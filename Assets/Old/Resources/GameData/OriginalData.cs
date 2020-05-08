@@ -123,7 +123,7 @@ public class OriginalData : MonoSingleton<OriginalData>
     IEnumerator ReadStageJson()
     {
         WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/StageData.json");
-        //Debug.Log(@"file://" + Application.streamingAssetsPath + @"/Data/BuffData.json");
+        Debug.Log(@"file://" + Application.streamingAssetsPath + @"/Data/BuffData.json");
         yield return www;
         yield return StartCoroutine(ReadEquipJson());
         yield return StartCoroutine(ReadWorkerJson());

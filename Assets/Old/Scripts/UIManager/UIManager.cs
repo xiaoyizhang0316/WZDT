@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -250,8 +251,9 @@ public class UIManager : MonoSingleton<UIManager>
     /// </summary>
     public void GamePause()
     {
-        Time.timeScale = 0.01f;
-        Time.fixedDeltaTime = 0.0005f;
+        //Time.timeScale = 0.01f;
+        //Time.fixedDeltaTime = 0.0005f;
+        DOTween.PauseAll();
         Button_Pause.GetComponent<Button>().interactable = false;
         Button_Normal.GetComponent<Button>().interactable = true;
         Button_Accelerate.GetComponent<Button>().interactable = true;
@@ -262,8 +264,9 @@ public class UIManager : MonoSingleton<UIManager>
     /// </summary>
     public void GameNormal()
     {
-        Time.timeScale = 1f;
-        Time.fixedDeltaTime = 0.02f;
+        //Time.timeScale = 1f;
+        //Time.fixedDeltaTime = 0.02f;
+        DOTween.PlayAll();
         Button_Pause.GetComponent<Button>().interactable = true;
         Button_Normal.GetComponent<Button>().interactable = false;
         Button_Accelerate.GetComponent<Button>().interactable = true;
@@ -274,9 +277,9 @@ public class UIManager : MonoSingleton<UIManager>
     /// </summary>
     public void GameAccelerate()
     {
+        DOTween.PlayAll();
         Time.timeScale = 2f;
         Time.fixedDeltaTime = 0.02f;
-
         Button_Pause.GetComponent<Button>().interactable = true;
         Button_Normal.GetComponent<Button>().interactable = true;
         Button_Accelerate.GetComponent<Button>().interactable = false;
