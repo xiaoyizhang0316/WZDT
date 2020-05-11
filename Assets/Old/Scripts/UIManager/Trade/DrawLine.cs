@@ -84,9 +84,9 @@ public class DrawLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //List<Vector3> points = new List<Vector3>();
-        //points.Add(startTarget.localPosition);
-        //points.Add(Target.localPosition);
+        List<Vector3> points = new List<Vector3>();
+        points.Add(startTarget.localPosition);
+        points.Add(Target.localPosition);
         //int vertexCount = 20;//采样点数量
         pointList.Clear();
         if (startTarget != null && Target != null)
