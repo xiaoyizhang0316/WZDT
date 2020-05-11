@@ -33,7 +33,7 @@ public class CreateTradeLine : MonoBehaviour
         float LThickness = 0.1f;//线的粗细
 
         //创建圆柱体
-        lineGo = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        lineGo.SetActive(true);
         lineGo.gameObject.transform.parent = transform;
         lineGo.transform.position = rightPosition;
         lineGo.transform.rotation = Quaternion.FromToRotation(Vector3.up, rightRotation);
@@ -109,7 +109,8 @@ public class CreateTradeLine : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            Destroy(lineGo.gameObject);
+            //Destroy(lineGo.gameObject);
+            lineGo.SetActive(false);
             gameObject.SetActive(false);
             UIManager.My.isSetTrade = false;
         }
