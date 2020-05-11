@@ -19,64 +19,39 @@ namespace WZDT.GameData
         public int ProductOrder;
 
         /// <summary>
-        /// 产能
+        /// 效果值
         /// </summary>
-        public int capacity;
+        public int effect;
 
         /// <summary>
-        /// 效率
+        /// 效率值
         /// </summary>
         public int efficiency;
 
         /// <summary>
-        /// 质量
+        /// 范围值
         /// </summary>
-        public int quality;
+        public int range;
 
         /// <summary>
-        /// 品牌
+        /// 风险抗力
         /// </summary>
-        public int brand;
+        public int riskResistance;
 
         /// <summary>
-        /// 甜度加成
+        /// 交易成本
         /// </summary>
-        public int sweetnessAdd;
+        public int tradeCost;
 
         /// <summary>
-        /// 脆度加成
+        /// 成本
         /// </summary>
-        public int BrittlenessAdd;
+        public int cost;
 
         /// <summary>
-        /// 固定成本
+        /// 弹药容量
         /// </summary>
-        public int fixedCost;
-
-        /// <summary>
-        /// 每月成本
-        /// </summary>
-        public int costMonth;
-
-        /// <summary>
-        /// 风险加成
-        /// </summary>
-        public int riskAdd;
-
-        /// <summary>
-        /// 搜寻加成
-        /// </summary>
-        public int searchAdd;
-
-        /// <summary>
-        /// 议价加成
-        /// </summary>
-        public int bargainAdd;
-
-        /// <summary>
-        /// 交付加成
-        /// </summary>
-        public int deliverAdd;
+        public int bulletCapacity;
 
         /// <summary>
         /// 当前是否正在使用

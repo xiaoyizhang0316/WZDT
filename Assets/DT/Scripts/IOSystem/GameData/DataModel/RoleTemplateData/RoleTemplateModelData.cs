@@ -19,6 +19,8 @@ namespace WZDT.GameData
         /// </summary>
         public RoleType roleType;
 
+        public int level;
+
         /// <summary>
         /// 模板提供效果值
         /// </summary>
@@ -78,12 +80,12 @@ namespace WZDT.GameData
             //SpritePath = CommonData.My.SpritePath + "Role/" + roleType.ToString() + "_" + level;
             //RoleSpacePath =  CommonData.My.SpritePath + "RoleSpace/" + roleType.ToString() + "_" + level;
             //PrePath = CommonData.My.PrefabPath + "Role/" + roleType.ToString() + "_" + level;
-            SpritePath = "Sprite/Role/" + roleType.ToString() + "_1";
-            RoleSpacePath = "Sprite/RoleSpace/" + roleType.ToString() + "_1";
-            PrePath = "Prefabs/Role/" + roleType.ToString() + "_1";
+            SpritePath = "Sprite/Role/" + roleType.ToString() + "_" + level.ToString();
+            RoleSpacePath = "Sprite/RoleSpace/" + roleType.ToString() + "_" + level.ToString();
+            PrePath = "Prefabs/Role/" + roleType.ToString() + "_" + level.ToString();
             tempRoleData = new BaseRoleData();
             tempRoleData.roleType = roleType;
-            tempRoleData.level = 1;
+            tempRoleData.level = level;
             tempRoleData.effect = effect;
             tempRoleData.effeciency = effeciency;
             tempRoleData.range = range;
@@ -94,12 +96,6 @@ namespace WZDT.GameData
             tempRoleData.SpritePath = SpritePath;
             tempRoleData.PrePath = PrePath;
             tempRoleData.RoleSpacePath = RoleSpacePath;
-            //tempRoleData.activityId = ActivityId;
-            //tempRoleData.activityList = new List<int>();
-            //foreach (int i in activityList)
-            //{
-            //    tempRoleData.activityList.Add(i);
-            //}
         }
     }
 }

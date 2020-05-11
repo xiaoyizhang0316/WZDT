@@ -458,20 +458,15 @@ namespace WZDT.GameData
             {
                 WorkerData temp = new WorkerData();
                 temp.ID = int.Parse(w.workerId);
-                //temp.workerName = w.workerName;
+                temp.workerName = w.workerName;
                 temp.ProductOrder = int.Parse(w.level);
-                temp.capacity = int.Parse(w.capacity);
+                temp.effect = int.Parse(w.effect);
                 temp.efficiency = int.Parse(w.efficiency);
-                temp.quality = int.Parse(w.quality);
-                temp.brand = int.Parse(w.brand);
-                temp.sweetnessAdd = int.Parse(w.sweetnessAdd);
-                temp.BrittlenessAdd = int.Parse(w.crispAdd);
-                temp.fixedCost = int.Parse(w.fixedCost);
-                temp.costMonth = int.Parse(w.costMonth);
-                temp.riskAdd = int.Parse(w.riskAdd);
-                temp.searchAdd = int.Parse(w.searchAdd);
-                temp.bargainAdd = int.Parse(w.bargainAdd);
-                temp.deliverAdd = int.Parse(w.deliverAdd);
+                temp.range = int.Parse(w.range);
+                temp.riskResistance = int.Parse(w.riskResistance);
+                temp.tradeCost = int.Parse(w.tradeCost);
+                temp.cost = int.Parse(w.cost);
+                temp.bulletCapacity = int.Parse(w.bulletCapacity);
                 //temp.PDP = (PDPType)Enum.Parse(typeof(PDPType), w.PDP);
                 temp.Init();
                 workerDatas.Add(temp);
@@ -489,20 +484,15 @@ namespace WZDT.GameData
             {
                 GearData temp = new GearData();
                 temp.ID = int.Parse(e.equipId);
-                //temp.equipName = e.equipName;
+                temp.equipName = e.equipName;
                 temp.ProductOrder = int.Parse(e.level);
-                temp.capacity = int.Parse(e.capacity);
+                temp.effect = int.Parse(e.effect);
                 temp.efficiency = int.Parse(e.efficiency);
-                temp.quality = int.Parse(e.quality);
-                temp.brand = int.Parse(e.brand);
-                temp.sweetnessAdd = int.Parse(e.sweetnessAdd);
-                temp.BrittlenessAdd = int.Parse(e.crispAdd);
-                temp.fixedCost = int.Parse(e.fixedCost);
-                temp.costMonth = int.Parse(e.costMonth);
-                temp.riskAdd = int.Parse(e.riskAdd);
-                temp.searchAdd = int.Parse(e.searchAdd);
-                temp.bargainAdd = int.Parse(e.bargainAdd);
-                temp.deliverAdd = int.Parse(e.deliverAdd);
+                temp.range = int.Parse(e.range);
+                temp.riskResistance = int.Parse(e.riskResistance);
+                temp.tradeCost = int.Parse(e.tradeCost);
+                temp.cost = int.Parse(e.cost);
+                temp.bulletCapacity = int.Parse(e.bulletCapacity);
                 temp.Init();
                 gearDatas.Add(temp);
             }
@@ -519,18 +509,15 @@ namespace WZDT.GameData
             {
                 RoleTemplateModelData temp = new RoleTemplateModelData();
                 temp.roleType = (RoleType)Enum.Parse(typeof(RoleType), r.roleType);
+                temp.level = int.Parse(r.level);
                 //temp.unlock = int.Parse(r.unlock);
                 temp.effect = int.Parse(r.effect);
                 temp.effeciency = int.Parse(r.effeciency);
-                temp.needBrand = int.Parse(r.needBrand);
-                temp.needQuality = int.Parse(r.needQuality);
-                temp.baseFixedCost = int.Parse(r.baseFixedCost);
-                temp.baseCostMonth = int.Parse(r.baseCostMonth);
-                temp.baseRisk = int.Parse(r.baseRisk);
-                temp.baseSearch = int.Parse(r.baseSearch);
-                temp.baseBargain = int.Parse(r.baseBargain);
-                temp.baseDelivery = int.Parse(r.baseDelivery);
-                temp.counter = int.Parse(r.counter);
+                temp.range = int.Parse(r.range);
+                temp.riskResistance = int.Parse(r.riskResistance);
+                temp.tradeCost = int.Parse(r.tradeCost);
+                temp.cost = int.Parse(r.cost);
+                temp.bulletCapacity = int.Parse(r.bulletCapacity);
                 temp.Init();
                 roleTemplateModelDatas.Add(temp);
             }

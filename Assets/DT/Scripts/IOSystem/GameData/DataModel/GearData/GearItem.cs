@@ -8,7 +8,10 @@ namespace WZDT.GameData
     [Serializable]
     public class GearItem
     {
+
         public string equipId;
+
+        public string equipName;
 
         /// <summary>
         /// 品阶
@@ -16,64 +19,39 @@ namespace WZDT.GameData
         public string level;
 
         /// <summary>
-        /// 产能
+        /// 效果值
         /// </summary>
-        public string capacity;
+        public string effect;
 
         /// <summary>
-        /// 效率
+        /// 效率值
         /// </summary>
         public string efficiency;
 
         /// <summary>
-        /// 质量
+        /// 范围值
         /// </summary>
-        public string quality;
+        public string range;
 
         /// <summary>
-        /// 品牌
+        /// 风险抗力
         /// </summary>
-        public string brand;
+        public string riskResistance;
 
         /// <summary>
-        /// 甜度加成
+        /// 交易成本
         /// </summary>
-        public string sweetnessAdd;
+        public string tradeCost;
 
         /// <summary>
-        /// 脆度加成
+        /// 成本
         /// </summary>
-        public string crispAdd;
+        public string cost;
 
         /// <summary>
-        /// 固定成本
+        /// 弹药容量
         /// </summary>
-        public string fixedCost;
-
-        /// <summary>
-        /// 每月成本
-        /// </summary>
-        public string costMonth;
-
-        /// <summary>
-        /// 风险加成
-        /// </summary>
-        public string riskAdd;
-
-        /// <summary>
-        /// 搜寻加成
-        /// </summary>
-        public string searchAdd;
-
-        /// <summary>
-        /// 议价加成
-        /// </summary>
-        public string bargainAdd;
-
-        /// <summary>
-        /// 交付加成
-        /// </summary>
-        public string deliverAdd;
+        public string bulletCapacity;
     }
 
     public class GearsData

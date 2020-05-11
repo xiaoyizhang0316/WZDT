@@ -14,6 +14,11 @@ namespace WZDT.GameData
         public string roleType;
 
         /// <summary>
+        /// 等级
+        /// </summary>
+        public string level;
+
+        /// <summary>
         /// 模板提供效果值
         /// </summary>
         public string effect;
