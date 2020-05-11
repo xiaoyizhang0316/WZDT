@@ -75,7 +75,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// <summary>
     /// 装备是否满足模板需求
     /// </summary>
-    public bool isNeedTemplate;
+    //public bool isNeedTemplate;
 
     /// <summary>
     /// 所有装备槽位
@@ -124,12 +124,19 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     #region finalAttribute
 
     public int finalCapacity;
-    public int finalEfficiency;
     public int finalQuality;
     public int finalBrand;
 
+    public int finalEffect;
+    public int finalEfficiency;
+    public int finalRange;
+    public int finalTradeCost;
+    public int finalCost;
+    public int finalBulletCapacity;
+    public int finalRiskResistance;
+
     
-      public Text souxun;
+    public Text souxun;
     public Text yijia;
     public Text jiaodu;
     public Text fengxian;
@@ -242,13 +249,10 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
 
             Vector3 V2 = new Vector3(v.Value.x - Screen.width / 2, v.Value.y - Screen.height / 2);
             tempGo.transform.localPosition = v.Value;
-           // tempGo.transform.position = v.Value;
             tempGo.name = "workerOBJ_" + v.Key;
             tempGo.GetComponent<DragUI>().dragType = DragUI.DragType.people;
         }
     }
-
-
 
     /// <summary>
     /// 判断角色组装是否满足所有条件
@@ -257,9 +261,11 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     {
         isWorkerOnEquip = CheckWorkerOnEquip();
         isAtLeastOneWorkerEquip = CheckAtLeastOneWorkerEquip();
-        isNeedTemplate = CheckNeedTemplate();
+        CalculateAllAttribute();
+        //isNeedTemplate = CheckNeedTemplate();
         RoleInfoManager.My.UpdateRoleInfo();
-        if (isWorkerOnEquip && isAtLeastOneWorkerEquip && isNeedTemplate)
+        //if (isWorkerOnEquip && isAtLeastOneWorkerEquip && isNeedTemplate)
+        if (isWorkerOnEquip && isAtLeastOneWorkerEquip)
             ensureButton.GetComponent<Button>().interactable = true;
         else
             ensureButton.GetComponent<Button>().interactable = false;
@@ -318,18 +324,18 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         return worker && gear;
     }
 
-    /// <summary>
-    /// 判断装备是否满足模板需求
-    /// </summary>
-    /// <returns></returns>
-    public bool CheckNeedTemplate()
-    {
-        CalculateAllAttribute();
-        if (gearCapacity >= CurrentRole.baseRoleData.needCapacity && gearEfficiency >= CurrentRole.baseRoleData.needEfficiency && gearQuality >= CurrentRole.baseRoleData.needQuality &&
-            gearBrand >= CurrentRole.baseRoleData.needBrand)
-            return true;
-        return false;
-    }
+    ///// <summary>
+    ///// 判断装备是否满足模板需求
+    ///// </summary>
+    ///// <returns></returns>
+    //public bool CheckNeedTemplate()
+    //{
+    //    CalculateAllAttribute();
+    //    if (gearCapacity >= CurrentRole.baseRoleData.needCapacity && gearEfficiency >= CurrentRole.baseRoleData.needEfficiency && gearQuality >= CurrentRole.baseRoleData.needQuality &&
+    //        gearBrand >= CurrentRole.baseRoleData.needBrand)
+    //        return true;
+    //    return false;
+    //}
 
     /// <summary>
     /// 计算角色属性数值
@@ -340,35 +346,49 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         foreach (var i in EquipList)
         {
             GearData tempData = GameDataMgr.My.GetGearData(i.Key);
-            gearCapacity += tempData.capacity;
-            gearEfficiency += tempData.efficiency;
-            gearQuality += tempData.quality;
-            gearBrand += tempData.brand;
-            CurrentRole.search += tempData.searchAdd;
-            CurrentRole.bargain += tempData.bargainAdd;
-            CurrentRole.delivery += tempData.deliverAdd;
-            CurrentRole.risk += tempData.riskAdd;
-            CurrentRole.fixedCost += tempData.fixedCost;
-            CurrentRole.costMonth += tempData.costMonth;
-            CurrentRole.sweetness += tempData.sweetnessAdd;
-            CurrentRole.Brittleness += tempData.BrittlenessAdd;
-            CurrentRole.equipCost += tempData.costMonth;
+            finalEffect += tempData.effect;
+            finalEfficiency += tempData.efficiency;
+            finalRange += tempData.range;
+            finalTradeCost += tempData.tradeCost;
+            finalCost += tempData.cost;
+            finalRiskResistance += tempData.riskResistance;
+            finalBulletCapacity += tempData.bulletCapacity;
+            //gearCapacity += tempData.capacity;
+            //gearEfficiency += tempData.efficiency;
+            //gearQuality += tempData.quality;
+            //gearBrand += tempData.brand;
+            //CurrentRole.search += tempData.searchAdd;
+            //CurrentRole.bargain += tempData.bargainAdd;
+            //CurrentRole.delivery += tempData.deliverAdd;
+            //CurrentRole.risk += tempData.riskAdd;
+            //CurrentRole.fixedCost += tempData.fixedCost;
+            //CurrentRole.costMonth += tempData.costMonth;
+            //CurrentRole.sweetness += tempData.sweetnessAdd;
+            //CurrentRole.Brittleness += tempData.BrittlenessAdd;
+            //CurrentRole.equipCost += tempData.costMonth;
         }
         PDPCheck();
         foreach (var i in peoPleList)
         {
             WorkerData tempData = GameDataMgr.My.GetWorkerData(i.Key);
-            workerCapacity += tempData.capacity;
-            workerEfficiency += tempData.efficiency;
-            workerQuality += tempData.quality;
-            workerBrand += tempData.brand;
-            CurrentRole.search += tempData.searchAdd;
-            CurrentRole.bargain += tempData.bargainAdd;
-            CurrentRole.delivery += tempData.deliverAdd;
-            CurrentRole.risk += tempData.riskAdd;
-            CurrentRole.fixedCost += tempData.fixedCost;
-            CurrentRole.costMonth += tempData.costMonth;
-            CurrentRole.workerCost += tempData.costMonth;
+            finalEffect += tempData.effect;
+            finalEfficiency += tempData.efficiency;
+            finalRange += tempData.range;
+            finalTradeCost += tempData.tradeCost;
+            finalCost += tempData.cost;
+            finalRiskResistance += tempData.riskResistance;
+            finalBulletCapacity += tempData.bulletCapacity;
+            //workerCapacity += tempData.capacity;
+            //workerEfficiency += tempData.efficiency;
+            //workerQuality += tempData.quality;
+            //workerBrand += tempData.brand;
+            //CurrentRole.search += tempData.searchAdd;
+            //CurrentRole.bargain += tempData.bargainAdd;
+            //CurrentRole.delivery += tempData.deliverAdd;
+            //CurrentRole.risk += tempData.riskAdd;
+            //CurrentRole.fixedCost += tempData.fixedCost;
+            //CurrentRole.costMonth += tempData.costMonth;
+            //CurrentRole.workerCost += tempData.costMonth;
         }
         FinalCheck();
     }
@@ -387,20 +407,15 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         workerQuality = 0;
         workerBrand = 0;
         finalCapacity = 0;
-        finalEfficiency = 0;
         finalQuality = 0;
         finalBrand = 0;
-        CurrentRole.search = CurrentRole.baseRoleData.baseSearch;
-        CurrentRole.risk = CurrentRole.baseRoleData.baseRisk;
-        CurrentRole.bargain = CurrentRole.baseRoleData.baseBargain;
-        CurrentRole.delivery = CurrentRole.baseRoleData.baseDelivery;
-        CurrentRole.fixedCost = CurrentRole.baseRoleData.baseFixedCost;
-        CurrentRole.costMonth = CurrentRole.baseRoleData.baseCostMonth;
-        CurrentRole.tradingRange = CurrentRole.baseRoleData.tradingRange;
-        CurrentRole.sweetness = 0;
-        CurrentRole.Brittleness = 0;
-        CurrentRole.workerCost = 0;
-        CurrentRole.equipCost = 0;
+        finalEffect = CurrentRole.baseRoleData.effect;
+        finalEfficiency = CurrentRole.baseRoleData.efficiency;
+        finalRange = CurrentRole.baseRoleData.range;
+        finalTradeCost = CurrentRole.baseRoleData.tradeCost;
+        finalCost = CurrentRole.baseRoleData.cost;
+        finalBulletCapacity = CurrentRole.baseRoleData.bulletCapacity;
+        finalRiskResistance = CurrentRole.baseRoleData.riskResistance;
     }
 
     /// <summary>
@@ -416,23 +431,23 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void FinalCheck()
     {
-        finalCapacity = Mathf.Min(gearCapacity, workerCapacity);
-        finalEfficiency = Mathf.Min(gearEfficiency, workerEfficiency);
-        finalQuality = Mathf.Min(gearQuality, workerQuality);
-        finalBrand = Mathf.Min(gearBrand, workerBrand);
-        int count = 0;
-        if (finalCapacity < CurrentRole.baseRoleData.needCapacity)
-            count++;
-        if (finalEfficiency < CurrentRole.baseRoleData.needEfficiency)
-            count++;
-        if (finalQuality < CurrentRole.baseRoleData.needQuality)
-            count++;
-        if (finalBrand < CurrentRole.baseRoleData.needBrand)
-            count++;
-        finalCapacity = (int)(finalCapacity * (1 - 0.1 * count));
-        finalEfficiency = (int)(finalEfficiency * (1 - 0.1 * count));
-        finalQuality = (int)(finalQuality * (1 - 0.1 * count));
-        finalBrand = (int)(finalBrand * (1 - 0.1 * count));
+        //finalCapacity = Mathf.Min(gearCapacity, workerCapacity);
+        //finalEfficiency = Mathf.Min(gearEfficiency, workerEfficiency);
+        //finalQuality = Mathf.Min(gearQuality, workerQuality);
+        //finalBrand = Mathf.Min(gearBrand, workerBrand);
+        //int count = 0;
+        //if (finalCapacity < CurrentRole.baseRoleData.needCapacity)
+        //    count++;
+        //if (finalEfficiency < CurrentRole.baseRoleData.needEfficiency)
+        //    count++;
+        //if (finalQuality < CurrentRole.baseRoleData.needQuality)
+        //    count++;
+        //if (finalBrand < CurrentRole.baseRoleData.needBrand)
+        //    count++;
+        //finalCapacity = (int)(finalCapacity * (1 - 0.1 * count));
+        //finalEfficiency = (int)(finalEfficiency * (1 - 0.1 * count));
+        //finalQuality = (int)(finalQuality * (1 - 0.1 * count));
+        //finalBrand = (int)(finalBrand * (1 - 0.1 * count));
     }
 
     /// <summary>
@@ -440,12 +455,13 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void QuitAndSave()
     {
-        CurrentRole.capacity = finalCapacity;
+        CurrentRole.effect = finalCapacity;
         CurrentRole.efficiency = finalEfficiency;
-        CurrentRole.quality = finalQuality;
-        CurrentRole.brand = finalBrand;
-        CurrentRole.EquipList = EquipList;
-        CurrentRole.peoPleList = peoPleList;
+        CurrentRole.riskResistance = finalRiskResistance;
+        CurrentRole.range = finalRange;
+        CurrentRole.cost = finalCost;
+        CurrentRole.tradeCost = finalTradeCost;
+        CurrentRole.bulletCapacity = finalBulletCapacity;
         int flag = 0;
         for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
         {
@@ -473,36 +489,36 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     {
         for (int i = 0; i < template_BottomPos.childCount; i++)
         {
-            Destroy(template_BottomPos.GetChild(i).gameObject, 0.1f);
+            Destroy(template_BottomPos.GetChild(0).gameObject, 0.1f);
         }
 
         for (int i = 0; i < template_TopPos.childCount; i++)
         {
-            Destroy(template_TopPos.GetChild(i).gameObject, 0.1f);
+            Destroy(template_TopPos.GetChild(0).gameObject, 0.1f);
         }
 
         for (int i = 0; i < template_MidPos.childCount; i++)
         {
-            Destroy(template_MidPos.GetChild(i).gameObject, 0.1f);
+            Destroy(template_MidPos.GetChild(0).gameObject, 0.1f);
         }
 
         for (int i = 0; i < workerPos.childCount; i++)
         {
-            Destroy(workerPos.GetChild(i).gameObject, 0.1f);
+            Destroy(workerPos.GetChild(0).gameObject, 0.1f);
         }
 
         for (int i = 0; i < equipPos.childCount; i++)
         {
-            Destroy(equipPos.GetChild(i).gameObject, 0.1f);
+            Destroy(equipPos.GetChild(0).gameObject, 0.1f);
         }
         for (int i = 0; i < WorkerListManager.My.transform.Find("Viewport/Content").childCount; i++)
         {
-            Destroy(WorkerListManager.My.transform.Find("Viewport/Content").GetChild(i).gameObject, 0.1f);
+            Destroy(WorkerListManager.My.transform.Find("Viewport/Content").GetChild(0).gameObject, 0.1f);
         }
 
         for (int i = 0; i < EquipListManager.My.transform.Find("Viewport/Content").childCount; i++)
         {
-            Destroy(EquipListManager.My.transform.Find("Viewport/Content").GetChild(i).gameObject, 0.1f);
+            Destroy(EquipListManager.My.transform.Find("Viewport/Content").GetChild(0).gameObject, 0.1f);
         }
         WorkerListManager.My._signs.Clear();
         EquipListManager.My._signs.Clear();

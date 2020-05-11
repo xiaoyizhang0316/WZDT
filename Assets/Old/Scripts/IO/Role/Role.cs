@@ -16,7 +16,7 @@ public class Role
     /// <summary>
     /// 产能值
     /// </summary>
-    public int capacity;
+    public int effect;
 
     /// <summary>
     /// 效率值
@@ -26,57 +26,27 @@ public class Role
     /// <summary>
     /// 质量值
     /// </summary>
-    public int quality;
+    public int range;
 
     /// <summary>
     /// 品牌值
     /// </summary>
-    public int brand;
+    public int tradeCost;
 
     /// <summary>
     /// 固定成本
     /// </summary>
-    public int fixedCost;
+    public int cost;
 
     /// <summary>
     /// 每月成本
     /// </summary>
-    public int costMonth;
+    public int riskResistance;
 
     /// <summary>
     /// 交易范围
     /// </summary>
-    public int tradingRange;
-
-    /// <summary>
-    /// 风险
-    /// </summary>
-    public int risk;
-
-    /// <summary>
-    /// 搜寻
-    /// </summary>
-    public int search;
-
-    /// <summary>
-    /// 议价
-    /// </summary>
-    public int bargain;
-
-    /// <summary>
-    /// 交付
-    /// </summary>
-    public int delivery;
-
-    /// <summary>
-    /// 甜度加成
-    /// </summary>
-    public int sweetness;
-
-    /// <summary>
-    /// 脆度加成
-    /// </summary>
-    public int Brittleness;
+    public int bulletCapacity;
 
     /// <summary>
     /// ID

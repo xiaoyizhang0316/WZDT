@@ -4,8 +4,7 @@ using UnityEngine;
 using System;
 using static GameEnum;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class BaseRoleData
     {
@@ -28,7 +27,7 @@ namespace WZDT.GameData
         /// <summary>
         /// 模板提供效率值
         /// </summary>
-        public int effeciency;
+        public int efficiency;
 
         /// <summary>
         /// 模板提供范围值
@@ -70,5 +69,4 @@ namespace WZDT.GameData
         /// </summary>
         public string RoleSpacePath;
 
-    }
-}
+    } 

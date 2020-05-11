@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class GearData
     {
@@ -74,7 +73,4 @@ namespace WZDT.GameData
             SpritePath = "Sprite/Gear/" + ID.ToString();
             GearSpacePath = "Sprite/GearSpace/" + ID.ToString();
         }
-    }
-}
-
-
+    } 

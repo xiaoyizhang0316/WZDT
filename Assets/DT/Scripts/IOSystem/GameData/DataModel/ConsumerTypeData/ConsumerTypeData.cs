@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static GameEnum;
 
-namespace WZDT.GameData
-{
+ 
     public class ConsumerTypeData
     {
         /// <summary>
@@ -91,7 +90,6 @@ namespace WZDT.GameData
         /// 最大风险
         /// </summary>
         public int maxRisk;
-    }
-}
+    } 
 
 

@@ -39,99 +39,599 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Bullet/BulletType.cs">
+        <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/WorkerData/WorkerData.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+            <state relative-caret-position="1440">
+              <caret line="84" column="6" selection-start-line="84" selection-start-column="6" selection-end-line="84" selection-end-column="6" />
               <folding>
-                <marker date="1588926137384" expanded="true" signature="6:92" ph="..." />
-                <marker date="1588926137384" expanded="true" signature="119:231" ph="{...}" />
-                <marker date="1588926137384" expanded="true" signature="148:223" ph="{...}" />
+                <marker date="1589194047397" expanded="false" signature="6:115" ph="..." />
+                <marker date="1589194047397" expanded="true" signature="165:1779" ph="{...}" />
+                <marker date="1589194047397" expanded="true" signature="239:290" ph="/// 品阶 ... " />
+                <marker date="1589194047397" expanded="true" signature="333:385" ph="/// 效果值 ... " />
+                <marker date="1589194047397" expanded="true" signature="422:474" ph="/// 效率值 ... " />
+                <marker date="1589194047397" expanded="true" signature="515:567" ph="/// 范围值 ... " />
+                <marker date="1589194047397" expanded="true" signature="603:656" ph="/// 风险抗力 ... " />
+                <marker date="1589194047397" expanded="true" signature="701:754" ph="/// 交易成本 ... " />
+                <marker date="1589194047397" expanded="true" signature="794:845" ph="/// 成本 ... " />
+                <marker date="1589194047397" expanded="true" signature="880:933" ph="/// 弹药容量 ... " />
+                <marker date="1589194047397" expanded="true" signature="978:1035" ph="/// 当前是否正在使用 ... " />
+                <marker date="1589194047397" expanded="true" signature="1073:1127" ph="/// PDP性格 ... " />
+                <marker date="1589194047397" expanded="true" signature="1165:1222" ph="/// Icon路径地址 ... " />
+                <marker date="1589194047397" expanded="true" signature="1266:1325" ph="/// 模型空间2D路径地址 ... " />
+                <marker date="1589194047397" expanded="true" signature="1374:1426" ph="/// 初始化 ... " />
+                <marker date="1589194047397" expanded="true" signature="1453:1773" ph="{...}" />
+                <marker date="1589194047397" expanded="true" signature="1476:1635" ph="/* SpritePath = CommonData.My.SpritePath + &quot;Worker/&quot; + ID.ToString(); ... */" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/WorkerData/WorkerItem.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+              <folding>
+                <marker date="1589194065098" expanded="false" signature="6:92" ph="..." />
+                <marker date="1589194065098" expanded="true" signature="142:1069" ph="{...}" />
+                <marker date="1589194065098" expanded="true" signature="226:277" ph="/// 品阶 ... " />
+                <marker date="1589194065098" expanded="true" signature="316:368" ph="/// 效果值 ... " />
+                <marker date="1589194065098" expanded="true" signature="408:460" ph="/// 效率值 ... " />
+                <marker date="1589194065098" expanded="true" signature="504:556" ph="/// 范围值 ... " />
+                <marker date="1589194065098" expanded="true" signature="595:648" ph="/// 风险抗力 ... " />
+                <marker date="1589194065098" expanded="true" signature="696:749" ph="/// 交易成本 ... " />
+                <marker date="1589194065098" expanded="true" signature="792:843" ph="/// 成本 ... " />
+                <marker date="1589194065098" expanded="true" signature="881:934" ph="/// 弹药容量 ... " />
+                <marker date="1589194065098" expanded="true" signature="982:1036" ph="/// PDP性格 ... " />
+                <marker date="1589194065098" expanded="true" signature="1118:1200" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/GameDataMgr.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1180">
+              <caret line="590" column="6" selection-start-line="590" selection-start-column="6" selection-end-line="590" selection-end-column="6" />
+              <folding>
+                <marker date="1589194102239" expanded="false" signature="6:211" ph="..." />
+                <marker date="1589194102239" expanded="true" signature="283:21950" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="298:352" ph="/// 角色模板库 ... " />
+                <marker date="1589194102239" expanded="true" signature="429:481" ph="/// 装备库 ... " />
+                <marker date="1589194102239" expanded="true" signature="532:584" ph="/// 工人库 ... " />
+                <marker date="1589194102239" expanded="true" signature="639:691" ph="/// 活动库 ... " />
+                <marker date="1589194102239" expanded="true" signature="750:804" ph="/// 技能数据库 ... " />
+                <marker date="1589194102239" expanded="true" signature="857:913" ph="/// 交易技能解锁库 ... " />
+                <marker date="1589194102239" expanded="true" signature="976:1032" ph="/// Buff数据库 ... " />
+                <marker date="1589194102239" expanded="true" signature="1083:1139" ph="/// Buff数据库 ... " />
+                <marker date="1589194102239" expanded="true" signature="1202:1258" ph="/// 关卡配置数据库 ... " />
+                <marker date="1589194102239" expanded="true" signature="1369:1550" ph="/// 根据职业类型和等级获取角色模板 ... " />
+                <marker date="1589194102239" expanded="true" signature="1621:1900" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="1703:1865" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="1910:2037" ph="/// 根据ID获取装备 ... " />
+                <marker date="1589194102239" expanded="true" signature="2081:2262" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="2137:2227" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="2272:2399" ph="/// 根据ID获取工人 ... " />
+                <marker date="1589194102239" expanded="true" signature="2447:2632" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="2507:2597" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="2642:2771" ph="/// 根据ID获取活动数据 ... " />
+                <marker date="1589194102239" expanded="true" signature="2827:3016" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="2891:2981" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="3026:3155" ph="/// 根据技能ID查找技能 ... " />
+                <marker date="1589194102239" expanded="true" signature="3205:3393" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="3263:3358" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="3403:3532" ph="/// 根据技能名称查找技能 ... " />
+                <marker date="1589194102239" expanded="true" signature="3589:3786" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="3647:3751" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="3796:4022" ph="/// 根据发起方，承受方和技能名称查找技能数据 ... " />
+                <marker date="1589194102239" expanded="true" signature="4150:4532" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="4279:4453" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="4542:4673" ph="/// 根据技能ID查找技能数据 ... " />
+                <marker date="1589194102239" expanded="true" signature="4733:4926" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="4801:4891" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="4936:5072" ph="/// 根据buff ID查找BUFF数据 ... " />
+                <marker date="1589194102239" expanded="true" signature="5120:5305" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="5176:5270" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="5315:5448" ph="/// 根据消耗品ID查找消耗品数据 ... " />
+                <marker date="1589194102239" expanded="true" signature="5508:5741" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="5576:5676" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="5751:5882" ph="/// 根据名称查找关卡配置 ... " />
+                <marker date="1589194102239" expanded="true" signature="5939:6207" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="5997:6137" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="6057:6123" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="6217:6352" ph="/// 根据消费者类别查找消费者数据 ... " />
+                <marker date="1589194102239" expanded="true" signature="6429:6722" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="6501:6639" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="6559:6625" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="6732:6836" ph="/// 将技能源数据转成可用数据 ... " />
+                <marker date="1589194102239" expanded="true" signature="6891:9679" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="7005:9630" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="8368:8468" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="8519:8621" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="8666:8794" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="8843:8983" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="9033:9136" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="9188:9293" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="9689:9795" ph="/// 将交易技能源数据转成可用数据 ... " />
+                <marker date="1589194102239" expanded="true" signature="9860:12489" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="9994:12435" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="12499:12605" ph="/// 将Buff源数据转成可用数据 ... " />
+                <marker date="1589194102239" expanded="true" signature="12658:13862" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="12768:13814" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="13872:13976" ph="/// 将道具源数据转成可用数据 ... " />
+                <marker date="1589194102239" expanded="true" signature="14041:14982" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="14175:14745" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="14591:14688" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="14803:14925" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="14992:15094" ph="/// parse关卡数据源 ... " />
+                <marker date="1589194102239" expanded="true" signature="15149:16405" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="15263:16395" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="15963:16104" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="16203:16343" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="16415:16517" ph="/// parse工人数据源 ... " />
+                <marker date="1589194102239" expanded="true" signature="16574:17474" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="16692:17464" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="17484:17586" ph="/// parse装备数据源 ... " />
+                <marker date="1589194102239" expanded="true" signature="17640:18449" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="17750:18439" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="18459:18563" ph="/// parse角色模板数据源 ... " />
+                <marker date="1589194102239" expanded="true" signature="18637:19573" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="18799:19563" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="19583:19687" ph="/// parse消费者类型数据 ... " />
+                <marker date="1589194102239" expanded="true" signature="19756:21215" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="19898:21205" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="21225:21277" ph="/// 初始化 ... " />
+                <marker date="1589194102239" expanded="true" signature="21304:21655" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="21386:21440" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="21487:21541" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="21591:21645" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="21734:21857" ph="{...}" />
+                <marker date="1589194102239" expanded="true" signature="21777:21847" ph="/* print(bool.Parse(&quot;FALSE&quot;)); ... */" />
+                <marker date="1589194102239" expanded="true" signature="21923:21944" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/BaseRoleData.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1206">
+              <caret line="71" column="6" selection-start-line="71" selection-start-column="6" selection-end-line="71" selection-end-column="6" />
+              <folding>
+                <marker date="1589194118460" expanded="false" signature="6:115" ph="..." />
+                <marker date="1589194118460" expanded="true" signature="167:1372" ph="{...}" />
+                <marker date="1589194118460" expanded="true" signature="214:267" ph="/// 角色类型 ... " />
+                <marker date="1589194118460" expanded="true" signature="311:362" ph="/// 等级 ... " />
+                <marker date="1589194118460" expanded="true" signature="398:454" ph="/// 模板提供效果值 ... " />
+                <marker date="1589194118460" expanded="true" signature="491:547" ph="/// 模板提供效率值 ... " />
+                <marker date="1589194118460" expanded="true" signature="588:644" ph="/// 模板提供范围值 ... " />
+                <marker date="1589194118460" expanded="true" signature="680:737" ph="/// 模板提供交易成本 ... " />
+                <marker date="1589194118460" expanded="true" signature="777:834" ph="/// 模板提供风险抗力 ... " />
+                <marker date="1589194118460" expanded="true" signature="879:934" ph="/// 模板提供成本 ... " />
+                <marker date="1589194118460" expanded="true" signature="969:1027" ph="/// 模板提供弹药装载量 ... " />
+                <marker date="1589194118460" expanded="true" signature="1072:1129" ph="/// Icon路径地址 ... " />
+                <marker date="1589194118460" expanded="true" signature="1173:1228" ph="/// 模型路径地址 ... " />
+                <marker date="1589194118460" expanded="true" signature="1269:1328" ph="/// 模型空间2D路径地址 ... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DealConfigData.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1544">
+              <caret line="103" column="6" selection-start-line="103" selection-start-column="6" selection-end-line="103" selection-end-column="6" />
+              <folding>
+                <marker date="1589194142789" expanded="false" signature="6:120" ph="..." />
+                <marker date="1589194142789" expanded="true" signature="198:3237" ph="{...}" />
+                <marker date="1589194142789" expanded="true" signature="213:264" ph="/// 固定 ... " />
+                <marker date="1589194142789" expanded="true" signature="306:357" ph="/// 剩余 ... " />
+                <marker date="1589194142789" expanded="true" signature="400:451" ph="/// 分成 ... " />
+                <marker date="1589194142789" expanded="true" signature="496:547" ph="/// 免费 ... " />
+                <marker date="1589194142789" expanded="true" signature="590:642" ph="/// 不免费 ... " />
+                <marker date="1589194142789" expanded="true" signature="687:738" ph="/// 先钱 ... " />
+                <marker date="1589194142789" expanded="true" signature="787:838" ph="/// 后钱 ... " />
+                <marker date="1589194142789" expanded="true" signature="898:1547" ph="{...}" />
+                <marker date="1589194142789" expanded="true" signature="1626:3138" ph="{...}" />
+                <marker date="1589194142789" expanded="true" signature="1662:2358" ph="{...}" />
+                <marker date="1589194142789" expanded="true" signature="1712:2344" ph="{...}" />
+                <marker date="1589194142789" expanded="true" signature="2375:3071" ph="{...}" />
+                <marker date="1589194142789" expanded="true" signature="2425:3057" ph="{...}" />
+                <marker date="1589194142789" expanded="true" signature="3168:3231" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/OriginalData.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1432">
+              <caret line="226" column="1" selection-start-line="226" selection-start-column="1" selection-end-line="226" selection-end-column="1" />
+              <folding>
+                <marker date="1589194167369" expanded="false" signature="6:120" ph="..." />
+                <marker date="1589194167369" expanded="true" signature="183:7728" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="687:1088" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="1130:1874" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="1408:1864" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="1461:1578" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="1599:1850" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="1911:2625" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="2179:2615" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="2232:2349" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="2370:2601" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="2661:3369" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="2927:3359" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="2980:3097" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="3118:3345" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="3411:4149" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="3683:4139" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="3736:3853" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="3874:4125" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="4186:5014" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="4568:5004" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="4621:4738" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="4759:4990" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="5051:5665" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="5222:5655" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="5275:5392" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="5413:5641" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="5703:6325" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="5875:6315" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="5928:6045" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="6066:6301" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="6369:7026" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="6547:7016" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="6600:6717" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="6738:7002" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="7070:7722" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="7248:7712" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="7301:7418" ph="{...}" />
+                <marker date="1589194167369" expanded="true" signature="7439:7698" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/BaseMapRole.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3340">
+              <caret line="483" column="105" selection-start-line="483" selection-start-column="105" selection-end-line="483" selection-end-column="105" />
+              <folding>
+                <marker date="1589194185761" expanded="false" signature="6:111" ph="..." />
+                <marker date="1589194185761" expanded="true" signature="168:24671" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="206:249" ph="/// 仓库 ... " />
+                <marker date="1589194185761" expanded="true" signature="295:377" ph="/* 输入口 ... */" />
+                <marker date="1589194185761" expanded="true" signature="383:432" ph="/// 是否开启优势货架 ... " />
+                <marker date="1589194185761" expanded="true" signature="467:512" ph="/// 优势货架 ... " />
+                <marker date="1589194185761" expanded="true" signature="565:610" ph="/// 优势仓库 ... " />
+                <marker date="1589194185761" expanded="true" signature="674:721" ph="/// 所有主动技能 ... " />
+                <marker date="1589194185761" expanded="true" signature="765:812" ph="/// 所有主动技能 ... " />
+                <marker date="1589194185761" expanded="true" signature="1015:1062" ph="/// 是否是NPC ... " />
+                <marker date="1589194185761" expanded="true" signature="1099:1146" ph="/// 开启自动售卖 ... " />
+                <marker date="1589194185761" expanded="true" signature="1181:1228" ph="/// 交易历史记录 ... " />
+                <marker date="1589194185761" expanded="true" signature="1333:1382" ph="/// 自身buff列表 ... " />
+                <marker date="1589194185761" expanded="true" signature="1424:1478" ph="/// 周围的building列表 ... " />
+                <marker date="1589194185761" expanded="true" signature="1569:1617" ph="/// 召唤消费者间隔 ... " />
+                <marker date="1589194185761" expanded="true" signature="1708:1754" ph="/// 角色贡献度 ... " />
+                <marker date="1589194185761" expanded="false" signature="1904:2215" ph="UI显示信息" />
+                <marker date="1589194185761" expanded="true" signature="2220:2294" ph="/// 商店   最多不能多于  baseroleData.counter ... " />
+                <marker date="1589194185761" expanded="true" signature="2365:2447" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="2518:3265" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="2886:2951" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="3012:3086" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="3112:3203" ph="{...}" />
+                <marker date="1589194185761" expanded="false" signature="3271:4709" ph="交易记录" />
+                <marker date="1589194185761" expanded="true" signature="3288:3427" ph="/// 记录每个独特ID的交易，若该交易重复则更新 ... " />
+                <marker date="1589194185761" expanded="true" signature="3497:4693" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="4098:4297" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="4310:4490" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="4537:4604" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="4617:4687" ph="{...}" />
+                <marker date="1589194185761" expanded="false" signature="4715:7005" ph="BUFF结算" />
+                <marker date="1589194185761" expanded="true" signature="4735:4825" ph="/// buff增加时回调 ... " />
+                <marker date="1589194185761" expanded="true" signature="4868:5003" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="5009:5099" ph="/// buff删除时回调 ... " />
+                <marker date="1589194185761" expanded="true" signature="5145:5250" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="5256:5310" ph="/// 检测所有buff的持续时间 ... " />
+                <marker date="1589194185761" expanded="true" signature="5346:5831" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="5385:5425" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="5474:5825" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="5562:5815" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="5720:5801" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="5837:5926" ph="/// 当消费者进商店时 ... " />
+                <marker date="1589194185761" expanded="true" signature="5985:6104" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="6032:6098" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="6110:6159" ph="/// 当生产活动完成时 ... " />
+                <marker date="1589194185761" expanded="true" signature="6221:6343" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="6268:6337" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="6349:6396" ph="/// 当交易进行时 ... " />
+                <marker date="1589194185761" expanded="true" signature="6429:6534" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="6476:6528" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="6540:6630" ph="/// 当消费者满意度结算时 ... " />
+                <marker date="1589194185761" expanded="true" signature="6683:6802" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="6730:6796" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="6808:6855" ph="/// 当濒临破产时 ... " />
+                <marker date="1589194185761" expanded="true" signature="6886:6989" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="6933:6983" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="7011:12094" ph="钱，满意度相关" />
+                <marker date="1589194185761" expanded="true" signature="7031:7078" ph="/// 每月消耗成本 ... " />
+                <marker date="1589194185761" expanded="true" signature="7108:7536" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="7147:7530" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="7542:7592" ph="/// 计算角色的地块成本 ... " />
+                <marker date="1589194185761" expanded="true" signature="7625:7982" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="7841:7976" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="7988:8072" ph="/// 累计消费者满意度 ... " />
+                <marker date="1589194185761" expanded="true" signature="8118:8341" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="8347:8425" ph="/// 收入 ... " />
+                <marker date="1589194185761" expanded="true" signature="8459:8954" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="8509:8741" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="8622:8696" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="8754:8948" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="8865:8938" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="8960:9040" ph="/// 零售收入 ... " />
+                <marker date="1589194185761" expanded="true" signature="9082:9252" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="9258:9380" ph="/// 付钱给另一个角色 ... " />
+                <marker date="1589194185761" expanded="true" signature="9430:9686" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="9692:9739" ph="/// 处理分成选项 ... " />
+                <marker date="1589194185761" expanded="true" signature="9782:10225" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="9880:9926" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="10009:10198" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="10231:10312" ph="/// 获得角色当前分成总计比例 ... " />
+                <marker date="1589194185761" expanded="true" signature="10360:10766" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="10485:10532" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="10589:10737" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="10635:10727" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="10772:10869" ph="/// 获得新的或者更新已有的付钱关系 ... " />
+                <marker date="1589194185761" expanded="true" signature="10925:11420" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="10987:11160" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="11173:11414" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="11426:11515" ph="/// 删除指定的付钱关系 ... " />
+                <marker date="1589194185761" expanded="true" signature="11566:11729" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="11657:11723" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="11736:11783" ph="/// 每月重新统计 ... " />
+                <marker date="1589194185761" expanded="true" signature="11813:12078" ph="{...}" />
+                <marker date="1589194185761" expanded="false" signature="12100:14378" ph="移动物品" />
+                <marker date="1589194185761" expanded="true" signature="12119:12210" ph="/// 移动物品到仓库 ... " />
+                <marker date="1589194185761" expanded="true" signature="12272:12486" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="12323:12407" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="12492:12690" ph="/* 移动物体到输入口 ... */" />
+                <marker date="1589194185761" expanded="true" signature="12697:12906" ph="/* 将输入口产品到仓库 ... */" />
+                <marker date="1589194185761" expanded="true" signature="12912:13006" ph="/// 将仓库产品输入到商店 ... " />
+                <marker date="1589194185761" expanded="true" signature="13075:13590" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="13113:13204" ph="/* Debug.Log(warehouse.Count); ... */" />
+                <marker date="1589194185761" expanded="true" signature="13349:13507" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="13596:13659" ph="/// 移动到优势货架,如果货架满了将移动到优势仓库 ... " />
+                <marker date="1589194185761" expanded="true" signature="13728:13937" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="13774:13841" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="13854:13931" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="13944:13995" ph="/// 将优势仓库移动到货架 ... " />
+                <marker date="1589194185761" expanded="true" signature="14046:14362" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="14092:14356" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="14156:14346" ph="{...}" />
+                <marker date="1589194185761" expanded="false" signature="14384:16554" ph="获取物品" />
+                <marker date="1589194185761" expanded="true" signature="14402:15112" ph="/* 获取输入口产品 ... */" />
+                <marker date="1589194185761" expanded="true" signature="15114:15213" ph="/// 查找仓库产品 ... " />
+                <marker date="1589194185761" expanded="true" signature="15287:15537" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="15366:15516" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="15420:15509" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="15543:15654" ph="/// 提取仓库产品 ... " />
+                <marker date="1589194185761" expanded="true" signature="15728:16049" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="15816:16022" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="15876:16012" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="16055:16166" ph="/// 提取仓库产品 ... " />
+                <marker date="1589194185761" expanded="true" signature="16228:16538" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="16316:16511" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="16365:16501" ph="{...}" />
+                <marker date="1589194185761" expanded="false" signature="16560:20288" ph="技能" />
+                <marker date="1589194185761" expanded="true" signature="16577:16704" ph="/// 初始化所有技能 ... " />
+                <marker date="1589194185761" expanded="true" signature="16735:16804" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="16843:16930" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="16936:16983" ph="/// 释放被动技能 ... " />
+                <marker date="1589194185761" expanded="true" signature="17024:17351" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="17089:17345" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="17178:17271" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="17357:17471" ph="/// 释放技能 ... " />
+                <marker date="1589194185761" expanded="true" signature="17547:17860" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="17603:17800" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="17682:17790" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="17866:17918" ph="/// 根据技能名字获取技能类 ... " />
+                <marker date="1589194185761" expanded="true" signature="17972:18344" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="18109:18285" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="18174:18275" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="18350:18406" ph="/// 根据被动技能名字获取被动技能类 ... " />
+                <marker date="1589194185761" expanded="true" signature="18476:18844" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="18605:18783" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="18670:18773" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="18850:18938" ph="/// 解锁被动技能 ... " />
+                <marker date="1589194185761" expanded="true" signature="18993:19387" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="19058:19381" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="19135:19371" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="19393:19509" ph="/// 查找被动技能 ... " />
+                <marker date="1589194185761" expanded="true" signature="19575:19830" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="19640:19801" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="19717:19791" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="19836:19924" ph="/// 锁上被动技能 ... " />
+                <marker date="1589194185761" expanded="true" signature="19977:20270" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="20042:20264" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="20119:20254" ph="{...}" />
+                <marker date="1589194185761" expanded="false" signature="20294:24001" ph="商店/零售" />
+                <marker date="1589194185761" expanded="true" signature="20313:20360" ph="/// 减少物品数量 ... " />
+                <marker date="1589194185761" expanded="true" signature="20428:20768" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="20482:20650" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="20663:20762" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="20807:21868" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="20839:20879" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="20907:21203" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="20971:21193" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="21080:21179" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="21232:21529" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="21296:21519" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="21406:21505" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="21560:21862" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="21624:21852" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="21739:21838" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="21874:22010" ph="/// 将周围的居民楼加入list ... " />
+                <marker date="1589194185761" expanded="true" signature="22072:22259" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="22128:22168" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="22181:22253" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="22265:22314" ph="/// 周期性召唤消费者 ... " />
+                <marker date="1589194185761" expanded="true" signature="22346:23324" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="22397:22437" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="22724:23053" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="22815:23043" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="22909:23029" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="23180:23318" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="23330:23488" ph="/// 从列表中随机N个Gameobject ... " />
+                <marker date="1589194185761" expanded="true" signature="23557:23985" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="23652:23697" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="23710:23956" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="23762:23946" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="24007:24107" ph="/// 当角色获得贡献度时 ... " />
+                <marker date="1589194185761" expanded="true" signature="24163:24222" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="24253:24266" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="24319:24532" ph="{...}" />
+                <marker date="1589194185761" expanded="true" signature="24589:24669" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/Skill/PassivitySkill/ProductionSkill.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="558">
+              <caret line="34" column="13" lean-forward="true" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+              <folding>
+                <marker date="1589194230825" expanded="false" signature="6:92" ph="..." />
+                <marker date="1589194230825" expanded="true" signature="93:130" ph="/// 生产技能 ... " />
+                <marker date="1589194230825" expanded="true" signature="172:1632" ph="{...}" />
+                <marker date="1589194230825" expanded="true" signature="346:1510" ph="{...}" />
+                <marker date="1589194230825" expanded="true" signature="358:1482" ph="/* print(&quot;生产&quot;); ... */" />
+                <marker date="1589194230825" expanded="true" signature="1528:1549" ph="{...}" />
+                <marker date="1589194230825" expanded="true" signature="1607:1628" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Bullet/BulletObjectPool/BulletObjectPool.cs">
+        <entry file="file://$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Role/CreatRoleManager.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2124">
-              <caret line="118" column="5" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
+            <state relative-caret-position="641">
+              <caret line="120" column="17" lean-forward="true" selection-start-line="120" selection-start-column="17" selection-end-line="120" selection-end-column="17" />
               <folding>
-                <marker date="1589005718651" expanded="true" signature="6:188" ph="..." />
-                <marker date="1589005718651" expanded="true" signature="215:4806" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="286:4804" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="376:429" ph="/// 子弹类型 ... " />
-                <marker date="1589005718651" expanded="true" signature="612:666" ph="/// 初始化子弹 ... " />
-                <marker date="1589005718651" expanded="true" signature="703:1816" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="837:1806" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="984:1644" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="1243:1549" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="1665:1791" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="1826:1951" ph="/// 获取子弹 ... " />
-                <marker date="1589005718651" expanded="true" signature="2005:3311" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="2066:3151" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="2150:2473" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="2230:2434" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="2636:2950" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="2971:3137" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="3168:3301" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="3322:3414" ph="/// 回收子弹 ... " />
-                <marker date="1589005718651" expanded="true" signature="3465:3623" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="3702:3752" ph="{...}" />
-                <marker date="1589005718651" expanded="true" signature="3761:4755" ph="/* public void OnGUI() ... */" />
-                <marker date="1589005718651" expanded="true" signature="4777:4798" ph="{...}" />
+                <marker date="1589189142713" expanded="false" signature="6:165" ph="..." />
+                <marker date="1589189142713" expanded="true" signature="230:16886" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="237:284" ph="/// 当前角色信息 ... " />
+                <marker date="1589189142713" expanded="true" signature="364:416" ph="/// 当前创建装备的位置坐标 ... " />
+                <marker date="1589189142713" expanded="true" signature="452:504" ph="/// 当前创建装备的位置坐标 ... " />
+                <marker date="1589189142713" expanded="true" signature="541:589" ph="/// 装备列表预制体 ... " />
+                <marker date="1589189142713" expanded="true" signature="627:675" ph="/// 工人列表预制体 ... " />
+                <marker date="1589189142713" expanded="true" signature="714:760" ph="/// 装备模板槽 ... " />
+                <marker date="1589189142713" expanded="true" signature="801:847" ph="/// 工人模板槽 ... " />
+                <marker date="1589189142713" expanded="true" signature="890:936" ph="/// 角色模板槽 ... " />
+                <marker date="1589189142713" expanded="true" signature="1028:1075" ph="/// 模板创建位置 ... " />
+                <marker date="1589189142713" expanded="true" signature="1235:1280" ph="/// 确认按钮 ... " />
+                <marker date="1589189142713" expanded="true" signature="1322:1372" ph="/// 工人是否都在装备上 ... " />
+                <marker date="1589189142713" expanded="true" signature="1411:1465" ph="/// 是否至少一个装备和一个工人 ... " />
+                <marker date="1589189142713" expanded="true" signature="1512:1563" ph="/// 装备是否满足模板需求 ... " />
+                <marker date="1589189142713" expanded="true" signature="1601:1648" ph="/// 所有装备槽位 ... " />
+                <marker date="1589189142713" expanded="true" signature="1686:1733" ph="/// 所有工人槽位 ... " />
+                <marker date="1589189142713" expanded="true" signature="1995:2055" ph="/// 工人加起来的4项属性值（用于UI显示） ... " />
+                <marker date="1589189142713" expanded="false" signature="2060:2222" ph="workerAttribute" />
+                <marker date="1589189142713" expanded="true" signature="2228:2288" ph="/// 装备加起来的4项属性值（用于UI显示） ... " />
+                <marker date="1589189142713" expanded="false" signature="2293:2445" ph="gearAttribute" />
+                <marker date="1589189142713" expanded="true" signature="2451:2513" ph="/// 最终的4项属性值（用于UI显示和最终结算） ... " />
+                <marker date="1589189142713" expanded="false" signature="2518:2810" ph="finalAttribute" />
+                <marker date="1589189142713" expanded="true" signature="2858:3152" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="3197:3493" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="3499:3566" ph="/// 初始化角色创建界面，将要创建的角色模板赋值给管理类 ... " />
+                <marker date="1589189142713" expanded="true" signature="3602:4609" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="3708:3800" ph="/* print(tempRole.baseRoleData.roleType); ... */" />
+                <marker date="1589189142713" expanded="true" signature="3951:4014" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="4061:4125" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="4173:4257" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="4615:4669" ph="/// 显示组装中的角色的职业名称 ... " />
+                <marker date="1589189142713" expanded="true" signature="4706:5279" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="4762:5273" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="5316:5369" ph="/// 将组装好的角色的装备复位 ... " />
+                <marker date="1589189142713" expanded="true" signature="5396:5899" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="5439:5893" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="5905:5958" ph="/// 将组装好的角色的工人复位 ... " />
+                <marker date="1589189142713" expanded="true" signature="5986:6533" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="6030:6527" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="6541:6596" ph="/// 判断角色组装是否满足所有条件 ... " />
+                <marker date="1589189142713" expanded="true" signature="6633:7074" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="7080:7160" ph="/// 判断工人是否都在装备上 ... " />
+                <marker date="1589189142713" expanded="true" signature="7197:7749" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="7351:7449" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="7499:7593" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="7632:7722" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="7755:7839" ph="/// 判断是否至少一个装备和一个工人 ... " />
+                <marker date="1589189142713" expanded="true" signature="7884:8329" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="7987:8117" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="8027:8107" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="8160:8292" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="8200:8282" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="8335:8416" ph="/// 判断装备是否满足模板需求 ... " />
+                <marker date="1589189142713" expanded="true" signature="8452:8790" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="8796:8845" ph="/// 计算角色属性数值 ... " />
+                <marker date="1589189142713" expanded="true" signature="8885:10494" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="8953:9736" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="9794:10466" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="10500:10555" ph="/// 初始化角色数值，放置多重叠加 ... " />
+                <marker date="1589189142713" expanded="true" signature="10587:11544" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="11550:11600" ph="/// 计算工人PDP性格 ... " />
+                <marker date="1589189142713" expanded="true" signature="11627:11640" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="11646:11700" ph="/// 最后结算角色实际的预览属性 ... " />
+                <marker date="1589189142713" expanded="true" signature="11729:12626" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="12632:12683" ph="/// 点确认后保存所有信息 ... " />
+                <marker date="1589189142713" expanded="true" signature="12713:13616" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="13072:13420" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="13169:13410" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="13269:13396" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="13622:13674" ph="/// 删除所有模板中的子物体 ... " />
+                <marker date="1589189142713" expanded="true" signature="13707:15008" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="13777:13867" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="13929:14016" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="14078:14165" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="14221:14302" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="14357:14437" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="14538:14665" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="14766:14892" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="15015:15060" ph="/// 重置角色 ... " />
+                <marker date="1589189142713" expanded="true" signature="15088:15910" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="15149:15228" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="15282:15360" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="15410:15474" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="15526:15592" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="15630:15707" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="15772:15847" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="15916:15963" ph="/// 关闭当前菜单 ... " />
+                <marker date="1589189142713" expanded="true" signature="15991:16134" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="16205:16615" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="16339:16446" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="16500:16607" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="16673:16686" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="16691:16739" ph="/// 创建装备啊列表 ... " />
+                <marker date="1589189142713" expanded="true" signature="16772:16785" ph="{...}" />
+                <marker date="1589189142713" expanded="true" signature="16790:16837" ph="/// 创建工人列表 ... " />
+                <marker date="1589189142713" expanded="true" signature="16871:16884" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Bullet/BulletLaunch.cs">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/090959EA-8BDA-448D-921C-6CAB7FB64DBA/21/b3d0d04e/JsonUtility.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
-              <folding>
-                <marker date="1589007208399" expanded="true" signature="6:134" ph="..." />
-                <marker date="1589007208399" expanded="true" signature="136:174" ph="/// 炮弹发射器 ... " />
-                <marker date="1589007208399" expanded="true" signature="216:3514" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="245:288" ph="/// 炮台 ... " />
-                <marker date="1589007208399" expanded="true" signature="393:913" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="840:905" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="991:2078" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="1212:2006" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="1638:1996" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="2153:3206" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="2374:3134" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="2775:3124" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="3280:3301" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="3327:3433" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="3370:3427" ph="{...}" />
-                <marker date="1589007208399" expanded="true" signature="3491:3512" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Trade/DrawMoneyLine.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="22" column="21" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="21" />
-              <folding>
-                <marker date="1587633120000" expanded="false" signature="6:92" ph="..." />
-                <marker date="1587633120000" expanded="true" signature="136:2379" ph="{...}" />
-                <marker date="1587633120000" expanded="true" signature="143:189" ph="/// 发起者位置 ... " />
-                <marker date="1587633120000" expanded="true" signature="229:275" ph="/// 承受者位置 ... " />
-                <marker date="1587633120000" expanded="true" signature="310:355" ph="/// 交易Id ... " />
-                <marker date="1587633120000" expanded="true" signature="482:501" ph="{...}" />
-                <marker date="1587633120000" expanded="true" signature="574:729" ph="{...}" />
-                <marker date="1587633120000" expanded="true" signature="800:855" ph="{...}" />
-                <marker date="1587633120000" expanded="true" signature="921:2377" ph="{...}" />
-                <marker date="1587633120000" expanded="true" signature="936:1124" ph="/* List&lt;Vector3&gt; points = new List&lt;Vector3&gt;(); ... */" />
-                <marker date="1587633120000" expanded="true" signature="1289:2113" ph="{...}" />
-                <marker date="1587633120000" expanded="true" signature="1735:2103" ph="{...}" />
-              </folding>
+            <state relative-caret-position="122">
+              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -140,9 +640,36 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Bullet/BulletLaunch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/GearData/GearData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Trade/DrawMoneyLine.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/RoleTemplateData/RoleTemplateModelData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/GearData/GearItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/TradeSkillData/TradeSkillData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumableData/ConsumableData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/TradeSkillData/TradeSkillItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Bullet/BulletType.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/BaseRoleData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/Skill/PassivitySkill/ProductionSkill.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/GameDataMgr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/OriginalData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/BuffData/BuffItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DealConfigData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/BuffData/BuffData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumableData/ConsumableItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/WorkerData/WorkerData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/WorkerData/WorkerItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/StageData/StageData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumerTypeData/ConsumerTypeData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Bullet/BulletObjectPool/BulletObjectPool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/BaseMapRole.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Old/Scripts/IO/Role/Role.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumerTypeData/ConsumerTypeItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/StageData/StageItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Role/CreatRoleManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/RoleTemplateData/RoleTemplateModelItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/090959EA-8BDA-448D-921C-6CAB7FB64DBA/21/b3d0d04e/JsonUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/SkillData/SkillItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/SkillData/SkillData.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -151,14 +678,43 @@
         <option value="$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Bullet/BulletType.cs" />
         <option value="$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Bullet/BulletObjectPool/BulletObjectPool.cs" />
         <option value="$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Bullet/BulletLaunch.cs" />
+        <option value="$PROJECT_DIR$/Assets/Old/Scripts/IO/Role/BaseRoleData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Old/Resources/GameData/DealConfigData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Old/Scripts/IO/PlayerData/GameDataMgr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Old/Resources/GameData/OriginalData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Old/Resources/GameData/RoleTemplateData/RoleTemplateModelData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/BuffData/BuffData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/BuffData/BuffItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumableData/ConsumableData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumableData/ConsumableItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumerTypeData/ConsumerTypeData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumerTypeData/ConsumerTypeItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/GearData/GearData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/GearData/GearItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/RoleTemplateData/RoleTemplateModelData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/RoleTemplateData/RoleTemplateModelItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/SkillData/SkillData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/SkillData/SkillItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/StageData/StageData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/StageData/StageItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/TradeSkillData/TradeSkillData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/TradeSkillData/TradeSkillItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/WorkerData/WorkerData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/WorkerData/WorkerItem.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/GameDataMgr.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/BaseRoleData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DealConfigData.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/OriginalData.cs" />
+        <option value="$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/BaseMapRole.cs" />
+        <option value="$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/Skill/PassivitySkill/ProductionSkill.cs" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-8" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1912" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="width" value="1096" />
+    <option name="height" value="1055" />
   </component>
   <component name="ProjectView">
     <navigator currentView="UnityExplorer" proportions="" version="1">
@@ -228,12 +784,12 @@
       <updated>1588922606344</updated>
       <workItem from="1588922612824" duration="7775000" />
       <workItem from="1588998208389" duration="6455000" />
-      <workItem from="1589167208555" duration="1217000" />
+      <workItem from="1589167208555" duration="4424000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15447000" />
+    <option name="totallyTimeSpent" value="18654000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -245,9 +801,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <frame x="1912" y="-8" width="1096" height="1906" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.033031434" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.05978785" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -296,7 +853,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Past.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Bullet/BulletType.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
+        <state relative-caret-position="90">
           <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
           <folding>
             <marker date="1588926137384" expanded="true" signature="6:92" ph="..." />
@@ -308,28 +865,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Trade/DrawMoneyLine.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
+        <state relative-caret-position="306">
           <caret line="22" column="21" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="21" />
           <folding>
-            <marker date="1587633120000" expanded="false" signature="6:92" ph="..." />
-            <marker date="1587633120000" expanded="true" signature="136:2379" ph="{...}" />
-            <marker date="1587633120000" expanded="true" signature="143:189" ph="/// 发起者位置 ... " />
-            <marker date="1587633120000" expanded="true" signature="229:275" ph="/// 承受者位置 ... " />
-            <marker date="1587633120000" expanded="true" signature="310:355" ph="/// 交易Id ... " />
-            <marker date="1587633120000" expanded="true" signature="482:501" ph="{...}" />
-            <marker date="1587633120000" expanded="true" signature="574:729" ph="{...}" />
-            <marker date="1587633120000" expanded="true" signature="800:855" ph="{...}" />
-            <marker date="1587633120000" expanded="true" signature="921:2377" ph="{...}" />
-            <marker date="1587633120000" expanded="true" signature="936:1124" ph="/* List&lt;Vector3&gt; points = new List&lt;Vector3&gt;(); ... */" />
-            <marker date="1587633120000" expanded="true" signature="1289:2113" ph="{...}" />
-            <marker date="1587633120000" expanded="true" signature="1735:2103" ph="{...}" />
+            <marker date="1589189142815" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589189142815" expanded="true" signature="136:2379" ph="{...}" />
+            <marker date="1589189142815" expanded="true" signature="143:189" ph="/// 发起者位置 ... " />
+            <marker date="1589189142815" expanded="true" signature="229:275" ph="/// 承受者位置 ... " />
+            <marker date="1589189142815" expanded="true" signature="310:355" ph="/// 交易Id ... " />
+            <marker date="1589189142815" expanded="true" signature="482:501" ph="{...}" />
+            <marker date="1589189142815" expanded="true" signature="574:729" ph="{...}" />
+            <marker date="1589189142815" expanded="true" signature="800:855" ph="{...}" />
+            <marker date="1589189142815" expanded="true" signature="921:2377" ph="{...}" />
+            <marker date="1589189142815" expanded="true" signature="936:1124" ph="/* List&lt;Vector3&gt; points = new List&lt;Vector3&gt;(); ... */" />
+            <marker date="1589189142815" expanded="true" signature="1289:2113" ph="{...}" />
+            <marker date="1589189142815" expanded="true" signature="1735:2103" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Bullet/BulletLaunch.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
+        <state relative-caret-position="396">
           <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
           <folding>
             <marker date="1589007208399" expanded="true" signature="6:134" ph="..." />
@@ -380,6 +937,1028 @@
             <marker date="1589005718651" expanded="true" signature="3702:3752" ph="{...}" />
             <marker date="1589005718651" expanded="true" signature="3761:4755" ph="/* public void OnGUI() ... */" />
             <marker date="1589005718651" expanded="true" signature="4777:4798" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Old/Scripts/IO/Role/Role.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+          <folding>
+            <marker date="1589189142190" expanded="false" signature="6:124" ph="..." />
+            <marker date="1589189142190" expanded="true" signature="160:3119" ph="{...}" />
+            <marker date="1589189142190" expanded="true" signature="172:219" ph="/// 角色基础数据 ... " />
+            <marker date="1589189142190" expanded="true" signature="264:308" ph="/// 产能值 ... " />
+            <marker date="1589189142190" expanded="true" signature="339:383" ph="/// 效率值 ... " />
+            <marker date="1589189142190" expanded="true" signature="416:460" ph="/// 质量值 ... " />
+            <marker date="1589189142190" expanded="true" signature="490:534" ph="/// 品牌值 ... " />
+            <marker date="1589189142190" expanded="true" signature="562:607" ph="/// 固定成本 ... " />
+            <marker date="1589189142190" expanded="true" signature="639:684" ph="/// 每月成本 ... " />
+            <marker date="1589189142190" expanded="true" signature="716:761" ph="/// 交易范围 ... " />
+            <marker date="1589189142190" expanded="true" signature="796:839" ph="/// 风险 ... " />
+            <marker date="1589189142190" expanded="true" signature="866:909" ph="/// 搜寻 ... " />
+            <marker date="1589189142190" expanded="true" signature="938:981" ph="/// 议价 ... " />
+            <marker date="1589189142190" expanded="true" signature="1011:1054" ph="/// 交付 ... " />
+            <marker date="1589189142190" expanded="true" signature="1085:1130" ph="/// 甜度加成 ... " />
+            <marker date="1589189142190" expanded="true" signature="1162:1207" ph="/// 脆度加成 ... " />
+            <marker date="1589189142190" expanded="true" signature="1241:1284" ph="/// ID ... " />
+            <marker date="1589189142190" expanded="true" signature="1312:1358" ph="/// 装备总成本 ... " />
+            <marker date="1589189142190" expanded="true" signature="1390:1436" ph="/// 工人总成本 ... " />
+            <marker date="1589189142190" expanded="true" signature="1469:1515" ph="/// 地块总成本 ... " />
+            <marker date="1589189142190" expanded="true" signature="1546:1593" ph="/// 是否在地图中 ... " />
+            <marker date="1589189142190" expanded="true" signature="1986:2391" ph="{...}" />
+            <marker date="1589189142190" expanded="true" signature="2187:2255" ph="{...}" />
+            <marker date="1589189142190" expanded="true" signature="2294:2363" ph="{...}" />
+            <marker date="1589189142190" expanded="true" signature="2410:2423" ph="{...}" />
+            <marker date="1589189142190" expanded="true" signature="2447:2468" ph="{...}" />
+            <marker date="1589189142190" expanded="true" signature="2526:2547" ph="{...}" />
+            <marker date="1589189142190" expanded="true" signature="2556:2678" ph="/// 设置装备 ... " />
+            <marker date="1589189142190" expanded="true" signature="2724:2831" ph="{...}" />
+            <marker date="1589189142190" expanded="true" signature="2769:2824" ph="{...}" />
+            <marker date="1589189142190" expanded="true" signature="2837:2961" ph="/// 设置人物 ... " />
+            <marker date="1589189142190" expanded="true" signature="3008:3117" ph="{...}" />
+            <marker date="1589189142190" expanded="true" signature="3054:3111" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Old/Resources/GameData/OriginalData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="215" column="13" selection-start-line="215" selection-start-column="13" selection-end-line="215" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Old/Scripts/IO/Role/BaseRoleData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Old/Scripts/IO/PlayerData/GameDataMgr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3654">
+          <caret line="559" column="26" lean-forward="true" selection-start-line="559" selection-start-column="26" selection-end-line="559" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Old/Resources/GameData/DealConfigData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="102" column="1" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Old/Resources/GameData/RoleTemplateData/RoleTemplateModelData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="110" column="14" selection-start-line="110" selection-start-column="14" selection-end-line="110" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/BuffData/BuffData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1458">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
+          <folding>
+            <marker date="1589189334901" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589189334901" expanded="true" signature="139:1731" ph="{...}" />
+            <marker date="1589189334901" expanded="true" signature="154:210" ph="/// Buff ID ... " />
+            <marker date="1589189334901" expanded="true" signature="247:302" ph="/// Buff名称 ... " />
+            <marker date="1589189334901" expanded="true" signature="344:399" ph="/// BUFF描述 ... " />
+            <marker date="1589189334901" expanded="true" signature="441:497" ph="/// Buff添加时 ... " />
+            <marker date="1589189334901" expanded="true" signature="546:602" ph="/// Buff移除时 ... " />
+            <marker date="1589189334901" expanded="true" signature="654:708" ph="/// 交易发生时 ... " />
+            <marker date="1589189334901" expanded="true" signature="762:817" ph="/// 消费者进店时 ... " />
+            <marker date="1589189334901" expanded="true" signature="873:928" ph="/// 消费者购物时 ... " />
+            <marker date="1589189334901" expanded="true" signature="988:1046" ph="/// 消费者满意度结算时 ... " />
+            <marker date="1589189334901" expanded="true" signature="1103:1157" ph="/// 濒临破产时 ... " />
+            <marker date="1589189334901" expanded="true" signature="1209:1263" ph="/// 生产完成时 ... " />
+            <marker date="1589189334901" expanded="true" signature="1323:1377" ph="/// 周期性时  ... " />
+            <marker date="1589189334901" expanded="true" signature="1423:1476" ph="/// 持续时间 ... " />
+            <marker date="1589189334901" expanded="true" signature="1515:1568" ph="/// 生效间隔 ... " />
+            <marker date="1589189334901" expanded="true" signature="1607:1664" ph="/// 时间点其他骚操作 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/BuffData/BuffItem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1152">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+          <folding>
+            <marker date="1589193658203" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589193658203" expanded="true" signature="140:1293" ph="{...}" />
+            <marker date="1589193658203" expanded="true" signature="155:204" ph="///  ... " />
+            <marker date="1589193658203" expanded="true" signature="243:292" ph="///  ... " />
+            <marker date="1589193658203" expanded="true" signature="366:415" ph="///  ... " />
+            <marker date="1589193658203" expanded="true" signature="457:506" ph="///  ... " />
+            <marker date="1589193658203" expanded="true" signature="551:600" ph="///  ... " />
+            <marker date="1589193658203" expanded="true" signature="647:696" ph="///  ... " />
+            <marker date="1589193658203" expanded="true" signature="745:794" ph="///  ... " />
+            <marker date="1589193658203" expanded="true" signature="847:896" ph="///  ... " />
+            <marker date="1589193658203" expanded="true" signature="946:995" ph="///  ... " />
+            <marker date="1589193658203" expanded="true" signature="1040:1089" ph="///  ... " />
+            <marker date="1589193658203" expanded="true" signature="1142:1191" ph="///  ... " />
+            <marker date="1589193658203" expanded="true" signature="1340:1416" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumableData/ConsumableData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <marker date="1589193679293" expanded="false" signature="6:78" ph="..." />
+            <marker date="1589193679293" expanded="true" signature="113:530" ph="{...}" />
+            <marker date="1589193679293" expanded="true" signature="128:182" ph="/// 消耗品ID ... " />
+            <marker date="1589193679293" expanded="true" signature="225:279" ph="/// 消耗品名字 ... " />
+            <marker date="1589193679293" expanded="true" signature="327:381" ph="/// 消耗品描述 ... " />
+            <marker date="1589193679293" expanded="true" signature="429:483" ph="/// 消耗品作用 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumableData/ConsumableItem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <marker date="1589193696552" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589193696552" expanded="true" signature="146:311" ph="{...}" />
+            <marker date="1589193696552" expanded="true" signature="365:459" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumerTypeData/ConsumerTypeData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1558">
+          <caret line="92" column="6" selection-start-line="92" selection-start-column="6" selection-end-line="92" selection-end-column="6" />
+          <folding>
+            <marker date="1589193747372" expanded="false" signature="6:101" ph="..." />
+            <marker date="1589193747372" expanded="true" signature="138:1967" ph="{...}" />
+            <marker date="1589193747372" expanded="true" signature="153:207" ph="/// 消费者类型 ... " />
+            <marker date="1589193747372" expanded="true" signature="258:313" ph="/// 最小甜度需求 ... " />
+            <marker date="1589193747372" expanded="true" signature="351:406" ph="/// 最大甜度需求 ... " />
+            <marker date="1589193747372" expanded="true" signature="444:499" ph="/// 最小脆度需求 ... " />
+            <marker date="1589193747372" expanded="true" signature="537:592" ph="/// 最大脆度需求 ... " />
+            <marker date="1589193747372" expanded="true" signature="630:685" ph="/// 最小心理价位 ... " />
+            <marker date="1589193747372" expanded="true" signature="729:784" ph="/// 最大心理价位 ... " />
+            <marker date="1589193747372" expanded="true" signature="828:883" ph="/// 最小搜寻时间 ... " />
+            <marker date="1589193747372" expanded="true" signature="926:981" ph="/// 最大搜寻时间 ... " />
+            <marker date="1589193747372" expanded="true" signature="1024:1078" ph="/// 最小购买力 ... " />
+            <marker date="1589193747372" expanded="true" signature="1121:1175" ph="/// 最大购买力 ... " />
+            <marker date="1589193747372" expanded="true" signature="1219:1273" ph="/// 最小搜寻值 ... " />
+            <marker date="1589193747372" expanded="true" signature="1313:1367" ph="/// 最大搜寻值 ... " />
+            <marker date="1589193747372" expanded="true" signature="1407:1461" ph="/// 最小议价值 ... " />
+            <marker date="1589193747372" expanded="true" signature="1502:1556" ph="/// 最大议价值 ... " />
+            <marker date="1589193747372" expanded="true" signature="1597:1651" ph="/// 最小交付值 ... " />
+            <marker date="1589193747372" expanded="true" signature="1693:1747" ph="/// 最大交付值 ... " />
+            <marker date="1589193747372" expanded="true" signature="1789:1842" ph="/// 最小风险 ... " />
+            <marker date="1589193747372" expanded="true" signature="1880:1933" ph="/// 最大风险 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Old/Resources/GameData/ConsumerTypeData/ConsumerTypeItem.cs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/ConsumerTypeData/ConsumerTypeItem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
+          <folding>
+            <marker date="1589193771461" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589193771461" expanded="true" signature="148:828" ph="{...}" />
+            <marker date="1589193771461" expanded="true" signature="883:983" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Old/Resources/GameData/GearData/GearData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="33" column="10" lean-forward="true" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/GearData/GearData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1296">
+          <caret line="75" column="6" selection-start-line="75" selection-start-column="6" selection-end-line="75" selection-end-column="6" />
+          <folding>
+            <marker date="1589193790847" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589193790847" expanded="true" signature="140:1587" ph="{...}" />
+            <marker date="1589193790847" expanded="true" signature="247:299" ph="/// 效果值 ... " />
+            <marker date="1589193790847" expanded="true" signature="336:388" ph="/// 效率值 ... " />
+            <marker date="1589193790847" expanded="true" signature="429:481" ph="/// 范围值 ... " />
+            <marker date="1589193790847" expanded="true" signature="517:570" ph="/// 风险抗力 ... " />
+            <marker date="1589193790847" expanded="true" signature="615:668" ph="/// 交易成本 ... " />
+            <marker date="1589193790847" expanded="true" signature="708:759" ph="/// 成本 ... " />
+            <marker date="1589193790847" expanded="true" signature="794:847" ph="/// 弹药容量 ... " />
+            <marker date="1589193790847" expanded="true" signature="892:949" ph="/// 当前是否正在使用 ... " />
+            <marker date="1589193790847" expanded="true" signature="987:1044" ph="/// Icon路径地址 ... " />
+            <marker date="1589193790847" expanded="true" signature="1088:1147" ph="/// 模型空间2D路径地址 ... " />
+            <marker date="1589193790847" expanded="true" signature="1194:1246" ph="/// 初始化 ... " />
+            <marker date="1589193790847" expanded="true" signature="1273:1581" ph="{...}" />
+            <marker date="1589193790847" expanded="true" signature="1296:1449" ph="/* SpritePath = CommonData.My.SpritePath + &quot;Gear/&quot; + ID.ToString(); ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/GearData/GearItem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="36" column="22" selection-start-line="35" selection-start-column="16" selection-end-line="36" selection-end-column="22" />
+          <folding>
+            <marker date="1589193821649" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589193821649" expanded="true" signature="140:974" ph="{...}" />
+            <marker date="1589193821649" expanded="true" signature="222:273" ph="/// 品阶 ... " />
+            <marker date="1589193821649" expanded="true" signature="312:364" ph="/// 效果值 ... " />
+            <marker date="1589193821649" expanded="true" signature="404:456" ph="/// 效率值 ... " />
+            <marker date="1589193821649" expanded="true" signature="500:552" ph="/// 范围值 ... " />
+            <marker date="1589193821649" expanded="true" signature="591:644" ph="/// 风险抗力 ... " />
+            <marker date="1589193821649" expanded="true" signature="692:745" ph="/// 交易成本 ... " />
+            <marker date="1589193821649" expanded="true" signature="788:839" ph="/// 成本 ... " />
+            <marker date="1589193821649" expanded="true" signature="877:930" ph="/// 弹药容量 ... " />
+            <marker date="1589193821649" expanded="true" signature="1002:1078" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/RoleTemplateData/RoleTemplateModelData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1540">
+          <caret line="98" column="6" selection-start-line="98" selection-start-column="6" selection-end-line="98" selection-end-column="6" />
+          <folding>
+            <marker date="1589193859834" expanded="false" signature="6:115" ph="..." />
+            <marker date="1589193859834" expanded="true" signature="176:2695" ph="{...}" />
+            <marker date="1589193859834" expanded="true" signature="191:246" ph="/// 角色临时变量 ... " />
+            <marker date="1589193859834" expanded="true" signature="298:351" ph="/// 角色类型 ... " />
+            <marker date="1589193859834" expanded="true" signature="422:478" ph="/// 模板提供效果值 ... " />
+            <marker date="1589193859834" expanded="true" signature="515:571" ph="/// 模板提供效率值 ... " />
+            <marker date="1589193859834" expanded="true" signature="612:668" ph="/// 模板提供范围值 ... " />
+            <marker date="1589193859834" expanded="true" signature="704:761" ph="/// 模板提供交易成本 ... " />
+            <marker date="1589193859834" expanded="true" signature="801:858" ph="/// 模板提供风险抗力 ... " />
+            <marker date="1589193859834" expanded="true" signature="903:958" ph="/// 模板提供成本 ... " />
+            <marker date="1589193859834" expanded="true" signature="993:1051" ph="/// 模板提供弹药装载量 ... " />
+            <marker date="1589193859834" expanded="true" signature="1096:1153" ph="/// Icon路径地址 ... " />
+            <marker date="1589193859834" expanded="true" signature="1197:1252" ph="/// 模型路径地址 ... " />
+            <marker date="1589193859834" expanded="true" signature="1293:1352" ph="/// 模型空间2D路径地址 ... " />
+            <marker date="1589193859834" expanded="true" signature="1400:1452" ph="/// 初始化 ... " />
+            <marker date="1589193859834" expanded="true" signature="1479:2689" ph="{...}" />
+            <marker date="1589193859834" expanded="true" signature="1502:1792" ph="/* SpritePath = CommonData.My.SpritePath + &quot;Role/&quot; + roleType.ToString() + &quot;_&quot; + level; ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/RoleTemplateData/RoleTemplateModelItem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <marker date="1589193887346" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589193887346" expanded="true" signature="153:1044" ph="{...}" />
+            <marker date="1589193887346" expanded="true" signature="168:221" ph="/// 角色类型 ... " />
+            <marker date="1589193887346" expanded="true" signature="263:314" ph="/// 等级 ... " />
+            <marker date="1589193887346" expanded="true" signature="353:409" ph="/// 模板提供效果值 ... " />
+            <marker date="1589193887346" expanded="true" signature="449:505" ph="/// 模板提供效率值 ... " />
+            <marker date="1589193887346" expanded="true" signature="549:605" ph="/// 模板提供范围值 ... " />
+            <marker date="1589193887346" expanded="true" signature="644:701" ph="/// 模板提供交易成本 ... " />
+            <marker date="1589193887346" expanded="true" signature="744:801" ph="/// 模板提供风险抗力 ... " />
+            <marker date="1589193887346" expanded="true" signature="849:904" ph="/// 模板提供成本 ... " />
+            <marker date="1589193887346" expanded="true" signature="942:1000" ph="/// 模板提供弹药装载量 ... " />
+            <marker date="1589193887346" expanded="true" signature="1104:1219" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/SkillData/SkillData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1360">
+          <caret line="83" column="32" selection-start-line="83" selection-start-column="32" selection-end-line="83" selection-end-column="32" />
+          <folding>
+            <marker date="1589193917572" expanded="false" signature="6:115" ph="..." />
+            <marker date="1589193917572" expanded="true" signature="164:1925" ph="{...}" />
+            <marker date="1589193917572" expanded="true" signature="179:232" ph="/// 技能ID ... " />
+            <marker date="1589193917572" expanded="true" signature="270:323" ph="/// 技能名称 ... " />
+            <marker date="1589193917572" expanded="true" signature="366:419" ph="/// 技能描述 ... " />
+            <marker date="1589193917572" expanded="true" signature="462:515" ph="/// 技能要求 ... " />
+            <marker date="1589193917572" expanded="true" signature="558:611" ph="/// 技能类别 ... " />
+            <marker date="1589193917572" expanded="true" signature="661:716" ph="/// 技能持续类别 ... " />
+            <marker date="1589193917572" expanded="true" signature="773:826" ph="/// 技能成本 ... " />
+            <marker date="1589193917572" expanded="true" signature="861:918" ph="/// 自身buff列表 ... " />
+            <marker date="1589193917572" expanded="true" signature="967:1024" ph="/// 目标buff列表 ... " />
+            <marker date="1589193917572" expanded="true" signature="1075:1133" ph="/// 支持的收支方式列表 ... " />
+            <marker date="1589193917572" expanded="true" signature="1186:1245" ph="/// 支持的现金流结构列表 ... " />
+            <marker date="1589193917572" expanded="true" signature="1306:1361" ph="/// 是否支持免费 ... " />
+            <marker date="1589193917572" expanded="true" signature="1404:1462" ph="/// 是否支持第三方目标 ... " />
+            <marker date="1589193917572" expanded="true" signature="1506:1559" ph="/// 技能贡献 ... " />
+            <marker date="1589193917572" expanded="true" signature="1607:1662" ph="/// 基础分成比例 ... " />
+            <marker date="1589193917572" expanded="true" signature="1705:1764" ph="/// 解锁自身被动技能列表 ... " />
+            <marker date="1589193917572" expanded="true" signature="1816:1875" ph="/// 解锁目标被动技能列表 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/SkillData/SkillItem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1404">
+          <caret line="81" column="6" selection-start-line="81" selection-start-column="6" selection-end-line="81" selection-end-column="6" />
+          <folding>
+            <marker date="1589193938073" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589193938073" expanded="true" signature="141:1521" ph="{...}" />
+            <marker date="1589193938073" expanded="true" signature="156:205" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="245:294" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="336:385" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="427:476" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="518:567" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="613:664" ph="/// 送货 ... " />
+            <marker date="1589193938073" expanded="true" signature="702:751" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="796:845" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="893:942" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="987:1036" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="1085:1134" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="1179:1228" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="1274:1323" ph="///  ... " />
+            <marker date="1589193938073" expanded="true" signature="1569:1648" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/StageData/StageData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="882">
+          <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
+          <folding>
+            <marker date="1589193953392" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589193953392" expanded="true" signature="122:1034" ph="{...}" />
+            <marker date="1589193953392" expanded="true" signature="137:190" ph="/// 场景名称 ... " />
+            <marker date="1589193953392" expanded="true" signature="233:290" ph="/// 消费者满意度上限 ... " />
+            <marker date="1589193953392" expanded="true" signature="334:392" ph="/// 消费者满意度初始值 ... " />
+            <marker date="1589193953392" expanded="true" signature="438:494" ph="/// 股东满意度上限 ... " />
+            <marker date="1589193953392" expanded="true" signature="534:591" ph="/// 股东满意度初始值 ... " />
+            <marker date="1589193953392" expanded="true" signature="633:686" ph="/// 银行利率 ... " />
+            <marker date="1589193953392" expanded="true" signature="727:782" ph="/// 初始工人列表 ... " />
+            <marker date="1589193953392" expanded="true" signature="830:885" ph="/// 初始装备列表 ... " />
+            <marker date="1589193953392" expanded="true" signature="932:988" ph="/// 消费者质量要求 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/StageData/StageItem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="31" column="6" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
+          <folding>
+            <marker date="1589193971115" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589193971115" expanded="true" signature="141:474" ph="{...}" />
+            <marker date="1589193971115" expanded="true" signature="503:582" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/TradeSkillData/TradeSkillData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1612">
+          <caret line="137" column="6" selection-start-line="137" selection-start-column="6" selection-end-line="137" selection-end-column="6" />
+          <folding>
+            <marker date="1589193988931" expanded="false" signature="6:115" ph="..." />
+            <marker date="1589193988931" expanded="true" signature="169:2706" ph="{...}" />
+            <marker date="1589193988931" expanded="true" signature="209:261" ph="/// 发起方 ... " />
+            <marker date="1589193988931" expanded="true" signature="306:358" ph="/// 承受方 ... " />
+            <marker date="1589193988931" expanded="true" signature="401:453" ph="/// 操作方 ... " />
+            <marker date="1589193988931" expanded="true" signature="500:552" ph="/// 验收方 ... " />
+            <marker date="1589193988931" expanded="true" signature="599:652" ph="/// 是否解锁 ... " />
+            <marker date="1589193988931" expanded="true" signature="690:743" ph="/// 技能Id ... " />
+            <marker date="1589193988931" expanded="true" signature="781:837" ph="/// 内部搜寻比例A ... " />
+            <marker date="1589193988931" expanded="true" signature="882:938" ph="/// 内部搜寻比例B ... " />
+            <marker date="1589193988931" expanded="true" signature="983:1040" ph="/// 内部搜寻额外比例 ... " />
+            <marker date="1589193988931" expanded="true" signature="1084:1140" ph="/// 内部议价比例A ... " />
+            <marker date="1589193988931" expanded="true" signature="1186:1242" ph="/// 内部议价比例B ... " />
+            <marker date="1589193988931" expanded="true" signature="1288:1345" ph="/// 内部议价额外比例 ... " />
+            <marker date="1589193988931" expanded="true" signature="1390:1446" ph="/// 内部交付比例A ... " />
+            <marker date="1589193988931" expanded="true" signature="1492:1548" ph="/// 内部交付比例B ... " />
+            <marker date="1589193988931" expanded="true" signature="1594:1651" ph="/// 内部交付额外比例 ... " />
+            <marker date="1589193988931" expanded="true" signature="1696:1752" ph="/// 内部风险比例A ... " />
+            <marker date="1589193988931" expanded="true" signature="1795:1851" ph="/// 内部风险比例B ... " />
+            <marker date="1589193988931" expanded="true" signature="1894:1950" ph="/// 外部搜寻比例A ... " />
+            <marker date="1589193988931" expanded="true" signature="1996:2052" ph="/// 外部搜寻比例B ... " />
+            <marker date="1589193988931" expanded="true" signature="2098:2154" ph="/// 外部议价比例A ... " />
+            <marker date="1589193988931" expanded="true" signature="2201:2257" ph="/// 外部议价比例B ... " />
+            <marker date="1589193988931" expanded="true" signature="2304:2360" ph="/// 外部交付比例A ... " />
+            <marker date="1589193988931" expanded="true" signature="2407:2463" ph="/// 外部交付比例B ... " />
+            <marker date="1589193988931" expanded="true" signature="2510:2566" ph="/// 外部风险比例A ... " />
+            <marker date="1589193988931" expanded="true" signature="2610:2666" ph="/// 外部风险比例B ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/TradeSkillData/TradeSkillItem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1314">
+          <caret line="76" column="6" selection-start-line="76" selection-start-column="6" selection-end-line="76" selection-end-column="6" />
+          <folding>
+            <marker date="1589194006150" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589194006150" expanded="true" signature="140:1140" ph="{...}" />
+            <marker date="1589194006150" expanded="true" signature="146:183" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="206:243" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="273:310" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="338:375" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="407:444" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="476:515" ph="/// 送货 ... " />
+            <marker date="1589194006150" expanded="true" signature="544:581" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="608:645" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="674:711" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="741:778" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="808:845" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="872:909" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="939:976" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="1007:1044" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="1075:1112" ph="///  ... " />
+            <marker date="1589194006150" expanded="true" signature="1187:1269" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/WorkerData/WorkerData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="84" column="6" selection-start-line="84" selection-start-column="6" selection-end-line="84" selection-end-column="6" />
+          <folding>
+            <marker date="1589194047397" expanded="false" signature="6:115" ph="..." />
+            <marker date="1589194047397" expanded="true" signature="165:1779" ph="{...}" />
+            <marker date="1589194047397" expanded="true" signature="239:290" ph="/// 品阶 ... " />
+            <marker date="1589194047397" expanded="true" signature="333:385" ph="/// 效果值 ... " />
+            <marker date="1589194047397" expanded="true" signature="422:474" ph="/// 效率值 ... " />
+            <marker date="1589194047397" expanded="true" signature="515:567" ph="/// 范围值 ... " />
+            <marker date="1589194047397" expanded="true" signature="603:656" ph="/// 风险抗力 ... " />
+            <marker date="1589194047397" expanded="true" signature="701:754" ph="/// 交易成本 ... " />
+            <marker date="1589194047397" expanded="true" signature="794:845" ph="/// 成本 ... " />
+            <marker date="1589194047397" expanded="true" signature="880:933" ph="/// 弹药容量 ... " />
+            <marker date="1589194047397" expanded="true" signature="978:1035" ph="/// 当前是否正在使用 ... " />
+            <marker date="1589194047397" expanded="true" signature="1073:1127" ph="/// PDP性格 ... " />
+            <marker date="1589194047397" expanded="true" signature="1165:1222" ph="/// Icon路径地址 ... " />
+            <marker date="1589194047397" expanded="true" signature="1266:1325" ph="/// 模型空间2D路径地址 ... " />
+            <marker date="1589194047397" expanded="true" signature="1374:1426" ph="/// 初始化 ... " />
+            <marker date="1589194047397" expanded="true" signature="1453:1773" ph="{...}" />
+            <marker date="1589194047397" expanded="true" signature="1476:1635" ph="/* SpritePath = CommonData.My.SpritePath + &quot;Worker/&quot; + ID.ToString(); ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/WorkerData/WorkerItem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <marker date="1589194065098" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589194065098" expanded="true" signature="142:1069" ph="{...}" />
+            <marker date="1589194065098" expanded="true" signature="226:277" ph="/// 品阶 ... " />
+            <marker date="1589194065098" expanded="true" signature="316:368" ph="/// 效果值 ... " />
+            <marker date="1589194065098" expanded="true" signature="408:460" ph="/// 效率值 ... " />
+            <marker date="1589194065098" expanded="true" signature="504:556" ph="/// 范围值 ... " />
+            <marker date="1589194065098" expanded="true" signature="595:648" ph="/// 风险抗力 ... " />
+            <marker date="1589194065098" expanded="true" signature="696:749" ph="/// 交易成本 ... " />
+            <marker date="1589194065098" expanded="true" signature="792:843" ph="/// 成本 ... " />
+            <marker date="1589194065098" expanded="true" signature="881:934" ph="/// 弹药容量 ... " />
+            <marker date="1589194065098" expanded="true" signature="982:1036" ph="/// PDP性格 ... " />
+            <marker date="1589194065098" expanded="true" signature="1118:1200" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/GameDataMgr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1180">
+          <caret line="590" column="6" selection-start-line="590" selection-start-column="6" selection-end-line="590" selection-end-column="6" />
+          <folding>
+            <marker date="1589194102239" expanded="false" signature="6:211" ph="..." />
+            <marker date="1589194102239" expanded="true" signature="283:21950" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="298:352" ph="/// 角色模板库 ... " />
+            <marker date="1589194102239" expanded="true" signature="429:481" ph="/// 装备库 ... " />
+            <marker date="1589194102239" expanded="true" signature="532:584" ph="/// 工人库 ... " />
+            <marker date="1589194102239" expanded="true" signature="639:691" ph="/// 活动库 ... " />
+            <marker date="1589194102239" expanded="true" signature="750:804" ph="/// 技能数据库 ... " />
+            <marker date="1589194102239" expanded="true" signature="857:913" ph="/// 交易技能解锁库 ... " />
+            <marker date="1589194102239" expanded="true" signature="976:1032" ph="/// Buff数据库 ... " />
+            <marker date="1589194102239" expanded="true" signature="1083:1139" ph="/// Buff数据库 ... " />
+            <marker date="1589194102239" expanded="true" signature="1202:1258" ph="/// 关卡配置数据库 ... " />
+            <marker date="1589194102239" expanded="true" signature="1369:1550" ph="/// 根据职业类型和等级获取角色模板 ... " />
+            <marker date="1589194102239" expanded="true" signature="1621:1900" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="1703:1865" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="1910:2037" ph="/// 根据ID获取装备 ... " />
+            <marker date="1589194102239" expanded="true" signature="2081:2262" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="2137:2227" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="2272:2399" ph="/// 根据ID获取工人 ... " />
+            <marker date="1589194102239" expanded="true" signature="2447:2632" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="2507:2597" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="2642:2771" ph="/// 根据ID获取活动数据 ... " />
+            <marker date="1589194102239" expanded="true" signature="2827:3016" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="2891:2981" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="3026:3155" ph="/// 根据技能ID查找技能 ... " />
+            <marker date="1589194102239" expanded="true" signature="3205:3393" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="3263:3358" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="3403:3532" ph="/// 根据技能名称查找技能 ... " />
+            <marker date="1589194102239" expanded="true" signature="3589:3786" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="3647:3751" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="3796:4022" ph="/// 根据发起方，承受方和技能名称查找技能数据 ... " />
+            <marker date="1589194102239" expanded="true" signature="4150:4532" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="4279:4453" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="4542:4673" ph="/// 根据技能ID查找技能数据 ... " />
+            <marker date="1589194102239" expanded="true" signature="4733:4926" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="4801:4891" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="4936:5072" ph="/// 根据buff ID查找BUFF数据 ... " />
+            <marker date="1589194102239" expanded="true" signature="5120:5305" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="5176:5270" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="5315:5448" ph="/// 根据消耗品ID查找消耗品数据 ... " />
+            <marker date="1589194102239" expanded="true" signature="5508:5741" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="5576:5676" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="5751:5882" ph="/// 根据名称查找关卡配置 ... " />
+            <marker date="1589194102239" expanded="true" signature="5939:6207" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="5997:6137" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="6057:6123" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="6217:6352" ph="/// 根据消费者类别查找消费者数据 ... " />
+            <marker date="1589194102239" expanded="true" signature="6429:6722" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="6501:6639" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="6559:6625" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="6732:6836" ph="/// 将技能源数据转成可用数据 ... " />
+            <marker date="1589194102239" expanded="true" signature="6891:9679" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="7005:9630" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="8368:8468" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="8519:8621" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="8666:8794" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="8843:8983" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="9033:9136" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="9188:9293" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="9689:9795" ph="/// 将交易技能源数据转成可用数据 ... " />
+            <marker date="1589194102239" expanded="true" signature="9860:12489" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="9994:12435" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="12499:12605" ph="/// 将Buff源数据转成可用数据 ... " />
+            <marker date="1589194102239" expanded="true" signature="12658:13862" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="12768:13814" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="13872:13976" ph="/// 将道具源数据转成可用数据 ... " />
+            <marker date="1589194102239" expanded="true" signature="14041:14982" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="14175:14745" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="14591:14688" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="14803:14925" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="14992:15094" ph="/// parse关卡数据源 ... " />
+            <marker date="1589194102239" expanded="true" signature="15149:16405" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="15263:16395" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="15963:16104" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="16203:16343" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="16415:16517" ph="/// parse工人数据源 ... " />
+            <marker date="1589194102239" expanded="true" signature="16574:17474" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="16692:17464" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="17484:17586" ph="/// parse装备数据源 ... " />
+            <marker date="1589194102239" expanded="true" signature="17640:18449" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="17750:18439" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="18459:18563" ph="/// parse角色模板数据源 ... " />
+            <marker date="1589194102239" expanded="true" signature="18637:19573" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="18799:19563" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="19583:19687" ph="/// parse消费者类型数据 ... " />
+            <marker date="1589194102239" expanded="true" signature="19756:21215" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="19898:21205" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="21225:21277" ph="/// 初始化 ... " />
+            <marker date="1589194102239" expanded="true" signature="21304:21655" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="21386:21440" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="21487:21541" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="21591:21645" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="21734:21857" ph="{...}" />
+            <marker date="1589194102239" expanded="true" signature="21777:21847" ph="/* print(bool.Parse(&quot;FALSE&quot;)); ... */" />
+            <marker date="1589194102239" expanded="true" signature="21923:21944" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/BaseRoleData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1206">
+          <caret line="71" column="6" selection-start-line="71" selection-start-column="6" selection-end-line="71" selection-end-column="6" />
+          <folding>
+            <marker date="1589194118460" expanded="false" signature="6:115" ph="..." />
+            <marker date="1589194118460" expanded="true" signature="167:1372" ph="{...}" />
+            <marker date="1589194118460" expanded="true" signature="214:267" ph="/// 角色类型 ... " />
+            <marker date="1589194118460" expanded="true" signature="311:362" ph="/// 等级 ... " />
+            <marker date="1589194118460" expanded="true" signature="398:454" ph="/// 模板提供效果值 ... " />
+            <marker date="1589194118460" expanded="true" signature="491:547" ph="/// 模板提供效率值 ... " />
+            <marker date="1589194118460" expanded="true" signature="588:644" ph="/// 模板提供范围值 ... " />
+            <marker date="1589194118460" expanded="true" signature="680:737" ph="/// 模板提供交易成本 ... " />
+            <marker date="1589194118460" expanded="true" signature="777:834" ph="/// 模板提供风险抗力 ... " />
+            <marker date="1589194118460" expanded="true" signature="879:934" ph="/// 模板提供成本 ... " />
+            <marker date="1589194118460" expanded="true" signature="969:1027" ph="/// 模板提供弹药装载量 ... " />
+            <marker date="1589194118460" expanded="true" signature="1072:1129" ph="/// Icon路径地址 ... " />
+            <marker date="1589194118460" expanded="true" signature="1173:1228" ph="/// 模型路径地址 ... " />
+            <marker date="1589194118460" expanded="true" signature="1269:1328" ph="/// 模型空间2D路径地址 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DealConfigData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1544">
+          <caret line="103" column="6" selection-start-line="103" selection-start-column="6" selection-end-line="103" selection-end-column="6" />
+          <folding>
+            <marker date="1589194142789" expanded="false" signature="6:120" ph="..." />
+            <marker date="1589194142789" expanded="true" signature="198:3237" ph="{...}" />
+            <marker date="1589194142789" expanded="true" signature="213:264" ph="/// 固定 ... " />
+            <marker date="1589194142789" expanded="true" signature="306:357" ph="/// 剩余 ... " />
+            <marker date="1589194142789" expanded="true" signature="400:451" ph="/// 分成 ... " />
+            <marker date="1589194142789" expanded="true" signature="496:547" ph="/// 免费 ... " />
+            <marker date="1589194142789" expanded="true" signature="590:642" ph="/// 不免费 ... " />
+            <marker date="1589194142789" expanded="true" signature="687:738" ph="/// 先钱 ... " />
+            <marker date="1589194142789" expanded="true" signature="787:838" ph="/// 后钱 ... " />
+            <marker date="1589194142789" expanded="true" signature="898:1547" ph="{...}" />
+            <marker date="1589194142789" expanded="true" signature="1626:3138" ph="{...}" />
+            <marker date="1589194142789" expanded="true" signature="1662:2358" ph="{...}" />
+            <marker date="1589194142789" expanded="true" signature="1712:2344" ph="{...}" />
+            <marker date="1589194142789" expanded="true" signature="2375:3071" ph="{...}" />
+            <marker date="1589194142789" expanded="true" signature="2425:3057" ph="{...}" />
+            <marker date="1589194142789" expanded="true" signature="3168:3231" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/090959EA-8BDA-448D-921C-6CAB7FB64DBA/21/b3d0d04e/JsonUtility.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/OriginalData.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1432">
+          <caret line="226" column="1" selection-start-line="226" selection-start-column="1" selection-end-line="226" selection-end-column="1" />
+          <folding>
+            <marker date="1589194167369" expanded="false" signature="6:120" ph="..." />
+            <marker date="1589194167369" expanded="true" signature="183:7728" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="687:1088" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="1130:1874" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="1408:1864" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="1461:1578" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="1599:1850" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="1911:2625" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="2179:2615" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="2232:2349" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="2370:2601" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="2661:3369" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="2927:3359" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="2980:3097" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="3118:3345" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="3411:4149" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="3683:4139" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="3736:3853" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="3874:4125" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="4186:5014" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="4568:5004" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="4621:4738" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="4759:4990" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="5051:5665" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="5222:5655" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="5275:5392" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="5413:5641" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="5703:6325" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="5875:6315" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="5928:6045" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="6066:6301" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="6369:7026" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="6547:7016" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="6600:6717" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="6738:7002" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="7070:7722" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="7248:7712" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="7301:7418" ph="{...}" />
+            <marker date="1589194167369" expanded="true" signature="7439:7698" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/BaseMapRole.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3340">
+          <caret line="483" column="105" selection-start-line="483" selection-start-column="105" selection-end-line="483" selection-end-column="105" />
+          <folding>
+            <marker date="1589194185761" expanded="false" signature="6:111" ph="..." />
+            <marker date="1589194185761" expanded="true" signature="168:24671" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="206:249" ph="/// 仓库 ... " />
+            <marker date="1589194185761" expanded="true" signature="295:377" ph="/* 输入口 ... */" />
+            <marker date="1589194185761" expanded="true" signature="383:432" ph="/// 是否开启优势货架 ... " />
+            <marker date="1589194185761" expanded="true" signature="467:512" ph="/// 优势货架 ... " />
+            <marker date="1589194185761" expanded="true" signature="565:610" ph="/// 优势仓库 ... " />
+            <marker date="1589194185761" expanded="true" signature="674:721" ph="/// 所有主动技能 ... " />
+            <marker date="1589194185761" expanded="true" signature="765:812" ph="/// 所有主动技能 ... " />
+            <marker date="1589194185761" expanded="true" signature="1015:1062" ph="/// 是否是NPC ... " />
+            <marker date="1589194185761" expanded="true" signature="1099:1146" ph="/// 开启自动售卖 ... " />
+            <marker date="1589194185761" expanded="true" signature="1181:1228" ph="/// 交易历史记录 ... " />
+            <marker date="1589194185761" expanded="true" signature="1333:1382" ph="/// 自身buff列表 ... " />
+            <marker date="1589194185761" expanded="true" signature="1424:1478" ph="/// 周围的building列表 ... " />
+            <marker date="1589194185761" expanded="true" signature="1569:1617" ph="/// 召唤消费者间隔 ... " />
+            <marker date="1589194185761" expanded="true" signature="1708:1754" ph="/// 角色贡献度 ... " />
+            <marker date="1589194185761" expanded="false" signature="1904:2215" ph="UI显示信息" />
+            <marker date="1589194185761" expanded="true" signature="2220:2294" ph="/// 商店   最多不能多于  baseroleData.counter ... " />
+            <marker date="1589194185761" expanded="true" signature="2365:2447" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="2518:3265" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="2886:2951" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="3012:3086" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="3112:3203" ph="{...}" />
+            <marker date="1589194185761" expanded="false" signature="3271:4709" ph="交易记录" />
+            <marker date="1589194185761" expanded="true" signature="3288:3427" ph="/// 记录每个独特ID的交易，若该交易重复则更新 ... " />
+            <marker date="1589194185761" expanded="true" signature="3497:4693" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="4098:4297" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="4310:4490" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="4537:4604" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="4617:4687" ph="{...}" />
+            <marker date="1589194185761" expanded="false" signature="4715:7005" ph="BUFF结算" />
+            <marker date="1589194185761" expanded="true" signature="4735:4825" ph="/// buff增加时回调 ... " />
+            <marker date="1589194185761" expanded="true" signature="4868:5003" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="5009:5099" ph="/// buff删除时回调 ... " />
+            <marker date="1589194185761" expanded="true" signature="5145:5250" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="5256:5310" ph="/// 检测所有buff的持续时间 ... " />
+            <marker date="1589194185761" expanded="true" signature="5346:5831" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="5385:5425" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="5474:5825" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="5562:5815" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="5720:5801" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="5837:5926" ph="/// 当消费者进商店时 ... " />
+            <marker date="1589194185761" expanded="true" signature="5985:6104" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="6032:6098" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="6110:6159" ph="/// 当生产活动完成时 ... " />
+            <marker date="1589194185761" expanded="true" signature="6221:6343" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="6268:6337" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="6349:6396" ph="/// 当交易进行时 ... " />
+            <marker date="1589194185761" expanded="true" signature="6429:6534" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="6476:6528" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="6540:6630" ph="/// 当消费者满意度结算时 ... " />
+            <marker date="1589194185761" expanded="true" signature="6683:6802" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="6730:6796" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="6808:6855" ph="/// 当濒临破产时 ... " />
+            <marker date="1589194185761" expanded="true" signature="6886:6989" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="6933:6983" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="7011:12094" ph="钱，满意度相关" />
+            <marker date="1589194185761" expanded="true" signature="7031:7078" ph="/// 每月消耗成本 ... " />
+            <marker date="1589194185761" expanded="true" signature="7108:7536" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="7147:7530" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="7542:7592" ph="/// 计算角色的地块成本 ... " />
+            <marker date="1589194185761" expanded="true" signature="7625:7982" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="7841:7976" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="7988:8072" ph="/// 累计消费者满意度 ... " />
+            <marker date="1589194185761" expanded="true" signature="8118:8341" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="8347:8425" ph="/// 收入 ... " />
+            <marker date="1589194185761" expanded="true" signature="8459:8954" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="8509:8741" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="8622:8696" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="8754:8948" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="8865:8938" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="8960:9040" ph="/// 零售收入 ... " />
+            <marker date="1589194185761" expanded="true" signature="9082:9252" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="9258:9380" ph="/// 付钱给另一个角色 ... " />
+            <marker date="1589194185761" expanded="true" signature="9430:9686" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="9692:9739" ph="/// 处理分成选项 ... " />
+            <marker date="1589194185761" expanded="true" signature="9782:10225" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="9880:9926" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="10009:10198" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="10231:10312" ph="/// 获得角色当前分成总计比例 ... " />
+            <marker date="1589194185761" expanded="true" signature="10360:10766" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="10485:10532" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="10589:10737" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="10635:10727" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="10772:10869" ph="/// 获得新的或者更新已有的付钱关系 ... " />
+            <marker date="1589194185761" expanded="true" signature="10925:11420" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="10987:11160" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="11173:11414" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="11426:11515" ph="/// 删除指定的付钱关系 ... " />
+            <marker date="1589194185761" expanded="true" signature="11566:11729" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="11657:11723" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="11736:11783" ph="/// 每月重新统计 ... " />
+            <marker date="1589194185761" expanded="true" signature="11813:12078" ph="{...}" />
+            <marker date="1589194185761" expanded="false" signature="12100:14378" ph="移动物品" />
+            <marker date="1589194185761" expanded="true" signature="12119:12210" ph="/// 移动物品到仓库 ... " />
+            <marker date="1589194185761" expanded="true" signature="12272:12486" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="12323:12407" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="12492:12690" ph="/* 移动物体到输入口 ... */" />
+            <marker date="1589194185761" expanded="true" signature="12697:12906" ph="/* 将输入口产品到仓库 ... */" />
+            <marker date="1589194185761" expanded="true" signature="12912:13006" ph="/// 将仓库产品输入到商店 ... " />
+            <marker date="1589194185761" expanded="true" signature="13075:13590" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="13113:13204" ph="/* Debug.Log(warehouse.Count); ... */" />
+            <marker date="1589194185761" expanded="true" signature="13349:13507" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="13596:13659" ph="/// 移动到优势货架,如果货架满了将移动到优势仓库 ... " />
+            <marker date="1589194185761" expanded="true" signature="13728:13937" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="13774:13841" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="13854:13931" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="13944:13995" ph="/// 将优势仓库移动到货架 ... " />
+            <marker date="1589194185761" expanded="true" signature="14046:14362" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="14092:14356" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="14156:14346" ph="{...}" />
+            <marker date="1589194185761" expanded="false" signature="14384:16554" ph="获取物品" />
+            <marker date="1589194185761" expanded="true" signature="14402:15112" ph="/* 获取输入口产品 ... */" />
+            <marker date="1589194185761" expanded="true" signature="15114:15213" ph="/// 查找仓库产品 ... " />
+            <marker date="1589194185761" expanded="true" signature="15287:15537" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="15366:15516" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="15420:15509" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="15543:15654" ph="/// 提取仓库产品 ... " />
+            <marker date="1589194185761" expanded="true" signature="15728:16049" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="15816:16022" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="15876:16012" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="16055:16166" ph="/// 提取仓库产品 ... " />
+            <marker date="1589194185761" expanded="true" signature="16228:16538" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="16316:16511" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="16365:16501" ph="{...}" />
+            <marker date="1589194185761" expanded="false" signature="16560:20288" ph="技能" />
+            <marker date="1589194185761" expanded="true" signature="16577:16704" ph="/// 初始化所有技能 ... " />
+            <marker date="1589194185761" expanded="true" signature="16735:16804" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="16843:16930" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="16936:16983" ph="/// 释放被动技能 ... " />
+            <marker date="1589194185761" expanded="true" signature="17024:17351" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="17089:17345" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="17178:17271" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="17357:17471" ph="/// 释放技能 ... " />
+            <marker date="1589194185761" expanded="true" signature="17547:17860" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="17603:17800" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="17682:17790" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="17866:17918" ph="/// 根据技能名字获取技能类 ... " />
+            <marker date="1589194185761" expanded="true" signature="17972:18344" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="18109:18285" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="18174:18275" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="18350:18406" ph="/// 根据被动技能名字获取被动技能类 ... " />
+            <marker date="1589194185761" expanded="true" signature="18476:18844" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="18605:18783" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="18670:18773" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="18850:18938" ph="/// 解锁被动技能 ... " />
+            <marker date="1589194185761" expanded="true" signature="18993:19387" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="19058:19381" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="19135:19371" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="19393:19509" ph="/// 查找被动技能 ... " />
+            <marker date="1589194185761" expanded="true" signature="19575:19830" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="19640:19801" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="19717:19791" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="19836:19924" ph="/// 锁上被动技能 ... " />
+            <marker date="1589194185761" expanded="true" signature="19977:20270" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="20042:20264" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="20119:20254" ph="{...}" />
+            <marker date="1589194185761" expanded="false" signature="20294:24001" ph="商店/零售" />
+            <marker date="1589194185761" expanded="true" signature="20313:20360" ph="/// 减少物品数量 ... " />
+            <marker date="1589194185761" expanded="true" signature="20428:20768" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="20482:20650" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="20663:20762" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="20807:21868" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="20839:20879" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="20907:21203" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="20971:21193" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="21080:21179" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="21232:21529" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="21296:21519" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="21406:21505" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="21560:21862" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="21624:21852" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="21739:21838" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="21874:22010" ph="/// 将周围的居民楼加入list ... " />
+            <marker date="1589194185761" expanded="true" signature="22072:22259" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="22128:22168" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="22181:22253" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="22265:22314" ph="/// 周期性召唤消费者 ... " />
+            <marker date="1589194185761" expanded="true" signature="22346:23324" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="22397:22437" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="22724:23053" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="22815:23043" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="22909:23029" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="23180:23318" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="23330:23488" ph="/// 从列表中随机N个Gameobject ... " />
+            <marker date="1589194185761" expanded="true" signature="23557:23985" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="23652:23697" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="23710:23956" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="23762:23946" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="24007:24107" ph="/// 当角色获得贡献度时 ... " />
+            <marker date="1589194185761" expanded="true" signature="24163:24222" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="24253:24266" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="24319:24532" ph="{...}" />
+            <marker date="1589194185761" expanded="true" signature="24589:24669" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/Skill/PassivitySkill/ProductionSkill.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="34" column="13" lean-forward="true" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+          <folding>
+            <marker date="1589194230825" expanded="false" signature="6:92" ph="..." />
+            <marker date="1589194230825" expanded="true" signature="93:130" ph="/// 生产技能 ... " />
+            <marker date="1589194230825" expanded="true" signature="172:1632" ph="{...}" />
+            <marker date="1589194230825" expanded="true" signature="346:1510" ph="{...}" />
+            <marker date="1589194230825" expanded="true" signature="358:1482" ph="/* print(&quot;生产&quot;); ... */" />
+            <marker date="1589194230825" expanded="true" signature="1528:1549" ph="{...}" />
+            <marker date="1589194230825" expanded="true" signature="1607:1628" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Role/CreatRoleManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="120" column="17" lean-forward="true" selection-start-line="120" selection-start-column="17" selection-end-line="120" selection-end-column="17" />
+          <folding>
+            <marker date="1589189142713" expanded="false" signature="6:165" ph="..." />
+            <marker date="1589189142713" expanded="true" signature="230:16886" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="237:284" ph="/// 当前角色信息 ... " />
+            <marker date="1589189142713" expanded="true" signature="364:416" ph="/// 当前创建装备的位置坐标 ... " />
+            <marker date="1589189142713" expanded="true" signature="452:504" ph="/// 当前创建装备的位置坐标 ... " />
+            <marker date="1589189142713" expanded="true" signature="541:589" ph="/// 装备列表预制体 ... " />
+            <marker date="1589189142713" expanded="true" signature="627:675" ph="/// 工人列表预制体 ... " />
+            <marker date="1589189142713" expanded="true" signature="714:760" ph="/// 装备模板槽 ... " />
+            <marker date="1589189142713" expanded="true" signature="801:847" ph="/// 工人模板槽 ... " />
+            <marker date="1589189142713" expanded="true" signature="890:936" ph="/// 角色模板槽 ... " />
+            <marker date="1589189142713" expanded="true" signature="1028:1075" ph="/// 模板创建位置 ... " />
+            <marker date="1589189142713" expanded="true" signature="1235:1280" ph="/// 确认按钮 ... " />
+            <marker date="1589189142713" expanded="true" signature="1322:1372" ph="/// 工人是否都在装备上 ... " />
+            <marker date="1589189142713" expanded="true" signature="1411:1465" ph="/// 是否至少一个装备和一个工人 ... " />
+            <marker date="1589189142713" expanded="true" signature="1512:1563" ph="/// 装备是否满足模板需求 ... " />
+            <marker date="1589189142713" expanded="true" signature="1601:1648" ph="/// 所有装备槽位 ... " />
+            <marker date="1589189142713" expanded="true" signature="1686:1733" ph="/// 所有工人槽位 ... " />
+            <marker date="1589189142713" expanded="true" signature="1995:2055" ph="/// 工人加起来的4项属性值（用于UI显示） ... " />
+            <marker date="1589189142713" expanded="false" signature="2060:2222" ph="workerAttribute" />
+            <marker date="1589189142713" expanded="true" signature="2228:2288" ph="/// 装备加起来的4项属性值（用于UI显示） ... " />
+            <marker date="1589189142713" expanded="false" signature="2293:2445" ph="gearAttribute" />
+            <marker date="1589189142713" expanded="true" signature="2451:2513" ph="/// 最终的4项属性值（用于UI显示和最终结算） ... " />
+            <marker date="1589189142713" expanded="false" signature="2518:2810" ph="finalAttribute" />
+            <marker date="1589189142713" expanded="true" signature="2858:3152" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="3197:3493" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="3499:3566" ph="/// 初始化角色创建界面，将要创建的角色模板赋值给管理类 ... " />
+            <marker date="1589189142713" expanded="true" signature="3602:4609" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="3708:3800" ph="/* print(tempRole.baseRoleData.roleType); ... */" />
+            <marker date="1589189142713" expanded="true" signature="3951:4014" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="4061:4125" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="4173:4257" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="4615:4669" ph="/// 显示组装中的角色的职业名称 ... " />
+            <marker date="1589189142713" expanded="true" signature="4706:5279" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="4762:5273" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="5316:5369" ph="/// 将组装好的角色的装备复位 ... " />
+            <marker date="1589189142713" expanded="true" signature="5396:5899" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="5439:5893" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="5905:5958" ph="/// 将组装好的角色的工人复位 ... " />
+            <marker date="1589189142713" expanded="true" signature="5986:6533" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="6030:6527" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="6541:6596" ph="/// 判断角色组装是否满足所有条件 ... " />
+            <marker date="1589189142713" expanded="true" signature="6633:7074" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="7080:7160" ph="/// 判断工人是否都在装备上 ... " />
+            <marker date="1589189142713" expanded="true" signature="7197:7749" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="7351:7449" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="7499:7593" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="7632:7722" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="7755:7839" ph="/// 判断是否至少一个装备和一个工人 ... " />
+            <marker date="1589189142713" expanded="true" signature="7884:8329" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="7987:8117" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="8027:8107" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="8160:8292" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="8200:8282" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="8335:8416" ph="/// 判断装备是否满足模板需求 ... " />
+            <marker date="1589189142713" expanded="true" signature="8452:8790" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="8796:8845" ph="/// 计算角色属性数值 ... " />
+            <marker date="1589189142713" expanded="true" signature="8885:10494" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="8953:9736" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="9794:10466" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="10500:10555" ph="/// 初始化角色数值，放置多重叠加 ... " />
+            <marker date="1589189142713" expanded="true" signature="10587:11544" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="11550:11600" ph="/// 计算工人PDP性格 ... " />
+            <marker date="1589189142713" expanded="true" signature="11627:11640" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="11646:11700" ph="/// 最后结算角色实际的预览属性 ... " />
+            <marker date="1589189142713" expanded="true" signature="11729:12626" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="12632:12683" ph="/// 点确认后保存所有信息 ... " />
+            <marker date="1589189142713" expanded="true" signature="12713:13616" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="13072:13420" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="13169:13410" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="13269:13396" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="13622:13674" ph="/// 删除所有模板中的子物体 ... " />
+            <marker date="1589189142713" expanded="true" signature="13707:15008" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="13777:13867" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="13929:14016" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="14078:14165" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="14221:14302" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="14357:14437" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="14538:14665" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="14766:14892" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="15015:15060" ph="/// 重置角色 ... " />
+            <marker date="1589189142713" expanded="true" signature="15088:15910" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="15149:15228" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="15282:15360" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="15410:15474" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="15526:15592" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="15630:15707" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="15772:15847" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="15916:15963" ph="/// 关闭当前菜单 ... " />
+            <marker date="1589189142713" expanded="true" signature="15991:16134" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="16205:16615" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="16339:16446" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="16500:16607" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="16673:16686" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="16691:16739" ph="/// 创建装备啊列表 ... " />
+            <marker date="1589189142713" expanded="true" signature="16772:16785" ph="{...}" />
+            <marker date="1589189142713" expanded="true" signature="16790:16837" ph="/// 创建工人列表 ... " />
+            <marker date="1589189142713" expanded="true" signature="16871:16884" ph="{...}" />
           </folding>
         </state>
       </provider>

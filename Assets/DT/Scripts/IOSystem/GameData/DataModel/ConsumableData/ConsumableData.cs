@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WZDT.GameData
-{
+ 
     public class ConsumableData
     {
         /// <summary>
@@ -25,7 +24,5 @@ namespace WZDT.GameData
         /// 消耗品作用
         /// </summary>
         public List<int> targetBuffList;
-    }
-}
-
+    } 
 

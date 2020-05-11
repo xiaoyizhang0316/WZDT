@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 
-namespace WZDT.GameData
-{
+ 
     public class OriginalData : MonoSingleton<OriginalData>
     {
         public TradeSkillsData tradeSkillRawData;
@@ -225,5 +224,4 @@ namespace WZDT.GameData
             }
         }
     }
-
-}
+ 

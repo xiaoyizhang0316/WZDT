@@ -4,8 +4,7 @@ using UnityEngine;
 using static GameEnum;
 using System;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class WorkerData
     {
@@ -83,5 +82,4 @@ namespace WZDT.GameData
             SpritePath = "Sprite/Worker/" + ID.ToString();
             WorkerSpacePath = "Sprite/WorkerSpace/" + ID.ToString();
         }
-    }
-}
+    } 

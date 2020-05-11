@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace WZDT.GameData
-{
+ 
     public class StageData
     {
         /// <summary>
@@ -51,5 +50,4 @@ namespace WZDT.GameData
         /// 消费者质量要求
         /// </summary>
         public int consumerQualityNeed;
-    }
-}
+    } 

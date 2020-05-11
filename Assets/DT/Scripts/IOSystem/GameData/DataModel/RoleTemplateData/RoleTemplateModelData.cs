@@ -4,8 +4,7 @@ using UnityEngine;
 using System;
 using static GameEnum;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class RoleTemplateModelData
     {
@@ -29,7 +28,7 @@ namespace WZDT.GameData
         /// <summary>
         /// 模板提供效率值
         /// </summary>
-        public int effeciency;
+        public int efficiency;
 
         /// <summary>
         /// 模板提供范围值
@@ -87,7 +86,7 @@ namespace WZDT.GameData
             tempRoleData.roleType = roleType;
             tempRoleData.level = level;
             tempRoleData.effect = effect;
-            tempRoleData.effeciency = effeciency;
+            tempRoleData.efficiency = efficiency;
             tempRoleData.range = range;
             tempRoleData.riskResistance = riskResistance;
             tempRoleData.tradeCost = tradeCost;
@@ -97,7 +96,6 @@ namespace WZDT.GameData
             tempRoleData.PrePath = PrePath;
             tempRoleData.RoleSpacePath = RoleSpacePath;
         }
-    }
-}
+    } 
 
 

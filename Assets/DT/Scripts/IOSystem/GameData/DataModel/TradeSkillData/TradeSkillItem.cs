@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace WZDT.GameData
-{
+ 
 	[Serializable]
 	public class TradeSkillItem
 	{
@@ -75,5 +74,4 @@ namespace WZDT.GameData
 	public class TradeSkillsData
 	{
 		public List<TradeSkillItem> tradeSkillSigns = new List<TradeSkillItem>();
-	}
-}
+	} 

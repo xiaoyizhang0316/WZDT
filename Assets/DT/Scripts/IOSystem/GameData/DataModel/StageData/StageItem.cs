@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class StageItem
     {
@@ -30,5 +29,4 @@ namespace WZDT.GameData
     public class StagesData
     {
         public List<StageItem> stageSigns = new List<StageItem>();
-    }
-}
+    } 

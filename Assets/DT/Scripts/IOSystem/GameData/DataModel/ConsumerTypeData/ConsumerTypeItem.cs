@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class ConsumerTypeItem
     {
@@ -51,6 +50,5 @@ namespace WZDT.GameData
     public class ConsumerTypesData
     {
         public List<ConsumerTypeItem> consumerTypeSigns = new List<ConsumerTypeItem>();
-    }
-}
+    } 
 

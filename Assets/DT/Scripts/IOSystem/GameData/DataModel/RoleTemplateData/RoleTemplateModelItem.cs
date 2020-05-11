@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class RoleTemplateModelItem
     {
@@ -26,7 +25,7 @@ namespace WZDT.GameData
         /// <summary>
         /// 模板提供效率值
         /// </summary>
-        public string effeciency;
+        public string efficiency;
 
         /// <summary>
         /// 模板提供范围值
@@ -58,6 +57,5 @@ namespace WZDT.GameData
     public class RoleTemplateModelsData
     {
         public List<RoleTemplateModelItem> roleTemplateModelItems = new List<RoleTemplateModelItem>();
-    }
-}
+    } 
 
