@@ -4,8 +4,7 @@ using UnityEngine;
 using System;
 using static GameEnum;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class SkillData
     {
@@ -93,7 +92,6 @@ namespace WZDT.GameData
         /// 解锁目标被动技能列表
         /// </summary>
         public List<int> targetSkillUnlock;
-    }
-}
+    } 
 
 

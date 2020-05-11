@@ -4,8 +4,7 @@ using UnityEngine;
 using System;
 using static GameEnum;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class RoleTemplateModelData
     {
@@ -97,7 +96,6 @@ namespace WZDT.GameData
             tempRoleData.PrePath = PrePath;
             tempRoleData.RoleSpacePath = RoleSpacePath;
         }
-    }
-}
+    } 
 
 

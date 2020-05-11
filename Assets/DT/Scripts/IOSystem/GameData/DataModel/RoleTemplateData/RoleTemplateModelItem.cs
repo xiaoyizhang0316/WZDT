@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class RoleTemplateModelItem
     {
@@ -58,6 +57,5 @@ namespace WZDT.GameData
     public class RoleTemplateModelsData
     {
         public List<RoleTemplateModelItem> roleTemplateModelItems = new List<RoleTemplateModelItem>();
-    }
-}
+    } 
 

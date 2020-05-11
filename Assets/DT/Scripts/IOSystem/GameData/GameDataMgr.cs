@@ -7,8 +7,7 @@ using System.Linq;
 using System;
 using UnityEngine.SceneManagement;
 
-namespace WZDT.GameData
-{
+ 
     public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     {
         /// <summary>
@@ -589,5 +588,4 @@ namespace WZDT.GameData
         {
 
         }
-    }
-}
+    } 

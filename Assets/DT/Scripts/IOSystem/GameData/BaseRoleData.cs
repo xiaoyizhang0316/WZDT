@@ -4,8 +4,7 @@ using UnityEngine;
 using System;
 using static GameEnum;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class BaseRoleData
     {
@@ -70,5 +69,4 @@ namespace WZDT.GameData
         /// </summary>
         public string RoleSpacePath;
 
-    }
-}
+    } 

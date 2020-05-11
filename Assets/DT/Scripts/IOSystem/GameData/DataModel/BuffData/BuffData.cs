@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class BuffData
     {
@@ -82,7 +80,5 @@ namespace WZDT.GameData
         /// 时间点其他骚操作
         /// </summary>
         public Dictionary<int, List<string>> otherFunctions;
-    }
-}
-
+    } 
 

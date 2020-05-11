@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class BuffItem
     {
@@ -65,5 +64,4 @@ namespace WZDT.GameData
     {
         public List<BuffItem> buffSigns = new List<BuffItem>();
     }
-}
-
+ 

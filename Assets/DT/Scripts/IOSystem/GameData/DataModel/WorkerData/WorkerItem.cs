@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class WorkerItem
     {
@@ -63,5 +62,4 @@ namespace WZDT.GameData
     public class WorkersData
     {
         public List<WorkerItem> workerItems = new List<WorkerItem>();
-    }
-}
+    } 

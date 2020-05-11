@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class ConsumableItem
     {
@@ -22,6 +21,5 @@ namespace WZDT.GameData
     public class ConsumablesData
     {
         public List<ConsumableItem> consumableSigns = new List<ConsumableItem>();
-    }
-}
+    } 
 

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 
-namespace WZDT.GameData
-{
+ 
     public class DealConfigData : MonoSingletonDontDestroy<DealConfigData>
     {
         /// <summary>
@@ -102,5 +101,4 @@ namespace WZDT.GameData
         {
             DontDestroyOnLoad(gameObject);
         }
-    }
-}
+    } 

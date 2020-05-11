@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class SkillItem
     {
@@ -80,6 +79,5 @@ namespace WZDT.GameData
     public class SkillsData
     {
         public List<SkillItem> skillSigns = new List<SkillItem>();
-    }
-}
+    } 
 

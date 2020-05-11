@@ -4,8 +4,7 @@ using UnityEngine;
 using static GameEnum;
 using System;
 
-namespace WZDT.GameData
-{
+ 
     [Serializable]
     public class TradeSkillData
     {
@@ -136,5 +135,4 @@ namespace WZDT.GameData
         /// 外部风险比例B
         /// </summary>
         public float riskOutPerB;
-    }
-}
+    } 

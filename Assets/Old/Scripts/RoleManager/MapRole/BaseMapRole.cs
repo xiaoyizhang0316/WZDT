@@ -308,7 +308,7 @@ public class BaseMapRole : MonoBehaviour
         {
             CheckLandPrice();
             int result = 0;
-            result += baseRoleData.baseRoleData.baseCostMonth;
+            result += baseRoleData.baseRoleData.cost;
             result += baseRoleData.equipCost;
             result += baseRoleData.workerCost;
             result += baseRoleData.landCost;
@@ -324,7 +324,7 @@ public class BaseMapRole : MonoBehaviour
     public void CheckLandPrice()
     {
         baseRoleData.landCost = 0;
-        operationCost = baseRoleData.workerCost + baseRoleData.equipCost + baseRoleData.baseRoleData.baseCostMonth;
+        operationCost = baseRoleData.workerCost + baseRoleData.equipCost + baseRoleData.baseRoleData.cost;
         foreach (MapSign m in GetComponent<RolePosSign>().MapSigns)
         {
             baseRoleData.landCost += MapManager.My.GetLandRoleCost(baseRoleData.baseRoleData.roleType, m.mapType);
@@ -481,7 +481,7 @@ public class BaseMapRole : MonoBehaviour
     public void RecheckInfo()
     {
         rentCost = baseRoleData.landCost;
-        operationCost = baseRoleData.workerCost + baseRoleData.equipCost + baseRoleData.baseRoleData.baseCostMonth;
+        operationCost = baseRoleData.workerCost + baseRoleData.equipCost + baseRoleData.baseRoleData.cost;
         monthlyProfit = 0;
         monthlySatisfy = 0;
         activityCost = 0;
