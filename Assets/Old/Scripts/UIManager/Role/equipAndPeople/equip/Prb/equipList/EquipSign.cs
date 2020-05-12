@@ -74,15 +74,7 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
         Image_shape.sprite = Resources.Load<Sprite>(gearData.SpritePath);
         pop_1.position = pop_1startPOS.position; 
         pop_2.position = pop_2startPOS.position; 
-        pinpai.sizeDelta =new Vector2(gearData.brand/150f*133f,pinpai.sizeDelta.y);
-        zhiliang.sizeDelta =new Vector2(gearData.quality/150f*133f,pinpai.sizeDelta.y);
-        channeng.sizeDelta =new Vector2(gearData.capacity/150f*133f,pinpai.sizeDelta.y);
-        xiaolv.sizeDelta =new Vector2(gearData.efficiency/150f*133f,pinpai.sizeDelta.y);
-        souxun.text = gearData.searchAdd.ToString();
-        yijia.text = gearData.bargainAdd.ToString();
-        jiaofu.text = gearData.deliverAdd.ToString();
-        fengxian.text = gearData.riskAdd.ToString();
-        Cost.text = gearData.costMonth.ToString();
+       
         
     }
 
