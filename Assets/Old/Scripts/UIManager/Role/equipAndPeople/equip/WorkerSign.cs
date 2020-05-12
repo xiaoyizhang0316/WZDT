@@ -53,15 +53,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         Image_shape.sprite = Resources.Load<Sprite>(workerData.SpritePath);
         pop_1.position = pop_1startPOS.position;
         pop_2.position = pop_2startPOS.position;
-        pinpai.sizeDelta = new Vector2(workerData.brand / 150f * 133f, pinpai.sizeDelta.y);
-        zhiliang.sizeDelta = new Vector2(workerData.quality / 150f * 133f, pinpai.sizeDelta.y);
-        channeng.sizeDelta = new Vector2(workerData.capacity / 150f * 133f, pinpai.sizeDelta.y);
-        xiaolv.sizeDelta = new Vector2(workerData.efficiency / 150f * 133f, pinpai.sizeDelta.y);
-        souxun.text = workerData.searchAdd.ToString();
-        yijia.text = workerData.bargainAdd.ToString();
-        jiaofu.text = workerData.deliverAdd.ToString();
-        fengxian.text = workerData.riskAdd.ToString();
-        cost.text = workerData.costMonth.ToString();
+         
     }
 
     /// <summary>
