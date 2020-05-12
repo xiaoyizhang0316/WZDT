@@ -214,57 +214,58 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public float CalculateTCOfTwo(string startRole,string endRole)
     {
-        Role start = PlayerData.My.GetRoleById(double.Parse(startRole));
-        Role end = PlayerData.My.GetRoleById(double.Parse(endRole));
-        Role conduct = PlayerData.My.GetRoleById(double.Parse(tradeData.castRole));
-        //print(start.fixedCost);
-        //print(end.fixedCost);
-        //print(PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)).AllSkills.Count);
-        //print(PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).AllSkills.Count);
-        //if (start == null || end == null || PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)) == null || PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)) == null)
-        //    return; 
-        TradeSkillData data = GameDataMgr.My.GetSkillDataByStartEndConductSkill(start.baseRoleData.roleType, end.baseRoleData.roleType, conduct.baseRoleData.roleType, tradeData.selectJYFS);
-        float resultSearch = 0f;
-        float resultBargain = 0f;
-        float resultDeliver = 0f;
-        float risk = 0f;
-        List<float> resultList;
-        //外部
-        if (PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)).isNpc || PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).isNpc)
-        {
-            resultSearch += data.searchOutPerA * start.search + data.searchOutPerB * end.search;
-            resultBargain += data.bargainOutPerA * start.bargain + data.bargainOutPerB * end.bargain;
-            if (data.conductRole == start.baseRoleData.roleType)
-            {
-                resultDeliver += data.deliverOutPerA * start.delivery + data.deliverOutPerB * end.delivery;
-            }
-            else
-            {
-                resultDeliver += data.deliverOutPerA * end.delivery + data.deliverOutPerB * start.delivery;
-            }
-            risk = data.riskOutPerA * start.risk + data.riskOutPerB * end.risk;
-            resultList = GetDealConfigAdd(false);
-        }
-        //内部
-        else
-        {
-            resultSearch += (data.searchInPerA * start.search + data.searchInPerB * end.search) * data.searchInAdd;
-            resultBargain += (data.bargainInPerA * start.bargain + data.bargainInPerB * end.bargain) * data.bargainInAdd;
-            if (data.conductRole == start.baseRoleData.roleType)
-            {
-                resultDeliver += (data.deliverInPerA * start.delivery + data.deliverInPerB * end.delivery) * data.deliverInAdd;
-            }
-            else
-            {
-                resultDeliver += (data.deliverInPerA * end.delivery + data.deliverInPerB * start.delivery) * data.deliverInAdd;
-            }
-            risk = data.riskInPerA * start.risk + data.riskInPerB * end.risk;
-            resultList = GetDealConfigAdd(true);
-        }
-        float totalCost = resultSearch * resultList[0] + resultBargain * resultList[1] + resultDeliver * resultList[2];
-        totalCost = totalCost * 8;
-        //print("扣除交易成本，数量为：" + totalCost);
-        return totalCost;
+        //todo
+       //Role start = PlayerData.My.GetRoleById(double.Parse(startRole));
+       //Role end = PlayerData.My.GetRoleById(double.Parse(endRole));
+       //Role conduct = PlayerData.My.GetRoleById(double.Parse(tradeData.castRole));
+       ////print(start.fixedCost);
+       ////print(end.fixedCost);
+       ////print(PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)).AllSkills.Count);
+       ////print(PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).AllSkills.Count);
+       ////if (start == null || end == null || PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)) == null || PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)) == null)
+       ////    return; 
+       //TradeSkillData data = GameDataMgr.My.GetSkillDataByStartEndConductSkill(start.baseRoleData.roleType, end.baseRoleData.roleType, conduct.baseRoleData.roleType, tradeData.selectJYFS);
+       //float resultSearch = 0f;
+       //float resultBargain = 0f;
+       //float resultDeliver = 0f;
+       //float risk = 0f;
+       //List<float> resultList;
+       ////外部
+       //if (PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)).isNpc || PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).isNpc)
+       //{
+       //    resultSearch += data.searchOutPerA * start.search + data.searchOutPerB * end.search;
+       //    resultBargain += data.bargainOutPerA * start.bargain + data.bargainOutPerB * end.bargain;
+       //    if (data.conductRole == start.baseRoleData.roleType)
+       //    {
+       //        resultDeliver += data.deliverOutPerA * start.delivery + data.deliverOutPerB * end.delivery;
+       //    }
+       //    else
+       //    {
+       //        resultDeliver += data.deliverOutPerA * end.delivery + data.deliverOutPerB * start.delivery;
+       //    }
+       //    risk = data.riskOutPerA * start.risk + data.riskOutPerB * end.risk;
+       //    resultList = GetDealConfigAdd(false);
+       //}
+       ////内部
+       //else
+       //{
+       //    resultSearch += (data.searchInPerA * start.search + data.searchInPerB * end.search) * data.searchInAdd;
+       //    resultBargain += (data.bargainInPerA * start.bargain + data.bargainInPerB * end.bargain) * data.bargainInAdd;
+       //    if (data.conductRole == start.baseRoleData.roleType)
+       //    {
+       //        resultDeliver += (data.deliverInPerA * start.delivery + data.deliverInPerB * end.delivery) * data.deliverInAdd;
+       //    }
+       //    else
+       //    {
+       //        resultDeliver += (data.deliverInPerA * end.delivery + data.deliverInPerB * start.delivery) * data.deliverInAdd;
+       //    }
+       //    risk = data.riskInPerA * start.risk + data.riskInPerB * end.risk;
+       //    resultList = GetDealConfigAdd(true);
+       //}
+       // float totalCost = resultSearch * resultList[0] + resultBargain * resultList[1] + resultDeliver * resultList[2];
+       // totalCost = totalCost * 8;
+       // //print("扣除交易成本，数量为：" + totalCost);
+         return 0;
     }
 
     /// <summary>

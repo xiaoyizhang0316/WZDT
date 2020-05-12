@@ -363,9 +363,9 @@ public class ConsumeSign : MonoBehaviour
     public float CalculateTC(BaseMapRole mapRole)
     {
         float result = 0f;
-        result += (float)(consumeData.search + mapRole.baseRoleData.search) ;
-        result += (float)(consumeData.bargain + mapRole.baseRoleData.bargain);
-        result += (float)(consumeData.delivery + mapRole.baseRoleData.delivery) ;
+      // result += (float)(consumeData.search + mapRole.baseRoleData.search) ;
+      // result += (float)(consumeData.bargain + mapRole.baseRoleData.bargain);
+      // result += (float)(consumeData.delivery + mapRole.baseRoleData.delivery) ;
         result = result / 1f;
         lastTC = result;
         //print("交易成本：" + result);

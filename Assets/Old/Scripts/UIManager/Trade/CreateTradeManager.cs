@@ -372,52 +372,53 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 
     public void CalculateTCOfTwo(string startRole,string endRole)
     {
-        Role start = PlayerData.My.GetRoleById(double.Parse(startRole));
-        Role end = PlayerData.My.GetRoleById(double.Parse(endRole));
-        Role conduct = PlayerData.My.GetRoleById(double.Parse(castRole));
-        TradeSkillData data = GameDataMgr.My.GetSkillDataByStartEndConductSkill(start.baseRoleData.roleType, end.baseRoleData.roleType, conduct.baseRoleData.roleType, selectJYFS);
-        float resultSearch = 0f;
-        float resultBargain = 0f;
-        float resultDeliver = 0f;
-        float resultRisk = 0f;
-        List<float> resultList;
-        //外部
-        if (PlayerData.My.GetMapRoleById(double.Parse(startRole)).isNpc || PlayerData.My.GetMapRoleById(double.Parse(endRole)).isNpc)
-        {
-            resultSearch += data.searchOutPerA * start.search + data.searchOutPerB * end.search;
-            resultBargain += data.bargainOutPerA * start.bargain + data.bargainOutPerB * end.bargain;
-            if (data.conductRole == start.baseRoleData.roleType)
-            {
-                resultDeliver += data.deliverOutPerA * start.delivery + data.deliverOutPerB * end.delivery;
-            }
-            else
-            {
-                resultDeliver += data.deliverOutPerA * end.delivery + data.deliverOutPerB * start.delivery;
-            }
-            resultRisk = data.riskOutPerA * start.risk + data.riskOutPerB * end.risk;
-            resultList = GetDealConfigAdd(false);
-        }
-        //内部
-        else
-        {
-            resultSearch += (data.searchInPerA * start.search + data.searchInPerB * end.search) * data.searchInAdd;
-            resultBargain += (data.bargainInPerA * start.bargain + data.bargainInPerB * end.bargain) * data.bargainInAdd;
-            if (data.conductRole == start.baseRoleData.roleType)
-            {
-                resultDeliver += (data.deliverInPerA * start.delivery + data.deliverInPerB * end.delivery) * data.deliverInAdd;
-            }
-            else
-            {
-                resultDeliver += (data.deliverInPerA * end.delivery + data.deliverInPerB * start.delivery) * data.deliverInAdd;
-            }
-            resultRisk = data.riskInPerA * start.risk + data.riskInPerB * end.risk;
-            resultList = GetDealConfigAdd(true);
-        }
-        float search = resultSearch * resultList[0];
-        float bargain = resultBargain * resultList[1];
-        float deliver = resultDeliver * resultList[2];
-        float risk = resultRisk * resultList[3];
-        UpdateTCInfo(search, bargain, deliver, risk);
+        //todo
+   //    Role start = PlayerData.My.GetRoleById(double.Parse(startRole));
+   //    Role end = PlayerData.My.GetRoleById(double.Parse(endRole));
+   //    Role conduct = PlayerData.My.GetRoleById(double.Parse(castRole));
+   //    TradeSkillData data = GameDataMgr.My.GetSkillDataByStartEndConductSkill(start.baseRoleData.roleType, end.baseRoleData.roleType, conduct.baseRoleData.roleType, selectJYFS);
+   //    float resultSearch = 0f;
+   //    float resultBargain = 0f;
+   //    float resultDeliver = 0f;
+   //    float resultRisk = 0f;
+   //    List<float> resultList;
+   //    //外部
+   //    if (PlayerData.My.GetMapRoleById(double.Parse(startRole)).isNpc || PlayerData.My.GetMapRoleById(double.Parse(endRole)).isNpc)
+   //    {
+   //        resultSearch += data.searchOutPerA * start.search + data.searchOutPerB * end.search;
+   //        resultBargain += data.bargainOutPerA * start.bargain + data.bargainOutPerB * end.bargain;
+   //        if (data.conductRole == start.baseRoleData.roleType)
+   //        {
+   //            resultDeliver += data.deliverOutPerA * start.delivery + data.deliverOutPerB * end.delivery;
+   //        }
+   //        else
+   //        {
+   //            resultDeliver += data.deliverOutPerA * end.delivery + data.deliverOutPerB * start.delivery;
+   //        }
+   //        resultRisk = data.riskOutPerA * start.risk + data.riskOutPerB * end.risk;
+   //        resultList = GetDealConfigAdd(false);
+   //    }
+   //    //内部
+   //    else
+   //    {
+   //        resultSearch += (data.searchInPerA * start.search + data.searchInPerB * end.search) * data.searchInAdd;
+   //        resultBargain += (data.bargainInPerA * start.bargain + data.bargainInPerB * end.bargain) * data.bargainInAdd;
+   //        if (data.conductRole == start.baseRoleData.roleType)
+   //        {
+   //            resultDeliver += (data.deliverInPerA * start.delivery + data.deliverInPerB * end.delivery) * data.deliverInAdd;
+   //        }
+   //        else
+   //        {
+   //            resultDeliver += (data.deliverInPerA * end.delivery + data.deliverInPerB * start.delivery) * data.deliverInAdd;
+   //        }
+   //        resultRisk = data.riskInPerA * start.risk + data.riskInPerB * end.risk;
+   //        resultList = GetDealConfigAdd(true);
+   //    }
+   //    float search = resultSearch * resultList[0];
+   //    float bargain = resultBargain * resultList[1];
+   //    float deliver = resultDeliver * resultList[2];
+   //    float risk = resultRisk * resultList[3];
+   //    UpdateTCInfo(search, bargain, deliver, risk);
     }
 
     /// <summary>

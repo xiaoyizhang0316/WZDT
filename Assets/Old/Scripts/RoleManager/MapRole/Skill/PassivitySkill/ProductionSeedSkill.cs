@@ -52,8 +52,9 @@ public class ProductionSeedSkill : BasePassivitySkill
                 temp.Crisp = ProductData.Crisp;
                 temp.Sweetness = ProductData.Sweetness;
                 temp.birthday = Time.time;
-                temp.Quality  =(int)((1+(baseMapRole.baseRoleData.quality*0.2)/100)* ProductData.Quality)  ;
-                temp.Brand  =(int)((1+(baseMapRole.baseRoleData.brand*0.1)/100)* ProductData.Brand);
+                //todo
+               // temp.Quality  =(int)((1+(baseMapRole.baseRoleData.quality*0.2)/100)* ProductData.Quality)  ;
+                //temp.Brand  =(int)((1+(baseMapRole.baseRoleData.brand*0.1)/100)* ProductData.Brand);
                 baseMapRole.MoveGoodsToWareHouse(temp);
                 StageGoal.My.productList.Add(temp);
                 ReleaseSkills(baseMapRole,null)  ;
@@ -125,25 +126,26 @@ public class ProductionSeedSkill : BasePassivitySkill
         productData.Sweetness = Random.Range(-5, 6);
 
         int random = 0;
-        if (baseMapRole.baseRoleData.quality >=70)
-        {
-            random = Random.Range(50,  70);
-        }
-        else if (baseMapRole.baseRoleData.quality >=40)
-        {
-            random = Random.Range(15,  50);
-        }
-        else if (baseMapRole.baseRoleData.quality >= 15)
-        {
-            random = Random.Range(5,  25); 
-        }
-        else
-        {
-            random = Random.Range(1,  10);  
-        }
+        //todo
+     //  if (baseMapRole.baseRoleData.quality >=70)
+     //  {
+     //      random = Random.Range(50,  70);
+     //  }
+     //  else if (baseMapRole.baseRoleData.quality >=40)
+     //  {
+     //      random = Random.Range(15,  50);
+     //  }
+     //  else if (baseMapRole.baseRoleData.quality >= 15)
+     //  {
+     //      random = Random.Range(5,  25); 
+     //  }
+     //  else
+     //  {
+     //      random = Random.Range(1,  10);  
+     //  }
 
-        productData.Quality =(int)( baseMapRole.baseRoleData.quality*0.6f+random);
-        productData.Brand =(int)( baseMapRole.baseRoleData.brand * 0.7f);
+     //  productData.Quality =(int)( baseMapRole.baseRoleData.quality*0.6f+random);
+     //  productData.Brand =(int)( baseMapRole.baseRoleData.brand * 0.7f);
          Debug.Log("随机种子"+productData.Quality +"|| 当前种子"+ProductData.Quantity);
          return productData;
     }

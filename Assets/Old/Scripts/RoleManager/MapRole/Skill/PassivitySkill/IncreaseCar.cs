@@ -95,8 +95,9 @@ public class IncreaseCar : BasePassivitySkill
     {
         if (isOpen && GetComponentInParent<RolePosSign>().isRelease)
         {
-            float scaleNum = GetComponentInParent<BaseMapRole>().baseRoleData.capacity * 0.8f;
-            transform.parent.localScale = new Vector3(scaleNum, 1f, scaleNum);
+            //todo;
+           // float scaleNum = GetComponentInParent<BaseMapRole>().baseRoleData.capacity * 0.8f;
+       //     transform.parent.localScale = new Vector3(scaleNum, 1f, scaleNum);
         }
     }
 }

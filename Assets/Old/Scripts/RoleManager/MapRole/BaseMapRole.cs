@@ -538,8 +538,9 @@ public class BaseMapRole : MonoBehaviour
        // Debug.Log(warehouse.Contains(productData));
         if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer || baseRoleData.baseRoleData.roleType == GameEnum.RoleType.BigDealer)
         {
-            productData.Quality += (int)(baseRoleData.quality * 0.2f);
-            productData.Brand += (int)(baseRoleData.brand * 0.2f);
+            //todo
+          //  productData.Quality += (int)(baseRoleData.quality * 0.2f);
+         //   productData.Brand += (int)(baseRoleData.brand * 0.2f);
         }
         warehouse.Remove(productData);
         //Debug.Log(warehouse.Count);
@@ -913,8 +914,9 @@ public class BaseMapRole : MonoBehaviour
         {
             return;
         }
+        //todo
         //print("开始召唤消费者");
-        int number = (int)(baseRoleData.brand / 6f);
+       // int number = (int)(baseRoleData.brand / 6f);
         //print(number);
         List<GameObject> availableConsumer = new List<GameObject>();
         List<int> keys = new List<int>(buildingList.Keys);
@@ -928,12 +930,13 @@ public class BaseMapRole : MonoBehaviour
                 }
             }
         }
-        List<GameObject> resultList = GetRandom(availableConsumer, number);
-        for (int i = 0; i < resultList.Count; i++)
-        {
-            resultList[i].SetActive(true);
-            resultList[i].GetComponent<ConsumeSign>().ActiveAndMove(this);
-        }
+        //todo
+     //   List<GameObject> resultList = GetRandom(availableConsumer, number);
+     // for (int i = 0; i < resultList.Count; i++)
+     // {
+     //     resultList[i].SetActive(true);
+     //     resultList[i].GetComponent<ConsumeSign>().ActiveAndMove(this);
+     // }
     }
 
     /// <summary>

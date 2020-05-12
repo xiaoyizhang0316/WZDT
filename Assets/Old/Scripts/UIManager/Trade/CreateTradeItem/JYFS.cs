@@ -193,22 +193,23 @@ public class JYFS : MonoSingleton<JYFS>
     {
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(CreateTradeManager.My.castRole));
         BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(CreateTradeManager.My.targetRole));
-        CreateTradeManager.My.castRoleAttribute.brand = cast.baseRoleData.brand;
-        CreateTradeManager.My.castRoleAttribute.quality = cast.baseRoleData.quality;
-        CreateTradeManager.My.castRoleAttribute.capacity = cast.baseRoleData.capacity;
-        CreateTradeManager.My.castRoleAttribute.effeciency = cast.baseRoleData.efficiency;
-        CreateTradeManager.My.castRoleAttribute.search = cast.baseRoleData.search;
-        CreateTradeManager.My.castRoleAttribute.bargain = cast.baseRoleData.bargain;
-        CreateTradeManager.My.castRoleAttribute.delivery = cast.baseRoleData.delivery;
-        CreateTradeManager.My.castRoleAttribute.risk = cast.baseRoleData.risk;
-        CreateTradeManager.My.targetRoleAttribute.brand = target.baseRoleData.brand;
-        CreateTradeManager.My.targetRoleAttribute.quality = target.baseRoleData.quality;
-        CreateTradeManager.My.targetRoleAttribute.capacity = target.baseRoleData.capacity;
-        CreateTradeManager.My.targetRoleAttribute.effeciency = target.baseRoleData.efficiency;
-        CreateTradeManager.My.targetRoleAttribute.search = target.baseRoleData.search;
-        CreateTradeManager.My.targetRoleAttribute.bargain = target.baseRoleData.bargain;
-        CreateTradeManager.My.targetRoleAttribute.delivery = target.baseRoleData.delivery;
-        CreateTradeManager.My.targetRoleAttribute.risk = target.baseRoleData.risk;
+        //todo
+        // CreateTradeManager.My.castRoleAttribute.brand = cast.baseRoleData.brand;
+       // CreateTradeManager.My.castRoleAttribute.quality = cast.baseRoleData.quality;
+       // CreateTradeManager.My.castRoleAttribute.capacity = cast.baseRoleData.capacity;
+       // CreateTradeManager.My.castRoleAttribute.effeciency = cast.baseRoleData.efficiency;
+       // CreateTradeManager.My.castRoleAttribute.search = cast.baseRoleData.search;
+       // CreateTradeManager.My.castRoleAttribute.bargain = cast.baseRoleData.bargain;
+       // CreateTradeManager.My.castRoleAttribute.delivery = cast.baseRoleData.delivery;
+       // CreateTradeManager.My.castRoleAttribute.risk = cast.baseRoleData.risk;
+       // CreateTradeManager.My.targetRoleAttribute.brand = target.baseRoleData.brand;
+       // CreateTradeManager.My.targetRoleAttribute.quality = target.baseRoleData.quality;
+       // CreateTradeManager.My.targetRoleAttribute.capacity = target.baseRoleData.capacity;
+       // CreateTradeManager.My.targetRoleAttribute.effeciency = target.baseRoleData.efficiency;
+       // CreateTradeManager.My.targetRoleAttribute.search = target.baseRoleData.search;
+       // CreateTradeManager.My.targetRoleAttribute.bargain = target.baseRoleData.bargain;
+       // CreateTradeManager.My.targetRoleAttribute.delivery = target.baseRoleData.delivery;
+       // CreateTradeManager.My.targetRoleAttribute.risk = target.baseRoleData.risk;
     }
 
     public void PredictRoleAttribute()

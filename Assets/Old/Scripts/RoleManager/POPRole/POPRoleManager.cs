@@ -26,10 +26,11 @@ public class POPRoleManager : MonoBehaviour
         }
         //Debug.Log(baseMapRole.baseRoleData.baseRoleData.roleType.ToString());
         rolename.text = baseMapRole.baseRoleData.baseRoleData.roleName;
-        capacity.fillAmount =baseMapRole.baseRoleData.capacity / 150f  ;
+        //todo
+        //capacity.fillAmount =baseMapRole.baseRoleData.capacity / 150f  ;
         efficiency.fillAmount = baseMapRole.baseRoleData.efficiency / 150f   ;
-        brand.fillAmount = baseMapRole.baseRoleData.brand / 150f  ;
-        quality.fillAmount = baseMapRole.baseRoleData.quality / 150f  ;
+       // brand.fillAmount = baseMapRole.baseRoleData.brand / 150f  ;
+      //  quality.fillAmount = baseMapRole.baseRoleData.quality / 150f  ;
 
         for (int i = 0; i < baseMapRole.AllPassivitySkills.Count; i++)
         {

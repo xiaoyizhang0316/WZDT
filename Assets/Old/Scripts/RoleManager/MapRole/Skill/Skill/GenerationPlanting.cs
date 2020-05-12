@@ -59,8 +59,9 @@ public class GenerationPlanting : BaseSkill
             currentProduct.ID = CommonData.My.GetTimestamp(DateTime.Now);
             currentProduct.productType = GameEnum.ProductType.Melon;
             currentProduct.Quantity = 500;
-            currentProduct.Quality = (int)((1 + (baseMapRole.baseRoleData.quality * 0.15) / 100) * currentProduct.Quality);
-            currentProduct.Brand = (int)((1 + (baseMapRole.baseRoleData.brand * 0.18) / 100) * currentProduct.Brand);
+            //todo
+         //   currentProduct.Quality = (int)((1 + (baseMapRole.baseRoleData.quality * 0.15) / 100) * currentProduct.Quality);
+          //  currentProduct.Brand = (int)((1 + (baseMapRole.baseRoleData.brand * 0.18) / 100) * currentProduct.Brand);
             currentProduct.birthday =TimeManager.My.cumulativeTime;
             currentProduct.time = 480;
             Transform target = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole)).transform;

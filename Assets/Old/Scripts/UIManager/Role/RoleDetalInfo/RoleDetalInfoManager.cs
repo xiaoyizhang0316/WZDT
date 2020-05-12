@@ -202,18 +202,17 @@ public class RoleDetalInfoManager : MonoBehaviour
         if (UIManager.My.currentMapRole.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant)
             IconImage.sprite = peasantSprite;
 
-        capacity.GetComponent<RectTransform>().sizeDelta = new Vector2((float)UIManager.My.currentMapRole.baseRoleData.capacity / 150f * 483f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        efficiency.GetComponent<RectTransform>().sizeDelta = new Vector2((float)UIManager.My.currentMapRole.baseRoleData.efficiency / 150f * 483f, efficiency.GetComponent<RectTransform>().sizeDelta.y);
-        brand.GetComponent<RectTransform>().sizeDelta = new Vector2((float)UIManager.My.currentMapRole.baseRoleData.brand / 150f * 483f, brand.GetComponent<RectTransform>().sizeDelta.y);
-        quality.GetComponent<RectTransform>().sizeDelta = new Vector2((float)UIManager.My.currentMapRole.baseRoleData.quality / 150f * 483f, quality.GetComponent<RectTransform>().sizeDelta.y);
-        risk.text = UIManager.My.currentMapRole.baseRoleData.risk.ToString();
-        search.text = UIManager.My.currentMapRole.baseRoleData.search.ToString();
-        delivery.text = UIManager.My.currentMapRole.baseRoleData.delivery.ToString();
-        bargain.text = UIManager.My.currentMapRole.baseRoleData.bargain.ToString();
-        // templateCost.text = UIManager.My.currentMapRole.baseRoleData.baseRoleData.baseCostMonth.ToString();
-        // equipmentCost.text = UIManager.My.currentMapRole.baseRoleData.equipCost.ToString();
-        // workersCost.text = UIManager.My.currentMapRole.baseRoleData.workerCost.ToString();
-        //  landCost.text = UIManager.My.currentMapRole.baseRoleData.landCost.ToString();
+        //todo
+      //  capacity.GetComponent<RectTransform>().sizeDelta = new Vector2((float)UIManager.My.currentMapRole.baseRoleData.capacity / 150f * 483f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+      //  efficiency.GetComponent<RectTransform>().sizeDelta = new Vector2((float)UIManager.My.currentMapRole.baseRoleData.efficiency / 150f * 483f, efficiency.GetComponent<RectTransform>().sizeDelta.y);
+      //  brand.GetComponent<RectTransform>().sizeDelta = new Vector2((float)UIManager.My.currentMapRole.baseRoleData.brand / 150f * 483f, brand.GetComponent<RectTransform>().sizeDelta.y);
+      //  quality.GetComponent<RectTransform>().sizeDelta = new Vector2((float)UIManager.My.currentMapRole.baseRoleData.quality / 150f * 483f, quality.GetComponent<RectTransform>().sizeDelta.y);
+        //todo
+        // risk.text = UIManager.My.currentMapRole.baseRoleData.risk.ToString();
+       // search.text = UIManager.My.currentMapRole.baseRoleData.search.ToString();
+       // delivery.text = UIManager.My.currentMapRole.baseRoleData.delivery.ToString();
+       // bargain.text = UIManager.My.currentMapRole.baseRoleData.bargain.ToString();
+       
 
         InitActivity();
         InitBuy();

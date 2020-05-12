@@ -225,7 +225,8 @@ public class BaseBuff
                 break;
             case 11:
                 CalculateNumber(str,ref buffConfig.roleCapacityChange);
-                targetRole.baseRoleData.capacity += buffConfig.roleCapacityChange;
+                //todo
+             //   targetRole.baseRoleData.capacity += buffConfig.roleCapacityChange;
                 break;
             case 12:
                 CalculateNumber(str,ref buffConfig.roleEffeciencyChange);
@@ -233,31 +234,31 @@ public class BaseBuff
                 break;
             case 13:
                 CalculateNumber(str,ref buffConfig.roleQualityChange);
-                targetRole.baseRoleData.quality += buffConfig.roleQualityChange;
+             //   targetRole.baseRoleData.quality += buffConfig.roleQualityChange;
                 break;
             case 14:
                 CalculateNumber(str,ref buffConfig.roleBrandChange);
-                targetRole.baseRoleData.brand += buffConfig.roleBrandChange;
+             //   targetRole.baseRoleData.brand += buffConfig.roleBrandChange;
                 break;
             case 15:
                 CalculateNumber(str,ref buffConfig.roleSearchChange);
-                targetRole.baseRoleData.search += buffConfig.roleSearchChange;
+             //   targetRole.baseRoleData.search += buffConfig.roleSearchChange;
                 break;
             case 16:
                 CalculateNumber(str, ref buffConfig.roleBargainChange);
-                targetRole.baseRoleData.bargain += buffConfig.roleBargainChange;
+                //targetRole.baseRoleData.bargain += buffConfig.roleBargainChange;
                 break;
             case 17:
                 CalculateNumber(str,ref buffConfig.roleDeliverChange);
-                targetRole.baseRoleData.delivery += buffConfig.roleDeliverChange;
+               // targetRole.baseRoleData.delivery += buffConfig.roleDeliverChange;
                 break;
             case 18:
                 CalculateNumber(str, ref buffConfig.roleRiskChange);
-                targetRole.baseRoleData.risk += buffConfig.roleRiskChange;
+              //  targetRole.baseRoleData.risk += buffConfig.roleRiskChange;
                 break;
             case 19:
                 CalculateNumber(str, ref buffConfig.roleMonthCostChange);
-                targetRole.baseRoleData.costMonth += buffConfig.roleMonthCostChange;
+               // targetRole.baseRoleData.costMonth += buffConfig.roleMonthCostChange;
                 break;
             default:
                 break;
@@ -467,29 +468,30 @@ public class BaseBuff
         {
             switch(attri[2])
             {
+                //todo
                 case "CAPACITY":
-                    num = (targetRole.baseRoleData.capacity * float.Parse(attri[3]));
+              //      num = (targetRole.baseRoleData.capacity * float.Parse(attri[3]));
                     break;
                 case "EFFECIENCY":
-                    num = (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
+                  //  num = (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
                     break;
                 case "QUALITY":
-                    num = (int)(targetRole.baseRoleData.quality * float.Parse(attri[3]));
+                //    num = (int)(targetRole.baseRoleData.quality * float.Parse(attri[3]));
                     break;
                 case "BRAND":
-                    num = (int)(targetRole.baseRoleData.brand * float.Parse(attri[3]));
+                 //   num = (int)(targetRole.baseRoleData.brand * float.Parse(attri[3]));
                     break;
                 case "SEARCH":
-                    num = (int)(targetRole.baseRoleData.search * float.Parse(attri[3]));
+                 //   num = (int)(targetRole.baseRoleData.search * float.Parse(attri[3]));
                     break;
                 case "BARGAIN":
-                    num = (int)(targetRole.baseRoleData.bargain * float.Parse(attri[3]));
+                //    num = (int)(targetRole.baseRoleData.bargain * float.Parse(attri[3]));
                     break;
                 case "DELIVERY":
-                    num = (int)(targetRole.baseRoleData.delivery * float.Parse(attri[3]));
+               //     num = (int)(targetRole.baseRoleData.delivery * float.Parse(attri[3]));
                     break;
                 case "RISK":
-                    num = (int)(targetRole.baseRoleData.risk * float.Parse(attri[3]));
+                  //  num = (int)(targetRole.baseRoleData.risk * float.Parse(attri[3]));
                     break;
                 default:
                     break;
@@ -499,29 +501,30 @@ public class BaseBuff
         {
             switch (attri[2])
             {
+                //todo
                 case "CAPACITY":
-                    num = (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
+              //      num = (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
                     break;
                 case "EFFECIENCY":
                     num = (int)(castRole.baseRoleData.efficiency * float.Parse(attri[3]));
                     break;
                 case "QUALITY":
-                    num = (int)(castRole.baseRoleData.quality * float.Parse(attri[3]));
+               //     num = (int)(castRole.baseRoleData.quality * float.Parse(attri[3]));
                     break;
                 case "BRAND":
-                    num = (int)(castRole.baseRoleData.brand * float.Parse(attri[3]));
+                 //   num = (int)(castRole.baseRoleData.brand * float.Parse(attri[3]));
                     break;
                 case "SEARCH":
-                    num = (int)(castRole.baseRoleData.search * float.Parse(attri[3]));
-                    break;
+                  //  num = (int)(castRole.baseRoleData.search * float.Parse(attri[3]));
+                  break;
                 case "BARGAIN":
-                    num = (int)(castRole.baseRoleData.bargain * float.Parse(attri[3]));
+                  //  num = (int)(castRole.baseRoleData.bargain * float.Parse(attri[3]));
                     break;
                 case "DELIVERY":
-                    num = (int)(castRole.baseRoleData.delivery * float.Parse(attri[3]));
+                   // num = (int)(castRole.baseRoleData.delivery * float.Parse(attri[3]));
                     break;
                 case "RISK":
-                    num = (int)(castRole.baseRoleData.risk * float.Parse(attri[3]));
+                  //  num = (int)(castRole.baseRoleData.risk * float.Parse(attri[3]));
                     break;
                 default:
                     break;
@@ -550,29 +553,30 @@ public class BaseBuff
         {
             switch (attri[2])
             {
+                //todo
                 case "CAPACITY":
-                    num = (int)(targetRole.baseRoleData.capacity * float.Parse(attri[3]));
+                 //   num = (int)(targetRole.baseRoleData.capacity * float.Parse(attri[3]));
                     break;
                 case "EFFECIENCY":
-                    num = (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
+                  //  num = (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
                     break;
                 case "QUALITY":
-                    num = (int)(targetRole.baseRoleData.quality * float.Parse(attri[3]));
+                 //   num = (int)(targetRole.baseRoleData.quality * float.Parse(attri[3]));
                     break;
                 case "BRAND":
-                    num = (int)(targetRole.baseRoleData.brand * float.Parse(attri[3]));
+                 //   num = (int)(targetRole.baseRoleData.brand * float.Parse(attri[3]));
                     break;
                 case "SEARCH":
-                    num = (int)(targetRole.baseRoleData.search * float.Parse(attri[3]));
+                  //  num = (int)(targetRole.baseRoleData.search * float.Parse(attri[3]));
                     break;
                 case "BARGAIN":
-                    num = (int)(targetRole.baseRoleData.bargain * float.Parse(attri[3]));
+                 //   num = (int)(targetRole.baseRoleData.bargain * float.Parse(attri[3]));
                     break;
                 case "DELIVERY":
-                    num = (int)(targetRole.baseRoleData.delivery * float.Parse(attri[3]));
+                 //   num = (int)(targetRole.baseRoleData.delivery * float.Parse(attri[3]));
                     break;
                 case "RISK":
-                    num = (int)(targetRole.baseRoleData.risk * float.Parse(attri[3]));
+                 //   num = (int)(targetRole.baseRoleData.risk * float.Parse(attri[3]));
                     break;
                 default:
                     break;
@@ -582,29 +586,30 @@ public class BaseBuff
         {
             switch (attri[2])
             {
+                //todo
                 case "CAPACITY":
-                    num = (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
+               //     num = (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
                     break;
                 case "EFFECIENCY":
-                    num = (int)(castRole.baseRoleData.efficiency * float.Parse(attri[3]));
+               //     num = (int)(castRole.baseRoleData.efficiency * float.Parse(attri[3]));
                     break;
                 case "QUALITY":
-                    num = (int)(castRole.baseRoleData.quality * float.Parse(attri[3]));
+                //    num = (int)(castRole.baseRoleData.quality * float.Parse(attri[3]));
                     break;
                 case "BRAND":
-                    num = (int)(castRole.baseRoleData.brand * float.Parse(attri[3]));
+                 //   num = (int)(castRole.baseRoleData.brand * float.Parse(attri[3]));
                     break;
                 case "SEARCH":
-                    num = (int)(castRole.baseRoleData.search * float.Parse(attri[3]));
+                 //   num = (int)(castRole.baseRoleData.search * float.Parse(attri[3]));
                     break;
                 case "BARGAIN":
-                    num = (int)(castRole.baseRoleData.bargain * float.Parse(attri[3]));
+                 //   num = (int)(castRole.baseRoleData.bargain * float.Parse(attri[3]));
                     break;
                 case "DELIVERY":
-                    num = (int)(castRole.baseRoleData.delivery * float.Parse(attri[3]));
+                 //   num = (int)(castRole.baseRoleData.delivery * float.Parse(attri[3]));
                     break;
                 case "RISK":
-                    num = (int)(castRole.baseRoleData.risk * float.Parse(attri[3]));
+                 //   num = (int)(castRole.baseRoleData.risk * float.Parse(attri[3]));
                     break;
                 default:
                     break;
@@ -626,50 +631,51 @@ public class BaseBuff
         string[] attri = str.Split('_');
         if (attri[1].Equals("TAR"))
         {
+            //todo
             switch (attri[2])
             {
-                case "CAPACITY":
-                    return (int)(targetRole.baseRoleData.capacity * float.Parse(attri[3]));
-                case "EFFECIENCY":
-                    return (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
-                case "QUALITY":
-                    return (int)(targetRole.baseRoleData.quality * float.Parse(attri[3]));
-                case "BRAND":
-                    return (int)(targetRole.baseRoleData.brand * float.Parse(attri[3]));
-                case "SEARCH":
-                    return (int)(targetRole.baseRoleData.search * float.Parse(attri[3]));
-                case "BARGAIN":
-                    return (int)(targetRole.baseRoleData.bargain * float.Parse(attri[3]));
-                case "DELIVERY":
-                    return (int)(targetRole.baseRoleData.delivery * float.Parse(attri[3]));
-                case "RISK":
-                    return (int)(targetRole.baseRoleData.risk * float.Parse(attri[3]));
-                default:
-                    return 0;
+             //   case "CAPACITY":
+             //       return (int)(targetRole.baseRoleData.capacity * float.Parse(attri[3]));
+             //   case "EFFECIENCY":
+             //       return (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
+             //   case "QUALITY":
+             //       return (int)(targetRole.baseRoleData.quality * float.Parse(attri[3]));
+             //   case "BRAND":
+             //       return (int)(targetRole.baseRoleData.brand * float.Parse(attri[3]));
+             //   case "SEARCH":
+             //       return (int)(targetRole.baseRoleData.search * float.Parse(attri[3]));
+             //   case "BARGAIN":
+             //       return (int)(targetRole.baseRoleData.bargain * float.Parse(attri[3]));
+             //   case "DELIVERY":
+             //       return (int)(targetRole.baseRoleData.delivery * float.Parse(attri[3]));
+             //   case "RISK":
+             //       return (int)(targetRole.baseRoleData.risk * float.Parse(attri[3]));
+             //   default:
+             //       return 0;
             }
         }
         else if (attri[1].Equals("CAST"))
         {
             switch (attri[2])
             {
-                case "CAPACITY":
-                    return (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
-                case "EFFECIENCY":
-                    return (int)(castRole.baseRoleData.efficiency * float.Parse(attri[3]));
-                case "QUALITY":
-                    return (int)(castRole.baseRoleData.quality * float.Parse(attri[3]));
-                case "BRAND":
-                    return (int)(castRole.baseRoleData.brand * float.Parse(attri[3]));
-                case "SEARCH":
-                    return (int)(castRole.baseRoleData.search * float.Parse(attri[3]));
-                case "BARGAIN":
-                    return (int)(castRole.baseRoleData.bargain * float.Parse(attri[3]));
-                case "DELIVERY":
-                    return (int)(castRole.baseRoleData.delivery * float.Parse(attri[3]));
-                case "RISK":
-                    return (int)(castRole.baseRoleData.risk * float.Parse(attri[3]));
-                default:
-                    return 0;
+              // case "CAPACITY":
+              //     return (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
+              // case "EFFECIENCY":
+              //     return (int)(castRole.baseRoleData.efficiency * float.Parse(attri[3]));
+              // case "QUALITY":
+              //     return (int)(castRole.baseRoleData.quality * float.Parse(attri[3]));
+              // case "BRAND":
+              //     return (int)(castRole.baseRoleData.brand * float.Parse(attri[3]));
+              // case "SEARCH":
+              //     return (int)(castRole.baseRoleData.search * float.Parse(attri[3]));
+              // case "BARGAIN":
+              //     return (int)(castRole.baseRoleData.bargain * float.Parse(attri[3]));
+              // case "DELIVERY":
+              //     return (int)(castRole.baseRoleData.delivery * float.Parse(attri[3]));
+              // case "RISK":
+              //     return (int)(castRole.baseRoleData.risk * float.Parse(attri[3]));
+              // default:
+              //     return 0;
             }
         }
         else if (IsNumberic(attri[1]))

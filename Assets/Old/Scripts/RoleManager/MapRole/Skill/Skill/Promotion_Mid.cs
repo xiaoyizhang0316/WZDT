@@ -40,8 +40,9 @@ public class Promotion_Mid : BaseSkill
         car.GetComponent<CarMove>().Init(baseMapRole, 1, PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).transform, (TradeData) =>
         {
             Destroy(car);
-            currentProduct.Brand += (int)(baseMapRole.baseRoleData.brand * 0.2f);
-            currentProduct.Quality += (int)(baseMapRole.baseRoleData.quality * 0.2f);
+            //todo
+          //  currentProduct.Brand += (int)(baseMapRole.baseRoleData.brand * 0.2f);
+           // currentProduct.Quality += (int)(baseMapRole.baseRoleData.quality * 0.2f);
             PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).MoveGoodsToWareHouse(currentProduct);
             //刷新角色详细信息列表
             if (UIManager.My.Panel_RoleDetalInfo.gameObject.activeSelf)

@@ -54,8 +54,9 @@ public class Promotion_Small : BaseSkill
     {
         car.GetComponent<CarMove>().Init(baseMapRole, 1,bigDealPos.transform, (TradeData) =>
         {
-            currentProduct.Brand += (int)(baseMapRole.baseRoleData.brand * 0.2f);
-            currentProduct.Quality += (int)(baseMapRole.baseRoleData.quality * 0.2f);
+            //todo
+         //   currentProduct.Brand += (int)(baseMapRole.baseRoleData.brand * 0.2f);
+         //   currentProduct.Quality += (int)(baseMapRole.baseRoleData.quality * 0.2f);
             bigDealPos.MoveGoodsToWareHouse(currentProduct);
             //刷新角色详细信息列表
             if (UIManager.My.Panel_RoleDetalInfo.gameObject.activeSelf)

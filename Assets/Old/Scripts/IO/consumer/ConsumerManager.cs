@@ -33,7 +33,7 @@ public class ConsumerManager : MonoSingleton<ConsumerManager>
         {
             if (b.shop.Count > 0)
             {
-                totalBrand += b.baseRoleData.brand;
+             //   totalBrand += b.baseRoleData.brand;
                 count++;
             }
         }

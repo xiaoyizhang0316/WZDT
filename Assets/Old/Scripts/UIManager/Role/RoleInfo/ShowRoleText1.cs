@@ -17,78 +17,79 @@ public class ShowRoleText1 : RoleText1,IPointerEnterHandler,IPointerExitHandler
         bg.SetActive(true);
         if (UIManager.My.currentMapRole.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
         {
+            //todo
             if (name.Equals("band"))
             {
-                text.text = Seedband();
+              //  text.text = Seedband();
             }
             if (name.Equals("capacity"))
             {
-                text.text = Seedcapacity ();
+             //   text.text = Seedcapacity ();
             }
             if (name.Equals("efficiency"))
             {
-                text.text = Seedefficiency ();
+              // text.text = Seedefficiency ();
             }
             if (name.Equals("quality"))
             {
-                text.text = SeedQulity  ();
+             //   text.text = SeedQulity  ();
             }
         }
         if (UIManager.My.currentMapRole.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant)
         {
             if (name.Equals("band"))
             {
-                text.text = PeasantBand();
+              //  text.text = PeasantBand();
             }
             if (name.Equals("capacity"))
             {
-                text.text = Peasantcapacity ();
+            //    text.text = Peasantcapacity ();
             }
             if (name.Equals("efficiency"))
             {
-                text.text = Peasantefficiency ();
+              // text.text = Peasantefficiency ();
             }
             if (name.Equals("quality"))
             {
-                text.text = PeasantQulity  ();
+              //  text.text = PeasantQulity  ();
             }
         }
         if (UIManager.My.currentMapRole.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
         {
             if (name.Equals("band"))
             {
-                text.text = MerchantBand();
+              //  text.text = MerchantBand();
             }
             if (name.Equals("capacity"))
             {
-                text.text = Merchantcapacity ();
+             //   text.text = Merchantcapacity ();
             }
             if (name.Equals("efficiency"))
             {
-                text.text =  Merchantefficiency ();
+              //  text.text =  Merchantefficiency ();
             }
             if (name.Equals("quality"))
             {
-                text.text =  MerchantQulity  ();
+               // text.text =  MerchantQulity  ();
             }
         }
         if (UIManager.My.currentMapRole.baseRoleData.baseRoleData.roleType== GameEnum.RoleType.Dealer)
         {
             if (name.Equals("band"))
             {
-                text.text = DealerBand();
+               // text.text = DealerBand();
             }
             if (name.Equals("capacity"))
             {
-                text.text = Dealercapacity ();
+              //  text.text = Dealercapacity ();
             }
             if (name.Equals("efficiency"))
             {
-                text.text = Dealerefficiency ();
+             //   text.text = Dealerefficiency ();
             }
             if (name.Equals("quality"))
             {
-                text.text = DealerQulity  ();
+              //  text.text = DealerQulity  ();
             }
         }
     }

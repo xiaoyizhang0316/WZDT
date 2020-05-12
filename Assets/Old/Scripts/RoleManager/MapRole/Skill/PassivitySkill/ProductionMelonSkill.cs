@@ -51,8 +51,9 @@ public class ProductionMelonSkill : BasePassivitySkill
                     prodata.ID = CommonData.My.GetTimestamp(DateTime.Now);
                     prodata.productType = GameEnum.ProductType.Melon;
                     prodata.Quantity = 500;
-                    prodata.Quality = GetQuality(prodata.Quality, baseMapRole.baseRoleData.quality);
-                    prodata.Brand = Getband(prodata.Brand, baseMapRole.baseRoleData.brand);
+                    //todo
+                //    prodata.Quality = GetQuality(prodata.Quality, baseMapRole.baseRoleData.quality);
+                  //  prodata.Brand = Getband(prodata.Brand, baseMapRole.baseRoleData.brand);
                     prodata.birthday = TimeManager.My.cumulativeTime;
                     prodata.time = 240f;
 
