@@ -164,7 +164,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void RecheckBuff()
     {
-        Stop();
+        //Stop();
         float speedAdd = 1f;
         currentSpeed = startSpeed;
         if (buffList.Count > 0)
@@ -174,8 +174,9 @@ public class ConsumeSign : MonoBehaviour
                 speedAdd += v.Value;
             }
         }
-        currentSpeed = currentSpeed * speedAdd;
-        MoveToShop();
+        tweener.timeScale = speedAdd;
+        //currentSpeed = currentSpeed * speedAdd;
+        //MoveToShop();
     }
 
     /// <summary>

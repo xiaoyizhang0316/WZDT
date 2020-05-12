@@ -14,7 +14,7 @@ public class BuffConfig
 
     public int roleCapacityChange;
 
-    public int roleEffeciencyChange;
+    public int roleEfficiencyChange;
 
     public int roleQualityChange;
 
