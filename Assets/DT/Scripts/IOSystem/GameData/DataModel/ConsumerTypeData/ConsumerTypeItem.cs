@@ -3,52 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
- 
-    [Serializable]
-    public class ConsumerTypeItem
-    {
-        public string consumerType;
 
-        public string minSweet;
+[Serializable]
+public class ConsumerTypeItem
+{
+    public string consumerType;
 
-        public string maxSweet;
+    public string minSweet;
 
-        public string minCrisp;
+    public string maxSweet;
 
-        public string maxCrisp;
+    public string minCrisp;
 
-        public string minMentalPrice;
+    public string maxCrisp;
 
-        public string maxMentalPrice;
+    public string minMentalPrice;
 
-        public string minSearchTime;
+    public string maxMentalPrice;
 
-        public string maxSearchTime;
+    public string minSearchTime;
 
-        public string minBuyPower;
+    public string maxSearchTime;
 
-        public string maxBuyPower;
+    public string minBuyPower;
 
-        public string minSearch;
+    public string maxBuyPower;
 
-        public string maxSearch;
+    public string minSearch;
 
-        public string minBargain;
+    public string maxSearch;
 
-        public string maxBargain;
+    public string minBargain;
 
-        public string minDelivery;
+    public string maxBargain;
 
-        public string maxDelivery;
+    public string minDelivery;
 
-        public string minRisk;
+    public string maxDelivery;
 
-        public string maxRisk;
-    }
+    public string minRisk;
 
-    [Serializable]
-    public class ConsumerTypesData
-    {
-        public List<ConsumerTypeItem> consumerTypeSigns = new List<ConsumerTypeItem>();
-    } 
+    public string maxRisk;
+}
+
+[Serializable]
+public class ConsumerTypesData
+{
+    public List<ConsumerTypeItem> consumerTypeSigns = new List<ConsumerTypeItem>();
+}
 

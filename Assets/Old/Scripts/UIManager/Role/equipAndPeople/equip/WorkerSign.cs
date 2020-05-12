@@ -141,8 +141,6 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             CreatWorkerOBJ();
             CreatRoleManager.My.CurrentTemplateManager.OpenTopTemplate(0.3f);
         }
-
-
     }
 
     public void OnDrag(PointerEventData eventData)

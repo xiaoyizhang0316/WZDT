@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
- 
-    [Serializable]
-    public class StageItem
-    {
-        public string sceneName;
 
-        public string maxConsumer;
+[Serializable]
+public class StageItem
+{
+    public string sceneName;
 
-        public string startConsumer;
+    public string maxConsumer;
 
-        public string maxBoss;
+    public string startConsumer;
 
-        public string startBoss;
+    public string maxBoss;
 
-        public string bankRate;
+    public string startBoss;
 
-        public string startWorker;
+    public string bankRate;
 
-        public string startEquip;
+    public string startWorker;
 
-        public string consumerQualityNeed;
-    }
+    public string startEquip;
 
-    public class StagesData
-    {
-        public List<StageItem> stageSigns = new List<StageItem>();
-    } 
+    public string consumerQualityNeed;
+}
+
+public class StagesData
+{
+    public List<StageItem> stageSigns = new List<StageItem>();
+}

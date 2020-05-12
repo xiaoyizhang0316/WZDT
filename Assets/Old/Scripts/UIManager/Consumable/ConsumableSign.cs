@@ -112,12 +112,16 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             RaycastHit[] hit = Physics.RaycastAll(ray);
             for (int i = 0; i < hit.Length; i++)
             {
-                if (hit[i].transform.tag.Equals("Role"))
+                //if (hit[i].transform.tag.Equals("Role"))
+                if (hit[i].transform.tag.Equals("MapLand"))
                 {
-                    BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
-                    print("使用消耗品:" + consumableId.ToString());
-                    InitBuff();
-                    CastBuff(role);
+                    print(hit[i].point);
+                    GameObject go1 = Instantiate(Resources.Load<GameObject>("Consumable/Consumable"));
+                    go1.transform.position = hit[i].point;
+                    //BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
+                    //print("使用消耗品:" + consumableId.ToString());
+                    //InitBuff();
+                    //CastBuff(role);
                     PlayerData.My.UseConsumable(consumableId);
                     CheckDelete();
                     break;

@@ -99,7 +99,7 @@ public class CarMove : MonoBehaviour
     /// </summary>
     public void RecheckBuff()
     {
-        StopCar();
+        //StopCar();
         float speedAdd = 1f;
         CurrentSpeed = startSpeed;
         if (buffList.Count > 0)
@@ -109,9 +109,9 @@ public class CarMove : MonoBehaviour
                 speedAdd += v.Value;
             }
         }
-
-        CurrentSpeed = CurrentSpeed * speedAdd;
-        MoveCar();
+        tweener.timeScale = speedAdd;
+        //CurrentSpeed = CurrentSpeed * speedAdd;
+        //MoveCar();
     }
 
     // Update is called once per frame
