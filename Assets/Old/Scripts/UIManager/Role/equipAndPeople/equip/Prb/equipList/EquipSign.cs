@@ -6,28 +6,48 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = System.Random;
 
-public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandler,IPointerEnterHandler,IPointerExitHandler
+public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandler 
 {
-    public Text name;
-    public Text Text_describe;
+  
     public Image Image_shape;
-    public Transform pop_1;
-    public Transform pop_2;
-    public RectTransform pinpai;
-    public RectTransform zhiliang;
-    public RectTransform channeng;
-    public RectTransform xiaolv;
-    public Text souxun;
-    public Text yijia;
-    public Text jiaofu;
-    public Text fengxian;
-    public Transform pop_1startPOS;
-    public Transform pop_1EndPOS;
-    public Transform pop_2startPOS;
-    public Transform pop_2EndPOS;
-    public Text Cost;
-
+   
+    /// <summary>
+    /// 效果值
+    /// </summary>
+    public  Text effect;
+    
+    /// <summary>
+    /// 效率值
+    /// </summary>
+    public  Text efficiency;
+    
+    /// <summary>
+    /// 范围值
+    /// </summary>
+    public  Text range;
+    
+    /// <summary>
+    /// 风险抗力
+    /// </summary>
+    public  Text riskResistance;
+    
+    /// <summary>
+    /// 交易成本
+    /// </summary>
+    public Text tradeCost;
+    
+    /// <summary>
+    /// 成本
+    /// </summary>
+    public Text cost;
+    
+    /// <summary>
+    /// 弹药容量
+    /// </summary>
+    public Text bulletCapacity; 
+ 
     public Image BG;
     /// <summary>
     /// 当创建销毁时候或者保存角色时候调整占用状态
@@ -69,12 +89,16 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
         SetOccupyStatus(_isEquiped);
         gearData = GameDataMgr.My.GetGearData(id);
         //name.text = gearData.name;
-        
+        effect.text = gearData.effect.ToString();
+        efficiency.text = gearData.efficiency.ToString();
+        range.text = gearData.range.ToString();
+        riskResistance.text = gearData.riskResistance.ToString();
+        tradeCost.text = gearData.tradeCost.ToString();
+        cost.text = gearData.cost.ToString();
+        bulletCapacity.text = gearData.bulletCapacity.ToString(); 
         //print(gearData.SpritePath);
         Image_shape.sprite = Resources.Load<Sprite>(gearData.SpritePath);
-        pop_1.position = pop_1startPOS.position; 
-        pop_2.position = pop_2startPOS.position; 
-       
+         
         
     }
 
@@ -208,22 +232,5 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        pop_1.DOLocalMove(pop_1EndPOS.localPosition, 0.05f).SetEase(Ease.OutBack).SetUpdate(true);
-        pop_2.DOLocalMove(pop_2EndPOS.localPosition, 0.05f).SetEase(Ease.OutBack).SetUpdate(true);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-     var  t1= pop_1.DOLocalMove(Vector3.zero, 0.05f).SetUpdate(true).OnComplete(() =>
-     {
-         pop_1.transform.localPosition = Vector3.zero;  
-     });
-      var t2 =  pop_2.DOLocalMove(Vector3.zero, 0.05f).SetUpdate(true).OnComplete(() =>
-      {
-          pop_2.transform.localPosition =Vector3.zero;  
-      });
-        
-    }
+  
 }

@@ -5,32 +5,51 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler 
 {
-    public Text name;
-    public Text Text_describe;
     public Image Image_shape;
-    public int ID;
-    public Transform pop_1;
-    public Transform pop_2;
-    public RectTransform pinpai;
-    public RectTransform zhiliang;
-    public RectTransform channeng;
-    public RectTransform xiaolv;
-    public Text souxun;
-    public Text yijia;
-    public Text jiaofu;
-    public Text fengxian;
-    public Transform pop_1startPOS;
-    public Transform pop_1EndPOS;
-    public Transform pop_2startPOS;
-    public Transform pop_2EndPOS;
+   
+    /// <summary>
+    /// 效果值
+    /// </summary>
+    public  Text effect;
+    
+    /// <summary>
+    /// 效率值
+    /// </summary>
+    public  Text efficiency;
+    
+    /// <summary>
+    /// 范围值
+    /// </summary>
+    public  Text range;
+    
+    /// <summary>
+    /// 风险抗力
+    /// </summary>
+    public  Text riskResistance;
+    
+    /// <summary>
+    /// 交易成本
+    /// </summary>
+    public Text tradeCost;
+    
+    /// <summary>
+    /// 成本
+    /// </summary>
     public Text cost;
+    
+    /// <summary>
+    /// 弹药容量
+    /// </summary>
+    public Text bulletCapacity; 
+
     public Image BG;
     /// <summary>
     /// 当创建销毁时候或者保存角色时候调整占用状态
     /// </summary>
     public bool isOccupation;
+    public int ID; 
 
     public WorkerData workerData;
 
@@ -48,11 +67,17 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         ID = id;
         SetOccupyStatus(Occupation);
         workerData = GameDataMgr.My.GetWorkerData(id);
+        effect.text = workerData.effect.ToString();
+        efficiency.text = workerData.efficiency.ToString();
+        range.text = workerData.range.ToString();
+        riskResistance.text = workerData.riskResistance.ToString();
+        tradeCost.text = workerData.tradeCost.ToString();
+        cost.text = workerData.cost.ToString();
+        bulletCapacity.text = workerData.bulletCapacity.ToString(); 
         //S name.text = workerData.name;
         //print(workerData.SpritePath);
         Image_shape.sprite = Resources.Load<Sprite>(workerData.SpritePath);
-        pop_1.position = pop_1startPOS.position;
-        pop_2.position = pop_2startPOS.position;
+       
          
     }
 
@@ -105,7 +130,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         Vector3 V = Input.mousePosition;
         Vector3 V2 = new Vector3(V.x - Screen.width / 2, V.y - Screen.height / 2);
         worker.transform.localPosition = V2;
-        worker.name = "workerOBJ_" + ID;
+        worker.name = "WorkerOBJ_" + ID;
         worker.GetComponent<DragUI>().dragType = DragUI.DragType.people;
     }
 
@@ -173,15 +198,5 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        pop_1.DOLocalMove(pop_1EndPOS.localPosition, 0.1f).SetEase(Ease.OutBack).SetUpdate(true);
-        pop_2.DOLocalMove(pop_2EndPOS.localPosition, 0.1f).SetEase(Ease.OutBack).SetUpdate(true);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        pop_1.DOLocalMove(pop_1startPOS.localPosition, 0.1f).SetUpdate(true);
-        pop_2.DOLocalMove(pop_2startPOS.localPosition, 0.1f).SetUpdate(true);
-    }
+    
 }
