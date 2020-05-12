@@ -511,7 +511,7 @@ using UnityEngine.SceneManagement;
                 temp.level = int.Parse(r.level);
                 //temp.unlock = int.Parse(r.unlock);
                 temp.effect = int.Parse(r.effect);
-                temp.effeciency = int.Parse(r.effeciency);
+                temp.efficiency = int.Parse(r.efficiency);
                 temp.range = int.Parse(r.range);
                 temp.riskResistance = int.Parse(r.riskResistance);
                 temp.tradeCost = int.Parse(r.tradeCost);

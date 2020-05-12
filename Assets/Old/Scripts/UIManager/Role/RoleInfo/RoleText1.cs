@@ -22,10 +22,10 @@ public class RoleText1 : MonoBehaviour
     {
       
     }
-
+    //TODO
+    /*
     public string  Seedband()
     {
-        
       float band = ((1+(float)(UIManager.My.currentMapRole.baseRoleData.brand *0.1)/100)* ( UIManager.My.currentMapRole.baseRoleData.brand * 0.7f) );
       int b = (int) band; 
       string a = "影响生产种子的" + "<color=#F87C02>" + "品牌值" + "</color>" + "，当前产品" + "<color=#F87C02>" + "品牌值" + "</color>" +
@@ -136,4 +136,5 @@ public class RoleText1 : MonoBehaviour
     {
         return "影响零售商对消费者加速的效果";
     }
+    */
 }

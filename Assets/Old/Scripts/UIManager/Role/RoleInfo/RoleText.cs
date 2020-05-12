@@ -22,7 +22,8 @@ public class RoleText : MonoBehaviour
     {
       
     }
-
+    //TODO
+    /*
     public string  Seedband()
     {
         
@@ -136,4 +137,6 @@ public class RoleText : MonoBehaviour
     {
         return "影响零售商对消费者加速的效果";
     }
+    */
+
 }

@@ -28,7 +28,7 @@ using static GameEnum;
         /// <summary>
         /// 模板提供效率值
         /// </summary>
-        public int effeciency;
+        public int efficiency;
 
         /// <summary>
         /// 模板提供范围值
@@ -86,7 +86,7 @@ using static GameEnum;
             tempRoleData.roleType = roleType;
             tempRoleData.level = level;
             tempRoleData.effect = effect;
-            tempRoleData.effeciency = effeciency;
+            tempRoleData.efficiency = efficiency;
             tempRoleData.range = range;
             tempRoleData.riskResistance = riskResistance;
             tempRoleData.tradeCost = tradeCost;

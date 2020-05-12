@@ -25,7 +25,7 @@ using System;
         /// <summary>
         /// 模板提供效率值
         /// </summary>
-        public string effeciency;
+        public string efficiency;
 
         /// <summary>
         /// 模板提供范围值
