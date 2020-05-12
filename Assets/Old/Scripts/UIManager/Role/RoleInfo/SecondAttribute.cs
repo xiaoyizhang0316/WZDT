@@ -15,15 +15,11 @@ public class SecondAttribute : MonoSingleton<SecondAttribute>
     /// </summary>
     public void UpdateSecondAttriInfo()
     {
-        //TODO
-        // tempItems[0].SetText(CreatRoleManager.My.CurrentRole.risk);
-        // tempItems[1].SetText(CreatRoleManager.My.CurrentRole.search);
-        // tempItems[2].SetText(CreatRoleManager.My.CurrentRole.bargain);
-        // tempItems[3].SetText(CreatRoleManager.My.CurrentRole.delivery);
-        //// tempItems[4].SetText(CreatRoleManager.My.CurrentRole.fixedCost);
-        // tempItems[4].SetText(CreatRoleManager.My.CurrentRole.costMonth);
-        // tempItems[5].SetText(CreatRoleManager.My.CurrentRole.workerCost);
-        // tempItems[6].SetText(CreatRoleManager.My.CurrentRole.equipCost);
+        tempItems[0].SetText(CreatRoleManager.My.finalRiskResistance);
+        tempItems[1].SetText(CreatRoleManager.My.finalTradeCost);
+        tempItems[2].SetText(CreatRoleManager.My.CurrentRole.workerCost);
+        tempItems[3].SetText(CreatRoleManager.My.CurrentRole.equipCost);
+        tempItems[4].SetText(CreatRoleManager.My.finalCost);
     }
 
     // Start is called before the first frame update

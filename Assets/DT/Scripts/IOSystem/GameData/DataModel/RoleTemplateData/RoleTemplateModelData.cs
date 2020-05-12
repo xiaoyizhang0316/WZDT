@@ -83,6 +83,7 @@ using static GameEnum;
             RoleSpacePath = "Sprite/RoleSpace/" + roleType.ToString() + "_" + level.ToString();
             PrePath = "Prefabs/Role/" + roleType.ToString() + "_" + level.ToString();
             tempRoleData = new BaseRoleData();
+            tempRoleData.roleName = "";
             tempRoleData.roleType = roleType;
             tempRoleData.level = level;
             tempRoleData.effect = effect;

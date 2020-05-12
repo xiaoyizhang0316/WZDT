@@ -15,7 +15,9 @@ public class MainAttribute : MonoSingleton<MainAttribute>
     /// </summary>
     public void UpdateMainAttriInfo()
     {
-
+        tempItems[0].SetSlide(CreatRoleManager.My.finalEffect);
+        tempItems[1].SetSlide(CreatRoleManager.My.finalEfficiency);
+        tempItems[2].SetSlide(CreatRoleManager.My.finalRange);
         //tempItems[0].SetSlide(CreatRoleManager.My.gearBrand, CreatRoleManager.My.CurrentRole.baseRoleData.needBrand);
         //tempItems[1].SetSlide(CreatRoleManager.My.workerBrand);
         //tempItems[2].SetSlide(CreatRoleManager.My.finalBrand);

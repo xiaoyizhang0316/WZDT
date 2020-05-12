@@ -353,6 +353,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             finalCost += tempData.cost;
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
+            CurrentRole.equipCost += tempData.cost;
             //gearCapacity += tempData.capacity;
             //gearEfficiency += tempData.efficiency;
             //gearQuality += tempData.quality;
@@ -378,6 +379,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             finalCost += tempData.cost;
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
+            CurrentRole.workerCost += tempData.cost;
             //workerCapacity += tempData.capacity;
             //workerEfficiency += tempData.efficiency;
             //workerQuality += tempData.quality;
@@ -398,17 +400,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void InitRoleValue()
     {
-        gearBrand = 0;
-        gearCapacity = 0;
-        gearEfficiency = 0;
-        gearQuality = 0;
-        workerCapacity = 0;
-        workerEfficiency = 0;
-        workerQuality = 0;
-        workerBrand = 0;
-        finalCapacity = 0;
-        finalQuality = 0;
-        finalBrand = 0;
         finalEffect = CurrentRole.baseRoleData.effect;
         finalEfficiency = CurrentRole.baseRoleData.efficiency;
         finalRange = CurrentRole.baseRoleData.range;
@@ -416,6 +407,9 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         finalCost = CurrentRole.baseRoleData.cost;
         finalBulletCapacity = CurrentRole.baseRoleData.bulletCapacity;
         finalRiskResistance = CurrentRole.baseRoleData.riskResistance;
+        CurrentRole.equipCost = 0;
+        CurrentRole.workerCost = 0;
+        //CurrentRole.cost = CurrentRole.baseRoleData.cost;
     }
 
     /// <summary>
