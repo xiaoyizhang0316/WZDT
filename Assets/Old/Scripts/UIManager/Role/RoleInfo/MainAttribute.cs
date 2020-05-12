@@ -15,22 +15,24 @@ public class MainAttribute : MonoSingleton<MainAttribute>
     /// </summary>
     public void UpdateMainAttriInfo()
     {
-        tempItems[0].SetSlide(CreatRoleManager.My.gearBrand, CreatRoleManager.My.CurrentRole.baseRoleData.needBrand);
-        tempItems[1].SetSlide(CreatRoleManager.My.workerBrand);
-        tempItems[2].SetSlide(CreatRoleManager.My.finalBrand);
-        tempItems[3].SetPosition(CreatRoleManager.My.CurrentRole.baseRoleData.needBrand);
-        tempItems[4].SetSlide(CreatRoleManager.My.gearQuality, CreatRoleManager.My.CurrentRole.baseRoleData.needQuality);
-        tempItems[5].SetSlide(CreatRoleManager.My.workerQuality);
-        tempItems[6].SetSlide(CreatRoleManager.My.finalQuality);
-        tempItems[7].SetPosition(CreatRoleManager.My.CurrentRole.baseRoleData.needQuality);
-        tempItems[8].SetSlide(CreatRoleManager.My.gearCapacity, CreatRoleManager.My.CurrentRole.baseRoleData.needCapacity);
-        tempItems[9].SetSlide(CreatRoleManager.My.workerCapacity);
-        tempItems[10].SetSlide(CreatRoleManager.My.finalCapacity);
-        tempItems[11].SetPosition(CreatRoleManager.My.CurrentRole.baseRoleData.needCapacity);
-        tempItems[12].SetSlide(CreatRoleManager.My.gearEfficiency, CreatRoleManager.My.CurrentRole.baseRoleData.needEfficiency);
-        tempItems[13].SetSlide(CreatRoleManager.My.workerEfficiency);
-        tempItems[14].SetSlide(CreatRoleManager.My.finalEfficiency);
-        tempItems[15].SetPosition(CreatRoleManager.My.CurrentRole.baseRoleData.needEfficiency);
+
+        //tempItems[0].SetSlide(CreatRoleManager.My.gearBrand, CreatRoleManager.My.CurrentRole.baseRoleData.needBrand);
+        //tempItems[1].SetSlide(CreatRoleManager.My.workerBrand);
+        //tempItems[2].SetSlide(CreatRoleManager.My.finalBrand);
+        //tempItems[3].SetPosition(CreatRoleManager.My.CurrentRole.baseRoleData.needBrand);
+        //tempItems[4].SetSlide(CreatRoleManager.My.gearQuality, CreatRoleManager.My.CurrentRole.baseRoleData.needQuality);
+        //tempItems[5].SetSlide(CreatRoleManager.My.workerQuality);
+        //tempItems[6].SetSlide(CreatRoleManager.My.finalQuality);
+        //tempItems[7].SetPosition(CreatRoleManager.My.CurrentRole.baseRoleData.needQuality);
+        //tempItems[8].SetSlide(CreatRoleManager.My.gearCapacity, CreatRoleManager.My.CurrentRole.baseRoleData.needCapacity);
+        //tempItems[9].SetSlide(CreatRoleManager.My.workerCapacity);
+        //tempItems[10].SetSlide(CreatRoleManager.My.finalCapacity);
+        //tempItems[11].SetPosition(CreatRoleManager.My.CurrentRole.baseRoleData.needCapacity);
+        //tempItems[12].SetSlide(CreatRoleManager.My.gearEfficiency, CreatRoleManager.My.CurrentRole.baseRoleData.needEfficiency);
+        //tempItems[13].SetSlide(CreatRoleManager.My.workerEfficiency);
+        //tempItems[14].SetSlide(CreatRoleManager.My.finalEfficiency);
+        //tempItems[15].SetPosition(CreatRoleManager.My.CurrentRole.baseRoleData.needEfficiency);
+        //TODO
     }
 
     // Start is called before the first frame update

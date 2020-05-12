@@ -32,7 +32,7 @@ public class RoleInfoManager : MonoSingleton<RoleInfoManager>
         SecondAttribute.My.UpdateSecondAttriInfo();
         workerOnEquip.GetComponent<StatusIcon>().status = CreatRoleManager.My.isWorkerOnEquip;
         atLeastOne.GetComponent<StatusIcon>().status = CreatRoleManager.My.isAtLeastOneWorkerEquip;
-        templateNeed.GetComponent<StatusIcon>().status = CreatRoleManager.My.isNeedTemplate;
+        //templateNeed.GetComponent<StatusIcon>().status = CreatRoleManager.My.isNeedTemplate;
     }
 
     // Start is called before the first frame update

@@ -148,19 +148,19 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     {
         popInfo.SetActive( true);
         var data = GameDataMgr.My.GetGearData(ID);
-        souxun.text = data.searchAdd.ToString();
-        yijia.text = data.bargainAdd.ToString();
-        jiaodu.text = data.deliverAdd.ToString();
-        fengxian.text = data.riskAdd.ToString();
+        souxun.text = data.effect.ToString();
+        yijia.text = data.efficiency.ToString();
+        jiaodu.text = data.range.ToString();
+        //fengxian.text = data.riskAdd.ToString();
     }
     public void ShowWorkListPOPDatal(int ID)
     {
         popInfo.SetActive( true);
         var data = GameDataMgr.My.GetWorkerData(ID);
-        souxun.text = data.searchAdd.ToString();
-        yijia.text = data.bargainAdd.ToString();
-        jiaodu.text = data.deliverAdd.ToString();
-        fengxian.text = data.riskAdd.ToString();
+        souxun.text = data.effect.ToString();
+        yijia.text = data.efficiency.ToString();
+        jiaodu.text = data.range.ToString();
+        //fengxian.text = data.riskAdd.ToString();
     }
 
     /// <summary>
