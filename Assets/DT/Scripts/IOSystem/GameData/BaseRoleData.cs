@@ -60,6 +60,11 @@ public class BaseRoleData
     public int bulletCapacity;
 
     /// <summary>
+    /// 最远交易距离
+    /// </summary>
+    public int tradeRange;
+
+    /// <summary>
     /// Icon路径地址
     /// </summary>
     public string SpritePath;

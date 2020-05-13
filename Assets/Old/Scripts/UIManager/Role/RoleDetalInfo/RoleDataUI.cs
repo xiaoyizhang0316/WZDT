@@ -94,14 +94,14 @@ public class RoleDataUI : MonoBehaviour
         capacityAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.capacityAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
         qualityAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.qualityAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
         brandAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.brandAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        efficiencyAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.effeciencyAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+        efficiencyAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.efficiencyAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
         if (change.capacityAdd > 0)
             capacityAdd.transform.DOLocalRotate(new Vector3(0f,-180f,0f), 0f);
         if (change.qualityAdd > 0)
             qualityAdd.transform.DOLocalRotate(new Vector3(0f, -180f, 0f), 0f);
         if (change.brandAdd > 0)
             brandAdd.transform.DOLocalRotate(new Vector3(0f, -180f, 0f), 0f);
-        if (change.effeciencyAdd > 0)
+        if (change.efficiencyAdd > 0)
             efficiencyAdd.transform.DOLocalRotate(new Vector3(0f, -180f, 0f), 0f);
     }
 

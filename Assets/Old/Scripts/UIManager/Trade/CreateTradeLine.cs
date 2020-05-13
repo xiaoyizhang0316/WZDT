@@ -19,26 +19,30 @@ public class CreateTradeLine : MonoBehaviour
 
     public Material material;
 
+    public BaseMapRole targetRole;
 
     public List<Vector3> pointList = new List<Vector3>();
-
 
     public void InitPos(Transform startTarget)
     {
         this.startTarget = startTarget;
         //lineGo = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        Vector3 rightPosition = (startTarget.gameObject.transform.position + Target) / 2;
-        Vector3 rightRotation = Target - startTarget.transform.position;
-        float HalfLength = Vector3.Distance(startTarget.transform.position, Target) / 2;
-        float LThickness = 0.1f;//线的粗细
-
+        //Vector3 rightPosition = (startTarget.gameObject.transform.position + Target) / 2;
+        //Vector3 rightRotation = Target - startTarget.transform.position;
+        //float HalfLength = Vector3.Distance(startTarget.transform.position, Target) / 2;
+        //float LThickness = 0.1f;//线的粗细
         //创建圆柱体
         lineGo.SetActive(true);
-        lineGo.gameObject.transform.parent = transform;
-        lineGo.transform.position = rightPosition;
-        lineGo.transform.rotation = Quaternion.FromToRotation(Vector3.up, rightRotation);
-        lineGo.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
+        //lineGo.gameObject.transform.parent = transform;
+        //lineGo.transform.position = rightPosition;
+        //lineGo.transform.rotation = Quaternion.FromToRotation(Vector3.up, rightRotation);
+        //lineGo.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
         lineGo.GetComponent<MeshRenderer>().material = material;
+    }
+
+    public void CheckDistance()
+    {
+
     }
 
 
@@ -86,7 +90,11 @@ public class CreateTradeLine : MonoBehaviour
                         //}
                         //GetComponent<LineRenderer>().positionCount = pointList.Count;
                         //GetComponent<LineRenderer>().SetPositions(pointList.ToArray());
-                        break;
+                    }
+                    if (hit[i].transform.CompareTag("MapRole"))
+                    {
+                        targetRole = hit[i].transform.GetComponent<BaseMapRole>();
+                        CheckDistance();
                     }
                 }
                 //float x = start.x * 0.5f + Target.x * (0.5f);
@@ -97,9 +105,6 @@ public class CreateTradeLine : MonoBehaviour
                 Vector3 rightRotation = Target - startTarget.transform.position;
                 float HalfLength = Vector3.Distance(startTarget.transform.position, Target) / 2;
                 float LThickness = 0.1f;//线的粗细
-
-                //创建圆柱体
-                //lineGo = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
                 lineGo.gameObject.transform.parent = transform;
                 lineGo.transform.position = rightPosition;
                 lineGo.transform.rotation = Quaternion.FromToRotation(Vector3.up, rightRotation);

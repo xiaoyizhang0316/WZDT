@@ -229,8 +229,8 @@ public class BaseBuff
              //   targetRole.baseRoleData.capacity += buffConfig.roleCapacityChange;
                 break;
             case 12:
-                CalculateNumber(str,ref buffConfig.roleEffeciencyChange);
-                targetRole.baseRoleData.efficiency += buffConfig.roleEffeciencyChange;
+                CalculateNumber(str,ref buffConfig.roleEfficiencyChange);
+                targetRole.baseRoleData.efficiency += buffConfig.roleEfficiencyChange;
                 break;
             case 13:
                 CalculateNumber(str,ref buffConfig.roleQualityChange);
@@ -276,7 +276,7 @@ public class BaseBuff
                 CalculateNumber(str, ref buffConfig.roleCapacityChange);
                 break;
             case 12:
-                CalculateNumber(str, ref buffConfig.roleEffeciencyChange);
+                CalculateNumber(str, ref buffConfig.roleEfficiencyChange);
                 break;
             case 13:
                 CalculateNumber(str, ref buffConfig.roleQualityChange);
@@ -472,7 +472,7 @@ public class BaseBuff
                 case "CAPACITY":
               //      num = (targetRole.baseRoleData.capacity * float.Parse(attri[3]));
                     break;
-                case "EFFECIENCY":
+                case "Efficiency":
                   //  num = (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
                     break;
                 case "QUALITY":
@@ -505,7 +505,7 @@ public class BaseBuff
                 case "CAPACITY":
               //      num = (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
                     break;
-                case "EFFECIENCY":
+                case "Efficiency":
                     num = (int)(castRole.baseRoleData.efficiency * float.Parse(attri[3]));
                     break;
                 case "QUALITY":
@@ -557,7 +557,7 @@ public class BaseBuff
                 case "CAPACITY":
                  //   num = (int)(targetRole.baseRoleData.capacity * float.Parse(attri[3]));
                     break;
-                case "EFFECIENCY":
+                case "Efficiency":
                   //  num = (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
                     break;
                 case "QUALITY":
@@ -590,7 +590,7 @@ public class BaseBuff
                 case "CAPACITY":
                //     num = (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
                     break;
-                case "EFFECIENCY":
+                case "Efficiency":
                //     num = (int)(castRole.baseRoleData.efficiency * float.Parse(attri[3]));
                     break;
                 case "QUALITY":
@@ -636,7 +636,7 @@ public class BaseBuff
             {
              //   case "CAPACITY":
              //       return (int)(targetRole.baseRoleData.capacity * float.Parse(attri[3]));
-             //   case "EFFECIENCY":
+             //   case "Efficiency":
              //       return (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
              //   case "QUALITY":
              //       return (int)(targetRole.baseRoleData.quality * float.Parse(attri[3]));
@@ -660,7 +660,7 @@ public class BaseBuff
             {
               // case "CAPACITY":
               //     return (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
-              // case "EFFECIENCY":
+              // case "Efficiency":
               //     return (int)(castRole.baseRoleData.efficiency * float.Parse(attri[3]));
               // case "QUALITY":
               //     return (int)(castRole.baseRoleData.quality * float.Parse(attri[3]));
@@ -696,7 +696,7 @@ public class BaseBuff
         tradeRoleAttribute.brandAdd = buffConfig.roleBrandChange;
         tradeRoleAttribute.qualityAdd = buffConfig.roleQualityChange;
         tradeRoleAttribute.capacityAdd = buffConfig.roleCapacityChange;
-        tradeRoleAttribute.effeciencyAdd = buffConfig.roleEffeciencyChange;
+        tradeRoleAttribute.efficiencyAdd = buffConfig.roleEfficiencyChange;
         tradeRoleAttribute.searchAdd = buffConfig.roleSearchChange;
         tradeRoleAttribute.bargainAdd = buffConfig.roleBargainChange;
         tradeRoleAttribute.deliveryAdd = buffConfig.roleDeliverChange;

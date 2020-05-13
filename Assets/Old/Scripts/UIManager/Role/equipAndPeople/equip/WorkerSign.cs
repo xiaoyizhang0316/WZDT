@@ -130,7 +130,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         Vector3 V = Input.mousePosition;
         Vector3 V2 = new Vector3(V.x - Screen.width / 2, V.y - Screen.height / 2);
         worker.transform.localPosition = V2;
-  
+        worker.name = "WorkerOBJ_" + ID;
         worker.GetComponent<DragUI>().dragType = DragUI.DragType.people;
     }
 

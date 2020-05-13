@@ -291,7 +291,7 @@ public class JYFS : MonoSingleton<JYFS>
         baseRolechange.brandAdd += roleChange.brandAdd;
         baseRolechange.qualityAdd += roleChange.qualityAdd;
         baseRolechange.capacityAdd += roleChange.capacityAdd;
-        baseRolechange.effeciencyAdd += roleChange.effeciencyAdd;
+        baseRolechange.efficiencyAdd += roleChange.efficiencyAdd;
         baseRolechange.searchAdd += roleChange.searchAdd;
         baseRolechange.bargainAdd += roleChange.bargainAdd;
         baseRolechange.deliveryAdd += roleChange.deliveryAdd;
@@ -318,7 +318,7 @@ public class JYFS : MonoSingleton<JYFS>
 
         public int capacityAdd;
 
-        public int effeciencyAdd;
+        public int efficiencyAdd;
 
         public int searchAdd;
 
