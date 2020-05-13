@@ -32,22 +32,138 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public GameObject tradeMoneyLineGo;
 
+    /// <summary>
+    /// 单根管子
+    /// </summary>
+    public GameObject tradeCylinder;
+
+    /// <summary>
+    /// 信息流线
+    /// </summary>
+    public GameObject tradeBuffLine;
+
     public void Init(string start, string end)
     {
         tradeData = new TradeData();
         tradeData.startRole = start;
         tradeData.endRole = end;
-        tradeData.selectTradeDestination = TradeDestinationType.Warehouse;
+        //tradeData.selectTradeDestination = TradeDestinationType.Warehouse;
         tradeData.isFree = false;
         isFirstSelect = true;
         tradeData.payRole = end;
         tradeData.receiveRole = start;
         tradeData.castRole = start;
         tradeData.targetRole = end;
+        tradeData.selectSZFS = SZFSType.固定;
+        tradeData.selectCashFlow = CashFlowType.先钱;
         tradeData.ID = TradeManager.My.index++;
-        tradeData.selectProduct = ProductType.Seed;
-        tradeData.payPer = 0f;
+        //tradeData.selectProduct = ProductType.Seed;
+        //tradeData.payPer = 0f;
         //print(TradeManager.My.index);
+        SetSkillTarget();
+        AddTradeToRole();
+        GenerateTradeLine();
+    }
+
+    /// <summary>
+    /// 设置技能施法者
+    /// </summary>
+    public void SetSkillTarget()
+    {
+        BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+        BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        if (startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+        {
+            if (endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+            {
+                tradeData.castRole = tradeData.startRole;
+                tradeData.targetRole = tradeData.endRole;
+            }
+            else if (endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+            {
+                tradeData.castRole = tradeData.endRole;
+                tradeData.targetRole = tradeData.startRole;
+            }
+        }
+        else if (startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        {
+            if (endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+            {
+                tradeData.castRole = tradeData.startRole;
+                tradeData.targetRole = tradeData.endRole;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 为施法方添加技能
+    /// </summary>
+    public void AddTradeToRole()
+    {
+        BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        cast.tradeList.Add(this);
+    }
+
+    /// <summary>
+    /// 生成交易线
+    /// </summary>
+    public void GenerateTradeLine()
+    {
+        BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+        {
+            GenerateProductLine();
+        }
+        else
+        {
+            GenerateMoneyLine();
+        }
+    }
+
+    /// <summary>
+    /// 生成交易物流线
+    /// </summary>
+    public void GenerateProductLine()
+    {
+        BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole));
+        int number = Mathf.FloorToInt( Vector3.Distance(cast.transform.position, target.transform.position));
+        Vector3 offset = (target.transform.position - cast.transform.position) / number;
+        float HalfLength = Vector3.Distance(target.transform.position, cast.transform.position) / number / 2f;
+        Vector3 tempStart = cast.transform.position;
+        for (int i = 0; i < number; i++)
+        {
+            GameObject go = Instantiate(tradeCylinder);
+            go.transform.SetParent(transform);
+            Vector3 rightRotation = target.transform.position - cast.transform.position;
+            float LThickness = 0.1f;
+            go.transform.position = tempStart + offset;
+            go.transform.rotation = Quaternion.FromToRotation(Vector3.up, rightRotation);
+            go.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
+            tempStart = go.transform.position;
+        }
+        //lineGo = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        //Vector3 rightPosition = (startTarget.gameObject.transform.position + Target) / 2;
+        //
+        //float HalfLength = Vector3.Distance(startTarget.transform.position, Target) / 2;
+        //float LThickness = 0.1f;//线的粗细
+        //创建圆柱体
+        //lineGo.gameObject.transform.parent = transform;
+        //lineGo.transform.position = rightPosition;
+        //lineGo.transform.rotation = Quaternion.FromToRotation(Vector3.up, rightRotation);
+        //lineGo.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
+    }
+
+    /// <summary>
+    /// 生成交易信息流线
+    /// </summary>
+    public void GenerateMoneyLine()
+    {
+        BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole));
+        GameObject go = Instantiate(tradeBuffLine);
+        go.transform.SetParent(transform);
+        go.GetComponent<DrawMoneyLine>().InitPos(cast.transform, target.transform, tradeData.ID);
     }
 
     /// <summary>

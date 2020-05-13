@@ -99,7 +99,7 @@ public class RoleTemplateModelData
         tempRoleData.tradeCost = tradeCost;
         tempRoleData.cost = cost;
         tempRoleData.bulletCapacity = bulletCapacity;
-        tempRoleData.tradeRange = 5;
+        tempRoleData.tradeRange = 15;
         tempRoleData.SpritePath = SpritePath;
         tempRoleData.PrePath = PrePath;
         tempRoleData.RoleSpacePath = RoleSpacePath;

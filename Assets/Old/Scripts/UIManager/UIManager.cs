@@ -241,7 +241,7 @@ public class UIManager : MonoSingleton<UIManager>
         go.transform.SetParent(TradeManager.My.transform);
         go.GetComponent<TradeSign>().Init(startRole.ID.ToString(), endRole.ID.ToString());
         //Panel_CreateTrade.SetActive(true);
-        CreateTradeManager.My.Open(go);
+        //CreateTradeManager.My.Open(go);
         isSetTrade = false;
         //CreateTradeLineGo.SetActive(false);
     }
