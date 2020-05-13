@@ -456,8 +456,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         CurrentRole.cost = finalCost;
         CurrentRole.tradeCost = finalTradeCost;
         CurrentRole.bulletCapacity = finalBulletCapacity;
-        CurrentRole.EquipList = EquipList;
-        CurrentRole.peoPleList = peoPleList;
         int flag = 0;
         for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
         {
@@ -485,36 +483,36 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     {
         for (int i = 0; i < template_BottomPos.childCount; i++)
         {
-            Destroy(template_BottomPos.GetChild(i).gameObject, 0.1f);
+            Destroy(template_BottomPos.GetChild(0).gameObject, 0.1f);
         }
 
         for (int i = 0; i < template_TopPos.childCount; i++)
         {
-            Destroy(template_TopPos.GetChild(i).gameObject, 0.1f);
+            Destroy(template_TopPos.GetChild(0).gameObject, 0.1f);
         }
 
         for (int i = 0; i < template_MidPos.childCount; i++)
         {
-            Destroy(template_MidPos.GetChild(i).gameObject, 0.1f);
+            Destroy(template_MidPos.GetChild(0).gameObject, 0.1f);
         }
 
         for (int i = 0; i < workerPos.childCount; i++)
         {
-            Destroy(workerPos.GetChild(i).gameObject, 0.1f);
+            Destroy(workerPos.GetChild(0).gameObject, 0.1f);
         }
 
         for (int i = 0; i < equipPos.childCount; i++)
         {
-            Destroy(equipPos.GetChild(i).gameObject, 0.1f);
+            Destroy(equipPos.GetChild(0).gameObject, 0.1f);
         }
         for (int i = 0; i < WorkerListManager.My.transform.Find("Viewport/Content").childCount; i++)
         {
-            Destroy(WorkerListManager.My.transform.Find("Viewport/Content").GetChild(i).gameObject, 0.1f);
+            Destroy(WorkerListManager.My.transform.Find("Viewport/Content").GetChild(0).gameObject, 0.1f);
         }
 
         for (int i = 0; i < EquipListManager.My.transform.Find("Viewport/Content").childCount; i++)
         {
-            Destroy(EquipListManager.My.transform.Find("Viewport/Content").GetChild(i).gameObject, 0.1f);
+            Destroy(EquipListManager.My.transform.Find("Viewport/Content").GetChild(0).gameObject, 0.1f);
         }
         WorkerListManager.My._signs.Clear();
         EquipListManager.My._signs.Clear();
