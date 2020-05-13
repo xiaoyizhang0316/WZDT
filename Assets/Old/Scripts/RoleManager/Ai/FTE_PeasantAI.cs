@@ -18,7 +18,6 @@ public class FTE_PeasantAI : MonoBehaviour
         {
             Debug.Log(aiStart);
             double selfId = GetComponent<BaseMapRole>().baseRoleData.ID;
-            TradeManager.My.CreateTradeAI(selfId, targetId, "送货", ProductType.Melon, TradeDestinationType.Warehouse);
             aiStart = true;
         }
     }

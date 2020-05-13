@@ -28,21 +28,6 @@ public class TradeData
     public string targetRole;
 
     /// <summary>
-    /// 技能第三方目标（如果有的话）
-    /// </summary>
-    public string thirdPartyRole;
-
-    /// <summary>
-    /// 选择的交易方式
-    /// </summary>
-    public string selectJYFS;
-
-    /// <summary>
-    /// 选择的目的地
-    /// </summary>
-    public TradeDestinationType selectTradeDestination;
-
-    /// <summary>
     /// 选择的收支方式
     /// </summary>
     public SZFSType selectSZFS;
@@ -53,24 +38,9 @@ public class TradeData
     public CashFlowType selectCashFlow;
 
     /// <summary>
-    /// 选择的产品
-    /// </summary>
-    public ProductType selectProduct;
-
-    /// <summary>
     /// 是否免费
     /// </summary>
     public bool isFree;
-
-    /// <summary>
-    /// 付钱方
-    /// </summary>
-    public string payRole;
-
-    /// <summary>
-    /// 收钱方
-    /// </summary>
-    public string receiveRole;
 
     /// <summary>
     /// ID

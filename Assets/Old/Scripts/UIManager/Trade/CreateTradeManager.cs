@@ -140,15 +140,10 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     public void Init()
     {
         selectSZFS = currentTrade.tradeData.selectSZFS;
-        selectTradeDestination = currentTrade.tradeData.selectTradeDestination;
         selectCashFlow = currentTrade.tradeData.selectCashFlow;
         isFree = currentTrade.tradeData.isFree;
-        payRole = currentTrade.tradeData.payRole;
-        receiveRole = currentTrade.tradeData.receiveRole;
         castRole = currentTrade.tradeData.castRole;
         targetRole = currentTrade.tradeData.targetRole;
-        selectProduct = currentTrade.tradeData.selectProduct;
-        thirdPartyRole = currentTrade.tradeData.thirdPartyRole;
         payPerc = currentTrade.tradeData.payPer;
         availableTradeSkill = new List<TradeSkillData>();
         InitName();
@@ -193,16 +188,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
                 Transform start = CommonData.My.RoleTF.transform.Find(currentTrade.tradeData.startRole);
                 Transform end = CommonData.My.RoleTF.transform.Find(currentTrade.tradeData.endRole);
                 TradeManager.My.tradeList[currentTrade.tradeData.ID].tradeLineGo = CreateTradeLine(start, end);
-                //if (!isFree)
-                {
-                    Transform moneyStart = CommonData.My.RoleTF.transform.Find(currentTrade.tradeData.payRole);
-                    Transform moneyEnd = CommonData.My.RoleTF.transform.Find(currentTrade.tradeData.receiveRole);
-                    TradeManager.My.tradeList[currentTrade.tradeData.ID].tradeMoneyLineGo = CreateTradeMoneyLine(moneyStart, moneyEnd);
-                }
                 TradeManager.My.tradeList[currentTrade.tradeData.ID].tradeIconGo = CreateTradeIcon(start, end);
-                TradeManager.My.tradeList[currentTrade.tradeData.ID].tradeIconGo.GetComponent<TradeIcon>().SetTrasform(start, end);
-                print(TradeManager.My.tradeList[currentTrade.tradeData.ID].tradeData.selectProduct);
-        
+                TradeManager.My.tradeList[currentTrade.tradeData.ID].tradeIconGo.GetComponent<TradeIcon>().SetTrasform(start, end);     
             }
             DeleteTradeMenu();
         }
@@ -216,15 +203,9 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         //print(selectProduct);
         currentTrade.tradeData.selectSZFS = selectSZFS;
         currentTrade.tradeData.selectCashFlow = selectCashFlow;
-        currentTrade.tradeData.selectTradeDestination = selectTradeDestination;
-        currentTrade.tradeData.selectJYFS = selectJYFS;
         currentTrade.tradeData.isFree = isFree;
-        currentTrade.tradeData.payRole = payRole;
-        currentTrade.tradeData.receiveRole = receiveRole;
         currentTrade.tradeData.castRole = castRole;
         currentTrade.tradeData.targetRole = targetRole;
-        currentTrade.tradeData.selectProduct = selectProduct;
-        currentTrade.tradeData.thirdPartyRole = thirdPartyRole;
         currentTrade.tradeData.payPer = payPerc;
     }
 
@@ -233,48 +214,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     /// </summary>
     public void ChangeMoneyLine()
     {
-        DrawMoneyLine[] temp = FindObjectsOfType<DrawMoneyLine>();
-        //if (!isFree)
-        {
-            bool alreadyHas = false;
-            for (int i = 0; i < temp.Length; i++)
-            {
-                if (temp[i].ID == currentTrade.tradeData.ID)
-                {
-                    List<string> tempStrList = new List<string>();
-                    tempStrList.Add(TradeManager.My.tradeList[temp[i].ID].tradeData.payRole);
-                    tempStrList.Add(TradeManager.My.tradeList[temp[i].ID].tradeData.receiveRole);
-                    if (tempStrList.Contains(payRole) && tempStrList.Contains(receiveRole))
-                    {
-                        //print("发起者承受者相同");
-                        alreadyHas = true;
-                    }
-                    else
-                    {
-                        //print("发起者承受者不同");
-                        Destroy(temp[i].gameObject, 0.01f);
-                    }
-
-                }
-            }
-            if (!alreadyHas)
-            {
-                Transform moneyStart = CommonData.My.RoleTF.transform.Find(payRole);
-                Transform moneyEnd = CommonData.My.RoleTF.transform.Find(receiveRole);
-                TradeManager.My.tradeList[currentTrade.tradeData.ID].tradeMoneyLineGo = CreateTradeMoneyLine(moneyStart, moneyEnd);
-            }
-        }
-        //else
-        //{
-        //    for (int i = 0; i < temp.Length; i++)
-        //    {
-        //        if (temp[i].ID == currentTrade.tradeData.ID)
-        //        {
-        //            Destroy(temp[i].gameObject, 0.01f);
-        //            break;
-        //        }
-        //    }
-        //}
+        
     }
 
     /// <summary>

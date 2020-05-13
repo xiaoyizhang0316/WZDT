@@ -24,7 +24,6 @@ public class TestScript : MonoBehaviour
                 id2 = r.ID;
             }
         }
-        TradeManager.My.CreateTradeAI(id1, id2, "送货", ProductType.Seed, TradeDestinationType.Import);
 
     }
     public void Test22222()

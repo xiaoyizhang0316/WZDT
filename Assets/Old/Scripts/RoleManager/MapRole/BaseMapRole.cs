@@ -110,23 +110,7 @@ public class BaseMapRole : MonoBehaviour
     /// <param name="tradeCost"></param>
     public void GenerateTradeHistory(TradeData data, float tradeCost)
     {
-        TradeRecordData tradeData = new TradeRecordData();
-        tradeData.startRole = PlayerData.My.GetMapRoleById(double.Parse(data.startRole)).baseRoleData.baseRoleData.roleName;
-        tradeData.endRole = PlayerData.My.GetMapRoleById(double.Parse(data.endRole)).baseRoleData.baseRoleData.roleName;
-        tradeData.selectSkill = data.selectJYFS;
-        SkillData skillData = GameDataMgr.My.GetSkillDataByName(data.selectJYFS);
-        tradeData.skillCost = skillData.cost;
-        tradeData.transactionCost = Mathf.Floor(tradeCost);
-        if (data.selectSZFS == GameEnum.SZFSType.固定)
-        {
-            BaseMapRole castRole = PlayerData.My.GetMapRoleById(double.Parse(data.castRole));
-            tradeData.income = Mathf.Floor(castRole.operationCost + skillData.cost);
-        }
-        else
-        {
-            BaseMapRole payRole = PlayerData.My.GetMapRoleById(double.Parse(data.payRole));
-            tradeData.income = data.payPer * payRole.monthlyProfit;
-        }
+        
         
     }
 
@@ -388,18 +372,7 @@ public class BaseMapRole : MonoBehaviour
     /// <param name="tradeData"></param>
     public void GetPayRelationShip(TradeData tradeData)
     {
-        if (payRelationShips.ContainsKey(tradeData.ID))
-        {
-            payRelationShips[tradeData.ID].targetRole = tradeData.receiveRole;
-            payRelationShips[tradeData.ID].payPercent = tradeData.payPer;
-        }
-        else
-        {
-            PayRelationShipData data = new PayRelationShipData();
-            data.targetRole = tradeData.receiveRole;
-            data.payPercent = tradeData.payPer;
-            payRelationShips.Add(tradeData.ID, data);
-        }
+
     }
 
     /// <summary>
