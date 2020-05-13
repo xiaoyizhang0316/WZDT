@@ -19,8 +19,12 @@ public class BaseMapRole : MonoBehaviour
     /// 是否是NPC
     /// </summary>
     public bool isNpc = false;
+
+    /// <summary>
+    /// 交易列表
+    /// </summary>
+    public List<TradeSign> tradeList = new List<TradeSign>();
  
-    
     /// <summary>
     /// 自身buff列表
     /// </summary>

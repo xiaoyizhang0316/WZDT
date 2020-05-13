@@ -95,7 +95,7 @@ public class RoleDrag : MonoBehaviour
             {
                 if (CheckTradeDistance() && CheckStartAndEnd())
                 {
-                    UIManager.My.Panel_CreateTrade.SetActive(true);
+                    //UIManager.My.Panel_CreateTrade.SetActive(true);
                     UIManager.My.InitCreateTradePanel();
                 }
             }

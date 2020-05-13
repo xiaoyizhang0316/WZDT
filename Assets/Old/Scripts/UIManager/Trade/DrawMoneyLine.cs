@@ -35,22 +35,11 @@ public class DrawMoneyLine : MonoBehaviour
         this.Target = Target;
         this.ID = ID;
         per = UnityEngine.Random.Range(0.3f, 0.8f);
+        DrawLine();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void DrawLine()
     {
-    //    GetComponent<LineRenderer>().
-  
-    }
-   
-    
-    // Update is called once per frame
-    void Update()
-    {
-        //List<Vector3> points = new List<Vector3>();
-        //points.Add(startTarget.localPosition + new Vector3(0f,1f,0f));
-        //points.Add(Target.localPosition + new Vector3(0f, 1f, 0f));
         int vertexCount = 30;//采样点数量
         pointList.Clear();
         pointList.Add(startTarget.localPosition);
@@ -72,6 +61,23 @@ public class DrawMoneyLine : MonoBehaviour
         pointList.Add(Target.localPosition);
         GetComponent<LineRenderer>().positionCount = pointList.Count;
         GetComponent<LineRenderer>().SetPositions(pointList.ToArray());
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+    //    GetComponent<LineRenderer>().
+  
+    }
+   
+    
+    // Update is called once per frame
+    void Update()
+    {
+        //List<Vector3> points = new List<Vector3>();
+        //points.Add(startTarget.localPosition + new Vector3(0f,1f,0f));
+        //points.Add(Target.localPosition + new Vector3(0f, 1f, 0f));
+        
         //GetComponent<LineRenderer>().SetPositions(points.ToArray());
     }
 }
