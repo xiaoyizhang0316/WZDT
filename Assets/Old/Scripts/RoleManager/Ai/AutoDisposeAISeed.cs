@@ -36,7 +36,6 @@ public class AutoDisposeAISeed : MonoBehaviour
             }
             if (targetId > 0)
             {
-                TradeManager.My.CreateTradeAI(selfId,targetId,"送货",ProductType.Seed,TradeDestinationType.Warehouse);
                 AiStart = true;
             }
         }

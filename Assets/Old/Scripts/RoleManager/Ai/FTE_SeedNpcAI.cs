@@ -15,7 +15,6 @@ public class FTE_SeedNpcAI : MonoBehaviour
         {
             Debug.Log(aiStart);
             double selfId = GetComponent<BaseMapRole>().baseRoleData.ID;
-            TradeManager.My.CreateTradeAI(selfId, targetId, "送货", ProductType.Seed, TradeDestinationType.Warehouse);
             aiStart = true;
         }
     }

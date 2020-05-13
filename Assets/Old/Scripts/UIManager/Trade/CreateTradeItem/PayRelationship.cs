@@ -22,25 +22,7 @@ public class PayRelationship : MonoBehaviour
     /// </summary>
     public void OnPayRoleChange()
     {
-        Dropdown temp = GetComponentsInChildren<Dropdown>()[0];
-        if (CreateTradeManager.My.receiveRole.Equals(PlayerData.My.GetRoleByName(temp.options[temp.value].text).ID.ToString()))
-        {
-            Role choosePayRole = PlayerData.My.GetRoleById(double.Parse(CreateTradeManager.My.currentTrade.tradeData.payRole));
-            string choosePayOption = choosePayRole.baseRoleData.roleName;
-            for (int i = 0; i < temp.options.Count; i++)
-            {
-
-                if (temp.options[i].text.Equals(choosePayOption))
-                {
-                    temp.value = i;
-                    temp.captionText.text = temp.options[i].text;
-                    break;
-                }
-            }
-            return;
-        }
-        CreateTradeManager.My.payRole = PlayerData.My.GetRoleByName(temp.options[temp.value].text).ID.ToString();
-        CreateTradeManager.My.CalculateTCOfTwo(CreateTradeManager.My.currentTrade.tradeData.startRole, CreateTradeManager.My.currentTrade.tradeData.endRole);
+        
     }
 
     /// <summary>
@@ -48,25 +30,7 @@ public class PayRelationship : MonoBehaviour
     /// </summary>
     public void OnReceiveRoleChange()
     {
-        Dropdown temp = GetComponentsInChildren<Dropdown>()[1];
-        if (CreateTradeManager.My.payRole.Equals(PlayerData.My.GetRoleByName(temp.options[temp.value].text).ID.ToString()))
-        {
-            Role chooseReceiveRole = PlayerData.My.GetRoleById(double.Parse(CreateTradeManager.My.currentTrade.tradeData.receiveRole));
-            string chooseReceiveOption = chooseReceiveRole.baseRoleData.roleName;
-            for (int i = 0; i < temp.options.Count; i++)
-            {
 
-                if (temp.options[i].text.Equals(chooseReceiveOption))
-                {
-                    temp.value = i;
-                    temp.captionText.text = temp.options[i].text;
-                    break;
-                }
-            }
-            return;
-        }
-        CreateTradeManager.My.receiveRole = PlayerData.My.GetRoleByName(temp.options[temp.value].text).ID.ToString();
-        CreateTradeManager.My.CalculateTCOfTwo(CreateTradeManager.My.currentTrade.tradeData.startRole, CreateTradeManager.My.currentTrade.tradeData.endRole);
     }
 
     /// <summary>
@@ -92,44 +56,6 @@ public class PayRelationship : MonoBehaviour
         }
         GetComponentInChildren<Toggle>().isOn = CreateTradeManager.My.isFree;
         CheckFree();
-        Dropdown temp1 = GetComponentsInChildren<Dropdown>()[0];
-        Dropdown temp2 = GetComponentsInChildren<Dropdown>()[1];
-        temp1.ClearOptions();
-        temp2.ClearOptions();
-        foreach (Role r in PlayerData.My.RoleData)
-        {
-            //print(r.inMap);
-            if (r.inMap)
-            {
-                string str = r.baseRoleData.roleName;
-                //string str = r.baseRoleData.roleType.ToString() + "_" + r.ID.ToString();
-                temp1.options.Add(new Dropdown.OptionData(str, null));
-                temp2.options.Add(new Dropdown.OptionData(str, null));
-            }
-        }
-        Role choosePayRole = PlayerData.My.GetRoleById(double.Parse(CreateTradeManager.My.currentTrade.tradeData.payRole));
-        string choosePayOption = choosePayRole.baseRoleData.roleName;
-        Role chooseReceiveRole = PlayerData.My.GetRoleById(double.Parse(CreateTradeManager.My.currentTrade.tradeData.receiveRole));
-        string chooseReceiveOption = chooseReceiveRole.baseRoleData.roleName;
-        for (int i = 0; i < temp1.options.Count; i++)
-        {
-            
-            if (temp1.options[i].text.Equals(choosePayOption))
-            {
-                temp1.value = i;
-                temp1.captionText.text = temp1.options[i].text;
-                break;
-            }
-        }
-        for (int i = 0; i < temp2.options.Count; i++)
-        {
-            if (temp2.options[i].text.Equals(chooseReceiveOption))
-            {
-                temp2.value = i;
-                temp2.captionText.text = temp2.options[i].text;
-                break;
-            }
-        }
     }
 
     public void CheckFree()

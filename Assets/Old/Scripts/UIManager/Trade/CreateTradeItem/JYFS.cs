@@ -118,7 +118,6 @@ public class JYFS : MonoSingleton<JYFS>
         }
         else
         {
-            CreateTradeManager.My.selectJYFS = CreateTradeManager.My.currentTrade.tradeData.selectJYFS;
             GameObject go = Instantiate(skillItemPrb, skillListTF);
             go.GetComponent<JYFSSkillItem>().Init(CreateTradeManager.My.selectJYFS);
         }

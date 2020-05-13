@@ -42,23 +42,22 @@ public class TradeIcon : MonoBehaviour
     public void SetTradeIcon(SZFSType szfs,CashFlowType cashflow, bool isfree,TradeData tradeData,int Id)
     {
         tradeId = Id;
-        RoleSkillType skilltype = GameDataMgr.My.GetSkillDataByName(tradeData.selectJYFS).skillType;
         if (isfree)
         {
             SZLYGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/白给");
             SZFSGo.GetComponent<SpriteRenderer>().sprite = null;
-            switch (skilltype)
-            {
-                case RoleSkillType.Product:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品黑");
-                    break;
-                case RoleSkillType.Service:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务黑");
-                    break;
-                case RoleSkillType.Solution:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案黑");
-                    break;
-            }
+            //switch (skilltype)
+            //{
+            //    case RoleSkillType.Product:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品黑");
+            //        break;
+            //    case RoleSkillType.Service:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务黑");
+            //        break;
+            //    case RoleSkillType.Solution:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案黑");
+            //        break;
+            //}
         }
         else if (szfs == SZFSType.固定)
         {
@@ -72,52 +71,52 @@ public class TradeIcon : MonoBehaviour
                     SZLYGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/后给");
                     break;
             }
-            switch(skilltype)
-            {
-                case RoleSkillType.Product:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品黑");
-                    break;
-                case RoleSkillType.Service:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务黑");
-                    break;
-                case RoleSkillType.Solution:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案黑");
-                    break;
-            }
+            //switch(skilltype)
+            //{
+            //    case RoleSkillType.Product:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品黑");
+            //        break;
+            //    case RoleSkillType.Service:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务黑");
+            //        break;
+            //    case RoleSkillType.Solution:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案黑");
+            //        break;
+            //}
         }
         else if (szfs == SZFSType.剩余)
         {
             SZFSGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/剩余");
             SZLYGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/后给");
-            switch (skilltype)
-            {
-                case RoleSkillType.Product:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品白");
-                    break;
-                case RoleSkillType.Service:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务白");
-                    break;
-                case RoleSkillType.Solution:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案白");
-                    break;
-            }
+            //switch (skilltype)
+            //{
+            //    case RoleSkillType.Product:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品白");
+            //        break;
+            //    case RoleSkillType.Service:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务白");
+            //        break;
+            //    case RoleSkillType.Solution:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案白");
+            //        break;
+            //}
         }
         else if (szfs == SZFSType.分成)
         {
             SZFSGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/分成");
             SZLYGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/后给");
-            switch (skilltype)
-            {
-                case RoleSkillType.Product:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品白");
-                    break;
-                case RoleSkillType.Service:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务白");
-                    break;
-                case RoleSkillType.Solution:
-                    JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案白");
-                    break;
-            }
+            //switch (skilltype)
+            //{
+            //    case RoleSkillType.Product:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品白");
+            //        break;
+            //    case RoleSkillType.Service:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务白");
+            //        break;
+            //    case RoleSkillType.Solution:
+            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案白");
+            //        break;
+            //}
         }
     }
 

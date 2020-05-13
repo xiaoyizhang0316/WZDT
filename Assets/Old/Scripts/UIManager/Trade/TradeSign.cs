@@ -50,8 +50,6 @@ public class TradeSign : MonoBehaviour
         //tradeData.selectTradeDestination = TradeDestinationType.Warehouse;
         tradeData.isFree = false;
         isFirstSelect = true;
-        tradeData.payRole = end;
-        tradeData.receiveRole = start;
         tradeData.castRole = start;
         tradeData.targetRole = end;
         tradeData.selectSZFS = SZFSType.固定;
@@ -142,16 +140,6 @@ public class TradeSign : MonoBehaviour
             go.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
             tempStart = go.transform.position;
         }
-        //lineGo = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        //Vector3 rightPosition = (startTarget.gameObject.transform.position + Target) / 2;
-        //
-        //float HalfLength = Vector3.Distance(startTarget.transform.position, Target) / 2;
-        //float LThickness = 0.1f;//线的粗细
-        //创建圆柱体
-        //lineGo.gameObject.transform.parent = transform;
-        //lineGo.transform.position = rightPosition;
-        //lineGo.transform.rotation = Quaternion.FromToRotation(Vector3.up, rightRotation);
-        //lineGo.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
     }
 
     /// <summary>
@@ -167,6 +155,21 @@ public class TradeSign : MonoBehaviour
     }
 
     /// <summary>
+    /// 获取所有物流移动路径点
+    /// </summary>
+    /// <returns></returns>
+    public List<Vector3> GetDeliverProductPath()
+    {
+        List<Vector3> posList = new List<Vector3>();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            posList.Add(transform.GetChild(i).Find("end").position);
+        }
+        CalculateTC();
+        return posList;
+    }
+
+    /// <summary>
     /// 清理所有线
     /// </summary>
     public void ClearAllLine()
@@ -175,37 +178,13 @@ public class TradeSign : MonoBehaviour
         Destroy(tradeMoneyLineGo, 0.001f);
         Destroy(tradeIconGo, 0.001f);
     }
- 
-  
 
     /// <summary>
     /// 结算付钱关系(先钱)
     /// </summary>
     public void PayForTrade()
     {
-        if (tradeData.isFree)
-        {
-            BaseMapRole payRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.payRole));
-            payRole.RemovePayRelationShip(tradeData.ID);
-            return;
-        }
-        else
-        {
-            if(tradeData.selectSZFS == SZFSType.固定 && tradeData.selectCashFlow == CashFlowType.先钱)
-            {
-                BaseMapRole castRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
-                SkillData data = GameDataMgr.My.GetSkillDataByName(tradeData.selectJYFS);
-                int payNum = (int)castRole.operationCost + data.cost;
-                BaseMapRole payRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.payRole));
-                payRole.PayToRole(tradeData.receiveRole, payNum);
-                payRole.RemovePayRelationShip(tradeData.ID);
-            }
-            else if (tradeData.selectSZFS == SZFSType.分成)
-            {
-                BaseMapRole payRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.payRole));
-                payRole.GetPayRelationShip(tradeData);
-            }
-        }
+
     }
 
     /// <summary>
@@ -213,23 +192,7 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public void PayForTradeLast()
     {
-        //print("触发后钱回调");
-        //print(tradeData.ID);
-        if (tradeData.isFree)
-        {
-            return;
-        }
-        else
-        {
-            if (tradeData.selectSZFS == SZFSType.固定 && tradeData.selectCashFlow == CashFlowType.后钱)
-            {
-                BaseMapRole castRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
-                SkillData data = GameDataMgr.My.GetSkillDataByName(tradeData.selectJYFS);
-                int payNum = (int)castRole.operationCost + data.cost;
-                BaseMapRole payRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.payRole));
-                payRole.PayToRole(tradeData.receiveRole, payNum);
-            }
-        }
+
     }
 
     /// <summary>
@@ -246,29 +209,14 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public float CalculateTC()
     {
-        SkillData data = GameDataMgr.My.GetSkillDataByName(tradeData.selectJYFS);
-        if (data.supportThird)
-        {
-            float result1 = CalculateTCOfTwo(tradeData.startRole, tradeData.endRole);
-            float result2 = CalculateTCOfTwo(tradeData.castRole, tradeData.thirdPartyRole);
-            result1 = (result1 + result2) / 2f;
-            PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)).GetMoney(0 - (int)result1);
-            PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)).tradeCost += result1;
-            PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).GetMoney(0 - (int)result1);
-            PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).tradeCost += result1;
-            PlayerData.My.GetMapRoleById(double.Parse(tradeData.thirdPartyRole)).GetMoney(0 - (int)result1);
-            PlayerData.My.GetMapRoleById(double.Parse(tradeData.thirdPartyRole)).tradeCost += result1;
-            return result1;
-        }
-        else
-        {
-            float result = CalculateTCOfTwo(tradeData.startRole, tradeData.endRole);
-            PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)).GetMoney(0 - (int)result);
-            PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)).tradeCost += result;
-            PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).GetMoney(0 - (int)result);
-            PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).tradeCost += result;
-            return result;
-        }
+        //TODO
+        //float result = CalculateTCOfTwo(tradeData.startRole, tradeData.endRole);
+        //PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)).GetMoney(0 - (int)result);
+        //PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)).tradeCost += result;
+        //PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).GetMoney(0 - (int)result);
+        //PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).tradeCost += result;
+        //return result;
+        return 0;
     }
 
     /// <summary>
