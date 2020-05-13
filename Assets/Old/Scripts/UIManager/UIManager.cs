@@ -183,7 +183,7 @@ public class UIManager : MonoSingleton<UIManager>
     public void ShowRoleDetalInfo()
     {
         Panel_RoleDetalInfo.GetComponent<RoleDetalInfoManager>().currentMapRole = currentMapRole;
-        Panel_RoleDetalInfo.GetComponent<RoleDetalInfoManager>().InitToggle();
+      
 
         Panel_RoleDetalInfo.GetComponent<RoleDetalInfoManager>().InitRoleDetalInfo();
         Panel_RoleDetalInfo.GetComponent<RoleDetalInfoManager>().InitRoleDetalData();
@@ -316,15 +316,7 @@ public class UIManager : MonoSingleton<UIManager>
                 Debug.Log("当前技能为空");
             }
         }
-        else if (number == 1)
-        {
-            string str = PlayerData.My.UnlockPassiveSkill();
-            if (!str.Equals(""))
-            {
-                ShowExecutionPanel();
-                ExecutionManager.My.unlockText.text = str;
-            }
-        }
+     
 
     }
 

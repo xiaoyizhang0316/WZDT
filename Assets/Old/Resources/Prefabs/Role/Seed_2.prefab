@@ -141,9 +141,6 @@ GameObject:
   - component: {fileID: 745394881712787411}
   - component: {fileID: 745394881712787410}
   - component: {fileID: 5835603690850080641}
-  - component: {fileID: -3654781934806206786}
-  - component: {fileID: 6168110071898260208}
-  - component: {fileID: -7267738695987779558}
   m_Layer: 0
   m_Name: Seed_2
   m_TagString: MapRole
@@ -208,6 +205,7 @@ MonoBehaviour:
     baseRoleData:
       roleName: 
       roleType: 0
+      roleSkillType: 0
       level: 0
       effect: 0
       efficiency: 0
@@ -216,6 +214,7 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
+      tradeRange: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -233,17 +232,7 @@ MonoBehaviour:
     inMap: 0
     isNpc: 0
   warehouse: []
-  isAdvantage: 0
-  advantageShelves: []
-  advantageShelves_warehouse: []
-  AllSkills: []
-  AllPassivitySkills: []
-  passiveSkills: []
-  isCanSellSeed: 0
-  isCanSellMelon: 0
-  isCanRottenMelon: 0
   isNpc: 0
-  autoLoading: 0
   buffList: []
   spawnConsumerInterval: 0
   CarCount: 0
@@ -259,81 +248,6 @@ MonoBehaviour:
   activityCost: 0
   tradeCost: 0
   shop: []
---- !u!114 &-3654781934806206786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ea20787fc0ecca4aa94ade737512d8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u9001\u8D27"
-  isOpen: 1
-  skillTime: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetBuffList: []
-  CarPrb: {fileID: 736384662113046618, guid: bbbbb1b370e95cd499ed1a4d13585c8d, type: 3}
---- !u!114 &6168110071898260208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60ebcb360cbfd4f4b994c56fe0525455, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u80B2\u79CD"
-  skillTime: 0
-  isOpen: 1
-  isLock: 0
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
-  ProductData:
-    productType: 0
-    Sweetness: 1
-    Crisp: 1
-    Quality: 1
-    Appearance: 1
-    ID: 0
-    unitPrice: 1
-    Quantity: 1
-    Brand: 1
-    time: 60
-    birthday: 0
-  isProduct: 0
---- !u!114 &-7267738695987779558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8a8a757c5c5e44688f0ee29df1c272, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u96F6\u552E"
-  skillTime: 0
-  isOpen: 0
-  isLock: 0
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
-  residue: 0
 --- !u!1 &745394882125123644
 GameObject:
   m_ObjectHideFlags: 0

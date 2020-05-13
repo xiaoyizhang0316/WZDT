@@ -30,8 +30,7 @@ public class JYFS : MonoSingleton<JYFS>
     {
         CreateTradeManager.My.selectJYFS = skill;
         SetSelectStatus();
-        SetSkillTarget();
-        CheckSkillCondition();
+        SetSkillTarget(); 
         InitOtherSetting();
         SetSkillInfo();
         CreateTradeManager.My.CalculateTCOfTwo(CreateTradeManager.My.currentTrade.tradeData.startRole, CreateTradeManager.My.currentTrade.tradeData.endRole);
@@ -42,16 +41,7 @@ public class JYFS : MonoSingleton<JYFS>
             SetCastAndTargetRoleInfo();
         }
     }
-
-    /// <summary>
-    /// 检测选择的交易是否满足条件
-    /// </summary>
-    public void CheckSkillCondition()
-    {
-        BaseMapRole castRole = PlayerData.My.GetMapRoleById(double.Parse(CreateTradeManager.My.castRole));
-        BaseMapRole targetRole = PlayerData.My.GetMapRoleById(double.Parse(CreateTradeManager.My.targetRole));
-        CreateTradeManager.My.isSkillCanRelease = castRole.GetSkillByName(CreateTradeManager.My.selectJYFS).DetectionCanRelease(targetRole);
-    }
+ 
 
     /// <summary>
     /// 当交易方式改变时，初始化其他选项
@@ -134,8 +124,7 @@ public class JYFS : MonoSingleton<JYFS>
         }
         if (CreateTradeManager.My.availableTradeSkill.Count > 0)
         {
-            SetSkillInfo();
-            CheckSkillCondition();
+            SetSkillInfo(); 
             InitOtherSetting();
             SetCastAndTargetRoleAttribute();
             SetCastAndTargetRoleInfo();

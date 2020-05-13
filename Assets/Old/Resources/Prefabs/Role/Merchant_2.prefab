@@ -123,9 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 745394881712787411}
   - component: {fileID: 745394881712787410}
-  - component: {fileID: 8790967319471304661}
   - component: {fileID: 5881716200437269434}
-  - component: {fileID: 578411839906100039}
   m_Layer: 0
   m_Name: Merchant_2
   m_TagString: MapRole
@@ -174,25 +172,6 @@ MonoBehaviour:
   - {fileID: 745394882642940846}
   - {fileID: 745394882125123645}
   MapSigns: []
---- !u!114 &8790967319471304661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ea20787fc0ecca4aa94ade737512d8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u9001\u8D27"
-  isOpen: 0
-  skillTime: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetBuffList: []
-  CarPrb: {fileID: 736384662113046618, guid: bbbbb1b370e95cd499ed1a4d13585c8d, type: 3}
 --- !u!136 &5881716200437269434
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -207,28 +186,6 @@ CapsuleCollider:
   m_Height: 140.9
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &578411839906100039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8a8a757c5c5e44688f0ee29df1c272, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u4E0A\u8D27"
-  skillTime: 0
-  isOpen: 0
-  isLock: 0
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
-  residue: 0
 --- !u!1 &745394882125123644
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,7 +637,6 @@ GameObject:
   - component: {fileID: 2626224174971640626}
   - component: {fileID: 8841203007946715757}
   - component: {fileID: 3911155398786128173}
-  - component: {fileID: 414110998141827330}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -724,29 +680,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: -1
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &414110998141827330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2551854529144300098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b4d740abe8cdbe46b65b617cbae2528, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: 
-  skillTime: 0
-  isOpen: 1
-  isLock: 0
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
-  isAdd: 0
-  buffId: 0
 --- !u!1 &3612826378590001131
 GameObject:
   m_ObjectHideFlags: 0

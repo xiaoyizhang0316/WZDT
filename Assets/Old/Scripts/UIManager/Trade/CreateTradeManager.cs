@@ -202,7 +202,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
                 TradeManager.My.tradeList[currentTrade.tradeData.ID].tradeIconGo = CreateTradeIcon(start, end);
                 TradeManager.My.tradeList[currentTrade.tradeData.ID].tradeIconGo.GetComponent<TradeIcon>().SetTrasform(start, end);
                 print(TradeManager.My.tradeList[currentTrade.tradeData.ID].tradeData.selectProduct);
-                TradeManager.My.tradeList[currentTrade.tradeData.ID].Complete();
+        
             }
             DeleteTradeMenu();
         }

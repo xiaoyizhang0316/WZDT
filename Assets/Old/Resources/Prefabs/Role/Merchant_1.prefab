@@ -140,9 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 745394881712787411}
   - component: {fileID: 745394881712787410}
-  - component: {fileID: 8790967319471304661}
   - component: {fileID: 6762698527656334721}
-  - component: {fileID: 6838823102303630989}
   m_Layer: 0
   m_Name: Merchant_1
   m_TagString: MapRole
@@ -189,25 +187,6 @@ MonoBehaviour:
   - {fileID: 745394882642940846}
   - {fileID: 745394883042027118}
   MapSigns: []
---- !u!114 &8790967319471304661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ea20787fc0ecca4aa94ade737512d8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u9001\u8D27"
-  isOpen: 0
-  skillTime: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetBuffList: []
-  CarPrb: {fileID: 736384662113046618, guid: bbbbb1b370e95cd499ed1a4d13585c8d, type: 3}
 --- !u!114 &6762698527656334721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,6 +203,7 @@ MonoBehaviour:
     baseRoleData:
       roleName: 
       roleType: 0
+      roleSkillType: 0
       level: 0
       effect: 0
       efficiency: 0
@@ -232,6 +212,7 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
+      tradeRange: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -249,17 +230,7 @@ MonoBehaviour:
     inMap: 0
     isNpc: 0
   warehouse: []
-  isAdvantage: 0
-  advantageShelves: []
-  advantageShelves_warehouse: []
-  AllSkills: []
-  AllPassivitySkills: []
-  passiveSkills: []
-  isCanSellSeed: 0
-  isCanSellMelon: 0
-  isCanRottenMelon: 0
   isNpc: 0
-  autoLoading: 0
   buffList: []
   spawnConsumerInterval: 0
   CarCount: 0
@@ -275,26 +246,6 @@ MonoBehaviour:
   activityCost: 0
   tradeCost: 0
   shop: []
---- !u!114 &6838823102303630989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 225254ff5a635494e9858ed2af19766b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u4EE3\u8D2D"
-  isOpen: 1
-  skillTime: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetBuffList: []
-  CarMaxCount: 20
-  CarCurrentCount: 0
 --- !u!1 &745394882642940845
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +598,6 @@ GameObject:
   - component: {fileID: 8609503785501479511}
   - component: {fileID: 1639191643745982684}
   - component: {fileID: 5999004459837550096}
-  - component: {fileID: 4046749902426832641}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -691,29 +641,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: -1
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &4046749902426832641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4424807557431412505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b4d740abe8cdbe46b65b617cbae2528, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u52A0\u901F\u5C0F\u8F66"
-  skillTime: 0
-  isOpen: 1
-  isLock: 0
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
-  isAdd: 0
-  buffId: 0
 --- !u!1 &5644780332803344250
 GameObject:
   m_ObjectHideFlags: 0
