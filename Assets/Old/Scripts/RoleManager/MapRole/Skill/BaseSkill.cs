@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public abstract class BaseSkill : MonoBehaviour
@@ -30,12 +31,16 @@ public abstract class BaseSkill : MonoBehaviour
 
     public void UnleashSkills()
     {
-    
-           Skill();
-        if (IsOpen)
+        transform.DOScale(1, 1f / role.baseRoleData.efficiency).OnComplete(() =>
         {
-            UnleashSkills();
-        }
+            Skill();
+            if (IsOpen)
+            {
+                UnleashSkills();
+            }
+        });
+        
+      
     }
 
     /// <summary>
