@@ -14,7 +14,7 @@ public class Role
     public  BaseRoleData baseRoleData;
 
     /// <summary>
-    /// 产能值
+    /// 效果值
     /// </summary>
     public int effect;
 
@@ -24,12 +24,12 @@ public class Role
     public int efficiency;
 
     /// <summary>
-    /// 质量值
+    /// 范围
     /// </summary>
     public int range;
 
     /// <summary>
-    /// 品牌值
+    /// 交易成本
     /// </summary>
     public int tradeCost;
 
@@ -39,12 +39,12 @@ public class Role
     public int cost;
 
     /// <summary>
-    /// 每月成本
+    /// 风险抗力
     /// </summary>
     public int riskResistance;
 
     /// <summary>
-    /// 交易范围
+    /// 子弹容量
     /// </summary>
     public int bulletCapacity;
 

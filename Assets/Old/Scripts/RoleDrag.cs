@@ -4,6 +4,7 @@ using System.Collections;
 using System.Security.Cryptography;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using static GameEnum;
 
 //通过射线控制物体贴地面移动
 public class RoleDrag : MonoBehaviour
@@ -20,10 +21,39 @@ public class RoleDrag : MonoBehaviour
     /// </summary>
     public bool isCollision;
     public RolePosSign currentrole;
-  
+
     private void Start()
     {
-       }
+
+    }
+
+    /// <summary>
+    /// 检测发起者和承受者交易距离
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckTradeDistance()
+    {
+        BaseMapRole startRole = PlayerData.My.GetMapRoleById(UIManager.My.startRole.ID);
+        BaseMapRole endRole = PlayerData.My.GetMapRoleById(UIManager.My.endRole.ID);
+        int distance = Mathf.Max(startRole.baseRoleData.baseRoleData.tradeRange, endRole.baseRoleData.baseRoleData.tradeRange);
+        if (Vector3.Distance(startRole.transform.position, endRole.transform.position) > distance)
+            return false;
+        else
+            return true;
+    }
+
+    /// <summary>
+    /// 检测发起者和承受者技能类型
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckStartAndEnd()
+    {
+        if (UIManager.My.startRole.baseRoleData.roleSkillType == RoleSkillType.Service &&
+            UIManager.My.endRole.baseRoleData.roleSkillType == RoleSkillType.Service)
+            return false;
+        else
+            return true;
+    }
 
     private void OnMouseEnter()
     {
@@ -52,35 +82,36 @@ public class RoleDrag : MonoBehaviour
     }
 
     public void OnMouseUp()
-    {  if (UIManager.My.NeedRayCastPanel())
+    {
+        if (UIManager.My.NeedRayCastPanel())
         {
-            return;    
+            return;
         }
 
         if (UIManager.My.isSetTrade)
         {
-            //if (ExecutionManager.My.SubExecution(ExecutionManager.My.modifyDeal))
+            UIManager.My.endRole = PlayerData.My.GetRoleById(Double.Parse(Role.transform.name));
+            if (UIManager.My.endRole.ID != UIManager.My.startRole.ID)
             {
-                UIManager.My.endRole = PlayerData.My.GetRoleById(Double.Parse(Role.transform.name));
-                if (UIManager.My.endRole.ID != UIManager.My.startRole.ID)
+                if (CheckTradeDistance() && CheckStartAndEnd())
                 {
                     UIManager.My.Panel_CreateTrade.SetActive(true);
                     UIManager.My.InitCreateTradePanel();
                 }
-                    //UIManager.My.endRole = GetComponentInParent<Role>();
             }
+            UIManager.My.isSetTrade = false;
         }
         else
         {
-            if(!Role.GetComponent<BaseMapRole>().isNpc)
-              UIManager.My.UpdateUIPosition(Role.transform);
+            if (!Role.GetComponent<BaseMapRole>().isNpc)
+                UIManager.My.UpdateUIPosition(Role.transform);
         }
         //UIManager.My.UpdateUIPosition(Role.transform);
     }
 
     public void OnMouseDown()
     {
-           //if (UIManager.My.isSetTrade)
+        //if (UIManager.My.isSetTrade)
         //{
         //    UIManager.My.endRole = PlayerData.My.GetRoleById(Double.Parse(Role.transform.name));
         //    UIManager.My.InitCreateTradePanel();
@@ -94,34 +125,34 @@ public class RoleDrag : MonoBehaviour
 
     public void OnMouseDrag()
     {
-     //  if (currentrole == null)
-     //  {
-     //      return;
-     //  }
+        //  if (currentrole == null)
+        //  {
+        //      return;
+        //  }
 
-     //  Vector3 screenpos = Camera.main.WorldToScreenPoint(MoveTF.transform.position ); //物体的世界坐标转化成屏幕坐标  
-     //  Vector3 e = Input.mousePosition; //鼠标的位置  
-     //  e.z = screenpos.z; //1.因为鼠标的屏幕 Z 坐标的默认值是0，所以需要一个z坐标  
-     //  world.x = Camera.main.ScreenToWorldPoint(e).x;
-     //  world.z = Camera.main.ScreenToWorldPoint(e).z;
-     //  world.y =0;
-     //  speed = 1;
-     //  MoveTF.position = world;
-        
+        //  Vector3 screenpos = Camera.main.WorldToScreenPoint(MoveTF.transform.position ); //物体的世界坐标转化成屏幕坐标  
+        //  Vector3 e = Input.mousePosition; //鼠标的位置  
+        //  e.z = screenpos.z; //1.因为鼠标的屏幕 Z 坐标的默认值是0，所以需要一个z坐标  
+        //  world.x = Camera.main.ScreenToWorldPoint(e).x;
+        //  world.z = Camera.main.ScreenToWorldPoint(e).z;
+        //  world.y =0;
+        //  speed = 1;
+        //  MoveTF.position = world;
+
     }
 
-   //public void OnMouseUp()
-   //{
-   //    if (currentrole == null)
-   //    {
-   //        return;
-   //    }
+    //public void OnMouseUp()
+    //{
+    //    if (currentrole == null)
+    //    {
+    //        return;
+    //    }
 
-   //   // currentrole.ReleaseRole(() => { }, () => { });
-   //}
+    //   // currentrole.ReleaseRole(() => { }, () => { });
+    //}
     //  public float minDestence = 2;
 
- //  public MapSign minMapSign;
+    //  public MapSign minMapSign;
 
     public Transform MoveTF;
 

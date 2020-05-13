@@ -42,7 +42,16 @@ public class CreateTradeLine : MonoBehaviour
 
     public void CheckDistance()
     {
-
+        BaseMapRole start = PlayerData.My.GetMapRoleById(UIManager.My.startRole.ID);
+        int distance = Mathf.Max(targetRole.baseRoleData.baseRoleData.tradeRange,start.baseRoleData.baseRoleData.tradeRange);
+        if (Vector3.Distance(start.transform.position,targetRole.transform.position) <= distance)
+        {
+            lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
+        }
+        else
+        {
+            lineGo.GetComponent<MeshRenderer>().material.color = Color.red;
+        }
     }
 
 
@@ -66,7 +75,7 @@ public class CreateTradeLine : MonoBehaviour
             List<Vector3> points = new List<Vector3>();
             points.Add(startTarget.localPosition);
             //int vertexCount = 30;//采样点数量
-            pointList.Clear();
+            //pointList.Clear();
             if (startTarget != null)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -91,9 +100,9 @@ public class CreateTradeLine : MonoBehaviour
                         //GetComponent<LineRenderer>().positionCount = pointList.Count;
                         //GetComponent<LineRenderer>().SetPositions(pointList.ToArray());
                     }
-                    if (hit[i].transform.CompareTag("MapRole"))
+                    if (hit[i].transform.tag.Equals("Role"))
                     {
-                        targetRole = hit[i].transform.GetComponent<BaseMapRole>();
+                        targetRole = hit[i].transform.GetComponentInParent<BaseMapRole>();
                         CheckDistance();
                     }
                 }
