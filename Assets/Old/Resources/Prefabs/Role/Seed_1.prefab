@@ -141,18 +141,9 @@ GameObject:
   - component: {fileID: 745394881712787411}
   - component: {fileID: 745394881712787410}
   - component: {fileID: 5835603690850080641}
-  - component: {fileID: -3654781934806206786}
-  - component: {fileID: 4585626483123295318}
-  - component: {fileID: 5153798451001851605}
-  - component: {fileID: 6828343643347768655}
-  - component: {fileID: 8146234645997805547}
-  - component: {fileID: 2141977242941909212}
-  - component: {fileID: 918797360590169928}
-  - component: {fileID: 604346497230662709}
-  - component: {fileID: 8132211511847226997}
   m_Layer: 0
   m_Name: Seed_1
-  m_TagString: Untagged
+  m_TagString: MapRole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,38 +204,23 @@ MonoBehaviour:
       roleName: 
       roleType: 0
       level: 0
-      unlock: 0
-      activityId: 0
-      activityList: 
-      needCapacity: 0
-      needEfficiency: 0
-      needQuality: 0
-      needBrand: 0
-      baseFixedCost: 0
-      baseCostMonth: 0
-      tradingRange: 0
-      baseRisk: 0
-      baseSearch: 0
-      baseBargain: 0
-      baseDelivery: 0
-      activityTime: 0
-      counter: 0
+      effect: 0
+      efficiency: 0
+      range: 0
+      tradeCost: 0
+      riskResistance: 0
+      cost: 0
+      bulletCapacity: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
-    capacity: 0
+    effect: 0
     efficiency: 0
-    quality: 0
-    brand: 0
-    fixedCost: 0
-    costMonth: 0
-    tradingRange: 0
-    risk: 0
-    search: 0
-    bargain: 0
-    delivery: 0
-    sweetness: 0
-    Brittleness: 0
+    range: 0
+    tradeCost: 0
+    cost: 0
+    riskResistance: 0
+    bulletCapacity: 0
     ID: 0
     equipCost: 0
     workerCost: 0
@@ -278,193 +254,6 @@ MonoBehaviour:
   activityCost: 0
   tradeCost: 0
   shop: []
---- !u!114 &-3654781934806206786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ea20787fc0ecca4aa94ade737512d8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u9001\u8D27"
-  isOpen: 1
-  skillTime: 12
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetBuffList: []
-  CarPrb: {fileID: 736384662113046618, guid: bbbbb1b370e95cd499ed1a4d13585c8d, type: 3}
---- !u!114 &4585626483123295318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 873741e948d48446494f680b015cbb19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u8BD5\u9A8C\u7530"
-  isOpen: 1
-  skillTime: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetBuffList: []
---- !u!114 &5153798451001851605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60ebcb360cbfd4f4b994c56fe0525455, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u80B2\u79CD"
-  skillTime: 12
-  isOpen: 1
-  isLock: 0
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
-  ProductData:
-    productType: 0
-    Sweetness: 1
-    Crisp: 1
-    Quality: 1
-    Appearance: 1
-    ID: 0
-    unitPrice: 1
-    Quantity: 1
-    Brand: 1
-    time: 60
-    birthday: 0
-  isProduct: 0
---- !u!114 &6828343643347768655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64ecdef1969f9c143a5c171b27493625, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u79CD\u5B50\u7814\u53D1"
-  skillTime: 10
-  isOpen: 0
-  isLock: 0
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
---- !u!114 &8146234645997805547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4c3e05d45e5d455abbb276bad663f9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u79CD\u690D\u6307\u5BFC"
-  isOpen: 0
-  skillTime: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetBuffList: []
---- !u!114 &2141977242941909212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 043a814feed2e410c97b8330c1c53550, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u79CD\u690D\u6307\u5BFC_\u88AB\u52A8"
-  skillTime: 0
-  isOpen: 0
-  isLock: 1
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
---- !u!114 &918797360590169928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b99a46f508d0e34e8d3dfe506ae2b31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u8FD0\u8F93_\u88AB\u52A8"
-  skillTime: 0
-  isOpen: 0
-  isLock: 1
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
---- !u!114 &604346497230662709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cea48dd49bb64f54491fd1e18c47e6fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AiStart: 0
---- !u!114 &8132211511847226997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8a8a757c5c5e44688f0ee29df1c272, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u96F6\u552E"
-  skillTime: 0
-  isOpen: 0
-  isLock: 0
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
-  residue: 0
 --- !u!1 &745394882642940845
 GameObject:
   m_ObjectHideFlags: 0
