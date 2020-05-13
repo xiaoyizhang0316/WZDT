@@ -23,6 +23,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// </summary>
     public List<DrawLine> tradeLines;
 
+    #region AI
     /// <summary>
     /// 创建指定对象指定技能的交易（用于AI自动创建）
     /// </summary>
@@ -57,6 +58,10 @@ public class TradeManager : MonoSingleton<TradeManager>
         tradeSign.tradeData.selectTradeDestination = destinationType;
     }
 
+    /// <summary>
+    /// 为AI的交易画线
+    /// </summary>
+    /// <param name="sign"></param>
     public void DrawTradeLineAI(ref TradeSign sign)
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole));
@@ -79,6 +84,8 @@ public class TradeManager : MonoSingleton<TradeManager>
         sign.tradeIconGo.GetComponent<TradeIcon>().SetTrasform(start.transform,end.transform);
         sign.tradeIconGo.GetComponent<TradeIcon>().SetTradeIcon(sign.tradeData.selectSZFS, sign.tradeData.selectCashFlow, sign.tradeData.isFree, sign.tradeData, sign.tradeData.ID);
     }
+
+    #endregion
 
     /// <summary>
     /// 删除指定ID的交易
