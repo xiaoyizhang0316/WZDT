@@ -217,48 +217,6 @@ public class BaseRoleManager : MonoBehaviour
       //  productManager.transform.position = pos.position;
       ProductDatas.Add(productData);
     }
-
-    /// <summary>
-    /// 根据类型查找产品
-    /// </summary>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    public ProductData GetProdect(ProductType type)
-    {
-        print("抓取产品");
-        for (int i = 0; i < ProductDatas.Count; i++)
-        {
-            if (ProductDatas[i].productType == type)
-            {
-                ProductData productData = ProductDatas[i];
-                ProductDatas.Remove( ProductDatas[i]);
-                print("得到一个产品");
-                return productData;
-            }
-        }
-        return null;
-    }
-
-    /// <summary>
-    /// 根据ID 查找产品
-    /// </summary>
-    /// <param name="ID"></param>
-    /// <returns></returns>
-    public ProductData GetProdect( double  ID)
-    {
-        for (int i = 0; i < ProductDatas.Count; i++)
-        {
-            if (ProductDatas[i] . ID == ID)
-            {
-                ProductData productData = ProductDatas[i];
-                ProductDatas.Remove( ProductDatas[i]);
-                print("得到一个产品");
-                return productData;
-            }
-
-        }
-
-        return null;
-    }
+  
 }
 

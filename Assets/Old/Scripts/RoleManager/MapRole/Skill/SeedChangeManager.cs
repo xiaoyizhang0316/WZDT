@@ -52,16 +52,7 @@ public class SeedChangeManager : MonoBehaviour
 
     public void InitPanel(ProductData oldseed,ProductData newseed,Action confirm, Action cancle)
     {
-
-        seedBrand_Old.text = oldseed.Brand.ToString();
-        seedQulity_Old.text = oldseed.Quality.ToString();
-        hookCrisp_Old.GetComponent<RectTransform>().localPosition  = new Vector3(oldseed.Crisp*20, 0,0 );
-        hookSweetness_Old.GetComponent<RectTransform>().localPosition  = new Vector3(oldseed.Sweetness*20, 0,0 ); 
-        seedBrand_New.text = newseed.Brand.ToString();
-        seedQulity_New.text = newseed.Quality.ToString();
-        hookCrisp_New.GetComponent<RectTransform>().localPosition  = new Vector3(newseed.Crisp*20, 0,0 );
-        hookSweetness_New.GetComponent<RectTransform>().localPosition  = new Vector3(newseed.Sweetness*20, 0,0 );  
-        confirmac = confirm;
+         confirmac = confirm;
         cancleac = cancle;
     }
 }

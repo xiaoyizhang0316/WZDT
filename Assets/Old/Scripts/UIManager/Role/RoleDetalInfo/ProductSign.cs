@@ -52,7 +52,7 @@ public class ProductSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
     public void OnPointerDown(PointerEventData eventData)
     {
         ProductDetalUI.My.panel.SetActive(true);
-        ProductDetalUI.My.InitUI( transform.GetChild(0).GetComponent<Image>().sprite ,currentProduct.Sweetness,currentProduct.Crisp,currentProduct.Quality.ToString(),currentProduct.Brand.ToString(),currentProduct.time-(Time.time-currentProduct.birthday));
+     //   ProductDetalUI.My.InitUI( transform.GetChild(0).GetComponent<Image>().sprite ,currentProduct.Sweetness,currentProduct.Crisp,currentProduct.Quality.ToString(),currentProduct.Brand.ToString(),currentProduct.time-(Time.time-currentProduct.birthday));
         ProductDetalUI.My.panel.transform.position = gameObject.transform.position;
     }
 }

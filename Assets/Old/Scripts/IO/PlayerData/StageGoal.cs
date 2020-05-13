@@ -298,17 +298,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
             return;
     }
-
-    /// <summary>
-    /// 检测所有物品的腐烂
-    /// </summary>
-    public void CheckProductFresh()
-    {
-        foreach (ProductData p in productList)
-        {
-            p.CheckBirth();
-        }
-    }
+ 
 
     /// <summary>
     /// 股东每月固定扣除满意度

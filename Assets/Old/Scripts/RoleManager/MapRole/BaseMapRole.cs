@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DT.Fight.Bullet;
 using UnityEngine;
 
 [Serializable]
@@ -436,11 +437,7 @@ public class BaseMapRole : MonoBehaviour
     /// <param name="productData"></param>
     public void MoveGoodsToWareHouse(ProductData productData)
     {
-        foreach (ProductData p in warehouse)
-        {
-            if (p.ID == productData.ID)
-                return;
-        }
+  
         warehouse.Add(productData);
         //Input.Remove(productData);
     }
@@ -499,12 +496,12 @@ public class BaseMapRole : MonoBehaviour
  /// </summary>
  /// <param name="type"></param>
  /// <returns></returns>
- public ProductData SearchWarehouseProductData(GameEnum.ProductType type)
+ public ProductData SearchWarehouseProductData(BulletType type)
  {
      ProductData pro = null;
      for (int i = 0; i < warehouse.Count; i++)
      {
-         if (warehouse[i].productType == type)
+         if (warehouse[i].bulletType == type)
          {
              pro = warehouse[i];
             
@@ -521,12 +518,12 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public ProductData GetWarehouseProductData(GameEnum.ProductType type)
+    public ProductData GetWarehouseProductData(BulletType type)
     {
         ProductData pro = null;
         for (int i = 0; i < warehouse.Count; i++)
         {
-            if (warehouse[i].productType == type)
+            if (warehouse[i].bulletType == type)
             {
                 pro = warehouse[i];
                 warehouse.Remove(warehouse[i]);
@@ -537,29 +534,7 @@ public class BaseMapRole : MonoBehaviour
 
         return pro;
     }
-
-    /// <summary>
-    /// 提取仓库产品
-    /// </summary>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    public ProductData GetWarehouseProductDataByID(double ID)
-    {
-        ProductData pro = null;
-        for (int i = 0; i < warehouse.Count; i++)
-        {
-            if (warehouse[i].ID == ID)
-            {
-                pro = warehouse[i];
-                warehouse.Remove(warehouse[i]);
-
-                break;
-            }
-        }
-
-        return pro;
-    }
-
+ 
     #endregion
 
     #region  技能
@@ -570,25 +545,6 @@ public class BaseMapRole : MonoBehaviour
     #endregion
 
     #region 商店/零售
-
-    /// <summary>
-    /// 减少物品数量
-    /// </summary>
-    public int LessenGoods(ProductData productData, int productNum)
-    {
-        if (productData.Quantity <= productNum)
-        {
-            int count = productData.Quantity;
-            productData.Quantity = 0;
-            shop.Remove(productData);
-            return count;
-        }
-        else
-        {
-            productData.Quantity -= productNum;
-            return productNum;
-        }
-    }
  
     /// <summary>
     /// 将周围的居民楼加入list

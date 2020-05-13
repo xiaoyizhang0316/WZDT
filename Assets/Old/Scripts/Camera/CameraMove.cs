@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -43,7 +44,7 @@ public class CameraMove : MonoBehaviour,IDragHandler
             return;
         }
 
-        Camera.main.orthographicSize -=Input.GetAxis("Mouse ScrollWheel")* v ;
+        Camera.main.orthographicSize-=Input.GetAxis("Mouse ScrollWheel")* v   ;
         if (Camera.main.orthographicSize <10  )
         {
             Camera.main.orthographicSize = 10;

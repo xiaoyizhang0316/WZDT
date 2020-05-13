@@ -72,13 +72,6 @@ public class ProductManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ProductsData != null && ProductsData.productType != ProductType.Seed)
-        {
-            ProductsData.time -= Time.deltaTime;
-            if (ProductsData.time <= 0)
-            {
-                isRot = true;
-            }
-        }
+        
     }
 }

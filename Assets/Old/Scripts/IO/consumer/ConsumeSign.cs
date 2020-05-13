@@ -240,20 +240,7 @@ public class ConsumeSign : MonoBehaviour
                     maxProIndex = i;
                 }
             }
-
-            if (maxValue <= 4)
-            {
-                money = BuyProduct(0, targetShop.shop[maxProIndex], targetShop);
-            }
-            else if (maxValue <= 8)
-            {
-                money = BuyProduct(1, targetShop.shop[maxProIndex], targetShop);
-            }
-            else if (maxValue <= 12)
-            {
-                money = BuyProduct(2, targetShop.shop[maxProIndex], targetShop);
-            }
-            CalculateSatisfy(targetShop, money);
+ 
         }
         ///价格
         ///
@@ -276,19 +263,7 @@ public class ConsumeSign : MonoBehaviour
                     maxProIndex = i;
                 }
             }
-            if (maxValue <= 10)
-            {
-                money = BuyProduct(0, targetShop.shop[maxProIndex], targetShop);
-            }
-            else if (maxValue > 10 && maxValue <= 20)
-            {
-                money = BuyProduct(1, targetShop.shop[maxProIndex], targetShop);
-            }
-            else if (maxValue > 20 && maxValue <= 30)
-            {
-                money = BuyProduct(2, targetShop.shop[maxProIndex], targetShop);
-            }
-            CalculateSatisfy(targetShop, money);
+        
         }
     }
 
@@ -300,25 +275,7 @@ public class ConsumeSign : MonoBehaviour
     /// <returns></returns>
     public int CheckMatch(ProductData p, int preference)
     {
-        if (p.productType == consumeData.needProductType)
-        {
-            if (p.Quality < qualityNeed)
-            {
-                //print("质量达不到要求");
-                return 10000;
-            }
-            ///口味
-            if (preference == 0)
-            {
-                return Math.Abs(consumeData.needCrisp - p.Crisp) + Math.Abs(consumeData.needSweetness - p.Sweetness);
-            }
-            ///价格
-            else
-            {
-                int price = (int)((p.Quality + p.Brand) / 2 * StageGoal.My.qualityRecognition)  ;
-                return (price - consumeData.mentalPrice);
-            }
-        }
+         
         return 10000;
     }
 
@@ -369,56 +326,7 @@ public class ConsumeSign : MonoBehaviour
         //print("交易成本：" + result);
         return (result);
     }
-
-    /// <summary>
-    /// 购买商品
-    /// </summary>
-    /// <param name="type"></param>
-    /// <param name="p"></param>
-    /// <param name="mapRole"></param>
-    public int BuyProduct(int type, ProductData p, BaseMapRole mapRole)
-    {
-        float heat = StageGoal.My.customerSatisfy / StageGoal.My.maxCustomerSatisfy;
-        int heatNum;
-        float per = 0f;
-        if (heat < 0.2f)
-        {
-            heatNum = UnityEngine.Random.Range(8, 13);
-        }
-        else if (heat < 0.6f)
-        {
-            heatNum = UnityEngine.Random.Range(9, 13);
-        }
-        else if (heat < 0.9f)
-        {
-            heatNum = UnityEngine.Random.Range(10, 14);
-        }
-        else
-        {
-            heatNum = UnityEngine.Random.Range(11, 15);
-        }
-        switch(type)
-        {
-            case 0:
-                per = 1.1f;
-                break;
-            case 1:
-                per = 1f;
-                break;
-            case 2:
-                per = 0.9f;
-                break;
-        }
-        int price = (int)((p.Quality + p.Brand ) / 2 * StageGoal.My.qualityRecognition);
-        int buyNum = (int)(consumeData.buyPower * heatNum);
-        buyNum = mapRole.LessenGoods(p, buyNum);
-        mapRole.GetConsumerMoney(buyNum * price);
-        lastBuyNumber = buyNum;
-        lastBuySinglePrice = price;
-        totalPay += buyNum * price * per;
-        return (int)(buyNum * price * per);
-    }
-
+ 
     // Start is called before the first frame update
     void Start()
     {

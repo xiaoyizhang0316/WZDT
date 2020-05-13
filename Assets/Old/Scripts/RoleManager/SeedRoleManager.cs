@@ -34,14 +34,7 @@ public class SeedRoleManager : BaseRoleManager
     {
        //  GameObject seed =  Instantiate(seedPrb, OutIO.transform);
        ProductData productData = new ProductData();
-       productData.time = 60;
-       productData.Crisp =brittleness;
-       productData.productType = ProductType.Seed;
-       productData.Quality = quality;
-       productData.Quantity = 1; 
-       productData.Sweetness = sweetness; 
-       productData.unitPrice = quality*5*(CommonData.My.qualityRecognition/100);
-       productData.ID = CommonData.My.GetTimestamp(DateTime.Now);
+   
        //seed.GetComponent<ProductManager>().ProductsData = productData;
        //.GetComponent<ProductManager>().Sprite.sprite = CommonData.My.seetSprite;
        SetProdect( productData);

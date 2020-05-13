@@ -395,19 +395,19 @@ public class BaseBuff
                 break;
             case 50:
                 buffConfig.productSweetChange = CalculateNumber(str);
-                product.Sweetness += buffConfig.productSweetChange;
+              //  product.Sweetness += buffConfig.productSweetChange;
                 break;
             case 51:
                 buffConfig.productCrispChange = CalculateNumber(str);
-                product.Crisp += buffConfig.productCrispChange;
+                //product.Crisp += buffConfig.productCrispChange;
                 break;
             case 52:
                 buffConfig.productQualityChange = CalculateNumber(str);
-                product.Quality += buffConfig.productQualityChange;
+               // product.Quality += buffConfig.productQualityChange;
                 break;
             case 53:
                 buffConfig.productBrandChange = CalculateNumber(str);
-                product.Brand += buffConfig.productBrandChange;
+               // product.Brand += buffConfig.productBrandChange;
                 break;
             default:
                 break;

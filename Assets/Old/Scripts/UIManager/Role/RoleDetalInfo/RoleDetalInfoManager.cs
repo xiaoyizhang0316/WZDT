@@ -274,39 +274,39 @@ public class RoleDetalInfoManager : MonoBehaviour
     /// <param name="isInput">0 ----仓库   1--- 输入口   2----商店</param>
     public void AddProductToWarehouse(ProductData productData, int isInput)
     {
-        GameObject prbong = Instantiate(goodsPrb, wareHouseTF);
-
-        if (productData.productType == GameEnum.ProductType.Melon)
-        {
-            prbong.transform.GetChild(0).GetComponent<Image>().sprite = melon;
-        }
-
-        if (productData.productType == GameEnum.ProductType.Seed)
-        {
-            prbong.transform.GetChild(0).GetComponent<Image>().sprite = Seed;
-        }
-        if (productData.productType == GameEnum.ProductType.DecayMelon)
-        {
-            prbong.transform.GetChild(0).GetComponent<Image>().sprite = DecayMelon;
-        }
-        prbong.GetComponent<ProductSign>().currentProduct = productData;
-        if (isInput == 1)
-        {
-            prbong.GetComponent<ProductSign>().canSell = false;
-            currentInputCount++;
-        }
-        else if (isInput == 0)
-        {
-            prbong.GetComponent<ProductSign>().canSell = true;
-
-            currentWareHouseCount++;
-        }
-        else
-        {
-            prbong.GetComponent<ProductSign>().canSell = true;
-            prbong.transform.SetParent(shopTF);
-            currentShopCount++;
-        }
+     //   GameObject prbong = Instantiate(goodsPrb, wareHouseTF);
+//
+     //   if (productData.productType == GameEnum.ProductType.Melon)
+     //   {
+     //       prbong.transform.GetChild(0).GetComponent<Image>().sprite = melon;
+     //   }
+//
+     //   if (productData.productType == GameEnum.ProductType.Seed)
+     //   {
+     //       prbong.transform.GetChild(0).GetComponent<Image>().sprite = Seed;
+     //   }
+     //   if (productData.productType == GameEnum.ProductType.DecayMelon)
+     //   {
+     //       prbong.transform.GetChild(0).GetComponent<Image>().sprite = DecayMelon;
+     //   }
+     //   prbong.GetComponent<ProductSign>().currentProduct = productData;
+     //   if (isInput == 1)
+     //   {
+     //       prbong.GetComponent<ProductSign>().canSell = false;
+     //       currentInputCount++;
+     //   }
+     //   else if (isInput == 0)
+     //   {
+     //       prbong.GetComponent<ProductSign>().canSell = true;
+//
+     //       currentWareHouseCount++;
+     //   }
+     //   else
+     //   {
+     //       prbong.GetComponent<ProductSign>().canSell = true;
+     //       prbong.transform.SetParent(shopTF);
+     //       currentShopCount++;
+     //   }
     }
 
     /// <summary>
