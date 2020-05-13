@@ -3,63 +3,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
- 
-    [Serializable]
-    public class WorkerItem
-    {
 
-        public string workerId;
+[Serializable]
+public class WorkerItem
+{
 
-        public string workerName;
+    public string workerId;
 
-        /// <summary>
-        /// 品阶
-        /// </summary>
-        public string level;
+    /// <summary>
+    /// 工人名称
+    /// </summary>
+    public string workerName;
 
-        /// <summary>
-        /// 效果值
-        /// </summary>
-        public string effect;
+    /// <summary>
+    /// 品阶
+    /// </summary>
+    public string level;
 
-        /// <summary>
-        /// 效率值
-        /// </summary>
-        public string efficiency;
+    /// <summary>
+    /// 效果值
+    /// </summary>
+    public string effect;
 
-        /// <summary>
-        /// 范围值
-        /// </summary>
-        public string range;
+    /// <summary>
+    /// 效率值
+    /// </summary>
+    public string efficiency;
 
-        /// <summary>
-        /// 风险抗力
-        /// </summary>
-        public string riskResistance;
+    /// <summary>
+    /// 范围值
+    /// </summary>
+    public string range;
 
-        /// <summary>
-        /// 交易成本
-        /// </summary>
-        public string tradeCost;
+    /// <summary>
+    /// 风险抗力
+    /// </summary>
+    public string riskResistance;
 
-        /// <summary>
-        /// 成本
-        /// </summary>
-        public string cost;
+    /// <summary>
+    /// 交易成本
+    /// </summary>
+    public string tradeCost;
 
-        /// <summary>
-        /// 弹药容量
-        /// </summary>
-        public string bulletCapacity;
+    /// <summary>
+    /// 成本
+    /// </summary>
+    public string cost;
 
-        /// <summary>
-        /// PDP性格
-        /// </summary>
-        public string PDP;
-    }
+    /// <summary>
+    /// 弹药容量
+    /// </summary>
+    public string bulletCapacity;
 
-    [Serializable]
-    public class WorkersData
-    {
-        public List<WorkerItem> workerItems = new List<WorkerItem>();
-    } 
+    /// <summary>
+    /// PDP性格
+    /// </summary>
+    public string PDP;
+}
+
+[Serializable]
+public class WorkersData
+{
+    public List<WorkerItem> workerItems = new List<WorkerItem>();
+}

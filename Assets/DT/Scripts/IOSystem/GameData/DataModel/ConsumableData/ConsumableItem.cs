@@ -3,23 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
- 
-    [Serializable]
-    public class ConsumableItem
-    {
-        public string consumableId;
 
-        public string consumableName;
+[Serializable]
+public class ConsumableItem
+{
+    public string consumableId;
 
-        public string consumableDesc;
+    public string consumableName;
 
-        public string targetBuffList;
-    }
+    public string consumableDesc;
+
+    public string targetBuffList;
+}
 
 
-    [Serializable]
-    public class ConsumablesData
-    {
-        public List<ConsumableItem> consumableSigns = new List<ConsumableItem>();
-    } 
+[Serializable]
+public class ConsumablesData
+{
+    public List<ConsumableItem> consumableSigns = new List<ConsumableItem>();
+}
 
