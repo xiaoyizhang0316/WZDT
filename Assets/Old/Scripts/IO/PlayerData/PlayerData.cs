@@ -317,65 +317,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         }
         return null;
     }
-
-    /// <summary>
-    /// 解锁被动技能
-    /// </summary>
-    /// <returns></returns>
-    public string UnlockPassiveSkill()
-    {
-        string str = "";
-        List<int> lockIndex = new List<int>();
-        int number;
-        string unlockName = "";
-        for (int i = 0; i < MapRole.Count; i++)
-        {
-            if (MapRole[i].baseRoleData.baseRoleData.roleType == RoleType.Dealer && !MapRole[i].isNpc)
-            {
-                for (int j = 0; j < MapRole[i].AllPassivitySkills.Count; j++)
-                {
-                    if (MapRole[i].AllPassivitySkills[j].isLock && (MapRole[i].AllPassivitySkills[j].SkillName.Equals("精细运营") || MapRole[i].AllPassivitySkills[j].SkillName.Equals("在线支付")))
-                    {
-                        lockIndex.Add(j);
-                    }
-                    if (lockIndex.Count != 0)
-                    {
-                        number = Random.Range(0, lockIndex.Count);
-                        unlockName = MapRole[i].AllPassivitySkills[lockIndex[number]].SkillName;
-                        break;
-                    }
-                    else
-                    {
-                        str = "";
-                        return str;
-                    }
-                }
-                break;
-            }
-        }
-        if (lockIndex.Count == 0)
-        {
-            return str;
-        }
-        if (ExecutionManager.My.SubExecution(ExecutionManager.My.unlockSkills))
-        {
-            for (int i = 0; i < MapRole.Count; i++)
-            {
-                if (MapRole[i].baseRoleData.baseRoleData.roleType == RoleType.Dealer && !MapRole[i].isNpc)
-                {
-                    MapRole[i].UnLockPassivitySkill(unlockName);
-                }
-            }
-            str = "解锁了零售商的" + unlockName + "被动技能";
-            return str;
-        }
-        else
-        {
-            str = "";
-            return str;
-        }
-    }
-
+ 
     /// <summary>
     /// 判断角色种类是否在地图中
     /// </summary>

@@ -213,11 +213,7 @@ public class RoleDetalInfoManager : MonoBehaviour
        // delivery.text = UIManager.My.currentMapRole.baseRoleData.delivery.ToString();
        // bargain.text = UIManager.My.currentMapRole.baseRoleData.bargain.ToString();
        
-
-        InitActivity();
-        InitBuy();
-        InitSkill();
-        InitBuff();
+ 
     }
 
     void Start()
@@ -227,38 +223,13 @@ public class RoleDetalInfoManager : MonoBehaviour
             UIManager.My.ExitRoleDetalInfo();
 
         });
-        sellType_seed.onValueChanged.AddListener((a) =>
-        {
-            UIManager.My.currentMapRole.isCanSellSeed = sellType_seed.isOn;
-        });
-        sellType_melom.onValueChanged.AddListener((a) =>
-        {
-            UIManager.My.currentMapRole.isCanSellMelon = sellType_melom.isOn;
-        });
-        sellType_rottenMelon.onValueChanged.AddListener((a) =>
-        {
-            UIManager.My.currentMapRole.isCanRottenMelon = sellType_rottenMelon.isOn;
-        });
+      
         //Debug.Log("   D 打开 " + confirm);
 
         exhibiGoods_Panel.SetActive(false);
         confirm.onClick.AddListener(() =>
         {
-            if (UIManager.My.currentMapRole.autoLoading)
-            {
-                UIManager.My.currentMapRole.autoLoading = false;
-                confirm.transform.GetChild(0).GetComponent<Text>().text = "关闭";
-                //保证当前存在自动上货
-                UIManager.My.currentMapRole. GetComponent<AutomaticLoading>().Close();
-            }
-            else
-            {
-                UIManager.My.currentMapRole.autoLoading = true;
-                UIManager.My.currentMapRole.GetComponent<AutomaticLoading>().Open(); 
-                confirm.transform.GetChild(0).GetComponent<Text>().text = "开启";
-                UIManager.My.currentMapRole. GetComponent<AutomaticLoading>().ReleaseSkills(UIManager.My.currentMapRole);
-                UIManager.My.currentMapRole. GetComponent<AutomaticLoading>().ShowImage(UIManager.My.currentMapRole);
-            }
+           
             exhibiGoods_Panel.SetActive(false);
         });
     }
@@ -375,63 +346,8 @@ public class RoleDetalInfoManager : MonoBehaviour
         //Debug.Log("当前仓库" + currentMapRole.warehouse.Count);
         currentWareHouseCount--;
     }
-
-    public void InitSkill()
-    {
-
-        for (int i = 0; i < skillTF.childCount; i++)
-        {
-            Destroy(skillTF.GetChild(i).gameObject);
-        }
-        //Debug.Log("交易记录");
-        //Debug.Log(UIManager.My.currentMapRole.tradeHistroy.Count);
-        List<int> temp = new List<int>(UIManager.My.currentMapRole.tradeHistroy.Keys);
-        for (int i = 0; i < UIManager.My.currentMapRole.tradeHistroy.Count; i++)
-        {
-
-            GameObject game = Instantiate(jiaoyiPRb, skillTF);
-            //game.GetComponent<DetalDataSkillInfo>().InitUI(UIManager.My.currentMapRole.tradeHistroy[temp[i]].selectSkill, UIManager.My.currentMapRole.tradeHistroy[temp[i]].startRole, UIManager.My.currentMapRole.tradeHistroy[temp[i]].endRole,
-            //    UIManager.My.currentMapRole.tradeHistroy[temp[i]].skillCost.ToString(), UIManager.My.currentMapRole.tradeHistroy[temp[i]].transactionCost.ToString()
-            //    );
-            game.GetComponent<DetalDataSkillInfo>().InitUI(UIManager.My.currentMapRole.tradeHistroy[temp[i]]);
-        }
-    }
-
-
-    /// <summary>
-    /// 创建活动
-    /// </summary>
-    public void InitActivity()
-    {
-        for (int i = 0; i < currentActivityTF.childCount; i++)
-        {
-            Destroy(currentActivityTF.GetChild(i).gameObject);
-        }
-
-        for (int i = 0; i < UIManager.My.currentMapRole.AllPassivitySkills.Count; i++)
-        {
-            if (UIManager.My.currentMapRole.AllPassivitySkills[i].isLock)
-            {
-                continue;
-            }
-
-            GameObject game = Instantiate(prbActivity, currentActivityTF);
-            UIManager.My.currentMapRole.AllPassivitySkills[i].skillImage =
-                game. GetComponent<SkillActivityUI>().SkillCD;
-            UIManager.My.currentMapRole.AllPassivitySkills[i].skillButton =
-                game. GetComponent<SkillActivityUI>().openButton;
-Debug.Log(UIManager.My.currentMapRole.AllPassivitySkills[i].SkillName);
-            game.GetComponent<SkillActivityUI>().contentUI.text = GameDataMgr.My.GetSkillDataByName(   UIManager.My.currentMapRole.AllPassivitySkills[i].SkillName).skillDesc;
-            game.GetComponent<SkillActivityUI>().skillName.text =
-                UIManager.My.currentMapRole.AllPassivitySkills[i].SkillName;
-            game.GetComponent<SkillActivityUI>().cost.text = GameDataMgr.My
-                .GetSkillDataByName(UIManager.My.currentMapRole.AllPassivitySkills[i].SkillName).cost.ToString();
-            UIManager.My.currentMapRole.AllPassivitySkills[i].ShowImage(UIManager.My.currentMapRole);
-
-            UIManager.My.currentMapRole.AllPassivitySkills[i].SwitchButton(UIManager.My.currentMapRole,game. GetComponent<SkillActivityUI>().openButton);
-        }
-    }
-
+ 
+ 
     /// <summary>
     /// 创建交易记录
     /// </summary>
@@ -448,14 +364,7 @@ Debug.Log(UIManager.My.currentMapRole.AllPassivitySkills[i].SkillName);
         //    game.GetComponent<Text>().text = UIManager.My.currentMapRole.tradingHistory[i];
         //}
     }
-
-    public void InitToggle()
-    {
-        sellType_seed.isOn = UIManager.My.currentMapRole.isCanSellSeed;
-        sellType_melom.isOn = UIManager.My.currentMapRole.isCanSellMelon;
-        sellType_rottenMelon.isOn = UIManager.My.currentMapRole.isCanRottenMelon;
-    }
-
+ 
     public void InitBuff()
     {
         for (int i = 0; i < buffTF.childCount; i++)
@@ -467,22 +376,5 @@ Debug.Log(UIManager.My.currentMapRole.AllPassivitySkills[i].SkillName);
             GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/UI/RoleBuff/RoleBuffSign"),buffTF);
             go.GetComponent<RoleBuffSign>().Init(UIManager.My.currentMapRole.buffList[i]);
         }
-    }
-
-    public void InitAUTOUI()
-    {
-        exhibiGoods_Panel.SetActive(true);
-        Debug.Log(UIManager.My.currentMapRole.autoLoading);
-        if (UIManager.My.currentMapRole.autoLoading)
-        {
-
-            confirm.transform.GetChild(0).GetComponent<Text>().text = "关闭";
-        }
-        else
-        {
-
-            confirm.transform.GetChild(0).GetComponent<Text>().text = "开启";
-        }
-    }
-
+    } 
 }

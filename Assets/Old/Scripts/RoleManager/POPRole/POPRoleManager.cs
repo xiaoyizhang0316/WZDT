@@ -31,17 +31,7 @@ public class POPRoleManager : MonoBehaviour
         efficiency.fillAmount = baseMapRole.baseRoleData.efficiency / 150f   ;
        // brand.fillAmount = baseMapRole.baseRoleData.brand / 150f  ;
       //  quality.fillAmount = baseMapRole.baseRoleData.quality / 150f  ;
-
-        for (int i = 0; i < baseMapRole.AllPassivitySkills.Count; i++)
-        {
-            if (!baseMapRole.AllPassivitySkills[i].isLock  )
-            {
-                var game = Instantiate(acPrb, acitvityTF);
-                game.transform.GetChild(0).GetComponent<Text>().text =
-                    baseMapRole.AllPassivitySkills[i].SkillName;
-            }
-
-        }
+ 
         return  true;
         
     }

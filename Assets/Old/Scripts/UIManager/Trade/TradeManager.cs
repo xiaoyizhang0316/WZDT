@@ -38,7 +38,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         DrawTradeLineAI(ref sign);
         tradeList.Add(sign.tradeData.ID, sign);
         sign.isFirstSelect = false;
-        sign.Complete();
+       
     }
 
     /// <summary>
@@ -123,16 +123,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
     }
 
-    /// <summary>
-    /// 一次交易完成时
-    /// </summary>
-    public void CompleteTrade(int tradeID)
-    {
-        if (tradeList.ContainsKey(tradeID))
-        {
-            tradeList[tradeID].Complete();
-        }
-    }
+   
 
     private void OnDestroy()
     {

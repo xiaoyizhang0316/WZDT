@@ -155,13 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 745394881712787411}
   - component: {fileID: 745394881712787410}
-  - component: {fileID: 2171549029280834072}
   - component: {fileID: 5610149045411547644}
-  - component: {fileID: 775234579445623473}
-  - component: {fileID: -6466891574514918502}
-  - component: {fileID: 5274790340457415675}
-  - component: {fileID: 3762224315642537157}
-  - component: {fileID: 1231080109048999656}
   m_Layer: 0
   m_Name: Dealer_1
   m_TagString: MapRole
@@ -209,25 +203,6 @@ MonoBehaviour:
   - {fileID: 745394883042027118}
   - {fileID: 745394882642940846}
   MapSigns: []
---- !u!114 &2171549029280834072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ea20787fc0ecca4aa94ade737512d8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u9001\u8D27"
-  isOpen: 0
-  skillTime: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetBuffList: []
-  CarPrb: {fileID: 736384662113046618, guid: bbbbb1b370e95cd499ed1a4d13585c8d, type: 3}
 --- !u!114 &5610149045411547644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +219,7 @@ MonoBehaviour:
     baseRoleData:
       roleName: 
       roleType: 3
+      roleSkillType: 0
       level: 0
       effect: 0
       efficiency: 0
@@ -252,6 +228,7 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
+      tradeRange: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -269,17 +246,7 @@ MonoBehaviour:
     inMap: 0
     isNpc: 0
   warehouse: []
-  isAdvantage: 0
-  advantageShelves: []
-  advantageShelves_warehouse: []
-  AllSkills: []
-  AllPassivitySkills: []
-  passiveSkills: []
-  isCanSellSeed: 0
-  isCanSellMelon: 0
-  isCanRottenMelon: 0
   isNpc: 0
-  autoLoading: 0
   buffList: []
   spawnConsumerInterval: 0
   CarCount: 0
@@ -295,112 +262,6 @@ MonoBehaviour:
   activityCost: 0
   tradeCost: 0
   shop: []
---- !u!114 &775234579445623473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6df772d36e385437f8b62f599a89bb83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u7CBE\u7EC6\u8FD0\u8425"
-  skillTime: 0
-  isOpen: 0
-  isLock: 1
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
---- !u!114 &-6466891574514918502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6e72f5f16e03438eb288697dc4e1b1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u5728\u7EBF\u652F\u4ED8"
-  skillTime: 0
-  isOpen: 0
-  isLock: 1
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
---- !u!114 &5274790340457415675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c569576900cc4179af55ec3515ae7f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u4F1A\u5458\u653F\u7B56"
-  skillTime: 0
-  isOpen: 0
-  isLock: 1
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
---- !u!114 &3762224315642537157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b99a46f508d0e34e8d3dfe506ae2b31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u8FD0\u8F93_\u88AB\u52A8"
-  skillTime: 0
-  isOpen: 0
-  isLock: 1
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
---- !u!114 &1231080109048999656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8a8a757c5c5e44688f0ee29df1c272, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u96F6\u552E"
-  skillTime: 0
-  isOpen: 0
-  isLock: 0
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
-  residue: 0
 --- !u!1 &745394882642940845
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +661,6 @@ GameObject:
   - component: {fileID: 536926847919342649}
   - component: {fileID: 601174859542035484}
   - component: {fileID: 7308661235398786995}
-  - component: {fileID: 2512477875574778096}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -844,29 +704,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: -1
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2512477875574778096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4027598181052529707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73b87bcc044b83e4083ac7bd3a66752d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u52A0\u901F\u6D88\u8D39\u8005"
-  skillTime: 0
-  isOpen: 1
-  isLock: 0
-  skillButton: {fileID: 0}
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
-  isAdd: 0
-  buffId: 0
 --- !u!1 &4329599690989183277
 GameObject:
   m_ObjectHideFlags: 0

@@ -59,62 +59,8 @@ public class TradeSign : MonoBehaviour
         Destroy(tradeMoneyLineGo, 0.001f);
         Destroy(tradeIconGo, 0.001f);
     }
-
-    /// <summary>
-    /// 交易完成时
-    /// </summary>
-    public void Complete()
-    {
-        InvokeRepeating("ConductTrade",0f,1f);
-    }
-
-    /// <summary>
-    /// 执行交易
-    /// </summary>
-    public void ConductTrade()
-    {
-        BaseMapRole role = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
-        RoleType start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole)).baseRoleData.baseRoleData.roleType;
-        RoleType end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole)).baseRoleData.baseRoleData.roleType;
-        SkillData data = GameDataMgr.My.GetSkillDataByName(tradeData.selectJYFS);
-        if (data.skillLastType == SkillLastingType.Once)
-        {
-            if (role.ReleaseSkill(tradeData, ()=> {
-                PayForTradeLast();
-                Complete();
-            }))
-            {
-                //print("交易执行");
-                role.GetContribution(data.skillContribution);
-                float result = CalculateTC();
-                RecordHistory(result);
-                PayForTrade();
-                CancelInvoke();
-
-            }
-        }
-        else if (data.skillLastType == SkillLastingType.Lasting)
-        {
-            CancelInvoke();
-            InvokeRepeating("ConductLastingTrade",0f,60f);
-            InvokeRepeating("PayForTradeLast", 59f, 60f);
-        }
-        //print(tradeData.selectJYFS);
-    }
-
-    /// <summary>
-    /// 持续施法
-    /// </summary>
-    public void ConductLastingTrade()
-    {
-        BaseMapRole role = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
-        SkillData data = GameDataMgr.My.GetSkillDataByName(tradeData.selectJYFS);
-        role.GetContribution(data.skillContribution);
-        role.ReleaseSkill(tradeData);
-        float result = CalculateTC();
-        RecordHistory(result);
-        PayForTrade();
-    }
+ 
+  
 
     /// <summary>
     /// 结算付钱关系(先钱)

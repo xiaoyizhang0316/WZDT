@@ -13,59 +13,13 @@ public class BaseMapRole : MonoBehaviour
     /// 仓库
     /// </summary>
     public List<ProductData> warehouse;
-
-    /// <summary>
-    /// 输入口
-    /// </summary>
-   // public List<ProductData> Input;
-
-    /// <summary>
-    /// 是否开启优势货架
-    /// </summary>
-    public bool isAdvantage;
-
-    /// <summary>
-    /// 优势货架
-    /// </summary>
-    public List<ProductData> advantageShelves;
-
-    /// <summary>
-    /// 优势仓库
-    /// </summary>
-    public List<ProductData> advantageShelves_warehouse;
-
-
-    /// <summary>
-    /// 所有主动技能
-    /// </summary>
-    public List<BaseSkill> AllSkills;
-
-    /// <summary>
-    /// 所有主动技能
-    /// </summary>
-    public List<BasePassivitySkill> AllPassivitySkills;
-
-    public List<BaseSkill> passiveSkills;
-
-    public bool isCanSellSeed;
-    public bool isCanSellMelon;
-    public bool isCanRottenMelon;
-
+    
     /// <summary>
     /// 是否是NPC
     /// </summary>
     public bool isNpc = false;
-
-    /// <summary>
-    /// 开启自动售卖
-    /// </summary>
-    public bool autoLoading;
-
-    /// <summary>
-    /// 交易历史记录
-    /// </summary>
-    public Dictionary<int, TradeRecordData> tradeHistroy = new Dictionary<int, TradeRecordData>();
-
+ 
+    
     /// <summary>
     /// 自身buff列表
     /// </summary>
@@ -130,9 +84,7 @@ public class BaseMapRole : MonoBehaviour
         contributionNum = 0;
         if (!isNpc)
             InitBaseRoleData();
-        InitAllSkill();
-        InitPassivitySkill();
-        ReleasePassivitySkills();
+    
         InvokeRepeating("MonthlyCost", 1f, 60f);
         InvokeRepeating("SpawnConsumer", 10f, 10f);
         if (!PlayerData.My.MapRole.Contains(this))
@@ -143,14 +95,7 @@ public class BaseMapRole : MonoBehaviour
         if (!PlayerData.My.RoleData.Contains(baseRoleData))
         {
             PlayerData.My.RoleData.Add(baseRoleData);
-        }
-
-        if (isAdvantage)
-        {
-            InvokeRepeating("ShiftProductAdvantageWHtoShelves", 0, 1);
-        }
-
-        InvokeRepeating("AutoMoveGoodsToShop", 0, 1f);
+        } 
     }
 
     #region 交易记录
@@ -178,14 +123,7 @@ public class BaseMapRole : MonoBehaviour
             BaseMapRole payRole = PlayerData.My.GetMapRoleById(double.Parse(data.payRole));
             tradeData.income = data.payPer * payRole.monthlyProfit;
         }
-        if (tradeHistroy.ContainsKey(data.ID))
-        {
-            tradeHistroy[data.ID] = tradeData;
-        }
-        else
-        {
-            tradeHistroy.Add(data.ID, tradeData);
-        }
+        
     }
 
     #endregion
@@ -506,27 +444,7 @@ public class BaseMapRole : MonoBehaviour
         warehouse.Add(productData);
         //Input.Remove(productData);
     }
-
-    /// <summary>
-    /// 移动物体到输入口
-    /// </summary>
-    /// <param name="productData"></param>
-  // public void MoveGoodsToInput(ProductData productData)
-  // {
-  //     Input.Add(productData);
-  // }
-
-
-    /// <summary>
-    /// 将输入口产品到仓库
-    /// </summary>
-  // public void ShiftProductInputToWarehouse(ProductData productData)
-  // {
-  //     warehouse.Add(productData);
-
-  //     Input.Remove(productData);
-  // }
-
+ 
     /// <summary>
     /// 将仓库产品输入到商店
     /// </summary>
@@ -545,39 +463,7 @@ public class BaseMapRole : MonoBehaviour
         warehouse.Remove(productData);
         //Debug.Log(warehouse.Count);
     }
-
-    /// <summary>
-    /// 移动到优势货架,如果货架满了将移动到优势仓库
-    /// </summary>
-    public void MoveGoodsToAdvantageShelves(ProductData productData)
-    {
-        if (advantageShelves.Count < 3)
-        {
-            advantageShelves.Add(productData);
-        }
-        else
-        {
-            advantageShelves_warehouse.Add(productData);
-        }
-    }
-
-
-    /// <summary>
-    /// 将优势仓库移动到货架
-    /// </summary>
-    public void ShiftProductAdvantageWHtoShelves()
-    {
-        if (advantageShelves.Count < 3)
-        {
-            if (advantageShelves_warehouse.Count > 0)
-            {
-                var goods = advantageShelves_warehouse[0];
-                advantageShelves.Add(goods);
-                advantageShelves_warehouse.Remove(goods);
-            }
-        }
-    }
-
+ 
     #endregion
 
     #region 获取物品
@@ -678,148 +564,8 @@ public class BaseMapRole : MonoBehaviour
 
     #region  技能
 
-    /// <summary>                                                                               
-    /// 初始化所有技能
-    /// </summary>
-    public void InitAllSkill()
-    {
-        AllSkills = GetComponents<BaseSkill>().ToList();
-    }
-
-
-    public void InitPassivitySkill()
-    {
-        AllPassivitySkills = GetComponents<BasePassivitySkill>().ToList();
-    }
-
-    /// <summary>
-    /// 释放被动技能
-    /// </summary>
-    public void ReleasePassivitySkills()
-    {
-        for (int i = 0; i < AllPassivitySkills.Count; i++)
-        {
-            if (AllPassivitySkills[i].isOpen && !AllPassivitySkills[i].isLock)
-            {
-                AllPassivitySkills[i].ReleaseSkills(this, null);
-            }
-
-            //AllPassivitySkills[i].ReleaseSkills(this, null);
-        }
-    }
-
-    /// <summary>
-    /// 释放技能
-    /// </summary>
-    /// <param name="tradeData"></param>
-    /// <returns></returns>
-    public bool ReleaseSkill(TradeData tradeData, Action onComplete = null)
-    {
-        for (int i = 0; i < AllSkills.Count; i++)
-        {
-            if (AllSkills[i].SkillName.Equals(tradeData.selectJYFS))
-            {
-                return AllSkills[i].ReleaseSkills(this, tradeData, onComplete);
-            }
-        }
-
-        Debug.Log("没有找到当前技能");
-        return false;
-    }
-
-    /// <summary>
-    /// 根据技能名字获取技能类
-    /// </summary>
-    public BaseSkill GetSkillByName(string skillName)
-    {
-        BaseSkill[] skills = GetComponents<BaseSkill>();
-        print(skillName);
-        for (int i = 0; i < skills.Length; i++)
-        {
-            if (skills[i].SkillName.Equals(skillName))
-            {
-                //Debug.Log("找到当前技能");
-                return skills[i];
-            }
-        }
-
-        Debug.Log("没有找到当前技能");
-        return null;
-    }
-
-    /// <summary>
-    /// 根据被动技能名字获取被动技能类
-    /// </summary>
-    public BasePassivitySkill GetPassiveSkillByName(string skillName)
-    {
-        BasePassivitySkill[] skills = GetComponents<BasePassivitySkill>();
-        for (int i = 0; i < skills.Length; i++)
-        {
-            if (skills[i].SkillName.Equals(skillName))
-            {
-                //Debug.Log("找到当前被动技能");
-                return skills[i];
-            }
-        }
-
-        Debug.Log("没有找到当前被动技能");
-        return null;
-    }
-
-    /// <summary>
-    /// 解锁被动技能
-    /// </summary>
-    /// <param name="Skillname"></param>
-    public void UnLockPassivitySkill(string skillname)
-    {
-        for (int i = 0; i < AllPassivitySkills.Count; i++)
-        {
-            if (skillname.Equals(AllPassivitySkills[i].SkillName))
-            {
-                AllPassivitySkills[i].isLock = false;
-                AllPassivitySkills[i].isOpen = true;
-                //print("解锁了被动技能");
-                AllPassivitySkills[i].ReleaseSkills(this, null);
-            }
-        }
-    }
-
-    /// <summary>
-    /// 查找被动技能
-    /// </summary>
-    /// <param name="skillName"></param>
-    /// <returns></returns>
-    public BasePassivitySkill GetPassivitySkill(string skillName)
-    {
-        for (int i = 0; i < AllPassivitySkills.Count; i++)
-        {
-            if (skillName.Equals(AllPassivitySkills[i].SkillName))
-            {
-                return AllPassivitySkills[i];
-            }
-        }
-
-
-        return null;
-    }
-
-    /// <summary>
-    /// 锁上被动技能
-    /// </summary>
-    /// <param name="skillName"></param>
-    public void LockPassivitySkill(string skillName)
-    {
-        for (int i = 0; i < AllPassivitySkills.Count; i++)
-        {
-            if (skillName.Equals(AllPassivitySkills[i].SkillName))
-            {
-                AllPassivitySkills[i].isLock = true;
-                AllPassivitySkills[i].isOpen = false;
-            }
-        }
-    }
-
-
+    
+ 
 
     #endregion
 
@@ -843,51 +589,7 @@ public class BaseMapRole : MonoBehaviour
             return productNum;
         }
     }
-
-    public void AutoMoveGoodsToShop()
-    {
-        if (!autoLoading)
-        {
-            return;
-        }
-
-        if (isCanSellSeed)
-        {
-            for (int i = 0; i < warehouse.Count; i++)
-            {
-                if (warehouse[i].productType ==
-                    GameEnum.ProductType.Seed)
-                {
-                    ShiftProductWarehouseToShop(warehouse[i]);
-                }
-            }
-        }
-
-        if (isCanSellMelon)
-        {
-            for (int i = 0; i < warehouse.Count; i++)
-            {
-                if (warehouse[i].productType ==
-                    GameEnum.ProductType.Melon)
-                {
-                    ShiftProductWarehouseToShop(warehouse[i]);
-                }
-            }
-        }
-
-        if (isCanRottenMelon)
-        {
-            for (int i = 0; i < warehouse.Count; i++)
-            {
-                if (warehouse[i].productType ==
-                    GameEnum.ProductType.DecayMelon)
-                {
-                    ShiftProductWarehouseToShop(warehouse[i]);
-                }
-            }
-        }
-    }
-
+ 
     /// <summary>
     /// 将周围的居民楼加入list
     /// </summary>
@@ -910,10 +612,7 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void SpawnConsumer()
     {
-        if (!autoLoading || shop.Count == 0)
-        {
-            return;
-        }
+      
         //todo
         //print("开始召唤消费者");
        // int number = (int)(baseRoleData.brand / 6f);
