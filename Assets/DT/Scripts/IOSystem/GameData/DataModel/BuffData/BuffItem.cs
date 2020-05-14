@@ -11,6 +11,8 @@ public class BuffItem
     /// 
     /// </summary>
     public string BuffID;
+
+    public string BulletBuffType;
     /// <summary>
     /// 
     /// </summary>

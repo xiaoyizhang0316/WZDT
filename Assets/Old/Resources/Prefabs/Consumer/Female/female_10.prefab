@@ -2375,7 +2375,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4339130779355469075}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
@@ -2395,7 +2395,7 @@ Transform:
   - {fileID: 4339130779355695391}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4339130779362862805
 Animator:
   serializedVersion: 3
@@ -2441,29 +2441,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consumeData:
-    needSweetness: 0
-    needCrisp: 0
-    needProductType: 0
-    mentalPrice: 0
-    preference: 0
-    searchDistance: 0
-    buyPower: 0
-    buyRange: 0
-    search: 0
-    bargain: 0
-    delivery: 0
-    risk: 0
-  startSpeed: 0
-  currentSpeed: 0
+    maxHealth: 0
+    moveSpeed: 0
+    liveTime: 0
+    spawnNumber: 0
+    killMoney: 0
+    killSatisfy: 0
+    liveSatisfy: 0
+    consumerName: 
   consumerType: 0
-  qualityNeed: 0
-  target: {fileID: 0}
   targetShop: {fileID: 0}
-  totalPay: 0
-  totalSatisfy: 0
-  lastPay: 0
-  lastSatisfy: 0
+  currentHealth: 0
   isStart: 0
+  isCanSelect: 0
 --- !u!54 &2091486824380170509
 Rigidbody:
   m_ObjectHideFlags: 0

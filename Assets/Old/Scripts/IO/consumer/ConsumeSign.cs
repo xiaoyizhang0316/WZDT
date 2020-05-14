@@ -52,6 +52,10 @@ public class ConsumeSign : MonoBehaviour
         consumeData = new ConsumeData(consumerType);
     }
 
+    /// <summary>
+    /// 每次刷新消费者调用
+    /// </summary>
+    /// <param name="targetRole"></param>
     public void InitAndMove(BaseMapRole targetRole)
     {
         currentHealth = 0;
@@ -65,11 +69,18 @@ public class ConsumeSign : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 消费者被击中时调用
+    /// </summary>
+    /// <param name="data"></param>
     public void OnHit(ProductData data)
     {
-
+        
     }
 
+    /// <summary>
+    /// 消费者被击杀时调用   
+    /// </summary>
     public void OnDeath()
     {
         CancelInvoke("OnAlive");
@@ -77,9 +88,23 @@ public class ConsumeSign : MonoBehaviour
         Stop();
     }
 
+    /// <summary>
+    /// 消费者存活时调用
+    /// </summary>
     public void OnAlive()
     {
         AliveBackHome();
+    }
+
+    /// <summary>
+    /// 生命值检测
+    /// </summary>
+    public void HealthCheck()
+    {
+        if (currentHealth >= consumeData.maxHealth)
+        {
+            OnDeath();
+        }
     }
 
     /// <summary>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static GameEnum;
 
 [Serializable]
 public class BuffData
@@ -10,6 +11,11 @@ public class BuffData
     /// Buff ID
     /// </summary>
     public int BuffID;
+
+    /// <summary>
+    /// 子弹buff类别
+    /// </summary>
+    public BulletBuffType bulletBuffType;
 
     /// <summary>
     /// Buff名称

@@ -168,13 +168,12 @@ public class TradeSign : MonoBehaviour
     }
 
     /// <summary>
-    /// 清理所有线
+    /// 清理施法者目标
     /// </summary>
     public void ClearAllLine()
     {
-        Destroy(tradeLineGo, 0.001f);
-        Destroy(tradeMoneyLineGo, 0.001f);
-        Destroy(tradeIconGo, 0.001f);
+        BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        cast.tradeList.Remove(this);
     }
 
     /// <summary>
