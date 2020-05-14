@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 745394881712787411}
   - component: {fileID: 745394881712787410}
   - component: {fileID: 1118949462029124038}
+  - component: {fileID: 4667509899987826462}
   m_Layer: 0
   m_Name: Peasant_1
   m_TagString: MapRole
@@ -224,6 +225,7 @@ MonoBehaviour:
     isNpc: 0
   warehouse: []
   isNpc: 0
+  tradeList: []
   buffList: []
   spawnConsumerInterval: 0
   CarCount: 0
@@ -239,6 +241,20 @@ MonoBehaviour:
   activityCost: 0
   tradeCost: 0
   shop: []
+--- !u!114 &4667509899987826462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745394881712787409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1da214b00b29684aa3fcde6910d235c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  role: {fileID: 1118949462029124038}
+  IsOpen: 1
 --- !u!1 &745394882642940845
 GameObject:
   m_ObjectHideFlags: 0

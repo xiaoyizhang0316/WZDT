@@ -1,24 +1,34 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using DT.Fight.Bullet;
 using UnityEngine;
 
-public class PruductMelon : BaseSkill
-{ 
+public class PruductMerchant : BaseSkill
+{
     private int currentCount= 0 ;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
     public override void Skill()
     {
         if (role.tradeList.Count == 0)
         {
             return;
         }
-        if (role.warehouse.Count > 0 && role.warehouse[0].bulletType == BulletType.Seed)
+        if (role.warehouse.Count > 0 )
         {
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
-            data.bulletType = BulletType.NormalPP;
-            data.loadingSpeed *=1f-role.baseRoleData.effect/100f ; 
+         
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;
             game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
@@ -34,6 +44,5 @@ public class PruductMelon : BaseSkill
             }
 
         }
-
     }
 }

@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 2099352292442146493}
   - component: {fileID: 3954562971428105217}
   - component: {fileID: 1108041473005891046}
+  - component: {fileID: -4029087124941828733}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Lightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,3 +94,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4029087124941828733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956051860580140148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb628e81b94d8b449ba1e2028f37791a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productData:
+    bulletType: 0
+    damage: 0
+    loadingSpeed: 0
+    buffList: []
+    buffMaxCount: 0
+  path: []
+  role: {fileID: 0}

@@ -32,7 +32,23 @@ public class BulletLaunch : MonoBehaviour
          BulletObjectPool.My.RecoveryBullet(gameObject);
      });
     }
-
+    public GameObject LanchNormal(Vector3 target,ProductData data)
+    {
+        
+    
+         
+        GameObject gameObject =    BulletObjectPool.My.GetBullet(BulletType.NormalPP);
+        gameObject.GetComponent<GoodsSign>().productData = data;
+        gameObject.transform.SetParent(launchShooter);
+        gameObject.transform.localPosition = new Vector3(0,0.5f,0);
+     
+      launchShooter.DOLookAt(target , 0.3f);
+        gameObject.transform.DOMove(target,1).SetEase(sase).OnComplete(() =>
+        {
+            BulletObjectPool.My.RecoveryBullet(gameObject); 
+        });
+        return gameObject;
+    }
     public  List<Vector3>  DrawLine(Transform startTarget ,Transform Target)
     {
         List<Vector3> pointList = new List<Vector3>();
@@ -94,7 +110,7 @@ public class BulletLaunch : MonoBehaviour
     {
         if (GUILayout.Button("123"))
         {
-            LanchBoom(Vector3.zero);
+            LanchNormal(Camera.main.transform.position,new ProductData());
         }
     }
 
