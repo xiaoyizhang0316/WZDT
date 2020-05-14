@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConsumerSpawnRange : MonoBehaviour
+public class ShootingRange : MonoBehaviour
 {
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("Building") && GetComponentInParent<RolePosSign>().isRelease)
+        if (other.CompareTag("Consumer") && other.transform.TryGetComponent(out ConsumeSign sign))
         {
-            Building targetBuilding = other.GetComponent<Building>();
-            GetComponentInParent<BaseMapRole>().AddBuilding(targetBuilding.buildingId, targetBuilding);
+            if (sign.isCanSelect && sign.isStart)
+            {
+                GetComponentInParent<BaseMapRole>().AddConsumerIntoShootList(sign);
+            }
         }
     }
 

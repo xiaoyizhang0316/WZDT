@@ -73,6 +73,7 @@ public class ConsumeSign : MonoBehaviour
     public void OnDeath()
     {
         CancelInvoke("OnAlive");
+        DeathBackHome();
         Stop();
     }
 
@@ -99,6 +100,9 @@ public class ConsumeSign : MonoBehaviour
     public void AliveBackHome()
     {
         Stop();
+        isCanSelect = false;
+        isStart = false;
+        targetShop.RemoveConsumerFromShootList(this);
         print("消费者存活");
         float waitTime = UnityEngine.Random.Range(0.5f, 1.5f);
         Invoke("BackHome", waitTime);
@@ -110,6 +114,9 @@ public class ConsumeSign : MonoBehaviour
     public void DeathBackHome()
     {
         Stop();
+        isCanSelect = false;
+        isStart = false;
+        targetShop.RemoveConsumerFromShootList(this);
         print("消费者死亡");
         BackHome();
     }

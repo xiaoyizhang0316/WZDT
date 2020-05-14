@@ -40,6 +40,16 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public int spawnConsumerInterval;
 
+    /// <summary>
+    /// 进入射程的消费者列表
+    /// </summary>
+    public List<ConsumeSign> shootTargetList = new List<ConsumeSign>();
+
+    /// <summary>
+    /// 当前射击目标
+    /// </summary>
+    public ConsumeSign shootTarget;
+
     public int CarCount;
 
     public bool AI;
@@ -113,6 +123,54 @@ public class BaseMapRole : MonoBehaviour
     {
         
         
+    }
+
+    #endregion
+
+    #region 战斗
+
+    /// <summary>
+    /// 将目标消费者加入射击范围列表（防止重复）
+    /// </summary>
+    /// <param name="sign"></param>
+    public void AddConsumerIntoShootList(ConsumeSign sign)
+    {
+        if (shootTargetList.Contains(sign))
+            return;
+        else
+            shootTargetList.Add(sign);
+    }
+
+    /// <summary>
+    /// 将目标消费者移出射击范围列表
+    /// </summary>
+    /// <param name="sign"></param>
+    public void RemoveConsumerFromShootList(ConsumeSign sign)
+    {
+        if (!shootTargetList.Contains(sign))
+            return;
+        else
+            shootTargetList.Remove(sign);
+    }
+
+    /// <summary>
+    /// 选择范围内最近的消费者作为射击目标
+    /// </summary>
+    public void SetShootTarget()
+    {
+        if (shootTargetList.Count == 0)
+            return;
+        int max = 0;
+        float maxDis = Vector3.Distance(transform.position, shootTargetList[0].transform.position);
+        for (int i = 0; i < shootTargetList.Count; i++)
+        {
+            if (Vector3.Distance(transform.position, shootTargetList[i].transform.position) < maxDis)
+            {
+                maxDis = Vector3.Distance(transform.position, shootTargetList[i].transform.position);
+                max = i;
+            }
+        }
+        shootTarget = shootTargetList[max];
     }
 
     #endregion
@@ -557,10 +615,7 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void SpawnConsumer()
     {
-        //todo
-        //print("开始召唤消费者");
-       // int number = (int)(baseRoleData.brand / 6f);
-        //print(number);
+        int number = 5;
         List<GameObject> availableConsumer = new List<GameObject>();
         List<int> keys = new List<int>(buildingList.Keys);
         for (int i = 0; i < buildingList.Count; i++)
@@ -573,13 +628,30 @@ public class BaseMapRole : MonoBehaviour
                 }
             }
         }
-        //todo
-     //   List<GameObject> resultList = GetRandom(availableConsumer, number);
-     // for (int i = 0; i < resultList.Count; i++)
-     // {
-     //     resultList[i].SetActive(true);
-     //     resultList[i].GetComponent<ConsumeSign>().ActiveAndMove(this);
-     // }
+        List<GameObject> resultList = GetRandom(availableConsumer, number);
+        for (int i = 0; i < resultList.Count; i++)
+        {
+            resultList[i].SetActive(true);
+            resultList[i].GetComponent<ConsumeSign>().InitAndMove(this);
+        }
+    }
+
+    /// <summary>
+    /// 白天开始时开始召唤消费者
+    /// </summary>
+    public void DayBegin()
+    {
+        InvokeRepeating("SpawnConsumer", 0f,10f);
+        InvokeRepeating("SetShootTarget", 0f, 1f);
+    }
+
+    /// <summary>
+    /// 白天结束时停止召唤消费者
+    /// </summary>
+    public void DayEnd()
+    {
+        CancelInvoke("SpawnConsumer");
+        CancelInvoke("SetShootTarget");
     }
 
     /// <summary>

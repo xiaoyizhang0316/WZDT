@@ -23,6 +23,10 @@ public class CreateTradeLine : MonoBehaviour
 
     public List<Vector3> pointList = new List<Vector3>();
 
+    /// <summary>
+    /// 初始化位置
+    /// </summary>
+    /// <param name="startTarget"></param>
     public void InitPos(Transform startTarget)
     {
         this.startTarget = startTarget;
@@ -30,6 +34,9 @@ public class CreateTradeLine : MonoBehaviour
         lineGo.GetComponent<MeshRenderer>().material = material;
     }
 
+    /// <summary>
+    /// 检测两个角色的距离是否过远
+    /// </summary>
     public void CheckDistance()
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(UIManager.My.startRole.ID);
@@ -43,8 +50,6 @@ public class CreateTradeLine : MonoBehaviour
             lineGo.GetComponent<MeshRenderer>().material.color = Color.red;
         }
     }
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -86,7 +91,6 @@ public class CreateTradeLine : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            //Destroy(lineGo.gameObject);
             lineGo.SetActive(false);
             gameObject.SetActive(false);
             UIManager.My.isSetTrade = false;
