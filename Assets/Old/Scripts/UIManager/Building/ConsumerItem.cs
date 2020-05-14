@@ -13,10 +13,6 @@ public class ConsumerItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
 
     public Text buyPower;
 
-    public Text buyRange;
-
-    public Image preference;
-
     public Image lastSatisfy;
 
     public ConsumeSign currentConsumer;
@@ -48,7 +44,6 @@ public class ConsumerItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
     public void InitInfo()
     {
         consumerName.text = currentConsumer.consumeData.consumerName;
-        buyRange.text = currentConsumer.consumeData.buyRange.ToString() + "'";
     }
 
     /// <summary>
@@ -75,34 +70,6 @@ public class ConsumerItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
                 temp[i].color = Color.white;
             }
         }
-        if (currentConsumer.totalSatisfy < -100)
-        {
-            lastSatisfy.sprite = consumerSatisfyList[4];
-        }
-        else if (currentConsumer.totalSatisfy < -50)
-        {
-            lastSatisfy.sprite = consumerSatisfyList[3];
-        }
-        else if (currentConsumer.totalSatisfy < 50)
-        {
-            lastSatisfy.sprite = consumerSatisfyList[2];
-        }
-        else if (currentConsumer.totalSatisfy < 100)
-        {
-            lastSatisfy.sprite = consumerSatisfyList[1];
-        }
-        else
-        {
-            lastSatisfy.sprite = consumerSatisfyList[0];
-        }
-        if (currentConsumer.consumeData.preference == 0)
-        {
-            preference.sprite = consumerPreferenceList[0];
-        }
-        else
-        {
-            preference.sprite = consumerPreferenceList[1];
-        }
     }
 
     /// <summary>
@@ -110,18 +77,7 @@ public class ConsumerItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
     /// </summary>
     public void SetBuyPower()
     {
-        if (currentConsumer.consumeData.buyPower < 0.5f)
-        {
-            buyPower.text = "低";
-        }
-        else if (currentConsumer.consumeData.buyPower < 1.1f)
-        {
-            buyPower.text = "中";
-        }
-        else
-        {
-            buyPower.text = "高";
-        }
+
     }
 
     /// <summary>

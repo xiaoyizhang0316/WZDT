@@ -160,10 +160,11 @@ public class TradeSign : MonoBehaviour
     /// <returns></returns>
     public List<Vector3> GetDeliverProductPath()
     {
+        TradeLineItem[] list = GetComponentsInChildren<TradeLineItem>();
         List<Vector3> posList = new List<Vector3>();
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < list.Length; i++)
         {
-            posList.Add(transform.GetChild(i).Find("end").position);
+            posList.Add(list[i].transform.Find("end").position);
         }
         CalculateTC();
         return posList;

@@ -20,6 +20,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     public float customerSatisfy;
 
     /// <summary>
+    /// 玩家金币
+    /// </summary>
+    public int playerGold;
+
+    /// <summary>
     /// 股东满意度上限
     /// </summary>
     public float maxBossSatisfy;
@@ -104,6 +109,16 @@ public class StageGoal : MonoSingleton<StageGoal>
     private bool isMenuOpen;
 
     private bool wudi = false;
+
+    public void CostPlayerGold(int num)
+    {
+        playerGold -= num;
+    }
+
+    public void GetPlayerGold(int num)
+    {
+        playerGold += num;
+    }
 
     /// <summary>
     /// 当扣除成本时调用函数计算股东满意度
@@ -407,6 +422,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         standardCrisp = Random.Range(-5, 5);
         consumerQualityNeed = Random.Range(data.consumerQualityNeed - 5, data.consumerQualityNeed + 5);
         qualityText.text = consumerQualityNeed.ToString();
+        playerGold = 10000;
         InitEquipAndWorker(data);
     }
 
