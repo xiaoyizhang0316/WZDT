@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DT.Fight.Bullet;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class PruductSeed : BaseSkill
         {
             return;
         }
-        
+        Debug.Log("产种子");
         ProductData data = new ProductData();
         data.bulletType = BulletType.Seed;
         data.damage = role.baseRoleData.effect * 10;
@@ -23,10 +24,19 @@ public class PruductSeed : BaseSkill
         data.buffMaxCount = 3;
         data.buffList = new List<BuffData>();
 
-        GameObject game = Instantiate(GoodsManager.My.GoodPrb, GoodsManager.My.transform);
+        GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
         game.GetComponent<GoodsSign>().productData = data;
+        game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
+        game.GetComponent<GoodsSign>().role =PlayerData.My.GetMapRoleById(Double.Parse( role.tradeList[currentCount].tradeData.targetRole));
 
-       
+        game.transform.position = transform.position;
+        game.GetComponent<GoodsSign>().Move();
         
+        currentCount++;
+        if (currentCount >= role.tradeList.Count)
+        {
+            currentCount = 0;
+        }
+
     }
 }

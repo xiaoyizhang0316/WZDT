@@ -370,7 +370,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         crispGo.GetComponent<RectTransform>().localPosition = new Vector3(standardCrisp * 10, 0, 0);
         SetInfo();
         productList = new List<ProductData>();
-        InvokeRepeating("CheckProductFresh", 5f, 1f);
+     
         InvokeRepeating("CheckFaceStatus", 1f, 10f);
         InvokeRepeating("MonthlyReduceBoss", 0f, 60f);
         InvokeRepeating("RecheckMapRole", 1f, 60f);

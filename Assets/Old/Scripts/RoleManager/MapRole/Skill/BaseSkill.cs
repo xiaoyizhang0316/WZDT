@@ -31,7 +31,9 @@ public abstract class BaseSkill : MonoBehaviour
 
     public void UnleashSkills()
     {
-        transform.DOScale(1, 1f / role.baseRoleData.efficiency).OnComplete(() =>
+        float d = 1f /(role.baseRoleData.efficiency * 0.1f);
+      
+        transform.DOScale(1,d ).OnComplete(() =>
         {
             Skill();
             if (IsOpen)
@@ -39,8 +41,6 @@ public abstract class BaseSkill : MonoBehaviour
                 UnleashSkills();
             }
         });
-        
-      
     }
 
     /// <summary>

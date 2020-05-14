@@ -447,28 +447,40 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
- //  public ProductData GetInputProductData(GameEnum.ProductType type)
- //  {
- //      //print(type);
- //      if (type == GameEnum.ProductType.None)
- //      {
- //          ProductData newProduct = new ProductData();
- //          newProduct.birthday = (int)TimeManager.My.cumulativeTime;
- //          StageGoal.My.productList.Add(newProduct);
- //          return newProduct;
- //      }
+    //  public ProductData GetInputProductData(GameEnum.ProductType type)
+    //  {
+    //      //print(type);
+    //      if (type == GameEnum.ProductType.None)
+    //      {
+    //          ProductData newProduct = new ProductData();
+    //          newProduct.birthday = (int)TimeManager.My.cumulativeTime;
+    //          StageGoal.My.productList.Add(newProduct);
+    //          return newProduct;
+    //      }
 
- //      for (int i = 0; i < Input.Count; i++)
- //      {
- //          if (Input[i].productType == type)
- //          {
- //              return Input[i];
- //          }
- //      }
+    //      for (int i = 0; i < Input.Count; i++)
+    //      {
+    //          if (Input[i].productType == type)
+    //          {
+    //              return Input[i];
+    //          }
+    //      }
 
- //      return null;
- //  }
- /// <summary>
+    //      return null;
+    //  }
+    public void AddPruductToWareHouse(ProductData data)
+    {
+        if (warehouse.Count > 10)
+        {
+            return;
+        }
+        else
+        {
+            warehouse.Add(data);
+        }
+    }
+
+    /// <summary>
  /// 查找仓库产品
  /// </summary>
  /// <param name="type"></param>

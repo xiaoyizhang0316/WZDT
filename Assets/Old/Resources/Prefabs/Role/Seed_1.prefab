@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 745394881712787411}
   - component: {fileID: 745394881712787410}
   - component: {fileID: 5835603690850080641}
+  - component: {fileID: 5238769971576237431}
   m_Layer: 0
   m_Name: Seed_1
   m_TagString: MapRole
@@ -203,6 +204,7 @@ MonoBehaviour:
     baseRoleData:
       roleName: 
       roleType: 0
+      roleSkillType: 0
       level: 0
       effect: 0
       efficiency: 0
@@ -211,6 +213,7 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
+      tradeRange: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -228,17 +231,8 @@ MonoBehaviour:
     inMap: 0
     isNpc: 0
   warehouse: []
-  isAdvantage: 0
-  advantageShelves: []
-  advantageShelves_warehouse: []
-  AllSkills: []
-  AllPassivitySkills: []
-  passiveSkills: []
-  isCanSellSeed: 0
-  isCanSellMelon: 0
-  isCanRottenMelon: 0
   isNpc: 0
-  autoLoading: 0
+  tradeList: []
   buffList: []
   spawnConsumerInterval: 0
   CarCount: 0
@@ -254,6 +248,20 @@ MonoBehaviour:
   activityCost: 0
   tradeCost: 0
   shop: []
+--- !u!114 &5238769971576237431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745394881712787409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0542d12c365a824797721eb96311d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  role: {fileID: 5835603690850080641}
+  IsOpen: 1
 --- !u!1 &745394882642940845
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +665,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Role_Seed_LV1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 55fd56131b2fab647897bd87755554a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55fd56131b2fab647897bd87755554a0, type: 3}
