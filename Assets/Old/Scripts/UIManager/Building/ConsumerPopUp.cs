@@ -9,26 +9,6 @@ public class ConsumerPopUp : MonoSingleton<ConsumerPopUp>
 {
     public ConsumeSign currentConsumer;
 
-    public Text search;
-
-    public Text bargain;
-
-    public Text delivery;
-
-    public Text risk;
-
-    public Text mentalPrice;
-
-    public Text lastBuy;
-
-    public Text lastTC;
-
-    public Image lastSatisfy;
-
-    public Image sweetCursor;
-
-    public Image crispCursor;
-
     public List<Sprite> consumerSatisfyList;
 
     public Tweener tweener;
@@ -54,13 +34,7 @@ public class ConsumerPopUp : MonoSingleton<ConsumerPopUp>
     /// </summary>
     public void InitInfo()
     {
-        search.text = currentConsumer.consumeData.search.ToString();
-        bargain.text = currentConsumer.consumeData.bargain.ToString();
-        delivery.text = currentConsumer.consumeData.delivery.ToString();
-        risk.text = currentConsumer.consumeData.risk.ToString();
-        mentalPrice.text = currentConsumer.consumeData.mentalPrice.ToString();
-        lastBuy.text = currentConsumer.lastBuySinglePrice.ToString() + "*" + currentConsumer.lastBuyNumber.ToString();
-        lastTC.text = currentConsumer.lastTC.ToString();
+
     }
 
     /// <summary>
@@ -68,8 +42,7 @@ public class ConsumerPopUp : MonoSingleton<ConsumerPopUp>
     /// </summary>
     public void SetCursor()
     {
-        sweetCursor.transform.localPosition = new Vector3(-14f + (currentConsumer.consumeData.needSweetness * 6.54f), sweetCursor.transform.localPosition.y, 0f);
-        crispCursor.transform.localPosition = new Vector3(-14f + (currentConsumer.consumeData.needCrisp * 6.54f), crispCursor.transform.localPosition.y, 0f);
+
     }
 
     /// <summary>
@@ -77,26 +50,7 @@ public class ConsumerPopUp : MonoSingleton<ConsumerPopUp>
     /// </summary>
     public void SetSprite()
     {
-        if (currentConsumer.lastSatisfy < -50)
-        {
-            lastSatisfy.sprite = consumerSatisfyList[4];
-        }
-        else if (currentConsumer.lastSatisfy < -10)
-        {
-            lastSatisfy.sprite = consumerSatisfyList[3];
-        }
-        else if (currentConsumer.lastSatisfy < 10)
-        {
-            lastSatisfy.sprite = consumerSatisfyList[2];
-        }
-        else if (currentConsumer.lastSatisfy < 50)
-        {
-            lastSatisfy.sprite = consumerSatisfyList[1];
-        }
-        else
-        {
-            lastSatisfy.sprite = consumerSatisfyList[0];
-        }
+
     }
 
     /// <summary>

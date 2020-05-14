@@ -316,46 +316,46 @@ public class BaseBuff
         {
             case -1:
                 break;
-            case 30:
-                buffConfig.consumerSweetChange = CalculateNumber(str);
-                consumeData.needSweetness += buffConfig.consumerSweetChange;
-                break;
-            case 31:
-                buffConfig.consumerCrispChange = CalculateNumber(str);
-                consumeData.needCrisp += buffConfig.consumerCrispChange;
-                break;
-            case 32:
-                buffConfig.consumerMentalPriceChange = CalculateNumber(str);
-                consumeData.mentalPrice += buffConfig.consumerMentalPriceChange;
-                break;
-            case 33:
-                buffConfig.consumerSearchDistanceChange = CalculateNumber(str);
-                consumeData.searchDistance += buffConfig.consumerSearchDistanceChange;
-                break;
-            case 34:
-                buffConfig.consumerBuyPowerChange = CalculateNumber(str);
-                consumeData.buyPower += buffConfig.consumerBuyPowerChange;
-                break;
-            case 35:
-                buffConfig.consumerBuyRangeChange = CalculateNumber(str);
-                consumeData.buyRange += buffConfig.consumerBuyRangeChange;
-                break;
-            case 36:
-                buffConfig.consumerSearchChange = CalculateNumber(str);
-                consumeData.search += buffConfig.consumerSearchChange;
-                break;
-            case 37:
-                buffConfig.consumerBargainChange = CalculateNumber(str);
-                consumeData.bargain += buffConfig.consumerBargainChange;
-                break;
-            case 38:
-                buffConfig.consumerDeliverChange = CalculateNumber(str);
-                consumeData.delivery += buffConfig.consumerDeliverChange;
-                break;
-            case 39:
-                buffConfig.consumerRiskChange = CalculateNumber(str);
-                consumeData.risk += buffConfig.consumerRiskChange;
-                break;
+            //case 30:
+            //    buffConfig.consumerSweetChange = CalculateNumber(str);
+            //    consumeData.needSweetness += buffConfig.consumerSweetChange;
+            //    break;
+            //case 31:
+            //    buffConfig.consumerCrispChange = CalculateNumber(str);
+            //    consumeData.needCrisp += buffConfig.consumerCrispChange;
+            //    break;
+            //case 32:
+            //    buffConfig.consumerMentalPriceChange = CalculateNumber(str);
+            //    consumeData.mentalPrice += buffConfig.consumerMentalPriceChange;
+            //    break;
+            //case 33:
+            //    buffConfig.consumerSearchDistanceChange = CalculateNumber(str);
+            //    consumeData.searchDistance += buffConfig.consumerSearchDistanceChange;
+            //    break;
+            //case 34:
+            //    buffConfig.consumerBuyPowerChange = CalculateNumber(str);
+            //    consumeData.buyPower += buffConfig.consumerBuyPowerChange;
+            //    break;
+            //case 35:
+            //    buffConfig.consumerBuyRangeChange = CalculateNumber(str);
+            //    consumeData.buyRange += buffConfig.consumerBuyRangeChange;
+            //    break;
+            //case 36:
+            //    buffConfig.consumerSearchChange = CalculateNumber(str);
+            //    consumeData.search += buffConfig.consumerSearchChange;
+            //    break;
+            //case 37:
+            //    buffConfig.consumerBargainChange = CalculateNumber(str);
+            //    consumeData.bargain += buffConfig.consumerBargainChange;
+            //    break;
+            //case 38:
+            //    buffConfig.consumerDeliverChange = CalculateNumber(str);
+            //    consumeData.delivery += buffConfig.consumerDeliverChange;
+            //    break;
+            //case 39:
+            //    buffConfig.consumerRiskChange = CalculateNumber(str);
+            //    consumeData.risk += buffConfig.consumerRiskChange;
+            //    break;
             default:
                 break;
         }

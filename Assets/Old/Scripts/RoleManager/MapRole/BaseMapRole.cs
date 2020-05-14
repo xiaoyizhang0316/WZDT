@@ -557,7 +557,6 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void SpawnConsumer()
     {
-      
         //todo
         //print("开始召唤消费者");
        // int number = (int)(baseRoleData.brand / 6f);

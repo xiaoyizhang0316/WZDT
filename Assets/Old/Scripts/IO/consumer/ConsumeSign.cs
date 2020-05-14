@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using static GameEnum;
+using DT.Fight.Bullet;
 
 
 public class ConsumeSign : MonoBehaviour
@@ -14,29 +15,9 @@ public class ConsumeSign : MonoBehaviour
     public ConsumeData consumeData;
 
     /// <summary>
-    /// 初始默认速度
-    /// </summary>
-    public float startSpeed;
-
-    /// <summary>
-    /// 当前速度
-    /// </summary>
-    public float currentSpeed;
-
-    /// <summary>
     /// 消费者类别
     /// </summary>
     public ConsumerType consumerType;
-
-    /// <summary>
-    /// 质量要求
-    /// </summary>
-    public int qualityNeed;
-
-    /// <summary>
-    /// 目标商店位置
-    /// </summary>
-    public Transform target;
 
     /// <summary>
     /// 目标商店
@@ -49,70 +30,106 @@ public class ConsumeSign : MonoBehaviour
     public Tweener tweener;
 
     /// <summary>
-    /// 总计花费
+    /// 当前生命值
     /// </summary>
-    public float totalPay;
-
-    /// <summary>
-    /// 总计满意度
-    /// </summary>
-    public float totalSatisfy;
-
-    /// <summary>
-    /// 上次购买数量
-    /// </summary>
-    public int lastBuyNumber;
-
-    /// <summary>
-    /// 上次购买单价
-    /// </summary>
-    public float lastBuySinglePrice;
-
-    /// <summary>
-    /// 上次交易成本
-    /// </summary>
-    public float lastTC;
-
-    /// <summary>
-    /// 上次满意度
-    /// </summary>
-    public float lastSatisfy;
+    public int currentHealth;
 
     /// <summary>
     /// BUFF列表
     /// </summary>
     public Dictionary<int, float> buffList = new Dictionary<int, float>();
 
-    public Dictionary<Transform, float> roleDistanceTime = new Dictionary<Transform, float>();
-
     public bool isStart = false;
+
+    public bool isCanSelect = false;
 
     /// <summary>
     /// 初始化
     /// </summary>
-    public void Init(ConsumerType type, int _qualityNeed,int sweet,int crisp)
+    public void Init(ConsumerType type)
     {
         consumerType = type;
-        qualityNeed = _qualityNeed;
-        consumeData = new ConsumeData(consumerType,sweet,crisp);
-        startSpeed = 1f;
-        currentSpeed = startSpeed;
-        totalPay = 0f;
-        lastBuyNumber = 0;
-        lastBuySinglePrice = 0f;
-        totalSatisfy = 0f;
-        lastSatisfy = 0f;
+        consumeData = new ConsumeData(consumerType);
     }
 
-    public void ActiveAndMove(BaseMapRole targetRole)
+    public void InitAndMove(BaseMapRole targetRole)
     {
+        currentHealth = 0;
         targetShop = targetRole;
-        target = targetRole.transform;
         float waitTime = UnityEngine.Random.Range(0f, 2f);
-        transform.DOLookAt(target.position, 0f);
+        transform.DOLookAt(targetShop.transform.position, 0f);
         Invoke("MoveToShop", waitTime);
-        Invoke("OverTimeBackHome", consumeData.searchDistance + waitTime);
-        //MoveToShop();
+        if (consumeData.liveTime > 0)
+        {
+            Invoke("OnAlive", consumeData.liveTime + waitTime);
+        }
+    }
+
+    public void OnHit(ProductData data)
+    {
+
+    }
+
+    public void OnDeath()
+    {
+        CancelInvoke("OnAlive");
+        Stop();
+    }
+
+    public void OnAlive()
+    {
+        AliveBackHome();
+    }
+
+    /// <summary>
+    /// 去目标的角色商店    
+    /// </summary>
+    public void MoveToShop()
+    {
+        GetComponent<Animator>().SetBool("walk", true);
+        isStart = true;
+        isCanSelect = true;
+        transform.DOLookAt(targetShop.transform.position, 0.5f);
+        tweener = transform.DOMove(targetShop.transform.position, Vector3.Distance(transform.position, targetShop.transform.position) / consumeData.moveSpeed).OnComplete(() => OnAlive()).SetEase(Ease.Linear);
+    }
+
+    /// <summary>
+    /// 存活自动回家
+    /// </summary>
+    public void AliveBackHome()
+    {
+        Stop();
+        print("消费者存活");
+        float waitTime = UnityEngine.Random.Range(0.5f, 1.5f);
+        Invoke("BackHome", waitTime);
+    }
+
+    /// <summary>
+    /// 死亡自动回家
+    /// </summary>
+    public void DeathBackHome()
+    {
+        Stop();
+        print("消费者死亡");
+        BackHome();
+    }
+
+    /// <summary>
+    /// 停止
+    /// </summary>
+    public void Stop()
+    {
+        tweener.Kill();
+        GetComponent<Animator>().SetBool("walk", false);
+    }
+
+    /// <summary>
+    /// 回家
+    /// </summary>
+    public void BackHome()
+    {
+        transform.localPosition = Vector3.zero;
+        gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -140,7 +157,6 @@ public class ConsumeSign : MonoBehaviour
                 RecheckBuff();
             }
         }
-
     }
 
     /// <summary>
@@ -164,7 +180,6 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void RecheckBuff()
     {
-        //Stop();
         float speedAdd = 1f;
         if (buffList.Count > 0)
         {
@@ -176,157 +191,6 @@ public class ConsumeSign : MonoBehaviour
         tweener.timeScale = speedAdd;
     }
 
-    /// <summary>
-    /// 去目标的角色商店    
-    /// </summary>
-    public void MoveToShop()
-    {
-        GetComponent<Animator>().SetBool("walk", true);
-        isStart = true;
-        transform.DOLookAt(target.position, 0.5f);
-        tweener = transform.DOMove(target.position, Vector3.Distance(this.transform.position, target.position) / currentSpeed).OnComplete(() => Shopping(targetShop)).SetEase(Ease.Linear);
-
-    }
-
-    /// <summary>
-    /// 超时自动回家
-    /// </summary>
-    public void OverTimeBackHome()
-    {
-        Stop();
-        print("超时自动回家");
-        float waitTime = UnityEngine.Random.Range(0.5f, 1.5f);
-        Invoke("BackHome", waitTime);
-    }
-
-    /// <summary>
-    /// 停止
-    /// </summary>
-    public void Stop()
-    {
-        tweener.Kill();
-        GetComponent<Animator>().SetBool("walk", false);
-    }
-
-    /// <summary>
-    /// 消费者进店购物结算
-    /// </summary>
-    /// <param name="targetShop"></param>
-    public void Shopping(BaseMapRole targetShop)
-    {
-        GetComponent<Animator>().SetBool("walk", false);
-        CancelInvoke("OverTimeBackHome");
-        int maxProIndex = -1;
-        targetShop.OnConsumerInShop(ref consumeData);
-        int money = 0;
-        ///口味
-        if (consumeData.preference == 0)
-        {
-            if (targetShop.shop.Count == 0)
-            {
-                print("没货返回");
-                CalculateSatisfy(targetShop, money);
-                return;
-            }
-            int maxValue = CheckMatch(targetShop.shop[0], 0);
-            int temp;
-            for (int i = 0; i < targetShop.shop.Count; i++)
-            {
-                temp = CheckMatch(targetShop.shop[i], 0);
-                maxProIndex = 0;
-                if (temp < maxValue)
-                {
-                    maxValue = temp;
-                    maxProIndex = i;
-                }
-            }
- 
-        }
-        ///价格
-        ///
-        else if (consumeData.preference == 1)
-        {
-            if (targetShop.shop.Count == 0)
-            {
-                CalculateSatisfy(targetShop, money);
-                return;
-            }
-            maxProIndex = 0;
-            int maxValue = CheckMatch(targetShop.shop[0], 1);
-            int temp;
-            for (int i = 0; i < targetShop.shop.Count; i++)
-            {
-                temp = CheckMatch(targetShop.shop[i], 1);
-                if (temp < maxValue)
-                {
-                    maxValue = temp;
-                    maxProIndex = i;
-                }
-            }
-        
-        }
-    }
-
-    /// <summary>
-    /// 将单个产品与消费者进行匹配
-    /// </summary>
-    /// <param name="p"></param>
-    /// <param name="preference"></param>
-    /// <returns></returns>
-    public int CheckMatch(ProductData p, int preference)
-    {
-         
-        return 10000;
-    }
-
-    /// <summary>
-    /// 满意度结算
-    /// </summary>
-    /// <param name="type"></param>
-    public void CalculateSatisfy(BaseMapRole mapRole, int money)
-    {
-        float result;
-        if (money != 0)
-        {
-            result = (money) - (CalculateTC(mapRole));
-        }
-        else
-        {
-            result = 0 - (CalculateTC(mapRole) / 2);
-        }
-        mapRole.OnConsumerSatisfy(ref result);
-        mapRole.GetConsumerSatisfy(result);
-        lastSatisfy = result;
-        totalSatisfy += result;
-        float waitTime = UnityEngine.Random.Range(2f, 5f);
-        Invoke("BackHome",waitTime);
-    }
-
-    /// <summary>
-    /// 回家
-    /// </summary>
-    public void BackHome()
-    {
-        transform.localPosition = Vector3.zero;
-        gameObject.SetActive(false);
-    }
-
-    /// <summary>
-    /// 计算消费者和商店之间的交易成本
-    /// </summary>
-    /// <returns></returns>
-    public float CalculateTC(BaseMapRole mapRole)
-    {
-        float result = 0f;
-      // result += (float)(consumeData.search + mapRole.baseRoleData.search) ;
-      // result += (float)(consumeData.bargain + mapRole.baseRoleData.bargain);
-      // result += (float)(consumeData.delivery + mapRole.baseRoleData.delivery) ;
-        result = result / 1f;
-        lastTC = result;
-        //print("交易成本：" + result);
-        return (result);
-    }
- 
     // Start is called before the first frame update
     void Start()
     {

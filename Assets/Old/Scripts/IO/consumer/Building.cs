@@ -41,7 +41,7 @@ public class Building : MonoBehaviour
                 int num = UnityEngine.Random.Range(1, 11);
                 path += num.ToString();
                 GameObject go = Instantiate(Resources.Load<GameObject>(path),transform);
-                go.GetComponent<ConsumeSign>().Init(buildingConfigs[i].consumerType, buildingQualityNeed,buildingSweet,buildingCrisp);
+                go.GetComponent<ConsumeSign>().Init(buildingConfigs[i].consumerType);
                 go.transform.localScale = Vector3.one;
                 consumerGoList.Add(go);
                 go.SetActive(false);
@@ -56,13 +56,7 @@ public class Building : MonoBehaviour
     public int GetActiveConsuemr()
     {
         int result = 0;
-        foreach (GameObject go in consumerGoList)
-        {
-            if (go.GetComponent<ConsumeSign>().totalSatisfy != 0)
-            {
-                result++;
-            }
-        }
+
         return result;
     }
 
@@ -73,10 +67,7 @@ public class Building : MonoBehaviour
     public float GetTotalSatisfy()
     {
         float result = 0;
-        foreach (GameObject go in consumerGoList)
-        {
-            result += go.GetComponent<ConsumeSign>().totalSatisfy;
-        }
+
         return result;
     }
 
