@@ -139,6 +139,4 @@ public class ConsumerItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
     {
         
     }
-
-
 }

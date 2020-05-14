@@ -53,13 +53,13 @@ public class ConsumeData
     public ConsumeData(ConsumerType type)
     {
         ConsumerTypeData data = GameDataMgr.My.GetConsumerTypeDataByType(type);
-        maxHealth = 100;
-        moveSpeed = 1f;
-        liveTime = 10f;
-        spawnNumber = 2;
-        killMoney = 10;
-        killSatisfy = 10;
-        liveSatisfy = 10;
+        maxHealth = data.maxHealth;
+        moveSpeed = data.moveSpeed;
+        liveTime = data.liveTime;
+        spawnNumber = data.spawnNumber;
+        killMoney = data.killMoney;
+        killSatisfy = data.killSatisfy;
+        liveSatisfy = data.liveSatisfy;
         consumerName = "消费者名称";
     }
 }

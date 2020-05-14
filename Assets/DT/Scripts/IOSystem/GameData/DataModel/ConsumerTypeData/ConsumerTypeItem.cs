@@ -9,41 +9,40 @@ public class ConsumerTypeItem
 {
     public string consumerType;
 
-    public string minSweet;
+    /// <summary>
+    /// 生命值（血量）
+    /// </summary>
+    public string maxHealth;
 
-    public string maxSweet;
+    /// <summary>
+    /// 移动速度
+    /// </summary>
+    public string moveSpeed;
 
-    public string minCrisp;
+    /// <summary>
+    /// 存活时间
+    /// </summary>
+    public string liveTime;
 
-    public string maxCrisp;
+    /// <summary>
+    /// 同时生产几个
+    /// </summary>
+    public string spawnNumber;
 
-    public string minMentalPrice;
+    /// <summary>
+    /// 击杀获得金钱
+    /// </summary>
+    public string killMoney;
 
-    public string maxMentalPrice;
+    /// <summary>
+    /// 击杀获得满意度
+    /// </summary>
+    public string killSatisfy;
 
-    public string minSearchTime;
-
-    public string maxSearchTime;
-
-    public string minBuyPower;
-
-    public string maxBuyPower;
-
-    public string minSearch;
-
-    public string maxSearch;
-
-    public string minBargain;
-
-    public string maxBargain;
-
-    public string minDelivery;
-
-    public string maxDelivery;
-
-    public string minRisk;
-
-    public string maxRisk;
+    /// <summary>
+    /// 存活满意度惩罚
+    /// </summary>
+    public string liveSatisfy;
 }
 
 [Serializable]

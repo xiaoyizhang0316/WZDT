@@ -247,8 +247,11 @@ MonoBehaviour:
     isNpc: 0
   warehouse: []
   isNpc: 0
+  tradeList: []
   buffList: []
   spawnConsumerInterval: 0
+  shotTargetList: []
+  shotTarget: {fileID: 0}
   CarCount: 0
   AI: 0
   contributionNum: 0
@@ -661,6 +664,7 @@ GameObject:
   - component: {fileID: 536926847919342649}
   - component: {fileID: 601174859542035484}
   - component: {fileID: 7308661235398786995}
+  - component: {fileID: 4746730520518176208}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -704,6 +708,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: -1
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4746730520518176208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027598181052529707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6807691c035244ba973b7ff3b582686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4329599690989183277
 GameObject:
   m_ObjectHideFlags: 0

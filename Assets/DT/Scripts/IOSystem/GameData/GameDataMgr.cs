@@ -533,24 +533,13 @@ using UnityEngine.SceneManagement;
             {
                 ConsumerTypeData temp = new ConsumerTypeData();
                 temp.consumerType = (ConsumerType)Enum.Parse(typeof(ConsumerType), c.consumerType);
-                temp.minSweet = int.Parse(c.minSweet);
-                temp.maxSweet = int.Parse(c.maxSweet);
-                temp.minCrisp = int.Parse(c.minCrisp);
-                temp.maxCrisp = int.Parse(c.maxCrisp);
-                temp.minMentalPrice = int.Parse(c.minMentalPrice);
-                temp.maxMentalPrice = int.Parse(c.maxMentalPrice);
-                temp.minSearchTime = int.Parse(c.minSearchTime);
-                temp.maxSearchTime = int.Parse(c.maxSearchTime);
-                temp.minBuyPower = float.Parse(c.minBuyPower);
-                temp.maxBuyPower = float.Parse(c.maxBuyPower);
-                temp.minSearch = int.Parse(c.minSearch);
-                temp.maxSearch = int.Parse(c.maxSearch);
-                temp.minBargain = int.Parse(c.minBargain);
-                temp.maxBargain = int.Parse(c.maxBargain);
-                temp.minDelivery = int.Parse(c.minDelivery);
-                temp.maxDelivery = int.Parse(c.maxDelivery);
-                temp.minRisk = int.Parse(c.minRisk);
-                temp.maxRisk = int.Parse(c.maxRisk);
+                temp.maxHealth = int.Parse(c.maxHealth);
+                temp.moveSpeed = float.Parse(c.moveSpeed);
+                temp.liveTime = float.Parse(c.liveTime);
+                temp.spawnNumber = int.Parse(c.spawnNumber);
+                temp.killMoney = int.Parse(c.killMoney);
+                temp.killSatisfy = int.Parse(c.killSatisfy);
+                temp.liveSatisfy = int.Parse(c.liveSatisfy);
                 consumerTypeDatas.Add(temp);
             }
         }
