@@ -110,7 +110,9 @@ public class BaseMapRole : MonoBehaviour
         if (!PlayerData.My.RoleData.Contains(baseRoleData))
         {
             PlayerData.My.RoleData.Add(baseRoleData);
-        } 
+        }
+
+        DayBegin();
     }
 
     #region 交易记录
@@ -642,7 +644,7 @@ public class BaseMapRole : MonoBehaviour
     public void DayBegin()
     {
         InvokeRepeating("SpawnConsumer", 0f,10f);
-        InvokeRepeating("SetShootTarget", 0f, 1f);
+        InvokeRepeating("SetShootTarget", 0f, 0.2f);
     }
 
     /// <summary>

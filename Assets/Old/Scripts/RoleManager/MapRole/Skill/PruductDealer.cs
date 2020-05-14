@@ -5,26 +5,17 @@ using UnityEngine;
 public class PruductDealer : BaseSkill
 {
 
-    public Transform Target;
+ 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+ 
     public override void Skill()
     {
         if (role.warehouse.Count > 0)
         {
+            Debug.Log("攻击");
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
-           GetComponent<BulletLaunch>().LanchNormal(Target.position,data);
+           GetComponent<BulletLaunch>().LanchNormal(role.shootTarget.transform.position,data);
         
         }
     }
