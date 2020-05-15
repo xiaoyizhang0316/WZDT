@@ -15,7 +15,7 @@ public class GoodsSign : MonoBehaviour
     /// </summary>
     public BulletLaunch lunch;
     public List<Vector3> path;
-    private Tweener twe;
+    public  Tweener twe;
     public BaseMapRole role;
     // Start is called before the first frame update
     void Start()
@@ -64,9 +64,9 @@ public class GoodsSign : MonoBehaviour
         Debug.Log(lunch);
         if (other.tag == "Consumer"&&other.GetComponent<ConsumeSign>()== lunch. GetComponent<BaseMapRole>().shootTarget)
         {
-            if (lunch.lanchNormalTWE.IsPlaying())
+            if (twe.IsPlaying())
             {
-                lunch.lanchNormalTWE.Kill();
+                twe.Kill();
                 lunch. GetComponent<BaseMapRole>().shootTarget.OnHit(productData);
                 BulletObjectPool.My.RecoveryBullet(gameObject); 
             }

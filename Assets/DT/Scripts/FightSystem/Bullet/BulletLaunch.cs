@@ -52,6 +52,7 @@ public class BulletLaunch : MonoBehaviour
             GetComponent<BaseMapRole>().shootTarget.OnHit(data);
             BulletObjectPool.My.RecoveryBullet(gameObject); 
         });
+        gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
         isplay = true;
         return gameObject;
     }
