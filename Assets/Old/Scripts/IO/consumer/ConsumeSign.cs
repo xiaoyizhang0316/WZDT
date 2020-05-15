@@ -47,12 +47,15 @@ public class ConsumeSign : MonoBehaviour
 
     public bool isCanSelect = false;
 
+    public Transform home;
+
     /// <summary>
     /// 初始化
     /// </summary>
-    public void Init(ConsumerType type)
+    public void Init(ConsumerType type,Transform building)
     {
         consumerType = type;
+        home = building;
         consumeData = new ConsumeData(consumerType);
         GameObject go = Instantiate(hudPrb, transform);
         hud = go.GetComponent<Hud>();
@@ -66,11 +69,13 @@ public class ConsumeSign : MonoBehaviour
     /// <param name="targetRole"></param>
     public void InitAndMove(BaseMapRole targetRole)
     {
+        isStart = false;
+        isCanSelect = false;
         currentHealth = 0;
         hud.UpdateHud(0f);
         targetShop = targetRole;
         float waitTime = UnityEngine.Random.Range(0f, 2f);
-        transform.DOLookAt(targetShop.transform.position, 0f);
+        transform.DOLookAt(home.position, 0.1f);
         Invoke("MoveToShop", waitTime);
         if (consumeData.liveTime > 0)
         {
@@ -94,6 +99,7 @@ public class ConsumeSign : MonoBehaviour
     public void OnDeath()
     {
         CancelInvoke("OnAlive");
+        DeathAward();
         DeathBackHome();
         Stop();
     }
@@ -103,6 +109,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void OnAlive()
     {
+        LivePunish();
         AliveBackHome();
     }
 
@@ -119,6 +126,16 @@ public class ConsumeSign : MonoBehaviour
         }
     }
 
+    public void DeathAward()
+    {
+
+    }
+
+    public void LivePunish()
+    {
+
+    }
+
     /// <summary>
     /// 去目标的角色商店    
     /// </summary>
@@ -127,8 +144,16 @@ public class ConsumeSign : MonoBehaviour
         GetComponent<Animator>().SetBool("walk", true);
         isStart = true;
         isCanSelect = true;
-        transform.DOLookAt(targetShop.transform.position, 0.5f);
-        tweener = transform.DOMove(targetShop.transform.position, Vector3.Distance(transform.position, targetShop.transform.position) / consumeData.moveSpeed).OnComplete(() => OnAlive()).SetEase(Ease.Linear);
+        Invoke("LookAtHome", 0.5f);
+        tweener = transform.DOMove(targetShop.transform.position, Vector3.Distance(transform.position, targetShop.transform.position) / consumeData.moveSpeed * 2f).OnComplete(() => OnAlive()).SetEase(Ease.Linear);
+    }
+
+    /// <summary>
+    /// 看向家的方向
+    /// </summary>
+    public void LookAtHome()
+    {
+        transform.DOLookAt(home.position, 0f);
     }
 
     /// <summary>
@@ -141,8 +166,10 @@ public class ConsumeSign : MonoBehaviour
         isStart = false;
         targetShop.RemoveConsumerFromShootList(this);
         print("消费者存活");
-        float waitTime = UnityEngine.Random.Range(0.5f, 1.5f);
-        Invoke("BackHome", waitTime);
+        tweener = transform.DOMove(home.transform.position, Vector3.Distance(transform.position, home.position) / consumeData.moveSpeed).OnComplete(BackHome);
+        GetComponent<Animator>().SetBool("walk", true);
+        //float waitTime = UnityEngine.Random.Range(0.5f, 1.5f);
+        //Invoke("BackHome", waitTime);
     }
 
     /// <summary>

@@ -15,43 +15,39 @@ public class BulletLaunch : MonoBehaviour
     /// 炮台
     /// </summary>
     public Transform launchShooter;
-    
+
     public float per;
     public void LanchBoom(Vector3 target)
     {
-        
         List<Vector3> pointList = new List<Vector3>();
-        pointList = DrawLine(transform,target);
-     GameObject gameObject =    BulletObjectPool.My.GetBullet(BulletType.Bomb);
-     gameObject.transform.SetParent(launchShooter);
-     gameObject.transform.localPosition = Vector3.zero;
-     
-     launchShooter.DOLookAt(target,0.3f);
-     gameObject.transform.DOPath(pointList.ToArray(),5).SetEase(sase).OnComplete(() =>
-     {
-         BulletObjectPool.My.RecoveryBullet(gameObject);
-     });
+        pointList = DrawLine(transform, target);
+        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Bomb);
+        gameObject.transform.SetParent(launchShooter);
+        gameObject.transform.localPosition = Vector3.zero;
+
+        launchShooter.DOLookAt(target, 0.3f);
+        gameObject.transform.DOPath(pointList.ToArray(), 5).SetEase(sase).OnComplete(() =>
+         {
+             BulletObjectPool.My.RecoveryBullet(gameObject);
+         });
     }
 
-    public GameObject LanchNormal(Vector3 target,ProductData data)
+    public GameObject LanchNormal(Vector3 target, ProductData data)
     {
-        
-    
-         
-        GameObject gameObject =    BulletObjectPool.My.GetBullet(BulletType.NormalPP);
+        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.NormalPP);
         gameObject.GetComponent<GoodsSign>().productData = data;
         gameObject.transform.SetParent(launchShooter);
-        gameObject.transform.localPosition = new Vector3(0,0.5f,0);
-     
-        launchShooter.DOLookAt(target , 0.3f);
-        gameObject.transform.DOMove(target,1).SetEase(sase).OnComplete(() =>
-        {
-            GetComponent<BaseMapRole>().shootTarget.OnHit(data);
-            BulletObjectPool.My.RecoveryBullet(gameObject); 
-        });
+        gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
+
+        launchShooter.DOLookAt(target, 0.3f);
+        gameObject.transform.DOMove(target, 1).SetEase(sase).OnComplete(() =>
+         {
+             GetComponent<BaseMapRole>().shootTarget.OnHit(data);
+             BulletObjectPool.My.RecoveryBullet(gameObject);
+         });
         return gameObject;
     }
-    public  List<Vector3>  DrawLine(Transform startTarget ,Transform Target)
+    public List<Vector3> DrawLine(Transform startTarget, Transform Target)
     {
         List<Vector3> pointList = new List<Vector3>();
         int vertexCount = 30;//采样点数量
@@ -75,7 +71,7 @@ public class BulletLaunch : MonoBehaviour
         pointList.Add(Target.position);
         return pointList;
     }
-    public  List<Vector3>  DrawLine(Transform startTarget ,Vector3 Target)
+    public List<Vector3> DrawLine(Transform startTarget, Vector3 Target)
     {
         List<Vector3> pointList = new List<Vector3>();
         int vertexCount = 30;//采样点数量
@@ -85,7 +81,7 @@ public class BulletLaunch : MonoBehaviour
         {
             float x = startTarget.position.x * per + Target.x * (per);
             //float y = startTarget.localPosition.y * per + Target.localPosition.y * (1f - per) ;
-            float y =50;
+            float y = 50;
             float z = startTarget.position.z * per + Target.z * (per);
             Vector3 point3 = new Vector3(x, y, z);
             for (float ratio = 0; ratio <= 1; ratio += 1.0f / vertexCount)
@@ -97,28 +93,28 @@ public class BulletLaunch : MonoBehaviour
             }
         }
         pointList.Add(Target);
-        
+
         return pointList;
     }
 
-  
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     private void OnGUI()
     {
         if (GUILayout.Button("123"))
         {
-            LanchNormal(Camera.main.transform.position,new ProductData());
+            LanchNormal(Camera.main.transform.position, new ProductData());
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

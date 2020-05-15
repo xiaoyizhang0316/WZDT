@@ -41,7 +41,7 @@ public class Building : MonoBehaviour
                 int num = UnityEngine.Random.Range(1, 11);
                 path += num.ToString();
                 GameObject go = Instantiate(Resources.Load<GameObject>(path),transform);
-                go.GetComponent<ConsumeSign>().Init(buildingConfigs[i].consumerType);
+                go.GetComponent<ConsumeSign>().Init(buildingConfigs[i].consumerType,transform);
                 go.transform.localScale = Vector3.one;
                 consumerGoList.Add(go);
                 go.SetActive(false);
