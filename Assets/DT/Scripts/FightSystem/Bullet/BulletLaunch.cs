@@ -15,8 +15,10 @@ public class BulletLaunch : MonoBehaviour
     /// 炮台
     /// </summary>
     public Transform launchShooter;
-    
+ public   Tweener lanchNormalTWE;
     public float per;
+
+    
     public void LanchBoom(Vector3 target)
     {
         
@@ -33,22 +35,24 @@ public class BulletLaunch : MonoBehaviour
      });
     }
 
-    public GameObject LanchNormal(Vector3 target,ProductData data)
+    private bool isplay ;
+    public GameObject LanchNormal( ProductData data)
     {
-        
-    
-         
         GameObject gameObject =    BulletObjectPool.My.GetBullet(BulletType.NormalPP);
         gameObject.GetComponent<GoodsSign>().productData = data;
+        gameObject.GetComponent<GoodsSign>().lunch = this;
         gameObject.transform.SetParent(launchShooter);
         gameObject.transform.localPosition = new Vector3(0,0.5f,0);
      
-        launchShooter.DOLookAt(target , 0.3f);
-        gameObject.transform.DOMove(target,1).SetEase(sase).OnComplete(() =>
+        launchShooter.DOLookAt(GetComponent<BaseMapRole>().shootTarget.transform.position  , 0.1f);
+  
+        lanchNormalTWE =     gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position ,1).SetEase(sase).OnComplete(() =>
         {
+            isplay = false;
             GetComponent<BaseMapRole>().shootTarget.OnHit(data);
             BulletObjectPool.My.RecoveryBullet(gameObject); 
         });
+        isplay = true;
         return gameObject;
     }
     public  List<Vector3>  DrawLine(Transform startTarget ,Transform Target)
@@ -110,10 +114,7 @@ public class BulletLaunch : MonoBehaviour
 
     private void OnGUI()
     {
-        if (GUILayout.Button("123"))
-        {
-            LanchNormal(Camera.main.transform.position,new ProductData());
-        }
+        
     }
 
     // Update is called once per frame

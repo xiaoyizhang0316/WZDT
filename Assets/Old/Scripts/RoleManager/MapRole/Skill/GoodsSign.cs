@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using DT.Fight.Bullet;
 using UnityEngine;
 
 public class GoodsSign : MonoBehaviour
@@ -8,13 +10,18 @@ public class GoodsSign : MonoBehaviour
 
     public ProductData productData;
 
+    /// <summary>
+    /// 发射者
+    /// </summary>
+    public BulletLaunch lunch;
     public List<Vector3> path;
-
+    private Tweener twe;
     public BaseMapRole role;
     // Start is called before the first frame update
     void Start()
     {
-        
+        needUpdate = false;
+    //    InvokeRepeating("UpdatePos",0.1f,0.1f);
     }
 
     // Update is called once per frame
@@ -44,4 +51,27 @@ public class GoodsSign : MonoBehaviour
         }).SetEase(Ease.Linear);
     }
 
+    private bool needUpdate;
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (lunch == null)
+        {
+            return;
+        }
+
+        Debug.Log(other.gameObject.name);
+        Debug.Log(lunch);
+        if (other.tag == "Consumer"&&other.GetComponent<ConsumeSign>()== lunch. GetComponent<BaseMapRole>().shootTarget)
+        {
+            if (lunch.lanchNormalTWE.IsPlaying())
+            {
+                lunch.lanchNormalTWE.Kill();
+                lunch. GetComponent<BaseMapRole>().shootTarget.OnHit(productData);
+                BulletObjectPool.My.RecoveryBullet(gameObject); 
+            }
+
+        
+        }
+    }
 }

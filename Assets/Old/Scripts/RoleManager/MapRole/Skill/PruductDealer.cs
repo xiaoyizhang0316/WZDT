@@ -12,10 +12,15 @@ public class PruductDealer : BaseSkill
     {
         if (role.warehouse.Count > 0)
         {
+            if (role.shootTarget == null)
+            {
+                return;
+            }
+
             //Debug.Log("攻击");
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
-           GetComponent<BulletLaunch>().LanchNormal(role.shootTarget.transform.position,data);
+           GetComponent<BulletLaunch>().LanchNormal( data);
         
         }
     }
