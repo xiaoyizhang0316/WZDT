@@ -34,6 +34,10 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public int currentHealth;
 
+    public GameObject hudPrb;
+
+    public Hud hud;
+
     /// <summary>
     /// BUFF列表
     /// </summary>
@@ -50,6 +54,10 @@ public class ConsumeSign : MonoBehaviour
     {
         consumerType = type;
         consumeData = new ConsumeData(consumerType);
+        GameObject go = Instantiate(hudPrb, transform);
+        hud = go.GetComponent<Hud>();
+        hud.Init(this);
+        go.transform.localPosition = Vector3.zero + new Vector3(0, 2.2f, 0);
     }
 
     /// <summary>
@@ -59,6 +67,7 @@ public class ConsumeSign : MonoBehaviour
     public void InitAndMove(BaseMapRole targetRole)
     {
         currentHealth = 0;
+        hud.UpdateHud(0f);
         targetShop = targetRole;
         float waitTime = UnityEngine.Random.Range(0f, 2f);
         transform.DOLookAt(targetShop.transform.position, 0f);
@@ -75,7 +84,8 @@ public class ConsumeSign : MonoBehaviour
     /// <param name="data"></param>
     public void OnHit(ProductData data)
     {
-        
+        currentHealth += (int)data.damage;
+        HealthCheck();
     }
 
     /// <summary>
@@ -101,6 +111,8 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void HealthCheck()
     {
+        float per = currentHealth / (float)consumeData.maxHealth;
+        hud.UpdateHud(per);
         if (currentHealth >= consumeData.maxHealth)
         {
             OnDeath();
@@ -232,6 +244,6 @@ public class ConsumeSign : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }
