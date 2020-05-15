@@ -23,12 +23,10 @@ public class PruductSeed : BaseSkill
         data.loadingSpeed = 1;
         data.buffMaxCount = 3;
         data.buffList = new List<BuffData>();
-        print("种子伤害 ： " + data.damage);
         GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
         game.GetComponent<GoodsSign>().productData = data;
         game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
         game.GetComponent<GoodsSign>().role =PlayerData.My.GetMapRoleById(Double.Parse( role.tradeList[currentCount].tradeData.targetRole));
-        print("运输种子伤害：" + game.GetComponent<GoodsSign>().productData.damage);
         game.transform.position = transform.position;
         game.GetComponent<GoodsSign>().Move();
         

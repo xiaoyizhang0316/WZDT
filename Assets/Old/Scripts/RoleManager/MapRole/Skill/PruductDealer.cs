@@ -12,7 +12,7 @@ public class PruductDealer : BaseSkill
     {
         if (role.warehouse.Count > 0)
         {
-            if (role.shootTarget == null)
+            if (!role.shootTarget.isCanSelect)
             {
                 return;
             }

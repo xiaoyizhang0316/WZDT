@@ -164,7 +164,7 @@ public class BaseMapRole : MonoBehaviour
         //    if (!shootTarget.isCanSelect)
         //        shootTarget = null;
         //}
-        shootTarget = null;
+        //shootTarget = null;
         if (shootTargetList.Count == 0)
             return;
         int max = 0;
