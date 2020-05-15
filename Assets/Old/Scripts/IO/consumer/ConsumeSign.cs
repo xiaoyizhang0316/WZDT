@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using static GameEnum;
 using DT.Fight.Bullet;
+using DG.Tweening;
 
 
 public class ConsumeSign : MonoBehaviour
@@ -72,7 +73,7 @@ public class ConsumeSign : MonoBehaviour
         isStart = false;
         isCanSelect = false;
         currentHealth = 0;
-        hud.UpdateHud(0f);
+        hud.healthImg.fillAmount = 0f;
         targetShop = targetRole;
         float waitTime = UnityEngine.Random.Range(0f, 2f);
         transform.DOLookAt(home.position, 0.1f);
@@ -89,8 +90,11 @@ public class ConsumeSign : MonoBehaviour
     /// <param name="data"></param>
     public void OnHit(ProductData data)
     {
-        currentHealth += (int)data.damage;
-        HealthCheck();
+        if (isCanSelect)
+        {
+            currentHealth += (int)data.damage;
+            HealthCheck();
+        }
     }
 
     /// <summary>
@@ -109,6 +113,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void OnAlive()
     {
+        CancelInvoke("OnAlive");
         LivePunish();
         AliveBackHome();
     }
@@ -119,7 +124,7 @@ public class ConsumeSign : MonoBehaviour
     public void HealthCheck()
     {
         float per = currentHealth / (float)consumeData.maxHealth;
-        hud.UpdateHud(per);
+        hud.UpdateInfo(per);
         if (currentHealth >= consumeData.maxHealth)
         {
             OnDeath();
@@ -128,12 +133,13 @@ public class ConsumeSign : MonoBehaviour
 
     public void DeathAward()
     {
-
+        StageGoal.My.GetSatisfy(consumeData.killSatisfy);
+        StageGoal.My.GetPlayerGold(consumeData.killMoney);
     }
 
     public void LivePunish()
     {
-
+        StageGoal.My.LostHealth(consumeData.liveSatisfy);
     }
 
     /// <summary>
@@ -262,15 +268,11 @@ public class ConsumeSign : MonoBehaviour
         tweener.timeScale = speedAdd;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (isStart)
+        {
+            LookAtHome();
+        }
     }
 }

@@ -10,6 +10,7 @@ public class GoodsSign : MonoBehaviour
 
     public ProductData productData;
 
+    public ConsumeSign target;
     /// <summary>
     /// 发射者
     /// </summary>
@@ -67,7 +68,7 @@ public class GoodsSign : MonoBehaviour
             if (twe.IsPlaying())
             {
                 twe.Kill();
-                lunch. GetComponent<BaseMapRole>().shootTarget.OnHit(productData);
+                target.OnHit(productData);
                 BulletObjectPool.My.RecoveryBullet(gameObject); 
             }
 

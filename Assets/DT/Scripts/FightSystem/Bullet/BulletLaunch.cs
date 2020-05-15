@@ -41,18 +41,21 @@ public class BulletLaunch : MonoBehaviour
         GameObject gameObject =    BulletObjectPool.My.GetBullet(BulletType.NormalPP);
         gameObject.GetComponent<GoodsSign>().productData = data;
         gameObject.GetComponent<GoodsSign>().lunch = this;
-        gameObject.transform.SetParent(launchShooter);
-        gameObject.transform.localPosition = new Vector3(0,0.5f,0);
-     
-        launchShooter.DOLookAt(GetComponent<BaseMapRole>().shootTarget.transform.position  , 0.1f);
-  
-        lanchNormalTWE =     gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position ,1).SetEase(sase).OnComplete(() =>
-        {
-            isplay = false;
-            GetComponent<BaseMapRole>().shootTarget.OnHit(data);
-            BulletObjectPool.My.RecoveryBullet(gameObject); 
+        gameObject.GetComponent<GoodsSign>().target = GetComponent<BaseMapRole>().shootTarget;
+        //gameObject.transform.SetParent(launchShooter);
+
+        //gameObject.transform.localPosition = new Vector3(0,0.5f,0);
+        gameObject.transform.position = launchShooter.position + new Vector3(0, 0.5f, 0);
+
+        launchShooter.DOLookAt(GetComponent<BaseMapRole>().shootTarget.transform.position  , 0.1f).OnComplete(()=> {
+            lanchNormalTWE = gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.4f).SetEase(sase).OnComplete(() =>
+            {
+                isplay = false;
+                gameObject.GetComponent<GoodsSign>().target.OnHit(data);
+                BulletObjectPool.My.RecoveryBullet(gameObject);
+            });
+            gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
         });
-        gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
         isplay = true;
         return gameObject;
     }

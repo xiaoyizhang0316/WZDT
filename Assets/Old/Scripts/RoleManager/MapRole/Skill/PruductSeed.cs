@@ -16,10 +16,10 @@ public class PruductSeed : BaseSkill
         {
             return;
         }
-        Debug.Log("产种子");
+        //Debug.Log("产种子");
         ProductData data = new ProductData();
         data.bulletType = BulletType.Seed;
-        data.damage = role.baseRoleData.effect * 10f;
+        data.damage = role.baseRoleData.effect * 2f;
         data.loadingSpeed = 1;
         data.buffMaxCount = 3;
         data.buffList = new List<BuffData>();

@@ -12,8 +12,9 @@ public class PruductDealer : BaseSkill
     {
         if (role.warehouse.Count > 0)
         {
-            if (!role.shootTarget.isCanSelect)
+            if (role.shootTarget == null)
             {
+                CancelSkill();
                 return;
             }
 
@@ -23,5 +24,10 @@ public class PruductDealer : BaseSkill
            GetComponent<BulletLaunch>().LanchNormal( data);
         
         }
+    }
+
+    private void Update()
+    {
+        role.SetShootTarget();
     }
 }
