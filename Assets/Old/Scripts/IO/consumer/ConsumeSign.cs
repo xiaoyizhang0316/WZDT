@@ -34,6 +34,10 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public int currentHealth;
 
+    public GameObject hudPrb;
+
+    public Hud hud;
+
     /// <summary>
     /// BUFF列表
     /// </summary>
@@ -50,11 +54,20 @@ public class ConsumeSign : MonoBehaviour
     {
         consumerType = type;
         consumeData = new ConsumeData(consumerType);
+        GameObject go = Instantiate(hudPrb, transform);
+        hud = go.GetComponent<Hud>();
+        hud.Init(this);
+        go.transform.localPosition = Vector3.zero + new Vector3(0, 2.2f, 0);
     }
 
+    /// <summary>
+    /// 每次刷新消费者调用
+    /// </summary>
+    /// <param name="targetRole"></param>
     public void InitAndMove(BaseMapRole targetRole)
     {
         currentHealth = 0;
+        hud.UpdateHud(0f);
         targetShop = targetRole;
         float waitTime = UnityEngine.Random.Range(0f, 2f);
         transform.DOLookAt(targetShop.transform.position, 0f);
@@ -65,11 +78,19 @@ public class ConsumeSign : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 消费者被击中时调用
+    /// </summary>
+    /// <param name="data"></param>
     public void OnHit(ProductData data)
     {
-
+        currentHealth += (int)data.damage;
+        HealthCheck();
     }
 
+    /// <summary>
+    /// 消费者被击杀时调用   
+    /// </summary>
     public void OnDeath()
     {
         CancelInvoke("OnAlive");
@@ -77,9 +98,25 @@ public class ConsumeSign : MonoBehaviour
         Stop();
     }
 
+    /// <summary>
+    /// 消费者存活时调用
+    /// </summary>
     public void OnAlive()
     {
         AliveBackHome();
+    }
+
+    /// <summary>
+    /// 生命值检测
+    /// </summary>
+    public void HealthCheck()
+    {
+        float per = currentHealth / (float)consumeData.maxHealth;
+        hud.UpdateHud(per);
+        if (currentHealth >= consumeData.maxHealth)
+        {
+            OnDeath();
+        }
     }
 
     /// <summary>
@@ -207,6 +244,6 @@ public class ConsumeSign : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }

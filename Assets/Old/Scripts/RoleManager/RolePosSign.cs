@@ -130,8 +130,6 @@ public class RolePosSign : MonoBehaviour
             }
             
         }
-
-
         //  CommonData.My.hand.GetComponent<RoleDrag>().currentrole = null;
     }
 }

@@ -32,6 +32,7 @@ public class BulletLaunch : MonoBehaviour
          BulletObjectPool.My.RecoveryBullet(gameObject);
      });
     }
+
     public GameObject LanchNormal(Vector3 target,ProductData data)
     {
         
@@ -42,9 +43,10 @@ public class BulletLaunch : MonoBehaviour
         gameObject.transform.SetParent(launchShooter);
         gameObject.transform.localPosition = new Vector3(0,0.5f,0);
      
-      launchShooter.DOLookAt(target , 0.3f);
+        launchShooter.DOLookAt(target , 0.3f);
         gameObject.transform.DOMove(target,1).SetEase(sase).OnComplete(() =>
         {
+            GetComponent<BaseMapRole>().shootTarget.OnHit(data);
             BulletObjectPool.My.RecoveryBullet(gameObject); 
         });
         return gameObject;

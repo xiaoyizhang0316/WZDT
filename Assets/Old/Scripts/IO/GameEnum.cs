@@ -306,4 +306,22 @@ public class GameEnum
         Elite_3
     }
 
+    public enum BulletBuffType
+    {
+        /// <summary>
+        /// 属性类
+        /// </summary>
+        Element,
+
+        /// <summary>
+        /// 攻击特效类
+        /// </summary>
+        AttackEffect,
+
+        /// <summary>
+        /// debuff类
+        /// </summary>
+        Debuff
+    }
+
 }

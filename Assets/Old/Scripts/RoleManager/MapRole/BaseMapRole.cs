@@ -101,7 +101,6 @@ public class BaseMapRole : MonoBehaviour
             InitBaseRoleData();
     
         InvokeRepeating("MonthlyCost", 1f, 60f);
-        InvokeRepeating("SpawnConsumer", 10f, 10f);
         if (!PlayerData.My.MapRole.Contains(this))
         {
             PlayerData.My.MapRole.Add(this);
@@ -643,8 +642,11 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void DayBegin()
     {
-        InvokeRepeating("SpawnConsumer", 0f,10f);
-        InvokeRepeating("SetShootTarget", 0f, 0.2f);
+        if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
+        {
+            InvokeRepeating("SpawnConsumer", 0f, 10f);
+            InvokeRepeating("SetShootTarget", 0f, 0.2f);
+        }
     }
 
     /// <summary>
@@ -652,8 +654,11 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void DayEnd()
     {
-        CancelInvoke("SpawnConsumer");
-        CancelInvoke("SetShootTarget");
+        if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
+        {
+            CancelInvoke("SpawnConsumer");
+            CancelInvoke("SetShootTarget");
+        }
     }
 
     /// <summary>

@@ -427,23 +427,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void FinalCheck()
     {
-        //finalCapacity = Mathf.Min(gearCapacity, workerCapacity);
-        //finalEfficiency = Mathf.Min(gearEfficiency, workerEfficiency);
-        //finalQuality = Mathf.Min(gearQuality, workerQuality);
-        //finalBrand = Mathf.Min(gearBrand, workerBrand);
-        //int count = 0;
-        //if (finalCapacity < CurrentRole.baseRoleData.needCapacity)
-        //    count++;
-        //if (finalEfficiency < CurrentRole.baseRoleData.needEfficiency)
-        //    count++;
-        //if (finalQuality < CurrentRole.baseRoleData.needQuality)
-        //    count++;
-        //if (finalBrand < CurrentRole.baseRoleData.needBrand)
-        //    count++;
-        //finalCapacity = (int)(finalCapacity * (1 - 0.1 * count));
-        //finalEfficiency = (int)(finalEfficiency * (1 - 0.1 * count));
-        //finalQuality = (int)(finalQuality * (1 - 0.1 * count));
-        //finalBrand = (int)(finalBrand * (1 - 0.1 * count));
+
     }
 
     /// <summary>
@@ -451,7 +435,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void QuitAndSave()
     {
-        CurrentRole.effect = finalCapacity;
+        CurrentRole.effect = finalEffect;
         CurrentRole.efficiency = finalEfficiency;
         CurrentRole.riskResistance = finalRiskResistance;
         CurrentRole.range = finalRange;
