@@ -41,6 +41,7 @@ public class BulletLaunch : MonoBehaviour
         GameObject gameObject =    BulletObjectPool.My.GetBullet(BulletType.NormalPP);
         gameObject.GetComponent<GoodsSign>().productData = data;
         gameObject.GetComponent<GoodsSign>().lunch = this;
+        gameObject.GetComponent<GoodsSign>().target = GetComponent<BaseMapRole>().shootTarget;
         gameObject.transform.SetParent(launchShooter);
         gameObject.transform.localPosition = new Vector3(0,0.5f,0);
      
@@ -49,7 +50,7 @@ public class BulletLaunch : MonoBehaviour
         lanchNormalTWE =     gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position ,1).SetEase(sase).OnComplete(() =>
         {
             isplay = false;
-            GetComponent<BaseMapRole>().shootTarget.OnHit(data);
+            gameObject.GetComponent<GoodsSign>().target.OnHit(data);
             BulletObjectPool.My.RecoveryBullet(gameObject); 
         });
         gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
