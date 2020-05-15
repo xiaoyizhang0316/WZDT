@@ -530,7 +530,7 @@ public class BaseMapRole : MonoBehaviour
     //  }
     public void AddPruductToWareHouse(ProductData data)
     {
-        if (warehouse.Count > 10)
+        if (warehouse.Count >baseRoleData.bulletCapacity)
         {
             return;
         }
