@@ -159,6 +159,7 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void SetShootTarget()
     {
+        ConsumeSign preStatus = shootTarget;
         //if (shootTarget != null)
         //{
         //    if (!shootTarget.isCanSelect)
@@ -178,6 +179,10 @@ public class BaseMapRole : MonoBehaviour
             }
         }
         shootTarget = shootTargetList[max];
+        if (preStatus == null && shootTarget != null && !GetComponent<BaseSkill>().IsOpen)
+        {
+            GetComponent<BaseSkill>().ReUnleashSkills();
+        }
     }
 
     #endregion
@@ -636,10 +641,15 @@ public class BaseMapRole : MonoBehaviour
             }
         }
         List<GameObject> resultList = GetRandom(availableConsumer, number);
+        float x;
+        float y;
         for (int i = 0; i < resultList.Count; i++)
         {
+            x = UnityEngine.Random.Range(-1.5f, 1.5f);
+            y = UnityEngine.Random.Range(-1.5f, 1.5f);
             resultList[i].SetActive(true);
             resultList[i].GetComponent<ConsumeSign>().InitAndMove(this);
+            resultList[i].transform.localPosition += new Vector3(x, y, 0);
         }
     }
 
@@ -651,7 +661,7 @@ public class BaseMapRole : MonoBehaviour
         if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
         {
             InvokeRepeating("SpawnConsumer", 0f, 10f);
-            InvokeRepeating("SetShootTarget", 0f, 0.2f);
+            //InvokeRepeating("SetShootTarget", 0f, 0.2f);
         }
     }
 
@@ -663,7 +673,7 @@ public class BaseMapRole : MonoBehaviour
         if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
         {
             CancelInvoke("SpawnConsumer");
-            CancelInvoke("SetShootTarget");
+            //CancelInvoke("SetShootTarget");
         }
     }
 

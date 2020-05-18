@@ -15,6 +15,7 @@ public class PruductDealer : BaseSkill
         {
             if (role.shootTarget == null)
             {
+                CancelSkill();
                 return;
             }
 
@@ -40,5 +41,10 @@ public class PruductDealer : BaseSkill
        
         
         }
+    }
+
+    private void Update()
+    {
+        role.SetShootTarget();
     }
 }

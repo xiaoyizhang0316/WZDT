@@ -267,6 +267,7 @@ public class UIManager : MonoSingleton<UIManager>
         //Time.timeScale = 1f;
         //Time.fixedDeltaTime = 0.02f;
         DOTween.PlayAll();
+        DOTween.timeScale = 1f;
         Button_Pause.GetComponent<Button>().interactable = true;
         Button_Normal.GetComponent<Button>().interactable = false;
         Button_Accelerate.GetComponent<Button>().interactable = true;
@@ -278,8 +279,9 @@ public class UIManager : MonoSingleton<UIManager>
     public void GameAccelerate()
     {
         DOTween.PlayAll();
-        Time.timeScale = 2f;
-        Time.fixedDeltaTime = 0.02f;
+        DOTween.timeScale = 2f;
+        //Time.timeScale = 2f;
+        //Time.fixedDeltaTime = 0.02f;
         Button_Pause.GetComponent<Button>().interactable = true;
         Button_Normal.GetComponent<Button>().interactable = true;
         Button_Accelerate.GetComponent<Button>().interactable = false;

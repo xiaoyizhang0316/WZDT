@@ -25,6 +25,21 @@ public class StageGoal : MonoSingleton<StageGoal>
     public int playerGold;
 
     /// <summary>
+    /// 关卡满意度目标
+    /// </summary>
+    public int goalSatisfy;
+
+    /// <summary>
+    /// 玩家满意度
+    /// </summary>
+    public int playerSatisfy;
+
+    /// <summary>
+    /// 玩家血量
+    /// </summary>
+    public int playerHealth;
+
+    /// <summary>
     /// 股东满意度上限
     /// </summary>
     public float maxBossSatisfy;
@@ -83,23 +98,6 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Image consumerFace;
 
-    /// <summary>
-    /// 所有产品的列表
-    /// </summary>
-    public List<ProductData> productList;
-
-    private float currentBossSatisfy;
-
-    private float currentConsumerSatisfy;
-
-    public GameObject sweetGo;
-
-    public GameObject crispGo;
-
-    public Text qualityText;
-
-    public Text contributionText;
-
     public Image buttonSprite;
 
     public List<Sprite> switchSprite;
@@ -110,14 +108,50 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     private bool wudi = false;
 
+    public Text playerGoldText;
+
+    public Text playerSatisfyText;
+
+    public Text playerHealthText;
+
+    /// <summary>
+    /// 玩家消耗金币
+    /// </summary>
+    /// <param name="num"></param>
     public void CostPlayerGold(int num)
     {
         playerGold -= num;
+        SetInfo();
     }
 
+    /// <summary>
+    /// 玩家获得金币
+    /// </summary>
+    /// <param name="num"></param>
     public void GetPlayerGold(int num)
     {
         playerGold += num;
+        SetInfo();
+    }
+
+    /// <summary>
+    /// 玩家获得满意度
+    /// </summary>
+    /// <param name="num"></param>
+    public void GetSatisfy(int num)
+    {
+        playerSatisfy += num;
+        SetInfo();
+    }
+
+    /// <summary>
+    /// 玩家失去生命值
+    /// </summary>
+    /// <param name="num"></param>
+    public void LostHealth(int num)
+    {
+        playerHealth += num;
+        SetInfo();
     }
 
     /// <summary>
@@ -162,56 +196,10 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         consumerSatisfyGo.transform.Find("Mask/Image").GetComponent<RectTransform>().sizeDelta = new Vector2(746f * customerSatisfy / maxCustomerSatisfy, consumerSatisfyGo.transform.Find("Mask/Image").GetComponent<RectTransform>().sizeDelta.y);
         bossSatisfyGo.transform.Find("Mask/Image").GetComponent<RectTransform>().sizeDelta = new Vector2(746f * bossSatisfy / maxBossSatisfy, bossSatisfyGo.transform.Find("Mask/Image").GetComponent<RectTransform>().sizeDelta.y);
+        playerGoldText.text = "玩家金币:" + playerGold.ToString();
+        playerSatisfyText.text = playerSatisfy.ToString() + "/" + goalSatisfy.ToString();
+        playerHealthText.text = "玩家血量:" + playerHealth.ToString();
         CheckWinOrDead();
-    }
-
-    /// <summary>
-    /// 满意度阶段性表情
-    /// </summary>
-    public void CheckFaceStatus()
-    {
-        if ((bossSatisfy - currentBossSatisfy) > 1000f)
-        {
-            bossFace.sprite = Resources.Load<Sprite>("Sprite/UI/Face/Boss_face1");
-        }
-        else if ((bossSatisfy - currentBossSatisfy) > 500f)
-        {
-            bossFace.sprite = Resources.Load<Sprite>("Sprite/UI/Face/Boss_face2");
-        }
-        else if ((bossSatisfy - currentBossSatisfy) > 000f)
-        {
-            bossFace.sprite = Resources.Load<Sprite>("Sprite/UI/Face/Boss_face3");
-        }
-        else if ((bossSatisfy - currentBossSatisfy) > -500f)
-        {
-            bossFace.sprite = Resources.Load<Sprite>("Sprite/UI/Face/Boss_face4");
-        }
-        else
-        {
-            bossFace.sprite = Resources.Load<Sprite>("Sprite/UI/Face/Boss_face5");
-        }
-        if ((customerSatisfy - currentConsumerSatisfy) > 800f)
-        {
-            consumerFace.sprite = Resources.Load<Sprite>("Sprite/UI/Face/Consumer_face1");
-        }
-        else if ((customerSatisfy - currentConsumerSatisfy) > 300f)
-        {
-            consumerFace.sprite = Resources.Load<Sprite>("Sprite/UI/Face/Consumer_face2");
-        }
-        else if ((customerSatisfy - currentConsumerSatisfy) > 0f)
-        {
-            consumerFace.sprite = Resources.Load<Sprite>("Sprite/UI/Face/Consumer_face3");
-        }
-        else if ((customerSatisfy - currentConsumerSatisfy) > -300f)
-        {
-            consumerFace.sprite = Resources.Load<Sprite>("Sprite/UI/Face/Consumer_face4");
-        }
-        else
-        {
-            consumerFace.sprite = Resources.Load<Sprite>("Sprite/UI/Face/Consumer_face5");
-        }
-        currentBossSatisfy = bossSatisfy;
-        currentConsumerSatisfy = customerSatisfy;
     }
 
     #region 菜单显示
@@ -271,24 +259,24 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CheckWinOrDead()
     {
 
-        if (bossSatisfy < 0f)
+        if (playerHealth < 0)
         {
-            for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-            {
-                PlayerData.My.MapRole[i].OnBeforeDead();
-            }
+            //for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+            //{
+            //    PlayerData.My.MapRole[i].OnBeforeDead();
+            //}
             if (wudi)
             {
-                bossSatisfy = 100f;
+                playerHealth = 100;
                 return;
             }
             Lose();
         }
-        else if (customerSatisfy > maxCustomerSatisfy)
+        else if (playerSatisfy >= goalSatisfy)
         {
             if (wudi)
             {
-                customerSatisfy = 3000f;
+                playerSatisfy = 100;
                 return;
             }
             Win();
@@ -300,6 +288,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Win()
     {
+        UIManager.My.GamePause();
         UIManager.My.Panel_Win.SetActive(true);
     }
 
@@ -308,12 +297,14 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Lose()
     {
-        if (bossSatisfy < 0f)
+        if (playerHealth < 0)
+        {
+            UIManager.My.GamePause();
             UIManager.My.Panel_Lose.SetActive(true);
+        }
         else
             return;
-    }
- 
+    } 
 
     /// <summary>
     /// 股东每月固定扣除满意度
@@ -328,35 +319,6 @@ public class StageGoal : MonoSingleton<StageGoal>
             CostMoney(500 * monthNum);
         else
             CostMoney(500 * Mathf.Pow(monthNum, 1.5f));
-    }
-
-    /// <summary>
-    /// 统计玩家的贡献度
-    /// </summary>
-    public void RecheckContribution()
-    {
-        int total = 0;
-        int player = 0;
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            if (PlayerData.My.MapRole[i].isNpc)
-            {
-                total += PlayerData.My.MapRole[i].contributionNum;
-            }
-            else
-            {
-                player += PlayerData.My.MapRole[i].contributionNum;
-            }
-        }
-        if (player != 0)
-        {
-            playerContributionPerf = (float)player  / (float)(player + total);
-        }
-        else
-        {
-            playerContributionPerf = 0f;
-        }
-        contributionText.text = Mathf.Floor(playerContributionPerf * 100f) + "%";
     }
 
     /// <summary>
@@ -380,16 +342,9 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStage()
     {
         InitStageData();
-        playerContributionPerf = 0f;
-        sweetGo.GetComponent<RectTransform>().localPosition = new Vector3(standardSweet * 10, 0, 0);
-        crispGo.GetComponent<RectTransform>().localPosition = new Vector3(standardCrisp * 10, 0, 0);
         SetInfo();
-        productList = new List<ProductData>();
-     
-        InvokeRepeating("CheckFaceStatus", 1f, 10f);
         InvokeRepeating("MonthlyReduceBoss", 0f, 60f);
         InvokeRepeating("RecheckMapRole", 1f, 60f);
-        InvokeRepeating("RecheckContribution",1f,2f);
         BuildingManager.My.InitAllBuilding();
         MenuHide();
     }
@@ -411,8 +366,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         standardSweet = Random.Range(-5, 5);
         standardCrisp = Random.Range(-5, 5);
         consumerQualityNeed = Random.Range(data.consumerQualityNeed - 5, data.consumerQualityNeed + 5);
-        qualityText.text = consumerQualityNeed.ToString();
         playerGold = 10000;
+        playerSatisfy = 0;
+        goalSatisfy = 1000;
+        playerHealth = 300;
         InitEquipAndWorker(data);
     }
 
