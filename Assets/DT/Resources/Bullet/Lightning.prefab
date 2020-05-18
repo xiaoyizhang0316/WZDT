@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3954562971428105217}
   - component: {fileID: 1108041473005891046}
   - component: {fileID: -4029087124941828733}
+  - component: {fileID: 4952552102044633133}
   m_Layer: 0
   m_Name: Lightning
   m_TagString: Untagged
@@ -41,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7956051860580140148}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &3954562971428105217
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 15764c64dd250bb458144b917977e511, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,5 +113,20 @@ MonoBehaviour:
     loadingSpeed: 0
     buffList: []
     buffMaxCount: 0
+  target: {fileID: 0}
+  lunch: {fileID: 0}
   path: []
   role: {fileID: 0}
+--- !u!114 &4952552102044633133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956051860580140148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba51279e36ab34e45ace5dca56aa640e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 5

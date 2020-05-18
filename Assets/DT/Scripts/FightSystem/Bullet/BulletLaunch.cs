@@ -24,18 +24,23 @@ public class BulletLaunch : MonoBehaviour
     public void LanchBoom(ProductData data)
     {
         List<Vector3> pointList = new List<Vector3>();
-        pointList = DrawLine(transform, GetComponent<BaseMapRole>().shootTarget.transform.position);
+  
         GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Bomb);
+        gameObject.transform.SetParent(launchShooter);
+        gameObject.transform.localPosition = new Vector3(0, 0.1f, 0);
         gameObject.GetComponent<GoodsSign>().productData = data;
+        pointList = DrawLine(gameObject.transform.position , GetComponent<BaseMapRole>().shootTarget.transform.position);
+        gameObject.transform.localPosition = new Vector3(0, 0.4f, 0);
         gameObject.GetComponent<GoodsSign>().lunch = this;
         gameObject.GetComponent<GoodsSign>().target = GetComponent<BaseMapRole>().shootTarget;
-        gameObject.transform.SetParent(launchShooter);
-        gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
-
-        launchShooter.DOLookAt(pointList[0], 0.1f).OnComplete(() =>
+    
+       // gameObject.transform.localPosition = new Vector3(0, 1, 0);
+         
+        launchShooter.DOLookAt(pointList[pointList.Count/2], 0.1f).OnComplete(() =>
         {
-            gameObject.transform.DOPath(pointList.ToArray(), 2).SetEase(sase).OnComplete(() =>
+            gameObject.transform.DOPath(pointList.ToArray(), 1).SetEase(sase).OnComplete(() =>
             {
+                gameObject.GetComponent<BoomTrigger>().GetConsumerList();
                 BulletObjectPool.My.RecoveryBullet(gameObject);
             });
         });
@@ -55,7 +60,7 @@ public class BulletLaunch : MonoBehaviour
 
         launchShooter.DOLookAt(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.1f).OnComplete(() =>
         {
-            lanchNormalTWE = gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position, 1)
+            lanchNormalTWE = gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.5f)
                 .SetEase(sase).OnComplete(() =>
                 {
                     isplay = false;
@@ -66,7 +71,30 @@ public class BulletLaunch : MonoBehaviour
         gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
         isplay = true;
     }
+    public void LanchLightning(ProductData data)
+    {
+        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Lightning);
+        gameObject.GetComponent<GoodsSign>().productData = data;
+        gameObject.GetComponent<GoodsSign>().lunch = this;
+        gameObject.GetComponent<GoodsSign>().target = GetComponent<BaseMapRole>().shootTarget;
+        gameObject.transform.SetParent(launchShooter);
+        gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
 
+        launchShooter.DOLookAt(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.1f).OnComplete(() =>
+        {
+            lanchNormalTWE = gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.5f)
+                .SetEase(sase).OnComplete(() =>
+                {
+                    isplay = false;
+                 gameObject.GetComponent<LightningTrigger>().GetTriggerList(GetComponent<BaseMapRole>().shootTarget,data);
+
+ 
+                
+                });
+        });
+        gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
+        isplay = true;
+    }
     public List<Vector3> DrawLine(Transform startTarget, Transform Target)
     {
         List<Vector3> pointList = new List<Vector3>();
@@ -93,22 +121,22 @@ public class BulletLaunch : MonoBehaviour
         return pointList;
     }
 
-    public List<Vector3> DrawLine(Transform startTarget, Vector3 Target)
+    public List<Vector3> DrawLine(Vector3 startTarget, Vector3 Target)
     {
         List<Vector3> pointList = new List<Vector3>();
-        int vertexCount = 30; //采样点数量
+        int vertexCount =20; //采样点数量
         pointList.Clear();
-        pointList.Add(startTarget.position);
+        pointList.Add(startTarget);
         if (startTarget != null && Target != null)
         {
-            float x = startTarget.position.x * per + Target.x * (per);
+            float x = startTarget .x * per + Target.x * (per);
             //float y = startTarget.localPosition.y * per + Target.localPosition.y * (1f - per) ;
-            float y = 50;
-            float z = startTarget.position.z * per + Target.z * (per);
+            float y = 10;
+            float z = startTarget .z * per + Target.z * (per);
             Vector3 point3 = new Vector3(x, y, z);
             for (float ratio = 0; ratio <= 1; ratio += 1.0f / vertexCount)
             {
-                Vector3 tangentLineVertex1 = Vector3.Lerp(startTarget.position, point3, ratio);
+                Vector3 tangentLineVertex1 = Vector3.Lerp(startTarget , point3, ratio);
                 Vector3 tangentLineVectex2 = Vector3.Lerp(point3, Target, ratio);
                 Vector3 bezierPoint = Vector3.Lerp(tangentLineVertex1, tangentLineVectex2, ratio);
                 pointList.Add(bezierPoint);

@@ -17,7 +17,7 @@ public class PruductMelon : BaseSkill
         {
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
-            data.bulletType = BulletType.NormalPP;
+            data.bulletType = BulletType.Lightning;
             data.loadingSpeed *=1f-role.baseRoleData.effect/100f ; 
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;

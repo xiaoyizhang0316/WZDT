@@ -18,6 +18,8 @@ public class GoodsSign : MonoBehaviour
     public List<Vector3> path;
     public  Tweener twe;
     public BaseMapRole role;
+
+    public Tweener moveingTwe;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,7 @@ public class GoodsSign : MonoBehaviour
     public void Move()
     {
        
-        transform.DOMove(path[count],1).OnComplete(() =>
+        moveingTwe =transform.DOMove(path[count],1).OnComplete(() =>
         {
             count++;
             if (count < path.Count)
@@ -52,27 +54,8 @@ public class GoodsSign : MonoBehaviour
         }).SetEase(Ease.Linear);
     }
 
+ 
     private bool needUpdate;
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (lunch == null)
-        {
-            return;
-        }
-
-        Debug.Log(other.gameObject.name);
-        Debug.Log(lunch);
-        if (other.tag == "Consumer"&&other.GetComponent<ConsumeSign>()== lunch. GetComponent<BaseMapRole>().shootTarget)
-        {
-            if (twe.IsPlaying())
-            {
-                twe.Kill();
-                target.OnHit(productData);
-                BulletObjectPool.My.RecoveryBullet(gameObject); 
-            }
-
-        
-        }
-    }
+   
 }
