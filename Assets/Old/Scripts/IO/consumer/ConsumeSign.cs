@@ -107,12 +107,15 @@ public class ConsumeSign : MonoBehaviour
     /// 消费者被击中时调用
     /// </summary>
     /// <param name="data"></param>
-    public void OnHit(ProductData data)
+    public void OnHit(ref ProductData data)
     {
         if (isCanSelect)
         {
+            CheckAttackEffect(ref data);
+            int realDamage = (int)data.damage;
+            CheckBulletElement(ref realDamage, data);
             CheckDebuff(data);
-            ChangeHealth((int)data.damage);
+            ChangeHealth(realDamage);
         }
     }
 
@@ -178,6 +181,50 @@ public class ConsumeSign : MonoBehaviour
     public void LivePunish()
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
+    }
+
+    /// <summary>
+    /// 结算属性抗性
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="data"></param>
+    public void CheckBulletElement(ref int damage,ProductData data)
+    {
+        float per = 1f;
+        foreach(int i in data.buffList)
+        {
+            BuffData b = GameDataMgr.My.GetBuffDataByID(i);
+            if (b.bulletBuffType == BulletBuffType.Element)
+            {
+                per += elementResistance[b.elementType] / 100f - 1f;
+            }
+        }
+        damage = (int)(damage * per);
+    }
+
+    /// <summary>
+    /// 检测攻击特效
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="data"></param>
+    public void CheckAttackEffect(ref ProductData data)
+    {
+        foreach (int i in data.buffList)
+        {
+            BuffData b = GameDataMgr.My.GetBuffDataByID(i);
+            if (b.bulletBuffType == BulletBuffType.AttackEffect)
+            {
+                int number = UnityEngine.Random.Range(1,101);
+                if (number <= b.attackEffect)
+                {
+                    BaseBuff buff = new BaseBuff();
+                    buff.Init(b);
+                    buff.OnProduct(ref data);
+                    buff.SetConsumerBuff(this);
+
+                }
+            }
+        }
     }
 
     /// <summary>

@@ -27,6 +27,11 @@ public class BuffData
     /// </summary>
     public string BuffDesc;
 
+
+    public ProductElementType elementType;
+
+    public int attackEffect;
+
     /// <summary>
     /// Buff添加时
     /// </summary>
@@ -46,6 +51,11 @@ public class BuffData
     /// 周期性时 
     /// </summary>
     public List<string> OnTick;
+
+    /// <summary>
+    /// 弹药相关
+    /// </summary>
+    public List<string> OnProduct;
 
     /// <summary>
     /// 持续时间

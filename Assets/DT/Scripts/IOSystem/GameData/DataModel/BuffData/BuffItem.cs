@@ -18,6 +18,10 @@ public class BuffItem
     /// </summary>
     public string BuffName;
 
+    public string ElementType;
+
+    public string AttackEffect;
+
     public string BuffDesc;
     /// <summary>
     /// 
@@ -34,23 +38,11 @@ public class BuffItem
     /// <summary>
     /// 
     /// </summary>
-    public string OnConsumerInShop;
-    /// <summary>
-    /// 
-    /// </summary>
-    public string OnConsumerBuyProduct;
-    /// <summary>
-    /// 
-    /// </summary>
-    public string OnConsumerSatisfy;
-    /// <summary>
-    /// 
-    /// </summary>
     public string OnBeforeDead;
     /// <summary>
     /// 
     /// </summary>
-    public string OnProductionComplete;
+    public string OnProduct;
     /// <summary>
     /// 
     /// </summary>

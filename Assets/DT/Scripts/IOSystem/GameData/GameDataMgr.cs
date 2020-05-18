@@ -368,9 +368,12 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.bulletBuffType = (BulletBuffType)Enum.Parse(typeof(BulletBuffType), b.BulletBuffType);
             temp.BuffName = b.BuffName;
             temp.BuffDesc = b.BuffDesc;
+            temp.elementType = (ProductElementType)Enum.Parse(typeof(ProductElementType), b.ElementType);
+            temp.attackEffect = int.Parse(b.AttackEffect);
             temp.OnBuffAdd = b.OnBuffAdd.Split(',').ToList();
             temp.OnBuffRemove = b.OnBuffRemove.Split(',').ToList();
             temp.OnBeforeDead = b.OnBeforeDead.Split(',').ToList();
+            temp.OnProduct = b.OnProduct.Split(',').ToList();
             temp.OnTick = b.OnTick.Split(',').ToList();
             temp.duration = int.Parse(b.Duration);
             temp.interval = int.Parse(b.Interval);

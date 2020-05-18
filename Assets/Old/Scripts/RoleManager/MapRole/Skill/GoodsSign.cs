@@ -68,7 +68,7 @@ public class GoodsSign : MonoBehaviour
             if (twe.IsPlaying())
             {
                 twe.Kill();
-                target.OnHit(productData);
+                target.OnHit(ref productData);
                 BulletObjectPool.My.RecoveryBullet(gameObject); 
             }
 

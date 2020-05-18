@@ -59,7 +59,7 @@ public class BulletLaunch : MonoBehaviour
                 .SetEase(sase).OnComplete(() =>
                 {
                     isplay = false;
-                    gameObject.GetComponent<GoodsSign>().target.OnHit(data);
+                    gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
                     BulletObjectPool.My.RecoveryBullet(gameObject);
                 });
             gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
