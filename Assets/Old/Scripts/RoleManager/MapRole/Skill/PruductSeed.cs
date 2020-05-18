@@ -22,7 +22,7 @@ public class PruductSeed : BaseSkill
         data.damage = role.baseRoleData.effect * 2f;
         data.loadingSpeed =5;
         data.buffMaxCount = 3;
-        data.buffList = new List<BuffData>();
+        data.buffList = new List<int>();
         GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
         game.GetComponent<GoodsSign>().productData = data;
         game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();

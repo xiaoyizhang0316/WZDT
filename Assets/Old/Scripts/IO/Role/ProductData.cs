@@ -26,7 +26,7 @@ public class ProductData
     /// <summary>
     /// BuffList
     /// </summary>
-    public List<BuffData> buffList;
+    public List<int> buffList = new List<int>();
 
     /// <summary>
     /// Buff上限

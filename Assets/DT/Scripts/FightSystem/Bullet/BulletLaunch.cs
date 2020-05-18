@@ -67,8 +67,9 @@ public class BulletLaunch : MonoBehaviour
                     gameObject.GetComponent<GoodsSign>().target.OnHit(data);
                     BulletObjectPool.My.RecoveryBullet(gameObject);
                 });
+            gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
         });
-        gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
+
         isplay = true;
     }
     public void LanchLightning(ProductData data)
