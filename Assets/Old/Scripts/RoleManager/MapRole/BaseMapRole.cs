@@ -197,7 +197,7 @@ public class BaseMapRole : MonoBehaviour
     {
         //print(baseBuff.buffName);
         buffList.Add(baseBuff);
-        baseBuff.BuffAdd();
+        baseBuff.RoleBuffAdd();
         //print("buff生成");
     }
 
@@ -207,7 +207,7 @@ public class BaseMapRole : MonoBehaviour
     /// <param name="baseBuff"></param>
     public void RemoveBuff(BaseBuff baseBuff)
     {
-        baseBuff.BuffRemove();
+        baseBuff.RoleBuffRemove();
         buffList.Remove(baseBuff);
         //print("buff消失");
     }
@@ -223,7 +223,7 @@ public class BaseMapRole : MonoBehaviour
         }
         for (int i = 0; i < buffList.Count; i++)
         {
-            buffList[i].OnTick();
+            buffList[i].OnRoleTick();
             if (buffList[i].duration != -1)
             {
                 buffList[i].duration--;
@@ -233,52 +233,6 @@ public class BaseMapRole : MonoBehaviour
                     RemoveBuff(buffList[i]);
                 }
             }
-        }
-    }
-
-    /// <summary>
-    /// 当消费者进商店时
-    /// </summary>
-    /// <param name="consumer"></param>
-    public void OnConsumerInShop(ref ConsumeData consumer)
-    {
-        foreach (BaseBuff b in buffList)
-        {
-            b.OnConsumerInShop(ref consumer);
-        }
-    }
-
-    /// <summary>
-    /// 当生产活动完成时
-    /// </summary>
-    public void OnProductionComplete(ref ProductData product)
-    {
-        foreach (BaseBuff b in buffList)
-        {
-            b.OnProductionComplete(ref product);
-        }
-    }
-
-    /// <summary>
-    /// 当交易进行时
-    /// </summary>
-    public void OnTradeConduct()
-    {
-        foreach (BaseBuff b in buffList)
-        {
-            b.OnTradeConduct();
-        }
-    }
-
-    /// <summary>
-    /// 当消费者满意度结算时
-    /// </summary>
-    /// <param name="satisfy"></param>
-    public void OnConsumerSatisfy(ref float satisfy)
-    {
-        foreach (BaseBuff b in buffList)
-        {
-            b.OnConsumerSatisfy(ref satisfy);
         }
     }
 

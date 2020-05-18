@@ -38,34 +38,9 @@ public class BuffData
     public List<string> OnBuffRemove;
 
     /// <summary>
-    /// 交易发生时
-    /// </summary>
-    public List<string> OnTradeConduct;
-
-    /// <summary>
-    /// 消费者进店时
-    /// </summary>
-    public List<string> OnConsumerInShop;
-
-    /// <summary>
-    /// 消费者购物时
-    /// </summary>
-    public List<string> OnConsumerBuyProduct;
-
-    /// <summary>
-    /// 消费者满意度结算时
-    /// </summary>
-    public List<string> OnConsumerSatisfy;
-
-    /// <summary>
     /// 濒临破产时
     /// </summary>
     public List<string> OnBeforeDead;
-
-    /// <summary>
-    /// 生产完成时
-    /// </summary>
-    public List<string> OnProductionComplete;
 
     /// <summary>
     /// 周期性时 

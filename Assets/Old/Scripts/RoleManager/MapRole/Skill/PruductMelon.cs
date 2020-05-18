@@ -18,7 +18,9 @@ public class PruductMelon : BaseSkill
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
             data.bulletType = BulletType.NormalPP;
-            data.loadingSpeed *=1f-role.baseRoleData.effect/100f ; 
+            data.loadingSpeed *=1f-role.baseRoleData.effect/100f ;
+            data.buffList.Add(101);
+            data.buffList.Add(102);
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;
             game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();

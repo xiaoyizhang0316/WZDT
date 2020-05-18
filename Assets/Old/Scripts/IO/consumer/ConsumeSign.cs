@@ -35,6 +35,16 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public int currentHealth;
 
+    /// <summary>
+    /// 属性抗性
+    /// </summary>
+    public Dictionary<ProductElementType, int> elementResistance = new Dictionary<ProductElementType, int>();
+
+    /// <summary>
+    /// 是否无视抗性
+    /// </summary>
+    public bool isIgnoreResistance = false;
+
     public GameObject hudPrb;
 
     public Hud hud;
@@ -42,7 +52,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// BUFF列表
     /// </summary>
-    public Dictionary<int, float> buffList = new Dictionary<int, float>();
+    public List<BaseBuff> buffList = new List<BaseBuff>();
 
     public bool isStart = false;
 
@@ -57,6 +67,10 @@ public class ConsumeSign : MonoBehaviour
     {
         consumerType = type;
         home = building;
+        foreach (ProductElementType p in Enum.GetValues(typeof(ProductElementType)))
+        {
+            elementResistance.Add(p, 100);
+        }
         consumeData = new ConsumeData(consumerType);
         GameObject go = Instantiate(hudPrb, transform);
         hud = go.GetComponent<Hud>();
@@ -72,6 +86,11 @@ public class ConsumeSign : MonoBehaviour
     {
         isStart = false;
         isCanSelect = false;
+        int num = buffList.Count;
+        for (int i = 0; i < num; i++)
+        {
+            RemoveBuff(buffList[0]);
+        }
         currentHealth = 0;
         hud.healthImg.fillAmount = 0f;
         targetShop = targetRole;
@@ -92,8 +111,8 @@ public class ConsumeSign : MonoBehaviour
     {
         if (isCanSelect)
         {
-            currentHealth += (int)data.damage;
-            HealthCheck();
+            CheckDebuff(data);
+            ChangeHealth((int)data.damage);
         }
     }
 
@@ -131,15 +150,51 @@ public class ConsumeSign : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 血量发生变化时
+    /// </summary>
+    /// <param name="num"></param>
+    public void ChangeHealth(int num)
+    {
+        if (isCanSelect)
+        {
+            currentHealth += num;
+            HealthCheck();
+        }
+    }
+
+    /// <summary>
+    /// 击杀奖励
+    /// </summary>
     public void DeathAward()
     {
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
     }
 
+    /// <summary>
+    /// 存活惩罚
+    /// </summary>
     public void LivePunish()
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
+    }
+
+    /// <summary>
+    /// 检测debuff
+    /// </summary>
+    public void CheckDebuff(ProductData data)
+    {
+        foreach (int i in data.buffList)
+        {
+            BuffData b = GameDataMgr.My.GetBuffDataByID(i);
+            if (b.bulletBuffType == BulletBuffType.Debuff)
+            {
+                BaseBuff buff = new BaseBuff();
+                buff.Init(b);
+                buff.SetConsumerBuff(this);
+            }
+        }
     }
 
     /// <summary>
@@ -151,6 +206,7 @@ public class ConsumeSign : MonoBehaviour
         isStart = true;
         isCanSelect = true;
         Invoke("LookAtHome", 0.5f);
+        InvokeRepeating("CheckBuffDuration", 0f, 1f);
         tweener = transform.DOMove(targetShop.transform.position, Vector3.Distance(transform.position, targetShop.transform.position) / consumeData.moveSpeed * 2f).OnComplete(() => OnAlive()).SetEase(Ease.Linear);
     }
 
@@ -197,6 +253,7 @@ public class ConsumeSign : MonoBehaviour
     public void Stop()
     {
         tweener.Kill();
+        CancelInvoke("CheckBuffDuration");
         GetComponent<Animator>().SetBool("walk", false);
     }
 
@@ -210,63 +267,66 @@ public class ConsumeSign : MonoBehaviour
     }
 
     /// <summary>
-    /// 增加buff
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="effect"></param>
-    public void AddBuff(int id, float effect)
-    {
-        if (isStart)
-        {
-            if (buffList.ContainsKey(id))
-            {
-                if (Mathf.Abs(buffList[id] - effect) > 0.01f)
-                {
-                    buffList[id] = effect;
-                    RecheckBuff();
-                }
-                else
-                    return;
-            }
-            else
-            {
-                buffList.Add(id, effect);
-                RecheckBuff();
-            }
-        }
-    }
-
-    /// <summary>
-    /// 删除buff
-    /// </summary>
-    /// <param name="id"></param>
-    public void RemoveBuff(int id)
-    {
-        if (isStart)
-        {
-            if (buffList.ContainsKey(id))
-            {
-                buffList.Remove(id);
-                RecheckBuff();
-            }
-        }
-    }
-
-    /// <summary>
     /// 重新计算速度
     /// </summary>
-    public void RecheckBuff()
+    public void ChangeSpeed(int num)
     {
-        float speedAdd = 1f;
-        if (buffList.Count > 0)
+        print(num);
+        float speedAdd = num / 100f;
+        tweener.timeScale += speedAdd;
+    }
+
+    #region BUFF
+
+    /// <summary>
+    /// buff增加时回调
+    /// </summary>
+    /// <param name="baseBuff"></param>
+    public void AddBuff(BaseBuff baseBuff)
+    {
+        for (int i = 0; i < buffList.Count; i++)
         {
-            foreach (var v in buffList)
+            if (buffList[i].buffId == baseBuff.buffId)
+                return;
+        }
+        buffList.Add(baseBuff);
+        baseBuff.ConsumerBuffAdd();
+    }
+
+    /// <summary>
+    /// buff删除时回调
+    /// </summary>
+    /// <param name="baseBuff"></param>
+    public void RemoveBuff(BaseBuff baseBuff)
+    {
+        baseBuff.ConsumerBuffRemove();
+        buffList.Remove(baseBuff);
+    }
+
+    /// <summary>
+    /// 检测所有buff的持续时间
+    /// </summary>
+    public void CheckBuffDuration()
+    {
+        if (buffList.Count == 0)
+        {
+            return;
+        }
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            buffList[i].OnConsumerTick();
+            if (buffList[i].duration != -1)
             {
-                speedAdd += v.Value;
+                buffList[i].duration--;
+                if (buffList[i].duration == 0)
+                {
+                    RemoveBuff(buffList[i]);
+                }
             }
         }
-        tweener.timeScale = speedAdd;
     }
+
+    #endregion
 
     private void Update()
     {

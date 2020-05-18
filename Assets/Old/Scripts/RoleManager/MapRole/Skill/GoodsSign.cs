@@ -61,8 +61,8 @@ public class GoodsSign : MonoBehaviour
             return;
         }
 
-        Debug.Log(other.gameObject.name);
-        Debug.Log(lunch);
+        //Debug.Log(other.gameObject.name);
+        //Debug.Log(lunch);
         if (other.tag == "Consumer"&&other.GetComponent<ConsumeSign>()== lunch. GetComponent<BaseMapRole>().shootTarget)
         {
             if (twe.IsPlaying())

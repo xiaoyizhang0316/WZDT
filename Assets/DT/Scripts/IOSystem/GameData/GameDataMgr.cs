@@ -370,12 +370,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.BuffDesc = b.BuffDesc;
             temp.OnBuffAdd = b.OnBuffAdd.Split(',').ToList();
             temp.OnBuffRemove = b.OnBuffRemove.Split(',').ToList();
-            temp.OnTradeConduct = b.OnTradeConduct.Split(',').ToList();
-            temp.OnConsumerInShop = b.OnConsumerInShop.Split(',').ToList();
-            temp.OnConsumerBuyProduct = b.OnConsumerBuyProduct.Split(',').ToList();
-            temp.OnConsumerSatisfy = b.OnConsumerSatisfy.Split(',').ToList();
             temp.OnBeforeDead = b.OnBeforeDead.Split(',').ToList();
-            temp.OnProductionComplete = b.OnProductionComplete.Split(',').ToList();
             temp.OnTick = b.OnTick.Split(',').ToList();
             temp.duration = int.Parse(b.Duration);
             temp.interval = int.Parse(b.Interval);
