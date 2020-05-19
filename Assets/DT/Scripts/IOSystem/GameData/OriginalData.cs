@@ -223,25 +223,4 @@ public class OriginalData : MonoSingleton<OriginalData>
             }
         }
     }
-
-    IEnumerator ReadStageEnemyData(string sceneName)
-    {
-        string path = "file://" + Application.streamingAssetsPath + @"/Data/StageEnemy/" + sceneName + ".json";
-        WWW www = new WWW(@path);
-        yield return www;
-        if (www.isDone)
-        {
-            if (www.error != null)
-            {
-                Debug.Log(www.error);
-                yield return null;
-            }
-            else
-            {
-                string json = www.text.ToString();
-                //consumerTypeRawData = JsonUtility.FromJson<ConsumerTypesData>(json);
-                //GameDataMgr.My.ParseConsumerTypeData(consumerTypeRawData);
-            }
-        }
-    }
 }

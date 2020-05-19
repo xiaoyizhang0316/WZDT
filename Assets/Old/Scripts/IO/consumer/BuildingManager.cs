@@ -13,22 +13,18 @@ public class BuildingManager : MonoSingleton<BuildingManager>
     /// <summary>
     /// 初始化所有建筑
     /// </summary>
-    public void InitAllBuilding()
+    public void InitAllBuilding(List<StageEnemyData> datas)
     {
         for (int i = 0; i < buildings.Count; i++)
         {
-            buildings[i].Init();
+            buildings[i].Init(datas);
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < buildings.Count; i++)
-        {
-            buildings[i].buildingId = buildingIndex;
-            buildingIndex++;
-        }
+
     }
 
     // Update is called once per frame

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class StageEnemyItem
 {
     public string waveNumber;
@@ -15,4 +17,11 @@ public class StageEnemyItem
     public string point4;
 
     public string point5;
+
+    public string point6;
+}
+
+public class StageEnemysData
+{
+    public List<StageEnemyItem> stageEnemyItems = new List<StageEnemyItem>();
 }
