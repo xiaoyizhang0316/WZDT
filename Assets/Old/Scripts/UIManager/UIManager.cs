@@ -395,8 +395,11 @@ public class UIManager : MonoSingleton<UIManager>
     /// </summary>
     public void UpdateRole()
     {
-        CurrentClickRole.baseRoleData = GameDataMgr.My.GetModelData(CurrentClickRole.baseRoleData.roleType,CurrentClickRole.baseRoleData.level++);
+        string name = CurrentClickRole.baseRoleData.roleName;
+        CurrentClickRole.baseRoleData = GameDataMgr.My.GetModelData(CurrentClickRole.baseRoleData.roleType,++CurrentClickRole.baseRoleData.level );
+        CurrentClickRole.baseRoleData.roleName = name;
         CurrentClickRole.CalculateAllAttribute();
+     ExitButton();
 
     }
 
