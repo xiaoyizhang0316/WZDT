@@ -60,15 +60,15 @@ public class ConsumeSign : MonoBehaviour
 
     public bool isCanSelect = false;
 
-    public Transform home;
+    public List<Transform> pathList;
 
     /// <summary>
     /// 初始化
     /// </summary>
-    public void Init(ConsumerType type,Transform building)
+    public void Init(ConsumerType type,List<Transform> paths)
     {
         consumerType = type;
-        home = building;
+        pathList = paths;
         foreach (ProductElementType p in Enum.GetValues(typeof(ProductElementType)))
         {
             elementResistance.Add(p, 100);

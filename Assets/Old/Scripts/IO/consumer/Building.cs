@@ -10,130 +10,114 @@ public class Building : MonoBehaviour
 
     public int buildingId;
 
-    public BuildingType buildingType;
+    public Dictionary<int, List<WaveConfig>> waveConfigs = new Dictionary<int, List<WaveConfig>>();
 
-    public int buildingQualityNeed;
-
-    public int buildingSweet;
-
-    public int buildingCrisp;
-
-    public int capacity;
-
-    public List<BuildingConfig> buildingConfigs;
+    public List<Transform> consumerPathList = new List<Transform>();
 
     /// <summary>
     /// 初始化
     /// </summary>
-    public void Init()
+    public void Init(List<StageEnemyData> datas)
     {
-        InitQuality();
-        for (int i = 0; i < buildingConfigs.Count; i++)
+        foreach (StageEnemyData s in datas)
         {
-            for (int j = 0; j < buildingConfigs[i].num; j++)
+            switch (buildingId)
             {
-                int sex = UnityEngine.Random.Range(0, 2);
-                string path;
-                if (sex == 0)
-                    path = "Prefabs/Consumer/Male/male_";
-                else
-                    path = "Prefabs/Consumer/Female/female_";
-                int num = UnityEngine.Random.Range(1, 11);
-                path += num.ToString();
-                GameObject go = Instantiate(Resources.Load<GameObject>(path),transform);
-                go.GetComponent<ConsumeSign>().Init(buildingConfigs[i].consumerType,transform);
-                go.transform.localScale = Vector3.one;
-                consumerGoList.Add(go);
-                go.SetActive(false);
+                case 0:
+                    InitSingleWave(s.waveNumber, s.point1);
+                    break;
+                case 1:
+                    InitSingleWave(s.waveNumber, s.point2);
+                    break;
+                case 2:
+                    InitSingleWave(s.waveNumber, s.point3);
+                    break;
+                case 3:
+                    InitSingleWave(s.waveNumber, s.point4);
+                    break;
+                case 4:
+                    InitSingleWave(s.waveNumber, s.point5);
+                    break;
+                case 5:
+                    InitSingleWave(s.waveNumber, s.point6);
+                    break;
+                default:
+                    throw new Exception("building Id over limit ");
             }
         }
     }
 
-    /// <summary>
-    /// 获得已经出门购物过消费者的人数
-    /// </summary>
-    /// <returns></returns>
-    public int GetActiveConsuemr()
+    public void InitSingleWave(int waveNum, List<string> waveConfig)
     {
-        int result = 0;
-
-        return result;
-    }
-
-    /// <summary>
-    /// 统计楼宇中总体满意度
-    /// </summary>
-    /// <returns></returns>
-    public float GetTotalSatisfy()
-    {
-        float result = 0;
-
-        return result;
-    }
-
-    /// <summary>
-    /// 为居民楼设置质量要求
-    /// </summary>
-    public void InitQuality()
-    {
-        switch (buildingType)
+        List<WaveConfig> tempList = new List<WaveConfig>();
+        foreach (string str in waveConfig)
         {
-            case BuildingType.Residential:
-                buildingQualityNeed = UnityEngine.Random.Range(StageGoal.My.consumerQualityNeed - 10, StageGoal.My.consumerQualityNeed - 6);
-                buildingSweet = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardSweet - 2), Mathf.Min(5,StageGoal.My.standardSweet + 3));
-                buildingCrisp = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardCrisp - 2), Mathf.Min(5,StageGoal.My.standardCrisp + 2));
-                break;
-            case BuildingType.Bungalow:
-                buildingQualityNeed = UnityEngine.Random.Range(StageGoal.My.consumerQualityNeed - 6, StageGoal.My.consumerQualityNeed - 1);
-                buildingSweet = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardSweet - 2), Mathf.Min(5, StageGoal.My.standardSweet + 3));
-                buildingCrisp = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardCrisp - 2), Mathf.Min(5, StageGoal.My.standardCrisp + 2));
-                break;
-            case BuildingType.Office:
-                buildingQualityNeed = UnityEngine.Random.Range(StageGoal.My.consumerQualityNeed - 2, StageGoal.My.consumerQualityNeed + 7);
-                buildingSweet = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardSweet - 2), Mathf.Min(5, StageGoal.My.standardSweet + 3));
-                buildingCrisp = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardCrisp - 2), Mathf.Min(5, StageGoal.My.standardCrisp + 2));
-                break;
-            case BuildingType.Villa:
-                buildingQualityNeed = UnityEngine.Random.Range(StageGoal.My.consumerQualityNeed + 10, StageGoal.My.consumerQualityNeed + 15);
-                buildingSweet = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardSweet - 2), Mathf.Min(5, StageGoal.My.standardSweet + 3));
-                buildingCrisp = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardCrisp - 2), Mathf.Min(5, StageGoal.My.standardCrisp + 2));
-                break;
-            case BuildingType.BuildingType1:
-                buildingQualityNeed = UnityEngine.Random.Range(StageGoal.My.consumerQualityNeed + 5, StageGoal.My.consumerQualityNeed + 12);
-                buildingSweet = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardSweet - 2), Mathf.Min(5, StageGoal.My.standardSweet + 3));
-                buildingCrisp = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardCrisp - 2), Mathf.Min(5, StageGoal.My.standardCrisp + 2));
-                break;
-            case BuildingType.BuildingType2:
-                buildingQualityNeed = UnityEngine.Random.Range(StageGoal.My.consumerQualityNeed - 8, StageGoal.My.consumerQualityNeed + 10);
-                buildingSweet = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardSweet - 2), Mathf.Min(5, StageGoal.My.standardSweet + 3));
-                buildingCrisp = UnityEngine.Random.Range(Mathf.Max(-5, StageGoal.My.standardCrisp - 2), Mathf.Min(5, StageGoal.My.standardCrisp + 2));
-                break;
+            string[] strList = str.Split('_');
+            WaveConfig config = new WaveConfig();
+            config.consumerType = (ConsumerType)Enum.Parse(typeof(ConsumerType), strList[0]);
+            config.num = int.Parse(strList[1]);
+            config.buffList = new List<int>();
+            string[] tempBuffList = strList[2].Split('|');
+            foreach(string tempStr in tempBuffList)
+            {
+                config.buffList.Add(int.Parse(tempStr));
+            }
+            tempList.Add(config);
         }
-        buildingQualityNeed = Mathf.Max(1, buildingQualityNeed);
+        waveConfigs.Add(waveNum, tempList);
     }
 
-    public void OnMouseEnter()
+    public void SpawnConsumer(int waveNumber)
     {
-        BuildingPopUp.My.Init(this);
-    }
-
-    public void OnMouseExit()
-    {
-        BuildingPopUp.My.MenuHide();
-    }
-
-    public void OnMouseUp()
-    {
-        if (!UIManager.My.NeedRayCastPanel())
+        if (!waveConfigs.ContainsKey(waveNumber))
         {
-            BuildingInfo.My.Init(this);
+            throw new Exception("配置表或者配置消费者刷新点错误");
+        }
+        else
+        {
+            foreach (WaveConfig w in waveConfigs[waveNumber])
+            {
+                for (int i = 0; i < w.num; i++)
+                {
+                    int sex = UnityEngine.Random.Range(0, 2);
+                    string path;
+                    if (sex == 0)
+                        path = "Prefabs/Consumer/Male/male_";
+                    else
+                        path = "Prefabs/Consumer/Female/female_";
+                    int num = UnityEngine.Random.Range(1, 11);
+                    path += num.ToString();
+                    GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+                    go.transform.localPosition = Vector3.zero;
+                    go.GetComponent<ConsumeSign>().Init(w.consumerType,consumerPathList);
+                    go.transform.localScale = Vector3.one;
+                }
+            }
         }
     }
+
+    //public void OnMouseEnter()
+    //{
+    //    BuildingPopUp.My.Init(this);
+    //}
+
+    //public void OnMouseExit()
+    //{
+    //    BuildingPopUp.My.MenuHide();
+    //}
+
+    //public void OnMouseUp()
+    //{
+    //    if (!UIManager.My.NeedRayCastPanel())
+    //    {
+    //        BuildingInfo.My.Init(this);
+    //    }
+    //}
 
     // Start is called before the first frame update
     void Start()
     {
-        //InvokeRepeating("SpawnConsumer", 10f, 10f);
+
     }
 
     // Update is called once per frame
@@ -148,10 +132,12 @@ public class Building : MonoBehaviour
     }
 
     [Serializable]
-    public class BuildingConfig
+    public class WaveConfig
     {
         public ConsumerType consumerType;
 
         public int num;
+
+        public List<int> buffList;
     }
 }

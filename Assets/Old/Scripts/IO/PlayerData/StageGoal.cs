@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using System.Linq;
 
 public class StageGoal : MonoSingleton<StageGoal>
 {
@@ -117,6 +118,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public Text playerSatisfyText;
 
     public Text playerHealthText;
+
+    public List<StageEnemyData> enemyDatas;
 
     /// <summary>
     /// 玩家消耗金币
@@ -317,7 +320,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         InitStageData();
         SetInfo();
-        BuildingManager.My.InitAllBuilding();
         MenuHide();
     }
 
@@ -327,11 +329,16 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
+        //StartCoroutine(ReadStageEnemyData(sceneName));
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
         bossSatisfy = data.startBoss;
         maxBossSatisfy = data.maxBoss;
         customerSatisfy = data.startConsumer;
         maxCustomerSatisfy = data.maxConsumer;
+        playerGold = 10000;
+        playerSatisfy = 0;
+        goalSatisfy = 1000;
+        playerHealth = 300;
         InitEquipAndWorker(data);
     }
 
@@ -350,6 +357,56 @@ public class StageGoal : MonoSingleton<StageGoal>
             PlayerData.My.GetNewGear(i);
         }
     }
+
+    /// <summary>
+    /// 读取当前关卡敌人配置
+    /// </summary>
+    /// <param name="sceneName"></param>
+    /// <returns></returns>
+    IEnumerator ReadStageEnemyData(string sceneName)
+    {
+        string path = "file://" + Application.streamingAssetsPath + @"/Data/StageEnemy/" + sceneName + ".json";
+        WWW www = new WWW(@path);
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
+                ParseStageEnemyData(stageEnemyData);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 将当前关卡敌人配置转化成可用数据
+    /// </summary>
+    /// <param name="data"></param>
+    public void ParseStageEnemyData(StageEnemysData data)
+    {
+        enemyDatas = new List<StageEnemyData>();
+        foreach(StageEnemyItem s in data.stageEnemyItems)
+        {
+            StageEnemyData stageEnemyData = new StageEnemyData();
+            stageEnemyData.waveNumber = int.Parse(s.waveNumber);
+            stageEnemyData.point1 = s.point1.Split(',').ToList();
+            stageEnemyData.point2 = s.point2.Split(',').ToList();
+            stageEnemyData.point3 = s.point3.Split(',').ToList();
+            stageEnemyData.point4 = s.point4.Split(',').ToList();
+            stageEnemyData.point5 = s.point5.Split(',').ToList();
+            stageEnemyData.point6 = s.point6.Split(',').ToList();
+            enemyDatas.Add(stageEnemyData);
+        }
+        BuildingManager.My.InitAllBuilding(enemyDatas);
+    }
+
+
 
     // Start is called before the first frame update
     void Start()
