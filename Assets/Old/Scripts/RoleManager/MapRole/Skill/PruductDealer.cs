@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
 
@@ -25,21 +26,53 @@ public class PruductDealer : BaseSkill
             switch (data.bulletType)
             {
                 case  BulletType.NormalPP: 
-                    GetComponent<BulletLaunch>().LanchNormal( data);
+                    GetComponent<BulletLaunch>().LanchNormal( data,role.shootTarget);
                     break;    
                 case  BulletType.Bomb: 
                     GetComponent<BulletLaunch>().LanchBoom( data);
                     break;    
                 case  BulletType.Lightning: 
-                    GetComponent<BulletLaunch>().LanchNormal( data);
+                    GetComponent<BulletLaunch>().LanchLightning( data);
                     break;    
                 case  BulletType.summon: 
-                    GetComponent<BulletLaunch>().LanchNormal( data);
+                    GetComponent<BulletLaunch>().CreatSummonTow( data);
                     break;
                  
-            }
-       
-        
+            } 
+        }
+    }
+
+
+
+    public override void UnleashSkills()
+    {
+        if (role.warehouse.Count > 0)
+        {
+            ProductData data = role.warehouse[0];
+            float d = 1f / (role.baseRoleData.efficiency * 0.1f) * data.loadingSpeed;
+            Debug.Log("释放技能" + d);
+
+            transform.DOScale(1, d).OnComplete(() =>
+            {
+                Debug.Log("释放技能" + d);
+                Skill();
+                if (IsOpen)
+                {
+                    UnleashSkills();
+                }
+            });
+        }
+        else
+        {
+            float d = 1f / (role.baseRoleData.efficiency * 0.1f);
+            transform.DOScale(1, d).OnComplete(() =>
+            {
+           
+                if (IsOpen)
+                {
+                    UnleashSkills();
+                }
+            });
         }
     }
 

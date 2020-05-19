@@ -442,11 +442,8 @@ GameObject:
   - component: {fileID: 7693488263620966188}
   - component: {fileID: 2932711243041654492}
   - component: {fileID: 257477406263896}
-  - component: {fileID: 1260764360700815956}
-  - component: {fileID: 2224112818310672154}
-  - component: {fileID: 7192160406168940591}
-  - component: {fileID: 5939357219235845252}
-  - component: {fileID: 2313457630297625617}
+  - component: {fileID: 7852745196157292447}
+  - component: {fileID: 2324630759765189340}
   m_Layer: 0
   m_Name: Npc_Peasant_LV1
   m_TagString: Untagged
@@ -519,39 +516,26 @@ MonoBehaviour:
     baseRoleData:
       roleName: "NPC\u521D\u7EA7\u519C\u6C11"
       roleType: 1
+      roleSkillType: 0
       level: 0
-      unlock: 0
-      activityId: 0
-      activityList: 
-      needCapacity: 0
-      needEfficiency: 0
-      needQuality: 0
-      needBrand: 0
-      baseFixedCost: 0
-      baseCostMonth: 0
-      tradingRange: 0
-      baseRisk: 0
-      baseSearch: 0
-      baseBargain: 0
-      baseDelivery: 0
-      activityTime: 0
-      counter: 0
+      effect: 0
+      efficiency: 0
+      range: 0
+      tradeCost: 0
+      riskResistance: 0
+      cost: 0
+      bulletCapacity: 0
+      tradeRange: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
-    capacity: 28
+    effect: 0
     efficiency: 30
-    quality: 18
-    brand: 20
-    fixedCost: 0
-    costMonth: 0
-    tradingRange: 0
-    risk: 28
-    search: 24
-    bargain: 22
-    delivery: 24
-    sweetness: 0
-    Brittleness: 0
+    range: 0
+    tradeCost: 0
+    cost: 0
+    riskResistance: 0
+    bulletCapacity: 0
     ID: 0
     equipCost: 0
     workerCost: 0
@@ -559,20 +543,12 @@ MonoBehaviour:
     inMap: 1
     isNpc: 1
   warehouse: []
-  Input: []
-  isAdvantage: 0
-  advantageShelves: []
-  advantageShelves_warehouse: []
-  AllSkills: []
-  AllPassivitySkills: []
-  passiveSkills: []
-  isCanSellSeed: 0
-  isCanSellMelon: 0
-  isCanRottenMelon: 1
   isNpc: 1
-  autoLoading: 0
+  tradeList: []
   buffList: []
   spawnConsumerInterval: 0
+  shootTargetList: []
+  shootTarget: {fileID: 0}
   CarCount: 0
   AI: 0
   contributionNum: 0
@@ -586,7 +562,7 @@ MonoBehaviour:
   activityCost: 0
   tradeCost: 0
   shop: []
---- !u!114 &1260764360700815956
+--- !u!114 &7852745196157292447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -595,17 +571,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2962074539741988428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ea20787fc0ecca4aa94ade737512d8a, type: 3}
+  m_Script: {fileID: 11500000, guid: d1da214b00b29684aa3fcde6910d235c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: "\u9001\u8D27"
-  isOpen: 0
-  skillTime: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetBuffList: []
-  CarPrb: {fileID: 736384662113046618, guid: bbbbb1b370e95cd499ed1a4d13585c8d, type: 3}
---- !u!114 &2224112818310672154
+  role: {fileID: 0}
+  IsOpen: 0
+--- !u!114 &2324630759765189340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -614,76 +585,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2962074539741988428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 873741e948d48446494f680b015cbb19, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ad11e3828a282a48bfda32d4aeda778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: "\u8BD5\u9A8C\u7530"
-  isOpen: 0
-  skillTime: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetBuffList: []
---- !u!114 &7192160406168940591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962074539741988428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a729cb886a6c1ef479c73b47823a926d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u4EE3\u79CD\u690D"
-  isOpen: 0
-  skillTime: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetBuffList: []
-  CarPrb: {fileID: 0}
-  ID: 0
---- !u!114 &5939357219235845252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962074539741988428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9468a690686b4c4abebc926badffa69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u8BD5\u9A8C\u7530_\u88AB\u52A8"
-  skillTime: 0
-  isOpen: 0
   isLock: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
---- !u!114 &2313457630297625617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962074539741988428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b16879042df2c65429100777d9306b84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: "\u79CD\u74DC"
-  skillTime: 12
-  isOpen: 1
-  isLock: 0
-  skillImage: {fileID: 0}
-  selfBuffList: []
-  targetMapRole: {fileID: 0}
-  startTime: 0
-  isProduct: 0
+  isCansee: 0
 --- !u!1 &3091693601966837845
 GameObject:
   m_ObjectHideFlags: 0

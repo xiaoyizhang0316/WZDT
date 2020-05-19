@@ -10,12 +10,13 @@ public abstract class BaseSkill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        role = GetComponent<BaseMapRole>();
         if (IsOpen)
         {
             UnleashSkills();
         }
 
-        role = GetComponent<BaseMapRole>();
+      
     }
 
     // Update is called once per frame
@@ -29,8 +30,9 @@ public abstract class BaseSkill : MonoBehaviour
     /// </summary>
     public abstract void  Skill ();
 
-    public void UnleashSkills()
+    public virtual void UnleashSkills()
     {
+ 
         float d = 1f /(role.baseRoleData.efficiency * 0.1f);
       
         transform.DOScale(1,d ).OnComplete(() =>
