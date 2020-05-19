@@ -30,6 +30,8 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public Tweener tweener;
 
+    public Tweener liveTween;
+
     /// <summary>
     /// 当前生命值
     /// </summary>
@@ -99,7 +101,7 @@ public class ConsumeSign : MonoBehaviour
         Invoke("MoveToShop", waitTime);
         if (consumeData.liveTime > 0)
         {
-            Invoke("OnAlive", consumeData.liveTime + waitTime);
+            liveTween = transform.DOScale(1f, consumeData.liveTime + waitTime).OnComplete(OnAlive);
         }
     }
 
@@ -124,7 +126,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void OnDeath()
     {
-        CancelInvoke("OnAlive");
+        liveTween.Kill();
         DeathAward();
         DeathBackHome();
         Stop();
@@ -135,7 +137,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void OnAlive()
     {
-        CancelInvoke("OnAlive");
+        liveTween.Kill();
         LivePunish();
         AliveBackHome();
     }
@@ -274,7 +276,7 @@ public class ConsumeSign : MonoBehaviour
         isCanSelect = false;
         isStart = false;
         targetShop.RemoveConsumerFromShootList(this);
-        print("消费者存活");
+        //print("消费者存活");
         tweener = transform.DOMove(home.transform.position, Vector3.Distance(transform.position, home.position) / consumeData.moveSpeed).OnComplete(BackHome);
         GetComponent<Animator>().SetBool("walk", true);
         //float waitTime = UnityEngine.Random.Range(0.5f, 1.5f);
@@ -290,7 +292,7 @@ public class ConsumeSign : MonoBehaviour
         isCanSelect = false;
         isStart = false;
         targetShop.RemoveConsumerFromShootList(this);
-        print("消费者死亡");
+        //print("消费者死亡");
         BackHome();
     }
 
@@ -321,6 +323,7 @@ public class ConsumeSign : MonoBehaviour
         print(num);
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
+        liveTween.timeScale += speedAdd;
     }
 
     #region BUFF
