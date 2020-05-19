@@ -110,8 +110,6 @@ public class BaseMapRole : MonoBehaviour
         {
             PlayerData.My.RoleData.Add(baseRoleData);
         }
-
-        DayBegin();
     }
 
     #region 交易记录
@@ -573,61 +571,6 @@ public class BaseMapRole : MonoBehaviour
         else
         {
             buildingList.Add(buildingId, building);
-        }
-    }
-
-    /// <summary>
-    /// 周期性召唤消费者
-    /// </summary>
-    public void SpawnConsumer()
-    {
-        int number = 5;
-        List<GameObject> availableConsumer = new List<GameObject>();
-        List<int> keys = new List<int>(buildingList.Keys);
-        for (int i = 0; i < buildingList.Count; i++)
-        {
-            for (int j = 0; j < buildingList[keys[i]].consumerGoList.Count; j++)
-            {
-                if (!buildingList[keys[i]].consumerGoList[j].activeInHierarchy)
-                {
-                    availableConsumer.Add(buildingList[keys[i]].consumerGoList[j]);
-                }
-            }
-        }
-        List<GameObject> resultList = GetRandom(availableConsumer, number);
-        float x;
-        float y;
-        for (int i = 0; i < resultList.Count; i++)
-        {
-            x = UnityEngine.Random.Range(-1.5f, 1.5f);
-            y = UnityEngine.Random.Range(-1.5f, 1.5f);
-            resultList[i].SetActive(true);
-            resultList[i].GetComponent<ConsumeSign>().InitAndMove(this);
-            resultList[i].transform.localPosition += new Vector3(x, y, 0);
-        }
-    }
-
-    /// <summary>
-    /// 白天开始时开始召唤消费者
-    /// </summary>
-    public void DayBegin()
-    {
-        if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
-        {
-            InvokeRepeating("SpawnConsumer", 0f, 10f);
-            //InvokeRepeating("SetShootTarget", 0f, 0.2f);
-        }
-    }
-
-    /// <summary>
-    /// 白天结束时停止召唤消费者
-    /// </summary>
-    public void DayEnd()
-    {
-        if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
-        {
-            CancelInvoke("SpawnConsumer");
-            //CancelInvoke("SetShootTarget");
         }
     }
 

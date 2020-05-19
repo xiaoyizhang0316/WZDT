@@ -21,16 +21,9 @@ public class ConsumeSign : MonoBehaviour
     public ConsumerType consumerType;
 
     /// <summary>
-    /// 目标商店
-    /// </summary>
-    public BaseMapRole targetShop;
-
-    /// <summary>
     /// DOTWeen
     /// </summary>
     public Tweener tweener;
-
-    public Tweener liveTween;
 
     /// <summary>
     /// 当前生命值
@@ -60,15 +53,17 @@ public class ConsumeSign : MonoBehaviour
 
     public bool isCanSelect = false;
 
-    public List<Transform> pathList;
+    public List<Vector3> pathList;
 
     /// <summary>
     /// 初始化
     /// </summary>
     public void Init(ConsumerType type,List<Transform> paths)
     {
+        isStart = false;
+        isCanSelect = false;
         consumerType = type;
-        pathList = paths;
+        currentHealth = 0;
         foreach (ProductElementType p in Enum.GetValues(typeof(ProductElementType)))
         {
             elementResistance.Add(p, 100);
@@ -77,31 +72,32 @@ public class ConsumeSign : MonoBehaviour
         GameObject go = Instantiate(hudPrb, transform);
         hud = go.GetComponent<Hud>();
         hud.Init(this);
+        hud.healthImg.fillAmount = 0f;
         go.transform.localPosition = Vector3.zero + new Vector3(0, 2.2f, 0);
+        InitPath(paths);
+        InitAndMove();
     }
 
     /// <summary>
     /// 每次刷新消费者调用
     /// </summary>
     /// <param name="targetRole"></param>
-    public void InitAndMove(BaseMapRole targetRole)
+    public void InitAndMove()
     {
-        isStart = false;
-        isCanSelect = false;
-        int num = buffList.Count;
-        for (int i = 0; i < num; i++)
-        {
-            RemoveBuff(buffList[0]);
-        }
-        currentHealth = 0;
-        hud.healthImg.fillAmount = 0f;
-        targetShop = targetRole;
         float waitTime = UnityEngine.Random.Range(0f, 2f);
-        transform.DOLookAt(home.position, 0.1f);
-        Invoke("MoveToShop", waitTime);
-        if (consumeData.liveTime > 0)
+        Invoke("Move", waitTime);
+    }
+
+    /// <summary>
+    /// 初始化路径点
+    /// </summary>
+    /// <param name="paths"></param>
+    public void InitPath(List<Transform> paths)
+    {
+        pathList = new List<Vector3>();
+        foreach (Transform t in paths)
         {
-            liveTween = transform.DOScale(1f, consumeData.liveTime + waitTime).OnComplete(OnAlive);
+            pathList.Add(t.position);
         }
     }
 
@@ -126,9 +122,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void OnDeath()
     {
-        liveTween.Kill();
         DeathAward();
-        DeathBackHome();
         Stop();
     }
 
@@ -137,9 +131,8 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void OnAlive()
     {
-        liveTween.Kill();
         LivePunish();
-        AliveBackHome();
+        Stop();
     }
 
     /// <summary>
@@ -246,51 +239,16 @@ public class ConsumeSign : MonoBehaviour
     }
 
     /// <summary>
-    /// 去目标的角色商店    
+    /// 去目标地点    
     /// </summary>
-    public void MoveToShop()
+    public void Move()
     {
         GetComponent<Animator>().SetBool("walk", true);
         isStart = true;
         isCanSelect = true;
-        Invoke("LookAtHome", 0.5f);
+        float time = CalculateTime();
+        tweener = transform.DOPath(pathList.ToArray(), time,PathType.CatmullRom, PathMode.Full3D).OnComplete(OnAlive).SetEase(Ease.Linear).SetLookAt(0.01f);
         InvokeRepeating("CheckBuffDuration", 0f, 1f);
-        tweener = transform.DOMove(targetShop.transform.position, Vector3.Distance(transform.position, targetShop.transform.position) / consumeData.moveSpeed * 2f).OnComplete(() => OnAlive()).SetEase(Ease.Linear);
-    }
-
-    /// <summary>
-    /// 看向家的方向
-    /// </summary>
-    public void LookAtHome()
-    {
-        transform.DOLookAt(home.position, 0f);
-    }
-
-    /// <summary>
-    /// 存活自动回家
-    /// </summary>
-    public void AliveBackHome()
-    {
-        Stop();
-        isCanSelect = false;
-        isStart = false;
-        targetShop.RemoveConsumerFromShootList(this);
-        //print("消费者存活");
-        tweener = transform.DOMove(home.transform.position, Vector3.Distance(transform.position, home.position) / consumeData.moveSpeed).OnComplete(BackHome);
-        GetComponent<Animator>().SetBool("walk", true);
-    }
-
-    /// <summary>
-    /// 死亡自动回家
-    /// </summary>
-    public void DeathBackHome()
-    {
-        Stop();
-        isCanSelect = false;
-        isStart = false;
-        targetShop.RemoveConsumerFromShootList(this);
-        //print("消费者死亡");
-        BackHome();
     }
 
     /// <summary>
@@ -301,15 +259,23 @@ public class ConsumeSign : MonoBehaviour
         tweener.Kill();
         CancelInvoke("CheckBuffDuration");
         GetComponent<Animator>().SetBool("walk", false);
+        Destroy(gameObject);
     }
 
     /// <summary>
-    /// 回家
+    /// 计算全程时间
     /// </summary>
-    public void BackHome()
+    /// <returns></returns>
+    public float CalculateTime()
     {
-        transform.localPosition = Vector3.zero;
-        gameObject.SetActive(false);
+        if (pathList.Count == 0)
+            throw new Exception("路径点数量为0！");
+        float result = Vector3.Distance(transform.position,pathList[0]) / consumeData.moveSpeed;
+        for (int i = 0; i < pathList.Count - 1; i++)
+        {
+            result += Vector3.Distance(pathList[i], pathList[i + 1]) / consumeData.moveSpeed;
+        }
+        return result;
     }
 
     /// <summary>
@@ -320,7 +286,6 @@ public class ConsumeSign : MonoBehaviour
         //print(num);
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
-        liveTween.timeScale += speedAdd;
     }
 
     #region BUFF
@@ -377,9 +342,6 @@ public class ConsumeSign : MonoBehaviour
 
     private void Update()
     {
-        if (isStart)
-        {
-            LookAtHome();
-        }
+
     }
 }

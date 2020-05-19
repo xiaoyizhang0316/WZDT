@@ -45,6 +45,7 @@ public class Building : MonoBehaviour
                     throw new Exception("building Id over limit ");
             }
         }
+        SpawnConsumer(1);
     }
 
     public void InitSingleWave(int waveNum, List<string> waveConfig)
@@ -88,7 +89,6 @@ public class Building : MonoBehaviour
                     int num = UnityEngine.Random.Range(1, 11);
                     path += num.ToString();
                     GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
-                    go.transform.localPosition = Vector3.zero;
                     go.GetComponent<ConsumeSign>().Init(w.consumerType,consumerPathList);
                     go.transform.localScale = Vector3.one;
                 }

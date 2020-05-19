@@ -329,7 +329,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        //StartCoroutine(ReadStageEnemyData(sceneName));
+        StartCoroutine(ReadStageEnemyData(sceneName));
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
         bossSatisfy = data.startBoss;
         maxBossSatisfy = data.maxBoss;
