@@ -49,19 +49,19 @@ public class BulletLaunch : MonoBehaviour
 
     private bool isplay;
 
-    public void LanchNormal(ProductData data)
+    public void LanchNormal(ProductData data, ConsumeSign target)
     {
         GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.NormalPP);
         gameObject.GetComponent<GoodsSign>().productData = data;
         gameObject.GetComponent<GoodsSign>().lunch = this;
-        gameObject.GetComponent<GoodsSign>().target = GetComponent<BaseMapRole>().shootTarget;
+        gameObject.GetComponent<GoodsSign>().target =target;
         gameObject.transform.SetParent(launchShooter);
         gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
 
-        launchShooter.DOLookAt(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.1f).OnComplete(() =>
+        launchShooter.DOLookAt(target.transform.position, 0.1f).OnComplete(() =>
         {
-            lanchNormalTWE = gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.5f)
-                .SetEase(sase).OnComplete(() =>
+            lanchNormalTWE = gameObject.transform.DOMove(target.transform.position, 0.5f)
+                .SetEase(Ease.Linear).OnComplete(() =>
                 {
                     isplay = false;
                     gameObject.GetComponent<GoodsSign>().target.OnHit(data);
@@ -80,7 +80,7 @@ public class BulletLaunch : MonoBehaviour
         gameObject.GetComponent<GoodsSign>().target = GetComponent<BaseMapRole>().shootTarget;
         gameObject.transform.SetParent(launchShooter);
         gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
-
+      
         launchShooter.DOLookAt(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.1f).OnComplete(() =>
         {
             lanchNormalTWE = gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.5f)
@@ -88,13 +88,40 @@ public class BulletLaunch : MonoBehaviour
                 {
                     isplay = false;
                  gameObject.GetComponent<LightningTrigger>().GetTriggerList(GetComponent<BaseMapRole>().shootTarget,data);
-
- 
+                    
+     
                 
                 });
         });
         gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
         isplay = true;
+    }
+    
+    /// <summary>
+    /// 召唤
+    /// </summary>
+    public void CreatSummonTow( ProductData data )
+    {
+        List<Vector3> pointList = new List<Vector3>();
+        GameObject towPrb = Resources.Load<GameObject>("Bullet/Tow" );
+     GameObject tow =   Instantiate(towPrb);
+        tow.transform.SetParent(launchShooter);
+        tow.transform.localPosition = new Vector3(0, 0.1f, 0);
+        tow.GetComponent<AutoFireTow>().data = data;
+        tow.GetComponent<AutoFireTow>().destroyTime = 4;
+        tow.GetComponent<AutoFireTow>().shootTime = 1f / ( GetComponent<BaseMapRole>().baseRoleData.efficiency * 0.1f) * data.loadingSpeed; 
+        pointList = DrawLine(tow.transform.position , GetComponent<BaseMapRole>().shootTarget.transform.position);
+        tow.transform.localPosition = new Vector3(0, 0.4f, 0);
+        tow.transform.SetParent(transform);
+        launchShooter.DOLookAt(pointList[pointList.Count/2], 0.1f).OnComplete(() =>
+        {
+            tow.transform.DOPath(pointList.ToArray(), 1).SetEase(sase).OnComplete(() =>
+            {
+                
+                tow.transform.position = new Vector3(tow.transform.position .x, 0.4f, tow.transform.position .z);
+                tow.transform.eulerAngles = Vector3.zero; 
+            });
+        });
     }
     public List<Vector3> DrawLine(Transform startTarget, Transform Target)
     {

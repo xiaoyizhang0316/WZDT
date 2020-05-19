@@ -10,12 +10,13 @@ public abstract class BaseSkill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        role = GetComponent<BaseMapRole>();
         if (IsOpen)
         {
             UnleashSkills();
         }
 
-        role = GetComponent<BaseMapRole>();
+      
     }
 
     // Update is called once per frame

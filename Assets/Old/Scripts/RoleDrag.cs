@@ -103,7 +103,7 @@ public class RoleDrag : MonoBehaviour
         }
         else
         {
-            if (!Role.GetComponent<BaseMapRole>().isNpc)
+             
                 UIManager.My.UpdateUIPosition(Role.transform);
         }
         //UIManager.My.UpdateUIPosition(Role.transform);

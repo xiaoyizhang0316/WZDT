@@ -24,7 +24,7 @@ public class NormalPPTrigger : MonoBehaviour
             return;
         }
  
-        if (other.tag == "Consumer"&&other.GetComponent<ConsumeSign>()== GetComponent<GoodsSign>(). lunch. GetComponent<BaseMapRole>().shootTarget)
+        if (other.tag == "Consumer"&&other.GetComponent<ConsumeSign>()== GetComponent<GoodsSign>(). target )
         {
             if (GetComponent<GoodsSign>(). twe!=null &&GetComponent<GoodsSign>(). twe.IsPlaying())
             {
