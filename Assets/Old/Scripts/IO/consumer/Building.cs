@@ -48,6 +48,11 @@ public class Building : MonoBehaviour
         SpawnConsumer(1);
     }
 
+    /// <summary>
+    /// 初始化每一波
+    /// </summary>
+    /// <param name="waveNum"></param>
+    /// <param name="waveConfig"></param>
     public void InitSingleWave(int waveNum, List<string> waveConfig)
     {
         List<WaveConfig> tempList = new List<WaveConfig>();
@@ -68,6 +73,10 @@ public class Building : MonoBehaviour
         waveConfigs.Add(waveNum, tempList);
     }
 
+    /// <summary>
+    /// 每一波召唤消费者
+    /// </summary>
+    /// <param name="waveNumber"></param>
     public void SpawnConsumer(int waveNumber)
     {
         if (!waveConfigs.ContainsKey(waveNumber))

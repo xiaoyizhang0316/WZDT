@@ -84,7 +84,10 @@ public class ConsumeSign : MonoBehaviour
     /// <param name="targetRole"></param>
     public void InitAndMove()
     {
-        float waitTime = UnityEngine.Random.Range(0f, 2f);
+        float x = UnityEngine.Random.Range(0, 5f);
+        float z = UnityEngine.Random.Range(0, 5f);
+        transform.position += new Vector3(x, 0f, z);
+        float waitTime = UnityEngine.Random.Range(1f, 4f);
         Invoke("Move", waitTime);
     }
 
@@ -283,7 +286,6 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void ChangeSpeed(int num)
     {
-        //print(num);
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
     }

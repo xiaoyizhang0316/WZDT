@@ -177,22 +177,6 @@ public class TradeSign : MonoBehaviour
     }
 
     /// <summary>
-    /// 结算付钱关系(先钱)
-    /// </summary>
-    public void PayForTrade()
-    {
-
-    }
-
-    /// <summary>
-    /// 结算固定后钱的关系
-    /// </summary>
-    public void PayForTradeLast()
-    {
-
-    }
-
-    /// <summary>
     /// 生成交易历史记录
     /// </summary>
     public void RecordHistory(float num)
