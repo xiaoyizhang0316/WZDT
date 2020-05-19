@@ -10,6 +10,8 @@ public class MapSign : MonoBehaviour,IDragHandler
     public MapType mapType;
     public  float sensitivityAmt = 1;
 
+    public bool isCanPlace = true;
+
     // Start is called before the first frame update
     private void Awake()
     {

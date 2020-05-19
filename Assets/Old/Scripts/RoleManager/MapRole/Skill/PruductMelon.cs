@@ -24,10 +24,8 @@ public class PruductMelon : BaseSkill
             game.GetComponent<GoodsSign>().productData = data;
             game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
             game.GetComponent<GoodsSign>().role =PlayerData.My.GetMapRoleById(Double.Parse( role.tradeList[currentCount].tradeData.targetRole));
-
             game.transform.position = transform.position;
             game.GetComponent<GoodsSign>().Move();
-        
             currentCount++;
             if (currentCount >= role.tradeList.Count)
             {

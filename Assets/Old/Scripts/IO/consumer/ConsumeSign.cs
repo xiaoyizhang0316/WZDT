@@ -223,7 +223,6 @@ public class ConsumeSign : MonoBehaviour
                     buff.Init(b);
                     buff.OnProduct(ref data);
                     buff.SetConsumerBuff(this);
-
                 }
             }
         }
@@ -279,8 +278,6 @@ public class ConsumeSign : MonoBehaviour
         //print("消费者存活");
         tweener = transform.DOMove(home.transform.position, Vector3.Distance(transform.position, home.position) / consumeData.moveSpeed).OnComplete(BackHome);
         GetComponent<Animator>().SetBool("walk", true);
-        //float waitTime = UnityEngine.Random.Range(0.5f, 1.5f);
-        //Invoke("BackHome", waitTime);
     }
 
     /// <summary>
@@ -320,7 +317,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void ChangeSpeed(int num)
     {
-        print(num);
+        //print(num);
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
         liveTween.timeScale += speedAdd;

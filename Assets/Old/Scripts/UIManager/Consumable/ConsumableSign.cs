@@ -68,6 +68,10 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         consumableNumber.text = consumableNum.ToString();
     }
 
+    /// <summary>
+    /// 开始拖拽时
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!isCopy)
@@ -83,23 +87,17 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         }
     }
 
+    /// <summary>
+    /// 拖拽途中
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnDrag(PointerEventData eventData)
     {
         if (!isCopy)
         {
-            //float amount = 16 * Screen.height / 9f / Screen.width;
-            //print(Screen.height.ToString() + "   " + Screen.width.ToString());
-            //print(amount);
-            //Vector3 temp = new Vector3(0f,Screen.height / 2,0f);
-            //Vector3 V = Input.mousePosition;
-            //print(Input.mousePosition - temp) ;
-            //Vector3 V2 = new Vector3(V.x / (amount * 2f - 1f) , V.y - (Screen.height / (2 * amount - 1f)));
-            //go.transform.localPosition = V2;
-            //go.GetComponent<RectTransform>().anchoredPosition = V2;
             Vector3 pos = new Vector3();
             RectTransformUtility.ScreenPointToWorldPointInRectangle(go.GetComponent<RectTransform>(), eventData.position,
             Camera.main, out pos);
-            //print(eventData.position);
             go.transform.position = pos;
         }
     }
@@ -112,7 +110,6 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             RaycastHit[] hit = Physics.RaycastAll(ray);
             for (int i = 0; i < hit.Length; i++)
             {
-                //if (hit[i].transform.tag.Equals("Role"))
                 if (hit[i].transform.tag.Equals("MapLand"))
                 {
                     print(hit[i].point);

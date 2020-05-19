@@ -29,6 +29,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public int playerHealth;
 
+    #region Old
+
     /// <summary>
     /// 股东满意度
     /// </summary>
@@ -93,6 +95,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 消费者满意度进度条物体
     /// </summary>
     public GameObject consumerSatisfyGo;
+
+    #endregion
 
     public Image bossFace;
 
@@ -307,44 +311,12 @@ public class StageGoal : MonoSingleton<StageGoal>
     } 
 
     /// <summary>
-    /// 股东每月固定扣除满意度
-    /// </summary>
-    public void MonthlyReduceBoss()
-    {
-        int monthNum = TimeManager.My.month;
-        print("固定扣股东");
-        if (monthNum < 10)
-            CostMoney(500 + monthNum * 10);
-        else if (monthNum < 15)
-            CostMoney(500 * monthNum);
-        else
-            CostMoney(500 * Mathf.Pow(monthNum, 1.5f));
-    }
-
-    /// <summary>
-    /// 重新统计所有角色信息
-    /// </summary>
-    public void RecheckMapRole()
-    {
-        if (PlayerData.My.MapRole.Count > 0)
-        {
-            foreach (BaseMapRole b in PlayerData.My.MapRole)
-            {
-                if (!b.baseRoleData.isNpc)
-                    b.RecheckInfo();
-            }
-        }
-    }
-
-    /// <summary>
     /// 将关卡配置表读取到本关
     /// </summary>
     public void InitStage()
     {
         InitStageData();
         SetInfo();
-        InvokeRepeating("MonthlyReduceBoss", 0f, 60f);
-        InvokeRepeating("RecheckMapRole", 1f, 60f);
         BuildingManager.My.InitAllBuilding();
         MenuHide();
     }
@@ -360,16 +332,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         maxBossSatisfy = data.maxBoss;
         customerSatisfy = data.startConsumer;
         maxCustomerSatisfy = data.maxConsumer;
-        bankRate = data.bankRate;
-        qualityRecognition = 1.5f;
-        brandRecognition = 1f;
-        standardSweet = Random.Range(-5, 5);
-        standardCrisp = Random.Range(-5, 5);
-        consumerQualityNeed = Random.Range(data.consumerQualityNeed - 5, data.consumerQualityNeed + 5);
-        playerGold = 10000;
-        playerSatisfy = 0;
-        goalSatisfy = 1000;
-        playerHealth = 300;
         InitEquipAndWorker(data);
     }
 

@@ -31,7 +31,6 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
     {
         sceneName = name;
         SceneManager.LoadScene("GameMain");
-
     }
 
     private void OnGUI()
