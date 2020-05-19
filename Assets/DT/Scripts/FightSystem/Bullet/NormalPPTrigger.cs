@@ -24,12 +24,12 @@ public class NormalPPTrigger : MonoBehaviour
             return;
         }
  
-        if (other.tag == "Consumer"&&other.GetComponent<ConsumeSign>()== GetComponent<GoodsSign>(). lunch. GetComponent<BaseMapRole>().shootTarget)
+        if (other.tag == "Consumer"&&other.GetComponent<ConsumeSign>()== GetComponent<GoodsSign>(). target )
         {
             if (GetComponent<GoodsSign>(). twe!=null &&GetComponent<GoodsSign>(). twe.IsPlaying())
             {
                 GetComponent<GoodsSign>(). twe.Kill();
-                GetComponent<GoodsSign>(). target.OnHit(GetComponent<GoodsSign>(). productData);
+                GetComponent<GoodsSign>(). target.OnHit(ref GetComponent<GoodsSign>(). productData);
                 BulletObjectPool.My.RecoveryBullet(gameObject); 
             }
 

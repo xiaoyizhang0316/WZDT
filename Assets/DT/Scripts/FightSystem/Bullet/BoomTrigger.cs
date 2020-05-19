@@ -28,7 +28,7 @@ public class BoomTrigger : MonoBehaviour
                 radius >= Vector3.Distance(gameObject.transform.position, signs[i].transform.position))
             {
                 Debug.Log("打到"+signs[i].name);
-                signs[i].OnHit(gameObject.GetComponent<GoodsSign>().productData);
+                signs[i].OnHit(ref gameObject.GetComponent<GoodsSign>().productData);
             }
         }
     }

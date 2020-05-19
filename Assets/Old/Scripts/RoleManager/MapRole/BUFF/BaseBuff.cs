@@ -129,6 +129,18 @@ public class BaseBuff
     }
 
     /// <summary>
+    /// 产品相关
+    /// </summary>
+    /// <param name="data"></param>
+    public void OnProduct(ref ProductData data)
+    {
+        foreach (string str in buffData.OnProduct)
+        {
+            CheckProductNumber(str, ref data);
+        }
+    }
+
+    /// <summary>
     /// 将buff付给目标(角色)
     /// </summary>
     public void AddBuffToTargetRole()

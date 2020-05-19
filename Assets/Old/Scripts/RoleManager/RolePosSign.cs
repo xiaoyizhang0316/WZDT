@@ -53,15 +53,13 @@ public class RolePosSign : MonoBehaviour
         for (int i = 0; i < _roleDrags.Count; i++)
         {
             Vector3 fwd = _roleDrags[i].TransformDirection(Vector3.down);
-             
             RaycastHit[] hit= Physics.RaycastAll(_roleDrags[i].position, fwd,  100);
-
             for (int j = 0; j < hit.Length; j++)
             {
-               
                 if (hit[j].collider.tag.Equals("MapLand"))
                 {
-                
+                    if (!hit[j].collider.GetComponent<MapSign>().isCanPlace)
+                        break;
                     //Debug.Log(hit.collider.gameObject.name);
                     vec = hit[j].collider.transform.position - _roleDrags[i].position;
                     // Debug.Log(vec);
@@ -72,10 +70,6 @@ public class RolePosSign : MonoBehaviour
                     break;
                 }
             }
-           
-             
-              
-           
         }
 
         transform.SetParent(CommonData.My.RoleTF.transform);

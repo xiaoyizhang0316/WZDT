@@ -30,6 +30,8 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public Tweener tweener;
 
+    public Tweener liveTween;
+
     /// <summary>
     /// 当前生命值
     /// </summary>
@@ -58,15 +60,15 @@ public class ConsumeSign : MonoBehaviour
 
     public bool isCanSelect = false;
 
-    public Transform home;
+    public List<Transform> pathList;
 
     /// <summary>
     /// 初始化
     /// </summary>
-    public void Init(ConsumerType type,Transform building)
+    public void Init(ConsumerType type,List<Transform> paths)
     {
         consumerType = type;
-        home = building;
+        pathList = paths;
         foreach (ProductElementType p in Enum.GetValues(typeof(ProductElementType)))
         {
             elementResistance.Add(p, 100);
@@ -95,11 +97,11 @@ public class ConsumeSign : MonoBehaviour
         hud.healthImg.fillAmount = 0f;
         targetShop = targetRole;
         float waitTime = UnityEngine.Random.Range(0f, 2f);
-        transform.DOLookAt(home.position, 0.1f);
+//        transform.DOLookAt(home.position, 0.1f);
         Invoke("MoveToShop", waitTime);
         if (consumeData.liveTime > 0)
         {
-            Invoke("OnAlive", consumeData.liveTime + waitTime);
+            liveTween = transform.DOScale(1f, consumeData.liveTime + waitTime).OnComplete(OnAlive);
         }
     }
 
@@ -107,12 +109,15 @@ public class ConsumeSign : MonoBehaviour
     /// 消费者被击中时调用
     /// </summary>
     /// <param name="data"></param>
-    public void OnHit(ProductData data)
+    public void OnHit(ref ProductData data)
     {
         if (isCanSelect)
         {
+            CheckAttackEffect(ref data);
+            int realDamage = (int)data.damage;
+            CheckBulletElement(ref realDamage, data);
             CheckDebuff(data);
-            ChangeHealth((int)data.damage);
+            ChangeHealth(realDamage);
         }
     }
 
@@ -121,7 +126,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void OnDeath()
     {
-        CancelInvoke("OnAlive");
+        liveTween.Kill();
         DeathAward();
         DeathBackHome();
         Stop();
@@ -132,7 +137,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void OnAlive()
     {
-        CancelInvoke("OnAlive");
+        liveTween.Kill();
         LivePunish();
         AliveBackHome();
     }
@@ -181,6 +186,49 @@ public class ConsumeSign : MonoBehaviour
     }
 
     /// <summary>
+    /// 结算属性抗性
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="data"></param>
+    public void CheckBulletElement(ref int damage,ProductData data)
+    {
+        float per = 1f;
+        foreach(int i in data.buffList)
+        {
+            BuffData b = GameDataMgr.My.GetBuffDataByID(i);
+            if (b.bulletBuffType == BulletBuffType.Element)
+            {
+                per += elementResistance[b.elementType] / 100f - 1f;
+            }
+        }
+        damage = (int)(damage * per);
+    }
+
+    /// <summary>
+    /// 检测攻击特效
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="data"></param>
+    public void CheckAttackEffect(ref ProductData data)
+    {
+        foreach (int i in data.buffList)
+        {
+            BuffData b = GameDataMgr.My.GetBuffDataByID(i);
+            if (b.bulletBuffType == BulletBuffType.AttackEffect)
+            {
+                int number = UnityEngine.Random.Range(1,101);
+                if (number <= b.attackEffect)
+                {
+                    BaseBuff buff = new BaseBuff();
+                    buff.Init(b);
+                    buff.OnProduct(ref data);
+                    buff.SetConsumerBuff(this);
+                }
+            }
+        }
+    }
+
+    /// <summary>
     /// 检测debuff
     /// </summary>
     public void CheckDebuff(ProductData data)
@@ -215,7 +263,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void LookAtHome()
     {
-        transform.DOLookAt(home.position, 0f);
+//        transform.DOLookAt(home.position, 0f);
     }
 
     /// <summary>
@@ -227,11 +275,9 @@ public class ConsumeSign : MonoBehaviour
         isCanSelect = false;
         isStart = false;
         targetShop.RemoveConsumerFromShootList(this);
-        print("消费者存活");
-        tweener = transform.DOMove(home.transform.position, Vector3.Distance(transform.position, home.position) / consumeData.moveSpeed).OnComplete(BackHome);
+        //print("消费者存活");
+      //  tweener = transform.DOMove(home.transform.position, Vector3.Distance(transform.position, home.position) / consumeData.moveSpeed).OnComplete(BackHome);
         GetComponent<Animator>().SetBool("walk", true);
-        //float waitTime = UnityEngine.Random.Range(0.5f, 1.5f);
-        //Invoke("BackHome", waitTime);
     }
 
     /// <summary>
@@ -243,7 +289,7 @@ public class ConsumeSign : MonoBehaviour
         isCanSelect = false;
         isStart = false;
         targetShop.RemoveConsumerFromShootList(this);
-        print("消费者死亡");
+        //print("消费者死亡");
         BackHome();
     }
 
@@ -271,9 +317,10 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void ChangeSpeed(int num)
     {
-        print(num);
+        //print(num);
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
+        liveTween.timeScale += speedAdd;
     }
 
     #region BUFF

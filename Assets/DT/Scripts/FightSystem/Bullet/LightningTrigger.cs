@@ -15,22 +15,22 @@ public class LightningTrigger : MonoBehaviour
     {
         Asign = target;
 
-        Asign.OnHit(data);
+        Asign.OnHit(ref data);
         if (GetminDisConsumer())
         {
             gameObject.transform.DOMove(Asign.transform.position, 0.1f).OnComplete(() =>
             {
-                Asign.OnHit(data);
+                Asign.OnHit(ref data);
                 if (GetminDisConsumer())
                 {
                     gameObject.transform.DOMove(Asign.transform.position, 0.1f).OnComplete(() =>
                     {
-                        Asign.OnHit(data);
+                        Asign.OnHit(ref data);
                         if (GetminDisConsumer())
                         {
                             gameObject.transform.DOMove(Asign.transform.position, 0.1f).OnComplete(() =>
                             {
-                                Asign.OnHit(data);
+                                Asign.OnHit(ref data);
 
                                 BulletObjectPool.My.RecoveryBullet(gameObject);
                             });

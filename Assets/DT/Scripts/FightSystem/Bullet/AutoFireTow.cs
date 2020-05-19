@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class AutoFireTow : MonoBehaviour
@@ -8,12 +9,17 @@ public class AutoFireTow : MonoBehaviour
     private ConsumeSign Asign;
 
     public ProductData data;
+
+    public float shootTime;
+
+    public float destroyTime;
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("GetminDisConsumer",0,1);
+        InvokeRepeating("Shoot",0,shootTime);
         GetComponent<BulletLaunch>().fire .SetActive(false);
-
+        DestotyOBJ();
     }
 
     // Update is called once per frame
@@ -49,8 +55,19 @@ public class AutoFireTow : MonoBehaviour
         if (Asign != null)
         {
             GetComponent<BulletLaunch>().fire .SetActive(true);
-            GetComponent<BulletLaunch>().LanchNormal(data);
+            GetComponent<BulletLaunch>().LanchNormal(data,Asign);
         }
-        
+        else
+        {
+            GetComponent<BulletLaunch>().fire .SetActive(false);
+        }
+    }
+
+    public void DestotyOBJ()
+    {
+        transform.DOScale(0.5f, destroyTime).OnComplete(() =>
+        { 
+            Destroy(gameObject);
+        });
     }
 }

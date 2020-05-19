@@ -112,7 +112,57 @@ public class Role
     {
         
     }
+    /// <summary>
+    /// 初始化角色数值，放置多重叠加
+    /// </summary>
+    public void InitRoleValue()
+    {
+        effect =  baseRoleData.effect;
+        efficiency = baseRoleData.efficiency;
+        range =  baseRoleData.range;
+        tradeCost = baseRoleData.tradeCost;
+        cost = baseRoleData.cost;
+        bulletCapacity =  baseRoleData.bulletCapacity;
+        riskResistance =  baseRoleData.riskResistance;
+        equipCost = 0;
+        workerCost = 0;
+        //CurrentRole.cost = CurrentRole.baseRoleData.cost;
+    }
 
+    /// <summary>
+    /// 计算角色属性数值
+    /// </summary>
+    public void CalculateAllAttribute()
+    {
+        InitRoleValue();
+        foreach (var i in EquipList)
+        {
+            GearData tempData = GameDataMgr.My.GetGearData(i.Key);
+            effect += tempData.effect;
+            efficiency += tempData.efficiency;
+            range += tempData.range;
+            tradeCost += tempData.tradeCost;
+            cost += tempData.cost;
+            bulletCapacity += tempData.riskResistance;
+            riskResistance += tempData.bulletCapacity;
+             equipCost += tempData.cost;
+      
+        }
+     
+        foreach (var i in peoPleList)
+        {
+            WorkerData tempData = GameDataMgr.My.GetWorkerData(i.Key);
+            effect += tempData.effect;
+            efficiency += tempData.efficiency;
+            range += tempData.range;
+            tradeCost += tempData.tradeCost;
+            cost += tempData.cost;
+            riskResistance += tempData.riskResistance;
+            bulletCapacity += tempData.bulletCapacity;
+            workerCost += tempData.cost;
+        }
+       
+    }
   
     /// <summary>
     /// 设置装备

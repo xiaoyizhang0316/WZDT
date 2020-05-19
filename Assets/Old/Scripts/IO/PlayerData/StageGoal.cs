@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using System.Linq;
 
 public class StageGoal : MonoSingleton<StageGoal>
 {
@@ -28,6 +29,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 玩家血量
     /// </summary>
     public int playerHealth;
+
+    #region Old
 
     /// <summary>
     /// 股东满意度
@@ -94,6 +97,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public GameObject consumerSatisfyGo;
 
+    #endregion
+
     public Image bossFace;
 
     public Image consumerFace;
@@ -113,6 +118,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public Text playerSatisfyText;
 
     public Text playerHealthText;
+
+    public List<StageEnemyData> enemyDatas;
 
     /// <summary>
     /// 玩家消耗金币
@@ -307,45 +314,12 @@ public class StageGoal : MonoSingleton<StageGoal>
     } 
 
     /// <summary>
-    /// 股东每月固定扣除满意度
-    /// </summary>
-    public void MonthlyReduceBoss()
-    {
-        int monthNum = TimeManager.My.month;
-        print("固定扣股东");
-        if (monthNum < 10)
-            CostMoney(500 + monthNum * 10);
-        else if (monthNum < 15)
-            CostMoney(500 * monthNum);
-        else
-            CostMoney(500 * Mathf.Pow(monthNum, 1.5f));
-    }
-
-    /// <summary>
-    /// 重新统计所有角色信息
-    /// </summary>
-    public void RecheckMapRole()
-    {
-        if (PlayerData.My.MapRole.Count > 0)
-        {
-            foreach (BaseMapRole b in PlayerData.My.MapRole)
-            {
-                if (!b.baseRoleData.isNpc)
-                    b.RecheckInfo();
-            }
-        }
-    }
-
-    /// <summary>
     /// 将关卡配置表读取到本关
     /// </summary>
     public void InitStage()
     {
         InitStageData();
         SetInfo();
-        InvokeRepeating("MonthlyReduceBoss", 0f, 60f);
-        InvokeRepeating("RecheckMapRole", 1f, 60f);
-        BuildingManager.My.InitAllBuilding();
         MenuHide();
     }
 
@@ -355,17 +329,12 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
+        //StartCoroutine(ReadStageEnemyData(sceneName));
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
         bossSatisfy = data.startBoss;
         maxBossSatisfy = data.maxBoss;
         customerSatisfy = data.startConsumer;
         maxCustomerSatisfy = data.maxConsumer;
-        bankRate = data.bankRate;
-        qualityRecognition = 1.5f;
-        brandRecognition = 1f;
-        standardSweet = Random.Range(-5, 5);
-        standardCrisp = Random.Range(-5, 5);
-        consumerQualityNeed = Random.Range(data.consumerQualityNeed - 5, data.consumerQualityNeed + 5);
         playerGold = 10000;
         playerSatisfy = 0;
         goalSatisfy = 1000;
@@ -388,6 +357,56 @@ public class StageGoal : MonoSingleton<StageGoal>
             PlayerData.My.GetNewGear(i);
         }
     }
+
+    /// <summary>
+    /// 读取当前关卡敌人配置
+    /// </summary>
+    /// <param name="sceneName"></param>
+    /// <returns></returns>
+    IEnumerator ReadStageEnemyData(string sceneName)
+    {
+        string path = "file://" + Application.streamingAssetsPath + @"/Data/StageEnemy/" + sceneName + ".json";
+        WWW www = new WWW(@path);
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
+                ParseStageEnemyData(stageEnemyData);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 将当前关卡敌人配置转化成可用数据
+    /// </summary>
+    /// <param name="data"></param>
+    public void ParseStageEnemyData(StageEnemysData data)
+    {
+        enemyDatas = new List<StageEnemyData>();
+        foreach(StageEnemyItem s in data.stageEnemyItems)
+        {
+            StageEnemyData stageEnemyData = new StageEnemyData();
+            stageEnemyData.waveNumber = int.Parse(s.waveNumber);
+            stageEnemyData.point1 = s.point1.Split(',').ToList();
+            stageEnemyData.point2 = s.point2.Split(',').ToList();
+            stageEnemyData.point3 = s.point3.Split(',').ToList();
+            stageEnemyData.point4 = s.point4.Split(',').ToList();
+            stageEnemyData.point5 = s.point5.Split(',').ToList();
+            stageEnemyData.point6 = s.point6.Split(',').ToList();
+            enemyDatas.Add(stageEnemyData);
+        }
+        BuildingManager.My.InitAllBuilding(enemyDatas);
+    }
+
+
 
     // Start is called before the first frame update
     void Start()

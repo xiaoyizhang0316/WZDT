@@ -19,16 +19,13 @@ public class PruductMelon : BaseSkill
             role.warehouse.RemoveAt(0);
             data.bulletType = BulletType.NormalPP;
             data.loadingSpeed *=1f-role.baseRoleData.effect/100f ;
-            data.buffList.Add(101);
-            data.buffList.Add(102);
+            data.buffList.Add(201);
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;
             game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
             game.GetComponent<GoodsSign>().role =PlayerData.My.GetMapRoleById(Double.Parse( role.tradeList[currentCount].tradeData.targetRole));
-
             game.transform.position = transform.position;
             game.GetComponent<GoodsSign>().Move();
-        
             currentCount++;
             if (currentCount >= role.tradeList.Count)
             {

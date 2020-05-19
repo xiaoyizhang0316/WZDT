@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
@@ -17,9 +18,11 @@ public class GoodsSign : MonoBehaviour
     public BulletLaunch lunch;
     public List<Vector3> path;
     public  Tweener twe;
+    public Tweener moveTween;
     public BaseMapRole role;
+    private float speedAdd;
 
-    public Tweener moveingTwe;
+    public Dictionary<double, int> speedBuffList = new Dictionary<double, int>();
     // Start is called before the first frame update
     void Start()
     {
@@ -36,14 +39,13 @@ public class GoodsSign : MonoBehaviour
     private int count = 0;
     public void Move()
     {
-       
-        moveingTwe =transform.DOMove(path[count],1).OnComplete(() =>
+
+        moveTween = transform.DOMove(path[count],1).OnComplete(() =>
         {
             count++;
             if (count < path.Count)
             {
                 Move();
-                
             }
             else
             {
@@ -52,10 +54,74 @@ public class GoodsSign : MonoBehaviour
             }
 
         }).SetEase(Ease.Linear);
+        moveTween.timeScale = speedAdd;
     }
 
- 
     private bool needUpdate;
 
-   
+    public void OnTriggerEnter(Collider other)
+    {
+        if (lunch == null)
+        {
+            return;
+        }
+        //Debug.Log(other.gameObject.name);
+        //Debug.Log(lunch);
+        if (other.tag == "Consumer"&&other.GetComponent<ConsumeSign>()== lunch. GetComponent<BaseMapRole>().shootTarget)
+        {
+            if (twe.IsPlaying())
+            {
+                twe.Kill();
+                target.OnHit(ref productData);
+                BulletObjectPool.My.RecoveryBullet(gameObject); 
+            }
+        }
+    }
+
+    public void AddSpeedBuff(double roleId, int num)
+    {
+        if (speedBuffList.ContainsKey(roleId))
+            return;
+        if (speedBuffList.Count == 0)
+        {
+            speedBuffList.Add(roleId, num);
+            ChangeMoveSpeed();
+        }
+        else
+        {
+            List<double> temp = speedBuffList.Keys.ToList();
+            if (speedBuffList[temp[0]] >= num)
+            {
+                return;
+            }
+            else
+            {
+                speedBuffList.Remove(temp[0]);
+                speedBuffList.Add(roleId, num);
+                ChangeMoveSpeed();
+            }
+        }
+    }
+
+    public void RemoveSpeedBuff(double roleId)
+    {
+        if (!speedBuffList.ContainsKey(roleId))
+            return;
+        else
+        {
+            speedBuffList.Remove(roleId);
+            ChangeMoveSpeed();
+        }
+    }
+
+    public void ChangeMoveSpeed()
+    {
+        speedAdd = 1f;
+        moveTween.timeScale = 1f;
+        foreach (var v in speedBuffList)
+        {
+            speedAdd += v.Value / 100f - 1f;
+        }
+        moveTween.timeScale += speedAdd;
+    }
 }

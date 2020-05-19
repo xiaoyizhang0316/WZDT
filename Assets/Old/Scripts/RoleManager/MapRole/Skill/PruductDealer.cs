@@ -26,7 +26,7 @@ public class PruductDealer : BaseSkill
             switch (data.bulletType)
             {
                 case  BulletType.NormalPP: 
-                    GetComponent<BulletLaunch>().LanchNormal( data);
+                    GetComponent<BulletLaunch>().LanchNormal( data,role.shootTarget);
                     break;    
                 case  BulletType.Bomb: 
                     GetComponent<BulletLaunch>().LanchBoom( data);
@@ -35,12 +35,14 @@ public class PruductDealer : BaseSkill
                     GetComponent<BulletLaunch>().LanchLightning( data);
                     break;    
                 case  BulletType.summon: 
-                    GetComponent<BulletLaunch>().LanchNormal( data);
+                    GetComponent<BulletLaunch>().CreatSummonTow( data);
                     break;
                  
             } 
         }
     }
+
+
 
     public override void UnleashSkills()
     {
