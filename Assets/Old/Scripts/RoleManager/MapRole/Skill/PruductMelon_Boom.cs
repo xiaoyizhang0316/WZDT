@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
 
@@ -25,7 +26,8 @@ public class PruductMelon_Boom : BaseSkill
             data.loadingSpeed += 2;
             data.buffList.Add(101);
             data.buffList.Add(102);
-            data.damage += 20;
+            data.damage =(float) (data.damage + role.baseRoleData.effect  );
+
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;
             game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
@@ -42,5 +44,37 @@ public class PruductMelon_Boom : BaseSkill
 
         }
 
+    }
+    
+    public override void UnleashSkills()
+    {
+        if (role.warehouse.Count > 0)
+        {
+            ProductData data = role.warehouse[0];
+            float d = 1;
+            Debug.Log("释放技能" + d);
+
+            transform.DOScale(1, d).OnComplete(() =>
+            {
+                Debug.Log("释放技能" + d);
+                Skill();
+                if (IsOpen)
+                {
+                    UnleashSkills();
+                }
+            });
+        }
+        else
+        {
+            float d =1;
+            transform.DOScale(1, d).OnComplete(() =>
+            {
+           
+                if (IsOpen)
+                {
+                    UnleashSkills();
+                }
+            });
+        }
     }
 }

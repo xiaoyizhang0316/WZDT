@@ -22,6 +22,7 @@ public class ChoseRoleManager : MonoBehaviour
         {
             Role role = new Role();
             role.baseRoleData = GameDataMgr.My.GetModelData(GameEnum.RoleType.Dealer, 1);
+            
             role.baseRoleData.roleName = StaticRoleName.DealerName[Random.Range(0, StaticRoleName.DealerName.Length)];
             role.ID = CommonData.My.GetTimestamp(DateTime.Now);
             UIManager.My.Panel_AssemblyRole.SetActive(true);
@@ -33,6 +34,7 @@ public class ChoseRoleManager : MonoBehaviour
             Role role = new Role();
             role.ID = CommonData.My.GetTimestamp(DateTime.Now);
             role.baseRoleData = GameDataMgr.My.GetModelData(GameEnum.RoleType.Merchant, 1);
+            
             role.baseRoleData.roleName = StaticRoleName.MerchantName[Random.Range(0, StaticRoleName.MerchantName.Length)];
             UIManager.My.Panel_AssemblyRole.SetActive(true);
 

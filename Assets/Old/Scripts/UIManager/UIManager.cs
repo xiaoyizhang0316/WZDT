@@ -390,6 +390,15 @@ public class UIManager : MonoSingleton<UIManager>
         return false;
     }
 
+    /// <summary>
+    /// 升级当前角色
+    /// </summary>
+    public void UpdateRole()
+    {
+        CurrentClickRole.baseRoleData = GameDataMgr.My.GetModelData(CurrentClickRole.baseRoleData.roleType,CurrentClickRole.baseRoleData.level++);
+        CurrentClickRole.CalculateAllAttribute();
+
+    }
 
     public void LoadCurrentScene()
     {

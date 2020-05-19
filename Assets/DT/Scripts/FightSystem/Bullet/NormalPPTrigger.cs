@@ -29,7 +29,7 @@ public class NormalPPTrigger : MonoBehaviour
             if (GetComponent<GoodsSign>(). twe!=null &&GetComponent<GoodsSign>(). twe.IsPlaying())
             {
                 GetComponent<GoodsSign>(). twe.Kill();
-                GetComponent<GoodsSign>(). target.OnHit(GetComponent<GoodsSign>(). productData);
+                GetComponent<GoodsSign>(). target.OnHit(ref GetComponent<GoodsSign>(). productData);
                 BulletObjectPool.My.RecoveryBullet(gameObject); 
             }
 
