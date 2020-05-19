@@ -11,58 +11,66 @@ using UnityEngine;
 public class BulletLaunch : MonoBehaviour
 {
     public Ease sase;
+
     /// <summary>
     /// 炮台
     /// </summary>
     public Transform launchShooter;
- public   Tweener lanchNormalTWE;
+
+    public Tweener lanchNormalTWE;
     public float per;
 
-    
-    public void LanchBoom(Vector3 target)
-    {
-        
-        List<Vector3> pointList = new List<Vector3>();
-        pointList = DrawLine(transform,target);
-     GameObject gameObject =    BulletObjectPool.My.GetBullet(BulletType.Bomb);
-     gameObject.transform.SetParent(launchShooter);
-     gameObject.transform.localPosition = Vector3.zero;
-     
-     launchShooter.DOLookAt(target,0.3f);
-     gameObject.transform.DOPath(pointList.ToArray(),5).SetEase(sase).OnComplete(() =>
-     {
-         BulletObjectPool.My.RecoveryBullet(gameObject);
-     });
-    }
 
-    private bool isplay ;
-    public GameObject LanchNormal( ProductData data)
+    public void LanchBoom(ProductData data)
     {
-        GameObject gameObject =    BulletObjectPool.My.GetBullet(BulletType.NormalPP);
+        List<Vector3> pointList = new List<Vector3>();
+        pointList = DrawLine(transform, GetComponent<BaseMapRole>().shootTarget.transform.position);
+        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Bomb);
         gameObject.GetComponent<GoodsSign>().productData = data;
         gameObject.GetComponent<GoodsSign>().lunch = this;
         gameObject.GetComponent<GoodsSign>().target = GetComponent<BaseMapRole>().shootTarget;
-        //gameObject.transform.SetParent(launchShooter);
+        gameObject.transform.SetParent(launchShooter);
+        gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
 
-        //gameObject.transform.localPosition = new Vector3(0,0.5f,0);
-        gameObject.transform.position = launchShooter.position + new Vector3(0, 0.5f, 0);
-
-        launchShooter.DOLookAt(GetComponent<BaseMapRole>().shootTarget.transform.position  , 0.1f).OnComplete(()=> {
-            lanchNormalTWE = gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.4f).SetEase(sase).OnComplete(() =>
+        launchShooter.DOLookAt(pointList[0], 0.1f).OnComplete(() =>
+        {
+            gameObject.transform.DOPath(pointList.ToArray(), 2).SetEase(sase).OnComplete(() =>
             {
-                isplay = false;
-                gameObject.GetComponent<GoodsSign>().target.OnHit(data);
                 BulletObjectPool.My.RecoveryBullet(gameObject);
             });
-            gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
         });
-        isplay = true;
-        return gameObject;
+        gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
     }
-    public  List<Vector3>  DrawLine(Transform startTarget ,Transform Target)
+
+    private bool isplay;
+
+    public void LanchNormal(ProductData data)
+    {
+        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.NormalPP);
+        gameObject.GetComponent<GoodsSign>().productData = data;
+        gameObject.GetComponent<GoodsSign>().lunch = this;
+        gameObject.GetComponent<GoodsSign>().target = GetComponent<BaseMapRole>().shootTarget;
+        gameObject.transform.SetParent(launchShooter);
+        gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
+
+        launchShooter.DOLookAt(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.1f).OnComplete(() =>
+        {
+            lanchNormalTWE = gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position, 1)
+                .SetEase(sase).OnComplete(() =>
+                {
+                    isplay = false;
+                    gameObject.GetComponent<GoodsSign>().target.OnHit(data);
+                    BulletObjectPool.My.RecoveryBullet(gameObject);
+                });
+        });
+        gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
+        isplay = true;
+    }
+
+    public List<Vector3> DrawLine(Transform startTarget, Transform Target)
     {
         List<Vector3> pointList = new List<Vector3>();
-        int vertexCount = 30;//采样点数量
+        int vertexCount = 30; //采样点数量
         pointList.Clear();
         pointList.Add(startTarget.position);
         if (startTarget != null && Target != null)
@@ -80,20 +88,22 @@ public class BulletLaunch : MonoBehaviour
                 pointList.Add(bezierPoint);
             }
         }
+
         pointList.Add(Target.position);
         return pointList;
     }
-    public  List<Vector3>  DrawLine(Transform startTarget ,Vector3 Target)
+
+    public List<Vector3> DrawLine(Transform startTarget, Vector3 Target)
     {
         List<Vector3> pointList = new List<Vector3>();
-        int vertexCount = 30;//采样点数量
+        int vertexCount = 30; //采样点数量
         pointList.Clear();
         pointList.Add(startTarget.position);
         if (startTarget != null && Target != null)
         {
             float x = startTarget.position.x * per + Target.x * (per);
             //float y = startTarget.localPosition.y * per + Target.localPosition.y * (1f - per) ;
-            float y =50;
+            float y = 50;
             float z = startTarget.position.z * per + Target.z * (per);
             Vector3 point3 = new Vector3(x, y, z);
             for (float ratio = 0; ratio <= 1; ratio += 1.0f / vertexCount)
@@ -104,26 +114,24 @@ public class BulletLaunch : MonoBehaviour
                 pointList.Add(bezierPoint);
             }
         }
+
         pointList.Add(Target);
-        
+
         return pointList;
     }
 
-  
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     private void OnGUI()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

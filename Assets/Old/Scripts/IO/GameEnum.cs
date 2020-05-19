@@ -324,4 +324,32 @@ public class GameEnum
         Debuff
     }
 
+    public enum ProductElementType
+    {
+        /// <summary>
+        /// 通常
+        /// </summary>
+        Normal,
+        /// <summary>
+        /// 折扣
+        /// </summary>
+        Discount,
+        /// <summary>
+        /// 精美包装
+        /// </summary>
+        GoodPack,
+        /// <summary>
+        /// 软
+        /// </summary>
+        Soft,
+        /// <summary>
+        /// 脆
+        /// </summary>
+        Crisp,
+        /// <summary>
+        /// 甜
+        /// </summary>
+        Sweet
+    }
+
 }

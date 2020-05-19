@@ -11,6 +11,7 @@ namespace DT.Fight.Bullet
         NormalPP =1 ,
         Bomb = 2,
         Lightning = 3,
+        summon = 4,
     }
      
 }
