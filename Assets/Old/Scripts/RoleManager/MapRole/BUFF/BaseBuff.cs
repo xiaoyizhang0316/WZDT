@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using static GameEnum;
 using static JYFS;
 
 [Serializable]
@@ -30,12 +31,14 @@ public class BaseBuff
 
     public BaseMapRole buffRole;
 
+    public ConsumeSign targetConsume;
+
     //Dictionary<string,List<int>>
 
     /// <summary>
     /// 当BUFF添加时
     /// </summary>
-    public void BuffAdd()
+    public void RoleBuffAdd()
     {
         foreach (string str in buffData.OnBuffAdd)
         {
@@ -47,7 +50,7 @@ public class BaseBuff
     /// <summary>
     /// 当BUFF移除时
     /// </summary>
-    public void BuffRemove()
+    public void RoleBuffRemove()
     {
         foreach (string str in buffData.OnBuffRemove)
         {
@@ -57,52 +60,26 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 当交易进行时
+    /// 当BUFF添加时
     /// </summary>
-    public void OnTradeConduct()
+    public void ConsumerBuffAdd()
     {
-        foreach (string str in buffData.OnTradeConduct)
+        foreach (string str in buffData.OnBuffAdd)
         {
             CheckStaticNumber(str);
-            CheckRoleNumber(str);
+            CheckConsumerNumber(str);
         }
     }
 
     /// <summary>
-    /// 当消费者进店时
+    /// 当BUFF移除时
     /// </summary>
-    public void OnConsumerInShop(ref ConsumeData consumer)
+    public void ConsumerBuffRemove()
     {
-        foreach (string str in buffData.OnConsumerInShop)
+        foreach (string str in buffData.OnBuffAdd)
         {
             CheckStaticNumber(str);
-            CheckRoleNumber(str);
-            CheckConsumerNumber(str, ref consumer);
-        }
-    }
-
-    /// <summary>
-    /// 当消费者购物时
-    /// </summary>
-    public void OnConsumerBuyProduct()
-    {
-        foreach (string str in buffData.OnConsumerBuyProduct)
-        {
-            CheckStaticNumber(str);
-            CheckRoleNumber(str);
-        }
-    }
-
-    /// <summary>
-    /// 当消费者满意度结算时
-    /// </summary>
-    public void OnConsumerSatisfy(ref float satisfy)
-    {
-        foreach (string str in buffData.OnConsumerSatisfy)
-        {
-            CheckStaticNumber(str);
-            CheckRoleNumber(str);
-            CheckConsumerSatisfyNumber(str, ref satisfy);
+            CheckConsumerNumber(str);
         }
     }
 
@@ -114,27 +91,13 @@ public class BaseBuff
         foreach (string str in buffData.OnBeforeDead)
         {
             CheckStaticNumber(str);
-            CheckRoleNumber(str);
         }
     }
 
     /// <summary>
-    /// 当生产活动完成时
+    /// 周期性活动(角色)时
     /// </summary>
-    public void OnProductionComplete(ref ProductData product)
-    {
-        foreach (string str in buffData.OnProductionComplete)
-        {
-            CheckStaticNumber(str);
-            CheckRoleNumber(str);
-            CheckProductNumber(str, ref product);
-        }
-    }
-
-    /// <summary>
-    /// 周期性活动时
-    /// </summary>
-    public void OnTick()
+    public void OnRoleTick()
     {
         count++;
         if (count == buffData.interval)
@@ -149,11 +112,36 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 将buff付给目标
+    /// 周期性活动（消费者）时
     /// </summary>
-    public void AddBuffToTarget()
+    public void OnConsumerTick()
+    {
+        count++;
+        if (count == buffData.interval)
+        {
+            foreach (string str in buffData.OnTick)
+            {
+                CheckStaticNumber(str);
+                CheckConsumerNumber(str);
+            }
+            count = 0;
+        }
+    }
+
+    /// <summary>
+    /// 将buff付给目标(角色)
+    /// </summary>
+    public void AddBuffToTargetRole()
     {
         buffRole.AddBuff(this);
+    }
+
+    /// <summary>
+    /// 将buff付给目标（消费者）
+    /// </summary>
+    public void AddBuffToTargetConsumer()
+    {
+        targetConsume.AddBuff(this);
     }
 
     /// <summary>
@@ -167,7 +155,17 @@ public class BaseBuff
         castRole = _castRole;
         targetRole = target;
         buffRole = _buffRole;
-        AddBuffToTarget();
+        AddBuffToTargetRole();
+    }
+
+    /// <summary>
+    /// 设置buff的目标
+    /// </summary>
+    /// <param name="consume"></param>
+    public void SetConsumerBuff(ConsumeSign consume)
+    {
+        targetConsume = consume;
+        AddBuffToTargetConsumer();
     }
 
     /// <summary>
@@ -179,7 +177,6 @@ public class BaseBuff
         buffConfig = new BuffConfig();
         buffData = buff;
         buffId = buff.BuffID;
-        //Debug.Log(buff.duration);
         duration = buff.duration;
         buffName = buff.BuffName;
     }
@@ -196,16 +193,16 @@ public class BaseBuff
             case -1:
                 break;
             case 1:
-                CalculateNumber(str,ref buffConfig.bossSatisfyChange);
-                StageGoal.My.bossSatisfy += buffConfig.bossSatisfyChange;
+                CalculateNumber(str, ref buffConfig.playerGoldChange, StageGoal.My.playerGold);
+                StageGoal.My.GetPlayerGold(buffConfig.playerGoldChange);
                 break;
             case 2:
-                CalculateNumber(str, ref buffConfig.consumerSafisfyChange);
-                StageGoal.My.customerSatisfy += buffConfig.consumerSafisfyChange;
+                CalculateNumber(str, ref buffConfig.playerSatisfyChange, StageGoal.My.playerSatisfy);
+                StageGoal.My.GetSatisfy(buffConfig.playerSatisfyChange);
                 break;
             case 3:
-                CalculateNumber(str, ref buffConfig.executionChange);
-                ExecutionManager.My.AddExecution(buffConfig.executionChange);
+                CalculateNumber(str, ref buffConfig.playerHealthChange, StageGoal.My.playerHealth);
+                StageGoal.My.playerHealth += (buffConfig.playerHealthChange);
                 break;
             default:
                 break;
@@ -224,47 +221,56 @@ public class BaseBuff
             case -1:
                 break;
             case 11:
-                CalculateNumber(str,ref buffConfig.roleCapacityChange);
-                //todo
-             //   targetRole.baseRoleData.capacity += buffConfig.roleCapacityChange;
-                break;
+                {
+                    CalculateNumber(str, ref buffConfig.roleEffectChange, targetRole.baseRoleData.effect);
+                    targetRole.baseRoleData.effect += buffConfig.roleEffectChange;
+                    break;
+                }
             case 12:
-                CalculateNumber(str,ref buffConfig.roleEfficiencyChange);
-                targetRole.baseRoleData.efficiency += buffConfig.roleEfficiencyChange;
-                break;
+                {
+                    CalculateNumber(str, ref buffConfig.roleEfficiencyChange, targetRole.baseRoleData.efficiency);
+                    targetRole.baseRoleData.efficiency += buffConfig.roleEfficiencyChange;
+                    break;
+                }
             case 13:
-                CalculateNumber(str,ref buffConfig.roleQualityChange);
-             //   targetRole.baseRoleData.quality += buffConfig.roleQualityChange;
-                break;
+                {
+                    CalculateNumber(str, ref buffConfig.roleRangeChange, targetRole.baseRoleData.range);
+                    targetRole.baseRoleData.range += buffConfig.roleRangeChange;
+                    break;
+                }
             case 14:
-                CalculateNumber(str,ref buffConfig.roleBrandChange);
-             //   targetRole.baseRoleData.brand += buffConfig.roleBrandChange;
-                break;
+                {
+                    CalculateNumber(str, ref buffConfig.roleTradeCostChange, targetRole.baseRoleData.tradeCost);
+                    targetRole.baseRoleData.tradeCost += buffConfig.roleTradeCostChange;
+                    break;
+                }
             case 15:
-                CalculateNumber(str,ref buffConfig.roleSearchChange);
-             //   targetRole.baseRoleData.search += buffConfig.roleSearchChange;
-                break;
+                {
+                    CalculateNumber(str, ref buffConfig.roleRiskResistanceChange, targetRole.baseRoleData.riskResistance);
+                    targetRole.baseRoleData.riskResistance += buffConfig.roleRiskResistanceChange;
+                    break;
+                }
             case 16:
-                CalculateNumber(str, ref buffConfig.roleBargainChange);
-                //targetRole.baseRoleData.bargain += buffConfig.roleBargainChange;
-                break;
+                {
+                    CalculateNumber(str, ref buffConfig.roleCostChange, targetRole.baseRoleData.cost);
+                    targetRole.baseRoleData.cost += buffConfig.roleCostChange;
+                    break;
+                }
             case 17:
-                CalculateNumber(str,ref buffConfig.roleDeliverChange);
-               // targetRole.baseRoleData.delivery += buffConfig.roleDeliverChange;
-                break;
-            case 18:
-                CalculateNumber(str, ref buffConfig.roleRiskChange);
-              //  targetRole.baseRoleData.risk += buffConfig.roleRiskChange;
-                break;
-            case 19:
-                CalculateNumber(str, ref buffConfig.roleMonthCostChange);
-               // targetRole.baseRoleData.costMonth += buffConfig.roleMonthCostChange;
-                break;
+                {
+                    CalculateNumber(str, ref buffConfig.roleBulletCapacityChange, targetRole.baseRoleData.bulletCapacity);
+                    targetRole.baseRoleData.bulletCapacity += buffConfig.roleBulletCapacityChange;
+                    break;
+                }
             default:
                 break;
         }
     }
 
+    /// <summary>
+    /// 计算角色相关BUFF(用于UI显示)
+    /// </summary>
+    /// <param name="str"></param>
     public void CheckRoleNumberNoChange(string str)
     {
         string[] attri = str.Split('_');
@@ -273,31 +279,25 @@ public class BaseBuff
             case -1:
                 break;
             case 11:
-                CalculateNumber(str, ref buffConfig.roleCapacityChange);
+                CalculateNumber(str, ref buffConfig.roleEffectChange, targetRole.baseRoleData.effect);
                 break;
             case 12:
-                CalculateNumber(str, ref buffConfig.roleEfficiencyChange);
+                CalculateNumber(str, ref buffConfig.roleEfficiencyChange, targetRole.baseRoleData.efficiency);
                 break;
             case 13:
-                CalculateNumber(str, ref buffConfig.roleQualityChange);
+                CalculateNumber(str, ref buffConfig.roleRangeChange, targetRole.baseRoleData.range);
                 break;
             case 14:
-                CalculateNumber(str, ref buffConfig.roleBrandChange);
+                CalculateNumber(str, ref buffConfig.roleTradeCostChange, targetRole.baseRoleData.tradeCost);
                 break;
             case 15:
-                CalculateNumber(str, ref buffConfig.roleSearchChange);
+                CalculateNumber(str, ref buffConfig.roleRiskResistanceChange, targetRole.baseRoleData.riskResistance);
                 break;
             case 16:
-                CalculateNumber(str, ref buffConfig.roleBargainChange);
+                CalculateNumber(str, ref buffConfig.roleCostChange, targetRole.baseRoleData.cost);
                 break;
             case 17:
-                CalculateNumber(str, ref buffConfig.roleDeliverChange);
-                break;
-            case 18:
-                CalculateNumber(str, ref buffConfig.roleRiskChange);
-                break;
-            case 19:
-                CalculateNumber(str, ref buffConfig.roleMonthCostChange);
+                CalculateNumber(str, ref buffConfig.roleBulletCapacityChange, targetRole.baseRoleData.bulletCapacity);
                 break;
             default:
                 break;
@@ -309,84 +309,72 @@ public class BaseBuff
     /// </summary>
     /// <param name="str"></param>
     /// <param name="consumeData"></param>
-    public void CheckConsumerNumber(string str, ref ConsumeData consumeData)
+    public void CheckConsumerNumber(string str)
     {
         string[] attri = str.Split('_');
         switch (int.Parse(attri[0]))
         {
             case -1:
                 break;
-            //case 30:
-            //    buffConfig.consumerSweetChange = CalculateNumber(str);
-            //    consumeData.needSweetness += buffConfig.consumerSweetChange;
-            //    break;
-            //case 31:
-            //    buffConfig.consumerCrispChange = CalculateNumber(str);
-            //    consumeData.needCrisp += buffConfig.consumerCrispChange;
-            //    break;
-            //case 32:
-            //    buffConfig.consumerMentalPriceChange = CalculateNumber(str);
-            //    consumeData.mentalPrice += buffConfig.consumerMentalPriceChange;
-            //    break;
-            //case 33:
-            //    buffConfig.consumerSearchDistanceChange = CalculateNumber(str);
-            //    consumeData.searchDistance += buffConfig.consumerSearchDistanceChange;
-            //    break;
-            //case 34:
-            //    buffConfig.consumerBuyPowerChange = CalculateNumber(str);
-            //    consumeData.buyPower += buffConfig.consumerBuyPowerChange;
-            //    break;
-            //case 35:
-            //    buffConfig.consumerBuyRangeChange = CalculateNumber(str);
-            //    consumeData.buyRange += buffConfig.consumerBuyRangeChange;
-            //    break;
-            //case 36:
-            //    buffConfig.consumerSearchChange = CalculateNumber(str);
-            //    consumeData.search += buffConfig.consumerSearchChange;
-            //    break;
-            //case 37:
-            //    buffConfig.consumerBargainChange = CalculateNumber(str);
-            //    consumeData.bargain += buffConfig.consumerBargainChange;
-            //    break;
-            //case 38:
-            //    buffConfig.consumerDeliverChange = CalculateNumber(str);
-            //    consumeData.delivery += buffConfig.consumerDeliverChange;
-            //    break;
-            //case 39:
-            //    buffConfig.consumerRiskChange = CalculateNumber(str);
-            //    consumeData.risk += buffConfig.consumerRiskChange;
-            //    break;
+            case 30:
+                CalculateNumber(str, ref buffConfig.consumerHealthChange, targetConsume.consumeData.maxHealth);
+                targetConsume.ChangeHealth(buffConfig.consumerHealthChange);
+                break;
+            case 31:
+                CalculateNumber(str, ref buffConfig.consumerSpeedChange, (int)(targetConsume.tweener.timeScale * 100));
+                targetConsume.ChangeSpeed(buffConfig.consumerSpeedChange);
+                break;
+            case 32:
+                CalculateNumber(str, ref buffConfig.consumerKillMoneyChange, targetConsume.consumeData.killMoney);
+                targetConsume.consumeData.killMoney += buffConfig.consumerKillMoneyChange;
+                break;
+            case 33:
+                CalculateNumber(str, ref buffConfig.consumerKillSatisfyChange, targetConsume.consumeData.killSatisfy);
+                targetConsume.consumeData.killSatisfy += buffConfig.consumerKillSatisfyChange;
+                break;
+            case 34:
+                CalculateNumber(str, ref buffConfig.consumerLiveSatisfyChange, targetConsume.consumeData.liveSatisfy);
+                targetConsume.consumeData.liveSatisfy += buffConfig.consumerLiveSatisfyChange;
+                break;
+            case 35:
+                CalculateNumber(str, ref buffConfig.consumerNormalChange, targetConsume.elementResistance[ProductElementType.Normal]);
+                targetConsume.elementResistance[ProductElementType.Normal] += buffConfig.consumerNormalChange;
+                break;
+            case 36:
+                CalculateNumber(str, ref buffConfig.consumerDiscountChange, targetConsume.elementResistance[ProductElementType.Discount]);
+                targetConsume.elementResistance[ProductElementType.Discount] += buffConfig.consumerDiscountChange;
+                break;
+            case 37:
+                CalculateNumber(str, ref buffConfig.consumerGoodPackChange, targetConsume.elementResistance[ProductElementType.GoodPack]);
+                targetConsume.elementResistance[ProductElementType.GoodPack] += buffConfig.consumerGoodPackChange;
+                break;
+            case 38:
+                CalculateNumber(str, ref buffConfig.consumerSoftChange, targetConsume.elementResistance[ProductElementType.Soft]);
+                targetConsume.elementResistance[ProductElementType.Soft] += buffConfig.consumerSoftChange;
+                break;
+            case 39:
+                CalculateNumber(str, ref buffConfig.consumerCrispChange, targetConsume.elementResistance[ProductElementType.Crisp]);
+                targetConsume.elementResistance[ProductElementType.Crisp] += buffConfig.consumerCrispChange;
+                break;
+            case 40:
+                CalculateNumber(str, ref buffConfig.consumerSweetChange, targetConsume.elementResistance[ProductElementType.Sweet]);
+                targetConsume.elementResistance[ProductElementType.Sweet] += buffConfig.consumerSweetChange;
+                break;
+            case 41:
+                CalculateNumber(str, ref buffConfig.consumerIgnoreResist);
+                targetConsume.isIgnoreResistance = buffConfig.consumerIgnoreResist;
+                break;
             default:
                 break;
         }
     }
 
-    /// <summary>
-    /// 计算消费者满意度相关的buff
-    /// </summary>
-    /// <param name="str"></param>
-    /// <param name="satisfyNum"></param>
-    public void CheckConsumerSatisfyNumber(string str, ref float satisfyNum)
-    {
-        string[] attri = str.Split('_');
-        switch (int.Parse(attri[0]))
-        {
-            case -1:
-                break;
-            case 40:
-                buffConfig.consumerSingleSatisfyChange = CalculateNumber(str);
-                satisfyNum += buffConfig.consumerSingleSatisfyChange;
-                break;
-            default:
-                break;
-        }
-    }
 
     /// <summary>
     /// 计算产品相关的buff
     /// </summary>
     /// <param name="product"></param>
-    public void CheckProductNumber(string str,ref ProductData product)
+    public void CheckProductNumber(string str, ref ProductData product)
     {
         string[] attri = str.Split('_');
         switch (int.Parse(attri[0]))
@@ -394,20 +382,12 @@ public class BaseBuff
             case -1:
                 break;
             case 50:
-                buffConfig.productSweetChange = CalculateNumber(str);
-              //  product.Sweetness += buffConfig.productSweetChange;
+                CalculateNumber(str, ref buffConfig.bulletDamageChange, (int)product.damage);
+                product.damage += buffConfig.bulletDamageChange;
                 break;
             case 51:
-                buffConfig.productCrispChange = CalculateNumber(str);
-                //product.Crisp += buffConfig.productCrispChange;
-                break;
-            case 52:
-                buffConfig.productQualityChange = CalculateNumber(str);
-               // product.Quality += buffConfig.productQualityChange;
-                break;
-            case 53:
-                buffConfig.productBrandChange = CalculateNumber(str);
-               // product.Brand += buffConfig.productBrandChange;
+                CalculateNumber(str, ref buffConfig.bulletLoadingChange, (int)(product.loadingSpeed * 100));
+                product.loadingSpeed += buffConfig.bulletLoadingChange / 100f;
                 break;
             default:
                 break;
@@ -451,97 +431,13 @@ public class BaseBuff
     }
 
     #region 具体计算（三个重载）
-    /// <summary>
-    /// 计算每个BUFF生效的具体数字
-    /// </summary>
-    /// <param name="str"></param>
-    /// <returns></returns>
-    public void CalculateNumber(string str,ref float num)
-    {
-        string[] attri = str.Split('_');
-        if (attri.Length == 1)
-        {
-            num = 0 - num;
-            return;
-        }
-        if (attri[1].Equals("TAR"))
-        {
-            switch(attri[2])
-            {
-                //todo
-                case "CAPACITY":
-              //      num = (targetRole.baseRoleData.capacity * float.Parse(attri[3]));
-                    break;
-                case "Efficiency":
-                  //  num = (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
-                    break;
-                case "QUALITY":
-                //    num = (int)(targetRole.baseRoleData.quality * float.Parse(attri[3]));
-                    break;
-                case "BRAND":
-                 //   num = (int)(targetRole.baseRoleData.brand * float.Parse(attri[3]));
-                    break;
-                case "SEARCH":
-                 //   num = (int)(targetRole.baseRoleData.search * float.Parse(attri[3]));
-                    break;
-                case "BARGAIN":
-                //    num = (int)(targetRole.baseRoleData.bargain * float.Parse(attri[3]));
-                    break;
-                case "DELIVERY":
-               //     num = (int)(targetRole.baseRoleData.delivery * float.Parse(attri[3]));
-                    break;
-                case "RISK":
-                  //  num = (int)(targetRole.baseRoleData.risk * float.Parse(attri[3]));
-                    break;
-                default:
-                    break;
-            }
-        }
-        else if (attri[1].Equals("CAST"))
-        {
-            switch (attri[2])
-            {
-                //todo
-                case "CAPACITY":
-              //      num = (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
-                    break;
-                case "Efficiency":
-                    num = (int)(castRole.baseRoleData.efficiency * float.Parse(attri[3]));
-                    break;
-                case "QUALITY":
-               //     num = (int)(castRole.baseRoleData.quality * float.Parse(attri[3]));
-                    break;
-                case "BRAND":
-                 //   num = (int)(castRole.baseRoleData.brand * float.Parse(attri[3]));
-                    break;
-                case "SEARCH":
-                  //  num = (int)(castRole.baseRoleData.search * float.Parse(attri[3]));
-                  break;
-                case "BARGAIN":
-                  //  num = (int)(castRole.baseRoleData.bargain * float.Parse(attri[3]));
-                    break;
-                case "DELIVERY":
-                   // num = (int)(castRole.baseRoleData.delivery * float.Parse(attri[3]));
-                    break;
-                case "RISK":
-                  //  num = (int)(castRole.baseRoleData.risk * float.Parse(attri[3]));
-                    break;
-                default:
-                    break;
-            }
-        }
-        else if (IsNumberic(attri[1]))
-        {
-            num = float.Parse(attri[1]);
-        }
-    }
 
     /// <summary>
     /// 计算每个BUFF生效的具体数字
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
-    public void CalculateNumber(string str, ref int num)
+    public void CalculateNumber(string str, ref int num, int sourceNum)
     {
         string[] attri = str.Split('_');
         if (attri.Length == 1)
@@ -549,76 +445,14 @@ public class BaseBuff
             num = 0 - num;
             return;
         }
-        if (attri[1].Equals("TAR"))
-        {
-            switch (attri[2])
-            {
-                //todo
-                case "CAPACITY":
-                 //   num = (int)(targetRole.baseRoleData.capacity * float.Parse(attri[3]));
-                    break;
-                case "Efficiency":
-                  //  num = (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
-                    break;
-                case "QUALITY":
-                 //   num = (int)(targetRole.baseRoleData.quality * float.Parse(attri[3]));
-                    break;
-                case "BRAND":
-                 //   num = (int)(targetRole.baseRoleData.brand * float.Parse(attri[3]));
-                    break;
-                case "SEARCH":
-                  //  num = (int)(targetRole.baseRoleData.search * float.Parse(attri[3]));
-                    break;
-                case "BARGAIN":
-                 //   num = (int)(targetRole.baseRoleData.bargain * float.Parse(attri[3]));
-                    break;
-                case "DELIVERY":
-                 //   num = (int)(targetRole.baseRoleData.delivery * float.Parse(attri[3]));
-                    break;
-                case "RISK":
-                 //   num = (int)(targetRole.baseRoleData.risk * float.Parse(attri[3]));
-                    break;
-                default:
-                    break;
-            }
-        }
-        else if (attri[1].Equals("CAST"))
-        {
-            switch (attri[2])
-            {
-                //todo
-                case "CAPACITY":
-               //     num = (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
-                    break;
-                case "Efficiency":
-               //     num = (int)(castRole.baseRoleData.efficiency * float.Parse(attri[3]));
-                    break;
-                case "QUALITY":
-                //    num = (int)(castRole.baseRoleData.quality * float.Parse(attri[3]));
-                    break;
-                case "BRAND":
-                 //   num = (int)(castRole.baseRoleData.brand * float.Parse(attri[3]));
-                    break;
-                case "SEARCH":
-                 //   num = (int)(castRole.baseRoleData.search * float.Parse(attri[3]));
-                    break;
-                case "BARGAIN":
-                 //   num = (int)(castRole.baseRoleData.bargain * float.Parse(attri[3]));
-                    break;
-                case "DELIVERY":
-                 //   num = (int)(castRole.baseRoleData.delivery * float.Parse(attri[3]));
-                    break;
-                case "RISK":
-                 //   num = (int)(castRole.baseRoleData.risk * float.Parse(attri[3]));
-                    break;
-                default:
-                    break;
-            }
-        }
-        else if (IsNumberic(attri[1]))
+        else if (Mathf.Abs(float.Parse(attri[1])) >= 1f)
         {
             num = int.Parse(attri[1]);
         }
+        else
+        {
+            num = (int)(sourceNum * float.Parse(attri[1]));
+        }
     }
 
     /// <summary>
@@ -626,63 +460,14 @@ public class BaseBuff
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
-    public int CalculateNumber(string str)
+    public bool CalculateNumber(string str, ref bool _bool)
     {
         string[] attri = str.Split('_');
-        if (attri[1].Equals("TAR"))
+        if (attri.Length == 1)
         {
-            //todo
-            switch (attri[2])
-            {
-             //   case "CAPACITY":
-             //       return (int)(targetRole.baseRoleData.capacity * float.Parse(attri[3]));
-             //   case "Efficiency":
-             //       return (int)(targetRole.baseRoleData.efficiency * float.Parse(attri[3]));
-             //   case "QUALITY":
-             //       return (int)(targetRole.baseRoleData.quality * float.Parse(attri[3]));
-             //   case "BRAND":
-             //       return (int)(targetRole.baseRoleData.brand * float.Parse(attri[3]));
-             //   case "SEARCH":
-             //       return (int)(targetRole.baseRoleData.search * float.Parse(attri[3]));
-             //   case "BARGAIN":
-             //       return (int)(targetRole.baseRoleData.bargain * float.Parse(attri[3]));
-             //   case "DELIVERY":
-             //       return (int)(targetRole.baseRoleData.delivery * float.Parse(attri[3]));
-             //   case "RISK":
-             //       return (int)(targetRole.baseRoleData.risk * float.Parse(attri[3]));
-             //   default:
-             //       return 0;
-            }
+            return !_bool;
         }
-        else if (attri[1].Equals("CAST"))
-        {
-            switch (attri[2])
-            {
-              // case "CAPACITY":
-              //     return (int)(castRole.baseRoleData.capacity * float.Parse(attri[3]));
-              // case "Efficiency":
-              //     return (int)(castRole.baseRoleData.efficiency * float.Parse(attri[3]));
-              // case "QUALITY":
-              //     return (int)(castRole.baseRoleData.quality * float.Parse(attri[3]));
-              // case "BRAND":
-              //     return (int)(castRole.baseRoleData.brand * float.Parse(attri[3]));
-              // case "SEARCH":
-              //     return (int)(castRole.baseRoleData.search * float.Parse(attri[3]));
-              // case "BARGAIN":
-              //     return (int)(castRole.baseRoleData.bargain * float.Parse(attri[3]));
-              // case "DELIVERY":
-              //     return (int)(castRole.baseRoleData.delivery * float.Parse(attri[3]));
-              // case "RISK":
-              //     return (int)(castRole.baseRoleData.risk * float.Parse(attri[3]));
-              // default:
-              //     return 0;
-            }
-        }
-        else if (IsNumberic(attri[1]))
-        {
-            return int.Parse(attri[1]);
-        }
-        return 0;
+        return bool.Parse(attri[1]);
     }
     #endregion
 
@@ -693,14 +478,6 @@ public class BaseBuff
         {
             CheckRoleNumberNoChange(str);
         }
-        tradeRoleAttribute.brandAdd = buffConfig.roleBrandChange;
-        tradeRoleAttribute.qualityAdd = buffConfig.roleQualityChange;
-        tradeRoleAttribute.capacityAdd = buffConfig.roleCapacityChange;
-        tradeRoleAttribute.efficiencyAdd = buffConfig.roleEfficiencyChange;
-        tradeRoleAttribute.searchAdd = buffConfig.roleSearchChange;
-        tradeRoleAttribute.bargainAdd = buffConfig.roleBargainChange;
-        tradeRoleAttribute.deliveryAdd = buffConfig.roleDeliverChange;
-        tradeRoleAttribute.riskAdd = buffConfig.roleRiskChange;
         return tradeRoleAttribute;
     }
 }

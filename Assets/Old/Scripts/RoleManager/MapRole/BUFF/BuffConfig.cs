@@ -6,59 +6,51 @@ using System;
 [Serializable]
 public class BuffConfig
 {
-    public float bossSatisfyChange;
+    public int playerGoldChange;
 
-    public float consumerSafisfyChange;
+    public int playerSatisfyChange;
 
-    public int executionChange;
+    public int playerHealthChange;
 
-    public int roleCapacityChange;
+    public int roleEffectChange;
 
     public int roleEfficiencyChange;
 
-    public int roleQualityChange;
+    public int roleRangeChange;
 
-    public int roleBrandChange;
+    public int roleTradeCostChange;
 
-    public int roleSearchChange;
+    public int roleRiskResistanceChange;
 
-    public int roleBargainChange;
+    public int roleCostChange;
 
-    public int roleDeliverChange;
+    public int roleBulletCapacityChange;
 
-    public int roleRiskChange;
+    public int consumerHealthChange;
 
-    public int roleMonthCostChange;
+    public int consumerSpeedChange;
 
-    public int consumerSweetChange;
+    public int consumerKillMoneyChange;
+
+    public int consumerKillSatisfyChange;
+
+    public int consumerLiveSatisfyChange;
+
+    public int consumerNormalChange;
+
+    public int consumerDiscountChange;
+
+    public int consumerGoodPackChange;
+
+    public int consumerSoftChange;
 
     public int consumerCrispChange;
 
-    public int consumerMentalPriceChange;
+    public int consumerSweetChange;
 
-    public int consumerSearchDistanceChange;
+    public bool consumerIgnoreResist;
 
-    public int consumerBuyPowerChange;
+    public int bulletDamageChange;
 
-    public int consumerBuyRangeChange;
-
-    public int consumerSearchChange;
-
-    public int consumerBargainChange;
-
-    public int consumerDeliverChange;
-
-    public int consumerRiskChange;
-
-    public float consumerSingleSatisfyChange;
-
-    public int productSweetChange;
-
-    public int productCrispChange;
-
-    public int productQualityChange;
-
-    public int productBrandChange;
-
-    public int effectInterval;
+    public int bulletLoadingChange;
 }

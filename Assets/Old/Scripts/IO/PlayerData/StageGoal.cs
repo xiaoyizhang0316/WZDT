@@ -10,16 +10,6 @@ public class StageGoal : MonoSingleton<StageGoal>
 {
 
     /// <summary>
-    /// 股东满意度
-    /// </summary>
-    public float bossSatisfy;
-
-    /// <summary>
-    /// 消费者满意度
-    /// </summary>
-    public float customerSatisfy;
-
-    /// <summary>
     /// 玩家金币
     /// </summary>
     public int playerGold;
@@ -38,6 +28,16 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 玩家血量
     /// </summary>
     public int playerHealth;
+
+    /// <summary>
+    /// 股东满意度
+    /// </summary>
+    public float bossSatisfy;
+
+    /// <summary>
+    /// 消费者满意度
+    /// </summary>
+    public float customerSatisfy;
 
     /// <summary>
     /// 股东满意度上限
