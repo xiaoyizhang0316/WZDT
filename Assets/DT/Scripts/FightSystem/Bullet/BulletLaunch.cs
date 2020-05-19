@@ -11,7 +11,7 @@ using UnityEngine;
 public class BulletLaunch : MonoBehaviour
 {
     public Ease sase;
-
+    public GameObject fire;
     /// <summary>
     /// 炮台
     /// </summary>
