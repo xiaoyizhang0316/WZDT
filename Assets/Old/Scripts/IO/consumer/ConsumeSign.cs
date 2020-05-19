@@ -97,7 +97,7 @@ public class ConsumeSign : MonoBehaviour
         hud.healthImg.fillAmount = 0f;
         targetShop = targetRole;
         float waitTime = UnityEngine.Random.Range(0f, 2f);
-        transform.DOLookAt(home.position, 0.1f);
+//        transform.DOLookAt(home.position, 0.1f);
         Invoke("MoveToShop", waitTime);
         if (consumeData.liveTime > 0)
         {
@@ -263,7 +263,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void LookAtHome()
     {
-        transform.DOLookAt(home.position, 0f);
+//        transform.DOLookAt(home.position, 0f);
     }
 
     /// <summary>
@@ -276,7 +276,7 @@ public class ConsumeSign : MonoBehaviour
         isStart = false;
         targetShop.RemoveConsumerFromShootList(this);
         //print("消费者存活");
-        tweener = transform.DOMove(home.transform.position, Vector3.Distance(transform.position, home.position) / consumeData.moveSpeed).OnComplete(BackHome);
+      //  tweener = transform.DOMove(home.transform.position, Vector3.Distance(transform.position, home.position) / consumeData.moveSpeed).OnComplete(BackHome);
         GetComponent<Animator>().SetBool("walk", true);
     }
 
