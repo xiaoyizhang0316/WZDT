@@ -667,6 +667,10 @@ public class BaseMapRole : MonoBehaviour
         contributionNum += contributionNumber;
     }
 
+    public void GetEquipBuffList()
+    {
+        
+    }
 
     private void OnDestroy()
     {

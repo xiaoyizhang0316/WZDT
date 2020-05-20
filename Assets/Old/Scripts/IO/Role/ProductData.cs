@@ -32,6 +32,37 @@ public class ProductData
     /// Buff上限
     /// </summary>
     public int buffMaxCount;
+
+    public void AddBuff(int buffId)
+    {
+        if (buffList.Count >= buffMaxCount)
+        {
+            return;
+        }
+        else
+        {
+            buffList.Add(buffId);
+        }
+    }
+
+    /// <summary>
+    /// 当改变上限的时候 调用
+    /// </summary>
+    public void CheckBuff()
+    {
+        for (int i = 0; i <int.MaxValue; i++)
+        {
+            if (buffMaxCount < buffList.Count)
+            {
+                buffList.RemoveAt(buffList.Count-1);
+                if (buffMaxCount >= buffList.Count)
+                {
+                    return;
+                }
+            }
+        }
+      
+    }
 }
 
 
