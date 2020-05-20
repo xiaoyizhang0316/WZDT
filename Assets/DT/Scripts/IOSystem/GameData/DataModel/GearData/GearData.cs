@@ -49,9 +49,9 @@ public class GearData
     public int bulletCapacity;
 
     /// <summary>
-    /// 当前是否正在使用
+    /// buff列表
     /// </summary>
-    public bool isUsed;
+    public List<int> buffList;
 
     /// <summary>
     /// Icon路径地址

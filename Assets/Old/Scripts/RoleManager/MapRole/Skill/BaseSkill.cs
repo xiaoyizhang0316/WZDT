@@ -15,8 +15,6 @@ public abstract class BaseSkill : MonoBehaviour
         {
             UnleashSkills();
         }
-
-      
     }
 
     // Update is called once per frame
