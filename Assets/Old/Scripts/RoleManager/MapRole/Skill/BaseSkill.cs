@@ -7,6 +7,8 @@ public abstract class BaseSkill : MonoBehaviour
 {
     public BaseMapRole role;
     public bool IsOpen;
+
+    public List<int> buffList ;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,7 @@ public abstract class BaseSkill : MonoBehaviour
 
     public virtual void UnleashSkills()
     {
- 
+     
         float d = 1f /(role.baseRoleData.efficiency * 0.1f);
       
         transform.DOScale(1,d ).OnComplete(() =>
@@ -46,12 +48,32 @@ public abstract class BaseSkill : MonoBehaviour
     }
 
     /// <summary>
+    /// 添加增益Buff
+    /// 
+    /// </summary>
+    public void AddRoleBuff(TradeData tradeData)
+    {
+        for (int i = 0; i <buffList.Count; i++)
+        {
+          var buff =  GameDataMgr.My.GetBuffDataByID(buffList[i]);
+          BaseBuff baseb = new BaseBuff();
+          baseb.Init(buff);
+          baseb.SetRoleBuff(PlayerData.My.GetMapRoleById(double.Parse( tradeData.castRole)),PlayerData.My.GetMapRoleById(double.Parse( tradeData.targetRole)),PlayerData.My.GetMapRoleById(double.Parse( tradeData.targetRole)));
+        }
+     }
+
+    public void DeteleRoleBuff(TradeData tradeData)
+    {
+       
+    }
+
+    /// <summary>
     /// 重启释放技能
     /// </summary>
     public void ReUnleashSkills()
     {
         IsOpen = true;
-        UnleashSkills();
+        UnleashSkills(); 
     }
 
     /// <summary>
