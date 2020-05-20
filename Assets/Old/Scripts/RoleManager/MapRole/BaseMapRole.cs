@@ -197,6 +197,22 @@ public class BaseMapRole : MonoBehaviour
     }
 
     /// <summary>
+    /// 删除指定id的buff
+    /// </summary>
+    /// <param name="buffId"></param>
+    public void RemoveBuffById(int buffId)
+    {
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            if (buffList[i].buffId == buffId)
+            {
+                RemoveBuff(buffList[i]);
+                break;
+            }
+        }
+    }
+
+    /// <summary>
     /// 检测所有buff的持续时间
     /// </summary>
     public void CheckBuffDuration()
