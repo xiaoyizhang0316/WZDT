@@ -42,14 +42,4 @@ public class DetalDataSkillInfo : MonoBehaviour
         this.chengben.text = chengben;
         this.jiaoyichengben.text = jiaoyichengben;
     }
-
-    public void InitUI(BaseMapRole.TradeRecordData data)
-    {
-        faqi.text = data.startRole;
-        chengshou.text = data.endRole;
-        SkillName.text = data.selectSkill;
-        chengben.text = data.skillCost.ToString();
-        jiaoyichengben.text = data.transactionCost.ToString();
-        income.text = data.income.ToString();
-    }
 }

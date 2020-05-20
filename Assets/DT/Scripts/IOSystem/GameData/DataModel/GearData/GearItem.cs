@@ -51,6 +51,11 @@ public class GearItem
     /// 弹药容量
     /// </summary>
     public string bulletCapacity;
+
+    /// <summary>
+    /// BUFF列表
+    /// </summary>
+    public string buffList;
 }
 
 public class GearsData

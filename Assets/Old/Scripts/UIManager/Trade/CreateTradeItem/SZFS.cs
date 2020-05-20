@@ -129,7 +129,6 @@ public class SZFS : MonoSingleton<SZFS>
             BaseMapRole payRole = PlayerData.My.GetMapRoleById(double.Parse(CreateTradeManager.My.payRole));
             Slider slider = divideSlider.GetComponent<Slider>();
             slider.minValue = data.baseDivide * 100;
-            slider.maxValue = (1f - payRole.GetTotalDividePer(CreateTradeManager.My.currentTrade.tradeData.ID)) * 100;
             minDivide.text = slider.minValue.ToString();
             maxDivide.text = slider.maxValue.ToString();
             if (CreateTradeManager.My.currentTrade.isFirstSelect)

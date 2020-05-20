@@ -720,7 +720,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9084812606407058965}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
@@ -740,7 +740,7 @@ Transform:
   - {fileID: 9084812606407293465}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!95 &9084812606399796691
 Animator:
   serializedVersion: 3
@@ -795,13 +795,14 @@ MonoBehaviour:
     liveSatisfy: 0
     consumerName: 
   consumerType: 0
-  targetShop: {fileID: 0}
   currentHealth: 0
+  isIgnoreResistance: 0
   hudPrb: {fileID: 7572926582215340307, guid: 1d9dd4442f9394aaabe4078580918502, type: 3}
   hud: {fileID: 0}
+  buffList: []
   isStart: 0
   isCanSelect: 0
-  home: {fileID: 0}
+  pathList: []
 --- !u!54 &5602175816005266812
 Rigidbody:
   m_ObjectHideFlags: 0

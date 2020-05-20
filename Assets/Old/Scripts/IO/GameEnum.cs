@@ -247,7 +247,7 @@ public class GameEnum
         /// <summary>
         /// 老炮1
         /// </summary>
-        Oldpao_1,
+        Oldpao,
         /// <summary>
         /// 老炮2
         /// </summary>

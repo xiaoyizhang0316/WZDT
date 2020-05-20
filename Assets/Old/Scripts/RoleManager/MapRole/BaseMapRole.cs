@@ -59,7 +59,7 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public int contributionNum;
 
-    public Dictionary<int, PayRelationShipData> payRelationShips = new Dictionary<int, PayRelationShipData>();
+    public BaseNpc npcScript;
 
     #region UI显示信息
 
@@ -110,23 +110,7 @@ public class BaseMapRole : MonoBehaviour
         {
             PlayerData.My.RoleData.Add(baseRoleData);
         }
-
-        DayBegin();
     }
-
-    #region 交易记录
-    /// <summary>
-    /// 记录每个独特ID的交易，若该交易重复则更新
-    /// </summary>
-    /// <param name="data"></param>
-    /// <param name="tradeCost"></param>
-    public void GenerateTradeHistory(TradeData data, float tradeCost)
-    {
-        
-        
-    }
-
-    #endregion
 
     #region 战斗
 
@@ -213,6 +197,22 @@ public class BaseMapRole : MonoBehaviour
     }
 
     /// <summary>
+    /// 删除指定id的buff
+    /// </summary>
+    /// <param name="buffId"></param>
+    public void RemoveBuffById(int buffId)
+    {
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            if (buffList[i].buffId == buffId)
+            {
+                RemoveBuff(buffList[i]);
+                break;
+            }
+        }
+    }
+
+    /// <summary>
     /// 检测所有buff的持续时间
     /// </summary>
     public void CheckBuffDuration()
@@ -257,175 +257,14 @@ public class BaseMapRole : MonoBehaviour
     {
         if (!baseRoleData.isNpc)
         {
-            CheckLandPrice();
             int result = 0;
             result += baseRoleData.baseRoleData.cost;
             result += baseRoleData.equipCost;
             result += baseRoleData.workerCost;
             result += baseRoleData.landCost;
             result = 0 - result;
-            GetMoney(result);
             //print("每月成本 " + result.ToString());
         }
-    }
-
-    /// <summary>
-    /// 计算角色的地块成本
-    /// </summary>
-    public void CheckLandPrice()
-    {
-        baseRoleData.landCost = 0;
-        operationCost = baseRoleData.workerCost + baseRoleData.equipCost + baseRoleData.baseRoleData.cost;
-        foreach (MapSign m in GetComponent<RolePosSign>().MapSigns)
-        {
-            baseRoleData.landCost += MapManager.My.GetLandRoleCost(baseRoleData.baseRoleData.roleType, m.mapType);
-        }
-    }
-
-    /// <summary>
-    /// 累计消费者满意度
-    /// </summary>
-    /// <param name="num"></param>
-    public void GetConsumerSatisfy(float num)
-    {
-        totalSatisfy += num;
-        monthlySatisfy += num;
-        num = num * StageGoal.My.playerContributionPerf;
-        BubbleManager.My.CreateConsumerBubble(num, transform.localPosition, baseRoleData.ID);
-    }
-
-    /// <summary>
-    /// 收入
-    /// </summary>
-    /// <param name="num"></param>
-    public void GetMoney(int num)
-    {
-        //print(num);
-        if (num >= 0)
-        {
-            totalProfit += num;
-            monthlyProfit += num;
-            if (!baseRoleData.isNpc)
-            {
-                StageGoal.My.MakeProfit(num);
-            }
-            ProcessDividePay(num);
-        }
-        else
-        {
-            num = Mathf.Abs(num);
-            totalCost += num;
-            if (!baseRoleData.isNpc)
-            {
-                StageGoal.My.CostMoney(num);
-            }
-        }
-    }
-
-    /// <summary>
-    /// 零售收入
-    /// </summary>
-    /// <param name="num"></param>
-    public void GetConsumerMoney(int num)
-    {
-        if (!baseRoleData.isNpc)
-            BubbleManager.My.CreateMoneyBubble(num, transform.localPosition, baseRoleData.ID);
-        //print("收钱：" + num);
-    }
-
-    /// <summary>
-    /// 付钱给另一个角色
-    /// </summary>
-    /// <param name="roleId"></param>
-    /// <param name="num"></param>
-    public void PayToRole(string roleId, int num)
-    {
-        //print("付钱： " + num);
-        BaseMapRole targetRole = PlayerData.My.GetMapRoleById(double.Parse(roleId));
-        targetRole.GetConsumerMoney(num);
-        int result = 0 - num;
-        GetMoney(result);
-        activityCost += num;
-
-    }
-
-    /// <summary>
-    /// 处理分成选项
-    /// </summary>
-    public int ProcessDividePay(int money)
-    {
-        List<int> keys = new List<int>(payRelationShips.Keys);
-        if (keys.Count == 0)
-        {
-            return money;
-        }
-        int rest = money;
-        for (int i = 0; i < payRelationShips.Count; i++)
-        {
-            int temp = (int)(money * payRelationShips[keys[i]].payPercent);
-            PayToRole(payRelationShips[keys[i]].targetRole, temp);
-            rest -= temp;
-        }
-        return rest;
-    }
-
-    /// <summary>
-    /// 获得角色当前分成总计比例
-    /// </summary>
-    /// <returns></returns>
-    public float GetTotalDividePer(int tradeId)
-    {
-        float result = 0f;
-        List<int> keys = new List<int>(payRelationShips.Keys);
-        if (keys.Count == 0)
-        {
-            return result;
-        }
-        for (int i = 0; i < payRelationShips.Count; i++)
-        {
-            if (keys[i] != tradeId)
-            {
-                result += payRelationShips[keys[i]].payPercent;
-            }
-        }
-        return result;
-    }
-
-    /// <summary>
-    /// 获得新的或者更新已有的付钱关系
-    /// </summary>
-    /// <param name="tradeData"></param>
-    public void GetPayRelationShip(TradeData tradeData)
-    {
-
-    }
-
-    /// <summary>
-    /// 删除指定的付钱关系
-    /// </summary>
-    /// <param name="tradeId"></param>
-    public void RemovePayRelationShip(int tradeId)
-    {
-        if (!payRelationShips.ContainsKey(tradeId))
-            return;
-        else
-        {
-            payRelationShips.Remove(tradeId);
-        }
-    }
-
-
-    /// <summary>
-    /// 每月重新统计
-    /// </summary>
-    public void RecheckInfo()
-    {
-        rentCost = baseRoleData.landCost;
-        operationCost = baseRoleData.workerCost + baseRoleData.equipCost + baseRoleData.baseRoleData.cost;
-        monthlyProfit = 0;
-        monthlySatisfy = 0;
-        activityCost = 0;
-        tradeCost = 0;
     }
 
     #endregion
@@ -577,61 +416,6 @@ public class BaseMapRole : MonoBehaviour
     }
 
     /// <summary>
-    /// 周期性召唤消费者
-    /// </summary>
-    public void SpawnConsumer()
-    {
-        int number = 5;
-        List<GameObject> availableConsumer = new List<GameObject>();
-        List<int> keys = new List<int>(buildingList.Keys);
-        for (int i = 0; i < buildingList.Count; i++)
-        {
-            for (int j = 0; j < buildingList[keys[i]].consumerGoList.Count; j++)
-            {
-                if (!buildingList[keys[i]].consumerGoList[j].activeInHierarchy)
-                {
-                    availableConsumer.Add(buildingList[keys[i]].consumerGoList[j]);
-                }
-            }
-        }
-        List<GameObject> resultList = GetRandom(availableConsumer, number);
-        float x;
-        float y;
-        for (int i = 0; i < resultList.Count; i++)
-        {
-            x = UnityEngine.Random.Range(-1.5f, 1.5f);
-            y = UnityEngine.Random.Range(-1.5f, 1.5f);
-            resultList[i].SetActive(true);
-            resultList[i].GetComponent<ConsumeSign>().InitAndMove(this);
-            resultList[i].transform.localPosition += new Vector3(x, y, 0);
-        }
-    }
-
-    /// <summary>
-    /// 白天开始时开始召唤消费者
-    /// </summary>
-    public void DayBegin()
-    {
-        if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
-        {
-            InvokeRepeating("SpawnConsumer", 0f, 10f);
-            //InvokeRepeating("SetShootTarget", 0f, 0.2f);
-        }
-    }
-
-    /// <summary>
-    /// 白天结束时停止召唤消费者
-    /// </summary>
-    public void DayEnd()
-    {
-        if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
-        {
-            CancelInvoke("SpawnConsumer");
-            //CancelInvoke("SetShootTarget");
-        }
-    }
-
-    /// <summary>
     /// 从列表中随机N个Gameobject
     /// </summary>
     /// <param name="list"></param>
@@ -667,37 +451,9 @@ public class BaseMapRole : MonoBehaviour
         contributionNum += contributionNumber;
     }
 
-    public void GetEquipBuffList()
-    {
-        
-    }
 
     private void OnDestroy()
     {
 
-    }
-
-    [Serializable]
-    public class TradeRecordData
-    {
-        public string startRole;
-
-        public string endRole;
-
-        public string selectSkill;
-
-        public int skillCost;
-
-        public float transactionCost;
-
-        public float income;
-    }
-
-    [Serializable]
-    public class PayRelationShipData
-    {
-        public string targetRole;
-
-        public float payPercent;
     }
 }
