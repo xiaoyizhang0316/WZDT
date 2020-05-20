@@ -28,7 +28,15 @@ public class PruductMerchant : BaseSkill
         {
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
-         
+            for (int i = 0; i <role.GetEquipBuffList().Count; i++)
+            {
+                data.AddBuff(role.GetEquipBuffList()[i]);
+            }
+
+            for (int i = 0; i <buffList.Count; i++)
+            {
+                data.AddBuff(buffList[i]);
+            }
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;
             game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();

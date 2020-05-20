@@ -21,12 +21,15 @@ public class PruductMelon : BaseSkill
             data.bulletType = BulletType.NormalPP;
             data.loadingSpeed *=1f-role.baseRoleData.effect/100f ;
             data.buffList.Add(201);
-            for (int i = 0; i < data.buffMaxCount; i++)
+            
+            for (int i = 0; i <role.GetEquipBuffList().Count; i++)
             {
-                if (!role.baseRoleData.isNpc)
-                {
-                    role.baseRoleData.EquipList.Keys.ToList()[i];
-                }
+                data.AddBuff(role.GetEquipBuffList()[i]);
+            }
+
+            for (int i = 0; i <buffList.Count; i++)
+            {
+                data.AddBuff(buffList[i]);
             }
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;

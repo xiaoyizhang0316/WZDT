@@ -442,6 +442,31 @@ public class BaseMapRole : MonoBehaviour
 
     #endregion
 
+    public List<int > GetEquipBuffList()
+    {
+        List<int> bufflist = new List<int>();
+        if (isNpc)
+        {
+            if (GetComponent<BaseNpc>().isCanSeeEquip)
+            {
+                for (int i = 0; i <baseRoleData.EquipList.Keys.ToList().Count; i++)
+                {
+                    bufflist.Add(baseRoleData.EquipList.Keys.ToList()[i]);
+                }
+            }
+           
+        }
+        else
+        {
+            for (int i = 0; i <baseRoleData.EquipList.Keys.ToList().Count; i++)
+            {
+                bufflist.Add(baseRoleData.EquipList.Keys.ToList()[i]);
+            }
+        }
+
+        return bufflist;
+    }
+
     /// <summary>
     /// 当角色获得贡献度时
     /// </summary>

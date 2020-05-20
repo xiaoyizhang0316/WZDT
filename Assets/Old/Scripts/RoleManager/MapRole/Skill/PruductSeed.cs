@@ -18,6 +18,15 @@ public class PruductSeed : BaseSkill
         }
         //Debug.Log("产种子");
         ProductData data = new ProductData();
+        for (int i = 0; i <role.GetEquipBuffList().Count; i++)
+        {
+            data.AddBuff(role.GetEquipBuffList()[i]);
+        }
+
+        for (int i = 0; i <buffList.Count; i++)
+        {
+            data.AddBuff(buffList[i]);
+        }
         data.bulletType = BulletType.Seed;
         data.damage = role.baseRoleData.effect * 2f;
         data.loadingSpeed =5;
