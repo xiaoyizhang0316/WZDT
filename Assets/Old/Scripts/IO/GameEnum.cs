@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameEnum
 {
-
     public enum ProductType
     {
         /// <summary>
@@ -188,25 +187,25 @@ public class GameEnum
     public enum MapType
     {
         /// <summary>
-        /// 核心区
+        /// 草地
         /// </summary>
-        CBD,
+        Grass,
         /// <summary>
-        /// 商业区
+        /// 土地
         /// </summary>
-        business,
+        Land,
         /// <summary>
         /// 居民区
         /// </summary>
-        residential,
+        Road,
         /// <summary>
         /// 郊区
         /// </summary>
-        outskirts,
+        OtherLandType1,
         /// <summary>
         /// 野外
         /// </summary>
-        openCountry,
+        OtherLandType2,
     }
 
     public enum BuildingType
@@ -350,6 +349,24 @@ public class GameEnum
         /// 甜
         /// </summary>
         Sweet
+    }
+
+    public enum ConsumableType
+    {
+        /// <summary>
+        /// 影响角色
+        /// </summary>
+        AffectRole,
+
+        /// <summary>
+        /// 影响消费者
+        /// </summary>
+        AffectConsumer,
+
+        /// <summary>
+        /// 生成物品
+        /// </summary>
+        SpawnItem
     }
 
 }

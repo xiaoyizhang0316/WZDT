@@ -9,35 +9,7 @@ public class MapManager : MonoSingleton<MapManager>
 
     public List<MapSign>_mapSigns = new List<MapSign>();
 
-    public List<RoleLandCost> roleLandCosts;
-
-    [System.Serializable]
-    public struct RoleLandCost
-    {
-        public RoleType roleType;
-
-        public MapType landType;
-
-        public int cost;
-        
-    }
-
-    /// <summary>
-    /// 查找对应地块类型对应角色的成本
-    /// </summary>
-    /// <param name="roleType"></param>
-    /// <param name="mapType"></param>
-    /// <returns></returns>
-    public int GetLandRoleCost(RoleType roleType,MapType mapType)
-    {
-        foreach (RoleLandCost r in roleLandCosts)
-        {
-            if (r.roleType == roleType && r.landType == mapType)
-                return r.cost;
-        }
-        print("找不到地块对应的角色价格");
-        return 0;
-    }
+    public List<GameObject> mapTypeList;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +20,56 @@ public class MapManager : MonoSingleton<MapManager>
     // Update is called once per frame
     void Update()
     {
-        
+        //草地
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            print("press 1");
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hit = Physics.RaycastAll(ray);
+            for (int i = 0; i < hit.Length; i++)
+            {
+                print(hit[i].transform);
+                if (hit[i].transform.tag.Equals("MapLand"))
+                {
+                    GameObject go =  Instantiate(mapTypeList[0], transform);
+                    go.transform.position = hit[i].transform.position;
+                    Destroy(hit[i].transform.gameObject);
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            print("press 1");
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hit = Physics.RaycastAll(ray);
+            for (int i = 0; i < hit.Length; i++)
+            {
+                print(hit[i].transform);
+                if (hit[i].transform.tag.Equals("MapLand"))
+                {
+                    GameObject go = Instantiate(mapTypeList[1], transform);
+                    go.transform.position = hit[i].transform.position;
+                    Destroy(hit[i].transform.gameObject);
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            print("press 1");
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hit = Physics.RaycastAll(ray);
+            for (int i = 0; i < hit.Length; i++)
+            {
+                print(hit[i].transform);
+                if (hit[i].transform.tag.Equals("MapLand"))
+                {
+                    GameObject go = Instantiate(mapTypeList[2], transform);
+                    go.transform.position = hit[i].transform.position;
+                    Destroy(hit[i].transform.gameObject);
+                }
+            }
+        }
     }
 }

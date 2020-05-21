@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using static GameEnum;
@@ -41,6 +42,11 @@ public class TradeSign : MonoBehaviour
     /// 信息流线
     /// </summary>
     public GameObject tradeBuffLine;
+
+    /// <summary>
+    /// buff线结算交易成本动画
+    /// </summary>
+    public Tweener tweener;
 
     private int countNumber = 0;
 
@@ -99,6 +105,19 @@ public class TradeSign : MonoBehaviour
     {
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
         cast.tradeList.Add(this);
+        if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        {
+            cast.GetComponent<BaseSkill>().AddRoleBuff(tradeData);
+        }
+    }
+
+    /// <summary>
+    /// 信息流每10秒结算交易成本
+    /// </summary>
+    public void CheckBuffLineTradeCost()
+    {
+        CalculateTC();
+        tweener = transform.DOScale(1f, 10f).OnComplete(CheckBuffLineTradeCost);
     }
 
     /// <summary>
@@ -181,6 +200,10 @@ public class TradeSign : MonoBehaviour
     {
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
         cast.tradeList.Remove(this);
+        if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        {
+            cast.GetComponent<BaseSkill>().DeteleRoleBuff(tradeData);
+        }
     }
 
     /// <summary>
