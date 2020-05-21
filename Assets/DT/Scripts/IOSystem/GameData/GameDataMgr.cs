@@ -420,15 +420,18 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         {
             StageData temp = new StageData();
             temp.sceneName = s.sceneName;
-            temp.maxConsumer = float.Parse(s.maxConsumer);
-            temp.startConsumer = float.Parse(s.startConsumer);
-            temp.maxBoss = float.Parse(s.maxBoss);
-            temp.startBoss = float.Parse(s.startBoss);
-            temp.bankRate = float.Parse(s.bankRate);
+            temp.maxWaveNumber = int.Parse(s.maxWaveNumber);
+            temp.startPlayerHealth = int.Parse(s.startPlayerHealth);
+            temp.startPlayerGold = int.Parse(s.startPlayerGold);
+            string[] waitTimeList = s.waveWaitTime.Split(',');
+            temp.waveWaitTime = new List<int>();
+            foreach (string str in waitTimeList)
+            {
+                temp.waveWaitTime.Add(int.Parse(str));
+            }
             string[] strList = s.startWorker.Split(',');
             temp.startWorker = new List<int>();
             temp.startEquip = new List<int>();
-            temp.consumerQualityNeed = int.Parse(s.consumerQualityNeed);
             foreach (string str in strList)
             {
                 if (!str.Equals("-1"))

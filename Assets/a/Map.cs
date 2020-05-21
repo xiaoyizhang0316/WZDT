@@ -5,6 +5,8 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     public GameObject map;
+
+    public List<Material> materials;
     
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,8 @@ public class Map : MonoBehaviour
             {
                 GameObject game= Instantiate(map);
                 game.transform.position += new Vector3(i*7,0,j*6)+ad;
+                int number = UnityEngine.Random.Range(0, materials.Count);
+                game.GetComponent<MeshRenderer>().material = materials[number];
             }
         }
       
