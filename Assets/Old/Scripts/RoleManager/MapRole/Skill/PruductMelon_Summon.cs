@@ -21,7 +21,15 @@ public class PruductMelon_Summon  : BaseSkill
             {
                 role.warehouse.RemoveAt(i);
             }
+            for (int i = 0; i <role.GetEquipBuffList().Count; i++)
+            {
+                data.AddBuff(role.GetEquipBuffList()[i]);
+            }
 
+            for (int i = 0; i <buffList.Count; i++)
+            {
+                data.AddBuff(buffList[i]);
+            }
             data.damage =(float) (data.damage * 0.3 + role.baseRoleData.effect * 1.5f);
             data.bulletType = BulletType.summon;
             data.loadingSpeed *=1f-role.baseRoleData.effect/100f ;
@@ -45,37 +53,5 @@ public class PruductMelon_Summon  : BaseSkill
         }
 
     }
-    
-    
-    public override void UnleashSkills()
-    {
-        if (role.warehouse.Count > 0)
-        {
-            ProductData data = role.warehouse[0];
-            float d = 1.5f;
-            Debug.Log("释放技能" + d);
-
-            transform.DOScale(1, d).OnComplete(() =>
-            {
-                Debug.Log("释放技能" + d);
-                Skill();
-                if (IsOpen)
-                {
-                    UnleashSkills();
-                }
-            });
-        }
-        else
-        {
-            float d =1.5f;
-            transform.DOScale(1, d).OnComplete(() =>
-            {
-           
-                if (IsOpen)
-                {
-                    UnleashSkills();
-                }
-            });
-        }
-    }
+     
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DT.Fight.Bullet;
 using UnityEngine;
 
@@ -20,6 +21,16 @@ public class PruductMelon : BaseSkill
             data.bulletType = BulletType.NormalPP;
             data.loadingSpeed *=1f-role.baseRoleData.effect/100f ;
             data.buffList.Add(201);
+            
+            for (int i = 0; i <role.GetEquipBuffList().Count; i++)
+            {
+                data.AddBuff(role.GetEquipBuffList()[i]);
+            }
+
+            for (int i = 0; i <buffList.Count; i++)
+            {
+                data.AddBuff(buffList[i]);
+            }
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;
             game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
