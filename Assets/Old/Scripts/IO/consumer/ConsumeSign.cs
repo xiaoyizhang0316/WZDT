@@ -25,6 +25,8 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public Tweener tweener;
 
+    public Tweener buffTweener;
+
     /// <summary>
     /// 当前生命值
     /// </summary>
@@ -251,7 +253,7 @@ public class ConsumeSign : MonoBehaviour
         isCanSelect = true;
         float time = CalculateTime();
         tweener = transform.DOPath(pathList.ToArray(), time,PathType.CatmullRom, PathMode.Full3D).OnComplete(OnAlive).SetEase(Ease.Linear).SetLookAt(0.01f);
-        InvokeRepeating("CheckBuffDuration", 0f, 1f);
+        CheckBuffDuration();
     }
 
     /// <summary>
@@ -260,7 +262,7 @@ public class ConsumeSign : MonoBehaviour
     public void Stop()
     {
         tweener.Kill();
-        CancelInvoke("CheckBuffDuration");
+        buffTweener.Kill();
         GetComponent<Animator>().SetBool("walk", false);
         Destroy(gameObject);
     }
@@ -322,10 +324,6 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void CheckBuffDuration()
     {
-        if (buffList.Count == 0)
-        {
-            return;
-        }
         for (int i = 0; i < buffList.Count; i++)
         {
             buffList[i].OnConsumerTick();
@@ -338,6 +336,9 @@ public class ConsumeSign : MonoBehaviour
                 }
             }
         }
+        buffTweener = transform.DOScale(1f, 1f).OnComplete(() => {
+            CheckBuffDuration();
+         });
     }
 
     #endregion

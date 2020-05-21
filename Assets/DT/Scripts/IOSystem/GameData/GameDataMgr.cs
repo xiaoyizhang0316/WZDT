@@ -309,7 +309,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             skillData.baseDivide = float.Parse(s.baseDivide);
             skillDatas.Add(skillData);
         }
-        //print(skillDatas.Count);
     }
 
     /// <summary>
@@ -558,7 +557,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         {
             r.Init();
         }
-
         foreach (GearData g in gearDatas)
         {
             g.Init();
@@ -573,8 +571,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     void Start()
     {
         Init();
-        //print(bool.Parse("FALSE"));
-        //print(float.Parse("123"));
     }
 
     // Update is called once per frame

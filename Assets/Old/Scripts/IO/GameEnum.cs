@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameEnum
 {
-
     public enum ProductType
     {
         /// <summary>
@@ -350,6 +349,24 @@ public class GameEnum
         /// 甜
         /// </summary>
         Sweet
+    }
+
+    public enum ConsumableType
+    {
+        /// <summary>
+        /// 影响角色
+        /// </summary>
+        AffectRole,
+
+        /// <summary>
+        /// 影响消费者
+        /// </summary>
+        AffectConsumer,
+
+        /// <summary>
+        /// 生成物品
+        /// </summary>
+        SpawnItem
     }
 
 }

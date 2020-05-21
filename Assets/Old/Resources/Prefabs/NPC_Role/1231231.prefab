@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b066c1cf3aaabe541bca36b339897309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRelease: 0
+  isRelease: 1
   isCollision: 0
   startPos: {x: 0, y: 0, z: 0}
   _roleDrags:
@@ -251,6 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   role: {fileID: 0}
   IsOpen: 0
+  buffList: 
 --- !u!114 &3685991788272927406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +268,7 @@ MonoBehaviour:
   isCanSee: 0
   isCanSeeEquip: 0
   lockNumber: 0
-  lockModel: {fileID: 3409920479423757753}
+  hideModel: {fileID: 3409920479423757753}
   trueModel: {fileID: 4628127957195899221}
 --- !u!1 &745394882642940845
 GameObject:
@@ -507,9 +508,10 @@ GameObject:
   - component: {fileID: 2647156271894444929}
   - component: {fileID: 2329893222105695351}
   - component: {fileID: 5511028452704836112}
+  - component: {fileID: 8123839985800763026}
   m_Layer: 0
   m_Name: lockModel
-  m_TagString: Untagged
+  m_TagString: Role
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -583,11 +585,30 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3409920479423757753}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8123839985800763026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3409920479423757753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343745aae1cc1154ca63423994bde5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPos: {x: 0, y: 0, z: 0}
+  world: {x: 0, y: 0, z: 0}
+  Role: {fileID: 745394881712787410}
+  isSucceed: 0
+  isCollision: 0
+  currentrole: {fileID: 745394881712787410}
+  MoveTF: {fileID: 0}
 --- !u!1 &4628127957195899221
 GameObject:
   m_ObjectHideFlags: 0
