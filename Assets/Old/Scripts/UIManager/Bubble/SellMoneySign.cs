@@ -38,8 +38,6 @@ public class SellMoneySign : MonoBehaviour
         Vector3 target = new Vector3(targetX, targetY, 0f);
         transform.DOLocalMove(target, 0.8f).OnComplete(() =>
         {
-            //print("收入:" + moneyNum);
-            PlayerData.My.GetMapRoleById(mapRoleId).GetMoney(moneyNum);
             Destroy(gameObject, 0.01f);
         }).SetUpdate(true);
     }

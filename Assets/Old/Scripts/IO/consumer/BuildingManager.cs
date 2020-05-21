@@ -8,8 +8,6 @@ public class BuildingManager : MonoSingleton<BuildingManager>
 
     public List<Building> buildings = new List<Building>();
 
-    public int buildingIndex = 0;
-
     /// <summary>
     /// 初始化所有建筑
     /// </summary>

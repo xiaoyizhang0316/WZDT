@@ -30,6 +30,16 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public int playerHealth;
 
+    /// <summary>
+    /// 最大赤字
+    /// </summary>
+    public int maxMinusGold;
+
+    /// <summary>
+    /// 是否处于赤字状态
+    /// </summary>
+    public bool isOverMaxMinus = false;
+
     #region Old
 
     /// <summary>
@@ -97,8 +107,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public GameObject consumerSatisfyGo;
 
-    #endregion
-
     public Image bossFace;
 
     public Image consumerFace;
@@ -112,6 +120,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     private bool isMenuOpen;
 
     private bool wudi = false;
+
+    #endregion
 
     public Text playerGoldText;
 
@@ -128,6 +138,35 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CostPlayerGold(int num)
     {
         playerGold -= num;
+        if(playerGold < maxMinusGold)
+        {
+            if (!isOverMaxMinus)
+            {
+                isOverMaxMinus = true;
+                foreach (BaseMapRole role in PlayerData.My.MapRole)
+                {
+                    if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
+                    {
+                        role.GetComponent<BaseSkill>().CancelSkill();
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (isOverMaxMinus)
+            {
+                isOverMaxMinus = false;
+                foreach (BaseMapRole role in PlayerData.My.MapRole)
+                {
+                    if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
+                    {
+                        role.GetComponent<BaseSkill>().UnleashSkills();
+                    }
+                }
+
+            }
+        }
         SetInfo();
     }
 
@@ -329,7 +368,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        //StartCoroutine(ReadStageEnemyData(sceneName));
+        StartCoroutine(ReadStageEnemyData(sceneName));
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
         bossSatisfy = data.startBoss;
         maxBossSatisfy = data.maxBoss;

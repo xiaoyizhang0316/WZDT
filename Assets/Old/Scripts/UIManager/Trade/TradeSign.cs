@@ -42,6 +42,8 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public GameObject tradeBuffLine;
 
+    private int countNumber = 0;
+
     public void Init(string start, string end)
     {
         tradeData = new TradeData();
@@ -54,7 +56,7 @@ public class TradeSign : MonoBehaviour
         tradeData.selectSZFS = SZFSType.固定;
         tradeData.selectCashFlow = CashFlowType.先钱;
         tradeData.ID = TradeManager.My.index++;
-        TradeManager.My.tradeList.Add(tradeData.ID,this);
+        TradeManager.My.tradeList.Add(tradeData.ID, this);
         SetSkillTarget();
         AddTradeToRole();
         GenerateTradeLine();
@@ -122,7 +124,7 @@ public class TradeSign : MonoBehaviour
     {
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
         BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole));
-        int number = Mathf.FloorToInt( Vector3.Distance(cast.transform.position, target.transform.position));
+        int number = Mathf.FloorToInt(Vector3.Distance(cast.transform.position, target.transform.position));
         Vector3 offset = (target.transform.position - cast.transform.position) / number;
         float HalfLength = Vector3.Distance(target.transform.position, cast.transform.position) / number / 2f;
         Vector3 tempStart = cast.transform.position;
@@ -163,7 +165,12 @@ public class TradeSign : MonoBehaviour
         {
             posList.Add(list[i].transform.Find("end").position);
         }
-        CalculateTC();
+        countNumber++;
+        if (countNumber == 10)
+        {
+            CalculateTC();
+            countNumber = 0;
+        }
         return posList;
     }
 
@@ -177,235 +184,25 @@ public class TradeSign : MonoBehaviour
     }
 
     /// <summary>
-    /// 结算付钱关系(先钱)
-    /// </summary>
-    public void PayForTrade()
-    {
-
-    }
-
-    /// <summary>
-    /// 结算固定后钱的关系
-    /// </summary>
-    public void PayForTradeLast()
-    {
-
-    }
-
-    /// <summary>
-    /// 生成交易历史记录
-    /// </summary>
-    public void RecordHistory(float num)
-    {
-        PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole)).GenerateTradeHistory(tradeData, num);
-        PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole)).GenerateTradeHistory(tradeData, num);
-    }
-
-    /// <summary>
     /// 结算交易成本
     /// </summary>
-    public float CalculateTC()
+    public void CalculateTC()
     {
-        //TODO
-        return 0;
-    }
-
-    /// <summary>
-    /// 结算交易成本
-    /// </summary>
-    public float CalculateTCOfTwo(string startRole,string endRole)
-    {
-        //todo
-         return 0;
-    }
-
-    /// <summary>
-    /// 结算交易结构附加量
-    /// </summary>
-    /// <param name="isInside"></param>
-    /// <returns></returns>
-    public List<float> GetDealConfigAdd(bool isInside)
-    {
-        float searchAdd = 1f;
-        float bargainAdd = 1f;
-        float deliverAdd = 1f;
-        float riskAdd = 1f;
-        if (tradeData.isFree)
+        BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+        BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        int result = startRole.baseRoleData.tradeCost + endRole.baseRoleData.tradeCost;
+        if (tradeData.selectCashFlow == CashFlowType.先钱)
         {
-            if (isInside)
-            {
-                searchAdd += DealConfigData.My.free[0];
-                bargainAdd += DealConfigData.My.free[1];
-                deliverAdd += DealConfigData.My.free[2];
-                riskAdd += DealConfigData.My.free[3];
-            }
-            else
-            {
-                searchAdd += DealConfigData.My.free[4];
-                bargainAdd += DealConfigData.My.free[5];
-                deliverAdd += DealConfigData.My.free[6];
-                riskAdd += DealConfigData.My.free[7];
-            }
+            result += (int)(startRole.baseRoleData.riskResistance * 0.7f + endRole.baseRoleData.riskResistance * 1.3f);
         }
-        else if (tradeData.selectSZFS == SZFSType.固定)
+        else if (tradeData.selectCashFlow == CashFlowType.后钱)
         {
-            if (isInside)
-            {
-                searchAdd += DealConfigData.My.fix[0];
-                bargainAdd += DealConfigData.My.fix[1];
-                deliverAdd += DealConfigData.My.fix[2];
-                riskAdd += DealConfigData.My.fix[3];
-            }
-            else
-            {
-                searchAdd += DealConfigData.My.fix[4];
-                bargainAdd += DealConfigData.My.fix[5];
-                deliverAdd += DealConfigData.My.fix[6];
-                riskAdd += DealConfigData.My.fix[7];
-            }
-            if (tradeData.selectCashFlow == CashFlowType.先钱)
-            {
-                if (isInside)
-                {
-                    searchAdd += DealConfigData.My.moneyFirst[0];
-                    bargainAdd += DealConfigData.My.moneyFirst[1];
-                    deliverAdd += DealConfigData.My.moneyFirst[2];
-                    riskAdd += DealConfigData.My.moneyFirst[3];
-                }
-                else
-                {
-                    searchAdd += DealConfigData.My.moneyFirst[4];
-                    bargainAdd += DealConfigData.My.moneyFirst[5];
-                    deliverAdd += DealConfigData.My.moneyFirst[6];
-                    riskAdd += DealConfigData.My.moneyFirst[7];
-                }
-            }
-            else if (tradeData.selectCashFlow == CashFlowType.后钱)
-            {
-                if (isInside)
-                {
-                    searchAdd += DealConfigData.My.moneyLast[0];
-                    bargainAdd += DealConfigData.My.moneyLast[1];
-                    deliverAdd += DealConfigData.My.moneyLast[2];
-                    riskAdd += DealConfigData.My.moneyLast[3];
-                }
-                else
-                {
-                    searchAdd += DealConfigData.My.moneyLast[4];
-                    bargainAdd += DealConfigData.My.moneyLast[5];
-                    deliverAdd += DealConfigData.My.moneyLast[6];
-                    riskAdd += DealConfigData.My.moneyLast[7];
-                }
-            }
-
+            result += (int)(startRole.baseRoleData.riskResistance * 1.3f + endRole.baseRoleData.riskResistance * 0.7f);
         }
-        else if (tradeData.selectSZFS == SZFSType.剩余)
-        {
-            if (isInside)
-            {
-                searchAdd += DealConfigData.My.rest[0];
-                bargainAdd += DealConfigData.My.rest[1];
-                deliverAdd += DealConfigData.My.rest[2];
-                riskAdd += DealConfigData.My.rest[3];
-            }
-            else
-            {
-                searchAdd += DealConfigData.My.rest[4];
-                bargainAdd += DealConfigData.My.rest[5];
-                deliverAdd += DealConfigData.My.rest[6];
-                riskAdd += DealConfigData.My.rest[7];
-            }
-            if (tradeData.selectCashFlow == CashFlowType.先钱)
-            {
-                if (isInside)
-                {
-                    searchAdd += DealConfigData.My.moneyFirst[0];
-                    bargainAdd += DealConfigData.My.moneyFirst[1];
-                    deliverAdd += DealConfigData.My.moneyFirst[2];
-                    riskAdd += DealConfigData.My.moneyFirst[3];
-                }
-                else
-                {
-                    searchAdd += DealConfigData.My.moneyFirst[4];
-                    bargainAdd += DealConfigData.My.moneyFirst[5];
-                    deliverAdd += DealConfigData.My.moneyFirst[6];
-                    riskAdd += DealConfigData.My.moneyFirst[7];
-                }
-            }
-            else if (tradeData.selectCashFlow == CashFlowType.后钱)
-            {
-                if (isInside)
-                {
-                    searchAdd += DealConfigData.My.moneyLast[0];
-                    bargainAdd += DealConfigData.My.moneyLast[1];
-                    deliverAdd += DealConfigData.My.moneyLast[2];
-                    riskAdd += DealConfigData.My.moneyLast[3];
-                }
-                else
-                {
-                    searchAdd += DealConfigData.My.moneyLast[4];
-                    bargainAdd += DealConfigData.My.moneyLast[5];
-                    deliverAdd += DealConfigData.My.moneyLast[6];
-                    riskAdd += DealConfigData.My.moneyLast[7];
-                }
-            }
-        }
-        else if (tradeData.selectSZFS == SZFSType.分成)
-        {
-            if (isInside)
-            {
-                searchAdd += DealConfigData.My.divide[0];
-                bargainAdd += DealConfigData.My.divide[1];
-                deliverAdd += DealConfigData.My.divide[2];
-                riskAdd += DealConfigData.My.divide[3];
-            }
-            else
-            {
-                searchAdd += DealConfigData.My.divide[4];
-                bargainAdd += DealConfigData.My.divide[5];
-                deliverAdd += DealConfigData.My.divide[6];
-                riskAdd += DealConfigData.My.divide[7];
-            }
-            if (tradeData.selectCashFlow == CashFlowType.先钱)
-            {
-                if (isInside)
-                {
-                    searchAdd += DealConfigData.My.moneyFirst[0];
-                    bargainAdd += DealConfigData.My.moneyFirst[1];
-                    deliverAdd += DealConfigData.My.moneyFirst[2];
-                    riskAdd += DealConfigData.My.moneyFirst[3];
-                }
-                else
-                {
-                    searchAdd += DealConfigData.My.moneyFirst[4];
-                    bargainAdd += DealConfigData.My.moneyFirst[5];
-                    deliverAdd += DealConfigData.My.moneyFirst[6];
-                    riskAdd += DealConfigData.My.moneyFirst[7];
-                }
-            }
-            else if (tradeData.selectCashFlow == CashFlowType.后钱)
-            {
-                if (isInside)
-                {
-                    searchAdd += DealConfigData.My.moneyLast[0];
-                    bargainAdd += DealConfigData.My.moneyLast[1];
-                    deliverAdd += DealConfigData.My.moneyLast[2];
-                    riskAdd += DealConfigData.My.moneyLast[3];
-                }
-                else
-                {
-                    searchAdd += DealConfigData.My.moneyLast[4];
-                    bargainAdd += DealConfigData.My.moneyLast[5];
-                    deliverAdd += DealConfigData.My.moneyLast[6];
-                    riskAdd += DealConfigData.My.moneyLast[7];
-                }
-            }
-        }
-        List<float> result = new List<float>();
-        result.Add(searchAdd);
-        result.Add(bargainAdd);
-        result.Add(deliverAdd);
-        result.Add(riskAdd);
-        return result;
+        if (startRole.isNpc || endRole.isNpc)
+            result /= 20;
+        else
+            result /= 10;
+        StageGoal.My.CostPlayerGold(result);
     }
 }

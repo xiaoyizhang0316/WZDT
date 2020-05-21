@@ -16,9 +16,4 @@ public class NPC : BaseNpc
     {
         
     }
-
-    public override bool LockCondition()
-    {
-        return true;
-    }
 }

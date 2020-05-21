@@ -491,6 +491,12 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.tradeCost = int.Parse(e.tradeCost);
             temp.cost = int.Parse(e.cost);
             temp.bulletCapacity = int.Parse(e.bulletCapacity);
+            temp.buffList = new List<int>();
+            string[] strList = e.buffList.Split(',');
+            foreach (string s in strList)
+            {
+                temp.buffList.Add(int.Parse(s));
+            }
             temp.Init();
             gearDatas.Add(temp);
         }

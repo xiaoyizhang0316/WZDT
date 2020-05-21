@@ -87,7 +87,7 @@ public class ConsumerItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
     {
         switch (currentConsumer.consumerType)
         {
-            case ConsumerType.Oldpao_1:
+            case ConsumerType.Oldpao:
             case ConsumerType.Oldpao_2:
             case ConsumerType.Oldpao_3:
                 consumerClass.color = new Color();

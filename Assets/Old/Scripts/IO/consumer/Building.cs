@@ -45,8 +45,14 @@ public class Building : MonoBehaviour
                     throw new Exception("building Id over limit ");
             }
         }
+        SpawnConsumer(1);
     }
 
+    /// <summary>
+    /// 初始化每一波
+    /// </summary>
+    /// <param name="waveNum"></param>
+    /// <param name="waveConfig"></param>
     public void InitSingleWave(int waveNum, List<string> waveConfig)
     {
         List<WaveConfig> tempList = new List<WaveConfig>();
@@ -67,6 +73,10 @@ public class Building : MonoBehaviour
         waveConfigs.Add(waveNum, tempList);
     }
 
+    /// <summary>
+    /// 每一波召唤消费者
+    /// </summary>
+    /// <param name="waveNumber"></param>
     public void SpawnConsumer(int waveNumber)
     {
         if (!waveConfigs.ContainsKey(waveNumber))
@@ -88,7 +98,6 @@ public class Building : MonoBehaviour
                     int num = UnityEngine.Random.Range(1, 11);
                     path += num.ToString();
                     GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
-                    go.transform.localPosition = Vector3.zero;
                     go.GetComponent<ConsumeSign>().Init(w.consumerType,consumerPathList);
                     go.transform.localScale = Vector3.one;
                 }
