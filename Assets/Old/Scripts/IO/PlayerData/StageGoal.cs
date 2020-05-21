@@ -16,11 +16,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     public int playerGold;
 
     /// <summary>
-    /// 关卡满意度目标
-    /// </summary>
-    public int goalSatisfy;
-
-    /// <summary>
     /// 玩家满意度
     /// </summary>
     public int playerSatisfy;
@@ -39,6 +34,20 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 是否处于赤字状态
     /// </summary>
     public bool isOverMaxMinus = false;
+
+    /// <summary>
+    /// 当前波数
+    /// </summary>
+    public int currentWave = 1;
+
+    /// <summary>
+    /// 本关总波数
+    /// </summary>
+    public int maxWaveNumber;
+
+    public List<int> waitTimeList = new List<int>();
+
+    public Tweener waveTween;
 
     #region Old
 
@@ -243,7 +252,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         consumerSatisfyGo.transform.Find("Mask/Image").GetComponent<RectTransform>().sizeDelta = new Vector2(746f * customerSatisfy / maxCustomerSatisfy, consumerSatisfyGo.transform.Find("Mask/Image").GetComponent<RectTransform>().sizeDelta.y);
         bossSatisfyGo.transform.Find("Mask/Image").GetComponent<RectTransform>().sizeDelta = new Vector2(746f * bossSatisfy / maxBossSatisfy, bossSatisfyGo.transform.Find("Mask/Image").GetComponent<RectTransform>().sizeDelta.y);
         playerGoldText.text = "玩家金币:" + playerGold.ToString();
-        playerSatisfyText.text = playerSatisfy.ToString() + "/" + goalSatisfy.ToString();
         playerHealthText.text = "玩家血量:" + playerHealth.ToString();
         CheckWinOrDead();
     }
@@ -318,15 +326,6 @@ public class StageGoal : MonoSingleton<StageGoal>
             }
             Lose();
         }
-        else if (playerSatisfy >= goalSatisfy)
-        {
-            if (wudi)
-            {
-                playerSatisfy = 100;
-                return;
-            }
-            Win();
-        }
     }
 
     /// <summary>
@@ -350,7 +349,27 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
             return;
-    } 
+    }
+
+    /// <summary>
+    /// 根据波数刷敌人
+    /// </summary>
+    public void WaveCount()
+    {
+        waveTween = transform.DOScale(1f, waitTimeList[currentWave - 1]).OnComplete(() =>
+        {
+            if (currentWave == maxWaveNumber)
+            {
+
+            }
+            else
+            {
+                BuildingManager.My.WaveSpawnConsumer(currentWave);
+                currentWave++;
+                WaveCount();
+            }
+        });
+    }
 
     /// <summary>
     /// 将关卡配置表读取到本关
@@ -360,6 +379,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         InitStageData();
         SetInfo();
         MenuHide();
+        WaveCount();
     }
 
     /// <summary>
@@ -370,14 +390,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         string sceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(ReadStageEnemyData(sceneName));
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
-        bossSatisfy = data.startBoss;
-        maxBossSatisfy = data.maxBoss;
-        customerSatisfy = data.startConsumer;
-        maxCustomerSatisfy = data.maxConsumer;
-        playerGold = 10000;
+        playerGold = data.startPlayerGold;
         playerSatisfy = 0;
-        goalSatisfy = 1000;
-        playerHealth = 300;
+        playerHealth = data.startPlayerHealth;
+        maxWaveNumber = data.maxWaveNumber;
+        foreach (int i in data.waveWaitTime)
+        {
+            waitTimeList.Add(i);
+        }
         InitEquipAndWorker(data);
     }
 

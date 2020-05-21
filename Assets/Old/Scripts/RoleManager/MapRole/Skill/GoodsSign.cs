@@ -20,7 +20,7 @@ public class GoodsSign : MonoBehaviour
     public  Tweener twe;
     public Tweener moveTween;
     public BaseMapRole role;
-    private float speedAdd;
+    private float speedAdd = 1f;
 
     public Dictionary<double, int> speedBuffList = new Dictionary<double, int>();
     // Start is called before the first frame update
@@ -39,9 +39,10 @@ public class GoodsSign : MonoBehaviour
     private int count = 0;
     public void Move()
     {
-
+        print("bullet start move" + path[count]);
         moveTween = transform.DOMove(path[count],1).OnComplete(() =>
         {
+            print("bullet move");
             count++;
             if (count < path.Count)
             {

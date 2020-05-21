@@ -12,31 +12,6 @@ public class StageData
     public string sceneName;
 
     /// <summary>
-    /// 消费者满意度上限
-    /// </summary>
-    public float maxConsumer;
-
-    /// <summary>
-    /// 消费者满意度初始值
-    /// </summary>
-    public float startConsumer;
-
-    /// <summary>
-    /// 股东满意度上限
-    /// </summary>
-    public float maxBoss;
-
-    /// <summary>
-    /// 股东满意度初始值
-    /// </summary>
-    public float startBoss;
-
-    /// <summary>
-    /// 银行利率
-    /// </summary>
-    public float bankRate;
-
-    /// <summary>
     /// 初始工人列表
     /// </summary>
     public List<int> startWorker;
@@ -47,7 +22,22 @@ public class StageData
     public List<int> startEquip;
 
     /// <summary>
-    /// 消费者质量要求
+    /// 关卡总波数
     /// </summary>
-    public int consumerQualityNeed;
+    public int maxWaveNumber;
+
+    /// <summary>
+    /// 每波间隔时间
+    /// </summary>
+    public List<int> waveWaitTime;
+
+    /// <summary>
+    /// 玩家初始血量
+    /// </summary>
+    public int startPlayerHealth;
+
+    /// <summary>
+    /// 玩家初始金币
+    /// </summary>
+    public int startPlayerGold;
 }
