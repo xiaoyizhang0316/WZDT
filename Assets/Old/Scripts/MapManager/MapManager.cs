@@ -20,8 +20,7 @@ public class MapManager : MonoSingleton<MapManager>
     // Update is called once per frame
     void Update()
     {
-        //草地
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKey(KeyCode.Alpha1))
         {
             print("press 1");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -31,16 +30,17 @@ public class MapManager : MonoSingleton<MapManager>
                 print(hit[i].transform);
                 if (hit[i].transform.tag.Equals("MapLand"))
                 {
-                    GameObject go =  Instantiate(mapTypeList[0], transform);
+                    GameObject go = Instantiate(mapTypeList[0], transform);
                     go.transform.position = hit[i].transform.position;
                     Destroy(hit[i].transform.gameObject);
+                    break;
                 }
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKey(KeyCode.Alpha2))
         {
-            print("press 1");
+            print("press 2");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hit = Physics.RaycastAll(ray);
             for (int i = 0; i < hit.Length; i++)
@@ -51,13 +51,14 @@ public class MapManager : MonoSingleton<MapManager>
                     GameObject go = Instantiate(mapTypeList[1], transform);
                     go.transform.position = hit[i].transform.position;
                     Destroy(hit[i].transform.gameObject);
+                    break;
                 }
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKey(KeyCode.Alpha3))
         {
-            print("press 1");
+            print("press 3");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hit = Physics.RaycastAll(ray);
             for (int i = 0; i < hit.Length; i++)
@@ -68,7 +69,37 @@ public class MapManager : MonoSingleton<MapManager>
                     GameObject go = Instantiate(mapTypeList[2], transform);
                     go.transform.position = hit[i].transform.position;
                     Destroy(hit[i].transform.gameObject);
+                    break;
                 }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            print("press up");
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hit = Physics.RaycastAll(ray);
+            for (int i = 0; i < hit.Length; i++)
+            {
+                if (hit[i].transform.tag.Equals("MapLand"))
+                {
+                    hit[i].transform.localPosition += new Vector3(0f, 0.5f, 0f);
+                }
+                break;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hit = Physics.RaycastAll(ray);
+            for (int i = 0; i < hit.Length; i++)
+            {
+                if (hit[i].transform.tag.Equals("MapLand"))
+                {
+                    hit[i].transform.localPosition += new Vector3(0f, -0.5f, 0f);
+                }
+                break;
             }
         }
     }
