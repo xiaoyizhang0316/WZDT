@@ -516,7 +516,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             RoleTemplateModelData temp = new RoleTemplateModelData();
             temp.roleType = (RoleType)Enum.Parse(typeof(RoleType), r.roleType);
             temp.level = int.Parse(r.level);
-            //temp.unlock = int.Parse(r.unlock);
             temp.effect = int.Parse(r.effect);
             temp.efficiency = int.Parse(r.efficiency);
             temp.range = int.Parse(r.range);
@@ -542,8 +541,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.consumerType = (ConsumerType)Enum.Parse(typeof(ConsumerType), c.consumerType);
             temp.maxHealth = int.Parse(c.maxHealth);
             temp.moveSpeed = float.Parse(c.moveSpeed);
-            temp.liveTime = float.Parse(c.liveTime);
-            temp.spawnNumber = int.Parse(c.spawnNumber);
             temp.killMoney = int.Parse(c.killMoney);
             temp.killSatisfy = int.Parse(c.killSatisfy);
             temp.liveSatisfy = int.Parse(c.liveSatisfy);

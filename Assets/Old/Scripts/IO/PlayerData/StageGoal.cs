@@ -206,6 +206,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void LostHealth(int num)
     {
         playerHealth += num;
+        CheckDead();
         SetInfo();
     }
 
@@ -253,7 +254,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         bossSatisfyGo.transform.Find("Mask/Image").GetComponent<RectTransform>().sizeDelta = new Vector2(746f * bossSatisfy / maxBossSatisfy, bossSatisfyGo.transform.Find("Mask/Image").GetComponent<RectTransform>().sizeDelta.y);
         playerGoldText.text = "玩家金币:" + playerGold.ToString();
         playerHealthText.text = "玩家血量:" + playerHealth.ToString();
-        CheckWinOrDead();
     }
 
     #region 菜单显示
@@ -310,7 +310,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <summary>
     /// 检测通关条件或者死亡条件
     /// </summary>
-    public void CheckWinOrDead()
+    public void CheckDead()
     {
 
         if (playerHealth < 0)
@@ -325,6 +325,15 @@ public class StageGoal : MonoSingleton<StageGoal>
                 return;
             }
             Lose();
+        }
+    }
+
+    public void CheckWin()
+    {
+        ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
+        if (list.Length == 0 && currentWave == maxWaveNumber)
+        {
+            Win();
         }
     }
 

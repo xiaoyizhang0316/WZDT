@@ -55,8 +55,6 @@ public class ConsumeData
         ConsumerTypeData data = GameDataMgr.My.GetConsumerTypeDataByType(type);
         maxHealth = data.maxHealth;
         moveSpeed = data.moveSpeed;
-        liveTime = data.liveTime;
-        spawnNumber = data.spawnNumber;
         killMoney = data.killMoney;
         killSatisfy = data.killSatisfy;
         liveSatisfy = data.liveSatisfy;

@@ -33,8 +33,6 @@ public class ConsumerItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
     {
         currentConsumer = consume.transform.GetComponent<ConsumeSign>();
         InitInfo();
-        SetClass();
-        SetBuyPower();
         SetSprite(consume);
     }
 
@@ -72,48 +70,6 @@ public class ConsumerItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
         }
     }
 
-    /// <summary>
-    /// 购买力相关设置
-    /// </summary>
-    public void SetBuyPower()
-    {
-
-    }
-
-    /// <summary>
-    /// 阶级设置
-    /// </summary>
-    public void SetClass()
-    {
-        switch (currentConsumer.consumerType)
-        {
-            case ConsumerType.Oldpao:
-            case ConsumerType.Oldpao_2:
-            case ConsumerType.Oldpao_3:
-                consumerClass.color = new Color();
-                break;
-            case ConsumerType.Bluecollar_1:
-            case ConsumerType.Bluecollar_2:
-            case ConsumerType.Bluecollar_3:
-                consumerClass.color = Color.blue;
-                break;
-            case ConsumerType.Whitecollar_1:
-            case ConsumerType.Whitecollar_2:
-            case ConsumerType.Whitecollar_3:
-                consumerClass.color = Color.white;
-                break;
-            case ConsumerType.Goldencollar_1:
-            case ConsumerType.Goldencollar_2:
-            case ConsumerType.Goldencollar_3:
-                consumerClass.color = Color.yellow;
-                break;
-            case ConsumerType.Elite_1:
-            case ConsumerType.Elite_2:
-            case ConsumerType.Elite_3:
-                consumerClass.color = Color.red;
-                break;
-        }
-    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
