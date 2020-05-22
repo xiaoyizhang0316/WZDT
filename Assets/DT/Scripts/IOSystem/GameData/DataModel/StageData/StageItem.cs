@@ -9,21 +9,17 @@ public class StageItem
 {
     public string sceneName;
 
-    public string maxConsumer;
-
-    public string startConsumer;
-
-    public string maxBoss;
-
-    public string startBoss;
-
-    public string bankRate;
-
     public string startWorker;
 
     public string startEquip;
 
-    public string consumerQualityNeed;
+    public string maxWaveNumber;
+
+    public string waveWaitTime;
+
+    public string startPlayerHealth;
+
+    public string startPlayerGold;
 }
 
 public class StagesData

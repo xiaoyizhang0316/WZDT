@@ -84,10 +84,10 @@ public class RoleDrag : MonoBehaviour
         }
 
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
-        if (UIManager.My.Panel_POPInfo.GetComponent<POPRoleManager>().InitPOPRole(gameObject.transform.parent.GetComponent<BaseMapRole>()))
-        {
-            UIManager.My.Panel_POPInfo.gameObject.SetActive(true);
-        }
+        //if (UIManager.My.Panel_POPInfo.GetComponent<POPRoleManager>().InitPOPRole(gameObject.transform.parent.GetComponent<BaseMapRole>()))
+        //{
+        //    UIManager.My.Panel_POPInfo.gameObject.SetActive(true);
+        //}
     }
 
     private void OnMouseExit()

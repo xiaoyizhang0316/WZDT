@@ -59,6 +59,9 @@ public abstract class BaseNpc : MonoBehaviour
         isLock = true;
         isCanSee = false;
         isCanSeeEquip = false;
+        gameObject.name = GetComponent<BaseMapRole>().baseRoleData.ID.ToString();
+        Invoke("DetectNPCRole", 5f);
+        Invoke("UnlockNPCRole", 10f);
     }
 
     // Update is called once per frame

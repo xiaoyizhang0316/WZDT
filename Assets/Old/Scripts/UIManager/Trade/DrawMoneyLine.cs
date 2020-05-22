@@ -22,7 +22,9 @@ public class DrawMoneyLine : MonoBehaviour
 
     public List<Vector3> pointList = new List<Vector3>();
 
-    public float offsetX;
+    public float offset = 0.02f;
+
+    private float offsetX = 0f;
 
     private void Awake()
     {
@@ -55,7 +57,7 @@ public class DrawMoneyLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        offsetX -= 0.0015f;
+        offsetX -= offset;
         GetComponent<LineRenderer>().material.mainTextureOffset = new Vector2(offsetX, 0f);
     }
 }

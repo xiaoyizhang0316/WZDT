@@ -86,9 +86,6 @@ public class ConsumeSign : MonoBehaviour
     /// <param name="targetRole"></param>
     public void InitAndMove()
     {
-        float x = UnityEngine.Random.Range(0, 5f);
-        float z = UnityEngine.Random.Range(0, 5f);
-        transform.position += new Vector3(x, 0f, z);
         float waitTime = UnityEngine.Random.Range(1f, 4f);
         Invoke("Move", waitTime);
     }
@@ -102,7 +99,9 @@ public class ConsumeSign : MonoBehaviour
         pathList = new List<Vector3>();
         foreach (Transform t in paths)
         {
-            pathList.Add(t.position);
+            float x = UnityEngine.Random.Range(-2f, 2f);
+            float z = UnityEngine.Random.Range(-2f, 2f);
+            pathList.Add(t.position + new Vector3(x,0f,z));
         }
     }
 

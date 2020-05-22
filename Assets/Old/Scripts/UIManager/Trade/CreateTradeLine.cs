@@ -70,7 +70,7 @@ public class CreateTradeLine : MonoBehaviour
                 {
                     if (hit[i].transform.tag.Equals("MapLand"))
                     {
-                        Target = hit[i].transform.localPosition + new Vector3(0f,1f,0f);
+                        Target = hit[i].transform.position + new Vector3(0f,1f,0f);
                         lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
                     }
                     if (hit[i].transform.tag.Equals("Role"))
