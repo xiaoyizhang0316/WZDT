@@ -39,10 +39,10 @@ public class GoodsSign : MonoBehaviour
     private int count = 0;
     public void Move()
     {
-        print("bullet start move" + path[count]);
+       // print("bullet start move" + path[count]);
         moveTween = transform.DOMove(path[count],1).OnComplete(() =>
         {
-            print("bullet move");
+           // print("bullet move");
             count++;
             if (count < path.Count)
             {

@@ -434,7 +434,14 @@ public class BaseMapRole : MonoBehaviour
             {
                 for (int i = 0; i <baseRoleData.EquipList.Keys.ToList().Count; i++)
                 {
-                    bufflist.Add(baseRoleData.EquipList.Keys.ToList()[i]);
+                    GearData data = GameDataMgr.My.GetGearData(baseRoleData.EquipList.Keys.ToList()[i]);
+                    foreach (int item in data.buffList)
+                    {
+                        if (item != -1)
+                        {
+                            bufflist.Add(item);
+                        }
+                    }
                 }
             }
            
@@ -443,10 +450,16 @@ public class BaseMapRole : MonoBehaviour
         {
             for (int i = 0; i <baseRoleData.EquipList.Keys.ToList().Count; i++)
             {
-                bufflist.Add(baseRoleData.EquipList.Keys.ToList()[i]);
+                GearData data = GameDataMgr.My.GetGearData(baseRoleData.EquipList.Keys.ToList()[i]);
+                foreach (int item in data.buffList)
+                {
+                    if (item != -1)
+                    {
+                        bufflist.Add(item);
+                    }
+                }
             }
         }
-
         return bufflist;
     }
 

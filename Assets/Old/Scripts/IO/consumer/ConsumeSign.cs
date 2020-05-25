@@ -265,6 +265,11 @@ public class ConsumeSign : MonoBehaviour
         tweener.Kill();
         buffTweener.Kill();
         GetComponent<Animator>().SetBool("walk", false);
+        BaseMapRole[] temp = FindObjectsOfType<BaseMapRole>();
+        foreach (BaseMapRole role in temp)
+        {
+            role.RemoveConsumerFromShootList(this);
+        }
         Destroy(gameObject);
     }
 

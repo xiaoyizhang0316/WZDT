@@ -16,6 +16,14 @@ public class ShootingRange : MonoBehaviour
         }
     }
 
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Consumer") && other.transform.TryGetComponent(out ConsumeSign sign))
+        {
+            GetComponentInParent<BaseMapRole>().RemoveConsumerFromShootList(sign);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
