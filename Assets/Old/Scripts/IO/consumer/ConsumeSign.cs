@@ -5,7 +5,6 @@ using DG.Tweening;
 using UnityEngine;
 using static GameEnum;
 using DT.Fight.Bullet;
-using DG.Tweening;
 
 
 public class ConsumeSign : MonoBehaviour
@@ -56,6 +55,8 @@ public class ConsumeSign : MonoBehaviour
     public bool isCanSelect = false;
 
     public List<Vector3> pathList;
+
+    public BaseConsumer baseConsumer;
 
     /// <summary>
     /// 初始化
@@ -172,6 +173,7 @@ public class ConsumeSign : MonoBehaviour
     {
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
+        StageGoal.My.CheckWin();
     }
 
     /// <summary>
@@ -343,6 +345,11 @@ public class ConsumeSign : MonoBehaviour
     #endregion
 
     private void Update()
+    {
+
+    }
+
+    private void Start()
     {
 
     }
