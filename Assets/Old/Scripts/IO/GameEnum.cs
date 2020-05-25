@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameEnum
 {
-
     public enum ProductType
     {
         /// <summary>
@@ -188,25 +187,25 @@ public class GameEnum
     public enum MapType
     {
         /// <summary>
-        /// 核心区
+        /// 草地
         /// </summary>
-        CBD,
+        Grass,
         /// <summary>
-        /// 商业区
+        /// 土地
         /// </summary>
-        business,
+        Land,
         /// <summary>
         /// 居民区
         /// </summary>
-        residential,
+        Road,
         /// <summary>
         /// 郊区
         /// </summary>
-        outskirts,
+        OtherLandType1,
         /// <summary>
         /// 野外
         /// </summary>
-        openCountry,
+        OtherLandType2,
     }
 
     public enum BuildingType
@@ -245,65 +244,85 @@ public class GameEnum
     public enum ConsumerType
     {
         /// <summary>
-        /// 老炮1
+        /// 普通老炮
         /// </summary>
-        Oldpao,
+        OldpaoNormal,
         /// <summary>
-        /// 老炮2
+        /// 稀有老炮
         /// </summary>
-        Oldpao_2,
+        OldpaoRare,
         /// <summary>
-        /// 老炮3
+        /// 强大老炮
         /// </summary>
-        Oldpao_3,
+        OldpaoEpic,
         /// <summary>
-        /// 白领1
+        /// 传奇老炮
         /// </summary>
-        Whitecollar_1,
+        OldpaoLegendary,
         /// <summary>
-        /// 白领2
+        /// 普通白领
         /// </summary>
-        Whitecollar_2,
+        WhitecollarNormal,
         /// <summary>
-        /// 白领3
+        /// 稀有白领
         /// </summary>
-        Whitecollar_3,
+        WhitecollarRare,
         /// <summary>
-        /// 蓝领1
+        /// 强大白领
         /// </summary>
-        Bluecollar_1,
+        WhitecollarEpic,
         /// <summary>
-        /// 蓝领2
+        /// 传奇白领
         /// </summary>
-        Bluecollar_2,
+        WhitecollarLegendary,
         /// <summary>
-        /// 蓝领3
+        /// 普通蓝领
         /// </summary>
-        Bluecollar_3,
+        BluecollarNormal,
         /// <summary>
-        /// 金领1
+        /// 稀有蓝领
         /// </summary>
-        Goldencollar_1,
+        BluecollarRare,
         /// <summary>
-        /// 金领2
+        /// 强大蓝领
         /// </summary>
-        Goldencollar_2,
+        BluecollarEpic,
         /// <summary>
-        /// 金领3
+        /// 传奇蓝领
         /// </summary>
-        Goldencollar_3,
+        BluecollarLegendary,
         /// <summary>
-        /// 精英1
+        /// 普通金领
         /// </summary>
-        Elite_1,
+        GoldencollarNormal,
         /// <summary>
-        /// 精英2
+        /// 稀有金领
         /// </summary>
-        Elite_2,
+        GoldencollarRare,
         /// <summary>
-        /// 精英3
+        /// 强大金领
         /// </summary>
-        Elite_3
+        GoldencollarEpic,
+        /// <summary>
+        /// 传奇金领
+        /// </summary>
+        GoldencollarLegendary,
+        /// <summary>
+        /// 普通精英
+        /// </summary>
+        EliteNormal,
+        /// <summary>
+        /// 稀有精英
+        /// </summary>
+        EliteRare,
+        /// <summary>
+        /// 强大精英
+        /// </summary>
+        EliteEpic,
+        /// <summary>
+        /// 传奇精英
+        /// </summary>
+        EliteLegendary,
     }
 
     public enum BulletBuffType
@@ -350,6 +369,24 @@ public class GameEnum
         /// 甜
         /// </summary>
         Sweet
+    }
+
+    public enum ConsumableType
+    {
+        /// <summary>
+        /// 影响角色
+        /// </summary>
+        AffectRole,
+
+        /// <summary>
+        /// 影响消费者
+        /// </summary>
+        AffectConsumer,
+
+        /// <summary>
+        /// 生成物品
+        /// </summary>
+        SpawnItem
     }
 
 }

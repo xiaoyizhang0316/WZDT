@@ -55,6 +55,27 @@ public class RoleDrag : MonoBehaviour
             return true;
     }
 
+    /// <summary>
+    /// 检测npc是否激活
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckNpcActive()
+    {
+        BaseMapRole start = PlayerData.My.GetMapRoleById(UIManager.My.startRole.ID);
+        BaseMapRole end = PlayerData.My.GetMapRoleById(UIManager.My.endRole.ID);
+        if (start.isNpc)
+        {
+            if (start.GetComponent<BaseNpc>().isLock)
+                return false;
+        }
+        if (end.isNpc)
+        {
+            if (end.GetComponent<BaseNpc>().isLock)
+                return false;
+        }
+        return true;
+    }
+
     private void OnMouseEnter()
     {
         if (UIManager.My.NeedRayCastPanel())
@@ -63,10 +84,10 @@ public class RoleDrag : MonoBehaviour
         }
 
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
-        if (UIManager.My.Panel_POPInfo.GetComponent<POPRoleManager>().InitPOPRole(gameObject.transform.parent.GetComponent<BaseMapRole>()))
-        {
-            UIManager.My.Panel_POPInfo.gameObject.SetActive(true);
-        }
+        //if (UIManager.My.Panel_POPInfo.GetComponent<POPRoleManager>().InitPOPRole(gameObject.transform.parent.GetComponent<BaseMapRole>()))
+        //{
+        //    UIManager.My.Panel_POPInfo.gameObject.SetActive(true);
+        //}
     }
 
     private void OnMouseExit()
@@ -93,7 +114,7 @@ public class RoleDrag : MonoBehaviour
             UIManager.My.endRole = PlayerData.My.GetRoleById(Double.Parse(Role.transform.name));
             if (UIManager.My.endRole.ID != UIManager.My.startRole.ID)
             {
-                if (CheckTradeDistance() && CheckStartAndEnd())
+                if (CheckTradeDistance() && CheckStartAndEnd() && CheckNpcActive())
                 {
                     //UIManager.My.Panel_CreateTrade.SetActive(true);
                     UIManager.My.InitCreateTradePanel();

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class BaseNpc : MonoBehaviour
 {
+    /// <summary>
+    /// 是否激活
+    /// </summary>
     public bool isLock;
     
     /// <summary>
@@ -21,12 +24,12 @@ public abstract class BaseNpc : MonoBehaviour
     /// </summary>
     public int lockNumber;
 
-    public GameObject lockModel;
+    public GameObject hideModel;
 
     public GameObject trueModel;
 
     /// <summary>
-    /// 解锁npc
+    /// 激活npc
     /// </summary>
     /// <returns></returns>
     public bool UnlockNPCRole()
@@ -35,9 +38,14 @@ public abstract class BaseNpc : MonoBehaviour
             return false;
         StageGoal.My.CostPlayerGold(lockNumber);
         isLock = false;
-        lockModel.SetActive(false);
-        trueModel.SetActive(true);
         return true;
+    }
+
+    public void DetectNPCRole()
+    {
+        isCanSee = true;
+        hideModel.SetActive(false);
+        trueModel.SetActive(true);
     }
 
     // Start is called before the first frame update
@@ -46,8 +54,14 @@ public abstract class BaseNpc : MonoBehaviour
         GetComponent<BaseMapRole>().npcScript = this;
         GetComponent<BaseMapRole>().isNpc = true;
         GetComponent<BaseMapRole>().baseRoleData.isNpc = true;
-        lockModel.SetActive(true);
+        hideModel.SetActive(true);
         trueModel.SetActive(false);
+        isLock = true;
+        isCanSee = false;
+        isCanSeeEquip = false;
+        gameObject.name = GetComponent<BaseMapRole>().baseRoleData.ID.ToString();
+        Invoke("DetectNPCRole", 5f);
+        Invoke("UnlockNPCRole", 10f);
     }
 
     // Update is called once per frame

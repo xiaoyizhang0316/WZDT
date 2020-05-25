@@ -5,7 +5,6 @@ using DG.Tweening;
 using UnityEngine;
 using static GameEnum;
 using DT.Fight.Bullet;
-using DG.Tweening;
 
 
 public class ConsumeSign : MonoBehaviour
@@ -24,6 +23,8 @@ public class ConsumeSign : MonoBehaviour
     /// DOTWeen
     /// </summary>
     public Tweener tweener;
+
+    public Tweener buffTweener;
 
     /// <summary>
     /// 当前生命值
@@ -55,6 +56,8 @@ public class ConsumeSign : MonoBehaviour
 
     public List<Vector3> pathList;
 
+    public BaseConsumer baseConsumer;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -84,9 +87,6 @@ public class ConsumeSign : MonoBehaviour
     /// <param name="targetRole"></param>
     public void InitAndMove()
     {
-        float x = UnityEngine.Random.Range(0, 5f);
-        float z = UnityEngine.Random.Range(0, 5f);
-        transform.position += new Vector3(x, 0f, z);
         float waitTime = UnityEngine.Random.Range(1f, 4f);
         Invoke("Move", waitTime);
     }
@@ -100,7 +100,9 @@ public class ConsumeSign : MonoBehaviour
         pathList = new List<Vector3>();
         foreach (Transform t in paths)
         {
-            pathList.Add(t.position);
+            float x = UnityEngine.Random.Range(-2f, 2f);
+            float z = UnityEngine.Random.Range(-2f, 2f);
+            pathList.Add(t.position + new Vector3(x,0f,z));
         }
     }
 
@@ -171,6 +173,7 @@ public class ConsumeSign : MonoBehaviour
     {
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
+        StageGoal.My.CheckWin();
     }
 
     /// <summary>
@@ -251,7 +254,7 @@ public class ConsumeSign : MonoBehaviour
         isCanSelect = true;
         float time = CalculateTime();
         tweener = transform.DOPath(pathList.ToArray(), time,PathType.CatmullRom, PathMode.Full3D).OnComplete(OnAlive).SetEase(Ease.Linear).SetLookAt(0.01f);
-        InvokeRepeating("CheckBuffDuration", 0f, 1f);
+        CheckBuffDuration();
     }
 
     /// <summary>
@@ -260,8 +263,13 @@ public class ConsumeSign : MonoBehaviour
     public void Stop()
     {
         tweener.Kill();
-        CancelInvoke("CheckBuffDuration");
+        buffTweener.Kill();
         GetComponent<Animator>().SetBool("walk", false);
+        BaseMapRole[] temp = FindObjectsOfType<BaseMapRole>();
+        foreach (BaseMapRole role in temp)
+        {
+            role.RemoveConsumerFromShootList(this);
+        }
         Destroy(gameObject);
     }
 
@@ -322,10 +330,6 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void CheckBuffDuration()
     {
-        if (buffList.Count == 0)
-        {
-            return;
-        }
         for (int i = 0; i < buffList.Count; i++)
         {
             buffList[i].OnConsumerTick();
@@ -338,11 +342,19 @@ public class ConsumeSign : MonoBehaviour
                 }
             }
         }
+        buffTweener = transform.DOScale(1f, 1f).OnComplete(() => {
+            CheckBuffDuration();
+         });
     }
 
     #endregion
 
     private void Update()
+    {
+
+    }
+
+    private void Start()
     {
 
     }

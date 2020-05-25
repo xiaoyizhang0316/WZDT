@@ -58,7 +58,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
                 return RoleData[i];
             }
         }
-
         return null;
     }
 
@@ -77,34 +76,22 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
                 return MapRole[i];
             }
         }
-
         return null;
     }
+
     /// <summary>
     /// 根据ID查找玩家的角色
     /// </summary>
     /// <returns></returns>
     public Role GetRoleById(double id)
     {
-
         for (int i = 0; i < RoleData.Count; i++)
         {
             if (Mathf.Abs((float)(RoleData[i].ID - id)) < 0.1)
             {
-
                 return RoleData[i];
             }
         }
-        //foreach (Role r in RoleData)
-        //{
-        //    if (Mathf.Abs((float)(r.ID - id)) < 0.1)
-        //    {
-        //        print("find role");
-        //        Role tempRole = new Role();
-        //        tempRole = r;
-        //        return tempRole;
-        //    }
-        //}
         Debug.Log("当前角色找不到");
         return null;
     }
@@ -115,7 +102,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// <returns></returns>
     public BaseMapRole GetMapRoleById(double id)
     {
-
         for (int i = 0; i < MapRole.Count; i++)
         {
             if (Mathf.Abs((float)(MapRole[i].baseRoleData.ID - id)) < 0.1)
@@ -124,18 +110,8 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
                 return MapRole[i];
             }
         }
-
         Debug.Log("当前角色找不到");
         return null;
-    }
-
-    /// <summary>
-    /// 将地图中的角色回收
-    /// </summary>
-    /// <param name="roleId"></param>
-    public void UnistallRoleFromMap(double roleId)
-    {
-
     }
 
     /// <summary>
@@ -153,7 +129,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         {
             SetWorkerStatus(v.Key, false);
         }
-
         for (int i = 0; i < RoleManager.Count; i++)
         {
             if (System.Math.Abs(double.Parse(RoleManager[i].name.Split('_')[1]) - target.ID) < 0.1f)
@@ -376,5 +351,4 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     {
 
     }
-
 }

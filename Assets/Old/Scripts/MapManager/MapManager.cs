@@ -9,35 +9,15 @@ public class MapManager : MonoSingleton<MapManager>
 
     public List<MapSign>_mapSigns = new List<MapSign>();
 
-    public List<RoleLandCost> roleLandCosts;
+    public List<GameObject> mapTypeList;
 
-    [System.Serializable]
-    public struct RoleLandCost
-    {
-        public RoleType roleType;
+    public List<Material> grassMaterials;
 
-        public MapType landType;
+    public List<Material> landMaterials;
 
-        public int cost;
-        
-    }
+    public List<Material> roadMaterials;
 
-    /// <summary>
-    /// 查找对应地块类型对应角色的成本
-    /// </summary>
-    /// <param name="roleType"></param>
-    /// <param name="mapType"></param>
-    /// <returns></returns>
-    public int GetLandRoleCost(RoleType roleType,MapType mapType)
-    {
-        foreach (RoleLandCost r in roleLandCosts)
-        {
-            if (r.roleType == roleType && r.landType == mapType)
-                return r.cost;
-        }
-        print("找不到地块对应的角色价格");
-        return 0;
-    }
+    private float interval;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +28,103 @@ public class MapManager : MonoSingleton<MapManager>
     // Update is called once per frame
     void Update()
     {
-        
+        interval += Time.deltaTime;
+        if (interval >= 0.2f)
+        {
+            //草地
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                print("press 1");
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    print(hit[i].transform);
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        GameObject go = Instantiate(mapTypeList[0], transform);
+                        go.transform.position = hit[i].transform.position;
+                        int number = UnityEngine.Random.Range(0, grassMaterials.Count);
+                        go.GetComponent<MeshRenderer>().material = grassMaterials[number];
+                        Destroy(hit[i].transform.gameObject);
+                        break;
+                    }
+                }
+                interval = 0f;
+            }
+            //土地
+            if (Input.GetKey(KeyCode.Alpha2))
+            {
+                print("press 2");
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    print(hit[i].transform);
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        GameObject go = Instantiate(mapTypeList[1], transform);
+                        go.transform.position = hit[i].transform.position;
+                        int number = UnityEngine.Random.Range(0, landMaterials.Count);
+                        go.GetComponent<MeshRenderer>().material = landMaterials[number];
+                        Destroy(hit[i].transform.gameObject);
+                        break;
+                    }
+                }
+                interval = 0f;
+            }
+            //路
+            if (Input.GetKey(KeyCode.Alpha3))
+            {
+                print("press 3");
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    print(hit[i].transform);
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        GameObject go = Instantiate(mapTypeList[2], transform);
+                        go.transform.position = hit[i].transform.position;
+                        int number = UnityEngine.Random.Range(0, roadMaterials.Count);
+                        go.GetComponent<MeshRenderer>().material = roadMaterials[number];
+                        Destroy(hit[i].transform.gameObject);
+                        break;
+                    }
+                }
+                interval = 0f;
+            }
+            //地块升高
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                print("press up");
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        hit[i].transform.localPosition += new Vector3(0f, 0.5f, 0f);
+                    }
+                    break;
+                }
+                interval = 0f;
+            }
+            //地块降低
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        hit[i].transform.localPosition += new Vector3(0f, -0.5f, 0f);
+                    }
+                    break;
+                }
+                interval = 0f;
+            }
+        }
     }
 }

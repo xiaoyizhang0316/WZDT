@@ -309,7 +309,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             skillData.baseDivide = float.Parse(s.baseDivide);
             skillDatas.Add(skillData);
         }
-        //print(skillDatas.Count);
     }
 
     /// <summary>
@@ -421,15 +420,18 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         {
             StageData temp = new StageData();
             temp.sceneName = s.sceneName;
-            temp.maxConsumer = float.Parse(s.maxConsumer);
-            temp.startConsumer = float.Parse(s.startConsumer);
-            temp.maxBoss = float.Parse(s.maxBoss);
-            temp.startBoss = float.Parse(s.startBoss);
-            temp.bankRate = float.Parse(s.bankRate);
+            temp.maxWaveNumber = int.Parse(s.maxWaveNumber);
+            temp.startPlayerHealth = int.Parse(s.startPlayerHealth);
+            temp.startPlayerGold = int.Parse(s.startPlayerGold);
+            string[] waitTimeList = s.waveWaitTime.Split(',');
+            temp.waveWaitTime = new List<int>();
+            foreach (string str in waitTimeList)
+            {
+                temp.waveWaitTime.Add(int.Parse(str));
+            }
             string[] strList = s.startWorker.Split(',');
             temp.startWorker = new List<int>();
             temp.startEquip = new List<int>();
-            temp.consumerQualityNeed = int.Parse(s.consumerQualityNeed);
             foreach (string str in strList)
             {
                 if (!str.Equals("-1"))
@@ -514,7 +516,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             RoleTemplateModelData temp = new RoleTemplateModelData();
             temp.roleType = (RoleType)Enum.Parse(typeof(RoleType), r.roleType);
             temp.level = int.Parse(r.level);
-            //temp.unlock = int.Parse(r.unlock);
             temp.effect = int.Parse(r.effect);
             temp.efficiency = int.Parse(r.efficiency);
             temp.range = int.Parse(r.range);
@@ -540,8 +541,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.consumerType = (ConsumerType)Enum.Parse(typeof(ConsumerType), c.consumerType);
             temp.maxHealth = int.Parse(c.maxHealth);
             temp.moveSpeed = float.Parse(c.moveSpeed);
-            temp.liveTime = float.Parse(c.liveTime);
-            temp.spawnNumber = int.Parse(c.spawnNumber);
             temp.killMoney = int.Parse(c.killMoney);
             temp.killSatisfy = int.Parse(c.killSatisfy);
             temp.liveSatisfy = int.Parse(c.liveSatisfy);
@@ -558,7 +557,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         {
             r.Init();
         }
-
         foreach (GearData g in gearDatas)
         {
             g.Init();
@@ -573,8 +571,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     void Start()
     {
         Init();
-        //print(bool.Parse("FALSE"));
-        //print(float.Parse("123"));
     }
 
     // Update is called once per frame

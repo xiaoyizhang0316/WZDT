@@ -45,7 +45,6 @@ public class Building : MonoBehaviour
                     throw new Exception("building Id over limit ");
             }
         }
-        SpawnConsumer(1);
     }
 
     /// <summary>
@@ -104,24 +103,6 @@ public class Building : MonoBehaviour
             }
         }
     }
-
-    //public void OnMouseEnter()
-    //{
-    //    BuildingPopUp.My.Init(this);
-    //}
-
-    //public void OnMouseExit()
-    //{
-    //    BuildingPopUp.My.MenuHide();
-    //}
-
-    //public void OnMouseUp()
-    //{
-    //    if (!UIManager.My.NeedRayCastPanel())
-    //    {
-    //        BuildingInfo.My.Init(this);
-    //    }
-    //}
 
     // Start is called before the first frame update
     void Start()

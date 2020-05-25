@@ -33,8 +33,6 @@ public class BaseBuff
 
     public ConsumeSign targetConsume;
 
-    //Dictionary<string,List<int>>
-
     /// <summary>
     /// 当BUFF添加时
     /// </summary>
@@ -457,7 +455,7 @@ public class BaseBuff
             num = 0 - num;
             return;
         }
-        else if (Mathf.Abs(float.Parse(attri[1])) >= 1f)
+        else if (Mathf.Abs(float.Parse(attri[1])) > 1f)
         {
             num = int.Parse(attri[1]);
         }

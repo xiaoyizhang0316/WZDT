@@ -16,8 +16,9 @@ public class PruductSeed : BaseSkill
         {
             return;
         }
-        //Debug.Log("产种子");
+        Debug.Log("产种子");
         ProductData data = new ProductData();
+        data.buffList = new List<int>();
         for (int i = 0; i <role.GetEquipBuffList().Count; i++)
         {
             data.AddBuff(role.GetEquipBuffList()[i]);
@@ -31,7 +32,6 @@ public class PruductSeed : BaseSkill
         data.damage = role.baseRoleData.effect * 2f;
         data.loadingSpeed =5;
         data.buffMaxCount = 3;
-        data.buffList = new List<int>();
         GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
         game.GetComponent<GoodsSign>().productData = data;
         game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();

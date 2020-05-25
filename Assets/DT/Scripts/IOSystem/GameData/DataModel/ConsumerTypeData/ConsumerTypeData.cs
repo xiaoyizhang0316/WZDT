@@ -22,16 +22,6 @@ public class ConsumerTypeData
     public float moveSpeed;
 
     /// <summary>
-    /// 存活时间
-    /// </summary>
-    public float liveTime;
-
-    /// <summary>
-    /// 同时生产几个
-    /// </summary>
-    public int spawnNumber;
-
-    /// <summary>
     /// 击杀获得金钱
     /// </summary>
     public int killMoney;

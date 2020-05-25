@@ -397,23 +397,6 @@ public class BaseMapRole : MonoBehaviour
     #endregion
 
     #region 商店/零售
- 
-    /// <summary>
-    /// 将周围的居民楼加入list
-    /// </summary>
-    /// <param name="buildingId"></param>
-    /// <param name="building"></param>
-    public void AddBuilding(int buildingId,Building building)
-    {
-        if (buildingList.ContainsKey(buildingId))
-        {
-            return;
-        }
-        else
-        {
-            buildingList.Add(buildingId, building);
-        }
-    }
 
     /// <summary>
     /// 从列表中随机N个Gameobject
@@ -451,7 +434,14 @@ public class BaseMapRole : MonoBehaviour
             {
                 for (int i = 0; i <baseRoleData.EquipList.Keys.ToList().Count; i++)
                 {
-                    bufflist.Add(baseRoleData.EquipList.Keys.ToList()[i]);
+                    GearData data = GameDataMgr.My.GetGearData(baseRoleData.EquipList.Keys.ToList()[i]);
+                    foreach (int item in data.buffList)
+                    {
+                        if (item != -1)
+                        {
+                            bufflist.Add(item);
+                        }
+                    }
                 }
             }
            
@@ -460,20 +450,17 @@ public class BaseMapRole : MonoBehaviour
         {
             for (int i = 0; i <baseRoleData.EquipList.Keys.ToList().Count; i++)
             {
-                bufflist.Add(baseRoleData.EquipList.Keys.ToList()[i]);
+                GearData data = GameDataMgr.My.GetGearData(baseRoleData.EquipList.Keys.ToList()[i]);
+                foreach (int item in data.buffList)
+                {
+                    if (item != -1)
+                    {
+                        bufflist.Add(item);
+                    }
+                }
             }
         }
-
         return bufflist;
-    }
-
-    /// <summary>
-    /// 当角色获得贡献度时
-    /// </summary>
-    /// <param name="contributionNumber"></param>
-    public void GetContribution(int contributionNumber)
-    {
-        contributionNum += contributionNumber;
     }
 
 

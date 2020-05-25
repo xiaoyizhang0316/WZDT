@@ -19,6 +19,20 @@ public class BuildingManager : MonoSingleton<BuildingManager>
         }
     }
 
+    /// <summary>
+    /// 根据波数让所有刷新点刷消费者
+    /// </summary>
+    /// <param name="waveNumber"></param>
+    public void WaveSpawnConsumer(int waveNumber)
+    {
+        for (int i = 0; i < buildings.Count; i++)
+        {
+            buildings[i].SpawnConsumer(waveNumber);
+        }
+    }
+
+
+
     // Start is called before the first frame update
     void Start()
     {
