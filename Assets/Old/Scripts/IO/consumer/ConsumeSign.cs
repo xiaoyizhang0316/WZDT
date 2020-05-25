@@ -61,11 +61,10 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 初始化
     /// </summary>
-    public void Init(ConsumerType type,List<Transform> paths)
+    public void Init(List<Transform> paths)
     {
         isStart = false;
         isCanSelect = false;
-        consumerType = type;
         currentHealth = 0;
         foreach (ProductElementType p in Enum.GetValues(typeof(ProductElementType)))
         {
@@ -76,7 +75,7 @@ public class ConsumeSign : MonoBehaviour
         hud = go.GetComponent<Hud>();
         hud.Init(this);
         hud.healthImg.fillAmount = 0f;
-        go.transform.localPosition = Vector3.zero + new Vector3(0, 2.2f, 0);
+        go.transform.localPosition = Vector3.zero + new Vector3(0, 3.5f, 0);
         InitPath(paths);
         InitAndMove();
     }
@@ -249,7 +248,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void Move()
     {
-        GetComponent<Animator>().SetBool("walk", true);
+        GetComponent<Animator>().SetFloat("Speed_f",0.5f);
         isStart = true;
         isCanSelect = true;
         float time = CalculateTime();
@@ -264,7 +263,7 @@ public class ConsumeSign : MonoBehaviour
     {
         tweener.Kill();
         buffTweener.Kill();
-        GetComponent<Animator>().SetBool("walk", false);
+        GetComponent<Animator>().SetFloat("Speed_f", 0f);
         BaseMapRole[] temp = FindObjectsOfType<BaseMapRole>();
         foreach (BaseMapRole role in temp)
         {
