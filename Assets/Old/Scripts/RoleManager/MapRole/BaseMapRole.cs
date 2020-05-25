@@ -99,13 +99,12 @@ public class BaseMapRole : MonoBehaviour
         contributionNum = 0;
         if (!isNpc)
             InitBaseRoleData();
-    
         InvokeRepeating("MonthlyCost", 1f, 60f);
+        InvokeRepeating("AddTechPoint", 0f, 10f);
         if (!PlayerData.My.MapRole.Contains(this))
         {
             PlayerData.My.MapRole.Add(this);
         }
-
         if (!PlayerData.My.RoleData.Contains(baseRoleData))
         {
             PlayerData.My.RoleData.Add(baseRoleData);
@@ -265,6 +264,17 @@ public class BaseMapRole : MonoBehaviour
             result = 0 - result;
             //print("每月成本 " + result.ToString());
         }
+    }
+
+    public void AddTechPoint()
+    {
+        int result = 0;
+        foreach (int id in baseRoleData.peoPleList.Keys)
+        {
+            WorkerData data = GameDataMgr.My.GetWorkerData(id);
+            result += data.techAdd;
+        }
+        StageGoal.My.GetTechPoint(result);
     }
 
     #endregion

@@ -65,6 +65,8 @@ public class WorkerData
     /// </summary>
     public PDPType PDP;
 
+    public int techAdd;
+
     /// <summary>
     /// Icon路径地址
     /// </summary>

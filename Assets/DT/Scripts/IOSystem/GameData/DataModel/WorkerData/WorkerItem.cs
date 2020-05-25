@@ -59,6 +59,8 @@ public class WorkerItem
     /// PDP性格
     /// </summary>
     public string PDP;
+
+    public string techAdd;
 }
 
 [Serializable]

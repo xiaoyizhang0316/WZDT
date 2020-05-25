@@ -117,6 +117,7 @@ public class ConsumeSign : MonoBehaviour
             int realDamage = (int)data.damage;
             CheckBulletElement(ref realDamage, data);
             CheckDebuff(data);
+
             ChangeHealth(realDamage);
         }
     }

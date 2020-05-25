@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0, g: 0.3333335, b: 1, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.55891776, g: 0.67639726, b: 0.754717, a: 1}
   m_AmbientGroundColor: {r: 1, g: 0.7531447, b: 0.25943398, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 1
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -121,6 +121,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &433624170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 433624171}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &433624171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433624170}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 58.70597, y: -3.132782, z: 55.04375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &613912430
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +229,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613912430}
   m_LocalRotation: {x: -0.016199762, y: -0.86546564, z: 0.49992025, w: -0.028045585}
-  m_LocalPosition: {x: 29.89, y: 20.44822, z: 24.340296}
+  m_LocalPosition: {x: 0, y: 0, z: 24.340296}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -217,16 +247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd573b1ed75fea40927dc995b77438e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 5982943571267824188, guid: 77e4e7999a9e845fd8612e943674ea54, type: 3}
+  map: {fileID: 3278547023569076450, guid: 2a5ffa2e7ae0c4d6db51e2f35ee60857, type: 3}
   materials:
   - {fileID: 2100000, guid: b6d5c27f426dc4f7d8808ab2552356d1, type: 2}
-  - {fileID: 2100000, guid: d27daac7d7cd44477a59ca26ddcebd42, type: 2}
-  - {fileID: 2100000, guid: 6bf8e40b2bdb948228e4e4125e9fd21f, type: 2}
-  - {fileID: 2100000, guid: ee8dd2d83c90f467c88abdc9bfc62fbd, type: 2}
-  - {fileID: 2100000, guid: c63252f6a1fb74dfba448c127d05e974, type: 2}
-  - {fileID: 2100000, guid: 7c0b25a360d254e638cee582f114b649, type: 2}
-  - {fileID: 2100000, guid: 57544daaaa2f14e62b6a23e54f235b61, type: 2}
-  - {fileID: 2100000, guid: f5cfc6291f8224a95a302468cdec0b84, type: 2}
 --- !u!1 &1626840434
 GameObject:
   m_ObjectHideFlags: 0

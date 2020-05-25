@@ -467,6 +467,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.tradeCost = int.Parse(w.tradeCost);
             temp.cost = int.Parse(w.cost);
             temp.bulletCapacity = int.Parse(w.bulletCapacity);
+            temp.techAdd = int.Parse(w.techAdd);
             //temp.PDP = (PDPType)Enum.Parse(typeof(PDPType), w.PDP);
             temp.Init();
             workerDatas.Add(temp);

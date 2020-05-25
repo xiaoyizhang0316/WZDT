@@ -214,6 +214,10 @@ public class BaseBuff
                 CalculateNumber(str, ref buffConfig.playerHealthChange, StageGoal.My.playerHealth);
                 StageGoal.My.playerHealth += (buffConfig.playerHealthChange);
                 break;
+            case 4:
+                CalculateNumber(str, ref buffConfig.playerTechPointChange, StageGoal.My.playerTechPoint);
+                StageGoal.My.GetTechPoint(buffConfig.playerTechPointChange);;
+                break;
             default:
                 break;
         }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShootingRange : MonoBehaviour
 {
-
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Consumer") && other.transform.TryGetComponent(out ConsumeSign sign))
