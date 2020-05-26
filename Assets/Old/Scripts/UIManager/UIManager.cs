@@ -14,10 +14,6 @@ public class UIManager : MonoSingleton<UIManager>
     public GameObject Panel_AssemblyRole;
 
     public GameObject Panel_ChoseRole;
-    /// <summary>
-    /// 创建角色按钮
-    /// </summary>
-    public Button CreatRoleButton;
 
     /// <summary>
     /// 交易配置Panel
@@ -94,10 +90,7 @@ public class UIManager : MonoSingleton<UIManager>
     // Start is called before the first frame update
     void Start()
     {
-        CreatRoleButton.onClick.AddListener(() =>
-        {
-            Panel_ChoseRole.SetActive(true);
-        });
+       
         GameNormal();
         for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
         {

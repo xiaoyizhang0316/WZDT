@@ -34,24 +34,24 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     // Start is called before the first frame update
     void Start()
     {
-        modification.gameObject.SetActive(secondMenuStatus);
+       // modification.gameObject.SetActive(secondMenuStatus);
         
-        deleteButton.gameObject.SetActive(secondMenuStatus); 
-        modification.onClick.AddListener(() =>
-        {
-            Role tempRole = PlayerData.My.GetRoleById(double.Parse(name.Split('_')[1]));
-            print(tempRole);
-            UIManager.My.Panel_AssemblyRole.SetActive(true);
-            CreatRoleManager.My.Open(tempRole);
-        });
+       //deleteButton.gameObject.SetActive(secondMenuStatus); 
+     //   modification.onClick.AddListener(() =>
+     //   {
+     //       Role tempRole = PlayerData.My.GetRoleById(double.Parse(name.Split('_')[1]));
+     //       print(tempRole);
+     //       UIManager.My.Panel_AssemblyRole.SetActive(true);
+     //       CreatRoleManager.My.Open(tempRole);
+     //   });
         
-        deleteButton.onClick.AddListener(() =>
-        {
-            Role tempRole = PlayerData.My.GetRoleById(double.Parse(name.Split('_')[1]));
-            UIManager.My.Panel_Confirm.SetActive(true);
-            string str = "确定要删除该角色吗？";
-            UIManager.My.Panel_Confirm.GetComponent<ConfirmPanel>().Init(PlayerData.My.DeleteRole, tempRole.ID,str);
-        });
+       // deleteButton.onClick.AddListener(() =>
+       // {
+       //     Role tempRole = PlayerData.My.GetRoleById(double.Parse(name.Split('_')[1]));
+       //     UIManager.My.Panel_Confirm.SetActive(true);
+       //     string str = "确定要删除该角色吗？";
+       //     UIManager.My.Panel_Confirm.GetComponent<ConfirmPanel>().Init(PlayerData.My.DeleteRole, tempRole.ID,str);
+       // });
     }
 
     // Update is called once per frame

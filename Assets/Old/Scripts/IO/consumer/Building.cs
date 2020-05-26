@@ -19,32 +19,37 @@ public class Building : MonoBehaviour
     /// </summary>
     public void Init(List<StageEnemyData> datas)
     {
-        foreach (StageEnemyData s in datas)
+        for (int i = 0; i < datas.Count; i++)
         {
             switch (buildingId)
             {
                 case 0:
-                    InitSingleWave(s.waveNumber, s.point1);
+                    InitSingleWave(datas[i].waveNumber, datas[i].point1);
                     break;
                 case 1:
-                    InitSingleWave(s.waveNumber, s.point2);
+                    InitSingleWave(datas[i].waveNumber, datas[i].point2);
                     break;
                 case 2:
-                    InitSingleWave(s.waveNumber, s.point3);
+                    InitSingleWave(datas[i].waveNumber, datas[i].point3);
                     break;
                 case 3:
-                    InitSingleWave(s.waveNumber, s.point4);
+                    InitSingleWave(datas[i].waveNumber, datas[i].point4);
                     break;
                 case 4:
-                    InitSingleWave(s.waveNumber, s.point5);
+                    InitSingleWave(datas[i].waveNumber, datas[i].point5);
                     break;
                 case 5:
-                    InitSingleWave(s.waveNumber, s.point6);
+                    InitSingleWave(datas[i].waveNumber, datas[i].point6);
                     break;
                 default:
                     throw new Exception("building Id over limit ");
             }
         }
+        //foreach (StageEnemyData s in datas)
+        //{
+        //    print(s.waveNumber + datas.IndexOf(s).ToString());
+            
+        //}
     }
 
     /// <summary>

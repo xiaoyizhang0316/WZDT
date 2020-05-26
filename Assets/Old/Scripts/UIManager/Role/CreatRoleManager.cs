@@ -260,16 +260,16 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void CheckAllConditions()
     {
-        isWorkerOnEquip = CheckWorkerOnEquip();
-        isAtLeastOneWorkerEquip = CheckAtLeastOneWorkerEquip();
+       // isWorkerOnEquip = CheckWorkerOnEquip();
+       // isAtLeastOneWorkerEquip = CheckAtLeastOneWorkerEquip();
         CalculateAllAttribute();
         //isNeedTemplate = CheckNeedTemplate();
         RoleInfoManager.My.UpdateRoleInfo();
         //if (isWorkerOnEquip && isAtLeastOneWorkerEquip && isNeedTemplate)
-        if (isWorkerOnEquip && isAtLeastOneWorkerEquip)
-            ensureButton.GetComponent<Button>().interactable = true;
-        else
-            ensureButton.GetComponent<Button>().interactable = false;
+       // if (isWorkerOnEquip && isAtLeastOneWorkerEquip)
+      //      ensureButton.GetComponent<Button>().interactable = true;
+     //   else
+          //  ensureButton.GetComponent<Button>().interactable = false;
     }
 
     /// <summary>

@@ -5,13 +5,11 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     public GameObject map;
-
-    public List<Material> materials;
     
     // Start is called before the first frame update
     void Start()
     {
-        for (int j = 0; j< 50; j++)
+        for (int j = 0; j< 40; j++)
         {
             Vector3 ad;
             if (j % 2==0)
@@ -23,10 +21,10 @@ public class Map : MonoBehaviour
                 ad = new Vector2( 0f,0);
             }
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 40; i++)
             {
-                GameObject game= Instantiate(map);
-                game.transform.position += new Vector3(i*1.7f,0,j*1.462f)+ad;
+                GameObject game= Instantiate(map); 
+                game.transform.position += new Vector3(i*1.7f,0,j*1.462f)+ad; 
             }
         }
       
