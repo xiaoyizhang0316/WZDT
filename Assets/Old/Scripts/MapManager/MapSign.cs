@@ -8,7 +8,12 @@ using static GameEnum;
 public class MapSign : MonoBehaviour,IDragHandler
 {
     public MapType mapType;
-    public  float sensitivityAmt = 1;
+
+    public int x;
+
+    public int y;
+
+    public int height = 0;
 
     public bool isCanPlace = true;
 

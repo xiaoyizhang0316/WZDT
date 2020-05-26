@@ -64,6 +64,10 @@ public class BaseRoleData
     /// </summary>
     public int tradeRange;
 
+    public List<int> xList = new List<int>();
+
+    public List<int> yList = new List<int>();
+
     /// <summary>
     /// Icon路径地址
     /// </summary>
