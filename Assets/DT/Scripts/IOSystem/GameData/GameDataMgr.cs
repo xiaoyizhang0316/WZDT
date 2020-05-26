@@ -524,6 +524,18 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.tradeCost = int.Parse(r.tradeCost);
             temp.cost = int.Parse(r.cost);
             temp.bulletCapacity = int.Parse(r.bulletCapacity);
+            temp.xList = new List<int>();
+            temp.yList = new List<int>();
+            string[] tempList = r.xList.Split(',');
+            foreach (string str in tempList)
+            {
+                temp.xList.Add(int.Parse(str));
+            }
+            tempList = r.yList.Split(',');
+            foreach (string str in tempList)
+            {
+                temp.yList.Add(int.Parse(str));
+            }
             temp.Init();
             roleTemplateModelDatas.Add(temp);
         }

@@ -95,8 +95,8 @@ public class RoleListManager : MonoSingleton<RoleListManager>
             PlayerData.My.RoleManager.Add(roleListSign);
             if (PlayerData.My.RoleData[i].inMap)
             {
-                roleListSign.GetComponent<Button>().interactable = false;
-                roleListSign.GetComponent<Image>().raycastTarget = false;
+                //roleListSign.GetComponent<Button>().interactable = false;
+                //roleListSign.GetComponent<Image>().raycastTarget = false;
             }
         }
     }

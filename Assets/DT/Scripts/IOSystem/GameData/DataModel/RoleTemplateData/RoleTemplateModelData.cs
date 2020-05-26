@@ -61,6 +61,16 @@ public class RoleTemplateModelData
     public int bulletCapacity;
 
     /// <summary>
+    /// 模型X坐标
+    /// </summary>
+    public List<int> xList;
+
+    /// <summary>
+    /// 模型Y坐标
+    /// </summary>
+    public List<int> yList;
+
+    /// <summary>
     /// Icon路径地址
     /// </summary>
     public string SpritePath;
@@ -100,6 +110,8 @@ public class RoleTemplateModelData
         tempRoleData.cost = cost;
         tempRoleData.bulletCapacity = bulletCapacity;
         tempRoleData.tradeRange = 15;
+        tempRoleData.xList = xList;
+        tempRoleData.yList = yList;
         tempRoleData.SpritePath = SpritePath;
         tempRoleData.PrePath = PrePath;
         tempRoleData.RoleSpacePath = RoleSpacePath;

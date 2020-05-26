@@ -51,6 +51,10 @@ public class RoleTemplateModelItem
     /// 模板提供弹药装载量
     /// </summary>
     public string bulletCapacity;
+
+    public string xList;
+
+    public string yList;
 }
 
 [Serializable]

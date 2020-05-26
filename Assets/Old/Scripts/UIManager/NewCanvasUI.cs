@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
@@ -16,8 +17,14 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public Transform roleListCreatPos;
     public GameObject Panel_ChoseRole;
-
-    public GameObject Panel_AssemblyRole;
+    public Role CurrentClickRole;
+    public BaseMapRole currentMapRole;
+    public GameObject Panel_AssemblyRole; 
+    public Transform RoleTF;
+    /// <summary>
+    /// 需要遮挡的UI
+    /// </summary>
+    public List<GameObject> needReycastTargetPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,4 +67,42 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             }
         }
     }
+    /// <summary>
+    /// 点击角色显示UI
+    /// </summary>
+    /// <param name="target"></param>
+    public void UpdateUIPosition(Transform target)
+    {
+        CurrentClickRole = PlayerData.My.GetRoleById(Double.Parse(target.name));
+        currentMapRole = PlayerData.My.GetMapRoleById(Double.Parse(target.name));
+        Vector2 mouseDown = Camera.main.WorldToScreenPoint(target.position);
+        Vector2 mouseUGUIPos = new Vector2();
+        bool isRect = RectTransformUtility.ScreenPointToLocalPointInRectangle(transform as RectTransform,
+            mouseDown, Camera.main, out mouseUGUIPos);
+        if (isRect)
+        {
+       //     UIManager.My.Panel_MapRoleUI.gameObject.SetActive(true);
+
+          //  MapRoleUI.GetComponent<RectTransform>().anchoredPosition = mouseUGUIPos;
+        }
+    }
+
+    /// <summary>
+    /// 检测当前界面是否可以穿透panel
+    /// </summary>
+    public bool NeedRayCastPanel()
+    {
+
+        for (int i = 0; i <needReycastTargetPanel.Count; i++)
+        {
+            if (needReycastTargetPanel[i].activeSelf)
+            {
+               
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

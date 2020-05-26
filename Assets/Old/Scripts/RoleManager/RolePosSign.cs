@@ -72,7 +72,7 @@ public class RolePosSign : MonoBehaviour
             }
         }
 
-        transform.SetParent(CommonData.My.RoleTF.transform);
+       // transform.SetParent(NewCanvasUI.My.RoleTF.transform);
          Debug.Log("Count"+cout);
         if (cout == _roleDrags.Count && ExecutionManager.My.SubExecution(ExecutionManager.My.putRole))
         {

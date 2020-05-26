@@ -551,7 +551,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void CloseMenu()
     {
-       NewCanvasUI.My.UpdateRoleList();
+        RoleListManager.My.UpdateRoleList();
  
         gameObject.SetActive(false);
     }
