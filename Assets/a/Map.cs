@@ -14,17 +14,17 @@ public class Map : MonoBehaviour
             Vector3 ad;
             if (j % 2==0)
             {
-                ad = new Vector2( 1.75f,0);
+                ad = new Vector2( 0.85f,0);
             }
             else
             {
-                ad = new Vector2( -1.75f,0);
+                ad = new Vector2( 0f,0);
             }
 
             for (int i = 0; i < 40; i++)
             {
-                GameObject game= Instantiate(map);
-                game.transform.position += new Vector3(i*7,0,j*6)+ad;
+                GameObject game= Instantiate(map); 
+                game.transform.position += new Vector3(i*1.7f,0,j*1.462f)+ad; 
             }
         }
       

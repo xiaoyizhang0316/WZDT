@@ -12,6 +12,8 @@ public class BuffConfig
 
     public int playerHealthChange;
 
+    public int playerTechPointChange;
+
     public int roleEffectChange;
 
     public int roleEfficiencyChange;

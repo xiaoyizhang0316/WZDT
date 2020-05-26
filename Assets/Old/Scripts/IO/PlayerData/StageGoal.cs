@@ -49,6 +49,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Tweener waveTween;
 
+    public int playerTechPoint;
+
     #region Old
 
     /// <summary>
@@ -177,6 +179,30 @@ public class StageGoal : MonoSingleton<StageGoal>
             }
         }
         SetInfo();
+    }
+
+    /// <summary>
+    /// 消耗人脉值
+    /// </summary>
+    /// <param name="num"></param>
+    /// <returns></returns>
+    public bool CostTechPoint(int num)
+    {
+        if (playerTechPoint < num)
+        {
+            return false;
+        }
+        playerTechPoint -= num;
+        return true;
+    }
+
+    /// <summary>
+    /// 获得人脉值
+    /// </summary>
+    /// <param name="num"></param>
+    public void GetTechPoint(int num)
+    {
+        playerTechPoint += num;
     }
 
     /// <summary>
@@ -403,6 +429,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerSatisfy = 0;
         playerHealth = data.startPlayerHealth;
         maxWaveNumber = data.maxWaveNumber;
+        playerTechPoint = 1000;
         foreach (int i in data.waveWaitTime)
         {
             waitTimeList.Add(i);
