@@ -95,7 +95,7 @@ public class Building : MonoBehaviour
                 {
                     string path = "Prefabs/Consumer/" + w.consumerType.ToString();
                     GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
-                    //go.transform.Rotate(new Vector3(90f,0f,0f));
+                    go.transform.Rotate(new Vector3(0f,90f,90f));
                     go.GetComponent<ConsumeSign>().Init(consumerPathList);
                     go.transform.localScale = Vector3.one;
                     go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, -0.75f);
