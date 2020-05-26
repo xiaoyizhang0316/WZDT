@@ -13,7 +13,7 @@ public class BuildingManager : MonoSingleton<BuildingManager>
     /// </summary>
     public void InitAllBuilding(List<StageEnemyData> datas)
     {
-        print(buildings.Count);
+       // print(buildings.Count);
         for (int i = 0; i < buildings.Count; i++)
         {
             buildings[i].Init(datas);
