@@ -62,7 +62,7 @@ public class ConsumerSatisfySign : MonoBehaviour
         transform.DOLocalMove(target, 0.8f).OnComplete(()=>
         {
             //print("满意度:" + satisfyNum);
-            StageGoal.My.ChangeCustomerSatisfy(satisfyNum);
+            //StageGoal.My.ChangeCustomerSatisfy(satisfyNum);
             BubbleManager.My.consumerSatisfySigns.Remove(this);
             Destroy(gameObject, 0.01f);
         }).SetUpdate(true);

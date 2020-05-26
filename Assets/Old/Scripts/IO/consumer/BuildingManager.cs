@@ -13,6 +13,7 @@ public class BuildingManager : MonoSingleton<BuildingManager>
     /// </summary>
     public void InitAllBuilding(List<StageEnemyData> datas)
     {
+        print(buildings.Count);
         for (int i = 0; i < buildings.Count; i++)
         {
             buildings[i].Init(datas);
@@ -36,7 +37,7 @@ public class BuildingManager : MonoSingleton<BuildingManager>
     // Start is called before the first frame update
     void Start()
     {
-
+        print(gameObject.name);
     }
 
     // Update is called once per frame

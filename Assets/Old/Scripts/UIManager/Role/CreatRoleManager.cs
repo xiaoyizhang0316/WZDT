@@ -134,6 +134,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     public int finalCost;
     public int finalBulletCapacity;
     public int finalRiskResistance;
+    public int finalTechAdd;
 
     
     public Text souxun;
@@ -379,6 +380,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             finalCost += tempData.cost;
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
+            finalTechAdd += tempData.techAdd;
             CurrentRole.workerCost += tempData.cost;
             CurrentRole.EquipList = EquipList;
             CurrentRole.peoPleList = peoPleList;
@@ -409,6 +411,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         finalCost = CurrentRole.baseRoleData.cost;
         finalBulletCapacity = CurrentRole.baseRoleData.bulletCapacity;
         finalRiskResistance = CurrentRole.baseRoleData.riskResistance;
+        finalTechAdd = 0;
         CurrentRole.equipCost = 0;
         CurrentRole.workerCost = 0;
         //CurrentRole.cost = CurrentRole.baseRoleData.cost;
@@ -442,6 +445,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         CurrentRole.cost = finalCost;
         CurrentRole.tradeCost = finalTradeCost;
         CurrentRole.bulletCapacity = finalBulletCapacity;
+        CurrentRole.techAdd = finalTechAdd;
         int flag = 0;
         for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
         {
