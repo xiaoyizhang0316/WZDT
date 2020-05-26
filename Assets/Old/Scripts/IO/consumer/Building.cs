@@ -88,16 +88,10 @@ public class Building : MonoBehaviour
             {
                 for (int i = 0; i < w.num; i++)
                 {
-                    int sex = UnityEngine.Random.Range(0, 2);
-                    string path;
-                    if (sex == 0)
-                        path = "Prefabs/Consumer/Male/male_";
-                    else
-                        path = "Prefabs/Consumer/Female/female_";
-                    int num = UnityEngine.Random.Range(1, 11);
-                    path += num.ToString();
+                    string path = "Prefabs/Consumer/" + w.consumerType.ToString();
                     GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
-                    go.GetComponent<ConsumeSign>().Init(w.consumerType,consumerPathList);
+                    go.transform.Rotate(new Vector3(0,90f,90f));
+                    go.GetComponent<ConsumeSign>().Init(consumerPathList);
                     go.transform.localScale = Vector3.one;
                 }
             }

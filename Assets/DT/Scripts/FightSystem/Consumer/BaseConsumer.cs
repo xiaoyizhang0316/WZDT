@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using static GameEnum;
 
 public class BaseConsumer : MonoBehaviour
 {
-
     public float pulseTime = 0f;
 
     public Tweener pulseTween;
