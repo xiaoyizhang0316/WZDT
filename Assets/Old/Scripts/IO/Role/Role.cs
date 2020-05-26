@@ -49,6 +49,11 @@ public class Role
     public int bulletCapacity;
 
     /// <summary>
+    /// 人脉值
+    /// </summary>
+    public int techAdd;
+
+    /// <summary>
     /// ID
     /// </summary>
     public double ID;
