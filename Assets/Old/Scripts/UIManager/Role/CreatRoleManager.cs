@@ -141,15 +141,13 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     public Text yijia;
     public Text jiaodu;
     public Text fengxian;
-    public GameObject popInfo;
 
     public Canvas currentCanvas;
     #endregion
 
 
     public void ShowEquipListPOPDatal(int ID)
-    {
-        popInfo.SetActive( true);
+    { 
         var data = GameDataMgr.My.GetGearData(ID);
         souxun.text = data.effect.ToString();
         yijia.text = data.efficiency.ToString();
@@ -157,8 +155,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         //fengxian.text = data.riskAdd.ToString();
     }
     public void ShowWorkListPOPDatal(int ID)
-    {
-        popInfo.SetActive( true);
+    { 
         var data = GameDataMgr.My.GetWorkerData(ID);
         souxun.text = data.effect.ToString();
         yijia.text = data.efficiency.ToString();
@@ -558,8 +555,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
 
     // Start is called before the first frame update
     void Start()
-    {
-        popInfo.SetActive( false);
+    { 
         //gameObject.SetActive(false);
         showWorker.onClick.AddListener(() =>
         {
