@@ -76,13 +76,13 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        role = Instantiate(RolePrb, CommonData.My.RoleTF.transform);
+        role = Instantiate(RolePrb, NewCanvasUI.My.RoleTF.transform);
         role.name = name.Split('_')[1];
      
         PlayerData.My.GetRoleById(  double.Parse(name.Split('_')[1])   ) .inMap = true;
         PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
 
-        UIManager.My.LandCube.transform.DOMoveY(-0.2f, 0.5f).SetUpdate(true);
+//        UIManager.My.LandCube.transform.DOMoveY(-0.2f, 0.5f).SetUpdate(true);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -98,7 +98,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        UIManager.My.LandCube.transform.DOMoveY(0, 0.5f).SetUpdate(true);
+        //UIManager.My.LandCube.transform.DOMoveY(0, 0.5f).SetUpdate(true);
 
         role.GetComponent<RolePosSign>().ReleaseRole(() =>
         {
@@ -107,7 +107,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             role.GetComponent<BaseMapRole>().AI = true;
             GetComponent<Button>().interactable = false;
             GetComponent<Image>().raycastTarget = false;
-            UIManager.My.UpdateRoleList();
+            RoleListManager.My.UpdateRoleList();
 
         }, () =>
         {
@@ -117,7 +117,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             GetComponent<Button>().interactable = true;
             GetComponent<Image>().raycastTarget = true;
             PlayerData.My.GetRoleById(double.Parse(role.name)).inMap = false;
-            UIManager.My.UpdateRoleList();
+          RoleListManager.My.UpdateRoleList();
         });
     }
 }
