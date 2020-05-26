@@ -76,14 +76,14 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
                     Remove();
                     
                     Destroy(this.gameObject, 0f);
-                    CreatRoleManager.My.CheckAllConditions();
+                    //CreatRoleManager.My.CheckAllConditions();
                     return false;
                 }
                 else
                 {
                     //回到上一次吸附的地点,并且当前是正确的点
                     Adsorb(startPos);
-                    CreatRoleManager.My.CheckAllConditions();
+                  //  CreatRoleManager.My.CheckAllConditions();
                     return true;
                 }
             }
@@ -91,7 +91,7 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
             {
                 Remove();
                 Destroy(this.gameObject, 0f);
-                CreatRoleManager.My.CheckAllConditions();
+               // CreatRoleManager.My.CheckAllConditions();
                 return false;
             }
         }

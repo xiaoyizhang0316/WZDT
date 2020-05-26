@@ -144,7 +144,7 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
     // Start is called before the first frame update
     void Start()
     {
-        canvas = UIManager.My.gameObject.GetComponent<RectTransform>();
+        canvas = CreatRoleManager.My.currentCanvas.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame

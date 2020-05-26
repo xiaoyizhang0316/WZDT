@@ -132,7 +132,7 @@ public class CarMove : MonoBehaviour
         }
         else
         {
-            StageGoal.My.CostMoney(200f);
+            //StageGoal.My.CostMoney(200f);
         }
 
 

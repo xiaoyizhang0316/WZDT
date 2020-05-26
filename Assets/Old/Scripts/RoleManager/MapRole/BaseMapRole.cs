@@ -268,13 +268,7 @@ public class BaseMapRole : MonoBehaviour
 
     public void AddTechPoint()
     {
-        int result = 0;
-        foreach (int id in baseRoleData.peoPleList.Keys)
-        {
-            WorkerData data = GameDataMgr.My.GetWorkerData(id);
-            result += data.techAdd;
-        }
-        StageGoal.My.GetTechPoint(result);
+        StageGoal.My.GetTechPoint(baseRoleData.techAdd);
     }
 
     #endregion
