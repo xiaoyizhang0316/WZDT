@@ -160,8 +160,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void SetInfo()
     {
-        playerGoldText.text = "玩家金币:" + playerGold.ToString();
-        playerHealthText.text = "玩家血量:" + playerHealth.ToString();
+      //  playerGoldText.text = "玩家金币:" + playerGold.ToString();
+       // playerHealthText.text = "玩家血量:" + playerHealth.ToString();
     }
 
     /// <summary>
