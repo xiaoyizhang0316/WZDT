@@ -27,10 +27,10 @@ public class RoleInfoManager : MonoSingleton<RoleInfoManager>
     /// </summary>
     public void UpdateRoleInfo()
     {
-        MainAttribute.My.UpdateMainAttriInfo();
-        SecondAttribute.My.UpdateSecondAttriInfo();
-        workerOnEquip.GetComponent<StatusIcon>().status = CreatRoleManager.My.isWorkerOnEquip;
-        atLeastOne.GetComponent<StatusIcon>().status = CreatRoleManager.My.isAtLeastOneWorkerEquip;
+      //  MainAttribute.My.UpdateMainAttriInfo();
+      //  SecondAttribute.My.UpdateSecondAttriInfo();
+      //  workerOnEquip.GetComponent<StatusIcon>().status = CreatRoleManager.My.isWorkerOnEquip;
+      //  atLeastOne.GetComponent<StatusIcon>().status = CreatRoleManager.My.isAtLeastOneWorkerEquip;
     }
 
     // Start is called before the first frame update

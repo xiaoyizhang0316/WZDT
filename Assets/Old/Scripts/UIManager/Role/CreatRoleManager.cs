@@ -142,6 +142,8 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     public Text jiaodu;
     public Text fengxian;
     public GameObject popInfo;
+
+    public Canvas currentCanvas;
     #endregion
 
 
@@ -169,7 +171,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary> 
     public void Open(Role tempRole)
     {
-        UIManager.My.Panel_CreatRole.SetActive(false);
+       NewCanvasUI .My.Panel_ChoseRole.SetActive(false);
             CurrentRole = tempRole;
         //print(tempRole.baseRoleData.roleType);
         //print(CurrentRole.baseRoleData.roleType);
@@ -192,8 +194,8 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         templateOBJ = Instantiate(Resources.Load<GameObject>(GameDataMgr.My.GetModelData(CurrentRole.baseRoleData.roleType, 1).RoleSpacePath), template_BottomPos);
         CurrentTemplateManager = templateOBJ.GetComponent<TemplateManager>();
         SetCreateRoleTitle();
-        EquipListManager.My.Init();
-        WorkerListManager.My.Init();
+         EquipListManager.My.Init();
+     WorkerListManager.My.Init();
     }
 
     /// <summary>
@@ -464,7 +466,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         EquipListManager.My.QuitAndSave();
         DeleteTemplate();
 
-    }
+    } 
 
     /// <summary>
     /// 删除所有模板中的子物体
@@ -549,8 +551,8 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void CloseMenu()
     {
-        UIManager.My.UpdateRoleList();
-        UIManager.My.Panel_ChoseRole.SetActive(false);
+       NewCanvasUI.My.UpdateRoleList();
+ 
         gameObject.SetActive(false);
     }
 

@@ -16,11 +16,9 @@ public class EquipListManager : MonoSingleton<EquipListManager>
     {
         foreach (PlayerGear p in PlayerData.My.playerGears)
         {
-            //print(PlayerData.My.playerGears.Count);
-            //print(p.GearId);
-            //CreatRoleManager.My.equipPrb
+        
             GameObject go = Instantiate(CreatRoleManager.My.equipPrb, transform.Find("Viewport/Content").position, transform.Find("Viewport/Content").rotation, transform.Find("Viewport/Content"));
-            //go.transform.SetParent(transform.Find("Viewport/Content"));
+         
             go.transform.GetComponent<EquipSign>().Init(p.GearId, p.isEquiped);
         }
         foreach (EquipSign e in _signs)

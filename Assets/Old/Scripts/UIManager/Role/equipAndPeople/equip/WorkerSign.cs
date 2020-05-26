@@ -155,7 +155,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
       //  worker.transform.localPosition = V2
       Vector2 mouseDrage = Input.mousePosition;//当鼠标拖动时的屏幕坐标
       Vector2 uguiPos = new Vector2();//用来接收转换后的拖动坐标
-      bool isRect = RectTransformUtility.ScreenPointToLocalPointInRectangle(UIManager.My.GetComponent<RectTransform>(), mouseDrage, eventData.enterEventCamera, out uguiPos);
+      bool isRect = RectTransformUtility.ScreenPointToLocalPointInRectangle(      CreatRoleManager.My.currentCanvas.GetComponent<RectTransform>() , mouseDrage, eventData.enterEventCamera, out uguiPos);
       if (isRect)
       {
           //设置图片的ugui坐标与鼠标的ugui坐标保持不变
