@@ -13,12 +13,12 @@ public class ChoseRoleManager : MonoBehaviour
     public Button peasant;
     public Button seed;
 
-    public GameObject CreatRolePanel;
+    public CreatRoleManager CreatRolePanel;
      
     // Start is called before the first frame update
     void Start()
     {
-        CreatRolePanel.SetActive(false);
+        CreatRolePanel.gameObject.SetActive(false);
         dealer.onClick.AddListener(() =>
         {
             Role role = new Role();
@@ -27,7 +27,7 @@ public class ChoseRoleManager : MonoBehaviour
             role.baseRoleData.roleName = StaticRoleName.DealerName[Random.Range(0, StaticRoleName.DealerName.Length)];
             role.ID = CommonData.My.GetTimestamp(DateTime.Now);
              
-            CreatRolePanel.SetActive(true);
+            CreatRolePanel.gameObject.SetActive(true);
 
             CreatRoleManager.My.Open(role);
         });
@@ -39,7 +39,7 @@ public class ChoseRoleManager : MonoBehaviour
             
             role.baseRoleData.roleName = StaticRoleName.MerchantName[Random.Range(0, StaticRoleName.MerchantName.Length)];
              
-            CreatRolePanel.SetActive(true);
+            CreatRolePanel.gameObject.SetActive(true);
             CreatRoleManager.My.Open(role);
 
         });
@@ -50,7 +50,7 @@ public class ChoseRoleManager : MonoBehaviour
             role.baseRoleData = GameDataMgr.My.GetModelData(GameEnum.RoleType.Peasant, 1);
             role.baseRoleData.roleName = StaticRoleName.PeasantName[Random.Range(0, StaticRoleName.PeasantName.Length)];
              
-            CreatRolePanel.SetActive(true);
+            CreatRolePanel.gameObject.SetActive(true);
             CreatRoleManager.My.Open(role);
         });
         seed.onClick.AddListener(() =>
@@ -63,8 +63,8 @@ public class ChoseRoleManager : MonoBehaviour
 ///            Debug.Log( CommonData.My.GetTimestamp(DateTime.Now) +"IDS");
             role.baseRoleData = GameDataMgr.My.GetModelData(GameEnum.RoleType.Seed, 1);
             role.baseRoleData.roleName = StaticRoleName.SeedName[Random.Range(0, StaticRoleName.SeedName.Length)];
-    
-            CreatRolePanel.SetActive(true);
+       Debug.Log(role.ID);
+            CreatRolePanel.gameObject.SetActive(true);
             CreatRoleManager.My.Open(role); 
 
         });
