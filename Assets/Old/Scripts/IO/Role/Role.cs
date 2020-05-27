@@ -82,6 +82,10 @@ public class Role
     public bool isNpc;
     public Dictionary<int, Vector3> EquipList =new Dictionary<int, Vector3>();
     public Dictionary<int, Vector3> peoPleList =new Dictionary<int, Vector3>();
+
+    public List<int> xList = new List<int>();
+
+    public List<int> yList = new List<int>();
     // Start is called before the first frame update
     
     public Role(BaseRoleData baseRoleData, Dictionary<int, Vector3> _EquipList, Dictionary<int, Vector3> _peoPleList,double ID)

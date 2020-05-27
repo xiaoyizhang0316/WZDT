@@ -345,28 +345,4 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         
     }
-
-    private void OnGUI()
-    {
-        if (GUILayout.Button("退出游戏",GUILayout.Width(120), GUILayout.Height(50)))
-        {
-            Application.Quit();
-        }
-        if (GUILayout.Button("一键通关", GUILayout.Width(120), GUILayout.Height(50)))
-        {
-            UIManager.My.Panel_Win.SetActive(true);
-        }
-        if (GUILayout.Button("增加行动力", GUILayout.Width(120), GUILayout.Height(50)))
-        {
-            ExecutionManager.My.AddExecution(20f);
-        }
-        if (GUILayout.Button("不会死也不会赢", GUILayout.Width(120), GUILayout.Height(50)))
-        {
-            wudi = !wudi;
-        }
-        if (GUILayout.Button("相机复位", GUILayout.Width(120), GUILayout.Height(50)))
-        {
-            Camera.main.transform.position = cameraPos;
-        }
-    }
 }
