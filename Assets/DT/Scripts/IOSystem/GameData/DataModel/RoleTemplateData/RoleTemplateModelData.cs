@@ -109,7 +109,6 @@ public class RoleTemplateModelData
         tempRoleData.tradeCost = tradeCost;
         tempRoleData.cost = cost;
         tempRoleData.bulletCapacity = bulletCapacity;
-        tempRoleData.tradeRange = 15;
         tempRoleData.xList = xList;
         tempRoleData.yList = yList;
         tempRoleData.SpritePath = SpritePath;

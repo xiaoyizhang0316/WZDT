@@ -59,11 +59,6 @@ public class BaseRoleData
     /// </summary>
     public int bulletCapacity;
 
-    /// <summary>
-    /// 最远交易距离
-    /// </summary>
-    public int tradeRange;
-
     public List<int> xList = new List<int>();
 
     public List<int> yList = new List<int>();
