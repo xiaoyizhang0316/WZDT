@@ -30,7 +30,12 @@ public class MapSign : MonoBehaviour,IDragHandler
     }
     void Start()
     {
-        
+        if (mapType == MapType.Road)
+        {
+            GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            go.transform.position = transform.position;
+            go.transform.SetParent(transform.parent.parent);
+        }
     }
 
     // Update is called once per frame

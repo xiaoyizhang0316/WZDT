@@ -170,7 +170,6 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-      CreatRoleManager.My.popInfo.gameObject.SetActive(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
