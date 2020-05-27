@@ -23,12 +23,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     /// <summary>
     /// 工人库
     /// </summary>
-    public List<WorkerData> workerDatas;
-
-    /// <summary>
-    /// 活动库
-    /// </summary>
-    public List<ActivityData> activityDatas;
+    public List<WorkerData> workerDatas; 
 
     /// <summary>
     /// Buff数据库
@@ -60,6 +55,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             if (r.level == level && roleType.ToString().Equals(r.roleType.ToString()))
                 return r.tempRoleData;
         }
+        print("------------查不到此角色模板!-----------");
         return null;
     }
 
@@ -75,6 +71,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             if (g.ID == id)
                 return g;
         }
+        print("------------查不到此装备!-----------");
         return null;
     }
 
@@ -90,26 +87,9 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             if (w.ID == id)
                 return w;
         }
+        print("------------查不到此工人!-----------");
         return null;
     }
-
-    /// <summary>
-    /// 根据ID获取活动数据
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public ActivityData GetActivityDataById(int id)
-    {
-        foreach (ActivityData a in activityDatas)
-        {
-            if (a.ID == id)
-                return a;
-        }
-        return null;
-    }
-
-
-
 
     /// <summary>
     /// 根据buff ID查找BUFF数据
@@ -123,6 +103,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             if (b.BuffID == id)
                 return b;
         }
+        print("------------查不到此BUFF!-----------");
         return null;
     }
 
@@ -138,7 +119,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             if (c.consumableId == id)
                 return c;
         }
-        print("查不到此消耗品");
+        print("----------查不到此消耗品-------------");
         return null;
     }
 
@@ -156,7 +137,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 return s;
             }
         }
-        print("查不到当前场景配置表！！");
+        print("---------------查不到当前场景配置表！！--------------");
         return null;
     }
 
@@ -174,7 +155,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 return c;
             }
         }
-        print("查不到此消费者类别----------------");
+        print("----------------查不到此消费者类别----------------");
         return null;
     }
 

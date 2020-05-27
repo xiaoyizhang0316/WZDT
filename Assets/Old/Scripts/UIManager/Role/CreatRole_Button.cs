@@ -137,7 +137,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 }
                 if (MapManager.My.CheckLandAvailable(tempXList, tempYList))
                 {
-                    print("true ");
                     role.transform.position = hit[j].transform.position;
                     print("x" + x.ToString() + "y" + y.ToString());
                     print(hit[j].transform.position);

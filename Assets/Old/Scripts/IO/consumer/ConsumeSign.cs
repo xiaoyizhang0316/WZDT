@@ -249,7 +249,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void Move()
     {
-        GetComponent<Animator>().SetFloat("Speed_f",0.5f);
+        GetComponent<Animator>().SetFloat("Speed_f",consumeData.moveSpeed);
         isStart = true;
         isCanSelect = true;
         float time = CalculateTime();

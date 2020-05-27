@@ -14,11 +14,6 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     public TradeSign currentTrade;
 
     /// <summary>
-    /// 选择的交易方式
-    /// </summary>
-    public string selectJYFS;
-
-    /// <summary>
     /// 选择的收支方式
     /// </summary>
     public SZFSType selectSZFS;
@@ -59,12 +54,6 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     public string thirdPartyRole;
 
     /// <summary>
-    /// 技能是否满足释放条件
-    /// </summary>
-    public bool isSkillCanRelease;
-
-
-    /// <summary>
     /// 发起者姓名
     /// </summary>
     public Text startName;
@@ -83,26 +72,6 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     /// 承受者角色图标
     /// </summary>
     public Image endLogo;
-
-    /// <summary>
-    /// 交易成本面板gameobject
-    /// </summary>
-    public GameObject TCGO;
-
-    /// <summary>
-    /// 悬浮提示面板
-    /// </summary>
-    public GameObject popUpPanel;
-
-    /// <summary>
-    /// 发起者信息
-    /// </summary>
-    public GameObject startRoleInfo;
-
-    /// <summary>
-    /// 承受者信息
-    /// </summary>
-    public GameObject endRoleInfo;
 
     /// <summary>
     /// 打开并初始化
@@ -191,10 +160,6 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     /// </summary>
     public void DeleteTradeMenu()
     {
-        if (!TradeManager.My.tradeList.ContainsKey(currentTrade.tradeData.ID))
-        {
-            Destroy(currentTrade.gameObject, 0.1f);
-        }
         Close();
     }
 
@@ -215,61 +180,12 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         transform.localPosition = new Vector3(0f, 0f, 0f);
     }
 
-
     #region 计算交易成本
 
     public void CalculateTCOfTwo(string startRole,string endRole)
     {
         //todo
-   //    Role start = PlayerData.My.GetRoleById(double.Parse(startRole));
-   //    Role end = PlayerData.My.GetRoleById(double.Parse(endRole));
-   //    Role conduct = PlayerData.My.GetRoleById(double.Parse(castRole));
-   //    TradeSkillData data = GameDataMgr.My.GetSkillDataByStartEndConductSkill(start.baseRoleData.roleType, end.baseRoleData.roleType, conduct.baseRoleData.roleType, selectJYFS);
-   //    float resultSearch = 0f;
-   //    float resultBargain = 0f;
-   //    float resultDeliver = 0f;
-   //    float resultRisk = 0f;
-   //    List<float> resultList;
-   //    //外部
-   //    if (PlayerData.My.GetMapRoleById(double.Parse(startRole)).isNpc || PlayerData.My.GetMapRoleById(double.Parse(endRole)).isNpc)
-   //    {
-   //        resultSearch += data.searchOutPerA * start.search + data.searchOutPerB * end.search;
-   //        resultBargain += data.bargainOutPerA * start.bargain + data.bargainOutPerB * end.bargain;
-   //        if (data.conductRole == start.baseRoleData.roleType)
-   //        {
-   //            resultDeliver += data.deliverOutPerA * start.delivery + data.deliverOutPerB * end.delivery;
-   //        }
-   //        else
-   //        {
-   //            resultDeliver += data.deliverOutPerA * end.delivery + data.deliverOutPerB * start.delivery;
-   //        }
-   //        resultRisk = data.riskOutPerA * start.risk + data.riskOutPerB * end.risk;
-   //        resultList = GetDealConfigAdd(false);
-   //    }
-   //    //内部
-   //    else
-   //    {
-   //        resultSearch += (data.searchInPerA * start.search + data.searchInPerB * end.search) * data.searchInAdd;
-   //        resultBargain += (data.bargainInPerA * start.bargain + data.bargainInPerB * end.bargain) * data.bargainInAdd;
-   //        if (data.conductRole == start.baseRoleData.roleType)
-   //        {
-   //            resultDeliver += (data.deliverInPerA * start.delivery + data.deliverInPerB * end.delivery) * data.deliverInAdd;
-   //        }
-   //        else
-   //        {
-   //            resultDeliver += (data.deliverInPerA * end.delivery + data.deliverInPerB * start.delivery) * data.deliverInAdd;
-   //        }
-   //        resultRisk = data.riskInPerA * start.risk + data.riskInPerB * end.risk;
-   //        resultList = GetDealConfigAdd(true);
-   //    }
-   //    float search = resultSearch * resultList[0];
-   //    float bargain = resultBargain * resultList[1];
-   //    float deliver = resultDeliver * resultList[2];
-   //    float risk = resultRisk * resultList[3];
-   //    UpdateTCInfo(search, bargain, deliver, risk);
     }
-
-   
 
     #endregion
 
@@ -282,9 +198,6 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     // Update is called once per frame
     void Update()
     {
-        if (currentTrade != null)
-        {
-            transform.Find("Ensure").GetComponent<Button>().interactable = isSkillCanRelease;
-        }
+
     }
 }

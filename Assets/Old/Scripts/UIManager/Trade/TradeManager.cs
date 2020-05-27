@@ -19,11 +19,6 @@ public class TradeManager : MonoSingleton<TradeManager>
     public List<TradeIcon> tradeIcons;
 
     /// <summary>
-    /// 所有的交易线列表
-    /// </summary>
-    public List<DrawLine> tradeLines;
-
-    /// <summary>
     /// 删除指定ID的交易
     /// </summary>
     /// <param name="ID"></param>
