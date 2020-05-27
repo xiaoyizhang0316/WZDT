@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8565220036788887402}
   - component: {fileID: 839442225}
   - component: {fileID: 839442226}
-  - component: {fileID: 839442227}
   - component: {fileID: 839442228}
   m_Layer: 0
   m_Name: DontDestroyOnLoad
@@ -49,9 +48,6 @@ MonoBehaviour:
   roleTemplateModelDatas: []
   gearDatas: []
   workerDatas: []
-  activityDatas: []
-  skillDatas: []
-  tradeSkillDatas: []
   buffDatas: []
 --- !u!114 &839442226
 MonoBehaviour:
@@ -65,12 +61,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f643b48c2e56d47239fee66e92785940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tradeSkillRawData:
-    tradeSkillSigns: []
   buffRawData:
     buffSigns: []
-  skillRawData:
-    skillSigns: []
   consumableRawData:
     consumableSigns: []
   workerRawData:
@@ -79,25 +71,6 @@ MonoBehaviour:
     roleTemplateModelItems: []
   consumerTypeRawData:
     consumerTypeSigns: []
---- !u!114 &839442227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 531665719386827218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11664ac576e8a48c4a6a1ece38e7b486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fix: []
-  rest: []
-  divide: []
-  free: []
-  noFree: []
-  moneyFirst: []
-  moneyLast: []
 --- !u!114 &839442228
 MonoBehaviour:
   m_ObjectHideFlags: 0

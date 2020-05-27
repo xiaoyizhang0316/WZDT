@@ -283,8 +283,8 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// </summary>
     public void Reset()
     {
-        playerGears.Clear();
-        playerWorkers.Clear();
+        //playerGears.Clear();
+        //playerWorkers.Clear();
         RoleData.Clear();
         RoleManager.Clear();
         MapRole.Clear();

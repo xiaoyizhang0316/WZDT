@@ -7,8 +7,6 @@ public class EquipListManager : MonoSingleton<EquipListManager>
 {
     public  List<EquipSign> _signs= new List<EquipSign>();
 
-
-
     /// <summary>
     /// 初始化，从角色物品栏中赋值
     /// </summary>
@@ -16,9 +14,8 @@ public class EquipListManager : MonoSingleton<EquipListManager>
     {
         foreach (PlayerGear p in PlayerData.My.playerGears)
         {
-        
-            GameObject go = Instantiate(CreatRoleManager.My.equipPrb, transform.Find("Viewport/Content").position, transform.Find("Viewport/Content").rotation, transform.Find("Viewport/Content"));
-         
+            GameObject go = Instantiate(CreatRoleManager.My.equipPrb, transform.Find("Viewport/Content").position,
+                transform.Find("Viewport/Content").rotation, transform.Find("Viewport/Content"));
             go.transform.GetComponent<EquipSign>().Init(p.GearId, p.isEquiped);
         }
         foreach (EquipSign e in _signs)
