@@ -86,8 +86,9 @@ public class ConsumeSign : MonoBehaviour
     /// <param name="targetRole"></param>
     public void InitAndMove()
     {
-        float waitTime = UnityEngine.Random.Range(1f, 4f);
-        Invoke("Move", waitTime);
+        //float waitTime = UnityEngine.Random.Range(0f, 0.5f);
+        //Invoke("Move", waitTime);
+        Move();
     }
 
     /// <summary>

@@ -89,16 +89,22 @@ public class Building : MonoBehaviour
         }
         else
         {
-            foreach (WaveConfig w in waveConfigs[waveNumber])
+            StartCoroutine(SpawnWaveConsumer(waveNumber));
+        }
+    }
+
+    public IEnumerator SpawnWaveConsumer(int waveNumber)
+    {
+        foreach (WaveConfig w in waveConfigs[waveNumber])
+        {
+            for (int i = 0; i < w.num; i++)
             {
-                for (int i = 0; i < w.num; i++)
-                {
-                    string path = "Prefabs/Consumer/" + w.consumerType.ToString();
-                    GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
-                    go.GetComponent<ConsumeSign>().Init(consumerPathList);
-                    go.transform.position = transform.position;
-                    go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
-                }
+                string path = "Prefabs/Consumer/" + w.consumerType.ToString();
+                GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+                go.GetComponent<ConsumeSign>().Init(consumerPathList);
+                go.transform.position = transform.position;
+                go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+                yield return new WaitForSeconds(1f);
             }
         }
     }

@@ -17,6 +17,7 @@ public class MapManager : MonoSingleton<MapManager>
 
     private Vector3 high = new Vector3(0f, 0.6f, 0f);
 
+    public bool generatePath;
     // Start is called before the first frame update
     void Start()
     {
