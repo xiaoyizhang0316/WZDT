@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 using System.Linq;
 using static GameEnum;
-using static JYFS;
 
 [Serializable]
 public class BaseBuff
@@ -485,13 +484,13 @@ public class BaseBuff
     }
     #endregion
 
-    public TradeRoleAttributeChange GetRoleAttributeChange()
-    {
-        TradeRoleAttributeChange tradeRoleAttribute = new TradeRoleAttributeChange();
-        foreach (string str in buffData.OnBuffAdd)
-        {
-            CheckRoleNumberNoChange(str);
-        }
-        return tradeRoleAttribute;
-    }
+    //public TradeRoleAttributeChange GetRoleAttributeChange()
+    //{
+    //    TradeRoleAttributeChange tradeRoleAttribute = new TradeRoleAttributeChange();
+    //    foreach (string str in buffData.OnBuffAdd)
+    //    {
+    //        CheckRoleNumberNoChange(str);
+    //    }
+    //    return tradeRoleAttribute;
+    //}
 }

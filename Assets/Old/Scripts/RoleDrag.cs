@@ -28,21 +28,6 @@ public class RoleDrag : MonoBehaviour
     }
 
     /// <summary>
-    /// 检测发起者和承受者交易距离
-    /// </summary>
-    /// <returns></returns>
-    public bool CheckTradeDistance()
-    {
-        BaseMapRole startRole = PlayerData.My.GetMapRoleById(UIManager.My.startRole.ID);
-        BaseMapRole endRole = PlayerData.My.GetMapRoleById(UIManager.My.endRole.ID);
-        int distance = Mathf.Max(startRole.baseRoleData.baseRoleData.tradeRange, endRole.baseRoleData.baseRoleData.tradeRange);
-        if (Vector3.Distance(startRole.transform.position, endRole.transform.position) > distance)
-            return false;
-        else
-            return true;
-    }
-
-    /// <summary>
     /// 检测发起者和承受者技能类型
     /// </summary>
     /// <returns></returns>
@@ -109,24 +94,24 @@ public class RoleDrag : MonoBehaviour
             return;
         }
 
-    //  if (UIManager.My.isSetTrade)
-    //  {
-    //      UIManager.My.endRole = PlayerData.My.GetRoleById(Double.Parse(Role.transform.name));
-    //      if (UIManager.My.endRole.ID != UIManager.My.startRole.ID)
-    //      {
-    //          if (CheckTradeDistance() && CheckStartAndEnd() && CheckNpcActive())
-    //          {
-    //              //UIManager.My.Panel_CreateTrade.SetActive(true);
-    //              UIManager.My.InitCreateTradePanel();
-    //          }
-    //      }
-    //      UIManager.My.isSetTrade = false;
-    //  }
-    //  else
-    //  {
-            
-             //  NewCanvasUI.My.UpdateUIPosition(Role.transform);
-   //    }
+        //if (UIManager.My.isSetTrade)
+        //{
+        //    UIManager.My.endRole = PlayerData.My.GetRoleById(Double.Parse(Role.transform.name));
+        //    if (UIManager.My.endRole.ID != UIManager.My.startRole.ID)
+        //    {
+        //        if (CheckStartAndEnd() && CheckNpcActive())
+        //        {
+        //            //UIManager.My.Panel_CreateTrade.SetActive(true);
+        //            UIManager.My.InitCreateTradePanel();
+        //        }
+        //    }
+        //    UIManager.My.isSetTrade = false;
+        //}
+        //  else
+        //  {
+
+        //  NewCanvasUI.My.UpdateUIPosition(Role.transform);
+        //    }
         //UIManager.My.UpdateUIPosition(Role.transform);
     }
 

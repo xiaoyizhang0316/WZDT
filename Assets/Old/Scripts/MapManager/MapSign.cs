@@ -21,14 +21,22 @@ public class MapSign : MonoBehaviour,IDragHandler
     private void Awake()
     {
          MapManager.My._mapSigns.Add(this);
+         isCanPlace = GetComponent<MeshRenderer>().enabled && isCanPlace;
     }
+
     public void OnDrag(PointerEventData eventData)
     {
   
     }
     void Start()
     {
-        
+        if (mapType == MapType.Road && MapManager.My.generatePath)
+        {
+            GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            go.transform.position = transform.position + new Vector3(0f,0.15f,0f);
+            go.transform.SetParent(transform.parent.parent);
+            go.GetComponent<MeshCollider>().enabled = false;
+        }
     }
 
     // Update is called once per frame

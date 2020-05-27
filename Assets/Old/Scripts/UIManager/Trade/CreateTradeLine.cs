@@ -34,23 +34,6 @@ public class CreateTradeLine : MonoBehaviour
         lineGo.GetComponent<MeshRenderer>().material = material;
     }
 
-    /// <summary>
-    /// 检测两个角色的距离是否过远
-    /// </summary>
-    public void CheckDistance()
-    {
-        BaseMapRole start = PlayerData.My.GetMapRoleById(UIManager.My.startRole.ID);
-        int distance = Mathf.Max(targetRole.baseRoleData.baseRoleData.tradeRange,start.baseRoleData.baseRoleData.tradeRange);
-        if (Vector3.Distance(start.transform.position,targetRole.transform.position) <= distance)
-        {
-            lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
-        }
-        else
-        {
-            lineGo.GetComponent<MeshRenderer>().material.color = Color.red;
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -76,7 +59,6 @@ public class CreateTradeLine : MonoBehaviour
                     if (hit[i].transform.tag.Equals("Role"))
                     {
                         targetRole = hit[i].transform.GetComponentInParent<BaseMapRole>();
-                        CheckDistance();
                     }
                 }
                 Vector3 rightPosition = (startTarget.gameObject.transform.position + Target) / 2;

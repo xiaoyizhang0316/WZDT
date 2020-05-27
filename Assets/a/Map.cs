@@ -27,7 +27,6 @@ public class Map : MonoBehaviour
             for (int i = 0; i < 40; i++)
             {
                 GameObject game= Instantiate(map);
-
                 game.transform.position += new Vector3(i*1.7f,0,j* Mathf.Sin(1f / 3f * Mathf.PI) * 1.7f) +ad;
                 game.GetComponent<MapSign>().x = i + offset - j / 2;
                 game.GetComponent<MapSign>().y = j;

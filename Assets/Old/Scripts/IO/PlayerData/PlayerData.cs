@@ -260,38 +260,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             }
         }
     }
-
-    /// <summary>
-    /// 随机解锁一个技能
-    /// </summary>
-    /// <returns></returns>
-    public TradeSkillData UnlockRandomSkill()
-    {
-        List<int> unlockList = new List<int>();
-        foreach (var v in tradeSkillLock)
-        {
-            TradeSkillData data = GameDataMgr.My.GetTradeSkillDataByID(v.Key);
-            if (IsRoleTypeInMap(data.startRole) && IsRoleTypeInMap(data.endRole))
-            {
-                if (v.Value)
-                {
-                    unlockList.Add(v.Key);
-                }
-            }
-        }
-        if (unlockList.Count == 0)
-            return null;
-        else
-        {
-            int num = Random.Range(0, unlockList.Count);
-            if (ExecutionManager.My.SubExecution(ExecutionManager.My.unlockSkills))
-            {
-                tradeSkillLock[unlockList[num]] = false;
-                return GameDataMgr.My.GetTradeSkillDataByID(unlockList[num]);
-            }
-        }
-        return null;
-    }
  
     /// <summary>
     /// 判断角色种类是否在地图中
@@ -308,22 +276,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
                 return true;
         }
         return false;
-    }
-
-    /// <summary>
-    /// 解锁所有指定技能ID的交易
-    /// </summary>
-    /// <param name="skillId"></param>
-    public void UnLockSelectTradeSkill(int skillId)
-    {
-        List<int> keyList = tradeSkillLock.Keys.ToList();
-        for (int i = 0; i < keyList.Count; i++)
-        {
-            if (GameDataMgr.My.GetTradeSkillDataByID(keyList[i]).skillId == skillId)
-            {
-                tradeSkillLock[keyList[i]] = false;
-            }
-        }
     }
 
     /// <summary>

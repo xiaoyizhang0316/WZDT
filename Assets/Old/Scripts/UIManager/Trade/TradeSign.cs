@@ -14,11 +14,6 @@ public class TradeSign : MonoBehaviour
     public TradeData tradeData;
 
     /// <summary>
-    /// 是否是第一次修改
-    /// </summary>
-    public bool isFirstSelect;
-
-    /// <summary>
     /// 交易图标Gameobject
     /// </summary>
     public GameObject tradeIconGo;
@@ -56,7 +51,6 @@ public class TradeSign : MonoBehaviour
         tradeData.startRole = start;
         tradeData.endRole = end;
         tradeData.isFree = false;
-        isFirstSelect = true;
         tradeData.castRole = start;
         tradeData.targetRole = end;
         tradeData.selectSZFS = SZFSType.固定;

@@ -141,13 +141,4 @@ public class ExecutionManager : MonoSingleton<ExecutionManager>
 
         fill = executionBar.DOFillAmount(executionValue, time).SetEase(Ease.Linear).OnComplete(() => { }).SetUpdate(true);
     }
-
-    public void ExchangeSkill(TradeSkillData skilldata)
-    {
-        SkillData data = GameDataMgr.My.GetSkillDataByID(skilldata.skillId);
-        string str = "解锁了" + skilldata.startRole.ToString() + "和" + skilldata.endRole.ToString() + "之间的" + data.skillName + "技能";
-        unlockText.text = str;
-    }
-
-     
 }

@@ -4,7 +4,6 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using static CreateTradeManager;
-using static JYFS;
 
 public class RoleDataUI : MonoBehaviour
 {
@@ -66,53 +65,50 @@ public class RoleDataUI : MonoBehaviour
     public Image qualityAdd;
 
 
-    public void Init(TradeRoleAttribute original,TradeRoleAttributeChange change)
-    {
-        InitOriginal(original);
-        InitChange(change);
-        InitTC(original, change);
-    }
+    //public void Init(TradeRoleAttribute original)
+    //{
 
-    public void InitOriginal(TradeRoleAttribute original)
-    {
-        capacity.GetComponent<RectTransform>().sizeDelta = new Vector2(original.capacity / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        brand.GetComponent<RectTransform>().sizeDelta = new Vector2(original.brand / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        quality.GetComponent<RectTransform>().sizeDelta = new Vector2(original.quality / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        efficiency.GetComponent<RectTransform>().sizeDelta = new Vector2(original.effeciency / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        capacityAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        qualityAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        brandAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        efficiencyAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        capacityAdd.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0f); 
-        qualityAdd.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0f);
-        brandAdd.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0f);
-        efficiencyAdd.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0f);
-    }
+    //}
 
-    public void InitChange(TradeRoleAttributeChange change)
-    {
-        capacityAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.capacityAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        qualityAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.qualityAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        brandAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.brandAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        efficiencyAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.efficiencyAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
-        if (change.capacityAdd > 0)
-            capacityAdd.transform.DOLocalRotate(new Vector3(0f,-180f,0f), 0f);
-        if (change.qualityAdd > 0)
-            qualityAdd.transform.DOLocalRotate(new Vector3(0f, -180f, 0f), 0f);
-        if (change.brandAdd > 0)
-            brandAdd.transform.DOLocalRotate(new Vector3(0f, -180f, 0f), 0f);
-        if (change.efficiencyAdd > 0)
-            efficiencyAdd.transform.DOLocalRotate(new Vector3(0f, -180f, 0f), 0f);
-    }
+    //public void InitOriginal(TradeRoleAttribute original)
+    //{
+    //    capacity.GetComponent<RectTransform>().sizeDelta = new Vector2(original.capacity / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    brand.GetComponent<RectTransform>().sizeDelta = new Vector2(original.brand / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    quality.GetComponent<RectTransform>().sizeDelta = new Vector2(original.quality / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    efficiency.GetComponent<RectTransform>().sizeDelta = new Vector2(original.effeciency / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    capacityAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    qualityAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    brandAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    efficiencyAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    capacityAdd.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0f); 
+    //    qualityAdd.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0f);
+    //    brandAdd.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0f);
+    //    efficiencyAdd.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 0f);
+    //}
 
-    public void InitTC(TradeRoleAttribute original, TradeRoleAttributeChange change)
-    {
-        risk.text = original.risk.ToString() + GetTCNumberString(change.riskAdd);
-        search.text = original.search.ToString() + GetTCNumberString(change.searchAdd);
-        bargain.text = original.bargain.ToString() + GetTCNumberString(change.bargainAdd);
-        delivery.text = original.delivery.ToString() + GetTCNumberString(change.deliveryAdd);
-        
-    }
+    //public void InitChange(TradeRoleAttributeChange change)
+    //{
+    //    capacityAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.capacityAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    qualityAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.qualityAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    brandAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.brandAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    efficiencyAdd.GetComponent<RectTransform>().sizeDelta = new Vector2(change.efficiencyAdd / 150f * 301f, capacity.GetComponent<RectTransform>().sizeDelta.y);
+    //    if (change.capacityAdd > 0)
+    //        capacityAdd.transform.DOLocalRotate(new Vector3(0f,-180f,0f), 0f);
+    //    if (change.qualityAdd > 0)
+    //        qualityAdd.transform.DOLocalRotate(new Vector3(0f, -180f, 0f), 0f);
+    //    if (change.brandAdd > 0)
+    //        brandAdd.transform.DOLocalRotate(new Vector3(0f, -180f, 0f), 0f);
+    //    if (change.efficiencyAdd > 0)
+    //        efficiencyAdd.transform.DOLocalRotate(new Vector3(0f, -180f, 0f), 0f);
+    //}
+
+    //public void InitTC(TradeRoleAttribute original, TradeRoleAttributeChange change)
+    //{
+    //    risk.text = original.risk.ToString() + GetTCNumberString(change.riskAdd);
+    //    search.text = original.search.ToString() + GetTCNumberString(change.searchAdd);
+    //    bargain.text = original.bargain.ToString() + GetTCNumberString(change.bargainAdd);
+    //    delivery.text = original.delivery.ToString() + GetTCNumberString(change.deliveryAdd);
+    //}
 
     public string GetTCNumberString(int number)
     {
