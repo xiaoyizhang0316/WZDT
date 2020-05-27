@@ -57,8 +57,6 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
     }
 
-   
-
     private void OnDestroy()
     {
         

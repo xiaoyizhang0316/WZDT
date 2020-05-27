@@ -95,10 +95,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     }
 
-
-
-
-
     public void OnBeginDrag(PointerEventData eventData)
     {
         role = Instantiate(RolePrb, NewCanvasUI.My.RoleTF.transform);
@@ -149,6 +145,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     RoleListManager.My.UpdateRoleList();
                     isSuccess = true;
                     GetComponent<Image>().raycastTarget = false;
+                    MapManager.My.SetLand(tempXList, tempYList);
                 }
                 else
                 {
