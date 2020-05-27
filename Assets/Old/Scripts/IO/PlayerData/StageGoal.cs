@@ -57,11 +57,19 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Text playerSatisfyText;
 
-    public Text playerHealthText;
+    public Text playerTechText;
+
+    public Image playerHealthBar;
+
+    public Text stageWaveText;
 
     public List<StageEnemyData> enemyDatas;
 
     public WaveCount waveCountItem;
+
+    public int playerMaxHealth;
+
+
 
     /// <summary>
     /// 玩家消耗金币
@@ -114,6 +122,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             return false;
         }
         playerTechPoint -= num;
+        SetInfo();
         return true;
     }
 
@@ -124,6 +133,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void GetTechPoint(int num)
     {
         playerTechPoint += num;
+        SetInfo();
     }
 
     /// <summary>
@@ -162,7 +172,10 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void SetInfo()
     {
-
+        playerHealthBar.fillAmount = playerHealth / (float)playerMaxHealth;
+        playerGoldText.text = playerGold.ToString();
+        playerSatisfyText.text = playerSatisfy.ToString();
+        playerTechText.text = playerTechPoint.ToString();   
     }
 
     /// <summary>
@@ -223,6 +236,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
+        stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
         waveCountItem.CountDown(waitTimeList[currentWave - 1],currentWave - 1);
         waveTween = transform.DOScale(1f, waitTimeList[currentWave - 1]).OnComplete(() =>
         {
@@ -234,6 +248,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 BuildingManager.My.WaveSpawnConsumer(currentWave);
                 currentWave++;
+                stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString(); 
                 WaveCount();
             }
         });
@@ -244,6 +259,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void InitStage()
     {
+        playerHealthBar = transform.parent.Find("Blood/PlayerHealthBar").GetComponent<Image>();
+        playerGoldText = transform.parent.Find("UserInfo/Image_money/PlayerMoney").GetComponent<Text>();
+        playerSatisfyText = transform.parent.Find("UserInfo/PlayerScore/PlayerScoreText").GetComponent<Text>();
+        playerTechText = transform.parent.Find("UserInfo/Image_money/PlayerTech").GetComponent<Text>();
+        stageWaveText = transform.parent.Find("UserInfo/Image_level/StageLevel").GetComponent<Text>();
         InitStageData();
         SetInfo();
         WaveCount();
@@ -260,6 +280,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerGold = data.startPlayerGold;
         playerSatisfy = 0;
         playerHealth = data.startPlayerHealth;
+        playerMaxHealth = playerHealth;
         maxWaveNumber = data.maxWaveNumber;
         playerTechPoint = 1000;
         foreach (int i in data.waveWaitTime)

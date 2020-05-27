@@ -8,11 +8,31 @@ public class WaveCount : MonoBehaviour
 {
     public Text waveNumber;
 
+    private Tweener twe;
+
+    private int countDownNumber;
+
     public void CountDown(int num,int waveNum)
     {
+        if (twe != null)
+            twe.Kill();
+        countDownNumber = num;
+        CountDownNumber();
         GetComponent<Image>().fillAmount = 0;
-        waveNumber.text = waveNum.ToString();
         GetComponent<Image>().DOFillAmount(1f, num).SetEase(Ease.Linear);
+    }
+
+    public void CountDownNumber()
+    {
+        if (countDownNumber == 0)
+            return;
+        waveNumber.text = countDownNumber.ToString();
+        twe = transform.DOScale(1f, 1f).OnComplete(() =>
+        {
+            countDownNumber--;
+            waveNumber.text = countDownNumber.ToString();
+            CountDownNumber();
+        });
     }
 
     private void Awake()
