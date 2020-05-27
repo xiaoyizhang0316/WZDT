@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 736591613450414055}
   - component: {fileID: 6414374090839530270}
   - component: {fileID: 3986697257790081157}
-  - component: {fileID: 7903973910487385345}
+  - component: {fileID: 1385571540245542087}
   m_Layer: 0
   m_Name: Road
   m_TagString: MapLand
@@ -98,17 +98,16 @@ MonoBehaviour:
   y: 0
   height: 0
   isCanPlace: 0
---- !u!64 &7903973910487385345
-MeshCollider:
+--- !u!65 &1385571540245542087
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4699709949400821698}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -615660730006235317, guid: 0afa07b5a2ff4d849bf78acc8ddb4c70, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.015115164, y: 0.018367125, z: 0.0052504535}
+  m_Center: {x: 0.000050373674, y: 0.00030088128, z: 0.0004888707}

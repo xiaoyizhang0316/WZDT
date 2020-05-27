@@ -87,7 +87,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             {
                 if (hit[i].transform.tag.Equals("MapLand"))
                 {
-                    role.transform.position = hit[i].transform.position + new Vector3(0f,5f,0f);
+                    role.transform.position = hit[i].transform.position + new Vector3(0f,0f,0f);
                 }
             }
         }
