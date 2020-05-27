@@ -24,6 +24,12 @@ public class MapManager : MonoSingleton<MapManager>
         
     }
 
+    /// <summary>
+    /// 检测地块是否能放置建筑
+    /// </summary>
+    /// <param name="xList"></param>
+    /// <param name="yList"></param>
+    /// <returns></returns>
     public bool CheckLandAvailable(List<int> xList,List<int> yList)
     {
         int height = 100000;
@@ -57,6 +63,39 @@ public class MapManager : MonoSingleton<MapManager>
         return null;
     }
 
+    /// <summary>
+    /// 设置地块占用
+    /// </summary>
+    /// <param name="xList"></param>
+    /// <param name="yList"></param>
+    public void SetLand(List<int> xList, List<int> yList)
+    {
+        for (int i = 0; i < xList.Count; i++)
+        {
+            MapSign temp = GetMapSignByXY(xList[i], yList[i]);
+            if (temp != null)
+            {
+                temp.isCanPlace = false;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 解除地块占用
+    /// </summary>
+    /// <param name="xList"></param>
+    /// <param name="yList"></param>
+    public void ReleaseLand(List<int> xList, List<int> yList)
+    {
+        for (int i = 0; i < xList.Count; i++)
+        {
+            MapSign temp = GetMapSignByXY(xList[i], yList[i]);
+            if (temp != null)
+            {
+                temp.isCanPlace = true;
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {

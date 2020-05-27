@@ -45,11 +45,6 @@ public class Building : MonoBehaviour
                     throw new Exception("building Id over limit ");
             }
         }
-        //foreach (StageEnemyData s in datas)
-        //{
-        //    print(s.waveNumber + datas.IndexOf(s).ToString());
-            
-        //}
     }
 
     /// <summary>

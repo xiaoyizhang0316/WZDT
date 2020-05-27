@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
-
+using UnityEngine.Networking;
 
 public class OriginalData : MonoSingleton<OriginalData>
 {
-    public TradeSkillsData tradeSkillRawData;
-
     public BuffsData buffRawData;
-
-    public SkillsData skillRawData;
 
     public ConsumablesData consumableRawData;
 
@@ -28,55 +24,11 @@ public class OriginalData : MonoSingleton<OriginalData>
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        StartCoroutine(ReadSkillJson());
-        StartCoroutine(ReadTradeSkillJson());
         StartCoroutine(ReadBuffJson());
         StartCoroutine(ReadConsumableJson());
         StartCoroutine(ReadStageJson());
         StartCoroutine(ReadRoleTemplateJson());
         StartCoroutine(ReadConsumerTypeJson());
-    }
-
-    IEnumerator ReadTradeSkillJson()
-    {
-        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/TradeSkillData.json");
-        //Debug.Log(@"file://" + Application.streamingAssetsPath + @"/Data/TradeSkillData.json");
-        yield return www;
-        if (www.isDone)
-        {
-            if (www.error != null)
-            {
-                Debug.Log(www.error);
-                yield return null;
-            }
-            else
-            {
-                string json = www.text.ToString();
-                tradeSkillRawData = JsonUtility.FromJson<TradeSkillsData>(json);
-                GameDataMgr.My.ParseTradeSkillData(tradeSkillRawData);
-            }
-        }
-    }
-
-    IEnumerator ReadSkillJson()
-    {
-        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/SkillData.json");
-        //Debug.Log(@"file://" + Application.streamingAssetsPath + @"/Data/SkillData.json");
-        yield return www;
-        if (www.isDone)
-        {
-            if (www.error != null)
-            {
-                Debug.Log(www.error);
-                yield return null;
-            }
-            else
-            {
-                string json = www.text.ToString();
-                skillRawData = JsonUtility.FromJson<SkillsData>(json);
-                GameDataMgr.My.ParseSkillData(skillRawData);
-            }
-        }
     }
 
     IEnumerator ReadBuffJson()

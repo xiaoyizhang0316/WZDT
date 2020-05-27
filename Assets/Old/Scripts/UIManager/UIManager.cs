@@ -292,29 +292,6 @@ public class UIManager : MonoSingleton<UIManager>
 
     }
 
-    /// <summary>
-    /// 兑换技能
-    /// </summary>
-    public void Exchangeskill()
-    {
-        int number = UnityEngine.Random.Range(0,2);
-        if (number == 0)
-        {
-            TradeSkillData tradeSkilldata = PlayerData.My.UnlockRandomSkill();
-            if (tradeSkilldata != null)
-            {
-                ShowExecutionPanel();
-                ExecutionManager.My.ExchangeSkill(tradeSkilldata);
-            }
-            else
-            {
-                Debug.Log("当前技能为空");
-            }
-        }
-     
-
-    }
-
     public void Load2Scene()
     {
         //GameMain.My.LoadScene("FTE_2");

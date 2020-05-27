@@ -31,16 +31,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     public List<ActivityData> activityDatas;
 
     /// <summary>
-    /// 技能数据库
-    /// </summary>
-    public List<SkillData> skillDatas;
-
-    /// <summary>
-    /// 交易技能解锁库
-    /// </summary>
-    public List<TradeSkillData> tradeSkillDatas;
-
-    /// <summary>
     /// Buff数据库
     /// </summary>
     public List<BuffData> buffDatas;
@@ -118,70 +108,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         return null;
     }
 
-    /// <summary>
-    /// 根据技能ID查找技能
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public SkillData GetSkillDataByID(int id)
-    {
-        foreach (SkillData s in skillDatas)
-        {
-            if (s.skillID == id)
-                return s;
-        }
-        return null;
-    }
 
-    /// <summary>
-    /// 根据技能名称查找技能
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public SkillData GetSkillDataByName(string name)
-    {
-        foreach (SkillData s in skillDatas)
-        {
-            if (s.skillName.Equals(name))
-                return s;
-        }
-        return null;
-    }
 
-    /// <summary>
-    /// 根据发起方，承受方和技能名称查找技能数据
-    /// </summary>
-    /// <param name="start"></param>
-    /// <param name="end"></param>
-    /// <param name="skillName"></param>
-    /// <returns></returns>
-    public TradeSkillData GetSkillDataByStartEndConductSkill(RoleType start, RoleType end, RoleType cast, string skillName)
-    {
-
-        SkillData data = GetSkillDataByName(skillName);
-        foreach (TradeSkillData s in tradeSkillDatas)
-        {
-            if (s.startRole == start && s.endRole == end && s.conductRole == cast && data.skillID == s.skillId)
-                return s;
-        }
-        print("找不到技能数据--------------");
-        return null;
-    }
-
-    /// <summary>
-    /// 根据技能ID查找技能数据
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public TradeSkillData GetTradeSkillDataByID(int id)
-    {
-        foreach (TradeSkillData s in tradeSkillDatas)
-        {
-            if (s.ID == id)
-                return s;
-        }
-        return null;
-    }
 
     /// <summary>
     /// 根据buff ID查找BUFF数据
@@ -248,109 +176,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         }
         print("查不到此消费者类别----------------");
         return null;
-    }
-
-    /// <summary>
-    /// 将技能源数据转成可用数据
-    /// </summary>
-    /// <param name="rawData"></param>
-    public void ParseSkillData(SkillsData rawData)
-    {
-        skillDatas = new List<SkillData>();
-        foreach (SkillItem s in rawData.skillSigns)
-        {
-            SkillData skillData = new SkillData();
-            skillData.skillID = int.Parse(s.skillID);
-            skillData.skillName = s.skillName;
-            skillData.skillDesc = s.skillDesc;
-            skillData.skillNeed = s.skillNeed;
-            skillData.skillType = (RoleSkillType)Enum.Parse(typeof(RoleSkillType), s.skillType);
-            skillData.skillLastType = (SkillLastingType)Enum.Parse(typeof(SkillLastingType), s.skillLastType);
-            skillData.cost = int.Parse(s.cost);
-            string[] selfBuff = s.selfBuffList.Split(',');
-            string[] targetBuff = s.targetBuffList.Split(',');
-            string[] SZFS = s.supportSZFS.Split(',');
-            string[] CashFlow = s.supportCashFlow.Split(',');
-            string[] selfSkill = s.selfSkillUnlock.Split(',');
-            string[] targetSkill = s.targetSkillUnlock.Split(',');
-            skillData.selfBuffList = new List<int>();
-            skillData.targetBuffList = new List<int>();
-            skillData.supportSZFS = new List<SZFSType>();
-            skillData.supportCashFlow = new List<CashFlowType>();
-            skillData.selfSkillUnlock = new List<int>();
-            skillData.targetSkillUnlock = new List<int>();
-            foreach (string str in selfBuff)
-            {
-                skillData.selfBuffList.Add(int.Parse(str));
-            }
-            foreach (string str in targetBuff)
-            {
-                skillData.targetBuffList.Add(int.Parse(str));
-            }
-            foreach (string str in SZFS)
-            {
-                skillData.supportSZFS.Add((SZFSType)Enum.Parse(typeof(SZFSType), str));
-            }
-            foreach (string str in CashFlow)
-            {
-                skillData.supportCashFlow.Add((CashFlowType)Enum.Parse(typeof(CashFlowType), str));
-            }
-            foreach (string str in selfSkill)
-            {
-                skillData.selfSkillUnlock.Add(int.Parse(str));
-            }
-            foreach (string str in targetSkill)
-            {
-                skillData.targetSkillUnlock.Add(int.Parse(str));
-            }
-            skillData.supportFree = bool.Parse(s.supportFree);
-            skillData.supportThird = bool.Parse(s.supportThird);
-            skillData.skillContribution = int.Parse(s.skillContribution);
-            skillData.baseDivide = float.Parse(s.baseDivide);
-            skillDatas.Add(skillData);
-        }
-    }
-
-    /// <summary>
-    /// 将交易技能源数据转成可用数据
-    /// </summary>
-    /// <param name="rawData"></param>
-    public void ParseTradeSkillData(TradeSkillsData rawData)
-    {
-        tradeSkillDatas = new List<TradeSkillData>();
-        foreach (TradeSkillItem s in rawData.tradeSkillSigns)
-        {
-            TradeSkillData tradeSkillData = new TradeSkillData();
-            tradeSkillData.ID = int.Parse(s.ID);
-            tradeSkillData.startRole = (RoleType)Enum.Parse(typeof(RoleType), s.startRole);
-            tradeSkillData.endRole = (RoleType)Enum.Parse(typeof(RoleType), s.endRole);
-            tradeSkillData.conductRole = (RoleType)Enum.Parse(typeof(RoleType), s.conductRole);
-            tradeSkillData.anotherRole = (RoleType)Enum.Parse(typeof(RoleType), s.anotherRole);
-            tradeSkillData.skillId = int.Parse(s.skillId);
-            tradeSkillData.isLock = bool.Parse(s.isLock);
-            tradeSkillData.searchInPerA = float.Parse(s.searchIn.Split(',')[0]);
-            tradeSkillData.searchInPerB = float.Parse(s.searchIn.Split(',')[1]);
-            tradeSkillData.searchInAdd = float.Parse(s.searchIn.Split(',')[2]);
-            tradeSkillData.bargainInPerA = float.Parse(s.bargainIn.Split(',')[0]);
-            tradeSkillData.bargainInPerB = float.Parse(s.bargainIn.Split(',')[1]);
-            tradeSkillData.bargainInAdd = float.Parse(s.bargainIn.Split(',')[2]);
-            tradeSkillData.deliverInPerA = float.Parse(s.deliverIn.Split(',')[0]);
-            tradeSkillData.deliverInPerB = float.Parse(s.deliverIn.Split(',')[1]);
-            tradeSkillData.deliverInAdd = float.Parse(s.deliverIn.Split(',')[2]);
-            tradeSkillData.riskInPerA = float.Parse(s.riskIn.Split(',')[0]);
-            tradeSkillData.riskInPerB = float.Parse(s.riskIn.Split(',')[1]);
-            tradeSkillData.searchOutPerA = float.Parse(s.searchOut.Split(',')[0]);
-            tradeSkillData.searchOutPerB = float.Parse(s.searchOut.Split(',')[1]);
-            tradeSkillData.bargainOutPerA = float.Parse(s.bargainOut.Split(',')[0]);
-            tradeSkillData.bargainOutPerB = float.Parse(s.bargainOut.Split(',')[1]);
-            tradeSkillData.deliverOutPerA = float.Parse(s.deliverOut.Split(',')[0]);
-            tradeSkillData.deliverOutPerB = float.Parse(s.deliverOut.Split(',')[1]);
-            tradeSkillData.riskOutPerA = float.Parse(s.riskOut.Split(',')[0]);
-            tradeSkillData.riskOutPerB = float.Parse(s.riskOut.Split(',')[1]);
-            PlayerData.My.tradeSkillLock.Add(tradeSkillData.ID, tradeSkillData.isLock);
-            tradeSkillDatas.Add(tradeSkillData);
-        }
-        //print(tradeSkillDatas.Count);
     }
 
     /// <summary>

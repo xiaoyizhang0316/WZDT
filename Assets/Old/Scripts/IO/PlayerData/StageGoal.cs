@@ -61,6 +61,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public List<StageEnemyData> enemyDatas;
 
+    public WaveCount waveCountItem;
+
     /// <summary>
     /// 玩家消耗金币
     /// </summary>
@@ -221,6 +223,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
+        waveCountItem.CountDown(waitTimeList[currentWave - 1],currentWave - 1);
         waveTween = transform.DOScale(1f, waitTimeList[currentWave - 1]).OnComplete(() =>
         {
             if (currentWave == maxWaveNumber)
