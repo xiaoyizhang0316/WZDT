@@ -119,7 +119,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     public void OnEndDrag(PointerEventData eventData)
     {
         //UIManager.My.LandCube.transform.DOMoveY(0, 0.5f).SetUpdate(true);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
         RaycastHit[] hit = Physics.RaycastAll(ray);
         bool isSuccess = false;
         for (int j = 0; j < hit.Length; j++)
@@ -130,13 +130,14 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 List<int> tempYList = new List<int>();
                 int x = hit[j].transform.GetComponent<MapSign>().x;
                 int y = hit[j].transform.GetComponent<MapSign>().y;
-                for (int i = 0; i < role.GetComponent<BaseMapRole>().baseRoleData.xList.Count; i++)
+                for (int i = 0; i < role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.xList.Count; i++)
                 {
-                    tempXList.Add(x + role.GetComponent<BaseMapRole>().baseRoleData.xList[i]);
-                    tempYList.Add(y + role.GetComponent<BaseMapRole>().baseRoleData.yList[i]);
+                    tempXList.Add(x + role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.xList[i]);
+                    tempYList.Add(y + role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.yList[i]);
                 }
                 if (MapManager.My.CheckLandAvailable(tempXList, tempYList))
                 {
+                    print("true ");
                     role.transform.position = hit[j].transform.position;
                     print("x" + x.ToString() + "y" + y.ToString());
                     print(hit[j].transform.position);
@@ -149,6 +150,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 }
                 else
                 {
+                    print("false    ");
                     GetComponent<Image>().raycastTarget = true;
                     Destroy(role, 0.01f);
                 }

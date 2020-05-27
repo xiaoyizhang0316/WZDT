@@ -95,7 +95,7 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
         riskResistance.text = gearData.riskResistance.ToString();
         tradeCost.text = gearData.tradeCost.ToString();
         cost.text = gearData.cost.ToString();
-        bulletCapacity.text = gearData.bulletCapacity.ToString(); 
+        //bulletCapacity.text = gearData.bulletCapacity.ToString(); 
         //print(gearData.SpritePath);
         Image_shape.sprite = Resources.Load<Sprite>(gearData.SpritePath);
          
@@ -144,7 +144,7 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
     // Start is called before the first frame update
     void Start()
     {
-        canvas = CreatRoleManager.My.currentCanvas.GetComponent<RectTransform>();
+     canvas = CreatRoleManager.My.currentCanvas.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame

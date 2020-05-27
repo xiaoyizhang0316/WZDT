@@ -109,8 +109,16 @@ public class RoleTemplateModelData
         tempRoleData.tradeCost = tradeCost;
         tempRoleData.cost = cost;
         tempRoleData.bulletCapacity = bulletCapacity;
-        tempRoleData.xList = xList;
-        tempRoleData.yList = yList;
+        tempRoleData.xList = new List<int>();
+        for (int i = 0; i < xList.Count; i++)
+        {
+            tempRoleData.xList.Add(xList[i]);
+        }
+        tempRoleData.yList = new List<int>();
+        for (int i = 0; i < yList.Count; i++)
+        {
+            tempRoleData.yList.Add(yList[i]);
+        }
         tempRoleData.SpritePath = SpritePath;
         tempRoleData.PrePath = PrePath;
         tempRoleData.RoleSpacePath = RoleSpacePath;

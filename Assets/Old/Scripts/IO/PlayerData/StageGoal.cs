@@ -242,7 +242,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             if (currentWave == maxWaveNumber)
             {
-
+                stageWaveText.text = (currentWave).ToString() + "/" + maxWaveNumber.ToString();
             }
             else
             {

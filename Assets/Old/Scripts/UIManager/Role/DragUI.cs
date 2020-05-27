@@ -166,6 +166,7 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
             {
             }
         }
+        CreatRoleManager.My.CheckAllConditions();
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -42,6 +42,7 @@ public class MapManager : MonoSingleton<MapManager>
             }
             else
             {
+                Debug.Log(temp.isCanPlace);
                 if (!temp.isCanPlace)
                     return false;
                 if (height != temp.height && height != 100000)
