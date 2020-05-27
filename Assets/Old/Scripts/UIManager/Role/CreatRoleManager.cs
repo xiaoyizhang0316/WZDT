@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using UnityEngine.UI;
@@ -122,10 +123,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// 最终的4项属性值（用于UI显示和最终结算）
     /// </summary>
     #region finalAttribute
-
-    public int finalCapacity;
-    public int finalQuality;
-    public int finalBrand;
+ 
 
     public int finalEffect;
     public int finalEfficiency;
@@ -136,7 +134,14 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     public int finalRiskResistance;
     public int finalTechAdd;
 
-    
+    public GameObject seedInfo;
+    public GameObject peasantInfo;
+    public GameObject merchantInfo;
+    public GameObject dealerInfo;
+
+
+    public List<EffectMove> effects;
+        
     public Text souxun;
     public Text yijia;
     public Text jiaodu;
@@ -148,19 +153,19 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
 
     public void ShowEquipListPOPDatal(int ID)
     { 
-        var data = GameDataMgr.My.GetGearData(ID);
-        souxun.text = data.effect.ToString();
-        yijia.text = data.efficiency.ToString();
-        jiaodu.text = data.range.ToString();
-        //fengxian.text = data.riskAdd.ToString();
+      //var data = GameDataMgr.My.GetGearData(ID);
+      //souxun.text = data.effect.ToString();
+      //yijia.text = data.efficiency.ToString();
+      //jiaodu.text = data.range.ToString();
+      ////fengxian.text = data.riskAdd.ToString();
     }
     public void ShowWorkListPOPDatal(int ID)
     { 
-        var data = GameDataMgr.My.GetWorkerData(ID);
-        souxun.text = data.effect.ToString();
-        yijia.text = data.efficiency.ToString();
-        jiaodu.text = data.range.ToString();
-        //fengxian.text = data.riskAdd.ToString();
+      // var data = GameDataMgr.My.GetWorkerData(ID);
+      // souxun.text = data.effect.ToString();
+      // yijia.text = data.efficiency.ToString();
+      // jiaodu.text = data.range.ToString();
+      // //fengxian.text = data.riskAdd.ToString();
     }
 
     /// <summary>
@@ -168,6 +173,10 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary> 
     public void Open(Role tempRole)
     {
+        for (int i = 0; i < effects.Count; i++)
+        {
+            StartCoroutine(   effects[i].Move());
+        }
        NewCanvasUI .My.Panel_ChoseRole.SetActive(false);
             CurrentRole = tempRole;
         //print(tempRole.baseRoleData.roleType);
@@ -193,6 +202,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         SetCreateRoleTitle();
          EquipListManager.My.Init();
      WorkerListManager.My.Init();
+    
     }
 
     /// <summary>
@@ -200,19 +210,30 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void SetCreateRoleTitle()
     {
+   seedInfo.SetActive(false);
+   peasantInfo.SetActive(false);
+   merchantInfo.SetActive(false);
+   dealerInfo.SetActive(false);
         switch(CurrentRole.baseRoleData.roleType)
         {
             case RoleType.Seed:
                 roleTitleText.text = "种子商";
+                seedInfo.SetActive(true);
                 break;
             case RoleType.Peasant:
                 roleTitleText.text = "农民";
+                peasantInfo.SetActive(true);
+
                 break;
             case RoleType.Merchant:
                 roleTitleText.text = "贸易商";
+                merchantInfo.SetActive(true);
+
                 break;
             case RoleType.Dealer:
                 roleTitleText.text = "零售商";
+                dealerInfo.SetActive(true);
+
                 break;
             default:
                 roleTitleText.text = "未知";
@@ -262,6 +283,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
        // isWorkerOnEquip = CheckWorkerOnEquip();
        // isAtLeastOneWorkerEquip = CheckAtLeastOneWorkerEquip();
         CalculateAllAttribute();
+        
         //isNeedTemplate = CheckNeedTemplate();
         RoleInfoManager.My.UpdateRoleInfo();
         //if (isWorkerOnEquip && isAtLeastOneWorkerEquip && isNeedTemplate)
@@ -549,8 +571,12 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     public void CloseMenu()
     {
         RoleListManager.My.UpdateRoleList();
- 
-        gameObject.SetActive(false);
+        for (int i = 0; i < effects.Count; i++)
+        {
+           StartCoroutine( effects[i].Back()) ;
+        }
+
+        transform.DOScale(1, 0.5f).OnComplete(() => { gameObject.SetActive(false); });
     }
 
     // Start is called before the first frame update

@@ -45,6 +45,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public Text bulletCapacity; 
 
     public Image BG;
+    public Text techAdd;
     /// <summary>
     /// 当创建销毁时候或者保存角色时候调整占用状态
     /// </summary>
@@ -77,8 +78,8 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         //S name.text = workerData.name;
         //print(workerData.SpritePath);
         Image_shape.sprite = Resources.Load<Sprite>(workerData.SpritePath);
-       
-         
+
+        techAdd.text = workerData.techAdd.ToString();
     }
 
     /// <summary>
