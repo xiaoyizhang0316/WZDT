@@ -21,7 +21,9 @@ public class MapSign : MonoBehaviour,IDragHandler
     private void Awake()
     {
          MapManager.My._mapSigns.Add(this);
+         isCanPlace = GetComponent<MeshRenderer>().enabled && isCanPlace;
     }
+
     public void OnDrag(PointerEventData eventData)
     {
   

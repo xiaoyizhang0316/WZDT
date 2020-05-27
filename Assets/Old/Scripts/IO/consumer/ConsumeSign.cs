@@ -99,8 +99,8 @@ public class ConsumeSign : MonoBehaviour
         pathList = new List<Vector3>();
         foreach (Transform t in paths)
         {
-            float x = UnityEngine.Random.Range(-2f, 2f);
-            float z = UnityEngine.Random.Range(-2f, 2f);
+            float x = UnityEngine.Random.Range(-1f, 1f);
+            float z = UnityEngine.Random.Range(-1f, 1f);
             pathList.Add(t.position + new Vector3(x,0f,z));
         }
     }
@@ -341,7 +341,7 @@ public class ConsumeSign : MonoBehaviour
                 }
             }
         }
-        buffTweener = transform.DOScale(1f, 1f).OnComplete(() => {
+        buffTweener = transform.DOScale(transform.localScale, 1f).OnComplete(() => {
             CheckBuffDuration();
          });
     }
