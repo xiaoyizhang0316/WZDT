@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static GameEnum;
+using System;
 
-
+[Serializable]
 public class ConsumerTypeData
 {
     /// <summary>
