@@ -32,6 +32,21 @@ public class BuildingManager : MonoSingleton<BuildingManager>
         }
     }
 
+    /// <summary>
+    /// 根据ID查找building
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public Building GetBuildingByIndex(int index)
+    {
+        for (int i = 0; i < buildings.Count; i++)
+        {
+            if (buildings[i].buildingId == index)
+                return buildings[i];
+        }
+        print("-----------查不到此building-----------");
+        return null;
+    }
 
 
     // Start is called before the first frame update

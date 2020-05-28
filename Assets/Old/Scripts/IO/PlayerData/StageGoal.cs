@@ -9,7 +9,6 @@ using System.Linq;
 
 public class StageGoal : MonoSingleton<StageGoal>
 {
-
     /// <summary>
     /// 玩家金币
     /// </summary>
@@ -26,6 +25,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     public int playerHealth;
 
     /// <summary>
+    /// 玩家最大血量
+    /// </summary>
+    public int playerMaxHealth;
+
+    /// <summary>
     /// 最大赤字
     /// </summary>
     public int maxMinusGold;
@@ -34,6 +38,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 是否处于赤字状态
     /// </summary>
     public bool isOverMaxMinus = false;
+
+    /// <summary>
+    /// 玩家科技点数
+    /// </summary>
+    public int playerTechPoint;
 
     /// <summary>
     /// 当前波数
@@ -47,11 +56,13 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public List<int> waitTimeList = new List<int>();
 
+    public int timeCount = 0;
+
     public Tweener waveTween;
 
-    public int playerTechPoint;
-
     private bool wudi = false;
+
+    #region UI
 
     public Text playerGoldText;
 
@@ -63,13 +74,17 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Text stageWaveText;
 
+    #endregion
+
+    /// <summary>
+    /// 当前关卡敌人波数数据
+    /// </summary>
     public List<StageEnemyData> enemyDatas;
 
+    /// <summary>
+    /// 倒计时
+    /// </summary>
     public WaveCount waveCountItem;
-
-    public int playerMaxHealth;
-
-
 
     /// <summary>
     /// 玩家消耗金币
@@ -104,7 +119,6 @@ public class StageGoal : MonoSingleton<StageGoal>
                         role.GetComponent<BaseSkill>().UnleashSkills();
                     }
                 }
-
             }
         }
         SetInfo();
@@ -235,22 +249,35 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
-        stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
-        waveCountItem.CountDown(waitTimeList[currentWave - 1],currentWave - 1);
-        waveTween = transform.DOScale(1f, waitTimeList[currentWave - 1]).OnComplete(() =>
+        if (currentWave == maxWaveNumber)
+            return;
+        timeCount++;
+        if (timeCount == waitTimeList[currentWave - 1])
         {
-            if (currentWave == maxWaveNumber)
-            {
-                stageWaveText.text = (currentWave).ToString() + "/" + maxWaveNumber.ToString();
-            }
-            else
-            {
-                BuildingManager.My.WaveSpawnConsumer(currentWave);
-                currentWave++;
-                stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString(); 
-                WaveCount();
-            }
+            BuildingManager.My.WaveSpawnConsumer(currentWave);
+            currentWave++;
+        }
+        waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+        {
+            stageWaveText.text = (currentWave).ToString() + "/" + maxWaveNumber.ToString();
+            WaveCount();
         });
+        //stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+        //waveCountItem.CountDown(waitTimeList[currentWave - 1],currentWave - 1);
+        //waveTween = transform.DOScale(1f, waitTimeList[currentWave - 1]).OnComplete(() =>
+        //{
+        //    if (currentWave == maxWaveNumber)
+        //    {
+        //        stageWaveText.text = (currentWave).ToString() + "/" + maxWaveNumber.ToString();
+        //    }
+        //    else
+        //    {
+        //        BuildingManager.My.WaveSpawnConsumer(currentWave);
+        //        currentWave++;
+        //        stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString(); 
+        //        WaveCount();
+        //    }
+        //});
     }
 
     /// <summary>
@@ -351,6 +378,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             enemyDatas.Add(stageEnemyData);
         }
         BuildingManager.My.InitAllBuilding(enemyDatas);
+        waveCountItem.Init(enemyDatas);
     }
 
 

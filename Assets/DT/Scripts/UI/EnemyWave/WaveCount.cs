@@ -12,6 +12,17 @@ public class WaveCount : MonoBehaviour
 
     private int countDownNumber;
 
+    public GameObject singleWavePrb;
+
+    public void Init(List<StageEnemyData> datas)
+    {
+        for (int i = 0; i < BuildingManager.My.buildings.Count; i++)
+        {
+            GameObject go = Instantiate(singleWavePrb, transform);
+            go.GetComponent<WaveSwim>().Init(BuildingManager.My.buildings[i].buildingId,datas);
+        }
+    }
+
     public void CountDown(int num,int waveNum)
     {
         if (twe != null)

@@ -64,7 +64,10 @@ public class BulletLaunch : MonoBehaviour
                 .SetEase(Ease.Linear).OnComplete(() =>
                 {
                     isplay = false;
-                    gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
+                    if (gameObject.GetComponent<GoodsSign>().target != null)
+                    {
+                        gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
+                    }
                     BulletObjectPool.My.RecoveryBullet(gameObject);
                 });
             gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;

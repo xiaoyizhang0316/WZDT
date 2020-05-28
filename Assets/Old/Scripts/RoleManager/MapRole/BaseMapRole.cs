@@ -151,17 +151,19 @@ public class BaseMapRole : MonoBehaviour
         shootTarget = null;
         if (shootTargetList.Count == 0)
             return;
-        int max = 0;
-        float maxDis = Vector3.Distance(transform.position, shootTargetList[0].transform.position);
+        float maxDis = 10000;
         for (int i = 0; i < shootTargetList.Count; i++)
         {
-            if (Vector3.Distance(transform.position, shootTargetList[i].transform.position) < maxDis)
+            if (shootTargetList[i] == null)
+            {
+                shootTargetList.RemoveAt(i);
+            }
+            else if (Vector3.Distance(transform.position, shootTargetList[i].transform.position) < maxDis)
             {
                 maxDis = Vector3.Distance(transform.position, shootTargetList[i].transform.position);
-                max = i;
+                shootTarget = shootTargetList[i];
             }
         }
-        shootTarget = shootTargetList[max];
         if (preStatus == null && shootTarget != null && !GetComponent<BaseSkill>().IsOpen)
         {
             GetComponent<BaseSkill>().ReUnleashSkills();

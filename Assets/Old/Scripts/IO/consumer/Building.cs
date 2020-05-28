@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static GameEnum;
 using System;
+using DG.Tweening;
 
 public class Building : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Building : MonoBehaviour
     public Dictionary<int, List<WaveConfig>> waveConfigs = new Dictionary<int, List<WaveConfig>>();
 
     public List<Transform> consumerPathList = new List<Transform>();
+
+    public GameObject pathIndicator;
 
     /// <summary>
     /// 初始化
@@ -85,6 +88,7 @@ public class Building : MonoBehaviour
         else
         {
             StartCoroutine(SpawnWaveConsumer(waveNumber));
+            DrawPathLine();
         }
     }
 
@@ -102,6 +106,20 @@ public class Building : MonoBehaviour
                 yield return new WaitForSeconds(1f);
             }
         }
+    }
+
+    public void DrawPathLine()
+    {
+        List<Vector3> list = new List<Vector3>();
+        for (int i = 0; i < consumerPathList.Count; i++)
+        {
+            list.Add(consumerPathList[i].position);
+        }
+        GameObject go = Instantiate(pathIndicator, transform);
+        go.transform.position = transform.position;
+        go.transform.DOPath(list.ToArray(), 3f, PathType.CatmullRom, PathMode.Full3D).OnComplete(()=> {
+            Destroy(go);
+        }).SetEase(Ease.Linear).SetLookAt(0.01f);
     }
 
     // Start is called before the first frame update

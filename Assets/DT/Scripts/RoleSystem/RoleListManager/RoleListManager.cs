@@ -20,7 +20,6 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     public Button inButton;
     public Button outButton;
 
-  
     /// <summary>
     /// 创建角色按钮
     /// </summary>
@@ -63,9 +62,8 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     // Update is called once per frame
     void Update()
     {
-    }
 
-    
+    }
     
     /// <summary>
     /// 创建玩家角色列表  刷新玩家角色列表
@@ -76,7 +74,6 @@ public class RoleListManager : MonoSingleton<RoleListManager>
         {
             Destroy(PlayerData.My.RoleManager[i]);
         }
-
         PlayerData.My.RoleManager.Clear();
         for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
         {
@@ -84,7 +81,6 @@ public class RoleListManager : MonoSingleton<RoleListManager>
             {
                 continue;
             }
-
             GameObject roleListSign = Instantiate(roleListSignOBJ, roleListCreatPos);
             roleListSign.GetComponent<CreatRole_Button>().RolePrb =
                 Resources.Load<GameObject>(PlayerData.My.RoleData[i].baseRoleData.PrePath);
@@ -95,11 +91,9 @@ public class RoleListManager : MonoSingleton<RoleListManager>
             PlayerData.My.RoleManager.Add(roleListSign);
             if (PlayerData.My.RoleData[i].inMap)
             {
-                //roleListSign.GetComponent<Button>().interactable = false;
-                //roleListSign.GetComponent<Image>().raycastTarget = false;
+                roleListSign.transform.Find("Image").GetComponent<Image>().raycastTarget = false;
+                roleListSign.transform.Find("Image").GetComponent<Image>().DOFade(0.5f, 0.5f);
             }
         }
     }
-    
-    
 }

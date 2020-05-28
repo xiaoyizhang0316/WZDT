@@ -57,6 +57,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -118,7 +119,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        //UIManager.My.LandCube.transform.DOMoveY(0, 0.5f).SetUpdate(true);
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
         RaycastHit[] hit = Physics.RaycastAll(ray);
         bool isSuccess = false;
@@ -144,7 +144,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
                     RoleListManager.My.UpdateRoleList();
                     isSuccess = true;
-                    GetComponent<Image>().raycastTarget = false;
                     MapManager.My.SetLand(tempXList, tempYList);
                 }
                 else

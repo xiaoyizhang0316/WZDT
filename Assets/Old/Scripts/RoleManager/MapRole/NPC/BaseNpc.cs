@@ -41,6 +41,9 @@ public abstract class BaseNpc : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// 广角镜解锁NPC
+    /// </summary>
     public void DetectNPCRole()
     {
         isCanSee = true;
