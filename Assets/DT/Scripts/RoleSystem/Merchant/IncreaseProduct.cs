@@ -7,7 +7,7 @@ public class IncreaseProduct : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Product") && GetComponentInParent<RolePosSign>().isRelease)
+        if (other.CompareTag("Product"))
         {
             double id = GetComponentInParent<BaseMapRole>().baseRoleData.ID;
             int num = GetComponentInParent<BaseMapRole>().baseRoleData.effect;

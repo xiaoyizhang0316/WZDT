@@ -9,19 +9,6 @@ using static GameEnum;
 //通过射线控制物体贴地面移动
 public class RoleDrag : MonoBehaviour
 {
-    public Vector3 startPos;
-    public Vector3 world;
-    float speed = 800; //物体的移动速度  
-    public RolePosSign Role;
-    public bool isSucceed;
-
-
-    /// <summary>
-    /// 当前碰撞
-    /// </summary>
-    public bool isCollision;
-    public RolePosSign currentrole;
-
     private void Start()
     {
 
@@ -33,8 +20,8 @@ public class RoleDrag : MonoBehaviour
     /// <returns></returns>
     public bool CheckStartAndEnd()
     {
-        if (UIManager.My.startRole.baseRoleData.roleSkillType == RoleSkillType.Service &&
-            UIManager.My.endRole.baseRoleData.roleSkillType == RoleSkillType.Service)
+        if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service &&
+            NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
             return false;
         else
             return true;
@@ -46,8 +33,8 @@ public class RoleDrag : MonoBehaviour
     /// <returns></returns>
     public bool CheckNpcActive()
     {
-        BaseMapRole start = PlayerData.My.GetMapRoleById(UIManager.My.startRole.ID);
-        BaseMapRole end = PlayerData.My.GetMapRoleById(UIManager.My.endRole.ID);
+        BaseMapRole start = PlayerData.My.GetMapRoleById(NewCanvasUI.My.startRole.baseRoleData.ID);
+        BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
         if (start.isNpc)
         {
             if (start.GetComponent<BaseNpc>().isLock)
@@ -94,34 +81,34 @@ public class RoleDrag : MonoBehaviour
             return;
         }
 
-        //if (UIManager.My.isSetTrade)
+        //if (NewCanvasUI.My.isSetTrade)
         //{
-        //    UIManager.My.endRole = PlayerData.My.GetRoleById(Double.Parse(Role.transform.name));
-        //    if (UIManager.My.endRole.ID != UIManager.My.startRole.ID)
+        //    if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
         //    {
         //        if (CheckStartAndEnd() && CheckNpcActive())
         //        {
         //            //UIManager.My.Panel_CreateTrade.SetActive(true);
-        //            UIManager.My.InitCreateTradePanel();
+        //            NewCanvasUI.My.InitCreateTradePanel();
         //        }
         //    }
-        //    UIManager.My.isSetTrade = false;
+        //    NewCanvasUI.My.isSetTrade = false;
         //}
-        //  else
-        //  {
-
-        //  NewCanvasUI.My.UpdateUIPosition(Role.transform);
-        //    }
-        //UIManager.My.UpdateUIPosition(Role.transform);
     }
 
     public void OnMouseDown()
     {
-        //if (UIManager.My.isSetTrade)
-        //{
-        //    UIManager.My.endRole = PlayerData.My.GetRoleById(Double.Parse(Role.transform.name));
-        //    UIManager.My.InitCreateTradePanel();
-        //}
+        if (NewCanvasUI.My.isSetTrade)
+        {
+            NewCanvasUI.My.endRole = GetComponentInParent<BaseMapRole>();
+            if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
+            {
+                if (CheckStartAndEnd() && CheckNpcActive())
+                {
+                    //UIManager.My.Panel_CreateTrade.SetActive(true);
+                    NewCanvasUI.My.InitCreateTradePanel();
+                }
+            }
+        }
         //else
         //{
         //    UIManager.My.UpdateUIPosition(Role.transform);
@@ -159,24 +146,4 @@ public class RoleDrag : MonoBehaviour
     //  public float minDestence = 2;
 
     //  public MapSign minMapSign;
-
-    public Transform MoveTF;
-
-
-    public void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Role")
-        {
-            isCollision = true;
-            // Debug.Log("当前碰撞"+name);
-        }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Role")
-        {
-            isCollision = false;
-        }
-    }
 }

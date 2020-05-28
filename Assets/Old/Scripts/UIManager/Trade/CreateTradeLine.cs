@@ -43,7 +43,7 @@ public class CreateTradeLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (UIManager.My.isSetTrade)
+        if (NewCanvasUI.My.isSetTrade)
         {
             if (startTarget != null)
             {
@@ -75,7 +75,7 @@ public class CreateTradeLine : MonoBehaviour
         {
             lineGo.SetActive(false);
             gameObject.SetActive(false);
-            UIManager.My.isSetTrade = false;
+            NewCanvasUI.My.isSetTrade = false;
         }
     }
 }

@@ -29,7 +29,7 @@ public class AutoDisposeAISeed : MonoBehaviour
             double selfId = GetComponent<BaseMapRole>().baseRoleData.ID;
             foreach (BaseMapRole r in PlayerData.My.MapRole)
             {
-                if (r.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant && r.baseRoleData.inMap && r.GetComponent<RolePosSign>().isRelease)
+                if (r.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant && r.baseRoleData.inMap)
                 {
                     targetId = r.baseRoleData.ID;
                 }

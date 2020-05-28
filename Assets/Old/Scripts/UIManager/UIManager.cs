@@ -225,6 +225,16 @@ public class UIManager : MonoSingleton<UIManager>
         ExitButton();
     }
 
+    public void CreateTrade(Role _startRole)
+    {
+        startRole = _startRole;
+        isSetTrade = true;
+        BaseMapRole start = PlayerData.My.GetMapRoleById(startRole.ID);
+        CreateTradeLineGo.gameObject.SetActive(true);
+        CreateTradeLineGo.GetComponent<CreateTradeLine>().InitPos(start.transform);
+        ExitButton();
+    }
+
     /// <summary>
     /// 创建交易面板
     /// </summary>
