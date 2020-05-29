@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 5560625451637735937}
   - component: {fileID: 2137972374117135806}
   - component: {fileID: 5295165541628208340}
-  - component: {fileID: 6599365691951626488}
   - component: {fileID: 6720930171535688648}
+  - component: {fileID: 6624083040664055390}
+  - component: {fileID: 7093033114479402174}
   m_Layer: 5
   m_Name: WaveSwim
   m_TagString: Untagged
@@ -34,10 +35,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 988.84}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.000061035156, y: -367.8}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2137972374117135806
 CanvasRenderer:
@@ -60,13 +61,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.12156863}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: cccf7ec9ef23e4930ad3600ae37a2c0a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -75,26 +76,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6599365691951626488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7758259913139632851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: 100
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!114 &6720930171535688648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +88,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9594c06192fb04d209eb0af86f8b2ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  singleWaveInfoPrb: {fileID: 4882921522919418196, guid: 55f2e992b8c8d4fc9b727eb2e82743c3,
+  waveNumber: 0
+  waveNumberPrb: {fileID: 8802251526265685301, guid: 814b8ef70954d437d84f71d3db97573e,
     type: 3}
-  singleEnemyInfoPrb: {fileID: 6548960574438435079, guid: 9ca0236d41ed44fb493879fe30463e7c,
-    type: 3}
+  waveSprites:
+  - {fileID: 21300000, guid: cc9b27822de4448068f633ee68ce3f35, type: 3}
+  - {fileID: 21300000, guid: 387bee3dd82d64b7c8b38b9219ef1dd9, type: 3}
+  - {fileID: 21300000, guid: 96955f145e37742dd91622ff365e34e0, type: 3}
+  - {fileID: 21300000, guid: b41fec7ff33514ca18180b2019500ec0, type: 3}
+  - {fileID: 21300000, guid: d94bd187f26af4753a70b5239e5c4565, type: 3}
+  - {fileID: 21300000, guid: ffa55abfcc06a4e239440c69468d8019, type: 3}
+--- !u!114 &6624083040664055390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758259913139632851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 1
+  m_VerticalFit: 1
+--- !u!114 &7093033114479402174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758259913139632851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 40, y: 40}
+  m_Spacing: {x: 0, y: 4.36}
+  m_Constraint: 0
+  m_ConstraintCount: 2
