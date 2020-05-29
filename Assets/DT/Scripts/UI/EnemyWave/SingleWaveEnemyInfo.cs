@@ -21,6 +21,9 @@ public class SingleWaveEnemyInfo : MonoBehaviour
     {
         string[] list = str.Split('_');
         consumeType = (ConsumerType)Enum.Parse(typeof(ConsumerType), list[0]);
+        string path = "Sprite/ConsumerType/" + consumeType.ToString();
+        print(path);
+        typeSprite.sprite = Resources.Load<Sprite>(path);
         enemyNum.text = int.Parse(list[1]).ToString();
         string[] buffList = list[2].Split('|');
         for (int i = 0; i < buffList.Length; i++)

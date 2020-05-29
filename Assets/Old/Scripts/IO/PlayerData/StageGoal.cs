@@ -74,6 +74,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Text stageWaveText;
 
+    public float maxHealtherBarLength;
+
     #endregion
 
     /// <summary>
@@ -186,7 +188,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void SetInfo()
     {
-        playerHealthBar.fillAmount = playerHealth / (float)playerMaxHealth;
+        float per = playerHealth / (float)playerMaxHealth;
+        playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
         playerGoldText.text = playerGold.ToString();
         playerSatisfyText.text = playerSatisfy.ToString();
         playerTechText.text = playerTechPoint.ToString();   
@@ -286,6 +289,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStage()
     {
         playerHealthBar = transform.parent.Find("Blood/PlayerHealthBar").GetComponent<Image>();
+        maxHealtherBarLength = playerHealthBar.GetComponent<RectTransform>().sizeDelta.x;
         playerGoldText = transform.parent.Find("UserInfo/Image_money/PlayerMoney").GetComponent<Text>();
         playerSatisfyText = transform.parent.Find("UserInfo/PlayerScore/PlayerScoreText").GetComponent<Text>();
         playerTechText = transform.parent.Find("UserInfo/Image_money/PlayerTech").GetComponent<Text>();
