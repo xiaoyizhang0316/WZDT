@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
 
@@ -151,16 +152,16 @@ public class BaseMapRole : MonoBehaviour
         shootTarget = null;
         if (shootTargetList.Count == 0)
             return;
-        float maxDis = 10000;
+        float maxDis = 0f;
         for (int i = 0; i < shootTargetList.Count; i++)
         {
             if (shootTargetList[i] == null)
             {
                 shootTargetList.RemoveAt(i);
             }
-            else if (Vector3.Distance(transform.position, shootTargetList[i].transform.position) < maxDis)
+            else if (shootTargetList[i].tweener.ElapsedPercentage(false) > maxDis)
             {
-                maxDis = Vector3.Distance(transform.position, shootTargetList[i].transform.position);
+                maxDis = shootTargetList[i].tweener.ElapsedPercentage(false);
                 shootTarget = shootTargetList[i];
             }
         }
