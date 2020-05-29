@@ -186,16 +186,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6558998875894138253}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2903601228562301086}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -960.6, y: 59}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -925.65, y: -330}
   m_SizeDelta: {x: 1851.2, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2736657486322356579
@@ -288,6 +288,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6558998875894138253}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7611988770760589548
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,8 +330,8 @@ RectTransform:
   m_Children:
   - {fileID: 852489846547705680}
   - {fileID: 7330262799143481404}
-  - {fileID: 5711634127881733087}
   - {fileID: 1011044701271620790}
+  - {fileID: 5711634127881733087}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -354,6 +365,7 @@ MonoBehaviour:
   waveBg: {fileID: 1011044701271620790}
   spotEnemyPrb: {fileID: 3151920468771795873, guid: 6d372ee54a5a14e108391eae74fcf671,
     type: 3}
+  closeBtn: {fileID: 6558998875894138253}
 --- !u!114 &5217351702256741812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,7 +425,7 @@ PrefabInstance:
     - target: {fileID: 27046972230934642, guid: 9a37b6384c4e64b2986403f12655c412,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 27046972230934642, guid: 9a37b6384c4e64b2986403f12655c412,
         type: 3}
