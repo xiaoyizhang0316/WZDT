@@ -62,6 +62,8 @@ public class Building : MonoBehaviour
         {
             string[] strList = str.Split('_');
             WaveConfig config = new WaveConfig();
+            if (strList.Length == 1)
+                continue;
             config.consumerType = (ConsumerType)Enum.Parse(typeof(ConsumerType), strList[0]);
             config.num = int.Parse(strList[1]);
             config.buffList = new List<int>();
