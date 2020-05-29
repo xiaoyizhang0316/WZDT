@@ -18,6 +18,7 @@ public class WaveEnemySign : MonoBehaviour
         for (int i = 0; i < enemys.Count; i++)
         {
             GameObject go = Instantiate(singleConsumerTypePrb, transform);
+            go.GetComponent<SingleWaveEnemyInfo>().Init(enemys[i]);
         }
     }
 
