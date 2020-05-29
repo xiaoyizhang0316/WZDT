@@ -13,6 +13,8 @@ public class WaveCount : MonoSingleton<WaveCount>
 
     public GameObject spotEnemyPrb;
 
+    public GameObject closeBtn;
+
     public void Init(List<StageEnemyData> datas)
     {
         for (int i = 0; i < StageGoal.My.maxWaveNumber - 1; i++)
@@ -25,6 +27,7 @@ public class WaveCount : MonoSingleton<WaveCount>
     public void InitWaveBg(int waveNumber)
     {
         waveBg.gameObject.SetActive(true);
+        closeBtn.SetActive(true);
         ClearWaveBg();
         StageEnemyData data = StageGoal.My.enemyDatas[waveNumber];
         string str = data.point1[0];
