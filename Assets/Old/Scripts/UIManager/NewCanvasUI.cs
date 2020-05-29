@@ -36,6 +36,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public GameObject CreateTradeLineGo;
 
+    public GameObject Panel_Delete;
+
     #endregion
 
     // Start is called before the first frame update
@@ -91,4 +93,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         //CreateTradeLineGo.SetActive(false);
     }
 
+    public void OpenDeletePanel()
+    {
+        Panel_Delete.SetActive(true);
+       // Panel_Delete.GetComponent<DeleteUIManager>().Init();
+    }
 }
