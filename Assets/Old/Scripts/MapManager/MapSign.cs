@@ -35,7 +35,7 @@ public class MapSign : MonoBehaviour,IDragHandler
             GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             go.transform.position = transform.position + new Vector3(0f,0.15f,0f);
             go.transform.SetParent(transform.parent.parent);
-            go.GetComponent<MeshCollider>().enabled = false;
+            //go.GetComponent<MeshCollider>().enabled = false;
         }
     }
 
