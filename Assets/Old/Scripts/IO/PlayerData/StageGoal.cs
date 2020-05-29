@@ -259,7 +259,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
         {
-            stageWaveText.text = (currentWave).ToString() + "/" + maxWaveNumber.ToString();
+            stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
             WaveCount();
         });
         //stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
