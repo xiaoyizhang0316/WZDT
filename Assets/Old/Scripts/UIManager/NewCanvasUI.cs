@@ -11,7 +11,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public GameObject Panel_ChoseRole;
     public Role CurrentClickRole;
     public BaseMapRole currentMapRole;
-    public GameObject Panel_AssemblyRole; 
+    public GameObject Panel_AssemblyRole;
+    public GameObject Panel_TradeSetting;
     public Transform RoleTF;
     /// <summary>
     /// 需要遮挡的UI
@@ -61,11 +62,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         {
             if (needReycastTargetPanel[i].activeSelf)
             {
-               
                 return true;
             }
         }
-
         return false;
     }
 
@@ -89,6 +88,13 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         //CreateTradeManager.My.Open(go);
         isSetTrade = false;
         //CreateTradeLineGo.SetActive(false);
+    }
+
+    public void OpenTradePanel()
+    {
+        Panel_TradeSetting.SetActive(true);
+        GameObject go = FindObjectOfType<TradeSign>().gameObject;
+        Panel_TradeSetting.GetComponent<CreateTradeManager>().Open(go);
     }
 
 }

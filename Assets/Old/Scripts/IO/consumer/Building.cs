@@ -113,13 +113,24 @@ public class Building : MonoBehaviour
         List<Vector3> list = new List<Vector3>();
         for (int i = 0; i < consumerPathList.Count; i++)
         {
-            list.Add(consumerPathList[i].position);
+            list.Add(consumerPathList[i].position + new Vector3(0f,0.1f,0f));
         }
         GameObject go = Instantiate(pathIndicator, transform);
         go.transform.position = transform.position;
-        go.transform.DOPath(list.ToArray(), 3f, PathType.CatmullRom, PathMode.Full3D).OnComplete(()=> {
+        Tweener twe = go.transform.DOPath(list.ToArray(), 0.1f, PathType.CatmullRom, PathMode.Full3D).OnComplete(() =>
+        {
             Destroy(go);
         }).SetEase(Ease.Linear).SetLookAt(0.01f);
+        twe.ForceInit();
+
+        GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
+        GetComponent<LineRenderer>().SetPositions( twe.PathGetDrawPoints());
+        GetComponent<LineRenderer>().material.mainTextureOffset = new Vector2(0.85f, 0f);
+        GetComponent<LineRenderer>().material.DOOffset(new Vector2(-1.6f, 0f), 1.5f).OnComplete(() =>
+        {
+            GetComponent<LineRenderer>().material.mainTextureOffset = new Vector2(0.85f, 0f);
+            GetComponent<LineRenderer>().material.DOOffset(new Vector2(-1.6f, 0f), 1.5f).SetEase(Ease.Linear);
+        }).SetEase(Ease.Linear);
     }
 
     // Start is called before the first frame update
