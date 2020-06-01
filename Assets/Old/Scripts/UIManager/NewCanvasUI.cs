@@ -73,6 +73,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause.onClick.AddListener(GamePause);
         Button_Normal.onClick.AddListener(GameNormal);
         Button_Accelerate.onClick.AddListener(GameAccelerate);
+        GameNormal();
     }
 
     /// <summary>
