@@ -121,7 +121,7 @@ public class GoodsSign : MonoBehaviour
         moveTween.timeScale = 1f;
         foreach (var v in speedBuffList)
         {
-            speedAdd += v.Value / 100f - 1f;
+            speedAdd += v.Value / 100f;
         }
         moveTween.timeScale += speedAdd;
     }
