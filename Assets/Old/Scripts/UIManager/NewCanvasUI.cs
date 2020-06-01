@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.UIElements.VisualElement;
 
 public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 {
@@ -40,12 +42,23 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public GameObject Panel_Delete;
 
     public GameObject Panel_Update;
+
+    public Button Button_Pause;
+
+    public Button Button_Normal;
+
+    public Button Button_Accelerate;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         CreateTradeLineGo = FindObjectOfType<CreateTradeLine>().gameObject;
+        RoleTF = GameObject.FindGameObjectWithTag("RoleTF").transform;
+        Button_Pause = transform.Find("TimeScale/GamePause").GetComponent<Button>();
+        Button_Normal = transform.Find("TimeScale/GameNormal").GetComponent<Button>();
+        Button_Accelerate = transform.Find("TimeScale/GameAccelerate").GetComponent<Button>();
+        InitTimeButton();
         Panel_Delete.SetActive(false);
     }
 
@@ -54,7 +67,50 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         
     }
-   
+
+    public void InitTimeButton()
+    {
+        Button_Pause.onClick.AddListener(GamePause);
+        Button_Normal.onClick.AddListener(GameNormal);
+        Button_Accelerate.onClick.AddListener(GameAccelerate);
+    }
+
+    /// <summary>
+    /// 游戏暂停
+    /// </summary>
+    public void GamePause()
+    {
+        //Time.timeScale = 0.01f;
+        //Time.fixedDeltaTime = 0.0005f;
+        DOTween.PauseAll();
+        Button_Pause.interactable = false;
+        Button_Normal.interactable = true;
+        Button_Accelerate.interactable = true;
+    }
+
+    /// <summary>
+    /// 游戏正常速度
+    /// </summary>
+    public void GameNormal()
+    {
+        DOTween.PlayAll();
+        DOTween.timeScale = 1f;
+        Button_Pause.interactable = true;
+        Button_Normal.interactable = false;
+        Button_Accelerate.interactable = true;
+    }
+
+    /// <summary>
+    /// 游戏加速
+    /// </summary>
+    public void GameAccelerate()
+    {
+        DOTween.PlayAll();
+        DOTween.timeScale = 2f;
+        Button_Pause.interactable = true;
+        Button_Normal.interactable = true;
+        Button_Accelerate.interactable = false;
+    }
 
     /// <summary>
     /// 检测当前界面是否可以穿透panel
