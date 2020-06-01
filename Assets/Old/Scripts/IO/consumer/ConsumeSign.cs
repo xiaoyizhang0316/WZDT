@@ -351,6 +351,7 @@ public class ConsumeSign : MonoBehaviour
 
     private void Update()
     {
+        print(tweener.ElapsedPercentage(false));
 
     }
 

@@ -29,7 +29,7 @@ public class PruductSeed : BaseSkill
             data.AddBuff(buffList[i]);
         }
         data.bulletType = BulletType.Seed;
-        data.damage = role.baseRoleData.effect * 20f;
+        data.damage = role.baseRoleData.effect * 10f;
         data.loadingSpeed =5;
         data.buffMaxCount = 3;
         GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
