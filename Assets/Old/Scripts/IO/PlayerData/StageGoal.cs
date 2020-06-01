@@ -229,8 +229,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Win()
     {
-        UIManager.My.GamePause();
-        UIManager.My.Panel_Win.SetActive(true);
+        NewCanvasUI.My.GamePause();
+        //NewCanvasUI.My.Panel_Win.SetActive(true);
     }
 
     /// <summary>
@@ -240,8 +240,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (playerHealth < 0)
         {
-            UIManager.My.GamePause();
-            UIManager.My.Panel_Lose.SetActive(true);
+            NewCanvasUI.My.GamePause();
+            //NewCanvasUI.My.Panel_Lose.SetActive(true);
         }
         else
             return;

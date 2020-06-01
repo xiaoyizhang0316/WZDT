@@ -17,6 +17,10 @@ public class Building : MonoBehaviour
 
     public GameObject pathIndicator;
 
+    public int intervalNumber = -1;
+
+    public float intervalLength = 1f;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -96,6 +100,7 @@ public class Building : MonoBehaviour
 
     public IEnumerator SpawnWaveConsumer(int waveNumber)
     {
+        int val = 0;
         foreach (WaveConfig w in waveConfigs[waveNumber])
         {
             for (int i = 0; i < w.num; i++)
@@ -106,6 +111,9 @@ public class Building : MonoBehaviour
                 go.transform.position = transform.position;
                 go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
                 yield return new WaitForSeconds(1f);
+                val++;
+                if (val == intervalNumber)
+                    yield return new WaitForSeconds(intervalLength);
             }
         }
     }
