@@ -2885,6 +2885,7 @@ GameObject:
   - component: {fileID: 5557698495541947906}
   - component: {fileID: 8679157771835317114}
   - component: {fileID: 3022122147741071126}
+  - component: {fileID: 7089320900704999366}
   m_Layer: 5
   m_Name: Close
   m_TagString: Untagged
@@ -2947,6 +2948,49 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7089320900704999366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824177599676937563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &844997848858815488
 GameObject:
   m_ObjectHideFlags: 0
@@ -21304,6 +21348,7 @@ MonoBehaviour:
   CreateTradeLineGo: {fileID: 8369071634612450567, guid: fcdc201a0670b4fbf8a6ce22aca303ce,
     type: 3}
   Panel_Delete: {fileID: 5608392436970239849}
+  Panel_Update: {fileID: 7924414262796691969}
 --- !u!1 &5578415290139016275
 GameObject:
   m_ObjectHideFlags: 0
@@ -33862,7 +33907,14 @@ MonoBehaviour:
     landCost: 0
     inMap: 0
     isNpc: 0
+  name: {fileID: 82496813689740405}
+  nextLevel: 0
+  currentLevel: 0
+  close: {fileID: 7089320900704999366}
   level: {fileID: 1657299004290609967}
+  hammer: {fileID: 0}
+  update: {fileID: 0}
+  roleName: 
 --- !u!1 &7969373299946954327
 GameObject:
   m_ObjectHideFlags: 0
@@ -38300,15 +38352,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0849dc57da38cf1488f0aa7647a37d51, type: 3}
---- !u!1 &4693051608285343275 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4800587886312926673, guid: 0849dc57da38cf1488f0aa7647a37d51,
-    type: 3}
-  m_PrefabInstance: {fileID: 269666968428463098}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8853386316261086409 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8746983744933336883, guid: 0849dc57da38cf1488f0aa7647a37d51,
+    type: 3}
+  m_PrefabInstance: {fileID: 269666968428463098}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4693051608285343275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4800587886312926673, guid: 0849dc57da38cf1488f0aa7647a37d51,
     type: 3}
   m_PrefabInstance: {fileID: 269666968428463098}
   m_PrefabAsset: {fileID: 0}
@@ -38518,7 +38570,7 @@ PrefabInstance:
     - target: {fileID: 1380913656845934978, guid: d764ee6484f5844cc8be1ae36f3c6494,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -22.599976
+      value: -22.599854
       objectReference: {fileID: 0}
     - target: {fileID: 1380913656845934978, guid: d764ee6484f5844cc8be1ae36f3c6494,
         type: 3}
