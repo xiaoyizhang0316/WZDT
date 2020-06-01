@@ -39,12 +39,14 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public GameObject Panel_Delete;
 
+    public GameObject Panel_Update;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         CreateTradeLineGo = FindObjectOfType<CreateTradeLine>().gameObject;
+        Panel_Delete.SetActive(false);
     }
 
     // Update is called once per frame
