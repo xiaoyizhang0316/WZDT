@@ -570,12 +570,10 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void CloseMenu()
     {
-        RoleListManager.My.UpdateRoleList();
         for (int i = 0; i < effects.Count; i++)
         {
            StartCoroutine( effects[i].Back()) ;
         }
-
         transform.DOScale(1, 0.5f).OnComplete(() => { gameObject.SetActive(false); });
     }
 

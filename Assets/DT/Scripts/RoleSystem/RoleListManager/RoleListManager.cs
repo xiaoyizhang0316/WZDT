@@ -31,8 +31,6 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     // Start is called before the first frame update
     void Start()
     {
-        UpdateRoleList();
-        
         CreatRoleButton.onClick.AddListener(() =>
         {
             Panel_ChoseRole.SetActive(true);
@@ -72,43 +70,42 @@ public class RoleListManager : MonoSingleton<RoleListManager>
         int index = PlayerData.My.MapRole.IndexOf(PlayerData.My.GetMapRoleById(role.ID));
         Destroy(PlayerData.My.GetMapRoleById(role.ID).gameObject, 0.01f);
         PlayerData.My.MapRole.RemoveAt(index);
-        UpdateRoleList();
     }
 
 
     /// <summary>
     /// 创建玩家角色列表  刷新玩家角色列表
     /// </summary>
-    public void UpdateRoleList()
-    {
-        for (int i = 0; i < PlayerData.My.RoleManager.Count; i++)
-        {
-            Destroy(PlayerData.My.RoleManager[i]);
-        }
+    //public void UpdateRoleList()
+    //{
+    //    for (int i = 0; i < PlayerData.My.RoleManager.Count; i++)
+    //    {
+    //        Destroy(PlayerData.My.RoleManager[i]);
+    //    }
 
-        PlayerData.My.RoleManager.Clear();
-        for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
-        {
-            if (PlayerData.My.RoleData[i].isNpc)
-            {
-                continue;
-            }
+    //    PlayerData.My.RoleManager.Clear();
+    //    for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
+    //    {
+    //        if (PlayerData.My.RoleData[i].isNpc)
+    //        {
+    //            continue;
+    //        }
 
-            GameObject roleListSign = Instantiate(roleListSignOBJ, roleListCreatPos);
-            roleListSign.GetComponent<CreatRole_Button>().RolePrb =
-                Resources.Load<GameObject>(PlayerData.My.RoleData[i].baseRoleData.PrePath);
-            roleListSign.transform.GetChild(0).GetComponent<Image>().sprite =
-                Resources.Load<Sprite>(PlayerData.My.RoleData[i].baseRoleData.SpritePath);
-            roleListSign.name = PlayerData.My.RoleData[i].baseRoleData.roleType.ToString() + "_" +
-                                PlayerData.My.RoleData[i].ID;
-            PlayerData.My.RoleManager.Add(roleListSign);
-            if (PlayerData.My.RoleData[i].inMap)
-            {
-                //roleListSign.GetComponent<Button>().interactable = false;
-                //roleListSign.GetComponent<Image>().raycastTarget = false;
-            }
-        }
-    }
+    //        GameObject roleListSign = Instantiate(roleListSignOBJ, roleListCreatPos);
+    //        roleListSign.GetComponent<CreatRole_Button>().RolePrb =
+    //            Resources.Load<GameObject>(PlayerData.My.RoleData[i].baseRoleData.PrePath);
+    //        roleListSign.transform.GetChild(0).GetComponent<Image>().sprite =
+    //            Resources.Load<Sprite>(PlayerData.My.RoleData[i].baseRoleData.SpritePath);
+    //        roleListSign.name = PlayerData.My.RoleData[i].baseRoleData.roleType.ToString() + "_" +
+    //                            PlayerData.My.RoleData[i].ID;
+    //        PlayerData.My.RoleManager.Add(roleListSign);
+    //        if (PlayerData.My.RoleData[i].inMap)
+    //        {
+    //            //roleListSign.GetComponent<Button>().interactable = false;
+    //            //roleListSign.GetComponent<Image>().raycastTarget = false;
+    //        }
+    //    }
+    //}
     
     
 }

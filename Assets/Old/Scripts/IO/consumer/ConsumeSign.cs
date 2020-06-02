@@ -119,7 +119,8 @@ public class ConsumeSign : MonoBehaviour
             CheckBulletElement(ref realDamage, data);
             CheckDebuff(data);
             ChangeHealth(realDamage);
-            GetComponent<Animator>().SetBool("OnHit",true);
+            if (transform.TryGetComponent(out Animator ani))
+                ani.SetBool("OnHit", true);
         }
     }
 
@@ -130,6 +131,7 @@ public class ConsumeSign : MonoBehaviour
     {
         DeathAward();
         Stop();
+        GetComponent<Animator>().SetBool("IsDead", true);
     }
 
     /// <summary>
@@ -139,6 +141,7 @@ public class ConsumeSign : MonoBehaviour
     {
         LivePunish();
         Stop();
+        Destroy(gameObject);
     }
 
     /// <summary>
@@ -265,13 +268,13 @@ public class ConsumeSign : MonoBehaviour
     {
         tweener.Kill();
         buffTweener.Kill();
+        isCanSelect = false;
         GetComponent<Animator>().SetFloat("Speed_f", 0f);
         BaseMapRole[] temp = FindObjectsOfType<BaseMapRole>();
         foreach (BaseMapRole role in temp)
         {
             role.RemoveConsumerFromShootList(this);
         }
-        Destroy(gameObject);
     }
 
     /// <summary>
