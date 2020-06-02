@@ -17,6 +17,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     public int nextLevel;
     public int currentLevel;
     public Button close;
+    public Button delete;
     public Text level;
 
     public Button hammer;
@@ -25,9 +26,17 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     // Start is called before the first frame update
     void Start()
     {
+        SetDependency();
         close.onClick.AddListener(() =>
         {
             gameObject.SetActive(false);
+        });
+        delete.onClick.AddListener(() =>
+        {
+            gameObject.SetActive(false);
+            NewCanvasUI.My.Panel_Delete.SetActive(true);
+            string str = "确定要删除" + currentRole.baseRoleData.roleName + "吗？";
+            DeleteUIManager.My.Init(str, () => { PlayerData.My.DeleteRole(currentRole.ID); });
         });
     }
 
@@ -36,10 +45,14 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     {
         
     }
-    public void Init(Role role )
-    {
-     
 
+    public void SetDependency()
+    {
+        delete = transform.Find("Delete").GetComponent<Button>();
+    }
+
+    public void Init(Role role )
+    {     
         name.text = role.baseRoleData.roleName;
         roleName = role.baseRoleData.roleName;
         currentRole = role; 
@@ -59,7 +72,6 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         {
             update.interactable = true;
             hammer.interactable = true;
-
         }
     }
 
@@ -70,31 +82,21 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         {
             seed.SetActive(true);
             seed.GetComponent<BaseRoleListInfo>().Init(role);
-         
         }
         if (role.baseRoleData.roleType == GameEnum.RoleType.Peasant)
         {
             peasant.SetActive(true);
             peasant.GetComponent<BaseRoleListInfo>().Init(role);
-          
-
-
         }
         if (role.baseRoleData.roleType == GameEnum.RoleType.Merchant)
         {
             merchant.SetActive(true);
             merchant.GetComponent<BaseRoleListInfo>().Init(role);
-        
-
-
         }
         if (role.baseRoleData.roleType == GameEnum.RoleType.Dealer)
         {
             dealer.SetActive(true);
             merchant.GetComponent<BaseRoleListInfo>().Init(role);
-         
-
-
         }
     }
 }

@@ -51,6 +51,8 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public ConsumeSign shootTarget;
 
+    public Transform tradePoint;
+
     public int CarCount;
 
     public bool AI;

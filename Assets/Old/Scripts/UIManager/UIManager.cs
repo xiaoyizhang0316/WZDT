@@ -196,7 +196,6 @@ public class UIManager : MonoSingleton<UIManager>
     {
         ExitButton();
         double roleId = CurrentClickRole.ID;
-
         POPUIManager.My.POPNormalUI("", "是否要删除当前角色", () =>
          {
              if (ExecutionManager.My.SubExecution(ExecutionManager.My.removeRole))
@@ -209,7 +208,6 @@ public class UIManager : MonoSingleton<UIManager>
                  UpdateRoleList();
              }
          }, () => { });
-
     }
 
     /// <summary>
@@ -322,6 +320,7 @@ public class UIManager : MonoSingleton<UIManager>
         SceneManager.LoadScene("FTE_4");
         //SceneManager.LoadScene( "GameMain");
     }
+
     public void Destroyrole()
     {
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)

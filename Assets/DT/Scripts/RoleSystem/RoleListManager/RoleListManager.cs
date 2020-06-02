@@ -63,16 +63,6 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     {
     }
 
-    public void RemoveRole(Role role)
-    {
-        TradeManager.My.DeleteRoleAllTrade(role.ID);
-        role.inMap = false;
-        int index = PlayerData.My.MapRole.IndexOf(PlayerData.My.GetMapRoleById(role.ID));
-        Destroy(PlayerData.My.GetMapRoleById(role.ID).gameObject, 0.01f);
-        PlayerData.My.MapRole.RemoveAt(index);
-    }
-
-
     /// <summary>
     /// 创建玩家角色列表  刷新玩家角色列表
     /// </summary>
@@ -106,6 +96,4 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     //        }
     //    }
     //}
-    
-    
 }

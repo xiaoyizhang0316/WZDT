@@ -43,6 +43,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public GameObject Panel_Update;
 
+    public GameObject Panel_RoleInfo;
+
     public Button Button_Pause;
 
     public Button Button_Normal;
@@ -118,11 +120,11 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public bool NeedRayCastPanel()
     {
-
         for (int i = 0; i <needReycastTargetPanel.Count; i++)
         {
             if (needReycastTargetPanel[i].activeSelf)
             {
+                print(needReycastTargetPanel[i].name);
                 return true;
             }
         }
@@ -150,6 +152,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         isSetTrade = false;
         //CreateTradeLineGo.SetActive(false);
     }
+
+    /// <summary>
+    /// 打开并初始化交易面板
+    /// </summary>
     public void OpenTradePanel()
     {
         Panel_TradeSetting.SetActive(true);

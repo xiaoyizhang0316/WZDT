@@ -60,7 +60,6 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
         {
             Destroy(gameObject);
         });
-
     }
 
     public void OnPointerClick(PointerEventData eventData)

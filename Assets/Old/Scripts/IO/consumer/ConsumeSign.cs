@@ -6,7 +6,6 @@ using UnityEngine;
 using static GameEnum;
 using DT.Fight.Bullet;
 
-
 public class ConsumeSign : MonoBehaviour
 {
     /// <summary>

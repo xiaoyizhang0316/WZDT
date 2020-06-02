@@ -9,9 +9,11 @@ using static GameEnum;
 //通过射线控制物体贴地面移动
 public class RoleDrag : MonoBehaviour
 {
+    private Role currentRole;
+
     private void Start()
     {
-
+        currentRole = GetComponentInParent<BaseMapRole>().baseRoleData;
     }
 
     /// <summary>
@@ -50,10 +52,7 @@ public class RoleDrag : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (NewCanvasUI.My.NeedRayCastPanel())
-        {
-            return;
-        }
+
 
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
         //if (UIManager.My.Panel_POPInfo.GetComponent<POPRoleManager>().InitPOPRole(gameObject.transform.parent.GetComponent<BaseMapRole>()))
@@ -64,10 +63,7 @@ public class RoleDrag : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (NewCanvasUI.My.NeedRayCastPanel())
-        {
-            return;
-        }
+
 
        // UIManager.My.Panel_POPInfo.gameObject.SetActive(false);
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
@@ -80,7 +76,23 @@ public class RoleDrag : MonoBehaviour
         {
             return;
         }
-
+        if (NewCanvasUI.My.isSetTrade)
+        {
+            NewCanvasUI.My.endRole = GetComponentInParent<BaseMapRole>();
+            if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
+            {
+                if (CheckStartAndEnd() && CheckNpcActive())
+                {
+                    //UIManager.My.Panel_CreateTrade.SetActive(true);
+                    NewCanvasUI.My.InitCreateTradePanel();
+                }
+            }
+        }
+        else
+        {
+            NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
+            RoleListInfo.My.Init(currentRole);
+        }
         //if (NewCanvasUI.My.isSetTrade)
         //{
         //    if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
@@ -97,22 +109,11 @@ public class RoleDrag : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (NewCanvasUI.My.isSetTrade)
+        if (NewCanvasUI.My.NeedRayCastPanel())
         {
-            NewCanvasUI.My.endRole = GetComponentInParent<BaseMapRole>();
-            if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
-            {
-                if (CheckStartAndEnd() && CheckNpcActive())
-                {
-                    //UIManager.My.Panel_CreateTrade.SetActive(true);
-                    NewCanvasUI.My.InitCreateTradePanel();
-                }
-            }
+            return;
         }
-        //else
-        //{
-        //    UIManager.My.UpdateUIPosition(Role.transform);
-        //}
+
     }
 
 
@@ -131,7 +132,6 @@ public class RoleDrag : MonoBehaviour
         //  world.y =0;
         //  speed = 1;
         //  MoveTF.position = world;
-
     }
 
     //public void OnMouseUp()

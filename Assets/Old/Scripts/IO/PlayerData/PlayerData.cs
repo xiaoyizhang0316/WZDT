@@ -72,10 +72,10 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         {
             if (MapRole[i].baseRoleData.baseRoleData.roleName.Equals(roleName))
             {
-
                 return MapRole[i];
             }
         }
+        Debug.Log("当前地图角色找不到！");
         return null;
     }
 
@@ -129,17 +129,11 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         {
             SetWorkerStatus(v.Key, false);
         }
-        for (int i = 0; i < RoleManager.Count; i++)
-        {
-            if (System.Math.Abs(double.Parse(RoleManager[i].name.Split('_')[1]) - target.ID) < 0.1f)
-            {
-                GameObject temp = RoleManager[i];
-                RoleManager.Remove(temp);
-                RoleData.Remove(target);
-                Destroy(temp, 0.001f);
-                break;
-            }
-        }
+        TradeManager.My.DeleteRoleAllTrade(roleId);
+        BaseMapRole mapRole = GetMapRoleById(roleId);
+        RoleData.Remove(target);
+        MapRole.Remove(mapRole);
+        Destroy(mapRole.gameObject);
     }
 
     /// <summary>
