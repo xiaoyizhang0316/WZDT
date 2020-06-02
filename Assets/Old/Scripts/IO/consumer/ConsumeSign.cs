@@ -119,6 +119,7 @@ public class ConsumeSign : MonoBehaviour
             CheckBulletElement(ref realDamage, data);
             CheckDebuff(data);
             ChangeHealth(realDamage);
+            GetComponent<Animator>().SetBool("OnHit",true);
         }
     }
 
