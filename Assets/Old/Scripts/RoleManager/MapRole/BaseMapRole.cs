@@ -461,7 +461,6 @@ public class BaseMapRole : MonoBehaviour
                     }
                 }
             }
-           
         }
         else
         {
