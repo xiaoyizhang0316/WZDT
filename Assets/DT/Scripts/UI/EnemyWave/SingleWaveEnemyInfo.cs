@@ -25,13 +25,21 @@ public class SingleWaveEnemyInfo : MonoBehaviour
         print(path);
         typeSprite.sprite = Resources.Load<Sprite>(path);
         enemyNum.text = int.Parse(list[1]).ToString();
-        string[] buffList = list[2].Split('|');
-        for (int i = 0; i < buffList.Length; i++)
+        //string[] buffList = list[2].Split('|');
+        List<int> buffList = new List<int>();
+        ConsumerTypeData data = GameDataMgr.My.GetConsumerTypeDataByType(consumeType);
+        buffList.AddRange(data.bornBuff);
+        string[] strList = list[2].Split('|');
+        for (int i = 0; i < strList.Length; i++)
         {
-            if (int.Parse(buffList[i]) != -1)
+            if (int.Parse(strList[i]) != -1)
             {
-                GameObject go = Instantiate(singleBuffPrb, buffListTF);
+                buffList.Add(int.Parse(strList[i]));
             }
+        }
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            GameObject go = Instantiate(singleBuffPrb, buffListTF);
         }
     }
 

@@ -363,6 +363,15 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.killMoney = int.Parse(c.killMoney);
             temp.killSatisfy = int.Parse(c.killSatisfy);
             temp.liveSatisfy = int.Parse(c.liveSatisfy);
+            List<string> strList = c.bornBuff.Split(',').ToList();
+            temp.bornBuff = new List<int>();
+            foreach(string str in strList)
+            {
+                if (int.Parse(str) != -1)
+                {
+                    temp.bornBuff.Add(int.Parse(str));
+                }
+            }
             consumerTypeDatas.Add(temp);
         }
     }

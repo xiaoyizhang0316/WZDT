@@ -174,10 +174,12 @@ public class TradeSign : MonoBehaviour
     {
         TradeLineItem[] list = GetComponentsInChildren<TradeLineItem>();
         List<Vector3> posList = new List<Vector3>();
-        for (int i = 0; i < list.Length; i++)
+        for (int i = 0; i < list.Length - 1; i++)
         {
             posList.Add(list[i].transform.Find("end").position);
         }
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        posList.Add(end.transform.position);
         countNumber++;
         if (countNumber == 10)
         {
