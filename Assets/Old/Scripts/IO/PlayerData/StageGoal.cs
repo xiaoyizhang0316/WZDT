@@ -118,7 +118,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                 {
                     if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
                     {
-                        role.GetComponent<BaseSkill>().UnleashSkills();
+                        role.GetComponent<BaseSkill>().ReUnleashSkills();
                     }
                 }
             }
