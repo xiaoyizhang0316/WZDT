@@ -159,6 +159,34 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void GetPlayerGold(int num)
     {
         playerGold += num;
+        if (playerGold < maxMinusGold)
+        {
+            if (!isOverMaxMinus)
+            {
+                isOverMaxMinus = true;
+                foreach (BaseMapRole role in PlayerData.My.MapRole)
+                {
+                    if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
+                    {
+                        role.GetComponent<BaseSkill>().CancelSkill();
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (isOverMaxMinus)
+            {
+                isOverMaxMinus = false;
+                foreach (BaseMapRole role in PlayerData.My.MapRole)
+                {
+                    if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
+                    {
+                        role.GetComponent<BaseSkill>().ReUnleashSkills();
+                    }
+                }
+            }
+        }
         SetInfo();
     }
 
