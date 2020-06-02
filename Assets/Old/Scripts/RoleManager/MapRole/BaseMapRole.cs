@@ -51,6 +51,8 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public ConsumeSign shootTarget;
 
+    public Transform tradePoint;
+
     public int CarCount;
 
     public bool AI;
@@ -93,19 +95,31 @@ public class BaseMapRole : MonoBehaviour
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
     }
 
+    public void InitAttribute()
+    {
+        baseRoleData.effect = baseRoleData.baseRoleData.effect;
+        baseRoleData.efficiency = baseRoleData.baseRoleData.efficiency;
+        baseRoleData.riskResistance = baseRoleData.baseRoleData.riskResistance;
+        baseRoleData.tradeCost = baseRoleData.baseRoleData.tradeCost;
+        baseRoleData.range = baseRoleData.baseRoleData.range;
+        baseRoleData.cost = baseRoleData.baseRoleData.cost;
+        baseRoleData.bulletCapacity = baseRoleData.baseRoleData.bulletCapacity;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         buffList = new List<BaseBuff>();
         contributionNum = 0;
-        if (!isNpc)
-            InitBaseRoleData();
         InvokeRepeating("MonthlyCost", 1f, 60f);
         InvokeRepeating("AddTechPoint", 0f, 10f);
-        if (!PlayerData.My.RoleData.Contains(baseRoleData))
-        {
-            PlayerData.My.RoleData.Add(baseRoleData);
-        }
+        InitAttribute();
+        //if (!PlayerData.My.RoleData.Contains(baseRoleData))
+        //{
+        //    PlayerData.My.RoleData.Add(baseRoleData);
+        //}
+        //if (!isNpc)
+        //    InitBaseRoleData();
     }
 
     #region 战斗

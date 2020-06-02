@@ -30,7 +30,8 @@ public class TradeManager : MonoSingleton<TradeManager>
             tradeList.Remove(ID);
             temp.ClearAllLine();
             Destroy(temp.gameObject, 0f);
-            CreateTradeManager.My.Close();
+            if (NewCanvasUI.My.Panel_TradeSetting.activeSelf)
+                CreateTradeManager.My.Close();
         }
     }
 

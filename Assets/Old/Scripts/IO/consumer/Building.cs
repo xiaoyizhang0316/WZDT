@@ -94,7 +94,6 @@ public class Building : MonoBehaviour
         else
         {
             StartCoroutine(SpawnWaveConsumer(waveNumber));
-            DrawPathLine();
         }
     }
 
@@ -103,6 +102,10 @@ public class Building : MonoBehaviour
         int val = 0;
         foreach (WaveConfig w in waveConfigs[waveNumber])
         {
+            if (w.num > 0)
+            {
+                DrawPathLine();
+            }
             for (int i = 0; i < w.num; i++)
             {
                 string path = "Prefabs/Consumer/" + w.consumerType.ToString();
@@ -113,7 +116,10 @@ public class Building : MonoBehaviour
                 yield return new WaitForSeconds(1f);
                 val++;
                 if (val == intervalNumber)
+                {
+                    val = 0;
                     yield return new WaitForSeconds(intervalLength);
+                }
             }
         }
     }
