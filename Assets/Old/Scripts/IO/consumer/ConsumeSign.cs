@@ -70,6 +70,19 @@ public class ConsumeSign : MonoBehaviour
             elementResistance.Add(p, 100);
         }
         consumeData = new ConsumeData(consumerType);
+        ConsumerTypeData data = GameDataMgr.My.GetConsumerTypeDataByType(consumerType);
+        foreach (int i in data.bornBuff)
+        {
+            BuffData buff = GameDataMgr.My.GetBuffDataByID(i);
+            BaseBuff baseBuff = new BaseBuff();
+            baseBuff.Init(buff);
+            baseBuff.SetConsumerBuff(this);
+        }
+        print(elementResistance[ProductElementType.Sweet]);
+        print(elementResistance[ProductElementType.Crisp]);
+        print(elementResistance[ProductElementType.Discount]);
+        print(elementResistance[ProductElementType.GoodPack]);
+        print(elementResistance[ProductElementType.Soft]);
         GameObject go = Instantiate(hudPrb, transform);
         hud = go.GetComponent<Hud>();
         hud.Init(this);

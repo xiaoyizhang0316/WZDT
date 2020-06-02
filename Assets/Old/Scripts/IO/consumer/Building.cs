@@ -72,7 +72,7 @@ public class Building : MonoBehaviour
             config.num = int.Parse(strList[1]);
             config.buffList = new List<int>();
             string[] tempBuffList = strList[2].Split('|');
-            foreach(string tempStr in tempBuffList)
+            foreach (string tempStr in tempBuffList)
             {
                 config.buffList.Add(int.Parse(tempStr));
             }
@@ -113,6 +113,16 @@ public class Building : MonoBehaviour
                 go.GetComponent<ConsumeSign>().Init(consumerPathList);
                 go.transform.position = transform.position;
                 go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+                foreach (int num in w.buffList)
+                {
+                    if (num != -1)
+                    {
+                        BuffData buff = GameDataMgr.My.GetBuffDataByID(num);
+                        BaseBuff baseBuff = new BaseBuff();
+                        baseBuff.Init(buff);
+                        baseBuff.SetConsumerBuff(go.GetComponent<ConsumeSign>());
+                    }
+                }
                 yield return new WaitForSeconds(1f);
                 val++;
                 if (val == intervalNumber)
@@ -129,7 +139,7 @@ public class Building : MonoBehaviour
         List<Vector3> list = new List<Vector3>();
         for (int i = 0; i < consumerPathList.Count; i++)
         {
-            list.Add(consumerPathList[i].position + new Vector3(0f,0.1f,0f));
+            list.Add(consumerPathList[i].position + new Vector3(0f, 0.1f, 0f));
         }
         GameObject go = Instantiate(pathIndicator, transform);
         go.transform.position = transform.position;
@@ -140,7 +150,7 @@ public class Building : MonoBehaviour
         twe.ForceInit();
 
         GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
-        GetComponent<LineRenderer>().SetPositions( twe.PathGetDrawPoints());
+        GetComponent<LineRenderer>().SetPositions(twe.PathGetDrawPoints());
         GetComponent<LineRenderer>().material.mainTextureOffset = new Vector2(0.85f, 0f);
         GetComponent<LineRenderer>().material.DOOffset(new Vector2(-1.6f, 0f), 1.5f).OnComplete(() =>
         {
@@ -158,7 +168,7 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void Awake()

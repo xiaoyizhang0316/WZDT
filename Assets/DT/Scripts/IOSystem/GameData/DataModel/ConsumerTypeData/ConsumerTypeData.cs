@@ -36,6 +36,8 @@ public class ConsumerTypeData
     /// 存活满意度惩罚
     /// </summary>
     public int liveSatisfy;
+
+    public List<int> bornBuff = new List<int>();
 }
 
 
