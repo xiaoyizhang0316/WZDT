@@ -83,7 +83,6 @@ public class RoleDrag : MonoBehaviour
             {
                 if (CheckStartAndEnd() && CheckNpcActive())
                 {
-                    //UIManager.My.Panel_CreateTrade.SetActive(true);
                     NewCanvasUI.My.InitCreateTradePanel();
                 }
             }
@@ -93,18 +92,6 @@ public class RoleDrag : MonoBehaviour
             NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
             RoleListInfo.My.Init(currentRole);
         }
-        //if (NewCanvasUI.My.isSetTrade)
-        //{
-        //    if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
-        //    {
-        //        if (CheckStartAndEnd() && CheckNpcActive())
-        //        {
-        //            //UIManager.My.Panel_CreateTrade.SetActive(true);
-        //            NewCanvasUI.My.InitCreateTradePanel();
-        //        }
-        //    }
-        //    NewCanvasUI.My.isSetTrade = false;
-        //}
     }
 
     public void OnMouseDown()

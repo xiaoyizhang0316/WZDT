@@ -96,6 +96,7 @@ public class MapManager : MonoSingleton<MapManager>
             }
         }
     }
+
     // Update is called once per frame
     void Update()
     {

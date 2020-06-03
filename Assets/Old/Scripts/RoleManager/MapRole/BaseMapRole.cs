@@ -32,19 +32,19 @@ public class BaseMapRole : MonoBehaviour
     public List<BaseBuff> buffList;
 
     /// <summary>
-    /// 周围的building列表
-    /// </summary>
-    public Dictionary<int, Building> buildingList = new Dictionary<int, Building>();
-
-    /// <summary>
-    /// 召唤消费者间隔
-    /// </summary>
-    public int spawnConsumerInterval;
-
-    /// <summary>
     /// 进入射程的消费者列表
     /// </summary>
     public List<ConsumeSign> shootTargetList = new List<ConsumeSign>();
+
+    /// <summary>
+    /// 占地列表x
+    /// </summary>
+    public List<int> xList = new List<int>();
+
+    /// <summary>
+    /// 占地列表y
+    /// </summary>
+    public List<int> yList = new List<int>();
 
     /// <summary>
     /// 当前射击目标
@@ -53,14 +53,7 @@ public class BaseMapRole : MonoBehaviour
 
     public Transform tradePoint;
 
-    public int CarCount;
-
     public bool AI;
-
-    /// <summary>
-    /// 角色贡献度
-    /// </summary>
-    public int contributionNum;
 
     public BaseNpc npcScript;
 
@@ -110,16 +103,9 @@ public class BaseMapRole : MonoBehaviour
     void Start()
     {
         buffList = new List<BaseBuff>();
-        contributionNum = 0;
         InvokeRepeating("MonthlyCost", 1f, 60f);
         InvokeRepeating("AddTechPoint", 0f, 10f);
         InitAttribute();
-        //if (!PlayerData.My.RoleData.Contains(baseRoleData))
-        //{
-        //    PlayerData.My.RoleData.Add(baseRoleData);
-        //}
-        //if (!isNpc)
-        //    InitBaseRoleData();
     }
 
     #region 战斗

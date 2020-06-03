@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 
-public class BaseLevelController : MonoBehaviour
+public class BaseLevelController : MonoSingleton<BaseLevelController>
 {
     /// <summary>
     /// 1星条件描述
@@ -38,39 +39,60 @@ public class BaseLevelController : MonoBehaviour
     /// 1星条件检测
     /// </summary>
     /// <returns></returns>
-    public virtual bool CheckStarOne()
+    public virtual void CheckStarOne()
     {
-        return true;
+        starOneStatus = StageGoal.My.playerHealth > 0;
     }
 
     /// <summary>
     /// 2星条件检测
     /// </summary>
     /// <returns></returns>
-    public virtual bool CheckStarTwo()
+    public virtual void CheckStarTwo()
     {
-        return true;
+        starTwoStatus = true;
     }
 
     /// <summary>
     /// 3星条件检测
     /// </summary>
     /// <returns></returns>
-    public virtual bool CheckStarThree()
+    public virtual void CheckStarThree()
     {
-        return true;
+        starThreeStatus = true;
     }
 
+    /// <summary>
+    /// 1星条件字符串生成
+    /// </summary>
+    /// <returns></returns>
+    public virtual void GenerateStarOneCondition()
+    {
+        starOneCondition = "";
+    }
+
+    /// <summary>
+    /// 2星条件字符串生成
+    /// </summary>
+    /// <returns></returns>
+    public virtual void GenerateStarTwoCondition()
+    {
+        starTwoCondition = "";
+    }
+
+    /// <summary>
+    /// 3星条件字符串生成
+    /// </summary>
+    /// <returns></returns>
+    public virtual void GenerateStarThreeCondition()
+    {
+        starThreeCondition = "";
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        InvokeRepeating("CheckStarTwo", 1f, 1f);
+        InvokeRepeating("CheckStarThree", 1f, 1f);
     }
 }
