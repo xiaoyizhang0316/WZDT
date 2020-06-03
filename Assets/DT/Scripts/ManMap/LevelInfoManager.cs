@@ -57,7 +57,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         this.mission_3.text = mission_3;
         panel.SetActive(true);
         this.loadScene = loadScene;
-        //InitBox(name);
+        InitBox(name);
     }
 
     void InitBox(string level)

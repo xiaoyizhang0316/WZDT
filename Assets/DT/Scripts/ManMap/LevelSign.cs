@@ -28,6 +28,7 @@ public class LevelSign : MonoBehaviour
             Debug.Log("1231231231");
             Init();
         });
+        InitLevel();
     }
 
     // Update is called once per frame
