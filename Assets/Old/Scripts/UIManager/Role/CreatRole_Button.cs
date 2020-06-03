@@ -118,6 +118,8 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
                     isSuccess = true;
                     MapManager.My.SetLand(tempXList, tempYList);
+                    role.GetComponent<BaseMapRole>().xList = tempXList;
+                    role.GetComponent<BaseMapRole>().yList = tempYList;
                 }
                 else
                 {
