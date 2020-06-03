@@ -60,7 +60,63 @@ public class GameEnum
         /// <summary>
         /// 投资人
         /// </summary>
-        Investor
+        Investor,
+        /// <summary>
+        /// 切瓜厂
+        /// </summary>
+        CutFactory,
+        /// <summary>
+        /// 果汁厂
+        /// </summary>
+        JuiceFactory,
+        /// <summary>
+        /// 罐头厂
+        /// </summary>
+        CanFactory,
+        /// <summary>
+        /// 批发厂
+        /// </summary>
+        WholesaleFactory,
+        /// <summary>
+        /// 包装厂
+        /// </summary>
+        PackageFactory,
+        /// <summary>
+        /// 软厂
+        /// </summary>
+        SoftFactory,
+        /// <summary>
+        /// 脆厂
+        /// </summary>
+        CrispFactory,
+        /// <summary>
+        /// 甜厂
+        /// </summary>
+        SweetFactory,
+        /// <summary>
+        /// 保险公司
+        /// </summary>
+        Insurance,
+        /// <summary>
+        /// 咨询公司
+        /// </summary>
+        Consulting,
+        /// <summary>
+        /// 公关公司
+        /// </summary>
+        PublicRelation,
+        /// <summary>
+        /// 加油站
+        /// </summary>
+        GasStation,
+        /// <summary>
+        /// 广告公司
+        /// </summary>
+        Advertisment,
+        /// <summary>
+        /// 肥料厂
+        /// </summary>
+        Fertilizer
     }
 
     public enum PDPType

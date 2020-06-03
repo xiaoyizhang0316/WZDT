@@ -67,8 +67,6 @@ public abstract class BaseNpc : MonoBehaviour
             hideModel.SetActive(true);
             trueModel.SetActive(false);
         }
-        isLock = true;
-        isCanSeeEquip = false;
         gameObject.name = GetComponent<BaseMapRole>().baseRoleData.ID.ToString();
         Invoke("UnlockNPCRole", 10f);
     }
