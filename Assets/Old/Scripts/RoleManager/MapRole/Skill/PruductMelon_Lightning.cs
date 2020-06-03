@@ -16,10 +16,11 @@ public class PruductMelon_Lightning  : BaseSkill
         }
         if (role.warehouse.Count > 6 && role.warehouse[0].bulletType == BulletType.NormalPP)
         {
+            print("产闪电链");
             ProductData data = role.warehouse[0];
             for (int i = 0; i < 5; i++)
             {
-                role.warehouse.RemoveAt(i);
+                role.warehouse.RemoveAt(0);
             }
             for (int i = 0; i <role.GetEquipBuffList().Count; i++)
             {
@@ -33,16 +34,13 @@ public class PruductMelon_Lightning  : BaseSkill
             data.bulletType = BulletType.Lightning;
             data.loadingSpeed *=1f-role.baseRoleData.effect/100f ;
             data.loadingSpeed += 1;
- 
             data.damage =  (data.damage*0.6f + role.baseRoleData.effect  );
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;
             game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
             game.GetComponent<GoodsSign>().role =PlayerData.My.GetMapRoleById(Double.Parse( role.tradeList[currentCount].tradeData.targetRole));
-
             game.transform.position = transform.position;
             game.GetComponent<GoodsSign>().Move();
-        
             currentCount++;
             if (currentCount >= role.tradeList.Count)
             {

@@ -42,8 +42,8 @@ public class DrawMoneyLine : MonoBehaviour
     public void DrawLine()
     {
         pointList.Clear();
-        pointList.Add(startTarget.localPosition);
-        pointList.Add(Target.localPosition);
+        pointList.Add(startTarget.position);
+        pointList.Add(Target.position);
         GetComponent<LineRenderer>().positionCount = pointList.Count;
         GetComponent<LineRenderer>().SetPositions(pointList.ToArray());
     }
