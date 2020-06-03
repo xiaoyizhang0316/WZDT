@@ -90,7 +90,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     }
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         InvokeRepeating("CheckStarTwo", 1f, 1f);
         InvokeRepeating("CheckStarThree", 1f, 1f);
