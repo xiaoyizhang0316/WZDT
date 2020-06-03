@@ -57,6 +57,7 @@ public abstract class BaseNpc : MonoBehaviour
         GetComponent<BaseMapRole>().npcScript = this;
         GetComponent<BaseMapRole>().isNpc = true;
         GetComponent<BaseMapRole>().baseRoleData.isNpc = true;
+        GetComponent<BaseMapRole>().baseRoleData.inMap = true;
         if (isCanSee)
         {
             hideModel.SetActive(false);
@@ -68,7 +69,7 @@ public abstract class BaseNpc : MonoBehaviour
             trueModel.SetActive(false);
         }
         gameObject.name = GetComponent<BaseMapRole>().baseRoleData.ID.ToString();
-        Invoke("UnlockNPCRole", 10f);
+        //Invoke("UnlockNPCRole", 10f);
     }
 
     // Update is called once per frame
