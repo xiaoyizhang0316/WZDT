@@ -5,21 +5,6 @@ using static GameEnum;
 
 public class TradeIcon : MonoBehaviour
 {
-    /// <summary>
-    /// 交易方式显示图标
-    /// </summary>
-    public GameObject JYFSgo;
-
-    /// <summary>
-    /// 收支来源显示图标
-    /// </summary>
-    public GameObject SZLYGo;
-
-    /// <summary>
-    /// 收支方式显示图标
-    /// </summary>
-    public GameObject SZFSGo;
-
     public Transform start;
 
     public Transform end;
@@ -39,93 +24,20 @@ public class TradeIcon : MonoBehaviour
     /// <param name="cashflow"></param>
     /// <param name="isfree"></param>
     /// <param name="skilltype"></param>
-    public void SetTradeIcon(SZFSType szfs,CashFlowType cashflow, bool isfree,TradeData tradeData,int Id)
+    public void Init(TradeData tradeData)
     {
-        tradeId = Id;
-        if (isfree)
-        {
-            SZLYGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/白给");
-            SZFSGo.GetComponent<SpriteRenderer>().sprite = null;
-            //switch (skilltype)
-            //{
-            //    case RoleSkillType.Product:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品黑");
-            //        break;
-            //    case RoleSkillType.Service:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务黑");
-            //        break;
-            //    case RoleSkillType.Solution:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案黑");
-            //        break;
-            //}
-        }
-        else if (szfs == SZFSType.固定)
-        {
-            SZFSGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/固定");
-            switch (cashflow)
-            {
-                case CashFlowType.先钱:
-                    SZLYGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/先给");
-                    break;
-                case CashFlowType.后钱:
-                    SZLYGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/后给");
-                    break;
-            }
-            //switch(skilltype)
-            //{
-            //    case RoleSkillType.Product:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品黑");
-            //        break;
-            //    case RoleSkillType.Service:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务黑");
-            //        break;
-            //    case RoleSkillType.Solution:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案黑");
-            //        break;
-            //}
-        }
-        else if (szfs == SZFSType.剩余)
-        {
-            SZFSGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/剩余");
-            SZLYGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/后给");
-            //switch (skilltype)
-            //{
-            //    case RoleSkillType.Product:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品白");
-            //        break;
-            //    case RoleSkillType.Service:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务白");
-            //        break;
-            //    case RoleSkillType.Solution:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案白");
-            //        break;
-            //}
-        }
-        else if (szfs == SZFSType.分成)
-        {
-            SZFSGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/分成");
-            SZLYGo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/后给");
-            //switch (skilltype)
-            //{
-            //    case RoleSkillType.Product:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/产品白");
-            //        break;
-            //    case RoleSkillType.Service:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/服务白");
-            //        break;
-            //    case RoleSkillType.Solution:
-            //        JYFSgo.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/Trade/DealElement/解决方案白");
-            //        break;
-            //}
-        }
+        tradeId = tradeData.ID;
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        transform.position = (start.tradePoint.position + end.tradePoint.position) / 2f + new Vector3(0f,0.3f,0f);
     }
 
     public void OnMouseDown()
     {
         //UIManager.My.Panel_CreateTrade.SetActive(true);
-        if (!UIManager.My.NeedRayCastPanel())
+        if (!NewCanvasUI.My.NeedRayCastPanel())
         {
-            UIManager.My.Panel_CreateTrade.SetActive(true);
+            NewCanvasUI.My.Panel_TradeSetting.SetActive(true);
             CreateTradeManager.My.Open(TradeManager.My.tradeList[tradeId].gameObject);
         }
     }
@@ -139,10 +51,6 @@ public class TradeIcon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(TradeManager.My.tradeList.ContainsKey(tradeId))
-        {
-            DrawMoneyLine tep = TradeManager.My.tradeList[tradeId].tradeMoneyLineGo.GetComponent<DrawMoneyLine>();
-            transform.position = tep.pointList[10];
-        }
+
     }
 }

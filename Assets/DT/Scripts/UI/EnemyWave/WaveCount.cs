@@ -17,7 +17,7 @@ public class WaveCount : MonoSingleton<WaveCount>
 
     public void Init(List<StageEnemyData> datas)
     {
-        for (int i = 0; i < StageGoal.My.maxWaveNumber - 1; i++)
+        for (int i = 0; i < StageGoal.My.maxWaveNumber; i++)
         {
             GameObject go = Instantiate(singleWavePrb, transform.Find("Panel"));
             go.GetComponent<WaveSwim>().Init(i,datas);

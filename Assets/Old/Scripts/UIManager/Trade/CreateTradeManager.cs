@@ -213,9 +213,10 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     /// </summary>
     public void DeleteThisTrade()
     {
-        UIManager.My.Panel_Confirm.gameObject.SetActive(true);
+        NewCanvasUI.My.Panel_Delete.SetActive(true);
+        gameObject.SetActive(false);
         string str = "确定要删除此交易吗？";
-        UIManager.My.Panel_Confirm.gameObject.GetComponent<ConfirmPanel>().Init(TradeManager.My.DeleteTrade, currentTrade.tradeData.ID, str);
+        DeleteUIManager.My.Init(str, () => { TradeManager.My.DeleteTrade(currentTrade.tradeData.ID); });
     }
 
     /// <summary>

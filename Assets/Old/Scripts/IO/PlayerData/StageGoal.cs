@@ -78,6 +78,14 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     #endregion
 
+    #region 统计
+
+    public int killNumber = 0;
+
+    public int totalCost = 0;
+
+    #endregion
+
     /// <summary>
     /// 当前关卡敌人波数数据
     /// </summary>

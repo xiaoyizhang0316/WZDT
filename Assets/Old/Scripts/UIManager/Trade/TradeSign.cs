@@ -14,21 +14,6 @@ public class TradeSign : MonoBehaviour
     public TradeData tradeData;
 
     /// <summary>
-    /// 交易图标Gameobject
-    /// </summary>
-    public GameObject tradeIconGo;
-
-    /// <summary>
-    /// 物流交易线Gameobject
-    /// </summary>
-    public GameObject tradeLineGo;
-
-    /// <summary>
-    /// 钱流交易线Gameobject
-    /// </summary>
-    public GameObject tradeMoneyLineGo;
-
-    /// <summary>
     /// 单根管子
     /// </summary>
     public GameObject tradeCylinder;
@@ -37,6 +22,8 @@ public class TradeSign : MonoBehaviour
     /// 信息流线
     /// </summary>
     public GameObject tradeBuffLine;
+
+    public GameObject tradeIconPrb;
 
     /// <summary>
     /// buff线结算交易成本动画
@@ -60,6 +47,7 @@ public class TradeSign : MonoBehaviour
         SetSkillTarget();
         AddTradeToRole();
         GenerateTradeLine();
+        GenerateTradeIcon();
     }
 
     /// <summary>
@@ -164,6 +152,15 @@ public class TradeSign : MonoBehaviour
         GameObject go = Instantiate(tradeBuffLine);
         go.transform.SetParent(transform);
         go.GetComponent<DrawMoneyLine>().InitPos(cast.tradePoint.transform, target.tradePoint.transform, tradeData.ID);
+    }
+
+    /// <summary>
+    /// 生成交易按钮图标
+    /// </summary>
+    public void GenerateTradeIcon()
+    {
+        GameObject go = Instantiate(tradeIconPrb, transform);
+        go.GetComponent<TradeIcon>().Init(tradeData);
     }
 
     /// <summary>
