@@ -105,7 +105,8 @@ public class BaseMapRole : MonoBehaviour
         buffList = new List<BaseBuff>();
         InvokeRepeating("MonthlyCost", 1f, 60f);
         InvokeRepeating("AddTechPoint", 0f, 10f);
-        InitAttribute();
+        if (!isNpc)
+            InitAttribute();
     }
 
     #region 战斗
