@@ -10,7 +10,7 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        //   Debug.Log("FTE_1"+PlayerPrefs.GetInt("FTE_1"));
+        //   Debug.Log("FTE_1"+PlayerPrefs.GetInt("FTE_1|1",true));
         //   Debug.Log("FTE_2"+PlayerPrefs.GetInt("FTE_2"));
         //   Debug.Log("FTE_3"+PlayerPrefs.GetInt("FTE_3"));
         //   Debug.Log("FTE_4"+PlayerPrefs.GetInt("FTE_4"));
