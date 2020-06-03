@@ -55,11 +55,25 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
             go.GetComponent<Image>().sprite = waveSprites[5];
         }
         int waitNumber = StageGoal.My.waitTimeList[number];
-        transform.localPosition = new Vector3(transform.localPosition.x, -waitNumber * 20, transform.localPosition.z);
-        transform.DOLocalMoveY(0f, waitNumber).SetEase(Ease.Linear).OnComplete(() =>
+        if (waitNumber <= 30)
         {
-            Destroy(gameObject);
-        });
+            transform.localPosition = new Vector3(transform.localPosition.x, -waitNumber * 40f / 3f, transform.localPosition.z);
+            transform.DOLocalMoveY(0f, waitNumber).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                Destroy(gameObject);
+            });
+        }
+        else
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, -waitNumber * 2f - 370f, transform.localPosition.z);
+            transform.DOLocalMoveY(-400f, waitNumber - 30).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                transform.DOLocalMoveY(0f, 30).SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    Destroy(gameObject);
+                });
+            });
+        }
 
     }
 

@@ -137,15 +137,15 @@ public class TradeSign : MonoBehaviour
     {
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
         BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole));
-        int number = Mathf.FloorToInt(Vector3.Distance(cast.transform.position, target.transform.position));
-        Vector3 offset = (target.transform.position - cast.transform.position) / number;
-        float HalfLength = Vector3.Distance(target.transform.position, cast.transform.position) / number / 2f;
-        Vector3 tempStart = cast.transform.position;
+        int number = Mathf.FloorToInt(Vector3.Distance(cast.tradePoint.position, target.tradePoint.position));
+        Vector3 offset = (target.tradePoint.position - cast.tradePoint.position) / number;
+        float HalfLength = Vector3.Distance(target.tradePoint.position, cast.tradePoint.position) / number / 2f;
+        Vector3 tempStart = cast.tradePoint.position - offset / 2f;
         for (int i = 0; i < number; i++)
         {
             GameObject go = Instantiate(tradeCylinder);
             go.transform.SetParent(transform);
-            Vector3 rightRotation = target.transform.position - cast.transform.position;
+            Vector3 rightRotation = target.tradePoint.position - cast.tradePoint.position;
             float LThickness = 0.1f;
             go.transform.position = tempStart + offset;
             go.transform.rotation = Quaternion.FromToRotation(Vector3.up, rightRotation);
@@ -163,7 +163,7 @@ public class TradeSign : MonoBehaviour
         BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole));
         GameObject go = Instantiate(tradeBuffLine);
         go.transform.SetParent(transform);
-        go.GetComponent<DrawMoneyLine>().InitPos(cast.transform, target.transform, tradeData.ID);
+        go.GetComponent<DrawMoneyLine>().InitPos(cast.tradePoint.transform, target.tradePoint.transform, tradeData.ID);
     }
 
     /// <summary>
@@ -174,10 +174,12 @@ public class TradeSign : MonoBehaviour
     {
         TradeLineItem[] list = GetComponentsInChildren<TradeLineItem>();
         List<Vector3> posList = new List<Vector3>();
-        for (int i = 0; i < list.Length; i++)
+        for (int i = 0; i < list.Length - 1; i++)
         {
             posList.Add(list[i].transform.Find("end").position);
         }
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        posList.Add(end.transform.position);
         countNumber++;
         if (countNumber == 10)
         {

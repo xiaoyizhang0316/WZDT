@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static GameEnum;
 
 public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandler, IPointerExitHandler,IBeginDragHandler, IEndDragHandler,IPointerEnterHandler
 {
@@ -16,7 +18,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public GameObject role;
 
-   
+    public RoleType type;
 
     /// <summary>
     /// 窗口开关控制
@@ -55,18 +57,37 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Role tempRole = new Role();
+        tempRole.baseRoleData = GameDataMgr.My.GetModelData(type, 1);
+        tempRole.ID = CommonData.My.GetTimestamp(DateTime.Now);
+        switch (type)
+        {
+            case RoleType.Seed:
+                tempRole.baseRoleData.roleName = StaticRoleName.SeedName[UnityEngine.Random.Range(0, StaticRoleName.SeedName.Length)];
+                break;
+            case RoleType.Peasant:
+                tempRole.baseRoleData.roleName = StaticRoleName.PeasantName[UnityEngine.Random.Range(0, StaticRoleName.PeasantName.Length)];
+                break;
+            case RoleType.Merchant:
+                tempRole.baseRoleData.roleName = StaticRoleName.MerchantName[UnityEngine.Random.Range(0, StaticRoleName.MerchantName.Length)];
+                break;
+            case RoleType.Dealer:
+                tempRole.baseRoleData.roleName = StaticRoleName.DealerName[UnityEngine.Random.Range(0, StaticRoleName.DealerName.Length)];
+                break;
+        }
         role = Instantiate(RolePrb, NewCanvasUI.My.RoleTF.transform);
-        role.name = name.Split('_')[1];
-      
+        role.name = tempRole.ID.ToString();
+        role.GetComponent<BaseMapRole>().baseRoleData = new Role();
+        role.GetComponent<BaseMapRole>().baseRoleData = tempRole;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        secondMenuStatus = !secondMenuStatus;
-        NewCanvasUI.My.Panel_Update.SetActive(true);
-        RoleListInfo.My.roleInfo.transform.position =  transform.position+new Vector3(0,4f) ;
-        RoleListInfo.My.Init( PlayerData.My.GetRoleById(double.Parse(name.Split('_')[1])),this);
-        RoleUpdateInfo.My.Init(PlayerData.My.GetRoleById(double.Parse(name.Split('_')[1])));
+        //secondMenuStatus = !secondMenuStatus;
+        //NewCanvasUI.My.Panel_Update.SetActive(true);
+        //RoleListInfo.My.roleInfo.transform.position =  transform.position+new Vector3(0,4f) ;
+        //RoleListInfo.My.Init( PlayerData.My.GetRoleById(double.Parse(name.Split('_')[1])),this);
+        //RoleUpdateInfo.My.Init(PlayerData.My.GetRoleById(double.Parse(name.Split('_')[1])));
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -92,19 +113,15 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 {
                     print("true ");
                     role.transform.position = hit[j].transform.position;
-                    print("x" + x.ToString() + "y" + y.ToString());
-                    print(hit[j].transform.position);
-                    PlayerData.My.GetRoleById(double.Parse(name.Split('_')[1])).inMap = true;
+                    role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
+                    PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
-                    RoleListManager.My.UpdateRoleList();
                     isSuccess = true;
-                    GetComponent<Image>().raycastTarget = false;
                     MapManager.My.SetLand(tempXList, tempYList);
                 }
                 else
                 {
                     print("false    ");
-                    GetComponent<Image>().raycastTarget = true;
                     Destroy(role, 0.01f);
                 }
                 break;

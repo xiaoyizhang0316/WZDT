@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
@@ -123,7 +124,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// 最终的4项属性值（用于UI显示和最终结算）
     /// </summary>
     #region finalAttribute
- 
+
 
     public int finalEffect;
     public int finalEfficiency;
@@ -141,7 +142,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
 
 
     public List<EffectMove> effects;
-        
+
     public Text souxun;
     public Text yijia;
     public Text jiaodu;
@@ -152,20 +153,20 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
 
 
     public void ShowEquipListPOPDatal(int ID)
-    { 
-      //var data = GameDataMgr.My.GetGearData(ID);
-      //souxun.text = data.effect.ToString();
-      //yijia.text = data.efficiency.ToString();
-      //jiaodu.text = data.range.ToString();
-      ////fengxian.text = data.riskAdd.ToString();
+    {
+        //var data = GameDataMgr.My.GetGearData(ID);
+        //souxun.text = data.effect.ToString();
+        //yijia.text = data.efficiency.ToString();
+        //jiaodu.text = data.range.ToString();
+        ////fengxian.text = data.riskAdd.ToString();
     }
     public void ShowWorkListPOPDatal(int ID)
-    { 
-      // var data = GameDataMgr.My.GetWorkerData(ID);
-      // souxun.text = data.effect.ToString();
-      // yijia.text = data.efficiency.ToString();
-      // jiaodu.text = data.range.ToString();
-      // //fengxian.text = data.riskAdd.ToString();
+    {
+        // var data = GameDataMgr.My.GetWorkerData(ID);
+        // souxun.text = data.effect.ToString();
+        // yijia.text = data.efficiency.ToString();
+        // jiaodu.text = data.range.ToString();
+        // //fengxian.text = data.riskAdd.ToString();
     }
 
     /// <summary>
@@ -175,10 +176,10 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     {
         for (int i = 0; i < effects.Count; i++)
         {
-            StartCoroutine(   effects[i].Move());
+            StartCoroutine(effects[i].Move());
         }
-       NewCanvasUI .My.Panel_ChoseRole.SetActive(false);
-            CurrentRole = tempRole;
+        NewCanvasUI.My.Panel_ChoseRole.SetActive(false);
+        CurrentRole = tempRole;
         //print(tempRole.baseRoleData.roleType);
         //print(CurrentRole.baseRoleData.roleType);
         EquipList = new Dictionary<int, Vector3>();
@@ -200,9 +201,9 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         templateOBJ = Instantiate(Resources.Load<GameObject>(GameDataMgr.My.GetModelData(CurrentRole.baseRoleData.roleType, 1).RoleSpacePath), template_BottomPos);
         CurrentTemplateManager = templateOBJ.GetComponent<TemplateManager>();
         SetCreateRoleTitle();
-         EquipListManager.My.Init();
-     WorkerListManager.My.Init();
-    
+        EquipListManager.My.Init();
+        WorkerListManager.My.Init();
+
     }
 
     /// <summary>
@@ -210,11 +211,11 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void SetCreateRoleTitle()
     {
-   seedInfo.SetActive(false);
-   peasantInfo.SetActive(false);
-   merchantInfo.SetActive(false);
-   dealerInfo.SetActive(false);
-        switch(CurrentRole.baseRoleData.roleType)
+        seedInfo.SetActive(false);
+        peasantInfo.SetActive(false);
+        merchantInfo.SetActive(false);
+        dealerInfo.SetActive(false);
+        switch (CurrentRole.baseRoleData.roleType)
         {
             case RoleType.Seed:
                 roleTitleText.text = "种子商";
@@ -252,7 +253,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             tempGo = Instantiate(Resources.Load<GameObject>(GameDataMgr.My.GetGearData(v.Key).GearSpacePath), EquipListManager.My.equipPos);
 
             Vector3 V2 = new Vector3(v.Value.x - Screen.width / 2, v.Value.y - Screen.height / 2);
-               
+
             tempGo.transform.localPosition = v.Value;
             tempGo.name = "EquipOBJ_" + v.Key;
             tempGo.GetComponent<DragUI>().dragType = DragUI.DragType.equip;
@@ -280,84 +281,18 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void CheckAllConditions()
     {
-       // isWorkerOnEquip = CheckWorkerOnEquip();
-       // isAtLeastOneWorkerEquip = CheckAtLeastOneWorkerEquip();
+        // isWorkerOnEquip = CheckWorkerOnEquip();
+        // isAtLeastOneWorkerEquip = CheckAtLeastOneWorkerEquip();
         CalculateAllAttribute();
-        
+
         //isNeedTemplate = CheckNeedTemplate();
         RoleInfoManager.My.UpdateRoleInfo();
         //if (isWorkerOnEquip && isAtLeastOneWorkerEquip && isNeedTemplate)
-       // if (isWorkerOnEquip && isAtLeastOneWorkerEquip)
-      //      ensureButton.GetComponent<Button>().interactable = true;
-     //   else
-          //  ensureButton.GetComponent<Button>().interactable = false;
+        // if (isWorkerOnEquip && isAtLeastOneWorkerEquip)
+        //      ensureButton.GetComponent<Button>().interactable = true;
+        //   else
+        //  ensureButton.GetComponent<Button>().interactable = false;
     }
-
-    /// <summary>
-    /// 判断工人是否都在装备上
-    /// </summary>
-    /// <returns></returns>
-    public bool CheckWorkerOnEquip()
-    {
-        List<int> workerIndex = new List<int>();
-        List<int> gearIndex = new List<int>();
-        for (int i = 0; i < workerPlot.Length; i++)
-        {
-            if (workerPlot[i].isOccupied)
-                workerIndex.Add(i);
-        }
-        for (int i = 0; i < gearPlot.Length; i++)
-        {
-            if (gearPlot[i].isOccupied)
-                gearIndex.Add(i);
-        }
-        foreach (int i in workerIndex)
-        {
-            if (!gearIndex.Contains(i))
-                return false;
-        }
-        return true;
-    }
-
-    /// <summary>
-    /// 判断是否至少一个装备和一个工人
-    /// </summary>
-    /// <returns></returns>
-    public bool CheckAtLeastOneWorkerEquip()
-    {
-        bool worker = false;
-        bool gear = false;
-        foreach (PlotSign p in gearPlot)
-        {
-            if (p.isOccupied)
-            {
-                gear = true;
-                break;
-            }
-        }
-        foreach (PlotSign p in workerPlot)
-        {
-            if (p.isOccupied)
-            {
-                worker = true;
-                break;
-            }
-        }
-        return worker && gear;
-    }
-
-    ///// <summary>
-    ///// 判断装备是否满足模板需求
-    ///// </summary>
-    ///// <returns></returns>
-    //public bool CheckNeedTemplate()
-    //{
-    //    CalculateAllAttribute();
-    //    if (gearCapacity >= CurrentRole.baseRoleData.needCapacity && gearEfficiency >= CurrentRole.baseRoleData.needEfficiency && gearQuality >= CurrentRole.baseRoleData.needQuality &&
-    //        gearBrand >= CurrentRole.baseRoleData.needBrand)
-    //        return true;
-    //    return false;
-    //}
 
     /// <summary>
     /// 计算角色属性数值
@@ -403,8 +338,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             finalBulletCapacity += tempData.bulletCapacity;
             finalTechAdd += tempData.techAdd;
             CurrentRole.workerCost += tempData.cost;
-            CurrentRole.EquipList = EquipList;
-            CurrentRole.peoPleList = peoPleList;
             //workerCapacity += tempData.capacity;
             //workerEfficiency += tempData.efficiency;
             //workerQuality += tempData.quality;
@@ -467,6 +400,18 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         CurrentRole.tradeCost = finalTradeCost;
         CurrentRole.bulletCapacity = finalBulletCapacity;
         CurrentRole.techAdd = finalTechAdd;
+        List<int> keys = EquipList.Keys.ToList();
+        CurrentRole.EquipList.Clear();
+        CurrentRole.peoPleList.Clear();
+        for (int i = 0; i < keys.Count; i++)
+        {
+            CurrentRole.EquipList.Add(keys[i], EquipList[keys[i]]);
+        }
+        List<int> keys2 = peoPleList.Keys.ToList();
+        for (int i = 0; i < keys2.Count; i++)
+        {
+            CurrentRole.peoPleList.Add(keys2[i], peoPleList[keys2[i]]);
+        }
         int flag = 0;
         for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
         {
@@ -485,7 +430,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         EquipListManager.My.QuitAndSave();
         DeleteTemplate();
 
-    } 
+    }
 
     /// <summary>
     /// 删除所有模板中的子物体
@@ -570,18 +515,16 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void CloseMenu()
     {
-        RoleListManager.My.UpdateRoleList();
         for (int i = 0; i < effects.Count; i++)
         {
-           StartCoroutine( effects[i].Back()) ;
+            StartCoroutine(effects[i].Back());
         }
-
         transform.DOScale(1, 0.5f).OnComplete(() => { gameObject.SetActive(false); });
     }
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
         //gameObject.SetActive(false);
         showWorker.onClick.AddListener(() =>
         {

@@ -6,7 +6,6 @@ using UnityEngine;
 using static GameEnum;
 using DT.Fight.Bullet;
 
-
 public class ConsumeSign : MonoBehaviour
 {
     /// <summary>
@@ -71,6 +70,19 @@ public class ConsumeSign : MonoBehaviour
             elementResistance.Add(p, 100);
         }
         consumeData = new ConsumeData(consumerType);
+        ConsumerTypeData data = GameDataMgr.My.GetConsumerTypeDataByType(consumerType);
+        foreach (int i in data.bornBuff)
+        {
+            BuffData buff = GameDataMgr.My.GetBuffDataByID(i);
+            BaseBuff baseBuff = new BaseBuff();
+            baseBuff.Init(buff);
+            baseBuff.SetConsumerBuff(this);
+        }
+        print(elementResistance[ProductElementType.Sweet]);
+        print(elementResistance[ProductElementType.Crisp]);
+        print(elementResistance[ProductElementType.Discount]);
+        print(elementResistance[ProductElementType.GoodPack]);
+        print(elementResistance[ProductElementType.Soft]);
         GameObject go = Instantiate(hudPrb, transform);
         hud = go.GetComponent<Hud>();
         hud.Init(this);
@@ -119,6 +131,8 @@ public class ConsumeSign : MonoBehaviour
             CheckBulletElement(ref realDamage, data);
             CheckDebuff(data);
             ChangeHealth(realDamage);
+            if (transform.TryGetComponent(out Animator ani))
+                ani.SetBool("OnHit", true);
         }
     }
 
@@ -129,6 +143,7 @@ public class ConsumeSign : MonoBehaviour
     {
         DeathAward();
         Stop();
+        GetComponent<Animator>().SetBool("IsDead", true);
     }
 
     /// <summary>
@@ -138,6 +153,7 @@ public class ConsumeSign : MonoBehaviour
     {
         LivePunish();
         Stop();
+        Destroy(gameObject);
     }
 
     /// <summary>
@@ -264,13 +280,13 @@ public class ConsumeSign : MonoBehaviour
     {
         tweener.Kill();
         buffTweener.Kill();
+        isCanSelect = false;
         GetComponent<Animator>().SetFloat("Speed_f", 0f);
         BaseMapRole[] temp = FindObjectsOfType<BaseMapRole>();
         foreach (BaseMapRole role in temp)
         {
             role.RemoveConsumerFromShootList(this);
         }
-        Destroy(gameObject);
     }
 
     /// <summary>

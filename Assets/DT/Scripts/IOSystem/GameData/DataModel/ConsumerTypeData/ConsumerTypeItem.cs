@@ -43,6 +43,8 @@ public class ConsumerTypeItem
     /// 存活满意度惩罚
     /// </summary>
     public string liveSatisfy;
+
+    public string bornBuff;
 }
 
 [Serializable]

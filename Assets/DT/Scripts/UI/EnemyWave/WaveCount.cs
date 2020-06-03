@@ -84,6 +84,7 @@ public class WaveCount : MonoSingleton<WaveCount>
     void Start()
     {
         waveBg.gameObject.SetActive(false);
+        closeBtn.SetActive(false);
     }
 
     // Update is called once per frame
