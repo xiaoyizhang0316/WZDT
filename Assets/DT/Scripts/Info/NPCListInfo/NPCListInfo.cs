@@ -16,6 +16,8 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public Button serviceTrade;
     public Button productTrade;
 
+    public GameObject npcInfo;
+
     public GameObject specialInfo;
     public GameObject commonServiceInfo;
     public GameObject commonProductInfo;
@@ -27,13 +29,12 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     void Start()
     {
         closeBtn.onClick.AddListener(()=> {
-            gameObject.SetActive(false);
-        });
-        cancelBtn.onClick.AddListener(() => {
-            gameObject.SetActive(false);
+            npcInfo.SetActive(false);
+            closeBtn.gameObject.SetActive(false);
         });
 
-        gameObject.SetActive(false);
+        closeBtn.gameObject.SetActive(false);
+        npcInfo.SetActive(false);
     }
 
     // Update is called once per frame
@@ -50,6 +51,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     {
         HideAll();
         currentNpc = npc;
+        closeBtn.gameObject.SetActive(true);
         switch (npc.baseRoleData.roleType)
         {
             case GameEnum.RoleType.Seed:
@@ -81,6 +83,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
 
     void ShowSpecialNpc()
     {
+        npcInfo.SetActive(true);
         specialTrade.onClick.RemoveAllListeners();
         specialTrade.onClick.AddListener(() =>
         {
@@ -93,7 +96,8 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
 
     void ShowCommonNpc()
     {
-        if(currentNpc.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
+        npcInfo.SetActive(true);
+        if (currentNpc.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
         {
             commonProductInfo.GetComponent<NpcProductInfo>().SetInfo(currentNpc);
             commonProductInfo.SetActive(true);
@@ -120,6 +124,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public void ShowHideTipPop()
     {
         //useItemPop.GetComponent<NpcPop>()
+        npcInfo.SetActive(true);
         pop.SetActive(true);
         closeBtn.interactable = false;
         pop.GetComponent<Image>().DOFade(0, 1f).OnComplete(()=> {
@@ -131,12 +136,19 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public void ShowUnlckPop(Role npc, int unlockNumber)
     {
         currentNpc = npc;
+        npcInfo.SetActive(true);
         lockedInfo.GetComponent<NpcLockedInfo>().SetInfo(npc, unlockNumber);
         lockedInfo.SetActive(true);
 
         unlockBtn.onClick.RemoveAllListeners();
         unlockBtn.onClick.AddListener(()=> {
             Unlock(unlockNumber);
+        });
+
+        cancelBtn.onClick.RemoveAllListeners();
+        cancelBtn.onClick.AddListener(() => {
+            npcInfo.SetActive(false);
+            closeBtn.gameObject.SetActive(false);
         });
     }
 
