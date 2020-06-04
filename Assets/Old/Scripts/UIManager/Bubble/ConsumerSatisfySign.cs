@@ -32,16 +32,7 @@ public class ConsumerSatisfySign : MonoBehaviour
 
     public void ChooseSprite()
     {
-        if (satisfyNum >= 0.7f)
-            GetComponent<Image>().sprite = BubbleManager.My.consumerSprite[0];
-        else if (satisfyNum >= 0.3f && satisfyNum < 0.7f)
-            GetComponent<Image>().sprite = BubbleManager.My.consumerSprite[1];
-        else if (satisfyNum >= -0.2f && satisfyNum < 0.3f)
-            GetComponent<Image>().sprite = BubbleManager.My.consumerSprite[2];
-        else if (satisfyNum >= -0.5f && satisfyNum < -0.2f)
-            GetComponent<Image>().sprite = BubbleManager.My.consumerSprite[3];
-        else if (satisfyNum < -0.5f)
-            GetComponent<Image>().sprite = BubbleManager.My.consumerSprite[4];
+
     }
 
     public void CheckBreak()
@@ -63,7 +54,6 @@ public class ConsumerSatisfySign : MonoBehaviour
         {
             //print("满意度:" + satisfyNum);
             //StageGoal.My.ChangeCustomerSatisfy(satisfyNum);
-            BubbleManager.My.consumerSatisfySigns.Remove(this);
             Destroy(gameObject, 0.01f);
         }).SetUpdate(true);
     }
@@ -76,14 +66,14 @@ public class ConsumerSatisfySign : MonoBehaviour
             //print(EventSystem.current.IsPointerOverGameObject());
             if (EventSystem.current.IsPointerOverGameObject())
             {
-                BubbleManager.My.BreakRoleBubble(mapRoleId);
+
             }
         }
     }
 
     private void Awake()
     {
-        BubbleManager.My.consumerSatisfySigns.Add(this);
+
     }
 
     // Start is called before the first frame update

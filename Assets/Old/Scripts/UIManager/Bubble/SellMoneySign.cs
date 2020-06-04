@@ -32,7 +32,6 @@ public class SellMoneySign : MonoBehaviour
     public void DeleteAndSave()
     {
         isStart = true;
-        BubbleManager.My.sellMoneySigns.Remove(this);
         float targetY = 819f;
         float targetX = Random.Range(192f, 853f);
         Vector3 target = new Vector3(targetX, targetY, 0f);
@@ -59,14 +58,14 @@ public class SellMoneySign : MonoBehaviour
             //print(EventSystem.current.IsPointerOverGameObject());
             if(EventSystem.current.IsPointerOverGameObject())
             {
-                BubbleManager.My.BreakRoleBubble(mapRoleId);
+
             }
         }
     }
 
     private void Awake()
     {
-        BubbleManager.My.sellMoneySigns.Add(this);
+
     }
 
     // Start is called before the first frame update
