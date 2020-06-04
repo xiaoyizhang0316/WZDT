@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.UIElements.VisualElement;
 
@@ -175,5 +176,6 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void LostConfirm()
     {
         lose.SetActive(false);
+        SceneManager.LoadScene("Map");
     }
 }
