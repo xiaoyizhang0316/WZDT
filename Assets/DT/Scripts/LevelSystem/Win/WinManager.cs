@@ -51,12 +51,10 @@ public class WinManager : MonoSingleton<WinManager>
 
     public void InitWin()
     {
-
         boxs.SetActive(false);
         isStar_0 = BaseLevelController.My.starOneStatus;
         isStar_1 = BaseLevelController.My.starTwoStatus;
         isStar_2 = BaseLevelController.My.starThreeStatus;
-
         winPanel.SetActive(true);
         if (isStar_0)
         {
@@ -84,7 +82,6 @@ public class WinManager : MonoSingleton<WinManager>
             box_0Button.interactable = false;
             box_0.color = Color.gray;
         }
-
         if (isStar_1)
         {
             if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "|" + 2, 0) == 0)
@@ -94,7 +91,6 @@ public class WinManager : MonoSingleton<WinManager>
                 box_1Button.interactable = true;
                 box_1.color = Color.white;
             }
-
             else
             {
                 box_1.sprite = tielist[tielist.Count - 1];
@@ -102,7 +98,6 @@ public class WinManager : MonoSingleton<WinManager>
                 star_1.sprite = lightStar;
                 box_1Button.interactable = false;
                 box_1.color = Color.gray;
-
             }
         }
         else
@@ -114,7 +109,6 @@ public class WinManager : MonoSingleton<WinManager>
 
 
         }
-
         if (isStar_2)
         {
             if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "|" + 3, 0) == 0)
@@ -123,18 +117,13 @@ public class WinManager : MonoSingleton<WinManager>
                 star_2.sprite = lightStar;
                 box_2Button.interactable = true;
                 box_2.color = Color.white;
-
-
-
             }
-
             else
             {
                 box_2.sprite = jinlist[jinlist.Count - 1];
                 star_2.sprite = lightStar;
                 box_2Button.interactable = false;
                 box_2.color = Color.gray;
-
             }
         }
         else
@@ -143,7 +132,6 @@ public class WinManager : MonoSingleton<WinManager>
             star_2.sprite = blackStar;
             box_2Button.interactable = false;
             box_2.color = Color.gray;
-
         }
         CheckNext();
     }
