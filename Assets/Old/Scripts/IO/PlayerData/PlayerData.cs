@@ -294,20 +294,8 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         MapRole.Clear();
     }
 
-    public void Init()
-    {
-        foreach (PlayerGear p in playerGears)
-        {
-            p.isEquiped = false;
-        }
-        foreach (PlayerWorker p in playerWorkers)
-        {
-            p.isEquiped = false;
-        }
-    }
-
     private void Start()
     {
-        Init();
+
     }
 }

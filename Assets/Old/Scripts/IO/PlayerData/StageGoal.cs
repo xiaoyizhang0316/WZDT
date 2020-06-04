@@ -412,6 +412,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerSatisfyText = transform.parent.Find("UserInfo/PlayerScore/PlayerScoreText").GetComponent<Text>();
         playerTechText = transform.parent.Find("UserInfo/Image_money/PlayerTech").GetComponent<Text>();
         stageWaveText = transform.parent.Find("UserInfo/Image_level/StageLevel").GetComponent<Text>();
+        foreach (PlayerGear p in PlayerData.My.playerGears)
+        {
+            p.isEquiped = false;
+        }
+        foreach (PlayerWorker p in PlayerData.My.playerWorkers)
+        {
+            p.isEquiped = false;
+        }
         InitStageData();
         SetInfo();
         WaveCount();
