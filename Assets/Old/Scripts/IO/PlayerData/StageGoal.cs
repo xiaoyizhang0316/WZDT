@@ -76,6 +76,20 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public float maxHealtherBarLength;
 
+    public List<Sprite> starSprites = new List<Sprite>();
+
+    public Image starOne;
+
+    public Image starTwo;
+
+    public Image starThree;
+
+    public Text starOneText;
+
+    public Text starTwoText;
+
+    public Text starThreeText;
+
     #endregion
 
     #region 统计
@@ -273,6 +287,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         BaseLevelController.My.CancelInvoke("CheckStarTwo");
         BaseLevelController.My.CancelInvoke("CheckStarOne");
         BaseLevelController.My.CancelInvoke("CheckStarThree");
+        BaseLevelController.My.CancelInvoke("UpdateInfo");
         NewCanvasUI.My.GamePause();
         WinManager.My.InitWin();
         //NewCanvasUI.My.Panel_Win.SetActive(true);
