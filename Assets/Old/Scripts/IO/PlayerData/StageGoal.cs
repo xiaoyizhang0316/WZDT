@@ -76,6 +76,24 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public float maxHealtherBarLength;
 
+    public Button menuOpenButton;
+
+    public Button menuCloseButton;
+
+    public List<Sprite> starSprites = new List<Sprite>();
+
+    public Image starOne;
+
+    public Image starTwo;
+
+    public Image starThree;
+
+    public Text starOneText;
+
+    public Text starTwoText;
+
+    public Text starThreeText;
+
     #endregion
 
     #region 统计
@@ -273,6 +291,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         BaseLevelController.My.CancelInvoke("CheckStarTwo");
         BaseLevelController.My.CancelInvoke("CheckStarOne");
         BaseLevelController.My.CancelInvoke("CheckStarThree");
+        BaseLevelController.My.CancelInvoke("UpdateInfo");
         NewCanvasUI.My.GamePause();
         WinManager.My.InitWin();
         //NewCanvasUI.My.Panel_Win.SetActive(true);
@@ -393,6 +412,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerSatisfyText = transform.parent.Find("UserInfo/PlayerScore/PlayerScoreText").GetComponent<Text>();
         playerTechText = transform.parent.Find("UserInfo/Image_money/PlayerTech").GetComponent<Text>();
         stageWaveText = transform.parent.Find("UserInfo/Image_level/StageLevel").GetComponent<Text>();
+        foreach (PlayerGear p in PlayerData.My.playerGears)
+        {
+            p.isEquiped = false;
+        }
+        foreach (PlayerWorker p in PlayerData.My.playerWorkers)
+        {
+            p.isEquiped = false;
+        }
         InitStageData();
         SetInfo();
         WaveCount();
@@ -467,12 +494,29 @@ public class StageGoal : MonoSingleton<StageGoal>
         waveCountItem.Init(enemyDatas);
     }
 
+    public void MenuHide()
+    {
+        GetComponent<RectTransform>().DOAnchorPosX(160.27f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
+            menuCloseButton.gameObject.SetActive(false);
+            menuOpenButton.gameObject.SetActive(true);
+        });
+    }
+
+    public void MenuShow()
+    {
+        GetComponent<RectTransform>().DOAnchorPosX(-178f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {
+            menuCloseButton.gameObject.SetActive(true);
+            menuOpenButton.gameObject.SetActive(false);
+        });
+    }
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         InitStage();
+        MenuHide();
         cameraPos = Camera.main.transform.position;
     }
     private Vector3 cameraPos;
