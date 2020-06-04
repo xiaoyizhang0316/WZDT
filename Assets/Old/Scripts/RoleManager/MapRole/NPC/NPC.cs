@@ -87,7 +87,7 @@ public class NPC : BaseNpc
             {
                 if (isLock)
                 {
-                    NPCListInfo.My.ShowUnlckPop(currentRole, lockNumber);
+                    NPCListInfo.My.ShowUnlckPop(currentRole, this);
                 }
                 else
                 {
@@ -96,7 +96,7 @@ public class NPC : BaseNpc
             }
             else
             {
-                NPCListInfo.My.ShowHideTipPop();
+                NPCListInfo.My.ShowHideTipPop("使用广角镜发现角色");
             }
         }
     }
