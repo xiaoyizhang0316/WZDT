@@ -22,6 +22,7 @@ public class Level2Controller : BaseLevelController
         {
             starTwoStatus = true;
         }
+        starTwoCondition = "满足蓝领数量:" + targetNumber.ToString() + "/18";
     }
 
     public override void CheckStarThree()

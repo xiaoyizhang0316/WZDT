@@ -49,6 +49,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     public virtual void CheckStarOne()
     {
         starOneStatus = StageGoal.My.playerHealth > 0;
+        starOneCondition = "玩家当前血量大于0";
     }
 
     /// <summary>
@@ -58,6 +59,16 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     public virtual void CheckStarTwo()
     {
         starTwoStatus = true;
+    }
+
+    public virtual void UpdateInfo()
+    {
+        StageGoal.My.starOne.sprite = StageGoal.My.starSprites[starOneStatus ? 0 : 1];
+        StageGoal.My.starTwo.sprite = StageGoal.My.starSprites[starTwoStatus ? 0 : 1];
+        StageGoal.My.starThree.sprite = StageGoal.My.starSprites[starThreeStatus ? 0 : 1];
+        StageGoal.My.starOneText.text = starOneCondition;
+        StageGoal.My.starTwoText.text = starTwoCondition;
+        StageGoal.My.starThreeText.text = starThreeCondition;
     }
 
     /// <summary>
@@ -72,8 +83,9 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     // Start is called before the first frame update
     public virtual void Start()
     {
-        InvokeRepeating("CheckStarTwo", 1f, 1f);
-        InvokeRepeating("CheckStarThree", 1f, 1f);
-        InvokeRepeating("CheckStarOne", 1f, 1f);
+        InvokeRepeating("CheckStarTwo", 0f, 1f);
+        InvokeRepeating("CheckStarThree", 0f, 1f);
+        InvokeRepeating("CheckStarOne", 0f, 1f);
+        InvokeRepeating("UpdateInfo", 0.1f, 1f);
     }
 }

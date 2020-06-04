@@ -17,14 +17,10 @@ public class Level1Controller : BaseLevelController
                 break;
             }
         }
-        //if (starTwoStatus)
-        //{
-        //    starTwoCondition = "关卡内有一个零售商达到LV2";
-        //}
-        //else
-        //{
-        //    starTwoCondition = "关卡内尚未有零售商达到LV2";
-        //}
+        if (starTwoStatus)
+            starTwoCondition = "关卡内有一个零售商达到LV2 : 1/1";
+        else
+            starTwoCondition = "关卡内有一个零售商达到LV2 : 0/1";
     }
 
     public override void CheckStarThree()
@@ -37,5 +33,7 @@ public class Level1Controller : BaseLevelController
         {
             starThreeStatus = false;
         }
+        string number = (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth * 100).ToString() + "%";
+        starThreeCondition = "玩家血量不低于80%，当前：" + number;
     }
 }
