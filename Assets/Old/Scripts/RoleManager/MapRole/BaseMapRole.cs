@@ -428,7 +428,10 @@ public class BaseMapRole : MonoBehaviour
     }
 
     #endregion
-
+    /// <summary>
+    /// 获得所有装备带的BUFF
+    /// </summary>
+    /// <returns></returns>
     public List<int > GetEquipBuffList()
     {
         List<int> bufflist = new List<int>();

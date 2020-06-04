@@ -74,5 +74,6 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     {
         InvokeRepeating("CheckStarTwo", 1f, 1f);
         InvokeRepeating("CheckStarThree", 1f, 1f);
+        InvokeRepeating("CheckStarOne", 1f, 1f);
     }
 }
