@@ -232,7 +232,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     }
 
     /// <summary>
-    /// 检测通关条件或者死亡条件
+    /// 检测死亡条件
     /// </summary>
     public void CheckDead()
     {
@@ -251,6 +251,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
     }
 
+    /// <summary>
+    /// 检测通关条件
+    /// </summary>
     public void CheckWin()
     {
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();

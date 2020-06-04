@@ -41,7 +41,8 @@ public class ProductData
         }
         else
         {
-            buffList.Add(buffId);
+            if(!buffList.Contains(buffId))
+                buffList.Add(buffId);
         }
     }
 
