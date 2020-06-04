@@ -9,10 +9,6 @@ public class StageItem
 {
     public string sceneName;
 
-    public string startWorker;
-
-    public string startEquip;
-
     public string maxWaveNumber;
 
     public string waveWaitTime;

@@ -103,7 +103,7 @@ public class RoleListInfo : MonoSingleton<RoleListInfo>
         if (role.baseRoleData.roleType == GameEnum.RoleType.Dealer)
         {
             dealer.SetActive(true);
-            merchant.GetComponent<BaseRoleListInfo>().Init(role);
+            dealer.GetComponent<BaseRoleListInfo>().Init(role);
         }
     }
 }

@@ -229,25 +229,53 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.maxWaveNumber = int.Parse(s.maxWaveNumber);
             temp.startPlayerHealth = int.Parse(s.startPlayerHealth);
             temp.startPlayerGold = int.Parse(s.startPlayerGold);
-            string[] waitTimeList = s.waveWaitTime.Split(',');
             temp.waveWaitTime = new List<int>();
+            string[] waitTimeList = s.waveWaitTime.Split(',');
             foreach (string str in waitTimeList)
             {
                 temp.waveWaitTime.Add(int.Parse(str));
             }
-            string[] strList = s.startWorker.Split(',');
-            temp.startWorker = new List<int>();
-            temp.startEquip = new List<int>();
+            temp.starOneEquip = new List<int>();
+            temp.starOneWorker = new List<int>();
+            temp.starTwoEquip = new List<int>();
+            temp.starTwoWorker = new List<int>();
+            temp.starThreeEquip = new List<int>();
+            temp.starThreeWorker = new List<int>();
+            string[] strList = s.starOneEquip.Split(',');
             foreach (string str in strList)
             {
-                if (!str.Equals("-1"))
-                    temp.startWorker.Add(int.Parse(str));
+                if (int.Parse(str) != -1)
+                    temp.starOneEquip.Add(int.Parse(str));
             }
-            strList = s.startEquip.Split(',');
+            strList = s.starOneWorker.Split(',');
             foreach (string str in strList)
             {
-                if (!str.Equals("-1"))
-                    temp.startEquip.Add(int.Parse(str));
+                if (int.Parse(str) != -1)
+                    temp.starOneWorker.Add(int.Parse(str));
+            }
+            strList = s.starTwoEquip.Split(',');
+            foreach (string str in strList)
+            {
+                if (int.Parse(str) != -1)
+                    temp.starTwoEquip.Add(int.Parse(str));
+            }
+            strList = s.starTwoWorker.Split(',');
+            foreach (string str in strList)
+            {
+                if (int.Parse(str) != -1)
+                    temp.starTwoWorker.Add(int.Parse(str));
+            }
+            strList = s.starThreeEquip.Split(',');
+            foreach (string str in strList)
+            {
+                if (int.Parse(str) != -1)
+                    temp.starThreeEquip.Add(int.Parse(str));
+            }
+            strList = s.starThreeWorker.Split(',');
+            foreach (string str in strList)
+            {
+                if (int.Parse(str) != -1)
+                    temp.starThreeWorker.Add(int.Parse(str));
             }
             stageDatas.Add(temp);
         }
