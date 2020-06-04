@@ -69,7 +69,6 @@ public abstract class BaseNpc : MonoBehaviour
             trueModel.SetActive(false);
         }
         gameObject.name = GetComponent<BaseMapRole>().baseRoleData.ID.ToString();
-        //Invoke("UnlockNPCRole", 10f);
     }
 
     // Update is called once per frame
