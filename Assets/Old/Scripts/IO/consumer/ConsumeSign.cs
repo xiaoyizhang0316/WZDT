@@ -141,6 +141,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void OnDeath()
     {
+        BroadcastMessage("CountKillNumber", this);
         DeathAward();
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);

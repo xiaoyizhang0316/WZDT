@@ -19,7 +19,6 @@ public class PruductDealer : BaseSkill
                 CancelSkill();
                 return;
             }
-
             //Debug.Log("攻击");
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
