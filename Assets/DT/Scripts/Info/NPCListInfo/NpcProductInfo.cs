@@ -14,7 +14,7 @@ public class NpcProductInfo : MonoBehaviour
     {
         //des
         //timeInv
-        cost.text = npc.tradeCost.ToString();
-        risk.text = npc.riskResistance.ToString();
+        cost.text = npc.baseRoleData.tradeCost.ToString();
+        risk.text = npc.baseRoleData.riskResistance.ToString();
     }
 }

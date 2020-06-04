@@ -35,6 +35,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
 
         closeBtn.gameObject.SetActive(false);
         npcInfo.SetActive(false);
+        //ShowHideTipPop("解锁失败");
     }
 
     // Update is called once per frame
@@ -88,7 +89,8 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         specialTrade.onClick.AddListener(() =>
         {
             NewCanvasUI.My.CreateTrade(PlayerData.My.GetMapRoleById(currentNpc.ID));
-            gameObject.SetActive(false);
+            npcInfo.SetActive(false);
+            closeBtn.gameObject.SetActive(false);
         });
         specialInfo.GetComponent<NpcSpecialInfo>().SetInfo(currentNpc);
         specialInfo.SetActive(true);
@@ -105,7 +107,8 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
             productTrade.onClick.AddListener(() =>
             {
                 NewCanvasUI.My.CreateTrade(PlayerData.My.GetMapRoleById(currentNpc.ID));
-                gameObject.SetActive(false);
+                npcInfo.SetActive(false);
+                closeBtn.gameObject.SetActive(false);
             });
         }
         else if(currentNpc.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Service)
@@ -116,33 +119,36 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
             serviceTrade.onClick.AddListener(() =>
             {
                 NewCanvasUI.My.CreateTrade(PlayerData.My.GetMapRoleById(currentNpc.ID));
-                gameObject.SetActive(false);
+                npcInfo.SetActive(false);
+                closeBtn.gameObject.SetActive(false);
             });
         }
     }
 
-    public void ShowHideTipPop()
+    public void ShowHideTipPop(string tip)
     {
         //useItemPop.GetComponent<NpcPop>()
         npcInfo.SetActive(true);
+        pop.transform.GetChild(0).GetComponent<Text>().text = tip;
         pop.SetActive(true);
         closeBtn.interactable = false;
         pop.GetComponent<Image>().DOFade(0, 1f).OnComplete(()=> {
-            gameObject.SetActive(false);
+            npcInfo.SetActive(false);
             closeBtn.interactable = true;
+            closeBtn.gameObject.SetActive(false);
         });
     }
 
-    public void ShowUnlckPop(Role npc, int unlockNumber)
+    public void ShowUnlckPop(Role npc, NPC n)
     {
         currentNpc = npc;
         npcInfo.SetActive(true);
-        lockedInfo.GetComponent<NpcLockedInfo>().SetInfo(npc, unlockNumber);
+        lockedInfo.GetComponent<NpcLockedInfo>().SetInfo(npc, n.lockNumber);
         lockedInfo.SetActive(true);
 
         unlockBtn.onClick.RemoveAllListeners();
         unlockBtn.onClick.AddListener(()=> {
-            Unlock(unlockNumber);
+            Unlock(n);
         });
 
         cancelBtn.onClick.RemoveAllListeners();
@@ -152,8 +158,18 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         });
     }
 
-    private void Unlock(int unlockNum)
+    private void Unlock(NPC npc)
     {
-        
+        if (npc.UnlockNPCRole())
+        {
+            lockedInfo.SetActive(false);
+            ShowNpcInfo(currentNpc);
+        }
+        else
+        {
+            // unlock fail
+            lockedInfo.SetActive(false);
+            ShowHideTipPop("解锁失败");
+        }
     }
 }

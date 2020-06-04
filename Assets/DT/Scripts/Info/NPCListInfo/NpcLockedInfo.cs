@@ -16,8 +16,8 @@ public class NpcLockedInfo : MonoBehaviour
     {
         //skillDes.text = 
         //timeInterval.text = 
-        tradeCost.text = npc.tradeCost.ToString();
-        risk.text = npc.riskResistance.ToString();
+        tradeCost.text = npc.baseRoleData.tradeCost.ToString();
+        risk.text = npc.baseRoleData.riskResistance.ToString();
 
         unlockCost.text = unlockNumber.ToString();
     }
