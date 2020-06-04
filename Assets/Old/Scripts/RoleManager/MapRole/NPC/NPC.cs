@@ -83,6 +83,21 @@ public class NPC : BaseNpc
         {
             //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
             //RoleListInfo.My.Init(currentRole);
+            if (isCanSee)
+            {
+                if (isLock)
+                {
+                    NPCListInfo.My.ShowUnlckPop(currentRole, lockNumber);
+                }
+                else
+                {
+                    NPCListInfo.My.ShowNpcInfo(currentRole);
+                }
+            }
+            else
+            {
+                NPCListInfo.My.ShowHideTipPop();
+            }
         }
     }
 
