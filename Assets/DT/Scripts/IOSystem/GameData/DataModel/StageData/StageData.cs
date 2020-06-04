@@ -12,16 +12,6 @@ public class StageData
     public string sceneName;
 
     /// <summary>
-    /// 初始工人列表
-    /// </summary>
-    public List<int> startWorker;
-
-    /// <summary>
-    /// 初始装备列表
-    /// </summary>
-    public List<int> startEquip;
-
-    /// <summary>
     /// 关卡总波数
     /// </summary>
     public int maxWaveNumber;
