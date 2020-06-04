@@ -23,17 +23,24 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     /// <summary>
     /// 1星状态
     /// </summary>
-    public bool starOneStatus;
+    public bool starOneStatus = false;
 
     /// <summary>
     /// 2星状态
     /// </summary>
-    public bool starTwoStatus;
+    public bool starTwoStatus = false;
 
     /// <summary>
     /// 3星状态
     /// </summary>
-    public bool starThreeStatus;
+    public bool starThreeStatus = false;
+
+    public int targetNumber = 0;
+
+    public virtual void CountKillNumber(ConsumeSign sign)
+    {
+        targetNumber++;
+    }
 
     /// <summary>
     /// 1星条件检测
@@ -62,35 +69,8 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         starThreeStatus = true;
     }
 
-    /// <summary>
-    /// 1星条件字符串生成
-    /// </summary>
-    /// <returns></returns>
-    public virtual void GenerateStarOneCondition()
-    {
-        starOneCondition = "";
-    }
-
-    /// <summary>
-    /// 2星条件字符串生成
-    /// </summary>
-    /// <returns></returns>
-    public virtual void GenerateStarTwoCondition()
-    {
-        starTwoCondition = "";
-    }
-
-    /// <summary>
-    /// 3星条件字符串生成
-    /// </summary>
-    /// <returns></returns>
-    public virtual void GenerateStarThreeCondition()
-    {
-        starThreeCondition = "";
-    }
-
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         InvokeRepeating("CheckStarTwo", 1f, 1f);
         InvokeRepeating("CheckStarThree", 1f, 1f);
