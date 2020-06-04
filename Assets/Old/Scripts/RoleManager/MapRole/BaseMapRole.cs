@@ -103,10 +103,13 @@ public class BaseMapRole : MonoBehaviour
     void Start()
     {
         buffList = new List<BaseBuff>();
-        InvokeRepeating("MonthlyCost", 1f, 60f);
-        InvokeRepeating("AddTechPoint", 0f, 10f);
         if (!isNpc)
+        {
             InitAttribute();
+            MonthlyCost();
+            AddTechPoint();
+        }
+
     }
 
     #region 战斗
@@ -254,21 +257,21 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void MonthlyCost()
     {
-        if (!baseRoleData.isNpc)
+        //BubbleManager.My.InitCostMoney(transform, baseRoleData.cost);
+        transform.DOScale(1f, 20f).OnComplete(() =>
         {
-            int result = 0;
-            result += baseRoleData.baseRoleData.cost;
-            result += baseRoleData.equipCost;
-            result += baseRoleData.workerCost;
-            result += baseRoleData.landCost;
-            result = 0 - result;
-            //print("每月成本 " + result.ToString());
-        }
+            StageGoal.My.CostPlayerGold(baseRoleData.cost);
+            MonthlyCost();
+        });
     }
 
     public void AddTechPoint()
     {
-        StageGoal.My.GetTechPoint(baseRoleData.techAdd);
+        transform.DOScale(1f, 10f).OnComplete(() =>
+        {
+            StageGoal.My.GetTechPoint(baseRoleData.techAdd);
+            AddTechPoint();
+        });
     }
 
     #endregion

@@ -305,6 +305,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         if (playerHealth < 0)
         {
             NewCanvasUI.My.GamePause();
+           
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
         }
         else

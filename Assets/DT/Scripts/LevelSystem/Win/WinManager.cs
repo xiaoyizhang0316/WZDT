@@ -262,6 +262,7 @@ public class WinManager : MonoSingleton<WinManager>
         });
         returnMap.onClick.AddListener(() =>
         {
+            PlayerData.My.Reset();
             SceneManager.LoadScene("Map");
         });
     }

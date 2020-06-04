@@ -6,17 +6,6 @@ using UnityEngine;
 public class PruductMerchant : BaseSkill
 {
     private int currentCount= 0 ;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public override void Skill()
     {
@@ -26,6 +15,7 @@ public class PruductMerchant : BaseSkill
         }
         if (role.warehouse.Count > 0 )
         {
+            print("贸易商技能");
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
             for (int i = 0; i <role.GetEquipBuffList().Count; i++)
