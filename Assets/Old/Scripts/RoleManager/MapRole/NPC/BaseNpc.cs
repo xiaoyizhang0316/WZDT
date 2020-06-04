@@ -24,6 +24,11 @@ public abstract class BaseNpc : MonoBehaviour
     /// </summary>
     public int lockNumber;
 
+    /// <summary>
+    /// NPC装备
+    /// </summary>
+    public List<int> NPCgear = new List<int>();
+
     public GameObject hideModel;
 
     public GameObject trueModel;
@@ -57,14 +62,22 @@ public abstract class BaseNpc : MonoBehaviour
         GetComponent<BaseMapRole>().npcScript = this;
         GetComponent<BaseMapRole>().isNpc = true;
         GetComponent<BaseMapRole>().baseRoleData.isNpc = true;
-        hideModel.SetActive(true);
-        trueModel.SetActive(false);
-        isLock = true;
-        isCanSee = false;
-        isCanSeeEquip = false;
+        GetComponent<BaseMapRole>().baseRoleData.inMap = true;
+        for (int i = 0; i < NPCgear.Count; i++)
+        {
+            GetComponent<BaseMapRole>().baseRoleData.EquipList.Add(NPCgear[i], Vector3.zero);
+        }
+        if (isCanSee)
+        {
+            hideModel.SetActive(false);
+            trueModel.SetActive(true);
+        }
+        else
+        {
+            hideModel.SetActive(true);
+            trueModel.SetActive(false);
+        }
         gameObject.name = GetComponent<BaseMapRole>().baseRoleData.ID.ToString();
-        Invoke("DetectNPCRole", 5f);
-        Invoke("UnlockNPCRole", 10f);
     }
 
     // Update is called once per frame

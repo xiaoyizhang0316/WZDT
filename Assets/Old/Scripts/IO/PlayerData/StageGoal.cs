@@ -78,6 +78,14 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     #endregion
 
+    #region 统计
+
+    public int killNumber = 0;
+
+    public int totalCost = 0;
+
+    #endregion
+
     /// <summary>
     /// 当前关卡敌人波数数据
     /// </summary>
@@ -224,7 +232,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     }
 
     /// <summary>
-    /// 检测通关条件或者死亡条件
+    /// 检测死亡条件
     /// </summary>
     public void CheckDead()
     {
@@ -243,11 +251,16 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
     }
 
+    /// <summary>
+    /// 检测通关条件
+    /// </summary>
     public void CheckWin()
     {
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
-        if (list.Length == 0 && currentWave == maxWaveNumber)
+        //print("consumeSign list:" + list.Length.ToString());
+        if (list.Length == 1 && currentWave > maxWaveNumber)
         {
+            print("胜利");
             Win();
         }
     }
@@ -257,7 +270,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Win()
     {
+        BaseLevelController.My.CancelInvoke("CheckStarTwo");
+        BaseLevelController.My.CancelInvoke("CheckStarOne");
+        BaseLevelController.My.CancelInvoke("CheckStarThree");
         NewCanvasUI.My.GamePause();
+        WinManager.My.InitWin();
         //NewCanvasUI.My.Panel_Win.SetActive(true);
     }
 
@@ -280,8 +297,10 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
-        if (currentWave == maxWaveNumber)
+        if (currentWave > maxWaveNumber)
+        {
             return;
+        }
         timeCount++;
         if (timeCount == waitTimeList[currentWave - 1])
         {
@@ -293,22 +312,74 @@ public class StageGoal : MonoSingleton<StageGoal>
             stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
             WaveCount();
         });
-        //stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
-        //waveCountItem.CountDown(waitTimeList[currentWave - 1],currentWave - 1);
-        //waveTween = transform.DOScale(1f, waitTimeList[currentWave - 1]).OnComplete(() =>
-        //{
-        //    if (currentWave == maxWaveNumber)
-        //    {
-        //        stageWaveText.text = (currentWave).ToString() + "/" + maxWaveNumber.ToString();
-        //    }
-        //    else
-        //    {
-        //        BuildingManager.My.WaveSpawnConsumer(currentWave);
-        //        currentWave++;
-        //        stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString(); 
-        //        WaveCount();
-        //    }
-        //});
+    }
+
+    /// <summary>
+    /// 获得星数对应的装备
+    /// </summary>
+    /// <param name="starNumber"></param>
+    /// <returns></returns>
+    public List<GearData> GetStarGearData(int starNumber)
+    {
+        List<GearData> result = new List<GearData>();
+        string sceneName = SceneManager.GetActiveScene().name;
+        StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
+        List<int> gearList = new List<int>();
+        switch(starNumber)
+        {
+            case 1:
+                gearList = data.starOneEquip;
+                break;
+            case 2:
+                gearList = data.starTwoEquip;
+                break;
+            case 3:
+                gearList = data.starThreeEquip;
+                break;
+            default:
+                throw new System.Exception("星数输入错误！");
+        }
+        foreach (int item in gearList)
+        {
+            GearData gearData = GameDataMgr.My.GetGearData(item);
+            PlayerData.My.GetNewGear(item);
+            result.Add(gearData);
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// 获得星数对应的工人
+    /// </summary>
+    /// <param name="starNumber"></param>
+    /// <returns></returns>
+    public List<WorkerData> GetStarWorkerData(int starNumber)
+    {
+        List<WorkerData> result = new List<WorkerData>();
+        string sceneName = SceneManager.GetActiveScene().name;
+        StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
+        List<int> workerList = new List<int>();
+        switch (starNumber)
+        {
+            case 1:
+                workerList = data.starOneWorker;
+                break;
+            case 2:
+                workerList = data.starTwoWorker;
+                break;
+            case 3:
+                workerList = data.starThreeWorker;
+                break;
+            default:
+                throw new System.Exception("星数输入错误！");
+        }
+        foreach (int item in workerList)
+        {
+            WorkerData workerData = GameDataMgr.My.GetWorkerData(item);
+            PlayerData.My.GetNewWorker(item);
+            result.Add(workerData);
+        }
+        return result;
     }
 
     /// <summary>
@@ -344,23 +415,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         foreach (int i in data.waveWaitTime)
         {
             waitTimeList.Add(i);
-        }
-        InitEquipAndWorker(data);
-    }
-
-    /// <summary>
-    /// 读取装备和工人
-    /// </summary>
-    /// <param name="data"></param>
-    public void InitEquipAndWorker(StageData data)
-    {
-        foreach (int i in data.startWorker)
-        {
-            PlayerData.My.GetNewWorker(i);
-        }
-        foreach (int i in data.startEquip)
-        {
-            PlayerData.My.GetNewGear(i);
         }
     }
 
@@ -427,5 +481,17 @@ public class StageGoal : MonoSingleton<StageGoal>
     void Update()
     {
         
+    }
+
+    private void OnGUI()
+    {
+        if (GUI.Button(new Rect(0,0,100,20),"4倍速"))
+        {
+            DOTween.timeScale = 4f;
+        }
+        if (GUI.Button(new Rect(0, 20, 100, 20), "通关"))
+        {
+            Win();
+        }
     }
 }

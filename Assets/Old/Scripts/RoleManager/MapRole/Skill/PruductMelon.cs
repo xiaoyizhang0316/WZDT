@@ -31,13 +31,22 @@ public class PruductMelon : BaseSkill
             {
                 data.AddBuff(buffList[i]);
             }
-            GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
-            game.GetComponent<GoodsSign>().productData = data;
-            game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
-            game.GetComponent<GoodsSign>().role =PlayerData.My.GetMapRoleById(Double.Parse( role.tradeList[currentCount].tradeData.targetRole));
-            game.transform.position = transform.position;
-            game.GetComponent<GoodsSign>().Move();
-            currentCount++;
+            try
+            {
+                GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
+                game.GetComponent<GoodsSign>().productData = data;
+                game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();
+                game.GetComponent<GoodsSign>().role = PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
+                game.transform.position = transform.position;
+                game.GetComponent<GoodsSign>().Move();
+                currentCount++;
+            }
+            catch (Exception)
+            {
+
+
+            }
+           
             if (currentCount >= role.tradeList.Count)
             {
                 currentCount = 0;

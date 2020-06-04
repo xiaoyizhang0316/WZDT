@@ -5,9 +5,18 @@ using UnityEngine;
 
 public abstract class BaseSkill : MonoBehaviour
 {
+
     public BaseMapRole role;
+
     public bool IsOpen;
 
+    /// <summary>
+    /// 技能描述
+    /// </summary>
+    public string skillDesc;
+    /// <summary>
+    /// 附带buff列表
+    /// </summary>
     public List<int> buffList;
     // Start is called before the first frame update
     void Start()
@@ -32,7 +41,6 @@ public abstract class BaseSkill : MonoBehaviour
 
     public virtual void UnleashSkills()
     {
-
         float d = 1f / (role.baseRoleData.efficiency * 0.05f);
 
         transform.DOScale(1, d ).OnComplete(() =>

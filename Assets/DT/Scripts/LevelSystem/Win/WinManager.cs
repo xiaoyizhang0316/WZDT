@@ -36,7 +36,7 @@ public class WinManager : MonoSingleton<WinManager>
     public Button box_0Button;
     public Button box_1Button;
     public Button box_2Button;
-    
+
     public Image star_0;
     public Image star_1;
     public Image star_2;
@@ -51,9 +51,11 @@ public class WinManager : MonoSingleton<WinManager>
 
     public void InitWin()
     {
-        
-        boxs.SetActive(false);
 
+        boxs.SetActive(false);
+        isStar_0 = BaseLevelController.My.starOneStatus;
+        isStar_1 = BaseLevelController.My.starTwoStatus;
+        isStar_2 = BaseLevelController.My.starThreeStatus;
 
         winPanel.SetActive(true);
         if (isStar_0)
@@ -64,20 +66,15 @@ public class WinManager : MonoSingleton<WinManager>
                 star_0.sprite = lightStar;
                 //   boxs.SetActive(true);
                 box_0.color = Color.white;
-
                 box_0Button.interactable = true;
-
-             
             }
-
             else
             {
-                box_0.sprite = mulist[mulist.Count-1];
+                box_0.sprite = mulist[mulist.Count - 1];
                 star_0.sprite = lightStar;
                 //  boxs.SetActive(true);
                 box_0Button.interactable = false;
                 box_0.color = Color.gray;
-
             }
         }
         else
@@ -96,14 +93,11 @@ public class WinManager : MonoSingleton<WinManager>
                 star_1.sprite = lightStar;
                 box_1Button.interactable = true;
                 box_1.color = Color.white;
-
-
-             
             }
 
             else
             {
-                box_1.sprite = tielist[tielist.Count-1];
+                box_1.sprite = tielist[tielist.Count - 1];
 
                 star_1.sprite = lightStar;
                 box_1Button.interactable = false;
@@ -131,12 +125,12 @@ public class WinManager : MonoSingleton<WinManager>
                 box_2.color = Color.white;
 
 
-              
+
             }
 
             else
             {
-                box_2.sprite = jinlist[jinlist.Count-1];
+                box_2.sprite = jinlist[jinlist.Count - 1];
                 star_2.sprite = lightStar;
                 box_2Button.interactable = false;
                 box_2.color = Color.gray;
@@ -145,19 +139,15 @@ public class WinManager : MonoSingleton<WinManager>
         }
         else
         {
-            box_2.sprite =  jinlist[0];
+            box_2.sprite = jinlist[0];
             star_2.sprite = blackStar;
             box_2Button.interactable = false;
             box_2.color = Color.gray;
 
         }
-
         CheckNext();
     }
 
-
-    
-    
     public IEnumerator playerEffect(Image target, List<Sprite> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -169,10 +159,10 @@ public class WinManager : MonoSingleton<WinManager>
 
     public void OnGUI()
     {
-        if (GUILayout.Button("胜利"))
-        {
-            InitWin();
-        }
+        //if (GUILayout.Button("胜利"))
+        //{
+        //    InitWin();
+        //}
     }
 
     // Start is called before the first frame update
@@ -182,33 +172,43 @@ public class WinManager : MonoSingleton<WinManager>
         winPanel.SetActive(false);
         box_0Button.onClick.AddListener(() =>
         {
-            
+
             box_0Button.interactable = false;
+            StageGoal.My.GetStarGearData(1);
+            StageGoal.My.GetStarWorkerData(1);
             CheckNext();
-            StartCoroutine(playerEffect(box_0, mulist)); 
+            StartCoroutine(playerEffect(box_0, mulist));
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "|" + 1, 1);
         });
         box_1Button.onClick.AddListener(() =>
         {
             box_1Button.interactable = false;
+            StageGoal.My.GetStarGearData(2);
+            StageGoal.My.GetStarWorkerData(2);
             CheckNext();
-            StartCoroutine(playerEffect(box_1, tielist)); 
+            StartCoroutine(playerEffect(box_1, tielist));
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "|" + 2, 1);
         });
         box_2Button.onClick.AddListener(() =>
         {
             box_2Button.interactable = false;
+            StageGoal.My.GetStarGearData(3);
+            StageGoal.My.GetStarWorkerData(3);
             CheckNext();
-            StartCoroutine(playerEffect(box_2, jinlist)); 
+            StartCoroutine(playerEffect(box_2, jinlist));
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "|" + 3, 1);
+        });
+        returnMap.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene("Map");
         });
     }
 
     public void CheckNext()
     {
         returnMap.interactable = true;
-      
-        if ( box_0Button.interactable || box_1Button.interactable ||  box_2Button.interactable)
+
+        if (box_0Button.interactable || box_1Button.interactable || box_2Button.interactable)
         {
             returnMap.interactable = false;
         }
@@ -217,5 +217,6 @@ public class WinManager : MonoSingleton<WinManager>
     // Update is called once per frame
     void Update()
     {
+
     }
 }

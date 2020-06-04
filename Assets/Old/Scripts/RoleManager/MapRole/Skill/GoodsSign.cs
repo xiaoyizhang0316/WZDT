@@ -123,6 +123,6 @@ public class GoodsSign : MonoBehaviour
         {
             speedAdd += v.Value / 100f;
         }
-        moveTween.timeScale += speedAdd;
+        moveTween.timeScale = speedAdd;
     }
 }

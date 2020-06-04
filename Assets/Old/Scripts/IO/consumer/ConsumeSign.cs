@@ -141,6 +141,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void OnDeath()
     {
+        BaseLevelController.My.CountKillNumber(this); 
         DeathAward();
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
@@ -190,6 +191,7 @@ public class ConsumeSign : MonoBehaviour
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
         StageGoal.My.CheckWin();
+        StageGoal.My.killNumber++;
     }
 
     /// <summary>
@@ -198,6 +200,7 @@ public class ConsumeSign : MonoBehaviour
     public void LivePunish()
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
+        StageGoal.My.CheckWin();
     }
 
     /// <summary>
