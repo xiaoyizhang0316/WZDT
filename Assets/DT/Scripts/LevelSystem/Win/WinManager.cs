@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class WinManager : MonoBehaviour
+public class WinManager : MonoSingleton<WinManager>
 {
     public GameObject winPanel;
 
