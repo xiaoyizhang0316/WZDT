@@ -276,7 +276,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
         //print("consumeSign list:" + list.Length.ToString());
-        if (list.Length == 1 && currentWave > maxWaveNumber)
+        if (list.Length <= 1 && currentWave > maxWaveNumber)
         {
             print("胜利");
             Win();
