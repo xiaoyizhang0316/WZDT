@@ -257,8 +257,10 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CheckWin()
     {
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
-        if (list.Length == 0 && currentWave == maxWaveNumber)
+        //print("consumeSign list:" + list.Length.ToString());
+        if (list.Length == 1 && currentWave > maxWaveNumber)
         {
+            print("胜利");
             Win();
         }
     }
@@ -268,7 +270,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Win()
     {
+        BaseLevelController.My.CancelInvoke("CheckStarTwo");
+        BaseLevelController.My.CancelInvoke("CheckStarOne");
+        BaseLevelController.My.CancelInvoke("CheckStarThree");
         NewCanvasUI.My.GamePause();
+        WinManager.My.InitWin();
         //NewCanvasUI.My.Panel_Win.SetActive(true);
     }
 
@@ -482,6 +488,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         if (GUI.Button(new Rect(0,0,100,20),"4倍速"))
         {
             DOTween.timeScale = 4f;
+        }
+        if (GUI.Button(new Rect(0, 20, 100, 20), "通关"))
+        {
+            Win();
         }
     }
 }
