@@ -283,7 +283,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         RoleData.Clear();
         RoleManager.Clear();
         MapRole.Clear();
-        playerConsumables.Clear();
+        //playerConsumables.Clear();
     }
 
     /// <summary>
