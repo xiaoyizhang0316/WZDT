@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.UIElements.VisualElement;
 
@@ -16,6 +17,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public GameObject Panel_AssemblyRole;
     public GameObject Panel_TradeSetting;
     public Transform RoleTF;
+    public GameObject lose;
     /// <summary>
     /// 需要遮挡的UI
     /// </summary>
@@ -62,6 +64,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Accelerate = transform.Find("TimeScale/GameAccelerate").GetComponent<Button>();
         InitTimeButton();
         Panel_Delete.SetActive(false);
+        lose.SetActive(false);
     }
 
     // Update is called once per frame
@@ -168,5 +171,11 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         Panel_Delete.SetActive(true);
        // Panel_Delete.GetComponent<DeleteUIManager>().Init();
+    }
+
+    public void LostConfirm()
+    {
+        lose.SetActive(false);
+        SceneManager.LoadScene("Map");
     }
 }

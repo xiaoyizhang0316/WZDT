@@ -276,7 +276,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
         //print("consumeSign list:" + list.Length.ToString());
-        if (list.Length == 1 && currentWave > maxWaveNumber)
+        if (list.Length <= 1 && currentWave > maxWaveNumber)
         {
             print("胜利");
             Win();
@@ -305,6 +305,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         if (playerHealth < 0)
         {
             NewCanvasUI.My.GamePause();
+            NewCanvasUI.My.lose.SetActive(true);
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
         }
         else
