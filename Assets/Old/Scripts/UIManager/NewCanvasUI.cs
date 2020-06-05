@@ -88,6 +88,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         //Time.timeScale = 0.01f;
         //Time.fixedDeltaTime = 0.0005f;
         DOTween.PauseAll();
+        DOTween.defaultAutoPlay = AutoPlay.None;
         Button_Pause.interactable = false;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = true;
@@ -98,8 +99,11 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public void GameNormal()
     {
+        //Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         DOTween.PlayAll();
         DOTween.timeScale = 1f;
+        DOTween.defaultAutoPlay = AutoPlay.All;
         Button_Pause.interactable = true;
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
@@ -112,6 +116,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         DOTween.PlayAll();
         DOTween.timeScale = 2f;
+        DOTween.defaultAutoPlay = AutoPlay.All;
         Button_Pause.interactable = true;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = false;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoleTradeButton : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class RoleTradeButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(Camera.main.transform.position);
+        transform.parent.LookAt(Camera.main.transform.position);
+        GetComponent<Image>().fillAmount = currentRole.warehouse.Count / (float)currentRole.baseRoleData.bulletCapacity;
     }
 }
