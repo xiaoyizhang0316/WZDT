@@ -12,6 +12,8 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
 {
   
     public Image Image_shape;
+
+    public Image Image_buff;
    
     /// <summary>
     /// 效果值
@@ -98,8 +100,10 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
         //bulletCapacity.text = gearData.bulletCapacity.ToString(); 
         //print(gearData.SpritePath);
         Image_shape.sprite = Resources.Load<Sprite>(gearData.SpritePath);
-         
-        
+        if (gearData.buffList[0] != -1)
+        {
+            Image_buff.sprite = Resources.Load<Sprite>("Sprite/Buff/" + gearData.buffList[0].ToString());
+        }
     }
 
     /// <summary>

@@ -350,7 +350,6 @@ public class StageGoal : MonoSingleton<StageGoal>
                 WaveCount();
             });
         }
-        
     }
 
     /// <summary>

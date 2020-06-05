@@ -40,6 +40,7 @@ public class SingleWaveEnemyInfo : MonoBehaviour
         for (int i = 0; i < buffList.Count; i++)
         {
             GameObject go = Instantiate(singleBuffPrb, buffListTF);
+            go.GetComponent<WaveBuffSign>().Init(buffList[i]);
         }
     }
 
