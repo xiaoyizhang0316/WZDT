@@ -275,8 +275,18 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CheckWin()
     {
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
+        print("消费者数： " + list.Length.ToString());
+        bool isComplete = true;
+        foreach (Building b in BuildingManager.My.buildings)
+        {
+            if (!b.isFinishSpawn)
+            {
+                isComplete = false;
+                break;
+            }
+        }
         //print("consumeSign list:" + list.Length.ToString());
-        if (list.Length == 1 && currentWave > maxWaveNumber)
+        if (list.Length == 1 && currentWave > maxWaveNumber && isComplete)
         {
             print("胜利");
             Win();
@@ -288,6 +298,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Win()
     {
+
         BaseLevelController.My.CancelInvoke("CheckStarTwo");
         BaseLevelController.My.CancelInvoke("CheckStarOne");
         BaseLevelController.My.CancelInvoke("CheckStarThree");
@@ -500,7 +511,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         GetComponent<RectTransform>().DOAnchorPosX(160.27f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
-        });
+        }).Play();
     }
 
     public void MenuShow()
@@ -508,7 +519,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         GetComponent<RectTransform>().DOAnchorPosX(-178f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {
             menuCloseButton.gameObject.SetActive(true);
             menuOpenButton.gameObject.SetActive(false);
-        });
+        }).Play();
     }
 
 
@@ -516,6 +527,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.DeleteAll();
         InitStage();
         MenuHide();
         cameraPos = Camera.main.transform.position;
@@ -533,8 +545,11 @@ public class StageGoal : MonoSingleton<StageGoal>
         if (GUI.Button(new Rect(0,0,100,20),"4倍速"))
         {
             DOTween.timeScale = 4f;
+            DOTween.defaultAutoPlay = AutoPlay.All;
+            DOTween.PlayAll();
+            //NewCanvasUI.My.GamePause();
         }
-        if (GUI.Button(new Rect(0, 20, 100, 20), "通关"))
+        if (GUI.Button(new Rect(0, 20, 100, 20), "Win"))
         {
             Win();
         }

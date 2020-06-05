@@ -260,7 +260,7 @@ public class BaseMapRole : MonoBehaviour
         //BubbleManager.My.InitCostMoney(transform, baseRoleData.cost);
         transform.DOScale(1f, 20f).OnComplete(() =>
         {
-            StageGoal.My.CostPlayerGold(baseRoleData.cost);
+            //StageGoal.My.CostPlayerGold(baseRoleData.cost);
             MonthlyCost();
         });
     }
