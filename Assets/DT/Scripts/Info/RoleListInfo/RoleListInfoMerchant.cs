@@ -38,7 +38,7 @@ public class RoleListInfoMerchant : BaseRoleListInfo
         effect.text = role.effect.ToString();
         MoveSpeed.text =  role.effect  .ToString()+"%";
         efficiency.text = role.efficiency.ToString();
-        TradDown.text = (((role.efficiency *0.3f)/100f)*  role.tradeCost).ToString()+" /s";
+        TradDown.text = (((role.efficiency *0.3f)/100f)*  role.tradeCost).ToString();
         tradCost.text  =   role.tradeCost.ToString();
         risk .text =  role.riskResistance.ToString();
         montyCost.text =   role.cost.ToString();
