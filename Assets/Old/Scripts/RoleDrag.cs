@@ -91,6 +91,7 @@ public class RoleDrag : MonoBehaviour
         {
             NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
             RoleListInfo.My.Init(currentRole);
+            //if (!EventSystem.current.IsPointerOverGameObject())
         }
     }
 

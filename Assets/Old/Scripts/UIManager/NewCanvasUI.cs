@@ -131,7 +131,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         {
             if (needReycastTargetPanel[i].activeSelf)
             {
-                print(needReycastTargetPanel[i].name);
+                //print(needReycastTargetPanel[i].name);
                 return true;
             }
         }
