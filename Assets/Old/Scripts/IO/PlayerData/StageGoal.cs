@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Linq;
+using System;
 
 public class StageGoal : MonoSingleton<StageGoal>
 {
@@ -102,6 +103,14 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public int totalCost = 0;
 
+    public int tradeCost = 0;
+
+    public int productCost = 0;
+
+    public int getGold = 0;
+
+    public List<DataStat> dataStats;
+
     #endregion
 
     /// <summary>
@@ -185,6 +194,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void GetPlayerGold(int num)
     {
         playerGold += num;
+        GetGold(num);
         if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -331,6 +341,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
             WaveCount();
+            if (timeCount % 5 == 0)
+            {
+                Stat();
+            }
         });
     }
 
@@ -538,5 +552,40 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             Win();
         }
+    }
+
+    public void TradeCost(int num)
+    {
+        tradeCost += num;
+    }
+
+    public void ProductCost(int num)
+    {
+        productCost += num;
+    }
+
+    public void GetGold(int num)
+    {
+        getGold += num;
+    }
+
+    private void Stat()
+    {
+        if(dataStats == null)
+        {
+            dataStats = new List<DataStat>();
+        }
+        dataStats.Add(new DataStat(playerHealth, playerSatisfy, productCost, tradeCost, playerGold));
+    }
+
+    public string ShowStat()
+    {
+        string list = "";
+        foreach(var ds in dataStats)
+        {
+            list += string.Format($"{ds.blood}\t{ds.score}\t{ds.cost}\t{ds.tradeCost}\t{ds.totalGold}\n");
+        }
+
+        return list;
     }
 }
