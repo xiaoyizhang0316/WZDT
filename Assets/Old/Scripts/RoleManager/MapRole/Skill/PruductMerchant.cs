@@ -40,7 +40,8 @@ public class PruductMerchant : BaseSkill
             game.GetComponent<GoodsSign>().productData = data;
             game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
             game.GetComponent<GoodsSign>().role =PlayerData.My.GetMapRoleById(Double.Parse( role.tradeList[currentCount].tradeData.targetRole));
-            game.GetComponent<GoodsSign>(). speed=  1f / (role.baseRoleData.efficiency * 0.05f);
+            if(role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant) 
+                game.GetComponent<GoodsSign>(). speed=  1f * (1 - role.baseRoleData.efficiency / 100f);
             game.transform.position = transform.position;
             game.GetComponent<GoodsSign>().Move();
         

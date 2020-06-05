@@ -43,7 +43,7 @@ public class GoodsSign : MonoBehaviour
   
         if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
         {
-            speed=  1f / (role.baseRoleData.efficiency * 0.05f);
+            speed=  1f * (1 - role.baseRoleData.efficiency / 100f);
         }
 
         // print("bullet start move" + path[count]);
