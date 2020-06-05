@@ -35,6 +35,10 @@ public class PruductMelon_Lightning  : BaseSkill
             data.loadingSpeed *=1f-role.baseRoleData.effect/100f ;
             data.loadingSpeed += 1;
             data.damage =  (data.damage*0.6f + role.baseRoleData.effect  );
+            try
+            {
+
+          
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;
             game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
@@ -42,6 +46,11 @@ public class PruductMelon_Lightning  : BaseSkill
             game.transform.position = transform.position;
             game.GetComponent<GoodsSign>().Move();
             currentCount++;
+            }
+            catch (Exception e)
+            {
+              
+            }
             if (currentCount >= role.tradeList.Count)
             {
                 currentCount = 0;
