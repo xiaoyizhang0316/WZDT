@@ -345,6 +345,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
         {
             CheckWin();
+            waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+            {
+                WaveCount();
+            });
         }
         
     }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1072859920752429704}
   - component: {fileID: 5604644318778930454}
   - component: {fileID: 1181641350973111515}
+  - component: {fileID: 8439126954250754037}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -129,6 +130,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &8439126954250754037
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339117934597280606}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.9991155, y: 1.178863, z: 1}
+  m_Center: {x: 0.03613342, y: 0.011924267, z: 0}
 --- !u!1 &1202769312029361800
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,9 +312,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7062710201189638545}
-  - component: {fileID: 1278337725793940902}
-  - component: {fileID: 1233164623401708769}
-  - component: {fileID: 8063532087328838563}
+  - component: {fileID: 5760815834828099163}
+  - component: {fileID: 6093097753830012064}
   m_Layer: 5
   m_Name: RoleCreateTradeButton
   m_TagString: Untagged
@@ -331,7 +344,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1.75}
   m_SizeDelta: {x: 2.009, y: 1.187}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!223 &1278337725793940902
+--- !u!223 &5760815834828099163
 Canvas:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -352,29 +365,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &1233164623401708769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8256080403480066048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
---- !u!114 &8063532087328838563
+--- !u!114 &6093097753830012064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
