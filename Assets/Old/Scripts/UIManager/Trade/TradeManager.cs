@@ -53,6 +53,22 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
     }
 
+    /// <summary>
+    /// 检测发起者承受者之间是否已经存在交易
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckDuplicateTrade()
+    {
+        foreach (TradeSign sign in tradeList.Values)
+        {
+            if (sign.tradeData.startRole.Equals(NewCanvasUI.My.startRole.baseRoleData.ID.ToString()) && sign.tradeData.endRole.Equals(NewCanvasUI.My.endRole.baseRoleData.ID.ToString()))
+                return false;
+            if (sign.tradeData.startRole.Equals(NewCanvasUI.My.endRole.baseRoleData.ID.ToString()) && sign.tradeData.endRole.Equals(NewCanvasUI.My.startRole.baseRoleData.ID.ToString()))
+                return false;
+        }
+        return true;
+    }
+
     private void OnDestroy()
     {
         

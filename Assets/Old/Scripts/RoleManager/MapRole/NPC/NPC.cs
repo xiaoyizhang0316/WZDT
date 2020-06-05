@@ -73,7 +73,7 @@ public class NPC : BaseNpc
             NewCanvasUI.My.endRole = GetComponentInParent<BaseMapRole>();
             if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
             {
-                if (CheckStartAndEnd() && CheckNpcActive())
+                if (CheckStartAndEnd() && CheckNpcActive() && TradeManager.My.CheckDuplicateTrade())
                 {
                     NewCanvasUI.My.InitCreateTradePanel();
                 }
