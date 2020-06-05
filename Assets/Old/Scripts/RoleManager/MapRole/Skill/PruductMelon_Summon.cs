@@ -36,6 +36,10 @@ public class PruductMelon_Summon  : BaseSkill
             data.loadingSpeed += 0.5f;
  
             data.damage -= 20;
+            try
+            {
+
+        
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;
             game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
@@ -45,6 +49,12 @@ public class PruductMelon_Summon  : BaseSkill
             game.GetComponent<GoodsSign>().Move();
         
             currentCount++;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             if (currentCount >= role.tradeList.Count)
             {
                 currentCount = 0;

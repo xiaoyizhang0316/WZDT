@@ -36,6 +36,8 @@ public class PruductMelon_Boom : BaseSkill
             data.buffList.Add(101);
             data.buffList.Add(102);
             data.damage =(float) (data.damage + role.baseRoleData.effect  );
+            try
+            {
 
             GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
             game.GetComponent<GoodsSign>().productData = data;
@@ -46,6 +48,12 @@ public class PruductMelon_Boom : BaseSkill
             game.GetComponent<GoodsSign>().Move();
         
             currentCount++;
+            
+            }
+            catch (Exception e)
+            {
+             
+            }
             if (currentCount >= role.tradeList.Count)
             {
                 currentCount = 0;
