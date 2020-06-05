@@ -15,6 +15,15 @@ public class PruductMerchant : BaseSkill
         }
         if (role.warehouse.Count > 0 )
         {
+            if (PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).warehouse
+                    .Count >= PlayerData.My
+                    .GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).baseRoleData
+                    .bulletCapacity)
+            {
+                Debug.Log("储存");
+                return;
+            }
+
             print("贸易商技能");
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);

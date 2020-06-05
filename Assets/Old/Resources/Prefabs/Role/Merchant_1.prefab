@@ -51,7 +51,7 @@ MonoBehaviour:
   baseRoleData:
     baseRoleData:
       roleName: 
-      roleType: 0
+      roleType: 2
       roleSkillType: 0
       level: 0
       effect: 0
@@ -84,13 +84,12 @@ MonoBehaviour:
   isNpc: 0
   tradeList: []
   buffList: []
-  spawnConsumerInterval: 0
   shootTargetList: []
+  xList: 
+  yList: 
   shootTarget: {fileID: 0}
   tradePoint: {fileID: 1386838502588418603}
-  CarCount: 0
   AI: 0
-  contributionNum: 0
   npcScript: {fileID: 0}
   totalProfit: 0
   monthlyProfit: 0
@@ -116,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   role: {fileID: 6762698527656334721}
   IsOpen: 1
+  skillDesc: 
   buffList: 
 --- !u!1 &2012059022961659406
 GameObject:
@@ -409,18 +409,6 @@ MonoBehaviour:
   dashLine: {fileID: 3956934675686096452}
   duan: {fileID: 2104149754573621068}
   solidLine: {fileID: 8222257885738845404}
---- !u!114 &5527239175107838420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5702863791199925693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 343745aae1cc1154ca63423994bde5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &3725993150699834026
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -434,6 +422,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.012127895, y: 0.012127895, z: 0.08314635}
   m_Center: {x: 0, y: 6.658907e-17, z: -0.018797813}
+--- !u!114 &5527239175107838420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5702863791199925693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343745aae1cc1154ca63423994bde5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6669583325915950477
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,15 +878,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9974eb18960584510a747aceb568e3ca, type: 3}
---- !u!4 &8754995200691947438 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 9974eb18960584510a747aceb568e3ca,
-    type: 3}
-  m_PrefabInstance: {fileID: 4324943767961857204}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5702863791199925693 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 9974eb18960584510a747aceb568e3ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 4324943767961857204}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8754995200691947438 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 9974eb18960584510a747aceb568e3ca,
     type: 3}
   m_PrefabInstance: {fileID: 4324943767961857204}
   m_PrefabAsset: {fileID: 0}
