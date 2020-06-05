@@ -81,6 +81,7 @@ public class GoodsSign : MonoBehaviour
             {
                 twe.Kill();
                 target.OnHit(ref productData);
+                GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                 BulletObjectPool.My.RecoveryBullet(gameObject); 
             }
         }
