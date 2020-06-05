@@ -519,7 +519,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             StartCoroutine(effects[i].Back());
         }
-        transform.DOScale(1, 0.5f).OnComplete(() => { gameObject.SetActive(false); });
+        transform.DOScale(1, 0.5f).OnComplete(() => { gameObject.SetActive(false); }).Play();
     }
 
     // Start is called before the first frame update

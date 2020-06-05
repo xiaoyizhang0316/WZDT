@@ -16,7 +16,10 @@ public class SingleWaveEnemyInfo : MonoBehaviour
     public GameObject singleBuffPrb;
 
     public Transform buffListTF;
-
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    /// <param name="str"></param>
     public void Init(string str)
     {
         string[] list = str.Split('_');
