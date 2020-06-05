@@ -129,11 +129,14 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     {
         //useItemPop.GetComponent<NpcPop>()
         npcInfo.SetActive(true);
+        HideAll();
         pop.transform.GetChild(0).GetComponent<Text>().text = tip;
         pop.SetActive(true);
         closeBtn.interactable = false;
-        pop.GetComponent<Image>().DOFade(0, 1f).OnComplete(()=> {
+        pop.transform.GetChild(0).GetComponent<Text>().DOFade(0, 1f).OnComplete(()=> {
             npcInfo.SetActive(false);
+            pop.transform.GetChild(0).GetComponent<Text>().DOFade(1, 0.01f);
+            pop.SetActive(false);
             closeBtn.interactable = true;
             closeBtn.gameObject.SetActive(false);
         });
@@ -143,8 +146,11 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     {
         currentNpc = npc;
         npcInfo.SetActive(true);
+        closeBtn.gameObject.SetActive(true);
         lockedInfo.GetComponent<NpcLockedInfo>().SetInfo(npc, n.lockNumber);
         lockedInfo.SetActive(true);
+
+
 
         unlockBtn.onClick.RemoveAllListeners();
         unlockBtn.onClick.AddListener(()=> {

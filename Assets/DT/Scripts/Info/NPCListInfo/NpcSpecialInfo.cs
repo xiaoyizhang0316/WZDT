@@ -17,6 +17,8 @@ public class NpcSpecialInfo : MonoBehaviour
     public Text cost;
     public Text risk;
 
+    public Text level;
+
     public void SetInfo(Role npc)
     {
         npcName.text = npc.baseRoleData.roleName;
@@ -25,6 +27,7 @@ public class NpcSpecialInfo : MonoBehaviour
         effect.text = npc.baseRoleData.effect.ToString() ;
         cost.text = npc.baseRoleData.cost.ToString();
         risk.text = npc.baseRoleData.riskResistance.ToString();
+        level.text = npc.baseRoleData.level.ToString();
         HideAll();
         switch (npc.baseRoleData.roleType)
         {
