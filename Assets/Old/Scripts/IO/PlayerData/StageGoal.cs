@@ -275,7 +275,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CheckWin()
     {
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
-        print("消费者数： " + list.Length.ToString());
+        //print("消费者数： " + list.Length.ToString());
         bool isComplete = true;
         foreach (Building b in BuildingManager.My.buildings)
         {
@@ -286,7 +286,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             }
         }
         //print("consumeSign list:" + list.Length.ToString());
-        if (list.Length == 1 && currentWave > maxWaveNumber && isComplete)
+        if (list.Length == 0 && isComplete)
         {
             print("胜利");
             Win();
@@ -328,21 +328,25 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
-        if (currentWave > maxWaveNumber)
-        {
-            return;
-        }
         timeCount++;
-        if (timeCount == waitTimeList[currentWave - 1])
+        if (currentWave <= maxWaveNumber)
         {
-            BuildingManager.My.WaveSpawnConsumer(currentWave);
-            currentWave++;
+            if (timeCount == waitTimeList[currentWave - 1])
+            {
+                BuildingManager.My.WaveSpawnConsumer(currentWave);
+                currentWave++;
+            }
+            waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+            {
+                stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+                WaveCount();
+            });
         }
-        waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+        else
         {
-            stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
-            WaveCount();
-        });
+            CheckWin();
+        }
+        
     }
 
     /// <summary>
@@ -547,7 +551,6 @@ public class StageGoal : MonoSingleton<StageGoal>
             DOTween.timeScale = 4f;
             DOTween.defaultAutoPlay = AutoPlay.All;
             DOTween.PlayAll();
-            //NewCanvasUI.My.GamePause();
         }
         if (GUI.Button(new Rect(0, 20, 100, 20), "Win"))
         {
