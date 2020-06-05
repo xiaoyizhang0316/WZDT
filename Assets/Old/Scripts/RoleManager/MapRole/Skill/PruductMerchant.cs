@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PruductMerchant : BaseSkill
 {
-    private int currentCount= 0 ;
+    private int currentCount = 0;
 
     public override void Skill()
     {
@@ -13,47 +13,47 @@ public class PruductMerchant : BaseSkill
         {
             return;
         }
-        if (role.warehouse.Count > 0 )
+        if (role.warehouse.Count > 0)
         {
-            if (PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).warehouse
+            try
+            {
+                if (PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).warehouse
                     .Count >= PlayerData.My
                     .GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).baseRoleData
                     .bulletCapacity)
-            {
-                Debug.Log("储存");
-                return;
-            }
+                {
+                    Debug.Log("储存");
+                    return;
+                }
 
-            print("贸易商技能");
-            ProductData data = role.warehouse[0];
-            role.warehouse.RemoveAt(0);
-            for (int i = 0; i <role.GetEquipBuffList().Count; i++)
-            {
-                data.AddBuff(role.GetEquipBuffList()[i]);
-            }
+                print("贸易商技能");
+                ProductData data = role.warehouse[0];
+                role.warehouse.RemoveAt(0);
+                for (int i = 0; i < role.GetEquipBuffList().Count; i++)
+                {
+                    data.AddBuff(role.GetEquipBuffList()[i]);
+                }
 
-            for (int i = 0; i <buffList.Count; i++)
-            {
-                data.AddBuff(buffList[i]);
-            }
+                for (int i = 0; i < buffList.Count; i++)
+                {
+                    data.AddBuff(buffList[i]);
+                }
 
-            try
-            {
-                GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
+
+                GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
                 game.GetComponent<GoodsSign>().productData = data;
-                game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
-                game.GetComponent<GoodsSign>().role =PlayerData.My.GetMapRoleById(Double.Parse( role.tradeList[currentCount].tradeData.targetRole));
-                if(role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant) 
-                    game.GetComponent<GoodsSign>(). speed=  1f * (1 - role.baseRoleData.efficiency / 100f);
+                game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();
+                game.GetComponent<GoodsSign>().role = PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
+                if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
+                    game.GetComponent<GoodsSign>().speed = 1f * (1 - role.baseRoleData.efficiency / 100f);
                 game.transform.position = transform.position;
                 game.GetComponent<GoodsSign>().Move();
 
             }
             catch (Exception e)
             {
-                Console.WriteLine(e); 
+                Console.WriteLine(e);
             }
-         
             currentCount++;
             if (currentCount >= role.tradeList.Count)
             {
