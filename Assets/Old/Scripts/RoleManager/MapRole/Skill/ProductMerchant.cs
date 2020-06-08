@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PruductMerchant : BaseSkill
+public class ProductMerchant : BaseSkill
 {
     private int currentCount = 0;
 

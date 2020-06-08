@@ -5,7 +5,7 @@ using System.Linq;
 using DT.Fight.Bullet;
 using UnityEngine;
 
-public class PruductMelon : BaseSkill
+public class ProductMelon : BaseSkill
 { 
     private int currentCount= 0 ;
     public override void Skill()

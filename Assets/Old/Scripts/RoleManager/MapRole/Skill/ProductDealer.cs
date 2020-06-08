@@ -4,7 +4,7 @@ using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
 
-public class PruductDealer : BaseSkill
+public class ProductDealer : BaseSkill
 {
 
  
