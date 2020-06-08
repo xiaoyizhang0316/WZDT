@@ -24,6 +24,8 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     private string buildCostStr;
     private string extraCostStr;
 
+    public bool isShow = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     {
         statPanel.SetActive(false);
         mask.SetActive(false);
+        isShow = false;
     }
 
     public void ShowStat()
@@ -49,6 +52,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         Dictionary<string, int> otherIncomes, Dictionary<BaseMapRole, int> buildCost, 
         Dictionary<string, int> extraCost, int timeCount)
     {
+        isShow = false;
         mask.SetActive(true);
         statPanel.SetActive(true);
         npcIncomeStr = "";
@@ -114,5 +118,6 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         }
 
         this.extraCost.text = extraCostStr;
+        isShow = true;
     }
 }

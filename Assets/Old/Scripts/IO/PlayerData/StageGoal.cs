@@ -593,6 +593,10 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
                 break;
         }
+        if (DataStatPanel.My.isShow)
+        {
+            DataStatPanel.My.ShowStat();
+        }
     }
 
     public void Expend(int num, ExpendType expendType, BaseMapRole build = null, string extraName = "")
@@ -626,6 +630,10 @@ public class StageGoal : MonoSingleton<StageGoal>
                 break;
             default:
                 break;
+        }
+        if (DataStatPanel.My.isShow)
+        {
+            DataStatPanel.My.ShowStat();
         }
     }
 
