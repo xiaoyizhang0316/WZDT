@@ -104,9 +104,14 @@ namespace DT.Fight.Bullet
         /// <param name="OBJ"></param>
         public void RecoveryBullet(GameObject OBJ)
         {
+            for (int i = 0; i < OBJ.GetComponentInChildren<ETFXProjectileScript>().transform.childCount; i++)
+            {
+                Destroy(OBJ.GetComponentInChildren<ETFXProjectileScript>().transform.GetChild(i).gameObject);
+            }
             OBJ.SetActive(false);
             OBJ.transform.SetParent( bulletTF);
             OBJ.transform.localPosition = Vector3.zero;
+
         }
 
         // Start is called before the first frame update
