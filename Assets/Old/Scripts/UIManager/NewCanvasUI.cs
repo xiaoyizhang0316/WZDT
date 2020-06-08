@@ -181,6 +181,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void LostConfirm()
     {
         lose.SetActive(false);
+        PlayerData.My.Reset();
         SceneManager.LoadScene("Map");
     }
 }

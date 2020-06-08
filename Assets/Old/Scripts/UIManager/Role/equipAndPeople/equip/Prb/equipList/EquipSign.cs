@@ -6,79 +6,75 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Random = System.Random;
 
-public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHandler 
+public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-  
+
     public Image Image_shape;
 
     public Image Image_buff;
-   
+
     /// <summary>
     /// 效果值
     /// </summary>
-    public  Text effect;
-    
+    public Text effect;
+
     /// <summary>
     /// 效率值
     /// </summary>
-    public  Text efficiency;
-    
+    public Text efficiency;
+
     /// <summary>
     /// 范围值
     /// </summary>
-    public  Text range;
-    
+    public Text range;
+
     /// <summary>
     /// 风险抗力
     /// </summary>
-    public  Text riskResistance;
-    
+    public Text riskResistance;
+
     /// <summary>
     /// 交易成本
     /// </summary>
     public Text tradeCost;
-    
+
     /// <summary>
     /// 成本
     /// </summary>
     public Text cost;
-    
+
     /// <summary>
     /// 弹药容量
     /// </summary>
-    public Text bulletCapacity; 
- 
+    public Text bulletCapacity;
+
     public Image BG;
     /// <summary>
     /// 当创建销毁时候或者保存角色时候调整占用状态
     /// </summary>
-    public bool   isOccupation;
-    public int ID; 
+    public bool isOccupation;
+    public int ID;
 
     //public int isoccupy; 
     //public bool isEquiped;
 
     public GearData gearData;
- 
-    
-    public  RectTransform   canvas;//得到canvas的ugui坐标
+
+    public RectTransform canvas;//得到canvas的ugui坐标
     private RectTransform imgRect;//得到图片的ugui坐标
     Vector2 offset = new Vector3();//用来得到鼠标和图片的差值
 
-
     private Vector2 startPos;
 
-
     private GameObject cam;
-        private void Awake()
+    private void Awake()
     {
         EquipListManager.My._signs.Add(this);
         imgRect = GetComponent<RectTransform>();//得到组件
         startPos = imgRect.position;
         cam = Camera.main.gameObject;//找到摄像机
-         }
+    }
 
     /// <summary>
     /// 初始化
@@ -128,7 +124,7 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
             //GetComponent<Image>().raycastTarget = false;
             //Image_shape.GetComponent<Image>().raycastTarget = false;
             //GetComponent<Image>().DOFade(0.3f, 0.5f);
-            BG.GetComponent<Image>().DOColor(new Color(0.6f,0.6f,0.6f,1), 0.5f);
+            BG.GetComponent<Image>().DOColor(new Color(0.6f, 0.6f, 0.6f, 1), 0.5f);
             Image_shape.GetComponent<Image>().DOFade(0.3f, 0.5f);
             //GetComponent<LayoutElement>().layoutPriority = -10;
             transform.SetAsLastSibling();
@@ -138,8 +134,8 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
             //GetComponent<Image>().raycastTarget = true;
             //transform.Find("Image_SignBG").GetComponent<Image>().raycastTarget = true;
             //GetComponent<Image>().DOFade(1f, 0.5f);
-            BG.GetComponent<Image>().DOColor(new Color(1f,1f,1f,1), 0.5f);
-            Image_shape.GetComponent<Image>().DOFade(1 ,0.5f);
+            BG.GetComponent<Image>().DOColor(new Color(1f, 1f, 1f, 1), 0.5f);
+            Image_shape.GetComponent<Image>().DOFade(1, 0.5f);
             //GetComponent<LayoutElement>().layoutPriority = 10;
             transform.SetAsFirstSibling();
         }
@@ -148,7 +144,7 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
     // Start is called before the first frame update
     void Start()
     {
-     canvas = CreatRoleManager.My.currentCanvas.GetComponent<RectTransform>();
+        canvas = CreatRoleManager.My.currentCanvas.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -156,7 +152,7 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
     {
 
     }
-    
+
     private GameObject Equip;
     public void CreatEquipOBJ()
     {
@@ -169,39 +165,39 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
             Equip.name = "EquipOBJ_" + ID;
             Equip.GetComponent<DragUI>().dragType = DragUI.DragType.equip;
         }
-    } 
-    
+    }
+
     public void OnDrag(PointerEventData eventData)
-    { 
+    {
         if (Equip == null || isOccupation)
-        { 
+        {
             return;
         }
 
-     //  Vector3 V = Input.mousePosition;
-     //  Vector3 V2 = new Vector3(V.x-Screen.width/2 ,V.y-Screen.height/2);
-     //  Debug.Log("Screen.width"+Screen.width+"Screen.height"+Screen.height);
-     // // Vector3 V2 = new Vector3(V.x-960,V.y-540);
-     //  Equip.transform.localPosition = V2;
-     Vector2 mouseDrage = Input.mousePosition;//当鼠标拖动时的屏幕坐标
-     Vector2 uguiPos = new Vector2();//用来接收转换后的拖动坐标
-     bool isRect = RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, mouseDrage, eventData.enterEventCamera, out uguiPos);
-     if (isRect)
-     {
-         //设置图片的ugui坐标与鼠标的ugui坐标保持不变
-         Equip.GetComponent<RectTransform>().anchoredPosition =  uguiPos;
-     } 
+        //  Vector3 V = Input.mousePosition;
+        //  Vector3 V2 = new Vector3(V.x-Screen.width/2 ,V.y-Screen.height/2);
+        //  Debug.Log("Screen.width"+Screen.width+"Screen.height"+Screen.height);
+        // // Vector3 V2 = new Vector3(V.x-960,V.y-540);
+        //  Equip.transform.localPosition = V2;
+        Vector2 mouseDrage = Input.mousePosition;//当鼠标拖动时的屏幕坐标
+        Vector2 uguiPos = new Vector2();//用来接收转换后的拖动坐标
+        bool isRect = RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, mouseDrage, eventData.enterEventCamera, out uguiPos);
+        if (isRect)
+        {
+            //设置图片的ugui坐标与鼠标的ugui坐标保持不变
+            Equip.GetComponent<RectTransform>().anchoredPosition = uguiPos;
+        }
         // Equip.transform.position =  Input.mousePosition;
-    
+
     }
 
-    
+
     public void OnEndDrag(PointerEventData eventData)
     {
         //isOccupation =    Equip.GetComponent<DragUI>().CheckAllRight(false);
         SetOccupyStatus(Equip.GetComponent<DragUI>().CheckAllRight(false));
-       
-        
+
+
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -210,31 +206,31 @@ public class EquipSign : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHa
         {
             CreatEquipOBJ();
             CreatRoleManager.My.CurrentTemplateManager.OpenMidTemplate(0.3f);
-            
-          //Vector2 mouseDown = eventData.position;//记录鼠标按下时的屏幕坐标
-          //Vector2 mouseUguiPos = new Vector2();//定义一个接收返回的ugui坐标
+
+            //Vector2 mouseDown = eventData.position;//记录鼠标按下时的屏幕坐标
+            //Vector2 mouseUguiPos = new Vector2();//定义一个接收返回的ugui坐标
 
 
-          //bool isRect = RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, mouseDown, eventData.enterEventCamera, out mouseUguiPos);
-          ////RectTransformUtility.ScreenPointToLocalPointInRectangle()：把屏幕坐标转化成ugui坐标
-          ////canvas：坐标要转换到哪一个物体上，这里img父类是Canvas，我们就用Canvas
-          ////eventData.enterEventCamera：这个事件是由哪个摄像机执行的
-          ////out mouseUguiPos：返回转换后的ugui坐标
-          ////isRect：方法返回一个bool值，判断鼠标按下的点是否在要转换的物体上
- 
-
-          //if (isRect)//如果在
-          //{ //计算图片中心和鼠标点的差值
+            //bool isRect = RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, mouseDown, eventData.enterEventCamera, out mouseUguiPos);
+            ////RectTransformUtility.ScreenPointToLocalPointInRectangle()：把屏幕坐标转化成ugui坐标
+            ////canvas：坐标要转换到哪一个物体上，这里img父类是Canvas，我们就用Canvas
+            ////eventData.enterEventCamera：这个事件是由哪个摄像机执行的
+            ////out mouseUguiPos：返回转换后的ugui坐标
+            ////isRect：方法返回一个bool值，判断鼠标按下的点是否在要转换的物体上
 
 
-          //    offset = Equip.GetComponent<RectTransform>().anchoredPosition - mouseUguiPos;
-          //}
-//            cam.GetComponent<CameraMove>().enabled = false;
+            //if (isRect)//如果在
+            //{ //计算图片中心和鼠标点的差值
 
 
-           
+            //    offset = Equip.GetComponent<RectTransform>().anchoredPosition - mouseUguiPos;
+            //}
+            //            cam.GetComponent<CameraMove>().enabled = false;
+
+
+
         }
     }
 
-  
+
 }

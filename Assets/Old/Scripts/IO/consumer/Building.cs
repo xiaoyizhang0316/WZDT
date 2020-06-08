@@ -23,6 +23,8 @@ public class Building : MonoBehaviour
 
     public bool isFinishSpawn;
 
+    public GameObject protalGameObject;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -54,6 +56,7 @@ public class Building : MonoBehaviour
                     throw new Exception("building Id over limit ");
             }
         }
+        protalGameObject.transform.DOScale(0, 0);
     }
 
     /// <summary>
@@ -99,6 +102,11 @@ public class Building : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 每波召唤消费者（协程）
+    /// </summary>
+    /// <param name="waveNumber"></param>
+    /// <returns></returns>
     public IEnumerator SpawnWaveConsumer(int waveNumber)
     {
         int val = 0;
@@ -109,7 +117,11 @@ public class Building : MonoBehaviour
             yield break;
         }
         if (waveConfigs[waveNumber][0].num > 0)
+        {
             DrawPathLine();
+            protalGameObject.transform.DOScale(1, 1);
+        }
+
         foreach (WaveConfig w in waveConfigs[waveNumber])
         {
             for (int i = 0; i < w.num; i++)
@@ -141,8 +153,12 @@ public class Building : MonoBehaviour
             }
         }
         isFinishSpawn = true;
+        protalGameObject.transform.DOScale(0, 1);
     }
 
+    /// <summary>
+    /// 生成消费者路径线路
+    /// </summary>
     public void DrawPathLine()
     {
         List<Vector3> list = new List<Vector3>();

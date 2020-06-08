@@ -37,6 +37,10 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     public int targetNumber = 0;
 
+    /// <summary>
+    /// 统计击杀数量
+    /// </summary>
+    /// <param name="sign"></param>
     public virtual void CountKillNumber(ConsumeSign sign)
     {
         targetNumber++;
@@ -61,6 +65,9 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         starTwoStatus = true;
     }
 
+    /// <summary>
+    /// 更新界面信息
+    /// </summary>
     public virtual void UpdateInfo()
     {
         StageGoal.My.starOne.sprite = StageGoal.My.starSprites[starOneStatus ? 0 : 1];

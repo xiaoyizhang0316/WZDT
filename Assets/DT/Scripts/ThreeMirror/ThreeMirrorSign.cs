@@ -31,15 +31,14 @@ public class ThreeMirrorSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
         {
             return;
         }
-
         count++;
         isUpMove = true;
         transform.DOLocalMoveY(   posOut.localPosition .y, 0.3f).OnComplete(() =>
         {
             isUpMove = false; 
             
-        });
-        transform.GetChild(1).transform.DOScale(1.8f, 0.3f) ;
+        }).Play();
+        transform.GetChild(1).transform.DOScale(1.8f, 0.3f).Play();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -51,7 +50,7 @@ public class ThreeMirrorSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
 
         count--;
         isDownMove = true;
-        transform.DOLocalMoveY(   posIn.localPosition .y, 0.3f).OnComplete(() => { isDownMove = false; });
-        transform.GetChild(1).transform.DOScale(1f, 0.3f) ;
+        transform.DOLocalMoveY(   posIn.localPosition .y, 0.3f).OnComplete(() => { isDownMove = false; }).Play();
+        transform.GetChild(1).transform.DOScale(1f, 0.3f).Play();
     }
 }
