@@ -16,7 +16,10 @@ public class SingleWaveEnemyInfo : MonoBehaviour
     public GameObject singleBuffPrb;
 
     public Transform buffListTF;
-
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    /// <param name="str"></param>
     public void Init(string str)
     {
         string[] list = str.Split('_');
@@ -40,6 +43,7 @@ public class SingleWaveEnemyInfo : MonoBehaviour
         for (int i = 0; i < buffList.Count; i++)
         {
             GameObject go = Instantiate(singleBuffPrb, buffListTF);
+            go.GetComponent<WaveBuffSign>().Init(buffList[i]);
         }
     }
 

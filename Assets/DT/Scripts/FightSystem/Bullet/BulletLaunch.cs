@@ -61,12 +61,14 @@ public class BulletLaunch : MonoBehaviour
         launchShooter.DOLookAt(target.transform.position, 0.1f).OnComplete(() =>
         {
             float flyTime = Vector3.Distance(target.transform.position, gameObject.transform.position) / 8f;
+            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
             lanchNormalTWE = gameObject.transform.DOMove(target.transform.position, flyTime)
                 .SetEase(Ease.Linear).OnComplete(() =>
                 {
                     isplay = false;
                     if (gameObject.GetComponent<GoodsSign>().target != null)
                     {
+                        gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                         gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
                     }
                     BulletObjectPool.My.RecoveryBullet(gameObject);

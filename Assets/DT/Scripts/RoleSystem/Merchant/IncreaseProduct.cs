@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class IncreaseProduct : MonoBehaviour
 {
-
     public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Product") && GetComponentInParent<BaseMapRole>().baseRoleData.inMap)

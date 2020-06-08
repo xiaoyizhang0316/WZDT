@@ -345,8 +345,11 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
         {
             CheckWin();
+            waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+            {
+                WaveCount();
+            });
         }
-        
     }
 
     /// <summary>
@@ -510,6 +513,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         waveCountItem.Init(enemyDatas);
     }
 
+    /// <summary>
+    /// 菜单隐藏
+    /// </summary>
     public void MenuHide()
     {
         GetComponent<RectTransform>().DOAnchorPosX(160.27f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
@@ -518,6 +524,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         }).Play();
     }
 
+    /// <summary>
+    /// 菜单显示
+    /// </summary>
     public void MenuShow()
     {
         GetComponent<RectTransform>().DOAnchorPosX(-178f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {

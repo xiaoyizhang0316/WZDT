@@ -23,9 +23,13 @@ public class PruductMerchant : BaseSkill
                     .bulletCapacity)
                 {
                     Debug.Log("储存");
+                    currentCount++;
+                    if (currentCount >= role.tradeList.Count)
+                    {
+                        currentCount = 0;
+                    }
                     return;
                 }
-
                 print("贸易商技能");
                 ProductData data = role.warehouse[0];
                 role.warehouse.RemoveAt(0);
@@ -38,8 +42,6 @@ public class PruductMerchant : BaseSkill
                 {
                     data.AddBuff(buffList[i]);
                 }
-
-
                 GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
                 game.GetComponent<GoodsSign>().productData = data;
                 game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();
@@ -48,7 +50,6 @@ public class PruductMerchant : BaseSkill
                     game.GetComponent<GoodsSign>().speed = 1f * (1 - role.baseRoleData.efficiency / 100f);
                 game.transform.position = transform.position;
                 game.GetComponent<GoodsSign>().Move();
-
             }
             catch (Exception e)
             {

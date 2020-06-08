@@ -7,6 +7,9 @@ public class RoleTradeButton : MonoBehaviour
 {
     public BaseMapRole currentRole;
 
+    /// <summary>
+    /// 发起交易
+    /// </summary>
     public void StartTrade()
     {
         NewCanvasUI.My.CreateTrade(currentRole);

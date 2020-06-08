@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class WaveEnemySign : MonoBehaviour
 {
-
     public GameObject singleConsumerTypePrb;
 
     public Image buildingNumber;
