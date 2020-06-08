@@ -43,7 +43,6 @@ public class ProductSeed : BaseSkill
         catch (Exception e)
         {
             Console.WriteLine(e);
-
         }
         currentCount++;
         if (currentCount >= role.tradeList.Count)
