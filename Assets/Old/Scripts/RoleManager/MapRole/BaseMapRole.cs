@@ -261,7 +261,7 @@ public class BaseMapRole : MonoBehaviour
         transform.DOScale(1f, 20f).OnComplete(() =>
         {
             StageGoal.My.CostPlayerGold(baseRoleData.cost);
-            StageGoal.My.ProductCost(baseRoleData.cost);
+            StageGoal.My.Expend(baseRoleData.cost, ExpendType.ProductCosts, this);
             MonthlyCost();
         });
     }

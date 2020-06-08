@@ -190,6 +190,7 @@ public class ConsumeSign : MonoBehaviour
     {
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
+        StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
         StageGoal.My.CheckWin();
         StageGoal.My.killNumber++;
     }

@@ -107,9 +107,19 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public int productCost = 0;
 
-    public int getGold = 0;
+    public int totalIncome = 0;
+
+    public int consumeIncome = 0;
 
     public List<DataStat> dataStats;
+
+    public Dictionary<string, int> otherIncomes = new Dictionary<string, int>();
+
+    public Dictionary<BaseMapRole, int> npcIncomes = new Dictionary<BaseMapRole, int>();
+
+    public Dictionary<BaseMapRole, int> buildingCosts = new Dictionary<BaseMapRole, int>();
+
+    public Dictionary<string, int> extraCost = new Dictionary<string, int>();
 
     #endregion
 
@@ -194,7 +204,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void GetPlayerGold(int num)
     {
         playerGold += num;
-        GetGold(num);
         if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -554,19 +563,70 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
     }
 
-    public void TradeCost(int num)
+
+    public void Income(int num, IncomeType incomeType, BaseMapRole npc =null, string otherName="")
     {
-        tradeCost += num;
+        totalIncome += num;
+        switch (incomeType)
+        {
+            case IncomeType.Consume:
+                consumeIncome += num;
+                break;
+            case IncomeType.Npc:
+                if (npcIncomes.ContainsKey(npc))
+                {
+                    npcIncomes[npc] += num;
+                }
+                else
+                {
+                    npcIncomes.Add(npc, num);
+                }
+                break;
+            case IncomeType.Other:
+                if (otherIncomes.ContainsKey(otherName))
+                {
+                    otherIncomes[otherName] += num;
+                }
+                else
+                {
+                    otherIncomes.Add(otherName,num);
+                }
+                break;
+        }
     }
 
-    public void ProductCost(int num)
+    public void Expend(int num, ExpendType expendType, BaseMapRole build = null, string extraName = "")
     {
-        productCost += num;
-    }
-
-    public void GetGold(int num)
-    {
-        getGold += num;
+        totalCost += num;
+        switch (expendType)
+        {
+            case ExpendType.TradeCosts:
+                tradeCost += num;
+                break;
+            case ExpendType.ProductCosts:
+                productCost += num;
+                if (buildingCosts.ContainsKey(build))
+                {
+                    buildingCosts[build] += num;
+                }
+                else
+                {
+                    buildingCosts.Add(build, num);
+                }
+                break;
+            case ExpendType.AdditionalCosts:
+                if (extraCost.ContainsKey(extraName))
+                {
+                    extraCost[extraName] += num;
+                }
+                else
+                {
+                    extraCost.Add(extraName, num);
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     private void Stat()
@@ -575,7 +635,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             dataStats = new List<DataStat>();
         }
-        dataStats.Add(new DataStat(playerHealth, playerSatisfy, productCost, tradeCost, playerGold));
+        dataStats.Add(new DataStat(playerHealth, playerSatisfy, totalIncome, consumeIncome, totalCost, tradeCost, productCost, playerGold));
     }
 
     public string ShowStat()
@@ -583,9 +643,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         string list = "";
         foreach(var ds in dataStats)
         {
-            list += string.Format($"{ds.blood}\t{ds.score}\t{ds.cost}\t{ds.tradeCost}\t{ds.totalGold}\n");
+            //list += string.Format($"{ds.blood}\t{ds.score}\t{ds.cost}\t{ds.tradeCost}\t{ds.totalGold}\n");
         }
-
         return list;
     }
 }

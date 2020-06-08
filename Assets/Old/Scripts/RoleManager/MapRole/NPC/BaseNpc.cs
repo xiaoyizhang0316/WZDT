@@ -42,6 +42,7 @@ public abstract class BaseNpc : MonoBehaviour
         if (StageGoal.My.playerGold < lockNumber)
             return false;
         StageGoal.My.CostPlayerGold(lockNumber);
+        StageGoal.My.Expend(lockNumber, ExpendType.AdditionalCosts, null, "激活NPC");
         isLock = false;
         return true;
     }
