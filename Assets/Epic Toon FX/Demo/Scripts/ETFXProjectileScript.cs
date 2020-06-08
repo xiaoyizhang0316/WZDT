@@ -24,11 +24,11 @@ public class ETFXProjectileScript : MonoBehaviour
 
     public void Init()
     {
-        projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation,transform) as GameObject;
+        projectileParticle = Instantiate(projectileParticle, transform.parent.position, transform.parent.rotation,transform.parent) as GameObject;
         //projectileParticle.transform.parent = transform;
         if (muzzleParticle)
         {
-            muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation, transform) as GameObject;
+            muzzleParticle = Instantiate(muzzleParticle, transform.parent.position, transform.parent.rotation, transform.parent) as GameObject;
             Destroy(muzzleParticle, 1.5f); // Lifetime of muzzle effect.
         }
     }
@@ -76,7 +76,6 @@ public class ETFXProjectileScript : MonoBehaviour
 
     public void StartShoot()
     {
-        hasCollided = true;
         //transform.DetachChildren();
         impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
         //Debug.DrawRay(hit.contacts[0].point, hit.contacts[0].normal * 1, Color.yellow);
@@ -104,5 +103,10 @@ public class ETFXProjectileScript : MonoBehaviour
             trail.transform.SetParent(null);
             Destroy(trail.gameObject, 2);
         }
+    }
+
+    private void Update()
+    {
+        transform.rotation = transform.parent.rotation;
     }
 }
