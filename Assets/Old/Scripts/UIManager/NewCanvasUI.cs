@@ -76,6 +76,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         
     }
 
+    /// <summary>
+    /// 初始化三个时间控制按钮
+    /// </summary>
     public void InitTimeButton()
     {
         Button_Pause.onClick.AddListener(GamePause);
@@ -142,6 +145,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         return false;
     }
 
+    /// <summary>
+    /// 发起交易
+    /// </summary>
+    /// <param name="_startRole"></param>
     public void CreateTrade(BaseMapRole _startRole)
     {
         startRole = _startRole;
