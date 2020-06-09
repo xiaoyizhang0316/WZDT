@@ -80,6 +80,30 @@ public class BulletLaunch : MonoBehaviour
         });
         isplay = true;
     }
+    public void LanchNormalTest( Vector3 target,GameObject bullet ,float time)
+    {
+        GameObject gameObject = Instantiate(bullet,transform);
+      
+        gameObject.transform.SetParent(launchShooter);
+        gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
+
+        launchShooter.DOLookAt(target , 0.1f).OnComplete(() =>
+        {
+            float flyTime = 1;
+            gameObject .GetComponent <ETFXProjectileScript>().Init(); 
+            lanchNormalTWE = gameObject.transform.DOMove(target , time)
+                .SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    isplay = false;
+                      
+                        gameObject .GetComponent <ETFXProjectileScript>().StartShoot();
+         
+               Destroy(gameObject,0.3f);
+                });
+        
+        });
+        isplay = true;
+    }
     public void LanchLightning(ProductData data)
     {
         GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Lightning);

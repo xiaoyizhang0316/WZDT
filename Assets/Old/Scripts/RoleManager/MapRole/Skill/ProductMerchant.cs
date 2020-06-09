@@ -24,7 +24,7 @@ public class ProductMerchant : BaseSkill
                     .GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).baseRoleData
                     .bulletCapacity)
                 {
-                    Debug.Log("储存");
+       
                     currentCount++;
                     if (currentCount >= role.tradeList.Count)
                     {

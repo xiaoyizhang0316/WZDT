@@ -5,7 +5,7 @@ using DT.Fight.Bullet;
 using UnityEngine;
 
 
-public class PruductSeed : BaseSkill
+public class ProductSeed : BaseSkill
 {
     public List<ProductData> productDatas = new List<ProductData>();
     // Start is called before the first frame update

@@ -74,18 +74,18 @@ public class RoleListInfoPeasant : BaseRoleListInfo
         }
 
         int count = 9;
-        if (baseMapRole.GetComponent<PruductMelon>().productDatas.Count <9)
+        if (baseMapRole.GetComponent<ProductMelon>().productDatas.Count <9)
         {
-            count = baseMapRole.GetComponent<PruductMelon>().productDatas.Count ;
+            count = baseMapRole.GetComponent<ProductMelon>().productDatas.Count ;
         }
      
 
         for (int i = 1; i <=count; i++)
         { 
-            Debug.Log(i+"||"+ baseMapRole.GetComponent<PruductMelon>().productDatas.Count);
+            Debug.Log(i+"||"+ baseMapRole.GetComponent<ProductMelon>().productDatas.Count);
             GameObject Pruductgame =  Instantiate(productPrb, productTF);
             Pruductgame.GetComponent<ProductSign>().currentProduct =
-                baseMapRole.GetComponent<PruductMelon>().productDatas[    baseMapRole.GetComponent<PruductMelon>().productDatas.Count-i];
+                baseMapRole.GetComponent<ProductMelon>().productDatas[    baseMapRole.GetComponent<ProductMelon>().productDatas.Count-i];
             Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.normallpp;
         }
     }

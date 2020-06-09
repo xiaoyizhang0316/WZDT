@@ -76,18 +76,18 @@ public class RoleListInfoSeed : BaseRoleListInfo
      }
 
      int count = 9;
-     if (baseMapRole.GetComponent<PruductSeed>().productDatas.Count <9)
+     if (baseMapRole.GetComponent<ProductSeed>().productDatas.Count <9)
      {
-         count = baseMapRole.GetComponent<PruductSeed>().productDatas.Count ;
+         count = baseMapRole.GetComponent<ProductSeed>().productDatas.Count ;
      }
      
 
      for (int i = 1; i <=count; i++)
      { 
-         Debug.Log(i+"||"+ baseMapRole.GetComponent<PruductSeed>().productDatas.Count);
+         Debug.Log(i+"||"+ baseMapRole.GetComponent<ProductSeed>().productDatas.Count);
          GameObject Pruductgame =  Instantiate(productPrb, productTF);
          Pruductgame.GetComponent<ProductSign>().currentProduct =
-             baseMapRole.GetComponent<PruductSeed>().productDatas[    baseMapRole.GetComponent<PruductSeed>().productDatas.Count-i];
+             baseMapRole.GetComponent<ProductSeed>().productDatas[    baseMapRole.GetComponent<ProductSeed>().productDatas.Count-i];
          Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.seedSpeed;
      }
     }
