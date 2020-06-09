@@ -593,10 +593,11 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
                 break;
         }
-        if (DataStatPanel.My.isShow)
-        {
-            DataStatPanel.My.ShowStat();
-        }
+        //if (DataStatPanel.My.isShow)
+        //{
+        //    DataStatPanel.My.ShowStat();
+        //}
+        DataStatPanel.My.RefreshIncome(totalIncome, consumeIncome, npcIncomes, otherIncomes, timeCount);
     }
 
     public void Expend(int num, ExpendType expendType, BaseMapRole build = null, string extraName = "")
@@ -631,10 +632,11 @@ public class StageGoal : MonoSingleton<StageGoal>
             default:
                 break;
         }
-        if (DataStatPanel.My.isShow)
-        {
-            DataStatPanel.My.ShowStat();
-        }
+        //if (DataStatPanel.My.isShow)
+        //{
+        //    DataStatPanel.My.ShowStat();
+        //}
+        DataStatPanel.My.RefreshExpend(totalCost, tradeCost, buildingCosts, extraCost, timeCount);
     }
 
     private void Stat()
