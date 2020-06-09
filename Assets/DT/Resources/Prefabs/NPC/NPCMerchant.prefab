@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 745394881712787411}
   - component: {fileID: 6762698527656334721}
-  - component: {fileID: 690730063592205293}
   - component: {fileID: 3989839872042212707}
   - component: {fileID: 7580769199408575989}
   - component: {fileID: 3350102371471842545}
+  - component: {fileID: 5569870448007674632}
   m_Layer: 0
   m_Name: NPCMerchant
   m_TagString: MapRole
@@ -105,21 +105,6 @@ MonoBehaviour:
   activityCost: 0
   tradeCost: 0
   shop: []
---- !u!114 &690730063592205293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70d631e59b2bc334b83ab293c2f21606, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  role: {fileID: 6762698527656334721}
-  IsOpen: 1
-  buffList: 
 --- !u!65 &3989839872042212707
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -165,8 +150,25 @@ MonoBehaviour:
   isCanSee: 0
   isCanSeeEquip: 0
   lockNumber: 0
+  NPCgear: 
   hideModel: {fileID: 7108235030657446041}
   trueModel: {fileID: 5702863791199925693}
+--- !u!114 &5569870448007674632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745394881712787409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15132e808915d41afb014f5d6cd33929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  role: {fileID: 0}
+  IsOpen: 1
+  skillDesc: 
+  buffList: 
 --- !u!1 &2012059022961659406
 GameObject:
   m_ObjectHideFlags: 0
