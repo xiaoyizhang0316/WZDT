@@ -764,6 +764,8 @@ MonoBehaviour:
     type: 3}
   intervalNumber: -1
   intervalLength: 1
+  isFinishSpawn: 0
+  protalGameObject: {fileID: 0}
 --- !u!120 &131064105
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -932,6 +934,8 @@ MonoBehaviour:
     type: 3}
   intervalNumber: -1
   intervalLength: 1
+  isFinishSpawn: 0
+  protalGameObject: {fileID: 0}
 --- !u!120 &133904844
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -6205,19 +6209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee8d588cae6240aabf69b275fc9baf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyPrb: {fileID: 660545441987893423, guid: 4e4bc7b7613444b85aa89e2cc15e48e0, type: 3}
-  consumerPrb: {fileID: 7011424854135362316, guid: de4949b375fe446f9969789af42e8ce4,
-    type: 3}
-  consumerSprite:
-  - {fileID: 21300000, guid: bc9fcb35fd3d0e942ab621e3a707b893, type: 3}
-  - {fileID: 21300000, guid: 9d9efb7fbef45d1439c4343c3e989846, type: 3}
-  - {fileID: 21300000, guid: 626e930f833de1d4b883f459d978f39a, type: 3}
-  - {fileID: 21300000, guid: 8cc30eb823edd0c4f81a7bdc3dfdaeec, type: 3}
-  - {fileID: 21300000, guid: 27d1d82d74e75c849a43a91b24dab52f, type: 3}
-  moneySprite:
-  - {fileID: 21300000, guid: 3fe2d7c2bb5a9499dbef119128aadf69, type: 3}
-  consumerSatisfySigns: []
-  sellMoneySigns: []
+  costMoneyPrb: {fileID: 0}
 --- !u!114 &789990670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10617,10 +10609,20 @@ PrefabInstance:
       propertyPath: RoleTF
       value: 
       objectReference: {fileID: 1245745148}
+    - target: {fileID: 14312661856691554, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00048828125
+      objectReference: {fileID: 0}
     - target: {fileID: 583138783137619030, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: waveCountImg
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285762822948928648, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0053710938
       objectReference: {fileID: 0}
     - target: {fileID: 1337872522533243529, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
@@ -10830,7 +10832,7 @@ PrefabInstance:
     - target: {fileID: 6562833029927071625, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -22.599854
+      value: -22.600098
       objectReference: {fileID: 0}
     - target: {fileID: 7027794139494943396, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
@@ -12166,7 +12168,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1622245789
 PrefabInstance:
