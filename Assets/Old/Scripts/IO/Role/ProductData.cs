@@ -8,9 +8,20 @@ using static GameEnum;
   [Serializable]
 public class ProductData
 {
-     
-       
-    
+    public ProductData()
+    {
+    }
+
+    public ProductData( ProductData data)
+    {
+        bulletType = data.bulletType;
+        damage = data.damage;
+        loadingSpeed = data.loadingSpeed;
+        buffList =new List<int>() ;
+        buffList.AddRange(data.buffList);
+        buffMaxCount = data.buffMaxCount;
+    }
+
     public BulletType bulletType;
 
     /// <summary>

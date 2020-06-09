@@ -38,8 +38,11 @@ public class BulletLaunch : MonoBehaviour
 
         launchShooter.DOLookAt(pointList[pointList.Count / 2], 0.1f).OnComplete(() =>
           {
+              
+              gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
               gameObject.transform.DOPath(pointList.ToArray(), 1).SetEase(sase).OnComplete(() =>
               {
+                  gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                   gameObject.GetComponent<BoomTrigger>().GetConsumerList();
                   BulletObjectPool.My.RecoveryBullet(gameObject);
               });

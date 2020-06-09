@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PruductMelon : BaseSkill
 { 
+    public List<ProductData> productDatas = new List<ProductData>();
+
     private int currentCount= 0 ;
     public override void Skill()
     {
@@ -39,6 +41,8 @@ public class PruductMelon : BaseSkill
                 game.GetComponent<GoodsSign>().role = PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
                 game.transform.position = transform.position;
                 game.GetComponent<GoodsSign>().Move();
+                productDatas.Add(new ProductData(data)); 
+
                 currentCount++;
             }
             catch (Exception)
@@ -55,4 +59,5 @@ public class PruductMelon : BaseSkill
         }
 
     }
+    
 }

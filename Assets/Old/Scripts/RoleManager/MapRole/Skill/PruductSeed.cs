@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PruductSeed : BaseSkill
 {
-  
+    public List<ProductData> productDatas = new List<ProductData>();
     // Start is called before the first frame update
     private int currentCount= 0 ;
     public override void Skill()
@@ -43,6 +43,7 @@ public class PruductSeed : BaseSkill
         game.GetComponent<GoodsSign>().role =PlayerData.My.GetMapRoleById(Double.Parse( role.tradeList[currentCount].tradeData.targetRole));
         game.transform.position = transform.position;
         game.GetComponent<GoodsSign>().Move();
+        productDatas.Add(new ProductData(data));  
         }
         catch (Exception e)
         {

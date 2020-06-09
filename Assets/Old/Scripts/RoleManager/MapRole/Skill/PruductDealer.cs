@@ -70,6 +70,7 @@ public class PruductDealer : BaseSkill
                 if (IsOpen)
                 {
                     UnleashSkills();
+                    
                 }
             });
         }
