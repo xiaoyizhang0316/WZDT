@@ -45,6 +45,7 @@ public class ProductDealer : BaseSkill
 
     public override void UnleashSkills()
     {
+        isPlay = true;
         if (role.warehouse.Count > 0)
         {
             ProductData data = role.warehouse[0];

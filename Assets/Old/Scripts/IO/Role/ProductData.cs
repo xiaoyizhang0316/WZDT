@@ -42,7 +42,22 @@ public class ProductData
         else
         {
             if(!buffList.Contains(buffId))
+            {
+                //BuffData data = GameDataMgr.My.GetBuffDataByID(buffId);
+                //if(data.bulletBuffType == BulletBuffType.Element)
+                //{
+                //    for (int i = 0; i < buffList.Count; i++)
+                //    {
+                //        BuffData bData = GameDataMgr.My.GetBuffDataByID(buffList[i]);
+                //        if (bData.bulletBuffType == BulletBuffType.Element)
+                //        {
+                //            buffList.RemoveAt(i);
+                //        }
+                //    }
+                //}
                 buffList.Add(buffId);
+            }
+
         }
     }
 
