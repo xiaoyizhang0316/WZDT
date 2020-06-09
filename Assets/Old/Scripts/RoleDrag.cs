@@ -52,8 +52,6 @@ public class RoleDrag : MonoBehaviour
 
     private void OnMouseEnter()
     {
-
-
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
         //if (UIManager.My.Panel_POPInfo.GetComponent<POPRoleManager>().InitPOPRole(gameObject.transform.parent.GetComponent<BaseMapRole>()))
         //{
@@ -63,8 +61,6 @@ public class RoleDrag : MonoBehaviour
 
     private void OnMouseExit()
     {
-
-
        // UIManager.My.Panel_POPInfo.gameObject.SetActive(false);
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
 
@@ -81,7 +77,7 @@ public class RoleDrag : MonoBehaviour
             NewCanvasUI.My.endRole = GetComponentInParent<BaseMapRole>();
             if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
             {
-                if (CheckStartAndEnd() && CheckNpcActive())
+                if (CheckStartAndEnd() && CheckNpcActive() && TradeManager.My.CheckDuplicateTrade())
                 {
                     NewCanvasUI.My.InitCreateTradePanel();
                 }
@@ -91,6 +87,7 @@ public class RoleDrag : MonoBehaviour
         {
             NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
             RoleListInfo.My.Init(currentRole);
+            //if (!EventSystem.current.IsPointerOverGameObject())
         }
     }
 
@@ -100,7 +97,6 @@ public class RoleDrag : MonoBehaviour
         {
             return;
         }
-
     }
 
 

@@ -15,6 +15,10 @@ public class WaveCount : MonoSingleton<WaveCount>
 
     public GameObject closeBtn;
 
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    /// <param name="datas"></param>
     public void Init(List<StageEnemyData> datas)
     {
         for (int i = 0; i < StageGoal.My.maxWaveNumber; i++)
@@ -24,6 +28,10 @@ public class WaveCount : MonoSingleton<WaveCount>
         }
     }
 
+    /// <summary>
+    /// 初始化波数
+    /// </summary>
+    /// <param name="waveNumber"></param>
     public void InitWaveBg(int waveNumber)
     {
         waveBg.gameObject.SetActive(true);

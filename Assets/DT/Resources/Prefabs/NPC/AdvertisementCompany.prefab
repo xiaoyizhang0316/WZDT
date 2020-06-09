@@ -221,9 +221,9 @@ GameObject:
   - component: {fileID: 2363748267651291491}
   - component: {fileID: 2017345437413279364}
   - component: {fileID: 8899486489098488673}
-  - component: {fileID: 4357264554975179621}
   - component: {fileID: 5840160722976328818}
   - component: {fileID: 6545259540281883998}
+  - component: {fileID: 2261022846323357431}
   m_Layer: 0
   m_Name: AdvertisementCompany
   m_TagString: Untagged
@@ -330,23 +330,9 @@ MonoBehaviour:
   isCanSee: 0
   isCanSeeEquip: 0
   lockNumber: 0
+  NPCgear: 
   hideModel: {fileID: 7010573542175292831}
   trueModel: {fileID: 8145369834327937887}
---- !u!114 &4357264554975179621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692879230315230448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70d631e59b2bc334b83ab293c2f21606, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  role: {fileID: 0}
-  IsOpen: 1
-  buffList: 
 --- !u!65 &5840160722976328818
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -376,6 +362,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2261022846323357431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692879230315230448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15132e808915d41afb014f5d6cd33929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  role: {fileID: 0}
+  IsOpen: 1
+  skillDesc: 
+  buffList: 
 --- !u!1001 &1072662421135550785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -583,6 +585,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoleCreateTradeButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256080403480066048, guid: 9b3a05174be6f4dcd9f0ef324b229625,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b3a05174be6f4dcd9f0ef324b229625, type: 3}

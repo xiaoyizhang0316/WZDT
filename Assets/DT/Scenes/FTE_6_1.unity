@@ -737,13 +737,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343745aae1cc1154ca63423994bde5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {x: 0, y: 0, z: 0}
-  world: {x: 0, y: 0, z: 0}
-  Role: {fileID: 0}
-  isSucceed: 0
-  isCollision: 0
-  currentrole: {fileID: 0}
-  MoveTF: {fileID: 153605877}
 --- !u!65 &153605874
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1107,7 +1100,8 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
-      tradeRange: 0
+      xList: 
+      yList: 
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -1118,6 +1112,7 @@ MonoBehaviour:
     cost: 0
     riskResistance: 0
     bulletCapacity: 0
+    techAdd: 0
     ID: 0
     equipCost: 0
     workerCost: 0
@@ -1153,7 +1148,8 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
-      tradeRange: 0
+      xList: 
+      yList: 
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -1164,6 +1160,7 @@ MonoBehaviour:
     cost: 0
     riskResistance: 0
     bulletCapacity: 0
+    techAdd: 0
     ID: 0
     equipCost: 0
     workerCost: 0
@@ -1183,7 +1180,8 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
-      tradeRange: 0
+      xList: 
+      yList: 
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -1194,6 +1192,7 @@ MonoBehaviour:
     cost: 0
     riskResistance: 0
     bulletCapacity: 0
+    techAdd: 0
     ID: 0
     equipCost: 0
     workerCost: 0
@@ -5756,7 +5755,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
 --- !u!114 &707452865
 MonoBehaviour:
@@ -6033,19 +6032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee8d588cae6240aabf69b275fc9baf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyPrb: {fileID: 660545441987893423, guid: 4e4bc7b7613444b85aa89e2cc15e48e0, type: 3}
-  consumerPrb: {fileID: 7011424854135362316, guid: de4949b375fe446f9969789af42e8ce4,
-    type: 3}
-  consumerSprite:
-  - {fileID: 21300000, guid: bc9fcb35fd3d0e942ab621e3a707b893, type: 3}
-  - {fileID: 21300000, guid: 9d9efb7fbef45d1439c4343c3e989846, type: 3}
-  - {fileID: 21300000, guid: 626e930f833de1d4b883f459d978f39a, type: 3}
-  - {fileID: 21300000, guid: 8cc30eb823edd0c4f81a7bdc3dfdaeec, type: 3}
-  - {fileID: 21300000, guid: 27d1d82d74e75c849a43a91b24dab52f, type: 3}
-  moneySprite:
-  - {fileID: 21300000, guid: 3fe2d7c2bb5a9499dbef119128aadf69, type: 3}
-  consumerSatisfySigns: []
-  sellMoneySigns: []
+  costMoneyPrb: {fileID: 0}
 --- !u!114 &789990670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12423,6 +12410,7 @@ MonoBehaviour:
   merchant: {fileID: 1013307312}
   peasant: {fileID: 701081048}
   seed: {fileID: 693235853}
+  CreatRolePanel: {fileID: 0}
 --- !u!114 &1650756587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14075,13 +14063,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343745aae1cc1154ca63423994bde5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {x: 0, y: 0, z: 0}
-  world: {x: 0, y: 0, z: 0}
-  Role: {fileID: 0}
-  isSucceed: 0
-  isCollision: 0
-  currentrole: {fileID: 0}
-  MoveTF: {fileID: 1884738148}
 --- !u!4 &1884738148
 Transform:
   m_ObjectHideFlags: 0
@@ -14262,7 +14243,7 @@ Transform:
   m_Children:
   - {fileID: 2032221742}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 41.918003, y: 111.27701, z: 145.80301}
 --- !u!1001 &1949308672
 PrefabInstance:

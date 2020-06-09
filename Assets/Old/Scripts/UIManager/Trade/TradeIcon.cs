@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using static GameEnum;
 
@@ -15,6 +16,7 @@ public class TradeIcon : MonoBehaviour
     {
         start = s;
         end = e;
+
     }
 
     /// <summary>
@@ -30,6 +32,7 @@ public class TradeIcon : MonoBehaviour
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         transform.position = (start.tradePoint.position + end.tradePoint.position) / 2f + new Vector3(0f,0.3f,0f);
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.2f, 0.2f);
     }
 
     public void OnMouseDown()
@@ -40,6 +43,16 @@ public class TradeIcon : MonoBehaviour
             NewCanvasUI.My.Panel_TradeSetting.SetActive(true);
             CreateTradeManager.My.Open(TradeManager.My.tradeList[tradeId].gameObject);
         }
+    }
+
+    public void OnMouseEnter()
+    {
+        GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f);
+    }
+
+    public void OnMouseExit()
+    {
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.2f,0.8f);
     }
 
     // Start is called before the first frame update

@@ -11,6 +11,8 @@ public class GoodsSign : MonoBehaviour
 
     public ProductData productData;
 
+
+
     public ConsumeSign target;
     /// <summary>
     /// 发射者
@@ -21,6 +23,7 @@ public class GoodsSign : MonoBehaviour
     public Tweener moveTween;
     public BaseMapRole role;
     private float speedAdd = 1f;
+    public float speed=1;
 
     public Dictionary<double, int> speedBuffList = new Dictionary<double, int>();
     // Start is called before the first frame update
@@ -39,8 +42,14 @@ public class GoodsSign : MonoBehaviour
     private int count = 0;
     public void Move()
     {
-       // print("bullet start move" + path[count]);
-        moveTween = transform.DOMove(path[count],1).OnComplete(() =>
+  
+        if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
+        {
+            speed=  1f * (1 - role.baseRoleData.efficiency > 80? 80f: role.baseRoleData.efficiency / 100f);
+        }
+
+        // print("bullet start move" + path[count]);
+        moveTween = transform.DOMove(path[count],speed ).OnComplete(() =>
         {
            // print("bullet move");
             count++;
@@ -74,6 +83,7 @@ public class GoodsSign : MonoBehaviour
             {
                 twe.Kill();
                 target.OnHit(ref productData);
+                GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                 BulletObjectPool.My.RecoveryBullet(gameObject); 
             }
         }

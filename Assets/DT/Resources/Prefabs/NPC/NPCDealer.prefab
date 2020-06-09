@@ -173,10 +173,10 @@ GameObject:
   - component: {fileID: 1538349919051237719}
   - component: {fileID: 5970151871576199032}
   - component: {fileID: 1439850988682758017}
-  - component: {fileID: 702625955410161565}
   - component: {fileID: 6398667317432209123}
   - component: {fileID: 7208087184731264112}
   - component: {fileID: 5055238370488287258}
+  - component: {fileID: 8367377897582810313}
   m_Layer: 0
   m_Name: NPCDealer
   m_TagString: MapRole
@@ -287,21 +287,6 @@ MonoBehaviour:
   fire: {fileID: 0}
   launchShooter: {fileID: 7975031110103807854}
   per: 0.5
---- !u!114 &702625955410161565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538349919051237717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c50c012d9e70ec841b9f06ad7adbab34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  role: {fileID: 5970151871576199032}
-  IsOpen: 1
-  buffList: 
 --- !u!65 &6398667317432209123
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -347,8 +332,25 @@ MonoBehaviour:
   isCanSee: 0
   isCanSeeEquip: 0
   lockNumber: 0
+  NPCgear: 
   hideModel: {fileID: 1265753816666578431}
   trueModel: {fileID: 626043413420448301}
+--- !u!114 &8367377897582810313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538349919051237717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac92349df94849c59cb22672bebf9a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  role: {fileID: 0}
+  IsOpen: 0
+  skillDesc: 
+  buffList: 
 --- !u!1 &2058430452873792019
 GameObject:
   m_ObjectHideFlags: 0
@@ -2875,15 +2877,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffb4d4d4333486d4fab448a8688c1361, type: 3}
---- !u!1 &626043413420448301 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: ffb4d4d4333486d4fab448a8688c1361,
-    type: 3}
-  m_PrefabInstance: {fileID: 8904120299632018212}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4533857027884116030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ffb4d4d4333486d4fab448a8688c1361,
+    type: 3}
+  m_PrefabInstance: {fileID: 8904120299632018212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &626043413420448301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: ffb4d4d4333486d4fab448a8688c1361,
     type: 3}
   m_PrefabInstance: {fileID: 8904120299632018212}
   m_PrefabAsset: {fileID: 0}

@@ -37,7 +37,7 @@ public class EffectMove : MonoBehaviour
         gameObject.transform.position = startPos.position;
         yield return new WaitForSeconds(startTime);
       
-        gameObject.transform.DOMove(EndPos.position,moveTime).SetEase(moveease);
+        gameObject.transform.DOMove(EndPos.position,moveTime).SetEase(moveease).Play();
     }
 
     public IEnumerator Back()
@@ -45,6 +45,6 @@ public class EffectMove : MonoBehaviour
         gameObject.transform.position = EndPos.position;
         yield return new WaitForSeconds(backTime);
       
-        gameObject.transform.DOMove(startPos.position,moveTime).SetEase(Baskease);;
+        gameObject.transform.DOMove(startPos.position,moveTime).SetEase(Baskease).Play();
     }
 }
