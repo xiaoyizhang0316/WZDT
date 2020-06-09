@@ -220,5 +220,6 @@ public class TradeSign : MonoBehaviour
         else
             result /= 10;
         StageGoal.My.CostPlayerGold(result);
+        StageGoal.My.Expend(result, ExpendType.TradeCosts);
     }
 }

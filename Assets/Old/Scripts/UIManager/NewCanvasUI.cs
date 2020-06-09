@@ -52,6 +52,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public Button Button_Normal;
 
     public Button Button_Accelerate;
+
+    public Button statBtn;
     #endregion
 
     // Start is called before the first frame update
@@ -62,6 +64,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause = transform.Find("TimeScale/GamePause").GetComponent<Button>();
         Button_Normal = transform.Find("TimeScale/GameNormal").GetComponent<Button>();
         Button_Accelerate = transform.Find("TimeScale/GameAccelerate").GetComponent<Button>();
+        statBtn.onClick.AddListener(() =>  DataStatPanel.My.ShowStat());
         InitTimeButton();
         Panel_Delete.SetActive(false);
         lose.SetActive(false);
@@ -73,6 +76,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         
     }
 
+    /// <summary>
+    /// 初始化三个时间控制按钮
+    /// </summary>
     public void InitTimeButton()
     {
         Button_Pause.onClick.AddListener(GamePause);
@@ -139,6 +145,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         return false;
     }
 
+    /// <summary>
+    /// 发起交易
+    /// </summary>
+    /// <param name="_startRole"></param>
     public void CreateTrade(BaseMapRole _startRole)
     {
         startRole = _startRole;
@@ -181,6 +191,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void LostConfirm()
     {
         lose.SetActive(false);
+        PlayerData.My.Reset();
         SceneManager.LoadScene("Map");
     }
 }

@@ -11,25 +11,29 @@ public class ETFXProjectileScript : MonoBehaviour
     public Vector3 impactNormal; //Used to rotate impactparticle.
  
     private bool hasCollided = false;
- 
-  //  void Start()
-  //  {
-  //      projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
-  //      projectileParticle.transform.parent = transform;
-		//if (muzzleParticle){
-  //      muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation) as GameObject;
-  //      Destroy(muzzleParticle, 1.5f); // Lifetime of muzzle effect.
-		//}
-  //  }
+
+
+    private GameObject projectileParticleGo;
+
+    private GameObject muzzleParticleGo;
+    //  void Start()
+    //  {
+    //      projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
+    //      projectileParticle.transform.parent = transform;
+    //if (muzzleParticle){
+    //      muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation) as GameObject;
+    //      Destroy(muzzleParticle, 1.5f); // Lifetime of muzzle effect.
+    //}
+    //  }
 
     public void Init()
     {
-        projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation,transform) as GameObject;
+        projectileParticleGo = Instantiate(projectileParticle, transform.parent.position, transform.rotation,transform) as GameObject;
         //projectileParticle.transform.parent = transform;
         if (muzzleParticle)
         {
-            muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation, transform) as GameObject;
-            Destroy(muzzleParticle, 1.5f); // Lifetime of muzzle effect.
+            muzzleParticleGo = Instantiate(muzzleParticle, transform.parent.position, transform.rotation, transform) as GameObject;
+            Destroy(muzzleParticleGo, 1.5f); // Lifetime of muzzle effect.
         }
     }
  
@@ -76,22 +80,21 @@ public class ETFXProjectileScript : MonoBehaviour
 
     public void StartShoot()
     {
-        hasCollided = true;
         //transform.DetachChildren();
-        impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
+        GameObject go = Instantiate(impactParticle, transform.parent.position, transform.rotation, null);
+        //impactParticle = Instantiate(impactParticle, transform.position, transform.rotation,transform) as GameObject;
+
         //Debug.DrawRay(hit.contacts[0].point, hit.contacts[0].normal * 1, Color.yellow);
 
         //yield WaitForSeconds (0.05);
         foreach (GameObject trail in trailParticles)
         {
-            GameObject curTrail = transform.Find(projectileParticle.name + "/" + trail.name).gameObject;
-            curTrail.transform.parent = null;
+            GameObject curTrail = transform.Find(projectileParticleGo.name + "/" + trail.name).gameObject;
+            curTrail.transform.parent = transform;
             Destroy(curTrail, 3f);
         }
-        Destroy(projectileParticle, 3f);
-        Destroy(impactParticle, 5f);
-        Destroy(gameObject);
-        //projectileParticle.Stop();
+        Destroy(projectileParticleGo, 3f);
+        Destroy(go, 5f);
 
         ParticleSystem[] trails = GetComponentsInChildren<ParticleSystem>();
         //Component at [0] is that of the parent i.e. this object (if there is any)
@@ -101,8 +104,13 @@ public class ETFXProjectileScript : MonoBehaviour
             if (!trail.gameObject.name.Contains("Trail"))
                 continue;
 
-            trail.transform.SetParent(null);
+            trail.transform.SetParent(transform);
             Destroy(trail.gameObject, 2);
         }
+    }
+
+    private void Update()
+    {
+        transform.rotation = transform.parent.rotation;
     }
 }

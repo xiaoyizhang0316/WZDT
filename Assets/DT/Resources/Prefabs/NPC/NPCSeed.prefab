@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 745394881712787411}
   - component: {fileID: 5835603690850080641}
-  - component: {fileID: 5238769971576237431}
   - component: {fileID: 3667137923523956315}
   - component: {fileID: 4172996083580728710}
   - component: {fileID: 5131937319854673713}
+  - component: {fileID: 4422509531297122215}
   m_Layer: 0
   m_Name: NPCSeed
   m_TagString: MapRole
@@ -105,22 +105,6 @@ MonoBehaviour:
   activityCost: 0
   tradeCost: 0
   shop: []
---- !u!114 &5238769971576237431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745394881712787409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0542d12c365a824797721eb96311d74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  role: {fileID: 5835603690850080641}
-  IsOpen: 1
-  skillDesc: 
-  buffList: 
 --- !u!114 &3667137923523956315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +153,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4422509531297122215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745394881712787409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03ce42523d0e94b038be3bd544a2f8b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  role: {fileID: 0}
+  IsOpen: 1
+  skillDesc: 
+  buffList: 
 --- !u!114 &6519822529651845160
 MonoBehaviour:
   m_ObjectHideFlags: 0

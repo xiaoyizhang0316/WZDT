@@ -204,6 +204,7 @@ public class BaseBuff
             case 1:
                 CalculateNumber(str, ref buffConfig.playerGoldChange, StageGoal.My.playerGold);
                 StageGoal.My.GetPlayerGold(buffConfig.playerGoldChange);
+                StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Npc, castRole);
                 break;
             case 2:
                 CalculateNumber(str, ref buffConfig.playerSatisfyChange, StageGoal.My.playerSatisfy);

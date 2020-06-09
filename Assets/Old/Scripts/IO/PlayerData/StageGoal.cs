@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Linq;
+using System;
 
 public class StageGoal : MonoSingleton<StageGoal>
 {
@@ -101,6 +102,24 @@ public class StageGoal : MonoSingleton<StageGoal>
     public int killNumber = 0;
 
     public int totalCost = 0;
+
+    public int tradeCost = 0;
+
+    public int productCost = 0;
+
+    public int totalIncome = 0;
+
+    public int consumeIncome = 0;
+
+    public List<DataStat> dataStats;
+
+    public Dictionary<string, int> otherIncomes = new Dictionary<string, int>();
+
+    public Dictionary<BaseMapRole, int> npcIncomes = new Dictionary<BaseMapRole, int>();
+
+    public Dictionary<BaseMapRole, int> buildingCosts = new Dictionary<BaseMapRole, int>();
+
+    public Dictionary<string, int> extraCost = new Dictionary<string, int>();
 
     #endregion
 
@@ -275,18 +294,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CheckWin()
     {
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
-        //print("消费者数： " + list.Length.ToString());
-        bool isComplete = true;
-        foreach (Building b in BuildingManager.My.buildings)
-        {
-            if (!b.isFinishSpawn)
-            {
-                isComplete = false;
-                break;
-            }
-        }
         //print("consumeSign list:" + list.Length.ToString());
-        if (list.Length == 0 && isComplete)
+        if (list.Length <= 1 && currentWave > maxWaveNumber)
         {
             print("胜利");
             Win();
@@ -298,7 +307,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Win()
     {
-
         BaseLevelController.My.CancelInvoke("CheckStarTwo");
         BaseLevelController.My.CancelInvoke("CheckStarOne");
         BaseLevelController.My.CancelInvoke("CheckStarThree");
@@ -328,28 +336,25 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
+        if (currentWave > maxWaveNumber)
+        {
+            return;
+        }
         timeCount++;
-        if (currentWave <= maxWaveNumber)
+        if (timeCount == waitTimeList[currentWave - 1])
         {
-            if (timeCount == waitTimeList[currentWave - 1])
+            BuildingManager.My.WaveSpawnConsumer(currentWave);
+            currentWave++;
+        }
+        waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+        {
+            stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+            WaveCount();
+            if (timeCount % 5 == 0)
             {
-                BuildingManager.My.WaveSpawnConsumer(currentWave);
-                currentWave++;
+                Stat();
             }
-            waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
-            {
-                stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
-                WaveCount();
-            });
-        }
-        else
-        {
-            CheckWin();
-            waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
-            {
-                WaveCount();
-            });
-        }
+        });
     }
 
     /// <summary>
@@ -513,26 +518,20 @@ public class StageGoal : MonoSingleton<StageGoal>
         waveCountItem.Init(enemyDatas);
     }
 
-    /// <summary>
-    /// 菜单隐藏
-    /// </summary>
     public void MenuHide()
     {
         GetComponent<RectTransform>().DOAnchorPosX(160.27f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
-        }).Play();
+        });
     }
 
-    /// <summary>
-    /// 菜单显示
-    /// </summary>
     public void MenuShow()
     {
         GetComponent<RectTransform>().DOAnchorPosX(-178f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {
             menuCloseButton.gameObject.SetActive(true);
             menuOpenButton.gameObject.SetActive(false);
-        }).Play();
+        });
     }
 
 
@@ -540,7 +539,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.DeleteAll();
         InitStage();
         MenuHide();
         cameraPos = Camera.main.transform.position;
@@ -558,12 +556,103 @@ public class StageGoal : MonoSingleton<StageGoal>
         if (GUI.Button(new Rect(0,0,100,20),"4倍速"))
         {
             DOTween.timeScale = 4f;
-            DOTween.defaultAutoPlay = AutoPlay.All;
-            DOTween.PlayAll();
         }
-        if (GUI.Button(new Rect(0, 20, 100, 20), "Win"))
+        if (GUI.Button(new Rect(0, 20, 100, 20), "通关"))
         {
             Win();
         }
+    }
+
+
+    public void Income(int num, IncomeType incomeType, BaseMapRole npc =null, string otherName="")
+    {
+        totalIncome += num;
+        switch (incomeType)
+        {
+            case IncomeType.Consume:
+                consumeIncome += num;
+                break;
+            case IncomeType.Npc:
+                if (npcIncomes.ContainsKey(npc))
+                {
+                    npcIncomes[npc] += num;
+                }
+                else
+                {
+                    npcIncomes.Add(npc, num);
+                }
+                break;
+            case IncomeType.Other:
+                if (otherIncomes.ContainsKey(otherName))
+                {
+                    otherIncomes[otherName] += num;
+                }
+                else
+                {
+                    otherIncomes.Add(otherName,num);
+                }
+                break;
+        }
+        if (DataStatPanel.My.isShow)
+        {
+            DataStatPanel.My.ShowStat();
+        }
+    }
+
+    public void Expend(int num, ExpendType expendType, BaseMapRole build = null, string extraName = "")
+    {
+        totalCost += num;
+        switch (expendType)
+        {
+            case ExpendType.TradeCosts:
+                tradeCost += num;
+                break;
+            case ExpendType.ProductCosts:
+                productCost += num;
+                if (buildingCosts.ContainsKey(build))
+                {
+                    buildingCosts[build] += num;
+                }
+                else
+                {
+                    buildingCosts.Add(build, num);
+                }
+                break;
+            case ExpendType.AdditionalCosts:
+                if (extraCost.ContainsKey(extraName))
+                {
+                    extraCost[extraName] += num;
+                }
+                else
+                {
+                    extraCost.Add(extraName, num);
+                }
+                break;
+            default:
+                break;
+        }
+        if (DataStatPanel.My.isShow)
+        {
+            DataStatPanel.My.ShowStat();
+        }
+    }
+
+    private void Stat()
+    {
+        if(dataStats == null)
+        {
+            dataStats = new List<DataStat>();
+        }
+        dataStats.Add(new DataStat(playerHealth, playerSatisfy, totalIncome, consumeIncome, totalCost, tradeCost, productCost, playerGold));
+    }
+
+    public string ShowStat()
+    {
+        string list = "";
+        foreach(var ds in dataStats)
+        {
+            //list += string.Format($"{ds.blood}\t{ds.score}\t{ds.cost}\t{ds.tradeCost}\t{ds.totalGold}\n");
+        }
+        return list;
     }
 }

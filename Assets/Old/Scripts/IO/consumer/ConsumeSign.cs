@@ -78,11 +78,11 @@ public class ConsumeSign : MonoBehaviour
             baseBuff.Init(buff);
             baseBuff.SetConsumerBuff(this);
         }
-        //print(elementResistance[ProductElementType.Sweet]);
-        //print(elementResistance[ProductElementType.Crisp]);
-        //print(elementResistance[ProductElementType.Discount]);
-        //print(elementResistance[ProductElementType.GoodPack]);
-        //print(elementResistance[ProductElementType.Soft]);
+        print(elementResistance[ProductElementType.Sweet]);
+        print(elementResistance[ProductElementType.Crisp]);
+        print(elementResistance[ProductElementType.Discount]);
+        print(elementResistance[ProductElementType.GoodPack]);
+        print(elementResistance[ProductElementType.Soft]);
         GameObject go = Instantiate(hudPrb, transform);
         hud = go.GetComponent<Hud>();
         hud.Init(this);
@@ -190,6 +190,8 @@ public class ConsumeSign : MonoBehaviour
     {
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
+        StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
+        StageGoal.My.CheckWin();
         StageGoal.My.killNumber++;
     }
 
@@ -199,6 +201,7 @@ public class ConsumeSign : MonoBehaviour
     public void LivePunish()
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
+        StageGoal.My.CheckWin();
     }
 
     /// <summary>
