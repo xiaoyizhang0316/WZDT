@@ -59,6 +59,10 @@ public class ConsumeSign : MonoBehaviour
 
     public List<GameObject> debuffEffectList = new List<GameObject>();
 
+    public GameObject self;
+
+    public GameObject sheep;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -425,6 +429,30 @@ public class ConsumeSign : MonoBehaviour
     private void Update()
     {
         //print(tweener.ElapsedPercentage(false));
+        if(isIgnoreResistance)
+        {
+            try
+            {
+                self.SetActive(false);
+                sheep.SetActive(true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        else
+        {
+            try
+            {
+                self.SetActive(true);
+                sheep.SetActive(false);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
 
     private void Start()
