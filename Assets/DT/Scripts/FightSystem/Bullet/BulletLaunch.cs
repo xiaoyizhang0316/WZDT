@@ -47,7 +47,7 @@ public class BulletLaunch : MonoBehaviour
         gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
     }
 
-    private bool isplay;
+    public bool isplay;
 
     public void LanchNormal(ProductData data, ConsumeSign target)
     {

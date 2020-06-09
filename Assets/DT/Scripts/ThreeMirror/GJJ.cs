@@ -40,6 +40,8 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         if (StageGoal.My.CostTechPoint(costTechNumber))
                         {
                             hit[i].transform.GetComponentInChildren<BaseNpc>().DetectNPCRole();
+                            Debug.Log("使用广角镜成功");
+                            break;
                         }
                     }
                 }

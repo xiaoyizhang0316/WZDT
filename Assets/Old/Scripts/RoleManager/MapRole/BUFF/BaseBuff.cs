@@ -73,7 +73,7 @@ public class BaseBuff
     /// </summary>
     public void ConsumerBuffRemove()
     {
-        foreach (string str in buffData.OnBuffAdd)
+        foreach (string str in buffData.OnBuffRemove)
         {
             CheckStaticNumber(str);
             CheckConsumerNumber(str);

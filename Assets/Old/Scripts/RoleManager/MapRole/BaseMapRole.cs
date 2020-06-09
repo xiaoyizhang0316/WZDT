@@ -165,7 +165,7 @@ public class BaseMapRole : MonoBehaviour
                 shootTarget = shootTargetList[i];
             }
         }
-        if (preStatus == null && shootTarget != null && !GetComponent<BaseSkill>().IsOpen)
+        if (preStatus == null && shootTarget != null && !GetComponent<BaseSkill>().IsOpen && !GetComponent<BulletLaunch>().isplay)
         {
             GetComponent<BaseSkill>().ReUnleashSkills();
         }

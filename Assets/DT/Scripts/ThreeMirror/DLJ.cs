@@ -6,9 +6,7 @@ using UnityEngine.EventSystems;
 
 public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
-
-
-    public int consumeTechNumber;
+    public int costTechNumber;
 
     public GameObject goCopy;
 
@@ -28,12 +26,25 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        List<RaycastResult> hit = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, hit);
-        for (int i = 0; i < hit.Count; i++)
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit[] hit = Physics.RaycastAll(ray);
+        for (int i = 0; i < hit.Length; i++)
         {
-            print(hit[i].gameObject.name);
+            if (hit[i].transform.CompareTag("MapRole"))
+            {
+                if (hit[i].transform.GetComponent<BaseMapRole>().isNpc)
+                {
+                    if (hit[i].transform.GetComponentInChildren<BaseNpc>().isCanSee && !hit[i].transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
+                    {
+                        if (StageGoal.My.CostTechPoint(costTechNumber))
+                        {
+                            hit[i].transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip = true;
+                            Debug.Log("使用多棱镜成功");
+                            break;
+                        }
+                    }
+                }
+            }
         }
         Destroy(goCopy);
     }

@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
-    public int consumeTechNumber;
+    public int costTechNumber;
 
     public GameObject goCopy;
 
@@ -27,7 +27,6 @@ public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         List<RaycastResult> hit = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, hit);
         for (int i = 0; i < hit.Count; i++)
