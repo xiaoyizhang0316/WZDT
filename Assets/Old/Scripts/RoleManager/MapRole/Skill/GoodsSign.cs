@@ -11,6 +11,8 @@ public class GoodsSign : MonoBehaviour
 
     public ProductData productData;
 
+
+
     public ConsumeSign target;
     /// <summary>
     /// 发射者
