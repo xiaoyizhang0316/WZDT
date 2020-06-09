@@ -71,6 +71,7 @@ public class ProductDealer : BaseSkill
                 if (IsOpen)
                 {
                     UnleashSkills();
+                    
                 }
             });
         }

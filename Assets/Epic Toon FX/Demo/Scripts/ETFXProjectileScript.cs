@@ -80,8 +80,12 @@ public class ETFXProjectileScript : MonoBehaviour
 
     public void StartShoot()
     {
+        
         //transform.DetachChildren();
         GameObject go = Instantiate(impactParticle, transform.parent.position, transform.rotation, null);
+        go.transform.position = transform.position;
+        go.transform.eulerAngles = Vector3.up;
+        
         //impactParticle = Instantiate(impactParticle, transform.position, transform.rotation,transform) as GameObject;
 
         //Debug.DrawRay(hit.contacts[0].point, hit.contacts[0].normal * 1, Color.yellow);

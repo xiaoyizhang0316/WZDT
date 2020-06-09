@@ -12,16 +12,19 @@ public class ProductDetalUI : MonoSingleton<ProductDetalUI>
     public Transform sweetnessFlig;
     public Transform softFlig;
 
-    public Text qulity;
+    public Text damage;
 
-    public Text band;
+    public Text loadingSpeed;
 
     public Image Time;
     public GameObject panel;
     public Button Close;
-    Tweener a;
-    Tweener b;
-    Tweener  t;
+
+    public ProductData data;
+
+    public List<Image> buff;
+
+    public Sprite buffnull;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,27 +41,22 @@ public class ProductDetalUI : MonoSingleton<ProductDetalUI>
         
     }
 
-    public void InitUI(Sprite IconSprite,int sw,int soft,string qulity,string band,float time)
+    public void InitUI(ProductData data,Sprite IconSprite ,float damage,float loadingSpeed )
     {
-        Icon.sprite = IconSprite;
-        if (a != null && a.IsPlaying())
-        {
-            a.Kill();
-        }
-        if (b != null && b.IsPlaying())
-        {
-            b.Kill();
-        }
-        if (t != null && t.IsPlaying())
-        {
-            t.Kill();
-        }
-          a =      sweetnessFlig.DOLocalMoveX(sw * 10f, 0.2f);
-          b =      softFlig.DOLocalMoveX(soft * 10f, 0.2f);
-          Debug.Log("剩余时间"+time);
-          this.qulity.text = qulity;
-          this.band.text = band;
-          this.Time.fillAmount = 1 / (60 /time);
-          t = this.Time.DOFillAmount(0, time);
+        this.data = data;
+        Icon.sprite = IconSprite; 
+          this.damage.text = damage.ToString();
+          this.loadingSpeed.text = loadingSpeed.ToString();
+
+          for (int i = 0; i <buff.Count; i++)
+          {
+              buff[i].sprite = buffnull;
+              buff[i].GetComponent<ShowBuffText>().currentbuffData = null;
+          }
+          for (int i = 0; i <data.buffList.Count; i++)
+          {
+              buff[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" +data.buffList[i]); 
+              buff[i].GetComponent<ShowBuffText>().currentbuffData =     GameDataMgr.My.GetBuffDataByID(data.buffList[i]);
+          }
     }
 }

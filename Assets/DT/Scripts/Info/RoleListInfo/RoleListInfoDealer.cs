@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using DT.Fight.Bullet;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,11 @@ public class RoleListInfoDealer : BaseRoleListInfo
     public Text technology;
 
     public GameObject efficiencyBar; 
+    public Transform productTF;
+
+    public bool isShowProduct;
+
+    public GameObject productPrb;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +39,7 @@ public class RoleListInfoDealer : BaseRoleListInfo
 
     public override void Init(Role role)
     {
+        Debug.Log("初始化"+role.efficiency ); 
         fireTime.text = (role.efficiency  ).ToString()+"%";
         efficiency.text =role.efficiency.ToString();
         Range.text = (role.range ).ToString() ;
@@ -41,6 +48,10 @@ public class RoleListInfoDealer : BaseRoleListInfo
         montyCost.text =  role.cost.ToString();
         technology.text = role.techAdd.ToString();
         UpdateBar(role);
+        if (isShowProduct)
+        {
+            ShowLastpruduct(role);
+        }
     }
     public void UpdateBar(Role role)
     {
@@ -48,5 +59,43 @@ public class RoleListInfoDealer : BaseRoleListInfo
             new Vector2(role.efficiency/ 120f * 150f,
                 efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
         
+    }
+    
+    public void ShowLastpruduct(Role role)
+    {
+        BaseMapRole baseMapRole =    PlayerData.My.GetBaseMapRoleByName(role.baseRoleData.roleName);
+        for (int i = 0; i <productTF.childCount; i++)
+        {
+            Destroy(productTF.GetChild(i).gameObject);
+        }
+
+      
+
+        for (int i = 0; i <  baseMapRole.warehouse.Count; i++)
+        { 
+      
+            GameObject Pruductgame =  Instantiate(productPrb, productTF);
+            Pruductgame.GetComponent<ProductSign>().currentProduct =
+                baseMapRole.warehouse[i];
+            switch (baseMapRole.warehouse[i].bulletType )
+            {
+                case BulletType.Bomb:
+                    Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.AOE;
+                    break;
+                case BulletType.NormalPP:
+                    Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.normallpp;
+                    break;
+
+                case BulletType.Lightning:
+                    Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.lightning;
+                    break;
+
+                case BulletType.summon:
+                    Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.tow;
+                    break;
+
+            }
+        
+        }
     }
 }
