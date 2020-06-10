@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 
@@ -36,6 +37,22 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     public bool starThreeStatus = false;
 
     public int targetNumber = 0;
+
+    public List<GameObject> unlockLandList = new List<GameObject>();
+
+    public int unlockTime;
+
+    /// <summary>
+    /// 改变地形
+    /// </summary>
+    public void UnlockLand()
+    {
+        foreach (GameObject go in unlockLandList)
+        {
+            go.SetActive(true);
+            go.transform.DOMoveY(0f, 1f).SetEase(Ease.Linear);
+        }
+    }
 
     /// <summary>
     /// 统计击杀数量
@@ -94,5 +111,13 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         InvokeRepeating("CheckStarThree", 0f, 1f);
         InvokeRepeating("CheckStarOne", 0f, 1f);
         InvokeRepeating("UpdateInfo", 0.1f, 1f);
+    }
+
+    private void Update()
+    {
+        if (unlockTime == StageGoal.My.timeCount && unlockTime > 0)
+        {
+            UnlockLand();
+        }
     }
 }

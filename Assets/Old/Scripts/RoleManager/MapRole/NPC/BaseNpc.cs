@@ -57,6 +57,27 @@ public abstract class BaseNpc : MonoBehaviour
         trueModel.SetActive(true);
     }
 
+    /// <summary>
+    /// 初始化设置地块占用
+    /// </summary>
+    public void InitSetLand()
+    {
+        RaycastHit[] hit;
+        hit = Physics.RaycastAll(transform.position + new Vector3(0f, 5f, 0f), Vector3.down);
+        for (int j = 0; j < hit.Length; j++)
+        {
+            if (hit[j].transform.tag.Equals("MapLand"))
+            {
+                print(hit[j].transform);
+                List<int> xlist = new List<int>();
+                List<int> ylist = new List<int>();
+                xlist.Add(hit[j].transform.GetComponent<MapSign>().x);
+                ylist.Add(hit[j].transform.GetComponent<MapSign>().y);
+                MapManager.My.SetLand(xlist, ylist);
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -78,7 +99,7 @@ public abstract class BaseNpc : MonoBehaviour
             hideModel.SetActive(true);
             trueModel.SetActive(false);
         }
-        gameObject.name = GetComponent<BaseMapRole>().baseRoleData.ID.ToString();
+        
     }
 
     // Update is called once per frame
