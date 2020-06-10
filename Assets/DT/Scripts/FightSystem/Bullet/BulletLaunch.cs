@@ -39,11 +39,11 @@ public class BulletLaunch : MonoBehaviour
         launchShooter.DOLookAt(pointList[pointList.Count / 2], 0.1f).OnComplete(() =>
           {
               
-              gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
+//              gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
               gameObject.transform.DOPath(pointList.ToArray(), 1).SetEase(sase).OnComplete(() =>
               {
-                  gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
-                  gameObject.GetComponent<BoomTrigger>().GetConsumerList();
+//                  gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
+                 // gameObject.GetComponent<BoomTrigger>().GetConsumerList();
                   BulletObjectPool.My.RecoveryBullet(gameObject);
               });
           });
@@ -63,15 +63,20 @@ public class BulletLaunch : MonoBehaviour
 
         launchShooter.DOLookAt(target.transform.position, 0.1f).OnComplete(() =>
         {
+            gameObject .GetComponent <BulletEffect>().InitBuff(gameObject.GetComponent<GoodsSign>().productData.buffList);
+            gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().tile);
             float flyTime = Vector3.Distance(target.transform.position, gameObject.transform.position) / 8f;
-            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
-            lanchNormalTWE = gameObject.transform.DOMove(target.transform.position, flyTime)
+//            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
+           lanchNormalTWE = gameObject.transform.DOMove(target.transform.position, flyTime)
                 .SetEase(Ease.Linear).OnComplete(() =>
                 {
                     isplay = false;
                     if (gameObject.GetComponent<GoodsSign>().target != null)
                     {
-                        gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
+                        gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
+
+
+               //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                         gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
                     }
                     BulletObjectPool.My.RecoveryBullet(gameObject);
@@ -83,22 +88,22 @@ public class BulletLaunch : MonoBehaviour
     public void LanchNormalTest( Vector3 target,GameObject bullet ,float time)
     {
         GameObject gameObject = Instantiate(bullet,transform);
-      
         gameObject.transform.SetParent(launchShooter);
         gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
 
         launchShooter.DOLookAt(target , 0.1f).OnComplete(() =>
         {
             float flyTime = 1;
-            gameObject .GetComponent <ETFXProjectileScript>().Init(); 
+         //   gameObject .GetComponent <ETFXProjectileScript>().Init(); 
+         gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().tile);
             lanchNormalTWE = gameObject.transform.DOMove(target , time)
                 .SetEase(Ease.Linear).OnComplete(() =>
                 {
                     isplay = false;
                       
-                        gameObject .GetComponent <ETFXProjectileScript>().StartShoot();
+                        gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
          
-               Destroy(gameObject,0.3f);
+                      Destroy(gameObject,1f);
                 });
         
         });

@@ -20,7 +20,7 @@ public class ProductMelon : BaseSkill
         {
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
-            data.bulletType = BulletType.Bomb;
+            data.bulletType = BulletType.NormalPP;
             data.loadingSpeed *=1f-role.baseRoleData.effect/100f ;
             data.buffList.Add(201);
             
