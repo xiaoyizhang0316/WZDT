@@ -9,6 +9,7 @@
       <e p="Assets" t="Include">
         <e p="a" t="Include">
           <e p="Map.cs" t="Include" />
+          <e p="ShootTest.cs" t="Include" />
         </e>
         <e p="DT" t="Include">
           <e p="Art" t="Include">
@@ -97,6 +98,7 @@
               <e p="RoleTemplateInfo.cs" t="Include" />
               <e p="UpdateInfo" t="Include">
                 <e p="RoleUpdateInfo.cs" t="Include" />
+                <e p="ShowBuffText.cs" t="Include" />
                 <e p="UpdateRole.cs" t="Include" />
               </e>
             </e>
@@ -124,10 +126,6 @@
                     <e p="RoleTemplateModelData.cs" t="Include" />
                     <e p="RoleTemplateModelItem.cs" t="Include" />
                   </e>
-                  <e p="SkillData" t="Include">
-                    <e p="SkillData.cs" t="Include" />
-                    <e p="SkillItem.cs" t="Include" />
-                  </e>
                   <e p="StageData" t="Include">
                     <e p="StageData.cs" t="Include" />
                     <e p="StageItem.cs" t="Include" />
@@ -136,9 +134,9 @@
                     <e p="StageEnemyData.cs" t="Include" />
                     <e p="StageEnemyItem.cs" t="Include" />
                   </e>
-                  <e p="TradeSkillData" t="Include">
-                    <e p="TradeSkillData.cs" t="Include" />
-                    <e p="TradeSkillItem.cs" t="Include" />
+                  <e p="Stat" t="Include">
+                    <e p="DataStat.cs" t="Include" />
+                    <e p="DataStatType.cs" t="Include" />
                   </e>
                   <e p="WorkerData" t="Include">
                     <e p="WorkerData.cs" t="Include" />
@@ -181,15 +179,22 @@
               </e>
             </e>
             <e p="ThreeMirror" t="Include">
+              <e p="DLJ.cs" t="Include" />
+              <e p="GJJ.cs" t="Include" />
               <e p="ThreeMirrorManager.cs" t="Include" />
               <e p="ThreeMirrorSign.cs" t="Include" />
+              <e p="TSJ.cs" t="Include" />
             </e>
             <e p="UI" t="Include">
+              <e p="DataStat" t="Include">
+                <e p="DataStatPanel.cs" t="Include" />
+              </e>
               <e p="DeleteUI" t="Include">
                 <e p="DeleteUIManager.cs" t="Include" />
               </e>
               <e p="EnemyWave" t="Include">
                 <e p="SingleWaveEnemyInfo.cs" t="Include" />
+                <e p="WaveBuffSign.cs" t="Include" />
                 <e p="WaveCount.cs" t="Include" />
                 <e p="WaveEnemySign.cs" t="Include" />
                 <e p="WaveSwim.cs" t="Include" />
@@ -220,6 +225,17 @@
             </e>
           </e>
           <e p="ETFX Readme.txt" t="Include" />
+          <e p="Prefabs" t="Include">
+            <e p="Combat" t="Include">
+              <e p="Combat FX.txt" t="Include" />
+            </e>
+            <e p="Environment" t="Include">
+              <e p="Environment FX.txt" t="Include" />
+            </e>
+            <e p="Interactive" t="Include">
+              <e p="Interactive FX.txt" t="Include" />
+            </e>
+          </e>
           <e p="Scripts" t="Include">
             <e p="ETFXLightFade.cs" t="Include" />
             <e p="ETFXPitchRandomizer.cs" t="Include" />
@@ -419,13 +435,13 @@
                   <e p="BaseSkill.cs" t="Include" />
                   <e p="GoodsManager.cs" t="Include" />
                   <e p="GoodsSign.cs" t="Include" />
-                  <e p="PruductDealer.cs" t="Include" />
-                  <e p="PruductMelon.cs" t="Include" />
-                  <e p="PruductMelon_Boom.cs" t="Include" />
-                  <e p="PruductMelon_Lightning.cs" t="Include" />
-                  <e p="PruductMelon_Summon.cs" t="Include" />
-                  <e p="PruductMerchant.cs" t="Include" />
-                  <e p="PruductSeed.cs" t="Include" />
+                  <e p="ProductDealer.cs" t="Include" />
+                  <e p="ProductMelon.cs" t="Include" />
+                  <e p="ProductMelon_Boom.cs" t="Include" />
+                  <e p="ProductMelon_Lightning.cs" t="Include" />
+                  <e p="ProductMelon_Summon.cs" t="Include" />
+                  <e p="ProductMerchant.cs" t="Include" />
+                  <e p="ProductSeed.cs" t="Include" />
                   <e p="SeedChangeManager.cs" t="Include" />
                 </e>
               </e>

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ProductMerchant : BaseSkill
 {
+    public List<ProductData> productDatas = new List<ProductData>();
+
     private int currentCount = 0;
 
     public override void Skill()
@@ -22,7 +24,7 @@ public class ProductMerchant : BaseSkill
                     .GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).baseRoleData
                     .bulletCapacity)
                 {
-                    Debug.Log("储存");
+       
                     currentCount++;
                     if (currentCount >= role.tradeList.Count)
                     {
@@ -47,7 +49,11 @@ public class ProductMerchant : BaseSkill
                 game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();
                 game.GetComponent<GoodsSign>().role = PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
                 if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
+                {
                     game.GetComponent<GoodsSign>().speed = 1f * (1 - role.baseRoleData.efficiency / 100f);
+                    productDatas.Add(data);
+                }
+
                 game.transform.position = transform.position;
                 game.GetComponent<GoodsSign>().Move();
             }

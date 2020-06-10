@@ -69,6 +69,18 @@ public class TradeManager : MonoSingleton<TradeManager>
         return true;
     }
 
+    /// <summary>
+    /// 自动创建交易
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    public void AutoCreateTrade(string start,string end)
+    {
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Trade/TradeSign"));
+        go.transform.SetParent(transform);
+        go.GetComponent<TradeSign>().Init(start,end);
+    }
+
     private void OnDestroy()
     {
         

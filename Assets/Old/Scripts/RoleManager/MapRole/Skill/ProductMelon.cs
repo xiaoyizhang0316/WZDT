@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class ProductMelon : BaseSkill
 { 
+    public List<ProductData> productDatas = new List<ProductData>();
+
     private int currentCount= 0 ;
     public override void Skill()
     {
@@ -18,7 +20,7 @@ public class ProductMelon : BaseSkill
         {
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
-            data.bulletType = BulletType.NormalPP;
+            data.bulletType = BulletType.Bomb;
             data.loadingSpeed *=1f-role.baseRoleData.effect/100f ;
             data.buffList.Add(201);
             
@@ -39,6 +41,8 @@ public class ProductMelon : BaseSkill
                 game.GetComponent<GoodsSign>().role = PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
                 game.transform.position = transform.position;
                 game.GetComponent<GoodsSign>().Move();
+                productDatas.Add(new ProductData(data)); 
+
                 currentCount++;
             }
             catch (Exception)
@@ -55,4 +59,5 @@ public class ProductMelon : BaseSkill
         }
 
     }
+    
 }

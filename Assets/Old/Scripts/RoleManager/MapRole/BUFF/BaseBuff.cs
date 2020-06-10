@@ -73,7 +73,7 @@ public class BaseBuff
     /// </summary>
     public void ConsumerBuffRemove()
     {
-        foreach (string str in buffData.OnBuffAdd)
+        foreach (string str in buffData.OnBuffRemove)
         {
             CheckStaticNumber(str);
             CheckConsumerNumber(str);
@@ -479,8 +479,10 @@ public class BaseBuff
         string[] attri = str.Split('_');
         if (attri.Length == 1)
         {
+            _bool = !_bool;
             return !_bool;
         }
+        _bool = bool.Parse(attri[1]);
         return bool.Parse(attri[1]);
     }
     #endregion

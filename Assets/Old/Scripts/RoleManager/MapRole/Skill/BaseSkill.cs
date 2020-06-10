@@ -10,6 +10,8 @@ public abstract class BaseSkill : MonoBehaviour
 
     public bool IsOpen;
 
+    public bool isPlay;
+
     /// <summary>
     /// 技能描述
     /// </summary>
@@ -41,6 +43,7 @@ public abstract class BaseSkill : MonoBehaviour
 
     public virtual void UnleashSkills()
     {
+        isPlay = true;
         float d = 1f / (role.baseRoleData.efficiency * 0.05f);
         transform.DOScale(1, d ).OnComplete(() =>
         {
@@ -94,5 +97,6 @@ public abstract class BaseSkill : MonoBehaviour
     public void CancelSkill()
     {
         IsOpen = false;
+        isPlay = false;
     }
 }

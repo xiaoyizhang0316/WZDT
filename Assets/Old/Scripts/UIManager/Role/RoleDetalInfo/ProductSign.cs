@@ -19,7 +19,7 @@ public class ProductSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
     /// </summary>
     private void OnDestroy()
     {
-        CancelInvoke();
+     
     }
 
     // Start is called before the first frame update
@@ -41,7 +41,7 @@ public class ProductSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        ProductDetalUI.My.panel.SetActive(false);
+       // ProductDetalUI.My.panel.SetActive(false);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -51,8 +51,8 @@ public class ProductSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        ProductDetalUI.My.panel.SetActive(true);
-     //   ProductDetalUI.My.InitUI( transform.GetChild(0).GetComponent<Image>().sprite ,currentProduct.Sweetness,currentProduct.Crisp,currentProduct.Quality.ToString(),currentProduct.Brand.ToString(),currentProduct.time-(Time.time-currentProduct.birthday));
-        ProductDetalUI.My.panel.transform.position = gameObject.transform.position;
+      ProductDetalUI.My.panel.SetActive(true);
+      ProductDetalUI.My.InitUI( currentProduct,  transform.GetComponent<Image>().sprite ,currentProduct.damage,currentProduct.loadingSpeed);
+       ProductDetalUI.My.panel.transform.position = gameObject.transform.position;
     }
 }
