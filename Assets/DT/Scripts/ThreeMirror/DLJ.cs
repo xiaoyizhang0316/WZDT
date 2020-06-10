@@ -10,9 +10,11 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public GameObject goCopy;
 
+    public GameObject effectPrb;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        goCopy = Instantiate(gameObject, transform);
+        goCopy = Instantiate(gameObject, transform.parent);
         goCopy.transform.DOScale(1f, 0.3f);
     }
 
@@ -21,7 +23,8 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         Vector3 pos = new Vector3();
         RectTransformUtility.ScreenPointToWorldPointInRectangle(goCopy.GetComponent<RectTransform>(), eventData.position,
         Camera.main, out pos);
-        goCopy.transform.position = pos;
+        //goCopy.transform.position = pos;
+        goCopy.transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -39,6 +42,9 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         if (StageGoal.My.CostTechPoint(costTechNumber))
                         {
                             hit[i].transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip = true;
+                            GameObject effect = Instantiate(effectPrb, hit[i].transform);
+                            effect.transform.localPosition = Vector3.zero;
+                            Destroy(effect, 1f);
                             Debug.Log("使用多棱镜成功");
                             break;
                         }

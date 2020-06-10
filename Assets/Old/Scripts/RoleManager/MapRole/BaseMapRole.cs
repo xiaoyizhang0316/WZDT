@@ -258,7 +258,7 @@ public class BaseMapRole : MonoBehaviour
     public void MonthlyCost()
     {
         //BubbleManager.My.InitCostMoney(transform, baseRoleData.cost);
-        transform.DOScale(1f, 20f).OnComplete(() =>
+        transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             StageGoal.My.CostPlayerGold(baseRoleData.cost);
             StageGoal.My.Expend(baseRoleData.cost, ExpendType.ProductCosts, this);
@@ -268,7 +268,7 @@ public class BaseMapRole : MonoBehaviour
 
     public void AddTechPoint()
     {
-        transform.DOScale(1f, 10f).OnComplete(() =>
+        transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             StageGoal.My.GetTechPoint(baseRoleData.techAdd);
             AddTechPoint();
