@@ -52,7 +52,7 @@ public class ProductDealer : BaseSkill
             float d = 1f / (role.baseRoleData.efficiency * 0.1f) * data.loadingSpeed;
             //Debug.Log("释放技能" + d);
             Skill();
-            transform.DOScale(1, d).OnComplete(() =>
+            transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
             {
                 //Debug.Log("释放技能" + d);
            
@@ -65,7 +65,7 @@ public class ProductDealer : BaseSkill
         else
         {
             float d = 1f / (role.baseRoleData.efficiency * 0.1f);
-            transform.DOScale(1, d).OnComplete(() =>
+            transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
             {
            
                 if (IsOpen)

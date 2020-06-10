@@ -20,6 +20,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public RoleType type;
 
+    public GameObject portalPrb;
+
+    public GameObject dustPrb;
+
     /// <summary>
     /// 窗口开关控制
     /// </summary>
@@ -112,7 +116,16 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 if (MapManager.My.CheckLandAvailable(tempXList, tempYList))
                 {
                     print("true ");
-                    role.transform.position = hit[j].transform.position;
+                    role.transform.position = hit[j].transform.position + new Vector3(0f,2f,0f);
+                    role.transform.DOMove(hit[j].transform.position, 0.2f).OnComplete(() =>
+                    {
+                       GameObject go = Instantiate(dustPrb, role.transform);
+                       Destroy(go, 1f);
+                        role.transform.DOScale(new Vector3(1.3f,0.8f,1.3f), 0.2f).OnComplete(()=> {
+                            role.transform.DOScale(1f, 0.15f);
+                        });
+                    }).SetEase(Ease.Linear);
+                };
                     role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
                     PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
@@ -127,7 +140,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     Destroy(role, 0.01f);
                 }
                 break;
-            }
+            
         }
         if (!isSuccess)
         {

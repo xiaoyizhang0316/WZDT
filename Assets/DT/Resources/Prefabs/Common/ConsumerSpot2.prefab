@@ -18733,9 +18733,10 @@ GameObject:
   - component: {fileID: 4090009400148041204}
   - component: {fileID: 4090009400148041203}
   - component: {fileID: 4090009400148041202}
+  - component: {fileID: 17365967924360251}
   m_Layer: 0
   m_Name: ConsumerSpot2
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18797,6 +18798,7 @@ MonoBehaviour:
   intervalLength: 1
   isFinishSpawn: 0
   protalGameObject: {fileID: 596202626103974035}
+  isUseTSJ: 0
 --- !u!120 &4090009400148041202
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -18893,6 +18895,19 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!65 &17365967924360251
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4090009400148041205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4997215, y: 2.7830818, z: 2.48946}
+  m_Center: {x: -0.016389847, y: 0.8915409, z: -0.058725357}
 --- !u!1 &8010177943788346649
 GameObject:
   m_ObjectHideFlags: 0

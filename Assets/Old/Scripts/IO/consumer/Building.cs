@@ -25,6 +25,8 @@ public class Building : MonoBehaviour
 
     public GameObject protalGameObject;
 
+    public bool isUseTSJ = false;
+
     /// <summary>
     /// 初始化
     /// </summary>

@@ -20,7 +20,7 @@ public class SingleWaveEnemyInfo : MonoBehaviour
     /// 初始化
     /// </summary>
     /// <param name="str"></param>
-    public void Init(string str)
+    public void Init(string str,bool isCanSeeBuff)
     {
         string[] list = str.Split('_');
         consumeType = (ConsumerType)Enum.Parse(typeof(ConsumerType), list[0]);
@@ -42,8 +42,25 @@ public class SingleWaveEnemyInfo : MonoBehaviour
         }
         for (int i = 0; i < buffList.Count; i++)
         {
-            GameObject go = Instantiate(singleBuffPrb, buffListTF);
-            go.GetComponent<WaveBuffSign>().Init(buffList[i]);
+            if (i > 1)
+            {
+                if (isCanSeeBuff)
+                {
+                    GameObject go = Instantiate(singleBuffPrb, buffListTF);
+                    go.GetComponent<WaveBuffSign>().Init(buffList[i]);
+                }
+                else
+                {
+                    GameObject go = Instantiate(singleBuffPrb, buffListTF);
+                    go.GetComponent<WaveBuffSign>().Init(999);
+                }
+            }
+            else
+            {
+                GameObject go = Instantiate(singleBuffPrb, buffListTF);
+                go.GetComponent<WaveBuffSign>().Init(buffList[i]);
+            }
+
         }
     }
 
