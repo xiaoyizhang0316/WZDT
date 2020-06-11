@@ -134,6 +134,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public bool NeedRayCastPanel()
     {
+        if (GuideMgr.My.isOnGuide)
+        {
+            return true;
+        }
         for (int i = 0; i <needReycastTargetPanel.Count; i++)
         {
             if (needReycastTargetPanel[i].activeSelf)

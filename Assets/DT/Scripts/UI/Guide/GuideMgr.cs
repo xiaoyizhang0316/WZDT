@@ -8,13 +8,16 @@ using IOIntensiveFramework.MonoSingleton;
 
 public class GuideMgr : MonoSingleton<GuideMgr>
 {
+    public bool isOnGuide = false;
+
     private List<Action> actions;
-    private List<float> waitTimes;
+    //private List<float> waitTimes;
 
 
     public Button invalidClickBtn;
     public Text tip;
     public List<GuidePanel> guidePanels;
+    public GuideActions guideActions;
 
     public int currentGuidePanel = 0;
     // Start is called before the first frame update
@@ -22,6 +25,8 @@ public class GuideMgr : MonoSingleton<GuideMgr>
     {
         invalidClickBtn.onClick.RemoveAllListeners();
         invalidClickBtn.onClick.AddListener(InvalidClick);
+        guideActions.InitAllActions();
+        InitGuide();
     }
 
     // Update is called once per frame
@@ -35,16 +40,16 @@ public class GuideMgr : MonoSingleton<GuideMgr>
         // 判断当前教程进行到第几个场景 currentGuidePanel
 
         // 如果判断当前场景教程进行完毕 则结束教程
-        GuideEnd();
-
+        //GuideEnd();
+        isOnGuide = true;
         // 对各步骤赋值 actions,waitTimes
-
+        actions = guideActions.actionsList[currentGuidePanel];
         // 初始化该新手引导场景
-        InitGuidePanel(actions, waitTimes);
+        InitGuidePanel(actions/*, waitTimes*/);
         invalidClickBtn.interactable = true;
     }
 
-    void InitGuidePanel(List<Action> actions, List<float> waitTimes)
+    void InitGuidePanel(List<Action> actions/*, List<float> waitTimes*/)
     {
         foreach(Transform child in transform)
         {
@@ -54,15 +59,23 @@ public class GuideMgr : MonoSingleton<GuideMgr>
                 guidePanels.Add(gd);
             }
         }
+        Debug.LogError(guidePanels.Count);
+        Debug.LogError(guidePanels[0].name);
         guidePanels[currentGuidePanel].actions = actions;
-        guidePanels[currentGuidePanel].waitTime = waitTimes;
+       // guidePanels[currentGuidePanel].waitTime = waitTimes;
         guidePanels[currentGuidePanel].gameObject.SetActive(true);
+    }
+
+    public void ShowNextStep()
+    {
+        guidePanels[currentGuidePanel].ShowNextStep();
     }
 
     public void GuideEnd()
     {
         transform.GetComponent<Image>().raycastTarget = false;
         invalidClickBtn.interactable = false;
+        isOnGuide = false;
     }
 
     protected void InvalidClick()

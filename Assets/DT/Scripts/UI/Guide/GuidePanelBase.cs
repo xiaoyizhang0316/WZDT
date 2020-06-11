@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GuidePanelBase : MonoBehaviour
 {
     public List<Action> actions;
-    public List<float> waitTime;
+    //public List<float> waitTime;
 
     public int currentStep;
     protected virtual void InitGuidePanel()
@@ -26,26 +26,45 @@ public class GuidePanelBase : MonoBehaviour
         //StartCoroutine( ExcuteStep(currentStep));
     }
 
-    private void Excute(int step)
+    public void NextStep()
     {
-        StartCoroutine(ExcuteStep(step));
+        ++currentStep;
+        Excute(currentStep);
     }
 
-    protected virtual IEnumerator ExcuteStep(int step)
+    public void ShowNextStep()
     {
-        currentStep = step;
-        transform.GetChild(step).gameObject.SetActive(false);
-        actions[step]();
-        yield return new WaitForSeconds(waitTime[step]);
-        if (step < transform.childCount - 1)
+        if (currentStep < transform.childCount - 1)
         {
-            transform.GetChild(++step).gameObject.SetActive(true);
+            transform.GetChild(++currentStep).gameObject.SetActive(true);
         }
         else
         {
             gameObject.SetActive(false);
             GuideMgr.My.GuideEnd();
         }
+    }
+
+    private void Excute(int step)
+    {
+        ExcuteStep(step);
+    }
+
+    protected virtual void ExcuteStep(int step)
+    {
+        currentStep = step;
+        transform.GetChild(step).gameObject.SetActive(false);
+        actions[step]();
+        //yield return new WaitForSeconds(waitTime[step]);
+        //if (step < transform.childCount - 1)
+        //{
+        //    transform.GetChild(++step).gameObject.SetActive(true);
+        //}
+        //else
+        //{
+        //    gameObject.SetActive(false);
+        //    GuideMgr.My.GuideEnd();
+        //}
     }
 
     

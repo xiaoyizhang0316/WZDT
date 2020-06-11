@@ -8,12 +8,12 @@ public class GuidePanel : GuidePanelBase
     // Start is called before the first frame update
     void Start()
     {
-        actions = new List<Action>() { () => {
-            Debug.LogError("first");
-        }, () => {
-            Debug.LogError("second");
-        } };
-        waitTime = new List<float>() {2f, 0f };
+        //actions = new List<Action>() { () => {
+        //    Debug.LogError("first");
+        //}, () => {
+        //    Debug.LogError("second");
+        //} };
+        //waitTime = new List<float>() {2f, 0f };
         InitGuidePanel();
     }
 

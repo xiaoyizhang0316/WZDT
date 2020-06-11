@@ -70,9 +70,9 @@ public class GuideStep : MonoBehaviour
         if (isOnEnable)
         {
             hand.gameObject.SetActive(true);
-            tip.transform.DOScale(scale, scaleTime);
+            //tip.transform.DOScale(scale, scaleTime);
             hand.DOScale(scale, scaleTime).OnComplete(()=> {
-                tip.transform.DOScale(1, scaleTime);
+                //tip.transform.DOScale(1, scaleTime);
                 hand.DOScale(1, scaleTime).OnComplete(()=> {
                     
                     DoScale();
