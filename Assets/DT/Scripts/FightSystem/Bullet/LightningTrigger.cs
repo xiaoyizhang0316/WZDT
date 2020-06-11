@@ -14,25 +14,77 @@ public class LightningTrigger : MonoBehaviour
     public void GetTriggerList(ConsumeSign target, ProductData data)
     {
         Asign = target;
+        gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
+        gameObject.transform.DOScale(1, 0.3f).OnComplete(() =>
+        {
+            gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);
+        });
+        Debug.Log("闪电链" + gameObject.name + 1);
+        if (gameObject.GetComponent<GoodsSign>().target != null)
+        {
+            Debug.Log("target"+gameObject.GetComponent<GoodsSign>().target );
+            Asign.OnHit(ref data);
+        }
+        else
+        {
+            BulletObjectPool.My.RecoveryBullet(gameObject);
+        }
 
-        Asign.OnHit(ref data);
         if (GetminDisConsumer())
         {
-            gameObject.transform.DOMove(Asign.transform.position, 0.1f).OnComplete(() =>
+            gameObject.transform.DOMove(Asign.transform.position, 0.5f).OnComplete(() =>
             {
-                Asign.OnHit(ref data);
+                   gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
+                gameObject.transform.DOScale(1, 0.3f).OnComplete(() =>
+                {
+                    gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);
+                });
+                Debug.Log("闪电链" + gameObject.name + 2);
+                if (gameObject.GetComponent<GoodsSign>().target != null)
+                {
+                    Asign.OnHit(ref data);
+                }
+                else
+                {
+                    BulletObjectPool.My.RecoveryBullet(gameObject);
+                }
                 if (GetminDisConsumer())
                 {
-                    gameObject.transform.DOMove(Asign.transform.position, 0.1f).OnComplete(() =>
+                    gameObject.transform.DOMove(Asign.transform.position, 0.5f).OnComplete(() =>
                     {
-                        Asign.OnHit(ref data);
+                      gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
+                        gameObject.transform.DOScale(1, 0.3f).OnComplete(() =>
+                        {
+                            gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);
+                        });
+                        Debug.Log("闪电链" + gameObject.name + 3);
+                        if (gameObject.GetComponent<GoodsSign>().target != null)
+                        {
+                            Asign.OnHit(ref data);
+                        }
+                        else
+                        {
+                            BulletObjectPool.My.RecoveryBullet(gameObject);
+                        }
                         if (GetminDisConsumer())
                         {
-                            gameObject.transform.DOMove(Asign.transform.position, 0.1f).OnComplete(() =>
+                            gameObject.transform.DOMove(Asign.transform.position, 0.5f).OnComplete(() =>
                             {
-                                Asign.OnHit(ref data);
-
-                                BulletObjectPool.My.RecoveryBullet(gameObject);
+                                gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
+                                gameObject.transform.DOScale(1, 0.3f).OnComplete(() =>
+                                {
+                                    Debug.Log("闪电链" + gameObject.name + 4);
+                                    gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);
+                                    BulletObjectPool.My.RecoveryBullet(gameObject);
+                                });
+                                if (gameObject.GetComponent<GoodsSign>().target != null)
+                                {
+                                    Asign.OnHit(ref data);
+                                }
+                                else
+                                {
+                                    BulletObjectPool.My.RecoveryBullet(gameObject);
+                                }
                             });
                         }
                         else
@@ -66,7 +118,7 @@ public class LightningTrigger : MonoBehaviour
                 {
                     dis = Vector3.Distance(Asign.transform.position, signs[i].transform.position);
                     Asign = signs[i];
-                    find =  true;
+                    find = true;
                 }
             }
         }

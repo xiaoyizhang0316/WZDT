@@ -32,7 +32,7 @@ public class ProductMerchant : BaseSkill
                     }
                     return;
                 }
-                print("贸易商技能");
+              
                 ProductData data = role.warehouse[0];
                 role.warehouse.RemoveAt(0);
                 for (int i = 0; i < role.GetEquipBuffList().Count; i++)

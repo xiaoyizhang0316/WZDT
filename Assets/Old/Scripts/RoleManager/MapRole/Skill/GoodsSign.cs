@@ -29,14 +29,23 @@ public class GoodsSign : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        needUpdate = false;
-    //    InvokeRepeating("UpdatePos",0.1f,0.1f);
+     needUpdate = false;
+        
+   // InvokeRepeating(" DeleteEffect()",0.1f,0.1f);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void DeleteEffect()
+    {
+        if (target == null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private int count = 0;
@@ -83,10 +92,11 @@ public class GoodsSign : MonoBehaviour
             {
                 twe.Kill();
                 target.OnHit(ref productData);
+                Debug.Log("碰到消费者");
                 gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
 
             //    GetComponentInChildren<ETFXProjectileScript>().StartShoot();
-                BulletObjectPool.My.RecoveryBullet(gameObject); 
+                BulletObjectPool.My.RecoveryBullet(gameObject,0.3f); 
             }
         }
     }

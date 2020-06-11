@@ -8,8 +8,10 @@ public class AutoFireTow : MonoBehaviour
 {
     private ConsumeSign Asign;
 
+    public Transform launchShooter;
     public ProductData data;
 
+    public BulletLaunch lunch;
     public float shootTime;
 
     public float destroyTime;
@@ -17,8 +19,8 @@ public class AutoFireTow : MonoBehaviour
     void Start()
     {
         InvokeRepeating("GetminDisConsumer",0,1);
-        InvokeRepeating("Shoot",0,shootTime);
-        GetComponent<BulletLaunch>().fire .SetActive(false);
+        InvokeRepeating("Shoot",1,shootTime);
+//        GetComponent<BulletLaunch>().fire .SetActive(false);
         DestotyOBJ();
     }
 
@@ -54,12 +56,12 @@ public class AutoFireTow : MonoBehaviour
     {
         if (Asign != null)
         {
-            GetComponent<BulletLaunch>().fire .SetActive(true);
-            GetComponent<BulletLaunch>().LanchNormal(data,Asign);
+            //GetComponent<BulletLaunch>().fire .SetActive(true);
+            GetComponent<BulletLaunch>().LanchLeaser(data, Asign, launchShooter,lunch);
         }
         else
         {
-            GetComponent<BulletLaunch>().fire .SetActive(false);
+          //  GetComponent<BulletLaunch>().fire .SetActive(false);
         }
     }
 

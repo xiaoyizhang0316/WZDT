@@ -55,15 +55,18 @@ public class BulletLaunch : MonoBehaviour
     public void LanchNormal(ProductData data, ConsumeSign target)
     {
         GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.NormalPP);
+        Debug.Log("初始化子弹"+gameObject.name);
         gameObject.GetComponent<GoodsSign>().productData = data;
         gameObject.GetComponent<GoodsSign>().lunch = this;
         gameObject.GetComponent<GoodsSign>().target = target;
         gameObject.transform.SetParent(launchShooter);
+        gameObject .GetComponent <BulletEffect>().InitBufflist(gameObject.GetComponent<GoodsSign>().productData.buffList);
+
         gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
 
         launchShooter.DOLookAt(target.transform.position, 0.1f).OnComplete(() =>
         {
-            gameObject .GetComponent <BulletEffect>().InitBuff(gameObject.GetComponent<GoodsSign>().productData.buffList);
+    Debug.Log("初始化拖尾"+gameObject.name);
             gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().tile);
             float flyTime = Vector3.Distance(target.transform.position, gameObject.transform.position) / 8f;
 //            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
@@ -73,13 +76,16 @@ public class BulletLaunch : MonoBehaviour
                     isplay = false;
                     if (gameObject.GetComponent<GoodsSign>().target != null)
                     {
+                        Debug.Log("初始化爆炸"+gameObject.name);
                         gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
 
 
                //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                         gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
+                 
+                        BulletObjectPool.My.RecoveryBullet(gameObject,0.3f);
                     }
-                    BulletObjectPool.My.RecoveryBullet(gameObject);
+            
                 });
             gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
         });
@@ -116,15 +122,25 @@ public class BulletLaunch : MonoBehaviour
         gameObject.GetComponent<GoodsSign>().lunch = this;
         gameObject.GetComponent<GoodsSign>().target = GetComponent<BaseMapRole>().shootTarget;
         gameObject.transform.SetParent(launchShooter);
-        gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
-        launchShooter.DOLookAt(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.1f).OnComplete(() =>
+        gameObject.transform.localPosition = new Vector3(0, 0f, 0);
+        gameObject .GetComponent <BulletEffect>().InitBufflist(gameObject.GetComponent<GoodsSign>().productData.buffList);
+            launchShooter.DOLookAt(gameObject.GetComponent<GoodsSign>().target.transform.position, 0.1f).OnComplete(() =>
         {
+            gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().tile);
             float flyTime = Vector3.Distance(gameObject.GetComponent<GoodsSign>().target.transform.position, gameObject.transform.position) / 10f;
-            lanchNormalTWE = gameObject.transform.DOMove(GetComponent<BaseMapRole>().shootTarget.transform.position, 0.5f)
+                lanchNormalTWE = gameObject.transform.DOMove( gameObject.GetComponent<GoodsSign>().target.transform.position, 0.5f)
                 .SetEase(sase).OnComplete(() =>
                 {
                     isplay = false;
-                    gameObject.GetComponent<LightningTrigger>().GetTriggerList(GetComponent<BaseMapRole>().shootTarget, data);
+                    if (gameObject.GetComponent<GoodsSign>().target != null)
+                    {
+                        gameObject.GetComponent<LightningTrigger>()
+                            .GetTriggerList(gameObject.GetComponent<GoodsSign>().target , data);
+                    }
+                    else
+                    {
+                        BulletObjectPool.My.RecoveryBullet(gameObject,0.3f);
+                    }
                 });
         });
         gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
@@ -142,16 +158,24 @@ public class BulletLaunch : MonoBehaviour
         tow.transform.SetParent(launchShooter);
         tow.transform.localPosition = new Vector3(0, 0.1f, 0);
         tow.GetComponent<AutoFireTow>().data = data;
-        tow.GetComponent<AutoFireTow>().destroyTime = 4;
+        tow.GetComponent<AutoFireTow>().destroyTime =10;
+        tow.GetComponent<AutoFireTow>().launchShooter = launchShooter;
+        tow.GetComponent<AutoFireTow>().lunch = this;
         tow.GetComponent<AutoFireTow>().shootTime = 1f / (GetComponent<BaseMapRole>().baseRoleData.efficiency * 0.1f) * data.loadingSpeed;
+        tow .GetComponent <BulletEffect>().InitBufflist(data.buffList);
+
         pointList = DrawLine(tow.transform.position, GetComponent<BaseMapRole>().shootTarget.transform.position);
         tow.transform.localPosition = new Vector3(0, 0.4f, 0);
         tow.transform.SetParent(transform);
         launchShooter.DOLookAt(pointList[pointList.Count / 2], 0.1f).OnComplete(() =>
           {
+              tow .GetComponent <BulletEffect>().InitBuff(  tow .GetComponent <BulletEffect>().tile);
+
               tow.transform.DOPath(pointList.ToArray(), 1).SetEase(sase).OnComplete(() =>
               {
-
+                  tow .GetComponent <BulletEffect>().InitBuff(  tow .GetComponent <BulletEffect>().explosions);
+                  tow .GetComponent <BulletEffect>().explosions.SetActive(false);
+                  tow .GetComponent <BulletEffect>().tile.SetActive(false);
                   tow.transform.position = new Vector3(tow.transform.position.x, 0.4f, tow.transform.position.z);
                   tow.transform.eulerAngles = Vector3.zero;
               });
@@ -209,7 +233,45 @@ public class BulletLaunch : MonoBehaviour
 
         return pointList;
     }
+  public void LanchLeaser(ProductData data, ConsumeSign target,Transform BulletLaunch,BulletLaunch lunch)
+    {
+        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Leaser);
+        Debug.Log("初始化子弹"+gameObject.name);
+        gameObject.GetComponent<GoodsSign>().productData = data;
+       gameObject.GetComponent<GoodsSign>().lunch = lunch;
+        gameObject.GetComponent<GoodsSign>().target = target;
+        gameObject.transform.SetParent(BulletLaunch );
+        gameObject .GetComponent <BulletEffect>().InitBufflist(gameObject.GetComponent<GoodsSign>().productData.buffList);
 
+        gameObject.transform.position = this.transform.position;
+
+        launchShooter.DOLookAt(target.transform.position, 0.1f).OnComplete(() =>
+        {
+            Debug.Log("初始化拖尾"+gameObject.name);
+             gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().tile);
+            float flyTime = Vector3.Distance(target.transform.position, gameObject.transform.position) / 8f;
+//            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
+           lanchNormalTWE = gameObject.transform.DOMove(target.transform.position, flyTime)
+                .SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    isplay = false;
+                    if (gameObject.GetComponent<GoodsSign>().target != null)
+                    {
+                        Debug.Log("初始化爆炸"+gameObject.name);
+                        gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
+
+
+               //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
+                        gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
+                 
+                        BulletObjectPool.My.RecoveryBullet(gameObject,0.3f);
+                    }
+            
+                });
+            gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
+        });
+        isplay = true;
+    }
 
     // Start is called before the first frame update
     void Start()

@@ -27,22 +27,23 @@ public class BulletEffect : MonoBehaviour
         
     }
 
-    public void InitBuff(List<int >buffList)
+    public void InitBufflist(List<int >buffList)
     {
         this.bufflist = bufflist;
+        tile.SetActive(false);
+        explosions.SetActive(false);
     }
 
     public void InitBuff(GameObject effects)
     { 
         effects.SetActive(true);
-        Debug.Log("初始化");
+      
         for (int i = 0; i < effects .transform.childCount; i++)
         {
          //   if (!GetComponent<GoodsSign>().productData.buffList.Contains(int.Parse(effects .transform.GetChild(i).name)))
         if (!bufflist.Contains(int.Parse(effects .transform.GetChild(i).name)))
             {
-                Debug.Log(effects .transform.GetChild(i).name+bufflist.Contains(int.Parse(effects .transform.GetChild(i).name)));
-                if (effects .transform.GetChild(i).name.Equals("000"))
+                    if (effects .transform.GetChild(i).name.Equals("000"))
                 {
                     continue;
                 }
