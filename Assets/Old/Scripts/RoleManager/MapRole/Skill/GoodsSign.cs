@@ -79,7 +79,7 @@ public class GoodsSign : MonoBehaviour
         //Debug.Log(lunch);
         if (other.tag == "Consumer"&&other.GetComponent<ConsumeSign>()== lunch. GetComponent<BaseMapRole>().shootTarget)
         {
-            if (twe.IsPlaying())
+            if (twe!=null &&twe.IsPlaying())
             {
                 twe.Kill();
                 target.OnHit(ref productData);

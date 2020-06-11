@@ -462,7 +462,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerHealth = data.startPlayerHealth;
         playerMaxHealth = playerHealth;
         maxWaveNumber = data.maxWaveNumber;
-        playerTechPoint = 1000;
+        playerTechPoint = data.startTech;
         foreach (int i in data.waveWaitTime)
         {
             waitTimeList.Add(i);

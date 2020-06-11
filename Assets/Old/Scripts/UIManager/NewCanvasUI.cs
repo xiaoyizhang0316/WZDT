@@ -61,6 +61,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         CreateTradeLineGo = FindObjectOfType<CreateTradeLine>().gameObject;
         RoleTF = GameObject.FindGameObjectWithTag("RoleTF").transform;
+        GetComponent<Canvas>().worldCamera = Camera.main;
         Button_Pause = transform.Find("TimeScale/GamePause").GetComponent<Button>();
         Button_Normal = transform.Find("TimeScale/GameNormal").GetComponent<Button>();
         Button_Accelerate = transform.Find("TimeScale/GameAccelerate").GetComponent<Button>();
@@ -76,6 +77,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         
     }
 
+    /// <summary>
+    /// 初始化三个时间控制按钮
+    /// </summary>
     public void InitTimeButton()
     {
         Button_Pause.onClick.AddListener(GamePause);
@@ -142,6 +146,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         return false;
     }
 
+    /// <summary>
+    /// 发起交易
+    /// </summary>
+    /// <param name="_startRole"></param>
     public void CreateTrade(BaseMapRole _startRole)
     {
         startRole = _startRole;

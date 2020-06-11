@@ -57,6 +57,12 @@ public class ConsumeSign : MonoBehaviour
 
     public BaseConsumer baseConsumer;
 
+    public List<GameObject> debuffEffectList = new List<GameObject>();
+
+    public GameObject self;
+
+    public GameObject sheep;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -65,6 +71,7 @@ public class ConsumeSign : MonoBehaviour
         isStart = false;
         isCanSelect = false;
         currentHealth = 0;
+        InitEffect();
         foreach (ProductElementType p in Enum.GetValues(typeof(ProductElementType)))
         {
             elementResistance.Add(p, 100);
@@ -90,6 +97,53 @@ public class ConsumeSign : MonoBehaviour
         go.transform.localPosition = Vector3.zero + new Vector3(0, 3.5f, 0);
         InitPath(paths);
         InitAndMove();
+    }
+
+    /// <summary>
+    /// 初始化所有特效
+    /// </summary>
+    public void InitEffect()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).CompareTag("Effect"))
+            {
+                debuffEffectList.Add(transform.GetChild(i).gameObject);
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 激活特效
+    /// </summary>
+    /// <param name="buffID"></param>
+    public void AddEffect(int buffID)
+    {
+        for (int i = 0; i < debuffEffectList.Count; i++)
+        {
+            if (debuffEffectList[i].name.Equals(buffID.ToString()))
+            {
+                debuffEffectList[i].SetActive(true);
+                debuffEffectList[i].GetComponent<ParticleSystem>().Play();
+            }                
+        }
+    }
+
+    /// <summary>
+    /// 移除特效
+    /// </summary>
+    /// <param name="buffID"></param>
+    public void RemoveEffect(int buffID)
+    {
+        for (int i = 0; i < debuffEffectList.Count; i++)
+        {
+            if (debuffEffectList[i].name.Equals(buffID.ToString()))
+            {
+                debuffEffectList[i].SetActive(false);
+                debuffEffectList[i].GetComponent<ParticleSystem>().Stop();
+            }
+        }
     }
 
     /// <summary>
@@ -260,6 +314,7 @@ public class ConsumeSign : MonoBehaviour
                 BaseBuff buff = new BaseBuff();
                 buff.Init(b);
                 buff.SetConsumerBuff(this);
+                AddEffect(i);
             }
         }
     }
@@ -316,6 +371,7 @@ public class ConsumeSign : MonoBehaviour
     {
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
+        //print("移动速度：" + tweener.timeScale.ToString());
     }
 
     #region BUFF
@@ -342,6 +398,7 @@ public class ConsumeSign : MonoBehaviour
     public void RemoveBuff(BaseBuff baseBuff)
     {
         baseBuff.ConsumerBuffRemove();
+        RemoveEffect(baseBuff.buffId);
         buffList.Remove(baseBuff);
     }
 
@@ -372,6 +429,30 @@ public class ConsumeSign : MonoBehaviour
     private void Update()
     {
         //print(tweener.ElapsedPercentage(false));
+        if(isIgnoreResistance)
+        {
+            try
+            {
+                self.SetActive(false);
+                sheep.SetActive(true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        else
+        {
+            try
+            {
+                self.SetActive(true);
+                sheep.SetActive(false);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
 
     private void Start()

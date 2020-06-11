@@ -38,8 +38,11 @@ public class BulletLaunch : MonoBehaviour
 
         launchShooter.DOLookAt(pointList[pointList.Count / 2], 0.1f).OnComplete(() =>
           {
+              
+              gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
               gameObject.transform.DOPath(pointList.ToArray(), 1).SetEase(sase).OnComplete(() =>
               {
+                  gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                   gameObject.GetComponent<BoomTrigger>().GetConsumerList();
                   BulletObjectPool.My.RecoveryBullet(gameObject);
               });
@@ -47,7 +50,7 @@ public class BulletLaunch : MonoBehaviour
         gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
     }
 
-    private bool isplay;
+    public bool isplay;
 
     public void LanchNormal(ProductData data, ConsumeSign target)
     {
@@ -74,6 +77,30 @@ public class BulletLaunch : MonoBehaviour
                     BulletObjectPool.My.RecoveryBullet(gameObject);
                 });
             gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
+        });
+        isplay = true;
+    }
+    public void LanchNormalTest( Vector3 target,GameObject bullet ,float time)
+    {
+        GameObject gameObject = Instantiate(bullet,transform);
+      
+        gameObject.transform.SetParent(launchShooter);
+        gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
+
+        launchShooter.DOLookAt(target , 0.1f).OnComplete(() =>
+        {
+            float flyTime = 1;
+            gameObject .GetComponent <ETFXProjectileScript>().Init(); 
+            lanchNormalTWE = gameObject.transform.DOMove(target , time)
+                .SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    isplay = false;
+                      
+                        gameObject .GetComponent <ETFXProjectileScript>().StartShoot();
+         
+               Destroy(gameObject,0.3f);
+                });
+        
         });
         isplay = true;
     }

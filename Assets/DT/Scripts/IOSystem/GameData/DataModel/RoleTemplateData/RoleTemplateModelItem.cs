@@ -48,13 +48,19 @@ public class RoleTemplateModelItem
     public string cost;
 
     /// <summary>
+    /// 创建时需要消耗的科技值
+    /// </summary>
+    public string costTech;
+
+    /// <summary>
+    /// 升级所需花费
+    /// </summary>
+    public string upgradeCost;
+
+    /// <summary>
     /// 模板提供弹药装载量
     /// </summary>
     public string bulletCapacity;
-
-    public string xList;
-
-    public string yList;
 }
 
 [Serializable]

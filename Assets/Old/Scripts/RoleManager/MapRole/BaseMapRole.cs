@@ -39,12 +39,12 @@ public class BaseMapRole : MonoBehaviour
     /// <summary>
     /// 占地列表x
     /// </summary>
-    public List<int> xList = new List<int>();
+    public int posX;
 
     /// <summary>
     /// 占地列表y
     /// </summary>
-    public List<int> yList = new List<int>();
+    public int posY;
 
     /// <summary>
     /// 当前射击目标
@@ -165,7 +165,7 @@ public class BaseMapRole : MonoBehaviour
                 shootTarget = shootTargetList[i];
             }
         }
-        if (preStatus == null && shootTarget != null && !GetComponent<BaseSkill>().IsOpen)
+        if (preStatus == null && shootTarget != null && !GetComponent<BaseSkill>().IsOpen && !GetComponent<BaseSkill>().isPlay)
         {
             GetComponent<BaseSkill>().ReUnleashSkills();
         }
@@ -258,7 +258,7 @@ public class BaseMapRole : MonoBehaviour
     public void MonthlyCost()
     {
         //BubbleManager.My.InitCostMoney(transform, baseRoleData.cost);
-        transform.DOScale(1f, 20f).OnComplete(() =>
+        transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             StageGoal.My.CostPlayerGold(baseRoleData.cost);
             StageGoal.My.Expend(baseRoleData.cost, ExpendType.ProductCosts, this);
@@ -268,7 +268,7 @@ public class BaseMapRole : MonoBehaviour
 
     public void AddTechPoint()
     {
-        transform.DOScale(1f, 10f).OnComplete(() =>
+        transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             StageGoal.My.GetTechPoint(baseRoleData.techAdd);
             AddTechPoint();

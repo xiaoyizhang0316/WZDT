@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static GameEnum;
 
-public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandler, IPointerExitHandler,IBeginDragHandler, IEndDragHandler,IPointerEnterHandler
+public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandler, IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler
 {
     public Vector3 world;
 
@@ -20,6 +20,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public RoleType type;
 
+    public GameObject portalPrb;
+
+    public GameObject dustPrb;
+
     /// <summary>
     /// 窗口开关控制
     /// </summary>
@@ -29,7 +33,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -39,7 +43,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-         
+
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
         RaycastHit[] hit = Physics.RaycastAll(ray);
         {
@@ -47,7 +51,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             {
                 if (hit[i].transform.tag.Equals("MapLand"))
                 {
-                    role.transform.position = hit[i].transform.position + new Vector3(0f, 0f, 0f);
+                    role.transform.position = hit[i].transform.position + new Vector3(0f, 0.3f, 0f);
                     break;
                 }
             }
@@ -100,26 +104,28 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         {
             if (hit[j].transform.tag.Equals("MapLand"))
             {
-                List<int> tempXList = new List<int>();
-                List<int> tempYList = new List<int>();
                 int x = hit[j].transform.GetComponent<MapSign>().x;
                 int y = hit[j].transform.GetComponent<MapSign>().y;
-                for (int i = 0; i < role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.xList.Count; i++)
-                {
-                    tempXList.Add(x + role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.xList[i]);
-                    tempYList.Add(y + role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.yList[i]);
-                }
-                if (MapManager.My.CheckLandAvailable(tempXList, tempYList))
+                if (MapManager.My.CheckLandAvailable(x, y))
                 {
                     print("true ");
-                    role.transform.position = hit[j].transform.position;
+                    role.transform.position = hit[j].transform.position + new Vector3(0f, 2f, 0f);
+                    role.transform.DOMove(hit[j].transform.position + new Vector3(0f,0.3f,0f), 0.2f).OnComplete(() =>
+                    {
+                        GameObject go = Instantiate(dustPrb, role.transform);
+                        Destroy(go, 1f);
+                        role.transform.DOScale(new Vector3(1.3f, 0.8f, 1.3f), 0.2f).OnComplete(() =>
+                        {
+                            role.transform.DOScale(1f, 0.15f).Play();
+                        }).Play();
+                    }).SetEase(Ease.Linear).Play();
                     role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
                     PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
                     isSuccess = true;
-                    MapManager.My.SetLand(tempXList, tempYList);
-                    role.GetComponent<BaseMapRole>().xList = tempXList;
-                    role.GetComponent<BaseMapRole>().yList = tempYList;
+                    MapManager.My.SetLand(x, y);
+                    role.GetComponent<BaseMapRole>().posX = x;
+                    role.GetComponent<BaseMapRole>().posY = y;
                 }
                 else
                 {
@@ -133,17 +139,16 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         {
             Destroy(role, 0.01f);
         }
-         
     }
 
     public void OnPointerEnter(PointerEventData eventData)
-    { 
-   
-       
+    {
+
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
-    { 
-     
+    {
+
     }
 }

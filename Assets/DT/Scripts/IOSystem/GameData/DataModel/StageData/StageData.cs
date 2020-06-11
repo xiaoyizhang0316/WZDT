@@ -32,6 +32,11 @@ public class StageData
     public int startPlayerGold;
 
     /// <summary>
+    /// 初始科技值
+    /// </summary>
+    public int startTech;
+
+    /// <summary>
     /// 1星奖励装备
     /// </summary>
     public List<int> starOneEquip;
