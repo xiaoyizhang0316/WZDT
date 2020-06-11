@@ -12,6 +12,7 @@ namespace DT.Fight.Bullet
         Bomb = 2,
         Lightning = 3,
         summon = 4,
+        Leaser = 5,
     }
      
 }
