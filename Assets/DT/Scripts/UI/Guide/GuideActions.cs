@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GuideActions : MonoBehaviour
 {
@@ -74,11 +75,12 @@ public class GuideActions : MonoBehaviour
             TradeManager.My.AutoCreateTrade("0", "1");
             StartCoroutine(DelayExcute(()=>TradeManager.My.AutoCreateTrade("1", "2"), 1f));
             StartCoroutine(DelayExcute(()=>TradeManager.My.AutoCreateTrade("2", "3"), 2f));
-            //StartCoroutine(DelayExcute(()=>Building.));
+            StartCoroutine(DelayExcute(()=>GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1), 7f));
             //GuideMgr.My.ShowNextStep();
+            StartCoroutine(DelayExcute(()=>GuideMgr.My.ShowNextStep(), 20f));
         },
-        ()=>{ 
-            
+        ()=>{
+            SceneManager.LoadScene("FTE_1");
         }
         };
     }

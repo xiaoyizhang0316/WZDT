@@ -135,7 +135,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public bool NeedRayCastPanel()
     {
-        if (GuideMgr.My.isOnGuide)
+        if (GuideMgr.My.isOnGuide/*||FTEManager.My.isOnFTE*/)
         {
             return true;
         }
