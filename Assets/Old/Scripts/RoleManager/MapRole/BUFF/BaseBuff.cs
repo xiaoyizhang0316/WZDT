@@ -81,9 +81,21 @@ public class BaseBuff
     }
 
     /// <summary>
+    /// 消费者濒临死亡时
+    /// </summary>
+    public void OnConsumerBeforeDead()
+    {
+        foreach (string str in buffData.OnBeforeDead)
+        {
+            CheckStaticNumber(str);
+            CheckConsumerNumber(str);
+        }
+    }
+
+    /// <summary>
     /// 当濒临破产时
     /// </summary>
-    public void OnBeforeDead()
+    public void OnPlayerBeforeDead()
     {
         foreach (string str in buffData.OnBeforeDead)
         {
@@ -204,7 +216,7 @@ public class BaseBuff
             case 1:
                 CalculateNumber(str, ref buffConfig.playerGoldChange, StageGoal.My.playerGold);
                 StageGoal.My.GetPlayerGold(buffConfig.playerGoldChange);
-                StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Npc, castRole);
+                //StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Npc, castRole);
                 break;
             case 2:
                 CalculateNumber(str, ref buffConfig.playerSatisfyChange, StageGoal.My.playerSatisfy);

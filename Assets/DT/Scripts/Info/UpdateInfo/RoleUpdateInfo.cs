@@ -42,6 +42,10 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public GameObject buffcontent;
     public Text buffcontentText;
+
+    public Button changeRoleButton;
+
+    public Button createTradeButton;
     
     // Start is called before the first frame update
     void Start()
@@ -57,6 +61,17 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要删除" + currentRole.baseRoleData.roleName + "吗？";
             DeleteUIManager.My.Init(str, () => { PlayerData.My.DeleteRole(currentRole.ID); });
+        });
+        changeRoleButton.onClick.AddListener(() =>
+        {
+            NewCanvasUI.My.Panel_AssemblyRole.gameObject.SetActive(true);
+            CreatRoleManager.My.Open(currentRole);
+            gameObject.SetActive(false);
+        });
+        createTradeButton.onClick.AddListener(() =>
+        {
+            NewCanvasUI.My.CreateTrade(PlayerData.My.GetMapRoleById(currentRole.ID));
+            gameObject.SetActive(false);
         });
         buffcontent.SetActive(false);
     }
@@ -94,7 +109,6 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             update.interactable = true;
             hammer.interactable = true;
         }
-
         InitBuff();
     }
 
@@ -130,6 +144,14 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     public void ReInit(Role role )
     {
         level.text = role.baseRoleData.level.ToString();
+        if (role.baseRoleData.level >= 5)
+        {
+            level.color = Color.yellow;
+        }
+        else
+        {
+            level.color = Color.white;
+        }
         if (role.baseRoleData.roleType == GameEnum.RoleType.Seed)
         {
             seed.SetActive(true);

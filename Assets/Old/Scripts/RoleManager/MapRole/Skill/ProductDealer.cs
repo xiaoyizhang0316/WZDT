@@ -19,7 +19,7 @@ public class ProductDealer : BaseSkill
                 CancelSkill();
                 return;
             }
-            //Debug.Log("攻击");
+            Debug.Log("攻击" + role.baseRoleData.ID);
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
             switch (data.bulletType)
@@ -45,9 +45,10 @@ public class ProductDealer : BaseSkill
 
     public override void UnleashSkills()
     {
-        isPlay = true;
+
         if (role.warehouse.Count > 0)
         {
+            isPlay = true;
             ProductData data = role.warehouse[0];
             float d = 1f / (role.baseRoleData.efficiency * 0.1f) * data.loadingSpeed;
             //Debug.Log("释放技能" + d);
@@ -55,7 +56,7 @@ public class ProductDealer : BaseSkill
             transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
             {
                 //Debug.Log("释放技能" + d);
-           
+                isPlay = false;
                 if (IsOpen)
                 {
                     UnleashSkills();
@@ -64,16 +65,17 @@ public class ProductDealer : BaseSkill
         }
         else
         {
-            float d = 1f / (role.baseRoleData.efficiency * 0.1f);
-            transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
-            {
+            CancelSkill();
+            //float d = 1f / (role.baseRoleData.efficiency * 0.1f);
+            //transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
+            //{
            
-                if (IsOpen)
-                {
-                    UnleashSkills();
+            //    if (IsOpen)
+            //    {
+            //        UnleashSkills();
                     
-                }
-            });
+            //    }
+            //});
         }
     }
 

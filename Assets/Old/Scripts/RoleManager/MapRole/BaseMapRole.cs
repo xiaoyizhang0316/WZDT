@@ -57,6 +57,8 @@ public class BaseMapRole : MonoBehaviour
 
     public BaseNpc npcScript;
 
+    public BaseExtraSkill extraSkill;
+
     #region UI显示信息
 
     public float totalProfit;
@@ -106,8 +108,6 @@ public class BaseMapRole : MonoBehaviour
         if (!isNpc)
         {
             InitAttribute();
-            MonthlyCost();
-            AddTechPoint();
         }
 
     }
@@ -245,7 +245,7 @@ public class BaseMapRole : MonoBehaviour
     {
         foreach (BaseBuff b in buffList)
         {
-            b.OnBeforeDead();
+            b.OnPlayerBeforeDead();
         }
     }
 
@@ -257,7 +257,6 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void MonthlyCost()
     {
-        //BubbleManager.My.InitCostMoney(transform, baseRoleData.cost);
         transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             StageGoal.My.CostPlayerGold(baseRoleData.cost);

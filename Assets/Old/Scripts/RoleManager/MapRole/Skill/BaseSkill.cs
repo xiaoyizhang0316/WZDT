@@ -88,6 +88,7 @@ public abstract class BaseSkill : MonoBehaviour
     public void ReUnleashSkills()
     {
         IsOpen = true;
+        Debug.Log("重启技能" + role.baseRoleData.ID);
         UnleashSkills();
     }
 
@@ -96,6 +97,7 @@ public abstract class BaseSkill : MonoBehaviour
     /// </summary>
     public void CancelSkill()
     {
+        Debug.Log("取消技能" + role.baseRoleData.ID);
         IsOpen = false;
         isPlay = false;
     }

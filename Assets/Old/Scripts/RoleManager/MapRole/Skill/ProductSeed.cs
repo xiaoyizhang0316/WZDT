@@ -16,7 +16,7 @@ public class ProductSeed : BaseSkill
         {
             return;
         }
-        Debug.Log("产种子");
+        //Debug.Log("产种子");
         ProductData data = new ProductData();
         data.buffList = new List<int>();
         data.bulletType = BulletType.Seed;

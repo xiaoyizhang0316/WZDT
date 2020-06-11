@@ -126,6 +126,8 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     MapManager.My.SetLand(x, y);
                     role.GetComponent<BaseMapRole>().posX = x;
                     role.GetComponent<BaseMapRole>().posY = y;
+                    role.GetComponent<BaseMapRole>().MonthlyCost();
+                    role.GetComponent<BaseMapRole>().AddTechPoint();
                 }
                 else
                 {

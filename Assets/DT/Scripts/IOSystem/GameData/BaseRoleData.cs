@@ -60,6 +60,16 @@ public class BaseRoleData
     public int bulletCapacity;
 
     /// <summary>
+    /// 创建时需要消耗的科技值
+    /// </summary>
+    public int costTech;
+
+    /// <summary>
+    /// 升级所需花费
+    /// </summary>
+    public int upgradeCost;
+
+    /// <summary>
     /// Icon路径地址
     /// </summary>
     public string SpritePath;

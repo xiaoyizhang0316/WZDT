@@ -151,10 +151,8 @@ public class Role
             cost += tempData.cost;
             bulletCapacity += tempData.riskResistance;
             riskResistance += tempData.bulletCapacity;
-             equipCost += tempData.cost;
-      
+            equipCost += tempData.cost;
         }
-     
         foreach (var i in peoPleList)
         {
             WorkerData tempData = GameDataMgr.My.GetWorkerData(i.Key);
@@ -167,7 +165,6 @@ public class Role
             bulletCapacity += tempData.bulletCapacity;
             workerCost += tempData.cost;
         }
-       
     }
   
     /// <summary>
