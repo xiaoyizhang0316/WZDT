@@ -30,25 +30,17 @@ public class MapManager : MonoSingleton<MapManager>
     /// <param name="xList"></param>
     /// <param name="yList"></param>
     /// <returns></returns>
-    public bool CheckLandAvailable(List<int> xList,List<int> yList)
+    public bool CheckLandAvailable(int x,int y)
     {
-        int height = 100000;
-        for (int i = 0; i < xList.Count; i++)
+        MapSign temp = GetMapSignByXY(x, y);
+        if (temp == null)
         {
-            MapSign temp = GetMapSignByXY(xList[i], yList[i]);
-            if (temp == null)
-            {
+            return false;
+        }
+        else
+        {
+            if (!temp.isCanPlace)
                 return false;
-            }
-            else
-            {
-                if (!temp.isCanPlace)
-                    return false;
-                if (height != temp.height && height != 100000)
-                    return false;
-                else
-                    height = temp.height;
-            }
         }
         return true;
     }
@@ -68,16 +60,13 @@ public class MapManager : MonoSingleton<MapManager>
     /// </summary>
     /// <param name="xList"></param>
     /// <param name="yList"></param>
-    public void SetLand(List<int> xList, List<int> yList)
+    public void SetLand(int x, int y)
     {
-        for (int i = 0; i < xList.Count; i++)
-        {
-            MapSign temp = GetMapSignByXY(xList[i], yList[i]);
+            MapSign temp = GetMapSignByXY(x, y);
             if (temp != null)
             {
                 temp.isCanPlace = false;
             }
-        }
     }
 
     /// <summary>
@@ -85,16 +74,13 @@ public class MapManager : MonoSingleton<MapManager>
     /// </summary>
     /// <param name="xList"></param>
     /// <param name="yList"></param>
-    public void ReleaseLand(List<int> xList, List<int> yList)
+    public void ReleaseLand(int x, int y)
     {
-        for (int i = 0; i < xList.Count; i++)
-        {
-            MapSign temp = GetMapSignByXY(xList[i], yList[i]);
+            MapSign temp = GetMapSignByXY(x, y);
             if (temp != null)
             {
                 temp.isCanPlace = true;
             }
-        }
     }
 
     // Update is called once per frame

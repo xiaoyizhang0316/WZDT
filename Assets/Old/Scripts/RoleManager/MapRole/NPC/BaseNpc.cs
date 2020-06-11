@@ -68,12 +68,8 @@ public abstract class BaseNpc : MonoBehaviour
         {
             if (hit[j].transform.tag.Equals("MapLand"))
             {
-                print(hit[j].transform);
-                List<int> xlist = new List<int>();
-                List<int> ylist = new List<int>();
-                xlist.Add(hit[j].transform.GetComponent<MapSign>().x);
-                ylist.Add(hit[j].transform.GetComponent<MapSign>().y);
-                MapManager.My.SetLand(xlist, ylist);
+                //print(hit[j].transform);
+                MapManager.My.SetLand(hit[j].transform.GetComponent<MapSign>().x, hit[j].transform.GetComponent<MapSign>().y);
             }
         }
     }

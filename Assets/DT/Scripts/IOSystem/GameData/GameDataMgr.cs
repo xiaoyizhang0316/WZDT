@@ -229,6 +229,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.maxWaveNumber = int.Parse(s.maxWaveNumber);
             temp.startPlayerHealth = int.Parse(s.startPlayerHealth);
             temp.startPlayerGold = int.Parse(s.startPlayerGold);
+            temp.startTech = int.Parse(s.startTech);
             temp.waveWaitTime = new List<int>();
             string[] waitTimeList = s.waveWaitTime.Split(',');
             foreach (string str in waitTimeList)
@@ -358,18 +359,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.tradeCost = int.Parse(r.tradeCost);
             temp.cost = int.Parse(r.cost);
             temp.bulletCapacity = int.Parse(r.bulletCapacity);
-            temp.xList = new List<int>();
-            temp.yList = new List<int>();
-            string[] tempList = r.xList.Split(',');
-            foreach (string str in tempList)
-            {
-                temp.xList.Add(int.Parse(str));
-            }
-            tempList = r.yList.Split(',');
-            foreach (string str in tempList)
-            {
-                temp.yList.Add(int.Parse(str));
-            }
+            temp.costTech = int.Parse(r.costTech);
+            temp.upgradeCost = int.Parse(r.upgradeCost);
             temp.Init();
             roleTemplateModelDatas.Add(temp);
         }

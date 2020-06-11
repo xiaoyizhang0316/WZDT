@@ -104,16 +104,9 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         {
             if (hit[j].transform.tag.Equals("MapLand"))
             {
-                List<int> tempXList = new List<int>();
-                List<int> tempYList = new List<int>();
                 int x = hit[j].transform.GetComponent<MapSign>().x;
                 int y = hit[j].transform.GetComponent<MapSign>().y;
-                for (int i = 0; i < role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.xList.Count; i++)
-                {
-                    tempXList.Add(x + role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.xList[i]);
-                    tempYList.Add(y + role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.yList[i]);
-                }
-                if (MapManager.My.CheckLandAvailable(tempXList, tempYList))
+                if (MapManager.My.CheckLandAvailable(x, y))
                 {
                     print("true ");
                     role.transform.position = hit[j].transform.position + new Vector3(0f, 2f, 0f);
@@ -130,9 +123,9 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
                     isSuccess = true;
-                    MapManager.My.SetLand(tempXList, tempYList);
-                    role.GetComponent<BaseMapRole>().xList = tempXList;
-                    role.GetComponent<BaseMapRole>().yList = tempYList;
+                    MapManager.My.SetLand(x, y);
+                    role.GetComponent<BaseMapRole>().posX = x;
+                    role.GetComponent<BaseMapRole>().posY = y;
                 }
                 else
                 {
