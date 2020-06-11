@@ -16,7 +16,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     public void OnBeginDrag(PointerEventData eventData)
     {
         goCopy = Instantiate(gameObject,transform.parent);
-        goCopy.transform.DOScale(1f,0.3f);
+        goCopy.transform.DOScale(1f,0.3f).Play();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -25,7 +25,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         RectTransformUtility.ScreenPointToWorldPointInRectangle(goCopy.GetComponent<RectTransform>(), eventData.position,
         Camera.main, out pos);
         //print(eventData.position);
-        goCopy.transform.position = eventData.position;
+        goCopy.transform.position = pos;
     }
 
     public void OnEndDrag(PointerEventData eventData)

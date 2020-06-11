@@ -133,7 +133,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         BaseMapRole mapRole = GetMapRoleById(roleId);
         RoleData.Remove(target);
         MapRole.Remove(mapRole);
-        MapManager.My.ReleaseLand(mapRole.xList, mapRole.yList);
+        MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
         Destroy(mapRole.gameObject);
     }
 

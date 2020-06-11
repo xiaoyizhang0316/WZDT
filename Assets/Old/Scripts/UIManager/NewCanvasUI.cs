@@ -61,6 +61,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         CreateTradeLineGo = FindObjectOfType<CreateTradeLine>().gameObject;
         RoleTF = GameObject.FindGameObjectWithTag("RoleTF").transform;
+        GetComponent<Canvas>().worldCamera = Camera.main;
         Button_Pause = transform.Find("TimeScale/GamePause").GetComponent<Button>();
         Button_Normal = transform.Find("TimeScale/GameNormal").GetComponent<Button>();
         Button_Accelerate = transform.Find("TimeScale/GameAccelerate").GetComponent<Button>();

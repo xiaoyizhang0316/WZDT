@@ -39,12 +39,12 @@ public class BaseMapRole : MonoBehaviour
     /// <summary>
     /// 占地列表x
     /// </summary>
-    public List<int> xList = new List<int>();
+    public int posX;
 
     /// <summary>
     /// 占地列表y
     /// </summary>
-    public List<int> yList = new List<int>();
+    public int posY;
 
     /// <summary>
     /// 当前射击目标
