@@ -25,6 +25,10 @@ public class Building : MonoBehaviour
 
     public GameObject protalGameObject;
 
+    public bool isUseTSJ = false;
+
+    public List<WaveConfig> extraConsumer = new List<WaveConfig>();
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -55,7 +59,7 @@ public class Building : MonoBehaviour
                 default:
                     throw new Exception("building Id over limit ");
             }
-        }
+        }     
         protalGameObject.transform.DOScale(0, 0);
     }
 
@@ -121,8 +125,10 @@ public class Building : MonoBehaviour
             DrawPathLine();
             protalGameObject.transform.DOScale(1, 1);
         }
-
-        foreach (WaveConfig w in waveConfigs[waveNumber])
+        List<WaveConfig> result = new List<WaveConfig>();
+        result.AddRange(waveConfigs[waveNumber]);
+        result.AddRange(extraConsumer);
+        foreach (WaveConfig w in result)
         {
             for (int i = 0; i < w.num; i++)
             {

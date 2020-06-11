@@ -61,14 +61,14 @@ public class RoleTemplateModelData
     public int bulletCapacity;
 
     /// <summary>
-    /// 模型X坐标
+    /// 创建时需要消耗的科技值
     /// </summary>
-    public List<int> xList;
+    public int costTech;
 
     /// <summary>
-    /// 模型Y坐标
+    /// 升级所需花费
     /// </summary>
-    public List<int> yList;
+    public int upgradeCost;
 
     /// <summary>
     /// Icon路径地址
@@ -109,16 +109,8 @@ public class RoleTemplateModelData
         tempRoleData.tradeCost = tradeCost;
         tempRoleData.cost = cost;
         tempRoleData.bulletCapacity = bulletCapacity;
-        tempRoleData.xList = new List<int>();
-        for (int i = 0; i < xList.Count; i++)
-        {
-            tempRoleData.xList.Add(xList[i]);
-        }
-        tempRoleData.yList = new List<int>();
-        for (int i = 0; i < yList.Count; i++)
-        {
-            tempRoleData.yList.Add(yList[i]);
-        }
+        tempRoleData.costTech = costTech;
+        tempRoleData.upgradeCost = upgradeCost;
         tempRoleData.SpritePath = SpritePath;
         tempRoleData.PrePath = PrePath;
         tempRoleData.RoleSpacePath = RoleSpacePath;

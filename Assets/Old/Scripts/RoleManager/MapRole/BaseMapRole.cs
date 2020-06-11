@@ -39,12 +39,12 @@ public class BaseMapRole : MonoBehaviour
     /// <summary>
     /// 占地列表x
     /// </summary>
-    public List<int> xList = new List<int>();
+    public int posX;
 
     /// <summary>
     /// 占地列表y
     /// </summary>
-    public List<int> yList = new List<int>();
+    public int posY;
 
     /// <summary>
     /// 当前射击目标
@@ -56,6 +56,8 @@ public class BaseMapRole : MonoBehaviour
     public bool AI;
 
     public BaseNpc npcScript;
+
+    public BaseExtraSkill extraSkill;
 
     #region UI显示信息
 
@@ -106,8 +108,6 @@ public class BaseMapRole : MonoBehaviour
         if (!isNpc)
         {
             InitAttribute();
-            MonthlyCost();
-            AddTechPoint();
         }
 
     }
@@ -245,7 +245,7 @@ public class BaseMapRole : MonoBehaviour
     {
         foreach (BaseBuff b in buffList)
         {
-            b.OnBeforeDead();
+            b.OnPlayerBeforeDead();
         }
     }
 
@@ -257,8 +257,7 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void MonthlyCost()
     {
-        //BubbleManager.My.InitCostMoney(transform, baseRoleData.cost);
-        transform.DOScale(1f, 20f).OnComplete(() =>
+        transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             StageGoal.My.CostPlayerGold(baseRoleData.cost);
             StageGoal.My.Expend(baseRoleData.cost, ExpendType.ProductCosts, this);
@@ -268,7 +267,7 @@ public class BaseMapRole : MonoBehaviour
 
     public void AddTechPoint()
     {
-        transform.DOScale(1f, 10f).OnComplete(() =>
+        transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             StageGoal.My.GetTechPoint(baseRoleData.techAdd);
             AddTechPoint();

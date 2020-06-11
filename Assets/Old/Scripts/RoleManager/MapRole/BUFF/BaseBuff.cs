@@ -73,7 +73,19 @@ public class BaseBuff
     /// </summary>
     public void ConsumerBuffRemove()
     {
-        foreach (string str in buffData.OnBuffAdd)
+        foreach (string str in buffData.OnBuffRemove)
+        {
+            CheckStaticNumber(str);
+            CheckConsumerNumber(str);
+        }
+    }
+
+    /// <summary>
+    /// 消费者濒临死亡时
+    /// </summary>
+    public void OnConsumerBeforeDead()
+    {
+        foreach (string str in buffData.OnBeforeDead)
         {
             CheckStaticNumber(str);
             CheckConsumerNumber(str);
@@ -83,7 +95,7 @@ public class BaseBuff
     /// <summary>
     /// 当濒临破产时
     /// </summary>
-    public void OnBeforeDead()
+    public void OnPlayerBeforeDead()
     {
         foreach (string str in buffData.OnBeforeDead)
         {
@@ -204,7 +216,7 @@ public class BaseBuff
             case 1:
                 CalculateNumber(str, ref buffConfig.playerGoldChange, StageGoal.My.playerGold);
                 StageGoal.My.GetPlayerGold(buffConfig.playerGoldChange);
-                StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Npc, castRole);
+                //StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Npc, castRole);
                 break;
             case 2:
                 CalculateNumber(str, ref buffConfig.playerSatisfyChange, StageGoal.My.playerSatisfy);
@@ -479,8 +491,10 @@ public class BaseBuff
         string[] attri = str.Split('_');
         if (attri.Length == 1)
         {
+            _bool = !_bool;
             return !_bool;
         }
+        _bool = bool.Parse(attri[1]);
         return bool.Parse(attri[1]);
     }
     #endregion

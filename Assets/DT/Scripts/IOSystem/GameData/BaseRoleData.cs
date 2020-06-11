@@ -59,9 +59,15 @@ public class BaseRoleData
     /// </summary>
     public int bulletCapacity;
 
-    public List<int> xList = new List<int>();
+    /// <summary>
+    /// 创建时需要消耗的科技值
+    /// </summary>
+    public int costTech;
 
-    public List<int> yList = new List<int>();
+    /// <summary>
+    /// 升级所需花费
+    /// </summary>
+    public int upgradeCost;
 
     /// <summary>
     /// Icon路径地址

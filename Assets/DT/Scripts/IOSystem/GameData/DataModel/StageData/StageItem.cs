@@ -16,6 +16,8 @@ public class StageItem
 
     public string startPlayerGold;
 
+    public string startTech;
+
     /// <summary>
     /// 1星奖励装备
     /// </summary>

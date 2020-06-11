@@ -80,7 +80,7 @@ public class WaveCount : MonoSingleton<WaveCount>
     {
         for (int i = 0; i < waveBg.childCount; i++)
         {
-            Destroy(waveBg.GetChild(0).gameObject);
+            Destroy(waveBg.GetChild(i).gameObject);
         }
     }
 

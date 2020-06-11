@@ -11,10 +11,12 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public GameObject goCopy;
 
+    public GameObject effectPrb;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        goCopy = Instantiate(gameObject,transform);
-        goCopy.transform.DOScale(1f,0.3f);
+        goCopy = Instantiate(gameObject,transform.parent);
+        goCopy.transform.DOScale(1f,0.3f).Play();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -22,6 +24,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         Vector3 pos = new Vector3();
         RectTransformUtility.ScreenPointToWorldPointInRectangle(goCopy.GetComponent<RectTransform>(), eventData.position,
         Camera.main, out pos);
+        //print(eventData.position);
         goCopy.transform.position = pos;
     }
 
@@ -40,6 +43,12 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         if (StageGoal.My.CostTechPoint(costTechNumber))
                         {
                             hit[i].transform.GetComponentInChildren<BaseNpc>().DetectNPCRole();
+                            GameObject effect = Instantiate(effectPrb, hit[i].transform);
+                            effect.transform.localPosition = Vector3.zero;
+                            //effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
+                            Destroy(effect, 1f);
+                            Debug.Log("使用广角镜成功");
+                            break;
                         }
                     }
                 }

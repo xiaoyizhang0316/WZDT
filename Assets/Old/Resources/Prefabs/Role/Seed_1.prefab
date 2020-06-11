@@ -83,8 +83,8 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
-      xList: 
-      yList: 
+      costTech: 0
+      upgradeCost: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -107,12 +107,13 @@ MonoBehaviour:
   tradeList: []
   buffList: []
   shootTargetList: []
-  xList: 
-  yList: 
+  posX: 0
+  posY: 0
   shootTarget: {fileID: 0}
   tradePoint: {fileID: 5268046155399773150}
   AI: 0
   npcScript: {fileID: 0}
+  extraSkill: {fileID: 0}
   totalProfit: 0
   monthlyProfit: 0
   totalSatisfy: 0
@@ -137,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   role: {fileID: 0}
   IsOpen: 1
+  isPlay: 0
   skillDesc: 
   buffList: 
   productDatas: []

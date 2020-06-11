@@ -90,6 +90,10 @@ public class TradeSign : MonoBehaviour
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
             cast.GetComponent<BaseSkill>().AddRoleBuff(tradeData);
+            if (cast.extraSkill != null)
+            {
+                cast.extraSkill.SkillOn();
+            }
         }
     }
 
