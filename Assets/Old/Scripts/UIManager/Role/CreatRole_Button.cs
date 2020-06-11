@@ -106,7 +106,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             {
                 int x = hit[j].transform.GetComponent<MapSign>().x;
                 int y = hit[j].transform.GetComponent<MapSign>().y;
-                if (MapManager.My.CheckLandAvailable(x, y))
+                if (MapManager.My.CheckLandAvailable(x, y) && StageGoal.My.CostTechPoint(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech))
                 {
                     print("true ");
                     role.transform.position = hit[j].transform.position + new Vector3(0f, 2f, 0f);

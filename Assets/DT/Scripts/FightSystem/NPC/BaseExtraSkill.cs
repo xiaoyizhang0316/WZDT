@@ -24,10 +24,4 @@ public class BaseExtraSkill : MonoBehaviour
         isOpen = false;
         GetComponentInParent<BaseMapRole>().extraSkill = this;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

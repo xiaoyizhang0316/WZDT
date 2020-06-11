@@ -55,8 +55,8 @@ public class ProductDealer : BaseSkill
             Skill();
             transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
             {
-                //Debug.Log("释放技能" + d);
                 isPlay = false;
+                //Debug.Log("释放技能" + d);
                 if (IsOpen)
                 {
                     UnleashSkills();
@@ -65,17 +65,17 @@ public class ProductDealer : BaseSkill
         }
         else
         {
-            CancelSkill();
-            //float d = 1f / (role.baseRoleData.efficiency * 0.1f);
-            //transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
-            //{
-           
-            //    if (IsOpen)
-            //    {
-            //        UnleashSkills();
-                    
-            //    }
-            //});
+            isPlay = true;
+            float d = 1f / (role.baseRoleData.efficiency * 0.1f);
+            transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
+            {
+                isPlay = false;
+                if (IsOpen)
+                {
+                    UnleashSkills();
+
+                }
+            });
         }
     }
 
