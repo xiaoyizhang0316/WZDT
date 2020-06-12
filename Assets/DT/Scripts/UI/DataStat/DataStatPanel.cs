@@ -25,6 +25,8 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     private string extraCostStr;
 
     public bool isShow = false;
+    private bool isIncomeRefreshing = false;
+    private bool isExpendRefreshing = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +48,28 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
             StageGoal.My.npcIncomes, StageGoal.My.otherIncomes,
             StageGoal.My.buildingCosts, StageGoal.My.extraCost, StageGoal.My.timeCount);
     }
+
+    public void RefreshIncome(int totalIncome, int totalConsumeIncome, Dictionary<BaseMapRole, int> npcIncomes,
+        Dictionary<string, int> otherIncomes, int timeCount)
+    {
+        if(isShow&& !isIncomeRefreshing)
+        {
+            isIncomeRefreshing = true;
+            ShowIncome(totalIncome, totalConsumeIncome, npcIncomes, otherIncomes, timeCount);
+        }
+    }
+
+    public void RefreshExpend(int totalCost, int tradeCost, Dictionary<BaseMapRole, int> buildCost,
+        Dictionary<string, int> extraCost, int timeCount)
+    {
+        if (isShow && !isExpendRefreshing)
+        {
+            isExpendRefreshing = true;
+            ShowExpend(totalCost, tradeCost, buildCost, extraCost, timeCount);
+        }
+    }
+
+
 
     private void ShowStat(int totalIncome,int totalConsumeIncome, int totalCost, int tradeCost,
         Dictionary<BaseMapRole, int> npcIncomes,
@@ -119,5 +143,82 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
 
         this.extraCost.text = extraCostStr;
         isShow = true;
+    }
+
+    private void ShowIncome(int totalIncome, int totalConsumeIncome, Dictionary<BaseMapRole, int> npcIncomes,
+        Dictionary<string, int> otherIncomes, int timeCount)
+    {
+        npcIncomeStr = "";
+        otherIncomeStr = "";
+        this.totalIncome.text = string.Format($"{totalIncome * 60 / timeCount}/min\t\t{totalIncome}");
+        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}/min\t\t{totalConsumeIncome}");
+        if (npcIncomes.Count > 0)
+        {
+            foreach (var k in npcIncomes.Keys)
+            {
+                npcIncomeStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\t{npcIncomes[k] * 60 / timeCount}/min\t{npcIncomes[k]}\n");
+            }
+        }
+        else
+        {
+            npcIncomeStr = "None";
+        }
+
+        npcIncome.text = npcIncomeStr;
+
+        if (otherIncomes.Count > 0)
+        {
+            foreach (var k in otherIncomes.Keys)
+            {
+                otherIncomeStr += string.Format($"{k}\t{otherIncomes[k] * 60 / timeCount}/min\t{otherIncomes[k]}\n");
+            }
+        }
+        else
+        {
+            otherIncomeStr = "None";
+        }
+
+        otherIncome.text = otherIncomeStr;
+
+        isIncomeRefreshing = false;
+    }
+
+    private void ShowExpend(int totalCost, int tradeCost, Dictionary<BaseMapRole, int> buildCost,
+        Dictionary<string, int> extraCost, int timeCount)
+    {
+        buildCostStr = "";
+        extraCostStr = "";
+        this.totalCost.text = string.Format($"{totalCost * 60 / timeCount}/min\t\t{totalCost}");
+        this.tradeCost.text = string.Format($"{tradeCost * 60 / timeCount}/min\t\t{tradeCost}");
+
+        if (buildCost.Count > 0)
+        {
+            foreach (var k in buildCost.Keys)
+            {
+                buildCostStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\t{buildCost[k] * 60 / timeCount}/min\t{buildCost[k]}\n");
+            }
+        }
+        else
+        {
+            buildCostStr = "None";
+        }
+
+        buildingCost.text = buildCostStr;
+
+        if (extraCost.Count > 0)
+        {
+            foreach (var k in extraCost.Keys)
+            {
+                extraCostStr += string.Format($"{k}\t{extraCost[k] * 60 / timeCount}/min\t{extraCost[k]}\n");
+            }
+        }
+        else
+        {
+            extraCostStr = "None";
+        }
+
+        this.extraCost.text = extraCostStr;
+
+        isExpendRefreshing = false;
     }
 }
