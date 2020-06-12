@@ -23,6 +23,7 @@ public class GuideMgr : MonoSingleton<GuideMgr>
     // Start is called before the first frame update
     void Start()
     {
+        
         invalidClickBtn.onClick.RemoveAllListeners();
         invalidClickBtn.onClick.AddListener(InvalidClick);
         guideActions.InitAllActions();
