@@ -159,7 +159,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         startRole = _startRole;
         isSetTrade = true;
         CreateTradeLineGo.gameObject.SetActive(true);
-        CreateTradeLineGo.GetComponent<CreateTradeLine>().InitPos(startRole.transform);
+        CreateTradeLineGo.GetComponent<CreateTradeLine>().InitPos(startRole.tradePoint);
     }
 
     /// <summary>
