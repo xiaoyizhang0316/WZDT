@@ -8,14 +8,14 @@ public class FloatWindow : MonoSingleton<FloatWindow>
 {
     public Text showText;
 
-    public float x = 10;
+    public float x = 2;
 
-    public float y = -5;
+    public float y = -2;
 
     public void Init(Transform _transform, string str)
     {
         showText.text = str;
-        transform.position = _transform.position + new Vector3(x,y,0f);
+        transform.position = _transform.position + new Vector3(3,-2,0f);
     }
 
     public void Hide()
