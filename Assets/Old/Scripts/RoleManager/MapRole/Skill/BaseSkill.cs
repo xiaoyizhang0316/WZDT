@@ -88,7 +88,14 @@ public abstract class BaseSkill : MonoBehaviour
     public void ReUnleashSkills()
     {
         IsOpen = true;
-        UnleashSkills();
+        Debug.Log("重启技能" + role.baseRoleData.ID);
+        if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
+        {
+            if (!isPlay)
+                UnleashSkills();
+        }
+        else
+            UnleashSkills();
     }
 
     /// <summary>
@@ -96,7 +103,7 @@ public abstract class BaseSkill : MonoBehaviour
     /// </summary>
     public void CancelSkill()
     {
+        Debug.Log("取消技能" + role.baseRoleData.ID);
         IsOpen = false;
-        isPlay = false;
     }
 }

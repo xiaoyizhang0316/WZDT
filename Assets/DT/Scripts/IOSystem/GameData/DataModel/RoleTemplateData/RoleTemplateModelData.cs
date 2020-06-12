@@ -109,6 +109,8 @@ public class RoleTemplateModelData
         tempRoleData.tradeCost = tradeCost;
         tempRoleData.cost = cost;
         tempRoleData.bulletCapacity = bulletCapacity;
+        tempRoleData.costTech = costTech;
+        tempRoleData.upgradeCost = upgradeCost;
         tempRoleData.SpritePath = SpritePath;
         tempRoleData.PrePath = PrePath;
         tempRoleData.RoleSpacePath = RoleSpacePath;

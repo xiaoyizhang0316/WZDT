@@ -85,11 +85,6 @@ public class ConsumeSign : MonoBehaviour
             baseBuff.Init(buff);
             baseBuff.SetConsumerBuff(this);
         }
-        print(elementResistance[ProductElementType.Sweet]);
-        print(elementResistance[ProductElementType.Crisp]);
-        print(elementResistance[ProductElementType.Discount]);
-        print(elementResistance[ProductElementType.GoodPack]);
-        print(elementResistance[ProductElementType.Soft]);
         GameObject go = Instantiate(hudPrb, transform);
         hud = go.GetComponent<Hud>();
         hud.Init(this);
@@ -126,7 +121,7 @@ public class ConsumeSign : MonoBehaviour
             {
                 debuffEffectList[i].SetActive(true);
                 debuffEffectList[i].GetComponent<ParticleSystem>().Play();
-            }                
+            }
         }
     }
 
@@ -140,8 +135,8 @@ public class ConsumeSign : MonoBehaviour
         {
             if (debuffEffectList[i].name.Equals(buffID.ToString()))
             {
-                debuffEffectList[i].SetActive(false);
                 debuffEffectList[i].GetComponent<ParticleSystem>().Stop();
+                debuffEffectList[i].SetActive(false);
             }
         }
     }
@@ -195,6 +190,14 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public void OnDeath()
     {
+        foreach (BaseBuff b in buffList)
+        {
+            b.OnConsumerBeforeDead();
+        }
+        if (currentHealth < consumeData.maxHealth)
+        {
+            return;
+        }
         BaseLevelController.My.CountKillNumber(this); 
         DeathAward();
         Stop();
@@ -296,6 +299,7 @@ public class ConsumeSign : MonoBehaviour
                     buff.Init(b);
                     buff.OnProduct(ref data);
                     buff.SetConsumerBuff(this);
+                    AddEffect(i);
                 }
             }
         }

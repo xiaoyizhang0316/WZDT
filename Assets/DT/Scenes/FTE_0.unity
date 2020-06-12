@@ -1696,6 +1696,8 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
+      costTech: 0
+      upgradeCost: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -1742,6 +1744,8 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
+      costTech: 0
+      upgradeCost: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -1772,6 +1776,8 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
+      costTech: 0
+      upgradeCost: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -4886,7 +4892,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 663343719}
-  - component: {fileID: 663343718}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -4894,27 +4899,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &663343718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 663343717}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9679ed2a91c7b414188dc4555878e00f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  starOneCondition: 
-  starTwoCondition: 
-  starThreeCondition: 
-  starOneStatus: 0
-  starTwoStatus: 0
-  starThreeStatus: 0
-  targetNumber: 0
-  unlockLandList: []
-  unlockTime: 0
 --- !u!4 &663343719
 Transform:
   m_ObjectHideFlags: 0
@@ -5525,8 +5509,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 1.5
-  far clip plane: 1000
+  near clip plane: -79.9
+  far clip plane: 1000.94
   field of view: 44
   orthographic: 1
   orthographic size: 7
@@ -8677,7 +8661,7 @@ PrefabInstance:
     - target: {fileID: 745394881712787411, guid: af6d739fa15784db49d6711f7f9dd67c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 48.71
+      value: 48.736
       objectReference: {fileID: 0}
     - target: {fileID: 745394881712787411, guid: af6d739fa15784db49d6711f7f9dd67c,
         type: 3}
@@ -8687,7 +8671,7 @@ PrefabInstance:
     - target: {fileID: 745394881712787411, guid: af6d739fa15784db49d6711f7f9dd67c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 59.52
+      value: 59.61
       objectReference: {fileID: 0}
     - target: {fileID: 745394881712787411, guid: af6d739fa15784db49d6711f7f9dd67c,
         type: 3}
@@ -11243,7 +11227,7 @@ PrefabInstance:
     - target: {fileID: 745394881712787411, guid: a20dc357a1a9b4848836cae18c0a36fe,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 50.62
+      value: 50.434
       objectReference: {fileID: 0}
     - target: {fileID: 745394881712787411, guid: a20dc357a1a9b4848836cae18c0a36fe,
         type: 3}
@@ -11253,7 +11237,7 @@ PrefabInstance:
     - target: {fileID: 745394881712787411, guid: a20dc357a1a9b4848836cae18c0a36fe,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 56.74
+      value: 56.638
       objectReference: {fileID: 0}
     - target: {fileID: 745394881712787411, guid: a20dc357a1a9b4848836cae18c0a36fe,
         type: 3}
@@ -11870,7 +11854,7 @@ PrefabInstance:
     - target: {fileID: 745394881712787411, guid: 5280d1d7889004cec8e9a5869ee70aa9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47.11
+      value: 47.01
       objectReference: {fileID: 0}
     - target: {fileID: 745394881712787411, guid: 5280d1d7889004cec8e9a5869ee70aa9,
         type: 3}
@@ -11880,7 +11864,7 @@ PrefabInstance:
     - target: {fileID: 745394881712787411, guid: 5280d1d7889004cec8e9a5869ee70aa9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 62.37
+      value: 62.6
       objectReference: {fileID: 0}
     - target: {fileID: 745394881712787411, guid: 5280d1d7889004cec8e9a5869ee70aa9,
         type: 3}
@@ -12801,7 +12785,7 @@ PrefabInstance:
     - target: {fileID: 1538349919051237719, guid: f97eb84f2fa06496fb6754c2d46211e4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 52.3
+      value: 52.14
       objectReference: {fileID: 0}
     - target: {fileID: 1538349919051237719, guid: f97eb84f2fa06496fb6754c2d46211e4,
         type: 3}
@@ -12811,7 +12795,7 @@ PrefabInstance:
     - target: {fileID: 1538349919051237719, guid: f97eb84f2fa06496fb6754c2d46211e4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 53.73
+      value: 53.71
       objectReference: {fileID: 0}
     - target: {fileID: 1538349919051237719, guid: f97eb84f2fa06496fb6754c2d46211e4,
         type: 3}

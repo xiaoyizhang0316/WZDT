@@ -5,15 +5,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UpdateRole : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
+public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public bool isUpdate;
     public Image hammer;
-  
+
+    public Text upgradeNumber;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -22,33 +24,40 @@ public class UpdateRole : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         
     }
 
+    public void Init()
+    {
+        if (RoleUpdateInfo.My.currentRole.baseRoleData.level == 5)
+        {
+            upgradeNumber.gameObject.SetActive(false);
+            return;
+        }
+        upgradeNumber.text = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.nextLevel).upgradeCost.ToString();
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isUpdate||RoleUpdateInfo.My.currentLevel ==5)
+        if (isUpdate || RoleUpdateInfo.My.currentLevel == 5)
         {
             return;
         }
-
-        RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(   RoleUpdateInfo.My.currentRole.baseRoleData .roleType,RoleUpdateInfo.My.nextLevel );
-        
+        RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.nextLevel);
         RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
-        
-        RoleUpdateInfo.My.ReInit( RoleUpdateInfo.My.currentRole);
+        RoleUpdateInfo.My.ReInit(RoleUpdateInfo.My.currentRole);
         isUpdate = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!isUpdate )
+        if (!isUpdate)
         {
             return;
         }
 
-        RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(   RoleUpdateInfo.My.currentRole.baseRoleData .roleType,RoleUpdateInfo.My.currentLevel  );
-        
+        RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.currentLevel);
+
         RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
-        
-        RoleUpdateInfo.My.ReInit( RoleUpdateInfo.My.currentRole);   
+
+        RoleUpdateInfo.My.ReInit(RoleUpdateInfo.My.currentRole);
         isUpdate = false;
     }
 
@@ -56,38 +65,39 @@ public class UpdateRole : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     public void OnPointerClick(PointerEventData eventData)
     {
 
-        if (RoleUpdateInfo.My.currentLevel ==5|| (tew!=null &&  tew.IsPlaying()))
+        if (RoleUpdateInfo.My.currentLevel == 5 || (tew != null && tew.IsPlaying()))
         {
-            Debug.Log( hammer.transform.eulerAngles);
+            Debug.Log(hammer.transform.eulerAngles);
             return;
         }
-        GetComponent<Image>().raycastTarget = false;
-        tew=  hammer.transform.DOLocalRotate(new Vector3(0,0,-42f),0.3f ).SetEase(Ease.InOutBack).OnComplete(() =>
+        if (RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost <= StageGoal.My.playerGold)
+        {
+            GetComponent<Image>().raycastTarget = false;
+            StageGoal.My.CostPlayerGold(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost);
+            tew = hammer.transform.DOLocalRotate(new Vector3(0, 0, -42f), 0.3f).SetEase(Ease.InOutBack).OnComplete(() =>
             {
-                RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(   RoleUpdateInfo.My.currentRole.baseRoleData .roleType,RoleUpdateInfo.My.nextLevel );
+                RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.nextLevel);
                 RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
-                RoleUpdateInfo.My.currentRole.baseRoleData.roleName =  RoleUpdateInfo.My.roleName;
-                RoleUpdateInfo.My.Init( RoleUpdateInfo.My.currentRole);
+                RoleUpdateInfo.My.currentRole.baseRoleData.roleName = RoleUpdateInfo.My.roleName;
+                RoleUpdateInfo.My.Init(RoleUpdateInfo.My.currentRole);
 
-                tew=   hammer.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.3f);
-           
+                tew = hammer.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.3f);
+
                 GetComponent<Image>().raycastTarget = true;
 
-                if ( RoleUpdateInfo.My.currentRole.baseRoleData.level ==5)
+                if (RoleUpdateInfo.My.currentRole.baseRoleData.level == 5)
                 {
-                   
+                    upgradeNumber.gameObject.SetActive(false);
                 }
                 else
                 {
-                    RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(   RoleUpdateInfo.My.currentRole.baseRoleData .roleType,RoleUpdateInfo.My.nextLevel );
-        
+                    upgradeNumber.gameObject.SetActive(true);
+                    RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.nextLevel);
                     RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
-        
-                    RoleUpdateInfo.My.ReInit( RoleUpdateInfo.My.currentRole);
+                    upgradeNumber.text = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost.ToString();
+                    RoleUpdateInfo.My.ReInit(RoleUpdateInfo.My.currentRole);
                 }
- 
-              
             });
-
+        }
     }
 }

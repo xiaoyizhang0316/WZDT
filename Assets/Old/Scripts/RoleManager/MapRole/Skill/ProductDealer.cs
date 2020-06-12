@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ProductDealer : BaseSkill
 {
@@ -19,7 +20,7 @@ public class ProductDealer : BaseSkill
                 CancelSkill();
                 return;
             }
-            //Debug.Log("攻击");
+            Debug.Log("攻击" + role.baseRoleData.ID);
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
             switch (data.bulletType)
@@ -45,17 +46,18 @@ public class ProductDealer : BaseSkill
 
     public override void UnleashSkills()
     {
-        isPlay = true;
+
         if (role.warehouse.Count > 0)
         {
+            isPlay = true;
             ProductData data = role.warehouse[0];
             float d = 1f / (role.baseRoleData.efficiency * 0.1f) * data.loadingSpeed;
             //Debug.Log("释放技能" + d);
             Skill();
             transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
             {
+                isPlay = false;
                 //Debug.Log("释放技能" + d);
-           
                 if (IsOpen)
                 {
                     UnleashSkills();
@@ -64,14 +66,14 @@ public class ProductDealer : BaseSkill
         }
         else
         {
+            isPlay = true;
             float d = 1f / (role.baseRoleData.efficiency * 0.1f);
             transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
             {
-           
+                isPlay = false;
                 if (IsOpen)
                 {
                     UnleashSkills();
-                    
                 }
             });
         }
