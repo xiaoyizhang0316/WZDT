@@ -54,6 +54,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public Button Button_Accelerate;
 
     public Button statBtn;
+    public Button OptionsBtn;
     #endregion
 
     // Start is called before the first frame update
@@ -66,6 +67,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Normal = transform.Find("TimeScale/GameNormal").GetComponent<Button>();
         Button_Accelerate = transform.Find("TimeScale/GameAccelerate").GetComponent<Button>();
         statBtn.onClick.AddListener(() =>  DataStatPanel.My.ShowStat());
+        OptionsBtn.onClick.AddListener(()=>OptionsPanel.My.ShowOPtionsPanel());
         InitTimeButton();
         Panel_Delete.SetActive(false);
         lose.SetActive(false);

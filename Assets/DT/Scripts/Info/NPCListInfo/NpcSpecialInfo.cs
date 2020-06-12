@@ -19,36 +19,36 @@ public class NpcSpecialInfo : MonoBehaviour
 
     public Text level;
 
-    public void SetInfo(Role npc)
+    public void SetInfo(BaseMapRole npc, BaseSkill baseSkill)
     {
-        npcName.text = npc.baseRoleData.roleName;
-        //skillDes.text = 
-        efficiency.text = npc.baseRoleData.efficiency.ToString();
-        effect.text = npc.baseRoleData.effect.ToString() ;
-        cost.text = npc.baseRoleData.cost.ToString();
+        npcName.text = npc.baseRoleData.baseRoleData.roleName;
+        skillDes.text = baseSkill.skillDesc;
+        efficiency.text = npc.baseRoleData.baseRoleData.efficiency.ToString();
+        effect.text = npc.baseRoleData.baseRoleData.effect.ToString() ;
+        cost.text = npc.baseRoleData.baseRoleData.cost.ToString();
         risk.text = npc.baseRoleData.riskResistance.ToString();
-        level.text = npc.baseRoleData.level.ToString();
+        level.text = npc.baseRoleData.baseRoleData.level.ToString();
         HideAll();
-        switch (npc.baseRoleData.roleType)
+        switch (npc.baseRoleData.baseRoleData.roleType)
         {
             case GameEnum.RoleType.Seed:
-                seedProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.efficiency / 20f).ToString() + " /s";
-                seedProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.effect*10).ToString();
+                seedProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.efficiency / 20f).ToString() + " /s";
+                seedProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.effect*10).ToString();
                 seedProp.SetActive(true);
                 break;
             case GameEnum.RoleType.Peasant:
-                peasantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.efficiency / 10f).ToString() + " /s";
-                peasantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.effect).ToString()+"%";
+                peasantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.efficiency / 10f).ToString() + " /s";
+                peasantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.effect).ToString()+"%";
                 peasantProp.SetActive(true);
                 break;
             case GameEnum.RoleType.Merchant:
-                merchantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (((npc.baseRoleData.efficiency * 0.3f) / 100f) * npc.tradeCost).ToString() + " /s";
-                merchantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.effect).ToString() + "%";
+                merchantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (((npc.baseRoleData.baseRoleData.efficiency * 0.3f) / 100f) * npc.baseRoleData.tradeCost).ToString() + " /s";
+                merchantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.effect).ToString() + "%";
                 merchantProp.SetActive(true);
                 break;
             case GameEnum.RoleType.Dealer:
-                dealerProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.efficiency).ToString() + "%";
-                dealerProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.range).ToString();
+                dealerProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.efficiency).ToString() + "%";
+                dealerProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.range).ToString();
 
                 dealerProp.SetActive(true);
                 break;
