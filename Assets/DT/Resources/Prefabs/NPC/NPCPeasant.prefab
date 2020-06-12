@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseRoleData:
     baseRoleData:
-      roleName: 
+      roleName: "NPC\u519C\u6C11"
       roleType: 1
       roleSkillType: 0
       level: 0
@@ -90,8 +90,8 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
-      xList: 
-      yList: 
+      costTech: 0
+      upgradeCost: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -114,12 +114,13 @@ MonoBehaviour:
   tradeList: []
   buffList: []
   shootTargetList: []
-  xList: 
-  yList: 
+  posX: 0
+  posY: 0
   shootTarget: {fileID: 0}
   tradePoint: {fileID: 8276303879955418510}
   AI: 0
   npcScript: {fileID: 0}
+  extraSkill: {fileID: 0}
   totalProfit: 0
   monthlyProfit: 0
   totalSatisfy: 0
@@ -192,8 +193,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   role: {fileID: 0}
   IsOpen: 1
-  skillDesc: 
+  isPlay: 0
+  skillDesc: "\u5C06\u79CD\u5B50\u52A0\u5DE5\u6210\u74DC\uFF08\u901A\u5E38\u5F39\uFF09\u7684\u89D2\u8272"
   buffList: 
+  productDatas: []
 --- !u!114 &7412013190087819024
 MonoBehaviour:
   m_ObjectHideFlags: 0
