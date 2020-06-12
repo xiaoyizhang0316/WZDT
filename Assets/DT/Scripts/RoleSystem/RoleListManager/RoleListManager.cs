@@ -44,7 +44,7 @@ public class RoleListManager : MonoSingleton<RoleListManager>
                 outButton.gameObject.SetActive(false);
                 inButton.gameObject.SetActive(true);
                 inButton.interactable = true;
-            });
+            }).Play();
         });
         inButton.onClick.AddListener(() =>
         {
@@ -54,7 +54,7 @@ public class RoleListManager : MonoSingleton<RoleListManager>
                 inButton.gameObject.SetActive(false);
                 outButton.gameObject.SetActive(true);
                 outButton.interactable = true;
-            });
+            }).Play();
         });
     }
 
