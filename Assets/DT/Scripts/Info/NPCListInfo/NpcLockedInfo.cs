@@ -10,12 +10,15 @@ public class NpcLockedInfo : MonoBehaviour
     public Text tradeCost;
     public Text risk;
 
+    public Text npcName;
+
     public Text unlockCost;
 
     public void SetInfo(Role npc, int unlockNumber)
     {
         //skillDes.text = 
-        //timeInterval.text = 
+        //timeInterval.text =
+        npcName.text = npc.baseRoleData.roleName;
         tradeCost.text = npc.baseRoleData.tradeCost.ToString();
         risk.text = npc.baseRoleData.riskResistance.ToString();
 

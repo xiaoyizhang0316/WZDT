@@ -101,7 +101,6 @@ public abstract class BaseNpc : MonoBehaviour
             hideModel.SetActive(true);
             trueModel.SetActive(false);
         }
-        
     }
 
     // Update is called once per frame
