@@ -104,7 +104,7 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
     {
         startPos = Pos;
        
-        Tweener tweener = transform.DOMove(Pos, 0.1f).OnComplete(() => action());
+        Tweener tweener = transform.DOMove(Pos, 0.1f).OnComplete(() => action()).Play();
         tweener.SetUpdate(true);
 
     }
