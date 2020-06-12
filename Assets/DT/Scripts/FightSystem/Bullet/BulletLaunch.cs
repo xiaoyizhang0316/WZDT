@@ -25,7 +25,7 @@ public class BulletLaunch : MonoBehaviour
     {
         List<Vector3> pointList = new List<Vector3>();
 
-        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.NormalPP);
+        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Bomb);
         gameObject.transform.SetParent(launchShooter);
         gameObject.transform.localPosition = new Vector3(0, 0.1f, 0);
         gameObject.GetComponent<GoodsSign>().productData = data;
