@@ -63,6 +63,8 @@ public class ConsumeSign : MonoBehaviour
 
     public GameObject sheep;
 
+    private ConsumerBuffRange rangeBuff;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -106,6 +108,25 @@ public class ConsumeSign : MonoBehaviour
                 debuffEffectList.Add(transform.GetChild(i).gameObject);
                 transform.GetChild(i).gameObject.SetActive(false);
             }
+        }
+    }
+
+    /// <summary>
+    /// 初始化光环效果
+    /// </summary>
+    public void InitRangeBuff()
+    {
+        rangeBuff = GetComponentInChildren<ConsumerBuffRange>();
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            if (buffList[i].buffId > 1000)
+            {
+                rangeBuff.buffList.Add(buffList[i].buffId / 10);
+            }
+        }
+        if(rangeBuff.buffList.Count == 0)
+        {
+            rangeBuff.transform.parent.gameObject.SetActive(false);
         }
     }
 
@@ -391,6 +412,7 @@ public class ConsumeSign : MonoBehaviour
         }
         buffList.Add(baseBuff);
         baseBuff.ConsumerBuffAdd();
+        AddEffect(baseBuff.buffId);
     }
 
     /// <summary>

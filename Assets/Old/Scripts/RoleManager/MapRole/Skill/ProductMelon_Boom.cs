@@ -35,7 +35,7 @@ public class ProductMelon_Boom : BaseSkill
             data.loadingSpeed += 2;
             data.buffList.Add(101);
             data.buffList.Add(102);
-            data.damage =(float) (data.damage + role.baseRoleData.effect  );
+            data.damage =(float) (data.damage + role.baseRoleData.effect);
             try
             {
 

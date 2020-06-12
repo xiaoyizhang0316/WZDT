@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using static GameEnum;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class TradeIcon : MonoBehaviour
 {
@@ -38,10 +40,19 @@ public class TradeIcon : MonoBehaviour
     public void OnMouseDown()
     {
         //UIManager.My.Panel_CreateTrade.SetActive(true);
-        if (!NewCanvasUI.My.NeedRayCastPanel())
+        if (!NewCanvasUI.My.NeedRayCastPanel() && !EventSystem.current.IsPointerOverGameObject())
         {
-            NewCanvasUI.My.Panel_TradeSetting.SetActive(true);
-            CreateTradeManager.My.Open(TradeManager.My.tradeList[tradeId].gameObject);
+            if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 3)
+            {
+                NewCanvasUI.My.Panel_TradeSetting.SetActive(true);
+                CreateTradeManager.My.Open(TradeManager.My.tradeList[tradeId].gameObject);
+            }
+            else
+            {
+                NewCanvasUI.My.Panel_Delete.SetActive(true);
+                string str = "确定要删除此交易吗？";
+                DeleteUIManager.My.Init(str, () => { TradeManager.My.DeleteTrade(tradeId); });
+            }
         }
     }
 

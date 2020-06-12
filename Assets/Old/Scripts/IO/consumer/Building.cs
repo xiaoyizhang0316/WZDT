@@ -154,6 +154,7 @@ public class Building : MonoBehaviour
                     val = 0;
                     waitTime = intervalLength;
                 }
+                go.GetComponent<ConsumeSign>().InitRangeBuff();
                 Tweener twe = transform.DOScale(1f, waitTime);
                 yield return twe.WaitForCompletion();
             }
