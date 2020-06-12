@@ -72,7 +72,7 @@ public class RoleDrag : MonoBehaviour
         {
             return;
         }
-        if (NewCanvasUI.My.isSetTrade)
+        if (NewCanvasUI.My.isSetTrade && !EventSystem.current.IsPointerOverGameObject())
         {
             NewCanvasUI.My.endRole = GetComponentInParent<BaseMapRole>();
             if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
@@ -83,13 +83,10 @@ public class RoleDrag : MonoBehaviour
                 }
             }
         }
-        else
+        else if (!EventSystem.current.IsPointerOverGameObject())
         {
-            //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
-            //RoleListInfo.My.Init(currentRole);
             NewCanvasUI.My.Panel_Update.SetActive(true);
             RoleUpdateInfo.My.Init(currentRole);
-            //if (!EventSystem.current.IsPointerOverGameObject())
         }
     }
 
