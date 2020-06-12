@@ -98,6 +98,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         dealer.SetActive(false);
         nextLevel = role.baseRoleData.level+1;
         currentLevel = role.baseRoleData.level;
+        GetComponentInChildren<UpdateRole>().Init();
         ReInit(role);
         if (currentLevel >= 5)
         {

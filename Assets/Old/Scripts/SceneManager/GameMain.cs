@@ -10,7 +10,7 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         //   Debug.Log("FTE_1"+PlayerPrefs.GetInt("FTE_1|1",true));
         //   Debug.Log("FTE_2"+PlayerPrefs.GetInt("FTE_2"));
         //   Debug.Log("FTE_3"+PlayerPrefs.GetInt("FTE_3"));
@@ -24,6 +24,14 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         //           return;
         //       }
         //   }
+        if (PlayerPrefs.GetInt("FTE0End", 0) == 0)
+        {
+            sceneName = "FTE_0";
+        }
+        else
+        {
+            sceneName = "Map";
+        }
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(sceneName);
     }

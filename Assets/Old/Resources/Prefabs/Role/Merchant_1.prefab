@@ -52,7 +52,7 @@ MonoBehaviour:
   baseRoleData:
     baseRoleData:
       roleName: 
-      roleType: 0
+      roleType: 2
       roleSkillType: 0
       level: 0
       effect: 0
@@ -62,8 +62,8 @@ MonoBehaviour:
       riskResistance: 0
       cost: 0
       bulletCapacity: 0
-      xList: 
-      yList: 
+      costTech: 0
+      upgradeCost: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
@@ -86,12 +86,13 @@ MonoBehaviour:
   tradeList: []
   buffList: []
   shootTargetList: []
-  xList: 
-  yList: 
+  posX: 0
+  posY: 0
   shootTarget: {fileID: 0}
   tradePoint: {fileID: 1386838502588418603}
   AI: 0
   npcScript: {fileID: 0}
+  extraSkill: {fileID: 0}
   totalProfit: 0
   monthlyProfit: 0
   totalSatisfy: 0
@@ -116,8 +117,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   role: {fileID: 0}
   IsOpen: 1
+  isPlay: 0
   skillDesc: 
   buffList: 
+  productDatas: []
 --- !u!1 &2012059022961659406
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,15 +882,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9974eb18960584510a747aceb568e3ca, type: 3}
---- !u!1 &5702863791199925693 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 9974eb18960584510a747aceb568e3ca,
-    type: 3}
-  m_PrefabInstance: {fileID: 4324943767961857204}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8754995200691947438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 9974eb18960584510a747aceb568e3ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 4324943767961857204}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5702863791199925693 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 9974eb18960584510a747aceb568e3ca,
     type: 3}
   m_PrefabInstance: {fileID: 4324943767961857204}
   m_PrefabAsset: {fileID: 0}

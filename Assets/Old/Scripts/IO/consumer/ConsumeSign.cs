@@ -248,7 +248,6 @@ public class ConsumeSign : MonoBehaviour
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
         StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
-        StageGoal.My.CheckWin();
         StageGoal.My.killNumber++;
     }
 
@@ -258,7 +257,6 @@ public class ConsumeSign : MonoBehaviour
     public void LivePunish()
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
-        StageGoal.My.CheckWin();
     }
 
     /// <summary>

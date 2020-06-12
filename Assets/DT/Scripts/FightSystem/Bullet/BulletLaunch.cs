@@ -25,7 +25,7 @@ public class BulletLaunch : MonoBehaviour
     {
         List<Vector3> pointList = new List<Vector3>();
 
-        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Bomb);
+        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.NormalPP);
         gameObject.transform.SetParent(launchShooter);
         gameObject.transform.localPosition = new Vector3(0, 0.1f, 0);
         gameObject.GetComponent<GoodsSign>().productData = data;
@@ -33,18 +33,23 @@ public class BulletLaunch : MonoBehaviour
         gameObject.transform.localPosition = new Vector3(0, 0.4f, 0);
         gameObject.GetComponent<GoodsSign>().lunch = this;
         gameObject.GetComponent<GoodsSign>().target = GetComponent<BaseMapRole>().shootTarget;
+        gameObject.transform.SetParent(this.transform);
+        gameObject .GetComponent <BulletEffect>().InitBufflist(gameObject.GetComponent<GoodsSign>().productData.buffList);
 
         // gameObject.transform.localPosition = new Vector3(0, 1, 0);
 
         launchShooter.DOLookAt(pointList[pointList.Count / 2], 0.1f).OnComplete(() =>
           {
-              
+              gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().tile);
 //              gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
               gameObject.transform.DOPath(pointList.ToArray(), 1).SetEase(sase).OnComplete(() =>
               {
+                  gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
 //                  gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
-                 // gameObject.GetComponent<BoomTrigger>().GetConsumerList();
-                  BulletObjectPool.My.RecoveryBullet(gameObject);
+                 gameObject.GetComponent<BoomTrigger>().GetConsumerList();
+            
+
+                  BulletObjectPool.My.RecoveryBullet(gameObject,0.5f);
               });
           });
         gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;

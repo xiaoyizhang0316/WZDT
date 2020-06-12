@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ProductDealer : BaseSkill
 {
@@ -73,7 +74,6 @@ public class ProductDealer : BaseSkill
                 if (IsOpen)
                 {
                     UnleashSkills();
-
                 }
             });
         }

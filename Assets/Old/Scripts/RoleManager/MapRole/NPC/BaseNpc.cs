@@ -39,12 +39,18 @@ public abstract class BaseNpc : MonoBehaviour
     /// <returns></returns>
     public bool UnlockNPCRole()
     {
-        if (StageGoal.My.playerGold < lockNumber)
-            return false;
-        StageGoal.My.CostPlayerGold(lockNumber);
-        StageGoal.My.Expend(lockNumber, ExpendType.AdditionalCosts, null, "激活NPC");
-        isLock = false;
-        return true;
+        if (StageGoal.My.CostTechPoint(lockNumber))
+        {
+            isLock = false;
+            return true;
+        }
+        return false;
+        //if (StageGoal.My.playerGold < lockNumber)
+        //    return false;
+        //StageGoal.My.CostPlayerGold(lockNumber);
+        //StageGoal.My.Expend(lockNumber, ExpendType.AdditionalCosts, null, "激活NPC");
+        //isLock = false;
+        //return true;
     }
 
     /// <summary>

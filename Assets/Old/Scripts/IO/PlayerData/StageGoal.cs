@@ -294,8 +294,16 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CheckWin()
     {
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
-        //print("consumeSign list:" + list.Length.ToString());
-        if (list.Length <= 1 && currentWave > maxWaveNumber)
+        bool isComplete = true;
+        foreach (Building b in BuildingManager.My.buildings)
+        {
+            if (!b.isFinishSpawn)
+            {
+                isComplete = false;
+                break;
+            }
+        }
+        if (list.Length == 0 && isComplete)
         {
             print("胜利");
             Win();
@@ -313,7 +321,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         BaseLevelController.My.CancelInvoke("UpdateInfo");
         NewCanvasUI.My.GamePause();
         WinManager.My.InitWin();
-        //NewCanvasUI.My.Panel_Win.SetActive(true);
     }
 
     /// <summary>
@@ -336,25 +343,37 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
-        if (currentWave > maxWaveNumber)
-        {
-            return;
-        }
         timeCount++;
-        if (timeCount == waitTimeList[currentWave - 1])
+        if (currentWave <= maxWaveNumber)
         {
-            BuildingManager.My.WaveSpawnConsumer(currentWave);
-            currentWave++;
-        }
-        waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
-        {
-            stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
-            WaveCount();
-            if (timeCount % 5 == 0)
+            if (timeCount == waitTimeList[currentWave - 1])
             {
-                Stat();
+                BuildingManager.My.WaveSpawnConsumer(currentWave);
+                currentWave++;
             }
-        });
+            waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+            {
+                stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+                WaveCount();
+                if (timeCount % 5 == 0)
+                {
+                    Stat();
+                }
+            });
+        }
+        else
+        {
+            CheckWin();
+            waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+            {
+                WaveCount();
+                stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+                if (timeCount % 5 == 0)
+                {
+                    Stat();
+                }
+            });
+        }
     }
 
     /// <summary>
@@ -555,7 +574,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (GUI.Button(new Rect(0,0,100,20),"4倍速"))
         {
-            DOTween.timeScale = 4f;
+            DOTween.timeScale = 16f;
         }
         if (GUI.Button(new Rect(0, 20, 100, 20), "通关"))
         {
