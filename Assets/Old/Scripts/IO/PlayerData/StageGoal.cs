@@ -294,7 +294,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CheckWin()
     {
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
-        //print("consumeSign list:" + list.Length.ToString());
+        print("consumeSign list:" + list.Length.ToString());
         if (list.Length <= 1 && currentWave > maxWaveNumber)
         {
             print("胜利");
@@ -553,11 +553,11 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(0,0,100,20),"4倍速"))
+        if (GUI.Button(new Rect(0,0,100,60),"4倍速"))
         {
-            DOTween.timeScale = 4f;
+            DOTween.timeScale = 16f;
         }
-        if (GUI.Button(new Rect(0, 20, 100, 20), "通关"))
+        if (GUI.Button(new Rect(0, 60, 100, 60), "通关"))
         {
             Win();
         }
