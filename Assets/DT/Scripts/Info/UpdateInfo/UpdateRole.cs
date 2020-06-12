@@ -21,8 +21,8 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     // Update is called once per frame
     void Update()
     {
-        if (upgradeNumber.gameObject.activeInHierarchy && RoleUpdateInfo.My.currentRole.baseRoleData.level <= 4)
-            upgradeNumber.text = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost.ToString();
+//        if (upgradeNumber.gameObject.activeInHierarchy && RoleUpdateInfo.My.currentRole.baseRoleData.level <= 4)
+          //  upgradeNumber.text = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost.ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
