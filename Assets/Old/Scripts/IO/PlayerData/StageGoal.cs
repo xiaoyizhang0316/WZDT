@@ -574,7 +574,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (GUI.Button(new Rect(0,0,100,20),"4倍速"))
         {
-            DOTween.timeScale = 4f;
+            DOTween.timeScale = 16f;
         }
         if (GUI.Button(new Rect(0, 20, 100, 20), "通关"))
         {

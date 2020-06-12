@@ -80,6 +80,7 @@ public class GuideActions : MonoBehaviour
             StartCoroutine(DelayExcute(()=>GuideMgr.My.ShowNextStep(), 20f));
         },
         ()=>{
+            PlayerPrefs.SetInt("FTE0End",1);
             SceneManager.LoadScene("FTE_1");
         }
         };
