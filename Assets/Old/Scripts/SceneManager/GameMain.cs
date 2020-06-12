@@ -26,7 +26,7 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         //   }
         if (PlayerPrefs.GetInt("FTE0End", 0) == 0)
         {
-            sceneName = "FTE_0";
+            sceneName = "Map";
         }
         else
         {
