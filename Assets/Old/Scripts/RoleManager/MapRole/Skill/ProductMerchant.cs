@@ -24,7 +24,6 @@ public class ProductMerchant : BaseSkill
                     .GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).baseRoleData
                     .bulletCapacity)
                 {
-       
                     currentCount++;
                     if (currentCount >= role.tradeList.Count)
                     {
@@ -32,7 +31,6 @@ public class ProductMerchant : BaseSkill
                     }
                     return;
                 }
-              
                 ProductData data = role.warehouse[0];
                 role.warehouse.RemoveAt(0);
                 for (int i = 0; i < role.GetEquipBuffList().Count; i++)
