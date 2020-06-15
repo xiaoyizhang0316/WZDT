@@ -196,8 +196,7 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         //isOccupation =    Equip.GetComponent<DragUI>().CheckAllRight(false);
         SetOccupyStatus(Equip.GetComponent<DragUI>().CheckAllRight(false));
-
-
+        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PutEquip);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -206,7 +205,7 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             CreatEquipOBJ();
             CreatRoleManager.My.CurrentTemplateManager.OpenMidTemplate(0.3f);
-
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.GrabEquip);
             //Vector2 mouseDown = eventData.position;//记录鼠标按下时的屏幕坐标
             //Vector2 mouseUguiPos = new Vector2();//定义一个接收返回的ugui坐标
 
