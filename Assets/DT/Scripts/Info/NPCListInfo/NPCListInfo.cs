@@ -146,6 +146,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
 
     public void ShowUnlckPop(Transform npc)
     {
+        HideAll();
         currentNpc = npc.GetComponent<BaseMapRole>();
         npcInfo.SetActive(true);
         closeBtn.gameObject.SetActive(true);

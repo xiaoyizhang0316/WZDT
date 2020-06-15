@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class NpcServiceInfo : MonoBehaviour
 {
+    public Text npcName;
     public Text des;
     public Text timeInv;
     public Text cost;
@@ -15,6 +16,7 @@ public class NpcServiceInfo : MonoBehaviour
 
     public void SetInfo(Transform npc, BaseSkill baseSkill)
     {
+        npcName.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleName;
         des.text = baseSkill.skillDesc;
         //timeInv
         cost.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.tradeCost.ToString();
