@@ -87,11 +87,11 @@ public class NPC : BaseNpc
             {
                 if (isLock)
                 {
-                    NPCListInfo.My.ShowUnlckPop(currentRole, this);
+                    NPCListInfo.My.ShowUnlckPop(transform);
                 }
                 else
                 {
-                    NPCListInfo.My.ShowNpcInfo(currentRole);
+                    NPCListInfo.My.ShowNpcInfo(transform);
                 }
             }
             else

@@ -24,7 +24,7 @@ public class GuideStep : MonoBehaviour
 
     private void Start()
     {
-        InitStep();
+        //InitStep();   
     }
 
     void InitStep()
@@ -104,21 +104,21 @@ public class GuideStep : MonoBehaviour
         return endPos;
     }
 
-    private void OnEnable()
-    {
-        isOnEnable = true;
-        if (isMove)
-        {
-            DoMove();
-        }
-        else
-        {
-            DoScale();
-        }
-    }
+   // private void OnEnable()
+    //{
+    //    isOnEnable = true;
+    //    if (isMove)
+    //    {
+   //         DoMove();
+    //    }
+    //    else
+   //     {
+    //        DoScale();
+   //     }
+   // }
 
-    private void OnDisable()
-    {
-        isOnEnable = false;
-    }
+   // private void OnDisable()
+    //{
+   //     isOnEnable = false;
+   // }
 }

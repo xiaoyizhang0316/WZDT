@@ -12,16 +12,24 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
 
     public Text totalIncome;
     public Text consumeIncome;
+    public Text npcNames;
     public Text npcIncome;
+    public Text otherNames;
     public Text otherIncome;
     public Text totalCost;
     public Text tradeCost;
+    public Text buildingNames;
     public Text buildingCost;
+    public Text extraNames;
     public Text extraCost;
 
+    private string npcNamesStr;
     private string npcIncomeStr;
+    private string otherNamesStr;
     private string otherIncomeStr;
+    private string buildingNamesStr;
     private string buildCostStr;
+    private string extraNamesStr;
     private string extraCostStr;
 
     public bool isShow = false;
@@ -79,68 +87,77 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         isShow = false;
         mask.SetActive(true);
         statPanel.SetActive(true);
+
+        npcNamesStr = "";
         npcIncomeStr = "";
+        otherNamesStr = "";
         otherIncomeStr = "";
+        buildingNamesStr = "";
         buildCostStr = "";
+        extraNamesStr = "";
         extraCostStr = "";
-        this.totalIncome.text = string.Format($"{totalIncome*60/timeCount}/min\t\t{totalIncome}");
-        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}/min\t\t{totalConsumeIncome}");
-        this.totalCost.text = string.Format($"{totalCost*60/timeCount}/min\t\t{totalCost}");
-        this.tradeCost.text = string.Format($"{tradeCost*60/timeCount}/min\t\t{tradeCost}");
+        this.totalIncome.text = string.Format($"{totalIncome*60/timeCount}\t\t{totalIncome}");
+        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}\t\t{totalConsumeIncome}");
+        this.totalCost.text = string.Format($"{totalCost*60/timeCount}\t\t{totalCost}");
+        this.tradeCost.text = string.Format($"{tradeCost*60/timeCount}\t\t{tradeCost}");
         if (npcIncomes.Count > 0)
         {
             foreach(var k in npcIncomes.Keys)
             {
-                npcIncomeStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\t{npcIncomes[k] * 60 / timeCount}/min\t{npcIncomes[k]}\n");
+                npcNamesStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\n");
+                npcIncomeStr += string.Format($"{npcIncomes[k] * 60 / timeCount}  \t\t{npcIncomes[k]}\n");
             }
         }
         else
         {
-            npcIncomeStr = "None";
+            npcNamesStr = "None";
         }
-
+        npcNames.text = npcNamesStr;
         npcIncome.text = npcIncomeStr;
 
         if (otherIncomes.Count > 0)
         {
             foreach(var k in otherIncomes.Keys)
             {
-                otherIncomeStr += string.Format($"{k}\t{otherIncomes[k] * 60 / timeCount}/min\t{otherIncomes[k]}\n");
+                otherNamesStr += string.Format($"{k}\n");
+                otherIncomeStr += string.Format($"{otherIncomes[k] * 60 / timeCount}  \t\t{otherIncomes[k]}\n");
             }
         }
         else
         {
-            otherIncomeStr = "None";
+            otherNamesStr = "None";
         }
-
+        otherNames.text = otherNamesStr;
         otherIncome.text = otherIncomeStr;
 
         if (buildCost.Count > 0)
         {
             foreach (var k in buildCost.Keys)
             {
-                buildCostStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\t{buildCost[k] * 60 / timeCount}/min\t{buildCost[k]}\n");
+                buildingNamesStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\n");
+                buildCostStr += string.Format($"{buildCost[k] * 60 / timeCount}  \t\t{buildCost[k]}\n");
             }
         }
         else
         {
-            buildCostStr = "None";
+            buildingNamesStr = "None";
         }
-
+        buildingNames.text = buildingNamesStr;
         buildingCost.text = buildCostStr;
 
         if (extraCost.Count > 0)
         {
             foreach (var k in otherIncomes.Keys)
             {
-                extraCostStr += string.Format($"{k}\t{extraCost[k] * 60 / timeCount}/min\t{extraCost[k]}\n");
+                extraNamesStr += string.Format($"{k}\n");
+                extraCostStr += string.Format($"{extraCost[k] * 60 / timeCount}  \t\t{extraCost[k]}\n");
             }
         }
         else
         {
-            extraCostStr = "None";
+            extraNamesStr = "None";
         }
-
+        extraNames.text = extraNamesStr;
         this.extraCost.text = extraCostStr;
         isShow = true;
     }
@@ -148,36 +165,40 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     private void ShowIncome(int totalIncome, int totalConsumeIncome, Dictionary<BaseMapRole, int> npcIncomes,
         Dictionary<string, int> otherIncomes, int timeCount)
     {
+        npcNamesStr = "";
         npcIncomeStr = "";
+        otherNamesStr = "";
         otherIncomeStr = "";
-        this.totalIncome.text = string.Format($"{totalIncome * 60 / timeCount}/min\t\t{totalIncome}");
-        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}/min\t\t{totalConsumeIncome}");
+        this.totalIncome.text = string.Format($"{totalIncome * 60 / timeCount}\t\t{totalIncome}");
+        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}\t\t{totalConsumeIncome}");
         if (npcIncomes.Count > 0)
         {
             foreach (var k in npcIncomes.Keys)
             {
-                npcIncomeStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\t{npcIncomes[k] * 60 / timeCount}/min\t{npcIncomes[k]}\n");
+                npcNamesStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\n");
+                npcIncomeStr += string.Format($"{npcIncomes[k] * 60 / timeCount}  \t\t{npcIncomes[k]}\n");
             }
         }
         else
         {
-            npcIncomeStr = "None";
+            npcNamesStr = "None";
         }
-
+        npcNames.text = npcNamesStr;
         npcIncome.text = npcIncomeStr;
 
         if (otherIncomes.Count > 0)
         {
             foreach (var k in otherIncomes.Keys)
             {
-                otherIncomeStr += string.Format($"{k}\t{otherIncomes[k] * 60 / timeCount}/min\t{otherIncomes[k]}\n");
+                otherNamesStr += string.Format($"{k}\n");
+                otherIncomeStr += string.Format($"{otherIncomes[k] * 60 / timeCount}  \t\t{otherIncomes[k]}\n");
             }
         }
         else
         {
-            otherIncomeStr = "None";
+            otherNamesStr = "None";
         }
-
+        otherNames.text = otherNamesStr;
         otherIncome.text = otherIncomeStr;
 
         isIncomeRefreshing = false;
@@ -186,37 +207,41 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     private void ShowExpend(int totalCost, int tradeCost, Dictionary<BaseMapRole, int> buildCost,
         Dictionary<string, int> extraCost, int timeCount)
     {
+        buildingNamesStr = "";
         buildCostStr = "";
+        extraNamesStr = "";
         extraCostStr = "";
-        this.totalCost.text = string.Format($"{totalCost * 60 / timeCount}/min\t\t{totalCost}");
-        this.tradeCost.text = string.Format($"{tradeCost * 60 / timeCount}/min\t\t{tradeCost}");
+        this.totalCost.text = string.Format($"{totalCost * 60 / timeCount}\t\t{totalCost}");
+        this.tradeCost.text = string.Format($"{tradeCost * 60 / timeCount}\t\t{tradeCost}");
 
         if (buildCost.Count > 0)
         {
             foreach (var k in buildCost.Keys)
             {
-                buildCostStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\t{buildCost[k] * 60 / timeCount}/min\t{buildCost[k]}\n");
+                buildingNamesStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\n");
+                buildCostStr += string.Format($"{buildCost[k] * 60 / timeCount}  \t\t{buildCost[k]}\n");
             }
         }
         else
         {
-            buildCostStr = "None";
+            buildingNamesStr = "None";
         }
-
+        buildingNames.text = buildingNamesStr;
         buildingCost.text = buildCostStr;
 
         if (extraCost.Count > 0)
         {
             foreach (var k in extraCost.Keys)
             {
-                extraCostStr += string.Format($"{k}\t{extraCost[k] * 60 / timeCount}/min\t{extraCost[k]}\n");
+                extraNamesStr += string.Format($"{k}\n");
+                extraCostStr += string.Format($"{extraCost[k] * 60 / timeCount}  \t\t{extraCost[k]}\n");
             }
         }
         else
         {
-            extraCostStr = "None";
+            extraNamesStr = "None";
         }
-
+        extraNames.text = extraNamesStr;
         this.extraCost.text = extraCostStr;
 
         isExpendRefreshing = false;
