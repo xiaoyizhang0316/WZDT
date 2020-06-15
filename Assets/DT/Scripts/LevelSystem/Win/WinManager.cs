@@ -56,8 +56,11 @@ public class WinManager : MonoSingleton<WinManager>
     public Transform pos_worker;
 
     public Button confirm;
+
+    public Button retry;
     public void InitWin()
     {
+        retry.onClick.AddListener(() => { SceneManager.LoadScene(SceneManager.GetActiveScene().name); });
         boxs.SetActive(false);
         isStar_0 = BaseLevelController.My.starOneStatus;
         isStar_1 = BaseLevelController.My.starTwoStatus;
@@ -149,8 +152,13 @@ public class WinManager : MonoSingleton<WinManager>
         {
             target.sprite = list[i];
             yield return new WaitForSeconds(0.03f);
+            if (i == list.Count - 1)
+            {
+                boxs.SetActive(true);
+            }
         }
-        boxs.SetActive(true);
+   
+      
     }
 
     public void OnGUI()

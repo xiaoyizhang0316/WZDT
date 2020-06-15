@@ -136,12 +136,12 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         pop.SetActive(true);
         closeBtn.interactable = false;
         pop.transform.GetChild(0).GetComponent<Text>().DOFade(0, 1f).OnComplete(()=> {
-            npcInfo.SetActive(false);
-            pop.transform.GetChild(0).GetComponent<Text>().DOFade(1, 0.01f);
+            //npcInfo.SetActive(false);
+            pop.transform.GetChild(0).GetComponent<Text>().DOFade(1, 0.01f).Play();
             pop.SetActive(false);
             closeBtn.interactable = true;
             closeBtn.gameObject.SetActive(false);
-        });
+        }).Play();
     }
 
     public void ShowUnlckPop(Transform npc)

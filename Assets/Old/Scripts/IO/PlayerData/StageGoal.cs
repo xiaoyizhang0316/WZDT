@@ -264,6 +264,12 @@ public class StageGoal : MonoSingleton<StageGoal>
         float per = playerHealth / (float)playerMaxHealth;
         playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
         playerGoldText.text = playerGold.ToString();
+        if (playerGold > 0)
+            playerGoldText.color = Color.white;
+        else if (playerGold >= maxMinusGold)
+            playerGoldText.color = Color.yellow;
+        else
+            playerGoldText.color = Color.red;
         playerSatisfyText.text = playerSatisfy.ToString();
         playerTechText.text = playerTechPoint.ToString();   
     }
@@ -542,7 +548,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         GetComponent<RectTransform>().DOAnchorPosX(160.27f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
-        });
+        }).Play();
     }
 
     public void MenuShow()
@@ -550,7 +556,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         GetComponent<RectTransform>().DOAnchorPosX(-178f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {
             menuCloseButton.gameObject.SetActive(true);
             menuOpenButton.gameObject.SetActive(false);
-        });
+        }).Play();
     }
 
 

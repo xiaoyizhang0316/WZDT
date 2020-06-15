@@ -46,6 +46,7 @@ public class DrawMoneyLine : MonoBehaviour
         pointList.Add(Target.position);
         GetComponent<LineRenderer>().positionCount = pointList.Count;
         GetComponent<LineRenderer>().SetPositions(pointList.ToArray());
+        GetComponent<LineRenderer>().material.mainTextureScale = new Vector2(Vector3.Distance(startTarget.position, Target.position) * 4f, 1f);
     }
 
     // Start is called before the first frame update
