@@ -257,6 +257,8 @@ public class ConsumeSign : MonoBehaviour
         if (isCanSelect)
         {
             currentHealth += num;
+            if (currentHealth <= 0)
+                currentHealth = 0;
             HealthCheck();
         }
     }
