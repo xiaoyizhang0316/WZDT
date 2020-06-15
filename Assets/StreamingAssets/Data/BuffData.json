@@ -13,7 +13,7 @@
             "OnProduct": "-1",
             "OnTick": "-1",
             "Duration": "8",
-            "Interval": "10",
+            "Interval": "-1",
             "canRemove": "TRUE"
         },
         {
@@ -45,6 +45,22 @@
             "OnProduct": "-1",
             "OnTick": "-1",
             "Duration": "60",
+            "Interval": "-1",
+            "canRemove": "TRUE"
+        },
+        {
+            "BuffID": "104",
+            "BulletBuffType": "Debuff",
+            "BuffName": "治疗",
+            "BuffDesc": "每秒加10点血",
+            "ElementType": "Normal",
+            "AttackEffect": "2",
+            "OnBuffAdd": "-1",
+            "OnBuffRemove": "-1",
+            "OnBeforeDead": "-1",
+            "OnProduct": "-1",
+            "OnTick": "30_-10",
+            "Duration": "5",
             "Interval": "1",
             "canRemove": "TRUE"
         },
@@ -61,7 +77,7 @@
             "OnProduct": "50_0.8",
             "OnTick": "-1",
             "Duration": "1",
-            "Interval": "1",
+            "Interval": "-1",
             "canRemove": "TRUE"
         },
         {
@@ -77,7 +93,7 @@
             "OnProduct": "-1",
             "OnTick": "-1",
             "Duration": "3",
-            "Interval": "1",
+            "Interval": "-1",
             "canRemove": "TRUE"
         },
         {
@@ -93,7 +109,7 @@
             "OnProduct": "-1",
             "OnTick": "-1",
             "Duration": "10",
-            "Interval": "1",
+            "Interval": "-1",
             "canRemove": "TRUE"
         },
         {
@@ -109,7 +125,7 @@
             "OnProduct": "-1",
             "OnTick": "-1",
             "Duration": "1",
-            "Interval": "1",
+            "Interval": "-1",
             "canRemove": "TRUE"
         },
         {
@@ -557,7 +573,23 @@
             "OnProduct": "-1",
             "OnTick": "-1",
             "Duration": "8",
-            "Interval": "10",
+            "Interval": "-1",
+            "canRemove": "TRUE"
+        },
+        {
+            "BuffID": "1040",
+            "BulletBuffType": "Debuff",
+            "BuffName": "群体治疗",
+            "BuffDesc": "周围人每秒加10点血",
+            "ElementType": "Normal",
+            "AttackEffect": "2",
+            "OnBuffAdd": "-1",
+            "OnBuffRemove": "-1",
+            "OnBeforeDead": "-1",
+            "OnProduct": "-1",
+            "OnTick": "30_-10",
+            "Duration": "-1",
+            "Interval": "1",
             "canRemove": "TRUE"
         }
     ]
