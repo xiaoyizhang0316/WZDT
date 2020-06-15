@@ -10,11 +10,32 @@ public class NpcProductInfo : MonoBehaviour
     public Text cost;
     public Text risk;
 
-    public void SetInfo(BaseMapRole npc, BaseSkill baseSkill)
+    public Image icon;
+    public List<Image> buffs;
+
+
+
+
+    public void SetInfo(Transform npc, BaseSkill baseSkill)
     {
         des.text = baseSkill.skillDesc;
         //timeInv
-        cost.text = npc.baseRoleData.baseRoleData.tradeCost.ToString();
-        risk.text = npc.baseRoleData.baseRoleData.riskResistance.ToString();
+        cost.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.tradeCost.ToString();
+        risk.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.riskResistance.ToString();
+
+        if (npc.GetComponent<NPC>().isCanSeeEquip)
+        {
+            int i = 0;
+            foreach(var bf in baseSkill.buffList)
+            {
+                buffs[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + bf);
+                if (i == 2)
+                {
+                    break;
+                }
+                i++;
+            }
+            
+        }
     }
 }
