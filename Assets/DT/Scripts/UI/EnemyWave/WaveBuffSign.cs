@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class WaveBuffSign : MonoBehaviour
+public class WaveBuffSign : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     /// <summary>
     /// buffID
@@ -26,6 +27,17 @@ public class WaveBuffSign : MonoBehaviour
     public void InitSprite()
     {
         GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Buff/" + buffId.ToString());
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        BuffData data = GameDataMgr.My.GetBuffDataByID(buffId);
+        FloatWindow.My.Init(transform,data.BuffDesc);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        FloatWindow.My.Hide();
     }
 
     // Start is called before the first frame update

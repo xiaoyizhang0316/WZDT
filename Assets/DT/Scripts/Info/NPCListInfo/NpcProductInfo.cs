@@ -10,11 +10,14 @@ public class NpcProductInfo : MonoBehaviour
     public Text cost;
     public Text risk;
 
-    public void SetInfo(BaseMapRole npc, BaseSkill baseSkill)
+    public Text npcName;
+
+    public void SetInfo(Role npc)
     {
-        des.text = baseSkill.skillDesc;
+        //des
         //timeInv
-        cost.text = npc.baseRoleData.baseRoleData.tradeCost.ToString();
-        risk.text = npc.baseRoleData.baseRoleData.riskResistance.ToString();
+        npcName.text = npc.baseRoleData.roleName;
+        cost.text = npc.baseRoleData.tradeCost.ToString();
+        risk.text = npc.baseRoleData.riskResistance.ToString();
     }
 }
