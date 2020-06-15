@@ -9,19 +9,33 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     public GameObject statPanel;
     public GameObject mask;
     public Button closeBtn;
+    public GameObject statItem;
+
+    public Transform npcContent;
+    public Transform otherContent;
+    public Transform buildContent;
+    public Transform extraContent;
 
     public Text totalIncome;
     public Text consumeIncome;
+    public Text npcNames;
     public Text npcIncome;
+    public Text otherNames;
     public Text otherIncome;
     public Text totalCost;
     public Text tradeCost;
+    public Text buildingNames;
     public Text buildingCost;
+    public Text extraNames;
     public Text extraCost;
 
+    private string npcNamesStr;
     private string npcIncomeStr;
+    private string otherNamesStr;
     private string otherIncomeStr;
+    private string buildingNamesStr;
     private string buildCostStr;
+    private string extraNamesStr;
     private string extraCostStr;
 
     public bool isShow = false;
@@ -37,13 +51,13 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     void Close()
     {
         statPanel.SetActive(false);
-        mask.SetActive(false);
+        //mask.SetActive(false);
         isShow = false;
     }
 
     public void ShowStat()
     {
-        ShowStat(StageGoal.My.totalIncome, StageGoal.My.consumeIncome, StageGoal.My.totalCost,
+        ShowStatNew(StageGoal.My.totalIncome, StageGoal.My.consumeIncome, StageGoal.My.totalCost,
             StageGoal.My.tradeCost,
             StageGoal.My.npcIncomes, StageGoal.My.otherIncomes,
             StageGoal.My.buildingCosts, StageGoal.My.extraCost, StageGoal.My.timeCount);
@@ -55,7 +69,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         if(isShow&& !isIncomeRefreshing)
         {
             isIncomeRefreshing = true;
-            ShowIncome(totalIncome, totalConsumeIncome, npcIncomes, otherIncomes, timeCount);
+            ShowIncomeNew(totalIncome, totalConsumeIncome, npcIncomes, otherIncomes, timeCount);
         }
     }
 
@@ -65,13 +79,230 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         if (isShow && !isExpendRefreshing)
         {
             isExpendRefreshing = true;
-            ShowExpend(totalCost, tradeCost, buildCost, extraCost, timeCount);
+            ShowExpendNew(totalCost, tradeCost, buildCost, extraCost, timeCount);
         }
+    }
+
+    private void ShowStatNew(int totalIncome, int totalConsumeIncome, int totalCost, int tradeCost,
+        Dictionary<BaseMapRole, int> npcIncomes,
+        Dictionary<string, int> otherIncomes, Dictionary<BaseMapRole, int> buildCost,
+        Dictionary<string, int> extraCost, int timeCount)
+    {
+        isShow = false;
+        //mask.SetActive(true);
+        statPanel.SetActive(true);
+        this.totalIncome.text = string.Format($"{totalIncome * 60 / timeCount}\t\t{totalIncome}");
+        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}\t\t{totalConsumeIncome}");
+        this.totalCost.text = string.Format($"{totalCost * 60 / timeCount}\t\t{totalCost}");
+        this.tradeCost.text = string.Format($"{tradeCost * 60 / timeCount}\t\t{tradeCost}");
+
+        if (npcIncomes.Count > 0)
+        {
+            int i= 0;
+            foreach (var key in npcIncomes.Keys)
+            {
+                if (i >= npcContent.childCount)
+                {
+                    GameObject newNpc = Instantiate(statItem, npcContent);
+                    StatItem stat = newNpc.GetComponent<StatItem>();
+                    stat.Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key]);
+                }
+                npcContent.GetChild(i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key]);
+                i++;
+            }
+            if (i < npcContent.childCount)
+            {
+                for (; i < npcContent.childCount; i++)
+                {
+                    npcContent.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+
+        
+        if (otherIncomes.Count > 0)
+        {
+            int i = 0;
+            foreach (var key in otherIncomes.Keys)
+            {
+                if (i >= otherContent.childCount)
+                {
+                    GameObject newNpc = Instantiate(statItem, otherContent);
+                    StatItem stat = newNpc.GetComponent<StatItem>();
+                    stat.Setup(key, otherIncomes[key] * 60 / timeCount, otherIncomes[key]);
+                }
+                otherContent.GetChild(i).GetComponent<StatItem>().Setup(key, otherIncomes[key] * 60 / timeCount, otherIncomes[key]);
+                i++;
+            }
+            if (i < otherContent.childCount)
+            {
+                for (; i < otherContent.childCount; i++)
+                {
+                    otherContent.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+        if (buildCost.Count > 0)
+        {
+            int i = 0;
+            foreach (var key in buildCost.Keys)
+            {
+                if (i >= buildContent.childCount)
+                {
+                    GameObject newNpc = Instantiate(statItem, buildContent);
+                    StatItem stat = newNpc.GetComponent<StatItem>();
+                    stat.Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 / timeCount, buildCost[key]);
+                }
+                buildContent.GetChild(i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 / timeCount, buildCost[key]);
+                i++;
+            }
+            if (i < buildContent.childCount)
+            {
+                for (; i < buildContent.childCount; i++)
+                {
+                    buildContent.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+
+        if (extraCost.Count > 0)
+        {
+            int i = 0;
+            foreach (var key in extraCost.Keys)
+            {
+                if (i >= extraContent.childCount)
+                {
+                    GameObject newNpc = Instantiate(statItem, extraContent);
+                    StatItem stat = newNpc.GetComponent<StatItem>();
+                    stat.Setup(key, extraCost[key] * 60 / timeCount, extraCost[key]);
+                }
+                extraContent.GetChild(i).GetComponent<StatItem>().Setup(key, extraCost[key] * 60 / timeCount, extraCost[key]);
+                i++;
+            }
+            if (i < extraContent.childCount)
+            {
+                for (; i < extraContent.childCount; i++)
+                {
+                    extraContent.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+
+        isShow = true;
+    }
+
+    private void ShowIncomeNew(int totalIncome, int totalConsumeIncome, Dictionary<BaseMapRole, int> npcIncomes,
+        Dictionary<string, int> otherIncomes, int timeCount)
+    {
+
+        this.totalIncome.text = string.Format($"{totalIncome * 60 / timeCount}\t\t{totalIncome}");
+        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}\t\t{totalConsumeIncome}");
+        if (npcIncomes.Count > 0)
+        {
+            int i = 0;
+            foreach (var key in npcIncomes.Keys)
+            {
+                if (i >= npcContent.childCount)
+                {
+                    GameObject newNpc = Instantiate(statItem, npcContent);
+                    StatItem stat = newNpc.GetComponent<StatItem>();
+                    stat.Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key]);
+                }
+                npcContent.GetChild(i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key]);
+                i++;
+            }
+            if (i < npcContent.childCount)
+            {
+                for (; i < npcContent.childCount; i++)
+                {
+                    npcContent.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+
+
+        if (otherIncomes.Count > 0)
+        {
+            int i = 0;
+            foreach (var key in otherIncomes.Keys)
+            {
+                if (i >= otherContent.childCount)
+                {
+                    GameObject newNpc = Instantiate(statItem, otherContent);
+                    StatItem stat = newNpc.GetComponent<StatItem>();
+                    stat.Setup(key, otherIncomes[key] * 60 / timeCount, otherIncomes[key]);
+                }
+                otherContent.GetChild(i).GetComponent<StatItem>().Setup(key, otherIncomes[key] * 60 / timeCount, otherIncomes[key]);
+                i++;
+            }
+            if (i < otherContent.childCount)
+            {
+                for (; i < otherContent.childCount; i++)
+                {
+                    otherContent.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+        isIncomeRefreshing = false;
+    }
+
+    private void ShowExpendNew(int totalCost, int tradeCost, Dictionary<BaseMapRole, int> buildCost,
+        Dictionary<string, int> extraCost, int timeCount)
+    {
+        this.totalCost.text = string.Format($"{totalCost * 60 / timeCount}\t\t{totalCost}");
+        this.tradeCost.text = string.Format($"{tradeCost * 60 / timeCount}\t\t{tradeCost}");
+        if (buildCost.Count > 0)
+        {
+            int i = 0;
+            foreach (var key in buildCost.Keys)
+            {
+                if (i >= buildContent.childCount)
+                {
+                    GameObject newNpc = Instantiate(statItem, buildContent);
+                    StatItem stat = newNpc.GetComponent<StatItem>();
+                    stat.Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 / timeCount, buildCost[key]);
+                }
+                buildContent.GetChild(i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 / timeCount, buildCost[key]);
+                i++;
+            }
+            if (i < buildContent.childCount)
+            {
+                for (; i < buildContent.childCount; i++)
+                {
+                    buildContent.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+
+        if (extraCost.Count > 0)
+        {
+            int i = 0;
+            foreach (var key in extraCost.Keys)
+            {
+                if (i >= extraContent.childCount)
+                {
+                    GameObject newNpc = Instantiate(statItem, extraContent);
+                    StatItem stat = newNpc.GetComponent<StatItem>();
+                    stat.Setup(key, extraCost[key] * 60 / timeCount, extraCost[key]);
+                }
+                extraContent.GetChild(i).GetComponent<StatItem>().Setup(key, extraCost[key] * 60 / timeCount, extraCost[key]);
+                i++;
+            }
+            if (i < extraContent.childCount)
+            {
+                for (; i < extraContent.childCount; i++)
+                {
+                    extraContent.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+
+        isExpendRefreshing = false;
     }
 
 
 
-    private void ShowStat(int totalIncome,int totalConsumeIncome, int totalCost, int tradeCost,
+        private void ShowStat(int totalIncome,int totalConsumeIncome, int totalCost, int tradeCost,
         Dictionary<BaseMapRole, int> npcIncomes,
         Dictionary<string, int> otherIncomes, Dictionary<BaseMapRole, int> buildCost, 
         Dictionary<string, int> extraCost, int timeCount)
@@ -79,68 +310,77 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         isShow = false;
         mask.SetActive(true);
         statPanel.SetActive(true);
+
+        npcNamesStr = "";
         npcIncomeStr = "";
+        otherNamesStr = "";
         otherIncomeStr = "";
+        buildingNamesStr = "";
         buildCostStr = "";
+        extraNamesStr = "";
         extraCostStr = "";
-        this.totalIncome.text = string.Format($"{totalIncome*60/timeCount}/min\t\t{totalIncome}");
-        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}/min\t\t{totalConsumeIncome}");
-        this.totalCost.text = string.Format($"{totalCost*60/timeCount}/min\t\t{totalCost}");
-        this.tradeCost.text = string.Format($"{tradeCost*60/timeCount}/min\t\t{tradeCost}");
+        this.totalIncome.text = string.Format($"{totalIncome*60/timeCount}\t\t{totalIncome}");
+        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}\t\t{totalConsumeIncome}");
+        this.totalCost.text = string.Format($"{totalCost*60/timeCount}\t\t{totalCost}");
+        this.tradeCost.text = string.Format($"{tradeCost*60/timeCount}\t\t{tradeCost}");
         if (npcIncomes.Count > 0)
         {
             foreach(var k in npcIncomes.Keys)
             {
-                npcIncomeStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\t{npcIncomes[k] * 60 / timeCount}/min\t{npcIncomes[k]}\n");
+                npcNamesStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\n");
+                npcIncomeStr += string.Format($"{npcIncomes[k] * 60 / timeCount}  \t\t{npcIncomes[k]}\n");
             }
         }
         else
         {
-            npcIncomeStr = "None";
+            npcNamesStr = "None";
         }
-
+        npcNames.text = npcNamesStr;
         npcIncome.text = npcIncomeStr;
 
         if (otherIncomes.Count > 0)
         {
             foreach(var k in otherIncomes.Keys)
             {
-                otherIncomeStr += string.Format($"{k}\t{otherIncomes[k] * 60 / timeCount}/min\t{otherIncomes[k]}\n");
+                otherNamesStr += string.Format($"{k}\n");
+                otherIncomeStr += string.Format($"{otherIncomes[k] * 60 / timeCount}  \t\t{otherIncomes[k]}\n");
             }
         }
         else
         {
-            otherIncomeStr = "None";
+            otherNamesStr = "None";
         }
-
+        otherNames.text = otherNamesStr;
         otherIncome.text = otherIncomeStr;
 
         if (buildCost.Count > 0)
         {
             foreach (var k in buildCost.Keys)
             {
-                buildCostStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\t{buildCost[k] * 60 / timeCount}/min\t{buildCost[k]}\n");
+                buildingNamesStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\n");
+                buildCostStr += string.Format($"{buildCost[k] * 60 / timeCount}  \t\t{buildCost[k]}\n");
             }
         }
         else
         {
-            buildCostStr = "None";
+            buildingNamesStr = "None";
         }
-
+        buildingNames.text = buildingNamesStr;
         buildingCost.text = buildCostStr;
 
         if (extraCost.Count > 0)
         {
             foreach (var k in otherIncomes.Keys)
             {
-                extraCostStr += string.Format($"{k}\t{extraCost[k] * 60 / timeCount}/min\t{extraCost[k]}\n");
+                extraNamesStr += string.Format($"{k}\n");
+                extraCostStr += string.Format($"{extraCost[k] * 60 / timeCount}  \t\t{extraCost[k]}\n");
             }
         }
         else
         {
-            extraCostStr = "None";
+            extraNamesStr = "None";
         }
-
+        extraNames.text = extraNamesStr;
         this.extraCost.text = extraCostStr;
         isShow = true;
     }
@@ -148,36 +388,40 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     private void ShowIncome(int totalIncome, int totalConsumeIncome, Dictionary<BaseMapRole, int> npcIncomes,
         Dictionary<string, int> otherIncomes, int timeCount)
     {
+        npcNamesStr = "";
         npcIncomeStr = "";
+        otherNamesStr = "";
         otherIncomeStr = "";
-        this.totalIncome.text = string.Format($"{totalIncome * 60 / timeCount}/min\t\t{totalIncome}");
-        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}/min\t\t{totalConsumeIncome}");
+        this.totalIncome.text = string.Format($"{totalIncome * 60 / timeCount}\t\t{totalIncome}");
+        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}\t\t{totalConsumeIncome}");
         if (npcIncomes.Count > 0)
         {
             foreach (var k in npcIncomes.Keys)
             {
-                npcIncomeStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\t{npcIncomes[k] * 60 / timeCount}/min\t{npcIncomes[k]}\n");
+                npcNamesStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\n");
+                npcIncomeStr += string.Format($"{npcIncomes[k] * 60 / timeCount}  \t\t{npcIncomes[k]}\n");
             }
         }
         else
         {
-            npcIncomeStr = "None";
+            npcNamesStr = "None";
         }
-
+        npcNames.text = npcNamesStr;
         npcIncome.text = npcIncomeStr;
 
         if (otherIncomes.Count > 0)
         {
             foreach (var k in otherIncomes.Keys)
             {
-                otherIncomeStr += string.Format($"{k}\t{otherIncomes[k] * 60 / timeCount}/min\t{otherIncomes[k]}\n");
+                otherNamesStr += string.Format($"{k}\n");
+                otherIncomeStr += string.Format($"{otherIncomes[k] * 60 / timeCount}  \t\t{otherIncomes[k]}\n");
             }
         }
         else
         {
-            otherIncomeStr = "None";
+            otherNamesStr = "None";
         }
-
+        otherNames.text = otherNamesStr;
         otherIncome.text = otherIncomeStr;
 
         isIncomeRefreshing = false;
@@ -186,37 +430,41 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     private void ShowExpend(int totalCost, int tradeCost, Dictionary<BaseMapRole, int> buildCost,
         Dictionary<string, int> extraCost, int timeCount)
     {
+        buildingNamesStr = "";
         buildCostStr = "";
+        extraNamesStr = "";
         extraCostStr = "";
-        this.totalCost.text = string.Format($"{totalCost * 60 / timeCount}/min\t\t{totalCost}");
-        this.tradeCost.text = string.Format($"{tradeCost * 60 / timeCount}/min\t\t{tradeCost}");
+        this.totalCost.text = string.Format($"{totalCost * 60 / timeCount}\t\t{totalCost}");
+        this.tradeCost.text = string.Format($"{tradeCost * 60 / timeCount}\t\t{tradeCost}");
 
         if (buildCost.Count > 0)
         {
             foreach (var k in buildCost.Keys)
             {
-                buildCostStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\t{buildCost[k] * 60 / timeCount}/min\t{buildCost[k]}\n");
+                buildingNamesStr += string.Format($"{k.baseRoleData.baseRoleData.roleName}\n");
+                buildCostStr += string.Format($"{buildCost[k] * 60 / timeCount}  \t\t{buildCost[k]}\n");
             }
         }
         else
         {
-            buildCostStr = "None";
+            buildingNamesStr = "None";
         }
-
+        buildingNames.text = buildingNamesStr;
         buildingCost.text = buildCostStr;
 
         if (extraCost.Count > 0)
         {
             foreach (var k in extraCost.Keys)
             {
-                extraCostStr += string.Format($"{k}\t{extraCost[k] * 60 / timeCount}/min\t{extraCost[k]}\n");
+                extraNamesStr += string.Format($"{k}\n");
+                extraCostStr += string.Format($"{extraCost[k] * 60 / timeCount}  \t\t{extraCost[k]}\n");
             }
         }
         else
         {
-            extraCostStr = "None";
+            extraNamesStr = "None";
         }
-
+        extraNames.text = extraNamesStr;
         this.extraCost.text = extraCostStr;
 
         isExpendRefreshing = false;
