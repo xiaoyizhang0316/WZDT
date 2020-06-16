@@ -21,7 +21,7 @@ public class ProductSeed : BaseSkill
         data.buffList = new List<int>();
         data.bulletType = BulletType.Seed;
         data.damage = role.baseRoleData.effect * 10f;
-        data.loadingSpeed = 5;
+        data.loadingSpeed = 1.5f;
         data.buffMaxCount = 3;
         for (int i = 0; i < role.GetEquipBuffList().Count; i++)
         {
