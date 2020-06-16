@@ -67,7 +67,9 @@ public class ProductDealer : BaseSkill
         else
         {
             isPlay = true;
-            float d = 1f / (role.baseRoleData.efficiency * 0.1f);
+            float d = (role.baseRoleData.efficiency * -0.01f) + 1.5f;
+            if (d <= 0.5f)
+                d = 0.5f;
             transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
             {
                 isPlay = false;
