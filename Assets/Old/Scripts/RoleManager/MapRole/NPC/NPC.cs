@@ -80,7 +80,7 @@ public class NPC : BaseNpc
                 }
             }
         }
-        else
+        else if (!EventSystem.current.IsPointerOverGameObject())
         {
             //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
             //RoleListInfo.My.Init(currentRole);
