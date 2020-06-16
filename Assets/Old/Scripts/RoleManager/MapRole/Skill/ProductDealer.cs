@@ -51,7 +51,11 @@ public class ProductDealer : BaseSkill
         {
             isPlay = true;
             ProductData data = role.warehouse[0];
-            float d = 1f / (role.baseRoleData.efficiency * 0.1f) * data.loadingSpeed;
+            //float d = 1f / (role.baseRoleData.efficiency * 0.1f) * data.loadingSpeed;
+            float d = (role.baseRoleData.efficiency * -0.01f) + 1.5f;
+            if (d <= 0.5f)
+                d = 0.5f;
+            d *= data.loadingSpeed;
             //Debug.Log("释放技能" + d);
             Skill();
             transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
