@@ -11,6 +11,8 @@ public class NpcLockedInfo : MonoBehaviour
     public Text tradeCost;
     public Text risk;
 
+    public List<Image> buffs;
+
     public Text unlockCost;
 
     public void SetInfo(Transform npc, int unlockNumber)
@@ -22,5 +24,19 @@ public class NpcLockedInfo : MonoBehaviour
         risk.text = npc.GetComponent<BaseMapRole>().baseRoleData.riskResistance.ToString();
 
         unlockCost.text = unlockNumber.ToString();
+
+        if (npc.GetComponent<NPC>().isCanSeeEquip)
+        {
+            int i = 0;
+            foreach (var bf in npc.GetComponent<BaseSkill>().buffList)
+            {
+                buffs[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + bf);
+                if (i == 2)
+                {
+                    break;
+                }
+                i++;
+            }
+        }
     }
 }
