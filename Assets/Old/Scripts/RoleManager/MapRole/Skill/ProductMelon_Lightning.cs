@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class ProductMelon_Lightning : BaseSkill
 {
-    private int currentCount= 0 ;
+    private int currentCount = 0;
     public override void Skill()
     {
         if (role.tradeList.Count == 0)
@@ -22,34 +22,34 @@ public class ProductMelon_Lightning : BaseSkill
             {
                 role.warehouse.RemoveAt(0);
             }
-            for (int i = 0; i <role.GetEquipBuffList().Count; i++)
+            for (int i = 0; i < role.GetEquipBuffList().Count; i++)
             {
                 data.AddBuff(role.GetEquipBuffList()[i]);
             }
 
-            for (int i = 0; i <buffList.Count; i++)
+            for (int i = 0; i < buffList.Count; i++)
             {
                 data.AddBuff(buffList[i]);
             }
             data.bulletType = BulletType.Lightning;
-            data.loadingSpeed *=1f-role.baseRoleData.effect/100f ;
+            data.loadingSpeed *= 1f - role.baseRoleData.effect / 100f;
             data.loadingSpeed += 1;
-            data.damage =  (data.damage*0.6f + role.baseRoleData.effect  );
+            data.damage = (data.damage * 0.6f + role.baseRoleData.effect);
             try
             {
 
-          
-            GameObject game = Instantiate(GoodsManager.My.GoodPrb,   role.tradeList[currentCount]  .transform);
-            game.GetComponent<GoodsSign>().productData = data;
-            game.GetComponent<GoodsSign>().path=  role.tradeList[currentCount].GetDeliverProductPath();
-            game.GetComponent<GoodsSign>().role =PlayerData.My.GetMapRoleById(Double.Parse( role.tradeList[currentCount].tradeData.targetRole));
-            game.transform.position = transform.position;
-            game.GetComponent<GoodsSign>().Move();
-            currentCount++;
+
+                GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
+                game.GetComponent<GoodsSign>().productData = data;
+                game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();
+                game.GetComponent<GoodsSign>().role = PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
+                game.transform.position = transform.position;
+                game.GetComponent<GoodsSign>().Move();
+                currentCount++;
             }
             catch (Exception e)
             {
-              
+
             }
             if (currentCount >= role.tradeList.Count)
             {
@@ -59,6 +59,6 @@ public class ProductMelon_Lightning : BaseSkill
         }
 
     }
-    
-  
+
+
 }

@@ -45,7 +45,7 @@ public abstract class BaseSkill : MonoBehaviour
     {
         isPlay = true;
         float d = 1f / (role.baseRoleData.efficiency * 0.05f);
-        transform.DORotate(transform.eulerAngles, d ).OnComplete(() =>
+        transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
         {
             Skill();
             if (IsOpen)
