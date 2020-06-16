@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 public class ProductDealer : BaseSkill
 {
 
- 
+
     // Start is called before the first frame update
- 
+
     public override void Skill()
     {
         if (role.warehouse.Count > 0)
@@ -25,20 +25,20 @@ public class ProductDealer : BaseSkill
             role.warehouse.RemoveAt(0);
             switch (data.bulletType)
             {
-                case  BulletType.NormalPP: 
-                    GetComponent<BulletLaunch>().LanchNormal( data,role.shootTarget);
-                    break;    
-                case  BulletType.Bomb: 
-                    GetComponent<BulletLaunch>().LanchBoom( data);
-                    break;    
-                case  BulletType.Lightning: 
-                    GetComponent<BulletLaunch>().LanchLightning( data);
-                    break;    
-                case  BulletType.summon: 
-                    GetComponent<BulletLaunch>().CreatSummonTow( data);
+                case BulletType.NormalPP:
+                    GetComponent<BulletLaunch>().LanchNormal(data, role.shootTarget);
                     break;
-                 
-            } 
+                case BulletType.Bomb:
+                    GetComponent<BulletLaunch>().LanchBoom(data);
+                    break;
+                case BulletType.Lightning:
+                    GetComponent<BulletLaunch>().LanchLightning(data);
+                    break;
+                case BulletType.summon:
+                    GetComponent<BulletLaunch>().CreatSummonTow(data);
+                    break;
+
+            }
         }
     }
 
