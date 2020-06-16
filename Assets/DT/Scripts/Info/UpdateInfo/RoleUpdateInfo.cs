@@ -131,7 +131,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
         for (int i = 0; i <buffTF.childCount; i++)
         {
-            Destroy(buffTF.GetChild(i));
+            Destroy(buffTF.GetChild(i).gameObject);
         }
         for (int i = 0; i <baseMapRole.buffList.Count; i++)
         {
