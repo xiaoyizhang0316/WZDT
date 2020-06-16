@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static GameEnum;
 
 public class NPC : BaseNpc
@@ -68,7 +69,7 @@ public class NPC : BaseNpc
         {
             return;
         }
-        if (NewCanvasUI.My.isSetTrade)
+        if (NewCanvasUI.My.isSetTrade && !EventSystem.current.IsPointerOverGameObject())
         {
             NewCanvasUI.My.endRole = GetComponentInParent<BaseMapRole>();
             if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
@@ -79,7 +80,7 @@ public class NPC : BaseNpc
                 }
             }
         }
-        else
+        else if (!EventSystem.current.IsPointerOverGameObject())
         {
             //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
             //RoleListInfo.My.Init(currentRole);
