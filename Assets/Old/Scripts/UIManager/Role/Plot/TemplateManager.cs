@@ -38,11 +38,11 @@ public class TemplateManager : MonoBehaviour
         {
             top.GetChild(i).GetComponent<BoxCollider>().enabled = false;
             top.GetChild(i).GetComponent<Image>().raycastTarget = false;
-            top.GetChild(i).GetComponent<Image>().DOFade(0.3f, time).SetUpdate(true);
+            top.GetChild(i).GetComponent<Image>().DOFade(0.3f, time).SetUpdate(true).Play();
        
             mid.GetChild(i).GetComponent<BoxCollider>().enabled = true;
             mid.GetChild(i).GetComponent<Image>().raycastTarget = true;
-            mid.GetChild(i).GetComponent<Image>().DOFade(1, time).SetUpdate(true);
+            mid.GetChild(i).GetComponent<Image>().DOFade(1, time).SetUpdate(true).Play();
         }
 
         for (int i = 0; i <EquipListManager.My.equipPos.childCount; i++)
@@ -51,7 +51,7 @@ public class TemplateManager : MonoBehaviour
             {
                 EquipListManager.My.equipPos.GetChild(i).GetChild(j).GetComponent<BoxCollider>().enabled = true;
                 EquipListManager.My.equipPos.GetChild(i).GetChild(j).GetComponent<Image>().raycastTarget = true;
-                EquipListManager.My.equipPos.GetChild(i).GetChild(j).GetComponent<Image>().DOFade(1, time);
+                EquipListManager.My.equipPos.GetChild(i).GetChild(j).GetComponent<Image>().DOFade(1, time).Play();
               
             }
         }
@@ -62,7 +62,7 @@ public class TemplateManager : MonoBehaviour
             {
                 WorkerListManager.My.workerPos.GetChild(i).GetChild(j).GetComponent<BoxCollider>().enabled = false;
                 WorkerListManager.My.workerPos.GetChild(i).GetChild(j).GetComponent<Image>().raycastTarget = false;
-                WorkerListManager.My.workerPos.GetChild(i).GetChild(j).GetComponent<Image>().DOFade(0.3f, time);
+                WorkerListManager.My.workerPos.GetChild(i).GetChild(j).GetComponent<Image>().DOFade(0.3f, time).Play();
               
             }
         }
@@ -70,7 +70,7 @@ public class TemplateManager : MonoBehaviour
 
     public void OpenTopTemplate(float time)
     {
-        top .GetComponent<Image>().DOFade(1, time).SetUpdate(true);
+        top .GetComponent<Image>().DOFade(1, time).SetUpdate(true).Play();
         top.GetComponent<Image>().raycastTarget = true;
 
         for (int i = 0; i < top.childCount; i++)
@@ -88,19 +88,16 @@ public class TemplateManager : MonoBehaviour
             {
                 EquipListManager.My.equipPos.GetChild(i).GetChild(j).GetComponent<BoxCollider>().enabled = false;
                 EquipListManager.My.equipPos.GetChild(i).GetChild(j).GetComponent<Image>().raycastTarget = false;
-                EquipListManager.My.equipPos.GetChild(i).GetChild(j).GetComponent<Image>().DOFade(1f, time);
-              
+                EquipListManager.My.equipPos.GetChild(i).GetChild(j).GetComponent<Image>().DOFade(1f, time).Play();
             }
         }
-        
         for (int i = 0; i <WorkerListManager.My.workerPos.childCount; i++)
         {
             for (int j = 0; j <WorkerListManager.My.workerPos.GetChild(i).childCount; j++)
             {
                 WorkerListManager.My.workerPos.GetChild(i).GetChild(j).GetComponent<BoxCollider>().enabled = true;
                 WorkerListManager.My.workerPos.GetChild(i).GetChild(j).GetComponent<Image>().raycastTarget = true;
-                WorkerListManager.My.workerPos.GetChild(i).GetChild(j).GetComponent<Image>().DOFade(1, time);
-              
+                WorkerListManager.My.workerPos.GetChild(i).GetChild(j).GetComponent<Image>().DOFade(1, time).Play();
             }
         }
     }

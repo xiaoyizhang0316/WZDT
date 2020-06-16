@@ -124,8 +124,8 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             //GetComponent<Image>().raycastTarget = false;
             //Image_shape.GetComponent<Image>().raycastTarget = false;
             //GetComponent<Image>().DOFade(0.3f, 0.5f);
-            BG.GetComponent<Image>().DOColor(new Color(0.6f, 0.6f, 0.6f, 1), 0.5f);
-            Image_shape.GetComponent<Image>().DOFade(0.3f, 0.5f);
+            BG.GetComponent<Image>().DOColor(new Color(0.6f, 0.6f, 0.6f, 1), 0.5f).Play();
+            Image_shape.GetComponent<Image>().DOFade(0.3f, 0.5f).Play();
             //GetComponent<LayoutElement>().layoutPriority = -10;
             transform.SetAsLastSibling();
         }
@@ -134,8 +134,8 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             //GetComponent<Image>().raycastTarget = true;
             //transform.Find("Image_SignBG").GetComponent<Image>().raycastTarget = true;
             //GetComponent<Image>().DOFade(1f, 0.5f);
-            BG.GetComponent<Image>().DOColor(new Color(1f, 1f, 1f, 1), 0.5f);
-            Image_shape.GetComponent<Image>().DOFade(1, 0.5f);
+            BG.GetComponent<Image>().DOColor(new Color(1f, 1f, 1f, 1), 0.5f).Play();
+            Image_shape.GetComponent<Image>().DOFade(1, 0.5f).Play();
             //GetComponent<LayoutElement>().layoutPriority = 10;
             transform.SetAsFirstSibling();
         }
