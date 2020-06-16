@@ -21,7 +21,7 @@ public class ProductMelon : BaseSkill
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
             data.bulletType = BulletType.NormalPP;
-            data.loadingSpeed *= 1f - role.baseRoleData.effect / 100f;
+            data.loadingSpeed *= 1f - role.baseRoleData.effect / 150f;
             for (int i = 0; i < role.GetEquipBuffList().Count; i++)
             {
                 data.AddBuff(role.GetEquipBuffList()[i]);
