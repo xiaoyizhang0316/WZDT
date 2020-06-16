@@ -60,8 +60,7 @@ public class GuideMgr : MonoSingleton<GuideMgr>
                 guidePanels.Add(gd);
             }
         }
-        Debug.LogError(guidePanels.Count);
-        Debug.LogError(guidePanels[0].name);
+        
         guidePanels[currentGuidePanel].actions = actions;
        // guidePanels[currentGuidePanel].waitTime = waitTimes;
         guidePanels[currentGuidePanel].gameObject.SetActive(true);
