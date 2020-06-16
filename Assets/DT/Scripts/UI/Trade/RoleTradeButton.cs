@@ -13,6 +13,7 @@ public class RoleTradeButton : MonoBehaviour
     public void StartTrade()
     {
         NewCanvasUI.My.CreateTrade(currentRole);
+
     }
 
     // Start is called before the first frame update

@@ -52,6 +52,7 @@ public class BaseAssembleUISign : MonoBehaviour, IDragHandler, IEndDragHandler, 
             {
                 EquipListManager.My.UninstallEquip(int.Parse(transform.parent.name.Split('_')[1]));
             }
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PutEquip);
         }
 
     }
@@ -94,5 +95,6 @@ public class BaseAssembleUISign : MonoBehaviour, IDragHandler, IEndDragHandler, 
         Vector3 V2 = new Vector3(V.x - Screen.width / 2, V.y - Screen.height / 2);
         Tweener tweener = transform.parent.DOLocalMove(V2, 0.1f);
         tweener.SetUpdate(true);
+        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.GrabEquip);
     }
 }

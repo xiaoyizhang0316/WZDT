@@ -42,6 +42,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                     {
                         if (StageGoal.My.CostTechPoint(costTechNumber))
                         {
+                            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
                             hit[i].transform.GetComponentInChildren<BaseNpc>().DetectNPCRole();
                             GameObject effect = Instantiate(effectPrb, hit[i].transform);
                             effect.transform.localPosition = Vector3.zero;

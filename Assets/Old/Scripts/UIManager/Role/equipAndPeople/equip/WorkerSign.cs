@@ -172,6 +172,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             return;
         }
         SetOccupyStatus(worker.GetComponent<DragUI>().CheckAllRight(false));
+        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PutEquip);
         //isOccupation = worker.GetComponent<DragUI>().CheckAllRight(false);
     }
 
@@ -191,6 +192,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         if (!isOccupation)
         {
             CreatWorkerOBJ();
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.GrabEquip);
             CreatRoleManager.My.CurrentTemplateManager.OpenTopTemplate(0.3f);
         }
 
