@@ -7,6 +7,10 @@ public class RoleTradeButton : MonoBehaviour
 {
     public BaseMapRole currentRole;
 
+    public GameObject lockImage;
+
+    public GameObject unlockImage;
+
     /// <summary>
     /// 发起交易
     /// </summary>
@@ -27,5 +31,18 @@ public class RoleTradeButton : MonoBehaviour
     {
         transform.parent.LookAt(Camera.main.transform.position);
         GetComponent<Image>().fillAmount = currentRole.warehouse.Count / (float)currentRole.baseRoleData.bulletCapacity;
+        if (currentRole.isNpc)
+        {
+            if (currentRole.npcScript.isLock)
+            {
+                lockImage.SetActive(true);
+                unlockImage.SetActive(false);
+            }
+            else
+            {
+                lockImage.SetActive(false);
+                unlockImage.SetActive(true);
+            }                
+        }
     }
 }
