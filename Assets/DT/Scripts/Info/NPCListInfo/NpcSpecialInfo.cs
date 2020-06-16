@@ -17,6 +17,8 @@ public class NpcSpecialInfo : MonoBehaviour
     public Text cost;
     public Text risk;
 
+    public List<Image> buffs;
+
     public Text level;
 
     public void SetInfo(BaseMapRole npc, BaseSkill baseSkill)
@@ -52,6 +54,21 @@ public class NpcSpecialInfo : MonoBehaviour
 
                 dealerProp.SetActive(true);
                 break;
+        }
+
+        if (npc.GetComponent<NPC>().isCanSeeEquip)
+        {
+            int i = 0;
+            foreach (var bf in baseSkill.buffList)
+            {
+                buffs[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + bf);
+                if (i == 2)
+                {
+                    break;
+                }
+                i++;
+            }
+
         }
     }
 

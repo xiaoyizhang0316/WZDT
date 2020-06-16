@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class LoginPanel : MonoBehaviour
 {
+    public Transform playerInfoPanel;
+    public Transform firstQuesionPanel;
+
     public InputField username_Input;
     public InputField password_Input;
 
@@ -57,6 +60,11 @@ public class LoginPanel : MonoBehaviour
     private void LoginFail()
     {
         // TODO
+        // 清楚错误密码
+        password_Input.text = "";
+        PlayerPrefs.DeleteKey("username");
+        PlayerPrefs.DeleteKey("password");
+        HttpManager.My.ShowTip("用户名或密码错误，请重新输入!");
     }
 
     private void SavePasswordOrNot()
