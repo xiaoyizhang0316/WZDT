@@ -18,6 +18,8 @@ public class StageItem
 
     public string startTech;
 
+    //public string maxMinusGold;
+
     /// <summary>
     /// 1星奖励装备
     /// </summary>

@@ -150,6 +150,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                     if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
                     {
                         role.GetComponent<BaseSkill>().CancelSkill();
+                        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
                     }
                 }
             }
@@ -164,6 +165,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                     if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
                     {
                         role.GetComponent<BaseSkill>().ReUnleashSkills();
+                        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PosivityMoney);
                     }
                 }
             }
@@ -214,6 +216,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                     if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
                     {
                         role.GetComponent<BaseSkill>().CancelSkill();
+                        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
                     }
                 }
             }
@@ -228,6 +231,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                     if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
                     {
                         role.GetComponent<BaseSkill>().ReUnleashSkills();
+                        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PosivityMoney);
                     }
                 }
             }

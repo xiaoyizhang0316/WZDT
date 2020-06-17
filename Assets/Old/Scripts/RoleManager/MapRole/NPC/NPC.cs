@@ -1,46 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static GameEnum;
 
 public class NPC : BaseNpc
 {
 
     private Role currentRole;
-
-    /// <summary>
-    /// 检测发起者和承受者技能类型
-    /// </summary>
-    /// <returns></returns>
-    public bool CheckStartAndEnd()
-    {
-        if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service &&
-            NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
-            return false;
-        else
-            return true;
-    }
-
-    /// <summary>
-    /// 检测npc是否激活
-    /// </summary>
-    /// <returns></returns>
-    public bool CheckNpcActive()
-    {
-        BaseMapRole start = PlayerData.My.GetMapRoleById(NewCanvasUI.My.startRole.baseRoleData.ID);
-        BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
-        if (start.isNpc)
-        {
-            if (start.GetComponent<BaseNpc>().isLock)
-                return false;
-        }
-        if (end.isNpc)
-        {
-            if (end.GetComponent<BaseNpc>().isLock)
-                return false;
-        }
-        return true;
-    }
 
     private void OnMouseEnter()
     {
@@ -68,18 +35,18 @@ public class NPC : BaseNpc
         {
             return;
         }
-        if (NewCanvasUI.My.isSetTrade)
+        if (NewCanvasUI.My.isSetTrade && !EventSystem.current.IsPointerOverGameObject())
         {
             NewCanvasUI.My.endRole = GetComponentInParent<BaseMapRole>();
             if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
             {
-                if (CheckStartAndEnd() && CheckNpcActive() && TradeManager.My.CheckDuplicateTrade())
+                if (TradeManager.My.CheckTradeCondition())
                 {
                     NewCanvasUI.My.InitCreateTradePanel();
                 }
             }
         }
-        else
+        else if (!EventSystem.current.IsPointerOverGameObject())
         {
             //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
             //RoleListInfo.My.Init(currentRole);

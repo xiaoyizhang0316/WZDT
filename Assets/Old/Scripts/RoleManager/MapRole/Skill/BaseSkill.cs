@@ -5,12 +5,13 @@ using UnityEngine;
 
 public abstract class BaseSkill : MonoBehaviour
 {
-
     public BaseMapRole role;
 
     public bool IsOpen;
 
     public bool isPlay;
+
+    public bool isAvaliable = true;
 
     /// <summary>
     /// 技能描述
@@ -20,6 +21,7 @@ public abstract class BaseSkill : MonoBehaviour
     /// 附带buff列表
     /// </summary>
     public List<int> buffList;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +47,7 @@ public abstract class BaseSkill : MonoBehaviour
     {
         isPlay = true;
         float d = 1f / (role.baseRoleData.efficiency * 0.05f);
-        transform.DORotate(transform.eulerAngles, d ).OnComplete(() =>
+        transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
         {
             Skill();
             if (IsOpen)

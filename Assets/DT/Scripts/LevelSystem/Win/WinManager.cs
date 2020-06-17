@@ -146,19 +146,22 @@ public class WinManager : MonoSingleton<WinManager>
         CheckNext();
     }
 
+    private bool isPlay = false;
+
     public IEnumerator playerEffect(Image target, List<Sprite> list)
     {
+        isPlay = true;
         for (int i = 0; i < list.Count; i++)
         {
             target.sprite = list[i];
             yield return new WaitForSeconds(0.03f);
             if (i == list.Count - 1)
             {
+                isPlay = false;
                 boxs.SetActive(true);
+                CheckNext();
             }
         }
-   
-      
     }
 
     public void OnGUI()
@@ -179,92 +182,100 @@ public class WinManager : MonoSingleton<WinManager>
         });
         box_0Button.onClick.AddListener(() =>
         {
-
+            if (isPlay)
+                return;
             box_0Button.interactable = false;
-         List<GearData> gearDatas =    StageGoal.My.GetStarGearData(1);
-         List<WorkerData> workDatas =      StageGoal.My.GetStarWorkerData(1);
-         for (int i = 0; i < pos_equip.transform.childCount; i++)
-         {
-             Destroy( pos_equip.transform.GetChild(0).gameObject);
-         }
-         for (int i = 0; i < gearDatas.Count; i++)
-         {
-          GameObject equip =   Instantiate(equipPrb, pos_equip);
-          equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
-          equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-         }
-         for (int i = 0; i < pos_worker.transform.childCount; i++)
-         {
-             Destroy( pos_worker.transform.GetChild(0).gameObject);
-         }
-         for (int i = 0; i < workDatas.Count; i++)
-         {
-             GameObject worker =   Instantiate(workerPrb, pos_worker);
-             worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
-             worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-         }
-       
-            CheckNext();
+            List<GearData> gearDatas = StageGoal.My.GetStarGearData(1);
+            List<WorkerData> workDatas = StageGoal.My.GetStarWorkerData(1);
+            for (int i = 0; i < pos_equip.transform.childCount; i++)
+            {
+                Destroy(pos_equip.transform.GetChild(0).gameObject);
+            }
+            for (int i = 0; i < gearDatas.Count; i++)
+            {
+                GameObject equip = Instantiate(equipPrb, pos_equip);
+                equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
+                equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
+            }
+            for (int i = 0; i < pos_worker.transform.childCount; i++)
+            {
+                Destroy(pos_worker.transform.GetChild(0).gameObject);
+            }
+            for (int i = 0; i < workDatas.Count; i++)
+            {
+                GameObject worker = Instantiate(workerPrb, pos_worker);
+                worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
+                worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
+            }
+
+            //CheckNext();
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.BoxOpen);
             StartCoroutine(playerEffect(box_0, mulist));
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "|" + 1, 1);
         });
         box_1Button.onClick.AddListener(() =>
         {
+            if (isPlay)
+                return;
             box_1Button.interactable = false;
-            List<GearData> gearDatas =    StageGoal.My.GetStarGearData(2);
-            List<WorkerData> workDatas =  StageGoal.My.GetStarWorkerData(2);
+            List<GearData> gearDatas = StageGoal.My.GetStarGearData(2);
+            List<WorkerData> workDatas = StageGoal.My.GetStarWorkerData(2);
             for (int i = 0; i < pos_equip.transform.childCount; i++)
             {
-                Destroy( pos_equip.transform.GetChild(0).gameObject);
+                Destroy(pos_equip.transform.GetChild(0).gameObject);
             }
             for (int i = 0; i < gearDatas.Count; i++)
             {
-                GameObject equip =   Instantiate(equipPrb, pos_equip);
+                GameObject equip = Instantiate(equipPrb, pos_equip);
                 equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
                 equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
             }
             for (int i = 0; i < pos_worker.transform.childCount; i++)
             {
-                Destroy( pos_worker.transform.GetChild(0).gameObject);
+                Destroy(pos_worker.transform.GetChild(0).gameObject);
             }
             for (int i = 0; i < workDatas.Count; i++)
             {
-                GameObject worker =   Instantiate(workerPrb, pos_worker);
+                GameObject worker = Instantiate(workerPrb, pos_worker);
                 worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
                 worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
             }
-            boxs.SetActive(true);
-            CheckNext();
+            //boxs.SetActive(true);
+            //CheckNext();
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.BoxOpen);
             StartCoroutine(playerEffect(box_1, tielist));
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "|" + 2, 1);
         });
         box_2Button.onClick.AddListener(() =>
         {
+            if (isPlay)
+                return;
             box_2Button.interactable = false;
-            List<GearData> gearDatas =     StageGoal.My.GetStarGearData(3);
-            List<WorkerData> workDatas =   StageGoal.My.GetStarWorkerData(3);
+            List<GearData> gearDatas = StageGoal.My.GetStarGearData(3);
+            List<WorkerData> workDatas = StageGoal.My.GetStarWorkerData(3);
             for (int i = 0; i < pos_equip.transform.childCount; i++)
             {
-                Destroy( pos_equip.transform.GetChild(0).gameObject);
+                Destroy(pos_equip.transform.GetChild(0).gameObject);
             }
             for (int i = 0; i < gearDatas.Count; i++)
             {
-                GameObject equip =   Instantiate(equipPrb, pos_equip);
+                GameObject equip = Instantiate(equipPrb, pos_equip);
                 equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
                 equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
             }
             for (int i = 0; i < pos_worker.transform.childCount; i++)
             {
-                Destroy( pos_worker.transform.GetChild(0).gameObject);
+                Destroy(pos_worker.transform.GetChild(0).gameObject);
             }
             for (int i = 0; i < workDatas.Count; i++)
             {
-                GameObject worker =   Instantiate(workerPrb, pos_worker);
+                GameObject worker = Instantiate(workerPrb, pos_worker);
                 worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
                 worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
             }
-            boxs.SetActive(true);
-            CheckNext();
+            //boxs.SetActive(true);
+
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.BoxOpen);
             StartCoroutine(playerEffect(box_2, jinlist));
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "|" + 3, 1);
         });

@@ -15,7 +15,7 @@ public class BaseMapRole : MonoBehaviour
     /// 仓库
     /// </summary>
     public List<ProductData> warehouse;
-    
+
     /// <summary>
     /// 是否是NPC
     /// </summary>
@@ -25,7 +25,7 @@ public class BaseMapRole : MonoBehaviour
     /// 交易列表
     /// </summary>
     public List<TradeSign> tradeList = new List<TradeSign>();
- 
+
     /// <summary>
     /// 自身buff列表
     /// </summary>
@@ -109,7 +109,6 @@ public class BaseMapRole : MonoBehaviour
         {
             InitAttribute();
         }
-
     }
 
     #region 战斗
@@ -144,11 +143,6 @@ public class BaseMapRole : MonoBehaviour
     public void SetShootTarget()
     {
         ConsumeSign preStatus = shootTarget;
-        //if (shootTarget != null)
-        //{
-        //    if (!shootTarget.isCanSelect)
-        //        shootTarget = null;
-        //}
         shootTarget = null;
         if (shootTargetList.Count == 0)
             return;
@@ -251,9 +245,9 @@ public class BaseMapRole : MonoBehaviour
 
     #endregion
 
-    #region 钱，满意度相关
+    #region 钱，科技值相关
     /// <summary>
-    /// 每月消耗成本
+    /// 固定消耗成本
     /// </summary>
     public void MonthlyCost()
     {
@@ -265,6 +259,9 @@ public class BaseMapRole : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// 固定获得科技点数
+    /// </summary>
     public void AddTechPoint()
     {
         transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
@@ -284,11 +281,11 @@ public class BaseMapRole : MonoBehaviour
     /// <param name="productData"></param>
     public void MoveGoodsToWareHouse(ProductData productData)
     {
-  
+
         warehouse.Add(productData);
         //Input.Remove(productData);
     }
- 
+
     /// <summary>
     /// 将仓库产品输入到商店
     /// </summary>
@@ -296,51 +293,25 @@ public class BaseMapRole : MonoBehaviour
     public void ShiftProductWarehouseToShop(ProductData productData)
     {
         shop.Add(productData);
-//        Debug.Log(warehouse.Count);
-       // Debug.Log(warehouse.Contains(productData));
+        //        Debug.Log(warehouse.Count);
+        // Debug.Log(warehouse.Contains(productData));
         if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer || baseRoleData.baseRoleData.roleType == GameEnum.RoleType.BigDealer)
         {
             //todo
-          //  productData.Quality += (int)(baseRoleData.quality * 0.2f);
-         //   productData.Brand += (int)(baseRoleData.brand * 0.2f);
+            //  productData.Quality += (int)(baseRoleData.quality * 0.2f);
+            //   productData.Brand += (int)(baseRoleData.brand * 0.2f);
         }
         warehouse.Remove(productData);
         //Debug.Log(warehouse.Count);
     }
- 
+
     #endregion
 
     #region 获取物品
 
-    /// <summary>
-    /// 获取输入口产品
-    /// </summary>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    //  public ProductData GetInputProductData(GameEnum.ProductType type)
-    //  {
-    //      //print(type);
-    //      if (type == GameEnum.ProductType.None)
-    //      {
-    //          ProductData newProduct = new ProductData();
-    //          newProduct.birthday = (int)TimeManager.My.cumulativeTime;
-    //          StageGoal.My.productList.Add(newProduct);
-    //          return newProduct;
-    //      }
-
-    //      for (int i = 0; i < Input.Count; i++)
-    //      {
-    //          if (Input[i].productType == type)
-    //          {
-    //              return Input[i];
-    //          }
-    //      }
-
-    //      return null;
-    //  }
     public void AddPruductToWareHouse(ProductData data)
     {
-        if (warehouse.Count >baseRoleData.bulletCapacity)
+        if (warehouse.Count > baseRoleData.bulletCapacity)
         {
             return;
         }
@@ -351,26 +322,23 @@ public class BaseMapRole : MonoBehaviour
     }
 
     /// <summary>
- /// 查找仓库产品
- /// </summary>
- /// <param name="type"></param>
- /// <returns></returns>
- public ProductData SearchWarehouseProductData(BulletType type)
- {
-     ProductData pro = null;
-     for (int i = 0; i < warehouse.Count; i++)
-     {
-         if (warehouse[i].bulletType == type)
-         {
-             pro = warehouse[i];
-            
-
-             break;
-         }
-     }
-
-     return pro;
- }
+    /// 查找仓库产品
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    public ProductData SearchWarehouseProductData(BulletType type)
+    {
+        ProductData pro = null;
+        for (int i = 0; i < warehouse.Count; i++)
+        {
+            if (warehouse[i].bulletType == type)
+            {
+                pro = warehouse[i];
+                break;
+            }
+        }
+        return pro;
+    }
 
     /// <summary>
     /// 提取仓库产品
@@ -386,20 +354,19 @@ public class BaseMapRole : MonoBehaviour
             {
                 pro = warehouse[i];
                 warehouse.Remove(warehouse[i]);
-
                 break;
             }
         }
-
         return pro;
     }
- 
-    #endregion
 
-    #region  技能
-
-    
- 
+    /// <summary>
+    /// 清空仓库
+    /// </summary>
+    public void ClearWarehouse()
+    {
+        warehouse.Clear();
+    }
 
     #endregion
 
@@ -411,7 +378,7 @@ public class BaseMapRole : MonoBehaviour
     /// <param name="list"></param>
     /// <param name="num"></param>
     /// <returns></returns>
-    public List<GameObject> GetRandom(List<GameObject> list,int num)
+    public List<GameObject> GetRandom(List<GameObject> list, int num)
     {
         List<GameObject> result = new List<GameObject>();
         if (list.Count <= num)
@@ -422,7 +389,7 @@ public class BaseMapRole : MonoBehaviour
         {
             for (int i = 0; i < num; i++)
             {
-                int selectId = UnityEngine.Random.Range(0,list.Count);
+                int selectId = UnityEngine.Random.Range(0, list.Count);
                 result.Add(list[selectId]);
                 list.RemoveAt(selectId);
             }
@@ -435,14 +402,14 @@ public class BaseMapRole : MonoBehaviour
     /// 获得所有装备带的BUFF
     /// </summary>
     /// <returns></returns>
-    public List<int > GetEquipBuffList()
+    public List<int> GetEquipBuffList()
     {
         List<int> bufflist = new List<int>();
         if (isNpc)
         {
             if (GetComponent<BaseNpc>().isCanSeeEquip)
             {
-                for (int i = 0; i <baseRoleData.EquipList.Keys.ToList().Count; i++)
+                for (int i = 0; i < baseRoleData.EquipList.Keys.ToList().Count; i++)
                 {
                     GearData data = GameDataMgr.My.GetGearData(baseRoleData.EquipList.Keys.ToList()[i]);
                     foreach (int item in data.buffList)
@@ -457,7 +424,7 @@ public class BaseMapRole : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i <baseRoleData.EquipList.Keys.ToList().Count; i++)
+            for (int i = 0; i < baseRoleData.EquipList.Keys.ToList().Count; i++)
             {
                 GearData data = GameDataMgr.My.GetGearData(baseRoleData.EquipList.Keys.ToList()[i]);
                 foreach (int item in data.buffList)

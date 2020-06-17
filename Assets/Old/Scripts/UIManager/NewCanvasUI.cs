@@ -84,9 +84,18 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public void InitTimeButton()
     {
-        Button_Pause.onClick.AddListener(GamePause);
-        Button_Normal.onClick.AddListener(GameNormal);
-        Button_Accelerate.onClick.AddListener(GameAccelerate);
+        Button_Pause.onClick.AddListener(()=>{
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
+            GamePause();
+        });
+        Button_Normal.onClick.AddListener(()=> {
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
+            GameNormal();
+        });
+        Button_Accelerate.onClick.AddListener(()=> {
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
+            GameAccelerate();
+        });
         GameNormal();
     }
 
@@ -162,6 +171,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         isSetTrade = true;
         CreateTradeLineGo.gameObject.SetActive(true);
         CreateTradeLineGo.GetComponent<CreateTradeLine>().InitPos(startRole.tradePoint);
+        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.StartTrade);
     }
 
     /// <summary>

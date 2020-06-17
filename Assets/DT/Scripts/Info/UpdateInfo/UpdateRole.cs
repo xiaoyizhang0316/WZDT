@@ -64,7 +64,6 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private Tweener tew;
     public void OnPointerClick(PointerEventData eventData)
     {
-
         if (RoleUpdateInfo.My.currentLevel == 5 || (tew != null && tew.IsPlaying()))
         {
             Debug.Log(hammer.transform.eulerAngles);
@@ -83,7 +82,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 RoleUpdateInfo.My.currentRole.baseRoleData.roleName = RoleUpdateInfo.My.roleName;
                 RoleUpdateInfo.My.Init(RoleUpdateInfo.My.currentRole);
 
-                tew = hammer.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.3f);
+                tew = hammer.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.3f).Play();
 
                 GetComponent<Image>().raycastTarget = true;
 
@@ -99,7 +98,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                     upgradeNumber.text = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost.ToString();
                     RoleUpdateInfo.My.ReInit(RoleUpdateInfo.My.currentRole);
                 }
-            });
+            }).Play();
         }
     }
 }

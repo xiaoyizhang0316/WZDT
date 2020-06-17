@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 public class ProductDealer : BaseSkill
 {
 
- 
+
     // Start is called before the first frame update
- 
+
     public override void Skill()
     {
         if (role.warehouse.Count > 0)
@@ -25,20 +25,20 @@ public class ProductDealer : BaseSkill
             role.warehouse.RemoveAt(0);
             switch (data.bulletType)
             {
-                case  BulletType.NormalPP: 
-                    GetComponent<BulletLaunch>().LanchNormal( data,role.shootTarget);
-                    break;    
-                case  BulletType.Bomb: 
-                    GetComponent<BulletLaunch>().LanchBoom( data);
-                    break;    
-                case  BulletType.Lightning: 
-                    GetComponent<BulletLaunch>().LanchLightning( data);
-                    break;    
-                case  BulletType.summon: 
-                    GetComponent<BulletLaunch>().CreatSummonTow( data);
+                case BulletType.NormalPP:
+                    GetComponent<BulletLaunch>().LanchNormal(data, role.shootTarget);
                     break;
-                 
-            } 
+                case BulletType.Bomb:
+                    GetComponent<BulletLaunch>().LanchBoom(data);
+                    break;
+                case BulletType.Lightning:
+                    GetComponent<BulletLaunch>().LanchLightning(data);
+                    break;
+                case BulletType.summon:
+                    GetComponent<BulletLaunch>().CreatSummonTow(data);
+                    break;
+
+            }
         }
     }
 
@@ -51,7 +51,11 @@ public class ProductDealer : BaseSkill
         {
             isPlay = true;
             ProductData data = role.warehouse[0];
-            float d = 1f / (role.baseRoleData.efficiency * 0.1f) * data.loadingSpeed;
+            //float d = 1f / (role.baseRoleData.efficiency * 0.1f) * data.loadingSpeed;
+            float d = (role.baseRoleData.efficiency * -0.01f) + 1.5f;
+            if (d <= 0.5f)
+                d = 0.5f;
+            d *= data.loadingSpeed;
             //Debug.Log("释放技能" + d);
             Skill();
             transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
@@ -67,7 +71,9 @@ public class ProductDealer : BaseSkill
         else
         {
             isPlay = true;
-            float d = 1f / (role.baseRoleData.efficiency * 0.1f);
+            float d = (role.baseRoleData.efficiency * -0.01f) + 1.5f;
+            if (d <= 0.5f)
+                d = 0.5f;
             transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
             {
                 isPlay = false;

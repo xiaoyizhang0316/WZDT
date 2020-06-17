@@ -25,4 +25,13 @@ public class ConsumerBuffReward : BaseExtraSkill
             }
         }
     }
+
+    public override void SkillOff()
+    {
+        base.SkillOff();
+        if (GetComponentInParent<BaseMapRole>().tradeList.Count == 0)
+        {
+            isOpen = false;
+        }
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -12,6 +13,8 @@ public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     public GameObject goCopy;
 
     public GameObject effectPrb;
+
+    public Text costNumber;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -47,6 +50,7 @@ public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                 {
                     if (StageGoal.My.CostTechPoint(costTechNumber))
                     {
+                        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
                         hit[i].transform.GetComponent<Building>().isUseTSJ = true;
                         GameObject effect = Instantiate(effectPrb, hit[i].transform);
                         effect.transform.localPosition = Vector3.zero;
@@ -72,12 +76,12 @@ public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     // Start is called before the first frame update
     void Start()
     {
-
+        costNumber.text = costTechNumber.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        costNumber.color = costTechNumber <= StageGoal.My.playerTechPoint ? Color.white : Color.red;
     }
 }

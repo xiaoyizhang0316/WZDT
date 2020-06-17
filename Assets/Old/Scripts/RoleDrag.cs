@@ -16,40 +16,6 @@ public class RoleDrag : MonoBehaviour
         currentRole = GetComponentInParent<BaseMapRole>().baseRoleData;
     }
 
-    /// <summary>
-    /// 检测发起者和承受者技能类型
-    /// </summary>
-    /// <returns></returns>
-    public bool CheckStartAndEnd()
-    {
-        if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service &&
-            NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
-            return false;
-        else
-            return true;
-    }
-
-    /// <summary>
-    /// 检测npc是否激活
-    /// </summary>
-    /// <returns></returns>
-    public bool CheckNpcActive()
-    {
-        BaseMapRole start = PlayerData.My.GetMapRoleById(NewCanvasUI.My.startRole.baseRoleData.ID);
-        BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
-        if (start.isNpc)
-        {
-            if (start.GetComponent<BaseNpc>().isLock)
-                return false;
-        }
-        if (end.isNpc)
-        {
-            if (end.GetComponent<BaseNpc>().isLock)
-                return false;
-        }
-        return true;
-    }
-
     private void OnMouseEnter()
     {
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
@@ -77,9 +43,10 @@ public class RoleDrag : MonoBehaviour
             NewCanvasUI.My.endRole = GetComponentInParent<BaseMapRole>();
             if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
             {
-                if (CheckStartAndEnd() && CheckNpcActive() && TradeManager.My.CheckDuplicateTrade())
+                if (TradeManager.My.CheckTradeCondition())
                 {
                     NewCanvasUI.My.InitCreateTradePanel();
+                    AudioManager.My.PlaySelectType(GameEnum.AudioClipType.EndTrade);
                 }
             }
         }

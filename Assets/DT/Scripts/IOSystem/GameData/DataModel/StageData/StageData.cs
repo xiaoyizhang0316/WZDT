@@ -37,6 +37,11 @@ public class StageData
     public int startTech;
 
     /// <summary>
+    /// 最低赤字值
+    /// </summary>
+    //public int maxMinusGold;
+
+    /// <summary>
     /// 1星奖励装备
     /// </summary>
     public List<int> starOneEquip;

@@ -445,4 +445,52 @@ public class GameEnum
         SpawnItem
     }
 
+    public enum AudioClipType
+    {
+        /// <summary>
+        /// 开箱子
+        /// </summary>
+        BoxOpen,
+        /// <summary>
+        /// 三镜
+        /// </summary>
+        ThreeMirror,
+        /// <summary>
+        /// 发起交易
+        /// </summary>
+        StartTrade,
+        /// <summary>
+        /// 发起交易（承受者）
+        /// </summary>
+        EndTrade,
+        /// <summary>
+        /// 拿起装备工人
+        /// </summary>
+        GrabEquip,
+        /// <summary>
+        /// 放下装备工人
+        /// </summary>
+        PutEquip,
+        /// <summary>
+        /// 当钱变为负数
+        /// </summary>
+        MinusMoney,
+        /// <summary>
+        /// 当钱变为正数
+        /// </summary>
+        PosivityMoney,
+        /// <summary>
+        /// 鼠标点击
+        /// </summary>
+        PointerClick,
+        /// <summary>
+        /// 切换游戏速度
+        /// </summary>
+        TimeScaleChange,
+        /// <summary>
+        /// 菜单打开
+        /// </summary>
+        MenuOpen
+    }
+
 }
