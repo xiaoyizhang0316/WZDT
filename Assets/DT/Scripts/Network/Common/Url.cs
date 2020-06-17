@@ -12,5 +12,5 @@ public static class Url
     public static string creatKeyUrl = ip + "createKeyCodes";
     public static string getKeyUrl = ip + "getKeyCodes";
 
-
+    public static string updateFte = ip + "updateFTE";
 }
