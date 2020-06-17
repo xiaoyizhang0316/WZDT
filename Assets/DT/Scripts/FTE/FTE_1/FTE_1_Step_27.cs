@@ -49,7 +49,16 @@ public class FTE_1_Step_27 : BaseStep
         {
             gameObject.SetActive(false); 
             FTESceneManager.My.PlayNextStep();
+            FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
+            FTESceneManager.My.UIFTE.SetActive(false);
+            for (int i = 0; i <     MapManager.My._mapSigns.Count; i++)
+            {
+                if (MapManager.My._mapSigns[i].mapType == GameEnum.MapType.Grass)
+                {
+                    MapManager.My._mapSigns[i].isCanPlace = true;
+                }
 
+            }
         }).Play(); 
     }
    
