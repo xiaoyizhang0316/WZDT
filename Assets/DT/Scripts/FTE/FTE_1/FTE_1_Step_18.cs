@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FTE_1_Step_17 : BaseStep
+public class FTE_1_Step_18 : BaseStep
 {
     // Start is called before the first frame update
     void Start()
@@ -26,8 +26,8 @@ public class FTE_1_Step_17 : BaseStep
            
             contenText.DOFade(1, 3f).OnComplete(() =>
             {
-                MaskManager.My.Open(14,130);
-                MaskManager.My.FadeMask(9,130);
+                MaskManager.My.Open(15,130);
+                MaskManager.My.FadeMask(11,130);
                 FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
                 PlayNext();
             }).Play(); 
@@ -40,8 +40,8 @@ public class FTE_1_Step_17 : BaseStep
         nextButton.interactable = false;  
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
 
-        MaskManager.My.Close(14,0 );
-        MaskManager.My.CloseMaks(9 );
+        MaskManager.My.Close(15,0 );
+        MaskManager.My.CloseMaks(11 );
         contenText.DOFade(0, 2f).OnComplete(() =>
         {
             gameObject.SetActive(false); 
@@ -52,7 +52,7 @@ public class FTE_1_Step_17 : BaseStep
     public void PlayNext()
     {
         Debug.Log("检测");
-        if (TradeManager.My.CheckTwoRoleHasTrade(PlayerData.My.RoleData[0],PlayerData.My.RoleData[1]))
+        if (TradeManager.My.CheckTwoRoleHasTrade(PlayerData.My.RoleData[1],PlayerData.My.RoleData[2]))
         {
             Debug.Log("检测成功");
 

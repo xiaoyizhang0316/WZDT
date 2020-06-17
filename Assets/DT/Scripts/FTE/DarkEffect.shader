@@ -16,7 +16,7 @@
                    #pragma fragment frag
                    #include "UnityCG.cginc"
                    //追踪物体最多个数
-                   #define ItemSize 20
+                   #define ItemSize 30
                    struct appdata
                   { 
                        float4 vertex : POSITION;
