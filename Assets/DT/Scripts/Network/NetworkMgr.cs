@@ -7,6 +7,8 @@ using IOIntensiveFramework.MonoSingleton;
 public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 {
     #region Player datas
+    public string loginRecordID;
+    public string playerID;
     public PlayerDatas playerDatas;
     #endregion
 
@@ -19,10 +21,41 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         HttpSend(Url.loginUrl, keyValues, playerDatas, doSuccess, doFail);
     }
 
-    public void UpdateFte(Action doSuccess = null, Action doFail = null)
+    public void CreatPlayerDatas(string playerName, string playerIcon, Action doSuccess=null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
-        HttpSend(Url.updateFte,keyValues, playerDatas, doSuccess, doFail);
+        keyValues.Add("playerIcon", playerIcon);
+        keyValues.Add("playerName", playerName);
+        keyValues.Add("playerID", playerID);
+        HttpSend(Url.createPlayerDatas, keyValues, playerDatas, doSuccess, doFail);
+    }
+
+    public void UpdatePlayerDatas(int fteProgress, int threeWordsProgress,Action doSuccess = null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("fteProgress", fteProgress.ToString());
+        keyValues.Add("threeWordsProgress", threeWordsProgress.ToString());
+        keyValues.Add("playerID", playerID);
+        HttpSend(Url.updatePlayerDatas,keyValues, playerDatas, doSuccess, doFail);
+    }
+
+    public void UploadThreeWords(string words, Action doSuccess=null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("answer", words);
+        keyValues.Add("qID", playerDatas.threeWordsProgress.ToString());
+        keyValues.Add("playerID", playerID);
+
+        HttpSend(Url.uploadWords, keyValues, playerDatas, doSuccess, doFail);
+    }
+
+    public void Logout(Action doSuccess=null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("recordID", loginRecordID);
+
+        HttpSend(Url.logout, keyValues, doSuccess, doFail);
     }
 
     /// <summary>
@@ -52,6 +85,24 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             HttpManager.My.mask.SetActive(false);
         }, keyValues, keyValues.Count==0?HttpType.Get:HttpType.Post));
+    }
+
+    private void HttpSend(string url, SortedDictionary<string, string> keyValues,  Action doSuccess = null, Action doFail = null)
+    {
+        HttpManager.My.mask.SetActive(true);
+        StartCoroutine(HttpManager.My.HttpSend(url, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                doSuccess?.Invoke();
+            }
+            HttpManager.My.mask.SetActive(false);
+        }, keyValues, keyValues.Count == 0 ? HttpType.Get : HttpType.Post));
     }
 }
 

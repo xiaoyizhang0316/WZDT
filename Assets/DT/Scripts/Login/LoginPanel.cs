@@ -55,10 +55,13 @@ public class LoginPanel : MonoBehaviour
     private void LoginSuccess()
     {
         SavePasswordOrNot();
+        NetworkMgr.My.loginRecordID = NetworkMgr.My.playerDatas.loginRecordID;
+        NetworkMgr.My.playerID = NetworkMgr.My.playerDatas.playerID;
         // TODO
         if (NetworkMgr.My.playerDatas.status == 0)
         {
             // 创建用户信息
+            HttpManager.My.ShowTip("创建用户信息");
         }
         else
         {

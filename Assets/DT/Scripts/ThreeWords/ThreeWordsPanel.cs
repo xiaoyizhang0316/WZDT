@@ -38,6 +38,21 @@ public class ThreeWordsPanel : MonoBehaviour
 
     private void Submit()
     {
+        string input = answer_input.text.Replace(" ", "");
+        if(input == "")
+        {
+            HttpManager.My.ShowTip("输入内容不能为空！");
+        }
+        NetworkMgr.My.UploadThreeWords(input, SubmitSuccess, SubmitFail);
+    }
+
+    private void SubmitSuccess()
+    {
+
+    }
+
+    private void SubmitFail()
+    {
 
     }
 }
