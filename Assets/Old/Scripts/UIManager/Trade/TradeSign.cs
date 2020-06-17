@@ -200,6 +200,10 @@ public class TradeSign : MonoBehaviour
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
             cast.GetComponent<BaseSkill>().DeteleRoleBuff(tradeData);
+            if (cast.extraSkill != null)
+            {
+                cast.extraSkill.SkillOff();
+            }
         }
     }
 

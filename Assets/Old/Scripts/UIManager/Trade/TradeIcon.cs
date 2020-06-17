@@ -34,7 +34,7 @@ public class TradeIcon : MonoBehaviour
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         transform.position = (start.tradePoint.position + end.tradePoint.position) / 2f + new Vector3(0f,0.3f,0f);
-        GetComponentInChildren<SpriteRenderer>().DOFade(0.2f, 0.2f);
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.2f, 0.2f).Play();
     }
 
     public void OnMouseDown()
@@ -58,12 +58,12 @@ public class TradeIcon : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f);
+        GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play();
     }
 
     public void OnMouseExit()
     {
-        GetComponentInChildren<SpriteRenderer>().DOFade(0.2f,0.8f);
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.2f,0.8f).Play();
     }
 
     // Start is called before the first frame update
