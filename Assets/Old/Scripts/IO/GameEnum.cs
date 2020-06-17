@@ -494,7 +494,15 @@ public class GameEnum
         /// <summary>
         /// 菜单打开
         /// </summary>
-        MenuOpen
+        MenuOpen,
+        /// <summary>
+        /// 胜利
+        /// </summary>
+        Victory,
+        /// <summary>
+        /// 失败
+        /// </summary>
+        Defeat
     }
 
 }
