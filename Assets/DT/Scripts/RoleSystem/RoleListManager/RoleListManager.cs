@@ -36,16 +36,7 @@ public class RoleListManager : MonoSingleton<RoleListManager>
             Panel_ChoseRole.SetActive(true);
         });
         
-        outButton.onClick.AddListener(() =>
-        {
-            outButton.interactable = false;
-            transform.DOMove(outPos.position,0.3f).OnComplete(() =>
-            {
-                outButton.gameObject.SetActive(false);
-                inButton.gameObject.SetActive(true);
-                inButton.interactable = true;
-            }).Play();
-        });
+        outButton.onClick.AddListener(() => { OutButton(); });
         inButton.onClick.AddListener(() =>
         {
             outButton.interactable = false;
@@ -56,6 +47,17 @@ public class RoleListManager : MonoSingleton<RoleListManager>
                 outButton.interactable = true;
             }).Play();
         });
+    }
+
+    public void OutButton()
+    {
+        outButton.interactable = false;
+        transform.DOMove(outPos.position,0.3f).OnComplete(() =>
+        {
+            outButton.gameObject.SetActive(false);
+            inButton.gameObject.SetActive(true);
+            inButton.interactable = true;
+        }).Play();
     }
 
     // Update is called once per frame
