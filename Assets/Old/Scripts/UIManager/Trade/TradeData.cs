@@ -46,9 +46,4 @@ public class TradeData
     /// ID
     /// </summary>
     public int ID;
-
-    /// <summary>
-    /// 分成比例
-    /// </summary>
-    public float payPer;
 }

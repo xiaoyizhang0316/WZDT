@@ -8,6 +8,8 @@ public class BaseExtraSkill : MonoBehaviour
 
     public string extraSkillDesc;
 
+    public int maxTradeLimit;
+
     public virtual void SkillOn()
     {
         isOpen = true;
@@ -15,7 +17,7 @@ public class BaseExtraSkill : MonoBehaviour
 
     public virtual void SkillOff()
     {
-        isOpen = false;
+        
     }
 
     // Start is called before the first frame update

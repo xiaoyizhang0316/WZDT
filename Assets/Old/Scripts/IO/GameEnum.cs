@@ -116,7 +116,11 @@ public class GameEnum
         /// <summary>
         /// 肥料厂
         /// </summary>
-        Fertilizer
+        Fertilizer,
+        /// <summary>
+        /// 研发中心
+        /// </summary>
+        ResearchInstitute
     }
 
     public enum PDPType
