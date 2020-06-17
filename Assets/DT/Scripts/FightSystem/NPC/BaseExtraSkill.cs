@@ -10,12 +10,12 @@ public class BaseExtraSkill : MonoBehaviour
 
     public int maxTradeLimit;
 
-    public virtual void SkillOn()
+    public virtual void SkillOn(TradeSign sign)
     {
         isOpen = true;
     }
 
-    public virtual void SkillOff()
+    public virtual void SkillOff(TradeSign sign)
     {
         
     }

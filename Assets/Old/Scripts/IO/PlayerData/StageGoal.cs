@@ -454,6 +454,31 @@ public class StageGoal : MonoSingleton<StageGoal>
         return result;
     }
 
+    public void GetAllPreviousAward()
+    {
+        int count = int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]);
+        for (int i = 1; i < count; i++)
+        {
+            StageData data = GameDataMgr.My.GetStageDataByName("FTE_" + i.ToString());
+            List<int> award = new List<int>();
+            List<int> awardEquip = new List<int>();
+            award.AddRange(data.starOneWorker);
+            award.AddRange(data.starTwoWorker);
+            award.AddRange(data.starThreeWorker);
+            awardEquip.AddRange(data.starOneEquip);
+            awardEquip.AddRange(data.starTwoEquip);
+            awardEquip.AddRange(data.starThreeEquip);
+            foreach (int item in award)
+            {
+                PlayerData.My.GetNewWorker(item);
+            }
+            foreach (var item in awardEquip)
+            {
+                PlayerData.My.GetNewGear(item);
+            }
+        }
+    }
+
     /// <summary>
     /// 将关卡配置表读取到本关
     /// </summary>
@@ -570,6 +595,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         InitStage();
         MenuHide();
+        GetAllPreviousAward();
         cameraPos = Camera.main.transform.position;
     }
     private Vector3 cameraPos;

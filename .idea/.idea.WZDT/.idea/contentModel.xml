@@ -18,10 +18,14 @@
             </e>
           </e>
           <e p="Scripts" t="Include">
+            <e p="Audio" t="Include">
+              <e p="AudioManager.cs" t="Include" />
+            </e>
             <e p="Effect" t="Include">
               <e p="BulletEffect.cs" t="Include" />
               <e p="BulletEffectSign.cs" t="Include" />
               <e p="EffectMove.cs" t="Include" />
+              <e p="MaskManager.cs" t="Include" />
             </e>
             <e p="EffectFlower.cs" t="Include" />
             <e p="FightSystem" t="Include">
@@ -76,10 +80,48 @@
                 <e p="ShootingRange.cs" t="Include" />
               </e>
               <e p="NPC" t="Include">
+                <e p="BankLoan.cs" t="Include" />
                 <e p="BaseExtraSkill.cs" t="Include" />
                 <e p="ConsumerBuffReward.cs" t="Include" />
                 <e p="ExtraConsumer.cs" t="Include" />
+                <e p="Youtuber.cs" t="Include" />
               </e>
+            </e>
+            <e p="FTE" t="Include">
+              <e p="BaseStep.cs" t="Include" />
+              <e p="DarkEffect.cs" t="Include" />
+              <e p="DarkEffect.shader" t="Include" />
+              <e p="FTE_1" t="Include">
+                <e p="FTE_1_Step_1.cs" t="Include" />
+                <e p="FTE_1_Step_10.cs" t="Include" />
+                <e p="FTE_1_Step_11.cs" t="Include" />
+                <e p="FTE_1_Step_12.cs" t="Include" />
+                <e p="FTE_1_Step_13.cs" t="Include" />
+                <e p="FTE_1_Step_14.cs" t="Include" />
+                <e p="FTE_1_Step_15.cs" t="Include" />
+                <e p="FTE_1_Step_16.cs" t="Include" />
+                <e p="FTE_1_Step_17.cs" t="Include" />
+                <e p="FTE_1_Step_18.cs" t="Include" />
+                <e p="FTE_1_Step_19.cs" t="Include" />
+                <e p="FTE_1_Step_2.cs" t="Include" />
+                <e p="FTE_1_Step_20.cs" t="Include" />
+                <e p="FTE_1_Step_21.cs" t="Include" />
+                <e p="FTE_1_Step_22.cs" t="Include" />
+                <e p="FTE_1_Step_23.cs" t="Include" />
+                <e p="FTE_1_Step_24.cs" t="Include" />
+                <e p="FTE_1_Step_25.cs" t="Include" />
+                <e p="FTE_1_Step_26.cs" t="Include" />
+                <e p="FTE_1_Step_27.cs" t="Include" />
+                <e p="FTE_1_Step_3.cs" t="Include" />
+                <e p="FTE_1_Step_4.cs" t="Include" />
+                <e p="FTE_1_Step_5.cs" t="Include" />
+                <e p="FTE_1_Step_6.cs" t="Include" />
+                <e p="FTE_1_Step_7.cs" t="Include" />
+                <e p="FTE_1_Step_8.cs" t="Include" />
+                <e p="FTE_1_Step_9.cs" t="Include" />
+              </e>
+              <e p="FTESceneManager.cs" t="Include" />
+              <e p="HollowOutMask.cs" t="Include" />
             </e>
             <e p="FTESystem" t="Include">
               <e p="Scripts" t="Include">
@@ -189,9 +231,33 @@
                 <e p="WinManager.cs" t="Include" />
               </e>
             </e>
+            <e p="Login" t="Include">
+              <e p="LoginPanel.cs" t="Include" />
+            </e>
             <e p="ManMap" t="Include">
               <e p="LevelInfoManager.cs" t="Include" />
               <e p="LevelSign.cs" t="Include" />
+            </e>
+            <e p="Network" t="Include">
+              <e p="Common" t="Include">
+                <e p="Http" t="Include">
+                  <e p="Converter.cs" t="Include" />
+                  <e p="HttpManager.cs" t="Include" />
+                  <e p="UnityWebRequestAgentHelper.cs" t="Include" />
+                  <e p="WebRequestAgentHelperBase.cs" t="Include" />
+                </e>
+                <e p="MonoSingleton.cs" t="Include" />
+                <e p="Url.cs" t="Include" />
+              </e>
+              <e p="Data" t="Include">
+                <e p="PlayerDatas.cs" t="Include" />
+              </e>
+              <e p="NetworkMgr.cs" t="Include" />
+              <e p="Sample" t="Include">
+                <e p="KeyCodeManager.cs" t="Include" />
+                <e p="KeyCodeSample.cs" t="Include" />
+                <e p="LoginManager.cs" t="Include" />
+              </e>
             </e>
             <e p="RoleSystem" t="Include">
               <e p="Merchant" t="Include">
@@ -209,9 +275,14 @@
               <e p="ThreeMirrorSign.cs" t="Include" />
               <e p="TSJ.cs" t="Include" />
             </e>
+            <e p="ThreeWords" t="Include">
+              <e p="Questions.cs" t="Include" />
+              <e p="ThreeWordsPanel.cs" t="Include" />
+            </e>
             <e p="UI" t="Include">
               <e p="DataStat" t="Include">
                 <e p="DataStatPanel.cs" t="Include" />
+                <e p="StatItem.cs" t="Include" />
               </e>
               <e p="DeleteUI" t="Include">
                 <e p="DeleteUIManager.cs" t="Include" />
@@ -232,6 +303,10 @@
                 <e p="GuidePanel.cs" t="Include" />
                 <e p="GuidePanelBase.cs" t="Include" />
                 <e p="GuideStep.cs" t="Include" />
+              </e>
+              <e p="Options" t="Include">
+                <e p="OptionsPanel.cs" t="Include" />
+                <e p="ReturnToMap.cs" t="Include" />
               </e>
               <e p="Trade" t="Include">
                 <e p="RoleTradeButton.cs" t="Include" />

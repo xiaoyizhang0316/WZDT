@@ -50,7 +50,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         foreach (GameObject go in unlockLandList)
         {
             go.SetActive(true);
-            go.transform.DOMoveY(0f, 1f).SetEase(Ease.Linear);
+            go.transform.DOMoveY(0f, 1f).SetEase(Ease.Linear).Play();
         }
     }
 

@@ -26,9 +26,9 @@ public class ConsumerBuffReward : BaseExtraSkill
         }
     }
 
-    public override void SkillOff()
+    public override void SkillOff(TradeSign sign)
     {
-        base.SkillOff();
+        base.SkillOff(sign);
         if (GetComponentInParent<BaseMapRole>().tradeList.Count == 0)
         {
             isOpen = false;
