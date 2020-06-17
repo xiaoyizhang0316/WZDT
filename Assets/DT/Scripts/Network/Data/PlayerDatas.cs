@@ -6,10 +6,13 @@ using System;
 [Serializable]
 public class PlayerDatas
 {
+    public int status;
+    public string msg;
     public string playerID;
     public string playerName;
-    public int playerIcon;
+    public string playerIcon;
 
-    public string fteProgress;
-    public string threeWordsProgress;
+    public int fteProgress;
+    public int threeWordsProgress;
+    public string loginRecordID;
 }

@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoginPanel : MonoBehaviour
 {
     public Transform playerInfoPanel;
-    public Transform firstQuesionPanel;
+    public Transform threeWordsPanel;
 
     public InputField username_Input;
     public InputField password_Input;
@@ -47,7 +48,7 @@ public class LoginPanel : MonoBehaviour
         }
         else
         {
-            NetworkMgr.My.Login(username, password, LoginSuccess, LoginFail, "登录失败: ");
+            NetworkMgr.My.Login(username, password, LoginSuccess, LoginFail);
         }
     }
 
@@ -55,6 +56,30 @@ public class LoginPanel : MonoBehaviour
     {
         SavePasswordOrNot();
         // TODO
+        if (NetworkMgr.My.playerDatas.status == 0)
+        {
+            // 创建用户信息
+        }
+        else
+        {
+            if (NetworkMgr.My.playerDatas.threeWordsProgress == 0)
+            {
+                // 第一个问题
+                threeWordsPanel.GetComponent<ThreeWordsPanel>().SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
+                threeWordsPanel.gameObject.SetActive(true);
+            }
+            else
+            {
+                if (NetworkMgr.My.playerDatas.fteProgress==0)
+                {
+                    SceneManager.LoadScene("FTE_0");
+                }
+                else
+                {
+                    SceneManager.LoadScene("Map");
+                }
+            }
+        }
     }
 
     private void LoginFail()
