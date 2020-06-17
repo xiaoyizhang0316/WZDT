@@ -24,14 +24,14 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         //           return;
         //       }
         //   }
-        if (PlayerPrefs.GetInt("FTE0End", 0) == 0)
-        {
-            sceneName = "Map";
-        }
-        else
-        {
-            sceneName = "Map";
-        }
+        //if (PlayerPrefs.GetInt("FTE0End", 0) == 0)
+        //{
+        //    sceneName = "Map";
+        //}
+        //else
+        //{
+        //    sceneName = "Map";
+        //}
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(sceneName);
     }
