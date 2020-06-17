@@ -30,6 +30,7 @@ public class DeleteUIManager : MonoSingleton<DeleteUIManager>
     public void Init(string content,Action delete)
     {
         this.content.text = content;
+        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MenuOpen);
         this.delete.onClick.RemoveAllListeners();
         this.delete.onClick.AddListener(() =>
         {

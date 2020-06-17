@@ -80,6 +80,7 @@ public class RoleDrag : MonoBehaviour
                 if (CheckStartAndEnd() && CheckNpcActive() && TradeManager.My.CheckDuplicateTrade())
                 {
                     NewCanvasUI.My.InitCreateTradePanel();
+                    AudioManager.My.PlaySelectType(GameEnum.AudioClipType.EndTrade);
                 }
             }
         }

@@ -116,7 +116,7 @@ Transform:
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_Children: []
   m_Father: {fileID: 2363748267651291491}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4077945395668164096
 MeshFilter:
@@ -207,8 +207,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9218235902883597798}
+  - {fileID: 4987333944534869277}
   m_Father: {fileID: 2363748267651291491}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8692879230315230448
 GameObject:
@@ -243,7 +244,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6274031768023256972}
-  - {fileID: 4264369171858387943}
   - {fileID: 4957317477574588339}
   - {fileID: 6390241512700188720}
   m_Father: {fileID: 0}
@@ -266,26 +266,26 @@ MonoBehaviour:
       roleName: "\u5E7F\u544A\u516C\u53F8"
       roleType: 20
       roleSkillType: 1
-      level: 0
-      effect: 0
-      efficiency: 0
-      range: 0
-      tradeCost: 0
-      riskResistance: 0
-      cost: 0
-      bulletCapacity: 0
+      level: 1
+      effect: 20
+      efficiency: 20
+      range: 20
+      tradeCost: 20
+      riskResistance: 20
+      cost: 20
+      bulletCapacity: 20
       costTech: 0
       upgradeCost: 0
       SpritePath: 
       PrePath: 
       RoleSpacePath: 
-    effect: 0
-    efficiency: 0
-    range: 0
-    tradeCost: 0
-    cost: 0
-    riskResistance: 0
-    bulletCapacity: 0
+    effect: 20
+    efficiency: 20
+    range: 20
+    tradeCost: 20
+    cost: 20
+    riskResistance: 20
+    bulletCapacity: 20
     techAdd: 0
     ID: 0
     equipCost: 0
@@ -330,7 +330,7 @@ MonoBehaviour:
   isLock: 0
   isCanSee: 0
   isCanSeeEquip: 0
-  lockNumber: 0
+  lockNumber: 10
   NPCgear: 
   hideModel: {fileID: 7010573542175292831}
   trueModel: {fileID: 8145369834327937887}
@@ -345,8 +345,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.521286, y: 5.578928, z: 1}
-  m_Center: {x: -0.0028762817, y: -1.0677137, z: 0}
+  m_Size: {x: 1.521286, y: 5.5890274, z: 1}
+  m_Center: {x: -0.0028762817, y: -1.062664, z: 0}
 --- !u!54 &6545259540281883998
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -379,7 +379,7 @@ MonoBehaviour:
   IsOpen: 1
   isPlay: 0
   skillDesc: "\u89D2\u8272\u8303\u56F4\u503C+15"
-  buffList: 
+  buffList: f9010000
   productDatas: []
 --- !u!1001 &1072662421135550785
 PrefabInstance:
@@ -472,12 +472,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1072662421135550785}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6426034862185075318
+--- !u!1001 &2825261435310834828
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2363748267651291491}
+    m_TransformParent: {fileID: 4957317477574588339}
     m_Modifications:
     - target: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
         type: 3}
@@ -492,7 +492,7 @@ PrefabInstance:
     - target: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
         type: 3}
@@ -542,12 +542,12 @@ PrefabInstance:
     - target: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.245
+      value: 1.815
       objectReference: {fileID: 0}
     - target: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 2.009
+      value: 1.187
       objectReference: {fileID: 0}
     - target: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
         type: 3}
@@ -589,16 +589,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoleCreateTradeButton
       objectReference: {fileID: 0}
-    - target: {fileID: 8256080403480066048, guid: 9b3a05174be6f4dcd9f0ef324b229625,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b3a05174be6f4dcd9f0ef324b229625, type: 3}
---- !u!224 &4264369171858387943 stripped
+--- !u!224 &4987333944534869277 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
     type: 3}
-  m_PrefabInstance: {fileID: 6426034862185075318}
+  m_PrefabInstance: {fileID: 2825261435310834828}
   m_PrefabAsset: {fileID: 0}

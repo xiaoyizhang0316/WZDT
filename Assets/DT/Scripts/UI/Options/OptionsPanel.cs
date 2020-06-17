@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class OptionsPanel : MonoSingleton<OptionsPanel>
@@ -14,6 +15,8 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
     public Button language;
     public Button close;
     public Button returnToMap;
+
+    public AudioMixer audioMixer;
     
     // Start is called before the first frame update
     void Start()
@@ -22,7 +25,10 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
         soundSlider.onValueChanged.AddListener((float value) => OnSliderValueChanged(value, MusicType.Sound));
 
         returnToMap.onClick.AddListener(ShowReturn);
-
+        audioMixer.SetFloat("BackGroundVolume", PlayerPrefs.GetInt("BackGroundVolume"));
+        musicSlider.value = PlayerPrefs.GetInt("BackGroundVolume");
+        audioMixer.SetFloat("SoundEffectVolume", PlayerPrefs.GetInt("SoundEffectVolume"));
+        soundSlider.value = PlayerPrefs.GetInt("SoundEffectVolume");
         close.onClick.AddListener(Close);
     }
 
@@ -36,9 +42,13 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
         switch (mt)
         {
             case MusicType.Music:
+                audioMixer.SetFloat("BackGroundVolume", musicSlider.value);
+                PlayerPrefs.SetInt("BackGroundVolume", (int)musicSlider.value);
                 // 设置全局音量大小
                 break;
             case MusicType.Sound:
+                audioMixer.SetFloat("SoundEffectVolume", soundSlider.value);
+                PlayerPrefs.SetInt("SoundEffectVolume", (int)soundSlider.value);
                 // 设置全局音效声音大小
                 break;
         }

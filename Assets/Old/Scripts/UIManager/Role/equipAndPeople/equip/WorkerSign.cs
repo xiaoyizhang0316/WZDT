@@ -103,8 +103,8 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         {
             //GetComponent<Image>().raycastTarget = false;
             //Image_shape.GetComponent<Image>().raycastTarget = false;
-            BG.DOColor (new Color(0.6f,0.6f,0.6f),  0.5f);
-            Image_shape.GetComponent<Image>().DOFade(0.3f, 0.5f);
+            BG.DOColor (new Color(0.6f,0.6f,0.6f),  0.5f).Play();
+            Image_shape.GetComponent<Image>().DOFade(0.3f, 0.5f).Play();
             //GetComponent<LayoutElement>().layoutPriority = -10;
             transform.SetAsLastSibling();
         }
@@ -113,8 +113,8 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             //GetComponent<Image>().raycastTarget = true;
             //Image_shape.GetComponent<Image>().raycastTarget = true;
            // GetComponent<Image>().DOFade(1f, 0.5f);
-            Image_shape.GetComponent<Image>().DOFade(1f, 0.5f);
-            BG.GetComponent<Image>().DOColor(new Color(1f,1f,1f,1), 0.5f);
+            Image_shape.GetComponent<Image>().DOFade(1f, 0.5f).Play();
+            BG.GetComponent<Image>().DOColor(new Color(1f,1f,1f,1), 0.5f).Play();
 
             //GetComponent<LayoutElement>().layoutPriority = 10;
             transform.SetAsFirstSibling();
@@ -172,6 +172,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             return;
         }
         SetOccupyStatus(worker.GetComponent<DragUI>().CheckAllRight(false));
+        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PutEquip);
         //isOccupation = worker.GetComponent<DragUI>().CheckAllRight(false);
     }
 
@@ -191,6 +192,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         if (!isOccupation)
         {
             CreatWorkerOBJ();
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.GrabEquip);
             CreatRoleManager.My.CurrentTemplateManager.OpenTopTemplate(0.3f);
         }
 

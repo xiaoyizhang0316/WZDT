@@ -19,25 +19,25 @@ public class GoodsSign : MonoBehaviour
     /// </summary>
     public BulletLaunch lunch;
     public List<Vector3> path;
-    public  Tweener twe;
+    public Tweener twe;
     public Tweener moveTween;
     public BaseMapRole role;
     private float speedAdd = 1f;
-    public float speed=1;
+    public float speed = 1;
 
     public Dictionary<double, int> speedBuffList = new Dictionary<double, int>();
     // Start is called before the first frame update
     void Start()
     {
-     needUpdate = false;
-        
-   // InvokeRepeating(" DeleteEffect()",0.1f,0.1f);
+        needUpdate = false;
+
+        // InvokeRepeating(" DeleteEffect()",0.1f,0.1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void DeleteEffect()
@@ -51,16 +51,16 @@ public class GoodsSign : MonoBehaviour
     private int count = 0;
     public void Move()
     {
-  
+
         if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
         {
-            speed=  1f * (1 - role.baseRoleData.efficiency > 80? 80f: role.baseRoleData.efficiency / 100f);
+            speed = 1f * (1 - role.baseRoleData.efficiency > 80 ? 80f : role.baseRoleData.efficiency / 100f);
         }
 
         // print("bullet start move" + path[count]);
-        moveTween = transform.DOMove(path[count],speed ).OnComplete(() =>
+        moveTween = transform.DOMove(path[count], speed).OnComplete(() =>
         {
-           // print("bullet move");
+            // print("bullet move");
             count++;
             if (count < path.Count)
             {
@@ -68,8 +68,8 @@ public class GoodsSign : MonoBehaviour
             }
             else
             {
-                role.AddPruductToWareHouse (productData);
-                Destroy(this.gameObject,0.01f);
+                role.AddPruductToWareHouse(productData);
+                Destroy(this.gameObject, 0.01f);
             }
 
         }).SetEase(Ease.Linear);
@@ -86,17 +86,17 @@ public class GoodsSign : MonoBehaviour
         }
         //Debug.Log(other.gameObject.name);
         //Debug.Log(lunch);
-        if (other.tag == "Consumer"&&other.GetComponent<ConsumeSign>()== lunch. GetComponent<BaseMapRole>().shootTarget)
+        if (other.tag == "Consumer" && other.GetComponent<ConsumeSign>() == lunch.GetComponent<BaseMapRole>().shootTarget)
         {
-            if (twe!=null &&twe.IsPlaying())
+            if (twe != null && twe.IsPlaying())
             {
                 twe.Kill();
                 target.OnHit(ref productData);
                 Debug.Log("碰到消费者");
-                gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
+                gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
 
-            //    GetComponentInChildren<ETFXProjectileScript>().StartShoot();
-                BulletObjectPool.My.RecoveryBullet(gameObject,0.3f); 
+                //    GetComponentInChildren<ETFXProjectileScript>().StartShoot();
+                BulletObjectPool.My.RecoveryBullet(gameObject, 0.3f);
             }
         }
     }

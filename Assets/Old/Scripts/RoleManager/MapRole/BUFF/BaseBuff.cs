@@ -132,6 +132,7 @@ public class BaseBuff
             {
                 CheckStaticNumber(str);
                 CheckConsumerNumber(str);
+                targetConsume.AddEffect(buffId);
             }
             count = 0;
         }
