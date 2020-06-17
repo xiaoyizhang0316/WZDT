@@ -11,15 +11,14 @@ public class BankLoan : BaseExtraSkill
 
     public int eachReturn;
 
-    public override void SkillOn()
+    public override void SkillOn(TradeSign sign)
     {
-        base.SkillOn();
-        int index = GetComponentInParent<BaseMapRole>().tradeList.Count - 1;
-        GetComponentInParent<BaseMapRole>().tradeList[index].icon.gameObject.SetActive(false);
-        StartCoroutine(StartLoan(index));
+        base.SkillOn(sign);
+        sign.icon.gameObject.SetActive(false);
+        StartCoroutine(StartLoan(sign));
     }
 
-    public IEnumerator StartLoan(int index)
+    public IEnumerator StartLoan(TradeSign sign)
     {
         int count = 0;
         StageGoal.My.GetPlayerGold(loanNumber);
@@ -32,6 +31,6 @@ public class BankLoan : BaseExtraSkill
             StageGoal.My.Expend(eachReturn, ExpendType.AdditionalCosts);
             count++;
         }
-        TradeManager.My.DeleteTrade(GetComponentInParent<BaseMapRole>().tradeList[index].tradeData.ID);
+        TradeManager.My.DeleteTrade(sign.tradeData.ID);
     }
 }

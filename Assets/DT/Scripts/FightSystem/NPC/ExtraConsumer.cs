@@ -8,16 +8,16 @@ public class ExtraConsumer : BaseExtraSkill
 
     public List<Building.WaveConfig> waveConfigs;
 
-    public override void SkillOn()
+    public override void SkillOn(TradeSign sign)
     {
-        base.SkillOn();
+        base.SkillOn(sign);
         Building targetBuilding = BuildingManager.My.GetBuildingByIndex(targetBuildingId);
         targetBuilding.extraConsumer.AddRange(waveConfigs);
     }
 
-    public override void SkillOff()
+    public override void SkillOff(TradeSign sign)
     {
-        base.SkillOff();
+        base.SkillOff(sign);
         Building targetBuilding = BuildingManager.My.GetBuildingByIndex(targetBuildingId);
         foreach (Building.WaveConfig w in waveConfigs)
         {

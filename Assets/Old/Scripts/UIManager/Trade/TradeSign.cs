@@ -97,7 +97,7 @@ public class TradeSign : MonoBehaviour
             cast.GetComponent<BaseSkill>().AddRoleBuff(tradeData);
             if (cast.extraSkill != null)
             {
-                cast.extraSkill.SkillOn();
+                cast.extraSkill.SkillOn(this);
             }
         }
     }
@@ -208,7 +208,7 @@ public class TradeSign : MonoBehaviour
             cast.GetComponent<BaseSkill>().DeteleRoleBuff(tradeData);
             if (cast.extraSkill != null)
             {
-                cast.extraSkill.SkillOff();
+                cast.extraSkill.SkillOff(this);
             }
         }
     }
