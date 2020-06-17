@@ -14,6 +14,11 @@ public class TradeSign : MonoBehaviour
     public TradeData tradeData;
 
     /// <summary>
+    /// 交易图标
+    /// </summary>
+    public TradeIcon icon;
+
+    /// <summary>
     /// 单根管子
     /// </summary>
     public GameObject tradeCylinder;
@@ -45,9 +50,9 @@ public class TradeSign : MonoBehaviour
         tradeData.ID = TradeManager.My.index++;
         TradeManager.My.tradeList.Add(tradeData.ID, this);
         SetSkillTarget();
-        AddTradeToRole();
         GenerateTradeLine();
         GenerateTradeIcon();
+        AddTradeToRole();
     }
 
     /// <summary>
@@ -165,6 +170,7 @@ public class TradeSign : MonoBehaviour
     {
         GameObject go = Instantiate(tradeIconPrb, transform);
         go.GetComponent<TradeIcon>().Init(tradeData);
+        icon = go.GetComponent<TradeIcon>();
     }
 
     /// <summary>

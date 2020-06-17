@@ -46,7 +46,6 @@ namespace DT.Fight.Bullet
                         bulletOBJs.Add(bulletOBJ); 
                     }
                     pool.Add( bullNames[i],bulletOBJs);
-                    
                 }
                 else
                 {
