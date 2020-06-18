@@ -281,17 +281,8 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void CheckAllConditions()
     {
-        // isWorkerOnEquip = CheckWorkerOnEquip();
-        // isAtLeastOneWorkerEquip = CheckAtLeastOneWorkerEquip();
         CalculateAllAttribute();
-
-        //isNeedTemplate = CheckNeedTemplate();
         RoleInfoManager.My.UpdateRoleInfo();
-        //if (isWorkerOnEquip && isAtLeastOneWorkerEquip && isNeedTemplate)
-        // if (isWorkerOnEquip && isAtLeastOneWorkerEquip)
-        //      ensureButton.GetComponent<Button>().interactable = true;
-        //   else
-        //  ensureButton.GetComponent<Button>().interactable = false;
     }
 
     /// <summary>
@@ -311,19 +302,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             CurrentRole.equipCost += tempData.cost;
-            //gearCapacity += tempData.capacity;
-            //gearEfficiency += tempData.efficiency;
-            //gearQuality += tempData.quality;
-            //gearBrand += tempData.brand;
-            //CurrentRole.search += tempData.searchAdd;
-            //CurrentRole.bargain += tempData.bargainAdd;
-            //CurrentRole.delivery += tempData.deliverAdd;
-            //CurrentRole.risk += tempData.riskAdd;
-            //CurrentRole.fixedCost += tempData.fixedCost;
-            //CurrentRole.costMonth += tempData.costMonth;
-            //CurrentRole.sweetness += tempData.sweetnessAdd;
-            //CurrentRole.Brittleness += tempData.BrittlenessAdd;
-            //CurrentRole.equipCost += tempData.costMonth;
         }
         PDPCheck();
         foreach (var i in peoPleList)
@@ -338,17 +316,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             finalBulletCapacity += tempData.bulletCapacity;
             finalTechAdd += tempData.techAdd;
             CurrentRole.workerCost += tempData.cost;
-            //workerCapacity += tempData.capacity;
-            //workerEfficiency += tempData.efficiency;
-            //workerQuality += tempData.quality;
-            //workerBrand += tempData.brand;
-            //CurrentRole.search += tempData.searchAdd;
-            //CurrentRole.bargain += tempData.bargainAdd;
-            //CurrentRole.delivery += tempData.deliverAdd;
-            //CurrentRole.risk += tempData.riskAdd;
-            //CurrentRole.fixedCost += tempData.fixedCost;
-            //CurrentRole.costMonth += tempData.costMonth;
-            //CurrentRole.workerCost += tempData.costMonth;
         }
         FinalCheck();
     }

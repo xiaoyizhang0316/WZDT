@@ -113,8 +113,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         endRolePanel.Find("EndRoleRisk").GetComponent<Text>().text = end.baseRoleData.riskResistance.ToString();
         startRolePanel.Find("StartRoleTradeCost").GetComponent<Text>().text = start.baseRoleData.tradeCost.ToString();
         startRolePanel.Find("StartRoleRisk").GetComponent<Text>().text = start.baseRoleData.riskResistance.ToString();
-        startRolePanel.transform.DOLocalMoveX(-220f,0.5f);
-        endRolePanel.transform.DOLocalMoveX(220f, 0.5f);
+        startRolePanel.transform.DOLocalMoveX(-220f,0.5f).Play().timeScale = 1f / DOTween.timeScale;
+        endRolePanel.transform.DOLocalMoveX(220f, 0.5f).Play().timeScale = 1f / DOTween.timeScale;
     }
 
     /// <summary>

@@ -580,7 +580,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         GetComponent<RectTransform>().DOAnchorPosX(160.27f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
-        }).Play();
+        }).Play().timeScale = 1f / DOTween.timeScale;
     }
 
     public void MenuShow()
@@ -588,7 +588,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         GetComponent<RectTransform>().DOAnchorPosX(-178f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {
             menuCloseButton.gameObject.SetActive(true);
             menuOpenButton.gameObject.SetActive(false);
-        }).Play();
+        }).Play().timeScale = 1f / DOTween.timeScale;
     }
 
 
@@ -613,7 +613,9 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (GUI.Button(new Rect(0,0,100,20),"4倍速"))
         {
+            DOTween.PlayAll();
             DOTween.timeScale = 16f;
+            DOTween.defaultAutoPlay = AutoPlay.All;
         }
         if (GUI.Button(new Rect(0, 20, 100, 20), "通关"))
         {
@@ -690,10 +692,6 @@ public class StageGoal : MonoSingleton<StageGoal>
             default:
                 break;
         }
-        //if (DataStatPanel.My.isShow)
-        //{
-        //    DataStatPanel.My.ShowStat();
-        //}
         DataStatPanel.My.RefreshExpend(totalCost, tradeCost, buildingCosts, extraCost, timeCount);
     }
 

@@ -10,7 +10,11 @@ using UnityEngine.EventSystems;
 public class AudioManager : MonoSingleton<AudioManager>
 {
     public List<PlaySource> clipList = new List<PlaySource>();
-    
+
+    /// <summary>
+    /// 根据类型播放所选音效
+    /// </summary>
+    /// <param name="t"></param>
     public void PlaySelectType(AudioClipType t)
     {
         for (int i = 0; i < clipList.Count; i++)
@@ -31,6 +35,9 @@ public class AudioManager : MonoSingleton<AudioManager>
         public AudioClip clip;
     }
 
+    /// <summary>
+    /// 检测鼠标点击音效
+    /// </summary>
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))

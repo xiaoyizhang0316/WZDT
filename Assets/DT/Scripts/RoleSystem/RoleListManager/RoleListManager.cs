@@ -45,7 +45,7 @@ public class RoleListManager : MonoSingleton<RoleListManager>
                 inButton.gameObject.SetActive(false);
                 outButton.gameObject.SetActive(true);
                 outButton.interactable = true;
-            }).Play();
+            }).Play().timeScale = 1f / DOTween.timeScale;
         });
     }
 
@@ -57,7 +57,7 @@ public class RoleListManager : MonoSingleton<RoleListManager>
             outButton.gameObject.SetActive(false);
             inButton.gameObject.SetActive(true);
             inButton.interactable = true;
-        }).Play();
+        }).Play().timeScale = 1f / DOTween.timeScale;
     }
 
     // Update is called once per frame
