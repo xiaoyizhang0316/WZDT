@@ -50,8 +50,16 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         foreach (GameObject go in unlockLandList)
         {
             go.SetActive(true);
-            go.transform.DOMoveY(0f, 1f).SetEase(Ease.Linear).Play();
+            go.transform.DOMoveY(go.transform.position.y + 2f, 1f).SetEase(Ease.Linear).Play();
         }
+    }
+
+    public void HideLande()
+    {
+        foreach (GameObject go in unlockLandList)
+        {
+            go.transform.position += new Vector3(0f, -2f, 0f);
+            go.SetActive(false);        }
     }
 
     /// <summary>
@@ -111,6 +119,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         InvokeRepeating("CheckStarThree", 0f, 1f);
         InvokeRepeating("CheckStarOne", 0f, 1f);
         InvokeRepeating("UpdateInfo", 0.1f, 1f);
+        HideLande();
     }
 
     private void Update()

@@ -18,7 +18,6 @@ public class TradeIcon : MonoBehaviour
     {
         start = s;
         end = e;
-
     }
 
     /// <summary>
@@ -37,7 +36,10 @@ public class TradeIcon : MonoBehaviour
         GetComponentInChildren<SpriteRenderer>().DOFade(0.2f, 0.2f).Play();
     }
 
-    public void OnMouseDown()
+    /// <summary>
+    /// 鼠标点击弹出交易配置窗口
+    /// </summary>
+    public void OnMouseUp()
     {
         //UIManager.My.Panel_CreateTrade.SetActive(true);
         if (!NewCanvasUI.My.NeedRayCastPanel() && !EventSystem.current.IsPointerOverGameObject())
@@ -56,11 +58,17 @@ public class TradeIcon : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 鼠标进入显现
+    /// </summary>
     public void OnMouseEnter()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play();
     }
 
+    /// <summary>
+    /// 鼠标移除淡出效果
+    /// </summary>
     public void OnMouseExit()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(0.2f,0.8f).Play();

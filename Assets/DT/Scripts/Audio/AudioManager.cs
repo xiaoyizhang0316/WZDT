@@ -39,9 +39,12 @@ public class AudioManager : MonoSingleton<AudioManager>
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit[] hit = Physics.RaycastAll(ray);
-                if (hit[0].transform.CompareTag("MapLand"))
+                if (hit.Length > 0)
                 {
-                    PlaySelectType(AudioClipType.PointerClick);
+                    if (hit[0].transform.CompareTag("MapLand"))
+                    {
+                        PlaySelectType(AudioClipType.PointerClick);
+                    }
                 }
             }
         }

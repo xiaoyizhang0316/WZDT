@@ -66,7 +66,7 @@ public class RoleListInfoMerchant : BaseRoleListInfo
     }
     public void ShowLastpruduct(Role role)
     {
-        BaseMapRole baseMapRole =    PlayerData.My.GetBaseMapRoleByName(role.baseRoleData.roleName);
+        BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(role.ID);
         for (int i = 0; i <productTF.childCount; i++)
         {
             Destroy(productTF.GetChild(i).gameObject);

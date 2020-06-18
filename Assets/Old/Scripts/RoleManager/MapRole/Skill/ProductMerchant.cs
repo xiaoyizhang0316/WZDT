@@ -9,6 +9,8 @@ public class ProductMerchant : BaseSkill
 
     private int currentCount = 0;
 
+    private int maxCount = 0;
+
     public override void Skill()
     {
         if (role.tradeList.Count == 0)
@@ -25,10 +27,16 @@ public class ProductMerchant : BaseSkill
                     .bulletCapacity)
                 {
                     currentCount++;
+                    maxCount++;
                     if (currentCount >= role.tradeList.Count)
                     {
                         currentCount = 0;
                     }
+                    if (maxCount >= role.tradeList.Count)
+                    {
+                        return;
+                    }
+                    Skill();
                     return;
                 }
                 ProductData data = role.warehouse[0];
@@ -48,7 +56,7 @@ public class ProductMerchant : BaseSkill
                 game.GetComponent<GoodsSign>().role = PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
                 if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
                 {
-                    game.GetComponent<GoodsSign>().speed = 1f * (1 - role.baseRoleData.efficiency / 100f);
+                    game.GetComponent<GoodsSign>().speed = 1f * (1 - role.baseRoleData.efficiency > 80 ? 80f : role.baseRoleData.efficiency / 100f);
                     productDatas.Add(data);
                 }
 

@@ -315,8 +315,11 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         if (list.Length == 0 && isComplete)
         {
-            print("胜利");
-            Win();
+            if (playerHealth > 0)
+            {
+                print("胜利");
+                Win();
+            }
         }
     }
 

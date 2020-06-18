@@ -63,17 +63,13 @@ public class RoleListInfoDealer : BaseRoleListInfo
     
     public void ShowLastpruduct(Role role)
     {
-        BaseMapRole baseMapRole =    PlayerData.My.GetBaseMapRoleByName(role.baseRoleData.roleName);
+        BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(role.ID);
         for (int i = 0; i <productTF.childCount; i++)
         {
             Destroy(productTF.GetChild(i).gameObject);
         }
-
-      
-
         for (int i = 0; i <  baseMapRole.warehouse.Count; i++)
         { 
-      
             GameObject Pruductgame =  Instantiate(productPrb, productTF);
             Pruductgame.GetComponent<ProductSign>().currentProduct =
                 baseMapRole.warehouse[i];
@@ -85,17 +81,13 @@ public class RoleListInfoDealer : BaseRoleListInfo
                 case BulletType.NormalPP:
                     Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.normallpp;
                     break;
-
                 case BulletType.Lightning:
                     Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.lightning;
                     break;
-
                 case BulletType.summon:
                     Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.tow;
                     break;
-
             }
-        
         }
     }
 }
