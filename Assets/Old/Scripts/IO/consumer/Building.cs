@@ -60,7 +60,7 @@ public class Building : MonoBehaviour
                     throw new Exception("building Id over limit ");
             }
         }     
-        protalGameObject.transform.DOScale(0, 0);
+        protalGameObject.transform.DOScale(0, 0).Play();
     }
 
     /// <summary>
