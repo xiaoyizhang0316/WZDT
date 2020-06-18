@@ -17,6 +17,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("username", userName);
         keyValues.Add("password", password);
+        Debug.Log("Login");
+        
 
         HttpSend(Url.loginUrl, keyValues, playerDatas, doSuccess, doFail);
     }

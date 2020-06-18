@@ -34,6 +34,7 @@ public class LoginPanel : MonoBehaviour
         {
             password_Input.text = password;
         }
+        //Test();
     }
 
     private void Login()
@@ -106,5 +107,17 @@ public class LoginPanel : MonoBehaviour
         {
             PlayerPrefs.SetString("password", "0");
         }
+    }
+
+    private void Test()
+    {
+        PlayerDatas playerDatas = new PlayerDatas();
+        playerDatas.playerID = "111";
+        playerDatas.playerName = "test";
+
+        string json = JsonUtility.ToJson(playerDatas);
+        Debug.Log(json);
+        PlayerDatas playerD = JsonUtility.FromJson<PlayerDatas>(json);
+        Debug.Log(playerD.playerName);
     }
 }

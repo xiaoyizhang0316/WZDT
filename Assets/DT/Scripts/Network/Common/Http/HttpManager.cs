@@ -47,6 +47,7 @@ public class HttpManager : MonoSingleton<HttpManager>
         //mask.SetActive(true);
         bool isNetworkSlow = false;
         time = 0;
+        Debug.Log("http send");
 
         UnityWebRequest uwr = new UnityWebRequest();
         //if(Application.internetReachability == NetworkReachability.NotReachable)
@@ -118,7 +119,10 @@ public class HttpManager : MonoSingleton<HttpManager>
         {
             if (!string.IsNullOrEmpty(uwr.error) || uwr.isNetworkError || uwr.isHttpError)
             {
-               
+                Debug.Log(uwr.error+uwr.responseCode);
+                //ShowNetworkStatus(uwr.responseCode);
+                ShowTip(uwr.error);
+                mask.SetActive(false);
                 yield break;
             }
             else
@@ -252,6 +256,7 @@ public class HttpManager : MonoSingleton<HttpManager>
                 tip = "服务器暂不可用，请稍后再试~";
                 break;
         }
+        ShowTip(tip);
     }
 
     public void ShowTip(string tipStr, Action doEnd = null)
@@ -265,7 +270,7 @@ public class HttpManager : MonoSingleton<HttpManager>
         }
         tip.gameObject.SetActive(true);
         isTipShow = true;
-        tip.DOFade(0, 1f).SetId("httpTip").OnComplete(()=> {
+        tip.DOFade(0, 2f).SetId("httpTip").OnComplete(()=> {
             tip.gameObject.SetActive(false);
             tip.DOFade(1, 0);
             isTipShow = false;
