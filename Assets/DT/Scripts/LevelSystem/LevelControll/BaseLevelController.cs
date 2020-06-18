@@ -54,11 +54,13 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         {
             go.SetActive(true);
             float tempY = go.transform.position.y + 2f;
-            print(tempY);
-            go.transform.DOMoveY(tempY, 1f).SetEase(Ease.Linear).Play();
+            go.transform.DOMoveY(tempY, 1f).Play();
         }
     }
 
+    /// <summary>
+    /// 开始隐藏地形
+    /// </summary>
     public void HideLande()
     {
         foreach (GameObject go in unlockLandList)
