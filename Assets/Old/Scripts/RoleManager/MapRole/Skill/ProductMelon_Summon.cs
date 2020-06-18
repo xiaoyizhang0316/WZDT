@@ -19,7 +19,7 @@ public class ProductMelon_Summon : BaseSkill
             ProductData data = role.warehouse[0];
             for (int i = 0; i < 8; i++)
             {
-                role.warehouse.RemoveAt(i);
+                role.warehouse.RemoveAt(0);
             }
             for (int i = 0; i < role.GetEquipBuffList().Count; i++)
             {
