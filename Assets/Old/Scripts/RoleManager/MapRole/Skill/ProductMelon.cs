@@ -26,9 +26,22 @@ public class ProductMelon : BaseSkill
             {
                 data.AddBuff(role.GetEquipBuffList()[i]);
             }
-            for (int i = 0; i < buffList.Count; i++)
+            if (role.isNpc)
             {
-                data.AddBuff(buffList[i]);
+                if (role.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
+                {
+                    for (int i = 0; i < buffList.Count; i++)
+                    {
+                        data.AddBuff(buffList[i]);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < buffList.Count; i++)
+                {
+                    data.AddBuff(buffList[i]);
+                }
             }
             try
             {

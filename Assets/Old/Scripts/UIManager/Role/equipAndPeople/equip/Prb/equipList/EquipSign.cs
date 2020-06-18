@@ -98,7 +98,8 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         Image_shape.sprite = Resources.Load<Sprite>(gearData.SpritePath);
         if (gearData.buffList[0] != -1)
         {
-            Image_buff.sprite = Resources.Load<Sprite>("Sprite/Buff/" + gearData.buffList[0].ToString());
+            //Image_buff.sprite = Resources.Load<Sprite>("Sprite/Buff/" + gearData.buffList[0].ToString());
+            GetComponentInChildren<WaveBuffSign>().Init(gearData.buffList[0]);
         }
     }
 
@@ -225,9 +226,6 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             //    offset = Equip.GetComponent<RectTransform>().anchoredPosition - mouseUguiPos;
             //}
             //            cam.GetComponent<CameraMove>().enabled = false;
-
-
-
         }
     }
 

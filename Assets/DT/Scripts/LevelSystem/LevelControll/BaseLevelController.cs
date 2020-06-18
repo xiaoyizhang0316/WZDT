@@ -42,15 +42,31 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     public int unlockTime;
 
+    private bool isLockFinish = false;
+
     /// <summary>
     /// 改变地形
     /// </summary>
     public void UnlockLand()
     {
+        isLockFinish = true;
         foreach (GameObject go in unlockLandList)
         {
             go.SetActive(true);
-            go.transform.DOMoveY(0f, 1f).SetEase(Ease.Linear).Play();
+            float tempY = go.transform.position.y + 2f;
+            go.transform.DOMoveY(tempY, 1f).Play();
+        }
+    }
+
+    /// <summary>
+    /// 开始隐藏地形
+    /// </summary>
+    public void HideLande()
+    {
+        foreach (GameObject go in unlockLandList)
+        {
+            go.transform.position += new Vector3(0f, -2f, 0f);
+            go.SetActive(false);
         }
     }
 
@@ -111,11 +127,12 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         InvokeRepeating("CheckStarThree", 0f, 1f);
         InvokeRepeating("CheckStarOne", 0f, 1f);
         InvokeRepeating("UpdateInfo", 0.1f, 1f);
+        HideLande();
     }
 
     private void Update()
     {
-        if (unlockTime == StageGoal.My.timeCount && unlockTime > 0)
+        if (unlockTime == StageGoal.My.timeCount && unlockTime > 0 && !isLockFinish)
         {
             UnlockLand();
         }

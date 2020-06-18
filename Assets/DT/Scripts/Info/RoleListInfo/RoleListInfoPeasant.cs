@@ -67,7 +67,7 @@ public class RoleListInfoPeasant : BaseRoleListInfo
     
     public void ShowLastpruduct(Role role)
     {
-        BaseMapRole baseMapRole =    PlayerData.My.GetBaseMapRoleByName(role.baseRoleData.roleName);
+        BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(role.ID);
         for (int i = 0; i <productTF.childCount; i++)
         {
             Destroy(productTF.GetChild(i).gameObject);
@@ -82,7 +82,7 @@ public class RoleListInfoPeasant : BaseRoleListInfo
 
         for (int i = 1; i <=count; i++)
         { 
-            Debug.Log(i+"||"+ baseMapRole.GetComponent<ProductMelon>().productDatas.Count);
+            //Debug.Log(i+"||"+ baseMapRole.GetComponent<ProductMelon>().productDatas.Count);
             GameObject Pruductgame =  Instantiate(productPrb, productTF);
             Pruductgame.GetComponent<ProductSign>().currentProduct =
                 baseMapRole.GetComponent<ProductMelon>().productDatas[    baseMapRole.GetComponent<ProductMelon>().productDatas.Count-i];

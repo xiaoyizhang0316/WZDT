@@ -19,16 +19,28 @@ public class ProductMelon_Boom : BaseSkill
             ProductData data = role.warehouse[0];
             for (int i = 0; i < 2; i++)
             {
-                role.warehouse.RemoveAt(i);
+                role.warehouse.RemoveAt(0);
             }
             for (int i = 0; i < role.GetEquipBuffList().Count; i++)
             {
                 data.AddBuff(role.GetEquipBuffList()[i]);
             }
-
-            for (int i = 0; i < buffList.Count; i++)
+            if (role.isNpc)
             {
-                data.AddBuff(buffList[i]);
+                if (role.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
+                {
+                    for (int i = 0; i < buffList.Count; i++)
+                    {
+                        data.AddBuff(buffList[i]);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < buffList.Count; i++)
+                {
+                    data.AddBuff(buffList[i]);
+                }
             }
             data.bulletType = BulletType.Bomb;
             data.loadingSpeed *= 1f - role.baseRoleData.effect / 100f;

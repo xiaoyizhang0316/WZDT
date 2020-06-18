@@ -25,21 +25,30 @@ public class ProductMelon_Summon : BaseSkill
             {
                 data.AddBuff(role.GetEquipBuffList()[i]);
             }
-
-            for (int i = 0; i < buffList.Count; i++)
+            if (role.isNpc)
             {
-                data.AddBuff(buffList[i]);
+                if (role.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
+                {
+                    for (int i = 0; i < buffList.Count; i++)
+                    {
+                        data.AddBuff(buffList[i]);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < buffList.Count; i++)
+                {
+                    data.AddBuff(buffList[i]);
+                }
             }
             data.damage = (float)(data.damage * 0.3 + role.baseRoleData.effect * 1.5f);
             data.bulletType = BulletType.summon;
             data.loadingSpeed *= 1f - role.baseRoleData.effect / 100f;
             data.loadingSpeed += 0.5f;
-
             data.damage -= 20;
             try
             {
-
-
                 GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
                 game.GetComponent<GoodsSign>().productData = data;
                 game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();

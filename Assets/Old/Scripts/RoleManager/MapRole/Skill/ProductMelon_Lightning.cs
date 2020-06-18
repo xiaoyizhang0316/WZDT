@@ -26,10 +26,22 @@ public class ProductMelon_Lightning : BaseSkill
             {
                 data.AddBuff(role.GetEquipBuffList()[i]);
             }
-
-            for (int i = 0; i < buffList.Count; i++)
+            if (role.isNpc)
             {
-                data.AddBuff(buffList[i]);
+                if (role.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
+                {
+                    for (int i = 0; i < buffList.Count; i++)
+                    {
+                        data.AddBuff(buffList[i]);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < buffList.Count; i++)
+                {
+                    data.AddBuff(buffList[i]);
+                }
             }
             data.bulletType = BulletType.Lightning;
             data.loadingSpeed *= 1f - role.baseRoleData.effect / 100f;

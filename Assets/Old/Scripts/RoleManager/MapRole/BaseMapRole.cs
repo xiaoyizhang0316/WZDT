@@ -295,7 +295,7 @@ public class BaseMapRole : MonoBehaviour
         shop.Add(productData);
         //        Debug.Log(warehouse.Count);
         // Debug.Log(warehouse.Contains(productData));
-        if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer || baseRoleData.baseRoleData.roleType == GameEnum.RoleType.BigDealer)
+        if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
         {
             //todo
             //  productData.Quality += (int)(baseRoleData.quality * 0.2f);

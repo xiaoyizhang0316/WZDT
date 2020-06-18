@@ -31,6 +31,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             upgradeNumber.gameObject.SetActive(false);
             return;
         }
+        upgradeNumber.gameObject.SetActive(true);
         upgradeNumber.text = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.nextLevel).upgradeCost.ToString();
     }
 

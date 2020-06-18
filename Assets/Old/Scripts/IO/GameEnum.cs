@@ -54,10 +54,6 @@ public class GameEnum
         /// </summary>
         Bank,
         /// <summary>
-        /// 大型零售
-        /// </summary>
-        BigDealer,
-        /// <summary>
         /// 投资人
         /// </summary>
         Investor,
@@ -120,7 +116,19 @@ public class GameEnum
         /// <summary>
         /// 研发中心
         /// </summary>
-        ResearchInstitute
+        ResearchInstitute,
+        /// <summary>
+        /// 网红
+        /// </summary>
+        Youtuber,
+        /// <summary>
+        /// 订单公司
+        /// </summary>
+        OrderCompany,
+        /// <summary>
+        /// 营销公司
+        /// </summary>
+        Marketing
     }
 
     public enum PDPType
@@ -494,7 +502,15 @@ public class GameEnum
         /// <summary>
         /// 菜单打开
         /// </summary>
-        MenuOpen
+        MenuOpen,
+        /// <summary>
+        /// 胜利
+        /// </summary>
+        Victory,
+        /// <summary>
+        /// 失败
+        /// </summary>
+        Defeat
     }
 
 }
