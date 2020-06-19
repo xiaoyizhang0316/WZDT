@@ -107,6 +107,7 @@ public class BaseMapRole : MonoBehaviour
     void Start()
     {
         buffList = new List<BaseBuff>();
+        CheckBuffDuration();
         if (!isNpc)
         {
             InitAttribute();
@@ -232,6 +233,10 @@ public class BaseMapRole : MonoBehaviour
                 }
             }
         }
+        transform.DORotate(transform.eulerAngles, 1f).OnComplete(() =>
+        {
+            CheckBuffDuration();
+        });
     }
 
     /// <summary>
