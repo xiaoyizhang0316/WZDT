@@ -25,7 +25,6 @@ public class SingleWaveEnemyInfo : MonoBehaviour
         string[] list = str.Split('_');
         consumeType = (ConsumerType)Enum.Parse(typeof(ConsumerType), list[0]);
         string path = "Sprite/ConsumerType/" + consumeType.ToString();
-        print(path);
         typeSprite.sprite = Resources.Load<Sprite>(path);
         enemyNum.text = int.Parse(list[1]).ToString();
         //string[] buffList = list[2].Split('|');
@@ -60,8 +59,18 @@ public class SingleWaveEnemyInfo : MonoBehaviour
                 GameObject go = Instantiate(singleBuffPrb, buffListTF);
                 go.GetComponent<WaveBuffSign>().Init(buffList[i]);
             }
-
         }
+    }
+
+    public void FloatWindowShow()
+    {
+        ConsumerTypeData data = GameDataMgr.My.GetConsumerTypeDataByType(consumeType);
+        FloatWindow.My.Init(typeSprite.transform, data.typeDesc);
+    }
+
+    public void FLoatWindowHide()
+    {
+        FloatWindow.My.Hide();
     }
 
     // Start is called before the first frame update

@@ -16,6 +16,8 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public List<ProductData> warehouse;
 
+    public List<ProductData> trash = new List<ProductData>();
+
     /// <summary>
     /// 是否是NPC
     /// </summary>
@@ -365,6 +367,7 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void ClearWarehouse()
     {
+        trash.AddRange(warehouse);
         warehouse.Clear();
     }
 
