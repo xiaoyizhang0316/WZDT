@@ -216,10 +216,6 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void CheckBuffDuration()
     {
-        if (buffList.Count == 0)
-        {
-            return;
-        }
         for (int i = 0; i < buffList.Count; i++)
         {
             buffList[i].OnRoleTick();
