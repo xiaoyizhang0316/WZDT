@@ -16,6 +16,7 @@ public class HttpManager : MonoSingleton<HttpManager>
 
     public GameObject mask;
     public Text tip;
+    public Transform clickTip;
 
     private string currentURL = "";
     private Action<UnityWebRequest> currenAction;
@@ -44,7 +45,7 @@ public class HttpManager : MonoSingleton<HttpManager>
 
     public IEnumerator HttpSend(string webRequestUrl, Action<UnityWebRequest> action, SortedDictionary<string, string> userData = null, HttpType httpType = HttpType.Get)
     {
-        //mask.SetActive(true);
+        mask.SetActive(true);
         bool isNetworkSlow = false;
         time = 0;
         Debug.Log("http send");
@@ -275,6 +276,14 @@ public class HttpManager : MonoSingleton<HttpManager>
             tip.DOFade(1, 0);
             isTipShow = false;
         });
+    }
+
+    public void ShowClickTip(string tip,Action doEnd=null)
+    {
+        clickTip.GetChild(0).GetComponent<Text>().text = tip;
+        clickTip.gameObject.SetActive(true);
+        clickTip.GetComponent<Button>().onClick.RemoveAllListeners();
+        clickTip.GetComponent<Button>().onClick.AddListener(()=> { doEnd?.Invoke(); });
     }
 }
 

@@ -18,6 +18,7 @@ public class LevelSign : MonoBehaviour
     public Button LevelButton;
 
     public string loadScene;
+    string stars="";
 
     //public Sprite lockImage;
     // Start is called before the first frame update
@@ -39,10 +40,21 @@ public class LevelSign : MonoBehaviour
 
     public void Init()
     {
-        LevelInfoManager.My.Init(levelName,content,mission_1,mission_2,mission_3, () =>
+        if (NetworkMgr.My.isUsingHttp)
+        {
+            LevelInfoManager.My.Init(stars, levelName, content, mission_1, mission_2, mission_3, () =>
             {
                 SceneManager.LoadScene(loadScene);
             });
+        }
+        else
+        {
+            LevelInfoManager.My.Init(levelName, content, mission_1, mission_2, mission_3, () =>
+            {
+                SceneManager.LoadScene(loadScene);
+            });
+        }
+        
     }
 
     void InitLevel()
@@ -88,5 +100,37 @@ public class LevelSign : MonoBehaviour
         transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
         transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
         transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+    }
+
+    // net
+    public void InitLevel(string currentStar, string lastStar)
+    {
+        while (lastStar.Length < 3)
+        {
+            lastStar = "0"+ lastStar;
+            currentStar = "0" + currentStar;
+        }
+        stars = currentStar;
+        if(lastStar == "000" && loadScene!="FTE_1")
+        {
+            HideAllStars();
+            transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
+            transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
+        }
+        else
+        {
+            if (currentStar[0] == '0')
+            {
+                transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+            }
+            if (currentStar[1] == '0')
+            {
+                transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+            }
+            if (currentStar[2] == '0')
+            {
+                transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+            }
+        }
     }
 }

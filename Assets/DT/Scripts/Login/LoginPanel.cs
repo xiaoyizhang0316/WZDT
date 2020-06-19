@@ -70,7 +70,8 @@ public class LoginPanel : MonoBehaviour
             {
                 // 第一个问题
                 threeWordsPanel.GetComponent<ThreeWordsPanel>().SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
-                threeWordsPanel.gameObject.SetActive(true);
+                threeWordsPanel.GetChild(0).gameObject.SetActive(true);
+                gameObject.SetActive(false);
             }
             else
             {
@@ -80,6 +81,8 @@ public class LoginPanel : MonoBehaviour
                 }
                 else
                 {
+                    NetworkMgr.My.GetLevelProgress();
+                    //NetworkMgr.My.GetAnswers();
                     SceneManager.LoadScene("Map");
                 }
             }
@@ -89,7 +92,7 @@ public class LoginPanel : MonoBehaviour
     private void LoginFail()
     {
         // TODO
-        // 清楚错误密码
+        // 清除错误密码
         password_Input.text = "";
         PlayerPrefs.DeleteKey("username");
         PlayerPrefs.DeleteKey("password");

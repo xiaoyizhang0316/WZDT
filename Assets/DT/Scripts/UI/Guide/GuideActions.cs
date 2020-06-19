@@ -81,7 +81,12 @@ public class GuideActions : MonoBehaviour
         },
         ()=>{
             PlayerPrefs.SetInt("FTE0End",1);
+            if (NetworkMgr.My.isUsingHttp)
+            {
+                NetworkMgr.My.UpdatePlayerDatas(1, 0);
+            }
             SceneManager.LoadScene("FTE_1");
+            
         }
         };
     }
