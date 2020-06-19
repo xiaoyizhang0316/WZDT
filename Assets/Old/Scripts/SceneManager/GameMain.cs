@@ -26,11 +26,11 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         //   }
         if (PlayerPrefs.GetInt("FTE0End", 0) == 0)
         {
-            sceneName = "Map";
+            sceneName = "FTE_4";
         }
         else
         {
-            sceneName = "Map";
+            sceneName = "FTE_4";
         }
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(sceneName);
