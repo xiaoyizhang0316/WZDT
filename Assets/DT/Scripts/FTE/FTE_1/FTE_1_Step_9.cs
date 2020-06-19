@@ -62,6 +62,7 @@ public class FTE_1_Step_9 : BaseStep
             Debug.Log("检测成功");
 
             StopCurrentStep();
+            nextButton.interactable = false;
         }
         else
         {

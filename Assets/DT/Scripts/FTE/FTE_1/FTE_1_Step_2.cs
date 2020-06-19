@@ -24,6 +24,7 @@ public class FTE_1_Step_2 : BaseStep
     {
      //   MaskManager.My.Open(1);
         nextButton.interactable = false;
+        FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
         MaskManager.My.Open(0,118);
         contenText.DOFade(0, 0).OnComplete(() => {
            
@@ -33,13 +34,14 @@ public class FTE_1_Step_2 : BaseStep
                 nextButton.interactable = true; 
              
             }).Play(); 
-        }).Play(); 
-        
+        }).Play();  
     }
 
+    
     public override void StopCurrentStep()
     { 
         Debug.Log("结束第二部");
+        FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
 
         nextButton.interactable = false; 
         MaskManager.My.Close(0,0);
