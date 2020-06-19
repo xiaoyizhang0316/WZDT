@@ -22,6 +22,8 @@ public abstract class BaseSkill : MonoBehaviour
     /// </summary>
     public List<int> buffList;
 
+    public List<GameObject> animationPart = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,12 +32,6 @@ public abstract class BaseSkill : MonoBehaviour
         {
             UnleashSkills();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     /// <summary>

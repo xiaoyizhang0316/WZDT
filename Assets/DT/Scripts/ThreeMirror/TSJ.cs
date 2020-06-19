@@ -57,6 +57,11 @@ public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         Debug.Log("使用透视镜成功");
                         break;
                     }
+                    else
+                    {
+                        NPCListInfo.My.ShowHideTipPop("科技点数不足！");
+                        break;
+                    }
                 }
             }
         }

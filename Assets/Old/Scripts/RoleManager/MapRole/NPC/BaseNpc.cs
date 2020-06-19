@@ -76,6 +76,7 @@ public abstract class BaseNpc : MonoBehaviour
             {
                 //print(hit[j].transform);
                 MapManager.My.SetLand(hit[j].transform.GetComponent<MapSign>().x, hit[j].transform.GetComponent<MapSign>().y);
+                transform.position = hit[j].transform.position + new Vector3(0f, 0.3f, 0f);
             }
         }
     }
@@ -101,6 +102,7 @@ public abstract class BaseNpc : MonoBehaviour
             hideModel.SetActive(true);
             trueModel.SetActive(false);
         }
+        InitSetLand();
     }
 
     // Update is called once per frame

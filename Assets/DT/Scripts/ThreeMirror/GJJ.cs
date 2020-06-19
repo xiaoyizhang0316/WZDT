@@ -54,6 +54,11 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             Debug.Log("使用广角镜成功");
                             break;
                         }
+                        else
+                        {
+                            NPCListInfo.My.ShowHideTipPop("科技点数不足！");
+                            break;
+                        }
                     }
                 }
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using static GameEnum;
 
 public class NPC : BaseNpc
@@ -61,7 +62,7 @@ public class NPC : BaseNpc
                     NPCListInfo.My.ShowNpcInfo(transform);
                 }
             }
-            else
+            else if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 3)
             {
                 NPCListInfo.My.ShowHideTipPop("使用广角镜发现角色");
             }

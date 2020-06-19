@@ -52,6 +52,11 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             Debug.Log("使用多棱镜成功");
                             break;
                         }
+                        else
+                        {
+                            NPCListInfo.My.ShowHideTipPop("科技点数不足！");
+                            break;
+                        }
                     }
                 }
             }

@@ -65,6 +65,16 @@ public class ProductSeed : BaseSkill
         {
             currentCount = 0;
         }
+    }
 
+    private void Update()
+    {
+        if (role.tradeList.Count > 0 && IsOpen)
+        {
+            foreach (GameObject item in animationPart)
+            {
+                item.transform.Rotate(Vector3.up,Space.World);
+            }
+        }
     }
 }

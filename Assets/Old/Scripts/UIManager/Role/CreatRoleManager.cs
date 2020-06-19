@@ -283,6 +283,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     {
         CalculateAllAttribute();
         RoleInfoManager.My.UpdateRoleInfo();
+        GetComponentInChildren<BaseRoleInfoAdd>().UpdateBuff();
     }
 
     /// <summary>

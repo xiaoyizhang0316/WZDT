@@ -68,4 +68,28 @@ public class ProductMelon : BaseSkill
 
     }
 
+    private float number = 1f;
+
+    private void Update()
+    {
+        if (role.tradeList.Count > 0 && IsOpen)
+        {
+            foreach (GameObject item in animationPart)
+            {
+                if(!item.name.Equals("农块3"))
+                {
+                    item.transform.Rotate(Vector3.right, Space.World);
+                }
+                else
+                {
+                    if (item.transform.position.y >= 1.75f)
+                        number = -1f;
+                    if (item.transform.position.y <= 1.5f)
+                        number = 1f;
+                    item.transform.position += new Vector3(0f, 0.02f, 0f) * number;
+                }
+            }
+        }
+    }
+
 }
