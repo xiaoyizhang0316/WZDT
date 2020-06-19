@@ -621,6 +621,12 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             Win();
         }
+        if (GUI.Button(new Rect(0, 40, 100, 20), "一键加钱"))
+        {
+            GetPlayerGold(10000);
+            GetTechPoint(1000);
+            playerHealth = playerMaxHealth;
+        }
     }
 
 

@@ -216,17 +216,12 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void CheckBuffDuration()
     {
-        if (buffList.Count == 0)
-        {
-            return;
-        }
         for (int i = 0; i < buffList.Count; i++)
         {
             buffList[i].OnRoleTick();
             if (buffList[i].duration != -1)
             {
                 buffList[i].duration--;
-                //print("持续时间:" + buffList[i].duration);
                 if (buffList[i].duration == 0)
                 {
                     RemoveBuff(buffList[i]);

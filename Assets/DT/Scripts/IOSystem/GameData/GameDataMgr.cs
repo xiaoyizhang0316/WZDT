@@ -53,7 +53,26 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         foreach (RoleTemplateModelData r in roleTemplateModelDatas)
         {
             if (r.level == level && roleType.ToString().Equals(r.roleType.ToString()))
-                return r.tempRoleData;
+            {
+                BaseRoleData data = new BaseRoleData();
+                data.bulletCapacity = r.bulletCapacity;
+                data.effect = r.effect;
+                data.efficiency = r.efficiency;
+                data.cost = r.cost;
+                data.level = r.level;
+                data.range = r.range;
+                data.roleSkillType = r.roleSkillType;
+                data.riskResistance = r.riskResistance;
+                data.roleType = r.roleType;
+                data.tradeCost = r.tradeCost;
+                data.PrePath = r.PrePath;
+                data.RoleSpacePath = r.RoleSpacePath;
+                data.SpritePath = r.SpritePath;
+                data.upgradeCost = r.upgradeCost;
+                data.roleName = "";
+                data.costTech = r.costTech;
+                return data;
+            }
         }
         print("------------查不到此角色模板!-----------");
         return null;
