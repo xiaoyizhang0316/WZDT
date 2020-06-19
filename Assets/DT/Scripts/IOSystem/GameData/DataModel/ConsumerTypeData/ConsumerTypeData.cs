@@ -13,6 +13,11 @@ public class ConsumerTypeData
     public ConsumerType consumerType;
 
     /// <summary>
+    /// 类型中文名称
+    /// </summary>
+    public string typeDesc;
+
+    /// <summary>
     /// 生命值（血量）
     /// </summary>
     public int maxHealth;

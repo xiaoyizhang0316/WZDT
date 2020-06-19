@@ -9,12 +9,12 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// 拖拽装备和角色UI
 /// </summary>
-public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
+public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 {
     public DragType dragType;
     public Vector3 startPos;
 
-  
+
     public enum DragType
     {
         equip,
@@ -47,12 +47,10 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
                 index++;
             }
         }
-
         if (index == transform.childCount)
         {
-         Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastpos + transform.position,Save);
-       // Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>(). lastPlot.position,Save);
-           
+            Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastpos + transform.position, Save);
+            // Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>(). lastPlot.position,Save);
             //Save();
             //CreatRoleManager.My.CheckAllConditions();
             return true;
@@ -70,11 +68,10 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
                         intCount++;
                     }
                 }
-
                 if (intCount == 0)
                 {
                     Remove();
-                    
+
                     Destroy(this.gameObject, 0f);
                     //CreatRoleManager.My.CheckAllConditions();
                     return false;
@@ -83,7 +80,7 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
                 {
                     //回到上一次吸附的地点,并且当前是正确的点
                     Adsorb(startPos);
-                  //  CreatRoleManager.My.CheckAllConditions();
+                    //  CreatRoleManager.My.CheckAllConditions();
                     return true;
                 }
             }
@@ -91,7 +88,7 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
             {
                 Remove();
                 Destroy(this.gameObject, 0f);
-               // CreatRoleManager.My.CheckAllConditions();
+                // CreatRoleManager.My.CheckAllConditions();
                 return false;
             }
         }
@@ -100,13 +97,11 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
     /// <summary>
     /// 吸附
     /// </summary>
-    public void Adsorb(Vector3 Pos,Action action = null)
+    public void Adsorb(Vector3 Pos, Action action = null)
     {
         startPos = Pos;
-       
         Tweener tweener = transform.DOMove(Pos, 0.1f).OnComplete(() => action()).Play();
         tweener.SetUpdate(true);
-
     }
 
 
@@ -116,12 +111,12 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
         {
             if (CreatRoleManager.My.EquipList.ContainsKey(int.Parse(name.Split('_')[1])))
             {
-                Debug.Log(transform.position+"装备"+name.Split('_')[1] );
+                Debug.Log(transform.position + "装备" + name.Split('_')[1]);
                 CreatRoleManager.My.EquipList[int.Parse(name.Split('_')[1])] = transform.localPosition;
             }
             else
             {
-                Debug.Log(transform.position+"装备"+name.Split('_')[1] );
+                Debug.Log(transform.position + "装备" + name.Split('_')[1]);
 
                 CreatRoleManager.My.EquipList.Add(int.Parse(name.Split('_')[1]), transform.localPosition);
             }
@@ -131,12 +126,12 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
         {
             if (CreatRoleManager.My.peoPleList.ContainsKey(int.Parse(name.Split('_')[1])))
             {
-                Debug.Log(transform.position+"人"+name.Split('_')[1] );
+                Debug.Log(transform.position + "人" + name.Split('_')[1]);
                 CreatRoleManager.My.peoPleList[int.Parse(name.Split('_')[1])] = transform.localPosition;
             }
             else
             {
-                Debug.Log(transform.position+"人"+name.Split('_')[1] );
+                Debug.Log(transform.position + "人" + name.Split('_')[1]);
                 CreatRoleManager.My.peoPleList.Add(int.Parse(name.Split('_')[1]), transform.localPosition);
             }
         }
@@ -155,7 +150,6 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
             {
             }
         }
-
         if (dragType == DragType.people)
         {
             if (CreatRoleManager.My.peoPleList.ContainsKey(int.Parse(name.Split('_')[1])))
@@ -171,6 +165,7 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -182,7 +177,7 @@ public class DragUI : MonoBehaviour,IPointerExitHandler,IPointerEnterHandler
         else
         {
             CreatRoleManager.My.ShowWorkListPOPDatal(int.Parse(name.Split('_')[1]));
-            
+
         }
     }
 }

@@ -9,6 +9,8 @@ public class ConsumerTypeItem
 {
     public string consumerType;
 
+    public string typeDesc;
+
     /// <summary>
     /// 生命值（血量）
     /// </summary>

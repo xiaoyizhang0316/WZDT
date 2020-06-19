@@ -46,6 +46,8 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     public Button changeRoleButton;
 
     public Button createTradeButton;
+
+    public Button clearWarehouse;
     
     // Start is called before the first frame update
     void Start()
@@ -72,6 +74,15 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         {
             NewCanvasUI.My.CreateTrade(PlayerData.My.GetMapRoleById(currentRole.ID));
             gameObject.SetActive(false);
+        });
+        clearWarehouse.onClick.AddListener(() =>
+        {
+            NewCanvasUI.My.Panel_Delete.SetActive(true);
+            string str = "确定要清空仓库吗？";
+            DeleteUIManager.My.Init(str, () => {
+                PlayerData.My.GetMapRoleById(currentRole.ID).ClearWarehouse();
+                ReInit(currentRole);
+            });
         });
         buffcontent.SetActive(false);
     }

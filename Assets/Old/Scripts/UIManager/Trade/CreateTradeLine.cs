@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CreateTradeLine : MonoBehaviour
 {
-
     /// <summary>
     /// 发起者位置
     /// </summary>

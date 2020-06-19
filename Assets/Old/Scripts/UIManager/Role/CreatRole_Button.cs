@@ -43,7 +43,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
         RaycastHit[] hit = Physics.RaycastAll(ray);
         {
@@ -56,7 +55,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 }
             }
         }
-
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -87,11 +85,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //secondMenuStatus = !secondMenuStatus;
-        //NewCanvasUI.My.Panel_Update.SetActive(true);
-        //RoleListInfo.My.roleInfo.transform.position =  transform.position+new Vector3(0,4f) ;
-        //RoleListInfo.My.Init( PlayerData.My.GetRoleById(double.Parse(name.Split('_')[1])),this);
-        //RoleUpdateInfo.My.Init(PlayerData.My.GetRoleById(double.Parse(name.Split('_')[1])));
+
     }
 
     public void OnEndDrag(PointerEventData eventData)

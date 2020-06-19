@@ -377,6 +377,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         {
             ConsumerTypeData temp = new ConsumerTypeData();
             temp.consumerType = (ConsumerType)Enum.Parse(typeof(ConsumerType), c.consumerType);
+            temp.typeDesc = c.typeDesc;
             temp.maxHealth = int.Parse(c.maxHealth);
             temp.moveSpeed = float.Parse(c.moveSpeed);
             temp.killMoney = int.Parse(c.killMoney);
