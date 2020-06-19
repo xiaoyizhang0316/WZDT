@@ -598,7 +598,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         InitStage();
         MenuHide();
-        GetAllPreviousAward();
+        //GetAllPreviousAward();
         cameraPos = Camera.main.transform.position;
     }
     private Vector3 cameraPos;
