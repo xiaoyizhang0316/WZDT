@@ -295,7 +295,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 
     private void OnApplicationQuit()
     {
-        Logout();
+        if(isUsingHttp)
+            Logout();
     }
 }
 

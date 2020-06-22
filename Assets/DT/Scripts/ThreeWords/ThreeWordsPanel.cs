@@ -21,7 +21,7 @@ public class ThreeWordsPanel : MonoBehaviour
         submit_btn.onClick.AddListener(Submit);
         answer_input.onValueChanged.AddListener(OnEdit);
         answer_input.onEndEdit.AddListener(OnEndEdit);
-        if(SceneManager.GetActiveScene().name == "Map")
+        if(NetworkMgr.My.isUsingHttp&& SceneManager.GetActiveScene().name == "Map")
         {
             if(NetworkMgr.My.levelProgressList.Count == 4 && NetworkMgr.My.playerDatas.threeWordsProgress==1 || NetworkMgr.My.levelProgressList.Count==10 && NetworkMgr.My.playerDatas.threeWordsProgress == 2)
             {

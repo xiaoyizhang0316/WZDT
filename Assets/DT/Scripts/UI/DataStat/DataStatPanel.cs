@@ -174,9 +174,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
                 {
                     GameObject newNpc = Instantiate(statItem, extraContent);
                     StatItem stat = newNpc.GetComponent<StatItem>();
-                    stat.Setup(key, extraCost[key] * 60 / timeCount, extraCost[key]);
+                    stat.Setup(key, 0, extraCost[key]);
                 }
-                extraContent.GetChild(i).GetComponent<StatItem>().Setup(key, extraCost[key] * 60 / timeCount, extraCost[key]);
+                extraContent.GetChild(i).GetComponent<StatItem>().Setup(key, 0, extraCost[key]);
                 i++;
             }
             if (i < extraContent.childCount)
@@ -283,9 +283,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
                 {
                     GameObject newNpc = Instantiate(statItem, extraContent);
                     StatItem stat = newNpc.GetComponent<StatItem>();
-                    stat.Setup(key, extraCost[key] * 60 / timeCount, extraCost[key]);
+                    stat.Setup(key, 0, extraCost[key]);
                 }
-                extraContent.GetChild(i).GetComponent<StatItem>().Setup(key, extraCost[key] * 60 / timeCount, extraCost[key]);
+                extraContent.GetChild(i).GetComponent<StatItem>().Setup(key, 0, extraCost[key]);
                 i++;
             }
             if (i < extraContent.childCount)

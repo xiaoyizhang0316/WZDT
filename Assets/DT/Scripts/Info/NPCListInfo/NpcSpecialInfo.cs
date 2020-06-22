@@ -34,23 +34,23 @@ public class NpcSpecialInfo : MonoBehaviour
         switch (npc.baseRoleData.baseRoleData.roleType)
         {
             case GameEnum.RoleType.Seed:
-                seedProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.efficiency / 20f).ToString() + " /s";
-                seedProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.effect*10).ToString();
+                seedProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.efficiency / 20f).ToString() + "/s";
+                seedProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.effect*10).ToString();
                 seedProp.SetActive(true);
                 break;
             case GameEnum.RoleType.Peasant:
-                peasantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.efficiency / 10f).ToString() + " /s";
-                peasantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.effect).ToString()+"%";
+                peasantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.efficiency / 10f).ToString() + "/s";
+                peasantProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.effect).ToString()+"%";
                 peasantProp.SetActive(true);
                 break;
             case GameEnum.RoleType.Merchant:
-                merchantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (((npc.baseRoleData.baseRoleData.efficiency * 0.3f) / 100f) * npc.baseRoleData.tradeCost).ToString() + " /s";
-                merchantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.effect).ToString() + "%";
+                merchantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (((npc.baseRoleData.baseRoleData.efficiency * 0.3f) / 100f) * npc.baseRoleData.tradeCost).ToString();
+                merchantProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.effect).ToString() + "%";
                 merchantProp.SetActive(true);
                 break;
             case GameEnum.RoleType.Dealer:
                 dealerProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.efficiency).ToString() + "%";
-                dealerProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.range).ToString();
+                dealerProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.baseRoleData.range).ToString();
 
                 dealerProp.SetActive(true);
                 break;

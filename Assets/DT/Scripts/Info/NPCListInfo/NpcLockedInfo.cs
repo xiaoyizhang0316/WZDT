@@ -19,7 +19,7 @@ public class NpcLockedInfo : MonoBehaviour
     {
         npcName.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleName;
         skillDes.text = npc.GetComponent<BaseSkill>().skillDesc;
-        //timeInterval.text = 
+        timeInterval.text = "";
         tradeCost.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.tradeCost.ToString();
         risk.text = npc.GetComponent<BaseMapRole>().baseRoleData.riskResistance.ToString();
 
