@@ -18,6 +18,7 @@ public class ReturnToMap : MonoBehaviour
 
     void Confirm()
     {
+        PlayerData.My.Reset();
         SceneManager.LoadScene("Map");
     }
 
