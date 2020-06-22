@@ -258,8 +258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseRoleData:
     baseRoleData:
-      roleName: "\u6C34\u679C\u5DE5\u5382"
-      roleType: 8
+      roleName: "NPC\u6C34\u679C\u5DE5\u5382"
+      roleType: 7
       roleSkillType: 0
       level: 0
       effect: 0
@@ -289,6 +289,7 @@ MonoBehaviour:
     inMap: 0
     isNpc: 0
   warehouse: []
+  trash: []
   isNpc: 0
   tradeList: []
   buffList: []
@@ -344,8 +345,10 @@ MonoBehaviour:
   role: {fileID: 0}
   IsOpen: 1
   isPlay: 0
+  isAvaliable: 1
   skillDesc: "\u74DC\uFF08\u901A\u5E38\u5F39\uFF09\u52A0\u5DE5\u4E3A\u5207\u597D\u7684\u74DC\uFF08\u95EA\u7535\u94FE\uFF09"
   buffList: 
+  animationPart: []
 --- !u!1 &4720203674094380097
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,15 +895,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4349f534abb534007841873edff1f3fe, type: 3}
---- !u!4 &4265083929867151404 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6481535761466992333, guid: 4349f534abb534007841873edff1f3fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 7116696022403665633}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &967085228887874111 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8045772783410336990, guid: 4349f534abb534007841873edff1f3fe,
+    type: 3}
+  m_PrefabInstance: {fileID: 7116696022403665633}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4265083929867151404 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6481535761466992333, guid: 4349f534abb534007841873edff1f3fe,
     type: 3}
   m_PrefabInstance: {fileID: 7116696022403665633}
   m_PrefabAsset: {fileID: 0}
