@@ -67,5 +67,12 @@ public class NpcProductInfo : MonoBehaviour
             }
 
         }
+        else
+        {
+            foreach (var sp in buffs)
+            {
+                sp.sprite = Resources.Load<Sprite>("Sprite/Buff/999");
+            }
+        }
     }
 }

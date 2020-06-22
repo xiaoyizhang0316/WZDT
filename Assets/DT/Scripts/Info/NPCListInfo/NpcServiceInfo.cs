@@ -64,5 +64,12 @@ public class NpcServiceInfo : MonoBehaviour
                 i++;
             }
         }
+        else
+        {
+            foreach (var sp in buffs)
+            {
+                sp.sprite = Resources.Load<Sprite>("Sprite/Buff/999");
+            }
+        }
     }
 }
