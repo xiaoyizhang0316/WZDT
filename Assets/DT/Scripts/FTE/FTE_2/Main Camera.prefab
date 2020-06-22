@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &197375987627668680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 197375987627668661}
+  - component: {fileID: 197375987627668682}
+  - component: {fileID: 197375987627668683}
+  - component: {fileID: 197375987627668660}
+  - component: {fileID: 197375987627668663}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &197375987627668661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197375987627668680}
+  m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
+  m_LocalPosition: {x: -8, y: 80, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
+--- !u!20 &197375987627668682
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197375987627668680}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 1.5
+  far clip plane: 1000
+  field of view: 44
+  orthographic: 1
+  orthographic size: 9
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &197375987627668683
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197375987627668680}
+  m_Enabled: 1
+--- !u!114 &197375987627668660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197375987627668680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522f25ea27fb9774bb5c0a656c854c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  cdSprite: {fileID: 0}
+  qualityRecognition: 0
+  seetSprite: {fileID: 0}
+  melonSprite: {fileID: 0}
+  comsumerPos: {fileID: 0}
+  BossValue: 100
+  hand: {fileID: 0}
+  RoleTF: {fileID: 0}
+  SpritePath: Resources/Sprite/
+  PrefabPath: Resources/Prefabs/
+--- !u!114 &197375987627668663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197375987627668680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eeeccc79b8d14843bdbf7b24660b21c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _smoothLength: 20
+  _darkColor: {r: 0, g: 0, b: 0, a: 0}
+  _items:
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
+  - target: {fileID: 0}
+    radius: 0
