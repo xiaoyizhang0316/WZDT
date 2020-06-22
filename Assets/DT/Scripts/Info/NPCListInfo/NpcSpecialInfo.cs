@@ -73,10 +73,12 @@ public class NpcSpecialInfo : MonoBehaviour
                 if (i < baseSkill.buffList.Count)
                 {
                     sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.buffList[i]);
+                    sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.buffList[i]));
                 }
                 else
                 {
                     sp.sprite = NPCListInfo.My.buff;
+                    sp.GetComponent<BuffText>().Reset();
                 }
                 i++;
             }
@@ -86,6 +88,7 @@ public class NpcSpecialInfo : MonoBehaviour
             foreach(var sp in buffs)
             {
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/999");
+                sp.GetComponent<BuffText>().Reset(); 
             }
         }
     }

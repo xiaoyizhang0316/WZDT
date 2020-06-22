@@ -21,7 +21,7 @@ public class ShowBuffText : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         if(currentbuffData != null)
-        RoleUpdateInfo.My.ShowBuffText(currentbuffData.BuffDesc);
+            RoleUpdateInfo.My.ShowBuffText(currentbuffData.BuffDesc);
     }
 
     public void OnPointerExit(PointerEventData eventData)

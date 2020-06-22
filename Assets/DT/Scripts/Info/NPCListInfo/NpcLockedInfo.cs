@@ -60,10 +60,12 @@ public class NpcLockedInfo : MonoBehaviour
                 if (i < npc.GetComponent<BaseSkill>().buffList.Count)
                 {
                     sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + npc.GetComponent<BaseSkill>().buffList[i]);
+                    sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(npc.GetComponent<BaseSkill>().buffList[i]));
                 }
                 else
                 {
                     sp.sprite = NPCListInfo.My.buff;
+                    sp.GetComponent<BuffText>().Reset();
                 }
                 i++;
             }
@@ -73,6 +75,7 @@ public class NpcLockedInfo : MonoBehaviour
             foreach (var sp in buffs)
             {
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/999");
+                sp.GetComponent<BuffText>().Reset();
             }
         }
 

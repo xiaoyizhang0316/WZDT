@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class StatItem : MonoBehaviour
 {
     public Text itemName;
-    public Text itemPerMinAndTotal;
+    public Text itemPerMin;
+    public Text itemTotal;
     //public Text itemTotal;
 
     public void Setup(string name, int perMin, int total)
@@ -17,7 +18,8 @@ public class StatItem : MonoBehaviour
         {
             permin = perMin.ToString();
         }
-        itemPerMinAndTotal.text = string.Format($"{ permin}\t\t{total}");
+        itemPerMin.text = permin;
+        itemTotal.text = total.ToString();
         //itemTotal.text = total.ToString();
 
         if (!gameObject.activeInHierarchy)

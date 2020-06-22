@@ -17,13 +17,17 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     public Transform extraContent;
 
     public Text totalIncome;
+    public Text totalIncomePerMin;
     public Text consumeIncome;
+    public Text consumeIncomePerMin;
     public Text npcNames;
     public Text npcIncome;
     public Text otherNames;
     public Text otherIncome;
     public Text totalCost;
+    public Text totalCostPerMin;
     public Text tradeCost;
+    public Text tradeCostPerMin;
     public Text buildingNames;
     public Text buildingCost;
     public Text extraNames;
@@ -91,10 +95,14 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         isShow = false;
         //mask.SetActive(true);
         statPanel.SetActive(true);
-        this.totalIncome.text = string.Format($"{totalIncome * 60 / timeCount}\t\t{totalIncome}");
-        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}\t\t{totalConsumeIncome}");
-        this.totalCost.text = string.Format($"{totalCost * 60 / timeCount}\t\t{totalCost}");
-        this.tradeCost.text = string.Format($"{tradeCost * 60 / timeCount}\t\t{tradeCost}");
+        totalIncomePerMin.text = (totalIncome * 60 / timeCount).ToString();
+        this.totalIncome.text = totalIncome.ToString();
+        consumeIncomePerMin.text = (totalConsumeIncome * 60 / timeCount).ToString();
+        consumeIncome.text = totalConsumeIncome.ToString();
+        totalCostPerMin.text = (totalCost * 60 / timeCount).ToString();
+        this.totalCost.text = totalCost.ToString();
+        tradeCostPerMin.text = (tradeCost * 60 / timeCount).ToString();
+        this.tradeCost.text = tradeCost.ToString();
 
         if (npcIncomes.Count > 0)
         {
@@ -195,8 +203,10 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         Dictionary<string, int> otherIncomes, int timeCount)
     {
 
-        this.totalIncome.text = string.Format($"{totalIncome * 60 / timeCount}\t\t{totalIncome}");
-        consumeIncome.text = string.Format($"{totalConsumeIncome * 60 / timeCount}\t\t{totalConsumeIncome}");
+        totalIncomePerMin.text = (totalIncome * 60 / timeCount).ToString();
+        this.totalIncome.text = totalIncome.ToString();
+        consumeIncomePerMin.text = (totalConsumeIncome * 60 / timeCount).ToString();
+        consumeIncome.text = totalConsumeIncome.ToString();
         if (npcIncomes.Count > 0)
         {
             int i = 0;
@@ -249,8 +259,10 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     private void ShowExpendNew(int totalCost, int tradeCost, Dictionary<BaseMapRole, int> buildCost,
         Dictionary<string, int> extraCost, int timeCount)
     {
-        this.totalCost.text = string.Format($"{totalCost * 60 / timeCount}\t\t{totalCost}");
-        this.tradeCost.text = string.Format($"{tradeCost * 60 / timeCount}\t\t{tradeCost}");
+        totalCostPerMin.text = (totalCost * 60 / timeCount).ToString();
+        this.totalCost.text = totalCost.ToString();
+        tradeCostPerMin.text = (tradeCost * 60 / timeCount).ToString();
+        this.tradeCost.text = tradeCost.ToString();
         if (buildCost.Count > 0)
         {
             int i = 0;
