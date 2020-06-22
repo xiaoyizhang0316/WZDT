@@ -27,7 +27,8 @@ public class ProductMelon : BaseSkill
                 data.AddBuff(role.GetEquipBuffList()[i]);
             }
             for (int i = 0; i < buffList.Count; i++)
-            {
+            { 
+                
                 data.AddBuff(buffList[i]);
             }
             try
