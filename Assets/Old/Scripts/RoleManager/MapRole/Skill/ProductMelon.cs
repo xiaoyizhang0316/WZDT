@@ -76,7 +76,7 @@ public class ProductMelon : BaseSkill
         {
             foreach (GameObject item in animationPart)
             {
-                if(!item.name.Equals("农块3"))
+                if (!item.name.Equals("农块3"))
                 {
                     item.transform.Rotate(Vector3.right, Space.World);
                 }
@@ -91,5 +91,4 @@ public class ProductMelon : BaseSkill
             }
         }
     }
-
 }

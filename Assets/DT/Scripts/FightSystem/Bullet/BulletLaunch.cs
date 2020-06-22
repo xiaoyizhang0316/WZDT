@@ -181,6 +181,7 @@ public class BulletLaunch : MonoBehaviour
                   tow .GetComponent <BulletEffect>().InitBuff(  tow .GetComponent <BulletEffect>().explosions);
                   tow .GetComponent <BulletEffect>().explosions.SetActive(false);
                   tow .GetComponent <BulletEffect>().tile.SetActive(false);
+                  tow .transform.GetChild(3).gameObject.SetActive(true);
                   tow.transform.position = new Vector3(tow.transform.position.x, 0.4f, tow.transform.position.z);
                   tow.transform.eulerAngles = Vector3.zero;
               });
