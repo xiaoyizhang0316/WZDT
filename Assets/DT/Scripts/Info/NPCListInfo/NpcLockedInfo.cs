@@ -19,11 +19,28 @@ public class NpcLockedInfo : MonoBehaviour
     {
         npcName.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleName;
         skillDes.text = npc.GetComponent<BaseSkill>().skillDesc;
-        timeInterval.text = "";
+        
         tradeCost.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.tradeCost.ToString();
         risk.text = npc.GetComponent<BaseMapRole>().baseRoleData.riskResistance.ToString();
 
         unlockCost.text = unlockNumber.ToString();
+        string timeiva = "";
+        switch (npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType)
+        {
+            case GameEnum.RoleType.Seed:
+                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency / 20f + "/s";
+                break;
+            case GameEnum.RoleType.Merchant:
+                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency + "%";
+                break;
+            case GameEnum.RoleType.Dealer:
+                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency + "%";
+                break;
+            case GameEnum.RoleType.Peasant:
+                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency / 10f + "/s";
+                break;
+        }
+        timeInterval.text = timeiva;
 
         if (npc.GetComponent<NPC>().isCanSeeEquip)
         {
