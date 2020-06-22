@@ -27,6 +27,9 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public BaseMapRole currentNpc;
     public BaseSkill currentSkill;
 
+    public GameObject buffTextContent;
+    public Text buffText;
+
     public Sprite buff;
     // Start is called before the first frame update
     void Start()
@@ -182,5 +185,16 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
             lockedInfo.SetActive(false);
             ShowHideTipPop("解锁失败");
         }
+    }
+
+    public void ShowBuffInfo(string info)
+    {
+        buffText.text = info;
+        buffTextContent.SetActive(true);
+    }
+
+    public void HideBuffInfo()
+    {
+        buffTextContent.SetActive(false);
     }
 }
