@@ -25,12 +25,25 @@ public class NpcServiceInfo : MonoBehaviour
         if (npc.GetComponent<NPC>().isCanSeeEquip)
         {
             int i = 0;
-            foreach (var bf in baseSkill.buffList)
+            //foreach (var bf in baseSkill.buffList)
+            //{
+             //   buffs[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + bf);
+             //   if (i == 2)
+             //   {
+             //       break;
+             //   }
+             //   i++;
+            //}
+
+            foreach (var sp in buffs)
             {
-                buffs[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + bf);
-                if (i == 2)
+                if (i < baseSkill.buffList.Count)
                 {
-                    break;
+                    sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.buffList[i]);
+                }
+                else
+                {
+                    sp.sprite = NPCListInfo.My.buff;
                 }
                 i++;
             }

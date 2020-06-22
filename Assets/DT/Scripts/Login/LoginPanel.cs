@@ -34,6 +34,7 @@ public class LoginPanel : MonoBehaviour
         {
             password_Input.text = password;
         }
+        //Test();
     }
 
     private void Login()
@@ -55,10 +56,13 @@ public class LoginPanel : MonoBehaviour
     private void LoginSuccess()
     {
         SavePasswordOrNot();
+        NetworkMgr.My.loginRecordID = NetworkMgr.My.playerDatas.loginRecordID;
+        NetworkMgr.My.playerID = NetworkMgr.My.playerDatas.playerID;
         // TODO
         if (NetworkMgr.My.playerDatas.status == 0)
         {
             // 创建用户信息
+            HttpManager.My.ShowTip("创建用户信息");
         }
         else
         {
@@ -66,7 +70,8 @@ public class LoginPanel : MonoBehaviour
             {
                 // 第一个问题
                 threeWordsPanel.GetComponent<ThreeWordsPanel>().SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
-                threeWordsPanel.gameObject.SetActive(true);
+                threeWordsPanel.GetChild(0).gameObject.SetActive(true);
+                gameObject.SetActive(false);
             }
             else
             {
@@ -76,6 +81,8 @@ public class LoginPanel : MonoBehaviour
                 }
                 else
                 {
+                    NetworkMgr.My.GetLevelProgress();
+                    //NetworkMgr.My.GetAnswers();
                     SceneManager.LoadScene("Map");
                 }
             }
@@ -85,7 +92,7 @@ public class LoginPanel : MonoBehaviour
     private void LoginFail()
     {
         // TODO
-        // 清楚错误密码
+        // 清除错误密码
         password_Input.text = "";
         PlayerPrefs.DeleteKey("username");
         PlayerPrefs.DeleteKey("password");
@@ -103,5 +110,17 @@ public class LoginPanel : MonoBehaviour
         {
             PlayerPrefs.SetString("password", "0");
         }
+    }
+
+    private void Test()
+    {
+        PlayerDatas playerDatas = new PlayerDatas();
+        playerDatas.playerID = "111";
+        playerDatas.playerName = "test";
+
+        string json = JsonUtility.ToJson(playerDatas);
+        Debug.Log(json);
+        PlayerDatas playerD = JsonUtility.FromJson<PlayerDatas>(json);
+        Debug.Log(playerD.playerName);
     }
 }

@@ -27,7 +27,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public BaseMapRole currentNpc;
     public BaseSkill currentSkill;
 
-    private Tweener twe;
+    public Sprite buff;
     // Start is called before the first frame update
     void Start()
     {
@@ -131,24 +131,19 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
 
     public void ShowHideTipPop(string tip)
     {
-        twe.Kill();
         //useItemPop.GetComponent<NpcPop>()
         npcInfo.SetActive(true);
         HideAll();
         pop.transform.GetChild(0).GetComponent<Text>().text = tip;
         pop.SetActive(true);
         closeBtn.interactable = false;
-        twe = pop.transform.GetChild(0).GetComponent<Text>().DOFade(1, 0.7f).OnComplete(()=> {
+        pop.transform.GetChild(0).GetComponent<Text>().DOFade(0, 2f).OnComplete(()=> {
             //npcInfo.SetActive(false);
-            twe = pop.transform.GetChild(0).GetComponent<Text>().DOFade(0, 0.7f).OnComplete(() =>
-            {
-                twe = pop.transform.GetChild(0).GetComponent<Text>().DOFade(1, 0.01f).Play();
-                pop.SetActive(false);
-                closeBtn.interactable = true;
-                closeBtn.gameObject.SetActive(false);
-            }).Play();
+            pop.transform.GetChild(0).GetComponent<Text>().DOFade(1, 0.01f).Play();
+            pop.SetActive(false);
+            closeBtn.interactable = true;
+            closeBtn.gameObject.SetActive(false);
         }).Play();
-        twe.timeScale = 1f / DOTween.timeScale;
     }
 
     public void ShowUnlckPop(Transform npc)

@@ -12,7 +12,12 @@ public class StatItem : MonoBehaviour
     public void Setup(string name, int perMin, int total)
     {
         itemName.text = name;
-        itemPerMinAndTotal.text = string.Format($"{ perMin.ToString()}\t\t{total.ToString()}");
+        string permin = "";
+        if (perMin != 0)
+        {
+            permin = perMin.ToString();
+        }
+        itemPerMinAndTotal.text = string.Format($"{ permin}\t\t{total}");
         //itemTotal.text = total.ToString();
 
         if (!gameObject.activeInHierarchy)

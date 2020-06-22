@@ -16,6 +16,7 @@ public class HttpManager : MonoSingleton<HttpManager>
 
     public GameObject mask;
     public Text tip;
+    public Transform clickTip;
 
     private string currentURL = "";
     private Action<UnityWebRequest> currenAction;
@@ -44,9 +45,10 @@ public class HttpManager : MonoSingleton<HttpManager>
 
     public IEnumerator HttpSend(string webRequestUrl, Action<UnityWebRequest> action, SortedDictionary<string, string> userData = null, HttpType httpType = HttpType.Get)
     {
-        //mask.SetActive(true);
+        mask.SetActive(true);
         bool isNetworkSlow = false;
         time = 0;
+        Debug.Log("http send");
 
         UnityWebRequest uwr = new UnityWebRequest();
         //if(Application.internetReachability == NetworkReachability.NotReachable)
@@ -118,7 +120,10 @@ public class HttpManager : MonoSingleton<HttpManager>
         {
             if (!string.IsNullOrEmpty(uwr.error) || uwr.isNetworkError || uwr.isHttpError)
             {
-               
+                Debug.Log(uwr.error+uwr.responseCode);
+                //ShowNetworkStatus(uwr.responseCode);
+                ShowTip(uwr.error);
+                mask.SetActive(false);
                 yield break;
             }
             else
@@ -252,6 +257,7 @@ public class HttpManager : MonoSingleton<HttpManager>
                 tip = "服务器暂不可用，请稍后再试~";
                 break;
         }
+        ShowTip(tip);
     }
 
     public void ShowTip(string tipStr, Action doEnd = null)
@@ -265,11 +271,19 @@ public class HttpManager : MonoSingleton<HttpManager>
         }
         tip.gameObject.SetActive(true);
         isTipShow = true;
-        tip.DOFade(0, 1f).SetId("httpTip").OnComplete(()=> {
+        tip.DOFade(0, 2f).SetId("httpTip").OnComplete(()=> {
             tip.gameObject.SetActive(false);
             tip.DOFade(1, 0);
             isTipShow = false;
         });
+    }
+
+    public void ShowClickTip(string tip,Action doEnd=null)
+    {
+        clickTip.GetChild(0).GetComponent<Text>().text = tip;
+        clickTip.gameObject.SetActive(true);
+        clickTip.GetComponent<Button>().onClick.RemoveAllListeners();
+        clickTip.GetComponent<Button>().onClick.AddListener(()=> { doEnd?.Invoke(); });
     }
 }
 

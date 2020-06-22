@@ -78,4 +78,35 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
             child.parent.GetComponent<Image>().sprite = close;
         }
     }
+    // net
+    public void Init(string star, string name, string contet, string mission_1, string mission_2, string mission_3, Action loadScene)
+    {
+        levelName.text = name;
+        content.text = contet;
+        this.mission_1.text = mission_1;
+        this.mission_2.text = mission_2;
+        this.mission_3.text = mission_3;
+        panel.SetActive(true);
+        this.loadScene = loadScene;
+        InitBoxs(star);
+    }
+
+    void InitBoxs(string star)
+    {
+        SetBoxsStatus(star[0], mission_1.transform, box1OpenedImage, box1CloseImage);
+        SetBoxsStatus(star[1], mission_2.transform, box2OpenedImage, box2CloseImage);
+        SetBoxsStatus(star[2], mission_3.transform, box3OpenedImage, box3CloseImage);
+    }
+
+    void SetBoxsStatus(char pos, Transform child, Sprite opened, Sprite close)
+    {
+        if (pos == '1')
+        {
+            child.parent.GetComponent<Image>().sprite = opened;
+        }
+        else
+        {
+            child.parent.GetComponent<Image>().sprite = close;
+        }
+    }
 }
