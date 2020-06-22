@@ -20,12 +20,12 @@ public class RoleBuffSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        BuffInfo.My.Init(buffsign);
+            BuffInfo.My.Init(buffsign);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        BuffInfo.My.MenuHide();
+            BuffInfo.My.MenuHide();
     }
 
     // Start is called before the first frame update
