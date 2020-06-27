@@ -33,6 +33,7 @@ public static class Url
 
     #region equip
     public static string addEquip = ip + "addEquip";
+    public static string getEquips = ip + "getPlayerEquips";
     public static string deleteEquip = ip + "deleteEquip";
     #endregion
 

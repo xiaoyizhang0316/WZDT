@@ -29,7 +29,8 @@ public class LevelSign : MonoBehaviour
             Debug.Log("1231231231");
             Init();
         });
-        InitLevel();
+        if(!NetworkMgr.My.isUsingHttp)
+            InitLevel();
     }
 
     // Update is called once per frame
@@ -108,6 +109,9 @@ public class LevelSign : MonoBehaviour
         while (lastStar.Length < 3)
         {
             lastStar = "0"+ lastStar;
+        }
+        while (currentStar.Length < 3)
+        {
             currentStar = "0" + currentStar;
         }
         stars = currentStar;
@@ -132,5 +136,7 @@ public class LevelSign : MonoBehaviour
                 transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
             }
         }
+        LevelButton.onClick.RemoveAllListeners();
+        LevelButton.onClick.AddListener(Init);
     }
 }

@@ -44,6 +44,7 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                     {
                         if (StageGoal.My.CostTechPoint(costTechNumber))
                         {
+                            StageGoal.My.CostTp(costTechNumber, CostTpType.Mirror);
                             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
                             hit[i].transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip = true;
                             GameObject effect = Instantiate(effectPrb, hit[i].transform);
