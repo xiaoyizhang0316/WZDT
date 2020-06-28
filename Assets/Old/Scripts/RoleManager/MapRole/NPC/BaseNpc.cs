@@ -42,6 +42,7 @@ public abstract class BaseNpc : MonoBehaviour
         if (StageGoal.My.CostTechPoint(lockNumber))
         {
             isLock = false;
+            StageGoal.My.CostTp(lockNumber, CostTpType.Unlock);
             return true;
         }
         return false;

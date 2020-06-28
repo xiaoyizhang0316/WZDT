@@ -31,11 +31,14 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public Text buffText;
 
     public Sprite buff;
+
+    public NpcBulletDetail npcBulletDetail;
     // Start is called before the first frame update
     void Start()
     {
         closeBtn.onClick.AddListener(()=> {
             npcInfo.SetActive(false);
+            specialInfo.GetComponent<NpcSpecialInfo>().Reset();
             closeBtn.gameObject.SetActive(false);
         });
 
@@ -63,16 +66,16 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         switch (currentNpc.baseRoleData.baseRoleData.roleType)
         {
             case GameEnum.RoleType.Seed:
-                ShowSpecialNpc();
+                ShowSpecialNpc(npc);
                 break;
             case GameEnum.RoleType.Peasant:
-                ShowSpecialNpc();
+                ShowSpecialNpc(npc);
                 break;
             case GameEnum.RoleType.Merchant:
-                ShowSpecialNpc();
+                ShowSpecialNpc(npc);
                 break;
             case GameEnum.RoleType.Dealer:
-                ShowSpecialNpc();
+                ShowSpecialNpc(npc);
                 break;
             default:
                 ShowCommonNpc( npc);
@@ -89,7 +92,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         lockedInfo.SetActive(false);
     }
 
-    void ShowSpecialNpc()
+    void ShowSpecialNpc(Transform npc)
     {
         npcInfo.SetActive(true);
         specialTrade.onClick.RemoveAllListeners();
@@ -99,7 +102,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
             npcInfo.SetActive(false);
             closeBtn.gameObject.SetActive(false);
         });
-        specialInfo.GetComponent<NpcSpecialInfo>().SetInfo(currentNpc, currentSkill);
+        specialInfo.GetComponent<NpcSpecialInfo>().SetInfo(currentNpc, currentSkill, npc);
         specialInfo.SetActive(true);
     }
 

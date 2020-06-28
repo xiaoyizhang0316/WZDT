@@ -34,6 +34,8 @@ public class LoginPanel : MonoBehaviour
         {
             password_Input.text = password;
         }
+        username_Input.ActivateInputField();
+        username_Input.MoveTextEnd(true);
         //Test();
     }
 
@@ -46,6 +48,8 @@ public class LoginPanel : MonoBehaviour
         {
             Debug.LogWarning("用户名或密码不能为空!");
             HttpManager.My.ShowTip("用户名或密码不能为空!");
+            username_Input.ActivateInputField();
+            username_Input.MoveTextEnd(true);
         }
         else
         {
@@ -56,8 +60,8 @@ public class LoginPanel : MonoBehaviour
     private void LoginSuccess()
     {
         SavePasswordOrNot();
-        NetworkMgr.My.loginRecordID = NetworkMgr.My.playerDatas.loginRecordID;
-        NetworkMgr.My.playerID = NetworkMgr.My.playerDatas.playerID;
+        //NetworkMgr.My.loginRecordID = NetworkMgr.My.playerDatas.loginRecordID;
+        //NetworkMgr.My.playerID = NetworkMgr.My.playerDatas.playerID;
         // TODO
         if (NetworkMgr.My.playerDatas.status == 0)
         {
@@ -82,6 +86,7 @@ public class LoginPanel : MonoBehaviour
                 else
                 {
                     NetworkMgr.My.GetLevelProgress();
+                    NetworkMgr.My.GetPlayerEquips();
                     //NetworkMgr.My.GetAnswers();
                     SceneManager.LoadScene("Map");
                 }
@@ -97,6 +102,8 @@ public class LoginPanel : MonoBehaviour
         PlayerPrefs.DeleteKey("username");
         PlayerPrefs.DeleteKey("password");
         HttpManager.My.ShowTip("用户名或密码错误，请重新输入!");
+        username_Input.ActivateInputField();
+        username_Input.MoveTextEnd(true);
     }
 
     private void SavePasswordOrNot()
@@ -110,6 +117,26 @@ public class LoginPanel : MonoBehaviour
         {
             PlayerPrefs.SetString("password", "0");
         }
+    }
+
+    private void Update()
+    {
+        //if (Input.anyKeyDown)
+        //{
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                if (username_Input.isFocused)
+                {
+                    password_Input.ActivateInputField();
+                    password_Input.MoveTextEnd(true);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Login();
+            }
+        //}
     }
 
     private void Test()
