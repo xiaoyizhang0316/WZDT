@@ -88,9 +88,9 @@ public abstract class BaseNpc : MonoBehaviour
         GetComponent<BaseMapRole>().isNpc = true;
         GetComponent<BaseMapRole>().baseRoleData.isNpc = true;
         GetComponent<BaseMapRole>().baseRoleData.inMap = true;
-        for (int i = 0; i < NPCgear.Count; i++)
+        for (int i = 0; i < NPCBuffList.Count; i++)
         {
-            GetComponent<BaseMapRole>().baseRoleData.EquipList.Add(NPCgear[i], Vector3.zero);
+            GetComponent<BaseMapRole>().baseRoleData.EquipList.Add(NPCBuffList[i], Vector3.zero);
         }
         if (isCanSee)
         {
