@@ -1763,79 +1763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d631e59b2bc334b83ab293c2f21606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &220183110
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 220183111}
-  - component: {fileID: 220183113}
-  - component: {fileID: 220183112}
-  m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &220183111
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220183110}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -232}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 820818632}
-  m_RootOrder: 23
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -800, y: 314}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &220183112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220183110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.015686275}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &220183113
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220183110}
-  m_CullTransparentMesh: 0
 --- !u!1 &224334379
 GameObject:
   m_ObjectHideFlags: 0
@@ -4765,7 +4692,7 @@ MonoBehaviour:
     radius: 0
   - target: {fileID: 587959425}
     radius: 0
-  - target: {fileID: 220183111}
+  - target: {fileID: 0}
     radius: 0
   - target: {fileID: 1368284777}
     radius: 0
@@ -5395,12 +5322,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7397686102021284340, guid: e3e8049fb83dfd9499077d0755ec919d,
     type: 3}
   m_PrefabInstance: {fileID: 817898588}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &820818632 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5578415290082428321, guid: 0d504daa51ecf5245804106862ffeb76,
-    type: 3}
-  m_PrefabInstance: {fileID: 5578415291692612235}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &827548049
 GameObject:
@@ -12686,6 +12607,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_FTE
       objectReference: {fileID: 0}
+    - target: {fileID: 1263914161780229802, guid: 4cae50a425fd5754283f2e68380289c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5014489348137107045, guid: 4cae50a425fd5754283f2e68380289c2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16334,6 +16260,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FTE
       objectReference: {fileID: 0}
+    - target: {fileID: 6730719145944875773, guid: e64942e184f2b344091945714f21e84d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6730719145944875774, guid: e64942e184f2b344091945714f21e84d,
         type: 3}
       propertyPath: Steps.Array.data[0]
@@ -16477,7 +16408,7 @@ PrefabInstance:
     - target: {fileID: 6730719145944875774, guid: e64942e184f2b344091945714f21e84d,
         type: 3}
       propertyPath: currentIndex
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6730719145944875775, guid: e64942e184f2b344091945714f21e84d,
         type: 3}
