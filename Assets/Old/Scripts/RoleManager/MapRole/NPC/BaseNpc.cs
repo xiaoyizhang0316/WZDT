@@ -89,10 +89,6 @@ public abstract class BaseNpc : MonoBehaviour
         GetComponent<BaseMapRole>().isNpc = true;
         GetComponent<BaseMapRole>().baseRoleData.isNpc = true;
         GetComponent<BaseMapRole>().baseRoleData.inMap = true;
-        for (int i = 0; i < NPCgear.Count; i++)
-        {
-            GetComponent<BaseMapRole>().baseRoleData.EquipList.Add(NPCgear[i], Vector3.zero);
-        }
         if (isCanSee)
         {
             hideModel.SetActive(false);
