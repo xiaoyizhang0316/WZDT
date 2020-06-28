@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 839442225}
   - component: {fileID: 839442226}
   - component: {fileID: 839442228}
+  - component: {fileID: 4968118238316722309}
   m_Layer: 0
   m_Name: DontDestroyOnLoad
   m_TagString: Untagged
@@ -49,6 +50,9 @@ MonoBehaviour:
   gearDatas: []
   workerDatas: []
   buffDatas: []
+  consumableDatas: []
+  stageDatas: []
+  consumerTypeDatas: []
 --- !u!114 &839442226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,3 +93,24 @@ MonoBehaviour:
   playerGears: []
   playerWorkers: []
   playerConsumables: []
+--- !u!114 &4968118238316722309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531665719386827218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3515432ad067b49688881ac64102906b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forbiddenTrade:
+  - startRole: 25
+    endRole: 0
+  - startRole: 3
+    endRole: 25
+  - startRole: 2
+    endRole: 1
+  - startRole: 0
+    endRole: 2

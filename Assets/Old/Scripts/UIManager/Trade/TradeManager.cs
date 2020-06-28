@@ -98,6 +98,11 @@ public class TradeManager : MonoSingleton<TradeManager>
             return true;
     }
 
+    public bool CheckTradeConstraint()
+    {
+        return TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleType);
+    }
+
     /// <summary>
     /// 检测技能可施放数量
     /// </summary>
@@ -125,7 +130,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// <returns></returns>
     public bool CheckTradeCondition()
     {
-        return CheckStartAndEnd() && CheckNpcActive() && CheckDuplicateTrade() && CheckSkillCountLimit();
+        return CheckStartAndEnd() && CheckNpcActive() && CheckDuplicateTrade() && CheckSkillCountLimit() && CheckTradeConstraint();
     }
 
     /// <summary>

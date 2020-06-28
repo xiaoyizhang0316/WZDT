@@ -55,10 +55,10 @@ public class ProductMerchant : BaseSkill
                         }
                     }
                 }
-                    for (int i = 0; i < buffList.Count; i++)
-                    {
-                        data.AddBuff(buffList[i]);
-                    }
+                for (int i = 0; i < buffList.Count; i++)
+                {
+                    data.AddBuff(buffList[i]);
+                }
                 GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
                 game.GetComponent<GoodsSign>().productData = data;
                 game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();
