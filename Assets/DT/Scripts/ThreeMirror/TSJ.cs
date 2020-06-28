@@ -50,6 +50,7 @@ public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                 {
                     if (StageGoal.My.CostTechPoint(costTechNumber))
                     {
+                        StageGoal.My.CostTp(costTechNumber, CostTpType.Mirror);
                         AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
                         hit[i].transform.GetComponent<Building>().isUseTSJ = true;
                         GameObject effect = Instantiate(effectPrb, hit[i].transform);

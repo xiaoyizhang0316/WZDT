@@ -17,65 +17,49 @@ public class NpcLockedInfo : MonoBehaviour
 
     public void SetInfo(Transform npc, int unlockNumber)
     {
+        BaseSkill baseSkill = npc.GetComponent<BaseSkill>();
         npcName.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleName;
         skillDes.text = npc.GetComponent<BaseSkill>().skillDesc;
         
-        tradeCost.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.tradeCost.ToString();
+        tradeCost.text = npc.GetComponent<BaseMapRole>().baseRoleData.tradeCost.ToString();
         risk.text = npc.GetComponent<BaseMapRole>().baseRoleData.riskResistance.ToString();
 
         unlockCost.text = unlockNumber.ToString();
-        string timeiva = "";
-        switch (npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType)
-        {
-            case GameEnum.RoleType.Seed:
-                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency / 20f + "/s";
-                break;
-            case GameEnum.RoleType.Merchant:
-                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency + "%";
-                break;
-            case GameEnum.RoleType.Dealer:
-                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency + "%";
-                break;
-            case GameEnum.RoleType.Peasant:
-                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency / 10f + "/s";
-                break;
-        }
-        timeInterval.text = timeiva;
 
-        if (npc.GetComponent<NPC>().isCanSeeEquip)
-        {
-            int i = 0;
-            //foreach (var bf in npc.GetComponent<BaseSkill>().buffList)
-            //{
-             //   buffs[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + bf);
-            //    if (i == 2)
-             //   {
-             //       break;
-             //   }
-             //   i++;
-            //}
+        timeInterval.text = (1.0f / npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("#.##");
 
-            foreach (var sp in buffs)
+        int i = 0;
+        foreach (var sp in buffs)
+        {
+            if (i < baseSkill.buffList.Count)
             {
-                if (i < npc.GetComponent<BaseSkill>().buffList.Count)
-                {
-                    sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + npc.GetComponent<BaseSkill>().buffList[i]);
-                    sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(npc.GetComponent<BaseSkill>().buffList[i]));
-                }
-                else
-                {
-                    sp.sprite = NPCListInfo.My.buff;
-                    sp.GetComponent<BuffText>().Reset();
-                }
-                i++;
+                sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.buffList[i]);
+                sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.buffList[i]));
             }
-        }
-        else
-        {
-            foreach (var sp in buffs)
+            else
             {
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/999");
                 sp.GetComponent<BuffText>().Reset();
+            }
+            i++;
+        }
+
+        if (npc.GetComponent<NPC>().isCanSeeEquip)
+        {
+            int a = 0;
+            for (int j = baseSkill.buffList.Count; j < buffs.Count; j++)
+            {
+                if (a < npc.GetComponent<NPC>().NPCBuffList.Count)
+                {
+                    buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + npc.GetComponent<NPC>().NPCBuffList[a]);
+                    buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(npc.GetComponent<NPC>().NPCBuffList[a]));
+                }
+                else
+                {
+                    buffs[j].sprite = NPCListInfo.My.buff;
+                    buffs[j].GetComponent<BuffText>().Reset();
+                }
+                a++;
             }
         }
 

@@ -107,9 +107,22 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public int productCost = 0;
 
+    public int extraCosts = 0;
+
     public int totalIncome = 0;
 
     public int consumeIncome = 0;
+
+    public int npcIncome = 0;
+
+    public int otherIncome = 0;
+
+    public int npcTpIncome = 0;
+    public int workerTpIncome = 0;
+    public int buffTpIncome = 0;
+    public int buildTpCost = 0;
+    public int mirrorTpCost = 0;
+    public int unlockTpCost = 0;
 
     public List<DataStat> dataStats;
 
@@ -346,6 +359,14 @@ public class StageGoal : MonoSingleton<StageGoal>
             NewCanvasUI.My.GamePause();
             NewCanvasUI.My.lose.SetActive(true);
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
+            if (NetworkMgr.My.isUsingHttp)
+            {
+                LevelRecord levelRecord = new LevelRecord(NetworkMgr.My.playerID, NetworkMgr.My.currentLevel, 0,
+                    tradeCost, productCost, extraCosts, consumeIncome, npcIncome, otherIncome, buildTpCost, mirrorTpCost,
+                    unlockTpCost, npcTpIncome, workerTpIncome, buffTpIncome, playerTechPoint, currentWave, playerGold, 0,
+                    timeCount, NetworkMgr.My.startTime, TimeStamp.GetCurrentTimeStamp());
+                NetworkMgr.My.AddLevelRecord(levelRecord);
+            }
         }
         else
             return;
@@ -513,6 +534,16 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         string sceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(ReadStageEnemyData(sceneName));
+        if(sceneName != "FTE_0")
+        {
+            if (NetworkMgr.My.isUsingHttp)
+            {
+                // 获取游戏开始时间
+                NetworkMgr.My.LevelStartTime();
+                // 获取游戏关卡
+                NetworkMgr.My.currentLevel = int.Parse(sceneName.Split('_')[1]);
+            }
+        }
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
         playerGold = data.startPlayerGold;
         playerSatisfy = 0;
@@ -639,6 +670,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                 consumeIncome += num;
                 break;
             case IncomeType.Npc:
+                npcIncome += num;
                 if (npcIncomes.ContainsKey(npc))
                 {
                     npcIncomes[npc] += num;
@@ -649,6 +681,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
                 break;
             case IncomeType.Other:
+                otherIncome += num;
                 if (otherIncomes.ContainsKey(otherName))
                 {
                     otherIncomes[otherName] += num;
@@ -686,6 +719,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
                 break;
             case ExpendType.AdditionalCosts:
+                extraCosts += num;
                 if (extraCost.ContainsKey(extraName))
                 {
                     extraCost[extraName] += num;
@@ -699,6 +733,38 @@ public class StageGoal : MonoSingleton<StageGoal>
                 break;
         }
         DataStatPanel.My.RefreshExpend(totalCost, tradeCost, buildingCosts, extraCost, timeCount);
+    }
+
+    public void IncomeTp(int num, IncomeTpType incomeTpType)
+    {
+        switch (incomeTpType)
+        {
+            case IncomeTpType.Npc:
+                npcTpIncome += num;
+                break;
+            case IncomeTpType.Worker:
+                workerTpIncome += num;
+                break;
+            case IncomeTpType.Buff:
+                buffTpIncome += num;
+                break;
+        }
+    }
+
+    public void CostTp(int num, CostTpType costTpType)
+    {
+        switch (costTpType)
+        {
+            case CostTpType.Build:
+                buildTpCost += num;
+                break;
+            case CostTpType.Mirror:
+                mirrorTpCost += num;
+                break;
+            case CostTpType.Unlock:
+                unlockTpCost += num;
+                break;
+        }
     }
 
     private void Stat()

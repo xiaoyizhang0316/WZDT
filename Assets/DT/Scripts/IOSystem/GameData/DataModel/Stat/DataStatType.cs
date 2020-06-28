@@ -20,3 +20,17 @@ public enum ExpendType
     ProductCosts,
     AdditionalCosts
 }
+
+public enum IncomeTpType
+{
+    Npc,
+    Worker,
+    Buff
+}
+
+public enum CostTpType
+{
+    Build,
+    Mirror,
+    Unlock
+}
