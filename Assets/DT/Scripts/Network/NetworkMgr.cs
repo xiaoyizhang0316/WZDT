@@ -60,7 +60,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     playerID = playerDatas.playerID;
                     loginRecordID = playerDatas.loginRecordID;
                     token = playerDatas.token;
-                    Debug.Log("token-----" + token);
+                    //Debug.Log("token-----" + token);
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -225,7 +225,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("token", token);
         StartCoroutine(HttpManager.My.HttpSend(Url.getAnswers, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
-            Debug.Log(response.errMsg);
+            //Debug.Log(response.errMsg);
             if (response.status == -1)
             {
                 GoToLogin(response.errMsg);
@@ -280,7 +280,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             else
             {
-                Debug.Log(response.data);
+                //Debug.Log(response.data);
                 try
                 {
                     levelProgress = JsonUtility.FromJson<LevelProgress>(response.data);
