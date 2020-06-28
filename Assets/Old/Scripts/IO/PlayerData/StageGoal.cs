@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Linq;
 using System;
+using static GameEnum;
 
 public class StageGoal : MonoSingleton<StageGoal>
 {
@@ -62,6 +63,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     public Tweener waveTween;
 
     private bool wudi = false;
+
+    /// <summary>
+    /// 玩家操作时间戳列表
+    /// </summary>
+    public List<PlayerOperation> playerOperations = new List<PlayerOperation>();
 
     #region UI
 
@@ -411,6 +417,19 @@ public class StageGoal : MonoSingleton<StageGoal>
     }
 
     /// <summary>
+    /// 生成玩家操作记录
+    /// </summary>
+    public void RecordOperation(OperationType _type, List<string> param)
+    {
+        PlayerOperation operation = new PlayerOperation();
+        operation.type = _type;
+        operation.operateTime = timeCount;
+        operation.operationParam = new List<string>();
+        operation.operationParam.AddRange(param);
+        playerOperations.Add(operation);
+    }
+
+    /// <summary>
     /// 获得星数对应的装备
     /// </summary>
     /// <param name="starNumber"></param>
@@ -478,6 +497,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         return result;
     }
 
+    /// <summary>
+    /// 获得之前关卡所有装备（调试用）
+    /// </summary>
     public void GetAllPreviousAward()
     {
         int count = int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]);
@@ -784,5 +806,17 @@ public class StageGoal : MonoSingleton<StageGoal>
             //list += string.Format($"{ds.blood}\t{ds.score}\t{ds.cost}\t{ds.tradeCost}\t{ds.totalGold}\n");
         }
         return list;
+    }
+
+    /// <summary>
+    /// 玩家操作结构
+    /// </summary>
+    public struct PlayerOperation
+    {
+        public int operateTime;
+
+        public OperationType type;
+
+        public List<string> operationParam;
     }
 }
