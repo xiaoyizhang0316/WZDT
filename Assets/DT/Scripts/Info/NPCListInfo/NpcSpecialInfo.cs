@@ -55,42 +55,41 @@ public class NpcSpecialInfo : MonoBehaviour
                 dealerProp.SetActive(true);
                 break;
         }
-
+        int i = 0;
+        foreach(var sp in buffs)
+        {
+            if (i < baseSkill.buffList.Count)
+            {
+                sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.buffList[i]);
+                sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.buffList[i]));
+            }
+            else
+            {
+                sp.sprite = Resources.Load<Sprite>("Sprite/Buff/999");
+                sp.GetComponent<BuffText>().Reset();
+            }
+        }
+        
         if (npc.GetComponent<NPC>().isCanSeeEquip)
         {
-            int i = 0;
-            //foreach (var bf in baseSkill.buffList)
-            //{
-            //    buffs[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + bf);
-            //    if (i == 2)
-            //    {
-            //        break;
-            //    }
-            //    i++;
-            //}
-            foreach(var sp in buffs)
+            int a = 0;
+            for (int j = baseSkill.buffList.Count; j < buffs.Count; j++)
             {
-                if (i < baseSkill.buffList.Count)
+                if(a< npc.GetComponent<NPC>().NPCBuffList.Count)
                 {
-                    sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.buffList[i]);
-                    sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.buffList[i]));
+                    buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + npc.GetComponent<NPC>().NPCBuffList[a]);
+                    buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(npc.GetComponent<NPC>().NPCBuffList[a]));
                 }
                 else
                 {
-                    sp.sprite = NPCListInfo.My.buff;
-                    sp.GetComponent<BuffText>().Reset();
+                    buffs[j].sprite = NPCListInfo.My.buff;
+                    buffs[j].GetComponent<BuffText>().Reset();
                 }
-                i++;
+                a++;
             }
         }
-        else
-        {
-            foreach(var sp in buffs)
-            {
-                sp.sprite = Resources.Load<Sprite>("Sprite/Buff/999");
-                sp.GetComponent<BuffText>().Reset(); 
-            }
-        }
+        
+        
     }
 
     void HideAll()
