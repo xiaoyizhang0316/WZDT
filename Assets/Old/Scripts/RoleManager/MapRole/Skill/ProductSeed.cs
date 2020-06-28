@@ -31,18 +31,15 @@ public class ProductSeed : BaseSkill
         {
             if (role.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
             {
-                for (int i = 0; i < buffList.Count; i++)
+                for (int i = 0; i < role.GetComponentInChildren<BaseNpc>().NPCBuffList.Count; i++)
                 {
-                    data.AddBuff(buffList[i]);
+                    data.AddBuff(role.GetComponentInChildren<BaseNpc>().NPCBuffList[i]);
                 }
             }
         }
-        else
+        for (int i = 0; i < buffList.Count; i++)
         {
-            for (int i = 0; i < buffList.Count; i++)
-            {
-                data.AddBuff(buffList[i]);
-            }
+            data.AddBuff(buffList[i]);
         }
         try
         {
