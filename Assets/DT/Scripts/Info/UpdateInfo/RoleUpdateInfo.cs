@@ -20,6 +20,8 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     public Button delete;
     public Text level;
 
+    public Text skillDesc;
+
     public Button hammer;
     public Button update;
     public string roleName;
@@ -102,6 +104,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     {     
         name.text = role.baseRoleData.roleName;
         roleName = role.baseRoleData.roleName;
+        skillDesc.text = PlayerData.My.GetMapRoleById(role.ID).transform.GetComponent<BaseSkill>().skillDesc;
         currentRole = role; 
         seed.SetActive(false);
         peasant.SetActive(false);
