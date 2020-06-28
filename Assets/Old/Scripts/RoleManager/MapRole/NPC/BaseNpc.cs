@@ -25,9 +25,9 @@ public abstract class BaseNpc : MonoBehaviour
     public int lockNumber;
 
     /// <summary>
-    /// NPC装备
+    /// NPC提供的buffList(多棱镜)
     /// </summary>
-    public List<int> NPCgear = new List<int>();
+    public List<int> NPCBuffList = new List<int>();
 
     public GameObject hideModel;
 
