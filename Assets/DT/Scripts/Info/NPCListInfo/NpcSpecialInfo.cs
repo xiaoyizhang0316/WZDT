@@ -89,6 +89,7 @@ public class NpcSpecialInfo : MonoBehaviour
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/999");
                 sp.GetComponent<BuffText>().Reset();
             }
+            i++;
         }
         
         if (npc.GetComponent<NPC>().isCanSeeEquip)
