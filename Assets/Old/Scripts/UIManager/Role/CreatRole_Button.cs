@@ -103,6 +103,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 if (MapManager.My.CheckLandAvailable(x, y) && StageGoal.My.CostTechPoint(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech))
                 {
                     print("true ");
+                    StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech, CostTpType.Build);
                     role.transform.position = hit[j].transform.position + new Vector3(0f, 2f, 0f);
                     role.transform.DOMove(hit[j].transform.position + new Vector3(0f,0.3f,0f), 0.2f).OnComplete(() =>
                     {

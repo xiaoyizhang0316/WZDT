@@ -269,6 +269,7 @@ public class BaseMapRole : MonoBehaviour
         transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             StageGoal.My.GetTechPoint(baseRoleData.techAdd);
+            StageGoal.My.IncomeTp(baseRoleData.techAdd, IncomeTpType.Npc);
             AddTechPoint();
         });
     }

@@ -234,6 +234,7 @@ public class BaseBuff
             case 4:
                 CalculateNumber(str, ref buffConfig.playerTechPointChange, StageGoal.My.playerTechPoint);
                 StageGoal.My.GetTechPoint(buffConfig.playerTechPointChange);;
+                StageGoal.My.IncomeTp(buffConfig.playerTechPointChange, IncomeTpType.Buff);
                 break;
             default:
                 break;

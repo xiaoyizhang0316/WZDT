@@ -22,25 +22,10 @@ public class NpcProductInfo : MonoBehaviour
         npcName.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleName;
         des.text = baseSkill.skillDesc;
         //timeInv
-        cost.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.tradeCost.ToString();
-        risk.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.riskResistance.ToString();
-        string timeiva = "";
-        switch (npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType)
-        {
-            case GameEnum.RoleType.Seed:
-                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency / 20f + "/s";
-                break;
-            case GameEnum.RoleType.Merchant:
-                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency + "%";
-                break;
-            case GameEnum.RoleType.Dealer:
-                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency + "%";
-                break;
-            case GameEnum.RoleType.Peasant:
-                timeiva = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.efficiency / 10f + "/s";
-                break;
-        }
-        timeInv.text = timeiva;
+        cost.text = npc.GetComponent<BaseMapRole>().baseRoleData.tradeCost.ToString();
+        risk.text = npc.GetComponent<BaseMapRole>().baseRoleData.riskResistance.ToString();
+        
+        timeInv.text = (1.0f / npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("#.##");
         if (npc.GetComponent<NPC>().isCanSeeEquip)
         {
             int i = 0;

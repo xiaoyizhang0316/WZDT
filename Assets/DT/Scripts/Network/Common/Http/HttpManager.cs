@@ -48,7 +48,7 @@ public class HttpManager : MonoSingleton<HttpManager>
         mask.SetActive(true);
         bool isNetworkSlow = false;
         time = 0;
-        Debug.Log("http send");
+        //Debug.Log("http send");
 
         UnityWebRequest uwr = new UnityWebRequest();
         //if(Application.internetReachability == NetworkReachability.NotReachable)
@@ -77,7 +77,7 @@ public class HttpManager : MonoSingleton<HttpManager>
             //}
             uwr = unityWebRequest.Request(webRequestUrl, userData, httpType);
         //}
-        Debug.Log(uwr.responseCode);
+        //Debug.Log(uwr.responseCode);
         while (true)
         {
             //Debug.Log("code----------------" + uwr.responseCode);
@@ -271,7 +271,7 @@ public class HttpManager : MonoSingleton<HttpManager>
         }
         tip.gameObject.SetActive(true);
         isTipShow = true;
-        tip.DOFade(0, 2f).SetId("httpTip").OnComplete(()=> {
+        tip.DOFade(0, 2f).SetId("httpTip").Play().OnComplete(()=> {
             tip.gameObject.SetActive(false);
             tip.DOFade(1, 0);
             isTipShow = false;
