@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class AutoFireTow : MonoBehaviour
 {
-    private ConsumeSign Asign;
+    public  ConsumeSign Asign;
 
     public Transform launchShooter;
     public ProductData data;
@@ -15,6 +15,10 @@ public class AutoFireTow : MonoBehaviour
     public float shootTime;
 
     public float destroyTime;
+
+    public ConsumeSign target;
+
+    public bool isupdate = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,25 +29,46 @@ public class AutoFireTow : MonoBehaviour
     }
 
     // Update is called once per frame
+    private Vector3 pos = new Vector3();
     void Update()
     {
-        
+        if (!isupdate)
+        {
+            return;
+        }
+
+        if (target != null)
+        {
+            Debug.Log("buweikong");
+            transform.position =target.transform.position;
+            pos = target.transform.position;
+        }
+
+        else
+        {
+            transform.position =pos;
+
+        }
     }
     
     public bool GetminDisConsumer()
     {
         List<ConsumeSign> signs = FindObjectsOfType<ConsumeSign>().ToList();
         bool find = false;
+        pos = transform.position;
         Asign = null;
         float dis = 2;
         for (int i = 0; i < signs.Count; i++)
         {
             if (  signs[i].isCanSelect)
             {
-                if (Vector3.Distance( transform.position, signs[i].transform.position) < dis)
+                if (Vector3.Distance( transform.position, signs[i].transform.position) < dis&&Vector3.Distance( transform.position, signs[i].transform.position)>0.1f)
                 {
+                    
+
                     dis = Vector3.Distance( transform.position, signs[i].transform.position);
                     Asign = signs[i];
+                  
                     find =  true;
                 }
             }
@@ -57,7 +82,8 @@ public class AutoFireTow : MonoBehaviour
         if (Asign != null)
         {
             //GetComponent<BulletLaunch>().fire .SetActive(true);
-            GetComponent<BulletLaunch>().LanchLeaser(data, Asign, launchShooter,lunch);
+            
+            GetComponent<BulletLaunch>().LanchLeaser(data, Asign, launchShooter,lunch,transform);
         }
         else
         {
