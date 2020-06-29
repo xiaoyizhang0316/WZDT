@@ -59,6 +59,8 @@ public class WinManager : MonoSingleton<WinManager>
 
     public Button retry;
 
+    public Button review;
+
     private int stars = 0;
     private string[] starArr;
     public void InitWin()
@@ -340,7 +342,11 @@ public class WinManager : MonoSingleton<WinManager>
                 PlayerData.My.Reset();
                 SceneManager.LoadScene("Map");
             }
-            
+        });
+        review.onClick.AddListener(() =>
+        {
+            NewCanvasUI.My.Panel_Review.SetActive(true);
+            ReviewPanel.My.Init(StageGoal.My.playerOperations);
         });
     }
 

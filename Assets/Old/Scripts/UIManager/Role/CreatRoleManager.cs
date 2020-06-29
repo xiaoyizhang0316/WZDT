@@ -408,7 +408,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     public void ChangeRoleRecord(Role role)
     {
         List<string> param = new List<string>();
-        param.Add(role.baseRoleData.roleName);
+        param.Add(role.ID.ToString());
         BaseMapRole mapRole = PlayerData.My.GetMapRoleById(role.ID);
         List<int> buffList = new List<int>();
         buffList.AddRange(mapRole.GetEquipBuffList());

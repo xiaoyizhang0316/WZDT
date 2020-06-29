@@ -146,6 +146,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     public void CreateRoleOperationRecord(BaseMapRole mapRole)
     {
         List<string> param = new List<string>();
+        param.Add(mapRole.baseRoleData.ID.ToString());
         param.Add(mapRole.baseRoleData.baseRoleData.roleName);
         param.Add(mapRole.baseRoleData.baseRoleData.roleType.ToString());
         StageGoal.My.RecordOperation(OperationType.PutRole, param);

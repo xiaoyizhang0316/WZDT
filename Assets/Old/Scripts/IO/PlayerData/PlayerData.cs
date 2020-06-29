@@ -144,7 +144,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     public void DeleleRoleOperationRecord(BaseMapRole mapRole)
     {
         List<string> param = new List<string>();
-        param.Add(mapRole.baseRoleData.baseRoleData.roleName);
+        param.Add(mapRole.baseRoleData.ID.ToString());
         StageGoal.My.RecordOperation(OperationType.DeleteRole, param);
     }
 
