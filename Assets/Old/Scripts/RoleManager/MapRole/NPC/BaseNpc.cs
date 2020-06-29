@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class BaseNpc : MonoBehaviour
 {
@@ -25,9 +26,9 @@ public abstract class BaseNpc : MonoBehaviour
     public int lockNumber;
 
     /// <summary>
-    /// NPC装备
+    /// NPC提供的buffList(多棱镜)
     /// </summary>
-    public List<int> NPCgear = new List<int>();
+    public List<int> NPCBuffList = new List<int>();
 
     public GameObject hideModel;
 
@@ -42,6 +43,7 @@ public abstract class BaseNpc : MonoBehaviour
         if (StageGoal.My.CostTechPoint(lockNumber))
         {
             isLock = false;
+            StageGoal.My.CostTp(lockNumber, CostTpType.Unlock);
             return true;
         }
         return false;
@@ -68,6 +70,8 @@ public abstract class BaseNpc : MonoBehaviour
     /// </summary>
     public void InitSetLand()
     {
+        if (SceneManager.GetActiveScene().name.Equals("FTE_0"))
+            return;
         RaycastHit[] hit;
         hit = Physics.RaycastAll(transform.position + new Vector3(0f, 5f, 0f), Vector3.down);
         for (int j = 0; j < hit.Length; j++)
@@ -88,10 +92,6 @@ public abstract class BaseNpc : MonoBehaviour
         GetComponent<BaseMapRole>().isNpc = true;
         GetComponent<BaseMapRole>().baseRoleData.isNpc = true;
         GetComponent<BaseMapRole>().baseRoleData.inMap = true;
-        for (int i = 0; i < NPCgear.Count; i++)
-        {
-            GetComponent<BaseMapRole>().baseRoleData.EquipList.Add(NPCgear[i], Vector3.zero);
-        }
         if (isCanSee)
         {
             hideModel.SetActive(false);

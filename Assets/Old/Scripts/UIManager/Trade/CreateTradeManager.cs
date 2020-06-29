@@ -113,6 +113,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         endRolePanel.Find("EndRoleRisk").GetComponent<Text>().text = end.baseRoleData.riskResistance.ToString();
         startRolePanel.Find("StartRoleTradeCost").GetComponent<Text>().text = start.baseRoleData.tradeCost.ToString();
         startRolePanel.Find("StartRoleRisk").GetComponent<Text>().text = start.baseRoleData.riskResistance.ToString();
+        startName.text = start.baseRoleData.baseRoleData.roleName;
+        endName.text = end.baseRoleData.baseRoleData.roleName;
         startRolePanel.transform.DOLocalMoveX(-220f,0.5f).Play().timeScale = 1f / DOTween.timeScale;
         endRolePanel.transform.DOLocalMoveX(220f, 0.5f).Play().timeScale = 1f / DOTween.timeScale;
     }
@@ -125,18 +127,40 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole));
         int result = startRole.baseRoleData.tradeCost + endRole.baseRoleData.tradeCost;
-        if (currentTrade.tradeData.selectCashFlow == CashFlowType.先钱)
-        {
-            result += (int)(startRole.baseRoleData.riskResistance * 0.7f + endRole.baseRoleData.riskResistance * 1.3f);
-        }
-        else if (currentTrade.tradeData.selectCashFlow == CashFlowType.后钱)
-        {
-            result += (int)(startRole.baseRoleData.riskResistance * 1.3f + endRole.baseRoleData.riskResistance * 0.7f);
-        }
+        result += startRole.baseRoleData.riskResistance + endRole.baseRoleData.riskResistance;
+        int result1, result2;
         if (startRole.isNpc || endRole.isNpc)
-            result /= 20;
+        {
+            result1 = (int)(result * 0.6f);
+            result2 = (int)(result * 0.3f);
+        }
         else
-            result /= 10;
+        {
+            result1 = (int)(result * 0.5f);
+            result2 = (int)(result * 0.2f);
+        }
+        if (currentTrade.randomIndex == 0)
+        {
+            if (currentTrade.tradeData.selectCashFlow == CashFlowType.先钱)
+            {
+                result = result1;
+            }
+            else
+            {
+                result = result2;
+            }
+        }
+        else if (currentTrade.randomIndex == 1)
+        {
+            if (currentTrade.tradeData.selectCashFlow == CashFlowType.先钱)
+            {
+                result = result2;
+            }
+            else
+            {
+                result = result1;
+            }
+        }
         tradeCostText.text = result.ToString();
     }
 
@@ -173,6 +197,14 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
             moneyFirstButton.interactable = true;
             moneyLastButton.interactable = false;
         }
+        if (selectCashFlow == currentTrade.tradeData.selectCashFlow)
+        {
+            InitTradeCost();
+        }
+        else
+        {
+            tradeCostText.text = "???";
+        }
     }
 
     /// <summary>
@@ -182,6 +214,18 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     {
         SaveTradeData();
         DeleteTradeMenu();
+        RecordChangeTrade(currentTrade);
+    }
+
+    /// <summary>
+    /// 修改交易操作记录
+    /// </summary>
+    public void RecordChangeTrade(TradeSign sign)
+    {
+        List<string> param = new List<string>();
+        param.Add(sign.tradeData.ID.ToString());
+        param.Add(sign.tradeData.selectCashFlow.ToString());
+        StageGoal.My.RecordOperation(OperationType.ChangeTrade,param);
     }
 
     /// <summary>

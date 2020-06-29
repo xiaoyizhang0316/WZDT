@@ -103,6 +103,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 if (MapManager.My.CheckLandAvailable(x, y) && StageGoal.My.CostTechPoint(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech))
                 {
                     print("true ");
+                    StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech, CostTpType.Build);
                     role.transform.position = hit[j].transform.position + new Vector3(0f, 2f, 0f);
                     role.transform.DOMove(hit[j].transform.position + new Vector3(0f,0.3f,0f), 0.2f).OnComplete(() =>
                     {
@@ -122,6 +123,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().posY = y;
                     role.GetComponent<BaseMapRole>().MonthlyCost();
                     role.GetComponent<BaseMapRole>().AddTechPoint();
+                    CreateRoleOperationRecord(role.GetComponent<BaseMapRole>());
                 }
                 else
                 {
@@ -135,6 +137,19 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         {
             Destroy(role, 0.01f);
         }
+    }
+
+    /// <summary>
+    /// 记录创建角色的操作
+    /// </summary>
+    /// <param name="mapRole"></param>
+    public void CreateRoleOperationRecord(BaseMapRole mapRole)
+    {
+        List<string> param = new List<string>();
+        param.Add(mapRole.baseRoleData.ID.ToString());
+        param.Add(mapRole.baseRoleData.baseRoleData.roleName);
+        param.Add(mapRole.baseRoleData.baseRoleData.roleType.ToString());
+        StageGoal.My.RecordOperation(OperationType.PutRole, param);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

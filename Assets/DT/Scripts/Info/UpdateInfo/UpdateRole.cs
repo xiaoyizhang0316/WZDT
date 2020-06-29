@@ -75,7 +75,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             GetComponent<Button>().interactable = false;
             StageGoal.My.CostPlayerGold(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost);
             StageGoal.My.Expend(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost, ExpendType.AdditionalCosts, null, "升级");
-
+            UpgradeRoleRecord(RoleUpdateInfo.My.currentRole);
             tew = hammer.transform.DOLocalRotate(new Vector3(0, 0, -42f), 0.3f).SetEase(Ease.InOutBack).OnComplete(() =>
             {
                 RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.nextLevel);
@@ -102,5 +102,13 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 }
             }).Play();
         }
+    }
+
+    public void UpgradeRoleRecord(Role role)
+    {
+        List<string> param = new List<string>();
+        param.Add(role.baseRoleData.roleName);
+        param.Add(role.baseRoleData.level.ToString());
+        StageGoal.My.RecordOperation(GameEnum.OperationType.UpgradeRole, param);
     }
 }

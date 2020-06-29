@@ -38,19 +38,39 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     public int targetNumber = 0;
 
-    public List<GameObject> unlockLandList = new List<GameObject>();
+    public List<GameObject> unlockLandList1 = new List<GameObject>();
 
-    public int unlockTime;
+    public List<GameObject> unlockLandList2 = new List<GameObject>();
 
-    private bool isLockFinish = false;
+    public int unlockTime1;
+
+    public int unlockTime2;
+
+    private bool isLockFinish1 = false;
+
+    private bool isLockFinish2 = false;
 
     /// <summary>
     /// 改变地形
     /// </summary>
-    public void UnlockLand()
+    public void UnlockLand1()
     {
-        isLockFinish = true;
-        foreach (GameObject go in unlockLandList)
+        isLockFinish1 = true;
+        foreach (GameObject go in unlockLandList1)
+        {
+            go.SetActive(true);
+            float tempY = go.transform.position.y + 2f;
+            go.transform.DOMoveY(tempY, 1f).Play();
+        }
+    }
+
+    /// <summary>
+    /// 改变地形
+    /// </summary>
+    public void UnlockLand2()
+    {
+        isLockFinish2 = true;
+        foreach (GameObject go in unlockLandList2)
         {
             go.SetActive(true);
             float tempY = go.transform.position.y + 2f;
@@ -63,7 +83,12 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     /// </summary>
     public void HideLande()
     {
-        foreach (GameObject go in unlockLandList)
+        foreach (GameObject go in unlockLandList1)
+        {
+            go.transform.position += new Vector3(0f, -2f, 0f);
+            go.SetActive(false);
+        }
+        foreach (GameObject go in unlockLandList2)
         {
             go.transform.position += new Vector3(0f, -2f, 0f);
             go.SetActive(false);
@@ -132,9 +157,13 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     private void Update()
     {
-        if (unlockTime == StageGoal.My.timeCount && unlockTime > 0 && !isLockFinish)
+        if (unlockTime1 == StageGoal.My.timeCount && unlockTime1 > 0 && !isLockFinish1)
         {
-            UnlockLand();
+            UnlockLand1();
+        }
+        if (unlockTime2 == StageGoal.My.timeCount && unlockTime2 > 0 && !isLockFinish2)
+        {
+            UnlockLand2();
         }
     }
 }

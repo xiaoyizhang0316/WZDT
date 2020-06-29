@@ -128,7 +128,11 @@ public class GameEnum
         /// <summary>
         /// 营销公司
         /// </summary>
-        Marketing
+        Marketing,
+        /// <summary>
+        /// 任意
+        /// </summary>
+        All
     }
 
     public enum PDPType
@@ -511,6 +515,41 @@ public class GameEnum
         /// 失败
         /// </summary>
         Defeat
+    }
+
+    /// <summary>
+    /// 玩家操作类型  
+    /// </summary>
+    public enum OperationType
+    {
+        /// <summary>
+        /// 放置角色
+        /// </summary>
+        PutRole,
+        /// <summary>
+        /// 删除角色
+        /// </summary>
+        DeleteRole,
+        /// <summary>
+        /// 变更角色装备
+        /// </summary>
+        ChangeRole,
+        /// <summary>
+        /// 升级角色
+        /// </summary>
+        UpgradeRole,
+        /// <summary>
+        /// 发起交易
+        /// </summary>
+        CreateTrade,
+        /// <summary>
+        /// 删除交易
+        /// </summary>
+        DeleteTrade,
+        /// <summary>
+        /// 修改交易
+        /// </summary>
+        ChangeTrade
     }
 
 }

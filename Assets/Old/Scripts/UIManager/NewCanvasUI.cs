@@ -47,6 +47,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public GameObject Panel_RoleInfo;
 
+    public GameObject Panel_Review;
+
     public Button Button_Pause;
 
     public Button Button_Normal;
@@ -182,10 +184,24 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Trade/TradeSign"));
         go.transform.SetParent(TradeManager.My.transform);
         go.GetComponent<TradeSign>().Init(startRole.baseRoleData.ID.ToString(), endRole.baseRoleData.ID.ToString());
+        CreateTradeRecord(go.GetComponent<TradeSign>());
         //Panel_CreateTrade.SetActive(true);
         //CreateTradeManager.My.Open(go);
         isSetTrade = false;
         //CreateTradeLineGo.SetActive(false);
+    }
+
+    /// <summary>
+    /// 创建交易记录操作
+    /// </summary>
+    public void CreateTradeRecord(TradeSign sign)
+    {
+        List<string> param = new List<string>();
+        param.Add(sign.tradeData.ID.ToString());
+        param.Add(sign.tradeData.startRole);
+        param.Add(sign.tradeData.endRole);
+        param.Add(sign.tradeData.selectCashFlow.ToString());
+        StageGoal.My.RecordOperation(GameEnum.OperationType.CreateTrade, param);
     }
 
     /// <summary>

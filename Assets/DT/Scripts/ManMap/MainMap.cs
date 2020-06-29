@@ -34,6 +34,10 @@ public class MainMap : MonoBehaviour
                 }
             });
         }
+        else
+        {
+            InitLevel();
+        }
     }
 
     void InitLevel()

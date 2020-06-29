@@ -25,9 +25,21 @@ public class TradeManager : MonoSingleton<TradeManager>
             tradeList.Remove(ID);
             temp.ClearAllLine();
             Destroy(temp.gameObject, 0f);
+            DeleteTradeRecord(ID);
             if (NewCanvasUI.My.Panel_TradeSetting.activeSelf)
                 CreateTradeManager.My.Close();
         }
+    }
+
+    /// <summary>
+    /// 删除交易记录操作
+    /// </summary>
+    /// <param name="ID"></param>
+    public void DeleteTradeRecord(int ID)
+    {
+        List<string> param = new List<string>();
+        param.Add(ID.ToString());
+        StageGoal.My.RecordOperation(OperationType.DeleteTrade,param);
     }
 
     /// <summary>
@@ -98,6 +110,14 @@ public class TradeManager : MonoSingleton<TradeManager>
             return true;
     }
 
+    public bool CheckTradeConstraint()
+    {
+        if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product && NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+            return TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleType);
+        else
+            return true;
+    }
+
     /// <summary>
     /// 检测技能可施放数量
     /// </summary>
@@ -125,7 +145,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// <returns></returns>
     public bool CheckTradeCondition()
     {
-        return CheckStartAndEnd() && CheckNpcActive() && CheckDuplicateTrade() && CheckSkillCountLimit();
+        return CheckStartAndEnd() && CheckNpcActive() && CheckDuplicateTrade() && CheckSkillCountLimit() && CheckTradeConstraint();
     }
 
     /// <summary>
