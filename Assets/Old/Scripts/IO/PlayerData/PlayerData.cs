@@ -134,7 +134,18 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         RoleData.Remove(target);
         MapRole.Remove(mapRole);
         MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
+        DeleleRoleOperationRecord(mapRole);
         Destroy(mapRole.gameObject);
+    }
+
+    /// <summary>
+    /// 记录删除角色的操作
+    /// </summary>
+    public void DeleleRoleOperationRecord(BaseMapRole mapRole)
+    {
+        List<string> param = new List<string>();
+        param.Add(mapRole.baseRoleData.baseRoleData.roleName);
+        StageGoal.My.RecordOperation(OperationType.DeleteRole, param);
     }
 
     /// <summary>

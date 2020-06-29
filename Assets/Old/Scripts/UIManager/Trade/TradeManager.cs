@@ -25,9 +25,21 @@ public class TradeManager : MonoSingleton<TradeManager>
             tradeList.Remove(ID);
             temp.ClearAllLine();
             Destroy(temp.gameObject, 0f);
+            DeleteTradeRecord(ID);
             if (NewCanvasUI.My.Panel_TradeSetting.activeSelf)
                 CreateTradeManager.My.Close();
         }
+    }
+
+    /// <summary>
+    /// 删除交易记录操作
+    /// </summary>
+    /// <param name="ID"></param>
+    public void DeleteTradeRecord(int ID)
+    {
+        List<string> param = new List<string>();
+        param.Add(ID.ToString());
+        StageGoal.My.RecordOperation(OperationType.DeleteTrade,param);
     }
 
     /// <summary>

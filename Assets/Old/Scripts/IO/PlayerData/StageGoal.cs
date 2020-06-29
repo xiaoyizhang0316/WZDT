@@ -811,6 +811,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <summary>
     /// 玩家操作结构
     /// </summary>
+    [Serializable]
     public struct PlayerOperation
     {
         public int operateTime;

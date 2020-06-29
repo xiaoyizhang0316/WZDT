@@ -182,6 +182,18 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     {
         SaveTradeData();
         DeleteTradeMenu();
+        RecordChangeTrade(currentTrade);
+    }
+
+    /// <summary>
+    /// 修改交易操作记录
+    /// </summary>
+    public void RecordChangeTrade(TradeSign sign)
+    {
+        List<string> param = new List<string>();
+        param.Add(sign.tradeData.ID.ToString());
+        param.Add(sign.tradeData.selectCashFlow.ToString());
+        StageGoal.My.RecordOperation(OperationType.ChangeTrade,param);
     }
 
     /// <summary>

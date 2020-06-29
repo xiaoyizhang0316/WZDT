@@ -396,8 +396,27 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             PlayerData.My.RoleData.Add(CurrentRole);
         WorkerListManager.My.QuitAndSave();
         EquipListManager.My.QuitAndSave();
+        ChangeRoleRecord(CurrentRole);
         DeleteTemplate();
 
+    }
+
+    /// <summary>
+    /// 记录修改角色操作
+    /// </summary>
+    /// <param name="role"></param>
+    public void ChangeRoleRecord(Role role)
+    {
+        List<string> param = new List<string>();
+        param.Add(role.baseRoleData.roleName);
+        BaseMapRole mapRole = PlayerData.My.GetMapRoleById(role.ID);
+        List<int> buffList = new List<int>();
+        buffList.AddRange(mapRole.GetEquipBuffList());
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            param.Add(buffList[i].ToString());
+        }
+        StageGoal.My.RecordOperation(OperationType.ChangeRole, param);
     }
 
     /// <summary>
