@@ -66,7 +66,21 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public void OnSliderValueChange()
     {
-
+        for (int i = 0; i < mapStates.Count; i++)
+        {
+            if (mapStates[i].time > playSlider.value)
+            {
+                if (i == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    //TODO
+                    //PlayClip(mapStates[i - 1])
+                }
+            }
+        }
     }
 
     public void Init(List<PlayerOperation> playerOperations)
@@ -74,6 +88,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         AutoPlay();
         Pause();
         GenerateMapStates(playerOperations);
+        playSlider.maxValue = StageGoal.My.timeCount;
     }
 
     /// <summary>
