@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using Vectrosity;
 using static GameEnum;
 using static StageGoal;
 
@@ -19,6 +20,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     public Slider playSlider;
 
     public List<MapState> mapStates;
+
+    public VectorLine line;
 
     private bool isStart = false;
 
@@ -55,9 +58,9 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public void AutoPlay()
     {
-        twe = transform.DOScale(1f, 1f).OnComplete(() =>
+        twe = transform.DOScale(1f, 0.1f).OnComplete(() =>
         {
-            playSlider.value++;
+            playSlider.value+= 0.1f;
             OnSliderValueChange();
             AutoPlay();
         }).Play();
@@ -89,6 +92,17 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         Pause();
         GenerateMapStates(playerOperations);
         playSlider.maxValue = StageGoal.My.timeCount;
+        InitMoneyLine();
+    }
+
+
+    public void InitMoneyLine()
+    {
+        
+        for (int i = 0; i < StageGoal.My.dataStats.Count; i++)
+        {
+
+        }
     }
 
     /// <summary>
