@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static StageGoal;
 
 [Serializable]
 public class PlayerDatas
@@ -144,4 +145,66 @@ public class LevelRecord
         this.startTime = startTime;
         this.uploadTime = uploadTime;
     }
+}
+
+[Serializable]
+public class PlayerReplay
+{
+    public string sceneName;
+    public List<Operation> operations;
+    //public List<DataStat> dataStats;
+    public int recordTime;
+    public int score;
+    public bool win;
+    public string stars;
+    public int timeCount;
+}
+
+[Serializable]
+public class Operation
+{
+    public int operateTime;
+
+    public OpType type;
+
+    public List<string> operationParam;
+
+    public Operation(int operateTime, OpType type, List<string> operationParam)
+    {
+        this.operateTime = operateTime;
+        this.type = type;
+        this.operationParam = operationParam;
+    }
+}
+
+public enum OpType
+{
+    /// <summary>
+    /// 放置角色
+    /// </summary>
+    PutRole,
+    /// <summary>
+    /// 删除角色
+    /// </summary>
+    DeleteRole,
+    /// <summary>
+    /// 变更角色装备
+    /// </summary>
+    ChangeRole,
+    /// <summary>
+    /// 升级角色
+    /// </summary>
+    UpgradeRole,
+    /// <summary>
+    /// 发起交易
+    /// </summary>
+    CreateTrade,
+    /// <summary>
+    /// 删除交易
+    /// </summary>
+    DeleteTrade,
+    /// <summary>
+    /// 修改交易
+    /// </summary>
+    ChangeTrade
 }

@@ -141,13 +141,24 @@ public class LoginPanel : MonoBehaviour
 
     private void Test()
     {
-        PlayerDatas playerDatas = new PlayerDatas();
-        playerDatas.playerID = "111";
-        playerDatas.playerName = "test";
+        PlayerReplay operations = new PlayerReplay();
+        List<Operation> operation = new List<Operation>();
 
-        string json = JsonUtility.ToJson(playerDatas);
+        operation.Add(new Operation(10, OpType.ChangeRole, new List<string>() { "12", "22" }));
+        operation.Add(new Operation(12, OpType.ChangeTrade, new List<string>() { "12", "22" }));
+        operation.Add(new Operation(14, OpType.CreateTrade, new List<string>() { "12", "22" }));
+        operation.Add(new Operation(16, OpType.DeleteRole, new List<string>() { "12", "22" }));
+
+        operations.operations = operation;
+        operations.sceneName = "FTE_1";
+
+        string json = JsonUtility.ToJson(operations);
+        NetworkMgr.My.TestPost(json);
+
         Debug.Log(json);
-        PlayerDatas playerD = JsonUtility.FromJson<PlayerDatas>(json);
-        Debug.Log(playerD.playerName);
+
+        //PlayerReplay op = JsonUtility.FromJson<PlayerReplay>(json);
+        //Debug.Log( op.operations[0].type.GetType());
+        //Debug.Log( op.operations[0].operationParam.Count);
     }
 }

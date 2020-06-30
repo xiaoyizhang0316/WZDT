@@ -464,6 +464,21 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     {
         HttpManager.My.mask.SetActive(false);
     }
+
+    public void TestPost(string json)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("json", json);
+        keyValues.Add("playerID", "11111");
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.testPost, (www)=> {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            Debug.Log(response.data);
+            PlayerReplay playerReplay = JsonUtility.FromJson<PlayerReplay>(response.data);
+            Debug.Log(playerReplay.operations.Count);
+            Debug.Log(playerReplay.operations[0].operationParam[0]);
+        }, keyValues, HttpType.Post));
+    }
     #endregion
 
     private void OnApplicationQuit()

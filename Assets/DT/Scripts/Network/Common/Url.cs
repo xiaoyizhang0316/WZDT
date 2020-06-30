@@ -37,4 +37,8 @@ public static class Url
     public static string deleteEquip = ip + "deleteEquip";
     #endregion
 
+    #region test
+    public static string testPost = ip + "testPost";
+    public static string testGet = ip + "testGet";
+    #endregion
 }
