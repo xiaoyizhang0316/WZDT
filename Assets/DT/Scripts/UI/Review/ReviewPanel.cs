@@ -21,7 +21,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public List<MapState> mapStates;
 
-    public VectorLine line;
+    public VectorObject2D line;
 
     private bool isStart = false;
 
@@ -98,11 +98,16 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public void InitMoneyLine()
     {
-        
+        if (StageGoal.My.dataStats.Count == 0)
+            return;
+        int maxAmount = StageGoal.My.dataStats[0].restMoney * 150 / 100;
+        line.vectorLine.points2.Clear();
         for (int i = 0; i < StageGoal.My.dataStats.Count; i++)
         {
-
+            line.vectorLine.points2.Add(new Vector2(1326 / StageGoal.My.timeCount * 5 * i, StageGoal.My.dataStats[0].restMoney / (float)maxAmount * 100f));
         }
+        line.vectorLine.points2.Add(new Vector2(1326, StageGoal.My.playerGold / (float)maxAmount * 100f));
+        line.vectorLine.Draw();
     }
 
     /// <summary>

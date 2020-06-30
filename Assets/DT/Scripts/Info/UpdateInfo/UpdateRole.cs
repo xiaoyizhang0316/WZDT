@@ -107,7 +107,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void UpgradeRoleRecord(Role role)
     {
         List<string> param = new List<string>();
-        param.Add(role.baseRoleData.roleName);
+        param.Add(role.ID.ToString());
         param.Add(role.baseRoleData.level.ToString());
         StageGoal.My.RecordOperation(GameEnum.OperationType.UpgradeRole, param);
     }

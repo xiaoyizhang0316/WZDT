@@ -198,8 +198,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         List<string> param = new List<string>();
         param.Add(sign.tradeData.ID.ToString());
-        param.Add(sign.tradeData.startRole);
-        param.Add(sign.tradeData.endRole);
+        param.Add(sign.tradeData.castRole);
+        param.Add(sign.tradeData.targetRole);
         param.Add(sign.tradeData.selectCashFlow.ToString());
         StageGoal.My.RecordOperation(GameEnum.OperationType.CreateTrade, param);
     }
