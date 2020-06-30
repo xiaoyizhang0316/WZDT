@@ -37,6 +37,8 @@ public class TradeSign : MonoBehaviour
 
     private int countNumber = 0;
 
+    public int randomIndex;
+
     public void Init(string start, string end)
     {
         tradeData = new TradeData();
@@ -49,6 +51,7 @@ public class TradeSign : MonoBehaviour
         tradeData.selectCashFlow = CashFlowType.先钱;
         tradeData.ID = TradeManager.My.index++;
         TradeManager.My.tradeList.Add(tradeData.ID, this);
+        randomIndex = UnityEngine.Random.Range(0, 2);
         SetSkillTarget();
         GenerateTradeLine();
         GenerateTradeIcon();
@@ -221,18 +224,40 @@ public class TradeSign : MonoBehaviour
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         int result = startRole.baseRoleData.tradeCost + endRole.baseRoleData.tradeCost;
-        if (tradeData.selectCashFlow == CashFlowType.先钱)
-        {
-            result += (int)(startRole.baseRoleData.riskResistance * 0.7f + endRole.baseRoleData.riskResistance * 1.3f);
-        }
-        else if (tradeData.selectCashFlow == CashFlowType.后钱)
-        {
-            result += (int)(startRole.baseRoleData.riskResistance * 1.3f + endRole.baseRoleData.riskResistance * 0.7f);
-        }
+        result += startRole.baseRoleData.riskResistance + endRole.baseRoleData.riskResistance;
+        int result1, result2;
         if (startRole.isNpc || endRole.isNpc)
-            result /= 20;
+        {
+            result1 = (int)(result * 0.6f);
+            result2 = (int)(result * 0.3f);
+        }
         else
-            result /= 10;
+        {
+            result1 = (int)(result * 0.5f);
+            result2 = (int)(result * 0.2f);
+        }
+        if (randomIndex == 0)
+        {
+            if (tradeData.selectCashFlow == CashFlowType.先钱)
+            {
+                result = result1;
+            }
+            else
+            {
+                result = result2;
+            }
+        }
+        else if (randomIndex == 1)
+        {
+            if (tradeData.selectCashFlow == CashFlowType.先钱)
+            {
+                result = result2;
+            }
+            else
+            {
+                result = result1;
+            }
+        }
         StageGoal.My.CostPlayerGold(result);
         StageGoal.My.Expend(result, ExpendType.TradeCosts);
     }

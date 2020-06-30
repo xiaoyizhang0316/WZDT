@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class BaseNpc : MonoBehaviour
 {
@@ -69,6 +70,8 @@ public abstract class BaseNpc : MonoBehaviour
     /// </summary>
     public void InitSetLand()
     {
+        if (SceneManager.GetActiveScene().name.Equals("FTE_0"))
+            return;
         RaycastHit[] hit;
         hit = Physics.RaycastAll(transform.position + new Vector3(0f, 5f, 0f), Vector3.down);
         for (int j = 0; j < hit.Length; j++)

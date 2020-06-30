@@ -47,6 +47,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public GameObject Panel_RoleInfo;
 
+    public GameObject Panel_Review;
+
     public Button Button_Pause;
 
     public Button Button_Normal;
