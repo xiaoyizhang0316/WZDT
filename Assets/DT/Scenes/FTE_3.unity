@@ -6297,7 +6297,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707452861}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0eeeccc79b8d14843bdbf7b24660b21c, type: 3}
   m_Name: 
@@ -11518,8 +11518,10 @@ MonoBehaviour:
   starTwoStatus: 0
   starThreeStatus: 0
   targetNumber: 0
-  unlockLandList: []
-  unlockTime: 0
+  unlockLandList1: []
+  unlockLandList2: []
+  unlockTime1: 0
+  unlockTime2: 0
 --- !u!4 &1313044076
 Transform:
   m_ObjectHideFlags: 0
@@ -12290,6 +12292,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -0.00048828125
       objectReference: {fileID: 0}
+    - target: {fileID: 85284378608616539, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 945.57996
+      objectReference: {fileID: 0}
     - target: {fileID: 583138783137619030, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: waveCountImg
@@ -12359,6 +12366,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661882305593539112, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00024414062
       objectReference: {fileID: 0}
     - target: {fileID: 3836471431425228770, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
@@ -12599,6 +12611,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: -151
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021426773942043710, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 59.899994
       objectReference: {fileID: 0}
     - target: {fileID: 6353020429387862263, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
@@ -21113,7 +21130,7 @@ MonoBehaviour:
   - {fileID: 7517492498823049149}
   - {fileID: 3669067506904535900}
   UIFTE: {fileID: 3669067506075209084}
-  currentIndex: -1
+  currentIndex: 0
 --- !u!114 &5457813272815842081
 MonoBehaviour:
   m_ObjectHideFlags: 0
