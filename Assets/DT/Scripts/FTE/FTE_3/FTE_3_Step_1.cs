@@ -10,8 +10,8 @@ public class FTE_3_Step_1 : BaseStep
     void Start()
     {
         nextButton.onClick.AddListener(() => { StopCurrentStep(); });
-        contenText.color = new Color(1,1,1,0);
-        NewCanvasUI.My.GamePause();
+     
+
     }
 
     // Update is called once per frame
@@ -22,16 +22,16 @@ public class FTE_3_Step_1 : BaseStep
 
     public override void StartCuttentStep()
     {
-   
+        NewCanvasUI.My.GamePause();
          MaskManager.My.Open(0,130);
-         contenText.DOFade(0, 0).OnComplete(() => { 
-             contenText.DOFade(1, 3f).OnComplete(() =>
+         contenText.color = new Color(1,1,1,0);
+               contenText.DOFade(1, 3f).OnComplete(() =>
              {
              
                  nextButton.interactable = true; 
              
              }).Play(); 
-         }).Play(); 
+        
 
     }
 
