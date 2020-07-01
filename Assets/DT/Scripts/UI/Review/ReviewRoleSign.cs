@@ -6,6 +6,9 @@ public class ReviewRoleSign : MonoBehaviour
 {
     public ReviewPanel.ReviewRole role;
 
+    public Vector3 pos;
+    
+    public Vector3 localpos;
     void Awake()
     {
         ReviewManager.My.signs.Add(this);
@@ -20,6 +23,7 @@ public class ReviewRoleSign : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        pos = transform.position;
+        localpos = transform.localPosition;
     }
 }

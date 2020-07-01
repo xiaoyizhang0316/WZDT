@@ -19,9 +19,10 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     public  List<GameObject> lines;
     public Transform lineTF;
     public int index;
+    public GameObject linePRBs;
     public void ShowCurrentReview(int index)
     {
-        Debug.Log("create report"  + index.ToString());
+ 
         this.index = index;
         ClearRolesLines();
         CreatRoles();
@@ -135,13 +136,10 @@ public class ReviewManager : MonoSingleton<ReviewManager>
       
             for (int j = 0; j <  panel.mapStates[index].mapTrades.Count; j++)
             { 
-               GameObject line =  Instantiate(linePrb, lineTF);
-               lines.Add(line);
-               line.GetComponent<VectorObject2D>().vectorLine.points2.Clear();
-               line.GetComponent<VectorObject2D>().vectorLine.points2.Add(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).transform.position);
-               line.GetComponent<VectorObject2D>().vectorLine.points2.Add(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).transform.position);
-               line.GetComponent<VectorObject2D>().vectorLine.Draw();
-
+              
+                   Debug.Log("当前"+index+"j"+j);
+               DrawLine( GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).gameObject, GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).gameObject
+               );
             }
         }
    
@@ -172,7 +170,30 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
         return false;
     }
+ 
 
+    
+
+    void DrawLine(GameObject posA, GameObject posB)
+    {
+        GameObject line =    Instantiate(linePrb, lineTF);
+        lines.Add(line);
+        line.GetComponent<WMG_Link>().fromNode = posA;
+        line.GetComponent<WMG_Link>().toNode = posB;
+        //RectTransform ImageRectTrans =    line.GetComponent<RectTransform>();
+        //   Vector3 differenceVector = posB - posA;
+//
+        //   // 设置线的长度（Width）
+        //   ImageRectTrans.sizeDelta = new Vector2(differenceVector.magnitude, 2);
+        //   // 从左向右划线
+        //
+        //   // 设置线的起始点
+        //   ImageRectTrans.position = posA;
+        //   // 设置线相对于水平向右方向的角度
+        //   float angle = Mathf.Atan2(differenceVector.y, differenceVector.x) * Mathf.Rad2Deg;
+        //   ImageRectTrans.transform.eulerAngles =new Vector3(0, 0, angle); 
+    }
+   
     // Start is called before the first frame update
     void Start()
     {
