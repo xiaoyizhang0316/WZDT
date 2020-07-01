@@ -166,24 +166,28 @@ public class BulletLaunch : MonoBehaviour
         tow.GetComponent<AutoFireTow>().destroyTime =10;
         tow.GetComponent<AutoFireTow>().launchShooter = launchShooter;
         tow.GetComponent<AutoFireTow>().lunch = this;
+        tow.GetComponent<AutoFireTow>().target =GetComponent<BaseMapRole>().shootTarget;
+        
         tow.GetComponent<AutoFireTow>().shootTime = 1f / (GetComponent<BaseMapRole>().baseRoleData.efficiency * 0.1f) * data.loadingSpeed;
         tow .GetComponent <BulletEffect>().InitBufflist(data.buffList);
 
+        
         pointList = DrawLine(tow.transform.position, GetComponent<BaseMapRole>().shootTarget.transform.position);
         tow.transform.localPosition = new Vector3(0, 0.4f, 0);
         tow.transform.SetParent(transform);
-        launchShooter.DOLookAt(pointList[pointList.Count / 2], 0.1f).OnComplete(() =>
+        launchShooter.DOLookAt(tow.GetComponent<AutoFireTow>().target.transform.position, 0.1f).OnComplete(() =>
           {
               tow .GetComponent <BulletEffect>().InitBuff(  tow .GetComponent <BulletEffect>().tile);
 
-              tow.transform.DOPath(pointList.ToArray(), 1).SetEase(sase).OnComplete(() =>
+              tow.transform.DOMove(tow.GetComponent<AutoFireTow>().target.transform.position, 1).SetEase(sase).OnComplete(() =>
               {
                   tow .GetComponent <BulletEffect>().InitBuff(  tow .GetComponent <BulletEffect>().explosions);
                   tow .GetComponent <BulletEffect>().explosions.SetActive(false);
                   tow .GetComponent <BulletEffect>().tile.SetActive(false);
                   tow .transform.GetChild(3).gameObject.SetActive(true);
-                  tow.transform.position = new Vector3(tow.transform.position.x, 0.4f, tow.transform.position.z);
-                  tow.transform.eulerAngles = Vector3.zero;
+                  tow.GetComponent<AutoFireTow>().isupdate = true;
+            
+              
               });
           });
     }
@@ -239,17 +243,17 @@ public class BulletLaunch : MonoBehaviour
 
         return pointList;
     }
-  public void LanchLeaser(ProductData data, ConsumeSign target,Transform BulletLaunch,BulletLaunch lunch)
+  public void LanchLeaser(ProductData data, ConsumeSign target,Transform BulletLaunch,BulletLaunch lunch,Transform pos)
     {
         GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Leaser);
         Debug.Log("初始化子弹"+gameObject.name);
         gameObject.GetComponent<GoodsSign>().productData = data;
        gameObject.GetComponent<GoodsSign>().lunch = lunch;
         gameObject.GetComponent<GoodsSign>().target = target;
-        gameObject.transform.SetParent(BulletLaunch );
+       
         gameObject .GetComponent <BulletEffect>().InitBufflist(gameObject.GetComponent<GoodsSign>().productData.buffList);
 
-        gameObject.transform.position = this.transform.position;
+       gameObject.transform.position =pos.position;
 
         launchShooter.DOLookAt(target.transform.position, 0.1f).OnComplete(() =>
         {

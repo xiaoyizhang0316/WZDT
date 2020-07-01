@@ -60,7 +60,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     {
         twe = transform.DOScale(1f, 0.1f).OnComplete(() =>
         {
-            playSlider.value+= 0.1f;
+            playSlider.value += 0.1f;
             OnSliderValueChange();
             AutoPlay();
         }).Play();
@@ -79,7 +79,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                 }
                 else
                 {
-                    //TODO
+                    ReviewManager.My.ShowCurrentReview();
                     //PlayClip(mapStates[i - 1])
                 }
             }
