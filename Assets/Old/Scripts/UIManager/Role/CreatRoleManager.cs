@@ -16,6 +16,8 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
 
     public Text roleTitleText;
 
+    public Image roleBg;
+
     /// <summary>
     /// 当前创建装备的位置坐标
     /// </summary>
@@ -197,7 +199,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             Destroy(template_BottomPos.GetChild(0).gameObject);
         }
-
+        roleBg.sprite = Resources.Load<Sprite>("Sprite/RoleBg/" + tempRole.baseRoleData.roleType.ToString() + tempRole.baseRoleData.level.ToString());
         templateOBJ = Instantiate(Resources.Load<GameObject>(GameDataMgr.My.GetModelData(CurrentRole.baseRoleData.roleType, 1).RoleSpacePath), template_BottomPos);
         CurrentTemplateManager = templateOBJ.GetComponent<TemplateManager>();
         SetCreateRoleTitle();
