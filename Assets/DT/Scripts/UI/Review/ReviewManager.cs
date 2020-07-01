@@ -21,7 +21,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     public int index;
     public void ShowCurrentReview(int index)
     {
-        Debug.Log("create report"  + index.ToString());
+        //Debug.Log("create report"  + index.ToString());
         this.index = index;
         ClearRolesLines();
         CreatRoles();
@@ -141,7 +141,6 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                line.GetComponent<VectorObject2D>().vectorLine.points2.Add(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).transform.position);
                line.GetComponent<VectorObject2D>().vectorLine.points2.Add(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).transform.position);
                line.GetComponent<VectorObject2D>().vectorLine.Draw();
-
             }
         }
    
