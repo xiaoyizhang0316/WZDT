@@ -8,6 +8,8 @@ public class FTE_4_Step_4 : BaseStep
 {
     public GameObject UI;
 
+    public GameObject UI2;
+
     public HollowOutMask BG;
     // Start is called before the first frame update
     void Start()
@@ -37,7 +39,7 @@ public class FTE_4_Step_4 : BaseStep
     public void PlayNext()
     {
         Debug.Log("检测");
-        if (UI.activeSelf)
+        if (UI.activeSelf && UI2.activeSelf)
         {
             Debug.Log("检测成功"); 
             StopCurrentStep();
@@ -47,7 +49,6 @@ public class FTE_4_Step_4 : BaseStep
             gameObject.transform.DOScale(1, 1f).OnComplete(() =>
             {
                 Debug.Log("检测失败");
-
                 PlayNext();
             }).Play();
         }
@@ -61,6 +62,7 @@ public class FTE_4_Step_4 : BaseStep
        {
            gameObject.SetActive(false);
            UI.SetActive(false);
+           UI2.SetActive(false);
            FTESceneManager.My.PlayNextStep();
 
        }).Play(); 

@@ -20,7 +20,7 @@ public class ProductDealer : BaseSkill
                 CancelSkill();
                 return;
             }
-            Debug.Log("攻击" + role.baseRoleData.ID);
+          
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
             switch (data.bulletType)

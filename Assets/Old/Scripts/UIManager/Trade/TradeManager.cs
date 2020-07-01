@@ -24,11 +24,47 @@ public class TradeManager : MonoSingleton<TradeManager>
             TradeSign temp = tradeList[ID];
             tradeList.Remove(ID);
             temp.ClearAllLine();
-            Destroy(temp.gameObject, 0f);
             DeleteTradeRecord(ID);
+            CheckNpcRole(temp);
+            Destroy(temp.gameObject, 0f);
             if (NewCanvasUI.My.Panel_TradeSetting.activeSelf)
                 CreateTradeManager.My.Close();
         }
+    }
+
+    public void CheckNpcRole(TradeSign sign)
+    {
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole));
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole));
+        if (start.baseRoleData.isNpc)
+        {
+            if (CheckTradeCount(sign.tradeData.startRole) <= 1)
+            {
+                List<string> param = new List<string>();
+                param.Add(start.baseRoleData.ID.ToString());
+                StageGoal.My.RecordOperation(OperationType.DeleteRole, param);
+            }
+        }
+        if (end.baseRoleData.isNpc)
+        {
+            if (CheckTradeCount(sign.tradeData.endRole) <= 1)
+            {
+                List<string> param = new List<string>();
+                param.Add(end.baseRoleData.ID.ToString());
+                StageGoal.My.RecordOperation(OperationType.DeleteRole, param);
+            }
+        }
+    }
+
+    public int CheckTradeCount(string roleId)
+    {
+        int result = 0;
+        foreach (TradeSign sign in tradeList.Values)
+        {
+            if (sign.tradeData.startRole.Equals(roleId) || sign.tradeData.endRole.Equals(roleId))
+                result++;
+        }
+        return result;
     }
 
     /// <summary>

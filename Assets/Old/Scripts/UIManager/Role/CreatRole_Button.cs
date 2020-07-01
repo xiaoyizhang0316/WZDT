@@ -43,6 +43,8 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (NewCanvasUI.My.isSetTrade)
+            return;
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
         RaycastHit[] hit = Physics.RaycastAll(ray);
         {
@@ -59,6 +61,8 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (NewCanvasUI.My.isSetTrade)
+            return;
         Role tempRole = new Role();
         tempRole.baseRoleData = GameDataMgr.My.GetModelData(type, 1);
         tempRole.ID = CommonData.My.GetTimestamp(DateTime.Now);
@@ -90,6 +94,8 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (NewCanvasUI.My.isSetTrade)
+            return;
         //UIManager.My.LandCube.transform.DOMoveY(0, 0.5f).SetUpdate(true);
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
         RaycastHit[] hit = Physics.RaycastAll(ray);

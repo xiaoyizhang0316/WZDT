@@ -6,6 +6,7 @@ using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static GameEnum;
 using static UnityEngine.UIElements.VisualElement;
 
 public class NewCanvasUI : MonoSingleton<NewCanvasUI>
@@ -198,10 +199,40 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         List<string> param = new List<string>();
         param.Add(sign.tradeData.ID.ToString());
-        param.Add(sign.tradeData.startRole);
-        param.Add(sign.tradeData.endRole);
+        param.Add(sign.tradeData.castRole);
+        param.Add(sign.tradeData.targetRole);
         param.Add(sign.tradeData.selectCashFlow.ToString());
         StageGoal.My.RecordOperation(GameEnum.OperationType.CreateTrade, param);
+        CheckNpcRole(sign);
+    }
+
+
+    public void CheckNpcRole(TradeSign sign)
+    {
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole));
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole));
+        if (start.baseRoleData.isNpc)
+        {
+            if (TradeManager.My.CheckTradeCount(sign.tradeData.startRole) <= 1)
+            {
+                List<string> param = new List<string>();
+                param.Add(start.baseRoleData.ID.ToString());
+                param.Add(start.baseRoleData.baseRoleData.roleName);
+                param.Add(start.baseRoleData.baseRoleData.roleType.ToString());
+                StageGoal.My.RecordOperation(OperationType.PutRole, param);
+            }
+        }
+        if (end.baseRoleData.isNpc)
+        {
+            if (TradeManager.My.CheckTradeCount(sign.tradeData.endRole) <= 1)
+            {
+                List<string> param = new List<string>();
+                param.Add(end.baseRoleData.ID.ToString());
+                param.Add(end.baseRoleData.baseRoleData.roleName);
+                param.Add(end.baseRoleData.baseRoleData.roleType.ToString());
+                StageGoal.My.RecordOperation(OperationType.PutRole, param);
+            }
+        }
     }
 
     /// <summary>
