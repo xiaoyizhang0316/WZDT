@@ -61,6 +61,8 @@ public class BaseMapRole : MonoBehaviour
 
     public BaseExtraSkill extraSkill;
 
+    public List<GameObject> levelModels;
+
     #region UI显示信息
 
     public float totalProfit;
@@ -111,6 +113,28 @@ public class BaseMapRole : MonoBehaviour
         if (!isNpc)
         {
             InitAttribute();
+        }
+    }
+
+    public void CheckLevel()
+    {
+        if (baseRoleData.baseRoleData.level == 1)
+        {
+            levelModels[0].SetActive(true);
+            levelModels[1].SetActive(false);
+            levelModels[2].SetActive(false);
+        }
+        else if (baseRoleData.baseRoleData.level == 3)
+        {
+            levelModels[0].SetActive(false);
+            levelModels[1].SetActive(true);
+            levelModels[2].SetActive(false);
+        }
+        else if (baseRoleData.baseRoleData.level == 5)
+        {
+            levelModels[0].SetActive(false);
+            levelModels[1].SetActive(false);
+            levelModels[2].SetActive(true);
         }
     }
 
