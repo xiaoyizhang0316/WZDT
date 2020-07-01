@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class DataStat
 {
     /// <summary>
@@ -48,9 +50,11 @@ public class DataStat
     {
         this.blood = blood;
         this.score = score;
-        this.totalIncome += totalIncome;
-        this.totalConsumeIncome += totalConsumeIncome;
-        this.monthlyCost += monthlyCost;
-        this.restMoney += restMoney;
+        this.totalIncome = totalIncome;
+        this.totalConsumeIncome = totalConsumeIncome;
+        this.totalCost = totalCost;
+        this.tradeCost = tradeCost;
+        this.monthlyCost = monthlyCost;
+        this.restMoney = restMoney;
     }
 }

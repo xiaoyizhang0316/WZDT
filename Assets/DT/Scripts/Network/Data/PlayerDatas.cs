@@ -151,8 +151,8 @@ public class LevelRecord
 public class PlayerReplay
 {
     public string sceneName;
-    public List<Operation> operations;
-    //public List<DataStat> dataStats;
+    public List<PlayerOperation> operations;
+    public List<DataStat> dataStats;
     public int recordTime;
     public int score;
     public bool win;
@@ -161,50 +161,27 @@ public class PlayerReplay
 }
 
 [Serializable]
-public class Operation
+public class ReplayList
 {
-    public int operateTime;
-
-    public OpType type;
-
-    public List<string> operationParam;
-
-    public Operation(int operateTime, OpType type, List<string> operationParam)
-    {
-        this.operateTime = operateTime;
-        this.type = type;
-        this.operationParam = operationParam;
-    }
+    public string recordID;
+    public string sceneName;
+    public int recordTime;
+    public int score;
+    public bool win;
+    public string stars;
+    public int timeCount;
 }
 
-public enum OpType
+[Serializable]
+public class ReplayLists
 {
-    /// <summary>
-    /// 放置角色
-    /// </summary>
-    PutRole,
-    /// <summary>
-    /// 删除角色
-    /// </summary>
-    DeleteRole,
-    /// <summary>
-    /// 变更角色装备
-    /// </summary>
-    ChangeRole,
-    /// <summary>
-    /// 升级角色
-    /// </summary>
-    UpgradeRole,
-    /// <summary>
-    /// 发起交易
-    /// </summary>
-    CreateTrade,
-    /// <summary>
-    /// 删除交易
-    /// </summary>
-    DeleteTrade,
-    /// <summary>
-    /// 修改交易
-    /// </summary>
-    ChangeTrade
+    public List<ReplayList> replayLists;
+}
+
+[Serializable]
+public class ReplayDatas
+{
+    public string recordID;
+    public string operations;
+    public string dataStats;
 }

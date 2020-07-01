@@ -25,6 +25,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     public LevelProgresses levelProgresses;
     public List<LevelProgress> levelProgressList;
 
+    public List<ReplayList> replayLists;
+
     private PlayerEquip playerEquip;
     public PlayerEquips playerEquips;
     public List<PlayerEquip> playerEquipsList;
@@ -34,6 +36,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     {
         deviceID = SystemInfo.deviceUniqueIdentifier;
         levelProgressList = new List<LevelProgress>();
+        replayLists = new List<ReplayList>();
         playerEquipsList = new List<PlayerEquip>();
     }
 
@@ -363,6 +366,109 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             SetMask();
         }, keyValues, HttpType.Post));
     }
+
+    public void AddReplayData(PlayerReplay playerReplay, Action doSuccess, Action doFail)
+    {
+        try
+        {
+            SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+            keyValues.Add("token", token);
+            keyValues.Add("playerID", playerID);
+            keyValues.Add("data", CompressUtils.Compress(JsonUtility.ToJson(playerReplay)));
+
+            StartCoroutine(HttpManager.My.HttpSend(Url.addReplayData, (www) => {
+                HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+                if (response.status == -1)
+                {
+                    GoToLogin(response.errMsg);
+                    return;
+                }
+                if (response.status == 1)
+                {
+                    Debug.Log("上传完成");
+                    doSuccess?.Invoke();
+                }
+                else
+                {
+                    Debug.Log("上传失败");
+                    doFail?.Invoke();
+                }
+            }, keyValues, HttpType.Post));
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message);
+            Debug.Log(ex.StackTrace);
+        }
+        
+    }
+
+    public void GetReplayDatas(string recordID, Action doSuccess, Action doFail)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("recordID", recordID);
+
+        StartCoroutine(HttpManager.My.HttpSend( Url.getReplayDatas, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                GoToLogin(response.errMsg);
+                return;
+            }
+            if (response.status == 1)
+            {
+                string json = CompressUtils.Uncompress(response.data);
+                ReplayDatas datas = JsonUtility.FromJson<ReplayDatas>(json);
+                Debug.Log(datas.recordID);
+                Debug.Log(datas.operations);
+                Debug.Log(datas.dataStats);
+                doSuccess?.Invoke();
+            }
+            else
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+        }, keyValues, HttpType.Post));
+    }
+
+    public void GetReplayLists(string sceneName, Action doSuccess, Action doFail)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("sceneName", sceneName);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.getReplayLists, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                GoToLogin(response.errMsg);
+                return;
+            }
+            if(response.status == 1)
+            {
+                ReplayLists replayList = JsonUtility.FromJson<ReplayLists>(response.data);
+                replayLists.Clear();
+                foreach(var rl in replayList.replayLists)
+                {
+                    replayLists.Add(rl);
+                }
+                Debug.Log(replayLists.Count);
+                Debug.Log(replayLists[0].recordTime);
+                Debug.Log(replayLists[0].win);
+                Debug.Log(replayLists[0].recordID);
+                doSuccess?.Invoke();
+            }
+            else
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+        }, keyValues, HttpType.Post));
+    }
     #endregion
 
     #region equip
@@ -474,9 +580,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         StartCoroutine(HttpManager.My.HttpSend(Url.testPost, (www)=> {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             Debug.Log(response.data);
-            PlayerReplay playerReplay = JsonUtility.FromJson<PlayerReplay>(response.data);
-            Debug.Log(playerReplay.operations.Count);
-            Debug.Log(playerReplay.operations[0].operationParam[0]);
         }, keyValues, HttpType.Post));
     }
     #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static StageGoal;
 
 public class LoginPanel : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class LoginPanel : MonoBehaviour
         }
         username_Input.ActivateInputField();
         username_Input.MoveTextEnd(true);
-        //Test();
+        Test();
     }
 
     private void Login()
@@ -141,24 +142,73 @@ public class LoginPanel : MonoBehaviour
 
     private void Test()
     {
-        PlayerReplay operations = new PlayerReplay();
-        List<Operation> operation = new List<Operation>();
+        //TestGetReplayDatas();
+    }
 
-        operation.Add(new Operation(10, OpType.ChangeRole, new List<string>() { "12", "22" }));
-        operation.Add(new Operation(12, OpType.ChangeTrade, new List<string>() { "12", "22" }));
-        operation.Add(new Operation(14, OpType.CreateTrade, new List<string>() { "12", "22" }));
-        operation.Add(new Operation(16, OpType.DeleteRole, new List<string>() { "12", "22" }));
+    private void TestGetReplayDatas()
+    {
+        NetworkMgr.My.GetReplayDatas("B9izmneslOKhE14zpk4", null, null);
+    }
 
-        operations.operations = operation;
-        operations.sceneName = "FTE_1";
+    private void TestGetReplayList()
+    {
+        NetworkMgr.My.GetReplayLists("FTE_1",null, null);
+    }
 
-        string json = JsonUtility.ToJson(operations);
-        NetworkMgr.My.TestPost(json);
+    private void TestUploadReplaydDatas()
+    {
+        List<PlayerOperation> playerOperations = new List<PlayerOperation>();
+        List<DataStat> dataStats = new List<DataStat>();
 
-        Debug.Log(json);
+        PlayerOperation pa = new PlayerOperation();
 
-        //PlayerReplay op = JsonUtility.FromJson<PlayerReplay>(json);
-        //Debug.Log( op.operations[0].type.GetType());
-        //Debug.Log( op.operations[0].operationParam.Count);
+        DataStat dataStat;
+
+        pa.operateTime = 0;
+        pa.type = GameEnum.OperationType.ChangeRole;
+        pa.operationParam = new List<string>() { "12", "13", "14" };
+        dataStat = new DataStat(10, 10, 10, 10, 1000, 10, 10, 10);
+        playerOperations.Add(pa);
+        dataStats.Add(dataStat);
+
+        pa.operateTime = 2;
+        pa.type = GameEnum.OperationType.ChangeTrade;
+        pa.operationParam = new List<string>() { "12", "13", "14" };
+        dataStat = new DataStat(12, 10, 10, 10, 10000, 10, 10, 10);
+        playerOperations.Add(pa);
+        dataStats.Add(dataStat);
+
+        pa.operateTime = 4;
+        pa.type = GameEnum.OperationType.CreateTrade;
+        pa.operationParam = new List<string>() { "12", "13", "14" };
+        dataStat = new DataStat(14, 10, 10, 10, 1000, 10, 10, 10);
+        playerOperations.Add(pa);
+        dataStats.Add(dataStat);
+
+        pa.operateTime = 6;
+        pa.type = GameEnum.OperationType.DeleteRole;
+        pa.operationParam = new List<string>() { "12", "13", "14" };
+        dataStat = new DataStat(16, 10, 10, 10, 100000, 10, 10, 10);
+        playerOperations.Add(pa);
+        dataStats.Add(dataStat);
+
+        pa.operateTime = 8;
+        pa.type = GameEnum.OperationType.DeleteTrade;
+        pa.operationParam = new List<string>() { "12", "13", "14" };
+        dataStat = new DataStat(18, 10, 10, 10, 100000, 10, 10, 10);
+        playerOperations.Add(pa);
+        dataStats.Add(dataStat);
+
+        PlayerReplay playerReplay = new PlayerReplay();
+        Debug.Log(dataStats.Count);
+        playerReplay.dataStats = dataStats;
+        playerReplay.operations = playerOperations;
+        playerReplay.sceneName = "FTE_1";
+        playerReplay.score = 100;
+        playerReplay.stars = "101";
+        playerReplay.timeCount = 100;
+        playerReplay.win = true;
+
+        NetworkMgr.My.AddReplayData(playerReplay, null, null);
     }
 }
