@@ -29,6 +29,11 @@ public static class Url
     public static string updateLevelProgress = ip + "updateLevelProgress";
     public static string addLevelRecord = ip + "addLevelRecord";
     public static string getLevelProgress = ip + "getLevelProgress";
+
+
+    public static string addReplayData = ip + "addReplayData";
+    public static string getReplayDatas = ip + "getReplayDatas";
+    public static string getReplayLists = ip + "getReplayLists";
     #endregion
 
     #region equip
@@ -37,4 +42,8 @@ public static class Url
     public static string deleteEquip = ip + "deleteEquip";
     #endregion
 
+    #region test
+    public static string testPost = ip + "testPost";
+    public static string testGet = ip + "testGet";
+    #endregion
 }

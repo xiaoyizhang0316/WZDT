@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static StageGoal;
 
 [Serializable]
 public class PlayerDatas
@@ -144,4 +145,43 @@ public class LevelRecord
         this.startTime = startTime;
         this.uploadTime = uploadTime;
     }
+}
+
+[Serializable]
+public class PlayerReplay
+{
+    public string sceneName;
+    public List<PlayerOperation> operations;
+    public List<DataStat> dataStats;
+    public int recordTime;
+    public int score;
+    public bool win;
+    public string stars;
+    public int timeCount;
+}
+
+[Serializable]
+public class ReplayList
+{
+    public string recordID;
+    public string sceneName;
+    public int recordTime;
+    public int score;
+    public bool win;
+    public string stars;
+    public int timeCount;
+}
+
+[Serializable]
+public class ReplayLists
+{
+    public List<ReplayList> replayLists;
+}
+
+[Serializable]
+public class ReplayDatas
+{
+    public string recordID;
+    public string operations;
+    public string dataStats;
 }

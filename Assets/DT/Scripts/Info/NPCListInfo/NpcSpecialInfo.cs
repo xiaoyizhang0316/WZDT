@@ -39,7 +39,7 @@ public class NpcSpecialInfo : MonoBehaviour
         skillDes.text = baseSkill.skillDesc;
         efficiency.text = npc.baseRoleData.efficiency.ToString();
         effect.text = npc.baseRoleData.effect.ToString() ;
-        cost.text = npc.baseRoleData.cost.ToString();
+        cost.text = npc.baseRoleData.tradeCost.ToString();
         risk.text = npc.baseRoleData.riskResistance.ToString();
         level.text = npc.baseRoleData.baseRoleData.level.ToString();
         HideAll();

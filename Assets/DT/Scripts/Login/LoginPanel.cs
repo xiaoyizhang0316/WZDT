@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static StageGoal;
 
 public class LoginPanel : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class LoginPanel : MonoBehaviour
 
     string username = "";
     string password = "";
+
+    bool isLogin = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,11 +39,12 @@ public class LoginPanel : MonoBehaviour
         }
         username_Input.ActivateInputField();
         username_Input.MoveTextEnd(true);
-        //Test();
+        Test();
     }
 
     private void Login()
     {
+        isLogin = true;
         username = username_Input.text.Replace(" ", "");
         password = password_Input.text.Replace(" ", "");
 
@@ -50,6 +54,7 @@ public class LoginPanel : MonoBehaviour
             HttpManager.My.ShowTip("用户名或密码不能为空!");
             username_Input.ActivateInputField();
             username_Input.MoveTextEnd(true);
+            isLogin = false;
         }
         else
         {
@@ -60,12 +65,11 @@ public class LoginPanel : MonoBehaviour
     private void LoginSuccess()
     {
         SavePasswordOrNot();
-        //NetworkMgr.My.loginRecordID = NetworkMgr.My.playerDatas.loginRecordID;
-        //NetworkMgr.My.playerID = NetworkMgr.My.playerDatas.playerID;
-        // TODO
+        
         if (NetworkMgr.My.playerDatas.status == 0)
         {
             // 创建用户信息
+            // TODO
             HttpManager.My.ShowTip("创建用户信息");
         }
         else
@@ -92,18 +96,18 @@ public class LoginPanel : MonoBehaviour
                 }
             }
         }
+        isLogin = false;
     }
 
     private void LoginFail()
     {
-        // TODO
-        // 清除错误密码
         password_Input.text = "";
         PlayerPrefs.DeleteKey("username");
         PlayerPrefs.DeleteKey("password");
         HttpManager.My.ShowTip("用户名或密码错误，请重新输入!");
         username_Input.ActivateInputField();
         username_Input.MoveTextEnd(true);
+        isLogin = false;
     }
 
     private void SavePasswordOrNot()
@@ -132,7 +136,7 @@ public class LoginPanel : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) && !isLogin)
             {
                 Login();
             }
@@ -141,13 +145,73 @@ public class LoginPanel : MonoBehaviour
 
     private void Test()
     {
-        PlayerDatas playerDatas = new PlayerDatas();
-        playerDatas.playerID = "111";
-        playerDatas.playerName = "test";
+        //TestGetReplayDatas();
+    }
 
-        string json = JsonUtility.ToJson(playerDatas);
-        Debug.Log(json);
-        PlayerDatas playerD = JsonUtility.FromJson<PlayerDatas>(json);
-        Debug.Log(playerD.playerName);
+    private void TestGetReplayDatas()
+    {
+        NetworkMgr.My.GetReplayDatas("B9izmneslOKhE14zpk4", null, null);
+    }
+
+    private void TestGetReplayList()
+    {
+        NetworkMgr.My.GetReplayLists("FTE_1",null, null);
+    }
+
+    private void TestUploadReplaydDatas()
+    {
+        List<PlayerOperation> playerOperations = new List<PlayerOperation>();
+        List<DataStat> dataStats = new List<DataStat>();
+
+        PlayerOperation pa = new PlayerOperation();
+
+        DataStat dataStat;
+
+        pa.operateTime = 0;
+        pa.type = GameEnum.OperationType.ChangeRole;
+        pa.operationParam = new List<string>() { "12", "13", "14" };
+        dataStat = new DataStat(10, 10, 10, 10, 1000, 10, 10, 10);
+        playerOperations.Add(pa);
+        dataStats.Add(dataStat);
+
+        pa.operateTime = 2;
+        pa.type = GameEnum.OperationType.ChangeTrade;
+        pa.operationParam = new List<string>() { "12", "13", "14" };
+        dataStat = new DataStat(12, 10, 10, 10, 10000, 10, 10, 10);
+        playerOperations.Add(pa);
+        dataStats.Add(dataStat);
+
+        pa.operateTime = 4;
+        pa.type = GameEnum.OperationType.CreateTrade;
+        pa.operationParam = new List<string>() { "12", "13", "14" };
+        dataStat = new DataStat(14, 10, 10, 10, 1000, 10, 10, 10);
+        playerOperations.Add(pa);
+        dataStats.Add(dataStat);
+
+        pa.operateTime = 6;
+        pa.type = GameEnum.OperationType.DeleteRole;
+        pa.operationParam = new List<string>() { "12", "13", "14" };
+        dataStat = new DataStat(16, 10, 10, 10, 100000, 10, 10, 10);
+        playerOperations.Add(pa);
+        dataStats.Add(dataStat);
+
+        pa.operateTime = 8;
+        pa.type = GameEnum.OperationType.DeleteTrade;
+        pa.operationParam = new List<string>() { "12", "13", "14" };
+        dataStat = new DataStat(18, 10, 10, 10, 100000, 10, 10, 10);
+        playerOperations.Add(pa);
+        dataStats.Add(dataStat);
+
+        PlayerReplay playerReplay = new PlayerReplay();
+        Debug.Log(dataStats.Count);
+        playerReplay.dataStats = dataStats;
+        playerReplay.operations = playerOperations;
+        playerReplay.sceneName = "FTE_1";
+        playerReplay.score = 100;
+        playerReplay.stars = "101";
+        playerReplay.timeCount = 100;
+        playerReplay.win = true;
+
+        NetworkMgr.My.AddReplayData(playerReplay, null, null);
     }
 }

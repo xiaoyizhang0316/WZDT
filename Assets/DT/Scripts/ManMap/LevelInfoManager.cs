@@ -21,6 +21,8 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public Button play;
     public Button close;
 
+    public Toggle isUseGuide;
+
     public Action loadScene;
 
     public Sprite levelLockImage;
@@ -40,6 +42,10 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
             
         });
         play.onClick.AddListener(() => { loadScene(); });
+        isUseGuide.onValueChanged.AddListener((bool b) =>
+        {
+            PlayerPrefs.SetInt("isUseGuide",b ? 1 : 0);
+        });
     }
 
     // Update is called once per frame
@@ -55,9 +61,11 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         this.mission_1.text = mission_1;
         this.mission_2.text = mission_2;
         this.mission_3.text = mission_3;
+        isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
         panel.SetActive(true);
         this.loadScene = loadScene;
         InitBox(name);
+
     }
 
     void InitBox(string level)

@@ -12,8 +12,8 @@ public class FTESceneManager : MonoSingleton<FTESceneManager>
     public int currentIndex =5;
     // Start is called before the first frame update
     void Start()
-    { 
-        if (currentIndex >= 0)
+    {
+        if (currentIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
         {
             UIFTE.SetActive(true);
 

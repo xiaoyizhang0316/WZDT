@@ -10,7 +10,7 @@ public class FTE_2_Step_1 : BaseStep
     void Start()
     {
         nextButton.onClick.AddListener(() => { StopCurrentStep(); });
-        contenText.color = new Color(1,1,1,0);
+        contenText.color = new Color(1,1,1,1);
         NewCanvasUI.My.GamePause();
     }
 
