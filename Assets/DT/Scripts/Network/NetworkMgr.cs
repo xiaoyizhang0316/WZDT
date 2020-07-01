@@ -421,9 +421,9 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             {
                 string json = CompressUtils.Uncompress(response.data);
                 ReplayDatas datas = JsonUtility.FromJson<ReplayDatas>(json);
-                Debug.Log(datas.recordID);
-                Debug.Log(datas.operations);
-                Debug.Log(datas.dataStats);
+                //Debug.Log(datas.recordID);
+                //Debug.Log(datas.operations);
+                //Debug.Log(datas.dataStats);
                 doSuccess?.Invoke();
             }
             else
@@ -456,10 +456,10 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     replayLists.Add(rl);
                 }
-                Debug.Log(replayLists.Count);
-                Debug.Log(replayLists[0].recordTime);
-                Debug.Log(replayLists[0].win);
-                Debug.Log(replayLists[0].recordID);
+                //Debug.Log(replayLists.Count);
+                //Debug.Log(replayLists[0].recordTime);
+                //Debug.Log(replayLists[0].win);
+                //Debug.Log(replayLists[0].recordID);
                 doSuccess?.Invoke();
             }
             else

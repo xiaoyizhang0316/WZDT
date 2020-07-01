@@ -20,6 +20,8 @@ public class LoginPanel : MonoBehaviour
     string username = "";
     string password = "";
 
+    bool isLogin = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,7 @@ public class LoginPanel : MonoBehaviour
 
     private void Login()
     {
+        isLogin = true;
         username = username_Input.text.Replace(" ", "");
         password = password_Input.text.Replace(" ", "");
 
@@ -51,6 +54,7 @@ public class LoginPanel : MonoBehaviour
             HttpManager.My.ShowTip("用户名或密码不能为空!");
             username_Input.ActivateInputField();
             username_Input.MoveTextEnd(true);
+            isLogin = false;
         }
         else
         {
@@ -61,12 +65,11 @@ public class LoginPanel : MonoBehaviour
     private void LoginSuccess()
     {
         SavePasswordOrNot();
-        //NetworkMgr.My.loginRecordID = NetworkMgr.My.playerDatas.loginRecordID;
-        //NetworkMgr.My.playerID = NetworkMgr.My.playerDatas.playerID;
-        // TODO
+        
         if (NetworkMgr.My.playerDatas.status == 0)
         {
             // 创建用户信息
+            // TODO
             HttpManager.My.ShowTip("创建用户信息");
         }
         else
@@ -93,18 +96,18 @@ public class LoginPanel : MonoBehaviour
                 }
             }
         }
+        isLogin = false;
     }
 
     private void LoginFail()
     {
-        // TODO
-        // 清除错误密码
         password_Input.text = "";
         PlayerPrefs.DeleteKey("username");
         PlayerPrefs.DeleteKey("password");
         HttpManager.My.ShowTip("用户名或密码错误，请重新输入!");
         username_Input.ActivateInputField();
         username_Input.MoveTextEnd(true);
+        isLogin = false;
     }
 
     private void SavePasswordOrNot()
@@ -133,7 +136,7 @@ public class LoginPanel : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) && !isLogin)
             {
                 Login();
             }
