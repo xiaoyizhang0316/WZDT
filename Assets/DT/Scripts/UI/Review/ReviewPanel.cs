@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using Vectrosity;
 using static GameEnum;
 using static StageGoal;
 
@@ -19,6 +20,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     public Slider playSlider;
 
     public List<MapState> mapStates;
+
+    public VectorObject2D line;
 
     private bool isStart = false;
 
@@ -55,9 +58,9 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public void AutoPlay()
     {
-        twe = transform.DOScale(1f, 1f).OnComplete(() =>
+        twe = transform.DOScale(1f, 0.1f).OnComplete(() =>
         {
-            playSlider.value++;
+            playSlider.value+= 0.1f;
             OnSliderValueChange();
             AutoPlay();
         }).Play();
@@ -66,7 +69,21 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public void OnSliderValueChange()
     {
-
+        for (int i = 0; i < mapStates.Count; i++)
+        {
+            if (mapStates[i].time > playSlider.value)
+            {
+                if (i == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    //TODO
+                    //PlayClip(mapStates[i - 1])
+                }
+            }
+        }
     }
 
     public void Init(List<PlayerOperation> playerOperations)
@@ -74,6 +91,23 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         AutoPlay();
         Pause();
         GenerateMapStates(playerOperations);
+        playSlider.maxValue = StageGoal.My.timeCount;
+        InitMoneyLine();
+    }
+
+
+    public void InitMoneyLine()
+    {
+        if (StageGoal.My.dataStats.Count == 0)
+            return;
+        int maxAmount = StageGoal.My.dataStats[0].restMoney * 150 / 100;
+        line.vectorLine.points2.Clear();
+        for (int i = 0; i < StageGoal.My.dataStats.Count; i++)
+        {
+            line.vectorLine.points2.Add(new Vector2(1326 / StageGoal.My.timeCount * 5 * i, StageGoal.My.dataStats[0].restMoney / (float)maxAmount * 100f));
+        }
+        line.vectorLine.points2.Add(new Vector2(1326, StageGoal.My.playerGold / (float)maxAmount * 100f));
+        line.vectorLine.Draw();
     }
 
     /// <summary>
