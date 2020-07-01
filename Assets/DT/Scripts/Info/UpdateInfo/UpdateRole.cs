@@ -86,7 +86,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 tew = hammer.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.3f).Play();
 
                 GetComponent<Button>().interactable = true;
-
+                PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).CheckLevel();
                 if (RoleUpdateInfo.My.currentRole.baseRoleData.level == 5)
                 {
                     upgradeNumber.gameObject.SetActive(false);
