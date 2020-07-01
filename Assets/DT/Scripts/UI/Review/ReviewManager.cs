@@ -18,8 +18,10 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     public  List<ReviewRoleSign> signs;
     public  List<GameObject> lines;
     public Transform lineTF;
-    public void ShowCurrentReview()
+    public int index;
+    public void ShowCurrentReview(int index)
     {
+        this.index = index;
         ClearRolesLines();
         CreatRoles();
         CreatLines();
@@ -28,16 +30,15 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
     public ReviewPanel.ReviewRole GetRoleByMapRoles(double ID)
     {
-        for (int i = 0; i < panel.mapStates.Count; i++)
-        {
-            for (int j = 0; j < panel.mapStates[i].mapTrades.Count; j++)
+     
+            for (int j = 0; j < panel.mapStates[index].mapTrades.Count; j++)
             {
-                if (panel.mapStates[i].mapRoles[j].roleId == ID)
+                if (panel.mapStates[index].mapRoles[j].roleId == ID)
                 {
-                    return panel.mapStates[i].mapRoles[j];
+                    return panel.mapStates[index].mapRoles[j];
                 }
             }
-        }
+       
 
         return new ReviewPanel.ReviewRole();
     }
@@ -55,45 +56,44 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
         return new ReviewRoleSign();
     }
-    public void CreatRoles()
+    public void CreatRoles( )
     {
-        for (int i = 0; i < panel.mapStates.Count; i++)
-        {
-            for (int j = 0; j < panel.mapStates[i].mapRoles.Count; j++)
+       
+            for (int j = 0; j < panel.mapStates[index].mapRoles.Count; j++)
             {
                 //生成生产性角色
-                if (panel.mapStates[i].mapRoles[j].roleType == GameEnum.RoleType.Seed)
+                if (panel.mapStates[index].mapRoles[j].roleType == GameEnum.RoleType.Seed)
                 {
                     GameObject obj = Instantiate(rolePrb, seed);
-                    obj.GetComponent<ReviewRoleSign>().role = panel.mapStates[i].mapRoles[j];
+                    obj.GetComponent<ReviewRoleSign>().role = panel.mapStates[index].mapRoles[j];
                 }
 
-                if (panel.mapStates[i].mapRoles[j].roleType == GameEnum.RoleType.Peasant)
+                if (panel.mapStates[index].mapRoles[j].roleType == GameEnum.RoleType.Peasant)
                 {
                     GameObject obj = Instantiate(rolePrb, peasant);
-                    obj.GetComponent<ReviewRoleSign>().role = panel.mapStates[i].mapRoles[j];
+                    obj.GetComponent<ReviewRoleSign>().role = panel.mapStates[index].mapRoles[j];
                 }
 
-                if (panel.mapStates[i].mapRoles[j].roleType == GameEnum.RoleType.CutFactory ||
-                    panel.mapStates[i].mapRoles[j].roleType == GameEnum.RoleType.JuiceFactory ||
-                    panel.mapStates[i].mapRoles[j].roleType == GameEnum.RoleType.CanFactory
+                if (panel.mapStates[index].mapRoles[j].roleType == GameEnum.RoleType.CutFactory ||
+                    panel.mapStates[index].mapRoles[j].roleType == GameEnum.RoleType.JuiceFactory ||
+                    panel.mapStates[index].mapRoles[j].roleType == GameEnum.RoleType.CanFactory
                 )
                 {
                     GameObject obj = Instantiate(rolePrb, merchant);
-                    obj.GetComponent<ReviewRoleSign>().role = panel.mapStates[i].mapRoles[j];
+                    obj.GetComponent<ReviewRoleSign>().role = panel.mapStates[index].mapRoles[j];
                 }
 
-                if (panel.mapStates[i].mapRoles[j].roleType == GameEnum.RoleType.Dealer)
+                if (panel.mapStates[index].mapRoles[j].roleType == GameEnum.RoleType.Dealer)
                 {
                     GameObject obj = Instantiate(rolePrb, dealer);
-                    obj.GetComponent<ReviewRoleSign>().role = panel.mapStates[i].mapRoles[j];
+                    obj.GetComponent<ReviewRoleSign>().role = panel.mapStates[index].mapRoles[j];
                 }
             }
 
-            for (int j = 0; j < panel.mapStates[i].mapTrades.Count; j++)
+            for (int j = 0; j < panel.mapStates[index].mapTrades.Count; j++)
             {
-                var starrole = GetRoleByMapRoles(panel.mapStates[i].mapTrades[j].startRole);
-                var endrole = GetRoleByMapRoles(panel.mapStates[i].mapTrades[j].endRole);
+                var starrole = GetRoleByMapRoles(panel.mapStates[index].mapTrades[j].startRole);
+                var endrole = GetRoleByMapRoles(panel.mapStates[index].mapTrades[j].endRole);
                 if (!CheckRole(starrole.roleId))
                 {
                      
@@ -125,27 +125,25 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                         obj.GetComponent<ReviewRoleSign>().role = starrole;
                     }
                 }
-            }
-        }
+            } 
     }
 
     
     public void CreatLines()
     {
-        for (int i = 0; i < panel.mapStates.Count; i++)
-        {
-            for (int j = 0; j <  panel.mapStates[i].mapTrades.Count; j++)
+      
+            for (int j = 0; j <  panel.mapStates[index].mapTrades.Count; j++)
             { 
                GameObject line =  Instantiate(linePrb, lineTF);
                lines.Add(line);
                line.GetComponent<VectorObject2D>().vectorLine.points2.Clear();
-               line.GetComponent<VectorObject2D>().vectorLine.points2.Add(GetRoleByMapRoleSigns(panel.mapStates[i].mapTrades[j].startRole).transform.position);
-               line.GetComponent<VectorObject2D>().vectorLine.points2.Add(GetRoleByMapRoleSigns(panel.mapStates[i].mapTrades[j].endRole).transform.position);
+               line.GetComponent<VectorObject2D>().vectorLine.points2.Add(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).transform.position);
+               line.GetComponent<VectorObject2D>().vectorLine.points2.Add(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).transform.position);
                
 
             }
         }
-    }
+   
 
     public void ClearRolesLines()
     {
