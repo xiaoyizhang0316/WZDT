@@ -21,6 +21,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     public int index;
     public void ShowCurrentReview(int index)
     {
+        Debug.Log("create report"  + index.ToString());
         this.index = index;
         ClearRolesLines();
         CreatRoles();
@@ -46,14 +47,14 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     {
         for (int i = 0; i < signs.Count; i++)
         {
-          
+                
                 if (signs[i].role.roleId == ID)
                 {
                     return signs[i];
                 }
            
         }
-
+        Debug.Log(ID);
         return new ReviewRoleSign();
     }
     public void CreatRoles( )
@@ -139,7 +140,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                line.GetComponent<VectorObject2D>().vectorLine.points2.Clear();
                line.GetComponent<VectorObject2D>().vectorLine.points2.Add(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).transform.position);
                line.GetComponent<VectorObject2D>().vectorLine.points2.Add(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).transform.position);
-               
+               line.GetComponent<VectorObject2D>().vectorLine.Draw();
 
             }
         }
@@ -155,6 +156,8 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         {
             Destroy(lines[i].gameObject); 
         }
+        signs.Clear();
+        lines.Clear();
     }
 
     public bool  CheckRole(double ID)

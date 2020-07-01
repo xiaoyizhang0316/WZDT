@@ -69,21 +69,27 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public void OnSliderValueChange()
     {
+        bool isPlay = false;
         for (int i = 0; i < mapStates.Count; i++)
         {
             if (mapStates[i].time > playSlider.value)
             {
                 if (i == 0)
                 {
-                    break;
+                    ReviewManager.My.ShowCurrentReview(0);
                 }
                 else
                 {
-                    ReviewManager.My.ShowCurrentReview();
+                    ReviewManager.My.ShowCurrentReview(i - 1);
+                    isPlay = true;
+                    break;
                     //PlayClip(mapStates[i - 1])
                 }
             }
         }
+        if (!isPlay)
+            ReviewManager.My.ShowCurrentReview(mapStates.Count - 1);
+
     }
 
     public void Init(List<PlayerOperation> playerOperations)
@@ -117,6 +123,10 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     public void GenerateMapStates(List<PlayerOperation> playerOperations)
     {
         mapStates = new List<MapState>();
+        MapState tempState = new MapState();
+        tempState.Init();
+        tempState.time = 0;
+        mapStates.Add(tempState);
         foreach (PlayerOperation p in playerOperations)
         {
             MapState mapState = new MapState();
