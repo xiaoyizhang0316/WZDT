@@ -60,8 +60,11 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     {
         twe = transform.DOScale(1f, 0.1f).OnComplete(() =>
         {
-            playSlider.value += 0.1f;
-            OnSliderValueChange();
+            if(playSlider.value < playSlider.maxValue)
+            {
+                playSlider.value += 0.1f;
+                OnSliderValueChange();
+            }
             AutoPlay();
         }).Play();
         twe.timeScale = speed;
@@ -83,7 +86,6 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                     ReviewManager.My.ShowCurrentReview(i - 1);
                     isPlay = true;
                     break;
-                    //PlayClip(mapStates[i - 1])
                 }
             }
         }
@@ -110,7 +112,14 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         line.vectorLine.points2.Clear();
         for (int i = 0; i < StageGoal.My.dataStats.Count; i++)
         {
-            line.vectorLine.points2.Add(new Vector2(1326 / StageGoal.My.timeCount * 5 * i, StageGoal.My.dataStats[0].restMoney / (float)maxAmount * 100f));
+            if (StageGoal.My.dataStats[i].restMoney <= maxAmount)
+            {
+                line.vectorLine.points2.Add(new Vector2(1326 / StageGoal.My.timeCount * 5 * i, StageGoal.My.dataStats[i].restMoney / (float)maxAmount * 100f));
+            }
+            else
+            {
+                line.vectorLine.points2.Add(new Vector2(1326 / StageGoal.My.timeCount * 5 * i, 100f));
+            }
         }
         line.vectorLine.points2.Add(new Vector2(1326, StageGoal.My.playerGold / (float)maxAmount * 100f));
         line.vectorLine.Draw();
