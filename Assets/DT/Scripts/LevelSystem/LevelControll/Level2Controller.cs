@@ -8,8 +8,7 @@ public class Level2Controller : BaseLevelController
 
     public override void CountKillNumber(ConsumeSign sign)
     {
-        List<ConsumerType> list = new List<ConsumerType>() { ConsumerType.BluecollarNormal,
-            ConsumerType.BluecollarRare, ConsumerType.BluecollarEpic, ConsumerType.BluecollarLegendary };
+        List<ConsumerType> list = new List<ConsumerType>() { ConsumerType.BluecollarRare };
         if (list.Contains(sign.consumerType))
         {
             targetNumber++;
@@ -18,29 +17,22 @@ public class Level2Controller : BaseLevelController
 
     public override void CheckStarTwo()
     {
-        if (targetNumber >= 18)
+        if (targetNumber >= 28)
         {
             starTwoStatus = true;
         }
-        starTwoCondition = "满足蓝领数量:" + targetNumber.ToString() + "/18";
+        starTwoCondition = "满足中级蓝领数量:" + targetNumber.ToString() + "/28";
     }
 
     public override void CheckStarThree()
     {
-        BaseMapRole[] baseMapRoles = FindObjectsOfType<BaseMapRole>();
-        int count = 0;
-        for (int i = 0; i < baseMapRoles.Length; i++)
+        if (putRoleNumber > 6)
         {
-            if (!baseMapRoles[i].isNpc)
-            {
-                count++;
-                if (count > 4)
-                {
-                    starThreeStatus = false;
-                    CancelInvoke("CheckStarThree");
-                }
-            }
+            starThreeStatus = false;
+            CancelInvoke("CheckStarThree");
+            return;
         }
         starThreeStatus = true;
+        starThreeCondition = "放置不多于6个角色，当前：" + putRoleNumber.ToString() + "/6";
     }
 }
