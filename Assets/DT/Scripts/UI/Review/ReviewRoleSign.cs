@@ -31,11 +31,19 @@ public class ReviewRoleSign : MonoBehaviour
         isInit = true;
         GetComponent<Image>().enabled = true;
         this.role = role;
+ 
+
+     
+    }
+
+    public void ChangeParent()
+    {
         startparent = transform.parent;
         index = transform.GetSiblingIndex();
         transform.SetParent(ReviewManager.My.roles.transform);
     }
 
+    
     public void ClearRole()
     {
         isInit = false;

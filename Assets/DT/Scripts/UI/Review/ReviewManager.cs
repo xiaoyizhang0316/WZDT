@@ -23,6 +23,10 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     public GameObject roles;
     public GameObject linePRBs;
  
+    public int countseed;
+    public int countpeasant;
+    public int countmerchant;
+    public int countdealer;
     public void ShowCurrentReview(int index)
     {
         if (this.index == index)
@@ -34,6 +38,10 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         ClearRolesLines();
 
         CreatRoles();
+        
+        Rank();
+        
+        
         CreatLines();
     }
 
@@ -74,6 +82,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             {
                 if (!seed.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
                 {
+                    countseed++;
                     return seed.GetChild(i).GetComponent<ReviewRoleSign>();
                 }
             }
@@ -85,6 +94,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 {
                     if (!peasant.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
                     {
+                        countpeasant++;
                         return peasant.GetChild(i).GetComponent<ReviewRoleSign>();
                     }
                 }
@@ -102,6 +112,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 {
                     if (!merchant.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
                     {
+                        countmerchant++;
                         return merchant.GetChild(i).GetComponent<ReviewRoleSign>();
                     }
                 }
@@ -113,6 +124,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 {
                     if (!dealer.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
                     {
+                        countdealer++;
                         return dealer.GetChild(i).GetComponent<ReviewRoleSign>();
                     }
                 }
@@ -173,7 +185,10 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                         Destroy(lines[i].gameObject);
                     }
 
-          
+                    countdealer = 0;
+                    countmerchant = 0;
+                    countpeasant = 0;
+                    countseed = 0;
                     lines.Clear();
                 }
 
@@ -190,6 +205,80 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                     return false;
                 }
 
+
+                public void Rank()
+                {
+                    List<ReviewRoleSign> tempList = new List<ReviewRoleSign>();
+                    for (int i = 0; i <seed.childCount; i++)
+                    {
+                        if ( seed.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
+                        {
+                            tempList.Add( seed.GetChild(i).GetComponent<ReviewRoleSign>());
+                        }
+                    }
+                    RankPosition(tempList );
+                    tempList.Clear();
+                    
+                    for (int i = 0; i <peasant.childCount; i++)
+                    {
+                        if ( peasant.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
+                        {
+                            tempList.Add( peasant.GetChild(i).GetComponent<ReviewRoleSign>());
+                        }
+                    }
+                    RankPosition(tempList );
+                    tempList.Clear();
+                    for (int i = 0; i <merchant.childCount; i++)
+                    {
+                        if ( merchant.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
+                        {
+                            tempList.Add( merchant.GetChild(i).GetComponent<ReviewRoleSign>());
+                        }
+                    }
+                    RankPosition(tempList );
+                    tempList.Clear();
+                    for (int i = 0; i <dealer.childCount; i++)
+                    {
+                        if ( dealer.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
+                        {
+                            tempList.Add( dealer.GetChild(i).GetComponent<ReviewRoleSign>());
+                        }
+                    }
+                    RankPosition(tempList );
+                    tempList.Clear();
+                }
+
+                public void RankPosition(List<ReviewRoleSign> signs)
+                {
+                    if (signs.Count <= 6)
+                    {
+                        //一行
+                        for (int i = 0; i <signs.Count; i++)
+                        {
+                            float tem = 720 / (signs.Count+1);
+                            signs[i].transform.localPosition = new Vector3(0,360-tem*(i+1));
+                            signs[i].ChangeParent();
+                        
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i <6; i++)
+                        {
+                            float tem = 720 / (6+1);
+                            signs[i].transform.localPosition = new Vector3(-80,360-tem*(i+1));
+                        
+                        }
+                        for (int i = 6; i <signs.Count ; i++)
+                        {
+                            float tem = 720 / (signs.Count+1);
+                            signs[i].transform.localPosition = new Vector3(80,360-tem*(i-6+1));
+                        
+                        }
+                        
+                    }
+
+                }
 
                 void DrawLine(GameObject posA, GameObject posB)
                 {
