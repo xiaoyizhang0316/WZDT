@@ -264,7 +264,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     /// <summary>
