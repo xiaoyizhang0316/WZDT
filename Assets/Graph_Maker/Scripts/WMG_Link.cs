@@ -145,4 +145,9 @@ public class WMG_Link : WMG_GUI_Functions {
 		}
 		return returnvalue;
 	}
+
+	public void Update()
+	{
+		Reposition();
+	}
 }
