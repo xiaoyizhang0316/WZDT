@@ -38,6 +38,8 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     public int targetNumber = 0;
 
+    public int putRoleNumber = 0;
+
     public List<GameObject> unlockLandList1 = new List<GameObject>();
 
     public List<GameObject> unlockLandList2 = new List<GameObject>();
@@ -105,13 +107,22 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     }
 
     /// <summary>
+    /// 统计放置的角色数量
+    /// </summary>
+    /// <param name="role"></param>
+    public virtual void CountPutRole(Role role)
+    {
+        putRoleNumber++;
+    }
+
+    /// <summary>
     /// 1星条件检测
     /// </summary>
     /// <returns></returns>
     public virtual void CheckStarOne()
     {
         starOneStatus = StageGoal.My.playerHealth > 0;
-        starOneCondition = "玩家当前血量大于0";
+        starOneCondition = "满意度大于0";
     }
 
     /// <summary>
