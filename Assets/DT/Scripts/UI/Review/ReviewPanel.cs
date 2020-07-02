@@ -98,7 +98,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         Pause();
         GenerateMapStates(playerOperations);
         playSlider.maxValue = StageGoal.My.timeCount;
-        InitMoneyLine();
+       // InitMoneyLine();
     }
 
 
@@ -107,7 +107,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         if (StageGoal.My.dataStats.Count == 0)
             return;
         int maxAmount = StageGoal.My.dataStats[0].restMoney * 150 / 100;
-        line.vectorLine.points2.Clear();
+      //  line.vectorLine.points2.Clear();
         for (int i = 0; i < StageGoal.My.dataStats.Count; i++)
         {
             line.vectorLine.points2.Add(new Vector2(1326 / StageGoal.My.timeCount * 5 * i, StageGoal.My.dataStats[0].restMoney / (float)maxAmount * 100f));
