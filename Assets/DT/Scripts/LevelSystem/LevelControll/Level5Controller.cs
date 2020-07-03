@@ -8,33 +8,37 @@ public class Level5Controller : BaseLevelController
 
     public override void CountKillNumber(ConsumeSign sign)
     {
-        List<ConsumerType> list = new List<ConsumerType>() { ConsumerType.GoldencollarEpic, ConsumerType.GoldencollarEpic,
-            ConsumerType.GoldencollarRare,ConsumerType.GoldencollarLegendary };
+        List<ConsumerType> list = new List<ConsumerType>() { ConsumerType.GoldencollarLegendary };
         if (list.Contains(sign.consumerType))
         {
             targetNumber++;
         }
     }
 
+    public override void CountPutRole(Role role)
+    {
+        if (role.baseRoleData.roleType == RoleType.Dealer)
+            putRoleNumber++;
+    }
+
     public override void CheckStarTwo()
     {
-        if (targetNumber >= 10)
+        if (putRoleNumber >= 6)
         {
-            starTwoStatus = true;
+            starTwoStatus = false;
+            CancelInvoke("CheckStarTwo");
+            return;
         }
+        starTwoStatus = true;
+        starTwoCondition = "放置不多于6个零售商,当前：" + putRoleNumber.ToString() + "/6";
     }
 
     public override void CheckStarThree()
     {
-        TradeSign[] signs = FindObjectsOfType<TradeSign>();
-        if (signs.Length > 10)
-        {
-            starThreeStatus = false;
-            CancelInvoke("CheckStarThree");
-        }
-        else
+        if (targetNumber >= 12)
         {
             starThreeStatus = true;
         }
+        starThreeCondition = "满足传奇金领数量" + targetNumber.ToString() + "/12";
     }
 }

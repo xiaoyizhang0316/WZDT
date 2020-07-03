@@ -33,6 +33,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     public Sprite seedSpeed;
     public Sprite melonSpeed;
 
+    public Image roleImg;
 
     public List<Image> roleBuff;
 
@@ -104,6 +105,8 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     {     
         name.text = role.baseRoleData.roleName;
         roleName = role.baseRoleData.roleName;
+        roleImg.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + role.baseRoleData.roleType.ToString()+role.baseRoleData.level.ToString());
+        roleImg.SetNativeSize();
         skillDesc.text = PlayerData.My.GetMapRoleById(role.ID).transform.GetComponent<BaseSkill>().skillDesc;
         currentRole = role; 
         seed.SetActive(false);

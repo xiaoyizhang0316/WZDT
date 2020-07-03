@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2102700106112451032}
   - component: {fileID: 7669333806280223149}
   - component: {fileID: 1940791772676264174}
+  - component: {fileID: -5719489757225196679}
   m_Layer: 5
   m_Name: ReviewSign
   m_TagString: Untagged
@@ -86,3 +87,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6425f470510d45046b100c10352d2f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  role:
+    roleId: 0
+    roleName: 
+    roleType: 0
+    buffList: 
+    level: 0
+  pos: {x: 0, y: 0, z: 0}
+  localpos: {x: 0, y: 0, z: 0}
+--- !u!114 &-5719489757225196679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022235888955243191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fa36ccc941f634bb81d88c0df424c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  radius: 15.5
+  isSquare: 0
+  numLinks: 0
+  links: []
+  linkAngles: []
+  objectToScale: {fileID: 100000, guid: 3fe6cc1c53eb56c45a14f450cb5349be, type: 3}
+  objectToColor: {fileID: 100000, guid: 3fe6cc1c53eb56c45a14f450cb5349be, type: 3}
+  objectToLabel: {fileID: 0}
+  isSelected: 0
+  wasSelected: 0
+  BFS_mark: 0
+  BFS_depth: 0
+  Dijkstra_depth: 0
+  seriesRef: {fileID: 0}

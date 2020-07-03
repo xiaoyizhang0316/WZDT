@@ -66,7 +66,10 @@ public class WinManager : MonoSingleton<WinManager>
     public void InitWin()
     {
         stars = 0;
-        retry.onClick.AddListener(() => { SceneManager.LoadScene(SceneManager.GetActiveScene().name); });
+        retry.onClick.AddListener(() => {
+            PlayerData.My.Reset();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        });
         boxs.SetActive(false);
         isStar_0 = BaseLevelController.My.starOneStatus;
         isStar_1 = BaseLevelController.My.starTwoStatus;

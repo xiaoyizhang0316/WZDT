@@ -10,6 +10,8 @@ public class NPC : BaseNpc
 
     private Role currentRole;
 
+    public List<string> autoTradeList;
+
     private void OnMouseEnter()
     {
 
@@ -102,6 +104,18 @@ public class NPC : BaseNpc
         PlayerData.My.RoleData.Add(GetComponent<BaseMapRole>().baseRoleData);
         PlayerData.My.MapRole.Add(GetComponent<BaseMapRole>());
         currentRole = GetComponentInParent<BaseMapRole>().baseRoleData;
+        Invoke("AutoSetTrade",0.2f);
+    }
+
+    public void AutoSetTrade()
+    {
+        if (autoTradeList.Count > 0)
+        {
+            for (int i = 0; i < autoTradeList.Count; i++)
+            {
+                TradeManager.My.AutoCreateTrade(currentRole.ID.ToString(), autoTradeList[i]);
+            }
+        }
     }
 
     // Update is called once per frame
