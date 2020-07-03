@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ReviewRoleSign : MonoBehaviour
+public class ReviewRoleSign : MonoBehaviour,IPointerClickHandler
 {
     public ReviewPanel.ReviewRole role;
 
@@ -12,6 +13,7 @@ public class ReviewRoleSign : MonoBehaviour
     public Transform startparent;
     public Vector3 localpos;
     public int index;
+    public bool isBuffRole;
     void Awake()
     {
         startparent = transform.parent;
@@ -26,8 +28,9 @@ public class ReviewRoleSign : MonoBehaviour
  
     }
 
-    public void InitRole(ReviewPanel.ReviewRole role)
+    public void InitRole(ReviewPanel.ReviewRole role,bool isbuffRole)
     {
+        isBuffRole = isbuffRole;
         isInit = true;
         GetComponent<Image>().enabled = true;
         this.role = role;
@@ -48,7 +51,7 @@ public class ReviewRoleSign : MonoBehaviour
     {
         isInit = false;
         GetComponent<Image>().enabled = false;
-        
+        isBuffRole = false;
         transform.SetParent(startparent);
         transform.SetSiblingIndex(index);
     }
@@ -57,5 +60,10 @@ public class ReviewRoleSign : MonoBehaviour
     void Update()
     {
      
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+         ReviewBuffManager.My.InitRoleBuff(this);
     }
 }
