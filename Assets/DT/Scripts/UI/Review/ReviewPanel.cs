@@ -28,6 +28,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     private Tweener twe;
 
     private float speed;
+    
+    
 
     public void Normal()
     {

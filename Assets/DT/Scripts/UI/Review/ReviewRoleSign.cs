@@ -14,6 +14,7 @@ public class ReviewRoleSign : MonoBehaviour,IPointerClickHandler
     public Vector3 localpos;
     public int index;
     public bool isBuffRole;
+    public List<Color> haveColoe; 
     void Awake()
     {
         startparent = transform.parent;
