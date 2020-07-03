@@ -30,13 +30,6 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     private Tweener twe;
 
     private float speed;
-    
-    
-
-    //private void Update()
-    //{
-    //    pos = GetComponent<RectTransform>().anchoredPosition;
-    //}
 
     public void Normal()
     {
@@ -122,7 +115,6 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         playSlider.value = 0;
         InitMoneyLine(StageGoal.My.dataStats,StageGoal.My.timeCount);
     }
-
 
     public void InitMoneyLine(List<DataStat> datas,int timeCount)
     {
