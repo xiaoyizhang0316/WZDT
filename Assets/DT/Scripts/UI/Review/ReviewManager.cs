@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Vectrosity;
+using Random = System.Random;
 
 public class ReviewManager : MonoSingleton<ReviewManager>
 {
@@ -142,8 +143,15 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                     {
                         //生成生产性角色
                             Debug.Log(panel.mapStates[index].mapRoles[j].roleType+"j");
-                        GetRoleSign(panel.mapStates[index].mapRoles[j].roleType)
-                            .InitRole(panel.mapStates[index].mapRoles[j]);
+                            ReviewRoleSign sign = new ReviewRoleSign();
+                          
+                             sign = GetRoleSign(panel.mapStates[index].mapRoles[j].roleType);
+                             if (sign != null)
+                             {
+                                 sign  .InitRole(panel.mapStates[index].mapRoles[j],false);
+                             }
+
+                           
                     }
 
                     for (int j = 0; j < panel.mapStates[index].mapTrades.Count; j++)
@@ -154,8 +162,9 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                         {
                            
                                 GetRoleSign(endrole.roleType)
-                                    .InitRole( starrole);
+                                    .InitRole( starrole,true);
                          
+                                
                         }
                     }
                 }
@@ -286,6 +295,12 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                     lines.Add(line);
                     line.GetComponent<WMG_Link>().fromNode = posA;
                     line.GetComponent<WMG_Link>().toNode = posB;
+                    if (posA.GetComponent<ReviewRoleSign>().isBuffRole)
+                    {
+                        Color color = new Color(UnityEngine.Random.Range(0,1.0f),UnityEngine.Random.Range(0,1.0f),UnityEngine.Random.Range(0,1.0f),1);
+                        line.transform.GetChild(0).GetComponent<Image>().color=color;
+                    }
+
                     //RectTransform ImageRectTrans =    line.GetComponent<RectTransform>();
                     //   Vector3 differenceVector = posB - posA;
 //
