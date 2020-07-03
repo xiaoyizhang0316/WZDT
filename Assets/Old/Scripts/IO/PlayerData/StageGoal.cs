@@ -364,15 +364,13 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             NewCanvasUI.My.GamePause();
             NewCanvasUI.My.lose.SetActive(true);
+
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
-            //if (NetworkMgr.My.isUsingHttp)
-            //{
-            //    LevelRecord levelRecord = new LevelRecord(NetworkMgr.My.playerID, NetworkMgr.My.currentLevel, 0,
-            //        tradeCost, productCost, extraCosts, consumeIncome, npcIncome, otherIncome, buildTpCost, mirrorTpCost,
-            //        unlockTpCost, npcTpIncome, workerTpIncome, buffTpIncome, playerTechPoint, currentWave, playerGold, 0,
-            //        timeCount, NetworkMgr.My.startTime, TimeStamp.GetCurrentTimeStamp());
-            //    NetworkMgr.My.AddLevelRecord(levelRecord);
-            //}
+            if (NetworkMgr.My.isUsingHttp)
+            {
+                PlayerReplay tempReplay = new PlayerReplay(false);
+                NetworkMgr.My.AddReplayData(tempReplay);
+            }
         }
         else
             return;

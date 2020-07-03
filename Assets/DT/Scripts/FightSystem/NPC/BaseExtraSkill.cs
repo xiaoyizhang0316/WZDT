@@ -21,7 +21,7 @@ public class BaseExtraSkill : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         isOpen = false;
         GetComponentInParent<BaseMapRole>().extraSkill = this;

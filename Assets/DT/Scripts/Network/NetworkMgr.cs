@@ -453,11 +453,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     /// <param name="recordID">复盘id（从复盘list里获取）</param>
     /// <param name="doSuccess"></param>
     /// <param name="doFail"></param>
-    public void GetReplayDatas(string recordID, Action doSuccess=null, Action doFail=null)
+    public void GetReplayDatas(string recordID, Action<ReplayDatas> doSuccess = null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
-        keyValues.Add("token", token);
-        keyValues.Add("playerID", playerID);
+        //keyValues.Add("token", token);
+        //keyValues.Add("playerID", playerID);
         keyValues.Add("recordID", recordID);
 
         StartCoroutine(HttpManager.My.HttpSend( Url.getReplayDatas, (www) => {
@@ -471,10 +471,10 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             {
                 string json = CompressUtils.Uncompress(response.data);
                 ReplayDatas datas = JsonUtility.FromJson<ReplayDatas>(json);
-                //Debug.Log(datas.recordID);
-                //Debug.Log(datas.operations);
-                //Debug.Log(datas.dataStats);
-                doSuccess?.Invoke();
+                Debug.Log(datas.recordID);
+                Debug.Log(datas.operations);
+                Debug.Log(datas.dataStats);
+                doSuccess?.Invoke(datas);
             }
             else
             {

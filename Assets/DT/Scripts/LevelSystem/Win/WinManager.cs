@@ -161,6 +161,11 @@ public class WinManager : MonoSingleton<WinManager>
             box_2Button.interactable = false;
             box_2.color = Color.gray;
         }
+        if (NetworkMgr.My.isUsingHttp)
+        {
+            PlayerReplay tempReplay = new PlayerReplay(true);
+            NetworkMgr.My.AddReplayData(tempReplay);
+        }
         CheckNext();
     }
 
