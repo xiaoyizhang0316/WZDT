@@ -34,6 +34,7 @@ public static class Url
     public static string addReplayData = ip + "addReplayData";
     public static string getReplayDatas = ip + "getReplayDatas";
     public static string getReplayLists = ip + "getReplayLists";
+    public static string getRankingLists = ip + "getRankingList";
     #endregion
 
     #region equip

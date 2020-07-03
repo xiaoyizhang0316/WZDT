@@ -146,6 +146,7 @@ public class LoginPanel : MonoBehaviour
     private void Test()
     {
         //TestGetReplayDatas();
+        
     }
 
     private void TestGetReplayDatas()
