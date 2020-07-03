@@ -13,10 +13,15 @@ public class ReviewBuffManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     public GameObject buffInfo;
 
     public Text roleName;
+
+    public GameObject buffContent;
+
+    public Text buffText;
     // Start is called before the first frame update
     void Start()
     {
         buffInfo.SetActive(false);
+        buffContent.SetActive(false);
         close.onClick.AddListener(() =>
         {
             buffInfo.SetActive(false);
@@ -49,5 +54,16 @@ public class ReviewBuffManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
            GameObject buff =  Instantiate(buffprb, content);
            buff.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/buff/"+sign.role.buffList[i]);
         }
+    }
+
+    public void ShowBuffContent(string content)
+    {
+        buffContent .SetActive(true);
+        buffText.text = content;
+    }
+
+    public void CloseBuffContent()
+    {
+        buffContent.SetActive(false);
     }
 }

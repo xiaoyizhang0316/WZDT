@@ -30,6 +30,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     private Tweener twe;
 
     private float speed;
+    
+    
 
     //private void Update()
     //{
@@ -106,6 +108,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         Pause();
         GenerateMapStates(playerOperations);
         playSlider.maxValue = timeCount;
+        playSlider.value = 0;
         InitMoneyLine(datas,timeCount);
         Show();
     }
@@ -116,6 +119,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         Pause();
         GenerateMapStates(playerOperations);
         playSlider.maxValue = StageGoal.My.timeCount;
+        playSlider.value = 0;
         InitMoneyLine(StageGoal.My.dataStats,StageGoal.My.timeCount);
     }
 
