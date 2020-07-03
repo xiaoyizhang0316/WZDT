@@ -16,10 +16,6 @@ public class DarkEffect : MonoBehaviour
         {
              
                 return cam.WorldToScreenPoint(target.position);
-          
-
-          
-
         }
     }
 
@@ -31,7 +27,7 @@ public class DarkEffect : MonoBehaviour
 
     //目标物体
     public List<Item> _items = new List<Item>();
-    protected Material _mainMaterial;
+    public Material _mainMaterial;
     protected Camera _mainCamera;
     Vector4[] _itemDatas;
     Item _tmpItem;
@@ -41,7 +37,7 @@ public class DarkEffect : MonoBehaviour
 
     private void OnEnable()
     {
-        _mainMaterial = new Material(Shader.Find("Peter/DarkEffect"));
+        //_mainMaterial = new Material(Shader.Find("Peter/DarkEffect"));
         _mainCamera = GetComponent<Camera>();
     }
 
