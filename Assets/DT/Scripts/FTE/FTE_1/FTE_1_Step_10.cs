@@ -112,7 +112,7 @@ public class FTE_1_Step_10 : BaseStep
 
         NewCanvasUI.My.Panel_Update.SetActive(false);
 
-       contenText.DOFade(0, 2f).OnComplete(() =>
+       contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
            gameObject.SetActive(false); 
           FTESceneManager.My.PlayNextStep();

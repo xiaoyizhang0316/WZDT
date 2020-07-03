@@ -142,6 +142,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     #endregion
 
+    public int totalPauseTime = 0;
+
     /// <summary>
     /// 当前关卡敌人波数数据
     /// </summary>
@@ -285,6 +287,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void SetInfo()
     {
         float per = playerHealth / (float)playerMaxHealth;
+        if (per > 1f)
+        {
+            per = 1f;
+            playerHealth = playerMaxHealth;
+        }
         playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
         playerGoldText.text = playerGold.ToString();
         if (playerGold > 0)

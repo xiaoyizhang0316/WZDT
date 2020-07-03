@@ -28,6 +28,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     public int countpeasant;
     public int countmerchant;
     public int countdealer;
+
     public void ShowCurrentReview(int index)
     {
         if (this.index == index)

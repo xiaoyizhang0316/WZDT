@@ -7,18 +7,16 @@ public class Level4Controller : BaseLevelController
 
     public override void CheckStarTwo()
     {
-        int count = 0;
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        starTwoStatus = true;
+        foreach (TradeSign sign in TradeManager.My.tradeList.Values)
         {
-            if (PlayerData.My.MapRole[i].isNpc)
+            if (!sign.isTradeSettingBest())
             {
-                if (PlayerData.My.MapRole[i].npcScript.isCanSee)
-                    count++;
+                starTwoStatus = false;
+                break;
             }
         }
-        if (count == 11)
-            starTwoStatus = true;
-        starTwoCondition = "使用广角镜查看所有NPC角色:" + count.ToString() + "/11";
+        starTwoCondition = "所有交易设置为最优设置";
     }
 
     public override void CheckStarThree()

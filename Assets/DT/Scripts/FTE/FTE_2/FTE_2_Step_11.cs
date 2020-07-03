@@ -30,8 +30,8 @@ public class FTE_2_Step_11 : BaseStep
      
         contenText.DOFade(0, 0).OnComplete(() =>
         {
-            maptext.DOFade(1, 3f).Play();
-            contenText.DOFade(1, 3f).OnComplete(() =>
+            maptext.DOFade(1, 1.5f).Play();
+            contenText.DOFade(1, 1.5f).OnComplete(() =>
             {
                 FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
          
@@ -68,8 +68,8 @@ public class FTE_2_Step_11 : BaseStep
     
         MaskManager.My.Close(12,0); 
         MaskManager.My.Close(11,0); 
-        maptext.DOFade(0, 2f).Play();
-        contenText.DOFade(0, 2f).OnComplete(() =>
+        maptext.DOFade(0, 0.8f).Play();
+        contenText.DOFade(0, 0.8f).OnComplete(() =>
         {
             gameObject.SetActive(false);
 

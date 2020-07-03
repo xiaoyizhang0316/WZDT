@@ -114,6 +114,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause.interactable = false;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = true;
+        InvokeRepeating("CountPauseTime",1f,1f);
     }
 
     /// <summary>
@@ -129,6 +130,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause.interactable = true;
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
+        CancelInvoke("CountPauseTime");
     }
 
     /// <summary>
@@ -142,6 +144,15 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause.interactable = true;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = false;
+        CancelInvoke("CountPauseTime");
+    }
+
+    /// <summary>
+    /// 统计暂停时间
+    /// </summary>
+    public void CountPauseTime()
+    {
+        StageGoal.My.totalPauseTime++;
     }
 
     /// <summary>

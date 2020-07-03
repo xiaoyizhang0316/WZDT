@@ -42,9 +42,9 @@ public class RubishProcessItem : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Consumer"))
+        if (other.CompareTag("Consumer") && isOpen)
         {
-            StageGoal.My.GetSatisfy(healNumber);
+            StageGoal.My.playerHealth += (healNumber);
         }
     }
 }

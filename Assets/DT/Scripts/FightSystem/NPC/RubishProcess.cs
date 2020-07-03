@@ -33,7 +33,7 @@ public class RubishProcess : BaseExtraSkill
 
     public void AutoClear()
     {
-        transform.DOScale(1f, 10f).OnComplete(() =>
+        transform.DOScale(1f, 5f).OnComplete(() =>
         {
             int clearNumber = 0;
             for (int i = 0; i < clearRoleList.Count; i++)

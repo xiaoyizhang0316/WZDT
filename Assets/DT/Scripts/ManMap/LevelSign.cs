@@ -48,7 +48,7 @@ public class LevelSign : MonoBehaviour
                 SceneManager.LoadScene(loadScene);
             });
             NetworkMgr.My.GetReplayLists(loadScene,()=> {
-                InitReplayList();
+                LevelInfoManager.My.listScript.Init(NetworkMgr.My.replayLists);
             });
         }
         else
@@ -58,12 +58,6 @@ public class LevelSign : MonoBehaviour
                 SceneManager.LoadScene(loadScene);
             });
         }
-    }
-
-    public void InitReplayList()
-    {
-        //TODO UI
-        //NetworkMgr.My.replayLists;
     }
 
     public void OnClick(string recordID)

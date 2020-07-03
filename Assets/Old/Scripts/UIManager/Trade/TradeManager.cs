@@ -164,12 +164,12 @@ public class TradeManager : MonoSingleton<TradeManager>
         BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
         if (start.extraSkill != null)
         {
-            if (start.tradeList.Count == start.extraSkill.maxTradeLimit)
+            if (start.tradeList.Count == start.extraSkill.maxTradeLimit && start.extraSkill.maxTradeLimit != 0)
                 return false;
         }
         if (end.extraSkill != null)
         {
-            if (end.tradeList.Count == end.extraSkill.maxTradeLimit)
+            if (end.tradeList.Count == end.extraSkill.maxTradeLimit && end.extraSkill.maxTradeLimit != 0)
                 return false;
         }
         return true;  

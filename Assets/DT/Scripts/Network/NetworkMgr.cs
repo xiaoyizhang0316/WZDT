@@ -437,6 +437,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     Debug.Log("上传失败");
                     doFail?.Invoke();
                 }
+                SetMask();
             }, keyValues, HttpType.Post));
         }
         catch (Exception ex)
@@ -481,7 +482,9 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 HttpManager.My.ShowTip(response.errMsg);
                 doFail?.Invoke();
             }
+            SetMask();
         }, keyValues, HttpType.Post));
+
     }
 
     /// <summary>
@@ -523,6 +526,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 HttpManager.My.ShowTip(response.errMsg);
                 doFail?.Invoke();
             }
+            SetMask();
         }, keyValues, HttpType.Post));
     }
 
@@ -566,6 +570,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 HttpManager.My.ShowTip(response.errMsg);
                 doFail?.Invoke();
             }
+            SetMask();
         }, keyValues, HttpType.Post));
     }
     #endregion

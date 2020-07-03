@@ -7,20 +7,17 @@ public class Level7Controller : BaseLevelController
 {
     public override void CountKillNumber(ConsumeSign sign)
     {
-        List<ConsumerType> list = new List<ConsumerType>() {  ConsumerType.GoldencollarEpic,ConsumerType.GoldencollarNormal,
-            ConsumerType.GoldencollarLegendary,ConsumerType.GoldencollarRare };
-        if (list.Contains(sign.consumerType))
+        if (sign.lastHitType == DT.Fight.Bullet.BulletType.Leaser)
         {
             targetNumber++;
         }
     }
 
-
     public override void CheckStarTwo()
     {
-        if (targetNumber >= 30)
+        if (targetNumber >= 10)
             starTwoStatus = true;
-        starTwoCondition = "满足所有的金领消费者";
+        starTwoCondition = "用罐头满足10个消费者，当前：" + targetNumber.ToString();
     }
 
     public override void CheckStarThree()

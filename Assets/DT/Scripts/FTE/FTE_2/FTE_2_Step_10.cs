@@ -30,7 +30,7 @@ public class FTE_2_Step_10 : BaseStep
          contenText.DOFade(0, 0).OnComplete(() =>
          {
              
-             contenText.DOFade(1, 3f).OnComplete(() =>
+             contenText.DOFade(1, 1.5f).OnComplete(() =>
              {
                  
 
@@ -49,7 +49,7 @@ public class FTE_2_Step_10 : BaseStep
 NewCanvasUI.My.Panel_AssemblyRole.SetActive(false);
        MaskManager.My.Close(10,0); 
        
-       contenText.DOFade(0, 2f).OnComplete(() =>
+       contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
            gameObject.SetActive(false);
 

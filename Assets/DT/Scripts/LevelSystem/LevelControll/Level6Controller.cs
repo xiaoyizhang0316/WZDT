@@ -23,7 +23,7 @@ public class Level6Controller : BaseLevelController
 
     public override void CheckStarThree()
     {
-        if (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth > 0.6f)
+        if (StageGoal.My.totalPauseTime <= 100)
         {
             starThreeStatus = true;
         }
@@ -31,8 +31,7 @@ public class Level6Controller : BaseLevelController
         {
             starThreeStatus = false;
         }
-        string number = (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth * 100).ToString() + "%";
-        starThreeCondition = "满意度不低于60%，当前：" + number;
+        starThreeCondition = "累计暂停时间不超过100秒，当前：" + StageGoal.My.totalPauseTime.ToString();
     }
 
 }
