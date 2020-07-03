@@ -24,6 +24,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     private LevelProgress levelProgress;
     public LevelProgresses levelProgresses;
     public List<LevelProgress> levelProgressList;
+    public LevelProgress currentLevelProgress;
 
     public List<ReplayList> replayLists;
     public List<ReplayList> rankList;
@@ -456,8 +457,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     public void GetReplayDatas(string recordID, Action doSuccess=null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
-        keyValues.Add("token", token);
-        keyValues.Add("playerID", playerID);
+        //keyValues.Add("token", token);
+        //keyValues.Add("playerID", playerID);
         keyValues.Add("recordID", recordID);
 
         StartCoroutine(HttpManager.My.HttpSend( Url.getReplayDatas, (www) => {
@@ -470,10 +471,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             if (response.status == 1)
             {
                 string json = CompressUtils.Uncompress(response.data);
+                Debug.Log(json);
                 ReplayDatas datas = JsonUtility.FromJson<ReplayDatas>(json);
                 //Debug.Log(datas.recordID);
-                //Debug.Log(datas.operations);
-                //Debug.Log(datas.dataStats);
+                Debug.Log(datas.operations);
+                Debug.Log(datas.dataStats);
                 doSuccess?.Invoke();
             }
             else

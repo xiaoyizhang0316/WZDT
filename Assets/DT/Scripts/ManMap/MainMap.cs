@@ -67,4 +67,16 @@ public class MainMap : MonoBehaviour
         }
         return "";
     }
+
+    LevelProgress GetProgressByLevel(int level)
+    {
+        foreach (var l in NetworkMgr.My.levelProgressList)
+        {
+            if (l.levelID == level)
+            {
+                return l;
+            }
+        }
+        return null;
+    }
 }

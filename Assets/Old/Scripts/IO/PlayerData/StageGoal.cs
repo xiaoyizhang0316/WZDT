@@ -140,6 +140,9 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Dictionary<string, int> extraCost = new Dictionary<string, int>();
 
+    int starNum = 1;
+    string[] stars = new string[] { "1", "0", "0" };
+
     #endregion
 
     /// <summary>
@@ -351,8 +354,28 @@ public class StageGoal : MonoSingleton<StageGoal>
         BaseLevelController.My.CancelInvoke("CheckStarOne");
         BaseLevelController.My.CancelInvoke("CheckStarThree");
         BaseLevelController.My.CancelInvoke("UpdateInfo");
+        
+        if (BaseLevelController.My.starTwoStatus)
+        {
+            starNum += 1;
+            stars[1] = "1";
+        }
+        if (BaseLevelController.My.starThreeStatus)
+        {
+            starNum += 1;
+            stars[2] = "1";
+        }
         NewCanvasUI.My.GamePause();
+        
         WinManager.My.InitWin();
+        
+        
+        
+    }
+
+    void CommitProgress(Action doPass, Action doFail)
+    {
+        NetworkMgr.My.UpdateLevelProgress(NetworkMgr.My.currentLevel, starNum, stars[0] + stars[1] + stars[2], "000", playerSatisfy, doPass, doFail);
     }
 
     /// <summary>
