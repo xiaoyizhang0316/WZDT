@@ -301,10 +301,16 @@ public class HttpManager : MonoSingleton<HttpManager>
         if (cancel != null)
         {
             selectCancel.onClick.RemoveAllListeners();
-            selectCancel.onClick.AddListener(() => cancel());
+            selectCancel.onClick.AddListener(() => {
+                cancel();
+                selectTip.gameObject.SetActive(false);
+            });
         }
         selectRetry.onClick.RemoveAllListeners();
-        selectRetry.onClick.AddListener(() => retry());
+        selectRetry.onClick.AddListener(() => {
+            retry();
+            selectTip.gameObject.SetActive(false);
+        });
         selectTip.gameObject.SetActive(true);
         mask.SetActive(false);
     }
