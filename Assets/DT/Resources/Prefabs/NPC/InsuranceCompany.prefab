@@ -141,7 +141,7 @@ MonoBehaviour:
     effect: 0
     efficiency: 0
     range: 0
-    tradeCost: 0
+    tradeCost: 68
     cost: 0
     riskResistance: 0
     bulletCapacity: 0
@@ -165,6 +165,7 @@ MonoBehaviour:
   AI: 0
   npcScript: {fileID: 0}
   extraSkill: {fileID: 0}
+  levelModels: []
   totalProfit: 0
   monthlyProfit: 0
   totalSatisfy: 0
@@ -187,13 +188,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad11e3828a282a48bfda32d4aeda778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLock: 0
+  isLock: 1
   isCanSee: 0
   isCanSeeEquip: 0
-  lockNumber: 0
-  NPCgear: 
-  hideModel: {fileID: 0}
-  trueModel: {fileID: 0}
+  lockNumber: 4
+  NPCBuffList: 
+  hideModel: {fileID: 8045772783410336990, guid: 4349f534abb534007841873edff1f3fe,
+    type: 3}
+  trueModel: {fileID: 46266004647074033}
+  autoTradeList: []
 --- !u!114 &7891854987806525311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,10 +210,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   role: {fileID: 0}
-  IsOpen: 1
+  IsOpen: 0
   isPlay: 0
   isAvaliable: 1
-  skillDesc: "\u89D2\u8272\u98CE\u9669\u6297\u6027+15"
+  skillDesc: "\u89D2\u8272\u98CE\u9669-35"
   buffList: f5010000
   animationPart: []
   productDatas: []
