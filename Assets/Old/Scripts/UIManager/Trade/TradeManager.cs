@@ -222,6 +222,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             {
                 List<string> param = new List<string>();
                 param.Add(start.baseRoleData.ID.ToString());
+                param.Add("TRUE");
                 param.Add(start.baseRoleData.baseRoleData.roleName);
                 param.Add(start.baseRoleData.baseRoleData.roleType.ToString());
                 StageGoal.My.RecordOperation(OperationType.PutRole, param);
@@ -234,6 +235,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             {
                 List<string> param = new List<string>();
                 param.Add(end.baseRoleData.ID.ToString());
+                param.Add("TRUE");
                 param.Add(end.baseRoleData.baseRoleData.roleName);
                 param.Add(end.baseRoleData.baseRoleData.roleType.ToString());
                 StageGoal.My.RecordOperation(OperationType.PutRole, param);

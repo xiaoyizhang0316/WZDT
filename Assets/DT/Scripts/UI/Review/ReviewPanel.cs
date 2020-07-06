@@ -196,8 +196,9 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
             case OperationType.PutRole:
                 ReviewRole role = new ReviewRole();
                 role.roleId = double.Parse(p.operationParam[0]);
-                role.roleName = p.operationParam[1];
-                role.roleType = (RoleType)Enum.Parse(typeof(RoleType), p.operationParam[2]);
+                role.isNPC = bool.Parse(p.operationParam[1]);
+                role.roleName = p.operationParam[2];
+                role.roleType = (RoleType)Enum.Parse(typeof(RoleType), p.operationParam[3]);
                 role.level = 1;
                 role.buffList = new List<int>();
                 result.mapRoles.Add(role);
@@ -339,6 +340,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     public struct ReviewRole
     {
         public double roleId;
+
+        public bool isNPC;
 
         public string roleName;
 

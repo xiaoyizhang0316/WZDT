@@ -9,13 +9,19 @@ public class RecordItem : MonoBehaviour
 
     public Text score;
 
-    public Text isWin;
-
     public Text playTimeCount;
+
+    public Image star1;
+
+    public Image star2;
+
+    public Image star3;
 
     public string Id;
 
     public int playTime;
+
+    public Sprite[] sprites;
 
     public void Init(ReplayList replay)
     {
@@ -24,16 +30,13 @@ public class RecordItem : MonoBehaviour
         Id = replay.recordID;
         playTime = replay.timeCount;
         playTimeCount.text = playTime.ToString();
+        char[] temp = replay.stars.ToCharArray();
         if (replay.win)
-        {
-            isWin.text = "成功";
-            isWin.color = Color.green;
-        }
+            star1.sprite = temp[0].Equals('1') ? sprites[0] : sprites[1];
         else
-        {
-            isWin.text = "失败";
-            isWin.color = Color.red;
-        }
+            star1.sprite = sprites[1];
+        star2.sprite = temp[1].Equals('1') ? sprites[0] : sprites[1];
+        star3.sprite = temp[2].Equals('1') ? sprites[0] : sprites[1];
         GetComponent<Button>().onClick.AddListener(GetReplayById);
     }
 

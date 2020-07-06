@@ -51,7 +51,7 @@ public class GoodsSign : MonoBehaviour
     private int count = 0;
     public void Move()
     {
-
+        CheckColor();
         if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
         {
             speed = 1f * (1 - role.baseRoleData.efficiency > 80 ? 80f : role.baseRoleData.efficiency / 100f);
@@ -98,6 +98,18 @@ public class GoodsSign : MonoBehaviour
                 //    GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                 BulletObjectPool.My.RecoveryBullet(gameObject, 0.3f);
             }
+        }
+    }
+
+    public void CheckColor()
+    {
+        switch (productData.bulletType)
+        {
+            case BulletType.Seed:
+                GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.green);
+                break;
+            default:
+                break;
         }
     }
 
