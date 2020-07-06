@@ -71,8 +71,8 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
                 transform.DOLocalMoveY(0f, 30).SetEase(Ease.Linear).OnComplete(() =>
                 {
                     Destroy(gameObject);
-                });
-            });
+                }).timeScale = 1f;
+            }).timeScale = 1f;
         }
 
     }

@@ -160,7 +160,7 @@ public class Building : MonoBehaviour
             }
         }
         isFinishSpawn = true;
-        protalGameObject.transform.DOScale(0, 1);
+        protalGameObject.transform.DOScale(0, 1).timeScale = 1f / DOTween.timeScale;
     }
 
     /// <summary>

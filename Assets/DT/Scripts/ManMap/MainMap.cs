@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,9 +19,24 @@ public class MainMap : MonoBehaviour
 
     void InitMap()
     {
-        NetworkMgr.My.GetAnswers(()=>title.text = NetworkMgr.My.currentAnswer);
-        Debug.Log("map init " + NetworkMgr.My.currentAnswer);
-        //title.text = NetworkMgr.My.currentAnswer;
+        //NetworkMgr.My.GetAnswers(()=>title.text = NetworkMgr.My.currentAnswer);
+        GetAnswers();
+        GetLevelProgress();
+        GetEquips();
+        Action actions = GetAnswers;
+        actions += GetLevelProgress;
+        actions += GetEquips;
+        HttpManager.My.Retry(actions);
+
+    }
+
+    private void GetAnswers()
+    {
+        NetworkMgr.My.GetAnswers(() => title.text = NetworkMgr.My.currentAnswer);
+    }
+
+    private void GetLevelProgress()
+    {
         if (NetworkMgr.My.levelProgresses == null)
         {
             NetworkMgr.My.GetLevelProgress(() => { InitLevel(); }, () => {
@@ -38,6 +54,11 @@ public class MainMap : MonoBehaviour
         {
             InitLevel();
         }
+    }
+
+    private void GetEquips()
+    {
+        NetworkMgr.My.GetPlayerEquips();
     }
 
     void InitLevel()
@@ -66,5 +87,17 @@ public class MainMap : MonoBehaviour
             }
         }
         return "";
+    }
+
+    LevelProgress GetProgressByLevel(int level)
+    {
+        foreach (var l in NetworkMgr.My.levelProgressList)
+        {
+            if (l.levelID == level)
+            {
+                return l;
+            }
+        }
+        return null;
     }
 }

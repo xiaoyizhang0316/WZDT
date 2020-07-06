@@ -117,9 +117,9 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                         Destroy(go, 1f);
                         role.transform.DOScale(new Vector3(1.3f, 0.8f, 1.3f), 0.2f).OnComplete(() =>
                         {
-                            role.transform.DOScale(1f, 0.15f).Play();
-                        }).Play();
-                    }).SetEase(Ease.Linear).Play();
+                            role.transform.DOScale(1f, 0.15f).Play().timeScale = 1f / DOTween.timeScale;
+                        }).Play().timeScale = 1f / DOTween.timeScale;
+                    }).SetEase(Ease.Linear).Play().timeScale = 1f / DOTween.timeScale;
                     role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
                     PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
@@ -154,6 +154,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     {
         List<string> param = new List<string>();
         param.Add(mapRole.baseRoleData.ID.ToString());
+        param.Add("FALSE");
         param.Add(mapRole.baseRoleData.baseRoleData.roleName);
         param.Add(mapRole.baseRoleData.baseRoleData.roleType.ToString());
         StageGoal.My.RecordOperation(OperationType.PutRole, param);

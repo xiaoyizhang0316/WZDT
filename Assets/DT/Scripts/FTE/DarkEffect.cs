@@ -35,7 +35,7 @@ public class DarkEffect : MonoBehaviour
     Vector3 _tmpPos;
     int _tmpScreenHeight;
 
-    private void OnEnable()
+    private void Start()
     {
         //_mainMaterial = new Material(Shader.Find("Peter/DarkEffect"));
         _mainCamera = GetComponent<Camera>();
