@@ -25,8 +25,12 @@ public class ThreeWordsPanel : MonoBehaviour
         {
             if(NetworkMgr.My.levelProgressList.Count == 4 && NetworkMgr.My.playerDatas.threeWordsProgress==1 || NetworkMgr.My.levelProgressList.Count==10 && NetworkMgr.My.playerDatas.threeWordsProgress == 2)
             {
-                thisPanel.SetActive(true);
-                SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
+                if (NetworkMgr.My.levelProgressList[NetworkMgr.My.levelProgressList.Count - 1].levelStar[0]=='1')
+                {
+
+                    thisPanel.SetActive(true);
+                    SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
+                }
             }
         }
     }
