@@ -83,12 +83,18 @@ public class GuideActions : MonoBehaviour
             PlayerPrefs.SetInt("FTE0End",1);
             if (NetworkMgr.My.isUsingHttp)
             {
-                NetworkMgr.My.UpdatePlayerDatas(1, 0);
+                UpdateFte();
+                HttpManager.My.retry = UpdateFte;
             }
             SceneManager.LoadScene("FTE_1");
             
         }
         };
+    }
+
+    private void UpdateFte()
+    {
+        NetworkMgr.My.UpdatePlayerDatas(1, 0);
     }
 
 

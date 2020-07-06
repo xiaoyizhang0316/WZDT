@@ -102,7 +102,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         GenerateMapStates(playerOperations);
         playSlider.maxValue = timeCount;
         playSlider.value = 0;
-       // InitMoneyLine(datas,timeCount);
+        InitMoneyLine(datas,timeCount);
         Show();
     }
 
@@ -113,7 +113,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         GenerateMapStates(playerOperations);
         playSlider.maxValue = StageGoal.My.timeCount;
         playSlider.value = 0;
-        //InitMoneyLine(StageGoal.My.dataStats,StageGoal.My.timeCount);
+        InitMoneyLine(StageGoal.My.dataStats,StageGoal.My.timeCount);
     }
 
     public void InitMoneyLine(List<DataStat> datas,int timeCount)
