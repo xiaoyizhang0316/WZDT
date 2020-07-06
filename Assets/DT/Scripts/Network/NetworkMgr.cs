@@ -573,6 +573,21 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             SetMask();
         }, keyValues, HttpType.Post));
     }
+
+    /// <summary>
+    /// 根据关卡ID获取关卡通关数据
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public LevelProgress GetLevelProgressByIndex(int index)
+    {
+        for (int i = 0; i < levelProgressList.Count; i++)
+        {
+            if (levelProgressList[i].levelID == index)
+                return levelProgressList[i];
+        }
+        return null;
+    }
     #endregion
 
     #region equip
@@ -658,6 +673,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
     #endregion
+
+
 
     #region other
     public void LevelStartTime()

@@ -15,6 +15,8 @@ public class LevelSign : MonoBehaviour
     public string mission_2;
     public string mission_3;
 
+    public int starRequirement;
+
     public Button LevelButton;
 
     public string loadScene;
@@ -132,7 +134,7 @@ public class LevelSign : MonoBehaviour
             currentStar = "0" + currentStar;
         }
         stars = currentStar;
-        if(lastStar == "000" && loadScene!="FTE_1")
+        if(lastStar == "000" && loadScene!="FTE_1" || !CheckPrevStar())
         {
             HideAllStars();
             transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
@@ -155,5 +157,19 @@ public class LevelSign : MonoBehaviour
         }
         LevelButton.onClick.RemoveAllListeners();
         LevelButton.onClick.AddListener(Init);
+    }
+
+    public bool CheckPrevStar()
+    {
+        int index = int.Parse(loadScene.Split('_')[1]);
+        int result = 0;
+        foreach (LevelProgress l in NetworkMgr.My.levelProgressList)
+        {
+            if (l.levelID < index)
+            {
+                result += l.starNum;
+            }
+        }
+        return result >= starRequirement;
     }
 }

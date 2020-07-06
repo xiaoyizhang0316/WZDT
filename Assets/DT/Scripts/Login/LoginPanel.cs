@@ -25,6 +25,7 @@ public class LoginPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //PlayerPrefs.DeleteAll();
         login_Btn.onClick.AddListener(Login);
         username = PlayerPrefs.GetString("username", "0");
         password = PlayerPrefs.GetString("password", "0");
