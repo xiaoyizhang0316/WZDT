@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8792243233983142942}
   - component: {fileID: 911782975559447034}
-  - component: {fileID: 5346309717499844712}
+  - component: {fileID: 6529719251386074751}
   m_Layer: 5
   m_Name: Line
   m_TagString: Untagged
@@ -45,7 +45,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5481603237685584923}
   m_CullTransparentMesh: 0
---- !u!114 &5346309717499844712
+--- !u!114 &6529719251386074751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5481603237685584923}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: -453220092, guid: e4ea078ee38a8467f92ea8c6515bb4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -71,64 +71,45 @@ MonoBehaviour:
     width: 1
     height: 1
   vectorLine:
-    m_lineVertices:
-    - {x: 860, y: 541, z: 0}
-    - {x: 1060, y: 541, z: 0}
-    - {x: 1060, y: 539, z: 0}
-    - {x: 860, y: 539, z: 0}
-    m_lineUVs:
-    - {x: 0, y: 1}
-    - {x: 1, y: 1}
-    - {x: 1, y: 0}
-    - {x: 0, y: 0}
-    m_lineColors:
-    - serializedVersion: 2
-      rgba: 4294967295
-    - serializedVersion: 2
-      rgba: 4294967295
-    - serializedVersion: 2
-      rgba: 4294967295
-    - serializedVersion: 2
-      rgba: 4294967295
-    m_lineTriangles: 000000000100000003000000010000000200000003000000
-    m_vertexCount: 4
-    m_go: {fileID: 5481603237685584923}
-    m_rectTransform: {fileID: 8792243233983142942}
+    m_lineVertices: []
+    m_lineUVs: []
+    m_lineColors: []
+    m_lineTriangles: 
+    m_vertexCount: 0
+    m_go: {fileID: 0}
+    m_rectTransform: {fileID: 0}
     m_color:
       serializedVersion: 2
-      rgba: 4294967295
-    m_canvasState: 1
-    m_is2D: 1
-    m_points2:
-    - {x: 860, y: 540}
-    - {x: 1060, y: 540}
+      rgba: 0
+    m_canvasState: 0
+    m_is2D: 0
+    m_points2: []
     m_points3: []
-    m_pointsCount: 2
+    m_pointsCount: 0
     m_screenPoints: []
-    m_lineWidths:
-    - 1
-    m_lineWidth: 2
-    m_maxWeldDistance: 16
+    m_lineWidths: []
+    m_lineWidth: 0.01
+    m_maxWeldDistance: 0.0004
     m_distances: []
     m_name: Line
     m_material: {fileID: 0}
     m_originalTexture: {fileID: 0}
     m_texture: {fileID: 0}
-    m_active: 1
+    m_active: 0
     m_lineType: 0
     m_capLength: 0
     m_smoothWidth: 0
     m_smoothColor: 0
-    m_joins: 2
+    m_joins: 0
     m_isAutoDrawing: 0
     m_drawStart: 0
-    m_drawEnd: 1
+    m_drawEnd: 0
     m_endPointsUpdate: 0
     m_useNormals: 0
     m_useTangents: 0
     m_normalsCalculated: 0
     m_tangentsCalculated: 0
-    m_capType: 4
+    m_capType: 0
     m_endCap: 
     m_useCapColors: 0
     m_frontColor:
@@ -137,10 +118,10 @@ MonoBehaviour:
     m_backColor:
       serializedVersion: 2
       rgba: 0
-    m_frontEndCapIndex: -1
-    m_backEndCapIndex: -1
+    m_frontEndCapIndex: 0
+    m_backEndCapIndex: 0
     m_lineUVBottom: 0
-    m_lineUVTop: 1
+    m_lineUVTop: 0
     m_frontCapUVBottom: 0
     m_frontCapUVTop: 0
     m_backCapUVBottom: 0
