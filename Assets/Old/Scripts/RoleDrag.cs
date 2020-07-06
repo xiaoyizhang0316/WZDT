@@ -45,6 +45,7 @@ public class RoleDrag : MonoBehaviour
             {
                 if (TradeManager.My.CheckTradeCondition())
                 {
+                    print("配置交易成功");
                     NewCanvasUI.My.InitCreateTradePanel();
                     AudioManager.My.PlaySelectType(GameEnum.AudioClipType.EndTrade);
                 }

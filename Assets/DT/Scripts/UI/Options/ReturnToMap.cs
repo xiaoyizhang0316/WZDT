@@ -18,6 +18,7 @@ public class ReturnToMap : MonoBehaviour
 
     void Confirm()
     {
+        StageGoal.My.CommitLose();
         PlayerData.My.Reset();
         SceneManager.LoadScene("Map");
     }

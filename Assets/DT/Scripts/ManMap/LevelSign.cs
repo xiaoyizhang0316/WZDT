@@ -20,6 +20,7 @@ public class LevelSign : MonoBehaviour
     public string loadScene;
     string stars="";
 
+
     //public Sprite lockImage;
     // Start is called before the first frame update
     void Start()
@@ -45,7 +46,11 @@ public class LevelSign : MonoBehaviour
         {
             LevelInfoManager.My.Init(stars, levelName, content, mission_1, mission_2, mission_3, () =>
             {
+             
                 SceneManager.LoadScene(loadScene);
+            });
+            NetworkMgr.My.GetReplayLists(loadScene,()=> {
+                LevelInfoManager.My.listScript.Init(NetworkMgr.My.replayLists);
             });
         }
         else
@@ -55,13 +60,25 @@ public class LevelSign : MonoBehaviour
                 SceneManager.LoadScene(loadScene);
             });
         }
-        
+    }
+
+    public void OnClick(string recordID)
+    {
+        NetworkMgr.My.GetReplayDatas(recordID, (datas)=> {
+            string str = "{ \"playerOperations\":" + datas.operations + "}";
+            PlayerOperations operations = JsonUtility.FromJson<PlayerOperations>(str);
+            string str1 = "{ \"dataStats\":" + datas.dataStats + "}";
+            PlayerStatus status = JsonUtility.FromJson<PlayerStatus>(str1);
+            //TODO UI
+            //Reviewpanel.Init(operations,status);
+        });
     }
 
     void InitLevel()
     {
         string[] strArr = loadScene.Split('_');
         int level = int.Parse(strArr[1]);
+        NetworkMgr.My.currentLevel = level;
         
         if(PlayerPrefs.GetInt(loadScene+"|1", 0) == 0)
         {

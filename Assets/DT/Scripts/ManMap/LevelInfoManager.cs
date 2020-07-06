@@ -32,14 +32,18 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public Sprite box1CloseImage;
     public Sprite box2CloseImage;
     public Sprite box3CloseImage;
+
+    public RecordList listScript;
     // Start is called before the first frame update
     void Start()
     {
         panel.SetActive(false);
+        listScript.gameObject.SetActive(false);
         close.onClick.AddListener(() =>
         {
             panel.SetActive(false);
-            
+            listScript.gameObject.SetActive(false);
+
         });
         play.onClick.AddListener(() => { loadScene(); });
         isUseGuide.onValueChanged.AddListener((bool b) =>
@@ -63,6 +67,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         this.mission_3.text = mission_3;
         isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
         panel.SetActive(true);
+        listScript.gameObject.SetActive(true);
         this.loadScene = loadScene;
         InitBox(name);
 
@@ -97,6 +102,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         panel.SetActive(true);
         this.loadScene = loadScene;
         InitBoxs(star);
+        listScript.gameObject.SetActive(true);
     }
 
     void InitBoxs(string star)

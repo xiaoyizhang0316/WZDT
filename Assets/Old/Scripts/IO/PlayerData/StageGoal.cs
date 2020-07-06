@@ -140,7 +140,12 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Dictionary<string, int> extraCost = new Dictionary<string, int>();
 
+    int starNum = 1;
+    string[] stars = new string[] { "1", "0", "0" };
+    PlayerReplay tempReplay;
     #endregion
+
+    public int totalPauseTime = 0;
 
     /// <summary>
     /// 当前关卡敌人波数数据
@@ -285,6 +290,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void SetInfo()
     {
         float per = playerHealth / (float)playerMaxHealth;
+        if (per > 1f)
+        {
+            per = 1f;
+            playerHealth = playerMaxHealth;
+        }
         playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
         playerGoldText.text = playerGold.ToString();
         if (playerGold > 0)
@@ -351,8 +361,28 @@ public class StageGoal : MonoSingleton<StageGoal>
         BaseLevelController.My.CancelInvoke("CheckStarOne");
         BaseLevelController.My.CancelInvoke("CheckStarThree");
         BaseLevelController.My.CancelInvoke("UpdateInfo");
+        
+        if (BaseLevelController.My.starTwoStatus)
+        {
+            starNum += 1;
+            stars[1] = "1";
+        }
+        if (BaseLevelController.My.starThreeStatus)
+        {
+            starNum += 1;
+            stars[2] = "1";
+        }
         NewCanvasUI.My.GamePause();
+        
         WinManager.My.InitWin();
+        
+        
+        
+    }
+
+    void CommitProgress(Action doPass, Action doFail)
+    {
+        NetworkMgr.My.UpdateLevelProgress(NetworkMgr.My.currentLevel, starNum, stars[0] + stars[1] + stars[2], "000", playerSatisfy, doPass, doFail);
     }
 
     /// <summary>
@@ -364,18 +394,22 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             NewCanvasUI.My.GamePause();
             NewCanvasUI.My.lose.SetActive(true);
+
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
-            //if (NetworkMgr.My.isUsingHttp)
-            //{
-            //    LevelRecord levelRecord = new LevelRecord(NetworkMgr.My.playerID, NetworkMgr.My.currentLevel, 0,
-            //        tradeCost, productCost, extraCosts, consumeIncome, npcIncome, otherIncome, buildTpCost, mirrorTpCost,
-            //        unlockTpCost, npcTpIncome, workerTpIncome, buffTpIncome, playerTechPoint, currentWave, playerGold, 0,
-            //        timeCount, NetworkMgr.My.startTime, TimeStamp.GetCurrentTimeStamp());
-            //    NetworkMgr.My.AddLevelRecord(levelRecord);
-            //}
+            if (NetworkMgr.My.isUsingHttp)
+            {
+                CommitLose();
+                HttpManager.My.Retry(CommitLose);
+            }
         }
         else
             return;
+    }
+
+    public void CommitLose()
+    {
+        tempReplay = new PlayerReplay(false);
+        NetworkMgr.My.AddReplayData(tempReplay);
     }
 
     /// <summary>

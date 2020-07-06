@@ -65,6 +65,8 @@ public class ConsumeSign : MonoBehaviour
 
     private ConsumerBuffRange rangeBuff;
 
+    public BulletType lastHitType;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -196,6 +198,7 @@ public class ConsumeSign : MonoBehaviour
     {
         if (isCanSelect)
         {
+            lastHitType = data.bulletType;
             CheckAttackEffect(ref data);
             int realDamage = (int)data.damage;
             CheckBulletElement(ref realDamage, data);

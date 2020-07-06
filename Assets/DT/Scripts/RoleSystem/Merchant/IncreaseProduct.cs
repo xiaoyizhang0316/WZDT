@@ -14,7 +14,7 @@ public class IncreaseProduct : MonoBehaviour
         }
         else if (other.CompareTag("MapRole"))
         {
-            BaseMapRole targetRole = other.GetComponent<BaseMapRole>();
+            BaseMapRole targetRole = other.GetComponentInParent<BaseMapRole>();
             for (int i = 0; i < targetRole.buffList.Count; i++)
             {
                 if (targetRole.buffList[i].buffId == 999)

@@ -16,10 +16,6 @@ public class DarkEffect : MonoBehaviour
         {
              
                 return cam.WorldToScreenPoint(target.position);
-          
-
-          
-
         }
     }
 

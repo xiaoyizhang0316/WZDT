@@ -24,7 +24,7 @@ public class FTE_1_Step_17 : BaseStep
      
         contenText.DOFade(0, 0).OnComplete(() => {
            
-            contenText.DOFade(1, 3f).OnComplete(() =>
+            contenText.DOFade(1, 1.5f).OnComplete(() =>
             {
                 MaskManager.My.Open(14,130);
                 MaskManager.My.FadeMask(9,130);
@@ -42,7 +42,7 @@ public class FTE_1_Step_17 : BaseStep
 
         MaskManager.My.Close(14,0 );
         MaskManager.My.CloseMaks(9 );
-        contenText.DOFade(0, 2f).OnComplete(() =>
+        contenText.DOFade(0, 0.8f).OnComplete(() =>
         {
             gameObject.SetActive(false); 
             FTESceneManager.My.PlayNextStep();

@@ -28,7 +28,7 @@ public class FTE_1_Step_8 : BaseStep
         MaskManager.My.Open(6,80);
         contenText.DOFade(0, 0).OnComplete(() => {
            
-            contenText.DOFade(1, 3f).OnComplete(() =>
+            contenText.DOFade(1, 1.5f).OnComplete(() =>
             {
                 nextButton.interactable = true;
                 nextButton.gameObject.SetActive(false);
@@ -64,7 +64,7 @@ public class FTE_1_Step_8 : BaseStep
 
         MaskManager.My.CloseMaks(6 );
         MaskManager.My.darkEffect._items[7].target = PlayerData.My.MapRole[0].transform;
-       contenText.DOFade(0, 2f).OnComplete(() =>
+       contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
            gameObject.SetActive(false); 
         

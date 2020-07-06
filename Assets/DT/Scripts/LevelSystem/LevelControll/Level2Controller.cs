@@ -26,13 +26,22 @@ public class Level2Controller : BaseLevelController
 
     public override void CheckStarThree()
     {
-        if (putRoleNumber > 6)
+        int count = 0;
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
-            starThreeStatus = false;
-            CancelInvoke("CheckStarThree");
-            return;
+            if (!PlayerData.My.MapRole[i].isNpc)
+            {
+                count++;
+                if (count > 6)
+                {
+                    starThreeStatus = false;
+                    CancelInvoke("CheckStarThree");
+                    starThreeCondition = "放置不多于6个角色，当前：" + count.ToString() + "/6";
+                    return;
+                }
+            }
         }
         starThreeStatus = true;
-        starThreeCondition = "放置不多于6个角色，当前：" + putRoleNumber.ToString() + "/6";
+        starThreeCondition = "放置不多于6个角色，当前：" + count.ToString() + "/6";
     }
 }

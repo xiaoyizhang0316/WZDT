@@ -28,7 +28,7 @@ public class FTE_4_Step_4 : BaseStep
     { 
     
          contenText.DOFade(0, 0).OnComplete(() => { 
-             contenText.DOFade(1, 3f).OnComplete(() =>
+             contenText.DOFade(1, 1.5f).OnComplete(() =>
              {
                  FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
                  nextButton.interactable = true;
@@ -58,7 +58,7 @@ public class FTE_4_Step_4 : BaseStep
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true; 
        nextButton.interactable = false;
        BG.DOFade(0, 0.5f).Play();
-       contenText.DOFade(0, 1f).OnComplete(() =>
+       contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
            gameObject.SetActive(false);
            UI.SetActive(false);

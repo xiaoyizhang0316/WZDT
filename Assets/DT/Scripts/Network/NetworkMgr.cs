@@ -26,6 +26,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     public List<LevelProgress> levelProgressList;
 
     public List<ReplayList> replayLists;
+    public List<ReplayList> rankList;
 
     private PlayerEquip playerEquip;
     public PlayerEquips playerEquips;
@@ -37,10 +38,18 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         deviceID = SystemInfo.deviceUniqueIdentifier;
         levelProgressList = new List<LevelProgress>();
         replayLists = new List<ReplayList>();
+        rankList = new List<ReplayList>();
         playerEquipsList = new List<PlayerEquip>();
     }
 
     #region login
+    /// <summary>
+    /// 登录
+    /// </summary>
+    /// <param name="userName">用户名</param>
+    /// <param name="password">密码</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void Login(string userName, string password, Action doSuccess = null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -75,25 +84,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
 
-    public void CheckDevice()
-    {
-        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
-        keyValues.Add("playerID", playerID);
-        keyValues.Add("deviceID", deviceID);
-        keyValues.Add("token", token);
-
-        StartCoroutine(HttpManager.My.HttpSend(Url.checkDeviceID, (www) => {
-            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
-            if (response.status == 0)
-            {
-                HttpManager.My.ShowClickTip(response.errMsg, ()=> {
-                    SceneManager.LoadScene("Login");
-                });
-            }
-            SetMask();
-        }, keyValues, HttpType.Post));
-    }
-
+    /// <summary>
+    /// 登出
+    /// </summary>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void Logout(Action doSuccess = null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -109,6 +104,13 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     #endregion
 
     #region playerDatas
+    /// <summary>
+    /// 创建角色信息
+    /// </summary>
+    /// <param name="playerName">昵称</param>
+    /// <param name="playerIcon">头像</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void CreatPlayerDatas(string playerName, string playerIcon, Action doSuccess=null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -145,6 +147,13 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
 
+    /// <summary>
+    /// 更新信息
+    /// </summary>
+    /// <param name="fteProgress">教学进度 无更新请填 0</param>
+    /// <param name="threeWordsProgress">三句话进度 无更新请填 0</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void UpdatePlayerDatas(int fteProgress, int threeWordsProgress,Action doSuccess = null, Action doFail = null)
     {
         Debug.Log("更新fte"+fteProgress);
@@ -185,6 +194,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     #endregion
 
     #region three words
+    /// <summary>
+    /// 回答问题
+    /// </summary>
+    /// <param name="words">答案</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void UploadThreeWords(string words, Action doSuccess=null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -221,6 +236,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
 
+    /// <summary>
+    /// 获取答案
+    /// </summary>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void GetAnswers(Action doSuccess = null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -261,6 +281,16 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     #endregion
 
     #region Level
+    /// <summary>
+    /// 更新过关信息
+    /// </summary>
+    /// <param name="levelID">关卡id</param>
+    /// <param name="stars">星数</param>
+    /// <param name="levelStar">星数排列 如 “101“</param>
+    /// <param name="rewardStatus">领取奖励状态 同levelStar</param>
+    /// <param name="score">分数</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void UpdateLevelProgress(int levelID, int stars, string levelStar, string rewardStatus, int score, Action doSuccess=null, Action doFail=null)
     {
         LevelProgress lp = new LevelProgress(playerID, levelID, stars, levelStar, rewardStatus, score);
@@ -307,6 +337,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
 
+    /// <summary>
+    /// 获取所有的过关信息
+    /// </summary>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void GetLevelProgress(Action doSuccess=null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -350,6 +385,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
 
+    #region 弃用
+    [Obsolete("接口需求暂时取消, 请使用上传复盘数据方法（AddReplayData）",true)]
     public void AddLevelRecord(LevelRecord levelRecord, Action doSuccess=null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -366,8 +403,15 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             SetMask();
         }, keyValues, HttpType.Post));
     }
+    #endregion
 
-    public void AddReplayData(PlayerReplay playerReplay, Action doSuccess, Action doFail)
+    /// <summary>
+    /// 上传复盘数据
+    /// </summary>
+    /// <param name="playerReplay">复盘的数据</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
+    public void AddReplayData(PlayerReplay playerReplay, Action doSuccess=null, Action doFail=null)
     {
         try
         {
@@ -393,6 +437,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     Debug.Log("上传失败");
                     doFail?.Invoke();
                 }
+                SetMask();
             }, keyValues, HttpType.Post));
         }
         catch (Exception ex)
@@ -403,11 +448,17 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         
     }
 
-    public void GetReplayDatas(string recordID, Action doSuccess, Action doFail)
+    /// <summary>
+    /// 获取某关的复盘数据
+    /// </summary>
+    /// <param name="recordID">复盘id（从复盘list里获取）</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
+    public void GetReplayDatas(string recordID, Action<ReplayDatas> doSuccess = null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
-        keyValues.Add("token", token);
-        keyValues.Add("playerID", playerID);
+        //keyValues.Add("token", token);
+        //keyValues.Add("playerID", playerID);
         keyValues.Add("recordID", recordID);
 
         StartCoroutine(HttpManager.My.HttpSend( Url.getReplayDatas, (www) => {
@@ -421,20 +472,28 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             {
                 string json = CompressUtils.Uncompress(response.data);
                 ReplayDatas datas = JsonUtility.FromJson<ReplayDatas>(json);
-                //Debug.Log(datas.recordID);
-                //Debug.Log(datas.operations);
-                //Debug.Log(datas.dataStats);
-                doSuccess?.Invoke();
+                Debug.Log(datas.recordID);
+                Debug.Log(datas.operations);
+                Debug.Log(datas.dataStats);
+                doSuccess?.Invoke(datas);
             }
             else
             {
                 HttpManager.My.ShowTip(response.errMsg);
                 doFail?.Invoke();
             }
+            SetMask();
         }, keyValues, HttpType.Post));
+
     }
 
-    public void GetReplayLists(string sceneName, Action doSuccess, Action doFail)
+    /// <summary>
+    /// 获取某关的复盘列表（replayLists），可能为空，仅展示列表用，如下载复盘的数据请从中获取recordID，然后调用 GetReplayDatas 方法
+    /// </summary>
+    /// <param name="sceneName">场景名 如：FTE_1</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
+    public void GetReplayLists(string sceneName, Action doSuccess=null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("token", token);
@@ -467,6 +526,51 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 HttpManager.My.ShowTip(response.errMsg);
                 doFail?.Invoke();
             }
+            SetMask();
+        }, keyValues, HttpType.Post));
+    }
+
+    /// <summary>
+    /// 获取排行榜，存储在该类的 rankList 中， 可能为空，后续相关操作，请自行判断
+    /// </summary>
+    /// <param name="sceneName">场景名称 如：FTE_1</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
+    public void GetRankingList(string sceneName, Action doSuccess=null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        //keyValues.Add("token", token);
+        keyValues.Add("playerID", "11111");
+        keyValues.Add("sceneName", sceneName);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.getRankingLists, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                GoToLogin(response.errMsg);
+                return;
+            }
+            if (response.status == 1)
+            {
+                ReplayLists replayList = JsonUtility.FromJson<ReplayLists>(response.data);
+                rankList.Clear();
+                foreach (var rl in replayList.replayLists)
+                {
+                    rankList.Add(rl);
+                }
+                //Debug.Log(rankList.Count);
+                //Debug.Log(rankList[0].recordTime);
+                //Debug.Log(rankList[0].win);
+                //Debug.Log(rankList[0].recordID);
+                //Debug.Log(response.data);
+                doSuccess?.Invoke();
+            }
+            else
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            SetMask();
         }, keyValues, HttpType.Post));
     }
     #endregion
@@ -513,7 +617,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     /// 获得装备
     /// </summary>
     /// <param name="equipID">装备id</param>
-    /// <param name="equipType">装备类型</param>
+    /// <param name="equipType">装备类型0 装备 1 工人</param>
     /// <param name="count">数量</param>
     /// <param name="doSuccess"></param>
     /// <param name="doFail"></param>

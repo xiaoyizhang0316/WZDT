@@ -39,7 +39,8 @@ public class LoginPanel : MonoBehaviour
         }
         username_Input.ActivateInputField();
         username_Input.MoveTextEnd(true);
-        Test();
+        
+        //Test();
     }
 
     private void Login()
@@ -58,8 +59,14 @@ public class LoginPanel : MonoBehaviour
         }
         else
         {
-            NetworkMgr.My.Login(username, password, LoginSuccess, LoginFail);
+            ForLogin();
+            HttpManager.My.retry = ForLogin;
         }
+    }
+
+    private void ForLogin()
+    {
+        NetworkMgr.My.Login(username, password, LoginSuccess, LoginFail);
     }
 
     private void LoginSuccess()
@@ -89,8 +96,8 @@ public class LoginPanel : MonoBehaviour
                 }
                 else
                 {
-                    NetworkMgr.My.GetLevelProgress();
-                    NetworkMgr.My.GetPlayerEquips();
+                    //NetworkMgr.My.GetLevelProgress();
+                    //NetworkMgr.My.GetPlayerEquips();
                     //NetworkMgr.My.GetAnswers();
                     SceneManager.LoadScene("Map");
                 }
@@ -146,6 +153,7 @@ public class LoginPanel : MonoBehaviour
     private void Test()
     {
         //TestGetReplayDatas();
+        
     }
 
     private void TestGetReplayDatas()
@@ -202,16 +210,16 @@ public class LoginPanel : MonoBehaviour
         playerOperations.Add(pa);
         dataStats.Add(dataStat);
 
-        PlayerReplay playerReplay = new PlayerReplay();
-        Debug.Log(dataStats.Count);
-        playerReplay.dataStats = dataStats;
-        playerReplay.operations = playerOperations;
-        playerReplay.sceneName = "FTE_1";
-        playerReplay.score = 100;
-        playerReplay.stars = "101";
-        playerReplay.timeCount = 100;
-        playerReplay.win = true;
+        //PlayerReplay playerReplay = new PlayerReplay();
+        //Debug.Log(dataStats.Count);
+        //playerReplay.dataStats = dataStats;
+        //playerReplay.operations = playerOperations;
+        //playerReplay.sceneName = "FTE_1";
+        //playerReplay.score = 100;
+        //playerReplay.stars = "101";
+        //playerReplay.timeCount = 100;
+        //playerReplay.win = true;
 
-        NetworkMgr.My.AddReplayData(playerReplay, null, null);
+        //NetworkMgr.My.AddReplayData(playerReplay, null, null);
     }
 }

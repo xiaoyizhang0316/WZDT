@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using static StageGoal;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class PlayerDatas
@@ -158,6 +159,20 @@ public class PlayerReplay
     public bool win;
     public string stars;
     public int timeCount;
+
+    public PlayerReplay(bool isWin)
+    {
+        operations = StageGoal.My.playerOperations;
+        sceneName = SceneManager.GetActiveScene().name;
+        dataStats = StageGoal.My.dataStats;
+        recordTime = TimeStamp.GetCurrentTimeStamp();
+        score = StageGoal.My.playerSatisfy;
+        win = isWin;
+        stars = BaseLevelController.My.starOneStatus ? "1" : "0";
+        stars += BaseLevelController.My.starTwoStatus ? "1" : "0";
+        stars += BaseLevelController.My.starThreeStatus ? "1" : "0";
+        timeCount = StageGoal.My.timeCount;
+    }
 }
 
 [Serializable]
@@ -184,4 +199,15 @@ public class ReplayDatas
     public string recordID;
     public string operations;
     public string dataStats;
+}
+
+[Serializable]
+public class PlayerOperations
+{
+    public List<PlayerOperation> playerOperations;
+}
+
+public class PlayerStatus
+{
+    public List<DataStat> dataStats;
 }

@@ -114,6 +114,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause.interactable = false;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = true;
+        InvokeRepeating("CountPauseTime",1f,1f);
     }
 
     /// <summary>
@@ -129,6 +130,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause.interactable = true;
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
+        CancelInvoke("CountPauseTime");
     }
 
     /// <summary>
@@ -142,6 +144,15 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause.interactable = true;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = false;
+        CancelInvoke("CountPauseTime");
+    }
+
+    /// <summary>
+    /// 统计暂停时间
+    /// </summary>
+    public void CountPauseTime()
+    {
+        StageGoal.My.totalPauseTime++;
     }
 
     /// <summary>
@@ -185,54 +196,11 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Trade/TradeSign"));
         go.transform.SetParent(TradeManager.My.transform);
         go.GetComponent<TradeSign>().Init(startRole.baseRoleData.ID.ToString(), endRole.baseRoleData.ID.ToString());
-        CreateTradeRecord(go.GetComponent<TradeSign>());
+        TradeManager.My.CreateTradeRecord(go.GetComponent<TradeSign>());
         //Panel_CreateTrade.SetActive(true);
         //CreateTradeManager.My.Open(go);
         isSetTrade = false;
         //CreateTradeLineGo.SetActive(false);
-    }
-
-    /// <summary>
-    /// 创建交易记录操作
-    /// </summary>
-    public void CreateTradeRecord(TradeSign sign)
-    {
-        List<string> param = new List<string>();
-        param.Add(sign.tradeData.ID.ToString());
-        param.Add(sign.tradeData.castRole);
-        param.Add(sign.tradeData.targetRole);
-        param.Add(sign.tradeData.selectCashFlow.ToString());
-        StageGoal.My.RecordOperation(GameEnum.OperationType.CreateTrade, param);
-        CheckNpcRole(sign);
-    }
-
-
-    public void CheckNpcRole(TradeSign sign)
-    {
-        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole));
-        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole));
-        if (start.baseRoleData.isNpc)
-        {
-            if (TradeManager.My.CheckTradeCount(sign.tradeData.startRole) <= 1)
-            {
-                List<string> param = new List<string>();
-                param.Add(start.baseRoleData.ID.ToString());
-                param.Add(start.baseRoleData.baseRoleData.roleName);
-                param.Add(start.baseRoleData.baseRoleData.roleType.ToString());
-                StageGoal.My.RecordOperation(OperationType.PutRole, param);
-            }
-        }
-        if (end.baseRoleData.isNpc)
-        {
-            if (TradeManager.My.CheckTradeCount(sign.tradeData.endRole) <= 1)
-            {
-                List<string> param = new List<string>();
-                param.Add(end.baseRoleData.ID.ToString());
-                param.Add(end.baseRoleData.baseRoleData.roleName);
-                param.Add(end.baseRoleData.baseRoleData.roleType.ToString());
-                StageGoal.My.RecordOperation(OperationType.PutRole, param);
-            }
-        }
     }
 
     /// <summary>

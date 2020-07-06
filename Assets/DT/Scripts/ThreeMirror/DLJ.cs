@@ -49,6 +49,7 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             hit[i].transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip = true;
                             GameObject effect = Instantiate(effectPrb, hit[i].transform);
                             effect.transform.localPosition = Vector3.zero;
+                            TradeManager.My.ChangeNPCRoleRecord(hit[i].transform.GetComponent<BaseMapRole>());
                             Destroy(effect, 1f);
                             Debug.Log("使用多棱镜成功");
                             break;

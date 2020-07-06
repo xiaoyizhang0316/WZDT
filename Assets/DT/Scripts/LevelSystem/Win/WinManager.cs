@@ -63,6 +63,7 @@ public class WinManager : MonoSingleton<WinManager>
 
     private int stars = 0;
     private string[] starArr;
+    PlayerReplay tempReplay;
     public void InitWin()
     {
         stars = 0;
@@ -161,7 +162,19 @@ public class WinManager : MonoSingleton<WinManager>
             box_2Button.interactable = false;
             box_2.color = Color.gray;
         }
+        if (NetworkMgr.My.isUsingHttp)
+        {
+             tempReplay = new PlayerReplay(true);
+            //NetworkMgr.My.AddReplayData(tempReplay);
+            UploadReplayData();
+            HttpManager.My.Retry(UploadReplayData);
+        }
         CheckNext();
+    }
+
+    private void UploadReplayData()
+    {
+        NetworkMgr.My.AddReplayData(tempReplay);
     }
 
     private bool isPlay = false;
@@ -326,19 +339,8 @@ public class WinManager : MonoSingleton<WinManager>
         {
             if (NetworkMgr.My.isUsingHttp)
             {
-                NetworkMgr.My.UpdateLevelProgress(NetworkMgr.My.currentLevel, stars, starArr[0] + starArr[1] + starArr[2],
-                    starArr[0] + starArr[1] + starArr[2], 0, () =>
-                    {
-                        PlayerData.My.Reset();
-                        SceneManager.LoadScene("Map");
-                    });
-                //LevelRecord levelRecord = new LevelRecord(NetworkMgr.My.playerID, NetworkMgr.My.currentLevel, stars, 
-                //    StageGoal.My.tradeCost, StageGoal.My.productCost, StageGoal.My.extraCosts, StageGoal.My.consumeIncome, 
-                //    StageGoal.My.npcIncome, StageGoal.My.otherIncome, StageGoal.My.buildTpCost, StageGoal.My.mirrorTpCost,
-                //    StageGoal.My.unlockTpCost, StageGoal.My.npcTpIncome, StageGoal.My.workerTpIncome, StageGoal.My.buffTpIncome,
-                //    StageGoal.My.playerTechPoint, StageGoal.My.currentWave, StageGoal.My.playerGold, 0, StageGoal.My.timeCount, 
-                //    NetworkMgr.My.startTime, TimeStamp.GetCurrentTimeStamp());
-                //NetworkMgr.My.AddLevelRecord(levelRecord);
+                CommitProgress();
+                HttpManager.My.retry = CommitProgress;
             }
             else
             {
@@ -351,6 +353,16 @@ public class WinManager : MonoSingleton<WinManager>
             NewCanvasUI.My.Panel_Review.SetActive(true);
             ReviewPanel.My.Init(StageGoal.My.playerOperations);
         });
+    }
+
+    private void CommitProgress()
+    {
+        NetworkMgr.My.UpdateLevelProgress(NetworkMgr.My.currentLevel, stars, starArr[0] + starArr[1] + starArr[2],
+                    starArr[0] + starArr[1] + starArr[2], 0, () =>
+                    {
+                        PlayerData.My.Reset();
+                        SceneManager.LoadScene("Map");
+                    });
     }
 
     public void CheckNext()
