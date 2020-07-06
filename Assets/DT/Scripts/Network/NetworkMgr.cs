@@ -581,7 +581,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     /// </summary>
     /// <param name="doSuccess"></param>
     /// <param name="doFail"></param>
-    public void GetPlayerEquips(Action doSuccess=null, Action doFail=null)
+    public void GetPlayerEquips(Action<List<PlayerEquip>> doSuccess=null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("token", token);
@@ -603,7 +603,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     playerEquipsList.Add(pe);
                 }
                 Debug.LogWarning(playerEquipsList.Count + "=========playerequip");
-                doSuccess?.Invoke();
+                doSuccess?.Invoke(playerEquipsList);
             }
             else
             {
