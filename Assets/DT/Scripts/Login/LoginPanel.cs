@@ -210,16 +210,16 @@ public class LoginPanel : MonoBehaviour
         playerOperations.Add(pa);
         dataStats.Add(dataStat);
 
-        PlayerReplay playerReplay = new PlayerReplay();
-        Debug.Log(dataStats.Count);
-        playerReplay.dataStats = dataStats;
-        playerReplay.operations = playerOperations;
-        playerReplay.sceneName = "FTE_1";
-        playerReplay.score = 100;
-        playerReplay.stars = "101";
-        playerReplay.timeCount = 100;
-        playerReplay.win = true;
+        //PlayerReplay playerReplay = new PlayerReplay();
+        //Debug.Log(dataStats.Count);
+        //playerReplay.dataStats = dataStats;
+        //playerReplay.operations = playerOperations;
+        //playerReplay.sceneName = "FTE_1";
+        //playerReplay.score = 100;
+        //playerReplay.stars = "101";
+        //playerReplay.timeCount = 100;
+        //playerReplay.win = true;
 
-        NetworkMgr.My.AddReplayData(playerReplay, null, null);
+        //NetworkMgr.My.AddReplayData(playerReplay, null, null);
     }
 }

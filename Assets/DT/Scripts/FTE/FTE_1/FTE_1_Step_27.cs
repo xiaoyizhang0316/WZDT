@@ -27,11 +27,11 @@ public class FTE_1_Step_27 : BaseStep
 
     public override void StartCuttentStep()
     {
-        mask.DOFade(0.4f,2).Play();
+        mask.DOFade(0.4f,1.2f).Play();
       
         text.DOFade(0, 0).OnComplete(() => {
            
-            text.DOFade(1, 3f).OnComplete(() =>
+            text.DOFade(1, 1.5f).OnComplete(() =>
             {
                 
             }).Play(); 
@@ -44,8 +44,8 @@ public class FTE_1_Step_27 : BaseStep
         nextButton.interactable = false;  
         NewCanvasUI.My.GameNormal();
            
-        mask.DOFade(0f,2).Play();
-        text.DOFade(0, 2f).OnComplete(() =>
+        mask.DOFade(0f,0.8f).Play();
+        text.DOFade(0, 0.8f).OnComplete(() =>
         {
             gameObject.SetActive(false); 
             FTESceneManager.My.PlayNextStep();

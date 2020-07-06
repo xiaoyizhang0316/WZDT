@@ -15,30 +15,39 @@ public class Level5Controller : BaseLevelController
         }
     }
 
-    public override void CountPutRole(Role role)
-    {
-        if (role.baseRoleData.roleType == RoleType.Dealer)
-            putRoleNumber++;
-    }
-
     public override void CheckStarTwo()
     {
-        if (putRoleNumber >= 6)
+        int count = 0;
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
-            starTwoStatus = false;
-            CancelInvoke("CheckStarTwo");
-            return;
+            if (!PlayerData.My.MapRole[i].isNpc && PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == RoleType.Dealer)
+            {
+                count++;
+                if (count > 6)
+                {
+                    starTwoStatus = false;
+                    CancelInvoke("CheckStarThree");
+                    starTwoCondition = "放置不多于6个零售商，当前：已失败";
+                    return;
+                }
+            }
         }
         starTwoStatus = true;
-        starTwoCondition = "放置不多于6个零售商,当前：" + putRoleNumber.ToString() + "/6";
+        starTwoCondition = "放置不多于6个角色，当前：" + count.ToString() + "/6";
     }
 
     public override void CheckStarThree()
     {
-        if (targetNumber >= 12)
+        int count = 0;
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
-            starThreeStatus = true;
+            if (!PlayerData.My.MapRole[i].isNpc && PlayerData.My.MapRole[i].baseRoleData.baseRoleData.level == 5)
+                count++;
         }
-        starThreeCondition = "满足传奇金领数量" + targetNumber.ToString() + "/12";
+        if (count >= 5)
+            starThreeStatus = true;
+        else
+            starThreeStatus = false;
+        starThreeCondition = "至少5个内部角色升级到5级，当前:" + count.ToString();
     }
 }

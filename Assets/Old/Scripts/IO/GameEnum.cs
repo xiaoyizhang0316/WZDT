@@ -130,6 +130,10 @@ public class GameEnum
         /// </summary>
         Marketing,
         /// <summary>
+        /// 垃圾处理厂
+        /// </summary>
+        RubishProcess,
+        /// <summary>
         /// 任意
         /// </summary>
         All

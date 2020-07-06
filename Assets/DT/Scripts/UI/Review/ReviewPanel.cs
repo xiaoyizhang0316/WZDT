@@ -23,6 +23,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public VectorObject2D line;
 
+    //public Vector3 pos;
+
     private bool isStart = false;
 
     private Tweener twe;
@@ -91,7 +93,17 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         }
         if (!isPlay)
             ReviewManager.My.ShowCurrentReview(mapStates.Count - 1);
+    }
 
+    public void MapInit(List<PlayerOperation> playerOperations,List<DataStat> datas,int timeCount)
+    {
+        AutoPlay();
+        Pause();
+        GenerateMapStates(playerOperations);
+        playSlider.maxValue = timeCount;
+        playSlider.value = 0;
+        InitMoneyLine(datas,timeCount);
+        Show();
     }
 
     public void Init(List<PlayerOperation> playerOperations)
@@ -100,28 +112,28 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         Pause();
         GenerateMapStates(playerOperations);
         playSlider.maxValue = StageGoal.My.timeCount;
-        InitMoneyLine();
+        playSlider.value = 0;
+        InitMoneyLine(StageGoal.My.dataStats,StageGoal.My.timeCount);
     }
 
-
-    public void InitMoneyLine()
+    public void InitMoneyLine(List<DataStat> datas,int timeCount)
     {
-        if (StageGoal.My.dataStats.Count == 0)
+        if (datas.Count == 0)
             return;
-        int maxAmount = StageGoal.My.dataStats[0].restMoney * 150 / 100;
+        int maxAmount = datas[0].restMoney * 150 / 100;
         line.vectorLine.points2.Clear();
-        for (int i = 0; i < StageGoal.My.dataStats.Count; i++)
+        for (int i = 0; i < datas.Count; i++)
         {
-            if (StageGoal.My.dataStats[i].restMoney <= maxAmount)
+            if (datas[i].restMoney <= maxAmount)
             {
-                line.vectorLine.points2.Add(new Vector2(1326 / StageGoal.My.timeCount * 5 * i, StageGoal.My.dataStats[i].restMoney / (float)maxAmount * 100f));
+                line.vectorLine.points2.Add(new Vector2(1326 / timeCount * 5 * i, datas[i].restMoney / (float)maxAmount * 100f));
             }
             else
             {
-                line.vectorLine.points2.Add(new Vector2(1326 / StageGoal.My.timeCount * 5 * i, 100f));
+                line.vectorLine.points2.Add(new Vector2(1326 / timeCount * 5 * i, 100f));
             }
         }
-        line.vectorLine.points2.Add(new Vector2(1326, StageGoal.My.playerGold / (float)maxAmount * 100f));
+        line.vectorLine.points2.Add(new Vector2(1326, datas[datas.Count - 1].restMoney / (float)maxAmount * 100f));
         line.vectorLine.Draw();
     }
 
@@ -270,10 +282,20 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         return result;
     }
 
+    public void Hide()
+    {
+        GetComponent<RectTransform>().anchoredPosition = new Vector3(-3000f, 0f, 0f);
+    }
+
+    public void Show()
+    {
+        GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, 0f, 0f);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        //gameObject.SetActive(false);
+        
     }
 
     /// <summary>

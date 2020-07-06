@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Vectrosity;
+using Random = System.Random;
 
 public class ReviewManager : MonoSingleton<ReviewManager>
 {
@@ -19,6 +20,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     public List<ReviewRoleSign> signs;
     public List<GameObject> lines;
     public Transform lineTF;
+    public Transform linebuffroleTF;
     public int index;
     public GameObject roles;
     public GameObject linePRBs;
@@ -27,6 +29,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     public int countpeasant;
     public int countmerchant;
     public int countdealer;
+
     public void ShowCurrentReview(int index)
     {
         if (this.index == index)
@@ -142,8 +145,15 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                     {
                         //生成生产性角色
                             Debug.Log(panel.mapStates[index].mapRoles[j].roleType+"j");
-                        GetRoleSign(panel.mapStates[index].mapRoles[j].roleType)
-                            .InitRole(panel.mapStates[index].mapRoles[j]);
+                            ReviewRoleSign sign   ;
+                          
+                             sign = GetRoleSign(panel.mapStates[index].mapRoles[j].roleType);
+                             if (sign != null)
+                             {
+                                 sign  .InitRole(panel.mapStates[index].mapRoles[j],false);
+                             }
+
+                           
                     }
 
                     for (int j = 0; j < panel.mapStates[index].mapTrades.Count; j++)
@@ -154,8 +164,9 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                         {
                            
                                 GetRoleSign(endrole.roleType)
-                                    .InitRole( starrole);
+                                    .InitRole( starrole,true);
                          
+                                
                         }
                     }
                 }
@@ -168,7 +179,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                         Debug.Log("当前" + index + "j" + j);
                         DrawLine(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).gameObject,
                             GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).gameObject
-                        );
+                      ,j  );
                     }
                 }
 
@@ -280,12 +291,24 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
                 }
 
-                void DrawLine(GameObject posA, GameObject posB)
+                void DrawLine(GameObject posA, GameObject posB,int index)
                 {
                     GameObject line = Instantiate(linePrb, lineTF);
                     lines.Add(line);
                     line.GetComponent<WMG_Link>().fromNode = posA;
                     line.GetComponent<WMG_Link>().toNode = posB;
+                    if (posA.GetComponent<ReviewRoleSign>().isBuffRole)
+                    {
+
+                        Color color = GetRandomColor(index);
+                        Debug.Log("J+"+index +color);
+                        line.transform.GetChild(0).GetComponent<Image>().color=color;
+                        line.transform.GetChild(0).GetChild(0).GetComponent<Image>().color=color;
+                        line.transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
+                        line.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().color=color;
+                        line.transform.SetParent(linebuffroleTF);
+                    }
+
                     //RectTransform ImageRectTrans =    line.GetComponent<RectTransform>();
                     //   Vector3 differenceVector = posB - posA;
 //
@@ -298,6 +321,45 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                     //   // 设置线相对于水平向右方向的角度
                     //   float angle = Mathf.Atan2(differenceVector.y, differenceVector.x) * Mathf.Rad2Deg;
                     //   ImageRectTrans.transform.eulerAngles =new Vector3(0, 0, angle); 
+                }
+
+                public Color GetRandomColor(int index)
+                {
+                    List<string> colorhtml = new List<string>();
+                    colorhtml.Add("#DE9BFD");
+                    colorhtml.Add("#6C73A3");
+                    colorhtml.Add("#9BFDEE");
+                    colorhtml.Add("#6E6E6E");
+                    colorhtml.Add("#FD9B9E");
+                    colorhtml.Add("#1A1814");
+                    colorhtml.Add("#9BFD9F");
+                    colorhtml.Add("#A36C71");
+                    colorhtml.Add("#A36C9A");
+                    colorhtml.Add("#0DFFE8");
+                    colorhtml.Add("#9BA6FD");
+                    colorhtml.Add("#896CA3");
+                    colorhtml.Add("#7BFF0D");
+                    colorhtml.Add("#8C252F");
+                    colorhtml.Add("#258C47");
+                    colorhtml.Add("#6F8C25");
+                    colorhtml.Add("#E1FD9B");
+                    colorhtml.Add("#FFF70D");
+                    colorhtml.Add("#8C2588");
+                    colorhtml.Add("#FD9BE3");
+                    colorhtml.Add("#6CA3A0");
+                    colorhtml.Add("#F3F2EF");
+                    colorhtml.Add("#FF0D9D");
+                    colorhtml.Add("#84A36C");
+                    colorhtml.Add("#25838C");
+                    colorhtml.Add("#B20DFF");
+                    colorhtml.Add("#FF0D0D");
+                    colorhtml.Add("#0D46FF");
+                    colorhtml.Add("#2A258C");
+                    colorhtml.Add("#0DFF54");
+                    Color nowColor;
+                    ColorUtility.TryParseHtmlString(colorhtml[index] ,
+                        out nowColor);
+                    return nowColor;
                 }
 
                 // Start is called before the first frame update

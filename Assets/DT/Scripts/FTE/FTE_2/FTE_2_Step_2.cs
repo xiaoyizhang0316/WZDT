@@ -29,8 +29,8 @@ public class FTE_2_Step_2 : BaseStep
          MaskManager.My.Open(2,130);
          contenText.DOFade(0, 0).OnComplete(() =>
          {
-             maptext.DOFade(1, 3f);
-             contenText.DOFade(1, 3f).OnComplete(() =>
+             maptext.DOFade(1, 1.5f);
+             contenText.DOFade(1, 1.5f).OnComplete(() =>
              {
                  FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
                  nextButton.interactable = true;
@@ -67,8 +67,8 @@ public class FTE_2_Step_2 : BaseStep
        RoleListManager.My.OutButton(); 
        MaskManager.My.Close(1,0);
        MaskManager.My.Close(2,0);
-       maptext.DOFade(0, 2f);
-       contenText.DOFade(0, 2f).OnComplete(() =>
+       maptext.DOFade(0, 0.8f);
+       contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
            gameObject.SetActive(false);
 

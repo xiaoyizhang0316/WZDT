@@ -397,6 +397,30 @@ public class BaseMapRole : MonoBehaviour
         warehouse.Clear();
     }
 
+    /// <summary>
+    /// 清理垃圾
+    /// </summary>
+    public int ClearTrash(int number)
+    {
+        if (trash.Count >= number)
+        {
+            for (int i = 0; i < number; i++)
+            {
+                trash.RemoveAt(0);
+            }
+            return number;
+        }
+        else
+        {
+            int result = trash.Count;
+            for (int i = 0; i < trash.Count; i++)
+            {
+                trash.RemoveAt(0);
+            }
+            return result;
+        }
+    }
+
     #endregion
 
     #region 商店/零售

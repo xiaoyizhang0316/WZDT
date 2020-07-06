@@ -145,6 +145,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     #endregion
 
+    public int totalPauseTime = 0;
+
     /// <summary>
     /// 当前关卡敌人波数数据
     /// </summary>
@@ -288,6 +290,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void SetInfo()
     {
         float per = playerHealth / (float)playerMaxHealth;
+        if (per > 1f)
+        {
+            per = 1f;
+            playerHealth = playerMaxHealth;
+        }
         playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
         playerGoldText.text = playerGold.ToString();
         if (playerGold > 0)
@@ -387,15 +394,13 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             NewCanvasUI.My.GamePause();
             NewCanvasUI.My.lose.SetActive(true);
+
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
-            //if (NetworkMgr.My.isUsingHttp)
-            //{
-            //    LevelRecord levelRecord = new LevelRecord(NetworkMgr.My.playerID, NetworkMgr.My.currentLevel, 0,
-            //        tradeCost, productCost, extraCosts, consumeIncome, npcIncome, otherIncome, buildTpCost, mirrorTpCost,
-            //        unlockTpCost, npcTpIncome, workerTpIncome, buffTpIncome, playerTechPoint, currentWave, playerGold, 0,
-            //        timeCount, NetworkMgr.My.startTime, TimeStamp.GetCurrentTimeStamp());
-            //    NetworkMgr.My.AddLevelRecord(levelRecord);
-            //}
+            if (NetworkMgr.My.isUsingHttp)
+            {
+                PlayerReplay tempReplay = new PlayerReplay(false);
+                NetworkMgr.My.AddReplayData(tempReplay);
+            }
         }
         else
             return;

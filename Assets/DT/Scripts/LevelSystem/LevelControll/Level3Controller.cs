@@ -5,7 +5,6 @@ using static GameEnum;
 
 public class Level3Controller : BaseLevelController
 {
-
     public override void CountKillNumber(ConsumeSign sign)
     {
         List<ConsumerType> list = new List<ConsumerType>() { ConsumerType.BluecollarLegendary};
@@ -26,7 +25,7 @@ public class Level3Controller : BaseLevelController
 
     public override void CheckStarThree()
     {
-        if (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth > 0.6f)
+        if (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth >= 1f)
         {
             starThreeStatus = true;
         }
@@ -35,6 +34,6 @@ public class Level3Controller : BaseLevelController
             starThreeStatus = false;
         }
         string number = (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth * 100).ToString() + "%";
-        starThreeCondition = "满意度不低于60%，当前：" + number;
+        starThreeCondition = "满意度不低于100%，当前：" + number;
     }
 }

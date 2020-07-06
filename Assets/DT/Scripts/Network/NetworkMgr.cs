@@ -24,7 +24,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     private LevelProgress levelProgress;
     public LevelProgresses levelProgresses;
     public List<LevelProgress> levelProgressList;
-    public LevelProgress currentLevelProgress;
 
     public List<ReplayList> replayLists;
     public List<ReplayList> rankList;
@@ -53,7 +52,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     /// <param name="doFail"></param>
     public void Login(string userName, string password, Action doSuccess = null, Action doFail = null)
     {
-        //HttpManager.My.retry = Login(userName, password, doSuccess, doFail);
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("username", userName);
         keyValues.Add("password", password);
@@ -439,6 +437,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     Debug.Log("上传失败");
                     doFail?.Invoke();
                 }
+                SetMask();
             }, keyValues, HttpType.Post));
         }
         catch (Exception ex)
@@ -455,7 +454,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     /// <param name="recordID">复盘id（从复盘list里获取）</param>
     /// <param name="doSuccess"></param>
     /// <param name="doFail"></param>
-    public void GetReplayDatas(string recordID, Action doSuccess=null, Action doFail=null)
+    public void GetReplayDatas(string recordID, Action<ReplayDatas> doSuccess = null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         //keyValues.Add("token", token);
@@ -472,19 +471,20 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             if (response.status == 1)
             {
                 string json = CompressUtils.Uncompress(response.data);
-                Debug.Log(json);
                 ReplayDatas datas = JsonUtility.FromJson<ReplayDatas>(json);
-                //Debug.Log(datas.recordID);
+                Debug.Log(datas.recordID);
                 Debug.Log(datas.operations);
                 Debug.Log(datas.dataStats);
-                doSuccess?.Invoke();
+                doSuccess?.Invoke(datas);
             }
             else
             {
                 HttpManager.My.ShowTip(response.errMsg);
                 doFail?.Invoke();
             }
+            SetMask();
         }, keyValues, HttpType.Post));
+
     }
 
     /// <summary>
@@ -526,6 +526,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 HttpManager.My.ShowTip(response.errMsg);
                 doFail?.Invoke();
             }
+            SetMask();
         }, keyValues, HttpType.Post));
     }
 
@@ -569,6 +570,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 HttpManager.My.ShowTip(response.errMsg);
                 doFail?.Invoke();
             }
+            SetMask();
         }, keyValues, HttpType.Post));
     }
     #endregion

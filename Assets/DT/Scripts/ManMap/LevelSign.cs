@@ -49,6 +49,9 @@ public class LevelSign : MonoBehaviour
              
                 SceneManager.LoadScene(loadScene);
             });
+            NetworkMgr.My.GetReplayLists(loadScene,()=> {
+                LevelInfoManager.My.listScript.Init(NetworkMgr.My.replayLists);
+            });
         }
         else
         {
@@ -57,7 +60,18 @@ public class LevelSign : MonoBehaviour
                 SceneManager.LoadScene(loadScene);
             });
         }
-        
+    }
+
+    public void OnClick(string recordID)
+    {
+        NetworkMgr.My.GetReplayDatas(recordID, (datas)=> {
+            string str = "{ \"playerOperations\":" + datas.operations + "}";
+            PlayerOperations operations = JsonUtility.FromJson<PlayerOperations>(str);
+            string str1 = "{ \"dataStats\":" + datas.dataStats + "}";
+            PlayerStatus status = JsonUtility.FromJson<PlayerStatus>(str1);
+            //TODO UI
+            //Reviewpanel.Init(operations,status);
+        });
     }
 
     void InitLevel()

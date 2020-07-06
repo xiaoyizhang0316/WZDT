@@ -27,7 +27,7 @@ public class FTE_1_Step_15 : BaseStep
         MaskManager.My.Open(12,80);
         contenText.DOFade(0, 0).OnComplete(() => {
            
-            contenText.DOFade(1, 3f).OnComplete(() =>
+            contenText.DOFade(1, 1.5f).OnComplete(() =>
             {
           
                 MapManager.My.ReleaseLand(11,22);
@@ -60,7 +60,7 @@ public class FTE_1_Step_15 : BaseStep
     public override void StopCurrentStep()
     {  
         MaskManager.My.Close(12,0 );
-        contenText.DOFade(0, 2f).OnComplete(() =>
+        contenText.DOFade(0, 0.8f).OnComplete(() =>
         {
             gameObject.SetActive(false); 
         

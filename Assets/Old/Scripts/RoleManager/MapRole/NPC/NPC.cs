@@ -46,6 +46,7 @@ public class NPC : BaseNpc
                 if (TradeManager.My.CheckTradeCondition())
                 {
                     NewCanvasUI.My.InitCreateTradePanel();
+                    AudioManager.My.PlaySelectType(GameEnum.AudioClipType.EndTrade);
                 }
             }
         }

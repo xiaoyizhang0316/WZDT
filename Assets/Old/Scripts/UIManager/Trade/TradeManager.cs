@@ -164,12 +164,12 @@ public class TradeManager : MonoSingleton<TradeManager>
         BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
         if (start.extraSkill != null)
         {
-            if (start.tradeList.Count == start.extraSkill.maxTradeLimit)
+            if (start.tradeList.Count == start.extraSkill.maxTradeLimit && start.extraSkill.maxTradeLimit != 0)
                 return false;
         }
         if (end.extraSkill != null)
         {
-            if (end.tradeList.Count == end.extraSkill.maxTradeLimit)
+            if (end.tradeList.Count == end.extraSkill.maxTradeLimit && end.extraSkill.maxTradeLimit != 0)
                 return false;
         }
         return true;  
@@ -218,26 +218,50 @@ public class TradeManager : MonoSingleton<TradeManager>
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole));
         if (start.baseRoleData.isNpc)
         {
-            if (TradeManager.My.CheckTradeCount(sign.tradeData.startRole) <= 1)
+            if (CheckTradeCount(sign.tradeData.startRole) <= 1)
             {
                 List<string> param = new List<string>();
                 param.Add(start.baseRoleData.ID.ToString());
                 param.Add(start.baseRoleData.baseRoleData.roleName);
                 param.Add(start.baseRoleData.baseRoleData.roleType.ToString());
                 StageGoal.My.RecordOperation(OperationType.PutRole, param);
+                ChangeNPCRoleRecord(start);
             }
         }
         if (end.baseRoleData.isNpc)
         {
-            if (TradeManager.My.CheckTradeCount(sign.tradeData.endRole) <= 1)
+            if (CheckTradeCount(sign.tradeData.endRole) <= 1)
             {
                 List<string> param = new List<string>();
                 param.Add(end.baseRoleData.ID.ToString());
                 param.Add(end.baseRoleData.baseRoleData.roleName);
                 param.Add(end.baseRoleData.baseRoleData.roleType.ToString());
                 StageGoal.My.RecordOperation(OperationType.PutRole, param);
+                ChangeNPCRoleRecord(end);
             }
         }
+    }
+
+    /// <summary>
+    /// 记录修改角色操作
+    /// </summary>
+    /// <param name="role"></param>
+    public void ChangeNPCRoleRecord(BaseMapRole role)
+    {
+        List<string> param = new List<string>();
+        param.Add(role.baseRoleData.ID.ToString());
+        BaseMapRole mapRole = PlayerData.My.GetMapRoleById(role.baseRoleData.ID);
+        List<int> buffList = new List<int>();
+        buffList.AddRange(mapRole.GetComponent<BaseSkill>().buffList);
+        if (role.npcScript.isCanSeeEquip)
+        {
+            buffList.AddRange(role.npcScript.NPCBuffList);
+        }
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            param.Add(buffList[i].ToString());
+        }
+        StageGoal.My.RecordOperation(OperationType.ChangeRole, param);
     }
 
     /// <summary>

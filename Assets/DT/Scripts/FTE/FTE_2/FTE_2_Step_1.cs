@@ -25,7 +25,7 @@ public class FTE_2_Step_1 : BaseStep
    
          MaskManager.My.Open(0,80);
          contenText.DOFade(0, 0).OnComplete(() => { 
-             contenText.DOFade(1, 3f).OnComplete(() =>
+             contenText.DOFade(1, 1.5f).OnComplete(() =>
              {
              
                  nextButton.interactable = true; 
@@ -40,7 +40,7 @@ public class FTE_2_Step_1 : BaseStep
        RoleListManager.My.OutButton();
        nextButton.interactable = false; 
        MaskManager.My.Close(0,0 );
-       contenText.DOFade(0, 2f).OnComplete(() =>
+       contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
            gameObject.SetActive(false);
 

@@ -261,4 +261,20 @@ public class TradeSign : MonoBehaviour
         StageGoal.My.CostPlayerGold(result);
         StageGoal.My.Expend(result, ExpendType.TradeCosts);
     }
+
+    /// <summary>
+    /// 判断交易成本是不是最优
+    /// </summary>
+    /// <returns></returns>
+    public bool isTradeSettingBest()
+    {
+        if (randomIndex == 0)
+        {
+            return tradeData.selectCashFlow == CashFlowType.后钱;
+        }
+        else
+        {
+            return tradeData.selectCashFlow == CashFlowType.先钱;
+        }
+    }
 }
