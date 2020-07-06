@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3986828949442454820
+--- !u!1 &5481603237685584923
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4291317013435033397}
-  - component: {fileID: 5467362288414281362}
-  - component: {fileID: 7387213522215042917}
+  - component: {fileID: 8792243233983142942}
+  - component: {fileID: 911782975559447034}
+  - component: {fileID: 6529719251386074751}
   m_Layer: 5
   m_Name: Line
   m_TagString: Untagged
@@ -18,13 +18,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &4291317013435033397
+--- !u!224 &8792243233983142942
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3986828949442454820}
+  m_GameObject: {fileID: 5481603237685584923}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,26 +32,26 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -960, y: -540}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!222 &5467362288414281362
+--- !u!222 &911782975559447034
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3986828949442454820}
+  m_GameObject: {fileID: 5481603237685584923}
   m_CullTransparentMesh: 0
---- !u!114 &7387213522215042917
+--- !u!114 &6529719251386074751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3986828949442454820}
+  m_GameObject: {fileID: 5481603237685584923}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -453220092, guid: e4ea078ee38a8467f92ea8c6515bb4b2, type: 3}
@@ -71,64 +71,45 @@ MonoBehaviour:
     width: 1
     height: 1
   vectorLine:
-    m_lineVertices:
-    - {x: 1052, y: 721, z: 0}
-    - {x: 1252, y: 721, z: 0}
-    - {x: 1252, y: 719, z: 0}
-    - {x: 1052, y: 719, z: 0}
-    m_lineUVs:
-    - {x: 0, y: 1}
-    - {x: 1, y: 1}
-    - {x: 1, y: 0}
-    - {x: 0, y: 0}
-    m_lineColors:
-    - serializedVersion: 2
-      rgba: 4294967295
-    - serializedVersion: 2
-      rgba: 4294967295
-    - serializedVersion: 2
-      rgba: 4294967295
-    - serializedVersion: 2
-      rgba: 4294967295
-    m_lineTriangles: 000000000100000003000000010000000200000003000000
-    m_vertexCount: 4
-    m_go: {fileID: 3986828949442454820}
-    m_rectTransform: {fileID: 4291317013435033397}
+    m_lineVertices: []
+    m_lineUVs: []
+    m_lineColors: []
+    m_lineTriangles: 
+    m_vertexCount: 0
+    m_go: {fileID: 0}
+    m_rectTransform: {fileID: 0}
     m_color:
       serializedVersion: 2
-      rgba: 4294967295
-    m_canvasState: 1
-    m_is2D: 1
-    m_points2:
-    - {x: 1052, y: 720}
-    - {x: 1252, y: 720}
+      rgba: 0
+    m_canvasState: 0
+    m_is2D: 0
+    m_points2: []
     m_points3: []
-    m_pointsCount: 2
+    m_pointsCount: 0
     m_screenPoints: []
-    m_lineWidths:
-    - 1
-    m_lineWidth: 2
-    m_maxWeldDistance: 16
+    m_lineWidths: []
+    m_lineWidth: 0
+    m_maxWeldDistance: 0
     m_distances: []
-    m_name: Line
+    m_name: 
     m_material: {fileID: 0}
     m_originalTexture: {fileID: 0}
     m_texture: {fileID: 0}
-    m_active: 1
+    m_active: 0
     m_lineType: 0
     m_capLength: 0
     m_smoothWidth: 0
     m_smoothColor: 0
-    m_joins: 2
+    m_joins: 0
     m_isAutoDrawing: 0
     m_drawStart: 0
-    m_drawEnd: 1
+    m_drawEnd: 0
     m_endPointsUpdate: 0
     m_useNormals: 0
     m_useTangents: 0
     m_normalsCalculated: 0
     m_tangentsCalculated: 0
-    m_capType: 4
+    m_capType: 0
     m_endCap: 
     m_useCapColors: 0
     m_frontColor:
@@ -137,10 +118,10 @@ MonoBehaviour:
     m_backColor:
       serializedVersion: 2
       rgba: 0
-    m_frontEndCapIndex: -1
-    m_backEndCapIndex: -1
+    m_frontEndCapIndex: 0
+    m_backEndCapIndex: 0
     m_lineUVBottom: 0
-    m_lineUVTop: 1
+    m_lineUVTop: 0
     m_frontCapUVBottom: 0
     m_frontCapUVTop: 0
     m_backCapUVBottom: 0
