@@ -142,7 +142,7 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     int starNum = 1;
     string[] stars = new string[] { "1", "0", "0" };
-
+    PlayerReplay tempReplay;
     #endregion
 
     public int totalPauseTime = 0;
@@ -398,12 +398,18 @@ public class StageGoal : MonoSingleton<StageGoal>
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
             if (NetworkMgr.My.isUsingHttp)
             {
-                PlayerReplay tempReplay = new PlayerReplay(false);
-                NetworkMgr.My.AddReplayData(tempReplay);
+                CommitLose();
+                HttpManager.My.Retry(CommitLose);
             }
         }
         else
             return;
+    }
+
+    public void CommitLose()
+    {
+        tempReplay = new PlayerReplay(false);
+        NetworkMgr.My.AddReplayData(tempReplay);
     }
 
     /// <summary>

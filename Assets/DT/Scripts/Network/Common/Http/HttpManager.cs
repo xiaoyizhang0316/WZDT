@@ -91,9 +91,17 @@ public class HttpManager : MonoSingleton<HttpManager>
             if (time >= 6)
             {
                 Debug.Log("long Delay----------" + uwr.responseCode);
-                
-                //ShowNetworkStatus(uwr.responseCode);
 
+                //ShowNetworkStatus(uwr.responseCode);
+                if(SceneManager.GetActiveScene().name =="Login" || SceneManager.GetActiveScene().name == "FTE_0")
+                {
+                    ShowTwoClickTip("网络较慢，请重新登录或重试");
+                }
+                else
+                {
+                    ShowTwoClickTip("网络缓慢，请重试或返回主界面", () => { SceneManager.LoadScene("Map"); });
+                }
+                
 
                 isNetworkSlow = true;
                 timer = false;
@@ -286,9 +294,14 @@ public class HttpManager : MonoSingleton<HttpManager>
     public void ShowTwoClickTip(string tip, Action cancel=null)
     {
         selectTipText.text = tip;
-        if (selectCancel.onClick.GetPersistentEventCount() == 0)
+
+        selectCancel.onClick.RemoveAllListeners();
+        selectCancel.onClick.AddListener(() => GotoLogin());
+        
+        if (cancel != null)
         {
-            selectCancel.onClick.AddListener(() => GotoLogin());
+            selectCancel.onClick.RemoveAllListeners();
+            selectCancel.onClick.AddListener(() => cancel());
         }
         selectRetry.onClick.RemoveAllListeners();
         selectRetry.onClick.AddListener(() => retry());

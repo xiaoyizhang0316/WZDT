@@ -63,6 +63,7 @@ public class WinManager : MonoSingleton<WinManager>
 
     private int stars = 0;
     private string[] starArr;
+    PlayerReplay tempReplay;
     public void InitWin()
     {
         stars = 0;
@@ -163,10 +164,17 @@ public class WinManager : MonoSingleton<WinManager>
         }
         if (NetworkMgr.My.isUsingHttp)
         {
-            PlayerReplay tempReplay = new PlayerReplay(true);
-            NetworkMgr.My.AddReplayData(tempReplay);
+             tempReplay = new PlayerReplay(true);
+            //NetworkMgr.My.AddReplayData(tempReplay);
+            UploadReplayData();
+            HttpManager.My.Retry(UploadReplayData);
         }
         CheckNext();
+    }
+
+    private void UploadReplayData()
+    {
+        NetworkMgr.My.AddReplayData(tempReplay);
     }
 
     private bool isPlay = false;
