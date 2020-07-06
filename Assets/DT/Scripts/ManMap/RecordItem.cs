@@ -23,6 +23,18 @@ public class RecordItem : MonoBehaviour
 
     public Sprite[] sprites;
 
+    public Sprite[] bgSprites;
+
+    private bool isStar1;
+
+    private bool isStar2;
+
+    private bool isStar3;
+
+    /// <summary>
+	/// 初始化
+	/// </summary>
+	/// <param name="replay"></param>
     public void Init(ReplayList replay)
     {
         recordTime.text = TimeStamp.TimeStampToString(replay.recordTime);
@@ -37,9 +49,16 @@ public class RecordItem : MonoBehaviour
             star1.sprite = sprites[1];
         star2.sprite = temp[1].Equals('1') ? sprites[0] : sprites[1];
         star3.sprite = temp[2].Equals('1') ? sprites[0] : sprites[1];
+        isStar1 = temp[0].Equals('1');
+        isStar2 = temp[1].Equals('1');
+        isStar3 = temp[2].Equals('1');
         GetComponent<Button>().onClick.AddListener(GetReplayById);
+        InitBg();
     }
 
+    /// <summary>
+	/// 点击调用
+	/// </summary>
     public void GetReplayById()
     {
         NetworkMgr.My.GetReplayDatas(Id, (datas) =>
@@ -51,6 +70,22 @@ public class RecordItem : MonoBehaviour
             Debug.Log("获取录像成功");
             ReviewPanel.My.MapInit(operations.playerOperations, status.dataStats,playTime);
         });
+    }
+
+    public void InitBg()
+    {
+        if (isStar3 && isStar2 && isStar1)
+        {
+            GetComponent<Image>().sprite = bgSprites[0];
+        }
+        else if (!isStar1)
+        {
+            GetComponent<Image>().sprite = bgSprites[2];
+        }
+        else
+        {
+            GetComponent<Image>().sprite = bgSprites[1];
+        }
     }
 
     // Start is called before the first frame update
