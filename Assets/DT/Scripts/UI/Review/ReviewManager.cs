@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Vectrosity;
@@ -24,12 +25,16 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     public int index;
     public GameObject roles;
     public GameObject linePRBs;
- 
+
+    public Sprite xianqian;
+    public Sprite houqian;
     public int countseed;
     public int countpeasant;
     public int countmerchant;
     public int countdealer;
 
+    public Transform money;
+    public GameObject moneyPrb;
     public void ShowCurrentReview(int index)
     {
         if (this.index == index)
@@ -153,7 +158,18 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                                  sign  .InitRole(panel.mapStates[index].mapRoles[j],false);
                              }
 
-                           
+                             if (panel.mapStates[index].mapRoles[j].isNPC)
+                             {
+                                 if( Resources.Load<Sprite>("Sprite/hong/"+panel.mapStates[index].mapRoles[j].roleType+panel.mapStates[index].mapRoles[j].level)!=null)
+                                 sign.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/hong/"+panel.mapStates[index].mapRoles[j].roleType+panel.mapStates[index].mapRoles[j].level);
+
+                             }
+                             else
+                             {
+                                 if( Resources.Load<Sprite>("Sprite/lan/"+panel.mapStates[index].mapRoles[j].roleType+panel.mapStates[index].mapRoles[j].level)!=null)
+                                     sign.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/lan/"+panel.mapStates[index].mapRoles[j].roleType+panel.mapStates[index].mapRoles[j].level);
+
+                             }
                     }
 
                     for (int j = 0; j < panel.mapStates[index].mapTrades.Count; j++)
@@ -176,11 +192,21 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 {
                     for (int j = 0; j < panel.mapStates[index].mapTrades.Count; j++)
                     {
-                        Debug.Log("当前" + index + "j" + j);
-                        DrawLine(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).gameObject,
-                            GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).gameObject
-                      ,j  );
+                        if (panel.mapStates[index].mapTrades[j].cashFlowType == GameEnum.CashFlowType.先钱)
+                        {
+                            Debug.Log("当前" + index + "j" + j);
+                            DrawLine(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).gameObject,
+                                GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).gameObject
+                                , j, "先");
+                        }
+                        else
+                        {
+                            DrawLine(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).gameObject,
+                                GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).gameObject
+                                , j, "后");
+                        }
                     }
+                  
                 }
 
 
@@ -189,6 +215,8 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                     for (int i = 0; i < signs.Count; i++)
                     {
                         signs[i].ClearRole() ;
+                        signs[i].gameObject.transform.GetChild(0).gameObject.SetActive(false);
+
                     }
 
                     for (int i = 0; i < lines.Count; i++)
@@ -291,7 +319,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
                 }
 
-                void DrawLine(GameObject posA, GameObject posB,int index)
+                void DrawLine(GameObject posA, GameObject posB,int index, string money)
                 {
                     GameObject line = Instantiate(linePrb, lineTF);
                     lines.Add(line);
@@ -303,12 +331,28 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                         Color color = GetRandomColor(index);
                         Debug.Log("J+"+index +color);
                         line.transform.GetChild(0).GetComponent<Image>().color=color;
-                        line.transform.GetChild(0).GetChild(0).GetComponent<Image>().color=color;
-                        line.transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
-                        line.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().color=color;
+                     line.transform.GetChild(0).GetChild(0).GetComponent<Image>().color=color;
+                      //  line.transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
+                      posB.GetComponent<ReviewRoleSign>().transform.GetChild(0).gameObject.SetActive(true);
+                      posB.GetComponent<ReviewRoleSign>().transform.GetChild(0).GetComponent<Image>().color = color;
+                      //  line.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().color=color;
                         line.transform.SetParent(linebuffroleTF);
                     }
 
+                  
+                    if (money.Equals("先"))
+                    {
+                        line.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = xianqian;
+                            
+                    }
+
+                    else
+                    {
+                        line.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = houqian;
+                    }
+                  
+            
+                    line.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Text>().text = money;
                     //RectTransform ImageRectTrans =    line.GetComponent<RectTransform>();
                     //   Vector3 differenceVector = posB - posA;
 //
