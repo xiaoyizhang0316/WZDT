@@ -12,7 +12,7 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
     IEnumerator Start()
     {
         //PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetInt("isUseGuide",1);
+        //PlayerPrefs.SetInt("isUseGuide",1);
         //   Debug.Log("FTE_1"+PlayerPrefs.GetInt("FTE_1|1",true));
         //   Debug.Log("FTE_2"+PlayerPrefs.GetInt("FTE_2"));
         //   Debug.Log("FTE_3"+PlayerPrefs.GetInt("FTE_3"));
