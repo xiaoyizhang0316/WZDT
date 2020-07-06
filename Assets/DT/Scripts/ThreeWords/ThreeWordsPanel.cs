@@ -59,6 +59,12 @@ public class ThreeWordsPanel : MonoBehaviour
         {
             HttpManager.My.ShowTip("输入内容不能为空！");
         }
+        UploadTw();
+        HttpManager.My.retry = UploadTw;
+    }
+
+    private void UploadTw()
+    {
         NetworkMgr.My.UploadThreeWords(input, SubmitSuccess, SubmitFail);
     }
 
@@ -81,6 +87,7 @@ public class ThreeWordsPanel : MonoBehaviour
         else
         {
             thisPanel.SetActive(false);
+            transform.parent.Find("Map").GetComponent<MainMap>().title.text = input;
         }
     }
 

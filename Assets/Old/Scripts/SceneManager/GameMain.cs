@@ -11,7 +11,7 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("isUseGuide",1);
         //   Debug.Log("FTE_1"+PlayerPrefs.GetInt("FTE_1|1",true));
         //   Debug.Log("FTE_2"+PlayerPrefs.GetInt("FTE_2"));

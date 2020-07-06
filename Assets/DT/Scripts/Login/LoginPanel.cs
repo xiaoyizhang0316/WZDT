@@ -39,7 +39,8 @@ public class LoginPanel : MonoBehaviour
         }
         username_Input.ActivateInputField();
         username_Input.MoveTextEnd(true);
-        Test();
+        
+        //Test();
     }
 
     private void Login()
@@ -58,8 +59,14 @@ public class LoginPanel : MonoBehaviour
         }
         else
         {
-            NetworkMgr.My.Login(username, password, LoginSuccess, LoginFail);
+            ForLogin();
+            HttpManager.My.retry = ForLogin;
         }
+    }
+
+    private void ForLogin()
+    {
+        NetworkMgr.My.Login(username, password, LoginSuccess, LoginFail);
     }
 
     private void LoginSuccess()
@@ -89,8 +96,8 @@ public class LoginPanel : MonoBehaviour
                 }
                 else
                 {
-                    NetworkMgr.My.GetLevelProgress();
-                    NetworkMgr.My.GetPlayerEquips();
+                    //NetworkMgr.My.GetLevelProgress();
+                    //NetworkMgr.My.GetPlayerEquips();
                     //NetworkMgr.My.GetAnswers();
                     SceneManager.LoadScene("Map");
                 }

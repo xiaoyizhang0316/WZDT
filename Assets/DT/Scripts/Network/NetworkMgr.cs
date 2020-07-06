@@ -53,6 +53,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     /// <param name="doFail"></param>
     public void Login(string userName, string password, Action doSuccess = null, Action doFail = null)
     {
+        //HttpManager.My.retry = Login(userName, password, doSuccess, doFail);
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("username", userName);
         keyValues.Add("password", password);
