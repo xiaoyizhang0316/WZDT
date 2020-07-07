@@ -146,6 +146,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
                 public void CreatRoles()
                 {
+                    
                     for (int j = 0; j < panel.mapStates[index].mapRoles.Count; j++)
                     {
                         //生成生产性角色
