@@ -266,7 +266,26 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             }
         }
     }
- 
+
+    /// <summary>
+    /// 初始化玩家装备
+    /// </summary>
+    /// <param name="data"></param>
+    public void InitPlayerEquip(List<PlayerEquip> data)
+    {
+        for (int i = 0; i < data.Count; i++)
+        {
+            if (data[i].equipType == 0)
+            {
+                GetNewGear(data[i].equipID);
+            }
+            else if (data[i].equipType == 1)
+            {
+                GetNewWorker(data[i].equipID);
+            }
+        }
+    }
+
     /// <summary>
     /// 判断角色种类是否在地图中
     /// </summary>

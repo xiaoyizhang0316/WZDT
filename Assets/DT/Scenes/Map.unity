@@ -807,6 +807,7 @@ MonoBehaviour:
   mission_1: "\u987A\u5229\u901A\u8FC7\u5173\u5361"
   mission_2: "\u8D1F\u8D44\u4EA7\u4E0D\u53EF\u4F4E\u4E8E-5000\u72B6\u6001"
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60%  "
+  starRequirement: 0
   LevelButton: {fileID: 241482737}
   loadScene: FTE_8
 --- !u!1 &168451096
@@ -2397,7 +2398,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &380810846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2748,6 +2749,7 @@ MonoBehaviour:
   mission_1: "\u987A\u5229\u901A\u8FC7\u5173\u5361"
   mission_2: "\u4F7F\u7528\u5E7F\u89D2\u955C\u67E5\u770B\u6240\u6709NPC\u89D2\u8272 "
   mission_3: "\u4E0D\u653E\u7F6E\u81EA\u6709\u7684\u79CD\u5B50\u5546\u5E76\u901A\u8FC7\u5173\u5361"
+  starRequirement: 0
   LevelButton: {fileID: 1783234902}
   loadScene: FTE_4
 --- !u!1 &525573945
@@ -3516,6 +3518,7 @@ MonoBehaviour:
   mission_1: "\u987A\u5229\u901A\u8FC7\u5173\u5361"
   mission_2: "\u6EE1\u8DB328\u4E2A\u4E2D\u7EA7\u84DD\u9886\u9700\u6C42    "
   mission_3: "\u653E\u7F6E\u4E0D\u591A\u4E8E6\u4E2A\u81EA\u6709\u89D2\u8272\u5E76\u901A\u8FC7\u5173\u5361"
+  starRequirement: 1
   LevelButton: {fileID: 1824538535}
   loadScene: FTE_2
 --- !u!1 &701352065
@@ -4569,6 +4572,7 @@ MonoBehaviour:
   mission_1: 1
   mission_2: 2
   mission_3: 3
+  starRequirement: 0
   LevelButton: {fileID: 130935242}
   loadScene: FTE_10
 --- !u!1 &942361182
@@ -5472,6 +5476,7 @@ MonoBehaviour:
   mission_1: "\u987A\u5229\u901A\u8FC7\u5173\u5361"
   mission_2: "\u5C06\u5173\u5361\u4E2D\u4EFB\u610F2\u4E2A\u89D2\u8272\u63D0\u5347\u81F3LEVEL2 "
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u5EA6\u6761\u4E0D\u4F4E\u4E8E80% "
+  starRequirement: 0
   LevelButton: {fileID: 1611530982}
   loadScene: FTE_1
 --- !u!1 &1184153164
@@ -5532,6 +5537,7 @@ MonoBehaviour:
   mission_1: "\u987A\u5229\u901A\u8FC7\u5173\u5361"
   mission_2: "\u6EE1\u8DB3\u6240\u6709\u7684\u91D1\u9886\u6D88\u8D39\u8005"
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60% "
+  starRequirement: 0
   LevelButton: {fileID: 1527685599}
   loadScene: FTE_7
 --- !u!1 &1195048341
@@ -6380,6 +6386,21 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8763496518949976018, guid: 0525fc1b36f4a4f90a3b39a2516ba80b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1345621803}
+    - target: {fileID: 8763496518949976018, guid: 0525fc1b36f4a4f90a3b39a2516ba80b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Hide
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763496518949976018, guid: 0525fc1b36f4a4f90a3b39a2516ba80b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0525fc1b36f4a4f90a3b39a2516ba80b, type: 3}
 --- !u!224 &1345621802 stripped
@@ -6388,6 +6409,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1345621801}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1345621803 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7458740725600979841, guid: 0525fc1b36f4a4f90a3b39a2516ba80b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1345621801}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859c3cb94c07f49cdbe7a3fdc1ba50c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1363094426
 GameObject:
   m_ObjectHideFlags: 0
@@ -6926,6 +6959,7 @@ MonoBehaviour:
   mission_1: "\u987A\u5229\u901A\u8FC7\u5173\u5361"
   mission_2: "\u653E\u7F6E\u4E0D\u591A\u4E8E6\u4E2A\u81EA\u6709\u96F6\u552E\u5546\u5E76\u901A\u8FC7\u5173\u5361"
   mission_3: "\u6EE1\u8DB3\u6240\u670912\u4E2A\u4F20\u5947\u91D1\u9886\u9700\u6C42 "
+  starRequirement: 0
   LevelButton: {fileID: 782163679}
   loadScene: FTE_5
 --- !u!1 &1524022877
@@ -9320,6 +9354,7 @@ MonoBehaviour:
   mission_1: "\u987A\u5229\u901A\u8FC7\u5173\u5361"
   mission_2: "\u4F7F\u7528\u79D1\u6280\u503C\u89E3\u9501\u6240\u6709NPC\u89D2\u8272"
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60% "
+  starRequirement: 0
   LevelButton: {fileID: 1531192459}
   loadScene: FTE_6
 --- !u!1 &1913122802
@@ -9879,6 +9914,7 @@ MonoBehaviour:
   mission_1: "\u987A\u5229\u901A\u8FC7\u5173\u5361"
   mission_2: "\u7ED3\u675F\u65F6\u4EA4\u6613\u6210\u672C\u7D2F\u8BA1\u4E0D\u9AD8\u4E8E100000"
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60%  "
+  starRequirement: 0
   LevelButton: {fileID: 1039402857}
   loadScene: FTE_9
 --- !u!1 &1994188982
@@ -10013,6 +10049,7 @@ MonoBehaviour:
   mission_1: "\u987A\u5229\u901A\u8FC7\u5173\u5361"
   mission_2: "\u6EE1\u8DB35\u4E2A\u4F20\u5947\u84DD\u9886\u9700\u6C42     "
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60%     "
+  starRequirement: 0
   LevelButton: {fileID: 614579327}
   loadScene: FTE_3
 --- !u!1 &2006630815
