@@ -25,11 +25,11 @@ public class RecordItem : MonoBehaviour
 
     public Sprite[] bgSprites;
 
-    private bool isStar1;
+    public bool isStar1;
 
-    private bool isStar2;
+    public bool isStar2;
 
-    private bool isStar3;
+    public bool isStar3;
 
     /// <summary>
 	/// 初始化
@@ -44,12 +44,19 @@ public class RecordItem : MonoBehaviour
         playTimeCount.text = playTime.ToString();
         char[] temp = replay.stars.ToCharArray();
         if (replay.win)
-            star1.sprite = temp[0].Equals('1') ? sprites[0] : sprites[1];
+        {
+            star1.sprite = sprites[0];
+            isStar1 = true;
+            star2.sprite = temp[1].Equals('1') ? sprites[0] : sprites[1];
+            star3.sprite = temp[2].Equals('1') ? sprites[0] : sprites[1];
+        }
         else
+        {
+            isStar1 = false;
             star1.sprite = sprites[1];
-        star2.sprite = temp[1].Equals('1') ? sprites[0] : sprites[1];
-        star3.sprite = temp[2].Equals('1') ? sprites[0] : sprites[1];
-        isStar1 = temp[0].Equals('1');
+            star2.sprite = sprites[1];
+            star3.sprite = sprites[1];
+        }
         isStar2 = temp[1].Equals('1');
         isStar3 = temp[2].Equals('1');
         GetComponent<Button>().onClick.AddListener(GetReplayById);

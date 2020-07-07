@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class NetErrorPanel : MonoSingleton<NetErrorPanel>
 {
@@ -11,11 +12,12 @@ public class NetErrorPanel : MonoSingleton<NetErrorPanel>
 
     public Button quit;
 
-    public void Init(Action _retry = null,Action _quit = null)
+    public void Init<T>(Action<T> _retry = null,Action<T> _quit = null)
     {
         //retry.onClick.RemoveAllListeners();
         //quit.onClick.RemoveAllListeners();
-        //retry.onClick.AddListener(()=> {
+        //retry.onClick.AddListener(() =>
+        //{
         //    _retry();
         //});
         //quit.onClick.AddListener(() =>
