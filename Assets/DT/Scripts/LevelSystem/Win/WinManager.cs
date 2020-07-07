@@ -262,7 +262,7 @@ public class WinManager : MonoSingleton<WinManager>
         }
         if (NetworkMgr.My.isUsingHttp)
         {
-             tempReplay = new PlayerReplay(true);
+            tempReplay = new PlayerReplay(true);
             //NetworkMgr.My.AddReplayData(tempReplay);
             UploadReplayData();
         }
