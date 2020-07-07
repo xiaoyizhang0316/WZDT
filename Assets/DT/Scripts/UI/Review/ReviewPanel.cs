@@ -273,6 +273,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                     {
                         if (result.mapTrades[i].tradeId == int.Parse(p.operationParam[0]))
                         {
+                            Debug.Log("改变了交易结构  ");
+                            Debug.Log((CashFlowType)Enum.Parse(typeof(CashFlowType), p.operationParam[1]));
                             result.mapTrades[i].SetCashFlow((CashFlowType)Enum.Parse(typeof(CashFlowType), p.operationParam[1]));
                             break;
                         }
@@ -322,7 +324,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     /// 每个关键时间对应的状态
     /// </summary>
     [Serializable]
-    public struct MapState
+    public class MapState
     {
         public List<ReviewRole> mapRoles;
 
@@ -355,7 +357,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         }
     }
 
-    public struct SpecialOperation
+    public class SpecialOperation
     {
         public OperationType type;
 
@@ -366,7 +368,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     /// 角色状态
     /// </summary>
     [Serializable]
-    public struct ReviewRole
+    public class ReviewRole
     {
         public double roleId;
 
@@ -406,7 +408,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     /// 交易状态
     /// </summary>
     [Serializable]
-    public struct ReviewTrade
+    public class ReviewTrade
     {
         public int tradeId;
 
