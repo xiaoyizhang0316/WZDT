@@ -24,7 +24,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             TradeSign temp = tradeList[ID];
             tradeList.Remove(ID);
             temp.ClearAllLine();
-            DeleteTradeRecord(ID);
+            DeleteTradeRecord(ID, temp);
             CheckDeleteNpcRole(temp);
             Destroy(temp.gameObject, 0f);
             if (NewCanvasUI.My.Panel_TradeSetting.activeSelf)
@@ -71,8 +71,11 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// 删除交易记录操作
     /// </summary>
     /// <param name="ID"></param>
-    public void DeleteTradeRecord(int ID)
+    public void DeleteTradeRecord(int ID,TradeSign sign)
     {
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.castRole));
+        if (start.baseRoleData.baseRoleData.roleType == RoleType.Bank)
+            return;
         List<string> param = new List<string>();
         param.Add(ID.ToString());
         StageGoal.My.RecordOperation(OperationType.DeleteTrade,param);
