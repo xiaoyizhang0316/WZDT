@@ -44,9 +44,9 @@ public class FTE_2_Step_10 : BaseStep
    
 
     public override void StopCurrentStep()
-    { 
-       
-NewCanvasUI.My.Panel_AssemblyRole.SetActive(false);
+    {
+        CreatRoleManager.My.QuitAndSave();
+       //NewCanvasUI.My.Panel_AssemblyRole.SetActive(false);
        MaskManager.My.Close(10,0); 
        
        contenText.DOFade(0, 0.8f).OnComplete(() =>

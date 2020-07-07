@@ -108,6 +108,18 @@ public class GoodsSign : MonoBehaviour
             case BulletType.Seed:
                 GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.green);
                 break;
+            case BulletType.NormalPP:
+                GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.yellow);
+                break;
+            case BulletType.Bomb:
+                GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.gray);
+                break;
+            case BulletType.Lightning:
+                GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.blue);
+                break;
+            case BulletType.summon:
+                GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.red);
+                break;
             default:
                 break;
         }
