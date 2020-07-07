@@ -12,25 +12,24 @@ public class NetErrorPanel : MonoSingleton<NetErrorPanel>
 
     public Button quit;
 
-    public void Init<T>(Action<T> _retry = null,Action<T> _quit = null)
+    public void Open()
     {
-        //retry.onClick.RemoveAllListeners();
-        //quit.onClick.RemoveAllListeners();
-        //retry.onClick.AddListener(() =>
-        //{
-        //    _retry();
-        //});
-        //quit.onClick.AddListener(() =>
-        //{
-        //    _quit();
-        //});
+        transform.localPosition = new Vector3(0f, 0f, 0f);
     }
-
+    
+    public void Close()
+    {
+        transform.localPosition = new Vector3(100000f, 0f, 0f);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Close();
+        quit.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene("Login");
+        });
     }
 
     // Update is called once per frame

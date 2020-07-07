@@ -35,12 +35,25 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 
     private void Start()
     {
+        //TestLogin();
         deviceID = SystemInfo.deviceUniqueIdentifier;
         levelProgressList = new List<LevelProgress>();
         replayLists = new List<ReplayList>();
         rankList = new List<ReplayList>();
         playerEquipsList = new List<PlayerEquip>();
     }
+
+    //private void TestLogin()
+    //{
+    //    SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+    //    keyValues.Add("url", Url.loginUrl);
+    //    keyValues.Add("username", "hwj");
+    //    keyValues.Add("password", "111112");
+
+    //    Send<PlayerDatas>(keyValues, (data) => {
+    //        Debug.Log(data.playerID);
+    //    }, null);
+    //}
 
     #region login
     /// <summary>
@@ -55,8 +68,15 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("username", userName);
         keyValues.Add("password", password);
-
-        StartCoroutine(HttpManager.My.HttpSend(Url.loginUrl, (www)=> {
+        //Send<PlayerDatas>(keyValues, (data) => {
+        //    playerDatas = data;
+        //    playerID = data.playerID;
+        //    loginRecordID = data.loginRecordID;
+        //    token = data.token;
+        //    doSuccess();
+        //});
+        StartCoroutine(HttpManager.My.HttpSend(Url.loginUrl, (www) =>
+        {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == 0)
             {
@@ -674,7 +694,60 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     }
     #endregion
 
-
+    /// <summary>
+    /// 通用HTTP Send方法
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="keyValues"></param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
+    public void Send<T>(SortedDictionary<string, string> keyValues, Action<T> doSuccess, Action doFail = null)
+    {
+        string url = "";
+        doFail = () =>
+        {
+            NetErrorPanel.My.Open();
+            NetErrorPanel.My.retry.onClick.AddListener(() =>
+            {
+                Send(keyValues, doSuccess, doFail);
+            });
+        };
+        keyValues.TryGetValue("url", out url);
+        //keyValues.Remove("url");
+        Debug.Log(url);
+        Debug.Log(keyValues.Keys.Count);
+        StartCoroutine(HttpManager.My.HttpSend(url, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            Debug.Log(response.data);
+            if (response.status == -1)
+            {
+                // token 失效
+                GoToLogin(response.errMsg);
+                return;
+            }
+            if (response.status == 1)
+            {
+                try
+                {
+                    T t = JsonUtility.FromJson<T>(response.data);
+                    Debug.Log(t);
+                    NetErrorPanel.My.Close();
+                    doSuccess?.Invoke(t);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                    Debug.Log(ex.StackTrace);
+                    doFail?.Invoke();
+                }
+            }
+            else
+            {
+                doFail?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post));
+    }
 
     #region other
     public void LevelStartTime()
