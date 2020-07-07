@@ -72,6 +72,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     playerID = playerDatas.playerID;
                     loginRecordID = playerDatas.loginRecordID;
                     token = playerDatas.token;
+                    //Debug.Log(playerID + " " + token);
                     //Debug.Log("token-----" + token);
                     doSuccess?.Invoke();
                 }
@@ -81,7 +82,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.loginID));
     }
 
     /// <summary>
@@ -189,7 +190,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.updatePlayerDatasID));
     }
     #endregion
 
@@ -233,7 +234,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post,HttpId.uploadAnswerID));
     }
 
     /// <summary>
@@ -276,7 +277,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doSuccess();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getAnswerID));
     }
     #endregion
 
@@ -334,7 +335,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.updateLevelProID));
     }
 
     /// <summary>
@@ -382,7 +383,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getLevelProID));
     }
 
     #region 弃用
@@ -438,7 +439,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     doFail?.Invoke();
                 }
                 SetMask();
-            }, keyValues, HttpType.Post));
+            }, keyValues, HttpType.Post, HttpId.addReplayDataID));
         }
         catch (Exception ex)
         {
@@ -483,7 +484,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doFail?.Invoke();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getReplayDataID));
 
     }
 
@@ -527,7 +528,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doFail?.Invoke();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getReplayListID));
     }
 
     /// <summary>
@@ -571,7 +572,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doFail?.Invoke();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getRankListID));
     }
 
     /// <summary>
@@ -625,7 +626,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doFail?.Invoke();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getEquipID));
     }
 
     /// <summary>
@@ -670,11 +671,9 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doFail?.Invoke();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.addEquipID));
     }
     #endregion
-
-
 
     #region other
     public void LevelStartTime()

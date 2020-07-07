@@ -399,7 +399,6 @@ public class StageGoal : MonoSingleton<StageGoal>
             if (NetworkMgr.My.isUsingHttp)
             {
                 CommitLose();
-                HttpManager.My.Retry(CommitLose);
             }
         }
         else

@@ -41,7 +41,7 @@ public class LoginPanel : MonoBehaviour
         username_Input.ActivateInputField();
         username_Input.MoveTextEnd(true);
         
-        //Test();
+        Test();
     }
 
     private void Login()
@@ -61,7 +61,6 @@ public class LoginPanel : MonoBehaviour
         else
         {
             ForLogin();
-            HttpManager.My.retry = ForLogin;
         }
     }
 
@@ -154,7 +153,7 @@ public class LoginPanel : MonoBehaviour
     private void Test()
     {
         //TestGetReplayDatas();
-        
+        //TestLogin();
     }
 
     private void TestGetReplayDatas()

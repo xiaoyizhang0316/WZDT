@@ -23,11 +23,6 @@ public class MainMap : MonoBehaviour
         GetAnswers();
         GetLevelProgress();
         GetEquips();
-        Action actions = GetAnswers;
-        actions += GetLevelProgress;
-        actions += GetEquips;
-        HttpManager.My.Retry(actions);
-
     }
 
     private void GetAnswers()

@@ -27,9 +27,7 @@ public class HttpManager : MonoSingleton<HttpManager>
 
     bool isTipShow = false;
 
-    public Action retry;
-    public bool retryAppend = false;
-
+    Dictionary<int, HttpData> retryDic = new Dictionary<int, HttpData>();
 
     void Start()
     {
@@ -45,38 +43,27 @@ public class HttpManager : MonoSingleton<HttpManager>
         }
     }
 
-    public IEnumerator HttpSend(string webRequestUrl, Action<UnityWebRequest> action, SortedDictionary<string, string> userData = null, HttpType httpType = HttpType.Get)
+    public IEnumerator HttpSend(string webRequestUrl, Action<UnityWebRequest> action, SortedDictionary<string, string> userData = null,  HttpType httpType = HttpType.Get, int retryID=0)
     {
         mask.SetActive(true);
         bool isNetworkSlow = false;
         time = 0;
-        //Debug.Log("http send");
+
+        if (retryID != 0 && !retryDic.ContainsKey(retryID))
+            retryDic.Add(retryID, new HttpData(retryID, webRequestUrl, action, userData, httpType, true));
+            
 
         UnityWebRequest uwr = new UnityWebRequest();
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             Debug.Log("网络不可用");
+            retryDic.Remove(retryID);
             ShowClickTip("网络不可用！", () => SceneManager.LoadScene("Login"));
             yield break;
         }
-        //if (Application.internetReachability == NetworkReachability.NotReachable && SceneManager.GetActiveScene().name != "GameMain")
-        //{
-        //    yield break;
-        //}
-        //else
-        //{
-        //if (SceneManager.GetActiveScene().name != "GameMain" && SceneManager.GetActiveScene().name != "Start")
-        //{
-        //    if (deviceDatas == null)
-        //    {
-        //        deviceDatas = new SortedDictionary<string, string>();
-        //    }
-        //    //deviceDatas.Clear();
-        //    //deviceDatas.Add("playerID", JsonRead.My.playerID);
-        //    //deviceDatas.Add("GUID", GlobalVariable.deviceNumber);
-        //    //checkUwr = unityWebRequest.Request(JsonPath.checkDeviceNumber, deviceDatas, HttpType.Post);
-        //}
+
         uwr = unityWebRequest.Request(webRequestUrl, userData, httpType);
+        //uwr.timeout = 6;
         //}
         //Debug.Log(uwr.responseCode);
         while (true)
@@ -93,7 +80,8 @@ public class HttpManager : MonoSingleton<HttpManager>
                 Debug.Log("long Delay----------" + uwr.responseCode);
 
                 //ShowNetworkStatus(uwr.responseCode);
-                if(SceneManager.GetActiveScene().name =="Login" || SceneManager.GetActiveScene().name == "FTE_0")
+                SetNeedRetryById(retryID, true);
+                if (SceneManager.GetActiveScene().name =="Login" || SceneManager.GetActiveScene().name == "FTE_0")
                 {
                     ShowTwoClickTip("网络较慢，请重新登录或重试");
                 }
@@ -131,12 +119,14 @@ public class HttpManager : MonoSingleton<HttpManager>
             {
                 Debug.Log(uwr.error+uwr.responseCode);
                 //ShowNetworkStatus(uwr.responseCode);
+                SetNeedRetryById(retryID, false);
                 ShowClickTip("网络错误！",()=>SceneManager.LoadScene("Login"));
                 mask.SetActive(false);
                 yield break;
             }
             else
             {
+                SetNeedRetryById(retryID,false);
                 action(uwr);
             }
         }
@@ -176,7 +166,7 @@ public class HttpManager : MonoSingleton<HttpManager>
 
             if (time >= 6)
             {
-                ShowNetworkStatus(uwr.responseCode);
+                //ShowNetworkStatus(uwr.responseCode);
 
 
                 isNetworkSlow = true;
@@ -208,6 +198,7 @@ public class HttpManager : MonoSingleton<HttpManager>
             }
             else
             {
+                Debug.Log(uwr.responseCode);
                 action(uwr);
                 //wait.transform.localEulerAngles = Vector3.zero;
             }
@@ -308,21 +299,32 @@ public class HttpManager : MonoSingleton<HttpManager>
         }
         selectRetry.onClick.RemoveAllListeners();
         selectRetry.onClick.AddListener(() => {
-            retry();
+            foreach(var v in retryDic.Values)
+            {
+                if(v.needRetry)
+                    StartCoroutine( HttpSend(v.url, v.action, v.keyValues, v.httpType, v.httpId));
+            }
             selectTip.gameObject.SetActive(false);
         });
         selectTip.gameObject.SetActive(true);
         mask.SetActive(false);
     }
 
+    private void SetNeedRetryById(int id, bool retry)
+    {
+        HttpData httpData;
+        retryDic.TryGetValue(id, out httpData);
+        if (httpData != null)
+        {
+            httpData.SetNeedRetry(retry);
+            retryDic.Remove(id);
+            retryDic.Add(id, httpData);
+        }
+    }
+
     private void GotoLogin()
     {
         SceneManager.LoadScene("Login");
-    }
-
-    public void Retry(Action add)
-    {
-        retry = add;
     }
 }
 

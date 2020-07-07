@@ -60,7 +60,6 @@ public class ThreeWordsPanel : MonoBehaviour
             HttpManager.My.ShowTip("输入内容不能为空！");
         }
         UploadTw();
-        HttpManager.My.retry = UploadTw;
     }
 
     private void UploadTw()
