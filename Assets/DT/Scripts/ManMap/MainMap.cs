@@ -58,7 +58,10 @@ public class MainMap : MonoBehaviour
 
     private void GetEquips()
     {
-        NetworkMgr.My.GetPlayerEquips();
+        if (PlayerData.My.playerGears.Count == 0)
+            NetworkMgr.My.GetPlayerEquips((data)=> {
+                PlayerData.My.InitPlayerEquip(data);
+            });
     }
 
     void InitLevel()

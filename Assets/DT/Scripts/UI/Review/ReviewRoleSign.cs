@@ -33,7 +33,7 @@ public class ReviewRoleSign : MonoBehaviour,IPointerClickHandler
     {
         isBuffRole = isbuffRole;
         isInit = true;
-        GetComponent<Image>().enabled = true;
+       transform.GetChild(1). GetComponent<Image>().enabled = true;
         this.role = role;
  
 
@@ -51,10 +51,11 @@ public class ReviewRoleSign : MonoBehaviour,IPointerClickHandler
     public void ClearRole()
     {
         isInit = false;
-        GetComponent<Image>().enabled = false;
+        transform.GetChild(1).   GetComponent<Image>().enabled = false;
         isBuffRole = false;
         transform.SetParent(startparent);
         transform.SetSiblingIndex(index);
+        
     }
 
     // Update is called once per frame

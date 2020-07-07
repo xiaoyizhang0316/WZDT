@@ -240,7 +240,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -301,6 +301,7 @@ MonoBehaviour:
   AI: 0
   npcScript: {fileID: 0}
   extraSkill: {fileID: 0}
+  levelModels: []
   totalProfit: 0
   monthlyProfit: 0
   totalSatisfy: 0
@@ -327,9 +328,10 @@ MonoBehaviour:
   isCanSee: 0
   isCanSeeEquip: 0
   lockNumber: 16
-  NPCgear: 
+  NPCBuffList: 
   hideModel: {fileID: 967085228887874111}
   trueModel: {fileID: 8825165898939728382}
+  autoTradeList: []
 --- !u!114 &8102327212305495097
 MonoBehaviour:
   m_ObjectHideFlags: 0

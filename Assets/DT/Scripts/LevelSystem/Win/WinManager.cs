@@ -76,11 +76,13 @@ public class WinManager : MonoSingleton<WinManager>
         isStar_1 = BaseLevelController.My.starTwoStatus;
         isStar_2 = BaseLevelController.My.starThreeStatus;
         winPanel.SetActive(true);
+        LevelProgress tempProgress = NetworkMgr.My.GetLevelProgressByIndex(int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]));
         if (isStar_0)
         {
             stars += 1;
             starArr[0] = "1";
-            if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "|" + 1, 0) == 0)
+            //没领过
+            if (tempProgress == null || tempProgress.rewardStatus[0] == '0')
             {
                 box_0.sprite = mulist[0];
                 star_0.sprite = lightStar;
@@ -88,6 +90,7 @@ public class WinManager : MonoSingleton<WinManager>
                 box_0.color = Color.white;
                 box_0Button.interactable = true;
             }
+            //领过
             else
             {
                 box_0.sprite = mulist[mulist.Count - 1];
@@ -96,71 +99,166 @@ public class WinManager : MonoSingleton<WinManager>
                 box_0Button.interactable = false;
                 box_0.color = Color.gray;
             }
+            //if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "|" + 1, 0) == 0)
+            //{
+            //    box_0.sprite = mulist[0];
+            //    star_0.sprite = lightStar;
+            //    //   boxs.SetActive(true);
+            //    box_0.color = Color.white;
+            //    box_0Button.interactable = true;
+            //}
+
         }
         else
         {
             starArr[0] = "0";
-            box_0.sprite = mulist[0];
-            star_0.sprite = blackStar;
-            box_0Button.interactable = false;
-            box_0.color = Color.gray;
+            //没领过
+            if (tempProgress == null || tempProgress.rewardStatus[0] == '0')
+            {
+                box_0.sprite = mulist[0];
+                star_0.sprite = blackStar;
+                //   boxs.SetActive(true);
+                box_0.color = Color.gray;
+                box_0Button.interactable = false;
+            }
+            //领过
+            else
+            {
+                box_0.sprite = mulist[mulist.Count - 1];
+                star_0.sprite = blackStar;
+                //  boxs.SetActive(true);
+                box_0Button.interactable = false;
+                box_0.color = Color.gray;
+            }
         }
         if (isStar_1)
         {
             stars += 1;
             starArr[1] = "1";
-            if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "|" + 2, 0) == 0)
+            //没领过
+            if (tempProgress == null || tempProgress.rewardStatus[1] == '0')
             {
                 box_1.sprite = tielist[0];
                 star_1.sprite = lightStar;
-                box_1Button.interactable = true;
+                //   boxs.SetActive(true);
                 box_1.color = Color.white;
+                box_1Button.interactable = true;
             }
+            //领过
             else
             {
-                box_1.sprite = tielist[tielist.Count - 1];
-
+                box_1.sprite = tielist[mulist.Count - 1];
                 star_1.sprite = lightStar;
+                //  boxs.SetActive(true);
                 box_1Button.interactable = false;
                 box_1.color = Color.gray;
             }
+            //if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "|" + 2, 0) == 0)
+            //{
+            //    box_1.sprite = tielist[0];
+            //    star_1.sprite = lightStar;
+            //    box_1Button.interactable = true;
+            //    box_1.color = Color.white;
+            //}
+            //else
+            //{
+            //    box_1.sprite = tielist[tielist.Count - 1];
+
+            //    star_1.sprite = lightStar;
+            //    box_1Button.interactable = false;
+            //    box_1.color = Color.gray;
+            //}
         }
         else
         {
-            starArr[1] = "0";
-            box_1.sprite = tielist[0];
-            star_1.sprite = blackStar;
-            box_1Button.interactable = false;
-            box_1.color = Color.gray;
 
+            //box_1.sprite = tielist[0];
+            //star_1.sprite = blackStar;
+            //box_1Button.interactable = false;
+            //box_1.color = Color.gray;
+            //
+            //没领过
+            starArr[1] = "0";
+            if (tempProgress == null || tempProgress.rewardStatus[1] == '0')
+            {
+                box_1.sprite = tielist[0];
+                star_1.sprite = blackStar;
+                //   boxs.SetActive(true);
+                box_1.color = Color.gray;
+                box_1Button.interactable = false;
+            }
+            //领过
+            else
+            {
+                box_1.sprite = tielist[mulist.Count - 1];
+                star_1.sprite = blackStar;
+                //  boxs.SetActive(true);
+                box_1Button.interactable = false;
+                box_1.color = Color.gray;
+            }
 
         }
         if (isStar_2)
         {
             stars += 1;
             starArr[2] = "1";
-            if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "|" + 3, 0) == 0)
+            //没领过
+            if (tempProgress == null || tempProgress.rewardStatus[2] == '0')
             {
                 box_2.sprite = jinlist[0];
                 star_2.sprite = lightStar;
-                box_2Button.interactable = true;
+                //   boxs.SetActive(true);
                 box_2.color = Color.white;
+                box_2Button.interactable = true;
             }
+            //领过
             else
             {
-                box_2.sprite = jinlist[jinlist.Count - 1];
+                box_2.sprite = jinlist[mulist.Count - 1];
                 star_2.sprite = lightStar;
+                //  boxs.SetActive(true);
                 box_2Button.interactable = false;
                 box_2.color = Color.gray;
             }
+            //if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "|" + 3, 0) == 0)
+            //{
+            //    box_2.sprite = jinlist[0];
+            //    star_2.sprite = lightStar;
+            //    box_2Button.interactable = true;
+            //    box_2.color = Color.white;
+            //}
+            //else
+            //{
+            //    box_2.sprite = jinlist[jinlist.Count - 1];
+            //    star_2.sprite = lightStar;
+            //    box_2Button.interactable = false;
+            //    box_2.color = Color.gray;
+            //}
         }
         else
         {
             starArr[2] = "0";
-            box_2.sprite = jinlist[0];
-            star_2.sprite = blackStar;
-            box_2Button.interactable = false;
-            box_2.color = Color.gray;
+            //box_2.sprite = jinlist[0];
+            //star_2.sprite = blackStar;
+            //box_2Button.interactable = false;
+            //box_2.color = Color.gray;
+            if (tempProgress == null || tempProgress.rewardStatus[2] == '0')
+            {
+                box_2.sprite = jinlist[0];
+                star_2.sprite = blackStar;
+                //   boxs.SetActive(true);
+                box_2.color = Color.gray;
+                box_2Button.interactable = false;
+            }
+            //领过
+            else
+            {
+                box_2.sprite = jinlist[mulist.Count - 1];
+                star_2.sprite = blackStar;
+                //  boxs.SetActive(true);
+                box_2Button.interactable = false;
+                box_2.color = Color.gray;
+            }
         }
         if (NetworkMgr.My.isUsingHttp)
         {
