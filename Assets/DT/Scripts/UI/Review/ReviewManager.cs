@@ -162,7 +162,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                              {
                                  if( Resources.Load<Sprite>("Sprite/hong/"+panel.mapStates[index].mapRoles[j].roleType+panel.mapStates[index].mapRoles[j].level)!=null)
                                  sign.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/hong/"+panel.mapStates[index].mapRoles[j].roleType+panel.mapStates[index].mapRoles[j].level);
-
+                                  
                              }
                              else
                              {
@@ -224,6 +224,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                         Destroy(lines[i].gameObject);
                     }
 
+                    indexBuff = 0;
                     countdealer = 0;
                     countmerchant = 0;
                     countpeasant = 0;
@@ -319,6 +320,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
                 }
 
+                public int indexBuff = 0;
                 void DrawLine(GameObject posA, GameObject posB,int index, string money)
                 {
                     GameObject line = Instantiate(linePrb, lineTF);
@@ -327,14 +329,17 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                     line.GetComponent<WMG_Link>().toNode = posB;
                     if (posA.GetComponent<ReviewRoleSign>().isBuffRole)
                     {
-
-                        Color color = GetRandomColor(index);
-                        Debug.Log("J+"+index +color);
-                        line.transform.GetChild(0).GetComponent<Image>().color=color;
-                     line.transform.GetChild(0).GetChild(0).GetComponent<Image>().color=color;
+                        if (posA.GetComponent<ReviewRoleSign>().haveColoe == Color.white)
+                        {
+                            Color color = GetRandomColor(indexBuff);
+                            indexBuff++;
+                            posA.GetComponent<ReviewRoleSign>().haveColoe = color;
+                        } 
+                        line.transform.GetChild(0).GetComponent<Image>().color=   posA.GetComponent<ReviewRoleSign>().haveColoe;
+                     line.transform.GetChild(0).GetChild(0).GetComponent<Image>().color=   posA.GetComponent<ReviewRoleSign>().haveColoe;
                       //  line.transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
                       posB.GetComponent<ReviewRoleSign>().transform.GetChild(0).gameObject.SetActive(true);
-                      posB.GetComponent<ReviewRoleSign>().transform.GetChild(0).GetComponent<Image>().color = color;
+                      posB.GetComponent<ReviewRoleSign>().transform.GetChild(0).GetComponent<Image>().color =    posA.GetComponent<ReviewRoleSign>().haveColoe;
                       //  line.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().color=color;
                         line.transform.SetParent(linebuffroleTF);
                     }

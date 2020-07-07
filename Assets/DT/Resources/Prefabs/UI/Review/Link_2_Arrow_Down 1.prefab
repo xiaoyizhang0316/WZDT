@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: e49a5417853994f40a54e8bea2d4c869, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -134,14 +134,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: e8384d0ab06054be09e77d286e3d7e1a, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8d86d5ebb57c30646ae1b37ab463601d, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: e517919c73f609b488c8794158811cf7, type: 3}
+  m_Type: 2
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -162,6 +162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3766fdf04457e304e8454fefb33689ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offsetY: 0
+  offset: -0.001
+  normal: {fileID: 21300000, guid: 8d86d5ebb57c30646ae1b37ab463601d, type: 3}
+  buff: {fileID: 21300000, guid: e517919c73f609b488c8794158811cf7, type: 3}
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +318,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 22400002}
     m_Modifications:
+    - target: {fileID: 359952609942736586, guid: 9633d3a408a0516468c1130af3c9a246,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263948470039279636, guid: 9633d3a408a0516468c1130af3c9a246,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 39
+      objectReference: {fileID: 0}
     - target: {fileID: 2997812693934506627, guid: 9633d3a408a0516468c1130af3c9a246,
         type: 3}
       propertyPath: m_Name
@@ -382,17 +396,17 @@ PrefabInstance:
     - target: {fileID: 8276547618342333098, guid: 9633d3a408a0516468c1130af3c9a246,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000024796
+      value: -11.85
       objectReference: {fileID: 0}
     - target: {fileID: 8276547618342333098, guid: 9633d3a408a0516468c1130af3c9a246,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 38.7
+      value: 56.14
       objectReference: {fileID: 0}
     - target: {fileID: 8276547618342333098, guid: 9633d3a408a0516468c1130af3c9a246,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 52.6
+      value: 76.3
       objectReference: {fileID: 0}
     - target: {fileID: 8276547618342333098, guid: 9633d3a408a0516468c1130af3c9a246,
         type: 3}
