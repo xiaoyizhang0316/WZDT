@@ -265,7 +265,6 @@ public class WinManager : MonoSingleton<WinManager>
              tempReplay = new PlayerReplay(true);
             //NetworkMgr.My.AddReplayData(tempReplay);
             UploadReplayData();
-            HttpManager.My.Retry(UploadReplayData);
         }
         CheckNext();
     }
@@ -438,7 +437,6 @@ public class WinManager : MonoSingleton<WinManager>
             if (NetworkMgr.My.isUsingHttp)
             {
                 CommitProgress();
-                HttpManager.My.retry = CommitProgress;
             }
             else
             {
