@@ -191,6 +191,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             {
                 var signs =     GetLineById(int.Parse(panel.mapStates[index].specialOperations[i].operationParams[0]));
                 GameObject game =  Instantiate(changeTradePrb, effectTF);
+                Debug.Log("当前ID" + signs.name + "更改交易");
                 game.transform.localPosition = signs.transform.localPosition;
 
                 Destroy(game, 1f);
@@ -382,6 +383,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         line.GetComponent<WMG_Link>().id = panel.mapStates[this.index].mapTrades[index].tradeId;
         line.GetComponent<WMG_Link>().fromNode = posA;
         line.GetComponent<WMG_Link>().toNode = posB;
+        line.GetComponent<WMG_Link>().Reposition();
         if (posA.GetComponent<ReviewRoleSign>().isBuffRole)
         {
             if (posA.GetComponent<ReviewRoleSign>().haveColoe == Color.white)

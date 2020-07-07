@@ -10,8 +10,8 @@ public class MoneyDoRotate : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Image>().DOFade(0, 0.3f).Play();
-        transform.GetChild(0). GetComponent<Text>().DOFade(0.3f, 0.3f).Play();
+        GetComponent<Image>().DOFade(0.3f, 0f).Play();
+        transform.GetChild(0). GetComponent<Text>().DOFade(0.3f, 0).Play();
     }
 
     // Update is called once per frame
