@@ -386,6 +386,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         {
             ReviewRole result = new ReviewRole();
             result.roleId = roleId;
+            result.isNPC = isNPC;
             result.roleType = roleType;
             result.roleName = roleName;
             result.buffList = new List<int>();
