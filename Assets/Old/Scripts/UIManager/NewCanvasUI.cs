@@ -203,17 +203,6 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         //CreateTradeLineGo.SetActive(false);
     }
 
-    /// <summary>
-    /// 打开并初始化交易面板
-    /// </summary>
-    public void OpenTradePanel()
-    {
-        Panel_TradeSetting.SetActive(true);
-        GameObject go = FindObjectOfType<TradeSign>().gameObject;
-        Panel_TradeSetting.GetComponent<CreateTradeManager>().Open(go);
-    }
-
-
     public void OpenDeletePanel()
     {
         Panel_Delete.SetActive(true);

@@ -105,8 +105,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         for (int i = 0; i < MapRole.Count; i++)
         {
             if (Mathf.Abs((float)(MapRole[i].baseRoleData.ID - id)) < 0.1)
-            {
-
+            { 
                 return MapRole[i];
             }
         }

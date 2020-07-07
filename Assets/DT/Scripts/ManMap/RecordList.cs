@@ -11,7 +11,7 @@ public class RecordList : MonoBehaviour
     public void Init(List<ReplayList> operations)
     {
         Clear();
-        for (int i = 0; i < operations.Count; i++)
+        for (int i = operations.Count - 1; i >= 0; i--)
         {
             GameObject go = Instantiate(itemPrb, contentTF);
             go.GetComponent<RecordItem>().Init(operations[i]);

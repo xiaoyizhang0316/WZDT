@@ -14,7 +14,7 @@ public class ReviewRoleSign : MonoBehaviour,IPointerClickHandler
     public Vector3 localpos;
     public int index;
     public bool isBuffRole;
-    public List<Color> haveColoe; 
+    public  Color  haveColoe = Color.white; 
     void Awake()
     {
         startparent = transform.parent;
@@ -55,7 +55,7 @@ public class ReviewRoleSign : MonoBehaviour,IPointerClickHandler
         isBuffRole = false;
         transform.SetParent(startparent);
         transform.SetSiblingIndex(index);
-        
+        haveColoe = Color.white; 
     }
 
     // Update is called once per frame

@@ -47,8 +47,8 @@ MonoBehaviour:
   startTarget: {fileID: 0}
   Target: {fileID: 0}
   ID: 0
-  per: 0
   pointList: []
+  offset: 0.02
 --- !u!120 &8369071634612450562
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -67,7 +67,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4aae71045430549dba1d4302642d8ade, type: 2}
+  - {fileID: 2100000, guid: 4844fac6310e2440c906cbc1b79cb786, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,7 +90,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 1, y: 1, z: 1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -141,7 +141,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 2
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1

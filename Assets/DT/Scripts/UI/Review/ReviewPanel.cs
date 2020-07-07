@@ -62,7 +62,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     {
         twe = transform.DOScale(1f, 0.1f).OnComplete(() =>
         {
-            if(playSlider.value < playSlider.maxValue)
+            if (playSlider.value < playSlider.maxValue)
             {
                 playSlider.value += 0.1f;
                 OnSliderValueChange();
@@ -95,14 +95,14 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
             ReviewManager.My.ShowCurrentReview(mapStates.Count - 1);
     }
 
-    public void MapInit(List<PlayerOperation> playerOperations,List<DataStat> datas,int timeCount)
+    public void MapInit(List<PlayerOperation> playerOperations, List<DataStat> datas, int timeCount)
     {
         AutoPlay();
         Pause();
         GenerateMapStates(playerOperations);
         playSlider.maxValue = timeCount;
         playSlider.value = 0;
-        InitMoneyLine(datas,timeCount);
+        InitMoneyLine(datas, timeCount);
         Show();
     }
 
@@ -114,10 +114,10 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         playSlider.maxValue = StageGoal.My.timeCount;
         playSlider.value = 0;
         line = playSlider.transform.GetChild(0).GetComponent<VectorObject2D>();
-        InitMoneyLine(StageGoal.My.dataStats,StageGoal.My.timeCount);
+        InitMoneyLine(StageGoal.My.dataStats, StageGoal.My.timeCount);
     }
 
-    public void InitMoneyLine(List<DataStat> datas,int timeCount)
+    public void InitMoneyLine(List<DataStat> datas, int timeCount)
     {
         if (datas.Count == 0)
             return;
@@ -155,7 +155,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
             mapState.Init();
             if (mapStates.Count > 0)
                 mapState = mapStates[mapStates.Count - 1];
-            if (mapStates.Count > 0 )
+            if (mapStates.Count > 0)
             {
                 if (mapStates[mapStates.Count - 1].time != p.operateTime)
                 {
@@ -169,7 +169,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
             else
             {
                 mapStates.Add(CheckOperationState(p, mapState));
-            }  
+            }
         }
     }
 
@@ -179,7 +179,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     /// <param name="p"></param>
     /// <param name="state"></param>
     /// <returns></returns>
-    public MapState CheckOperationState(PlayerOperation p,MapState state)
+    public MapState CheckOperationState(PlayerOperation p, MapState state)
     {
         MapState result = new MapState();
         result.Init();
@@ -215,6 +215,14 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                             {
                                 result.mapRoles[i].buffList.Add(int.Parse(p.operationParam[j]));
                             }
+                            if (!result.mapRoles[i].isNPC)
+                            {
+                                SpecialOperation temp = new SpecialOperation();
+                                temp.type = OperationType.ChangeRole;
+                                temp.operationParams = new List<string>();
+                                temp.operationParams.Add(p.operationParam[0]);
+                                result.specialOperations.Add(temp);
+                            }
                             break;
                         }
                     }
@@ -242,6 +250,11 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                             break;
                         }
                     }
+                    SpecialOperation temp = new SpecialOperation();
+                    temp.type = OperationType.UpgradeRole;
+                    temp.operationParams = new List<string>();
+                    temp.operationParams.Add(p.operationParam[0]);
+                    result.specialOperations.Add(temp);
                     break;
                 }
             case OperationType.CreateTrade:
@@ -264,6 +277,11 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                             break;
                         }
                     }
+                    SpecialOperation temp = new SpecialOperation();
+                    temp.type = OperationType.ChangeTrade;
+                    temp.operationParams = new List<string>();
+                    temp.operationParams.Add(p.operationParam[0]);
+                    result.specialOperations.Add(temp);
                     break;
                 }
             case OperationType.DeleteTrade:
@@ -297,7 +315,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     /// <summary>
@@ -310,12 +328,15 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
         public List<ReviewTrade> mapTrades;
 
+        public List<SpecialOperation> specialOperations;
+
         public int time;
 
         public void Init()
         {
             mapRoles = new List<ReviewRole>();
             mapTrades = new List<ReviewTrade>();
+            specialOperations = new List<SpecialOperation>();
         }
 
         public MapState CopyNewState()
@@ -332,6 +353,13 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
             }
             return result;
         }
+    }
+
+    public struct SpecialOperation
+    {
+        public OperationType type;
+
+        public List<string> operationParams;
     }
 
     /// <summary>
@@ -361,6 +389,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         {
             ReviewRole result = new ReviewRole();
             result.roleId = roleId;
+            result.isNPC = isNPC;
             result.roleType = roleType;
             result.roleName = roleName;
             result.buffList = new List<int>();
