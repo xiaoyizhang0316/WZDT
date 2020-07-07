@@ -215,14 +215,17 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                             {
                                 result.mapRoles[i].buffList.Add(int.Parse(p.operationParam[j]));
                             }
+                            if (!result.mapRoles[i].isNPC)
+                            {
+                                SpecialOperation temp = new SpecialOperation();
+                                temp.type = OperationType.ChangeRole;
+                                temp.operationParams = new List<string>();
+                                temp.operationParams.Add(p.operationParam[0]);
+                                result.specialOperations.Add(temp);
+                            }
                             break;
                         }
                     }
-                    SpecialOperation temp = new SpecialOperation();
-                    temp.type = OperationType.ChangeRole;
-                    temp.operationParams = new List<string>();
-                    temp.operationParams.Add(p.operationParam[0]);
-                    result.specialOperations.Add(temp);
                     break;
                 }
             case OperationType.DeleteRole:
