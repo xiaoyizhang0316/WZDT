@@ -291,7 +291,7 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void AddTechPoint()
     {
-        transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
+        transform.DORotate(transform.eulerAngles, 30f).OnComplete(() =>
         {
             StageGoal.My.GetTechPoint(baseRoleData.techAdd);
             StageGoal.My.IncomeTp(baseRoleData.techAdd, IncomeTpType.Npc);
