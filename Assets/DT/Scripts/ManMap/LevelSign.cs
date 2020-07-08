@@ -19,6 +19,8 @@ public class LevelSign : MonoBehaviour
 
     public Button LevelButton;
 
+    public Text starNeed;
+
     public string loadScene;
     string stars="";
 
@@ -27,6 +29,7 @@ public class LevelSign : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        starNeed = transform.Find("StarNeed").GetComponent<Text>();
         LevelButton.onClick.AddListener(() =>
         {
             Debug.Log("1231231231");
@@ -62,6 +65,7 @@ public class LevelSign : MonoBehaviour
                 SceneManager.LoadScene(loadScene);
             });
         }
+        
     }
 
     public void OnClick(string recordID)
@@ -157,6 +161,13 @@ public class LevelSign : MonoBehaviour
         }
         LevelButton.onClick.RemoveAllListeners();
         LevelButton.onClick.AddListener(Init);
+        InitStarNeedText();
+    }
+
+    public void InitStarNeedText()
+    {
+        starNeed.text = starRequirement.ToString();
+        starNeed.color = CheckPrevStar() ? Color.green : Color.red;
     }
 
     public bool CheckPrevStar()

@@ -84,7 +84,6 @@ public class GuideActions : MonoBehaviour
             if (NetworkMgr.My.isUsingHttp)
             {
                 UpdateFte();
-                HttpManager.My.retry = UpdateFte;
             }
             SceneManager.LoadScene("FTE_1");
             
