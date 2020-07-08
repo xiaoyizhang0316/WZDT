@@ -200,12 +200,15 @@ public class UIManager : MonoSingleton<UIManager>
          {
              if (ExecutionManager.My.SubExecution(ExecutionManager.My.removeRole))
              {
+                 if (StageGoal.My.timeCount - PlayerData.My.GetMapRoleById(roleId).putTime <= 5)
+                     StageGoal.My.GetTechPoint(CurrentClickRole.baseRoleData.costTech);
                  TradeManager.My.DeleteRoleAllTrade(roleId);
                  PlayerData.My.GetRoleById(roleId).inMap = false;
                  int index = PlayerData.My.MapRole.IndexOf(PlayerData.My.GetMapRoleById(roleId));
                  Destroy(PlayerData.My.GetMapRoleById(roleId).gameObject, 0.01f);
                  PlayerData.My.MapRole.RemoveAt(index);
                  UpdateRoleList();
+
              }
          }, () => { });
     }

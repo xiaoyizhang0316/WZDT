@@ -63,6 +63,8 @@ public class BaseMapRole : MonoBehaviour
 
     public List<GameObject> levelModels;
 
+    public int putTime;
+
     #region UI显示信息
 
     public float totalProfit;
@@ -203,10 +205,15 @@ public class BaseMapRole : MonoBehaviour
     /// <param name="baseBuff"></param>
     public void AddBuff(BaseBuff baseBuff)
     {
-        //print(baseBuff.buffName);
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            if (buffList[i].buffId == baseBuff.buffId)
+            {
+                return;
+            }
+        }
         buffList.Add(baseBuff);
         baseBuff.RoleBuffAdd();
-        //print("buff生成");
     }
 
     /// <summary>
