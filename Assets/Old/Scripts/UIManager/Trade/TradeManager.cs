@@ -207,12 +207,27 @@ public class TradeManager : MonoSingleton<TradeManager>
     }
 
     /// <summary>
+    /// 检测玩家金钱是否
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckMoneyCondition()
+    {
+        if (StageGoal.My.playerGold >= 0)
+            return true;
+        else
+        {
+            HttpManager.My.ShowTip("玩家金钱已达负数！无法发起新交易！");
+            return false;
+        }
+    }
+
+    /// <summary>
     /// 检测交易的所有条件
     /// </summary>
     /// <returns></returns>
     public bool CheckTradeCondition()
     {
-        return CheckStartAndEnd() && CheckNpcActive() && CheckDuplicateTrade() && CheckSkillCountLimit() && CheckTradeConstraint();
+        return CheckStartAndEnd() && CheckNpcActive() && CheckDuplicateTrade() && CheckSkillCountLimit() && CheckTradeConstraint() && CheckMoneyCondition();
     }
 
     /// <summary>

@@ -56,7 +56,6 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
         Rank();
 
-
         CreatLines();
 
         CreatEffect();
@@ -264,7 +263,6 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         }
     }
 
-
     public void ClearRolesLines()
     {
         for (int i = 0; i < signs.Count; i++)
@@ -272,12 +270,10 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             signs[i].ClearRole();
             signs[i].gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
-
         for (int i = 0; i < lines.Count; i++)
         {
-            Destroy(lines[i].gameObject);
+            DestroyImmediate(lines[i].gameObject);
         }
-
         indexBuff = 0;
         countdealer = 0;
         countmerchant = 0;
@@ -295,10 +291,8 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 return true;
             }
         }
-
         return false;
     }
-
 
     public void Rank()
     {
@@ -310,10 +304,8 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 tempList.Add(seed.GetChild(i).GetComponent<ReviewRoleSign>());
             }
         }
-
         RankPosition(tempList);
         tempList.Clear();
-
         for (int i = 0; i < peasant.childCount; i++)
         {
             if (peasant.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
@@ -321,7 +313,6 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 tempList.Add(peasant.GetChild(i).GetComponent<ReviewRoleSign>());
             }
         }
-
         RankPosition(tempList);
         tempList.Clear();
         for (int i = 0; i < merchant.childCount; i++)
@@ -472,11 +463,13 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
     }
 
    
