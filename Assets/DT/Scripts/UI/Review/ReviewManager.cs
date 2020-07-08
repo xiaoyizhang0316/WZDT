@@ -213,7 +213,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 sign.InitRole(panel.mapStates[index].mapRoles[j], false);
             }
 
-            if (panel.mapStates[index].mapRoles[j].isNPC)
+            if (!panel.mapStates[index].mapRoles[j].isNPC)
             {
                 if (Resources.Load<Sprite>("Sprite/hong/" + panel.mapStates[index].mapRoles[j].roleType +
                                            panel.mapStates[index].mapRoles[j].level) != null)
@@ -383,7 +383,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         line.GetComponent<WMG_Link>().id = panel.mapStates[this.index].mapTrades[index].tradeId;
         line.GetComponent<WMG_Link>().fromNode = posA;
         line.GetComponent<WMG_Link>().toNode = posB;
-        line.GetComponent<WMG_Link>().Reposition();
+
         if (posA.GetComponent<ReviewRoleSign>().isBuffRole)
         {
             if (posA.GetComponent<ReviewRoleSign>().haveColoe == Color.white)
@@ -414,8 +414,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         {
             line.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = houqian;
         }
-
-
+        line.GetComponent<WMG_Link>().Reposition();
         line.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Text>().text = money;
         //RectTransform ImageRectTrans =    line.GetComponent<RectTransform>();
         //   Vector3 differenceVector = posB - posA;

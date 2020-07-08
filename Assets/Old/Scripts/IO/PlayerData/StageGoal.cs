@@ -164,6 +164,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CostPlayerGold(int num)
     {
         playerGold -= num;
+        FloatInfoManager.My.MoneyChange(0 - num);
         if(playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -206,8 +207,10 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (playerTechPoint < num)
         {
+            HttpManager.My.ShowTip("科技值不足！");
             return false;
         }
+        FloatInfoManager.My.TechChange(0 - num);
         playerTechPoint -= num;
         SetInfo();
         return true;
@@ -219,6 +222,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void GetTechPoint(int num)
     {
+        FloatInfoManager.My.TechChange(num);
         playerTechPoint += num;
         SetInfo();
     }
@@ -230,6 +234,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void GetPlayerGold(int num)
     {
         playerGold += num;
+        FloatInfoManager.My.MoneyChange(num);
         if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
