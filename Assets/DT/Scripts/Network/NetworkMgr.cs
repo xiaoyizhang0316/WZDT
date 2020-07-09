@@ -459,8 +459,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     public void GetReplayDatas(string recordID, Action<ReplayDatas> doSuccess = null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
-        //keyValues.Add("token", token);
-        //keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
         keyValues.Add("recordID", recordID);
 
         StartCoroutine(HttpManager.My.HttpSend( Url.getReplayDatas, (www) => {
