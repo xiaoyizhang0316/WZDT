@@ -26,6 +26,7 @@ public class FTEManager : MonoSingleton<FTEManager>
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.SetInt("isUseGuide", 1);
         // 判断是否开启教学模式, 并设定当前教学场景和当前教学步骤 （currentFTEPanel, currentFTEStep）
         InitFTE();
     }

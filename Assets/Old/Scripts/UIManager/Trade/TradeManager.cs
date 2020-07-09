@@ -38,7 +38,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole));
         if (start.baseRoleData.isNpc)
         {
-            if (CheckTradeCount(sign.tradeData.startRole) <= 1)
+            if (CheckTradeCount(sign.tradeData.startRole) < 1)
             {
                 List<string> param = new List<string>();
                 param.Add(start.baseRoleData.ID.ToString());
@@ -47,7 +47,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
         if (end.baseRoleData.isNpc)
         {
-            if (CheckTradeCount(sign.tradeData.endRole) <= 1)
+            if (CheckTradeCount(sign.tradeData.endRole) < 1)
             {
                 List<string> param = new List<string>();
                 param.Add(end.baseRoleData.ID.ToString());
@@ -207,12 +207,27 @@ public class TradeManager : MonoSingleton<TradeManager>
     }
 
     /// <summary>
+    /// 检测玩家金钱是否
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckMoneyCondition()
+    {
+        if (StageGoal.My.playerGold >= 0)
+            return true;
+        else
+        {
+            HttpManager.My.ShowTip("玩家金钱已达负数！无法发起新交易！");
+            return false;
+        }
+    }
+
+    /// <summary>
     /// 检测交易的所有条件
     /// </summary>
     /// <returns></returns>
     public bool CheckTradeCondition()
     {
-        return CheckStartAndEnd() && CheckNpcActive() && CheckDuplicateTrade() && CheckSkillCountLimit() && CheckTradeConstraint();
+        return CheckStartAndEnd() && CheckNpcActive() && CheckDuplicateTrade() && CheckSkillCountLimit() && CheckTradeConstraint() && CheckMoneyCondition();
     }
 
     /// <summary>
