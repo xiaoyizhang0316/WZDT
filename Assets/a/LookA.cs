@@ -16,16 +16,20 @@ public class LookA : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUILayout.Button("123"))
-        {
+        //if (GUILayout.Button("123"))
+        //{
       
-        }
+        //}
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.DOLookAt(target.transform.position, 0.02f, AxisConstraint.Y );
-        pao.transform.DOLookAt(target.transform.position,0.02f,AxisConstraint.W );
+        if (GetComponentInParent<BaseMapRole>().shootTarget != null)
+        {
+            target = GetComponentInParent<BaseMapRole>().shootTarget.gameObject;
+            transform.DOLookAt(target.transform.position, 0.02f, AxisConstraint.Y);
+            pao.transform.DOLookAt(target.transform.position, 0.02f, AxisConstraint.W);
+        }
     }
 }
