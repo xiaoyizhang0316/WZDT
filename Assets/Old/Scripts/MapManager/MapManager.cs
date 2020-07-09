@@ -35,12 +35,16 @@ public class MapManager : MonoSingleton<MapManager>
         MapSign temp = GetMapSignByXY(x, y);
         if (temp == null)
         {
+            HttpManager.My.ShowTip("当前地块不能放置角色！");
             return false;
         }
         else
         {
             if (!temp.isCanPlace)
+            {
+                HttpManager.My.ShowTip("当前地块不能放置角色！");
                 return false;
+            }
         }
         return true;
     }

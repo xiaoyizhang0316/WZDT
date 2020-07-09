@@ -25,7 +25,6 @@ public class LoginPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //TestLogin();
         //PlayerPrefs.DeleteAll();
         login_Btn.onClick.AddListener(Login);
         username = PlayerPrefs.GetString("username", "0");
@@ -42,20 +41,8 @@ public class LoginPanel : MonoBehaviour
         username_Input.ActivateInputField();
         username_Input.MoveTextEnd(true);
         
-        //Test();
+        Test();
     }
-
-    //private void TestLogin()
-    //{
-    //    SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
-    //    keyValues.Add("url", Url.loginUrl);
-    //    keyValues.Add("username", "hwj");
-    //    keyValues.Add("password", "111112");
-
-    //    NetworkMgr.My.Send<PlayerDatas>(keyValues, (data) => {
-    //        Debug.Log(data.playerID);
-    //    }, null);
-    //}
 
     private void Login()
     {
@@ -74,7 +61,6 @@ public class LoginPanel : MonoBehaviour
         else
         {
             ForLogin();
-            HttpManager.My.retry = ForLogin;
         }
     }
 
@@ -167,7 +153,7 @@ public class LoginPanel : MonoBehaviour
     private void Test()
     {
         //TestGetReplayDatas();
-        
+        //TestLogin();
     }
 
     private void TestGetReplayDatas()

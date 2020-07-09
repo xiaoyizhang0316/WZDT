@@ -130,6 +130,8 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         }
         TradeManager.My.DeleteRoleAllTrade(roleId);
         BaseMapRole mapRole = GetMapRoleById(roleId);
+        if (StageGoal.My.timeCount - mapRole.putTime <= 5)
+            StageGoal.My.GetTechPoint(target.baseRoleData.costTech);
         RoleData.Remove(target);
         MapRole.Remove(mapRole);
         MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);

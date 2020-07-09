@@ -16,6 +16,8 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public Text mission_2;
     public Text mission_3;
 
+    public Text starNeed;
+
     public GameObject panel;
 
     public Button play;

@@ -35,25 +35,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 
     private void Start()
     {
-        //TestLogin();
         deviceID = SystemInfo.deviceUniqueIdentifier;
         levelProgressList = new List<LevelProgress>();
         replayLists = new List<ReplayList>();
         rankList = new List<ReplayList>();
         playerEquipsList = new List<PlayerEquip>();
     }
-
-    //private void TestLogin()
-    //{
-    //    SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
-    //    keyValues.Add("url", Url.loginUrl);
-    //    keyValues.Add("username", "hwj");
-    //    keyValues.Add("password", "111112");
-
-    //    Send<PlayerDatas>(keyValues, (data) => {
-    //        Debug.Log(data.playerID);
-    //    }, null);
-    //}
 
     #region login
     /// <summary>
@@ -68,15 +55,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("username", userName);
         keyValues.Add("password", password);
-        //Send<PlayerDatas>(keyValues, (data) => {
-        //    playerDatas = data;
-        //    playerID = data.playerID;
-        //    loginRecordID = data.loginRecordID;
-        //    token = data.token;
-        //    doSuccess();
-        //});
-        StartCoroutine(HttpManager.My.HttpSend(Url.loginUrl, (www) =>
-        {
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.loginUrl, (www)=> {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == 0)
             {
@@ -92,6 +72,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     playerID = playerDatas.playerID;
                     loginRecordID = playerDatas.loginRecordID;
                     token = playerDatas.token;
+                    //Debug.Log(playerID + " " + token);
                     //Debug.Log("token-----" + token);
                     doSuccess?.Invoke();
                 }
@@ -101,7 +82,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.loginID));
     }
 
     /// <summary>
@@ -209,7 +190,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.updatePlayerDatasID));
     }
     #endregion
 
@@ -253,7 +234,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post,HttpId.uploadAnswerID));
     }
 
     /// <summary>
@@ -296,7 +277,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doSuccess();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getAnswerID));
     }
     #endregion
 
@@ -354,7 +335,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.updateLevelProID));
     }
 
     /// <summary>
@@ -402,7 +383,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getLevelProID));
     }
 
     #region 弃用
@@ -458,7 +439,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     doFail?.Invoke();
                 }
                 SetMask();
-            }, keyValues, HttpType.Post));
+            }, keyValues, HttpType.Post, HttpId.addReplayDataID));
         }
         catch (Exception ex)
         {
@@ -503,7 +484,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doFail?.Invoke();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getReplayDataID));
 
     }
 
@@ -547,7 +528,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doFail?.Invoke();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getReplayListID));
     }
 
     /// <summary>
@@ -591,7 +572,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doFail?.Invoke();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getRankListID));
     }
 
     /// <summary>
@@ -645,7 +626,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doFail?.Invoke();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.getEquipID));
     }
 
     /// <summary>
@@ -690,64 +671,9 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 doFail?.Invoke();
             }
             SetMask();
-        }, keyValues, HttpType.Post));
+        }, keyValues, HttpType.Post, HttpId.addEquipID));
     }
     #endregion
-
-    /// <summary>
-    /// 通用HTTP Send方法
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="keyValues"></param>
-    /// <param name="doSuccess"></param>
-    /// <param name="doFail"></param>
-    public void Send<T>(SortedDictionary<string, string> keyValues, Action<T> doSuccess, Action doFail = null)
-    {
-        string url = "";
-        doFail = () =>
-        {
-            NetErrorPanel.My.Open();
-            NetErrorPanel.My.retry.onClick.AddListener(() =>
-            {
-                Send(keyValues, doSuccess, doFail);
-            });
-        };
-        keyValues.TryGetValue("url", out url);
-        //keyValues.Remove("url");
-        Debug.Log(url);
-        Debug.Log(keyValues.Keys.Count);
-        StartCoroutine(HttpManager.My.HttpSend(url, (www) => {
-            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
-            Debug.Log(response.data);
-            if (response.status == -1)
-            {
-                // token 失效
-                GoToLogin(response.errMsg);
-                return;
-            }
-            if (response.status == 1)
-            {
-                try
-                {
-                    T t = JsonUtility.FromJson<T>(response.data);
-                    Debug.Log(t);
-                    NetErrorPanel.My.Close();
-                    doSuccess?.Invoke(t);
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log(ex.Message);
-                    Debug.Log(ex.StackTrace);
-                    doFail?.Invoke();
-                }
-            }
-            else
-            {
-                doFail?.Invoke();
-            }
-            SetMask();
-        }, keyValues, HttpType.Post));
-    }
 
     #region other
     public void LevelStartTime()

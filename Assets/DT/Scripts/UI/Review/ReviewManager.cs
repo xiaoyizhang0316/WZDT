@@ -56,7 +56,6 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
         Rank();
 
-
         CreatLines();
 
         CreatEffect();
@@ -191,6 +190,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             {
                 var signs =     GetLineById(int.Parse(panel.mapStates[index].specialOperations[i].operationParams[0]));
                 GameObject game =  Instantiate(changeTradePrb, effectTF);
+                Debug.Log("当前ID" + signs.name + "更改交易");
                 game.transform.localPosition = signs.transform.localPosition;
 
                 Destroy(game, 1f);
@@ -212,7 +212,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 sign.InitRole(panel.mapStates[index].mapRoles[j], false);
             }
 
-            if (panel.mapStates[index].mapRoles[j].isNPC)
+            if (!panel.mapStates[index].mapRoles[j].isNPC)
             {
                 if (Resources.Load<Sprite>("Sprite/hong/" + panel.mapStates[index].mapRoles[j].roleType +
                                            panel.mapStates[index].mapRoles[j].level) != null)
@@ -263,7 +263,6 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         }
     }
 
-
     public void ClearRolesLines()
     {
         for (int i = 0; i < signs.Count; i++)
@@ -271,12 +270,10 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             signs[i].ClearRole();
             signs[i].gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
-
         for (int i = 0; i < lines.Count; i++)
         {
-            Destroy(lines[i].gameObject);
+            DestroyImmediate(lines[i].gameObject);
         }
-
         indexBuff = 0;
         countdealer = 0;
         countmerchant = 0;
@@ -294,10 +291,8 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 return true;
             }
         }
-
         return false;
     }
-
 
     public void Rank()
     {
@@ -309,10 +304,8 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 tempList.Add(seed.GetChild(i).GetComponent<ReviewRoleSign>());
             }
         }
-
         RankPosition(tempList);
         tempList.Clear();
-
         for (int i = 0; i < peasant.childCount; i++)
         {
             if (peasant.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
@@ -320,7 +313,6 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 tempList.Add(peasant.GetChild(i).GetComponent<ReviewRoleSign>());
             }
         }
-
         RankPosition(tempList);
         tempList.Clear();
         for (int i = 0; i < merchant.childCount; i++)
@@ -382,6 +374,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         line.GetComponent<WMG_Link>().id = panel.mapStates[this.index].mapTrades[index].tradeId;
         line.GetComponent<WMG_Link>().fromNode = posA;
         line.GetComponent<WMG_Link>().toNode = posB;
+
         if (posA.GetComponent<ReviewRoleSign>().isBuffRole)
         {
             if (posA.GetComponent<ReviewRoleSign>().haveColoe == Color.white)
@@ -412,8 +405,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         {
             line.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = houqian;
         }
-
-
+        line.GetComponent<WMG_Link>().Reposition();
         line.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Text>().text = money;
         //RectTransform ImageRectTrans =    line.GetComponent<RectTransform>();
         //   Vector3 differenceVector = posB - posA;
@@ -471,11 +463,13 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
     }
 
    

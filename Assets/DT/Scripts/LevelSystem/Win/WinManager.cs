@@ -61,11 +61,17 @@ public class WinManager : MonoSingleton<WinManager>
 
     public Button review;
 
+    public Text star1Con;
+    public Text star2Con;
+    public Text star3Con;
     private int stars = 0;
     private string[] starArr;
     PlayerReplay tempReplay;
     public void InitWin()
     {
+        star1Con.text = BaseLevelController.My.starOneCondition;
+        star2Con.text = BaseLevelController.My.starTwoCondition;
+        star3Con.text = BaseLevelController.My.starThreeCondition;
         stars = 0;
         retry.onClick.AddListener(() => {
             PlayerData.My.Reset();
@@ -262,10 +268,9 @@ public class WinManager : MonoSingleton<WinManager>
         }
         if (NetworkMgr.My.isUsingHttp)
         {
-             tempReplay = new PlayerReplay(true);
+            tempReplay = new PlayerReplay(true);
             //NetworkMgr.My.AddReplayData(tempReplay);
             UploadReplayData();
-            HttpManager.My.Retry(UploadReplayData);
         }
         CheckNext();
     }
@@ -438,7 +443,6 @@ public class WinManager : MonoSingleton<WinManager>
             if (NetworkMgr.My.isUsingHttp)
             {
                 CommitProgress();
-                HttpManager.My.retry = CommitProgress;
             }
             else
             {

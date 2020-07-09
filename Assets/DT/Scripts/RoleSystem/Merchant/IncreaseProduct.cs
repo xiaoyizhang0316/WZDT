@@ -12,21 +12,16 @@ public class IncreaseProduct : MonoBehaviour
             int num = GetComponentInParent<BaseMapRole>().baseRoleData.efficiency;
             other.GetComponent<GoodsSign>().AddSpeedBuff(id,num);
         }
-        else if (other.CompareTag("MapRole"))
+        else if (other.CompareTag("MapRole") && GetComponentInParent<BaseMapRole>().baseRoleData.inMap)
         {
             BaseMapRole targetRole = other.GetComponentInParent<BaseMapRole>();
-            for (int i = 0; i < targetRole.buffList.Count; i++)
-            {
-                if (targetRole.buffList[i].buffId == 999)
-                {
-                    return;
-                }
-            }
-            //TODO
-            //BaseBuff buff = new BaseBuff();
-            //BuffData data = GameDataMgr.My.GetBuffDataByID(000);
-            //buff.Init(data);
-            //buff.SetRoleBuff(targetRole, targetRole, targetRole);
+            BaseBuff buff = new BaseBuff();
+            BuffData data = GameDataMgr.My.GetBuffDataByID(1000);
+            float result;
+            result = 0 - (GetComponentInParent<BaseMapRole>().baseRoleData.effect * 0.3f + 24f) / 100f;
+            data.OnBuffAdd.Add("14_" + result.ToString());
+            buff.Init(data);
+            buff.SetRoleBuff(targetRole, targetRole, targetRole);
         }
     }
 
