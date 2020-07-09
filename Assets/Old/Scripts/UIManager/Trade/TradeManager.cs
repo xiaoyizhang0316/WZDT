@@ -38,7 +38,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole));
         if (start.baseRoleData.isNpc)
         {
-            if (CheckTradeCount(sign.tradeData.startRole) <= 1)
+            if (CheckTradeCount(sign.tradeData.startRole) < 1)
             {
                 List<string> param = new List<string>();
                 param.Add(start.baseRoleData.ID.ToString());
@@ -47,7 +47,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
         if (end.baseRoleData.isNpc)
         {
-            if (CheckTradeCount(sign.tradeData.endRole) <= 1)
+            if (CheckTradeCount(sign.tradeData.endRole) < 1)
             {
                 List<string> param = new List<string>();
                 param.Add(end.baseRoleData.ID.ToString());
@@ -108,9 +108,17 @@ public class TradeManager : MonoSingleton<TradeManager>
         foreach (TradeSign sign in tradeList.Values)
         {
             if (sign.tradeData.startRole.Equals(NewCanvasUI.My.startRole.baseRoleData.ID.ToString()) && sign.tradeData.endRole.Equals(NewCanvasUI.My.endRole.baseRoleData.ID.ToString()))
+            {
+                HttpManager.My.ShowTip("双方同时只能发生一笔交易！");
                 return false;
+            }
+
             if (sign.tradeData.startRole.Equals(NewCanvasUI.My.endRole.baseRoleData.ID.ToString()) && sign.tradeData.endRole.Equals(NewCanvasUI.My.startRole.baseRoleData.ID.ToString()))
+            {
+                HttpManager.My.ShowTip("双方同时只能发生一笔交易！");
                 return false;
+            }
+
         }
         return true;
     }
@@ -126,12 +134,20 @@ public class TradeManager : MonoSingleton<TradeManager>
         if (start.isNpc)
         {
             if (start.GetComponent<BaseNpc>().isLock)
+            {
+                HttpManager.My.ShowTip("角色未解锁！");
                 return false;
+            }
+
         }
         if (end.isNpc)
         {
             if (end.GetComponent<BaseNpc>().isLock)
+            {
+                HttpManager.My.ShowTip("角色未解锁！");
                 return false;
+            }
+
         }
         return true;
     }
@@ -144,7 +160,11 @@ public class TradeManager : MonoSingleton<TradeManager>
     {
         if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service &&
             NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        {
+            HttpManager.My.ShowTip("双方不能都为增益型角色！");
             return false;
+        }
+
         else
             return true;
     }
@@ -168,14 +188,37 @@ public class TradeManager : MonoSingleton<TradeManager>
         if (start.extraSkill != null)
         {
             if (start.tradeList.Count == start.extraSkill.maxTradeLimit && start.extraSkill.maxTradeLimit != 0)
+            {
+                HttpManager.My.ShowTip("发起方无法进行更多交易！");
                 return false;
+            }
+
         }
         if (end.extraSkill != null)
         {
             if (end.tradeList.Count == end.extraSkill.maxTradeLimit && end.extraSkill.maxTradeLimit != 0)
+            {
+                HttpManager.My.ShowTip("承受方无法进行更多交易！");
                 return false;
+            }
+
         }
         return true;  
+    }
+
+    /// <summary>
+    /// 检测玩家金钱是否
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckMoneyCondition()
+    {
+        if (StageGoal.My.playerGold >= 0)
+            return true;
+        else
+        {
+            HttpManager.My.ShowTip("玩家金钱已达负数！无法发起新交易！");
+            return false;
+        }
     }
 
     /// <summary>
@@ -184,7 +227,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// <returns></returns>
     public bool CheckTradeCondition()
     {
-        return CheckStartAndEnd() && CheckNpcActive() && CheckDuplicateTrade() && CheckSkillCountLimit() && CheckTradeConstraint();
+        return CheckStartAndEnd() && CheckNpcActive() && CheckDuplicateTrade() && CheckSkillCountLimit() && CheckTradeConstraint() && CheckMoneyCondition();
     }
 
     /// <summary>

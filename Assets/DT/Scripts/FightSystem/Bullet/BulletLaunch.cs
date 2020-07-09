@@ -20,6 +20,8 @@ public class BulletLaunch : MonoBehaviour
     public Tweener lanchNormalTWE;
     public float per;
 
+    public List<GameObject> paos;
+
 
     public void LanchBoom(ProductData data)
     {
@@ -295,5 +297,17 @@ public class BulletLaunch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        BaseMapRole role = GetComponent<BaseMapRole>();
+        for (int i = 0; i < role.levelModels.Count; i++)
+        {
+            if (role.levelModels[i].activeSelf)
+            {
+                paos[0].gameObject.SetActive(false);
+                paos[1].gameObject.SetActive(false);
+                paos[2].gameObject.SetActive(false);
+                paos[i].gameObject.SetActive(true);
+                launchShooter = paos[i].transform;
+            }
+        }
     }
 }

@@ -147,6 +147,10 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public int totalPauseTime = 0;
 
+    public int startTime;
+
+    public int endTime;
+
     /// <summary>
     /// 当前关卡敌人波数数据
     /// </summary>
@@ -164,6 +168,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CostPlayerGold(int num)
     {
         playerGold -= num;
+        FloatInfoManager.My.MoneyChange(0 - num);
         if(playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -206,8 +211,10 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (playerTechPoint < num)
         {
+            HttpManager.My.ShowTip("科技值不足！");
             return false;
         }
+        FloatInfoManager.My.TechChange(0 - num);
         playerTechPoint -= num;
         SetInfo();
         return true;
@@ -219,6 +226,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void GetTechPoint(int num)
     {
+        FloatInfoManager.My.TechChange(num);
         playerTechPoint += num;
         SetInfo();
     }
@@ -230,6 +238,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void GetPlayerGold(int num)
     {
         playerGold += num;
+        FloatInfoManager.My.MoneyChange(num);
         if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -407,6 +416,9 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public void CommitLose()
     {
+        endTime = TimeStamp.GetCurrentTimeStamp();
+        if (endTime - startTime <= 20 && playerOperations.Count <= 5)
+            return;
         tempReplay = new PlayerReplay(false);
         NetworkMgr.My.AddReplayData(tempReplay);
     }
@@ -687,6 +699,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         //GetAllPreviousAward();
         cameraPos = Camera.main.transform.position;
         Stat();
+        startTime = TimeStamp.GetCurrentTimeStamp();
     }
     private Vector3 cameraPos;
 

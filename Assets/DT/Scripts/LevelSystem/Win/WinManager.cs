@@ -33,6 +33,10 @@ public class WinManager : MonoSingleton<WinManager>
     public Image box_1;
     public Image box_2;
 
+    public Text star1Con;
+    public Text star2Con;
+    public Text star3Con;
+
     public Button box_0Button;
     public Button box_1Button;
     public Button box_2Button;
@@ -97,6 +101,10 @@ public class WinManager : MonoSingleton<WinManager>
 
     public void InitWin()
     {
+        StageGoal.My.endTime = TimeStamp.GetCurrentTimeStamp();
+        star1Con.text = BaseLevelController.My.starOneCondition;
+        star2Con.text = BaseLevelController.My.starTwoCondition;
+        star3Con.text = BaseLevelController.My.starThreeCondition;
         if (playerEquips == null)
         {
             playerEquips = new List<PlayerEquip>();

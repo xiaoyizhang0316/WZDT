@@ -810,7 +810,7 @@ MonoBehaviour:
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60%  "
   starRequirement: 0
   LevelButton: {fileID: 241482737}
-  starNeed: {fileID: 0}
+  starNeed: {fileID: 825304100}
   loadScene: FTE_8
 --- !u!1 &168451096
 GameObject:
@@ -2754,7 +2754,7 @@ MonoBehaviour:
   mission_3: "\u4E0D\u653E\u7F6E\u81EA\u6709\u7684\u79CD\u5B50\u5546\u5E76\u901A\u8FC7\u5173\u5361"
   starRequirement: 0
   LevelButton: {fileID: 1783234902}
-  starNeed: {fileID: 0}
+  starNeed: {fileID: 1732922699}
   loadScene: FTE_4
 --- !u!1 &493810810
 GameObject:
@@ -3679,7 +3679,7 @@ MonoBehaviour:
   mission_3: "\u653E\u7F6E\u4E0D\u591A\u4E8E6\u4E2A\u81EA\u6709\u89D2\u8272\u5E76\u901A\u8FC7\u5173\u5361"
   starRequirement: 1
   LevelButton: {fileID: 1824538535}
-  starNeed: {fileID: 0}
+  starNeed: {fileID: 1260079902}
   loadScene: FTE_2
 --- !u!1 &701352065
 GameObject:
@@ -4938,6 +4938,7 @@ RectTransform:
   - {fileID: 292577994}
   - {fileID: 1745925217}
   - {fileID: 825702836}
+  - {fileID: 1739299196}
   m_Father: {fileID: 596373592}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4965,7 +4966,7 @@ MonoBehaviour:
   mission_3: 3
   starRequirement: 0
   LevelButton: {fileID: 130935242}
-  starNeed: {fileID: 0}
+  starNeed: {fileID: 1739299197}
   loadScene: FTE_10
 --- !u!1 &942361182
 GameObject:
@@ -5948,7 +5949,7 @@ MonoBehaviour:
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u5EA6\u6761\u4E0D\u4F4E\u4E8E80% "
   starRequirement: 0
   LevelButton: {fileID: 1611530982}
-  starNeed: {fileID: 0}
+  starNeed: {fileID: 773245645}
   loadScene: FTE_1
 --- !u!1 &1184153164
 GameObject:
@@ -6011,7 +6012,7 @@ MonoBehaviour:
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60% "
   starRequirement: 0
   LevelButton: {fileID: 1527685599}
-  starNeed: {fileID: 0}
+  starNeed: {fileID: 493810812}
   loadScene: FTE_7
 --- !u!1 &1195048341
 GameObject:
@@ -7512,7 +7513,7 @@ MonoBehaviour:
   mission_3: "\u6EE1\u8DB3\u6240\u670912\u4E2A\u4F20\u5947\u91D1\u9886\u9700\u6C42 "
   starRequirement: 0
   LevelButton: {fileID: 782163679}
-  starNeed: {fileID: 0}
+  starNeed: {fileID: 507238399}
   loadScene: FTE_5
 --- !u!1 &1524022877
 GameObject:
@@ -8832,6 +8833,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732922697}
   m_CullTransparentMesh: 0
+--- !u!1 &1739299195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1739299196}
+  - component: {fileID: 1739299198}
+  - component: {fileID: 1739299197}
+  m_Layer: 5
+  m_Name: StarNeed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1739299196
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739299195}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 938053222}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -17, y: -15}
+  m_SizeDelta: {x: 58.095, y: 60.36}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1739299197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739299195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 3cc6351ee6715c844a336ea426170d30, type: 3}
+    m_FontSize: 66
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 72
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 4
+--- !u!222 &1739299198
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739299195}
+  m_CullTransparentMesh: 0
 --- !u!1 &1745925216
 GameObject:
   m_ObjectHideFlags: 0
@@ -10061,7 +10139,7 @@ MonoBehaviour:
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60% "
   starRequirement: 0
   LevelButton: {fileID: 1531192459}
-  starNeed: {fileID: 0}
+  starNeed: {fileID: 943068184}
   loadScene: FTE_6
 --- !u!1 &1913122802
 GameObject:
@@ -10623,7 +10701,7 @@ MonoBehaviour:
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60%  "
   starRequirement: 0
   LevelButton: {fileID: 1039402857}
-  starNeed: {fileID: 0}
+  starNeed: {fileID: 2069409968}
   loadScene: FTE_9
 --- !u!1 &1994188982
 GameObject:
@@ -10760,7 +10838,7 @@ MonoBehaviour:
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60%     "
   starRequirement: 0
   LevelButton: {fileID: 614579327}
-  starNeed: {fileID: 0}
+  starNeed: {fileID: 847661372}
   loadScene: FTE_3
 --- !u!1 &2006630815
 GameObject:

@@ -99,6 +99,7 @@ MonoBehaviour:
   - {fileID: 3791712011024375346}
   - {fileID: 8279648061454086906}
   - {fileID: 6820375390067776961}
+  putTime: 0
   totalProfit: 0
   monthlyProfit: 0
   totalSatisfy: 0
@@ -125,7 +126,7 @@ MonoBehaviour:
   IsOpen: 1
   isPlay: 0
   isAvaliable: 1
-  skillDesc: "\u53EF\u4EE5\u5C06\u5404\u79CD\u74DC\uFF08\u5404\u79CD\u5F39\u836F\uFF09\u8FDB\u884C\u5B58\u50A8\u5E76\u4E14\u63D0\u5347\u7269\u6D41\u8FD0\u8F93\u6548\u7387\u7684\u89D2\u8272."
+  skillDesc: "\u53EF\u4EE5\u5C06\u5404\u79CD\u74DC\uFF08\u5404\u79CD\u5F39\u836F\uFF09\u5B58\u50A8,\u63D0\u5347buff\u8303\u56F4\u5185\u7684\u8FD0\u8F93\u6548\u7387\u548C\u964D\u4F4E\u8303\u56F4\u5185\u89D2\u8272\u7684\u4EA4\u6613\u6210\u672C."
   buffList: 
   animationPart: []
   productDatas: []
@@ -316,6 +317,7 @@ GameObject:
   - component: {fileID: 1639191643745982684}
   - component: {fileID: 5999004459837550096}
   - component: {fileID: 1372498567507862147}
+  - component: {fileID: 8396569965767526502}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -371,6 +373,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18607c97996e14fd79358eead5074230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &8396569965767526502
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424807557431412505}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5644780332803344250
 GameObject:
   m_ObjectHideFlags: 0

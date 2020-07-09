@@ -26,6 +26,7 @@ public class LoginPanel : MonoBehaviour
     void Start()
     {
         //PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetInt("isUseGuide",1);
         login_Btn.onClick.AddListener(Login);
         username = PlayerPrefs.GetString("username", "0");
         password = PlayerPrefs.GetString("password", "0");

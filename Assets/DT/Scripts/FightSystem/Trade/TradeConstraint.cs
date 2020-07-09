@@ -25,6 +25,7 @@ public class TradeConstraint : MonoSingleton<TradeConstraint>
             {
                 if (forbiddenTrade[i].endRole == end || forbiddenTrade[i].endRole == RoleType.All)
                 {
+                    HttpManager.My.ShowTip("双方无法形成交易！");
                     return false;
                 }
             }
