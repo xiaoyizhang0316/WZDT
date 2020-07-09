@@ -376,30 +376,30 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 Destroy(pos_equip.transform.GetChild(0).gameObject);
             }
-            //for (int i = 0; i < gearDatas.Count; i++)
-            //{
-            //    GameObject equip = Instantiate(equipPrb, pos_equip);
-            //    equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
-            //    equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-            //    //if (NetworkMgr.My.isUsingHttp)
-            //    //{
-            //    //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-            //    //}
-            //}
+            for (int i = 0; i < gearDatas.Count; i++)
+            {
+                GameObject equip = Instantiate(equipPrb, pos_equip);
+                equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
+                equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
+                //}
+            }
             for (int i = 0; i < pos_worker.transform.childCount; i++)
             {
                 Destroy(pos_worker.transform.GetChild(0).gameObject);
             }
-            //for (int i = 0; i < workDatas.Count; i++)
-            //{
-            //    GameObject worker = Instantiate(workerPrb, pos_worker);
-            //    worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
-            //    worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-            //    //if (NetworkMgr.My.isUsingHttp)
-            //    //{
-            //    //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-            //    //}
-            //}
+            for (int i = 0; i < workDatas.Count; i++)
+            {
+                GameObject worker = Instantiate(workerPrb, pos_worker);
+                worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
+                worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
+                //}
+            }
 
             //CheckNext();
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.BoxOpen);
@@ -417,30 +417,30 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 Destroy(pos_equip.transform.GetChild(0).gameObject);
             }
-            //for (int i = 0; i < gearDatas.Count; i++)
-            //{
-            //    GameObject equip = Instantiate(equipPrb, pos_equip);
-            //    equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
-            //    equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-            //    //if (NetworkMgr.My.isUsingHttp)
-            //    //{
-            //    //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-            //    //}
-            //}
+            for (int i = 0; i < gearDatas.Count; i++)
+            {
+                GameObject equip = Instantiate(equipPrb, pos_equip);
+                equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
+                equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
+                //}
+            }
             for (int i = 0; i < pos_worker.transform.childCount; i++)
             {
                 Destroy(pos_worker.transform.GetChild(0).gameObject);
             }
-            //for (int i = 0; i < workDatas.Count; i++)
-            //{
-            //    GameObject worker = Instantiate(workerPrb, pos_worker);
-            //    worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
-            //    worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-            //    //if (NetworkMgr.My.isUsingHttp)
-            //    //{
-            //    //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-            //    //}
-            //}
+            for (int i = 0; i < workDatas.Count; i++)
+            {
+                GameObject worker = Instantiate(workerPrb, pos_worker);
+                worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
+                worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
+                //}
+            }
             //boxs.SetActive(true);
             //CheckNext();
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.BoxOpen);
@@ -458,30 +458,30 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 Destroy(pos_equip.transform.GetChild(0).gameObject);
             }
-            //for (int i = 0; i < gearDatas.Count; i++)
-            //{
-            //    GameObject equip = Instantiate(equipPrb, pos_equip);
-            //    equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
-            //    equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-            //    //if (NetworkMgr.My.isUsingHttp)
-            //    //{
-            //    //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-            //    //}
-            //}
+            for (int i = 0; i < gearDatas.Count; i++)
+            {
+                GameObject equip = Instantiate(equipPrb, pos_equip);
+                equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
+                equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
+                //}
+            }
             for (int i = 0; i < pos_worker.transform.childCount; i++)
             {
                 Destroy(pos_worker.transform.GetChild(0).gameObject);
             }
-            //for (int i = 0; i < workDatas.Count; i++)
-            //{
-            //    GameObject worker = Instantiate(workerPrb, pos_worker);
-            //    worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
-            //    worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-            //    //if (NetworkMgr.My.isUsingHttp)
-            //    //{
-            //    //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-            //    //}
-            //}
+            for (int i = 0; i < workDatas.Count; i++)
+            {
+                GameObject worker = Instantiate(workerPrb, pos_worker);
+                worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
+                worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
+                //}
+            }
             //boxs.SetActive(true);
 
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.BoxOpen);

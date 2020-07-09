@@ -38,7 +38,7 @@ public class RecordItem : MonoBehaviour
     public void Init(ReplayList replay)
     {
         recordTime.text = TimeStamp.TimeStampToString(replay.recordTime);
-        score.text = replay.score.ToString();
+        score.text = "得分：" + replay.score.ToString();
         Id = replay.recordID;
         playTime = replay.realTime;
         playTimeCount.text = (replay.realTime / 60).ToString() + ":" + (replay.realTime % 60).ToString();
