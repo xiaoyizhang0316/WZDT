@@ -40,8 +40,8 @@ public class RecordItem : MonoBehaviour
         recordTime.text = TimeStamp.TimeStampToString(replay.recordTime);
         score.text = replay.score.ToString();
         Id = replay.recordID;
-        playTime = replay.timeCount;
-        playTimeCount.text = playTime.ToString();
+        playTime = replay.realTime;
+        playTimeCount.text = (replay.realTime / 60).ToString() + ":" + (replay.realTime % 60).ToString();
         char[] temp = replay.stars.ToCharArray();
         if (replay.win)
         {

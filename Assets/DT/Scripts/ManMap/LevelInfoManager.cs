@@ -50,6 +50,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         play.onClick.AddListener(() => { loadScene(); });
         isUseGuide.onValueChanged.AddListener((bool b) =>
         {
+            print(b);
             PlayerPrefs.SetInt("isUseGuide",b ? 1 : 0);
         });
     }
@@ -96,6 +97,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     // net
     public void Init(string star, string name, string contet, string mission_1, string mission_2, string mission_3, Action loadScene)
     {
+        isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
         levelName.text = name;
         content.text = contet;
         this.mission_1.text = mission_1;

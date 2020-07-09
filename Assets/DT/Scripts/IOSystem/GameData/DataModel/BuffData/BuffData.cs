@@ -71,5 +71,15 @@ public class BuffData
     /// 时间点其他骚操作
     /// </summary>
     public Dictionary<int, List<string>> otherFunctions;
+
+    public BuffData()
+    {
+        OnBuffAdd = new List<string>();
+        OnBuffRemove = new List<string>();
+        OnBeforeDead = new List<string>();
+        OnTick = new List<string>();
+        OnProduct = new List<string>();
+        otherFunctions = new Dictionary<int, List<string>>();
+    }
 }
 

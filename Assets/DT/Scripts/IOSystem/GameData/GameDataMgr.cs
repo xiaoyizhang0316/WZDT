@@ -120,7 +120,24 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         foreach (BuffData b in buffDatas)
         {
             if (b.BuffID == id)
-                return b;
+            {
+                BuffData temp = new BuffData();
+                temp.BuffID = b.BuffID;
+                temp.bulletBuffType = b.bulletBuffType;
+                temp.BuffName = b.BuffName;
+                temp.BuffDesc = b.BuffDesc;
+                temp.elementType = b.elementType;
+                temp.attackEffect = b.attackEffect;
+                temp.OnBuffAdd.AddRange(b.OnBuffAdd);
+                temp.OnBuffRemove.AddRange(b.OnBuffRemove);
+                temp.OnBeforeDead.AddRange(b.OnBeforeDead);
+                temp.OnTick.AddRange(b.OnTick);
+                temp.OnProduct.AddRange(b.OnProduct);
+                temp.duration = b.duration;
+                temp.interval = b.interval;
+                return temp;
+            }
+
         }
         print("------------查不到此BUFF!-----------");
         return null;
