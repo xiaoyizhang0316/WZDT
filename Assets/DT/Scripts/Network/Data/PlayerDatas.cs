@@ -159,6 +159,7 @@ public class PlayerReplay
     public bool win;
     public string stars;
     public int timeCount;
+    public int realTime;
 
     public PlayerReplay(bool isWin)
     {
@@ -172,6 +173,7 @@ public class PlayerReplay
         stars += BaseLevelController.My.starTwoStatus ? "1" : "0";
         stars += BaseLevelController.My.starThreeStatus ? "1" : "0";
         timeCount = StageGoal.My.timeCount;
+        realTime = StageGoal.My.endTime - StageGoal.My.startTime;
     }
 }
 
@@ -185,6 +187,7 @@ public class ReplayList
     public bool win;
     public string stars;
     public int timeCount;
+    public int realTime;
 }
 
 [Serializable]

@@ -69,6 +69,7 @@ public class WinManager : MonoSingleton<WinManager>
     PlayerReplay tempReplay;
     public void InitWin()
     {
+        StageGoal.My.endTime = TimeStamp.GetCurrentTimeStamp();
         star1Con.text = BaseLevelController.My.starOneCondition;
         star2Con.text = BaseLevelController.My.starTwoCondition;
         star3Con.text = BaseLevelController.My.starThreeCondition;

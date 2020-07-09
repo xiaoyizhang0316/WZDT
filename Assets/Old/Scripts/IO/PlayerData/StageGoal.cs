@@ -147,6 +147,10 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public int totalPauseTime = 0;
 
+    public int startTime;
+
+    public int endTime;
+
     /// <summary>
     /// 当前关卡敌人波数数据
     /// </summary>
@@ -412,6 +416,9 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public void CommitLose()
     {
+        endTime = TimeStamp.GetCurrentTimeStamp();
+        if (endTime - startTime <= 20 && playerOperations.Count <= 5)
+            return;
         tempReplay = new PlayerReplay(false);
         NetworkMgr.My.AddReplayData(tempReplay);
     }
@@ -692,6 +699,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         //GetAllPreviousAward();
         cameraPos = Camera.main.transform.position;
         Stat();
+        startTime = TimeStamp.GetCurrentTimeStamp();
     }
     private Vector3 cameraPos;
 
