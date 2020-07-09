@@ -44,4 +44,5 @@ public static class HttpId
     public const int getRankListID              = 1009;
     public const int getEquipID                 = 1010;
     public const int addEquipID                 = 1011;
+    public const int addEquipsID                = 1012;
 }
