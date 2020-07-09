@@ -96,6 +96,12 @@ public class PlayerEquips
 }
 
 [Serializable]
+public class ParseEquips
+{
+    public object playerEquips;
+}
+
+[Serializable]
 public class LevelRecord
 {
     public string playerID;

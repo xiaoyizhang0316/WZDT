@@ -38,9 +38,12 @@ public class LoginPanel : MonoBehaviour
         {
             password_Input.text = password;
         }
-        username_Input.ActivateInputField();
-        username_Input.MoveTextEnd(true);
-        
+        if (PlayerPrefs.GetInt("savePassword", 0) == 1)
+        {
+            savePassword_Toggle.isOn = true;
+        }
+        //username_Input.ActivateInputField();
+        //username_Input.MoveTextEnd(true);
         Test();
     }
 
@@ -123,10 +126,12 @@ public class LoginPanel : MonoBehaviour
         if (savePassword_Toggle.isOn)
         {
             PlayerPrefs.SetString("password", password);
+            PlayerPrefs.SetInt("savePassword", 1);
         }
         else
         {
             PlayerPrefs.SetString("password", "0");
+            PlayerPrefs.SetInt("savePassword", 0);
         }
     }
 
@@ -154,6 +159,22 @@ public class LoginPanel : MonoBehaviour
     {
         //TestGetReplayDatas();
         //TestLogin();
+        //string json = "{\"playerEquips\":[{\"playerID\":\"999999\",\"equipType\":0,\"equipID\":22202,\"count\":1},{\"playerID\":\"999999\",\"equipType\":1,\"equipID\":10001,\"count\":1},{\"playerID\":\"999999\",\"equipType\":0,\"equipID\":22202,\"count\":1},{\"playerID\":\"999999\",\"equipType\":1,\"equipID\":10001,\"count\":1}]}";
+        //Debug.Log(json);
+        //json.Replace("[{","\"[{");
+        //json.Replace("}]", "}]\"");
+        //Debug.Log(json);
+        //PlayerEquips pes = JsonUtility.FromJson<PlayerEquips>(json);
+        //Debug.Log(pes.playerEquips.Count);
+        //try
+        //{
+        //    ParseEquips pe = JsonUtility.FromJson<ParseEquips>(json);
+        //    Debug.Log(pe.playerEquips.ToString());
+        //}
+        //catch (System.Exception ex)
+        //{
+        //    Debug.Log(ex.Message);
+        //}
     }
 
     private void TestGetReplayDatas()

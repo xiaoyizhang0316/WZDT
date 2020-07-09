@@ -327,6 +327,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                         }
                     }
                     levelProgressList.Add(levelProgress);
+                    Debug.Log("上传关卡"+ levelID.ToString() + "进度完成" );
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -644,6 +645,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("token", token);
         keyValues.Add("playerID", playerID);
         keyValues.Add("playerEquip", JsonUtility.ToJson(pe));
+        //return;
 
         StartCoroutine(HttpManager.My.HttpSend(Url.addEquip, (www)=> {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
@@ -655,15 +657,19 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             if (response.status == 1)
             {
                 playerEquip = JsonUtility.FromJson<PlayerEquip>(response.data);
-                for(int i = 0; i < playerEquipsList.Count; i++)
-                {
-                    if(playerEquipsList[i].equipID == playerEquip.equipID && playerEquipsList[i].equipType == playerEquip.equipType)
-                    {
-                        playerEquipsList.RemoveAt(i);
-                        break;
-                    }
-                }
+                //for(int i = 0; i < playerEquipsList.Count; i++)
+                //{
+                //    if(playerEquipsList[i].equipID == playerEquip.equipID && playerEquipsList[i].equipType == playerEquip.equipType)
+                //    {
+                //        playerEquipsList.RemoveAt(i);
+                //        break;
+                //    }
+                //}
+                //playerEquipsList.Add(playerEquip);
+                playerEquipsList.Clear();
                 playerEquipsList.Add(playerEquip);
+                PlayerData.My.InitPlayerEquip(playerEquipsList);
+                Debug.Log("获得装备 " + pe.equipID);
                 doSuccess?.Invoke();
             }
             else
@@ -672,6 +678,48 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             SetMask();
         }, keyValues, HttpType.Post, HttpId.addEquipID));
+    }
+
+    public void AddEquipList(List<PlayerEquip> playerEquips, Action doSuccess=null, Action doFail = null)
+    {
+        PlayerEquips equips = new PlayerEquips();
+        equips.playerEquips = playerEquips;
+        string json = JsonUtility.ToJson(equips);
+        Debug.Log(json);
+        //{"playerEquips":[{"playerID":"999999","equipType":0,"equipID":22202,"count":1},{"playerID":"999999","equipType":1,"equipID":10001,"count":1},{"playerID":"999999","equipType":0,"equipID":22202,"count":1},{"playerID":"999999","equipType":1,"equipID":10001,"count":1}]}
+
+        Debug.Log(JsonUtility.FromJson<ParseEquips>(json).playerEquips);
+        return;
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("playerEquips", JsonUtility.ToJson(playerEquips));
+        Debug.Log(JsonUtility.ToJson(playerEquips));
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.addEquips, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                GoToLogin(response.errMsg);
+                return;
+            }
+            if (response.status == 1)
+            {
+                PlayerEquips pes = JsonUtility.FromJson<PlayerEquips>(response.data);
+
+                PlayerData.My.InitPlayerEquip(pes.playerEquips);
+                foreach(var pe in playerEquips)
+                {
+                    Debug.Log("获得装备" + pe.equipID);
+                }
+                doSuccess?.Invoke();
+            }
+            else
+            {
+                doFail?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.addEquipsID));
     }
     #endregion
 

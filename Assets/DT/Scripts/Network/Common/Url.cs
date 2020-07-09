@@ -41,6 +41,7 @@ public static class Url
     public static string addEquip = ip + "addEquip";
     public static string getEquips = ip + "getPlayerEquips";
     public static string deleteEquip = ip + "deleteEquip";
+    public static string addEquips = ip + "addEquips";
     #endregion
 
     #region test
