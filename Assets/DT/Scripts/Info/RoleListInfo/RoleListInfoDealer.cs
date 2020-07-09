@@ -43,7 +43,7 @@ public class RoleListInfoDealer : BaseRoleListInfo
         fireTime.text = (role.efficiency  ).ToString()+"%";
         efficiency.text =role.efficiency.ToString();
         Range.text = (role.range ).ToString() ;
-        tradCost.text  =  role.cost.ToString();
+        tradCost.text  =  role.tradeCost.ToString();
         risk .text =  role.riskResistance.ToString();
         montyCost.text =  role.cost.ToString();
         technology.text = role.techAdd.ToString();
