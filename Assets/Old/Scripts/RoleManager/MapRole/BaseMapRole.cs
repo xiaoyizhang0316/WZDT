@@ -267,6 +267,19 @@ public class BaseMapRole : MonoBehaviour
         });
     }
 
+    public void ResetAllBuff()
+    {
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            buffList[i].RoleBuffRemove();
+        }
+        baseRoleData.CalculateAllAttribute();
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            buffList[i].RoleBuffAdd();
+        }
+    }
+
     /// <summary>
     /// 当濒临破产时
     /// </summary>

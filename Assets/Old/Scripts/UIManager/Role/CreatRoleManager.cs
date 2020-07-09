@@ -382,7 +382,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             CurrentRole.peoPleList.Add(keys2[i], peoPleList[keys2[i]]);
         }
-        int flag = 0;
         for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
         {
             if (System.Math.Abs(CurrentRole.ID - PlayerData.My.RoleData[i].ID) < 0.1f)
@@ -390,12 +389,10 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                 if (ExecutionManager.My.SubExecution(ExecutionManager.My.modifyRole))
                 {
                     PlayerData.My.RoleData[i] = CurrentRole;
-                    flag = 1;
                 }
             }
         }
-        if (flag == 0)
-            PlayerData.My.RoleData.Add(CurrentRole);
+        PlayerData.My.GetMapRoleById(CurrentRole.ID).ResetAllBuff();
         WorkerListManager.My.QuitAndSave();
         EquipListManager.My.QuitAndSave();
         ChangeRoleRecord(CurrentRole);

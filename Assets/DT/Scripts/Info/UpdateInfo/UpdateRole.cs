@@ -43,7 +43,8 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.nextLevel);
         RoleUpdateInfo.My.currentRole.baseRoleData.roleName = RoleUpdateInfo.My.roleName;
-        RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
+        PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ResetAllBuff();
+        //RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
         RoleUpdateInfo.My.ReInit(RoleUpdateInfo.My.currentRole);
         isUpdate = true;
     }
@@ -57,7 +58,8 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.currentLevel);
         RoleUpdateInfo.My.currentRole.baseRoleData.roleName = RoleUpdateInfo.My.roleName;
-        RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
+        PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ResetAllBuff();
+        //RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
         RoleUpdateInfo.My.ReInit(RoleUpdateInfo.My.currentRole);
         isUpdate = false;
     }
@@ -96,11 +98,16 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                     upgradeNumber.gameObject.SetActive(true);
                     RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.nextLevel);
                     RoleUpdateInfo.My.currentRole.baseRoleData.roleName = RoleUpdateInfo.My.roleName;
-                    RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
+                    PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ResetAllBuff();
+                    //RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
                     upgradeNumber.text = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost.ToString();
                     RoleUpdateInfo.My.ReInit(RoleUpdateInfo.My.currentRole);
                 }
             }).Play();
+        }
+        else
+        {
+            HttpManager.My.ShowTip("金钱不足，无法升级！");
         }
     }
 
