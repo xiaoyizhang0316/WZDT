@@ -28,6 +28,8 @@ public class NpcSpecialInfo : MonoBehaviour
 
     public GameObject bulletPrefab;
 
+    public Button clearBullets;
+
     public Sprite AOE;
     public Sprite normallpp;
     public Sprite lightning;
@@ -43,34 +45,48 @@ public class NpcSpecialInfo : MonoBehaviour
         risk.text = npc.baseRoleData.riskResistance.ToString();
         level.text = npc.baseRoleData.baseRoleData.level.ToString();
         HideAll();
+        clearBullets.onClick.RemoveAllListeners();
+        clearBullets.onClick.AddListener(()=> {
+            NewCanvasUI.My.Panel_Delete.SetActive(true);
+            string str = "确定要清空仓库吗？";
+            DeleteUIManager.My.Init(str, () => {
+                //PlayerData.My.GetMapRoleById(npc.baseRoleData.ID).ClearWarehouse();
+                npc.ClearWarehouse();
+                SetInfo(npc, baseSkill, npcTF);
+                ClearBulletContent();
+            });
+        });
         //ClearBulletContent();
         switch (npc.baseRoleData.baseRoleData.roleType)
         {
             case GameEnum.RoleType.Seed:
-                seedProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.efficiency / 20f).ToString("#.#") + "/s";
-                seedProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.effect*10).ToString();
+                //seedProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.efficiency / 20f).ToString("#.#") + "/s";
+                //seedProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.effect*10).ToString();
+                seedProp.GetComponent<NpcSpecialProp>().SetInfo(npc);
                 seedProp.SetActive(true);
                 ShowSeedBullet(npcTF);
                 bulletWarehourse.SetActive(true);
                 break;
             case GameEnum.RoleType.Peasant:
-                peasantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.efficiency / 10f).ToString("#.#") + "/s";
-                peasantProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.effect).ToString()+"%";
+                //peasantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.efficiency / 10f).ToString("#.#") + "/s";
+                //peasantProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.effect).ToString()+"%";
+                peasantProp.GetComponent<NpcSpecialProp>().SetInfo(npc);
                 peasantProp.SetActive(true);
                 ShowPeasantBullet(npcTF);
                 bulletWarehourse.SetActive(true);
                 break;
             case GameEnum.RoleType.Merchant:
-                merchantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (((npc.baseRoleData.efficiency * 0.3f) / 100f) * npc.baseRoleData.tradeCost).ToString("#.#");
-                merchantProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.effect).ToString() + "%";
+                //merchantProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (((npc.baseRoleData.efficiency * 0.3f) / 100f) * npc.baseRoleData.tradeCost).ToString("#.#");
+                //merchantProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.effect).ToString() + "%";
+                merchantProp.GetComponent<NpcSpecialProp>().SetInfo(npc);
                 merchantProp.SetActive(true);
                 ShowMerchantBullet(npcTF);
                 bulletWarehourse.SetActive(true);
                 break;
             case GameEnum.RoleType.Dealer:
-                dealerProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.efficiency).ToString() + "%";
-                dealerProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.range).ToString();
-
+                //dealerProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.efficiency).ToString() + "%";
+                //dealerProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.range).ToString();
+                dealerProp.GetComponent<NpcSpecialProp>().SetInfo(npc);
                 dealerProp.SetActive(true);
                 ShowDealerBullet(npcTF);
                 bulletWarehourse.SetActive(true);
@@ -116,6 +132,7 @@ public class NpcSpecialInfo : MonoBehaviour
 
     void ShowSeedBullet(Transform npc)
     {
+        
         int count = 9;
         if (npc.GetComponent<ProductSeed>().productDatas.Count < 9)
         {
