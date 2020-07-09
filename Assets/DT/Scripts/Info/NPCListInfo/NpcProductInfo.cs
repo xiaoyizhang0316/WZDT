@@ -37,6 +37,7 @@ public class NpcProductInfo : MonoBehaviour
     public Sprite normallpp;
     public Sprite lightning;
     public Sprite tow;
+    public Text level;
 
 
 
@@ -57,7 +58,9 @@ public class NpcProductInfo : MonoBehaviour
         prop2.text = (npc.GetComponent<BaseMapRole>().baseRoleData.effect).ToString() + "%";
 
         timeInv.text = (1.0f / npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("#.##");
-
+        icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType.ToString() +
+            npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level);
+        level.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level.ToString();
         clearBullets.onClick.RemoveAllListeners();
         clearBullets.onClick.AddListener(() => {
             NewCanvasUI.My.Panel_Delete.SetActive(true);

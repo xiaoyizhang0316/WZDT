@@ -13,6 +13,7 @@ public class NpcServiceInfo : MonoBehaviour
 
     public Image icon;
     public List<Image> buffs;
+    public Text level;
 
     public void SetInfo(Transform npc, BaseSkill baseSkill)
     {
@@ -21,7 +22,9 @@ public class NpcServiceInfo : MonoBehaviour
         //timeInv
         cost.text = npc.GetComponent<BaseMapRole>().baseRoleData.tradeCost.ToString();
         risk.text = npc.GetComponent<BaseMapRole>().baseRoleData.riskResistance.ToString();
-        
+        icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType.ToString() +
+            npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level);
+        level.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level.ToString();
         timeInv.text = (1.0f/ npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("#.##");
         int i = 0;
         foreach (var sp in buffs)
