@@ -502,7 +502,7 @@ public class WinManager : MonoSingleton<WinManager>
     private void CommitProgress()
     {
         NetworkMgr.My.UpdateLevelProgress(NetworkMgr.My.currentLevel, stars, starArr[0] + starArr[1] + starArr[2],
-                    starArr[0] + starArr[1] + starArr[2], 0, () =>
+                    starArr[0] + starArr[1] + starArr[2], StageGoal.My.playerSatisfy, () =>
                     {
                         //PlayerData.My.Reset();
                         //SceneManager.LoadScene("Map");
