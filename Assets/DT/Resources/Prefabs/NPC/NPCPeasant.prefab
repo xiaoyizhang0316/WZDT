@@ -94,6 +94,8 @@ MonoBehaviour:
   AI: 0
   npcScript: {fileID: 0}
   extraSkill: {fileID: 0}
+  levelModels: []
+  putTime: 0
   totalProfit: 0
   monthlyProfit: 0
   totalSatisfy: 0
@@ -149,9 +151,10 @@ MonoBehaviour:
   isCanSee: 0
   isCanSeeEquip: 0
   lockNumber: 0
-  NPCgear: 
+  NPCBuffList: 
   hideModel: {fileID: 2840251747047095788}
   trueModel: {fileID: 1402663332529615265}
+  autoTradeList: []
 --- !u!114 &2771515299031466189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +378,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876667174991743178, guid: 14ee27cfc30e4f9439b17154fc36d559,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.6060628
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876667174991743178, guid: 14ee27cfc30e4f9439b17154fc36d559,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.30303133
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876667174991743178, guid: 14ee27cfc30e4f9439b17154fc36d559,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -7.536213e-16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876667174991743178, guid: 14ee27cfc30e4f9439b17154fc36d559,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 7.8689556
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876667174991743178, guid: 14ee27cfc30e4f9439b17154fc36d559,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -2.825873
       objectReference: {fileID: 0}
     - target: {fileID: 6109254903091845886, guid: 14ee27cfc30e4f9439b17154fc36d559,
         type: 3}

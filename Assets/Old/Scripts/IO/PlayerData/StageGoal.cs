@@ -712,7 +712,15 @@ public class StageGoal : MonoSingleton<StageGoal>
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit[] hit = Physics.RaycastAll(ray);
+            for (int i = 0; i < hit.Length; i++)
+            {
+                print(hit[i].transform.name);
+            }
+        }
     }
 
     private void OnGUI()

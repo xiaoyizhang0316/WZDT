@@ -74,10 +74,10 @@ public class NPC : BaseNpc
 
     public void OnMouseDown()
     {
-        if (NewCanvasUI.My.NeedRayCastPanel())
-        {
-            return;
-        }
+        //if (NewCanvasUI.My.NeedRayCastPanel())
+        //{
+        //    return;
+        //}
 
     }
 
