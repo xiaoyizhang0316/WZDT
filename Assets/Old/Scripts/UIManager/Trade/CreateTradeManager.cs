@@ -139,27 +139,13 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
             result1 = (int)(result * 0.5f);
             result2 = (int)(result * 0.2f);
         }
-        if (currentTrade.randomIndex == 0)
+        if (currentTrade.isTradeSettingBest())
         {
-            if (currentTrade.tradeData.selectCashFlow == CashFlowType.先钱)
-            {
-                result = result1;
-            }
-            else
-            {
-                result = result2;
-            }
+            result = result2;
         }
-        else if (currentTrade.randomIndex == 1)
+        else
         {
-            if (currentTrade.tradeData.selectCashFlow == CashFlowType.先钱)
-            {
-                result = result2;
-            }
-            else
-            {
-                result = result1;
-            }
+            result = result1;
         }
         tradeCostText.text = result.ToString();
     }

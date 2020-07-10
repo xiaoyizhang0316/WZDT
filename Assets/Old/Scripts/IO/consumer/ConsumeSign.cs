@@ -63,9 +63,9 @@ public class ConsumeSign : MonoBehaviour
 
     public GameObject sheep;
 
-    private ConsumerBuffRange rangeBuff;
-
     public BulletType lastHitType;
+
+    public int buildingIndex;
 
     /// <summary>
     /// 初始化
@@ -113,24 +113,24 @@ public class ConsumeSign : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 初始化光环效果
-    /// </summary>
-    public void InitRangeBuff()
-    {
-        rangeBuff = GetComponentInChildren<ConsumerBuffRange>();
-        for (int i = 0; i < buffList.Count; i++)
-        {
-            if (buffList[i].buffId > 1000)
-            {
-                rangeBuff.buffList.Add(buffList[i].buffId / 10);
-            }
-        }
-        if(rangeBuff.buffList.Count == 0)
-        {
-            rangeBuff.transform.parent.gameObject.SetActive(false);
-        }
-    }
+    ///// <summary>
+    ///// 初始化光环效果
+    ///// </summary>
+    //public void InitRangeBuff()
+    //{
+    //    rangeBuff = GetComponentInChildren<ConsumerBuffRange>();
+    //    for (int i = 0; i < buffList.Count; i++)
+    //    {
+    //        if (buffList[i].buffId > 1000)
+    //        {
+    //            rangeBuff.buffList.Add(buffList[i].buffId / 10);
+    //        }
+    //    }
+    //    if(rangeBuff.buffList.Count == 0)
+    //    {
+    //        rangeBuff.transform.parent.gameObject.SetActive(false);
+    //    }
+    //}
 
     /// <summary>
     /// 激活特效
@@ -454,6 +454,12 @@ public class ConsumeSign : MonoBehaviour
     }
 
     #endregion
+
+    public void OnMouseDown()
+    {
+        NewCanvasUI.My.consumerInfoFloatWindow.SetActive(true);
+        NewCanvasUI.My.consumerInfoFloatWindow.GetComponent<ConsumerFloatWindow>().Init(this);
+    }
 
     private void Update()
     {

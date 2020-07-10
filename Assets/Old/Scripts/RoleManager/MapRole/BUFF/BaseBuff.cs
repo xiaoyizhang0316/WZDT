@@ -146,6 +146,7 @@ public class BaseBuff
     {
         foreach (string str in buffData.OnProduct)
         {
+            CheckStaticNumber(str);
             CheckProductNumber(str, ref data);
         }
     }
@@ -218,7 +219,7 @@ public class BaseBuff
                 CalculateNumber(str, ref buffConfig.playerGoldChange, StageGoal.My.playerGold);
                 StageGoal.My.GetPlayerGold(buffConfig.playerGoldChange);
                 if (targetConsume != null)
-                    StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Other);
+                    StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Other,null,buffName);
                 else if (castRole.isNpc)
                     StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Npc,castRole);
                 //StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Npc, castRole);

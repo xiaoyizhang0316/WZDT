@@ -25,7 +25,7 @@ public abstract class BaseSkill : MonoBehaviour
     public List<GameObject> animationPart = new List<GameObject>();
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         role = GetComponent<BaseMapRole>();
         if (IsOpen)

@@ -20,9 +20,26 @@ public class ProductDealer : BaseSkill
                 CancelSkill();
                 return;
             }
-          
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
+            for (int i = 0; i < role.GetEquipBuffList().Count; i++)
+            {
+                data.AddBuff(role.GetEquipBuffList()[i]);
+            }
+            if (role.isNpc)
+            {
+                if (role.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
+                {
+                    for (int i = 0; i < role.GetComponentInChildren<BaseNpc>().NPCBuffList.Count; i++)
+                    {
+                        data.AddBuff(role.GetComponentInChildren<BaseNpc>().NPCBuffList[i]);
+                    }
+                }
+            }
+            for (int i = 0; i < buffList.Count; i++)
+            {
+                data.AddBuff(buffList[i]);
+            }
             switch (data.bulletType)
             {
                 case BulletType.NormalPP:

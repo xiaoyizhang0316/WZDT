@@ -256,7 +256,7 @@ public class BaseMapRole : MonoBehaviour
                 buffList[i].duration--;
                 if (buffList[i].duration == 0)
                 {
-                    print("buff消失");
+                    //print("buff消失");
                     RemoveBuff(buffList[i]);
                 }
             }

@@ -11,6 +11,22 @@ public class ProductMerchant : BaseSkill
 
     private int maxCount = 0;
 
+    public List<int> specialBuffList;
+
+    public List<BaseBuff> baseBuffs = new List<BaseBuff>();
+
+    public new void Start()
+    {
+        base.Start();
+        for (int i = 0; i < specialBuffList.Count; i++)
+        {
+            BaseBuff buff = new BaseBuff();
+            BuffData data = GameDataMgr.My.GetBuffDataByID(specialBuffList[i]);
+            buff.Init(data);
+            buff.SetRoleBuff(role,role,role);
+        }
+    }
+
     public override void Skill()
     {
         if (role.tradeList.Count == 0)
@@ -24,7 +40,7 @@ public class ProductMerchant : BaseSkill
                 if (PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).warehouse
                     .Count >= PlayerData.My
                     .GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).baseRoleData
-                    .bulletCapacity)
+                    .bulletCapacity && role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
                 {
                     currentCount++;
                     maxCount++;
@@ -52,6 +68,10 @@ public class ProductMerchant : BaseSkill
                         for (int i = 0; i < role.GetComponentInChildren<BaseNpc>().NPCBuffList.Count; i++)
                         {
                             data.AddBuff(role.GetComponentInChildren<BaseNpc>().NPCBuffList[i]);
+                        }
+                        for (int i = 0; i < baseBuffs.Count; i++)
+                        {
+                            baseBuffs[i].OnProduct(ref data);
                         }
                     }
                 }
