@@ -94,6 +94,8 @@ MonoBehaviour:
   AI: 0
   npcScript: {fileID: 0}
   extraSkill: {fileID: 0}
+  levelModels: []
+  putTime: 0
   totalProfit: 0
   monthlyProfit: 0
   totalSatisfy: 0
@@ -149,9 +151,10 @@ MonoBehaviour:
   isCanSee: 0
   isCanSeeEquip: 0
   lockNumber: 0
-  NPCgear: 
+  NPCBuffList: 
   hideModel: {fileID: 7108235030657446041}
   trueModel: {fileID: 7307834171875257483}
+  autoTradeList: []
 --- !u!114 &5569870448007674632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +362,7 @@ GameObject:
   - component: {fileID: 1639191643745982684}
   - component: {fileID: 5999004459837550096}
   - component: {fileID: 1372498567507862147}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

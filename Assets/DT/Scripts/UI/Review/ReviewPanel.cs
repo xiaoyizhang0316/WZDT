@@ -123,18 +123,20 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
             return;
         int maxAmount = datas[0].restMoney * 150 / 100;
         line.vectorLine.points2.Clear();
+        print(timeCount);
+        print(datas.Count);
         for (int i = 0; i < datas.Count; i++)
         {
             if (datas[i].restMoney <= maxAmount)
             {
-                line.vectorLine.points2.Add(new Vector2(1326 / timeCount * 5 * i, datas[i].restMoney / (float)maxAmount * 100f));
+                line.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i, datas[i].restMoney / (float)maxAmount * 100f));
             }
             else
             {
-                line.vectorLine.points2.Add(new Vector2(1326 / timeCount * 5 * i, 100f));
+                line.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i, 100f));
             }
         }
-        line.vectorLine.points2.Add(new Vector2(1326, datas[datas.Count - 1].restMoney / (float)maxAmount * 100f));
+        //line.vectorLine.points2.Add(new Vector2(1326f, Mathf.Min(datas[datas.Count - 1].restMoney / (float)maxAmount * 100f,100f)));
         line.vectorLine.Draw();
     }
 
