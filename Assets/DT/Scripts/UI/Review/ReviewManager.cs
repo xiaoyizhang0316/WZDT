@@ -345,7 +345,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             for (int i = 0; i < signs.Count; i++)
             {
                 float tem = 720 / (signs.Count + 1);
-                signs[i].transform.localPosition = new Vector3(0, 360 - tem * (i + 1));
+                signs[i].transform.localPosition = new Vector3(0,   400 - tem * (i + 1)-i*25 );
                 signs[i].ChangeParent();
             }
         }
@@ -354,13 +354,15 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             for (int i = 0; i < 6; i++)
             {
                 float tem = 720 / (6 + 1);
-                signs[i].transform.localPosition = new Vector3(-80, 360 - tem * (i + 1));
+                signs[i].transform.localPosition = new Vector3(-80, 400 - tem * (i + 1)-i*25);
+                signs[i].ChangeParent();
             }
 
             for (int i = 6; i < signs.Count; i++)
             {
                 float tem = 720 / (signs.Count + 1);
-                signs[i].transform.localPosition = new Vector3(80, 360 - tem * (i - 6 + 1));
+                signs[i].transform.localPosition = new Vector3(80, 400 - tem * (i - 6 + 1)-i*25);
+                signs[i].ChangeParent();
             }
         }
     }
