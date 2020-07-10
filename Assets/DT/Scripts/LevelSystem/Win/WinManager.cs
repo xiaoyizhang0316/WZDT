@@ -64,6 +64,8 @@ public class WinManager : MonoSingleton<WinManager>
     public Text star1Con;
     public Text star2Con;
     public Text star3Con;
+
+    public Text UnlockText;
     private int stars = 0;
     private string[] starArr;
     PlayerReplay tempReplay;
@@ -470,10 +472,15 @@ public class WinManager : MonoSingleton<WinManager>
     public void CheckNext()
     {
         returnMap.interactable = true;
-
+        UnlockText .gameObject.SetActive(false);
         if (box_0Button.interactable || box_1Button.interactable || box_2Button.interactable)
         {
+            UnlockText .gameObject.SetActive(true);
             returnMap.interactable = false;
+        }
+        else
+        {
+            
         }
     }
 

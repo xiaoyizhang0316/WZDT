@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FTE_1_Step_27 : BaseStep
@@ -48,9 +49,9 @@ public class FTE_1_Step_27 : BaseStep
         text.DOFade(0, 0.8f).OnComplete(() =>
         {
             gameObject.SetActive(false); 
-            FTESceneManager.My.PlayNextStep();
-            FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
-            FTESceneManager.My.UIFTE.SetActive(false);
+            if(SceneManager.GetActiveScene().name=="FTE_1")
+            FTESceneManager.My.Steps[27].gameObject.SetActive(true);
+          
             for (int i = 0; i <     MapManager.My._mapSigns.Count; i++)
             {
                 if (MapManager.My._mapSigns[i].mapType == GameEnum.MapType.Grass)
@@ -59,6 +60,7 @@ public class FTE_1_Step_27 : BaseStep
                 }
 
             }
+            
         }).Play(); 
     }
    
