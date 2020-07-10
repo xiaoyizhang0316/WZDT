@@ -85,6 +85,36 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post, HttpId.loginID));
     }
 
+    public void ReConnect(Action doSuccess=null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.reConnUrl, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                GoToLogin("重连失败！");
+                return;
+            }
+            else
+            {
+                playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                token = playerDatas.token;
+                if (SceneManager.GetActiveScene().name.StartsWith("FTE")&& SceneManager.GetActiveScene().name!="FTE_0")
+                {
+                    StageGoal.My.CheckAfterReconnect();
+                }
+                if(SceneManager.GetActiveScene().name == "Map")
+                {
+                    SceneManager.LoadScene("Map");
+                }
+                doSuccess?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post));
+    }
+
     /// <summary>
     /// 登出
     /// </summary>
@@ -123,7 +153,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if(response.status == -1)
             {
-                GoToLogin(response.errMsg);
+                ShowReconn();
                 return;
             }
             if (response.status == 0)
@@ -167,7 +197,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
-                GoToLogin(response.errMsg);
+                ShowReconn();
                 return;
             }
             if (response.status == 0)
@@ -213,7 +243,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
-                GoToLogin(response.errMsg);
+                ShowReconn();
                 return;
             }
             if (response.status == 0)
@@ -252,7 +282,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             //Debug.Log(response.errMsg);
             if (response.status == -1)
             {
-                GoToLogin(response.errMsg);
+                ShowReconn();
                 return;
             }
             if (response.status == 0)
@@ -304,7 +334,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
-                GoToLogin(response.errMsg);
+                ShowReconn();
                 return;
             }
             if (response.status == 0)
@@ -354,7 +384,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
-                GoToLogin(response.errMsg);
+                ShowReconn();
                 return;
             }
             if (response.status == 0)
@@ -426,7 +456,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
                 if (response.status == -1)
                 {
-                    GoToLogin(response.errMsg);
+                    ShowReconn();
                     return;
                 }
                 if (response.status == 1)
@@ -467,7 +497,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
-                GoToLogin(response.errMsg);
+                ShowReconn();
                 return;
             }
             if (response.status == 1)
@@ -506,7 +536,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
-                GoToLogin(response.errMsg);
+                ShowReconn();
                 return;
             }
             if(response.status == 1)
@@ -549,7 +579,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
-                GoToLogin(response.errMsg);
+                ShowReconn();
                 return;
             }
             if (response.status == 1)
@@ -608,7 +638,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse httpResponse = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (httpResponse.status == -1)
             {
-                GoToLogin(httpResponse.errMsg);
+                ShowReconn();
                 return;
             }
             if (httpResponse.status == 1)
@@ -651,7 +681,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
-                GoToLogin(response.errMsg);
+                ShowReconn();
                 return;
             }
             if (response.status == 1)
@@ -700,7 +730,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
-                GoToLogin(response.errMsg);
+                ShowReconn();
                 return;
             }
             if (response.status == 1)
@@ -732,6 +762,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     private void GoToLogin(string tip)
     {
         HttpManager.My.ShowClickTip(tip, () => { SceneManager.LoadScene("Login"); });
+    }
+
+    private void ShowReconn(string str=null)
+    {
+        HttpManager.My.ShowReConn(str);
     }
 
     private void SetMask()

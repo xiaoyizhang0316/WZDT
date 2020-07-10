@@ -8,6 +8,7 @@ public static class Url
 
     #region login
     public static string loginUrl = ip + "login";
+    public static string reConnUrl = ip + "reconnect";
     public static string registerUrl = ip + "register";
     public static string logout = ip + "logout";
     public static string createPlayerDatas = ip + "createPlayerDatas";

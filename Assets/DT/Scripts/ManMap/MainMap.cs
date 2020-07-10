@@ -37,7 +37,8 @@ public class MainMap : MonoBehaviour
             NetworkMgr.My.GetLevelProgress(() => { InitLevel(); }, () => {
                 if (NetworkMgr.My.playerDatas.fteProgress > 1)
                 {
-                    HttpManager.My.ShowClickTip("获取数据失败，点击重试！", InitMap);
+                    //HttpManager.My.ShowClickTip("获取数据失败，点击重试！", InitMap);
+                    HttpManager.My.ShowTwoClickTip("获取数据失败，点击重试或取消");
                 }
                 else
                 {
