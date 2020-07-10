@@ -153,6 +153,7 @@ public class Building : MonoBehaviour
                 string path = "Prefabs/Consumer/" + w.consumerType.ToString();
                 GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
                 go.GetComponent<ConsumeSign>().Init(consumerPathList);
+                go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
                 go.transform.position = transform.position;
                 go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
                 foreach (int num in w.buffList)

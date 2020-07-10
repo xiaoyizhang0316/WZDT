@@ -146,6 +146,7 @@ public class BaseBuff
     {
         foreach (string str in buffData.OnProduct)
         {
+            CheckStaticNumber(str);
             CheckProductNumber(str, ref data);
         }
     }

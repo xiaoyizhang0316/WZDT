@@ -58,6 +58,6 @@ public class ConsumeData
         killMoney = data.killMoney;
         killSatisfy = data.killSatisfy;
         liveSatisfy = data.liveSatisfy;
-        consumerName = "消费者名称";
+        consumerName = data.typeDesc;
     }
 }
