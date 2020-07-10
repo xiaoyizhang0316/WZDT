@@ -157,4 +157,10 @@ public class NpcProductInfo : MonoBehaviour
             Destroy(bulletContent.GetChild(i).gameObject);
         }
     }
+
+    public void Reset()
+    {
+        ClearBulletContent();
+        bulletWarehourse.SetActive(false);
+    }
 }
