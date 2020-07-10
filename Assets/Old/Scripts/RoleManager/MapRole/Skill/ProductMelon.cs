@@ -60,7 +60,6 @@ public class ProductMelon : BaseSkill
             {
                 currentCount = 0;
             }
-
         }
 
     }

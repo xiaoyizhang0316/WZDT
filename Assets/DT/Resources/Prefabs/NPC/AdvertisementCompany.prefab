@@ -306,6 +306,8 @@ MonoBehaviour:
   AI: 0
   npcScript: {fileID: 0}
   extraSkill: {fileID: 0}
+  levelModels: []
+  putTime: 0
   totalProfit: 0
   monthlyProfit: 0
   totalSatisfy: 0
@@ -332,9 +334,10 @@ MonoBehaviour:
   isCanSee: 0
   isCanSeeEquip: 0
   lockNumber: 10
-  NPCgear: 
+  NPCBuffList: 
   hideModel: {fileID: 7010573542175292831}
   trueModel: {fileID: 8145369834327937887}
+  autoTradeList: []
 --- !u!65 &5840160722976328818
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -461,6 +464,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hide
       objectReference: {fileID: 0}
+    - target: {fileID: 8045772783410336990, guid: 4349f534abb534007841873edff1f3fe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4349f534abb534007841873edff1f3fe, type: 3}
 --- !u!1 &7010573542175292831 stripped
@@ -545,7 +553,7 @@ PrefabInstance:
     - target: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.815
+      value: 2.964
       objectReference: {fileID: 0}
     - target: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
         type: 3}
