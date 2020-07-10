@@ -4,6 +4,7 @@ using UnityEngine;
 using static GameEnum;
 using System;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class Building : MonoBehaviour
 {
@@ -28,6 +29,23 @@ public class Building : MonoBehaviour
     public bool isUseTSJ = false;
 
     public List<WaveConfig> extraConsumer = new List<WaveConfig>();
+
+    public Image countDownSprite;
+
+    /// <summary>
+    /// 使用透视镜
+    /// </summary>
+    public void UseTSJ()
+    {
+        countDownSprite.transform.parent.gameObject.SetActive(true);
+        isUseTSJ = true;
+        countDownSprite.fillAmount = 1f;
+        countDownSprite.DOFillAmount(0f, 20f).OnComplete(() =>
+        {
+            countDownSprite.transform.parent.gameObject.SetActive(false);
+            isUseTSJ = false;
+        });
+    }
 
     /// <summary>
     /// 初始化
@@ -154,7 +172,7 @@ public class Building : MonoBehaviour
                     val = 0;
                     waitTime = intervalLength;
                 }
-                go.GetComponent<ConsumeSign>().InitRangeBuff();
+                //go.GetComponent<ConsumeSign>().InitRangeBuff();
                 Tweener twe = transform.DOScale(1f, waitTime);
                 yield return twe.WaitForCompletion();
             }
@@ -206,6 +224,9 @@ public class Building : MonoBehaviour
     private void Awake()
     {
         BuildingManager.My.buildings.Add(this);
+        countDownSprite.color = protalGameObject.GetComponent<ParticleSystem>().startColor;
+        countDownSprite.transform.parent.LookAt(Camera.main.transform.position);
+        countDownSprite.transform.parent.gameObject.SetActive(false);
     }
 
     [Serializable]

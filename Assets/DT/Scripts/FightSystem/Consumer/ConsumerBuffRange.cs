@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class ConsumerBuffRange : MonoBehaviour
@@ -30,6 +31,6 @@ public class ConsumerBuffRange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

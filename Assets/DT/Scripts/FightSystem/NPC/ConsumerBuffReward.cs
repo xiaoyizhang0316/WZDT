@@ -22,6 +22,7 @@ public class ConsumerBuffReward : BaseExtraSkill
             {
                 StageGoal.My.playerHealth += GetComponent<ConsumeSign>().consumeData.liveSatisfy * 80 / 100;
                 StageGoal.My.GetPlayerGold(GetComponent<ConsumeSign>().consumeData.killMoney * 30 / 100);
+                StageGoal.My.Income(GetComponent<ConsumeSign>().consumeData.killMoney * 30 / 100, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
             }
         }
     }
