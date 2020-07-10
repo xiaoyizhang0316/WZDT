@@ -33,10 +33,6 @@ public class WinManager : MonoSingleton<WinManager>
     public Image box_1;
     public Image box_2;
 
-    public Text star1Con;
-    public Text star2Con;
-    public Text star3Con;
-
     public Button box_0Button;
     public Button box_1Button;
     public Button box_2Button;
@@ -65,54 +61,19 @@ public class WinManager : MonoSingleton<WinManager>
 
     public Button review;
 
+    public Text star1Con;
+    public Text star2Con;
+    public Text star3Con;
+
+    public Text UnlockText;
     private int stars = 0;
     private string[] starArr;
     PlayerReplay tempReplay;
-    List<PlayerEquip> playerEquips;
-
-    void AddEquipGear(List<GearData> gearDatas)
-    {
-        foreach(var g in gearDatas)
-        {
-            playerEquips.Add(new PlayerEquip(NetworkMgr.My.playerID, 0, g.ID, 1));
-        }
-    }
-
-
-    void AddEquipWorker(List<WorkerData> workerDatas)
-    {
-        foreach(var w in workerDatas)
-        {
-            playerEquips.Add(new PlayerEquip(NetworkMgr.My.playerID, 1, w.ID, 1));
-        }
-    }
-
-    void UploadGetEquip()
-    {
-        if(playerEquips.Count>0)
-        //NetworkMgr.My.AddEquipList(playerEquips);
-        {
-            foreach(var e  in playerEquips)
-            {
-                NetworkMgr.My.AddEquip(e.equipID, e.equipType, e.count);
-            }
-        }
-    }
-
     public void InitWin()
     {
-        StageGoal.My.endTime = TimeStamp.GetCurrentTimeStamp();
         star1Con.text = BaseLevelController.My.starOneCondition;
         star2Con.text = BaseLevelController.My.starTwoCondition;
         star3Con.text = BaseLevelController.My.starThreeCondition;
-        if (playerEquips == null)
-        {
-            playerEquips = new List<PlayerEquip>();
-        }
-        else
-        {
-            playerEquips.Clear();
-        }
         stars = 0;
         retry.onClick.AddListener(() => {
             PlayerData.My.Reset();
@@ -128,7 +89,6 @@ public class WinManager : MonoSingleton<WinManager>
         {
             stars += 1;
             starArr[0] = "1";
-            
             //没领过
             if (tempProgress == null || tempProgress.rewardStatus[0] == '0')
             {
@@ -137,8 +97,6 @@ public class WinManager : MonoSingleton<WinManager>
                 //   boxs.SetActive(true);
                 box_0.color = Color.white;
                 box_0Button.interactable = true;
-                AddEquipGear( StageGoal.My.GetStarGearData(1));
-                AddEquipWorker( StageGoal.My.GetStarWorkerData(1));
             }
             //领过
             else
@@ -193,8 +151,6 @@ public class WinManager : MonoSingleton<WinManager>
                 //   boxs.SetActive(true);
                 box_1.color = Color.white;
                 box_1Button.interactable = true;
-                AddEquipGear(StageGoal.My.GetStarGearData(2));
-                AddEquipWorker(StageGoal.My.GetStarWorkerData(2));
             }
             //领过
             else
@@ -262,8 +218,6 @@ public class WinManager : MonoSingleton<WinManager>
                 //   boxs.SetActive(true);
                 box_2.color = Color.white;
                 box_2Button.interactable = true;
-                AddEquipGear(StageGoal.My.GetStarGearData(3));
-                AddEquipWorker(StageGoal.My.GetStarWorkerData(3));
             }
             //领过
             else
@@ -316,11 +270,9 @@ public class WinManager : MonoSingleton<WinManager>
         }
         if (NetworkMgr.My.isUsingHttp)
         {
-             tempReplay = new PlayerReplay(true);
+            tempReplay = new PlayerReplay(true);
             //NetworkMgr.My.AddReplayData(tempReplay);
             UploadReplayData();
-            UploadGetEquip();
-            CommitProgress();
         }
         CheckNext();
     }
@@ -381,10 +333,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject equip = Instantiate(equipPrb, pos_equip);
                 equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
                 equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-                //}
+                if (NetworkMgr.My.isUsingHttp)
+                {
+                    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
+                }
             }
             for (int i = 0; i < pos_worker.transform.childCount; i++)
             {
@@ -395,10 +347,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject worker = Instantiate(workerPrb, pos_worker);
                 worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
                 worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-                //}
+                if (NetworkMgr.My.isUsingHttp)
+                {
+                    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
+                }
             }
 
             //CheckNext();
@@ -422,10 +374,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject equip = Instantiate(equipPrb, pos_equip);
                 equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
                 equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-                //}
+                if (NetworkMgr.My.isUsingHttp)
+                {
+                    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
+                }
             }
             for (int i = 0; i < pos_worker.transform.childCount; i++)
             {
@@ -436,10 +388,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject worker = Instantiate(workerPrb, pos_worker);
                 worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
                 worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-                //}
+                if (NetworkMgr.My.isUsingHttp)
+                {
+                    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
+                }
             }
             //boxs.SetActive(true);
             //CheckNext();
@@ -463,10 +415,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject equip = Instantiate(equipPrb, pos_equip);
                 equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
                 equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-                //}
+                if (NetworkMgr.My.isUsingHttp)
+                {
+                    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
+                }
             }
             for (int i = 0; i < pos_worker.transform.childCount; i++)
             {
@@ -477,10 +429,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject worker = Instantiate(workerPrb, pos_worker);
                 worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
                 worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-                //}
+                if (NetworkMgr.My.isUsingHttp)
+                {
+                    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
+                }
             }
             //boxs.SetActive(true);
 
@@ -490,15 +442,15 @@ public class WinManager : MonoSingleton<WinManager>
         });
         returnMap.onClick.AddListener(() =>
         {
-            //if (NetworkMgr.My.isUsingHttp)
-            //{
-            //    CommitProgress();
-            //}
-            //else
-            //{
+            if (NetworkMgr.My.isUsingHttp)
+            {
+                CommitProgress();
+            }
+            else
+            {
                 PlayerData.My.Reset();
                 SceneManager.LoadScene("Map");
-            //}
+            }
         });
         review.onClick.AddListener(() =>
         {
@@ -510,20 +462,25 @@ public class WinManager : MonoSingleton<WinManager>
     private void CommitProgress()
     {
         NetworkMgr.My.UpdateLevelProgress(NetworkMgr.My.currentLevel, stars, starArr[0] + starArr[1] + starArr[2],
-                    starArr[0] + starArr[1] + starArr[2], StageGoal.My.playerSatisfy, () =>
+                    starArr[0] + starArr[1] + starArr[2], 0, () =>
                     {
-                        //PlayerData.My.Reset();
-                        //SceneManager.LoadScene("Map");
+                        PlayerData.My.Reset();
+                        SceneManager.LoadScene("Map");
                     });
     }
 
     public void CheckNext()
     {
         returnMap.interactable = true;
-
+        UnlockText .gameObject.SetActive(false);
         if (box_0Button.interactable || box_1Button.interactable || box_2Button.interactable)
         {
+            UnlockText .gameObject.SetActive(true);
             returnMap.interactable = false;
+        }
+        else
+        {
+            
         }
     }
 
