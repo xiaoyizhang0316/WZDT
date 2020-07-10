@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class Url
 {
+
     private static string ip = "http://39.106.226.52:8080/";
 
     #region login

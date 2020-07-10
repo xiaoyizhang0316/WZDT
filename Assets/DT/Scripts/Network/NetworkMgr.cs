@@ -9,6 +9,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 {
     #region Player datas
     public bool isUsingHttp = false;
+    public bool isShowFPS = false;
 
     public string loginRecordID;
     private string token;
@@ -255,6 +256,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             {
                 try
                 {
+                    //Debug.Log(response.data);
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
                     doSuccess?.Invoke();
                 }

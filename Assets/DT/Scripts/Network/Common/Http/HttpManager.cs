@@ -34,11 +34,21 @@ public class HttpManager : MonoSingleton<HttpManager>
 
     bool isTipShow = false;
 
+    int frameCount = 0;
+    float frameTime = 0;
+    float fps = 0;
+    public Text FpsText;
+    //public bool showFps = false;
+
     Dictionary<int, HttpData> retryDic = new Dictionary<int, HttpData>();
 
     void Start()
     {
         timer = false;
+        if (NetworkMgr.My.isShowFPS && SceneManager.GetActiveScene().name.StartsWith("FTE") && SceneManager.GetActiveScene().name != "FTE_0")
+        {
+            InvokeRepeating("ShowFPS", 1, 1f);
+        }
     }
     
     // Update is called once per frame
@@ -48,7 +58,21 @@ public class HttpManager : MonoSingleton<HttpManager>
         {
             time += Time.deltaTime;
         }
+
+        if(NetworkMgr.My.isShowFPS && SceneManager.GetActiveScene().name.StartsWith("FTE")&&SceneManager.GetActiveScene().name != "FTE_0")
+        {
+            frameCount++;
+        }
     }
+
+    void ShowFPS()
+    {
+        fps = frameCount;
+        frameCount = 0;
+        FpsText.text = "FPS "+fps.ToString();
+        FpsText.color = fps >= 60 ? Color.green : (fps >= 30 ? Color.white : Color.red);
+    }
+
 
     public IEnumerator HttpSend(string webRequestUrl, Action<UnityWebRequest> action, SortedDictionary<string, string> userData = null,  HttpType httpType = HttpType.Get, int retryID=0)
     {
@@ -218,6 +242,7 @@ public class HttpManager : MonoSingleton<HttpManager>
     {
         return true;
     }
+
 
     private void ShowNetworkStatus(long code)
     {
