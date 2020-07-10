@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using DT.Fight.Bullet;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,20 @@ public class NpcProductInfo : MonoBehaviour
     public Image icon;
     public List<Image> buffs;
 
+    public GameObject bulletWarehourse;
+
+    public Transform bulletContent;
+
+    public GameObject bulletPrefab;
+
+    public Button clearBullets;
+
+    public Sprite AOE;
+    public Sprite normallpp;
+    public Sprite lightning;
+    public Sprite tow;
+    public Text level;
+
 
 
 
@@ -43,6 +58,22 @@ public class NpcProductInfo : MonoBehaviour
         prop2.text = (npc.GetComponent<BaseMapRole>().baseRoleData.effect).ToString() + "%";
 
         timeInv.text = (1.0f / npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("#.##");
+        icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType.ToString() +
+            npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level);
+        level.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level.ToString();
+        clearBullets.onClick.RemoveAllListeners();
+        clearBullets.onClick.AddListener(() => {
+            NewCanvasUI.My.Panel_Delete.SetActive(true);
+            string str = "确定要清空仓库吗？";
+            DeleteUIManager.My.Init(str, () => {
+                //PlayerData.My.GetMapRoleById(npc.baseRoleData.ID).ClearWarehouse();
+                npc.GetComponent<BaseMapRole>().ClearWarehouse();
+                SetInfo(npc, baseSkill);
+                ClearBulletContent();
+            });
+        });
+        ShowBullets(npc);
+        bulletWarehourse.SetActive(true);
         int i = 0;
         foreach (var sp in buffs)
         {
@@ -87,5 +118,49 @@ public class NpcProductInfo : MonoBehaviour
         effectBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(effct / 120f * 150f,
                 effectBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
+    }
+
+    void ShowBullets(Transform npc)
+    {
+        BaseMapRole baseMapRole = npc.GetComponent<BaseMapRole>();
+        for (int i = 0; i < baseMapRole.warehouse.Count; i++)
+        {
+
+            GameObject Pruductgame = Instantiate(bulletPrefab, bulletContent);
+            Pruductgame.GetComponent<NpcBulletSign>().currentProduct =
+                baseMapRole.warehouse[i];
+            switch (baseMapRole.warehouse[i].bulletType)
+            {
+                case BulletType.Bomb:
+                    Pruductgame.GetComponent<Image>().sprite = AOE;
+                    break;
+                case BulletType.NormalPP:
+                    Pruductgame.GetComponent<Image>().sprite = normallpp;
+                    break;
+
+                case BulletType.Lightning:
+                    Pruductgame.GetComponent<Image>().sprite = lightning;
+                    break;
+
+                case BulletType.summon:
+                    Pruductgame.GetComponent<Image>().sprite = tow;
+                    break;
+
+            }
+
+        }
+    }
+    void ClearBulletContent()
+    {
+        for (int i = 0; i < bulletContent.childCount; i++)
+        {
+            Destroy(bulletContent.GetChild(i).gameObject);
+        }
+    }
+
+    public void Reset()
+    {
+        ClearBulletContent();
+        bulletWarehourse.SetActive(false);
     }
 }

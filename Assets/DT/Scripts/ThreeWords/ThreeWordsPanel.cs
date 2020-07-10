@@ -14,6 +14,8 @@ public class ThreeWordsPanel : MonoBehaviour
 
     public GameObject thisPanel;
 
+    public Transform map;
+
     string input="";
     // Start is called before the first frame update
     void Start()
@@ -23,14 +25,15 @@ public class ThreeWordsPanel : MonoBehaviour
         answer_input.onEndEdit.AddListener(OnEndEdit);
         if(NetworkMgr.My.isUsingHttp&& SceneManager.GetActiveScene().name == "Map")
         {
-            if(NetworkMgr.My.levelProgressList.Count == 4 && NetworkMgr.My.playerDatas.threeWordsProgress==1 || NetworkMgr.My.levelProgressList.Count==10 && NetworkMgr.My.playerDatas.threeWordsProgress == 2)
+            Debug.Log(NetworkMgr.My.levelProgressList.Count + "  " + NetworkMgr.My.playerDatas.threeWordsProgress);
+            if(NetworkMgr.My.levelProgressList.Count == 4 && NetworkMgr.My.playerDatas.threeWordsProgress==1 || NetworkMgr.My.levelProgressList.Count==9 && NetworkMgr.My.playerDatas.threeWordsProgress == 2)
             {
-                if (NetworkMgr.My.levelProgressList[NetworkMgr.My.levelProgressList.Count - 1].levelStar[0]=='1')
-                {
+                //if (NetworkMgr.My.levelProgressList[NetworkMgr.My.levelProgressList.Count - 1].levelStar[0]=='1')
+                //{
 
                     thisPanel.SetActive(true);
                     SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
-                }
+                //}
             }
         }
     }
@@ -86,7 +89,7 @@ public class ThreeWordsPanel : MonoBehaviour
         else
         {
             thisPanel.SetActive(false);
-            transform.parent.Find("Map").GetComponent<MainMap>().title.text = input;
+            map.GetComponent<MainMap>().title.text = input;
         }
     }
 

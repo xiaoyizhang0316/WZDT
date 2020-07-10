@@ -361,6 +361,12 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
     }
 
+    public void CheckAfterReconnect()
+    {
+        CheckDead();
+        CheckWin();
+    }
+
     /// <summary>
     /// 通关时调用函数
     /// </summary>

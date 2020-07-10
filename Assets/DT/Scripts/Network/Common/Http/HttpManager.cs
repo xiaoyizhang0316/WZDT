@@ -17,21 +17,38 @@ public class HttpManager : MonoSingleton<HttpManager>
     public GameObject mask;
     public Text tip;
     public Transform clickTip;
+    public Text clickTipText;
+    public Button clickTipButton;
     public Transform selectTip;
     public Text selectTipText;
     public Button selectCancel;
     public Button selectRetry;
+
+    public Transform reConnTip;
+    public Text reConnTipText;
+    public Button reConnConfirm;
+    public Button reConnCancel;
 
     private bool timer = false;
     private float time = 0;
 
     bool isTipShow = false;
 
+    int frameCount = 0;
+    float frameTime = 0;
+    float fps = 0;
+    public Text FpsText;
+    //public bool showFps = false;
+
     Dictionary<int, HttpData> retryDic = new Dictionary<int, HttpData>();
 
     void Start()
     {
         timer = false;
+        if (NetworkMgr.My.isShowFPS && SceneManager.GetActiveScene().name.StartsWith("FTE") && SceneManager.GetActiveScene().name != "FTE_0")
+        {
+            InvokeRepeating("ShowFPS", 1, 1f);
+        }
     }
     
     // Update is called once per frame
@@ -41,7 +58,21 @@ public class HttpManager : MonoSingleton<HttpManager>
         {
             time += Time.deltaTime;
         }
+
+        if(NetworkMgr.My.isShowFPS && SceneManager.GetActiveScene().name.StartsWith("FTE")&&SceneManager.GetActiveScene().name != "FTE_0")
+        {
+            frameCount++;
+        }
     }
+
+    void ShowFPS()
+    {
+        fps = frameCount;
+        frameCount = 0;
+        FpsText.text = "FPS "+fps.ToString();
+        FpsText.color = fps >= 60 ? Color.green : (fps >= 30 ? Color.white : Color.red);
+    }
+
 
     public IEnumerator HttpSend(string webRequestUrl, Action<UnityWebRequest> action, SortedDictionary<string, string> userData = null,  HttpType httpType = HttpType.Get, int retryID=0)
     {
@@ -119,14 +150,16 @@ public class HttpManager : MonoSingleton<HttpManager>
             {
                 Debug.Log(uwr.error+uwr.responseCode);
                 //ShowNetworkStatus(uwr.responseCode);
-                SetNeedRetryById(retryID, false);
+                //SetNeedRetryById(retryID, false);
+                retryDic.Remove(retryID);
                 ShowClickTip("网络错误！",()=>SceneManager.LoadScene("Login"));
                 mask.SetActive(false);
                 yield break;
             }
             else
             {
-                SetNeedRetryById(retryID,false);
+                //SetNeedRetryById(retryID,false);
+                retryDic.Remove(retryID);
                 action(uwr);
             }
         }
@@ -210,6 +243,7 @@ public class HttpManager : MonoSingleton<HttpManager>
         return true;
     }
 
+
     private void ShowNetworkStatus(long code)
     {
         string tip = "网络故障";
@@ -275,11 +309,14 @@ public class HttpManager : MonoSingleton<HttpManager>
 
     public void ShowClickTip(string tip,Action doEnd=null)
     {
-        clickTip.GetChild(0).GetComponent<Text>().text = tip;
+        clickTipText.text = tip;
         clickTip.gameObject.SetActive(true);
         mask.SetActive(false);
-        clickTip.GetComponent<Button>().onClick.RemoveAllListeners();
-        clickTip.GetComponent<Button>().onClick.AddListener(()=> { doEnd?.Invoke(); });
+        clickTipButton.onClick.RemoveAllListeners();
+        clickTipButton.onClick.AddListener(()=> {
+            clickTip.gameObject.SetActive(false);
+            doEnd?.Invoke();
+        });
     }
 
     public void ShowTwoClickTip(string tip, Action cancel=null)
@@ -308,6 +345,30 @@ public class HttpManager : MonoSingleton<HttpManager>
         });
         selectTip.gameObject.SetActive(true);
         mask.SetActive(false);
+    }
+
+    public void ShowReConn(string str =null)
+    {
+        if (str != null)
+        {
+            reConnTipText.text = str;
+        }
+        else
+        {
+            reConnTipText.text = "与服务器断开连接";
+        }
+        reConnCancel.onClick.RemoveAllListeners();
+        reConnCancel.onClick.AddListener(() => {
+            reConnTip.gameObject.SetActive(false);
+            SceneManager.LoadScene("Login");
+        });
+
+        reConnConfirm.onClick.RemoveAllListeners();
+        reConnConfirm.onClick.AddListener(()=> {
+            reConnTip.gameObject.SetActive(false);
+            NetworkMgr.My.ReConnect();
+        });
+        reConnTip.gameObject.SetActive(true);
     }
 
     private void SetNeedRetryById(int id, bool retry)
