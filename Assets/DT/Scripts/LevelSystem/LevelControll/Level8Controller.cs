@@ -25,6 +25,6 @@ public class Level8Controller : BaseLevelController
         }
         else
             starThreeStatus = false;
-        starThreeCondition = "来自非消费者的收入占总收入50%以上，当前:" + per.ToString(); ;
+        starThreeCondition = "来自非消费者的收入占总收入50%以上，当前:" + per.ToString("##.##"); ;
     }
 }

@@ -113,24 +113,24 @@ public class ConsumeSign : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 初始化光环效果
-    /// </summary>
-    public void InitRangeBuff()
-    {
-        rangeBuff = GetComponentInChildren<ConsumerBuffRange>();
-        for (int i = 0; i < buffList.Count; i++)
-        {
-            if (buffList[i].buffId > 1000)
-            {
-                rangeBuff.buffList.Add(buffList[i].buffId / 10);
-            }
-        }
-        if(rangeBuff.buffList.Count == 0)
-        {
-            rangeBuff.transform.parent.gameObject.SetActive(false);
-        }
-    }
+    ///// <summary>
+    ///// 初始化光环效果
+    ///// </summary>
+    //public void InitRangeBuff()
+    //{
+    //    rangeBuff = GetComponentInChildren<ConsumerBuffRange>();
+    //    for (int i = 0; i < buffList.Count; i++)
+    //    {
+    //        if (buffList[i].buffId > 1000)
+    //        {
+    //            rangeBuff.buffList.Add(buffList[i].buffId / 10);
+    //        }
+    //    }
+    //    if(rangeBuff.buffList.Count == 0)
+    //    {
+    //        rangeBuff.transform.parent.gameObject.SetActive(false);
+    //    }
+    //}
 
     /// <summary>
     /// 激活特效

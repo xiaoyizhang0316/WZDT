@@ -26,22 +26,19 @@ public class Level2Controller : BaseLevelController
 
     public override void CheckStarThree()
     {
-        int count = 0;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
-            if (!PlayerData.My.MapRole[i].isNpc)
+            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == RoleType.Dealer)
             {
-                count++;
-                if (count > 6)
+                if (!PlayerData.My.MapRole[i].isNpc)
                 {
                     starThreeStatus = false;
                     CancelInvoke("CheckStarThree");
-                    starThreeCondition = "放置不多于6个角色，当前：" + count.ToString() + "/6";
                     return;
                 }
             }
         }
         starThreeStatus = true;
-        starThreeCondition = "放置不多于6个角色，当前：" + count.ToString() + "/6";
+        starThreeCondition = "不放置自有的零售商";
     }
 }
