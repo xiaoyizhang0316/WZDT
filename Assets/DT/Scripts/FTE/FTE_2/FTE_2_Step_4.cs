@@ -45,7 +45,7 @@ public class FTE_2_Step_4 : BaseStep
     {
         NewCanvasUI.My.Panel_AssemblyRole.SetActive(true);
         NewCanvasUI.My.Panel_Update.SetActive(false);
-        CreatRoleManager.My.Open(PlayerData.My.RoleData[3]);
+        CreatRoleManager.My.Open(PlayerData.My.RoleData[4]);
         nextButton.interactable = false;
        MaskManager.My.Close(3,0);
        

@@ -44,7 +44,7 @@ public class FTE_2_Step_3 : BaseStep
     public override void StopCurrentStep()
     {
         NewCanvasUI.My.Panel_Update.SetActive(true);
-        RoleUpdateInfo.My.Init(PlayerData.My.RoleData[3]);
+        RoleUpdateInfo.My.Init(PlayerData.My.RoleData[4]);
         nextButton.interactable = false;
        MaskManager.My.Close(2,0);
        
