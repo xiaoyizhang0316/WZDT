@@ -24,6 +24,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public GameObject dustPrb;
 
+    public Text techCost;
+
+    private int costTech;
+
     /// <summary>
     /// 窗口开关控制
     /// </summary>
@@ -33,12 +37,21 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     // Start is called before the first frame update
     void Start()
     {
-
+        costTech = GameDataMgr.My.GetModelData(type, 1).costTech;
     }
 
     // Update is called once per frame
     void Update()
     {
+        techCost.text = costTech.ToString();
+        if (StageGoal.My.playerTechPoint < costTech)
+        {
+            techCost.color = Color.red;
+        }
+        else
+        {
+            techCost.color = Color.white;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)

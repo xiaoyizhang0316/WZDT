@@ -32,6 +32,8 @@ public class Building : MonoBehaviour
 
     public Image countDownSprite;
 
+    public List<Material> materials;
+
     /// <summary>
     /// 使用透视镜
     /// </summary>
@@ -202,6 +204,7 @@ public class Building : MonoBehaviour
 
         GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
         GetComponent<LineRenderer>().SetPositions(twe.PathGetDrawPoints());
+        GetComponent<LineRenderer>().material = materials[0];
         GetComponent<LineRenderer>().material.mainTextureOffset = new Vector2(0.85f, 0f);
         GetComponent<LineRenderer>().material.DOOffset(new Vector2(-1.6f, 0f), 1.5f).OnComplete(() =>
         {
@@ -209,6 +212,12 @@ public class Building : MonoBehaviour
             GetComponent<LineRenderer>().material.DOOffset(new Vector2(-1.6f, 0f), 1.5f).SetEase(Ease.Linear);
         }).SetEase(Ease.Linear);
     }
+
+    //public void ShowPathLine()
+    //{
+    //    GetComponent<LineRenderer>().material = materials[1];
+
+    //}
 
     // Start is called before the first frame update
     void Start()
