@@ -50,6 +50,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public GameObject Panel_Review;
 
+    public GameObject consumerInfoFloatWindow;
+
     public Button Button_Pause;
 
     public Button Button_Normal;

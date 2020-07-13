@@ -26,7 +26,7 @@ public class FTE_1_Step_17 : BaseStep
            
             contenText.DOFade(1, 1.5f).OnComplete(() =>
             {
-                MaskManager.My.Open(14,130);
+                MaskManager.My.Open(14,60);
                 MaskManager.My.FadeMask(9,130);
                 FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
                 PlayNext();

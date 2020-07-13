@@ -63,9 +63,9 @@ public class ConsumeSign : MonoBehaviour
 
     public GameObject sheep;
 
-    private ConsumerBuffRange rangeBuff;
-
     public BulletType lastHitType;
+
+    public int buildingIndex;
 
     /// <summary>
     /// 初始化
@@ -454,6 +454,12 @@ public class ConsumeSign : MonoBehaviour
     }
 
     #endregion
+
+    public void OnMouseDown()
+    {
+        NewCanvasUI.My.consumerInfoFloatWindow.SetActive(true);
+        NewCanvasUI.My.consumerInfoFloatWindow.GetComponent<ConsumerFloatWindow>().Init(this);
+    }
 
     private void Update()
     {

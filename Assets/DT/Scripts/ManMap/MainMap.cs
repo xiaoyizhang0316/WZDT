@@ -8,6 +8,7 @@ public class MainMap : MonoBehaviour
 {
     public Text title;
     public List<LevelSign> levelSigns;
+    public Transform threeWords;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,22 +33,29 @@ public class MainMap : MonoBehaviour
 
     private void GetLevelProgress()
     {
+        //Debug.Log("get ");
         if (NetworkMgr.My.levelProgresses == null)
         {
-            NetworkMgr.My.GetLevelProgress(() => { InitLevel(); }, () => {
+            NetworkMgr.My.GetLevelProgress(() => {
+                InitLevel();
+                threeWords.gameObject.SetActive(true);
+            }, () => {
                 if (NetworkMgr.My.playerDatas.fteProgress > 1)
                 {
                     HttpManager.My.ShowClickTip("获取数据失败，点击重试！", InitMap);
+                    //HttpManager.My.ShowTwoClickTip("获取数据失败，点击重试或取消");
                 }
                 else
                 {
                     InitLevel();
+                    threeWords.gameObject.SetActive(true);
                 }
             });
         }
         else
         {
             InitLevel();
+            threeWords.gameObject.SetActive(true);
         }
     }
 

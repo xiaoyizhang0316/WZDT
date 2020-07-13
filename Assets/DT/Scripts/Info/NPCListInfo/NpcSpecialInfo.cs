@@ -11,6 +11,7 @@ public class NpcSpecialInfo : MonoBehaviour
     public GameObject merchantProp;
     public GameObject dealerProp;
 
+    public Image icon;
     public Text npcName;
     public Text skillDes;
     public Text efficiency;
@@ -35,6 +36,7 @@ public class NpcSpecialInfo : MonoBehaviour
     public Sprite lightning;
     public Sprite tow;
 
+
     public void SetInfo(BaseMapRole npc, BaseSkill baseSkill, Transform npcTF)
     {
         npcName.text = npc.baseRoleData.baseRoleData.roleName;
@@ -56,6 +58,7 @@ public class NpcSpecialInfo : MonoBehaviour
                 ClearBulletContent();
             });
         });
+        icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.baseRoleData.baseRoleData.roleType.ToString() + npc.baseRoleData.baseRoleData.level);
         //ClearBulletContent();
         switch (npc.baseRoleData.baseRoleData.roleType)
         {
@@ -63,6 +66,7 @@ public class NpcSpecialInfo : MonoBehaviour
                 //seedProp.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.efficiency / 20f).ToString("#.#") + "/s";
                 //seedProp.transform.GetChild(1).GetChild(2).GetComponent<Text>().text = (npc.baseRoleData.effect*10).ToString();
                 seedProp.GetComponent<NpcSpecialProp>().SetInfo(npc);
+                
                 seedProp.SetActive(true);
                 ShowSeedBullet(npcTF);
                 bulletWarehourse.SetActive(true);

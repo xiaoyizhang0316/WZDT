@@ -67,6 +67,11 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private Tweener tew;
     public void OnPointerClick(PointerEventData eventData)
     {
+        UpdateRole1();
+    }
+
+    public void UpdateRole1()
+    {
         if (RoleUpdateInfo.My.currentLevel == 5 || (tew != null && tew.IsPlaying()))
         {
             Debug.Log(hammer.transform.eulerAngles);

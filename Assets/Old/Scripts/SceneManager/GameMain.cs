@@ -8,6 +8,7 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
 {
     public bool useNetWork = false;
     public string sceneName = "FTE_1";
+    public bool showFPS = false;
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -41,6 +42,10 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
             //{
             //    sceneName = "Map";
             //}
+        }
+        if (showFPS)
+        {
+            NetworkMgr.My.isShowFPS = true;
         }
         
         yield return new WaitForSeconds(0.5f);

@@ -12,6 +12,11 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public Button unlockBtn;
     public Button cancelBtn;
 
+    public Button closeUnlock;
+    public Button closeProductAndSpecial;
+    public Button closeService;
+
+
     public Button specialTrade;
     public Button serviceTrade;
     public Button productTrade;
@@ -39,6 +44,24 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         closeBtn.onClick.AddListener(()=> {
             npcInfo.SetActive(false);
             specialInfo.GetComponent<NpcSpecialInfo>().Reset();
+            commonProductInfo.GetComponent<NpcProductInfo>().Reset();
+            closeBtn.gameObject.SetActive(false);
+        });
+
+        closeUnlock.onClick.AddListener(()=> {
+            npcInfo.SetActive(false);
+            specialInfo.GetComponent<NpcSpecialInfo>().Reset();
+            commonProductInfo.GetComponent<NpcProductInfo>().Reset();
+            closeBtn.gameObject.SetActive(false);
+        });
+        closeProductAndSpecial.onClick.AddListener(() => {
+            npcInfo.SetActive(false);
+            specialInfo.GetComponent<NpcSpecialInfo>().Reset();
+            commonProductInfo.GetComponent<NpcProductInfo>().Reset();
+            closeBtn.gameObject.SetActive(false);
+        });
+        closeService.onClick.AddListener(() => {
+            npcInfo.SetActive(false);
             closeBtn.gameObject.SetActive(false);
         });
 
