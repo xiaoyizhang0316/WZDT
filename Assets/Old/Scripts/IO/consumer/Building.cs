@@ -189,6 +189,7 @@ public class Building : MonoBehaviour
     /// </summary>
     public void DrawPathLine()
     {
+        isPathLineShow = false;
         List<Vector3> list = new List<Vector3>();
         for (int i = 0; i < consumerPathList.Count; i++)
         {
@@ -201,7 +202,7 @@ public class Building : MonoBehaviour
             Destroy(go);
         }).SetEase(Ease.Linear).SetLookAt(0.01f);
         twe.ForceInit();
-
+        GetComponent<LineRenderer>().textureMode = LineTextureMode.Stretch;
         GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
         GetComponent<LineRenderer>().SetPositions(twe.PathGetDrawPoints());
         GetComponent<LineRenderer>().material = materials[0];
@@ -213,11 +214,27 @@ public class Building : MonoBehaviour
         }).SetEase(Ease.Linear);
     }
 
-    //public void ShowPathLine()
-    //{
-    //    GetComponent<LineRenderer>().material = materials[1];
+    private bool isPathLineShow = false;
 
-    //}
+    public void ShowPathLine()
+    {
+        GetComponent<LineRenderer>().textureMode = LineTextureMode.Tile;
+        //GetComponent<LineRenderer>().material.mainTextureOffset = new Vector2(0f, 0f);
+        GetComponent<LineRenderer>().material = materials[1];
+        isPathLineShow = true;
+    }
+
+    public void StopShowPathLine()
+    {
+        if (isPathLineShow)
+        {
+            GetComponent<LineRenderer>().material = materials[0];
+            GetComponent<LineRenderer>().textureMode = LineTextureMode.Stretch;
+            //GetComponent<LineRenderer>().material.mainTextureOffset = new Vector2(0.85f, 0f);
+            isPathLineShow = false;
+        }
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -228,12 +245,17 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (isPathLineShow)
+        {
+            GetComponent<LineRenderer>().material.mainTextureOffset += new Vector2(-0.02f, 0f);
+        }
     }
 
     private void Awake()
     {
         BuildingManager.My.buildings.Add(this);
+        GetComponent<LineRenderer>().startColor = protalGameObject.GetComponent<ParticleSystem>().startColor;
+        GetComponent<LineRenderer>().endColor = protalGameObject.GetComponent<ParticleSystem>().startColor;
         countDownSprite.color = protalGameObject.GetComponent<ParticleSystem>().startColor;
         countDownSprite.transform.parent.LookAt(Camera.main.transform.position);
         countDownSprite.transform.parent.gameObject.SetActive(false);
