@@ -107,6 +107,27 @@ public class NpcProductInfo : MonoBehaviour
                 }
                 a++;
             }
+            ProductMerchant pm;
+            npc.TryGetComponent<ProductMerchant>(out pm);
+            if (pm != null)
+            {
+                a = 0;
+                for (int j = baseSkill.buffList.Count + npc.GetComponent<NPC>().NPCBuffList.Count; j < buffs.Count; j++)
+                {
+                    if (a< pm.specialBuffList.Count)
+                    {
+                        buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + pm.specialBuffList[a]);
+                        buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(pm.specialBuffList[a]));
+                    }
+                    else
+                    {
+                        buffs[j].sprite = NPCListInfo.My.buff;
+                        buffs[j].GetComponent<BuffText>().Reset();
+                    }
+                    a++;
+                }
+            }
+            
         }
     }
 
