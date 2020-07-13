@@ -6,7 +6,6 @@ using static GameEnum;
 
 public class MapManager : MonoSingleton<MapManager>
 {
-
     public List<MapSign>_mapSigns = new List<MapSign>();
 
     public List<GameObject> mapTypeList;
