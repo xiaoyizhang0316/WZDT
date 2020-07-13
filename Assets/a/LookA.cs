@@ -36,9 +36,9 @@ public class LookA : MonoBehaviour
             body.transform.DOLookAt(target.transform.position, 0.02f, AxisConstraint.Y);
             pao.transform.DOLookAt(target.transform.position + new Vector3(0f,1f,0f), 0.02f, AxisConstraint.W);
         }
-        else
-        {
-            pao.transform.DOLookAt(lastPos + new Vector3(0f, 2f, 0f), 0.02f, AxisConstraint.W);
-        }
+        //else
+        //{
+        //    pao.transform.DOLookAt(lastPos + new Vector3(0f, 2f, 0f), 0.02f, AxisConstraint.W);
+        //}
     }
 }
