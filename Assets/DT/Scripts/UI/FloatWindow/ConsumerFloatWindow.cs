@@ -19,6 +19,7 @@ public class ConsumerFloatWindow : MonoBehaviour
 
     public void Init(ConsumeSign sign)
     {
+        CancelInvoke("Close");
         targetConsume = sign;
         string path = "Sprite/ConsumerType/" + targetConsume.consumerType.ToString();
         typeSprite.sprite = Resources.Load<Sprite>(path);
@@ -51,6 +52,7 @@ public class ConsumerFloatWindow : MonoBehaviour
         }
         typeName.text = targetConsume.consumeData.consumerName;
         healthText.text = "满意度需要：" + targetConsume.consumeData.maxHealth.ToString();
+        Invoke("Close", 5f);
     }
 
     public void ClearList()
@@ -60,6 +62,11 @@ public class ConsumerFloatWindow : MonoBehaviour
         {
             DestroyImmediate(buffListTF.GetChild(0).gameObject);
         }
+    }
+
+    public void Close()
+    {
+        gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
