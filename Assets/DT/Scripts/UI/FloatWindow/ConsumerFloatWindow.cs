@@ -19,6 +19,8 @@ public class ConsumerFloatWindow : MonoBehaviour
 
     public void Init(ConsumeSign sign)
     {
+        if (targetConsume != null)
+            BuildingManager.My.GetBuildingByIndex(targetConsume.buildingIndex).StopShowPathLine();
         CancelInvoke("Close");
         targetConsume = sign;
         string path = "Sprite/ConsumerType/" + targetConsume.consumerType.ToString();
@@ -52,6 +54,7 @@ public class ConsumerFloatWindow : MonoBehaviour
         }
         typeName.text = targetConsume.consumeData.consumerName;
         healthText.text = "满意度需要：" + targetConsume.consumeData.maxHealth.ToString();
+        BuildingManager.My.GetBuildingByIndex(targetConsume.buildingIndex).ShowPathLine();
         Invoke("Close", 5f);
     }
 
@@ -66,6 +69,7 @@ public class ConsumerFloatWindow : MonoBehaviour
 
     public void Close()
     {
+        BuildingManager.My.GetBuildingByIndex(targetConsume.buildingIndex).StopShowPathLine();
         gameObject.SetActive(false);
     }
 
