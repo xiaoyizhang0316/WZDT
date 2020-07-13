@@ -44,7 +44,7 @@ public class FTE_2_Step_12 : BaseStep
     public void PlayNext()
     {
         Debug.Log("检测");
-        if (TradeManager.My.CheckTwoRoleHasTrade(PlayerData.My.RoleData[3],PlayerData.My.RoleData[4]))
+        if (TradeManager.My.CheckTwoRoleHasTrade(PlayerData.My.RoleData[4],PlayerData.My.RoleData[5]))
         {
             Debug.Log("检测成功");
 
