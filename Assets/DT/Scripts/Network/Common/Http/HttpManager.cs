@@ -34,7 +34,7 @@ public class HttpManager : MonoSingleton<HttpManager>
 
     bool isTipShow = false;
 
-    int frameCount = 0;
+    float frameCount = 0;
     float frameTime = 0;
     float fps = 0;
     public Text FpsText;
@@ -50,7 +50,8 @@ public class HttpManager : MonoSingleton<HttpManager>
             InvokeRepeating("ShowFPS", 1, 1f);
         }
     }
-    
+    private float deltaTime;
+
     // Update is called once per frame
     void Update()
     {
@@ -61,7 +62,8 @@ public class HttpManager : MonoSingleton<HttpManager>
 
         if(NetworkMgr.My.isShowFPS && SceneManager.GetActiveScene().name.StartsWith("FTE")&&SceneManager.GetActiveScene().name != "FTE_0")
         {
-            frameCount++;
+            deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+            frameCount = 1f / deltaTime;
         }
     }
 
@@ -69,7 +71,7 @@ public class HttpManager : MonoSingleton<HttpManager>
     {
         fps = frameCount;
         frameCount = 0;
-        FpsText.text = "FPS "+fps.ToString();
+        FpsText.text = "FPS "+Mathf.Ceil(fps).ToString();
         FpsText.color = fps >= 60 ? Color.green : (fps >= 30 ? Color.white : Color.red);
     }
 
