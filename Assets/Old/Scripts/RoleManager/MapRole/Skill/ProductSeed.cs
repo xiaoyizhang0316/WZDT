@@ -40,7 +40,7 @@ public class ProductSeed : BaseSkill
         for (int i = 0; i < buffList.Count; i++)
         {
             data.AddBuff(buffList[i]);
-        }
+        } 
         try
         {
             GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
