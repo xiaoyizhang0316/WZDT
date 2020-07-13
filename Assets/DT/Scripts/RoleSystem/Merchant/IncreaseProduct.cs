@@ -14,9 +14,9 @@ public class IncreaseProduct : MonoBehaviour
             int num = GetComponentInParent<BaseMapRole>().baseRoleData.efficiency;
             other.GetComponent<GoodsSign>().AddSpeedBuff(id,num);
         }
-        else if (other.CompareTag("MapRole") && GetComponentInParent<BaseMapRole>().baseRoleData.inMap)
+        else if (other.CompareTag("MapRole") && other.transform.GetComponentInParent<BaseMapRole>().baseRoleData.inMap && GetComponentInParent<BaseMapRole>().baseRoleData.inMap)
         {
-            //print("降交易成本");
+            print("降交易成本");
             BaseMapRole targetRole = other.GetComponentInParent<BaseMapRole>();
             BaseBuff buff = new BaseBuff();
             BuffData data = GameDataMgr.My.GetBuffDataByID(1000);
