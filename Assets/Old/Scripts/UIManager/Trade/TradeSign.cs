@@ -108,8 +108,10 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public void CheckBuffLineTradeCost()
     {
-        CalculateTC();
-        tweener = transform.DOScale(1f, 10f).OnComplete(CheckBuffLineTradeCost);
+        tweener = transform.DOScale(1f, 10f).OnComplete(()=> {
+            CalculateTC();
+            CheckBuffLineTradeCost();
+        });
     }
 
     /// <summary>

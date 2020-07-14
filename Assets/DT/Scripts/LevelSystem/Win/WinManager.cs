@@ -103,6 +103,7 @@ public class WinManager : MonoSingleton<WinManager>
 
     public void InitWin()
     {
+        StageGoal.My.endTime = TimeStamp.GetCurrentTimeStamp();
         star1Con.text = BaseLevelController.My.starOneCondition;
         star2Con.text = BaseLevelController.My.starTwoCondition;
         star3Con.text = BaseLevelController.My.starThreeCondition;
@@ -495,15 +496,16 @@ public class WinManager : MonoSingleton<WinManager>
         });
         returnMap.onClick.AddListener(() =>
         {
-            //if (NetworkMgr.My.isUsingHttp)
-            //{
-            //    CommitProgress();
-            //}
-            //else
-            //{
+            if (NetworkMgr.My.isUsingHttp)
+            {
                 PlayerData.My.Reset();
                 SceneManager.LoadScene("Map");
-            //}
+            }
+            else
+            {
+                PlayerData.My.Reset();
+                SceneManager.LoadScene("Map");
+            }
         });
         review.onClick.AddListener(() =>
         {

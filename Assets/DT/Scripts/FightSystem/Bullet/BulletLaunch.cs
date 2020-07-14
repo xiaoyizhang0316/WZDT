@@ -66,11 +66,11 @@ public class BulletLaunch : MonoBehaviour
         gameObject.GetComponent<GoodsSign>().productData = data;
         gameObject.GetComponent<GoodsSign>().lunch = this;
         gameObject.GetComponent<GoodsSign>().target = target;
-        gameObject.transform.SetParent(launchShooter);
+        gameObject.transform.SetParent(launchShooter );
         gameObject .GetComponent <BulletEffect>().InitBufflist(gameObject.GetComponent<GoodsSign>().productData.buffList);
 
         gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
-
+        gameObject.transform.SetParent(launchShooter.parent );
         launchShooter.DOLookAt(target.transform.position, 0.1f).OnComplete(() =>
         {
     Debug.Log("初始化拖尾"+gameObject.name);

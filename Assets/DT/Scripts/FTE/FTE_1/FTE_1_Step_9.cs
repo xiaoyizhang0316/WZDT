@@ -43,7 +43,7 @@ public class FTE_1_Step_9 : BaseStep
     public override void StopCurrentStep()
     { 
    
-    
+        nextButton.interactable = false;
    
        contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
@@ -62,7 +62,7 @@ public class FTE_1_Step_9 : BaseStep
             Debug.Log("检测成功");
 
             StopCurrentStep();
-            nextButton.interactable = false;
+           
         }
         else
         {
