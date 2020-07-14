@@ -48,19 +48,18 @@ public class FTE_1_Step_27 : BaseStep
         mask.DOFade(0f,0.8f).Play();
         text.DOFade(0, 0.8f).OnComplete(() =>
         {
-            gameObject.SetActive(false); 
-            if(SceneManager.GetActiveScene().name=="FTE_1")
-            FTESceneManager.My.Steps[27].gameObject.SetActive(true);
-          
+            gameObject.SetActive(false);
+            if (SceneManager.GetActiveScene().name == "FTE_1")
+                FTESceneManager.My.Steps[27].gameObject.SetActive(true);
+            else
+                FTESceneManager.My.UIFTE.gameObject.SetActive(false);
             for (int i = 0; i <     MapManager.My._mapSigns.Count; i++)
             {
                 if (MapManager.My._mapSigns[i].mapType == GameEnum.MapType.Grass)
                 {
                     MapManager.My._mapSigns[i].isCanPlace = true;
                 }
-
             }
-            
         }).Play(); 
     }
    

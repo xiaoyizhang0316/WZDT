@@ -67,5 +67,7 @@ public class FTE_1_Step_17 : BaseStep
                 PlayNext();
             }).Play();
         }
+        if (NewCanvasUI.My.Panel_Update.activeInHierarchy)
+            NewCanvasUI.My.Panel_Update.SetActive(false);
     }
 }

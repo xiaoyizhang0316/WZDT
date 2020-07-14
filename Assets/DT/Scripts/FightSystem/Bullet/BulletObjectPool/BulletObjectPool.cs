@@ -66,13 +66,13 @@ namespace DT.Fight.Bullet
             {
                 for (int i = 0; i < pool[type.ToString()].Count; i++)
                 {
-                    if (!pool[type.ToString()][i].activeSelf)
+                    if (pool[type.ToString()][i]!=null&&!pool[type.ToString()][i].activeSelf)
                     {
                         pool[type.ToString()][i].SetActive(true);
                         //当前存在并且有富余的
                         return pool[type.ToString()][i];
                     }
-                    
+                   
                 }
                 //当前没有富余的 扩容
                 GameObject bulletPrb = Resources.Load<GameObject>("Bullet/" +type.ToString());
