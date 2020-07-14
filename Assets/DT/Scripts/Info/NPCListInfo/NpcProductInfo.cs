@@ -59,7 +59,7 @@ public class NpcProductInfo : MonoBehaviour
 
         timeInv.text = (1.0f / npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("#.##");
         icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType.ToString() +
-            npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level);
+            (npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level == 0 ? 1 : npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level).ToString());
         level.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level.ToString();
         clearBullets.onClick.RemoveAllListeners();
         clearBullets.onClick.AddListener(() => {
