@@ -58,7 +58,7 @@ public class NpcSpecialInfo : MonoBehaviour
                 ClearBulletContent();
             });
         });
-        icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.baseRoleData.baseRoleData.roleType.ToString() + npc.baseRoleData.baseRoleData.level);
+        icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.baseRoleData.baseRoleData.roleType.ToString() + (npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level == 0 ? 1 : npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level).ToString());
         //ClearBulletContent();
         switch (npc.baseRoleData.baseRoleData.roleType)
         {

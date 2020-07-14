@@ -56,7 +56,6 @@ public class FTE_2_Step_15 : BaseStep
        contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
            gameObject.SetActive(false);
-
            FTESceneManager.My.PlayNextStep();
 
        }).Play(); 

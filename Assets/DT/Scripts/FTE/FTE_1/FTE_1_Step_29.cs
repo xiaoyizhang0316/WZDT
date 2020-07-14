@@ -27,23 +27,18 @@ public class FTE_1_Step_29 : BaseStep
 
     public override void StartCuttentStep()
     {
-     
         contenText.DOFade(1, 0.3f).Play();
-   
-    
-         
-            Mark.SetActive(true);
-            nextButton.interactable = true;
-            FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
+        Mark.SetActive(true);
+        nextButton.interactable = true;
+        FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
     }
 
     public override void StopCurrentStep()
     {
         Mark.SetActive(false);
-        NewCanvasUI.My.GameNormal(); 
+        //NewCanvasUI.My.GameNormal(); 
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
         FTESceneManager.My.UIFTE.SetActive(false);
-       
     }
 
 
@@ -62,13 +57,11 @@ public class FTE_1_Step_29 : BaseStep
 
     public void CheckStart()
     {
-     
         if (win.activeSelf )
         {
             StartCuttentStep();
             CancelInvoke("CheckStart");
         }
-
         else
         {
              
