@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static GameEnum;
 
-public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandler, IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler
+public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandler, IPointerExitHandler,
+    IBeginDragHandler, IEndDragHandler, IPointerEnterHandler
 {
     public Vector3 world;
 
@@ -43,14 +44,19 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     // Update is called once per frame
     void Update()
     {
-        techCost.text = costTech.ToString();
-        if (StageGoal.My.playerTechPoint < costTech)
+        if (techCost != null)
         {
-            techCost.color = Color.red;
-        }
-        else
-        {
-            techCost.color = Color.white;
+            techCost.text = costTech.ToString();
+
+
+            if (StageGoal.My.playerTechPoint < costTech)
+            {
+                techCost.color = Color.red;
+            }
+            else
+            {
+                techCost.color = Color.white;
+            }
         }
     }
 
@@ -82,18 +88,23 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         switch (type)
         {
             case RoleType.Seed:
-                tempRole.baseRoleData.roleName = StaticRoleName.SeedName[UnityEngine.Random.Range(0, StaticRoleName.SeedName.Length)];
+                tempRole.baseRoleData.roleName =
+                    StaticRoleName.SeedName[UnityEngine.Random.Range(0, StaticRoleName.SeedName.Length)];
                 break;
             case RoleType.Peasant:
-                tempRole.baseRoleData.roleName = StaticRoleName.PeasantName[UnityEngine.Random.Range(0, StaticRoleName.PeasantName.Length)];
+                tempRole.baseRoleData.roleName =
+                    StaticRoleName.PeasantName[UnityEngine.Random.Range(0, StaticRoleName.PeasantName.Length)];
                 break;
             case RoleType.Merchant:
-                tempRole.baseRoleData.roleName = StaticRoleName.MerchantName[UnityEngine.Random.Range(0, StaticRoleName.MerchantName.Length)];
+                tempRole.baseRoleData.roleName =
+                    StaticRoleName.MerchantName[UnityEngine.Random.Range(0, StaticRoleName.MerchantName.Length)];
                 break;
             case RoleType.Dealer:
-                tempRole.baseRoleData.roleName = StaticRoleName.DealerName[UnityEngine.Random.Range(0, StaticRoleName.DealerName.Length)];
+                tempRole.baseRoleData.roleName =
+                    StaticRoleName.DealerName[UnityEngine.Random.Range(0, StaticRoleName.DealerName.Length)];
                 break;
         }
+
         role = Instantiate(RolePrb, NewCanvasUI.My.RoleTF.transform);
         role.name = tempRole.ID.ToString();
         role.GetComponent<BaseMapRole>().baseRoleData = new Role();
@@ -102,7 +113,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -119,24 +129,24 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             {
                 int x = hit[j].transform.GetComponent<MapSign>().x;
                 int y = hit[j].transform.GetComponent<MapSign>().y;
-                if (MapManager.My.CheckLandAvailable(x, y) && StageGoal.My.CostTechPoint(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech))
+                if (MapManager.My.CheckLandAvailable(x, y) &&
+                    StageGoal.My.CostTechPoint(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech))
                 {
                     print("true ");
                     role.GetComponent<BaseMapRole>().putTime = StageGoal.My.timeCount;
-                    StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech, CostTpType.Build);
+                    StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech,
+                        CostTpType.Build);
                     role.transform.position = hit[j].transform.position + new Vector3(0f, 2f, 0f);
-                    role.transform.DOMove(hit[j].transform.position + new Vector3(0f,0.3f,0f), 0.2f).OnComplete(() =>
-                    {
-                        GameObject go = Instantiate(dustPrb, role.transform);
-                        Destroy(go, 1f);
-                        role.transform.DOScale(new Vector3(1.3f, 0.8f, 1.3f), 0.2f).OnComplete(() =>
+                    role.transform.DOMove(hit[j].transform.position + new Vector3(0f, 0.3f, 0f), 0.2f).OnComplete(() =>
                         {
-                            role.transform.DOScale(1f, 0.15f).OnComplete(()=> {
-                                role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
-                            }).Play().timeScale = 1f / DOTween.timeScale;
-                        }).Play().timeScale = 1f / DOTween.timeScale;
-                    }).SetEase(Ease.Linear).Play().timeScale = 1f / DOTween.timeScale;
-
+                            GameObject go = Instantiate(dustPrb, role.transform);
+                            Destroy(go, 1f);
+                            role.transform.DOScale(new Vector3(1.3f, 0.8f, 1.3f), 0.2f).OnComplete(() =>
+                                {
+                                    role.transform.DOScale(1f, 0.15f).Play().timeScale = 1f / DOTween.timeScale;
+                                }).Play().timeScale = 1f / DOTween.timeScale;
+                        }).SetEase(Ease.Linear).Play().timeScale = 1f / DOTween.timeScale;
+                    role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
                     PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
                     isSuccess = true;
@@ -153,9 +163,11 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     print("false    ");
                     Destroy(role, 0.01f);
                 }
+
                 break;
             }
         }
+
         if (!isSuccess)
         {
             Destroy(role, 0.01f);
@@ -178,12 +190,9 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-
-
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-
     }
 }
