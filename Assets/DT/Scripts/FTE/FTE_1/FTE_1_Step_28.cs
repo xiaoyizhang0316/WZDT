@@ -44,7 +44,10 @@ public class FTE_1_Step_28 : BaseStep
     {
         Debug.Log("点击升级");
         nextButton.interactable = false;
-       // button.UpdateRole1();
+        button.UpdateRole1();
+        StageGoal.My.CostPlayerGold(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost);
+        StageGoal.My.Expend(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost, ExpendType.AdditionalCosts, null, "升级");
+        button.   UpgradeRoleRecord(RoleUpdateInfo.My.currentRole);
         Mark.SetActive(false);
         NewCanvasUI.My.GameNormal();
         NewCanvasUI.My.Panel_Update.SetActive(false);
