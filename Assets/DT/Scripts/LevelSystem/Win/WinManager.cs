@@ -69,11 +69,53 @@ public class WinManager : MonoSingleton<WinManager>
     private int stars = 0;
     private string[] starArr;
     PlayerReplay tempReplay;
+    List<PlayerEquip> playerEquips;
+
+    void AddEquipGear(List<GearData> gearDatas)
+    {
+        foreach (var g in gearDatas)
+        {
+            playerEquips.Add(new PlayerEquip(NetworkMgr.My.playerID, 0, g.ID, 1));
+        }
+    }
+
+
+    void AddEquipWorker(List<WorkerData> workerDatas)
+    {
+        foreach (var w in workerDatas)
+        {
+            playerEquips.Add(new PlayerEquip(NetworkMgr.My.playerID, 1, w.ID, 1));
+        }
+    }
+
+    void UploadGetEquip()
+    {
+        if (playerEquips.Count > 0)
+        //NetworkMgr.My.AddEquipList(playerEquips);
+        {
+            foreach (var e in playerEquips)
+            {
+                NetworkMgr.My.AddEquip(e.equipID, e.equipType, e.count);
+            }
+        }
+    }
+
+
     public void InitWin()
     {
+        StageGoal.My.endTime = TimeStamp.GetCurrentTimeStamp();
         star1Con.text = BaseLevelController.My.starOneCondition;
         star2Con.text = BaseLevelController.My.starTwoCondition;
         star3Con.text = BaseLevelController.My.starThreeCondition;
+        if (playerEquips == null)
+        {
+            playerEquips = new List<PlayerEquip>();
+        }
+        else
+        {
+            playerEquips.Clear();
+        }
+
         stars = 0;
         retry.onClick.AddListener(() => {
             PlayerData.My.Reset();
@@ -97,6 +139,9 @@ public class WinManager : MonoSingleton<WinManager>
                 //   boxs.SetActive(true);
                 box_0.color = Color.white;
                 box_0Button.interactable = true;
+                AddEquipGear(StageGoal.My.GetStarGearData(1));
+                AddEquipWorker(StageGoal.My.GetStarWorkerData(1));
+
             }
             //领过
             else
@@ -151,6 +196,9 @@ public class WinManager : MonoSingleton<WinManager>
                 //   boxs.SetActive(true);
                 box_1.color = Color.white;
                 box_1Button.interactable = true;
+                AddEquipGear(StageGoal.My.GetStarGearData(2));
+                AddEquipWorker(StageGoal.My.GetStarWorkerData(2));
+
             }
             //领过
             else
@@ -218,6 +266,9 @@ public class WinManager : MonoSingleton<WinManager>
                 //   boxs.SetActive(true);
                 box_2.color = Color.white;
                 box_2Button.interactable = true;
+                AddEquipGear(StageGoal.My.GetStarGearData(3));
+                AddEquipWorker(StageGoal.My.GetStarWorkerData(3));
+
             }
             //领过
             else
@@ -273,6 +324,9 @@ public class WinManager : MonoSingleton<WinManager>
             tempReplay = new PlayerReplay(true);
             //NetworkMgr.My.AddReplayData(tempReplay);
             UploadReplayData();
+            UploadGetEquip();
+            CommitProgress();
+
         }
         CheckNext();
     }
@@ -444,7 +498,8 @@ public class WinManager : MonoSingleton<WinManager>
         {
             if (NetworkMgr.My.isUsingHttp)
             {
-                CommitProgress();
+                PlayerData.My.Reset();
+                SceneManager.LoadScene("Map");
             }
             else
             {
@@ -464,8 +519,8 @@ public class WinManager : MonoSingleton<WinManager>
         NetworkMgr.My.UpdateLevelProgress(NetworkMgr.My.currentLevel, stars, starArr[0] + starArr[1] + starArr[2],
                     starArr[0] + starArr[1] + starArr[2], 0, () =>
                     {
-                        PlayerData.My.Reset();
-                        SceneManager.LoadScene("Map");
+                        //PlayerData.My.Reset();
+                        //SceneManager.LoadScene("Map");
                     });
     }
 
