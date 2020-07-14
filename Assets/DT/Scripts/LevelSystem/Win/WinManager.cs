@@ -495,15 +495,15 @@ public class WinManager : MonoSingleton<WinManager>
         });
         returnMap.onClick.AddListener(() =>
         {
-            if (NetworkMgr.My.isUsingHttp)
-            {
-                CommitProgress();
-            }
-            else
-            {
+            //if (NetworkMgr.My.isUsingHttp)
+            //{
+            //    CommitProgress();
+            //}
+            //else
+            //{
                 PlayerData.My.Reset();
                 SceneManager.LoadScene("Map");
-            }
+            //}
         });
         review.onClick.AddListener(() =>
         {
@@ -517,8 +517,8 @@ public class WinManager : MonoSingleton<WinManager>
         NetworkMgr.My.UpdateLevelProgress(NetworkMgr.My.currentLevel, stars, starArr[0] + starArr[1] + starArr[2],
                     starArr[0] + starArr[1] + starArr[2], 0, () =>
                     {
-                        PlayerData.My.Reset();
-                        SceneManager.LoadScene("Map");
+                        //PlayerData.My.Reset();
+                        //SceneManager.LoadScene("Map");
                     });
     }
 
