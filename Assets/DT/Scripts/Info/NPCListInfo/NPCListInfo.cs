@@ -37,6 +37,9 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
 
     public Sprite buff;
 
+    public Transform buffTF;
+    public GameObject buffPrb;
+
     public NpcBulletDetail npcBulletDetail;
     // Start is called before the first frame update
     void Start()
@@ -90,19 +93,40 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         {
             case GameEnum.RoleType.Seed:
                 ShowSpecialNpc(npc);
+                InitBuff(currentNpc);
                 break;
             case GameEnum.RoleType.Peasant:
                 ShowSpecialNpc(npc);
+                InitBuff(currentNpc);
                 break;
             case GameEnum.RoleType.Merchant:
                 ShowSpecialNpc(npc);
+                InitBuff(currentNpc);
                 break;
             case GameEnum.RoleType.Dealer:
                 ShowSpecialNpc(npc);
+                InitBuff(currentNpc);
                 break;
             default:
                 ShowCommonNpc( npc);
                 break;
+        }
+    }
+
+    public void InitBuff(BaseMapRole baseMapRole)
+    {
+        //BaseMapRole baseMapRole = PlayerData.My.GetBaseMapRoleByName(currentRole.baseRoleData.roleName);
+
+        for (int i = 0; i < buffTF.childCount; i++)
+        {
+            Destroy(buffTF.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < baseMapRole.buffList.Count; i++)
+        {
+            GameObject game = Instantiate(buffPrb, buffTF);
+            game.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.buffList[i]);
+            game.GetComponent<BuffText>().buff =
+                baseMapRole.buffList[i].buffData;
         }
     }
 
@@ -143,6 +167,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
                 npcInfo.SetActive(false);
                 closeBtn.gameObject.SetActive(false);
             });
+            InitBuff(currentNpc);
         }
         else if(currentNpc.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Service)
         {
