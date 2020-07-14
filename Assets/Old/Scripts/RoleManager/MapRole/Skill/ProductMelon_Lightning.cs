@@ -8,6 +8,20 @@ using UnityEngine;
 public class ProductMelon_Lightning : BaseSkill
 {
     private int currentCount = 0;
+
+    public Animator anim;
+    public void Update()
+    {
+        if (IsOpen)
+        {
+            anim.SetBool("isPlay",true);
+        }
+        else
+        {
+            anim.SetBool("isPlay",false);
+        }
+    }
+
     public override void Skill()
     {
         if (role.tradeList.Count == 0)
