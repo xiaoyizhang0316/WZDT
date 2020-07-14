@@ -51,10 +51,10 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //if (!isUpdate)
-        //{
-        //    return;
-        //}
+        if (!isUpdate)
+        {
+            return;
+        }
 
         RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.currentLevel);
         RoleUpdateInfo.My.currentRole.baseRoleData.roleName = RoleUpdateInfo.My.roleName;
@@ -80,6 +80,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost <= StageGoal.My.playerGold)
         {
             GetComponent<Button>().interactable = false;
+            print(RoleUpdateInfo.My.currentRole.baseRoleData.roleName);
             print(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost);
             StageGoal.My.CostPlayerGold(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost);
             StageGoal.My.Expend(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost, ExpendType.AdditionalCosts, null, "升级");
