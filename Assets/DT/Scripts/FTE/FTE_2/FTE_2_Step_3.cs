@@ -43,9 +43,9 @@ public class FTE_2_Step_3 : BaseStep
  
     public override void StopCurrentStep()
     {
+        nextButton.interactable = false;
         NewCanvasUI.My.Panel_Update.SetActive(true);
         RoleUpdateInfo.My.Init(PlayerData.My.RoleData[4]);
-        nextButton.interactable = false;
        MaskManager.My.Close(2,0);
        
        contenText.DOFade(0, 0.8f).OnComplete(() =>

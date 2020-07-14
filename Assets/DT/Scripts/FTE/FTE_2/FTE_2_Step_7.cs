@@ -44,8 +44,8 @@ public class FTE_2_Step_7 : BaseStep
    
 
     public override void StopCurrentStep()
-    { 
-       
+    {
+        nextButton.interactable = false;
 
        MaskManager.My.Close(7,0); 
        

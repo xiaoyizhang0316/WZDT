@@ -44,10 +44,10 @@ public class FTE_2_Step_9 : BaseStep
    
 
     public override void StopCurrentStep()
-    { 
-       
+    {
 
-       MaskManager.My.Close(9,0); 
+        nextButton.interactable = false;
+        MaskManager.My.Close(9,0); 
        
        contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
