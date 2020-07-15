@@ -35,9 +35,13 @@ public class ReviewRoleSign : MonoBehaviour,IPointerClickHandler
         isInit = true;
        transform.GetChild(1). GetComponent<Image>().enabled = true;
         this.role = role;
- 
 
-     
+        if (isbuffRole)
+        {
+            if (Resources.Load<Sprite>("Sprite/npcF/" + role.roleType.ToString()) != null) 
+            transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/npcF/"+role.roleType.ToString() );
+        }
+
     }
 
     public void ChangeParent()

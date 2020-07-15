@@ -44,7 +44,10 @@ public class FTE_1_Step_28 : BaseStep
     {
         Debug.Log("点击升级");
         nextButton.interactable = false;
-       // button.UpdateRole1();
+        button.UpdateRole1();
+        StageGoal.My.CostPlayerGold(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost);
+        StageGoal.My.Expend(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost, ExpendType.AdditionalCosts, null, "升级");
+        button.   UpgradeRoleRecord(RoleUpdateInfo.My.currentRole);
         Mark.SetActive(false);
         NewCanvasUI.My.GameNormal();
         NewCanvasUI.My.Panel_Update.SetActive(false);
@@ -59,7 +62,8 @@ public class FTE_1_Step_28 : BaseStep
     public void CheckStart()
     {
         Debug.Log("当前时间"+StageGoal.My.timeCount );
-        if (StageGoal.My.timeCount > 10&&StageGoal.My.playerGold>3000)
+        FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
+        if (StageGoal.My.timeCount > 135 &&StageGoal.My.playerGold>3000)
         {
             Debug.Log("检查打开");
             StartCuttentStep();

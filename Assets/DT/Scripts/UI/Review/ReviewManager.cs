@@ -211,7 +211,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             {
                 sign.InitRole(panel.mapStates[index].mapRoles[j], false);
             }
-
+   
             if (!panel.mapStates[index].mapRoles[j].isNPC)
             {
                 if (Resources.Load<Sprite>("Sprite/hong/" + panel.mapStates[index].mapRoles[j].roleType +

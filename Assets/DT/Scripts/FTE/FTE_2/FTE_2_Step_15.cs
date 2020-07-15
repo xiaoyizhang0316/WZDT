@@ -46,17 +46,16 @@ public class FTE_2_Step_15 : BaseStep
    
 
     public override void StopCurrentStep()
-    { 
-       
+    {
 
-       MaskManager.My.Close(17,0); 
+        nextButton.interactable = false;
+        MaskManager.My.Close(17,0); 
        MaskManager.My.Close(18,0); 
        MaskManager.My.Close(19,0); 
        
        contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
            gameObject.SetActive(false);
-
            FTESceneManager.My.PlayNextStep();
 
        }).Play(); 
