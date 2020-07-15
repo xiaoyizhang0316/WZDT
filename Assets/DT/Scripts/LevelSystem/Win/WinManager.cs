@@ -387,10 +387,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject equip = Instantiate(equipPrb, pos_equip);
                 equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
                 equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-                if (NetworkMgr.My.isUsingHttp)
-                {
-                    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-                }
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
+                //}
             }
             for (int i = 0; i < pos_worker.transform.childCount; i++)
             {
@@ -401,10 +401,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject worker = Instantiate(workerPrb, pos_worker);
                 worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
                 worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-                if (NetworkMgr.My.isUsingHttp)
-                {
-                    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-                }
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
+                //}
             }
 
             //CheckNext();
@@ -428,10 +428,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject equip = Instantiate(equipPrb, pos_equip);
                 equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
                 equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-                if (NetworkMgr.My.isUsingHttp)
-                {
-                    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-                }
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
+                //}
             }
             for (int i = 0; i < pos_worker.transform.childCount; i++)
             {
@@ -442,10 +442,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject worker = Instantiate(workerPrb, pos_worker);
                 worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
                 worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-                if (NetworkMgr.My.isUsingHttp)
-                {
-                    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-                }
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
+                //}
             }
             //boxs.SetActive(true);
             //CheckNext();
@@ -469,10 +469,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject equip = Instantiate(equipPrb, pos_equip);
                 equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
                 equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-                if (NetworkMgr.My.isUsingHttp)
-                {
-                    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-                }
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
+                //}
             }
             for (int i = 0; i < pos_worker.transform.childCount; i++)
             {
@@ -483,10 +483,10 @@ public class WinManager : MonoSingleton<WinManager>
                 GameObject worker = Instantiate(workerPrb, pos_worker);
                 worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
                 worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-                if (NetworkMgr.My.isUsingHttp)
-                {
-                    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-                }
+                //if (NetworkMgr.My.isUsingHttp)
+                //{
+                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
+                //}
             }
             //boxs.SetActive(true);
 
