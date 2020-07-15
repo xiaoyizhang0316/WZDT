@@ -47,34 +47,30 @@ public class CreateTradeLine : MonoBehaviour
             if (startTarget != null)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit[] hit = Physics.RaycastAll(ray);
-                for (int i = 0; i < hit.Length; i++)
+                Physics.Raycast(ray, out RaycastHit hit);
+                if (hit.transform.tag.Equals("MapLand"))
                 {
-                    if (hit[i].transform.tag.Equals("MapLand"))
+                    Target = hit.transform.position + new Vector3(0f, 1f, 0f);
+                    lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
+                }
+                if (hit.transform.tag.Equals("MapRole"))
+                {
+                    targetRole = hit.transform.GetComponentInParent<BaseMapRole>();
+                    Target = hit.transform.GetComponentInParent<BaseMapRole>().tradePoint.position;
+                    if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product && targetRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
                     {
-                        Target = hit[i].transform.position + new Vector3(0f,1f,0f);
-                        lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
-                    }
-                    if (hit[i].transform.tag.Equals("MapRole"))
-                    {
-                        targetRole = hit[i].transform.GetComponentInParent<BaseMapRole>();
-                        Target = hit[i].transform.GetComponentInParent<BaseMapRole>().tradePoint.position;
-                        if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product && targetRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
+                        if (!TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, targetRole.baseRoleData.baseRoleData.roleType))
                         {
-                            if (!TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, targetRole.baseRoleData.baseRoleData.roleType))
-                            {
-                                lineGo.GetComponent<MeshRenderer>().material.color = Color.red;
-                            }
-                            else
-                            {
-                                lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
-                            }
+                            lineGo.GetComponent<MeshRenderer>().material.color = Color.red;
                         }
                         else
                         {
                             lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
                         }
-                        break;
+                    }
+                    else
+                    {
+                        lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
                     }
                 }
                 Vector3 rightPosition = (startTarget.gameObject.transform.position + Target) / 2;

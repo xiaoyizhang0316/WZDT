@@ -37,7 +37,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isUpdate || RoleUpdateInfo.My.currentLevel == 5)
+        if (GetComponent<Button>().interactable && isUpdate || RoleUpdateInfo.My.currentLevel == 5)
         {
             return;
         }
@@ -51,7 +51,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!isUpdate)
+        if (!isUpdate||!GetComponent<Button>().interactable  )
         {
             return;
         }
@@ -72,7 +72,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void UpdateRole1()
     {
-        if (RoleUpdateInfo.My.currentLevel == 5 || (tew != null && tew.IsPlaying()))
+        if (RoleUpdateInfo.My.currentLevel == 5 || (tew != null && tew.IsPlaying())||!GetComponent<Button>().interactable   )
         {
             Debug.Log(hammer.transform.eulerAngles);
             return;

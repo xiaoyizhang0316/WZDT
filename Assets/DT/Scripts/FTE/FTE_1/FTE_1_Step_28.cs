@@ -9,6 +9,9 @@ public class FTE_1_Step_28 : BaseStep
     public GameObject Mark;
 
     public UpdateRole button;
+
+    public List<Button> LockButton;
+    public List<GameObject> panels;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,10 @@ public class FTE_1_Step_28 : BaseStep
         InvokeRepeating("CheckStart",1,1); 
         nextButton.onClick.AddListener(() => { StopCurrentStep(); });
         nextButton.gameObject.SetActive(false);
+        for (int i = 0; i < LockButton.Count; i++)
+        {
+            LockButton[i].interactable = false;
+        }
     }
 
     // Update is called once per frame
@@ -28,7 +35,12 @@ public class FTE_1_Step_28 : BaseStep
 
     public override void StartCuttentStep()
     {
+        for (int i = 0; i <panels.Count; i++)
+        {
+            panels[i].gameObject.SetActive(false);
+        }
         Debug.Log("打开升级");
+        LockButton[0].interactable = true;
         NewCanvasUI.My.GamePause();
         nextButton.gameObject.SetActive(true);
         contenText.DOFade(1, 0.3f).Play();
@@ -53,8 +65,9 @@ public class FTE_1_Step_28 : BaseStep
         NewCanvasUI.My.Panel_Update.SetActive(false);
         gameObject.SetActive(false);
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
-      //  FTESceneManager.My.PlayNextStep();
-      FTESceneManager.My.Steps[28].gameObject.SetActive(true);
+        FTESceneManager.My.Steps[28].gameObject.SetActive(true);
+        FTESceneManager.My.currentIndex++;
+
     }
 
  

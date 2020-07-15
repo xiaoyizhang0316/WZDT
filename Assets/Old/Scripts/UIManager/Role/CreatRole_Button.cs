@@ -62,6 +62,11 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!transform.GetChild(0).GetComponent<Button>().interactable)
+        {
+            return;
+        }
+
         if (NewCanvasUI.My.isSetTrade)
             return;
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
@@ -80,6 +85,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (transform.GetChild(0).GetComponent<Button>()!=null &&!transform.GetChild(0).GetComponent<Button>().interactable)
+        {
+            return;
+        }
         if (NewCanvasUI.My.isSetTrade)
             return;
         Role tempRole = new Role();
@@ -117,6 +126,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!transform.GetChild(0).GetComponent<Button>().interactable)
+        {
+            return;
+        }
         if (NewCanvasUI.My.isSetTrade)
             return;
         //UIManager.My.LandCube.transform.DOMoveY(0, 0.5f).SetUpdate(true);

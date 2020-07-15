@@ -50,7 +50,10 @@ public class FTE_1_Step_27 : BaseStep
         {
             gameObject.SetActive(false);
             if (SceneManager.GetActiveScene().name == "FTE_1")
+            {
                 FTESceneManager.My.Steps[27].gameObject.SetActive(true);
+                FTESceneManager.My.currentIndex++;
+            } 
             else
                 FTESceneManager.My.UIFTE.gameObject.SetActive(false);
             for (int i = 0; i <     MapManager.My._mapSigns.Count; i++)

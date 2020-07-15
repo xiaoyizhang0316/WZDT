@@ -51,7 +51,7 @@ public class FTESceneManager : MonoSingleton<FTESceneManager>
     {
         Steps[index].gameObject.SetActive(true);
         Steps[index].StartCuttentStep();
-       
+        Debug.Log("开启当前引导步骤"+index);
     }
 
     public void PlayNextStep()
