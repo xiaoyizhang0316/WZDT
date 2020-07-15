@@ -30,10 +30,34 @@ public class TradeIcon : MonoBehaviour
     public void Init(TradeData tradeData)
     {
         tradeId = tradeData.ID;
-        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
-        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
-        transform.position = (start.tradePoint.position + end.tradePoint.position) / 2f + new Vector3(0f,0.3f,0f);
+        BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+        BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        start = startRole.tradePoint;
+        end = endRole.tradePoint;
+        transform.position = (startRole.tradePoint.position + endRole.tradePoint.position) / 2f + new Vector3(0f,0.3f,0f);
+        CheckPos();
         GetComponentInChildren<SpriteRenderer>().DOFade(0.2f, 0.2f).Play().timeScale = 1f / DOTween.timeScale;
+    }
+
+    public void CheckPos()
+    {
+        RaycastHit[] hit;
+        hit = Physics.RaycastAll(transform.position + new Vector3(-7f,10f,-7f), new Vector3(0.7f,-1f,0.7f));
+        for (int i = 0; i < hit.Length; i++)
+        {
+            if (hit[i].transform.CompareTag("CreateTradeButton"))
+            {
+                RePos();
+                break;
+            }
+        }
+    }
+
+    public void RePos()
+    {
+        float per = UnityEngine.Random.Range(0.2f, 0.8f);
+        transform.position = start.position + (end.position - start.position) * per;
+        CheckPos();
     }
 
     /// <summary>
