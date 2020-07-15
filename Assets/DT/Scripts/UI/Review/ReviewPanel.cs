@@ -135,6 +135,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
             line.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i, datas[i].restMoney / (float)maxAmount * 100f));
         }
         //line.vectorLine.points2.Add(new Vector2(1326f, Mathf.Min(datas[datas.Count - 1].restMoney / (float)maxAmount * 100f,100f)));
+        line.transform.SetAsLastSibling();
         line.vectorLine.Draw();
     }
 
