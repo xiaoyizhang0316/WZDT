@@ -6,7 +6,6 @@ public class IncreaseProduct : MonoBehaviour
 {
     public void OnTriggerStay(Collider other)
     {
-        //print(other.gameObject.name);
         //print("降交易成本");
         if (other.CompareTag("Product") && GetComponentInParent<BaseMapRole>().baseRoleData.inMap)
         {
@@ -16,7 +15,7 @@ public class IncreaseProduct : MonoBehaviour
         }
         else if (other.CompareTag("MapRole") && other.transform.GetComponentInParent<BaseMapRole>().baseRoleData.inMap && GetComponentInParent<BaseMapRole>().baseRoleData.inMap)
         {
-            print("降交易成本");
+            //print("降交易成本");
             BaseMapRole targetRole = other.GetComponentInParent<BaseMapRole>();
             BaseBuff buff = new BaseBuff();
             BuffData data = GameDataMgr.My.GetBuffDataByID(1000);

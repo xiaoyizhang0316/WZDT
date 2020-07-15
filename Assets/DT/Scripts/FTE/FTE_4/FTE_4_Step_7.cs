@@ -9,6 +9,8 @@ public class FTE_4_Step_7 : BaseStep
     public GameObject UI;
 
     public GameObject infolist;
+
+    public Transform targetNpc;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +25,9 @@ public class FTE_4_Step_7 : BaseStep
     }
 
     public override void StartCuttentStep()
-    { 
-    
-      UI.SetActive(true);
-      infolist.SetActive(true);
-         contenText.DOFade(0, 0).OnComplete(() => { 
+    {
+        NPCListInfo.My.ShowNpcInfo(targetNpc);
+        contenText.DOFade(0, 0).OnComplete(() => { 
              contenText.DOFade(1, 1.5f).OnComplete(() =>
              {
                  FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
