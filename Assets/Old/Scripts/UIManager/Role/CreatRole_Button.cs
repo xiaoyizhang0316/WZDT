@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static GameEnum;
 
@@ -62,10 +63,15 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!transform.GetChild(0).GetComponent<Button>().interactable)
+        if (SceneManager.GetActiveScene().name == "FTE_1")
         {
-            return;
+            
+            if (!transform.GetChild(0).GetComponent<Button>().interactable)
+            {
+                return;
+            }
         }
+
 
         if (NewCanvasUI.My.isSetTrade)
             return;
@@ -85,9 +91,13 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (transform.GetChild(0).GetComponent<Button>()!=null &&!transform.GetChild(0).GetComponent<Button>().interactable)
+        if (SceneManager.GetActiveScene().name == "FTE_1")
         {
-            return;
+            
+            if (!transform.GetChild(0).GetComponent<Button>().interactable)
+            {
+                return;
+            }
         }
         if (NewCanvasUI.My.isSetTrade)
             return;
@@ -126,9 +136,13 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!transform.GetChild(0).GetComponent<Button>().interactable)
+        if (SceneManager.GetActiveScene().name == "FTE_1")
         {
-            return;
+            
+            if (!transform.GetChild(0).GetComponent<Button>().interactable)
+            {
+                return;
+            }
         }
         if (NewCanvasUI.My.isSetTrade)
             return;
