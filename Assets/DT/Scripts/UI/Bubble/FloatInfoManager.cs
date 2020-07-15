@@ -21,7 +21,7 @@ public class FloatInfoManager : MonoSingleton<FloatInfoManager>
         if (number == 0)
             return;
         GameObject go = Instantiate(textPrb, transform);
-        go.transform.localPosition = moneyPos.localPosition + new Vector3(-130f, -10f, 0f);
+        go.transform.localPosition = moneyPos.localPosition + new Vector3(-130f, -10f, 0f) + new Vector3(Random.Range(-10,10),Random.Range(-10,10),0f);
         if (number > 0)
         {
             go.GetComponent<Text>().text = "+" + number.ToString() + "$";

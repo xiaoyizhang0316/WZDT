@@ -39,7 +39,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         {
             if(hit[i].transform.CompareTag("MapRole"))
             {
-                if (hit[i].transform.GetComponent<BaseMapRole>().isNpc)
+                if (hit[i].transform.GetComponentInParent<BaseMapRole>().isNpc)
                 {
                     if (!hit[i].transform.GetComponentInChildren<BaseNpc>().isCanSee)
                     {
