@@ -112,10 +112,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6385040176148751397}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.475, z: 0}
+  m_LocalPosition: {x: 0, y: 1.4750004, z: 0}
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_Children: []
-  m_Father: {fileID: 2363748267651291491}
+  m_Father: {fileID: 4957317477574588339}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4077945395668164096
@@ -208,6 +208,7 @@ Transform:
   m_Children:
   - {fileID: 9218235902883597798}
   - {fileID: 4987333944534869277}
+  - {fileID: 6390241512700188720}
   m_Father: {fileID: 2363748267651291491}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -245,7 +246,6 @@ Transform:
   m_Children:
   - {fileID: 6274031768023256972}
   - {fileID: 4957317477574588339}
-  - {fileID: 6390241512700188720}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -306,6 +306,8 @@ MonoBehaviour:
   AI: 0
   npcScript: {fileID: 0}
   extraSkill: {fileID: 0}
+  levelModels: []
+  putTime: 0
   totalProfit: 0
   monthlyProfit: 0
   totalSatisfy: 0
@@ -332,9 +334,10 @@ MonoBehaviour:
   isCanSee: 0
   isCanSeeEquip: 0
   lockNumber: 10
-  NPCgear: 
+  NPCBuffList: 
   hideModel: {fileID: 7010573542175292831}
   trueModel: {fileID: 8145369834327937887}
+  autoTradeList: []
 --- !u!65 &5840160722976328818
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -384,6 +387,8 @@ MonoBehaviour:
   buffList: 29020000
   animationPart: []
   productDatas: []
+  specialBuffList: 
+  baseBuffs: []
 --- !u!1001 &1072662421135550785
 PrefabInstance:
   m_ObjectHideFlags: 0
