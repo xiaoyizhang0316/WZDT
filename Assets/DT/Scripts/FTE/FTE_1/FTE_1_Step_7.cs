@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class FTE_1_Step_7 : BaseStep
 {
+    public GameObject mask;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,7 @@ public class FTE_1_Step_7 : BaseStep
     {
      //   MaskManager.My.Open(1);
         nextButton.interactable = false;
-        MaskManager.My.Open(5,170);
+        mask.SetActive(true);
         contenText.DOFade(0, 0).OnComplete(() => {
            
             contenText.DOFade(1, 1.5f).OnComplete(() =>
@@ -38,8 +39,8 @@ public class FTE_1_Step_7 : BaseStep
     public override void StopCurrentStep()
     { 
         nextButton.interactable = false;  
-
-        MaskManager.My.Close(5,0 );
+        mask.SetActive(false);
+        
        contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
            gameObject.SetActive(false); 
