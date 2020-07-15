@@ -24,8 +24,8 @@ public class FTE_2_Step_13 : BaseStep
 
     public override void StartCuttentStep()
     {
-        
-       
+
+
          MaskManager.My.Open(15,70); 
          contenText.DOFade(0, 0).OnComplete(() =>
          {
@@ -44,10 +44,10 @@ public class FTE_2_Step_13 : BaseStep
    
 
     public override void StopCurrentStep()
-    { 
-       
+    {
+        nextButton.interactable = false;
 
-       MaskManager.My.Close(15,0); 
+        MaskManager.My.Close(15,0); 
        
        contenText.DOFade(0, 0.8f).OnComplete(() =>
        {

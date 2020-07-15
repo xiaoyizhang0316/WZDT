@@ -6,7 +6,7 @@ using UnityEngine;
 public class MaskManager : MonoSingleton<MaskManager>
 {
     public DarkEffect darkEffect;
-     
+
 
     public void Open(int Index,int endRadius)
     {
