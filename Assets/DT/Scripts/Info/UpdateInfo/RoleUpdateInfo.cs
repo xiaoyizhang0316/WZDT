@@ -153,7 +153,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         for (int i = 0; i <baseMapRole.buffList.Count; i++)
         {
            GameObject game= Instantiate(buffPrb, buffTF);
-           game.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.buffList[i]);
+           game.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.buffList[i].buffId.ToString());
            game.GetComponent<ShowBuffText>().currentbuffData =
                baseMapRole.buffList[i].buffData;
         }
