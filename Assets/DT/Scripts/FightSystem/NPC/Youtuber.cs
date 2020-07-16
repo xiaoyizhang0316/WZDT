@@ -12,7 +12,7 @@ public class Youtuber : BaseExtraSkill
     {
         base.SkillOn(sign);
         GameObject go = Instantiate(youtuberItemPrb, PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)).transform);
-        go.transform.position = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)).transform.position;
+        go.transform.position = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)).transform.position + new Vector3(0f,-1.2f,0f);
         go.GetComponent<YoutuberItem>().Init(buffId, sign.tradeData.ID);
     }
 

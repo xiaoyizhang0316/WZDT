@@ -405,7 +405,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Lose()
     {
-        if (playerHealth < 0)
+        if (playerHealth <= 0)
         {
             NewCanvasUI.My.GamePause();
             NewCanvasUI.My.lose.SetActive(true);

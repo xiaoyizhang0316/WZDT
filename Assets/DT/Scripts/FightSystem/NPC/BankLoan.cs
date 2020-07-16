@@ -28,7 +28,7 @@ public class BankLoan : BaseExtraSkill
             Tweener twe = transform.DOScale(1f, 20f);
             yield return twe.WaitForCompletion();
             StageGoal.My.CostPlayerGold(eachReturn);
-            StageGoal.My.Expend(eachReturn, ExpendType.AdditionalCosts);
+            StageGoal.My.Expend(eachReturn, ExpendType.AdditionalCosts,null,"还贷");
             count++;
         }
         TradeManager.My.DeleteTrade(sign.tradeData.ID);
