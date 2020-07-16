@@ -321,7 +321,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void CheckDead()
     {
-        if (playerHealth < 0)
+        if (playerHealth <= 0)
         {
             //for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
             //{
