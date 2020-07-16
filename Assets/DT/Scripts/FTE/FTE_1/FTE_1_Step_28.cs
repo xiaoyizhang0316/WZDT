@@ -85,7 +85,7 @@ public class FTE_1_Step_28 : BaseStep
 
         else
         {
-             
+            LockButton[0].interactable = false;
         }
     }
 }

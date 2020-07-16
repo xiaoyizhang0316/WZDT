@@ -137,7 +137,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 temp.interval = b.interval;
                 return temp;
             }
-
         }
         print("------------查不到此BUFF!-----------");
         return null;
