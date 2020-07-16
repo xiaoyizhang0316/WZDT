@@ -63,6 +63,7 @@ public class FTE_2_Step_11 : BaseStep
 
     public override void StopCurrentStep()
     {
+        nextButton.interactable = false;
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
 
     

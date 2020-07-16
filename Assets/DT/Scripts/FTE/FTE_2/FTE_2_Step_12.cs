@@ -59,10 +59,13 @@ public class FTE_2_Step_12 : BaseStep
                 PlayNext();
             }).Play();
         }
+        if (NewCanvasUI.My.Panel_Update.activeInHierarchy)
+            NewCanvasUI.My.Panel_Update.SetActive(false);
     }
 
     public override void StopCurrentStep()
     {
+        nextButton.interactable = false;
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
 
     

@@ -40,7 +40,7 @@ public class FTE_1_Step_31 : BaseStep
     public override void StopCurrentStep()
     {
         Mark.SetActive(false);
-        NewCanvasUI.My.GameNormal(); 
+        //NewCanvasUI.My.GameNormal(); 
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
         FTESceneManager.My.UIFTE.SetActive(false);
        

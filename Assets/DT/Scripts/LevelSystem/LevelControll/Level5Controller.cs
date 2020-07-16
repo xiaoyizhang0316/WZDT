@@ -20,14 +20,14 @@ public class Level5Controller : BaseLevelController
         int count = 0;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
-            if (!PlayerData.My.MapRole[i].isNpc && PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == RoleType.Dealer)
+            if (!PlayerData.My.MapRole[i].isNpc)
             {
                 count++;
                 if (count > 6)
                 {
                     starTwoStatus = false;
                     CancelInvoke("CheckStarThree");
-                    starTwoCondition = "放置不多于6个零售商，当前：已失败";
+                    starTwoCondition = "放置不多于6个角色，当前：已失败";
                     return;
                 }
             }
