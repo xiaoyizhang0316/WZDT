@@ -40,7 +40,7 @@ public class RoleListInfoDealer : BaseRoleListInfo
     public override void Init(Role role)
     {
         Debug.Log("初始化"+role.efficiency ); 
-        fireTime.text = (role.efficiency  ).ToString()+"%";
+        fireTime.text = (role.efficiency * -0.01f + 1.5f  ).ToString("#.##") +"s";
         efficiency.text =role.efficiency.ToString();
         Range.text = (role.range ).ToString() ;
         tradCost.text  =  role.tradeCost.ToString();
