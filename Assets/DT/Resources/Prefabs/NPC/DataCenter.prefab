@@ -94,6 +94,8 @@ MonoBehaviour:
   AI: 0
   npcScript: {fileID: 0}
   extraSkill: {fileID: 0}
+  levelModels: []
+  putTime: 0
   totalProfit: 0
   monthlyProfit: 0
   totalSatisfy: 0
@@ -120,9 +122,10 @@ MonoBehaviour:
   isCanSee: 0
   isCanSeeEquip: 0
   lockNumber: 12
-  NPCgear: 
+  NPCBuffList: 
   hideModel: {fileID: 3815718885771491734}
   trueModel: {fileID: 9036407238198923515}
+  autoTradeList: []
 --- !u!54 &7210796264468271515
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172,6 +175,8 @@ MonoBehaviour:
   buffList: fe010000
   animationPart: []
   productDatas: []
+  specialBuffList: 
+  baseBuffs: []
 --- !u!1 &6381409787556087662
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +379,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9036407238198923515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.305, y: 0, z: -0.32}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8696110288596162073}
