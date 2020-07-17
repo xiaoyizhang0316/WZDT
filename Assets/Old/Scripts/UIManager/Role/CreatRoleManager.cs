@@ -171,11 +171,14 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         // //fengxian.text = data.riskAdd.ToString();
     }
 
+    private bool isPause;
+
     /// <summary>
     /// 初始化角色创建界面，将要创建的角色模板赋值给管理类
     /// </summary> 
     public void Open(Role tempRole)
     {
+        isPause = DOTween.defaultAutoPlay == AutoPlay.None;
         NewCanvasUI.My.GamePause();
         for (int i = 0; i < effects.Count; i++)
         {
@@ -506,7 +509,19 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             StartCoroutine(effects[i].Back());
         }
-        NewCanvasUI.My.GameNormal();
+        if (!isPause)
+        {
+            if (DOTween.timeScale > 1f)
+            {
+                NewCanvasUI.My.GameAccelerate();
+            }
+            else
+            {
+                NewCanvasUI.My.GameNormal();
+            }
+        }
+        
+       
         transform.DOScale(1, 0.5f).OnComplete(() => { gameObject.SetActive(false); }).Play();
     }
 
