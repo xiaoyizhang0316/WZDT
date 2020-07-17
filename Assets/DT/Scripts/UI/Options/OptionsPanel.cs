@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class OptionsPanel : MonoSingleton<OptionsPanel>
 {
+    public GameObject mask;
     public Transform options;
     public Transform returnPanel;
     public Slider musicSlider;
@@ -35,6 +36,7 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
     public void ShowOPtionsPanel()
     {
         options.gameObject.SetActive(true);
+        mask.SetActive(true);
     }
 
     private void OnSliderValueChanged(float value, MusicType mt)
@@ -57,6 +59,7 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
     public void Close()
     {
         options.gameObject.SetActive(false);
+        mask.SetActive(false);
         // 保存设置
     }
 
