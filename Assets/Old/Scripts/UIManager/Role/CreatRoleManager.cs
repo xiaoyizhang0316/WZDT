@@ -176,6 +176,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary> 
     public void Open(Role tempRole)
     {
+        NewCanvasUI.My.GamePause();
         for (int i = 0; i < effects.Count; i++)
         {
             StartCoroutine(effects[i].Move());
@@ -505,6 +506,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             StartCoroutine(effects[i].Back());
         }
+        NewCanvasUI.My.GameNormal();
         transform.DOScale(1, 0.5f).OnComplete(() => { gameObject.SetActive(false); }).Play();
     }
 

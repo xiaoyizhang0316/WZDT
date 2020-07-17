@@ -39,7 +39,7 @@ public class RoleInfoPeasant : BaseRoleInfoAdd
         effect.text = CreatRoleManager.My.finalEffect.ToString();
         reload.text =  CreatRoleManager.My.finalEffect  .ToString()+"%";
         efficiency.text = CreatRoleManager.My.finalEfficiency.ToString();
-        productTime.text = (CreatRoleManager.My.finalEfficiency / 10f).ToString()+" /s";
+        productTime.text = (CreatRoleManager.My.finalEfficiency / 20f).ToString()+" /s";
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();
         risk .text =  CreatRoleManager.My.finalRiskResistance.ToString();
         montyCost.text =  CreatRoleManager.My.finalCost.ToString();

@@ -124,7 +124,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         for (int i = 0; i < baseMapRole.buffList.Count; i++)
         {
             GameObject game = Instantiate(buffPrb, buffTF);
-            game.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.buffList[i]);
+            game.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.buffList[i].buffId.ToString());
             game.GetComponent<BuffText>().buff =
                 baseMapRole.buffList[i].buffData;
         }

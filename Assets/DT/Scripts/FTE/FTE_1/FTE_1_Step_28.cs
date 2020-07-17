@@ -18,7 +18,7 @@ public class FTE_1_Step_28 : BaseStep
         contenText.color = new Color(1,1,1,0);
         nextButton.interactable = false; 
         Mark.SetActive(false);
-        InvokeRepeating("CheckStart",1,1); 
+        InvokeRepeating("CheckStart",0,0.02f); 
         nextButton.onClick.AddListener(() => { StopCurrentStep(); });
         nextButton.gameObject.SetActive(false);
         for (int i = 0; i < LockButton.Count; i++)
@@ -30,7 +30,7 @@ public class FTE_1_Step_28 : BaseStep
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     public override void StartCuttentStep()

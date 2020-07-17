@@ -27,7 +27,7 @@ public class NpcSpecialProp : MonoBehaviour
                 prop2.text = (npc.baseRoleData.effect * 10).ToString();
                 break;
             case GameEnum.RoleType.Peasant:
-                prop1.text= (npc.baseRoleData.efficiency / 10f).ToString("#.#") + "/s";
+                prop1.text= (npc.baseRoleData.efficiency / 20f).ToString("#.#") + "/s";
                 prop2.text = (npc.baseRoleData.effect).ToString() + "%";
                 break;
             case GameEnum.RoleType.Merchant:
@@ -35,7 +35,7 @@ public class NpcSpecialProp : MonoBehaviour
                 prop2.text = (npc.baseRoleData.effect * 0.3f + 24f).ToString() + "%";
                 break;
             case GameEnum.RoleType.Dealer:
-                prop1.text = (npc.baseRoleData.efficiency).ToString() + "%";
+                prop1.text = (npc.baseRoleData.efficiency * -0.01f + 1.5f).ToString() + "s";
                 prop2.text = (npc.baseRoleData.range).ToString();
                 break;
         }

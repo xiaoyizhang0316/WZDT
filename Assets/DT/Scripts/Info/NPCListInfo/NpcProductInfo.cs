@@ -54,7 +54,7 @@ public class NpcProductInfo : MonoBehaviour
         efficiency.text = npc.GetComponent<BaseMapRole>().baseRoleData.efficiency.ToString();
 
         SetBar(npc.GetComponent<BaseMapRole>().baseRoleData.effect, npc.GetComponent<BaseMapRole>().baseRoleData.efficiency);
-        prop1.text = (npc.GetComponent<BaseMapRole>().baseRoleData.efficiency / 10f).ToString("#.#") + "/s";
+        prop1.text = (npc.GetComponent<BaseMapRole>().baseRoleData.efficiency / 20f).ToString("#.#") + "/s";
         prop2.text = (npc.GetComponent<BaseMapRole>().baseRoleData.effect).ToString() + "%";
 
         timeInv.text = (1.0f / npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("#.##");

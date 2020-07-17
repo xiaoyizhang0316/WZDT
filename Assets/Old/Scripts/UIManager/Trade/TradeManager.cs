@@ -36,7 +36,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole));
-        if (start.baseRoleData.isNpc)
+        if (start.baseRoleData.isNpc && start.baseRoleData.baseRoleData.roleType != RoleType.Bank)
         {
             if (CheckTradeCount(sign.tradeData.startRole) < 1)
             {
@@ -45,7 +45,7 @@ public class TradeManager : MonoSingleton<TradeManager>
                 StageGoal.My.RecordOperation(OperationType.DeleteRole, param);
             }
         }
-        if (end.baseRoleData.isNpc)
+        if (end.baseRoleData.isNpc && end.baseRoleData.baseRoleData.roleType != RoleType.Bank)
         {
             if (CheckTradeCount(sign.tradeData.endRole) < 1)
             {
