@@ -37,7 +37,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (GetComponent<Button>().interactable && isUpdate || RoleUpdateInfo.My.currentLevel == 5)
+        if (!isUpdate || !GetComponent<Button>().interactable || RoleUpdateInfo.My.currentLevel == 5)
         {
             return;
         }
