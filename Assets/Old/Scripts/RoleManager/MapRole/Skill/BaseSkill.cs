@@ -13,6 +13,10 @@ public abstract class BaseSkill : MonoBehaviour
 
     public bool isAvaliable = true;
 
+    public List<int> specialBuffList;
+
+    public List<BaseBuff> baseBuffs = new List<BaseBuff>();
+
     /// <summary>
     /// 技能描述
     /// </summary>

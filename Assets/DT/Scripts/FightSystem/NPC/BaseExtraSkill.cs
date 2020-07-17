@@ -20,6 +20,11 @@ public class BaseExtraSkill : MonoBehaviour
         
     }
 
+    public virtual bool CheckSkillCondition()
+    {
+        return StageGoal.My.playerGold >= 0;
+    }
+
     // Start is called before the first frame update
     public virtual void Start()
     {
