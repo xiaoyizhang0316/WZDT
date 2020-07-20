@@ -34,25 +34,26 @@ public class TradeIcon : MonoBehaviour
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         start = startRole.tradePoint;
         end = endRole.tradePoint;
-        transform.position = (startRole.tradePoint.position + endRole.tradePoint.position) / 2f + new Vector3(0f,0.3f,0f);
+        transform.position = (startRole.tradePoint.position + endRole.tradePoint.position) / 2f + new Vector3(0f, 0.3f, 0f);
         CheckPos();
         GetComponentInChildren<SpriteRenderer>().DOFade(0.2f, 0.2f).Play().timeScale = 1f / DOTween.timeScale;
     }
 
+    /// <summary>
+    /// 检测图标的位置有没有冲突
+    /// </summary>
     public void CheckPos()
     {
-        RaycastHit[] hit;
-        hit = Physics.RaycastAll(transform.position + new Vector3(-7f,10f,-7f), new Vector3(0.7f,-1f,0.7f));
-        for (int i = 0; i < hit.Length; i++)
+        Physics.Raycast(transform.position + new Vector3(-7f, 10f, -7f), new Vector3(0.7f, -1f, 0.7f), out RaycastHit hit);
+        if (hit.transform.CompareTag("CreateTradeButton") || hit.transform.CompareTag("MapRole"))
         {
-            if (hit[i].transform.CompareTag("CreateTradeButton"))
-            {
-                RePos();
-                break;
-            }
+            RePos();
         }
     }
 
+    /// <summary>
+    /// 重新排位置
+    /// </summary>
     public void RePos()
     {
         float per = UnityEngine.Random.Range(0.2f, 0.8f);
@@ -95,13 +96,13 @@ public class TradeIcon : MonoBehaviour
     /// </summary>
     public void OnMouseExit()
     {
-        GetComponentInChildren<SpriteRenderer>().DOFade(0.2f,0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.2f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

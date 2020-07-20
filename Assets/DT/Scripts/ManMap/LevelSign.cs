@@ -53,7 +53,7 @@ public class LevelSign : MonoBehaviour
             {
              
                 SceneManager.LoadScene(loadScene);
-            });
+            }, loadScene);
             NetworkMgr.My.GetReplayLists(loadScene,()=> {
                 LevelInfoManager.My.listScript.Init(NetworkMgr.My.replayLists);
             });

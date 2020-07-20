@@ -82,6 +82,11 @@ public class NpcProductInfo : MonoBehaviour
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.buffList[i]);
                 sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.buffList[i]));
             }
+            else if (i - baseSkill.buffList.Count < baseSkill.badSpecialBuffList.Count)
+            {
+                sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.badSpecialBuffList[i - baseSkill.buffList.Count]);
+                sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.badSpecialBuffList[i - baseSkill.buffList.Count]));
+            }
             else
             {
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/999");
@@ -100,6 +105,11 @@ public class NpcProductInfo : MonoBehaviour
                     buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + npc.GetComponent<NPC>().NPCBuffList[a]);
                     buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(npc.GetComponent<NPC>().NPCBuffList[a]));
                 }
+                else if (a - npc.GetComponent<NPC>().NPCBuffList.Count < baseSkill.goodSpecialBuffList.Count)
+                {
+                    buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.goodSpecialBuffList[a - npc.GetComponent<NPC>().NPCBuffList.Count]);
+                    buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.goodSpecialBuffList[a - npc.GetComponent<NPC>().NPCBuffList.Count]));
+                }
                 else
                 {
                     buffs[j].sprite = NPCListInfo.My.buff;
@@ -114,10 +124,10 @@ public class NpcProductInfo : MonoBehaviour
                 a = 0;
                 for (int j = baseSkill.buffList.Count + npc.GetComponent<NPC>().NPCBuffList.Count; j < buffs.Count; j++)
                 {
-                    if (a< pm.specialBuffList.Count)
+                    if (a< pm.goodSpecialBuffList.Count)
                     {
-                        buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + pm.specialBuffList[a]);
-                        buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(pm.specialBuffList[a]));
+                        buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + pm.goodSpecialBuffList[a]);
+                        buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(pm.goodSpecialBuffList[a]));
                     }
                     else
                     {

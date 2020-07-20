@@ -95,9 +95,17 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         }
     }
     // net
-    public void Init(string star, string name, string contet, string mission_1, string mission_2, string mission_3, Action loadScene)
+    public void Init(string star, string name, string contet, string mission_1, string mission_2, string mission_3, Action loadScene, string sceneName)
     {
-        isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
+        print(sceneName);
+        if (int.Parse(sceneName.Split('_')[1]) >= 5)
+            isUseGuide.gameObject.SetActive(false);
+        else
+        {
+            isUseGuide.gameObject.SetActive(true);
+            isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
+        }
+
         levelName.text = name;
         content.text = contet;
         this.mission_1.text = mission_1;

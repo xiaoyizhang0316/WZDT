@@ -33,11 +33,19 @@ public class ProductMelon_Summon : BaseSkill
                     {
                         data.AddBuff(role.GetComponentInChildren<BaseNpc>().NPCBuffList[i]);
                     }
+                    for (int i = 0; i < goodBaseBuffs.Count; i++)
+                    {
+                        goodBaseBuffs[i].OnProduct(ref data);
+                    }
                 }
             }
             for (int i = 0; i < buffList.Count; i++)
             {
                 data.AddBuff(buffList[i]);
+            }
+            for (int i = 0; i < badBaseBuffs.Count; i++)
+            {
+                badBaseBuffs[i].OnProduct(ref data);
             }
             data.damage = (float)(data.damage * 0.3 + role.baseRoleData.effect * 1.5f);
             data.bulletType = BulletType.summon;
