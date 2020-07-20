@@ -33,32 +33,27 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     public void OnEndDrag(PointerEventData eventData)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit[] hit = Physics.RaycastAll(ray);
-        for (int i = 0; i < hit.Length; i++)
+        Physics.Raycast(ray, out RaycastHit hit);
+        if (hit.transform.CompareTag("MapRole"))
         {
-            if (hit[i].transform.CompareTag("MapRole"))
+            if (hit.transform.GetComponent<BaseMapRole>().isNpc)
             {
-                if (hit[i].transform.GetComponent<BaseMapRole>().isNpc)
+                if (hit.transform.GetComponentInChildren<BaseNpc>().isCanSee && !hit.transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
                 {
-                    if (hit[i].transform.GetComponentInChildren<BaseNpc>().isCanSee && !hit[i].transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
+                    if (StageGoal.My.CostTechPoint(costTechNumber))
                     {
-                        if (StageGoal.My.CostTechPoint(costTechNumber))
-                        {
-                            StageGoal.My.CostTp(costTechNumber, CostTpType.Mirror);
-                            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
-                            hit[i].transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip = true;
-                            GameObject effect = Instantiate(effectPrb, hit[i].transform);
-                            effect.transform.localPosition = Vector3.zero;
-                            TradeManager.My.ChangeNPCRoleRecord(hit[i].transform.GetComponent<BaseMapRole>());
-                            Destroy(effect, 1f);
-                            Debug.Log("使用多棱镜成功");
-                            break;
-                        }
-                        else
-                        {
-                            NPCListInfo.My.ShowHideTipPop("科技点数不足！");
-                            break;
-                        }
+                        StageGoal.My.CostTp(costTechNumber, CostTpType.Mirror);
+                        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
+                        hit.transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip = true;
+                        GameObject effect = Instantiate(effectPrb, hit.transform);
+                        effect.transform.localPosition = Vector3.zero;
+                        TradeManager.My.ChangeNPCRoleRecord(hit.transform.GetComponent<BaseMapRole>());
+                        Destroy(effect, 1f);
+                        Debug.Log("使用多棱镜成功");
+                    }
+                    else
+                    {
+                        NPCListInfo.My.ShowHideTipPop("科技点数不足！");
                     }
                 }
             }

@@ -56,11 +56,11 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
         RankFather();
 
-       Rank();
+        Rank();
 
-       CreatLines();
+        CreatLines();
 
-       CreatEffect();
+        CreatEffect();
     }
 
 
@@ -205,7 +205,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         for (int j = 0; j < panel.mapStates[index].mapRoles.Count; j++)
         {
             //生成生产性角色
-            Debug.Log(panel.mapStates[index].mapRoles[j].roleType + "j");
+            //Debug.Log(panel.mapStates[index].mapRoles[j].roleType + "j");
             ReviewRoleSign sign;
 
             sign = GetRoleSign(panel.mapStates[index].mapRoles[j].roleType);
@@ -251,7 +251,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         {
             if (panel.mapStates[index].mapTrades[j].cashFlowType == GameEnum.CashFlowType.先钱)
             {
-                Debug.Log("当前" + index + "j" + j);
+                //Debug.Log("当前" + index + "j" + j);
                 DrawLine(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).gameObject,
                     GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).gameObject
                     , j, "先");
@@ -299,7 +299,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     public void RankFather()
     {
         float totalWidth = 0;
-        seed.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countseed/ 5 + (countseed % 5 == 0 ? 0 : 1)) * 140, 720f);
+        seed.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countseed / 5 + (countseed % 5 == 0 ? 0 : 1)) * 140, 720f);
         totalWidth += seed.GetComponent<RectTransform>().sizeDelta.x;
         peasant.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countpeasant / 5 + (countpeasant % 5 == 0 ? 0 : 1)) * 140, 720f);
         totalWidth += peasant.GetComponent<RectTransform>().sizeDelta.x;
@@ -307,7 +307,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         totalWidth += merchant.GetComponent<RectTransform>().sizeDelta.x;
         dealer.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countdealer / 5 + (countdealer % 5 == 0 ? 0 : 1)) * 140, 720f);
         totalWidth += dealer.GetComponent<RectTransform>().sizeDelta.x;
-        peasant.localPosition = seed.localPosition + new Vector3(seed.GetComponent<RectTransform>().sizeDelta.x,0f,0f);
+        peasant.localPosition = seed.localPosition + new Vector3(seed.GetComponent<RectTransform>().sizeDelta.x, 0f, 0f);
         merchant.localPosition = peasant.localPosition + new Vector3(peasant.GetComponent<RectTransform>().sizeDelta.x, 0f, 0f);
         dealer.localPosition = merchant.localPosition + new Vector3(merchant.GetComponent<RectTransform>().sizeDelta.x, 0f, 0f);
         if (totalWidth >= 1440)
@@ -374,10 +374,10 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             int restCount = Mathf.Min(5, rest);
             for (int i = 0; i < restCount; i++)
             {
-                print("i:" + i.ToString() + "  j:" + j.ToString());
-                print("count:" + signs.Count);
-                signs[j * 5 + i].GetComponent<RectTransform>().anchoredPosition = new Vector3(-(columnNum - 1) * 70 + j *140, 400 - tem * (i + 1) - i * 25);
-                print(signs[j * 5 + i].transform.localPosition);
+                //print("i:" + i.ToString() + "  j:" + j.ToString());
+                //print("count:" + signs.Count);
+                signs[j * 5 + i].GetComponent<RectTransform>().anchoredPosition = new Vector3(-(columnNum - 1) * 70 + j * 140, 400 - tem * (i + 1) - i * 25);
+                //print(signs[j * 5 + i].transform.localPosition);
                 signs[j * 5 + i].ChangeParent();
                 rest--;
             }
