@@ -298,15 +298,18 @@ public class BulletLaunch : MonoBehaviour
     void Update()
     {
         BaseMapRole role = GetComponent<BaseMapRole>();
-        for (int i = 0; i < role.levelModels.Count; i++)
+        if (role != null)
         {
-            if (role.levelModels[i].activeSelf)
+            for (int i = 0; i < role.levelModels.Count; i++)
             {
-                paos[0].gameObject.SetActive(false);
-                paos[1].gameObject.SetActive(false);
-                paos[2].gameObject.SetActive(false);
-                paos[i].gameObject.SetActive(true);
-                launchShooter = paos[i].transform;
+                if (role.levelModels[i].activeSelf)
+                {
+                    paos[0].gameObject.SetActive(false);
+                    paos[1].gameObject.SetActive(false);
+                    paos[2].gameObject.SetActive(false);
+                    paos[i].gameObject.SetActive(true);
+                    launchShooter = paos[i].transform;
+                }
             }
         }
     }
