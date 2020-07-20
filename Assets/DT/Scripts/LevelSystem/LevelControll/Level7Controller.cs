@@ -7,7 +7,7 @@ public class Level7Controller : BaseLevelController
 {
     public override void CountKillNumber(ConsumeSign sign)
     {
-        if (sign.lastHitType == DT.Fight.Bullet.BulletType.Leaser)
+        if (sign.lastHitType == DT.Fight.Bullet.BulletType.summon)
         {
             targetNumber++;
         }

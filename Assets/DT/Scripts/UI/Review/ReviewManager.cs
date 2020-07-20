@@ -298,13 +298,26 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
     public void RankFather()
     {
+        float totalWidth = 0;
         seed.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countseed/ 5 + (countseed % 5 == 0 ? 0 : 1)) * 140, 720f);
+        totalWidth += seed.GetComponent<RectTransform>().sizeDelta.x;
         peasant.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countpeasant / 5 + (countpeasant % 5 == 0 ? 0 : 1)) * 140, 720f);
+        totalWidth += peasant.GetComponent<RectTransform>().sizeDelta.x;
         merchant.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countmerchant / 5 + (countmerchant % 5 == 0 ? 0 : 1)) * 140, 720f);
+        totalWidth += merchant.GetComponent<RectTransform>().sizeDelta.x;
         dealer.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countdealer / 5 + (countdealer % 5 == 0 ? 0 : 1)) * 140, 720f);
+        totalWidth += dealer.GetComponent<RectTransform>().sizeDelta.x;
         peasant.localPosition = seed.localPosition + new Vector3(seed.GetComponent<RectTransform>().sizeDelta.x,0f,0f);
         merchant.localPosition = peasant.localPosition + new Vector3(peasant.GetComponent<RectTransform>().sizeDelta.x, 0f, 0f);
         dealer.localPosition = merchant.localPosition + new Vector3(merchant.GetComponent<RectTransform>().sizeDelta.x, 0f, 0f);
+        if (totalWidth >= 1440)
+        {
+            GetComponentInChildren<ScrollRect>().horizontal = true;
+        }
+        else
+        {
+            GetComponentInChildren<ScrollRect>().horizontal = false;
+        }
     }
 
     public void Rank()
@@ -390,7 +403,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 posA.GetComponent<ReviewRoleSign>().haveColoe = color;
             }
 
-            line.transform.GetChild(0).GetComponent<Image>().color = posA.GetComponent<ReviewRoleSign>().haveColoe;
+            line.transform.GetChild(0).GetComponent<RawImage>().color = posA.GetComponent<ReviewRoleSign>().haveColoe;
             line.transform.GetChild(0).GetChild(0).GetComponent<Image>().color =
                 posA.GetComponent<ReviewRoleSign>().haveColoe;
             //  line.transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
