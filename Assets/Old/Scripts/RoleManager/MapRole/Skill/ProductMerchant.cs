@@ -11,10 +11,6 @@ public class ProductMerchant : BaseSkill
 
     private int maxCount = 0;
 
-    public List<int> specialBuffList;
-
-    public List<BaseBuff> baseBuffs = new List<BaseBuff>();
-
     public new void Start()
     {
         base.Start();
