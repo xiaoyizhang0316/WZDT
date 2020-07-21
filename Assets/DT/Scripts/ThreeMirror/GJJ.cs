@@ -34,36 +34,31 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     public void OnEndDrag(PointerEventData eventData)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit[] hit = Physics.RaycastAll(ray);
-        for (int i = 0; i < hit.Length; i++)
-        {
-            if(hit[i].transform.CompareTag("MapRole"))
+        Physics.Raycast(ray,out RaycastHit hit);
+            if(hit.transform.CompareTag("MapRole"))
             {
-                if (hit[i].transform.GetComponentInParent<BaseMapRole>().isNpc)
+                if (hit.transform.GetComponentInParent<BaseMapRole>().isNpc)
                 {
-                    if (!hit[i].transform.GetComponentInChildren<BaseNpc>().isCanSee)
+                    if (!hit.transform.GetComponentInChildren<BaseNpc>().isCanSee)
                     {
                         if (StageGoal.My.CostTechPoint(costTechNumber))
                         {
                             StageGoal.My.CostTp(costTechNumber, CostTpType.Mirror);
                             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
-                            hit[i].transform.GetComponentInChildren<BaseNpc>().DetectNPCRole();
-                            GameObject effect = Instantiate(effectPrb, hit[i].transform);
+                            hit.transform.GetComponentInChildren<BaseNpc>().DetectNPCRole();
+                            GameObject effect = Instantiate(effectPrb, hit.transform);
                             effect.transform.localPosition = Vector3.zero;
                             //effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
                             Destroy(effect, 1f);
                             Debug.Log("使用广角镜成功");
-                            break;
                         }
                         else
                         {
                             NPCListInfo.My.ShowHideTipPop("科技点数不足！");
-                            break;
                         }
                     }
                 }
             }
-        }
         Destroy(goCopy);
     }
 

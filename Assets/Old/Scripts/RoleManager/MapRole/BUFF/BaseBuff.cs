@@ -397,6 +397,10 @@ public class BaseBuff
                 CalculateNumber(str, ref buffConfig.consumerIgnoreResist);
                 targetConsume.isIgnoreResistance = buffConfig.consumerIgnoreResist;
                 break;
+            case 42:
+                CalculateNumber(str, ref buffConfig.consumerMaxHealthChange, targetConsume.consumeData.maxHealth);
+                targetConsume.consumeData.maxHealth += buffConfig.consumerMaxHealthChange;
+                break;
             default:
                 break;
         }

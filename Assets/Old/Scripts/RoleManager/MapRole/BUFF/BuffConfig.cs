@@ -30,6 +30,8 @@ public class BuffConfig
 
     public int consumerHealthChange;
 
+    public int consumerMaxHealthChange;
+
     public int consumerSpeedChange;
 
     public int consumerKillMoneyChange;

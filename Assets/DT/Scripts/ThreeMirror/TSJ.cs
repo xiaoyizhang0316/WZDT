@@ -33,13 +33,6 @@ public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        //List<RaycastResult> hit = new List<RaycastResult>();
-        //EventSystem.current.RaycastAll(eventData, hit);
-        //for (int i = 0; i < hit.Count; i++)
-        //{
-        //    print(hit[i].gameObject.name);
-        //}
-        //Destroy(goCopy);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hit = Physics.RaycastAll(ray);
         for (int i = 0; i < hit.Length; i++)

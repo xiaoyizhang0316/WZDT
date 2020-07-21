@@ -29,7 +29,7 @@ public class ProductMerchant : BaseSkill
                 if (PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).warehouse
                     .Count >= PlayerData.My
                     .GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).baseRoleData
-                    .bulletCapacity&& role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
+                    .bulletCapacity && role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
                 {
                     currentCount++;
                     maxCount++;
