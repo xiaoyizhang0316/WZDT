@@ -39,7 +39,7 @@ public class RoleEffect2 : MonoBehaviour
 
         if (skill.role.tradeList.Count > 0 && skill.IsOpen)
         {
-            rotateOBJ.transform.Rotate(Vector3.left * index / 2, Space.World);
+            rotateOBJ.transform.Rotate(Vector3.left * index / 2, Space.Self);
             count++;
             if (count == 120)
             {
