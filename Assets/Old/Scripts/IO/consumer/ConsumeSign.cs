@@ -49,6 +49,8 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public List<BaseBuff> buffList = new List<BaseBuff>();
 
+    public List<int> bornBuffList = new List<int>();
+
     public bool isStart = false;
 
     public bool isCanSelect = false;
@@ -88,6 +90,7 @@ public class ConsumeSign : MonoBehaviour
             BaseBuff baseBuff = new BaseBuff();
             baseBuff.Init(buff);
             baseBuff.SetConsumerBuff(this);
+            bornBuffList.Add(i);
         }
         GameObject go = Instantiate(hudPrb, transform);
         hud = go.GetComponent<Hud>();

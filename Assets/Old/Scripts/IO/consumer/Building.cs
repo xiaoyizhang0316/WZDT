@@ -166,6 +166,7 @@ public class Building : MonoBehaviour
                         BaseBuff baseBuff = new BaseBuff();
                         baseBuff.Init(buff);
                         baseBuff.SetConsumerBuff(go.GetComponent<ConsumeSign>());
+                        go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
                     }
                 }
                 float waitTime = 1f;

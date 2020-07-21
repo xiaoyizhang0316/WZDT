@@ -29,13 +29,23 @@ public class RoleEffect2 : MonoBehaviour
         //    });
         //});
     }
+    private int index = 1;
+
+    private int count = 0;
 
     // Update is called once per frame
     void Update()
     {
-        if (skill.role.tradeList.Count > 0 && skill.IsOpen && tweFinish)
+
+        if (skill.role.tradeList.Count > 0 && skill.IsOpen)
         {
-            //Func();
+            rotateOBJ.transform.Rotate(Vector3.left * index / 2, Space.World);
+            count++;
+            if (count == 120)
+            {
+                index = 0 - index;
+                count = 0;
+            }
         }
     }
 }
