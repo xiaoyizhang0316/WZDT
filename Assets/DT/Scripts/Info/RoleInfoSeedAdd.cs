@@ -28,14 +28,16 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
     // Start is called before the first frame update
     void Start()
     {
-        Init();
-        InvokeRepeating("UpdateBar",0.1f,0.2f);
+        //Init();
+        //UpdateBar();
+        //InvokeRepeating("UpdateBar",0.1f,0.2f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Init();
+        //Init();
+        //UpdateBar();
     }
 
     public override void Init()
@@ -51,14 +53,14 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
 
     }
 
-    public void UpdateBar()
+    public override void UpdateBar()
     {
         efficiencyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(CreatRoleManager.My.finalEfficiency / 120f * 150f,
-                efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
+                efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
         effectyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(CreatRoleManager.My.finalEffect / 120f * 150f,
-                effectyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
+                effectyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
     }
 
     public override void UpdateBuff()

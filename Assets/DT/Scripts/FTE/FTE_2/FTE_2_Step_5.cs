@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class FTE_2_Step_5 : BaseStep
 {
-   
+    public GameObject mid; 
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +28,42 @@ public class FTE_2_Step_5 : BaseStep
        
          MaskManager.My.Open(4,90);
          MaskManager.My.Open(5,180);
+        Debug.Log("名字"+  mid.transform.GetChild(0) .name);
+         mid.transform.GetChild(0) .GetComponent<Image>().DOFade(0.1f, 0.5f).OnComplete(() =>
+         {
+             mid.transform.GetChild(0) .GetComponent<Image>().DOFade(1f, 0.5f).OnComplete(() =>
+             {
+                 mid.transform.GetChild(0) .GetComponent<Image>().DOFade(0.1f, 0.5f).OnComplete(() =>
+                 {
+                     mid.transform.GetChild(0) .GetComponent<Image>().DOFade(1f, 0.5f).OnComplete(() =>
+                     {
+                         mid.transform.GetChild(0) .GetComponent<Image>().DOFade(0.1f, 0.5f).OnComplete(() =>
+                         {
+                             mid.transform.GetChild(0) .GetComponent<Image>().DOFade(1f, 0.5f).OnComplete(() =>
+                             {
+                                 mid.transform.GetChild(0) .GetComponent<Image>().DOFade(0.1f, 0.5f).OnComplete(() =>
+                                 {
+                                     mid.transform.GetChild(0) .GetComponent<Image>().DOFade(1f, 0.5f).OnComplete(() =>
+                                     {
+                 
+                 
+                                     }).Play();
+             
+                                 }).Play();
+                 
+                             }).Play();
+             
+                         }).Play();
+                 
+                     }).Play();
+             
+                 }).Play();
+                 
+             }).Play();
+             
+         }).Play();
+         
+         
          contenText.DOFade(0, 0).OnComplete(() =>
          {
              

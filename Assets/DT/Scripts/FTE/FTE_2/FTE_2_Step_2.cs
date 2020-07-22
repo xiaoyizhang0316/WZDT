@@ -26,7 +26,7 @@ public class FTE_2_Step_2 : BaseStep
     {
         
          MaskManager.My.Open(1,80);
-         MaskManager.My.Open(2,130);
+         MaskManager.My.FadeMask(2,130);
          contenText.DOFade(0, 0).OnComplete(() =>
          {
              maptext.DOFade(1, 1.5f);

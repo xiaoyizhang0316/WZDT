@@ -35,7 +35,9 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray,out RaycastHit hit);
-            if(hit.transform.CompareTag("MapRole"))
+        if (hit.transform != null)
+        {
+            if (hit.transform.CompareTag("MapRole"))
             {
                 if (hit.transform.GetComponentInParent<BaseMapRole>().isNpc)
                 {
@@ -59,6 +61,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                     }
                 }
             }
+        }
         Destroy(goCopy);
     }
 

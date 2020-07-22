@@ -45,9 +45,12 @@ public class TradeIcon : MonoBehaviour
     public void CheckPos()
     {
         Physics.Raycast(transform.position + new Vector3(-7f, 10f, -7f), new Vector3(0.7f, -1f, 0.7f), out RaycastHit hit);
-        if (hit.transform.CompareTag("CreateTradeButton") || hit.transform.CompareTag("MapRole"))
+        if (hit.transform != null)
         {
-            RePos();
+            if (hit.transform.CompareTag("CreateTradeButton") || hit.transform.CompareTag("MapRole"))
+            {
+                RePos();
+            }
         }
     }
 

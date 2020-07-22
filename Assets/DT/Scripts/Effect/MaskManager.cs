@@ -57,7 +57,7 @@ public class MaskManager : MonoSingleton<MaskManager>
     {
         if (darkEffect._darkColor.a <= 0.4f)
         {
-            darkEffect._darkColor = new Color(0,0,0,   darkEffect._darkColor.a+0.04f);
+            darkEffect._darkColor = new Color(0,0,0,   darkEffect._darkColor.a+0.32f);
         }
         else
         {
@@ -69,7 +69,7 @@ public class MaskManager : MonoSingleton<MaskManager>
     {
         if (darkEffect._darkColor.a >0)
         {
-            darkEffect._darkColor = new Color(0,0,0,   darkEffect._darkColor.a-0.04f);
+            darkEffect._darkColor = new Color(0,0,0,   darkEffect._darkColor.a-0.32f);
         }
         else
         {
@@ -84,7 +84,7 @@ public class MaskManager : MonoSingleton<MaskManager>
         for (int i = 0; i <= radius; i++)
         {
             darkEffect._items[index].radius = i;
-            i++;
+            i+=4;
             yield return null;
         }
     }
@@ -94,7 +94,7 @@ public class MaskManager : MonoSingleton<MaskManager>
         for (int i =   darkEffect._items[index].radius ; i >=0; i--)
         {
             darkEffect._items[index].radius = i;
-            i--;
+            i-=4;
             yield return null;
         }
     }
