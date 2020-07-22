@@ -38,7 +38,7 @@ public class FTE_1_Step_30 : BaseStep
     public override void StopCurrentStep()
     {
         nextButton.interactable = false;  
-        FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
+        //FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
 
         MaskManager.My.Close(16,0 );
         MaskManager.My.CloseMaks(28 );
