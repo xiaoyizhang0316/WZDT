@@ -25,6 +25,14 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
 
     public Toggle isUseGuide;
 
+    public Toggle cheat1;
+    public Toggle cheat2;
+    public Toggle cheat3;
+
+    public GameObject cheatPanel;
+
+    public GameObject cheatDesc;
+
     public Action loadScene;
 
     public Sprite levelLockImage;
@@ -50,8 +58,23 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         play.onClick.AddListener(() => { loadScene(); });
         isUseGuide.onValueChanged.AddListener((bool b) =>
         {
-            print(b);
+            //print(b);
             PlayerPrefs.SetInt("isUseGuide",b ? 1 : 0);
+        });
+        cheat1.onValueChanged.AddListener((bool b) =>
+        {
+            PlayerData.My.cheatIndex1 = b;
+            CheckCheat();
+        });
+        cheat2.onValueChanged.AddListener((bool b) =>
+        {
+            PlayerData.My.cheatIndex2 = b;
+            CheckCheat();
+        });
+        cheat3.onValueChanged.AddListener((bool b) =>
+        {
+            PlayerData.My.cheatIndex3 = b;
+            CheckCheat();
         });
     }
 
@@ -97,13 +120,25 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     // net
     public void Init(string star, string name, string contet, string mission_1, string mission_2, string mission_3, Action loadScene, string sceneName)
     {
-        print(sceneName);
+        //print(sceneName);
         if (int.Parse(sceneName.Split('_')[1]) >= 5)
             isUseGuide.gameObject.SetActive(false);
         else
         {
             isUseGuide.gameObject.SetActive(true);
             isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
+        }
+        if (int.Parse(sceneName.Split('_')[1]) == 1)
+        {
+            cheatPanel.SetActive(false);
+        }
+        else
+        {
+            cheatPanel.SetActive(true);
+            cheat1.isOn = PlayerData.My.cheatIndex1;
+            cheat2.isOn = PlayerData.My.cheatIndex2;
+            cheat3.isOn = PlayerData.My.cheatIndex3;
+            CheckCheat();
         }
 
         levelName.text = name;
@@ -133,6 +168,18 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         else
         {
             child.parent.GetComponent<Image>().sprite = close;
+        }
+    }
+
+    public void CheckCheat()
+    {
+        if (cheat1.isOn || cheat2.isOn || cheat3.isOn)
+        {
+            cheatDesc.SetActive(true);
+        }
+        else
+        {
+            cheatDesc.SetActive(false);
         }
     }
 }

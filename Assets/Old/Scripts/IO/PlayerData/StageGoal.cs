@@ -313,6 +313,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
             playerGoldText.color = Color.red;
         playerSatisfyText.text = playerSatisfy.ToString();
+        if (PlayerData.My.cheatIndex1 || PlayerData.My.cheatIndex2 || PlayerData.My.cheatIndex3)
+            playerSatisfyText.color = Color.gray;
+        else
+            playerSatisfyText.color = Color.white;
         playerTechText.text = playerTechPoint.ToString();   
     }
 
@@ -619,8 +623,12 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
         playerGold = data.startPlayerGold;
+        if (PlayerData.My.cheatIndex1)
+            playerGold += 10000;
         playerSatisfy = 0;
         playerHealth = data.startPlayerHealth;
+        if (PlayerData.My.cheatIndex3)
+            playerHealth = (int)(playerHealth * 1.5f);
         playerMaxHealth = playerHealth;
         maxWaveNumber = data.maxWaveNumber;
         playerTechPoint = data.startTech;

@@ -35,5 +35,6 @@ public class Level4Controller : BaseLevelController
         }
         starThreeStatus = true;
         starThreeCondition = "不放置自有的种子商";
+        CheckCheat();
     }
 }

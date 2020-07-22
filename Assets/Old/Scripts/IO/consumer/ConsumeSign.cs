@@ -92,6 +92,8 @@ public class ConsumeSign : MonoBehaviour
             baseBuff.SetConsumerBuff(this);
             bornBuffList.Add(i);
         }
+        if (PlayerData.My.cheatIndex2)
+            consumeData.maxHealth = (int)(consumeData.maxHealth * 0.5f);
         GameObject go = Instantiate(hudPrb, transform);
         hud = go.GetComponent<Hud>();
         hud.Init(this);

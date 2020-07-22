@@ -32,6 +32,7 @@ public class Level6Controller : BaseLevelController
             starThreeStatus = false;
         }
         starThreeCondition = "累计暂停时间不超过100秒，当前：" + StageGoal.My.totalPauseTime.ToString();
+        CheckCheat();
     }
 
 }

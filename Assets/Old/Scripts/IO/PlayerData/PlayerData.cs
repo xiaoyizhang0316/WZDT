@@ -42,6 +42,11 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// </summary>
     public Dictionary<int, bool> tradeSkillLock = new Dictionary<int, bool>();
 
+    public bool cheatIndex1 = false;
+
+    public bool cheatIndex2 = false;
+
+    public bool cheatIndex3 = false;
 
     /// <summary>
     /// 通过名字获得Role信息
@@ -314,6 +319,9 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         RoleData.Clear();
         RoleManager.Clear();
         MapRole.Clear();
+        cheatIndex1 = false;
+        cheatIndex2 = false;
+        cheatIndex3 = false;
         //playerConsumables.Clear();
     }
 

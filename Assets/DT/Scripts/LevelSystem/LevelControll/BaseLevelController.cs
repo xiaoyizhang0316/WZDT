@@ -166,6 +166,15 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         HideLande();
     }
 
+    public void CheckCheat()
+    {
+        if (PlayerData.My.cheatIndex1 || PlayerData.My.cheatIndex2 || PlayerData.My.cheatIndex3)
+        {
+            starThreeStatus = false;
+            CancelInvoke("CheckStarThree");
+        }
+    }
+
     private void Update()
     {
         if (unlockTime1 == StageGoal.My.timeCount && unlockTime1 > 0 && !isLockFinish1)
