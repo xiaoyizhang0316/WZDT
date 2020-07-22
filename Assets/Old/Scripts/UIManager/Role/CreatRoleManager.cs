@@ -209,7 +209,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         SetCreateRoleTitle();
         EquipListManager.My.Init();
         WorkerListManager.My.Init();
-
+        CheckAllConditions();
     }
 
     /// <summary>
@@ -288,8 +288,9 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     public void CheckAllConditions()
     {
         CalculateAllAttribute();
-        RoleInfoManager.My.UpdateRoleInfo();
         GetComponentInChildren<BaseRoleInfoAdd>().UpdateBuff();
+        GetComponentInChildren<BaseRoleInfoAdd>().UpdateBar();
+        GetComponentInChildren<BaseRoleInfoAdd>().Init();
     }
 
     /// <summary>

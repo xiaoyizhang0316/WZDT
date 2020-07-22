@@ -20,4 +20,6 @@ public abstract class BaseRoleInfoAdd : MonoBehaviour
     public abstract void Init();
 
     public abstract void UpdateBuff();
+
+    public abstract void UpdateBar();
 }
