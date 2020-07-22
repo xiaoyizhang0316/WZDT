@@ -28,7 +28,7 @@ public class RoleInfoPeasant : BaseRoleInfoAdd
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("UpdateBar",0.1f,0.2f);
+        //InvokeRepeating("UpdateBar",0.1f,0.2f);
     }
 
  
@@ -45,14 +45,14 @@ public class RoleInfoPeasant : BaseRoleInfoAdd
         montyCost.text =  CreatRoleManager.My.finalCost.ToString();
         technology.text = CreatRoleManager.My.finalTechAdd.ToString();
     }
-    public void UpdateBar()
+    public override void UpdateBar()
     {
         efficiencyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(CreatRoleManager.My.finalEfficiency / 120f * 150f,
-                efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
+                efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
         effectyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(CreatRoleManager.My.finalEffect / 120f * 150f,
-                effectyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
+                effectyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
     }
 
     public override void UpdateBuff()
