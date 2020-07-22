@@ -18,7 +18,7 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     public void OnBeginDrag(PointerEventData eventData)
     {
         goCopy = Instantiate(gameObject, transform.parent);
-        goCopy.transform.DOScale(1f, 0.3f).Play();
+        goCopy.transform.DOScale(1f, 0f).Play();
     }
 
     public void OnDrag(PointerEventData eventData)
