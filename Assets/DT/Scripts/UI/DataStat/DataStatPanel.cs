@@ -55,7 +55,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     void Close()
     {
         statPanel.SetActive(false);
-        //mask.SetActive(false);
+        mask.SetActive(false);
         isShow = false;
     }
 
@@ -93,7 +93,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         Dictionary<string, int> extraCost, int timeCount)
     {
         isShow = false;
-        //mask.SetActive(true);
+        mask.SetActive(true);
         statPanel.SetActive(true);
         totalIncomePerMin.text = (totalIncome * 60 / timeCount).ToString();
         this.totalIncome.text = totalIncome.ToString();

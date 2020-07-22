@@ -11,20 +11,9 @@ public class ProductMerchant : BaseSkill
 
     private int maxCount = 0;
 
-    public List<int> specialBuffList;
-
-    public List<BaseBuff> baseBuffs = new List<BaseBuff>();
-
     public new void Start()
     {
         base.Start();
-        for (int i = 0; i < specialBuffList.Count; i++)
-        {
-            BaseBuff buff = new BaseBuff();
-            BuffData data = GameDataMgr.My.GetBuffDataByID(specialBuffList[i]);
-            buff.Init(data);
-            buff.SetRoleBuff(role, role, role);
-        }
     }
 
     public override void Skill()
@@ -40,7 +29,7 @@ public class ProductMerchant : BaseSkill
                 if (PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).warehouse
                     .Count >= PlayerData.My
                     .GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).baseRoleData
-                    .bulletCapacity&& role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
+                    .bulletCapacity && role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
                 {
                     currentCount++;
                     maxCount++;
@@ -69,15 +58,19 @@ public class ProductMerchant : BaseSkill
                         {
                             data.AddBuff(role.GetComponentInChildren<BaseNpc>().NPCBuffList[i]);
                         }
-                        for (int i = 0; i < baseBuffs.Count; i++)
+                        for (int i = 0; i < goodBaseBuffs.Count; i++)
                         {
-                            baseBuffs[i].OnProduct(ref data);
+                            goodBaseBuffs[i].OnProduct(ref data);
                         }
                     }
                 }
                 for (int i = 0; i < buffList.Count; i++)
                 {
                     data.AddBuff(buffList[i]);
+                }
+                for (int i = 0; i < badBaseBuffs.Count; i++)
+                {
+                    badBaseBuffs[i].OnProduct(ref data);
                 }
                 GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
                 game.GetComponent<GoodsSign>().productData = data;

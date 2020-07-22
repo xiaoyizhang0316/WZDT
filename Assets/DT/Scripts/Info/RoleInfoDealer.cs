@@ -28,14 +28,14 @@ public class RoleInfoDealer : BaseRoleInfoAdd
     void Start()
     {
    
-        InvokeRepeating("UpdateBar",0.1f,0.2f);
+        //InvokeRepeating("UpdateBar",0.1f,0.2f);
     }
  
 
     public override void Init()
     {
        
-        fireTime.text = (CreatRoleManager.My.finalEfficiency  ).ToString()+"%";
+        fireTime.text = (CreatRoleManager.My.finalEfficiency * -0.01f + 1.5f  ).ToString("#.##")+"s";
         efficiency.text = CreatRoleManager.My.finalEfficiency.ToString();
         Range.text = (CreatRoleManager.My.finalRange ).ToString() ;
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();
@@ -45,11 +45,11 @@ public class RoleInfoDealer : BaseRoleInfoAdd
 
     }
 
-    public void UpdateBar()
+    public override void UpdateBar()
     {
         efficiencyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(CreatRoleManager.My.finalEfficiency / 120f * 150f,
-                efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
+                efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
         
     }
 

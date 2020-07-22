@@ -28,16 +28,16 @@ public class RoleInfoMerchant : BaseRoleInfoAdd
     void Start()
     {
         
-        InvokeRepeating("UpdateBar",0.1f,0.2f);
+        //InvokeRepeating("UpdateBar",0.1f,0.2f);
     }
 
    
     public override void Init()
     {
         effect.text = CreatRoleManager.My.finalEffect.ToString();
-        MoveSpeed.text =  CreatRoleManager.My.finalEffect  .ToString()+"%";
+        MoveSpeed.text =  CreatRoleManager.My.finalEfficiency.ToString()+"%";
         efficiency.text = CreatRoleManager.My.finalEfficiency.ToString();
-        TradDown.text = (((CreatRoleManager.My.finalEfficiency *0.3f)/100f)*  CreatRoleManager.My.finalTradeCost).ToString()+" /s";
+        TradDown.text = (CreatRoleManager.My.finalEffect *0.3f + 24f).ToString()+"%";
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();
         risk .text =  CreatRoleManager.My.finalRiskResistance.ToString();
         montyCost.text =  CreatRoleManager.My.finalCost.ToString();
@@ -45,14 +45,14 @@ public class RoleInfoMerchant : BaseRoleInfoAdd
 
     }
 
-    public void UpdateBar()
+    public override void UpdateBar()
     {
         efficiencyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(CreatRoleManager.My.finalEfficiency / 120f * 150f,
-                efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
+                efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
         effectyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(CreatRoleManager.My.finalEffect / 120f * 150f,
-                effectyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
+                effectyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
     }
 
     public override void UpdateBuff()

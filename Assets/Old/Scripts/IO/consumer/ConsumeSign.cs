@@ -49,6 +49,8 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public List<BaseBuff> buffList = new List<BaseBuff>();
 
+    public List<int> bornBuffList = new List<int>();
+
     public bool isStart = false;
 
     public bool isCanSelect = false;
@@ -88,6 +90,7 @@ public class ConsumeSign : MonoBehaviour
             BaseBuff baseBuff = new BaseBuff();
             baseBuff.Init(buff);
             baseBuff.SetConsumerBuff(this);
+            bornBuffList.Add(i);
         }
         GameObject go = Instantiate(hudPrb, transform);
         hud = go.GetComponent<Hud>();
@@ -119,13 +122,21 @@ public class ConsumeSign : MonoBehaviour
     /// <param name="buffID"></param>
     public void AddEffect(int buffID)
     {
-        for (int i = 0; i < debuffEffectList.Count; i++)
+        if (buffID <= 1000)
         {
-            if (debuffEffectList[i].name.Equals(buffID.ToString()))
+            for (int i = 0; i < debuffEffectList.Count; i++)
             {
-                debuffEffectList[i].SetActive(true);
-                debuffEffectList[i].GetComponent<ParticleSystem>().Play();
+                if (debuffEffectList[i].name.Equals(buffID.ToString()))
+                {
+                    debuffEffectList[i].SetActive(true);
+                    debuffEffectList[i].GetComponent<ParticleSystem>().Play();
+                }
             }
+        }
+        else
+        {
+            GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Effect/BuffEffect/" + buffID.ToString()), transform);
+            go.transform.localPosition = Vector3.zero;
         }
     }
 
@@ -274,13 +285,19 @@ public class ConsumeSign : MonoBehaviour
     public void CheckBulletElement(ref int damage,ProductData data)
     {
         float per = 1f;
+        bool isNormal = true;
         foreach(int i in data.buffList)
         {
             BuffData b = GameDataMgr.My.GetBuffDataByID(i);
             if (b.bulletBuffType == BulletBuffType.Element)
             {
                 per += elementResistance[b.elementType] / 100f - 1f;
+                isNormal = false;
             }
+        }
+        if (isNormal)
+        {
+            per += elementResistance[ProductElementType.Normal] / 100f - 1f;
         }
         damage = (int)(damage * per);
     }

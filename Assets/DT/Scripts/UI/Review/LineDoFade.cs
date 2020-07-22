@@ -11,8 +11,8 @@ public class LineDoFade : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 
     public float offset;
 
-    public Sprite normal;
-    public Sprite buff;
+    public Texture normal;
+    public Texture buff;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,13 +24,13 @@ public class LineDoFade : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     {
         if ( gameObject.transform.parent.parent.name != "LinesBuffRole")
         {
-            gameObject.GetComponent<Image>().sprite = buff;
+            gameObject.GetComponent<RawImage>().texture = buff;
             offsetY -= offset;
-            GetComponent<Image>().material.mainTextureOffset = new Vector2(0, offsetY);
+            GetComponent<RawImage>().uvRect = new Rect(new Vector2(0f, offsetY), Vector2.one);
         }
         else
         {
-            gameObject.GetComponent<Image>().sprite = normal;
+            gameObject.GetComponent<RawImage>().texture = normal;
         }
 
     }

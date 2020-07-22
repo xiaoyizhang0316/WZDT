@@ -48,39 +48,43 @@ public class CreateTradeLine : MonoBehaviour
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 Physics.Raycast(ray, out RaycastHit hit);
-                if (hit.transform.tag.Equals("MapLand"))
+                if(hit.transform != null)
                 {
-                    Target = hit.transform.position + new Vector3(0f, 1f, 0f);
-                    lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
-                }
-                if (hit.transform.tag.Equals("MapRole"))
-                {
-                    targetRole = hit.transform.GetComponentInParent<BaseMapRole>();
-                    Target = hit.transform.GetComponentInParent<BaseMapRole>().tradePoint.position;
-                    if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product && targetRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
+                    if (hit.transform.tag.Equals("MapLand"))
                     {
-                        if (!TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, targetRole.baseRoleData.baseRoleData.roleType))
+                        Target = hit.transform.position + new Vector3(0f, 1f, 0f);
+                        lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
+                    }
+                    if (hit.transform.tag.Equals("MapRole"))
+                    {
+                        targetRole = hit.transform.GetComponentInParent<BaseMapRole>();
+                        Target = hit.transform.GetComponentInParent<BaseMapRole>().tradePoint.position;
+                        if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product && targetRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
                         {
-                            lineGo.GetComponent<MeshRenderer>().material.color = Color.red;
+                            if (!TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, targetRole.baseRoleData.baseRoleData.roleType))
+                            {
+                                lineGo.GetComponent<MeshRenderer>().material.color = Color.red;
+                            }
+                            else
+                            {
+                                lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
+                            }
                         }
                         else
                         {
                             lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
                         }
                     }
-                    else
-                    {
-                        lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
-                    }
+                    Vector3 rightPosition = (startTarget.gameObject.transform.position + Target) / 2;
+                    Vector3 rightRotation = Target - startTarget.transform.position;
+                    float HalfLength = Vector3.Distance(startTarget.transform.position, Target) / 2;
+                    float LThickness = 0.1f;//线的粗细
+                    lineGo.gameObject.transform.parent = transform;
+                    lineGo.transform.position = rightPosition;
+                    lineGo.transform.rotation = Quaternion.FromToRotation(Vector3.up, rightRotation);
+                    lineGo.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
                 }
-                Vector3 rightPosition = (startTarget.gameObject.transform.position + Target) / 2;
-                Vector3 rightRotation = Target - startTarget.transform.position;
-                float HalfLength = Vector3.Distance(startTarget.transform.position, Target) / 2;
-                float LThickness = 0.1f;//线的粗细
-                lineGo.gameObject.transform.parent = transform;
-                lineGo.transform.position = rightPosition;
-                lineGo.transform.rotation = Quaternion.FromToRotation(Vector3.up, rightRotation);
-                lineGo.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
+                
             }
         }
         if (Input.GetMouseButtonUp(0))

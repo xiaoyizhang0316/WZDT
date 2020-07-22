@@ -85,6 +85,7 @@ public class GuideActions : MonoBehaviour
             {
                 UpdateFte();
             }
+            PlayerData.My.Reset();
             SceneManager.LoadScene("FTE_1");
             
         }

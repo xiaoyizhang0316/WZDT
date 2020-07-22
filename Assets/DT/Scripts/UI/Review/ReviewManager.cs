@@ -54,6 +54,8 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
         CreatRoles();
 
+        RankFather();
+
         Rank();
 
         CreatLines();
@@ -93,7 +95,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
     public GameObject GetLineById(int id)
     {
-        for (int i = 0; i <lines.Count; i++)
+        for (int i = 0; i < lines.Count; i++)
         {
             if (lines[i].GetComponent<WMG_Link>().id == id)
             {
@@ -167,29 +169,29 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
     public void CreatEffect()
     {
-        for (int i = 0; i <panel.mapStates[index].specialOperations.Count; i++)
+        for (int i = 0; i < panel.mapStates[index].specialOperations.Count; i++)
         {
             if (panel.mapStates[index].specialOperations[i].type == GameEnum.OperationType.UpgradeRole)
             {
-            var signs =     GetRoleByMapRoleSigns(Double.Parse(panel.mapStates[index].specialOperations[i].operationParams[0]));
-           GameObject game =  Instantiate(levelupPrb, effectTF);
-           game.transform.localPosition = signs.transform.localPosition;
-           Debug.Log("当前ID"+signs.role.roleName+"升级角色");
-           Destroy(game, 1f);
+                var signs = GetRoleByMapRoleSigns(Double.Parse(panel.mapStates[index].specialOperations[i].operationParams[0]));
+                GameObject game = Instantiate(levelupPrb, effectTF);
+                game.transform.localPosition = signs.transform.localPosition;
+                Debug.Log("当前ID" + signs.role.roleName + "升级角色");
+                Destroy(game, 1f);
             }
             if (panel.mapStates[index].specialOperations[i].type == GameEnum.OperationType.ChangeRole)
             {
-                var signs =     GetRoleByMapRoleSigns(Double.Parse(panel.mapStates[index].specialOperations[i].operationParams[0]));
-                GameObject game =  Instantiate(changeEquipPrb, effectTF);
+                var signs = GetRoleByMapRoleSigns(Double.Parse(panel.mapStates[index].specialOperations[i].operationParams[0]));
+                GameObject game = Instantiate(changeEquipPrb, effectTF);
                 game.transform.localPosition = signs.transform.localPosition;
-                Debug.Log("当前ID"+signs.role.roleName+"更改装备");
+                Debug.Log("当前ID" + signs.role.roleName + "更改装备");
 
                 Destroy(game, 1f);
             }
             if (panel.mapStates[index].specialOperations[i].type == GameEnum.OperationType.ChangeTrade)
             {
-                var signs =     GetLineById(int.Parse(panel.mapStates[index].specialOperations[i].operationParams[0]));
-                GameObject game =  Instantiate(changeTradePrb, effectTF);
+                var signs = GetLineById(int.Parse(panel.mapStates[index].specialOperations[i].operationParams[0]));
+                GameObject game = Instantiate(changeTradePrb, effectTF);
                 Debug.Log("当前ID" + signs.name + "更改交易");
                 game.transform.localPosition = signs.transform.localPosition;
 
@@ -203,7 +205,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         for (int j = 0; j < panel.mapStates[index].mapRoles.Count; j++)
         {
             //生成生产性角色
-            Debug.Log(panel.mapStates[index].mapRoles[j].roleType + "j");
+            //Debug.Log(panel.mapStates[index].mapRoles[j].roleType + "j");
             ReviewRoleSign sign;
 
             sign = GetRoleSign(panel.mapStates[index].mapRoles[j].roleType);
@@ -211,7 +213,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             {
                 sign.InitRole(panel.mapStates[index].mapRoles[j], false);
             }
-   
+
             if (!panel.mapStates[index].mapRoles[j].isNPC)
             {
                 if (Resources.Load<Sprite>("Sprite/hong/" + panel.mapStates[index].mapRoles[j].roleType +
@@ -249,7 +251,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         {
             if (panel.mapStates[index].mapTrades[j].cashFlowType == GameEnum.CashFlowType.先钱)
             {
-                Debug.Log("当前" + index + "j" + j);
+                //Debug.Log("当前" + index + "j" + j);
                 DrawLine(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).gameObject,
                     GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).gameObject
                     , j, "先");
@@ -292,6 +294,30 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             }
         }
         return false;
+    }
+
+    public void RankFather()
+    {
+        float totalWidth = 0;
+        seed.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countseed / 5 + (countseed % 5 == 0 ? 0 : 1)) * 140, 720f);
+        totalWidth += seed.GetComponent<RectTransform>().sizeDelta.x;
+        peasant.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countpeasant / 5 + (countpeasant % 5 == 0 ? 0 : 1)) * 140, 720f);
+        totalWidth += peasant.GetComponent<RectTransform>().sizeDelta.x;
+        merchant.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countmerchant / 5 + (countmerchant % 5 == 0 ? 0 : 1)) * 140, 720f);
+        totalWidth += merchant.GetComponent<RectTransform>().sizeDelta.x;
+        dealer.GetComponent<RectTransform>().sizeDelta = new Vector2(120 + (countdealer / 5 + (countdealer % 5 == 0 ? 0 : 1)) * 140, 720f);
+        totalWidth += dealer.GetComponent<RectTransform>().sizeDelta.x;
+        peasant.localPosition = seed.localPosition + new Vector3(seed.GetComponent<RectTransform>().sizeDelta.x, 0f, 0f);
+        merchant.localPosition = peasant.localPosition + new Vector3(peasant.GetComponent<RectTransform>().sizeDelta.x, 0f, 0f);
+        dealer.localPosition = merchant.localPosition + new Vector3(merchant.GetComponent<RectTransform>().sizeDelta.x, 0f, 0f);
+        if (totalWidth >= 1440)
+        {
+            GetComponentInChildren<ScrollRect>().horizontal = true;
+        }
+        else
+        {
+            GetComponentInChildren<ScrollRect>().horizontal = false;
+        }
     }
 
     public void Rank()
@@ -339,37 +365,28 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
     public void RankPosition(List<ReviewRoleSign> signs)
     {
-        if (signs.Count <= 6)
+        int count = signs.Count;
+        int rest = count;
+        int columnNum = signs.Count / 5 + (signs.Count % 5 == 0 ? 0 : 1);
+        for (int j = 0; j < columnNum; j++)
         {
-            //一行
-            for (int i = 0; i < signs.Count; i++)
+            float tem = 720 / (Mathf.Min(5, rest) + 1);
+            int restCount = Mathf.Min(5, rest);
+            for (int i = 0; i < restCount; i++)
             {
-                float tem = 720 / (signs.Count + 1);
-                signs[i].transform.localPosition = new Vector3(0,   400 - tem * (i + 1)-i*25 );
-                signs[i].ChangeParent();
-            }
-        }
-        else
-        {
-            for (int i = 0; i < 6; i++)
-            {
-                float tem = 720 / (6 + 1);
-                signs[i].transform.localPosition = new Vector3(-80, 400 - tem * (i + 1)-i*25);
-                signs[i].ChangeParent();
-            }
-
-            for (int i = 6; i < signs.Count; i++)
-            {
-                float tem = 720 / (signs.Count + 1);
-                signs[i].transform.localPosition = new Vector3(80, 400 - tem * (i - 6 + 1)-i*25);
-                signs[i].ChangeParent();
+                //print("i:" + i.ToString() + "  j:" + j.ToString());
+                //print("count:" + signs.Count);
+                signs[j * 5 + i].GetComponent<RectTransform>().anchoredPosition = new Vector3(-(columnNum - 1) * 70 + j * 140, 400 - tem * (i + 1) - i * 25);
+                //print(signs[j * 5 + i].transform.localPosition);
+                signs[j * 5 + i].ChangeParent();
+                rest--;
             }
         }
     }
 
     public int indexBuff = 0;
 
-    void DrawLine(GameObject posA, GameObject posB, int index, string money )
+    void DrawLine(GameObject posA, GameObject posB, int index, string money)
     {
         GameObject line = Instantiate(linePrb, lineTF);
         lines.Add(line);
@@ -386,7 +403,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                 posA.GetComponent<ReviewRoleSign>().haveColoe = color;
             }
 
-            line.transform.GetChild(0).GetComponent<Image>().color = posA.GetComponent<ReviewRoleSign>().haveColoe;
+            line.transform.GetChild(0).GetComponent<RawImage>().color = posA.GetComponent<ReviewRoleSign>().haveColoe;
             line.transform.GetChild(0).GetChild(0).GetComponent<Image>().color =
                 posA.GetComponent<ReviewRoleSign>().haveColoe;
             //  line.transform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
@@ -411,7 +428,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         line.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Text>().text = money;
         //RectTransform ImageRectTrans =    line.GetComponent<RectTransform>();
         //   Vector3 differenceVector = posB - posA;
-//
+        //
         //   // 设置线的长度（Width）
         //   ImageRectTrans.sizeDelta = new Vector2(differenceVector.magnitude, 2);
         //   // 从左向右划线
@@ -474,5 +491,5 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
     }
 
-   
+
 }

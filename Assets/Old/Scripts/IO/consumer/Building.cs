@@ -120,7 +120,7 @@ public class Building : MonoBehaviour
         {
             throw new Exception("配置表或者配置消费者刷新点错误");
         }
-        else
+        else if(gameObject.activeInHierarchy)
         {
             StartCoroutine(SpawnWaveConsumer(waveNumber));
         }
@@ -166,6 +166,7 @@ public class Building : MonoBehaviour
                         BaseBuff baseBuff = new BaseBuff();
                         baseBuff.Init(buff);
                         baseBuff.SetConsumerBuff(go.GetComponent<ConsumeSign>());
+                        go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
                     }
                 }
                 float waitTime = 1f;

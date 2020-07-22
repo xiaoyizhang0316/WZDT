@@ -18,9 +18,18 @@ public class FloatWindow : MonoSingleton<FloatWindow>
         Vector3 V = Input.mousePosition;
         Vector3 V2 = new Vector3(V.x - Screen.width / 2 + 150f, V.y - Screen.height / 2);
         transform.localPosition = V2;
+        CheckPos();
         //print(Input.mousePosition);
         //print(Camera.main.ViewportToScreenPoint(_transform.position));
         //print(Camera.main.ViewportToWorldPoint(_transform.position));
+    }
+
+    public void CheckPos()
+    {
+        if (transform.localPosition.y + GetComponent<RectTransform>().sizeDelta.y / 2 >= Screen.height / 2)
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, Screen.height / 2 - GetComponent<RectTransform>().sizeDelta.y / 2);
+        }
     }
 
     public void Hide()

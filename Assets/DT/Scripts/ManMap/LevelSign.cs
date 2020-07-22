@@ -51,9 +51,8 @@ public class LevelSign : MonoBehaviour
         {
             LevelInfoManager.My.Init(stars, levelName, content, mission_1, mission_2, mission_3, () =>
             {
-             
                 SceneManager.LoadScene(loadScene);
-            });
+            }, loadScene);
             NetworkMgr.My.GetReplayLists(loadScene,()=> {
                 LevelInfoManager.My.listScript.Init(NetworkMgr.My.replayLists);
             });
@@ -65,7 +64,6 @@ public class LevelSign : MonoBehaviour
                 SceneManager.LoadScene(loadScene);
             });
         }
-        
     }
 
     public void OnClick(string recordID)
@@ -75,8 +73,6 @@ public class LevelSign : MonoBehaviour
             PlayerOperations operations = JsonUtility.FromJson<PlayerOperations>(str);
             string str1 = "{ \"dataStats\":" + datas.dataStats + "}";
             PlayerStatus status = JsonUtility.FromJson<PlayerStatus>(str1);
-            //TODO UI
-            //Reviewpanel.Init(operations,status);
         });
     }
 
@@ -85,7 +81,6 @@ public class LevelSign : MonoBehaviour
         string[] strArr = loadScene.Split('_');
         int level = int.Parse(strArr[1]);
         NetworkMgr.My.currentLevel = level;
-        
         if(PlayerPrefs.GetInt(loadScene+"|1", 0) == 0)
         {
             if(level != 1)
@@ -164,12 +159,19 @@ public class LevelSign : MonoBehaviour
         InitStarNeedText();
     }
 
+    /// <summary>
+    /// 初始化关卡星数需求文字颜色
+    /// </summary>
     public void InitStarNeedText()
     {
         starNeed.text = starRequirement.ToString();
         starNeed.color = CheckPrevStar() ? Color.green : Color.red;
     }
 
+    /// <summary>
+    /// 检测之前所有关卡的星数有没有达到要求
+    /// </summary>
+    /// <returns></returns>
     public bool CheckPrevStar()
     {
         int index = int.Parse(loadScene.Split('_')[1]);

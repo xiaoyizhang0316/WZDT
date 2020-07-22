@@ -26,9 +26,9 @@ public class ConsumerFloatWindow : MonoBehaviour
         string path = "Sprite/ConsumerType/" + targetConsume.consumerType.ToString();
         typeSprite.sprite = Resources.Load<Sprite>(path);
         List<int> buffList = new List<int>();
-        for (int i = 0; i < targetConsume.buffList.Count; i++)
+        for (int i = 0; i < targetConsume.bornBuffList.Count; i++)
         {
-            buffList.Add(targetConsume.buffList[i].buffId);
+            buffList.Add(targetConsume.bornBuffList[i]);
         }
         ClearList();
         for (int i = 0; i < buffList.Count; i++)
