@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class RoleInfoDealer : BaseRoleInfoAdd
 { 
-   
+    
     public Text fireTime;
 
     public Text efficiency;
@@ -27,14 +27,13 @@ public class RoleInfoDealer : BaseRoleInfoAdd
     // Start is called before the first frame update
     void Start()
     {
-   
+    
         //InvokeRepeating("UpdateBar",0.1f,0.2f);
     }
  
 
     public override void Init()
     {
-       
         fireTime.text = (CreatRoleManager.My.finalEfficiency * -0.01f + 1.5f  ).ToString("#.##")+"s";
         efficiency.text = CreatRoleManager.My.finalEfficiency.ToString();
         Range.text = (CreatRoleManager.My.finalRange ).ToString() ;
@@ -50,7 +49,6 @@ public class RoleInfoDealer : BaseRoleInfoAdd
         efficiencyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(CreatRoleManager.My.finalEfficiency / 120f * 150f,
                 efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
-        
     }
 
     public override void UpdateBuff()

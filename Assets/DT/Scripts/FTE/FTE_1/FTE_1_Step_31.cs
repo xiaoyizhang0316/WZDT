@@ -12,29 +12,26 @@ public class FTE_1_Step_31 : BaseStep
     // Start is called before the first frame update
     void Start()
     {
-        contenText.color = new Color(1,1,1,0);
-        nextButton.interactable = false; 
+        contenText.color = new Color(1, 1, 1, 0);
+        nextButton.interactable = false;
         Mark.SetActive(false);
-        InvokeRepeating("CheckStart",1,1);
-        InvokeRepeating("CheckWinPanel",1,1);
+        InvokeRepeating("CheckStart", 1, 1);
+        InvokeRepeating("CheckWinPanel", 1, 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public override void StartCuttentStep()
     {
-     
+
         contenText.DOFade(1, 0.3f).Play();
-   
-    
-         
-            Mark.SetActive(true);
-            nextButton.interactable = true;
-            FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
+        Mark.SetActive(true);
+        nextButton.interactable = true;
+        FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
     }
 
     public override void StopCurrentStep()
@@ -43,7 +40,7 @@ public class FTE_1_Step_31 : BaseStep
         //NewCanvasUI.My.GameNormal(); 
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
         FTESceneManager.My.UIFTE.SetActive(false);
-       
+
     }
 
 
@@ -56,22 +53,21 @@ public class FTE_1_Step_31 : BaseStep
         }
         else
         {
-            
+
         }
     }
 
     public void CheckStart()
     {
-     
-        if (win.activeSelf )
+
+        if (win.activeSelf)
         {
             StartCuttentStep();
             CancelInvoke("CheckStart");
         }
-
         else
         {
-             
+
         }
     }
 }

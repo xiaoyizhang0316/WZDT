@@ -14,10 +14,10 @@ public class ProductMelon_Summon : BaseSkill
         {
             return;
         }
-        if (role.warehouse.Count > 9 && role.warehouse[0].bulletType == BulletType.NormalPP)
+        if (role.warehouse.Count > 5 && role.warehouse[0].bulletType == BulletType.NormalPP)
         {
             ProductData data = role.warehouse[0];
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 4; i++)
             {
                 role.warehouse.RemoveAt(0);
             }

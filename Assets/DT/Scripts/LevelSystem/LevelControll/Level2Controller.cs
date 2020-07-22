@@ -40,5 +40,6 @@ public class Level2Controller : BaseLevelController
         }
         starThreeStatus = true;
         starThreeCondition = "不放置自有的零售商";
+        CheckCheat();
     }
 }
