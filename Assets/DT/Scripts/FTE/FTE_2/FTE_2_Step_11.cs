@@ -13,6 +13,8 @@ public class FTE_2_Step_11 : BaseStep
         //nextButton.onClick.AddListener(() => { StopCurrentStep(); });
         contenText.color = new Color(1,1,1,0);
         maptext.color = new Color(1,1,1,0);
+        
+        
         InitMap();
     }
 
@@ -25,9 +27,10 @@ public class FTE_2_Step_11 : BaseStep
     public override void StartCuttentStep()
     {
         
-        MaskManager.My.Open(12,130);
-        MaskManager.My.Open(11,80);
-     
+      //  MaskManager.My.Open(12,130);
+      //  MaskManager.My.Open(11,80);
+      StartCoroutine(MaskManager.My.OpenMask(12, 130));
+      StartCoroutine(MaskManager.My.OpenMask(11,80));
         contenText.DOFade(0, 0).OnComplete(() =>
         {
             maptext.DOFade(1, 1.5f).Play();
