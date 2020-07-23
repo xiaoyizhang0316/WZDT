@@ -107,7 +107,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// <summary>
     /// 游戏暂停
     /// </summary>
-    public void GamePause()
+    public void GamePause(bool isCount = true)
     {
         //Time.timeScale = 0.01f;
         //Time.fixedDeltaTime = 0.0005f;
@@ -116,7 +116,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause.interactable = false;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = true;
-        InvokeRepeating("CountPauseTime",1f,1f);
+        if (isCount)
+            InvokeRepeating("CountPauseTime",1f,1f);
     }
 
     /// <summary>

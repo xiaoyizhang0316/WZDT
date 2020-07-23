@@ -132,7 +132,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public void InitBuff()
     {
-        BaseMapRole baseMapRole =    PlayerData.My.GetBaseMapRoleByName(currentRole.baseRoleData.roleName);
+        BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(currentRole.ID);
         
         for (int i = 0; i <roleBuff.Count; i++)
         {

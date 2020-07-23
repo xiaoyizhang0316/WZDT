@@ -391,7 +391,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             starNum += 1;
             stars[2] = "1";
         }
-        NewCanvasUI.My.GamePause();
+        NewCanvasUI.My.GamePause(false);
         
         WinManager.My.InitWin();
         
@@ -411,7 +411,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (playerHealth <= 0)
         {
-            NewCanvasUI.My.GamePause();
+            NewCanvasUI.My.GamePause(false);
             NewCanvasUI.My.lose.SetActive(true);
 
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
@@ -438,35 +438,36 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
-        timeCount++;
         if (currentWave <= maxWaveNumber)
         {
-            if (timeCount == waitTimeList[currentWave - 1])
+            if (timeCount >= waitTimeList[currentWave - 1])
             {
                 BuildingManager.My.WaveSpawnConsumer(currentWave);
                 currentWave++;
             }
-            waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+            transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
+                timeCount++;
                 stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
-                WaveCount();
                 if (timeCount % 5 == 0)
                 {
                     Stat();
                 }
+                WaveCount();
             });
         }
         else
         {
             CheckWin();
-            waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+            transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
-                WaveCount();
+                timeCount++;
                 stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
                 if (timeCount % 5 == 0)
                 {
                     Stat();
                 }
+                WaveCount();
             });
         }
     }

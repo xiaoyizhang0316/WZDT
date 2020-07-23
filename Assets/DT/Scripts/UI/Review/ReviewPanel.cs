@@ -23,6 +23,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public VectorObject2D line;
 
+    public VectorObject2D healthLine;
+
     //public Vector3 pos;
 
     private bool isStart = false;
@@ -122,19 +124,22 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         if (datas.Count == 0)
             return;
         int maxAmount = datas[0].restMoney;
+        int maxHealth = datas[0].blood;
         for (int i = 0; i < datas.Count; i++)
         {
             if (datas[i].restMoney > maxAmount)
                 maxAmount = datas[i].restMoney;
         }
         line.vectorLine.points2.Clear();
-        print(timeCount);
-        print(datas.Count);
+        healthLine.vectorLine.points2.Clear();
         for (int i = 0; i < datas.Count; i++)
         {
             line.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i, datas[i].restMoney / (float)maxAmount * 100f));
+            healthLine.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i, datas[i].blood / (float)maxHealth * 100f));
         }
         //line.vectorLine.points2.Add(new Vector2(1326f, Mathf.Min(datas[datas.Count - 1].restMoney / (float)maxAmount * 100f,100f)));
+        healthLine.transform.SetAsLastSibling();
+        healthLine.vectorLine.Draw();
         line.transform.SetAsLastSibling();
         line.vectorLine.Draw();
     }
