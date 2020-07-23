@@ -143,7 +143,7 @@ public class Building : MonoBehaviour
         if (waveConfigs[waveNumber][0].num > 0)
         {
             DrawPathLine();
-            protalGameObject.transform.DOScale(1, 1);
+            protalGameObject.transform.DOScale(new Vector3(1,1,0.52f), 1);
         }
         List<WaveConfig> result = new List<WaveConfig>();
         result.AddRange(waveConfigs[waveNumber]);
@@ -169,15 +169,15 @@ public class Building : MonoBehaviour
                         go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
                     }
                 }
-                float waitTime = 0f;
+                float waitTime = 1f;
                 val++;
                 if (val == intervalNumber)
                 {
                     val = 0;
                     waitTime = intervalLength;
-                    Tweener twe = transform.DOScale(1f, waitTime);
-                    yield return twe.WaitForCompletion();
                 }
+                Tweener twe = transform.DOScale(1f, waitTime);
+                yield return twe.WaitForCompletion();
                 //go.GetComponent<ConsumeSign>().InitRangeBuff();
             }
         }

@@ -391,7 +391,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             starNum += 1;
             stars[2] = "1";
         }
-        NewCanvasUI.My.GamePause();
+        NewCanvasUI.My.GamePause(false);
         
         WinManager.My.InitWin();
         
@@ -411,7 +411,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (playerHealth <= 0)
         {
-            NewCanvasUI.My.GamePause();
+            NewCanvasUI.My.GamePause(false);
             NewCanvasUI.My.lose.SetActive(true);
 
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
@@ -440,7 +440,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (currentWave <= maxWaveNumber)
         {
-            if (timeCount == waitTimeList[currentWave - 1])
+            if (timeCount >= waitTimeList[currentWave - 1])
             {
                 BuildingManager.My.WaveSpawnConsumer(currentWave);
                 currentWave++;
