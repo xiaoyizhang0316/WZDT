@@ -169,20 +169,20 @@ public class Building : MonoBehaviour
                         go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
                     }
                 }
-                float waitTime = 1f;
+                float waitTime = 0f;
                 val++;
                 if (val == intervalNumber)
                 {
                     val = 0;
                     waitTime = intervalLength;
+                    Tweener twe = transform.DOScale(1f, waitTime);
+                    yield return twe.WaitForCompletion();
                 }
                 //go.GetComponent<ConsumeSign>().InitRangeBuff();
-                Tweener twe = transform.DOScale(1f, waitTime);
-                yield return twe.WaitForCompletion();
             }
         }
         isFinishSpawn = true;
-        protalGameObject.transform.DOScale(0, 1).timeScale = 1f / DOTween.timeScale;
+        protalGameObject.transform.DOScale(0, 1);
     }
 
     /// <summary>
