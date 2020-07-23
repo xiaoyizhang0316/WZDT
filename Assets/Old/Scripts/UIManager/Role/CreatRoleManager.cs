@@ -179,7 +179,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     public void Open(Role tempRole)
     {
         isPause = DOTween.defaultAutoPlay == AutoPlay.None;
-        NewCanvasUI.My.GamePause();
+        NewCanvasUI.My.GamePause(false);
         for (int i = 0; i < effects.Count; i++)
         {
             StartCoroutine(effects[i].Move());
