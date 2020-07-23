@@ -46,9 +46,9 @@ public class NpcSpecialProp : MonoBehaviour
     {
         effecencyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(effcy / 120f * 150f,
-                effecencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
+                effecencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
         effectBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(effct / 120f * 150f,
-                effectBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
+                effectBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play() ;
     }
 }
