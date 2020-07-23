@@ -100,7 +100,8 @@ public class FTE_1_Step_29 : BaseStep
     {
         Debug.Log("当前时间"+StageGoal.My.timeCount +"Game"+gameObject.name);
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
-        if (StageGoal.My.timeCount > 183  )
+        if (StageGoal.My.timeCount > 190
+            )
         {
             Debug.Log("检查打开");
             InitMap();
