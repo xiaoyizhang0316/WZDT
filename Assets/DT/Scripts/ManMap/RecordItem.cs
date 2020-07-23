@@ -9,6 +9,8 @@ public class RecordItem : MonoBehaviour
 
     public Text score;
 
+    public Image isCheat;
+
     public Text playTimeCount;
 
     public Image star1;
@@ -38,7 +40,16 @@ public class RecordItem : MonoBehaviour
     public void Init(ReplayList replay)
     {
         recordTime.text = TimeStamp.TimeStampToString(replay.recordTime);
-        score.text = "得分：" + replay.score.ToString();
+        if (replay.score < 0)
+        {
+            score.gameObject.SetActive(false);
+            isCheat.gameObject.SetActive(true);
+        }
+        else
+        {
+            score.text = "得分：" + replay.score.ToString();
+            isCheat.gameObject.SetActive(false);
+        }
         Id = replay.recordID;
         playTime = replay.realTime;
         playTimeCount.text = (replay.realTime / 60).ToString() + ":" + (replay.realTime % 60).ToString();
