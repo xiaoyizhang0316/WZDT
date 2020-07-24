@@ -18,6 +18,7 @@ public class AutoFireTow : MonoBehaviour
 
     public ConsumeSign target;
 
+    public GameObject boom;
     public bool isupdate = false;
     // Start is called before the first frame update
     void Start()
@@ -93,6 +94,14 @@ public class AutoFireTow : MonoBehaviour
 
     public void DestotyOBJ()
     {
+        transform.DOScale(0.5f, destroyTime-1).OnComplete(() =>
+        {
+            
+           GameObject gameObject =  Instantiate(boom,transform);
+           gameObject.transform.localPosition = Vector3.zero;
+           CancelInvoke("Shoot");
+           GetComponent<BoomTrigger>().GetConsumerListTow();
+        });
         transform.DOScale(0.5f, destroyTime).OnComplete(() =>
         { 
             Destroy(gameObject);

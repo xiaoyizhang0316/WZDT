@@ -8,6 +8,7 @@ using DG.Tweening;
 using System.Linq;
 using System;
 using static GameEnum;
+using UnityEngine.EventSystems;
 
 public class StageGoal : MonoSingleton<StageGoal>
 {
@@ -78,6 +79,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public Text playerTechText;
 
     public Image playerHealthBar;
+
+    public Text playerHealthText;
 
     public Text stageWaveText;
 
@@ -317,6 +320,19 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerSatisfyText.color = Color.gray;
         else
             playerSatisfyText.color = Color.white;
+        playerHealthText.text = (playerHealth / (float)playerMaxHealth).ToString("P");
+        if (playerHealth / (float)playerMaxHealth > 0.5f)
+        {
+            playerHealthText.color = Color.white;
+        }
+        else if (playerHealth / (float)playerMaxHealth > 0.2f)
+        {
+            playerHealthText.color = Color.yellow;
+        }
+        else
+        {
+            playerHealthText.color = Color.red;
+        }
         playerTechText.text = playerTechPoint.ToString();   
     }
 
@@ -394,9 +410,17 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.GamePause(false);
         
         WinManager.My.InitWin();
+    }
+
+    public void ShowHealthText()
+    {
+        playerHealthText.gameObject.SetActive(true);
         
-        
-        
+    }
+
+    public void HideHealthText()
+    {
+        playerHealthText.gameObject.SetActive(false);
     }
 
     void CommitProgress(Action doPass, Action doFail)
@@ -587,6 +611,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStage()
     {
         playerHealthBar = transform.parent.Find("Blood/PlayerHealthBar").GetComponent<Image>();
+        playerHealthText = transform.parent.Find("Blood/Text").GetComponent<Text>();
         maxHealtherBarLength = playerHealthBar.GetComponent<RectTransform>().sizeDelta.x;
         playerGoldText = transform.parent.Find("UserInfo/Image_money/PlayerMoney").GetComponent<Text>();
         playerSatisfyText = transform.parent.Find("UserInfo/PlayerScore/PlayerScoreText").GetComponent<Text>();
@@ -693,7 +718,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         GetComponent<RectTransform>().DOAnchorPosX(160.27f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
-        }).Play().timeScale = 1f / DOTween.timeScale;
+        }).Play();
     }
 
     public void MenuShow()
@@ -701,10 +726,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         GetComponent<RectTransform>().DOAnchorPosX(-178f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {
             menuCloseButton.gameObject.SetActive(true);
             menuOpenButton.gameObject.SetActive(false);
-        }).Play().timeScale = 1f / DOTween.timeScale;
+        }).Play();
     }
-
-
 
     // Start is called before the first frame update
     void Start()
