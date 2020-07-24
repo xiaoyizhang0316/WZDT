@@ -33,6 +33,9 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     private float speed;
 
+    /// <summary>
+    /// 正常速度播放
+    /// </summary>
     public void Normal()
     {
         speed = 1f;
@@ -42,6 +45,9 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         accelarate.interactable = true;
     }
 
+    /// <summary>
+    /// 暂停
+    /// </summary>
     public void Pause()
     {
         speed = 0f;
@@ -51,6 +57,9 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         accelarate.interactable = true;
     }
 
+    /// <summary>
+    /// 加速
+    /// </summary>
     public void Accerlate()
     {
         speed = 2f;
@@ -60,6 +69,9 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         accelarate.interactable = false;
     }
 
+    /// <summary>
+    /// 设置自动播放
+    /// </summary>
     public void AutoPlay()
     {
         twe = transform.DOScale(1f, 0.1f).OnComplete(() =>
@@ -74,6 +86,9 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         twe.timeScale = speed;
     }
 
+    /// <summary>
+    /// 当根据时间点播放对应的复盘状态
+    /// </summary>
     public void OnSliderValueChange()
     {
         bool isPlay = false;
@@ -97,6 +112,12 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
             ReviewManager.My.ShowCurrentReview(mapStates.Count - 1);
     }
 
+    /// <summary>
+    /// 初始化（录像复盘）
+    /// </summary>
+    /// <param name="playerOperations"></param>
+    /// <param name="datas"></param>
+    /// <param name="timeCount"></param>
     public void MapInit(List<PlayerOperation> playerOperations, List<DataStat> datas, int timeCount)
     {
         AutoPlay();
@@ -108,6 +129,10 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         Show();
     }
 
+    /// <summary>
+    /// 初始化（游戏内复盘）
+    /// </summary>
+    /// <param name="playerOperations"></param>
     public void Init(List<PlayerOperation> playerOperations)
     {
         AutoPlay();
@@ -119,6 +144,11 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         InitMoneyLine(StageGoal.My.dataStats, StageGoal.My.timeCount);
     }
 
+    /// <summary>
+    /// 生成钱线和血量线
+    /// </summary>
+    /// <param name="datas"></param>
+    /// <param name="timeCount"></param>
     public void InitMoneyLine(List<DataStat> datas, int timeCount)
     {
         if (datas.Count == 0)
