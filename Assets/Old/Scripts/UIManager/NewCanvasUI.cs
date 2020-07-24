@@ -107,16 +107,17 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// <summary>
     /// 游戏暂停
     /// </summary>
-    public void GamePause()
+    public void GamePause(bool isCount = true)
     {
-        //Time.timeScale = 0.01f;
-        //Time.fixedDeltaTime = 0.0005f;
         DOTween.PauseAll();
         DOTween.defaultAutoPlay = AutoPlay.None;
         Button_Pause.interactable = false;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = true;
-        InvokeRepeating("CountPauseTime",1f,1f);
+        if (isCount)
+            InvokeRepeating("CountPauseTime", 1f, 1f);
+        else
+            CancelInvoke("CountPauseTime");
     }
 
     /// <summary>
@@ -124,8 +125,6 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public void GameNormal()
     {
-        //Time.timeScale = 1f;
-        //Time.timeScale = 1f;
         DOTween.PlayAll();
         DOTween.timeScale = 1f;
         DOTween.defaultAutoPlay = AutoPlay.All;

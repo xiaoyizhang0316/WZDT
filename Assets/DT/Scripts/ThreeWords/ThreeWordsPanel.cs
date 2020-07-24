@@ -26,7 +26,7 @@ public class ThreeWordsPanel : MonoBehaviour
         if(NetworkMgr.My.isUsingHttp&& SceneManager.GetActiveScene().name == "Map")
         {
             Debug.Log(NetworkMgr.My.levelProgressList.Count + "  " + NetworkMgr.My.playerDatas.threeWordsProgress);
-            if(NetworkMgr.My.levelProgressList.Count == 4 && NetworkMgr.My.playerDatas.threeWordsProgress==1 || NetworkMgr.My.levelProgressList.Count==8 && NetworkMgr.My.playerDatas.threeWordsProgress == 2)
+            if(NetworkMgr.My.levelProgressList.Count >= 4 && NetworkMgr.My.playerDatas.threeWordsProgress==1 )
             {
                 //if (NetworkMgr.My.levelProgressList[NetworkMgr.My.levelProgressList.Count - 1].levelStar[0]=='1')
                 //{
@@ -34,6 +34,10 @@ public class ThreeWordsPanel : MonoBehaviour
                     thisPanel.SetActive(true);
                     SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
                 //}
+            }else if(NetworkMgr.My.levelProgressList.Count >= 8 && NetworkMgr.My.playerDatas.threeWordsProgress == 2)
+            {
+                thisPanel.SetActive(true);
+                SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
             }
         }
     }

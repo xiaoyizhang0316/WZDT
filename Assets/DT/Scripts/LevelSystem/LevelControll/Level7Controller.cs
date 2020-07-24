@@ -32,5 +32,6 @@ public class Level7Controller : BaseLevelController
         }
         string number = (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth * 100).ToString("##.##") + "%";
         starThreeCondition = "满意度不低于60%，当前：" + number;
+        CheckCheat();
     }
 }

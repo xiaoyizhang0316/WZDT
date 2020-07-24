@@ -173,7 +173,10 @@ public class PlayerReplay
         sceneName = SceneManager.GetActiveScene().name;
         dataStats = StageGoal.My.dataStats;
         recordTime = TimeStamp.GetCurrentTimeStamp();
-        score = StageGoal.My.playerSatisfy;
+        if (PlayerData.My.cheatIndex1 || PlayerData.My.cheatIndex2 || PlayerData.My.cheatIndex3)
+            score = -1;
+        else
+            score = StageGoal.My.playerSatisfy;
         win = isWin;
         stars = BaseLevelController.My.starOneStatus ? "1" : "0";
         stars += BaseLevelController.My.starTwoStatus ? "1" : "0";

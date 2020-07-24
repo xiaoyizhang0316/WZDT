@@ -26,7 +26,7 @@ public class Level5Controller : BaseLevelController
                 if (count > 6)
                 {
                     starTwoStatus = false;
-                    CancelInvoke("CheckStarThree");
+                    CancelInvoke("CheckStarTwo");
                     starTwoCondition = "放置不多于6个角色，当前：已失败";
                     return;
                 }
@@ -44,10 +44,11 @@ public class Level5Controller : BaseLevelController
             if (!PlayerData.My.MapRole[i].isNpc && PlayerData.My.MapRole[i].baseRoleData.baseRoleData.level == 5)
                 count++;
         }
-        if (count >= 5)
+        if (count >= 3)
             starThreeStatus = true;
         else
             starThreeStatus = false;
-        starThreeCondition = "至少5个内部角色升级到5级，当前:" + count.ToString();
+        starThreeCondition = "至少3个内部角色升级到5级，当前:" + count.ToString();
+        CheckCheat();
     }
 }

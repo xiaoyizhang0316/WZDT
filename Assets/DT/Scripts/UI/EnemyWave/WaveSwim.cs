@@ -15,6 +15,8 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
 
     public List<Sprite> waveSprites;
 
+    private Tweener twe;
+
     public void Init(int number, List<StageEnemyData> datas)
     {
         waveNumber = number;
@@ -58,7 +60,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
         if (waitNumber <= 30)
         {
             transform.localPosition = new Vector3(transform.localPosition.x, -waitNumber * 40f / 3f, transform.localPosition.z);
-            transform.DOLocalMoveY(0f, waitNumber).SetEase(Ease.Linear).OnComplete(() =>
+            twe = transform.DOLocalMoveY(0f, waitNumber).SetEase(Ease.Linear).OnComplete(() =>
             {
                 Destroy(gameObject);
             });
@@ -66,13 +68,16 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
         else
         {
             transform.localPosition = new Vector3(transform.localPosition.x, -waitNumber * 2f - 370f, transform.localPosition.z);
-            transform.DOLocalMoveY(-400f, waitNumber - 30).SetEase(Ease.Linear).OnComplete(() =>
+            twe = transform.DOLocalMoveY(-400f, waitNumber - 30f).SetEase(Ease.Linear).OnComplete(() =>
             {
-                transform.DOLocalMoveY(0f, 30).SetEase(Ease.Linear).OnComplete(() =>
+                //print("Timecount before 30: " + StageGoal.My.timeCount);
+                twe = transform.DOLocalMoveY(0f, 30f).SetEase(Ease.Linear).OnComplete(() =>
                 {
+                    StageGoal.My.timeCount = waitNumber;
+                    print("Timecount: " + StageGoal.My.timeCount);
                     Destroy(gameObject);
-                }).timeScale = 1f;
-            }).timeScale = 1f;
+                });
+            });
         }
 
     }

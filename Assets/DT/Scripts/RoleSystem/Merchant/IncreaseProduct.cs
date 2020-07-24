@@ -14,6 +14,11 @@ public class IncreaseProduct : MonoBehaviour
         }
         else if (other.CompareTag("MapRole") && other.transform.GetComponentInParent<BaseMapRole>().baseRoleData.inMap && GetComponentInParent<BaseMapRole>().baseRoleData.inMap)
         {
+            if (GetComponentInParent<BaseMapRole>().baseRoleData.isNpc)
+            {
+                if (GetComponentInParent<BaseMapRole>().npcScript.isLock)
+                    return;
+            }
             BaseMapRole targetRole = other.GetComponentInParent<BaseMapRole>();
             BaseBuff buff = new BaseBuff();
             BuffData data = GameDataMgr.My.GetBuffDataByID(1000);

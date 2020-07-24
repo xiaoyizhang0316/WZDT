@@ -8,6 +8,7 @@ using DG.Tweening;
 using System.Linq;
 using System;
 using static GameEnum;
+using UnityEngine.EventSystems;
 
 public class StageGoal : MonoSingleton<StageGoal>
 {
@@ -78,6 +79,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public Text playerTechText;
 
     public Image playerHealthBar;
+
+    public Text playerHealthText;
 
     public Text stageWaveText;
 
@@ -313,6 +316,23 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
             playerGoldText.color = Color.red;
         playerSatisfyText.text = playerSatisfy.ToString();
+        if (PlayerData.My.cheatIndex1 || PlayerData.My.cheatIndex2 || PlayerData.My.cheatIndex3)
+            playerSatisfyText.color = Color.gray;
+        else
+            playerSatisfyText.color = Color.white;
+        playerHealthText.text = (playerHealth / (float)playerMaxHealth).ToString("P");
+        if (playerHealth / (float)playerMaxHealth > 0.5f)
+        {
+            playerHealthText.color = Color.white;
+        }
+        else if (playerHealth / (float)playerMaxHealth > 0.2f)
+        {
+            playerHealthText.color = Color.yellow;
+        }
+        else
+        {
+            playerHealthText.color = Color.red;
+        }
         playerTechText.text = playerTechPoint.ToString();   
     }
 
@@ -387,12 +407,20 @@ public class StageGoal : MonoSingleton<StageGoal>
             starNum += 1;
             stars[2] = "1";
         }
-        NewCanvasUI.My.GamePause();
+        NewCanvasUI.My.GamePause(false);
         
         WinManager.My.InitWin();
+    }
+
+    public void ShowHealthText()
+    {
+        playerHealthText.gameObject.SetActive(true);
         
-        
-        
+    }
+
+    public void HideHealthText()
+    {
+        playerHealthText.gameObject.SetActive(false);
     }
 
     void CommitProgress(Action doPass, Action doFail)
@@ -407,7 +435,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (playerHealth <= 0)
         {
-            NewCanvasUI.My.GamePause();
+            NewCanvasUI.My.GamePause(false);
             NewCanvasUI.My.lose.SetActive(true);
 
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
@@ -434,35 +462,36 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
-        timeCount++;
         if (currentWave <= maxWaveNumber)
         {
-            if (timeCount == waitTimeList[currentWave - 1])
+            if (timeCount >= waitTimeList[currentWave - 1])
             {
                 BuildingManager.My.WaveSpawnConsumer(currentWave);
                 currentWave++;
             }
-            waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+            transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
+                timeCount++;
                 stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
-                WaveCount();
                 if (timeCount % 5 == 0)
                 {
                     Stat();
                 }
+                WaveCount();
             });
         }
         else
         {
             CheckWin();
-            waveTween = transform.DOScale(1f, 1f).OnComplete(() =>
+            transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
-                WaveCount();
+                timeCount++;
                 stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
                 if (timeCount % 5 == 0)
                 {
                     Stat();
                 }
+                WaveCount();
             });
         }
     }
@@ -582,6 +611,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStage()
     {
         playerHealthBar = transform.parent.Find("Blood/PlayerHealthBar").GetComponent<Image>();
+        playerHealthText = transform.parent.Find("Blood/Text").GetComponent<Text>();
         maxHealtherBarLength = playerHealthBar.GetComponent<RectTransform>().sizeDelta.x;
         playerGoldText = transform.parent.Find("UserInfo/Image_money/PlayerMoney").GetComponent<Text>();
         playerSatisfyText = transform.parent.Find("UserInfo/PlayerScore/PlayerScoreText").GetComponent<Text>();
@@ -619,8 +649,12 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
         playerGold = data.startPlayerGold;
+        if (PlayerData.My.cheatIndex1)
+            playerGold += 10000;
         playerSatisfy = 0;
         playerHealth = data.startPlayerHealth;
+        if (PlayerData.My.cheatIndex3)
+            playerHealth = (int)(playerHealth * 1.5f);
         playerMaxHealth = playerHealth;
         maxWaveNumber = data.maxWaveNumber;
         playerTechPoint = data.startTech;
@@ -684,7 +718,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         GetComponent<RectTransform>().DOAnchorPosX(160.27f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
-        }).Play().timeScale = 1f / DOTween.timeScale;
+        }).Play();
     }
 
     public void MenuShow()
@@ -692,10 +726,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         GetComponent<RectTransform>().DOAnchorPosX(-178f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {
             menuCloseButton.gameObject.SetActive(true);
             menuOpenButton.gameObject.SetActive(false);
-        }).Play().timeScale = 1f / DOTween.timeScale;
+        }).Play();
     }
-
-
 
     // Start is called before the first frame update
     void Start()
