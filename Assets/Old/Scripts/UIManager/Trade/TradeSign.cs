@@ -109,6 +109,8 @@ public class TradeSign : MonoBehaviour
     public void CheckBuffLineTradeCost()
     {
         tweener = transform.DOScale(1f, 10f).OnComplete(()=> {
+            BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+            cast.GetComponent<BaseSkill>().AddRoleBuff(tradeData);
             CalculateTC();
             CheckBuffLineTradeCost();
         });
