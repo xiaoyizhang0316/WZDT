@@ -115,7 +115,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         GenerateMapStates(playerOperations);
         playSlider.maxValue = StageGoal.My.timeCount;
         playSlider.value = 0;
-        line = playSlider.transform.GetChild(0).GetComponent<VectorObject2D>();
+        //line = playSlider.transform.GetChild(0).GetComponent<VectorObject2D>();
         InitMoneyLine(StageGoal.My.dataStats, StageGoal.My.timeCount);
     }
 
