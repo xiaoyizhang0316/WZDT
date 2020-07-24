@@ -32,4 +32,19 @@ public class BoomTrigger : MonoBehaviour
             }
         }
     }
+    
+    public void GetConsumerListTow( )
+    {
+        List<ConsumeSign> signs = FindObjectsOfType<ConsumeSign>().ToList();
+        for (int i = 0; i < signs.Count; i++)
+        {
+            if (signs[i].isCanSelect &&
+                radius >= Vector3.Distance(gameObject.transform.position, signs[i].transform.position))
+            {
+                Debug.Log("打到"+signs[i].name);
+                gameObject.GetComponent<GoodsSign>().productData.damage *= 3;
+                signs[i].OnHit(ref gameObject.GetComponent<GoodsSign>().productData);
+            }
+        }
+    }
 }
