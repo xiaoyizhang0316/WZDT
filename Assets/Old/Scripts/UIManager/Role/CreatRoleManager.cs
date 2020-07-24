@@ -521,6 +521,10 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                 NewCanvasUI.My.GameNormal();
             }
         }
+        else
+        {
+            NewCanvasUI.My.GamePause();
+        }
         
        
         transform.DOScale(1, 0.5f).OnComplete(() => { gameObject.SetActive(false); }).Play();
