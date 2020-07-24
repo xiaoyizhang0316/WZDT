@@ -103,6 +103,19 @@ public abstract class BaseSkill : MonoBehaviour
             baseb.Init(buff);
             baseb.SetRoleBuff(PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole)), PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole)), PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole)));
         }
+        if (role.isNpc)
+        {
+            if (role.npcScript.isCanSeeEquip)
+            {
+                for (int i = 0; i < role.npcScript.NPCBuffList.Count; i++)
+                {
+                    var buff = GameDataMgr.My.GetBuffDataByID(role.npcScript.NPCBuffList[i]);
+                    BaseBuff baseb = new BaseBuff();
+                    baseb.Init(buff);
+                    baseb.SetRoleBuff(PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole)), PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole)), PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole)));
+                }
+            }
+        }
     }
 
     /// <summary>
