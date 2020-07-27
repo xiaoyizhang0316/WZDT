@@ -757,21 +757,30 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(0,0,100,20),"4倍速"))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             DOTween.PlayAll();
             DOTween.timeScale = 16f;
             DOTween.defaultAutoPlay = AutoPlay.All;
         }
-        if (GUI.Button(new Rect(0, 20, 100, 20), "通关"))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             Win();
         }
-        if (GUI.Button(new Rect(0, 40, 100, 20), "一键加钱"))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             GetPlayerGold(10000);
             GetTechPoint(1000);
             playerHealth = playerMaxHealth;
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+                Camera.main.cullingMask = -1;
+
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Camera.main.cullingMask = 279;
         }
     }
 
