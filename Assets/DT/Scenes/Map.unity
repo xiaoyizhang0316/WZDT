@@ -803,6 +803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebca947f2bbf7c42ab8ed88e4f8bbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelID: 8
   levelName: "\u7B2C\u516B\u5173   \u7ED3\u4F59"
   content: "\u5E94\u5BF9\u8D44\u91D1\u532E\u4E4F"
   mission_1: "\u6EE1\u610F\u5EA6\u5927\u4E8E0\u8FC7\u5173"
@@ -2747,6 +2748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebca947f2bbf7c42ab8ed88e4f8bbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelID: 4
   levelName: "\u7B2C\u56DB\u5173   \u5173\u8054"
   content: "\u5546\u4E1A\u6A21\u5F0F\u4E09\u955C"
   mission_1: "\u6EE1\u610F\u5EA6\u5927\u4E8E0\u8FC7\u5173"
@@ -3673,6 +3675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebca947f2bbf7c42ab8ed88e4f8bbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelID: 2
   levelName: "\u7B2C\u4E8C\u5173   \u589E\u76CA"
   content: "\u914D\u7F6E\u8D44\u6E90\u80FD\u529B"
   mission_1: "\u6EE1\u610F\u5EA6\u5927\u4E8E0\u8FC7\u5173"
@@ -4945,7 +4948,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 672, y: 246}
+  m_AnchoredPosition: {x: 802, y: -122}
   m_SizeDelta: {x: 168.9, y: 168.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &938053223
@@ -4960,15 +4963,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebca947f2bbf7c42ab8ed88e4f8bbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelID: 10
   levelName: "LEVEL10_\u91CD\u6784"
   content: "\u5206\u6790\u67E5\u770B\u5DF2\u6709\u7684\u4EA4\u6613\u7ED3\u6784\uFF0C\u5B9E\u65F6\u7684\u5BF9\u573A\u666F\u4E2D\u7684\u4EA4\u6613\u505A\u51FA\u8C03\u6574"
   mission_1: 1
   mission_2: 2
   mission_3: 3
-  starRequirement: 0
+  starRequirement: 1
   LevelButton: {fileID: 130935242}
   starNeed: {fileID: 1739299197}
-  loadScene: FTE_10
+  loadScene: FTE_20
 --- !u!1 &942361182
 GameObject:
   m_ObjectHideFlags: 0
@@ -5948,6 +5952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebca947f2bbf7c42ab8ed88e4f8bbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelID: 1
   levelName: "\u7B2C\u4E00\u5173   \u5229\u7528"
   content: "\u57FA\u7840\u5DE5\u827A\u6D41\u7A0B"
   mission_1: "\u6EE1\u610F\u5EA6\u5927\u4E8E0\u8FC7\u5173"
@@ -6011,6 +6016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebca947f2bbf7c42ab8ed88e4f8bbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelID: 7
   levelName: "\u7B2C\u4E03\u5173   \u201C\u5BB9\u6613\u201D"
   content: "\u4E16\u4E8B\u65E0\u5E38\u96BE\u6599"
   mission_1: "\u6EE1\u610F\u5EA6\u5927\u4E8E0\u8FC7\u5173"
@@ -7603,6 +7609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebca947f2bbf7c42ab8ed88e4f8bbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelID: 5
   levelName: "\u7B2C\u4E94\u5173   \u52C7\u8005"
   content: "\u5916\u90E8\u4F01\u4E1A\u652F\u6301"
   mission_1: "\u6EE1\u610F\u5EA6\u5927\u4E8E0\u8FC7\u5173"
@@ -10248,6 +10255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebca947f2bbf7c42ab8ed88e4f8bbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelID: 6
   levelName: "\u7B2C\u516D\u5173   \u4EA4\u878D"
   content: "\u4EA4\u6613\u7B56\u7565\u6539\u53D8"
   mission_1: "\u6EE1\u610F\u5EA6\u5927\u4E8E0\u8FC7\u5173"
@@ -10772,7 +10780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1986625606
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10810,6 +10818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebca947f2bbf7c42ab8ed88e4f8bbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelID: 9
   levelName: "\u7B2C\u4E5D\u5173   \u91CD\u6784"
   content: "\u91CD\u6784\u4EA4\u6613\u7ED3\u6784"
   mission_1: "\u987A\u5229\u901A\u8FC7\u5173\u5361"
@@ -10818,7 +10827,7 @@ MonoBehaviour:
   starRequirement: 0
   LevelButton: {fileID: 1039402857}
   starNeed: {fileID: 2069409968}
-  loadScene: FTE_9
+  loadScene: FTE_20
 --- !u!1 &1994188982
 GameObject:
   m_ObjectHideFlags: 0
@@ -10947,6 +10956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebca947f2bbf7c42ab8ed88e4f8bbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelID: 3
   levelName: "\u7B2C\u4E09\u5173   \u76F8\u9022"
   content: "\u5916\u90E8\u4F01\u4E1A\u4EA4\u6613"
   mission_1: "\u6EE1\u610F\u5EA6\u5927\u4E8E0\u8FC7\u5173"

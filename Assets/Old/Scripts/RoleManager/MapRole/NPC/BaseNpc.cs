@@ -70,7 +70,7 @@ public abstract class BaseNpc : MonoBehaviour
     /// </summary>
     public void InitSetLand()
     {
-        if (SceneManager.GetActiveScene().name.Equals("FTE_0"))
+        if (SceneManager.GetActiveScene().name.Equals("FTE_0")|| SceneManager.GetActiveScene().name.Equals("FTE_Record"))
             return;
         RaycastHit[] hit;
         hit = Physics.RaycastAll(transform.position + new Vector3(0f, 5f, 0f), Vector3.down);

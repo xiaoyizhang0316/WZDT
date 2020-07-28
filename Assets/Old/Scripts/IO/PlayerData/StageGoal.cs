@@ -640,6 +640,12 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
+        if(sceneName == "FTE_Record")
+        {
+            playerHealth = int.MaxValue;
+            wudi = true;
+            return;
+        }
         StartCoroutine(ReadStageEnemyData(sceneName));
         if(sceneName != "FTE_0")
         {

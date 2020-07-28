@@ -71,7 +71,8 @@ public class MainMap : MonoBehaviour
     {
         foreach(var ls in levelSigns)
         {
-            int level = int.Parse( ls.loadScene.Split('_')[1]);
+            //int level = int.Parse( ls.loadScene.Split('_')[1]);
+            int level = ls.levelID;
             if (level == 1)
             {
                 ls.InitLevel(GetStar(level), "");
