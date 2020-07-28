@@ -18,6 +18,8 @@ public class StageItem
 
     public string startTech;
 
+    public string stageType;
+
     //public string maxMinusGold;
 
     /// <summary>

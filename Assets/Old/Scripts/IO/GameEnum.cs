@@ -399,6 +399,10 @@ public class GameEnum
         /// 传奇精英
         /// </summary>
         EliteLegendary,
+        /// <summary>
+        /// 首领
+        /// </summary>
+        Boss
     }
 
     public enum BulletBuffType
@@ -554,6 +558,18 @@ public class GameEnum
         /// 修改交易
         /// </summary>
         ChangeTrade
+    }
+
+    public enum StageType
+    {
+        /// <summary>
+        /// 常规模式
+        /// </summary>
+        Normal,
+        /// <summary>
+        /// Boss模式
+        /// </summary>
+        Boss
     }
 
 }

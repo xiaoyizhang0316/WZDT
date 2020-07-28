@@ -19,7 +19,6 @@ public class RoleEffect : MonoBehaviour
         if (skill.role.tradeList.Count > 0 &&skill. IsOpen)
         { 
             rotateOBJ.transform.Rotate(Vector3.up,Space.World);
-          
         }
     }
 }

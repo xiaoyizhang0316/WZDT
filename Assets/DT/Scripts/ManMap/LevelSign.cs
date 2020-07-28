@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LevelSign : MonoBehaviour
 {
-
+    public int levelID = 0;
     public string levelName;
 
     public string content;

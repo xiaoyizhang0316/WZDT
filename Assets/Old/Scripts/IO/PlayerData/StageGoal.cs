@@ -154,6 +154,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public int endTime;
 
+    public StageType currentType;
+
     /// <summary>
     /// 当前关卡敌人波数数据
     /// </summary>
@@ -361,6 +363,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void CheckWin()
     {
+        if (currentType != StageType.Normal)
+            return;
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
         bool isComplete = true;
         foreach (Building b in BuildingManager.My.buildings)
@@ -636,6 +640,12 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
+        if(sceneName == "FTE_Record")
+        {
+            playerHealth = int.MaxValue;
+            wudi = true;
+            return;
+        }
         StartCoroutine(ReadStageEnemyData(sceneName));
         if(sceneName != "FTE_0")
         {
@@ -658,6 +668,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerMaxHealth = playerHealth;
         maxWaveNumber = data.maxWaveNumber;
         playerTechPoint = data.startTech;
+        currentType = data.stageType;
         foreach (int i in data.waveWaitTime)
         {
             waitTimeList.Add(i);
@@ -757,21 +768,30 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(0,0,100,20),"4倍速"))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             DOTween.PlayAll();
             DOTween.timeScale = 16f;
             DOTween.defaultAutoPlay = AutoPlay.All;
         }
-        if (GUI.Button(new Rect(0, 20, 100, 20), "通关"))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             Win();
         }
-        if (GUI.Button(new Rect(0, 40, 100, 20), "一键加钱"))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             GetPlayerGold(10000);
             GetTechPoint(1000);
             playerHealth = playerMaxHealth;
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+                Camera.main.cullingMask = -1;
+
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Camera.main.cullingMask = 279;
         }
     }
 

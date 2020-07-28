@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static GameEnum;
 
 [Serializable]
 public class StageData
@@ -35,6 +36,11 @@ public class StageData
     /// 初始科技值
     /// </summary>
     public int startTech;
+
+    /// <summary>
+    /// 关卡类型    
+    /// </summary>
+    public StageType stageType;
 
     /// <summary>
     /// 最低赤字值

@@ -265,6 +265,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.startPlayerHealth = int.Parse(s.startPlayerHealth);
             temp.startPlayerGold = int.Parse(s.startPlayerGold);
             temp.startTech = int.Parse(s.startTech);
+            temp.stageType = (StageType)Enum.Parse(typeof(StageType), s.stageType);
             temp.waveWaitTime = new List<int>();
             string[] waitTimeList = s.waveWaitTime.Split(',');
             foreach (string str in waitTimeList)
