@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using static GameEnum;
+using Random = UnityEngine.Random;
 
 public class BossConsumer : ConsumeSign
 {
     public int skillOneTime;
-
+    public  int  skillTwoTime;
+    public List<GameObject> peopleList;
     /// <summary>
     /// 初始化
     /// </summary>
@@ -106,8 +108,8 @@ public class BossConsumer : ConsumeSign
     {
         //float waitTime = UnityEngine.Random.Range(0f, 0.5f);
         //Invoke("Move", waitTime);
+        LostHealth();
         CheckBuffDuration();
-        SkillOne();
         Move();
     }
 
@@ -145,6 +147,9 @@ public class BossConsumer : ConsumeSign
         }
     }
 
+    private int killCount = 0; 
+     
+
     /// <summary>
     /// 消费者被击杀时调用   
     /// </summary>
@@ -159,8 +164,36 @@ public class BossConsumer : ConsumeSign
             return;
         }
         currentHealth = 0;
+        killCount++;
+        consumeData.maxHealth = killCount * 100 * 2 + 2000;
         hud.healthImg.color = new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f));
+        hud.UpdateInfo(0);
         BaseLevelController.My.CountKillNumber(this);
+        for (int i = 0; i <peopleList.Count; i++)
+        {
+            peopleList[i].gameObject.SetActive(false);
+        }
+        if (killCount <= 5)
+        {
+            peopleList[0].SetActive(true);
+        }
+else if (killCount<= 10)
+        {
+            peopleList[1].SetActive(true);
+        }
+        else if (killCount<= 15)
+        {
+            peopleList[2].SetActive(true);
+            if (killCount == 15)
+                SkillOne();
+        }
+        else    
+        {
+            peopleList[3].SetActive(true);
+            if (killCount == 20)
+                SkillTwo();
+        }
+      
         DeathAward();
     }
 
@@ -196,7 +229,7 @@ public class BossConsumer : ConsumeSign
         if (isCanSelect)
         {
             currentHealth += num;
-            StageGoal.My.playerSatisfy += num;
+            StageGoal.My.GetSatisfy(num);
             if (currentHealth <= 0)
                 currentHealth = 0;
             HealthCheck();
@@ -406,10 +439,57 @@ public class BossConsumer : ConsumeSign
 
     public void SkillOne()
     {
-        transform.DOScale(1f, skillOneTime).OnComplete(() =>
+        transform.DOScale(transform.localScale, skillOneTime).OnComplete(() =>
         {
             //TODO 
+            List<MapSign> signs = new List<MapSign>();
+            for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
+            {
+                if (MapManager.My._mapSigns[i].mapType == MapType.Grass)
+                {
+                    signs.Add(MapManager.My._mapSigns[i]);
+                }
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                signs[Random.Range(0, signs.Count)].LostEffect(skillOneTime/3);
+            }
+          
             SkillOne();
+        });
+    }
+
+    public void SkillTwo()
+    {
+
+        transform.DOScale(transform.localScale, skillTwoTime).OnComplete(() =>
+        {
+            //TODO 
+            List<MapSign> signs = new List<MapSign>();
+            for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
+            {
+                if (MapManager.My._mapSigns[i].mapType == MapType.Grass)
+                {
+                    signs.Add(MapManager.My._mapSigns[i]);
+                }
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                signs[Random.Range(0, signs.Count)].AddCost(1,skillTwoTime/3);
+            }
+          
+            SkillTwo();
+        });
+    }
+
+    public void LostHealth()
+    {
+        transform.DOScale(transform.localScale, 10f).OnComplete(() =>
+        {
+            StageGoal.My.LostHealth(-2);
+            LostHealth();
         });
     }
 
