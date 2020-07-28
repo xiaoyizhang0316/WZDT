@@ -77,7 +77,7 @@ public class MapManager : MonoSingleton<MapManager>
         if (temp != null)
         {
             temp.isCanPlace = false;
-            temp.baseMapRole = role;
+ 
         }
     }
 
@@ -92,7 +92,7 @@ public class MapManager : MonoSingleton<MapManager>
             if (temp != null)
             {
                 temp.isCanPlace = true;
-                temp.baseMapRole = null;
+         
             }
     }
 

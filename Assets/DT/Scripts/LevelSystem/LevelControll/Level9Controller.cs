@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Level9Controller : BaseLevelController
 {
+
+    public List<MapSign> lockLandList;
     public override void CheckStarTwo()
     {
         if (StageGoal.My.tradeCost > 100000)
