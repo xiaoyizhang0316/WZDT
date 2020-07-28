@@ -909,10 +909,10 @@ GameObject:
   m_Component:
   - component: {fileID: 484806}
   - component: {fileID: 9548304}
-  - component: {fileID: -1507766123911273396}
   - component: {fileID: -5990610765561186485}
   - component: {fileID: -1486570631176692421}
   - component: {fileID: -4814326839757297611}
+  - component: {fileID: -8121386830688468518}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Consumer
@@ -976,43 +976,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-1507766123911273396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa42d58bb186f94b887022861b73d5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  consumeData:
-    maxHealth: 0
-    moveSpeed: 0
-    liveTime: 0
-    spawnNumber: 0
-    killMoney: 0
-    killSatisfy: 0
-    liveSatisfy: 0
-    consumerName: 
-  consumerType: 3
-  currentHealth: 0
-  isIgnoreResistance: 0
-  hudPrb: {fileID: 7572926582215340307, guid: 1d9dd4442f9394aaabe4078580918502, type: 3}
-  hud: {fileID: 0}
-  buffList: []
-  bornBuffList: 
-  isStart: 0
-  isCanSelect: 0
-  pathList: []
-  baseConsumer: {fileID: 0}
-  debuffEffectList: []
-  self: {fileID: 150552}
-  sheep: {fileID: 2832262302776370688}
-  lastHitType: 0
-  buildingIndex: 0
 --- !u!65 &-5990610765561186485
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1055,6 +1018,43 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8121386830688468518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780340aabc27c4dc7bf3cb7cb46d902a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  consumeData:
+    maxHealth: 0
+    moveSpeed: 0
+    liveTime: 0
+    spawnNumber: 0
+    killMoney: 0
+    killSatisfy: 0
+    liveSatisfy: 0
+    consumerName: 
+  consumerType: 20
+  currentHealth: 0
+  isIgnoreResistance: 0
+  hudPrb: {fileID: 7572926582215340307, guid: 1d9dd4442f9394aaabe4078580918502, type: 3}
+  hud: {fileID: 0}
+  buffList: []
+  bornBuffList: 
+  isStart: 0
+  isCanSelect: 0
+  pathList: []
+  baseConsumer: {fileID: 0}
+  debuffEffectList: []
+  self: {fileID: 150552}
+  sheep: {fileID: 2832262302776370688}
+  lastHitType: 0
+  buildingIndex: 0
 --- !u!1 &144336
 GameObject:
   m_ObjectHideFlags: 0
