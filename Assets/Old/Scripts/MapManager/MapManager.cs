@@ -71,6 +71,15 @@ public class MapManager : MonoSingleton<MapManager>
                 temp.isCanPlace = false;
             }
     }
+    public void SetLand(int x, int y,BaseMapRole role)
+    {
+        MapSign temp = GetMapSignByXY(x, y);
+        if (temp != null)
+        {
+            temp.isCanPlace = false;
+            temp.baseMapRole = role;
+        }
+    }
 
     /// <summary>
     /// 解除地块占用
@@ -83,6 +92,7 @@ public class MapManager : MonoSingleton<MapManager>
             if (temp != null)
             {
                 temp.isCanPlace = true;
+                temp.baseMapRole = null;
             }
     }
 

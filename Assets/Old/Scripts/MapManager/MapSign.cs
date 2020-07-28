@@ -17,6 +17,7 @@ public class MapSign : MonoBehaviour,IDragHandler
 
     public bool isCanPlace = true;
 
+    public BaseMapRole baseMapRole;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class MapSign : MonoBehaviour,IDragHandler
          isCanPlace = GetComponent<MeshRenderer>().enabled && isCanPlace;
     }
 
+    
     public void OnDrag(PointerEventData eventData)
     {
   
@@ -44,4 +46,5 @@ public class MapSign : MonoBehaviour,IDragHandler
     {
         
     }
+       
 }
