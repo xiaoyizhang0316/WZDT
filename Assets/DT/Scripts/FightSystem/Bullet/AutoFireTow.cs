@@ -50,7 +50,7 @@ public class AutoFireTow : MonoBehaviour
             transform.position =pos;
 
         }
-    }
+    } 
     
     public bool GetminDisConsumer()
     {

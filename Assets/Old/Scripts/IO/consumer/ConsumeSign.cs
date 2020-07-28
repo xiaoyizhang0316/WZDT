@@ -72,7 +72,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 初始化
     /// </summary>
-    public void Init(List<Transform> paths)
+    public virtual void Init(List<Transform> paths)
     {
         isStart = false;
         isCanSelect = false;
@@ -106,7 +106,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 初始化所有特效
     /// </summary>
-    public void InitEffect()
+    public virtual void InitEffect()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -122,7 +122,7 @@ public class ConsumeSign : MonoBehaviour
     /// 激活特效
     /// </summary>
     /// <param name="buffID"></param>
-    public void AddEffect(int buffID)
+    public virtual void AddEffect(int buffID)
     {
         if (buffID <= 1000)
         {
@@ -146,7 +146,7 @@ public class ConsumeSign : MonoBehaviour
     /// 移除特效
     /// </summary>
     /// <param name="buffID"></param>
-    public void RemoveEffect(int buffID)
+    public virtual void RemoveEffect(int buffID)
     {
         for (int i = 0; i < debuffEffectList.Count; i++)
         {
@@ -162,7 +162,7 @@ public class ConsumeSign : MonoBehaviour
     /// 每次刷新消费者调用
     /// </summary>
     /// <param name="targetRole"></param>
-    public void InitAndMove()
+    public virtual void InitAndMove()
     {
         //float waitTime = UnityEngine.Random.Range(0f, 0.5f);
         //Invoke("Move", waitTime);
@@ -173,7 +173,7 @@ public class ConsumeSign : MonoBehaviour
     /// 初始化路径点
     /// </summary>
     /// <param name="paths"></param>
-    public void InitPath(List<Transform> paths)
+    public virtual void InitPath(List<Transform> paths)
     {
         pathList = new List<Vector3>();
         foreach (Transform t in paths)
@@ -188,7 +188,7 @@ public class ConsumeSign : MonoBehaviour
     /// 消费者被击中时调用
     /// </summary>
     /// <param name="data"></param>
-    public void OnHit(ref ProductData data)
+    public virtual void OnHit(ref ProductData data)
     {
         if (isCanSelect)
         {
@@ -206,7 +206,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 消费者被击杀时调用   
     /// </summary>
-    public void OnDeath()
+    public virtual void OnDeath()
     {
         foreach (BaseBuff b in buffList)
         {
@@ -225,7 +225,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 消费者存活时调用
     /// </summary>
-    public void OnAlive()
+    public virtual void OnAlive()
     {
         LivePunish();
         Stop();
@@ -235,7 +235,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 生命值检测
     /// </summary>
-    public void HealthCheck()
+    public virtual void HealthCheck()
     {
         float per = currentHealth / (float)consumeData.maxHealth;
         hud.UpdateInfo(per);
@@ -249,7 +249,7 @@ public class ConsumeSign : MonoBehaviour
     /// 血量发生变化时
     /// </summary>
     /// <param name="num"></param>
-    public void ChangeHealth(int num)
+    public virtual void ChangeHealth(int num)
     {
         if (isCanSelect)
         {
@@ -263,7 +263,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 击杀奖励
     /// </summary>
-    public void DeathAward()
+    public virtual void DeathAward()
     {
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
@@ -274,7 +274,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 存活惩罚
     /// </summary>
-    public void LivePunish()
+    public virtual void LivePunish()
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
     }
@@ -284,7 +284,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="data"></param>
-    public void CheckBulletElement(ref int damage,ProductData data)
+    public virtual void CheckBulletElement(ref int damage,ProductData data)
     {
         float per = 1f;
         bool isNormal = true;
@@ -309,7 +309,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="data"></param>
-    public void CheckAttackEffect(ref ProductData data)
+    public virtual void CheckAttackEffect(ref ProductData data)
     {
         foreach (int i in data.buffList)
         {
@@ -332,7 +332,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 检测debuff
     /// </summary>
-    public void CheckDebuff(ProductData data)
+    public virtual void CheckDebuff(ProductData data)
     {
         foreach (int i in data.buffList)
         {
@@ -350,7 +350,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 去目标地点    
     /// </summary>
-    public void Move()
+    public virtual void Move()
     {
         GetComponent<Animator>().SetFloat("Speed_f",consumeData.moveSpeed);
         isStart = true;
@@ -363,7 +363,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 停止
     /// </summary>
-    public void Stop()
+    public virtual void Stop()
     {
         tweener.Kill();
         buffTweener.Kill();
@@ -380,7 +380,7 @@ public class ConsumeSign : MonoBehaviour
     /// 计算全程时间
     /// </summary>
     /// <returns></returns>
-    public float CalculateTime()
+    public virtual float CalculateTime()
     {
         if (pathList.Count == 0)
             throw new Exception("路径点数量为0！");
@@ -395,7 +395,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 重新计算速度
     /// </summary>
-    public void ChangeSpeed(int num)
+    public virtual void ChangeSpeed(int num)
     {
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
@@ -408,7 +408,7 @@ public class ConsumeSign : MonoBehaviour
     /// buff增加时回调
     /// </summary>
     /// <param name="baseBuff"></param>
-    public void AddBuff(BaseBuff baseBuff)
+    public virtual void AddBuff(BaseBuff baseBuff)
     {
         for (int i = 0; i < buffList.Count; i++)
         {
@@ -424,7 +424,7 @@ public class ConsumeSign : MonoBehaviour
     /// buff删除时回调
     /// </summary>
     /// <param name="baseBuff"></param>
-    public void RemoveBuff(BaseBuff baseBuff)
+    public virtual void RemoveBuff(BaseBuff baseBuff)
     {
         baseBuff.ConsumerBuffRemove();
         RemoveEffect(baseBuff.buffId);
@@ -434,7 +434,7 @@ public class ConsumeSign : MonoBehaviour
     /// <summary>
     /// 检测所有buff的持续时间
     /// </summary>
-    public void CheckBuffDuration()
+    public virtual void CheckBuffDuration()
     {
         for (int i = 0; i < buffList.Count; i++)
         {
@@ -455,7 +455,7 @@ public class ConsumeSign : MonoBehaviour
 
     #endregion
 
-    public void OnMouseDown()
+    public virtual void OnMouseDown()
     {
         NewCanvasUI.My.consumerInfoFloatWindow.SetActive(true);
         NewCanvasUI.My.consumerInfoFloatWindow.GetComponent<ConsumerFloatWindow>().Init(this);

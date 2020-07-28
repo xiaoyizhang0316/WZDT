@@ -12,7 +12,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 初始化
     /// </summary>
-    public new void Init(List<Transform> paths)
+    public override void Init(List<Transform> paths)
     {
         isStart = false;
         isCanSelect = false;
@@ -46,7 +46,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 初始化所有特效
     /// </summary>
-    public new void InitEffect()
+    public override void InitEffect()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -62,7 +62,7 @@ public class BossConsumer : ConsumeSign
     /// 激活特效
     /// </summary>
     /// <param name="buffID"></param>
-    public new void AddEffect(int buffID)
+    public override void AddEffect(int buffID)
     {
         if (buffID <= 1000)
         {
@@ -86,7 +86,7 @@ public class BossConsumer : ConsumeSign
     /// 移除特效
     /// </summary>
     /// <param name="buffID"></param>
-    public new void RemoveEffect(int buffID)
+    public override void RemoveEffect(int buffID)
     {
         for (int i = 0; i < debuffEffectList.Count; i++)
         {
@@ -102,7 +102,7 @@ public class BossConsumer : ConsumeSign
     /// 每次刷新消费者调用
     /// </summary>
     /// <param name="targetRole"></param>
-    public new void InitAndMove()
+    public override void InitAndMove()
     {
         //float waitTime = UnityEngine.Random.Range(0f, 0.5f);
         //Invoke("Move", waitTime);
@@ -115,7 +115,7 @@ public class BossConsumer : ConsumeSign
     /// 初始化路径点
     /// </summary>
     /// <param name="paths"></param>
-    public new void InitPath(List<Transform> paths)
+    public override void InitPath(List<Transform> paths)
     {
         pathList = new List<Vector3>();
         foreach (Transform t in paths)
@@ -130,7 +130,7 @@ public class BossConsumer : ConsumeSign
     /// 消费者被击中时调用
     /// </summary>
     /// <param name="data"></param>
-    public new void OnHit(ref ProductData data)
+    public override void OnHit(ref ProductData data)
     {
         if (isCanSelect)
         {
@@ -148,7 +148,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 消费者被击杀时调用   
     /// </summary>
-    public new void OnDeath()
+    public override void OnDeath()
     {
         foreach (BaseBuff b in buffList)
         {
@@ -167,7 +167,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 消费者存活时调用
     /// </summary>
-    public new void OnAlive()
+    public override void OnAlive()
     {
         LivePunish();
         Stop();
@@ -177,7 +177,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 生命值检测
     /// </summary>
-    public new void HealthCheck()
+    public override void HealthCheck()
     {
         float per = currentHealth / (float)consumeData.maxHealth;
         hud.UpdateInfo(per);
@@ -191,7 +191,7 @@ public class BossConsumer : ConsumeSign
     /// 血量发生变化时
     /// </summary>
     /// <param name="num"></param>
-    public new void ChangeHealth(int num)
+    public override void ChangeHealth(int num)
     {
         if (isCanSelect)
         {
@@ -206,7 +206,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 击杀奖励
     /// </summary>
-    public new void DeathAward()
+    public override void DeathAward()
     {
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
@@ -217,7 +217,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 存活惩罚
     /// </summary>
-    public new void LivePunish()
+    public override void LivePunish()
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
     }
@@ -227,7 +227,7 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="data"></param>
-    public new void CheckBulletElement(ref int damage, ProductData data)
+    public override void CheckBulletElement(ref int damage, ProductData data)
     {
         float per = 1f;
         bool isNormal = true;
@@ -252,7 +252,7 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="data"></param>
-    public new void CheckAttackEffect(ref ProductData data)
+    public override void CheckAttackEffect(ref ProductData data)
     {
         foreach (int i in data.buffList)
         {
@@ -275,7 +275,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 检测debuff
     /// </summary>
-    public new void CheckDebuff(ProductData data)
+    public override void CheckDebuff(ProductData data)
     {
         foreach (int i in data.buffList)
         {
@@ -293,7 +293,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 去目标地点    
     /// </summary>
-    public new void Move()
+    public override void Move()
     {
         GetComponent<Animator>().SetFloat("Speed_f", consumeData.moveSpeed);
         isStart = true;
@@ -306,7 +306,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 停止
     /// </summary>
-    public new void Stop()
+    public override void Stop()
     {
         tweener.Kill();
         buffTweener.Kill();
@@ -323,7 +323,7 @@ public class BossConsumer : ConsumeSign
     /// 计算全程时间
     /// </summary>
     /// <returns></returns>
-    public new float CalculateTime()
+    public override float CalculateTime()
     {
         if (pathList.Count == 0)
             throw new Exception("路径点数量为0！");
@@ -338,7 +338,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 重新计算速度
     /// </summary>
-    public new void ChangeSpeed(int num)
+    public override void ChangeSpeed(int num)
     {
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
@@ -351,7 +351,7 @@ public class BossConsumer : ConsumeSign
     /// buff增加时回调
     /// </summary>
     /// <param name="baseBuff"></param>
-    public new void AddBuff(BaseBuff baseBuff)
+    public override void AddBuff(BaseBuff baseBuff)
     {
         for (int i = 0; i < buffList.Count; i++)
         {
@@ -367,7 +367,7 @@ public class BossConsumer : ConsumeSign
     /// buff删除时回调
     /// </summary>
     /// <param name="baseBuff"></param>
-    public new void RemoveBuff(BaseBuff baseBuff)
+    public override void RemoveBuff(BaseBuff baseBuff)
     {
         baseBuff.ConsumerBuffRemove();
         RemoveEffect(baseBuff.buffId);
@@ -377,7 +377,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 检测所有buff的持续时间
     /// </summary>
-    public new void CheckBuffDuration()
+    public override void CheckBuffDuration()
     {
         for (int i = 0; i < buffList.Count; i++)
         {
@@ -398,7 +398,7 @@ public class BossConsumer : ConsumeSign
 
     #endregion
 
-    public new void OnMouseDown()
+    public override void OnMouseDown()
     {
         NewCanvasUI.My.consumerInfoFloatWindow.SetActive(true);
         NewCanvasUI.My.consumerInfoFloatWindow.GetComponent<ConsumerFloatWindow>().Init(this);
@@ -441,6 +441,4 @@ public class BossConsumer : ConsumeSign
             }
         }
     }
-
-
 }
