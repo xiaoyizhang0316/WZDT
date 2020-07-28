@@ -13,6 +13,9 @@ public class FTERecord : MonoBehaviour
 
     private ConsumerType ct;
 
+    float waitTime = 0;
+    int count = 0;
+
     int[] nums = new int[] { 3, 5 };
 
     private void Start()
@@ -48,7 +51,7 @@ public class FTERecord : MonoBehaviour
             });
         });
         yield return new WaitForSeconds(0.5f);
-        TradeManager.My.AutoCreateTrade("0", "1");
+        
         scene0roles[2].transform.DOMoveY(0.3f, 0.5f).OnComplete(() => {
             GameObject go = Instantiate(dustDirtyPoofSoft, scene0roles[2].transform);
             Destroy(go, 1f);
@@ -58,7 +61,7 @@ public class FTERecord : MonoBehaviour
             });
         });
         yield return new WaitForSeconds(0.5f);
-        TradeManager.My.AutoCreateTrade("1", "2");
+        
         scene0roles[3].transform.DOMoveY(0.3f, 0.5f).OnComplete(() => {
             GameObject go = Instantiate(dustDirtyPoofSoft, scene0roles[3].transform);
             Destroy(go, 1f);
@@ -67,17 +70,27 @@ public class FTERecord : MonoBehaviour
                 //GuideMgr.My.ShowNextStep();
             });
         });
+        yield return new WaitForSeconds(0.7f);
+        TradeManager.My.AutoCreateTrade("0", "1");
+        yield return new WaitForSeconds(0.5f);
+        TradeManager.My.AutoCreateTrade("1", "2");
         yield return new WaitForSeconds(0.5f);
         TradeManager.My.AutoCreateTrade("2", "3");
+        RoleUp(5);
+    }
+
+    private void RoleUp(float time)
+    {
+        waitTime = time;
         StartCoroutine(RolesLevelUp());
     }
 
     private IEnumerator RolesLevelUp()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(waitTime);
         for (int i = 0; i < scene0roles.Count; i++)
         {
-            scene0roles[i].GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level = nums[UnityEngine.Random.Range(0, 2)];
+            scene0roles[i].GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level = nums[count];
             
             scene0roles[i].transform.DOScale(new Vector3(1.1f, 1.2f, 1.1f), 0.2f).OnComplete(()=> {
                 scene0roles[i].GetComponent<BaseMapRole>().CheckLevel();
@@ -85,12 +98,17 @@ public class FTERecord : MonoBehaviour
             });
             yield return new WaitForSeconds(1f);
         }
+        count++;
+        if (count <= 1)
+        {
+            RoleUp(6);
+        }
     }
 
-    //private IEnumerator DelayExcute(Action action, float delayTime)
-    //{
-    //    yield return new WaitForSeconds(delayTime);
-    //    action();
-    //    StopCoroutine("DelayExcute");
-    //}
+    private IEnumerator DelayExcute(Action action, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        action();
+        StopCoroutine("DelayExcute");
+    }
 }
