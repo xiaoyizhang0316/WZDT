@@ -154,6 +154,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public int endTime;
 
+    public StageType currentType;
+
     /// <summary>
     /// 当前关卡敌人波数数据
     /// </summary>
@@ -361,6 +363,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void CheckWin()
     {
+        if (currentType != StageType.Normal)
+            return;
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
         bool isComplete = true;
         foreach (Building b in BuildingManager.My.buildings)
@@ -658,6 +662,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerMaxHealth = playerHealth;
         maxWaveNumber = data.maxWaveNumber;
         playerTechPoint = data.startTech;
+        currentType = data.stageType;
         foreach (int i in data.waveWaitTime)
         {
             waitTimeList.Add(i);
