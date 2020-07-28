@@ -7,6 +7,8 @@ using static GameEnum;
 
 public class BossConsumer : ConsumeSign
 {
+    public int skillOneTime;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -105,6 +107,7 @@ public class BossConsumer : ConsumeSign
         //float waitTime = UnityEngine.Random.Range(0f, 0.5f);
         //Invoke("Move", waitTime);
         CheckBuffDuration();
+        SkillOne();
         Move();
     }
 
@@ -399,6 +402,15 @@ public class BossConsumer : ConsumeSign
     {
         NewCanvasUI.My.consumerInfoFloatWindow.SetActive(true);
         NewCanvasUI.My.consumerInfoFloatWindow.GetComponent<ConsumerFloatWindow>().Init(this);
+    }
+
+    public void SkillOne()
+    {
+        transform.DOScale(1f, skillOneTime).OnComplete(() =>
+        {
+            //TODO 
+            SkillOne();
+        });
     }
 
     private void Update()
