@@ -96,6 +96,11 @@ public abstract class BaseSkill : MonoBehaviour
     /// </summary>
     public void AddRoleBuff(TradeData tradeData)
     {
+        if (!IsOpen)
+        {
+            return;
+        }
+
         for (int i = 0; i < buffList.Count; i++)
         {
             var buff = GameDataMgr.My.GetBuffDataByID(buffList[i]);

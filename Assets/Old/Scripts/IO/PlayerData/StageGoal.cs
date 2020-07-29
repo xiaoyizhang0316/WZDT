@@ -154,6 +154,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public int endTime;
 
+    public StageType currentType;
+
     /// <summary>
     /// 当前关卡敌人波数数据
     /// </summary>
@@ -361,6 +363,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void CheckWin()
     {
+        if (currentType != StageType.Normal)
+            return;
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
         bool isComplete = true;
         foreach (Building b in BuildingManager.My.buildings)
@@ -433,7 +437,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Lose()
     {
-        if (playerHealth <= 0)
+        if (currentType == StageType.Normal)
         {
             NewCanvasUI.My.GamePause(false);
             NewCanvasUI.My.lose.SetActive(true);
@@ -444,8 +448,23 @@ public class StageGoal : MonoSingleton<StageGoal>
                 CommitLose();
             }
         }
-        else
-            return;
+        else if (currentType == StageType.Boss)
+        {
+            if (BaseLevelController.My.starOneStatus)
+            {
+                Win();
+            }
+            else
+            {
+                NewCanvasUI.My.GamePause(false);
+                NewCanvasUI.My.lose.SetActive(true);
+                //NewCanvasUI.My.Panel_Lose.SetActive(true);
+                if (NetworkMgr.My.isUsingHttp)
+                {
+                    CommitLose();
+                }
+            }
+        }
     }
 
     public void CommitLose()
@@ -664,6 +683,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerMaxHealth = playerHealth;
         maxWaveNumber = data.maxWaveNumber;
         playerTechPoint = data.startTech;
+        currentType = data.stageType;
         foreach (int i in data.waveWaitTime)
         {
             waitTimeList.Add(i);

@@ -50,12 +50,17 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public Text bulletCapacity;
 
     public Image BG;
+    public Image shapeImageBG;
     /// <summary>
     /// 当创建销毁时候或者保存角色时候调整占用状态
     /// </summary>
     public bool isOccupation;
     public int ID;
 
+
+    public Sprite lv;
+    public Sprite lan;
+    public Sprite hui;
     //public int isoccupy; 
     //public bool isEquiped;
 
@@ -95,6 +100,18 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         cost.text = gearData.cost.ToString();
         //bulletCapacity.text = gearData.bulletCapacity.ToString(); 
         //print(gearData.SpritePath);
+        if (gearData.ProductOrder == 1)
+        {
+            shapeImageBG.sprite = hui;
+        }
+        if (gearData.ProductOrder == 2)
+        {
+            shapeImageBG.sprite = lv;
+        }
+        if (gearData.ProductOrder == 3)
+        {
+            shapeImageBG.sprite = lan ;
+        }
         Image_shape.sprite = Resources.Load<Sprite>(gearData.SpritePath);
         if (gearData.buffList[0] != -1)
         {
