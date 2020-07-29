@@ -23,14 +23,18 @@ public class BossBloodBar : IOIntensiveFramework.MonoSingleton.MonoSingleton<Bos
         
     }
 
-    public void SetBar(float fillAmount,Action end)
+    public void SetBar(float fillAmount,Action end=null)
     {
-        bar.DOFillAmount(fillAmount,0.3f).OnComplete(() => { end(); });
+        bar.DOFillAmount(fillAmount,0.3f).OnComplete(() =>
+        {
+            if(end!=null)
+            end();
+        });
     }
 
     public void ChangeColor(Color color)
     {
-        barBG.color = bar.color;
+      //  barBG.color = bar.color;
         bar.color = color;
     }
 }
