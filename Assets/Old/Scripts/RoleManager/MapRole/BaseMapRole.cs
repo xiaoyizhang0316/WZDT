@@ -116,6 +116,7 @@ public class BaseMapRole : MonoBehaviour
         {
             InitAttribute();
         }
+        tradePoint.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void CheckLevel()

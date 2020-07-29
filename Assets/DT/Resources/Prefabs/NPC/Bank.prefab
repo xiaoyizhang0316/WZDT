@@ -315,12 +315,14 @@ MonoBehaviour:
   IsOpen: 1
   isPlay: 0
   isAvaliable: 1
+  goodSpecialBuffList: 
+  goodBaseBuffs: []
+  badSpecialBuffList: 
+  badBaseBuffs: []
   skillDesc: "\u5C0F\u989D\u8D37\u6B3E\uFF0C6\u671F\u514D\u606F\uFF0C\u4F46\u5305\u542B\u5927\u91CF\u670D\u52A1\u8D39"
   buffList: 
   animationPart: []
   productDatas: []
-  specialBuffList: 
-  baseBuffs: []
 --- !u!114 &2120803140364257434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,6 +610,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 618b62e38bc0648b7b41112a6aa88934,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 50ea2e496214a42e68451bd1ead24f10, type: 2}
     - target: {fileID: -927199367670048503, guid: 618b62e38bc0648b7b41112a6aa88934,
         type: 3}
       propertyPath: m_Name
