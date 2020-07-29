@@ -121,6 +121,7 @@ public class BossConsumer : ConsumeSign
         BossBloodBar.My.SetBar(0f, () =>
         {
             BossBloodBar.My.ChangeColor(new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f)));
+            BossBloodBar.My.SetKillCount(killCount);
         });
         consumeData.maxHealth = consumeData.maxHealth * 130 / 100;
         consumeData.killMoney = consumeData.killMoney * 130 / 100;
