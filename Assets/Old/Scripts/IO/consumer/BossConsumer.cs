@@ -9,12 +9,18 @@ using Random = UnityEngine.Random;
 public class BossConsumer : ConsumeSign
 {
     public int skillOneTime;
-    public int skillTwoTime;
-    public List<GameObject> peopleList;
+
+    public  int  skillTwoTime;
+    public List<GameObject> peopleList; 
+    public GameObject skillOneEffect;
+    public GameObject skillTwoEffect; 
+
 
     public GameObject littlePrb;
 
     private List<Transform> bossPathList = new List<Transform>();
+
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -41,11 +47,12 @@ public class BossConsumer : ConsumeSign
         }
         if (PlayerData.My.cheatIndex2)
             consumeData.maxHealth = (int)(consumeData.maxHealth * 0.5f);
-        GameObject go = Instantiate(hudPrb, transform);
-        hud = go.GetComponent<Hud>();
-        hud.Init(this);
-        hud.healthImg.fillAmount = 0f;
-        go.transform.localPosition = Vector3.zero + new Vector3(0, 3.5f, 0);
+        //GameObject go = Instantiate(hudPrb, transform);
+        //hud = go.GetComponent<Hud>();
+        //hud.Init(this);
+        //hud.healthImg.fillAmount = 0f;
+        BossBloodBar.My.SetBar(0f);
+        //go.transform.localPosition = Vector3.zero + new Vector3(0, 3.5f, 0);
         InitPath(paths);
         InitAndMove();
     }
@@ -62,6 +69,8 @@ public class BossConsumer : ConsumeSign
         transform.DOLookAt(bossPathList[0].position,0f);
         LostHealth();
         CheckBuffDuration();
+        SkillOne();
+        SkillTwo();
         //Move();
     }
 
@@ -79,7 +88,7 @@ public class BossConsumer : ConsumeSign
         pathList.Add(paths[0].position);
     }
 
-    private int killCount = 0; 
+    private int killCount = 1; 
      
     /// <summary>
     /// Boss本层被击杀时调用   
@@ -109,14 +118,16 @@ public class BossConsumer : ConsumeSign
     public void ChangeAttribute()
     {
         currentHealth = 0;
+        BossBloodBar.My.SetBar(0f, () =>
+        {
+            BossBloodBar.My.ChangeColor(new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f)));
+        });
         consumeData.maxHealth = consumeData.maxHealth * 130 / 100;
         consumeData.killMoney = consumeData.killMoney * 130 / 100;
         if (killCount >= 20)
         {
             consumeData.maxHealth = 999999;
         }
-        hud.healthImg.color = new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f));
-        hud.UpdateInfo(0);
     }
 
     /// <summary>
@@ -175,6 +186,19 @@ public class BossConsumer : ConsumeSign
     }
 
     /// <summary>
+    /// 生命值检测
+    /// </summary>
+    public override void HealthCheck()
+    {
+        float per = currentHealth / (float)consumeData.maxHealth;
+        BossBloodBar.My.SetBar(per);
+        if (currentHealth >= consumeData.maxHealth)
+        {
+            OnDeath();
+        }
+    }
+
+    /// <summary>
     /// 去目标地点    
     /// </summary>
     public override void Move()
@@ -209,7 +233,8 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     public void SkillOne()
     {
-        transform.DOScale(transform.localScale, skillOneTime).OnComplete(() =>
+ 
+        transform.DOScale(transform.localScale, 3).OnComplete(() => 
         {
             List<MapSign> signs = new List<MapSign>();
             for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
@@ -221,7 +246,15 @@ public class BossConsumer : ConsumeSign
             }
             for (int i = 0; i < 3; i++)
             {
-                signs[Random.Range(0, signs.Count)].LostEffect(skillOneTime/3);
+                var land = Random.Range(0, signs.Count);
+                signs[land].LostEffect(skillOneTime/3);
+                var lins = DrawLine(transform.transform.position,     signs[land].transform.position);
+                
+               GameObject effect =  Instantiate(skillOneEffect,transform);
+               effect.transform.position = transform.position;
+               effect.transform.parent = Camera.main.transform;
+               effect.transform.DOPath(lins.ToArray(), 3).SetEase(Ease.Linear);
+               Destroy(effect,3);
             }
             SkillOne();
         });
@@ -233,6 +266,7 @@ public class BossConsumer : ConsumeSign
     public void SkillTwo()
     {
         transform.DOScale(transform.localScale, skillTwoTime).OnComplete(() =>
+
         {
             List<MapSign> signs = new List<MapSign>();
             for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
@@ -244,20 +278,54 @@ public class BossConsumer : ConsumeSign
             }
             for (int i = 0; i < 3; i++)
             {
-                signs[Random.Range(0, signs.Count)].AddCost(1,skillTwoTime/3);
+                var land = Random.Range(0, signs.Count);
+                signs[land].AddCost(1,skillTwoTime/3);
+                var lins = DrawLine(transform.transform.position,     signs[land].transform.position); 
+                GameObject effect =  Instantiate(skillTwoEffect,transform);
+                effect.transform.position = transform.position;
+                effect.transform.parent = Camera.main.transform;
+                effect.transform.DOPath(lins.ToArray(), 3).SetEase(Ease.Linear);
+                Destroy(effect,3);
             }
             SkillTwo();
         });
-    }
+    } 
+    public float per;
+    public List<Vector3> DrawLine(Vector3 startTarget, Vector3 Target)
+    {
+        List<Vector3> pointList = new List<Vector3>();
+        int vertexCount = 20; //采样点数量
+        pointList.Clear();
+        pointList.Add(startTarget);
+        if (startTarget != null && Target != null)
+        {
+            float x = startTarget.x * per + Target.x * (per);
+            //float y = startTarget.localPosition.y * per + Target.localPosition.y * (1f - per) ;
+            float y = 10;
+            float z = startTarget.z * per + Target.z * (per);
+            Vector3 point3 = new Vector3(x, y, z);
+            for (float ratio = 0; ratio <= 1; ratio += 1.0f / vertexCount)
+            {
+                Vector3 tangentLineVertex1 = Vector3.Lerp(startTarget, point3, ratio);
+                Vector3 tangentLineVectex2 = Vector3.Lerp(point3, Target, ratio);
+                Vector3 bezierPoint = Vector3.Lerp(tangentLineVertex1, tangentLineVectex2, ratio);
+                pointList.Add(bezierPoint);
+            }
+        }
+
+        pointList.Add(Target);
+
+        return pointList;
+    } 
 
     /// <summary>
     /// 周期性扣除玩家血量
     /// </summary>
     public void LostHealth()
     {
-        transform.DOScale(transform.localScale, 10f).OnComplete(() =>
+        transform.DOScale(transform.localScale, 1f).OnComplete(() =>
         {
-            StageGoal.My.LostHealth(-2 - killCount / 3);
+            StageGoal.My.LostHealth(-1);
             LostHealth();
         });
     }
@@ -288,7 +356,7 @@ public class BossConsumer : ConsumeSign
     {
 
     }
-
+ 
     private void Update()
     {
         //print(tweener.ElapsedPercentage(false));
