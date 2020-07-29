@@ -9,7 +9,7 @@ public class BossBloodBar : IOIntensiveFramework.MonoSingleton.MonoSingleton<Bos
 {
 
     public Image barBG;
-
+    public Text killCount;
     public Image bar;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,11 @@ public class BossBloodBar : IOIntensiveFramework.MonoSingleton.MonoSingleton<Bos
     void Update()
     {
         
+    }
+
+    public void SetKillCount(int count )
+    {
+        killCount.text = count.ToString();
     }
 
     public void SetBar(float fillAmount,Action end=null)
