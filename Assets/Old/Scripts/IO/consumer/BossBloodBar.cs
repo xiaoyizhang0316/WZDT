@@ -9,12 +9,12 @@ public class BossBloodBar : IOIntensiveFramework.MonoSingleton.MonoSingleton<Bos
 {
 
     public Image barBG;
-
+    public Text killCount;
     public Image bar;
     // Start is called before the first frame update
     void Start()
     {
-        
+        killCount.text = "1";
     }
 
     // Update is called once per frame
@@ -23,14 +23,23 @@ public class BossBloodBar : IOIntensiveFramework.MonoSingleton.MonoSingleton<Bos
         
     }
 
-    public void SetBar(float fillAmount,Action end)
+    public void SetKillCount(int count )
     {
-        bar.DOFillAmount(fillAmount,0.3f).OnComplete(() => { end(); });
+        killCount.text = count.ToString();
+    }
+
+    public void SetBar(float fillAmount,Action end=null)
+    {
+        bar.DOFillAmount(fillAmount,0.3f).OnComplete(() =>
+        {
+            if(end!=null)
+            end();
+        });
     }
 
     public void ChangeColor(Color color)
     {
-        barBG.color = bar.color;
+      //  barBG.color = bar.color;
         bar.color = color;
     }
 }
