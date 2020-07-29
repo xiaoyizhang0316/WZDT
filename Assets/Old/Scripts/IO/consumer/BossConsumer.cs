@@ -11,6 +11,8 @@ public class BossConsumer : ConsumeSign
     public int skillOneTime;
     public  int  skillTwoTime;
     public List<GameObject> peopleList;
+    public GameObject skillOneEffect;
+    public GameObject skillTwoEffect;
     /// <summary>
     /// 初始化
     /// </summary>
@@ -437,7 +439,7 @@ else if (killCount<= 10)
 
     public void SkillOne()
     {
-        transform.DOScale(1f, skillOneTime).OnComplete(() =>
+        transform.DOScale(1f, 10).OnComplete(() =>
         {
             //TODO 
             List<MapSign> signs = new List<MapSign>();
@@ -451,7 +453,12 @@ else if (killCount<= 10)
 
             for (int i = 0; i < 3; i++)
             {
-                signs[Random.Range(0, signs.Count)].LostEffect(skillOneTime/3);
+                var land = Random.Range(0, signs.Count);
+                signs[land].LostEffect(skillOneTime/3);
+                var lins = DrawLine(transform.transform.position,     signs[land].transform.position);
+               GameObject effect =  Instantiate(skillOneEffect,transform);
+               effect.transform.DOPath(lins.ToArray(), 3);
+               Destroy(effect,3);
             }
           
             SkillOne();
@@ -479,6 +486,33 @@ else if (killCount<= 10)
           
             SkillTwo();
         });
+    }
+    public float per;
+    public List<Vector3> DrawLine(Vector3 startTarget, Vector3 Target)
+    {
+        List<Vector3> pointList = new List<Vector3>();
+        int vertexCount = 20; //采样点数量
+        pointList.Clear();
+        pointList.Add(startTarget);
+        if (startTarget != null && Target != null)
+        {
+            float x = startTarget.x * per + Target.x * (per);
+            //float y = startTarget.localPosition.y * per + Target.localPosition.y * (1f - per) ;
+            float y = 10;
+            float z = startTarget.z * per + Target.z * (per);
+            Vector3 point3 = new Vector3(x, y, z);
+            for (float ratio = 0; ratio <= 1; ratio += 1.0f / vertexCount)
+            {
+                Vector3 tangentLineVertex1 = Vector3.Lerp(startTarget, point3, ratio);
+                Vector3 tangentLineVectex2 = Vector3.Lerp(point3, Target, ratio);
+                Vector3 bezierPoint = Vector3.Lerp(tangentLineVertex1, tangentLineVectex2, ratio);
+                pointList.Add(bezierPoint);
+            }
+        }
+
+        pointList.Add(Target);
+
+        return pointList;
     }
     private void Update()
     {
