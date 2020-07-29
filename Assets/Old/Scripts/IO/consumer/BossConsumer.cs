@@ -10,16 +10,13 @@ public class BossConsumer : ConsumeSign
 {
     public int skillOneTime;
     public  int  skillTwoTime;
-    public List<GameObject> peopleList;
-<<<<<<< HEAD
+    public List<GameObject> peopleList; 
     public GameObject skillOneEffect;
-    public GameObject skillTwoEffect;
-=======
+    public GameObject skillTwoEffect; 
 
     public GameObject littlePrb;
 
-    private List<Transform> bossPathList = new List<Transform>();
->>>>>>> origin/ZXY
+    private List<Transform> bossPathList = new List<Transform>(); 
     /// <summary>
     /// 初始化
     /// </summary>
@@ -122,6 +119,8 @@ public class BossConsumer : ConsumeSign
         transform.DOMove(bossPathList[0].position, time).SetEase(Ease.Linear).OnComplete(Move);
         LostHealth();
         CheckBuffDuration();
+        SkillOne();
+        SkillTwo();
         //Move();
     }
 
@@ -482,11 +481,8 @@ public class BossConsumer : ConsumeSign
 
     public void SkillOne()
     {
-<<<<<<< HEAD
-        transform.DOScale(1f, 10).OnComplete(() =>
-=======
-        transform.DOScale(transform.localScale, skillOneTime).OnComplete(() =>
->>>>>>> origin/ZXY
+ 
+        transform.DOScale(transform.localScale, 3).OnComplete(() => 
         {
             //TODO 
             List<MapSign> signs = new List<MapSign>();
@@ -503,8 +499,11 @@ public class BossConsumer : ConsumeSign
                 var land = Random.Range(0, signs.Count);
                 signs[land].LostEffect(skillOneTime/3);
                 var lins = DrawLine(transform.transform.position,     signs[land].transform.position);
+                
                GameObject effect =  Instantiate(skillOneEffect,transform);
-               effect.transform.DOPath(lins.ToArray(), 3);
+               effect.transform.position = transform.position;
+               effect.transform.parent = Camera.main.transform;
+               effect.transform.DOPath(lins.ToArray(), 3).SetEase(Ease.Linear);
                Destroy(effect,3);
             }
           
@@ -515,7 +514,7 @@ public class BossConsumer : ConsumeSign
     public void SkillTwo()
     {
 
-        transform.DOScale(transform.localScale, skillTwoTime).OnComplete(() =>
+        transform.DOScale(transform.localScale, 3).OnComplete(() =>
         {
             //TODO 
             List<MapSign> signs = new List<MapSign>();
@@ -529,13 +528,19 @@ public class BossConsumer : ConsumeSign
 
             for (int i = 0; i < 3; i++)
             {
-                signs[Random.Range(0, signs.Count)].AddCost(1,skillTwoTime/3);
+                var land = Random.Range(0, signs.Count);
+                signs[land].AddCost(1,skillTwoTime/3);
+                var lins = DrawLine(transform.transform.position,     signs[land].transform.position); 
+                GameObject effect =  Instantiate(skillTwoEffect,transform);
+                effect.transform.position = transform.position;
+                effect.transform.parent = Camera.main.transform;
+                effect.transform.DOPath(lins.ToArray(), 3).SetEase(Ease.Linear);
+                Destroy(effect,3);
             }
           
             SkillTwo();
         });
-    }
-<<<<<<< HEAD
+    } 
     public float per;
     public List<Vector3> DrawLine(Vector3 startTarget, Vector3 Target)
     {
@@ -562,8 +567,7 @@ public class BossConsumer : ConsumeSign
         pointList.Add(Target);
 
         return pointList;
-    }
-=======
+    } 
 
     public void LostHealth()
     {
@@ -572,6 +576,7 @@ public class BossConsumer : ConsumeSign
             StageGoal.My.LostHealth(-2);
             SummonLittle();
             LostHealth();
+            
         });
     }
 
@@ -588,8 +593,7 @@ public class BossConsumer : ConsumeSign
 
         //go.transform.localPosition = transform.localPosition;
     }
-
->>>>>>> origin/ZXY
+ 
     private void Update()
     {
         //print(tweener.ElapsedPercentage(false));
