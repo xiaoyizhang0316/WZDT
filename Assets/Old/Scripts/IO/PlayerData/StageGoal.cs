@@ -437,7 +437,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Lose()
     {
-        if (playerHealth <= 0)
+        if (currentType == StageType.Normal)
         {
             NewCanvasUI.My.GamePause(false);
             NewCanvasUI.My.lose.SetActive(true);
@@ -448,8 +448,23 @@ public class StageGoal : MonoSingleton<StageGoal>
                 CommitLose();
             }
         }
-        else
-            return;
+        else if (currentType == StageType.Boss)
+        {
+            if (BaseLevelController.My.starOneStatus)
+            {
+                Win();
+            }
+            else
+            {
+                NewCanvasUI.My.GamePause(false);
+                NewCanvasUI.My.lose.SetActive(true);
+                //NewCanvasUI.My.Panel_Lose.SetActive(true);
+                if (NetworkMgr.My.isUsingHttp)
+                {
+                    CommitLose();
+                }
+            }
+        }
     }
 
     public void CommitLose()

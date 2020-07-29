@@ -11,8 +11,15 @@ public class BossConsumer : ConsumeSign
     public int skillOneTime;
     public  int  skillTwoTime;
     public List<GameObject> peopleList;
+<<<<<<< HEAD
     public GameObject skillOneEffect;
     public GameObject skillTwoEffect;
+=======
+
+    public GameObject littlePrb;
+
+    private List<Transform> bossPathList = new List<Transform>();
+>>>>>>> origin/ZXY
     /// <summary>
     /// 初始化
     /// </summary>
@@ -21,6 +28,7 @@ public class BossConsumer : ConsumeSign
         isStart = false;
         isCanSelect = false;
         currentHealth = 0;
+        bossPathList.AddRange(paths);
         InitEffect();
         foreach (ProductElementType p in Enum.GetValues(typeof(ProductElementType)))
         {
@@ -110,8 +118,11 @@ public class BossConsumer : ConsumeSign
     {
         //float waitTime = UnityEngine.Random.Range(0f, 0.5f);
         //Invoke("Move", waitTime);
+        float time = Vector3.Distance(bossPathList[0].position, transform.position) / consumeData.moveSpeed;
+        transform.DOMove(bossPathList[0].position, time).SetEase(Ease.Linear).OnComplete(Move);
+        LostHealth();
         CheckBuffDuration();
-        Move();
+        //Move();
     }
 
     /// <summary>
@@ -121,12 +132,11 @@ public class BossConsumer : ConsumeSign
     public override void InitPath(List<Transform> paths)
     {
         pathList = new List<Vector3>();
-        foreach (Transform t in paths)
+        for (int i = 1; i < paths.Count; i++)
         {
-            float x = UnityEngine.Random.Range(-0.3f, 0.3f);
-            float z = UnityEngine.Random.Range(-0.3f, 0.3f);
-            pathList.Add(t.position + new Vector3(x, 0f, z));
+            pathList.Add(paths[i].position);
         }
+        pathList.Add(paths[0].position);
     }
 
     /// <summary>
@@ -164,12 +174,45 @@ public class BossConsumer : ConsumeSign
         {
             return;
         }
-        currentHealth = 0;
         killCount++;
-        consumeData.maxHealth = killCount * 100 * 2 + 2000;
-        hud.healthImg.color = new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f));
+        ChangeMaxHealth();
+        ChangeModel();
         BaseLevelController.My.CountKillNumber(this);
-        for (int i = 0; i <peopleList.Count; i++)
+        DeathAward();
+    }
+
+    /// <summary>
+    /// 层数增加提高生命上限
+    /// </summary>
+    public void ChangeMaxHealth()
+    {
+        currentHealth = 0;
+        if (killCount <= 5)
+        {
+            consumeData.maxHealth = killCount * 100 * 2 + 2000;
+        }
+        else if (killCount <= 10)
+        {
+            consumeData.maxHealth = killCount * 100 * 2 + 2000;
+        }
+        else if (killCount <= 15)
+        {
+            consumeData.maxHealth = killCount * 100 * 2 + 2000;
+        }
+        else
+        {
+            consumeData.maxHealth = killCount * 100 * 2 + 2000;
+        }
+        hud.healthImg.color = new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f));
+        hud.UpdateInfo(0);
+    }
+
+    /// <summary>
+    /// 层数增加换模型/释放特殊技能
+    /// </summary>
+    public void ChangeModel()
+    {
+        for (int i = 0; i < peopleList.Count; i++)
         {
             peopleList[i].gameObject.SetActive(false);
         }
@@ -177,24 +220,23 @@ public class BossConsumer : ConsumeSign
         {
             peopleList[0].SetActive(true);
         }
-else if (killCount<= 10)
+        else if (killCount <= 10)
         {
             peopleList[1].SetActive(true);
         }
-        else if (killCount<= 15)
+        else if (killCount <= 15)
         {
             peopleList[2].SetActive(true);
             if (killCount == 15)
                 SkillOne();
         }
-        else    
+        else
         {
             peopleList[3].SetActive(true);
             if (killCount == 20)
                 SkillTwo();
         }
-      
-        DeathAward();
+
     }
 
     /// <summary>
@@ -229,7 +271,7 @@ else if (killCount<= 10)
         if (isCanSelect)
         {
             currentHealth += num;
-            StageGoal.My.playerSatisfy += num;
+            StageGoal.My.GetSatisfy(num);
             if (currentHealth <= 0)
                 currentHealth = 0;
             HealthCheck();
@@ -332,7 +374,7 @@ else if (killCount<= 10)
         isStart = true;
         isCanSelect = true;
         float time = CalculateTime();
-        tweener = transform.DOPath(pathList.ToArray(), time, PathType.CatmullRom, PathMode.Full3D).OnComplete(Move).SetEase(Ease.Linear).SetLookAt(0.01f);
+        tweener = transform.DOPath(pathList.ToArray(), time, PathType.CatmullRom, PathMode.Full3D).SetEase(Ease.Linear).SetLookAt(0.01f).OnComplete(Move);
 
     }
 
@@ -360,11 +402,12 @@ else if (killCount<= 10)
     {
         if (pathList.Count == 0)
             throw new Exception("路径点数量为0！");
-        float result = Vector3.Distance(transform.position, pathList[0]) / consumeData.moveSpeed;
+        float result = 0f;
         for (int i = 0; i < pathList.Count - 1; i++)
         {
             result += Vector3.Distance(pathList[i], pathList[i + 1]) / consumeData.moveSpeed;
         }
+        result += Vector3.Distance(pathList[pathList.Count - 1], pathList[0]) / consumeData.moveSpeed;
         return result;
     }
 
@@ -439,7 +482,11 @@ else if (killCount<= 10)
 
     public void SkillOne()
     {
+<<<<<<< HEAD
         transform.DOScale(1f, 10).OnComplete(() =>
+=======
+        transform.DOScale(transform.localScale, skillOneTime).OnComplete(() =>
+>>>>>>> origin/ZXY
         {
             //TODO 
             List<MapSign> signs = new List<MapSign>();
@@ -464,10 +511,11 @@ else if (killCount<= 10)
             SkillOne();
         });
     }
+
     public void SkillTwo()
     {
 
-        transform.DOScale(1f, skillTwoTime).OnComplete(() =>
+        transform.DOScale(transform.localScale, skillTwoTime).OnComplete(() =>
         {
             //TODO 
             List<MapSign> signs = new List<MapSign>();
@@ -487,6 +535,7 @@ else if (killCount<= 10)
             SkillTwo();
         });
     }
+<<<<<<< HEAD
     public float per;
     public List<Vector3> DrawLine(Vector3 startTarget, Vector3 Target)
     {
@@ -514,6 +563,33 @@ else if (killCount<= 10)
 
         return pointList;
     }
+=======
+
+    public void LostHealth()
+    {
+        transform.DOScale(transform.localScale, 10f).OnComplete(() =>
+        {
+            StageGoal.My.LostHealth(-2);
+            SummonLittle();
+            LostHealth();
+        });
+    }
+
+    public void SummonLittle()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject go = Instantiate(littlePrb, transform.parent);
+            go.transform.position = bossPathList[0].position;
+            print(tweener.fullPosition);
+            float ran = Random.Range(-2f,2f);
+            go.GetComponent<BossSummonConsumer>().Init(bossPathList, tweener.fullPosition + ran, consumeData.moveSpeed);
+        }
+
+        //go.transform.localPosition = transform.localPosition;
+    }
+
+>>>>>>> origin/ZXY
     private void Update()
     {
         //print(tweener.ElapsedPercentage(false));
