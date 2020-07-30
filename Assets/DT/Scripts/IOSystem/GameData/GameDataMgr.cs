@@ -138,7 +138,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 return temp;
             }
         }
-        print("------------查不到此BUFF!-----------");
+        print("------------查不到此BUFF!-----------" + id);
         return null;
     }
 

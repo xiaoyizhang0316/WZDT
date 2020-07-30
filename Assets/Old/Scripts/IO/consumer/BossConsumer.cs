@@ -8,9 +8,8 @@ using Random = UnityEngine.Random;
 
 public class BossConsumer : ConsumeSign
 {
-    public int skillOneTime;
-
-    public int skillTwoTime;
+    int skillOneTime = 10;
+    int skillTwoTime = 10;
     public List<GameObject> peopleList;
     public GameObject skillOneEffect;
     public GameObject skillTwoEffect;
@@ -72,8 +71,7 @@ public class BossConsumer : ConsumeSign
         transform.DOLookAt(bossPathList[0].position,0f);
         LostHealth();
         CheckBuffDuration();
-        SkillOne();
-        SkillTwo();
+        SwitchElementResistance();
         //Move();
     }
 
@@ -146,22 +144,29 @@ public class BossConsumer : ConsumeSign
         if (killCount <= 5)
         {
             peopleList[0].SetActive(true);
+            BossBloodBar.My.boss.sprite = BossBloodBar.My.bossList[0];
         }
         else if (killCount <= 10)
         {
             peopleList[1].SetActive(true);
+            BossBloodBar.My.boss.sprite = BossBloodBar.My.bossList[1];
             if (killCount == 10)
+            {
                 SkillOne();
+            }
+
         }
         else if (killCount <= 15)
         {
             peopleList[2].SetActive(true);
+            BossBloodBar.My.boss.sprite = BossBloodBar.My.bossList[2];
             if (killCount == 15)
                 SkillTwo();
         }
         else
         {
             peopleList[3].SetActive(true);
+            BossBloodBar.My.boss.sprite = BossBloodBar.My.bossList[3];
         }
     }
 
@@ -283,7 +288,8 @@ public class BossConsumer : ConsumeSign
             for (int i = 0; i < 3; i++)
             {
                 var land = Random.Range(0, signs.Count);
-                signs[land].AddCost(1,skillTwoTime/3);
+                //TODO
+                signs[land].AddCost(999,skillTwoTime/3);
                 var lins = DrawLine(transform.transform.position,     signs[land].transform.position); 
                 GameObject effect =  Instantiate(skillTwoEffect,transform);
                 effect.transform.position = transform.position;
@@ -357,22 +363,28 @@ public class BossConsumer : ConsumeSign
     /// 切换口味抗性
     /// </summary>
     public void SwitchElementResistance()
-    { 
-        if (randomList.Contains(buffList[0].buffId))
+    {
+        if (buffList.Count > 0)
         {
-            int prevBuff = buffList[0].buffId;
-            RemoveBuff(buffList[0]);
-            tempBuffList.Remove(prevBuff);
-            bornBuffList.Remove(prevBuff);
-            if (tempBuffList.Count == 0)
-                tempBuffList.AddRange(randomList);
+            if (tempBuffList.Contains(buffList[0].buffId))
+            {
+                int prevBuff = buffList[0].buffId;
+                RemoveBuff(buffList[0]);
+                tempBuffList.Remove(prevBuff);
+                bornBuffList.Remove(prevBuff);
+                if (tempBuffList.Count == 0)
+                    tempBuffList.AddRange(randomList);
+            }
         }
         int index = Random.Range(0, tempBuffList.Count);
+        print(tempBuffList[index]);
         BuffData buff = GameDataMgr.My.GetBuffDataByID(tempBuffList[index]);
         BaseBuff baseBuff = new BaseBuff();
         baseBuff.Init(buff);
         baseBuff.SetConsumerBuff(this);
         bornBuffList.Insert(0,index);
+        BossBloodBar.My.buffImg.GetComponent<WaveBuffSign>().Init(tempBuffList[index]);
+        transform.DOScale(transform.localScale,10).OnComplete(SwitchElementResistance);
     }
  
     private void Update()

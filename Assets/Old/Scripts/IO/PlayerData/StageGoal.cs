@@ -770,19 +770,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKey(KeyCode.Mouse0))
-        //{
-        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //    RaycastHit[] hit = Physics.RaycastAll(ray);
-        //    for (int i = 0; i < hit.Length; i++)
-        //    {
-        //        print(hit[i].transform.name);
-        //    }
-        //}
-    }
-
-    private void OnGUI()
-    {
         if (Input.GetKeyDown(KeyCode.S))
         {
             DOTween.PlayAll();
@@ -801,7 +788,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
-                Camera.main.cullingMask = -1;
+            Camera.main.cullingMask = -1;
 
         }
         if (Input.GetKeyDown(KeyCode.I))
@@ -809,7 +796,6 @@ public class StageGoal : MonoSingleton<StageGoal>
             Camera.main.cullingMask = 279;
         }
     }
-
 
     public void Income(int num, IncomeType incomeType, BaseMapRole npc =null, string otherName="")
     {
