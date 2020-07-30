@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 
 public class BossConsumer : ConsumeSign
 {
-    int skillOneTime = 10;
-    int skillTwoTime = 10;
+    int skillOneTime = 60;
+    int skillTwoTime = 60;
     public List<GameObject> peopleList;
     public GameObject skillOneEffect;
     public GameObject skillTwoEffect;
@@ -124,8 +124,8 @@ public class BossConsumer : ConsumeSign
             BossBloodBar.My.ChangeColor(new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f)));
             BossBloodBar.My.SetKillCount(killCount);
         });
-        consumeData.maxHealth = consumeData.maxHealth * 130 / 100;
-        consumeData.killMoney = consumeData.killMoney * 130 / 100;
+        consumeData.maxHealth = consumeData.maxHealth * 120 / 100;
+        consumeData.killMoney = consumeData.killMoney += 1000;
         if (killCount >= 20)
         {
             consumeData.maxHealth = 999999;
@@ -139,33 +139,42 @@ public class BossConsumer : ConsumeSign
     {
         for (int i = 0; i < peopleList.Count; i++)
         {
-            peopleList[i].gameObject.SetActive(false);
+            peopleList[i].SetActive(false);
         }
-        if (killCount <= 5)
+        if (killCount < 5)
         {
+            print("1");
             peopleList[0].SetActive(true);
+            self = peopleList[0];
             BossBloodBar.My.boss.sprite = BossBloodBar.My.bossList[0];
         }
-        else if (killCount <= 10)
+        else if (killCount < 10)
         {
+            print("2");
             peopleList[1].SetActive(true);
+            self = peopleList[1];
             BossBloodBar.My.boss.sprite = BossBloodBar.My.bossList[1];
+
+        }
+        else if (killCount < 15)
+        {
             if (killCount == 10)
             {
                 SkillOne();
             }
-
-        }
-        else if (killCount <= 15)
-        {
+            print("3");
             peopleList[2].SetActive(true);
+            self = peopleList[2];
             BossBloodBar.My.boss.sprite = BossBloodBar.My.bossList[2];
-            if (killCount == 15)
-                SkillTwo();
+
         }
         else
         {
+            if (killCount == 15)
+                SkillTwo();
+            print("4");
             peopleList[3].SetActive(true);
+            self = peopleList[3];
             BossBloodBar.My.boss.sprite = BossBloodBar.My.bossList[3];
         }
     }
@@ -175,7 +184,7 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     public void AddPlayerResource()
     {
-        StageGoal.My.playerHealth += 5 + killCount / 3;
+        StageGoal.My.playerHealth += 30 + (killCount / 3) * 10;
     }
 
     /// <summary>
@@ -354,7 +363,7 @@ public class BossConsumer : ConsumeSign
             float ran = Random.Range(-2f,2f);
             go.GetComponent<BossSummonConsumer>().Init(bossPathList, tweener.fullPosition + ran, consumeData.moveSpeed);
             go.GetComponent<BossSummonConsumer>().consumeData.maxHealth = (int)(consumeData.maxHealth * 0.2f);
-            go.GetComponent<BossSummonConsumer>().consumeData.killMoney = (int)(consumeData.killMoney * 0.2f);
+            go.GetComponent<BossSummonConsumer>().consumeData.killMoney = (int)(consumeData.killMoney * 0.05f);
             go.GetComponent<BossSummonConsumer>().consumeData.killSatisfy = 0;
         }
     }
@@ -413,6 +422,14 @@ public class BossConsumer : ConsumeSign
             {
 
             }
+        }
+    }
+
+    private void OnGUI()
+    {
+        if (GUILayout.RepeatButton("扣血"))
+        {
+            ChangeHealth(1000);
         }
     }
 }
