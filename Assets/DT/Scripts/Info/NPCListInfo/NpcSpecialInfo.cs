@@ -35,6 +35,7 @@ public class NpcSpecialInfo : MonoBehaviour
     public Sprite normallpp;
     public Sprite lightning;
     public Sprite tow;
+    public Sprite seedSpeed;
 
 
     public void SetInfo(BaseMapRole npc, BaseSkill baseSkill, Transform npcTF)
@@ -156,7 +157,7 @@ public class NpcSpecialInfo : MonoBehaviour
             GameObject Pruductgame = Instantiate(bulletPrefab, bulletContent);
             Pruductgame.GetComponent<NpcBulletSign>().currentProduct =
                 npc.GetComponent<ProductSeed>().productDatas[npc.GetComponent<ProductSeed>().productDatas.Count - i];
-            Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.seedSpeed;
+            Pruductgame.GetComponent<Image>().sprite = seedSpeed;
         }
     }
 
@@ -175,7 +176,7 @@ public class NpcSpecialInfo : MonoBehaviour
             GameObject Pruductgame = Instantiate(bulletPrefab, bulletContent);
             Pruductgame.GetComponent<NpcBulletSign>().currentProduct =
                 npc.GetComponent<ProductMelon>().productDatas[npc.GetComponent<ProductMelon>().productDatas.Count - i];
-            Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.normallpp;
+            Pruductgame.GetComponent<Image>().sprite = normallpp;
         }
     }
 
