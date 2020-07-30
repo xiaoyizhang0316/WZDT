@@ -10,16 +10,19 @@ public class BossConsumer : ConsumeSign
 {
     public int skillOneTime;
 
-    public  int  skillTwoTime;
-    public List<GameObject> peopleList; 
+    public int skillTwoTime;
+    public List<GameObject> peopleList;
     public GameObject skillOneEffect;
-    public GameObject skillTwoEffect; 
+    public GameObject skillTwoEffect;
 
 
     public GameObject littlePrb;
 
     private List<Transform> bossPathList = new List<Transform>();
 
+    public List<int> randomList = new List<int>() { 701,702,703,704,705};
+
+    public List<int> tempBuffList = new List<int>() { 701, 702, 703, 704, 705 };
 
     /// <summary>
     /// 初始化
@@ -354,8 +357,22 @@ public class BossConsumer : ConsumeSign
     /// 切换口味抗性
     /// </summary>
     public void SwitchElementResistance()
-    {
-
+    { 
+        if (randomList.Contains(buffList[0].buffId))
+        {
+            int prevBuff = buffList[0].buffId;
+            RemoveBuff(buffList[0]);
+            tempBuffList.Remove(prevBuff);
+            bornBuffList.Remove(prevBuff);
+            if (tempBuffList.Count == 0)
+                tempBuffList.AddRange(randomList);
+        }
+        int index = Random.Range(0, tempBuffList.Count);
+        BuffData buff = GameDataMgr.My.GetBuffDataByID(tempBuffList[index]);
+        BaseBuff baseBuff = new BaseBuff();
+        baseBuff.Init(buff);
+        baseBuff.SetConsumerBuff(this);
+        bornBuffList.Insert(0,index);
     }
  
     private void Update()
