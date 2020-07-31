@@ -105,4 +105,23 @@ public class BossSummonConsumer : ConsumeSign
         return result;
     }
 
+    /// <summary>
+    /// 被击杀时
+    /// </summary>
+    public override void OnDeath()
+    {
+        foreach (BaseBuff b in buffList)
+        {
+            b.OnConsumerBeforeDead();
+        }
+        if (currentHealth < consumeData.maxHealth)
+        {
+            return;
+        }
+        BaseLevelController.My.CountKillNumber(this);
+        DeathAward(this);
+        Stop();
+        GetComponent<Animator>().SetBool("IsDead", true);
+    }
+
 }

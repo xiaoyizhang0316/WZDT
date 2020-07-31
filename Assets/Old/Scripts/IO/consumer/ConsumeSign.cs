@@ -272,6 +272,26 @@ public class ConsumeSign : MonoBehaviour
     }
 
     /// <summary>
+    /// 击杀奖励
+    /// </summary>
+    public virtual void DeathAward(ConsumeSign consume)
+    {
+        string npcName = "";
+        if(consume.consumerType == ConsumerType.Boss)
+        {
+            npcName = "首领消费者";
+        }
+        else
+        {
+            npcName = "小型消费者";
+        }
+        StageGoal.My.GetSatisfy(consumeData.killSatisfy);
+        StageGoal.My.GetPlayerGold(consumeData.killMoney);
+        StageGoal.My.Income(consumeData.killMoney, IncomeType.Npc,null, npcName);
+        StageGoal.My.killNumber++;
+    }
+
+    /// <summary>
     /// 存活惩罚
     /// </summary>
     public virtual void LivePunish()
