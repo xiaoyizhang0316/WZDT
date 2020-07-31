@@ -24,6 +24,8 @@ public class BossSummonConsumer : ConsumeSign
             elementResistance.Add(p, 100);
         }
         consumeData = new ConsumeData(consumerType);
+        float offset = UnityEngine.Random.Range(-0.1f, 0.1f);
+        consumeData.moveSpeed = speed + offset;
         ConsumerTypeData data = GameDataMgr.My.GetConsumerTypeDataByType(consumerType);
         twePer = per * speed / consumeData.moveSpeed;
         foreach (int i in data.bornBuff)

@@ -454,7 +454,9 @@ public class ConsumeSign : MonoBehaviour
     }
 
     #endregion
-
+    /// <summary>
+    /// 鼠标点击弹出浮动窗口显示消费者信息
+    /// </summary>
     public virtual void OnMouseDown()
     {
         NewCanvasUI.My.consumerInfoFloatWindow.SetActive(true);

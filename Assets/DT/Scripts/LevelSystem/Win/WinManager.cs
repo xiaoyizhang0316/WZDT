@@ -365,7 +365,7 @@ public class WinManager : MonoSingleton<WinManager>
     // Start is called before the first frame update
     void Start()
     {
-        winPanel.SetActive(false);
+        //winPanel.SetActive(false);
         starArr = new string[] { "0", "0", "0" };
         confirm.onClick.AddListener(() =>
         {

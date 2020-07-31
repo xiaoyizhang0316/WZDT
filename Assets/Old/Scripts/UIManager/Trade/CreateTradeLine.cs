@@ -36,7 +36,7 @@ public class CreateTradeLine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -84,7 +84,6 @@ public class CreateTradeLine : MonoBehaviour
                     lineGo.transform.rotation = Quaternion.FromToRotation(Vector3.up, rightRotation);
                     lineGo.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
                 }
-                
             }
         }
         if (Input.GetMouseButtonUp(0))

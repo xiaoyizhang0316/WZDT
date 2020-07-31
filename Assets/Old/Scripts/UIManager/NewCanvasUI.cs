@@ -11,7 +11,7 @@ using static UnityEngine.UIElements.VisualElement;
 
 public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 {
- 
+
     public GameObject Panel_ChoseRole;
     public Role CurrentClickRole;
     public BaseMapRole currentMapRole;
@@ -66,6 +66,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     void Start()
     {
         CreateTradeLineGo = FindObjectOfType<CreateTradeLine>().gameObject;
+        CreateTradeLineGo.SetActive(false);
         RoleTF = GameObject.FindGameObjectWithTag("RoleTF").transform;
         GetComponent<Canvas>().worldCamera = Camera.main;
         Button_Pause = transform.Find("TimeScale/GamePause").GetComponent<Button>();
