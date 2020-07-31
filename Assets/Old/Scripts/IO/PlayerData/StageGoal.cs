@@ -678,6 +678,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         if (PlayerData.My.cheatIndex1)
             playerGold += 10000;
         playerSatisfy = 0;
+        maxMinusGold = -8000;
         playerHealth = data.startPlayerHealth;
         if (PlayerData.My.cheatIndex3)
             playerHealth = (int)(playerHealth * 1.5f);

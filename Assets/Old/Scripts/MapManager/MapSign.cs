@@ -35,13 +35,11 @@ public class MapSign : MonoBehaviour,IDragHandler
         lostEffect = true;
         transform.DOScale(100f, time).OnComplete(() =>
         {
-            if (baseMapRole != null)
+            if (baseMapRole != null && !StageGoal.My.isOverMaxMinus)
             {
                 baseMapRole.transform.GetComponent<BaseSkill>().ReUnleashSkills();
                 lostEffect = false;
             }
-
-      
         });
 
     }

@@ -40,7 +40,7 @@ public class AutoFireTow : MonoBehaviour
 
         if (target != null)
         {
-            Debug.Log("buweikong");
+            //Debug.Log("buweikong");
             transform.position =target.transform.position;
             pos = target.transform.position;
         }
@@ -97,10 +97,10 @@ public class AutoFireTow : MonoBehaviour
         transform.DOScale(0.5f, destroyTime-1).OnComplete(() =>
         {
             
-           GameObject gameObject =  Instantiate(boom,transform);
-           gameObject.transform.localPosition = Vector3.zero;
-           CancelInvoke("Shoot");
-           GetComponent<BoomTrigger>().GetConsumerListTow();
+            GameObject gameObject =  Instantiate(boom,transform);
+            gameObject.transform.localPosition = Vector3.zero;
+            CancelInvoke("Shoot");
+            GetComponent<BoomTrigger>().GetConsumerListTow();
         });
         transform.DOScale(0.5f, destroyTime).OnComplete(() =>
         { 
