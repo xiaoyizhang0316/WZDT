@@ -125,7 +125,7 @@ public class BossConsumer : ConsumeSign
             BossBloodBar.My.SetKillCount(killCount);
         });
         consumeData.maxHealth = consumeData.maxHealth * 120 / 100;
-        consumeData.killMoney = consumeData.killMoney += 1000;
+        consumeData.killMoney = consumeData.killMoney += 2000;
         if (killCount >= 20)
         {
             consumeData.maxHealth = 999999;
