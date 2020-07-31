@@ -106,7 +106,7 @@ public class BossConsumer : ConsumeSign
         }
         killCount++;
         SummonLittle();
-        DeathAward();
+        DeathAward(this);
         AddPlayerResource();
         ChangeAttribute();
         ChangeModel();
