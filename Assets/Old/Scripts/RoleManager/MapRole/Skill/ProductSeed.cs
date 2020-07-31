@@ -22,7 +22,7 @@ public class ProductSeed : BaseSkill
         data.bulletType = BulletType.Seed;
         data.damage = role.baseRoleData.effect * 10f;
         data.loadingSpeed = 1.1f;
-        data.buffMaxCount = 3;
+        data.buffMaxCount =2;
         for (int i = 0; i < role.GetEquipBuffList().Count; i++)
         {
             data.AddBuff(role.GetEquipBuffList()[i]);

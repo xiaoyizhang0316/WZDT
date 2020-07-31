@@ -65,6 +65,7 @@ public class ProductMelon_Lightning : BaseSkill
             data.bulletType = BulletType.Lightning;
             data.loadingSpeed *= 1f - role.baseRoleData.effect / 100f;
             data.loadingSpeed += 1;
+            data.buffMaxCount = 4;
             data.damage = (data.damage * 0.6f + role.baseRoleData.effect);
             try
             {

@@ -485,20 +485,32 @@ public class BossConsumer : ConsumeSign
         transform.DOScale(transform.localScale, 3).OnComplete(() => 
         {
             //TODO 
-            List<MapSign> signs = new List<MapSign>();
-            for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
-            {
-                if (MapManager.My._mapSigns[i].mapType == MapType.Grass)
-                {
-                    signs.Add(MapManager.My._mapSigns[i]);
-                }
-            }
+       //    List<MapSign> signs = new List<MapSign>();
+       //    for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
+       //    {
+       //        if (MapManager.My._mapSigns[i].mapType == MapType.Grass)
+       //        {
+       //            signs.Add(MapManager.My._mapSigns[i]);
+       //        }
+       //    }
 
             for (int i = 0; i < 3; i++)
             {
-                var land = Random.Range(0, signs.Count);
-                signs[land].LostEffect(skillOneTime/3);
-                var lins = DrawLine(transform.transform.position,     signs[land].transform.position);
+               MapSign      sign =    RandomGetMapSign() ;
+               for (int j = 0; j < 30; j++)
+               {
+                 
+                        if (sign.lostEffect)
+                        {
+                            sign =    RandomGetMapSign();
+                        }
+                        else
+                        {
+                        break;
+                        }
+               }
+               sign.LostEffect(skillOneTime/3);
+                var lins = DrawLine(transform.transform.position,     sign.transform.position);
                 
                GameObject effect =  Instantiate(skillOneEffect,transform);
                effect.transform.position = transform.position;
@@ -516,21 +528,26 @@ public class BossConsumer : ConsumeSign
 
         transform.DOScale(transform.localScale, 3).OnComplete(() =>
         {
-            //TODO 
-            List<MapSign> signs = new List<MapSign>();
-            for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
-            {
-                if (MapManager.My._mapSigns[i].mapType == MapType.Grass)
-                {
-                    signs.Add(MapManager.My._mapSigns[i]);
-                }
-            }
+         
 
             for (int i = 0; i < 3; i++)
             {
-                var land = Random.Range(0, signs.Count);
-                signs[land].AddCost(1,skillTwoTime/3);
-                var lins = DrawLine(transform.transform.position,     signs[land].transform.position); 
+                MapSign      sign =    RandomGetMapSign() ;
+                for (int j = 0; j < 30; j++)
+                {
+                 
+                    if (sign.lostEffect)
+                    {
+                        sign =    RandomGetMapSign();
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+             
+                sign.AddCost(1,skillTwoTime/3);
+                var lins = DrawLine(transform.transform.position,     sign.transform.position); 
                 GameObject effect =  Instantiate(skillTwoEffect,transform);
                 effect.transform.position = transform.position;
                 effect.transform.parent = Camera.main.transform;
@@ -593,7 +610,50 @@ public class BossConsumer : ConsumeSign
 
         //go.transform.localPosition = transform.localPosition;
     }
- 
+
+
+    public MapSign RandomGetMapSign()
+    {
+        int count = 0;
+        List<MapSign> signs = new List<MapSign>();
+        for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
+        {
+            if (MapManager.My._mapSigns[i].mapType == MapType.Grass)
+            {
+                signs.Add(MapManager.My._mapSigns[i]);
+                count += MapManager.My._mapSigns[i].weighting;
+            }
+        }
+
+        int weighting = Random.Range(0,count);
+     
+        MapSign sign =    GetWeightingForMapSign(weighting);
+      
+        return sign;
+    }
+
+
+    public MapSign GetWeightingForMapSign(int range)
+    {
+        int count = 0;
+        List<MapSign> signs = new List<MapSign>();
+        for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
+        {
+            if (MapManager.My._mapSigns[i].mapType == MapType.Grass)
+            {
+                signs.Add(MapManager.My._mapSigns[i]);
+                count += MapManager.My._mapSigns[i].weighting;
+                if (count >= range)
+                {
+                    return MapManager.My._mapSigns[i];
+                }
+            }
+        }
+
+        return null;
+    }
+    
+
     private void Update()
     {
         //print(tweener.ElapsedPercentage(false));
@@ -618,7 +678,7 @@ public class BossConsumer : ConsumeSign
             }
             catch (Exception ex)
             {
-
+    
             }
         }
     }
