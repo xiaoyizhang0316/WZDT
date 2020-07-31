@@ -12,13 +12,15 @@ public class ProductMelon_Lightning : BaseSkill
     public Animator anim;
     public void Update()
     {
-        if (IsOpen)
+        if (IsOpen&&isAnimPlaying)
         {
-            anim.SetBool("isPlay",true);
+            //anim.SetBool("isPlay", true);
+            anim.speed = 1;
         }
         else
         {
-            anim.SetBool("isPlay",false);
+            //anim.SetBool("isPlay", false);
+            anim.speed = 0;
         }
     }
 
