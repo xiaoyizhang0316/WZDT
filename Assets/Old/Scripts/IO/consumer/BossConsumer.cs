@@ -391,7 +391,7 @@ public class BossConsumer : ConsumeSign
         BaseBuff baseBuff = new BaseBuff();
         baseBuff.Init(buff);
         baseBuff.SetConsumerBuff(this);
-        bornBuffList.Insert(0,index);
+        bornBuffList.Insert(0, tempBuffList[index]);
         BossBloodBar.My.buffImg.GetComponent<WaveBuffSign>().Init(tempBuffList[index]);
         transform.DOScale(transform.localScale,10).OnComplete(SwitchElementResistance);
     }
