@@ -113,6 +113,13 @@ public class BossConsumer : ConsumeSign
         BaseLevelController.My.CountKillNumber(this);
     }
 
+    public override void DeathAward()
+    {
+        StageGoal.My.GetSatisfy(consumeData.killSatisfy);
+        StageGoal.My.GetPlayerGold(consumeData.killMoney);
+        StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
+    }
+
     /// <summary>
     /// 层数增加提高属性
     /// </summary>
@@ -125,7 +132,7 @@ public class BossConsumer : ConsumeSign
             BossBloodBar.My.SetKillCount(killCount);
         });
         consumeData.maxHealth = consumeData.maxHealth * 120 / 100;
-        consumeData.killMoney = consumeData.killMoney += 1000;
+        consumeData.killMoney = consumeData.killMoney += 2000;
         if (killCount >= 20)
         {
             consumeData.maxHealth = 999999;
@@ -391,7 +398,7 @@ public class BossConsumer : ConsumeSign
         BaseBuff baseBuff = new BaseBuff();
         baseBuff.Init(buff);
         baseBuff.SetConsumerBuff(this);
-        bornBuffList.Insert(0,index);
+        bornBuffList.Insert(0, tempBuffList[index]);
         BossBloodBar.My.buffImg.GetComponent<WaveBuffSign>().Init(tempBuffList[index]);
         transform.DOScale(transform.localScale,10).OnComplete(SwitchElementResistance);
     }

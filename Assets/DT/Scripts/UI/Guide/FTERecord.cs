@@ -76,7 +76,8 @@ public class FTERecord : MonoBehaviour
         TradeManager.My.AutoCreateTrade("1", "2");
         yield return new WaitForSeconds(0.5f);
         TradeManager.My.AutoCreateTrade("2", "3");
-        RoleUp(5);
+        //RoleUp(3);
+        StartCoroutine(RolesLevelUp());
     }
 
     private void RoleUp(float time)
@@ -87,22 +88,55 @@ public class FTERecord : MonoBehaviour
 
     private IEnumerator RolesLevelUp()
     {
-        yield return new WaitForSeconds(waitTime);
-        for (int i = 0; i < scene0roles.Count; i++)
-        {
-            scene0roles[i].GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level = nums[count];
-            
-            scene0roles[i].transform.DOScale(new Vector3(1.1f, 1.2f, 1.1f), 0.2f).OnComplete(()=> {
-                scene0roles[i].GetComponent<BaseMapRole>().CheckLevel();
-                scene0roles[i].transform.DOScale(Vector3.one, 0.15f);
-            });
-            yield return new WaitForSeconds(1f);
-        }
-        count++;
-        if (count <= 1)
-        {
-            RoleUp(6);
-        }
+        yield return new WaitForSeconds(3);
+        scene0roles[0].GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level = 3;
+        scene0roles[1].GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level = 3;
+        scene0roles[2].GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level = 3;
+        scene0roles[3].GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level = 3;
+        scene0roles[0].transform.DOScale(new Vector3(1.1f, 1.2f, 1.1f), 0.2f).OnComplete(() => {
+            scene0roles[0].GetComponent<BaseMapRole>().CheckLevel();
+            scene0roles[0].transform.DOScale(Vector3.one, 0.15f);
+        });
+
+        scene0roles[1].transform.DOScale(new Vector3(1.1f, 1.2f, 1.1f), 0.2f).OnComplete(() => {
+            scene0roles[1].GetComponent<BaseMapRole>().CheckLevel();
+            scene0roles[1].transform.DOScale(Vector3.one, 0.15f);
+        });
+
+        scene0roles[2].transform.DOScale(new Vector3(1.1f, 1.2f, 1.1f), 0.2f).OnComplete(() => {
+            scene0roles[2].GetComponent<BaseMapRole>().CheckLevel();
+            scene0roles[2].transform.DOScale(Vector3.one, 0.15f);
+        });
+
+        scene0roles[3].transform.DOScale(new Vector3(1.1f, 1.2f, 1.1f), 0.2f).OnComplete(() => {
+            scene0roles[3].GetComponent<BaseMapRole>().CheckLevel();
+            scene0roles[3].transform.DOScale(Vector3.one, 0.15f);
+        });
+
+        yield return new WaitForSeconds(3);
+        scene0roles[0].GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level = 5;
+        scene0roles[1].GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level = 5;
+        scene0roles[2].GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level = 5;
+        scene0roles[3].GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level = 5;
+        scene0roles[0].transform.DOScale(new Vector3(1.1f, 1.2f, 1.1f), 0.2f).OnComplete(() => {
+            scene0roles[0].GetComponent<BaseMapRole>().CheckLevel();
+            scene0roles[0].transform.DOScale(Vector3.one, 0.15f);
+        });
+
+        scene0roles[1].transform.DOScale(new Vector3(1.1f, 1.2f, 1.1f), 0.2f).OnComplete(() => {
+            scene0roles[1].GetComponent<BaseMapRole>().CheckLevel();
+            scene0roles[1].transform.DOScale(Vector3.one, 0.15f);
+        });
+
+        scene0roles[2].transform.DOScale(new Vector3(1.1f, 1.2f, 1.1f), 0.2f).OnComplete(() => {
+            scene0roles[2].GetComponent<BaseMapRole>().CheckLevel();
+            scene0roles[2].transform.DOScale(Vector3.one, 0.15f);
+        });
+
+        scene0roles[3].transform.DOScale(new Vector3(1.1f, 1.2f, 1.1f), 0.2f).OnComplete(() => {
+            scene0roles[3].GetComponent<BaseMapRole>().CheckLevel();
+            scene0roles[3].transform.DOScale(Vector3.one, 0.15f);
+        });
     }
 
     private IEnumerator DelayExcute(Action action, float delayTime)

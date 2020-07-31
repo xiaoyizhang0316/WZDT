@@ -138,6 +138,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public Dictionary<string, int> otherIncomes = new Dictionary<string, int>();
 
     public Dictionary<BaseMapRole, int> npcIncomes = new Dictionary<BaseMapRole, int>();
+    public Dictionary<string, int> npcIncomesEx = new Dictionary<string, int>();
 
     public Dictionary<BaseMapRole, int> buildingCosts = new Dictionary<BaseMapRole, int>();
 
@@ -807,13 +808,26 @@ public class StageGoal : MonoSingleton<StageGoal>
                 break;
             case IncomeType.Npc:
                 npcIncome += num;
-                if (npcIncomes.ContainsKey(npc))
+                if (npc == null)
                 {
-                    npcIncomes[npc] += num;
+                    if(npcIncomesEx.ContainsKey(otherName)){
+                        npcIncomesEx[otherName] += num;
+                    }
+                    else
+                    {
+                        npcIncomesEx.Add(otherName, num);
+                    }
                 }
                 else
                 {
-                    npcIncomes.Add(npc, num);
+                    if (npcIncomes.ContainsKey(npc))
+                    {
+                        npcIncomes[npc] += num;
+                    }
+                    else
+                    {
+                        npcIncomes.Add(npc, num);
+                    }
                 }
                 break;
             case IncomeType.Other:
@@ -832,7 +846,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         //{
         //    DataStatPanel.My.ShowStat();
         //}
-        DataStatPanel.My.RefreshIncome(totalIncome, consumeIncome, npcIncomes, otherIncomes, timeCount);
+        DataStatPanel.My.RefreshIncome(totalIncome, consumeIncome, npcIncomesEx, npcIncomes, otherIncomes, timeCount);
     }
 
     public void Expend(int num, ExpendType expendType, BaseMapRole build = null, string extraName = "")
