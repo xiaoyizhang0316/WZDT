@@ -76,6 +76,13 @@ public class BossSummonConsumer : ConsumeSign
         tweener.Goto(twePer,true);
     }
 
+    public override void DeathAward()
+    {
+        StageGoal.My.GetSatisfy(consumeData.killSatisfy);
+        StageGoal.My.GetPlayerGold(consumeData.killMoney);
+        StageGoal.My.Income(consumeData.killMoney, IncomeType.Npc,null, GameDataMgr.My.GetConsumerTypeDataByType(consumerType).typeDesc);
+    }
+
     /// <summary>
     /// 去目标地点    
     /// </summary>
@@ -104,24 +111,4 @@ public class BossSummonConsumer : ConsumeSign
         result += Vector3.Distance(pathList[pathList.Count - 1], pathList[0]) / consumeData.moveSpeed;
         return result;
     }
-
-    /// <summary>
-    /// 被击杀时
-    /// </summary>
-    public override void OnDeath()
-    {
-        foreach (BaseBuff b in buffList)
-        {
-            b.OnConsumerBeforeDead();
-        }
-        if (currentHealth < consumeData.maxHealth)
-        {
-            return;
-        }
-        BaseLevelController.My.CountKillNumber(this);
-        DeathAward(this);
-        Stop();
-        GetComponent<Animator>().SetBool("IsDead", true);
-    }
-
 }

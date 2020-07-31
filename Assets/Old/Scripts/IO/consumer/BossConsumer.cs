@@ -106,11 +106,18 @@ public class BossConsumer : ConsumeSign
         }
         killCount++;
         SummonLittle();
-        DeathAward(this);
+        DeathAward();
         AddPlayerResource();
         ChangeAttribute();
         ChangeModel();
         BaseLevelController.My.CountKillNumber(this);
+    }
+
+    public override void DeathAward()
+    {
+        StageGoal.My.GetSatisfy(consumeData.killSatisfy);
+        StageGoal.My.GetPlayerGold(consumeData.killMoney);
+        StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
     }
 
     /// <summary>
