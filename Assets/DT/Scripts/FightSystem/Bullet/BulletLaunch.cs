@@ -170,7 +170,7 @@ public class BulletLaunch : MonoBehaviour
         tow.GetComponent<AutoFireTow>().lunch = this;
         tow.GetComponent<AutoFireTow>().target =GetComponent<BaseMapRole>().shootTarget;
         
-        tow.GetComponent<AutoFireTow>().shootTime = 1f / (GetComponent<BaseMapRole>().baseRoleData.efficiency * 0.1f) * data.loadingSpeed;
+        tow.GetComponent<AutoFireTow>().shootTime = 1f / (GetComponent<BaseMapRole>().baseRoleData.efficiency * 0.04f) * data.loadingSpeed;
         tow .GetComponent <BulletEffect>().InitBufflist(data.buffList);
 
         
