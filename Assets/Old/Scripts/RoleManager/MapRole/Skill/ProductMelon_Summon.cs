@@ -51,6 +51,7 @@ public class ProductMelon_Summon : BaseSkill
             data.bulletType = BulletType.summon;
             data.loadingSpeed *= 1f - role.baseRoleData.effect / 120f;
             data.loadingSpeed += 0.5f;
+            data.buffMaxCount = 4;
             data.damage -= 20;
             try
             {

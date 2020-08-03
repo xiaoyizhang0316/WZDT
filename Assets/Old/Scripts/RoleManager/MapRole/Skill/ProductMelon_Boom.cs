@@ -50,6 +50,7 @@ public class ProductMelon_Boom : BaseSkill
             data.bulletType = BulletType.Bomb;
             data.loadingSpeed *= 1f - role.baseRoleData.effect / 100f;
             data.loadingSpeed += 2;
+            data.buffMaxCount = 3;
             data.damage = (float)(data.damage + role.baseRoleData.effect);
             try
             {

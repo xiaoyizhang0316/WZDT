@@ -23,6 +23,9 @@ public class MapSign : MonoBehaviour,IDragHandler
     public bool addCost = false;
     public int addCostBuffId;
     public BaseMapRole baseMapRole;
+
+     
+    public int weighting;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -33,13 +36,19 @@ public class MapSign : MonoBehaviour,IDragHandler
     public void LostEffect(int time)
     {
         lostEffect = true;
+     GameObject eff=   Instantiate(    MapManager.My.skillOneEffect,this.transform);
+  
         transform.DOScale(100f, time).OnComplete(() =>
         {
-            if (baseMapRole != null && !StageGoal.My.isOverMaxMinus)
+            Destroy(eff,0.1f);
+
+            if (baseMapRole != null)
             {
                 baseMapRole.transform.GetComponent<BaseSkill>().ReUnleashSkills();
                 lostEffect = false;
             }
+
+      
         });
 
     }
@@ -71,6 +80,7 @@ public class MapSign : MonoBehaviour,IDragHandler
 
     public void  GetRoleByLand()
     {
+        weighting = 20;
         baseMapRole = null;
         RaycastHit[] hit;
         hit = Physics.RaycastAll(transform.position + new Vector3(0f, -5f, 0f), Vector3.up);
@@ -78,7 +88,10 @@ public class MapSign : MonoBehaviour,IDragHandler
         {
             if (hit[j].transform.tag.Equals("MapRole"))
             {
-                baseMapRole = hit[j].transform.GetComponent<BaseMapRole>();
+                baseMapRole = hit[j].transform.GetComponentInParent <BaseMapRole>();
+                
+               
+                weighting = baseMapRole.baseRoleData.riskResistance;
             }
         }
 
@@ -95,6 +108,7 @@ public class MapSign : MonoBehaviour,IDragHandler
            if (lostEffect&&baseMapRole!=null)
            {
                baseMapRole.transform.GetComponent<BaseSkill>().CancelSkill();
+               
            }
        }
 
