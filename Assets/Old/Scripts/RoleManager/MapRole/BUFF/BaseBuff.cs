@@ -484,11 +484,11 @@ public class BaseBuff
         }
         else if (Mathf.Abs(float.Parse(attri[1])) > 1f)
         {
-            num += int.Parse(attri[1]);
+            num = int.Parse(attri[1]);
         }
         else
         {
-            num += (int)(sourceNum * float.Parse(attri[1]));
+            num = (int)(sourceNum * float.Parse(attri[1]));
         }
     }
 

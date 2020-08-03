@@ -258,7 +258,6 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     public void SkillOne()
     {
- 
         transform.DOScale(transform.localScale, 3).OnComplete(() => 
         {
             List<MapSign> signs = new List<MapSign>();
@@ -273,13 +272,12 @@ public class BossConsumer : ConsumeSign
             {
                 var land = Random.Range(0, signs.Count);
                 signs[land].LostEffect(skillOneTime/3);
-                var lins = DrawLine(transform.transform.position,     signs[land].transform.position);
-                
-               GameObject effect =  Instantiate(skillOneEffect,transform);
-               effect.transform.position = transform.position;
-               effect.transform.parent = Camera.main.transform;
-               effect.transform.DOPath(lins.ToArray(), 3).SetEase(Ease.Linear);
-               Destroy(effect,3);
+                var lins = DrawLine(transform.transform.position, signs[land].transform.position);
+                GameObject effect =  Instantiate(skillOneEffect,transform);
+                effect.transform.position = transform.position;
+                effect.transform.parent = Camera.main.transform;
+                effect.transform.DOPath(lins.ToArray(), 3).SetEase(Ease.Linear);
+                Destroy(effect,3);                                                                                                                      
             }
             SkillOne();
         });
@@ -304,7 +302,6 @@ public class BossConsumer : ConsumeSign
             for (int i = 0; i < 3; i++)
             {
                 var land = Random.Range(0, signs.Count);
-                //TODO
                 signs[land].AddCost(999,skillTwoTime/3);
                 var lins = DrawLine(transform.transform.position,     signs[land].transform.position); 
                 GameObject effect =  Instantiate(skillTwoEffect,transform);
@@ -315,8 +312,10 @@ public class BossConsumer : ConsumeSign
             }
             SkillTwo();
         });
-    } 
+    }
+
     public float per;
+
     public List<Vector3> DrawLine(Vector3 startTarget, Vector3 Target)
     {
         List<Vector3> pointList = new List<Vector3>();
@@ -393,7 +392,6 @@ public class BossConsumer : ConsumeSign
             }
         }
         int index = Random.Range(0, tempBuffList.Count);
-        print(tempBuffList[index]);
         BuffData buff = GameDataMgr.My.GetBuffDataByID(tempBuffList[index]);
         BaseBuff baseBuff = new BaseBuff();
         baseBuff.Init(buff);
