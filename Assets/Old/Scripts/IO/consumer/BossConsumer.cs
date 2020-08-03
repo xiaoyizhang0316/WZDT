@@ -167,7 +167,6 @@ public class BossConsumer : ConsumeSign
 
     private int killCount = 1;
 
-
     /// <summary>
     /// 消费者被击杀时调用   
     /// </summary>
