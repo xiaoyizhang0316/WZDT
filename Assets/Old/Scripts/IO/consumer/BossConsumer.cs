@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 
 public class BossConsumer : ConsumeSign
 {
-    public int skillOneTime;
-    public  int  skillTwoTime;
+    private int skillOneTime = 60;
+    private  int  skillTwoTime = 60;
     public List<GameObject> peopleList; 
     public GameObject skillOneEffect;
     public GameObject skillTwoEffect; 
@@ -17,6 +17,15 @@ public class BossConsumer : ConsumeSign
     public GameObject littlePrb;
 
     private List<Transform> bossPathList = new List<Transform>(); 
+    
+    public void OnGUI()
+    {
+        if (GUILayout.Button("1"))
+        {
+            SkillOne();
+        }
+    }
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -119,8 +128,7 @@ public class BossConsumer : ConsumeSign
         transform.DOMove(bossPathList[0].position, time).SetEase(Ease.Linear).OnComplete(Move);
         LostHealth();
         CheckBuffDuration();
-        SkillOne();
-        SkillTwo();
+       
         //Move();
     }
 
