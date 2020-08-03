@@ -21,7 +21,7 @@ public class MapSign : MonoBehaviour,IDragHandler
     public bool lostEffect = false;
 
     public bool addCost = false;
-    public int addCostBuffId;
+    private int addCostBuffId = 999;
     public BaseMapRole baseMapRole;
 
      
