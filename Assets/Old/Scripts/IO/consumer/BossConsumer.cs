@@ -579,7 +579,7 @@ public class BossConsumer : ConsumeSign
 
     private void OnGUI()
     {
-        if (GUILayout.RepeatButton("扣血"))
+        if (GUILayout.Button("扣血"))
         {
             ChangeHealth(1000);
         }
