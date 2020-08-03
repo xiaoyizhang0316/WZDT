@@ -36,7 +36,12 @@ public class MapSign : MonoBehaviour,IDragHandler
     public void LostEffect(int time)
     {
         lostEffect = true;
-     GameObject eff=   Instantiate(    MapManager.My.skillOneEffect,this.transform);
+        GameObject eff = null;
+        transform.DOScale(100f, 3).OnComplete(() =>
+        {
+            eff =    Instantiate(    MapManager.My.skillOneEffect,this.transform);
+        }).Play();
+ 
   
         transform.DOScale(100f, time).OnComplete(() =>
         {
@@ -49,7 +54,7 @@ public class MapSign : MonoBehaviour,IDragHandler
             }
 
       
-        });
+        }).Play();
 
     }
 
@@ -57,9 +62,18 @@ public class MapSign : MonoBehaviour,IDragHandler
     {
         
         addCost = true;
-
+        GameObject eff = null;
+        transform.DOScale(100f, 3).OnComplete(() =>
+        {
+            eff =    Instantiate(    MapManager.My.skillTwoEffect,this.transform);
+        }).Play();
         addCostBuffId = id;
-        transform.DOScale(100f, time).OnComplete(() => { addCost = false; });
+        transform.DOScale(100f, time).OnComplete(() =>
+        {
+            Destroy(eff,0.1f);
+            addCost = false;
+            
+        });
     }
 
  

@@ -8,36 +8,21 @@ using Random = UnityEngine.Random;
 
 public class BossConsumer : ConsumeSign
 {
-    private int skillOneTime = 60;
-<<<<<<< HEAD
-    private  int  skillTwoTime = 60;
-    public List<GameObject> peopleList; 
-=======
-    private int skillTwoTime = 60;
-    public List<GameObject> peopleList;
->>>>>>> origin/ZXY
+    private int skillOneTime = 60; 
+    public List<GameObject> peopleList;  
+    private int skillTwoTime = 60; 
     public GameObject skillOneEffect;
     public GameObject skillTwoEffect;
 
     public GameObject littlePrb;
-
-<<<<<<< HEAD
+ 
     private List<Transform> bossPathList = new List<Transform>(); 
     
-    public void OnGUI()
-    {
-        if (GUILayout.Button("1"))
-        {
-            SkillOne();
-        }
-    }
-=======
-    private List<Transform> bossPathList = new List<Transform>();
+  
 
     public List<int> randomList = new List<int>() { 701, 702, 703, 704, 705 };
 
-    public List<int> tempBuffList = new List<int>() { 701, 702, 703, 704, 705 };
->>>>>>> origin/ZXY
+    public List<int> tempBuffList = new List<int>() { 701, 702, 703, 704, 705 }; 
 
     /// <summary>
     /// 初始化
@@ -144,12 +129,7 @@ public class BossConsumer : ConsumeSign
         transform.DOLookAt(bossPathList[0].position, 0f);
         SwitchElementResistance();
         LostHealth();
-        CheckBuffDuration();
-<<<<<<< HEAD
-       
-        //Move();
-=======
->>>>>>> origin/ZXY
+        CheckBuffDuration(); 
     }
 
     /// <summary>
@@ -605,5 +585,6 @@ public class BossConsumer : ConsumeSign
         {
             ChangeHealth(1000);
         }
+
     }
 }
