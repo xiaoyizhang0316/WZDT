@@ -214,6 +214,10 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// <returns></returns>
     public bool CheckMoneyCondition()
     {
+        BaseMapRole start = PlayerData.My.GetMapRoleById(NewCanvasUI.My.startRole.baseRoleData.ID);
+        BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
+        if (start.baseRoleData.baseRoleData.roleType == RoleType.Bank || end.baseRoleData.baseRoleData.roleType == RoleType.Bank)
+            return true;
         if (StageGoal.My.playerGold >= 0)
             return true;
         else
