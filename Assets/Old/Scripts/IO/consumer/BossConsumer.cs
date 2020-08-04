@@ -17,8 +17,6 @@ public class BossConsumer : ConsumeSign
     public GameObject littlePrb;
  
     private List<Transform> bossPathList = new List<Transform>(); 
-    
-  
 
     public List<int> randomList = new List<int>() { 701, 702, 703, 704, 705 };
 
@@ -209,8 +207,35 @@ public class BossConsumer : ConsumeSign
             BossBloodBar.My.ChangeColor(new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f)));
             BossBloodBar.My.SetKillCount(killCount);
         });
-        consumeData.maxHealth = consumeData.maxHealth * 120 / 100;
-        consumeData.killMoney = consumeData.killMoney += 2000;
+        float add = 1f;
+        float moneyAdd = 1f;
+        if (killCount <= 5)
+        {
+            add = 1.2f;
+            moneyAdd = 1.15f;
+        }
+        else if (killCount <= 10)
+        {
+            add = 1.2f;
+            moneyAdd = 1.1f;
+        }
+        else if (killCount <= 15)
+        {
+            add = 1.15f;
+            moneyAdd = 1.1f;
+        }
+        else if (killCount <= 20)
+        {
+            add = 1.1f;
+            moneyAdd = 1.1f;
+        }
+        else
+        {
+            add = 1.05f;
+            moneyAdd = 1.05f;
+        }
+        consumeData.maxHealth = (int)(consumeData.maxHealth * add);
+        consumeData.killMoney = (int)(consumeData.killMoney * moneyAdd);
     }
 
     /// <summary>
@@ -442,9 +467,7 @@ public class BossConsumer : ConsumeSign
                 pointList.Add(bezierPoint);
             }
         }
-
         pointList.Add(Target);
-
         return pointList;
     }
 
@@ -475,7 +498,7 @@ public class BossConsumer : ConsumeSign
             float ran = Random.Range(-2f, 2f);
             go.GetComponent<BossSummonConsumer>().Init(bossPathList, tweener.fullPosition + ran, consumeData.moveSpeed);
             go.GetComponent<BossSummonConsumer>().consumeData.maxHealth = (int)(consumeData.maxHealth * 0.2f);
-            go.GetComponent<BossSummonConsumer>().consumeData.killMoney = (int)(consumeData.killMoney * 0.05f);
+            go.GetComponent<BossSummonConsumer>().consumeData.killMoney = (int)(consumeData.killMoney * 0.2f);
             go.GetComponent<BossSummonConsumer>().consumeData.killSatisfy = 0;
         }
     }
