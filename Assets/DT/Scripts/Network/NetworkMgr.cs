@@ -599,7 +599,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             {
                 try
                 {
-                    Debug.Log(response.data);
+                    //Debug.Log(response.data);
                     groupList = JsonUtility.FromJson<GroupRankList>(response.data);
                     doSuccess?.Invoke(groupList.rankLists);
                 }
@@ -642,7 +642,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             {
                 try
                 {
-                    Debug.Log(response.data);
+                    //Debug.Log(response.data);
                     globalList = JsonUtility.FromJson<GlobalRankList>(response.data);
                     doSuccess?.Invoke(globalList.rankLists);
                 }
@@ -680,7 +680,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             {
                 try
                 {
-                    Debug.Log(response.data);
+                    //Debug.Log(response.data);
                     globalRank = JsonUtility.FromJson<GlobalRankList>(response.data);
                     doSuccess?.Invoke();
                 }
@@ -719,7 +719,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             {
                 try
                 {
-                    Debug.Log(response.data);
+                    //Debug.Log(response.data);
                     groupRank = JsonUtility.FromJson<GroupRankList>(response.data);
                     doSuccess?.Invoke();
                 }

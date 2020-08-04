@@ -357,7 +357,6 @@ public class RankPanel : MonoSingleton<RankPanel>
                         {
                             continue;
                         }
-                        Debug.Log(i+ NetworkMgr.My.currentGroupPage * maxPageCount);
                         listContent.GetChild(i).GetComponent<RankItem>().Setup(groupList[i],isGroup);
                         listContent.GetChild(i).gameObject.SetActive(true);
                     }
