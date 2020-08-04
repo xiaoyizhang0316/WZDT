@@ -13,6 +13,8 @@ public abstract class BaseSkill : MonoBehaviour
 
     public bool isAvaliable = true;
 
+    public bool isAnimPlaying = false;
+
     /// <summary>
     /// 需要多棱镜发现的buff
     /// </summary>
