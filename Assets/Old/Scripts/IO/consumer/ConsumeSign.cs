@@ -220,6 +220,7 @@ public class ConsumeSign : MonoBehaviour
         DeathAward();
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
+        ComboManager.My.AddComboNum();
     }
 
     /// <summary>
