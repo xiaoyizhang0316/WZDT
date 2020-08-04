@@ -14,6 +14,8 @@ public class Level9Controller : BaseLevelController
         if (targetBoss == null)
         {
             targetBoss = FindObjectOfType<BossConsumer>();
+            if (targetBoss == null)
+                return;
         }
         if (targetBoss.killCount >= 8)
         {
@@ -31,6 +33,8 @@ public class Level9Controller : BaseLevelController
         if (targetBoss == null)
         {
             targetBoss = FindObjectOfType<BossConsumer>();
+            if (targetBoss == null)
+                return;
         }
         if (targetBoss.killCount >= 15)
         {
@@ -48,6 +52,8 @@ public class Level9Controller : BaseLevelController
         if (targetBoss == null)
         {
             targetBoss = FindObjectOfType<BossConsumer>();
+            if (targetBoss == null)
+                return;
         }
         if (targetBoss.killCount >= 22)
         {
