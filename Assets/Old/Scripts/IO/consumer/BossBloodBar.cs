@@ -47,8 +47,8 @@ public class BossBloodBar : IOIntensiveFramework.MonoSingleton.MonoSingleton<Bos
             {   
                 outButton.gameObject.SetActive(false);
                 inButton.gameObject.SetActive(true);
-                skillImage.DOFillAmount(1, 0.3f).OnComplete(() => { InitSkill(); });
-            });
+                skillImage.DOFillAmount(1, 0.3f).OnComplete(() => { InitSkill(); }).Play();
+            }).Play();
         });
         inButton.onClick.AddListener(() =>
         {
@@ -59,8 +59,8 @@ public class BossBloodBar : IOIntensiveFramework.MonoSingleton.MonoSingleton<Bos
                 {
                     outButton.gameObject.SetActive(true);
                           inButton.gameObject.SetActive(false);
-                });
-            });
+                }).Play();
+            }).Play();
         });
         SetBar(0);
     }
@@ -84,6 +84,12 @@ public class BossBloodBar : IOIntensiveFramework.MonoSingleton.MonoSingleton<Bos
 
     public void InitSkill()
     {
+        FadeImage();
+        if (!inButton.gameObject.activeSelf)
+        {
+            return;
+        }
+
         if (currentkillCount >= 5)
         {
             skill_1.gameObject.SetActive(true);
@@ -116,7 +122,7 @@ public class BossBloodBar : IOIntensiveFramework.MonoSingleton.MonoSingleton<Bos
                 {
                     end();
                 }
-            });
+            }).Play();
     }
 
     public void ChangeColor(Color color)

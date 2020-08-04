@@ -71,6 +71,9 @@ public class WinManager : MonoSingleton<WinManager>
     PlayerReplay tempReplay;
     List<PlayerEquip> playerEquips;
 
+    public GameObject effect_1;
+    public GameObject effect_2;
+    public GameObject effect_3;
     void AddEquipGear(List<GearData> gearDatas)
     {
         foreach (var g in gearDatas)
@@ -103,6 +106,9 @@ public class WinManager : MonoSingleton<WinManager>
 
     public void InitWin()
     {
+        effect_1.SetActive(false);
+        effect_2.SetActive(false);
+        effect_3.SetActive(false);
         StageGoal.My.endTime = TimeStamp.GetCurrentTimeStamp();
         star1Con.text = BaseLevelController.My.starOneCondition;
         star2Con.text = BaseLevelController.My.starTwoCondition;
@@ -136,6 +142,9 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 box_0.sprite = mulist[0];
                 star_0.sprite = lightStar;
+                star_0.transform.localScale = Vector3.zero;
+                star_0.transform.DOScale(1, 1f).SetEase(Ease.OutBounce).Play();
+                effect_1.SetActive(true);
                 //   boxs.SetActive(true);
                 box_0.color = Color.white;
                 box_0Button.interactable = true;
@@ -148,6 +157,10 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 box_0.sprite = mulist[mulist.Count - 1];
                 star_0.sprite = lightStar;
+                star_0.transform.localScale = Vector3.zero;
+                star_0.transform.DOScale(1, 1f).SetEase(Ease.OutBounce).Play();
+                effect_1.SetActive(true);
+
                 //  boxs.SetActive(true);
                 box_0Button.interactable = false;
                 box_0.color = Color.gray;
@@ -193,6 +206,10 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 box_1.sprite = tielist[0];
                 star_1.sprite = lightStar;
+                star_1.transform.localScale = Vector3.zero;
+                star_1.transform.DOScale(1, 1f).SetEase(Ease.OutBounce).Play();
+                effect_2.SetActive(true);
+
                 //   boxs.SetActive(true);
                 box_1.color = Color.white;
                 box_1Button.interactable = true;
@@ -205,6 +222,10 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 box_1.sprite = tielist[mulist.Count - 1];
                 star_1.sprite = lightStar;
+                star_1.transform.localScale = Vector3.zero;
+                star_1.transform.DOScale(1, 1f).SetEase(Ease.OutBounce).Play();
+                effect_2.SetActive(true);
+
                 //  boxs.SetActive(true);
                 box_1Button.interactable = false;
                 box_1.color = Color.gray;
@@ -263,6 +284,10 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 box_2.sprite = jinlist[0];
                 star_2.sprite = lightStar;
+                star_2.transform.localScale = Vector3.zero;
+                star_2.transform.DOScale(1, 1f).SetEase(Ease.OutBounce).Play();
+                effect_3.SetActive(true);
+
                 //   boxs.SetActive(true);
                 box_2.color = Color.white;
                 box_2Button.interactable = true;
@@ -275,6 +300,10 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 box_2.sprite = jinlist[mulist.Count - 1];
                 star_2.sprite = lightStar;
+                star_2.transform.localScale = Vector3.zero;
+                star_2.transform.DOScale(1, 1f).SetEase(Ease.OutBounce).Play();
+                effect_3.SetActive(true);
+
                 //  boxs.SetActive(true);
                 box_2Button.interactable = false;
                 box_2.color = Color.gray;

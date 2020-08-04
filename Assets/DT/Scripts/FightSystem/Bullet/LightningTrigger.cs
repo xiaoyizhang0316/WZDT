@@ -15,7 +15,7 @@ public class LightningTrigger : MonoBehaviour
     {
         Asign = target;
         gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
-        gameObject.transform.DOScale(1, 0.3f).OnComplete(() =>
+        gameObject.transform.DOScale(1, 0.1f).OnComplete(() =>
         {
             gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);
         });
@@ -32,10 +32,10 @@ public class LightningTrigger : MonoBehaviour
 
         if (GetminDisConsumer())
         {
-            gameObject.transform.DOMove(Asign.transform.position, 0.5f).OnComplete(() =>
+            gameObject.transform.DOMove(Asign.transform.position, 0.1f).OnComplete(() =>
             {
                    gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
-                gameObject.transform.DOScale(1, 0.3f).OnComplete(() =>
+                gameObject.transform.DOScale(1, 0.1f).OnComplete(() =>
                 {
                     gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);
                 });
@@ -50,10 +50,10 @@ public class LightningTrigger : MonoBehaviour
                 }
                 if (GetminDisConsumer())
                 {
-                    gameObject.transform.DOMove(Asign.transform.position, 0.5f).OnComplete(() =>
+                    gameObject.transform.DOMove(Asign.transform.position, 0.1f).OnComplete(() =>
                     {
                       gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
-                        gameObject.transform.DOScale(1, 0.3f).OnComplete(() =>
+                        gameObject.transform.DOScale(1, 0.1f).OnComplete(() =>
                         {
                             gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);
                         });
@@ -68,10 +68,10 @@ public class LightningTrigger : MonoBehaviour
                         }
                         if (GetminDisConsumer())
                         {
-                            gameObject.transform.DOMove(Asign.transform.position, 0.5f).OnComplete(() =>
+                            gameObject.transform.DOMove(Asign.transform.position, 0.1f).OnComplete(() =>
                             {
                                 gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
-                                gameObject.transform.DOScale(1, 0.3f).OnComplete(() =>
+                                gameObject.transform.DOScale(1, 0.1f).OnComplete(() =>
                                 {
                                     Debug.Log("闪电链" + gameObject.name + 4);
                                     gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);

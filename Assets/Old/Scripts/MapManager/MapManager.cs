@@ -17,6 +17,10 @@ public class MapManager : MonoSingleton<MapManager>
     private Vector3 high = new Vector3(0f, 0.6f, 0f);
 
     public bool generatePath;
+
+    public GameObject skillOneEffect;
+    public GameObject skillTwoEffect;
+    public GameObject skillThreeEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,8 +57,11 @@ public class MapManager : MonoSingleton<MapManager>
         foreach(MapSign m in _mapSigns)
         {
             if (m.x == x && m.y == y)
+            {
                 return m;
+            }
         }
+        print("-----未找到地块-----");
         return null;
     }
 
@@ -65,12 +72,14 @@ public class MapManager : MonoSingleton<MapManager>
     /// <param name="yList"></param>
     public void SetLand(int x, int y)
     {
+        //print("x:" + x + "  y:" + y);
             MapSign temp = GetMapSignByXY(x, y);
             if (temp != null)
             {
                 temp.isCanPlace = false;
             }
     }
+
     public void SetLand(int x, int y,BaseMapRole role)
     {
         MapSign temp = GetMapSignByXY(x, y);

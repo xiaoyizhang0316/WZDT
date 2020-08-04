@@ -311,18 +311,26 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerHealth = playerMaxHealth;
         }
         playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
-        playerGoldText.text = playerGold.ToString();
+        if (!playerGoldText.text.Equals(playerGold.ToString()))
+        {
+            playerGoldText.DOText( playerGold.ToString(),0.2f,true,ScrambleMode.Numerals) .Play() ;
+        }
+
         if (playerGold > 0)
-            playerGoldText.color = Color.white;
+            playerGoldText.DOColor( Color.white,0.2f) .Play() ;
         else if (playerGold >= maxMinusGold)
-            playerGoldText.color = Color.yellow;
+            playerGoldText.DOColor(  Color.yellow,0.2f) .Play() ;
         else
-            playerGoldText.color = Color.red;
-        playerSatisfyText.text = playerSatisfy.ToString();
+            playerGoldText.DOColor(  Color.red,0.2f) .Play() ;
+        if (!playerSatisfyText.text.Equals(playerSatisfy.ToString()))
+        {
+            playerSatisfyText.DOText(playerSatisfy.ToString(),0.02f,true,ScrambleMode.Numerals).Play()   ;
+        }
+
         if (PlayerData.My.cheatIndex1 || PlayerData.My.cheatIndex2 || PlayerData.My.cheatIndex3)
-            playerSatisfyText.color = Color.gray;
+            playerSatisfyText.DOColor( Color.gray,0.02f).Play() ;
         else
-            playerSatisfyText.color = Color.white;
+            playerSatisfyText.DOColor( Color.white,0.02f).Play() ;
         playerHealthText.text = (playerHealth / (float)playerMaxHealth).ToString("P");
         if (playerHealth / (float)playerMaxHealth > 0.5f)
         {
@@ -336,7 +344,13 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             playerHealthText.color = Color.red;
         }
-        playerTechText.text = playerTechPoint.ToString();   
+
+        if (!playerTechText.text.Equals(playerTechPoint.ToString()))
+        {
+            playerTechText.DOText( playerTechPoint.ToString(),0.02f,true,ScrambleMode.Numerals).Play() ;   
+
+        }
+
     }
 
     /// <summary>
@@ -811,11 +825,13 @@ public class StageGoal : MonoSingleton<StageGoal>
                 npcIncome += num;
                 if (npc == null)
                 {
+                    print(otherName);
                     if(npcIncomesEx.ContainsKey(otherName)){
                         npcIncomesEx[otherName] += num;
                     }
                     else
                     {
+                        print(npcIncomesEx.Count);
                         npcIncomesEx.Add(otherName, num);
                     }
                 }

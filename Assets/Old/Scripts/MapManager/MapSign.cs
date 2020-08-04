@@ -21,8 +21,11 @@ public class MapSign : MonoBehaviour,IDragHandler
     public bool lostEffect = false;
 
     public bool addCost = false;
-    public int addCostBuffId;
+    private int addCostBuffId = 999;
     public BaseMapRole baseMapRole;
+
+     
+    public int weighting;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -33,14 +36,25 @@ public class MapSign : MonoBehaviour,IDragHandler
     public void LostEffect(int time)
     {
         lostEffect = true;
+        GameObject eff = null;
+        transform.DOScale(100f, 3).OnComplete(() =>
+        {
+            eff =    Instantiate(    MapManager.My.skillOneEffect,this.transform);
+        }).Play();
+ 
+  
         transform.DOScale(100f, time).OnComplete(() =>
         {
-            if (baseMapRole != null && !StageGoal.My.isOverMaxMinus)
+            Destroy(eff,0.1f);
+
+            if (baseMapRole != null)
             {
                 baseMapRole.transform.GetComponent<BaseSkill>().ReUnleashSkills();
                 lostEffect = false;
             }
-        });
+
+      
+        }).Play();
 
     }
 
@@ -48,9 +62,18 @@ public class MapSign : MonoBehaviour,IDragHandler
     {
         
         addCost = true;
-
+        GameObject eff = null;
+        transform.DOScale(100f, 3).OnComplete(() =>
+        {
+            eff =    Instantiate(    MapManager.My.skillTwoEffect,this.transform);
+        }).Play();
         addCostBuffId = id;
-        transform.DOScale(100f, time).OnComplete(() => { addCost = false; });
+        transform.DOScale(100f, time).OnComplete(() =>
+        {
+            Destroy(eff,0.1f);
+            addCost = false;
+            
+        });
     }
 
  
@@ -67,10 +90,15 @@ public class MapSign : MonoBehaviour,IDragHandler
             go.transform.SetParent(transform.parent.parent);
             //go.GetComponent<MeshCollider>().enabled = false;
         }
+        if (!GetComponent<MeshRenderer>().enabled)
+        {
+            mapType = MapType.Land;
+        }
     }
 
     public void  GetRoleByLand()
     {
+        weighting = 20;
         baseMapRole = null;
         RaycastHit[] hit;
         hit = Physics.RaycastAll(transform.position + new Vector3(0f, -5f, 0f), Vector3.up);
@@ -78,7 +106,8 @@ public class MapSign : MonoBehaviour,IDragHandler
         {
             if (hit[j].transform.tag.Equals("MapRole"))
             {
-                baseMapRole = hit[j].transform.GetComponent<BaseMapRole>();
+                baseMapRole = hit[j].transform.GetComponentInParent <BaseMapRole>();
+                weighting = baseMapRole.baseRoleData.riskResistance;
             }
         }
 
@@ -95,6 +124,7 @@ public class MapSign : MonoBehaviour,IDragHandler
            if (lostEffect&&baseMapRole!=null)
            {
                baseMapRole.transform.GetComponent<BaseSkill>().CancelSkill();
+               
            }
        }
 
@@ -102,11 +132,10 @@ public class MapSign : MonoBehaviour,IDragHandler
        {
            if (baseMapRole != null)
            { 
-               var buff = GameDataMgr.My.GetBuffDataByID(addCostBuffId );
+               var buff = GameDataMgr.My.GetBuffDataByID(addCostBuffId);
                BaseBuff baseb = new BaseBuff();
                baseb.Init(buff);
                baseb.SetRoleBuff(baseMapRole, baseMapRole, baseMapRole);
-               
            }
        }
     }

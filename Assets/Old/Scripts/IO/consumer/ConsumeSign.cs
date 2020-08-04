@@ -220,6 +220,7 @@ public class ConsumeSign : MonoBehaviour
         DeathAward();
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
+        ComboManager.My.AddComboNum();
     }
 
     /// <summary>
@@ -356,7 +357,7 @@ public class ConsumeSign : MonoBehaviour
         isStart = true;
         isCanSelect = true;
         float time = CalculateTime();
-        tweener = transform.DOPath(pathList.ToArray(), time,PathType.CatmullRom, PathMode.Full3D).OnComplete(OnAlive).SetEase(Ease.Linear).SetLookAt(0.01f);
+        tweener = transform.DOPath(pathList.ToArray(), time,PathType.CatmullRom, PathMode.Full3D).OnComplete(OnAlive).SetEase(Ease.Linear).SetLookAt(0f);
         CheckBuffDuration();
     }
 

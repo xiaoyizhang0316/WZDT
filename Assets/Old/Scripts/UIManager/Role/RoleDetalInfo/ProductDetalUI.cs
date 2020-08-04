@@ -25,6 +25,7 @@ public class ProductDetalUI : MonoSingleton<ProductDetalUI>
     public List<Image> buff;
 
     public Sprite buffnull;
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -43,11 +44,23 @@ public class ProductDetalUI : MonoSingleton<ProductDetalUI>
 
     public void InitUI(ProductData data,Sprite IconSprite ,float damage,float loadingSpeed )
     {
+        for (int i = 0; i <buff.Count; i++)
+        {
+            buff[i].gameObject.SetActive(false);
+        }
         this.data = data;
         Icon.sprite = IconSprite; 
           this.damage.text = damage.ToString();
           this.loadingSpeed.text = loadingSpeed.ToString();
 
+    
+              for (int i = 0; i < data.buffMaxCount; i++)
+              {
+                  buff[i].gameObject.SetActive(true);
+              }
+      
+
+       
           for (int i = 0; i <buff.Count; i++)
           {
               buff[i].sprite = buffnull;

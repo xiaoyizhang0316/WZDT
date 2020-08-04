@@ -671,7 +671,7 @@ GameObject:
   - component: {fileID: 496232}
   - component: {fileID: 13793500}
   m_Layer: 0
-  m_Name: SP2_Character_DareDevil
+  m_Name: boss4_daredevil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -709,7 +709,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cd732b90690d6e242b4555b46737d6dd, type: 2}
+  - {fileID: 2100000, guid: 687a73c28885fef4ea5d869acc1a0e26, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1016,7 +1016,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 72
   m_CollisionDetection: 0
 --- !u!114 &-8121386830688468518
 MonoBehaviour:
@@ -1055,16 +1055,16 @@ MonoBehaviour:
   sheep: {fileID: 2832262302776370688}
   lastHitType: 0
   buildingIndex: 0
-  skillOneTime: 0
-  skillTwoTime: 0
   peopleList:
   - {fileID: 150552}
   - {fileID: 190748}
-  - {fileID: 140580}
+  - {fileID: 188186}
   - {fileID: 139084}
   skillOneEffect: {fileID: 119216, guid: e85f4a610ef9e5b4aa9cedce76136489, type: 3}
   skillTwoEffect: {fileID: 174218, guid: eaf9728a2b7aafb4b822e2708a38fe70, type: 3}
   littlePrb: {fileID: 160742, guid: 7271484273a214eb69af1690a7c3acfb, type: 3}
+  randomList: bd020000be020000bf020000c0020000c1020000
+  tempBuffList: bd020000be020000bf020000c0020000c1020000
   per: 0.51
 --- !u!1 &144336
 GameObject:
@@ -1318,7 +1318,7 @@ GameObject:
   - component: {fileID: 481210}
   - component: {fileID: 13741974}
   m_Layer: 0
-  m_Name: SP2_Character_StripperWoman
+  m_Name: boss1_hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1356,7 +1356,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 02cb580785738814db60bec75c513847, type: 2}
+  - {fileID: 2100000, guid: 9c6975ce7b4f249b2bc052e26a26b30d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1381,7 +1381,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300172, guid: c72c97e952bf7834b85e6164373d310d, type: 3}
+  m_Mesh: {fileID: 4300164, guid: c72c97e952bf7834b85e6164373d310d, type: 3}
   m_Bones:
   - {fileID: 409554}
   - {fileID: 428638}
@@ -1702,7 +1702,7 @@ GameObject:
   - component: {fileID: 488358}
   - component: {fileID: 13708738}
   m_Layer: 0
-  m_Name: SP2_Character_DiscoGuy
+  m_Name: boss3_disco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1740,7 +1740,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 3cbca9b8726f88b4f838765cd86b2f52, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1837,7 +1837,7 @@ GameObject:
   - component: {fileID: 430742}
   - component: {fileID: 13755140}
   m_Layer: 0
-  m_Name: SP2_Character_HippsterMan
+  m_Name: boss2_asian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1875,7 +1875,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a68a5458578558146ac223b03933f741, type: 2}
+  - {fileID: 2100000, guid: e68783d64ae1cde418debc0de555bb1e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1900,7 +1900,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300164, guid: c72c97e952bf7834b85e6164373d310d, type: 3}
+  m_Mesh: {fileID: 4300038, guid: 47fbfbd2863d12246995504e9cffb8db, type: 3}
   m_Bones:
   - {fileID: 409554}
   - {fileID: 428638}
