@@ -18,6 +18,7 @@ public class PlayerDatas
     public int threeWordsProgress;
     public string loginRecordID;
     public string token;
+    public int groupID;
 }
 
 [Serializable]
@@ -222,4 +223,34 @@ public class PlayerOperations
 public class PlayerStatus
 {
     public List<DataStat> dataStats;
+}
+
+[Serializable]
+public class RankList
+{
+    public string recordID;
+    public string playerID;
+    public string sceneName;
+    public int recordTime;
+    public int score;
+    public bool win;
+    public string stars;
+    public int timeCount;
+    public int realTime;
+    public string playerName;
+    public int bossLevel;
+    public string groupName;
+    public int rank;
+}
+
+[Serializable]
+public class GroupRankList
+{
+    public List<RankList> rankLists;
+}
+
+[Serializable]
+public class GlobalRankList
+{
+    public List<RankList> rankLists;
 }

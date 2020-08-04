@@ -6,6 +6,7 @@ public static class Url
 {
 
     private static string ip = "http://39.106.226.52:8080/";
+    //private static string ip = "http://127.0.0.1:8080/";
 
     #region login
     public static string loginUrl = ip + "login";
@@ -37,6 +38,10 @@ public static class Url
     public static string getReplayDatas = ip + "getReplayDatas";
     public static string getReplayLists = ip + "getReplayLists";
     public static string getRankingLists = ip + "getRankingList";
+    public static string getGroupRankingList = ip + "getGroupRankingList";
+    public static string getGlobalRankingList = ip + "getGlobalRankingList";
+    public static string getPlayerGroupRanking = ip + "getPlayerGroupRanking";
+    public static string getPlayerGlobalRanking = ip + "getPlayerGlobalRanking";
     #endregion
 
     #region equip
