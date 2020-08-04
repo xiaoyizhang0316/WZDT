@@ -90,6 +90,10 @@ public class MapSign : MonoBehaviour,IDragHandler
             go.transform.SetParent(transform.parent.parent);
             //go.GetComponent<MeshCollider>().enabled = false;
         }
+        if (!GetComponent<MeshRenderer>().enabled)
+        {
+            mapType = MapType.Land;
+        }
     }
 
     public void  GetRoleByLand()
