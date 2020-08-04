@@ -825,11 +825,13 @@ public class StageGoal : MonoSingleton<StageGoal>
                 npcIncome += num;
                 if (npc == null)
                 {
+                    print(otherName);
                     if(npcIncomesEx.ContainsKey(otherName)){
                         npcIncomesEx[otherName] += num;
                     }
                     else
                     {
+                        print(npcIncomesEx.Count);
                         npcIncomesEx.Add(otherName, num);
                     }
                 }

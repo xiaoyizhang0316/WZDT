@@ -163,7 +163,7 @@ public class BossConsumer : ConsumeSign
         }
     }
 
-    private int killCount = 1;
+    public int killCount = 1;
 
     /// <summary>
     /// 消费者被击杀时调用   
@@ -433,7 +433,7 @@ public class BossConsumer : ConsumeSign
                     }
                 }
 
-                sign.AddCost(999, skillTwoTime / 3);
+                sign.AddCost(998, skillTwoTime / 3);
                 var lins = DrawLine(transform.transform.position, sign.transform.position);
                 GameObject effect = Instantiate(skillTwoEffect, transform);
                 effect.transform.position = transform.position;
@@ -498,7 +498,7 @@ public class BossConsumer : ConsumeSign
             float ran = Random.Range(-2f, 2f);
             go.GetComponent<BossSummonConsumer>().Init(bossPathList, tweener.fullPosition + ran, consumeData.moveSpeed);
             go.GetComponent<BossSummonConsumer>().consumeData.maxHealth = (int)(consumeData.maxHealth * 0.2f);
-            go.GetComponent<BossSummonConsumer>().consumeData.killMoney = (int)(consumeData.killMoney * 0.2f);
+            go.GetComponent<BossSummonConsumer>().consumeData.killMoney = (int)(consumeData.killMoney * 0.1f);
             go.GetComponent<BossSummonConsumer>().consumeData.killSatisfy = 0;
         }
     }

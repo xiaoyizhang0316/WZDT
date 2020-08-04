@@ -7,9 +7,17 @@ public class Level9Controller : BaseLevelController
 
     public List<MapSign> lockLandList;
 
+    public BossConsumer targetBoss;
+
     public override void CheckStarOne()
     {
-        if (StageGoal.My.playerSatisfy >= 10000)
+        if (targetBoss == null)
+        {
+            targetBoss = FindObjectOfType<BossConsumer>();
+            if (targetBoss == null)
+                return;
+        }
+        if (targetBoss.killCount >= 8)
         {
             starOneStatus = true;
         }
@@ -17,12 +25,18 @@ public class Level9Controller : BaseLevelController
         {
             starOneStatus = false;
         }
-        starOneCondition = "累计得分大于10000,当前：" + StageGoal.My.playerSatisfy.ToString();
+        starOneCondition = "首领消费者满足超过8次,当前：" + targetBoss.killCount.ToString();
     }
 
     public override void CheckStarTwo()
     {
-        if (StageGoal.My.playerSatisfy >= 50000)
+        if (targetBoss == null)
+        {
+            targetBoss = FindObjectOfType<BossConsumer>();
+            if (targetBoss == null)
+                return;
+        }
+        if (targetBoss.killCount >= 15)
         {
             starTwoStatus = true;
         }
@@ -30,12 +44,18 @@ public class Level9Controller : BaseLevelController
         {
             starTwoStatus = false;
         }
-        starTwoCondition = "累计得分大于50000,当前：" + StageGoal.My.playerSatisfy.ToString();
+        starTwoCondition = "首领消费者满足超过15次,当前：" + targetBoss.killCount.ToString();
     }
 
     public override void CheckStarThree()
     {
-        if (StageGoal.My.playerSatisfy >= 100000)
+        if (targetBoss == null)
+        {
+            targetBoss = FindObjectOfType<BossConsumer>();
+            if (targetBoss == null)
+                return;
+        }
+        if (targetBoss.killCount >= 22)
         {
             starThreeStatus = true;
         }
@@ -43,7 +63,7 @@ public class Level9Controller : BaseLevelController
         {
             starThreeStatus = false;
         }
-        starThreeCondition = "累计得分大于100000,当前：" + StageGoal.My.playerSatisfy.ToString();
+        starThreeCondition = "首领消费者满足超过22次,当前：" + targetBoss.killCount.ToString();
         CheckCheat();
     }
 }

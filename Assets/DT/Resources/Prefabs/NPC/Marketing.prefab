@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 634633065277404507}
   - component: {fileID: 4599117619496951951}
   - component: {fileID: 7760622236121501070}
+  - component: {fileID: 7001195645201410684}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -420,6 +421,22 @@ MonoBehaviour:
   extraSkillDesc: 
   maxTradeLimit: 1
   targetBuffRewardList: 67000000
+--- !u!54 &7001195645201410684
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6338280924178071667}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6385040176148751397
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +773,7 @@ MonoBehaviour:
   hideModel: {fileID: 7010573542175292831}
   trueModel: {fileID: 8145369834327937887}
   autoTradeList: []
+  animator: {fileID: 0}
 --- !u!65 &5840160722976328818
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -801,12 +819,15 @@ MonoBehaviour:
   IsOpen: 1
   isPlay: 0
   isAvaliable: 1
+  isAnimPlaying: 0
+  goodSpecialBuffList: 
+  goodBaseBuffs: []
+  badSpecialBuffList: 
+  badBaseBuffs: []
   skillDesc: "\u6309\u70B9\u51FB\u91CF\u4ED8\u8D39\uFF0C\u4E14\u65E0\u6CD5\u5237\u5355"
   buffList: ff010000
   animationPart: []
   productDatas: []
-  specialBuffList: 
-  baseBuffs: []
 --- !u!1 &8800528654386035229
 GameObject:
   m_ObjectHideFlags: 0

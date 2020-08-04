@@ -72,7 +72,7 @@ public class MapManager : MonoSingleton<MapManager>
     /// <param name="yList"></param>
     public void SetLand(int x, int y)
     {
-        print("x:" + x + "  y:" + y);
+        //print("x:" + x + "  y:" + y);
             MapSign temp = GetMapSignByXY(x, y);
             if (temp != null)
             {
