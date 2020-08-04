@@ -107,8 +107,6 @@ public class MapSign : MonoBehaviour,IDragHandler
             if (hit[j].transform.tag.Equals("MapRole"))
             {
                 baseMapRole = hit[j].transform.GetComponentInParent <BaseMapRole>();
-                
-               
                 weighting = baseMapRole.baseRoleData.riskResistance;
             }
         }
@@ -134,11 +132,10 @@ public class MapSign : MonoBehaviour,IDragHandler
        {
            if (baseMapRole != null)
            { 
-               var buff = GameDataMgr.My.GetBuffDataByID(addCostBuffId );
+               var buff = GameDataMgr.My.GetBuffDataByID(addCostBuffId);
                BaseBuff baseb = new BaseBuff();
                baseb.Init(buff);
                baseb.SetRoleBuff(baseMapRole, baseMapRole, baseMapRole);
-               
            }
        }
     }

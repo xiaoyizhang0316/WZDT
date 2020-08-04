@@ -230,6 +230,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         this.totalIncome.text = totalIncome.ToString();
         consumeIncomePerMin.text = (totalConsumeIncome * 60 / timeCount).ToString();
         consumeIncome.text = totalConsumeIncome.ToString();
+        int count = 0;
         if (npcIncomesEx.Count > 0)
         {
             int i = 0;
@@ -251,26 +252,27 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
                     npcContent.GetChild(i).gameObject.SetActive(false);
                 }
             }
+            count = i;
         }
         if (npcIncomes.Count > 0)
         {
             int i = 0;
             foreach (var key in npcIncomes.Keys)
             {
-                if (i >= npcContent.childCount)
+                if (i >= npcContent.childCount - count)
                 {
                     GameObject newNpc = Instantiate(statItem, npcContent);
                     StatItem stat = newNpc.GetComponent<StatItem>();
                     stat.Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key]);
                 }
-                npcContent.GetChild(i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key]);
+                npcContent.GetChild(count + i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key]);
                 i++;
             }
-            if (i < npcContent.childCount)
+            if (i < npcContent.childCount - count)
             {
                 for (; i < npcContent.childCount; i++)
                 {
-                    npcContent.GetChild(i).gameObject.SetActive(false);
+                    npcContent.GetChild(count + i).gameObject.SetActive(false);
                 }
             }
         }

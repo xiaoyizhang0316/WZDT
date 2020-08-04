@@ -433,7 +433,7 @@ public class BossConsumer : ConsumeSign
                     }
                 }
 
-                sign.AddCost(999, skillTwoTime / 3);
+                sign.AddCost(998, skillTwoTime / 3);
                 var lins = DrawLine(transform.transform.position, sign.transform.position);
                 GameObject effect = Instantiate(skillTwoEffect, transform);
                 effect.transform.position = transform.position;
