@@ -58,7 +58,6 @@ public class MapManager : MonoSingleton<MapManager>
         {
             if (m.x == x && m.y == y)
             {
-                print("dsdsadasdasd");
                 return m;
             }
 
