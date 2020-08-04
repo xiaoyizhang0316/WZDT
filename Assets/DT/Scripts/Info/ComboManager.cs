@@ -23,6 +23,8 @@ public class ComboManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Com
 
         isShow = true;
         showTime = 0;
+        num.transform.localScale = Vector3.zero;
+        
         num.transform.DOScale(1+combonum*0.01f, 0.4f).SetEase(Ease.InOutBounce).Play();
     }
 
