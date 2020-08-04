@@ -57,8 +57,13 @@ public class MapManager : MonoSingleton<MapManager>
         foreach(MapSign m in _mapSigns)
         {
             if (m.x == x && m.y == y)
+            {
+                print("dsdsadasdasd");
                 return m;
+            }
+
         }
+        print("-----未找到地块-----");
         return null;
     }
 
@@ -69,12 +74,14 @@ public class MapManager : MonoSingleton<MapManager>
     /// <param name="yList"></param>
     public void SetLand(int x, int y)
     {
+        print("x:" + x + "  y:" + y);
             MapSign temp = GetMapSignByXY(x, y);
             if (temp != null)
             {
                 temp.isCanPlace = false;
             }
     }
+
     public void SetLand(int x, int y,BaseMapRole role)
     {
         MapSign temp = GetMapSignByXY(x, y);

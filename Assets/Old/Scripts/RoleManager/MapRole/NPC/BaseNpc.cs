@@ -102,7 +102,17 @@ public abstract class BaseNpc : MonoBehaviour
             hideModel.SetActive(true);
             trueModel.SetActive(false);
         }
-        InitSetLand();
+        Invoke("InitSetLand",0.5f);
+        RaycastHit[] hit;
+        hit = Physics.RaycastAll(transform.position + new Vector3(0f, 5f, 0f), Vector3.down);
+        for (int j = 0; j < hit.Length; j++)
+        {
+            if (hit[j].transform.tag.Equals("MapLand"))
+            {
+                //print(hit[j].transform);
+                transform.position = hit[j].transform.position + new Vector3(0f, 0.3f, 0f);
+            }
+        }
     }
 
     // Update is called once per frame
