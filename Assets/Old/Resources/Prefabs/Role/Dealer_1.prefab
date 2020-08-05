@@ -341,6 +341,7 @@ MonoBehaviour:
   activityCost: 0
   tradeCost: 0
   shop: []
+  tradeButton: {fileID: 0}
 --- !u!114 &1439850988682758017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,6 +379,11 @@ MonoBehaviour:
   IsOpen: 1
   isPlay: 0
   isAvaliable: 1
+  isAnimPlaying: 0
+  goodSpecialBuffList: 
+  goodBaseBuffs: []
+  badSpecialBuffList: 
+  badBaseBuffs: []
   skillDesc: "\u5356\u74DC\u5C31\u50CF\u8001\u864E\u673A\uFF0C\u96F6\u552E\u5546\u6C38\u8FDC\u4E0D\u77E5\u9053\u522B\u4EBA\u7ED9\u4ED6\u7684\u662F\u4EC0\u4E48\u74DC\uFF0C\u4F46\u4ED6\u5C31\u662F\u6562\u5356"
   buffList: 
   animationPart: []
@@ -848,6 +854,7 @@ GameObject:
   - component: {fileID: 1681726067423558296}
   - component: {fileID: 8821681958119733559}
   - component: {fileID: 5134163323007665476}
+  - component: {fileID: 2854003016223885193}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -904,6 +911,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapRole: {fileID: 0}
+--- !u!54 &2854003016223885193
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946931539328072367}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3095725251720570581
 GameObject:
   m_ObjectHideFlags: 0
