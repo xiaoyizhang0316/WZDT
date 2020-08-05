@@ -29,7 +29,7 @@ public class LookA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponentInParent<BaseMapRole>().shootTarget != null)
+        if (GetComponentInParent<BaseMapRole>().shootTarget != null&& GetComponentInParent<BaseMapRole>().tradeList.Count>0 )
         {
             target = GetComponentInParent<BaseMapRole>().shootTarget.gameObject;
             lastPos = target.transform.position;
