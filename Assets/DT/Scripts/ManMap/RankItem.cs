@@ -38,6 +38,7 @@ public class RankItem : MonoBehaviour
     public Text bossLevelScore;
 
     private string recordID = "";
+    int rank = 0;
     void Start()
     {
         replay_btn.onClick.AddListener(Review);
@@ -74,20 +75,12 @@ public class RankItem : MonoBehaviour
         noRank.SetActive(false);
         recordInfos.SetActive(false);
         rankInfos.SetActive(true);
+        
         if(rankList.sceneName == "FTE_9")
         {
             bossLevelAndScore.SetActive(true);
             rankStarsAndScore.SetActive(false);
-            if (rankList.rank <= 3)
-            {
-                rankSprite.sprite = RankPanel.My.rankSprites[rankList.rank - 1];
-                rankSprite.gameObject.SetActive(true);
-            }
-            else
-            {
-                rankSprite.gameObject.SetActive(false);
-            }
-            rankText.text = (rankList.rank).ToString();
+            
             bossLevel.text = rankList.bossLevel.ToString();
             bossLevelScore.text = rankList.score.ToString();
             if (isGroup)
@@ -95,6 +88,15 @@ public class RankItem : MonoBehaviour
                 group.SetActive(true);
                 global.SetActive(false);
                 groupRankPlayerName.text = rankList.playerName;
+                rank = rankList.rank - NetworkMgr.My.currentGroupPage * CommonParams.rankPageMaxNum;
+                if (rank <= 0)
+                {
+                    rank = rankList.rank + NetworkMgr.My.currentGroupPage * CommonParams.rankPageMaxNum;
+                }
+                else
+                {
+                    rank = rankList.rank;
+                }
             }
             else
             {
@@ -102,6 +104,15 @@ public class RankItem : MonoBehaviour
                 global.SetActive(true);
                 globalRankPlayerName.text = rankList.playerName;
                 globalRankGroupName.text = rankList.groupName;
+                rank = rankList.rank - NetworkMgr.My.currentGlobalPage * CommonParams.rankPageMaxNum;
+                if (rank <= 0)
+                {
+                    rank = rankList.rank + NetworkMgr.My.currentGlobalPage * CommonParams.rankPageMaxNum;
+                }
+                else
+                {
+                    rank = rankList.rank;
+                }
             }
         }
         else
@@ -110,21 +121,21 @@ public class RankItem : MonoBehaviour
             rankStarsAndScore.SetActive(true);
             SetStars(rankStars, rankList.stars);
             starsScore.text = rankList.score.ToString();
-            if (rankList.rank <= 3)
-            {
-                rankSprite.sprite = RankPanel.My.rankSprites[rankList.rank - 1];
-                rankSprite.gameObject.SetActive(true);
-            }
-            else
-            {
-                rankSprite.gameObject.SetActive(false);
-            }
-            rankText.text = (rankList.rank).ToString();
+            
             if (isGroup)
             {
                 group.SetActive(true);
                 global.SetActive(false);
                 groupRankPlayerName.text = rankList.playerName;
+                rank = rankList.rank - NetworkMgr.My.currentGroupPage * CommonParams.rankPageMaxNum;
+                if (rank <= 0)
+                {
+                    rank = rankList.rank + NetworkMgr.My.currentGroupPage * CommonParams.rankPageMaxNum;
+                }
+                else
+                {
+                    rank = rankList.rank;
+                }
             }
             else
             {
@@ -132,9 +143,29 @@ public class RankItem : MonoBehaviour
                 global.SetActive(true);
                 globalRankPlayerName.text = rankList.playerName;
                 globalRankGroupName.text = rankList.groupName;
+                rank = rankList.rank - NetworkMgr.My.currentGlobalPage * CommonParams.rankPageMaxNum;
+                if (rank <= 0)
+                {
+                    rank = rankList.rank + NetworkMgr.My.currentGlobalPage * CommonParams.rankPageMaxNum;
+                }
+                else
+                {
+                    rank = rankList.rank;
+                }
             }
         }
-        
+        rankText.text = rank.ToString();
+        if (rank <= 3)
+        {
+            rankSprite.sprite = RankPanel.My.rankSprites[rank - 1];
+            
+            rankSprite.gameObject.SetActive(true);
+        }
+        else
+        {
+            rankSprite.gameObject.SetActive(false);
+        }
+
     }
 
     public void SetMyRank()
@@ -143,6 +174,73 @@ public class RankItem : MonoBehaviour
         rankInfos.SetActive(false);
         replay_btn.gameObject.SetActive(false);
         noRank.SetActive(true);
+    }
+
+    public void SetMyRank(RankList rankList, bool isGroup)
+    {
+        recordID = rankList.recordID;
+        noRank.SetActive(false);
+        recordInfos.SetActive(false);
+        rankInfos.SetActive(true);
+
+        if (rankList.sceneName == "FTE_9")
+        {
+            bossLevelAndScore.SetActive(true);
+            rankStarsAndScore.SetActive(false);
+
+            bossLevel.text = rankList.bossLevel.ToString();
+            bossLevelScore.text = rankList.score.ToString();
+            if (isGroup)
+            {
+                group.SetActive(true);
+                global.SetActive(false);
+                groupRankPlayerName.text = rankList.playerName;
+                
+            }
+            else
+            {
+                group.SetActive(false);
+                global.SetActive(true);
+                globalRankPlayerName.text = rankList.playerName;
+                globalRankGroupName.text = rankList.groupName;
+                
+            }
+        }
+        else
+        {
+            bossLevelAndScore.SetActive(false);
+            rankStarsAndScore.SetActive(true);
+            SetStars(rankStars, rankList.stars);
+            starsScore.text = rankList.score.ToString();
+
+            if (isGroup)
+            {
+                group.SetActive(true);
+                global.SetActive(false);
+                groupRankPlayerName.text = rankList.playerName;
+                
+            }
+            else
+            {
+                group.SetActive(false);
+                global.SetActive(true);
+                globalRankPlayerName.text = rankList.playerName;
+                globalRankGroupName.text = rankList.groupName;
+                
+            }
+        }
+        rank = rankList.rank;
+        rankText.text = rank.ToString();
+        if (rank <= 3)
+        {
+            rankSprite.sprite = RankPanel.My.rankSprites[rank - 1];
+
+            rankSprite.gameObject.SetActive(true);
+        }
+        else
+        {
+            rankSprite.gameObject.SetActive(false);
+        }
     }
 
     private void SetStars(Transform stars, string star)

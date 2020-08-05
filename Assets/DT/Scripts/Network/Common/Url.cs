@@ -5,8 +5,8 @@ using UnityEngine;
 public static class Url
 {
 
-    private static string ip = "http://39.106.226.52:8080/";
-    //private static string ip = "http://127.0.0.1:8080/";
+    //private static string ip = "http://39.106.226.52:8080/";
+    private static string ip = "http://127.0.0.1:8080/";
 
     #region login
     public static string loginUrl = ip + "login";
