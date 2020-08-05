@@ -78,7 +78,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         {
             return;
         }
-        title.text = "History";
+        title.text = "历史记录";
         currentShowIndex = 0;
         SetButton(false);
         if (isOn)
@@ -105,7 +105,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         {
             return;
         }
-        title.text = "Ranking";
+        title.text = "小组排名";
         currentShowIndex = 1;
         if (isOn)
         {
@@ -147,7 +147,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         {
             return;
         }
-        title.text = "Ranking";
+        title.text = "全球排名";
         currentShowIndex = 2;
         if (isOn)
         {
