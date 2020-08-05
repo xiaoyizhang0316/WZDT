@@ -298,7 +298,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         int childCount = listContent.childCount;
         if (childCount <= NetworkMgr.My.replayLists.Count)
         {
-            for(int i=0;i<NetworkMgr.My.replayLists.Count; i++)
+            for(int i= NetworkMgr.My.replayLists.Count-1; i>0; i--)
             {
                 if (i < childCount)
                 {
@@ -317,7 +317,7 @@ public class RankPanel : MonoSingleton<RankPanel>
                 listContent.GetChild(i).gameObject.SetActive(false);
                 if (i < NetworkMgr.My.replayLists.Count)
                 {
-                    listContent.GetChild(i).GetComponent<RankItem>().Setup(NetworkMgr.My.replayLists[i]);
+                    listContent.GetChild(i).GetComponent<RankItem>().Setup(NetworkMgr.My.replayLists[NetworkMgr.My.replayLists.Count-1-i]);
                     listContent.GetChild(i).gameObject.SetActive(true);
                 }
             }
