@@ -284,7 +284,14 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void GetSatisfy(int num)
     {
-        playerSatisfy += num;
+        if(int.MaxValue - playerSatisfy < num)
+        {
+            playerSatisfy = int.MaxValue;
+        }
+        else
+        {
+            playerSatisfy += num;
+        }
         SetInfo();
     }
 
