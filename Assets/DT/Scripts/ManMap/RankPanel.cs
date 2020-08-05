@@ -78,7 +78,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         {
             return;
         }
-        title.text = "History";
+        title.text = "历史记录";
         currentShowIndex = 0;
         SetButton(false);
         if (isOn)
@@ -105,7 +105,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         {
             return;
         }
-        title.text = "Ranking";
+        title.text = "小组排名";
         currentShowIndex = 1;
         if (isOn)
         {
@@ -147,7 +147,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         {
             return;
         }
-        title.text = "Ranking";
+        title.text = "全球排名";
         currentShowIndex = 2;
         if (isOn)
         {
@@ -298,7 +298,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         int childCount = listContent.childCount;
         if (childCount <= NetworkMgr.My.replayLists.Count)
         {
-            for(int i= NetworkMgr.My.replayLists.Count-1; i>0; i--)
+            for(int i= NetworkMgr.My.replayLists.Count-1; i>=0; i--)
             {
                 if (NetworkMgr.My.replayLists.Count - 1-i < childCount)
                 {
