@@ -80,7 +80,7 @@ public class BossSummonConsumer : ConsumeSign
     {
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
-        StageGoal.My.Income(consumeData.killMoney, IncomeType.Npc,null, GameDataMgr.My.GetConsumerTypeDataByType(consumerType).typeDesc);
+        StageGoal.My.Income(consumeData.killMoney, IncomeType.Npc,null, "小型消费者");
     }
 
     /// <summary>

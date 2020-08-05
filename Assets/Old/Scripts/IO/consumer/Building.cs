@@ -325,6 +325,24 @@ public class Building : MonoBehaviour
         countDownSprite.color = protalGameObject.GetComponent<ParticleSystem>().startColor;
         countDownSprite.transform.parent.LookAt(Camera.main.transform.position);
         countDownSprite.transform.parent.gameObject.SetActive(false);
+        Invoke("InitSetLand", 0.5f);
+    }
+
+    /// <summary>
+    /// 初始化设置地块占用
+    /// </summary>
+    public void InitSetLand()
+    {
+        RaycastHit[] hit;
+        hit = Physics.RaycastAll(transform.position + new Vector3(0f, 5f, 0f), Vector3.down);
+        for (int j = 0; j < hit.Length; j++)
+        {
+            if (hit[j].transform.tag.Equals("MapLand"))
+            {
+                //print(hit[j].transform);
+                MapManager.My.SetLand(hit[j].transform.GetComponent<MapSign>().x, hit[j].transform.GetComponent<MapSign>().y);
+            }
+        }
     }
 
     [Serializable]

@@ -12,6 +12,8 @@ public class NPC : BaseNpc
 
     public List<string> autoTradeList;
 
+    public Animator animator;
+
     private void OnMouseEnter()
     {
 
@@ -117,11 +119,33 @@ public class NPC : BaseNpc
                 TradeManager.My.AutoCreateTrade(currentRole.ID.ToString(), autoTradeList[i]);
             }
         }
+        AnimatorCtr(TradeManager.My.CheckNpcInTrade(currentRole.ID.ToString()));
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void AnimatorCtr(bool exist)
+    {
+        BaseSkill baseSkill;
+        TryGetComponent<BaseSkill>(out baseSkill);
+        if (exist)
+        {
+            if (baseSkill != null)
+            {
+                if (!baseSkill.isAnimPlaying)
+                    baseSkill.isAnimPlaying = true;
+            }
+        }
+        else
+        {
+            if (baseSkill != null)
+            {
+                baseSkill.isAnimPlaying = false;
+            }
+        }
     }
 }

@@ -71,6 +71,7 @@ public class ConsumerFloatWindow : MonoBehaviour
     {
         BuildingManager.My.GetBuildingByIndex(targetConsume.buildingIndex).StopShowPathLine();
         gameObject.SetActive(false);
+        FloatWindow.My.Hide();
     }
 
     // Start is called before the first frame update

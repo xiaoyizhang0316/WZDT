@@ -44,6 +44,7 @@ public class TradeManager : MonoSingleton<TradeManager>
                 param.Add(start.baseRoleData.ID.ToString());
                 StageGoal.My.RecordOperation(OperationType.DeleteRole, param);
             }
+            start.GetComponent<NPC>().AnimatorCtr(CheckNpcInTrade(sign.tradeData.startRole));
         }
         if (end.baseRoleData.isNpc && end.baseRoleData.baseRoleData.roleType != RoleType.Bank)
         {
@@ -53,6 +54,7 @@ public class TradeManager : MonoSingleton<TradeManager>
                 param.Add(end.baseRoleData.ID.ToString());
                 StageGoal.My.RecordOperation(OperationType.DeleteRole, param);
             }
+            end.GetComponent<NPC>().AnimatorCtr(CheckNpcInTrade(sign.tradeData.endRole));
         }
     }
 
@@ -212,6 +214,10 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// <returns></returns>
     public bool CheckMoneyCondition()
     {
+        BaseMapRole start = PlayerData.My.GetMapRoleById(NewCanvasUI.My.startRole.baseRoleData.ID);
+        BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
+        if (start.baseRoleData.baseRoleData.roleType == RoleType.Bank || end.baseRoleData.baseRoleData.roleType == RoleType.Bank)
+            return true;
         if (StageGoal.My.playerGold >= 0)
             return true;
         else
@@ -274,6 +280,7 @@ public class TradeManager : MonoSingleton<TradeManager>
                 StageGoal.My.RecordOperation(OperationType.PutRole, param);
                 ChangeNPCRoleRecord(start);
             }
+            start.GetComponent<NPC>().AnimatorCtr(true);
         }
         if (end.baseRoleData.isNpc)
         {
@@ -287,6 +294,7 @@ public class TradeManager : MonoSingleton<TradeManager>
                 StageGoal.My.RecordOperation(OperationType.PutRole, param);
                 ChangeNPCRoleRecord(end);
             }
+            end.GetComponent<NPC>().AnimatorCtr(true);
         }
     }
 
@@ -338,5 +346,21 @@ public class TradeManager : MonoSingleton<TradeManager>
     {
         index = 0;
         tradeList = new Dictionary<int, TradeSign>();
+    }
+
+    public bool CheckNpcInTrade(string npcID)
+    {
+        if (tradeList.Count <= 0)
+        {
+            return false;
+        }
+        foreach(var sign in tradeList.Values)
+        {
+            if(sign.tradeData.startRole==npcID || sign.tradeData.endRole == npcID)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

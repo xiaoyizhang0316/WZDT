@@ -45,4 +45,8 @@ public static class HttpId
     public const int getEquipID                 = 1010;
     public const int addEquipID                 = 1011;
     public const int addEquipsID                = 1012;
+    public const int getGroupRankingID          = 1013;
+    public const int getGlobalRankingID         = 1014;
+    public const int getplayerGlobalRankingID   = 1015;
+    public const int getplayerGroupRankingID    = 1016;
 }
