@@ -167,6 +167,7 @@ public class PlayerReplay
     public string stars;
     public int timeCount;
     public int realTime;
+    public int bossLevel;
 
     public PlayerReplay(bool isWin)
     {
@@ -184,6 +185,10 @@ public class PlayerReplay
         stars += BaseLevelController.My.starThreeStatus ? "1" : "0";
         timeCount = StageGoal.My.timeCount;
         realTime = StageGoal.My.endTime - StageGoal.My.startTime;
+        if(SceneManager.GetActiveScene().name == "FTE_9")
+        {
+            bossLevel = GameObject.FindObjectOfType<BossConsumer>().killCount;
+        }
     }
 }
 
