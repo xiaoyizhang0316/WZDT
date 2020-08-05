@@ -217,4 +217,25 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         PlayerData.My.Reset();
         SceneManager.LoadScene("Map");
     }
+
+    public bool isTradeButtonActive = true;
+
+    /// <summary>
+    /// 隐藏所有角色头上的创建交易按钮
+    /// </summary>
+    public void HideAllTradeButton()
+    {
+        isTradeButtonActive = !isTradeButtonActive;
+        foreach (BaseMapRole role in PlayerData.My.MapRole)
+        {
+            if (role.isNpc)
+            {
+                if (!role.npcScript.isCanSee)
+                {
+                    continue;
+                }
+            }
+            role.HideTradeButton(isTradeButtonActive);
+        }
+    }
 }

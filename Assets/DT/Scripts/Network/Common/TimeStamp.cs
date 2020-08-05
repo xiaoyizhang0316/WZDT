@@ -33,6 +33,6 @@ public static class TimeStamp
     /// <returns></returns>
     public static string TimeStampToString(int timeStamp)
     {
-        return startTime.AddSeconds(timeStamp).ToLocalTime().ToString();
+        return startTime.AddSeconds(timeStamp).ToLocalTime().ToString("yyyy/MM/dd HH:mm");
     }
 }

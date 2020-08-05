@@ -58,7 +58,7 @@ public class FTE_1_Step_27 : BaseStep
                 FTESceneManager.My.UIFTE.gameObject.SetActive(false);
             for (int i = 0; i <     MapManager.My._mapSigns.Count; i++)
             {
-                if (MapManager.My._mapSigns[i].mapType == GameEnum.MapType.Grass)
+                if (MapManager.My._mapSigns[i].mapType == GameEnum.MapType.Grass&&MapManager.My._mapSigns[i].baseMapRole==null)
                 {
                     MapManager.My._mapSigns[i].isCanPlace = true;
                 }

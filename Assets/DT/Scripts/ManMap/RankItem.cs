@@ -69,10 +69,15 @@ public class RankItem : MonoBehaviour
         SetStars(recordStars, rp.stars);
         recordScore.text = rp.score.ToString();
         recordDate.text = TimeStamp.TimeStampToString(rp.recordTime);
-        recordTimeCount.text = rp.timeCount.ToString();
+        recordTimeCount.text = rp.timeCount/60+":"+rp.timeCount%60;
         if (rp.score == -1)
         {
             GetComponent<Image>().color = Color.gray;
+        }
+        else if (!rp.win)
+        {
+            GetComponent<Image>().color = Color.red;
+            SetStars(recordStars, "000");
         }
     }
 

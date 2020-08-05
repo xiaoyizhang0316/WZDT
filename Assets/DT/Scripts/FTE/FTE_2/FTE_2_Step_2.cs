@@ -10,10 +10,7 @@ public class FTE_2_Step_2 : BaseStep
     // Start is called before the first frame update
     void Start()
     {
-        nextButton.onClick.AddListener(() => { StopCurrentStep(); });
-        contenText.color = new Color(1,1,1,0);
-        maptext.color = new Color(1,1,1,0);
-        InitMap();
+       
     }
 
     // Update is called once per frame
@@ -23,8 +20,12 @@ public class FTE_2_Step_2 : BaseStep
     }
 
     public override void StartCuttentStep()
-    {
-        
+    {FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
+        nextButton.interactable = false;
+        nextButton.onClick.AddListener(() => { StopCurrentStep(); });
+        contenText.color = new Color(1,1,1,0);
+        maptext.color = new Color(1,1,1,0);
+        InitMap();
          MaskManager.My.Open(1,80);
          MaskManager.My.FadeMask(2,130);
          contenText.DOFade(0, 0).OnComplete(() =>
@@ -68,12 +69,13 @@ public class FTE_2_Step_2 : BaseStep
        MaskManager.My.Close(1,0);
        MaskManager.My.Close(2,0);
        maptext.DOFade(0, 0.8f);
+       gameObject.SetActive(false);
+
+       FTESceneManager.My.PlayNextStep();
+
        contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
-           gameObject.SetActive(false);
-
-           FTESceneManager.My.PlayNextStep();
-
+         
        }).Play(); 
     }
     public void InitMap()
