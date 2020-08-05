@@ -187,6 +187,9 @@ public class BossConsumer : ConsumeSign
         DeathAward();
     }
 
+    /// <summary>
+    /// 击杀奖励
+    /// </summary>
     public override void DeathAward()
     {
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
@@ -414,8 +417,7 @@ public class BossConsumer : ConsumeSign
                 MapSign sign = RandomGetMapSign();
                 for (int j = 0; j < 30; j++)
                 {
-
-                    if (sign.lostEffect)
+                    if (sign.addCost)
                     {
                         sign = RandomGetMapSign();
                     }
@@ -480,7 +482,7 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     public void SummonLittle()
     {
-        if (killCount <= 500)
+        if (killCount <= 5)
             return;
         for (int i = 0; i < 8; i++)
         {

@@ -438,12 +438,17 @@ public class StageGoal : MonoSingleton<StageGoal>
         WinManager.My.InitWin();
     }
 
+    /// <summary>
+    /// 显示玩家血量
+    /// </summary>
     public void ShowHealthText()
     {
         playerHealthText.gameObject.SetActive(true);
-        
     }
 
+    /// <summary>
+    /// 隐藏玩家血量
+    /// </summary>
     public void HideHealthText()
     {
         playerHealthText.gameObject.SetActive(false);
@@ -762,6 +767,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         waveCountItem.Init(enemyDatas);
     }
 
+    /// <summary>
+    /// 右侧星数菜单隐藏
+    /// </summary>
     public void MenuHide()
     {
         GetComponent<RectTransform>().DOAnchorPosX(160.27f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
@@ -770,6 +778,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         }).Play();
     }
 
+    /// <summary>
+    /// 右侧星数菜单隐藏
+    /// </summary>
     public void MenuShow()
     {
         GetComponent<RectTransform>().DOAnchorPosX(-178f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {
