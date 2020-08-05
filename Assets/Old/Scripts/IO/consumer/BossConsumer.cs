@@ -207,35 +207,35 @@ public class BossConsumer : ConsumeSign
             BossBloodBar.My.ChangeColor(new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f)));
             BossBloodBar.My.SetKillCount(killCount);
         });
-        float add = 1f;
-        float moneyAdd = 1f;
+        int add = 1;
+        int moneyAdd = 1;
         if (killCount <= 5)
         {
-            add = 1.2f;
-            moneyAdd = 1.15f;
+            add = consumeData.maxHealth / 100 * 20;
+            moneyAdd = consumeData.killMoney / 100 * 15;
         }
         else if (killCount <= 10)
         {
-            add = 1.2f;
-            moneyAdd = 1.1f;
+            add = consumeData.maxHealth / 100 * 20;
+            moneyAdd = consumeData.killMoney / 100 * 10;
         }
         else if (killCount <= 15)
         {
-            add = 1.15f;
-            moneyAdd = 1.1f;
+            add = consumeData.maxHealth / 100 * 15;
+            moneyAdd = consumeData.killMoney / 100 * 10;
         }
         else if (killCount <= 20)
         {
-            add = 1.1f;
-            moneyAdd = 1.1f;
+            add = consumeData.maxHealth / 100 * 10;
+            moneyAdd = consumeData.killMoney / 100 * 5;
         }
         else
         {
-            add = 1.05f;
-            moneyAdd = 1.05f;
+            add = consumeData.maxHealth / 100 * 5;
+            moneyAdd = consumeData.killMoney / 100 * 5;
         }
-        consumeData.maxHealth = (int)(consumeData.maxHealth * add);
-        consumeData.killMoney = (int)(consumeData.killMoney * moneyAdd);
+        consumeData.maxHealth +=  add;
+        consumeData.killMoney += moneyAdd;
     }
 
     /// <summary>
@@ -366,21 +366,13 @@ public class BossConsumer : ConsumeSign
         NewCanvasUI.My.consumerInfoFloatWindow.GetComponent<ConsumerFloatWindow>().Init(this);
     }
 
+    /// <summary>
+    /// 技能1（自动释放）
+    /// </summary>
     public void SkillOne()
     {
-
         transform.DOScale(transform.localScale, skillOneTime).OnComplete(() =>
         {
-            //TODO 
-            //    List<MapSign> signs = new List<MapSign>();
-            //    for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
-            //    {
-            //        if (MapManager.My._mapSigns[i].mapType == MapType.Grass)
-            //        {
-            //            signs.Add(MapManager.My._mapSigns[i]);
-            //        }
-            //    }
-
             for (int i = 0; i < 3; i++)
             {
                 MapSign sign = RandomGetMapSign();
@@ -410,13 +402,13 @@ public class BossConsumer : ConsumeSign
         });
     }
 
+    /// <summary>
+    /// 技能2
+    /// </summary>
     public void SkillTwo()
     {
-
         transform.DOScale(transform.localScale, skillTwoTime).OnComplete(() =>
         {
-
-
             for (int i = 0; i < 3; i++)
             {
                 MapSign sign = RandomGetMapSign();
@@ -432,7 +424,6 @@ public class BossConsumer : ConsumeSign
                         break;
                     }
                 }
-
                 sign.AddCost(998, skillTwoTime / 3);
                 var lins = DrawLine(transform.transform.position, sign.transform.position);
                 GameObject effect = Instantiate(skillTwoEffect, transform);
@@ -441,11 +432,12 @@ public class BossConsumer : ConsumeSign
                 effect.transform.DOPath(lins.ToArray(), 3).SetEase(Ease.Linear);
                 Destroy(effect, 3);
             }
-
             SkillTwo();
         });
     }
+
     public float per;
+
     public List<Vector3> DrawLine(Vector3 startTarget, Vector3 Target)
     {
         List<Vector3> pointList = new List<Vector3>();
@@ -488,7 +480,7 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     public void SummonLittle()
     {
-        if (killCount <= 5)
+        if (killCount <= 500)
             return;
         for (int i = 0; i < 8; i++)
         {
@@ -529,7 +521,6 @@ public class BossConsumer : ConsumeSign
         BossBloodBar.My.buffImg.GetComponent<WaveBuffSign>().Init(tempBuffList[index]);
         transform.DOScale(transform.localScale, 10).OnComplete(SwitchElementResistance);
     }
-
 
     public MapSign RandomGetMapSign()
     {
@@ -603,9 +594,9 @@ public class BossConsumer : ConsumeSign
 
     private void OnGUI()
     {
-        if (GUILayout.Button("扣血"))
+        if (GUILayout.RepeatButton("扣血"))
         {
-            ChangeHealth(1000);
+            ChangeHealth(1000000);
         }
 
     }

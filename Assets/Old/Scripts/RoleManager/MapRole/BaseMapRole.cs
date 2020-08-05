@@ -91,6 +91,8 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public List<ProductData> shop;
 
+    public GameObject tradeButton;
+
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
@@ -117,6 +119,7 @@ public class BaseMapRole : MonoBehaviour
             InitAttribute();
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
+
     }
 
     public void CheckLevel()
@@ -512,6 +515,14 @@ public class BaseMapRole : MonoBehaviour
             }
         }
         return bufflist;
+    }
+
+
+    public void HideTradeButton(bool active)
+    {
+        if (tradeButton == null)
+            tradeButton = GetComponentInChildren<RoleTradeButton>().transform.parent.gameObject;
+        tradeButton.SetActive(active);
     }
 
 

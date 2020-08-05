@@ -50,10 +50,11 @@ public class MapSign : MonoBehaviour,IDragHandler
             if (baseMapRole != null)
             {
                 baseMapRole.transform.GetComponent<BaseSkill>().ReUnleashSkills();
-                lostEffect = false;
-            }
 
-      
+            }
+            lostEffect = false;
+
+
         }).Play();
 
     }
@@ -71,9 +72,10 @@ public class MapSign : MonoBehaviour,IDragHandler
         transform.DOScale(100f, time).OnComplete(() =>
         {
             Destroy(eff,0.1f);
-            addCost = false;
+
             
         });
+        addCost = false;
     }
 
  
@@ -104,14 +106,12 @@ public class MapSign : MonoBehaviour,IDragHandler
         hit = Physics.RaycastAll(transform.position + new Vector3(0f, -5f, 0f), Vector3.up);
         for (int j = 0; j < hit.Length; j++)
         {
-            if ( hit[j].transform.GetComponentInParent <BaseMapRole>()!=null)
+            if ( hit[j].transform.CompareTag("MapRole"))
             {
-                baseMapRole = hit[j].transform.GetComponentInParent <BaseMapRole>();
+                baseMapRole = hit[j].transform.GetComponent<BaseMapRole>();
                 weighting = baseMapRole.baseRoleData.riskResistance;
             }
         }
-
-    
     }
 
     // Update is called once per frame

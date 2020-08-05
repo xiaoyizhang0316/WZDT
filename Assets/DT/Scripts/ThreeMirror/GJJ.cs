@@ -50,6 +50,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             hit.transform.GetComponentInChildren<BaseNpc>().DetectNPCRole();
                             GameObject effect = Instantiate(effectPrb, hit.transform);
                             effect.transform.localPosition = Vector3.zero;
+                            hit.transform.GetComponentInParent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
                             //effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
                             Destroy(effect, 1f);
                             Debug.Log("使用广角镜成功");
