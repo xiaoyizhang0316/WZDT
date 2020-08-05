@@ -182,6 +182,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().posY = y;
                     role.GetComponent<BaseMapRole>().MonthlyCost();
                     role.GetComponent<BaseMapRole>().AddTechPoint();
+                    role.GetComponent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
                     BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
                     CreateRoleOperationRecord(role.GetComponent<BaseMapRole>());
                 }

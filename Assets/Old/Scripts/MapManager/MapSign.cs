@@ -104,7 +104,7 @@ public class MapSign : MonoBehaviour,IDragHandler
         hit = Physics.RaycastAll(transform.position + new Vector3(0f, -5f, 0f), Vector3.up);
         for (int j = 0; j < hit.Length; j++)
         {
-            if (hit[j].transform.tag.Equals("MapRole"))
+            if ( hit[j].transform.GetComponentInParent <BaseMapRole>()!=null)
             {
                 baseMapRole = hit[j].transform.GetComponentInParent <BaseMapRole>();
                 weighting = baseMapRole.baseRoleData.riskResistance;

@@ -47,7 +47,7 @@ public class FTE_2_Step_12 : BaseStep
         if (TradeManager.My.CheckTwoRoleHasTrade(PlayerData.My.RoleData[4],PlayerData.My.RoleData[5]))
         {
             Debug.Log("检测成功");
-
+            MapManager.My.SetLand(4,20);
             StopCurrentStep();
         }
         else
