@@ -110,8 +110,6 @@ public class MapSign : MonoBehaviour,IDragHandler
                 weighting = baseMapRole.baseRoleData.riskResistance;
             }
         }
-
-    
     }
 
     // Update is called once per frame
