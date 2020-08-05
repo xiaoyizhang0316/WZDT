@@ -13,7 +13,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 
     public string loginRecordID;
     private string token;
-    public string deviceID;
+    private int groupID = 0;
+    private string deviceID;
     public string playerID;
     public PlayerDatas playerDatas;
     public int currentLevel = 0;
@@ -27,7 +28,14 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     public List<LevelProgress> levelProgressList;
 
     public List<ReplayList> replayLists;
-    public List<ReplayList> rankList;
+
+    public GlobalRankList globalList;
+    public GroupRankList groupList;
+    public GroupRankList groupRank;
+    public GlobalRankList globalRank;
+    public int currentGroupPage = 0;
+    public int currentGlobalPage = 0;
+    
 
     private PlayerEquip playerEquip;
     public PlayerEquips playerEquips;
@@ -39,7 +47,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         deviceID = SystemInfo.deviceUniqueIdentifier;
         levelProgressList = new List<LevelProgress>();
         replayLists = new List<ReplayList>();
-        rankList = new List<ReplayList>();
+        
         playerEquipsList = new List<PlayerEquip>();
     }
 
@@ -73,6 +81,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     playerID = playerDatas.playerID;
                     loginRecordID = playerDatas.loginRecordID;
                     token = playerDatas.token;
+                    groupID = playerDatas.groupID;
                     //Debug.Log(playerID + " " + token);
                     //Debug.Log("token-----" + token);
                     doSuccess?.Invoke();
@@ -565,47 +574,168 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     }
 
     /// <summary>
-    /// 获取排行榜，存储在该类的 rankList 中， 可能为空，后续相关操作，请自行判断
+    /// 获取小组排行榜
     /// </summary>
-    /// <param name="sceneName">场景名称 如：FTE_1</param>
-    /// <param name="doSuccess"></param>
-    /// <param name="doFail"></param>
-    public void GetRankingList(string sceneName, Action doSuccess=null, Action doFail = null)
+    public void GetGroupRankingList(string sceneName, int page, Action<List<RankList>> doSuccess)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
-        //keyValues.Add("token", token);
-        keyValues.Add("playerID", "11111");
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
         keyValues.Add("sceneName", sceneName);
+        keyValues.Add("page", page.ToString());
+        keyValues.Add("groupID", groupID.ToString());
+        currentGroupPage = page;
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.getRankingLists, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.getGroupRankingList, (www) => {
+
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
                 ShowReconn();
                 return;
             }
+
             if (response.status == 1)
             {
-                ReplayLists replayList = JsonUtility.FromJson<ReplayLists>(response.data);
-                rankList.Clear();
-                foreach (var rl in replayList.replayLists)
+                try
                 {
-                    rankList.Add(rl);
+                    //Debug.Log(response.data);
+                    groupList = JsonUtility.FromJson<GroupRankList>(response.data);
+                    doSuccess?.Invoke(groupList.rankLists);
                 }
-                //Debug.Log(rankList.Count);
-                //Debug.Log(rankList[0].recordTime);
-                //Debug.Log(rankList[0].win);
-                //Debug.Log(rankList[0].recordID);
-                //Debug.Log(response.data);
-                doSuccess?.Invoke();
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.TargetSite);
+                    Debug.Log(ex.Message);
+                }
             }
             else
             {
                 HttpManager.My.ShowTip(response.errMsg);
-                doFail?.Invoke();
+                //doFail?.Invoke();
             }
             SetMask();
-        }, keyValues, HttpType.Post, HttpId.getRankListID));
+        }, keyValues, HttpType.Get, HttpId.getGroupRankingID));
+    }
+
+    /// <summary>
+    /// 获取全球排行榜
+    /// </summary>
+    public void GetGlobalRankingList(string sceneName,int page, Action<List<RankList>> doSuccess)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("sceneName", sceneName);
+        keyValues.Add("page", page.ToString());
+        currentGlobalPage = page;
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.getGlobalRankingList, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+
+            if (response.status == 1)
+            {
+                try
+                {
+                    //Debug.Log(response.data);
+                    globalList = JsonUtility.FromJson<GlobalRankList>(response.data);
+                    doSuccess?.Invoke(globalList.rankLists);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.TargetSite);
+                    Debug.Log(ex.Message);
+                }
+            }
+            else
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                //doFail?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.getGlobalRankingID));
+    }
+
+    public void GetGlobalRank(string sceneName, Action doSuccess)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("sceneName", sceneName);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.getPlayerGlobalRanking, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+
+            if (response.status == 1)
+            {
+                try
+                {
+                    //Debug.Log(response.data);
+                    globalRank = JsonUtility.FromJson<GlobalRankList>(response.data);
+                    doSuccess?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.TargetSite);
+                    Debug.Log(ex.Message);
+                }
+            }
+            else
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                //doFail?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.getplayerGlobalRankingID));
+    }
+
+    public void GetGroupRank(string sceneName, Action doSuccess)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("sceneName", sceneName);
+        keyValues.Add("groupID", groupID.ToString());
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.getPlayerGroupRanking, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+
+            if (response.status == 1)
+            {
+                try
+                {
+                    //Debug.Log(response.data);
+                    groupRank = JsonUtility.FromJson<GroupRankList>(response.data);
+                    doSuccess?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.TargetSite);
+                    Debug.Log(ex.Message);
+                }
+            }
+            else
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                //doFail?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.getplayerGroupRankingID));
     }
 
     /// <summary>
