@@ -39,9 +39,11 @@ public class RankItem : MonoBehaviour
 
     private string recordID = "";
     int rank = 0;
+    //Color _color = Color.white;;
     void Start()
     {
         replay_btn.onClick.AddListener(Review);
+        //_color = Color.white;
     }
 
     void Review()
@@ -59,6 +61,7 @@ public class RankItem : MonoBehaviour
 
     public void Setup(ReplayList rp)
     {
+        GetComponent<Image>().color = Color.white;
         recordID = rp.recordID;
         noRank.SetActive(false);
         rankInfos.SetActive(false);
@@ -67,10 +70,15 @@ public class RankItem : MonoBehaviour
         recordScore.text = rp.score.ToString();
         recordDate.text = TimeStamp.TimeStampToString(rp.recordTime);
         recordTimeCount.text = rp.timeCount.ToString();
+        if (rp.score == -1)
+        {
+            GetComponent<Image>().color = Color.gray;
+        }
     }
 
     public void Setup(RankList rankList, bool isGroup)
     {
+        GetComponent<Image>().color = Color.white;
         recordID = rankList.recordID;
         noRank.SetActive(false);
         recordInfos.SetActive(false);

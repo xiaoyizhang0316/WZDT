@@ -300,10 +300,10 @@ public class RankPanel : MonoSingleton<RankPanel>
         {
             for(int i= NetworkMgr.My.replayLists.Count-1; i>0; i--)
             {
-                if (i < childCount)
+                if (NetworkMgr.My.replayLists.Count - 1-i < childCount)
                 {
-                    listContent.GetChild(i).GetComponent<RankItem>().Setup(NetworkMgr.My.replayLists[i]);
-                    listContent.GetChild(i).gameObject.SetActive(true);
+                    listContent.GetChild(NetworkMgr.My.replayLists.Count - 1 - i).GetComponent<RankItem>().Setup(NetworkMgr.My.replayLists[i]);
+                    listContent.GetChild(NetworkMgr.My.replayLists.Count - 1 - i).gameObject.SetActive(true);
                     continue;
                 }
                 GameObject rankObj = Instantiate(rankPrefab, listContent);
