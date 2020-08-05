@@ -207,35 +207,35 @@ public class BossConsumer : ConsumeSign
             BossBloodBar.My.ChangeColor(new Color(UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f), UnityEngine.Random.Range(0, 1f)));
             BossBloodBar.My.SetKillCount(killCount);
         });
-        float add = 1f;
-        float moneyAdd = 1f;
+        int add = 1;
+        int moneyAdd = 1;
         if (killCount <= 5)
         {
-            add = 1.2f;
-            moneyAdd = 1.15f;
+            add = consumeData.maxHealth / 100 * 20;
+            moneyAdd = consumeData.killMoney / 100 * 15;
         }
         else if (killCount <= 10)
         {
-            add = 1.2f;
-            moneyAdd = 1.1f;
+            add = consumeData.maxHealth / 100 * 20;
+            moneyAdd = consumeData.killMoney / 100 * 10;
         }
         else if (killCount <= 15)
         {
-            add = 1.15f;
-            moneyAdd = 1.1f;
+            add = consumeData.maxHealth / 100 * 15;
+            moneyAdd = consumeData.killMoney / 100 * 10;
         }
         else if (killCount <= 20)
         {
-            add = 1.1f;
-            moneyAdd = 1.1f;
+            add = consumeData.maxHealth / 100 * 10;
+            moneyAdd = consumeData.killMoney / 100 * 5;
         }
         else
         {
-            add = 1.05f;
-            moneyAdd = 1.05f;
+            add = consumeData.maxHealth / 100 * 5;
+            moneyAdd = consumeData.killMoney / 100 * 5;
         }
-        consumeData.maxHealth = (int)(consumeData.maxHealth * add);
-        consumeData.killMoney = (int)(consumeData.killMoney * moneyAdd);
+        consumeData.maxHealth +=  add;
+        consumeData.killMoney += moneyAdd;
     }
 
     /// <summary>
