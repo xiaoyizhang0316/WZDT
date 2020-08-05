@@ -485,7 +485,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CommitLose()
     {
         endTime = TimeStamp.GetCurrentTimeStamp();
-        if (endTime - startTime <= 20 && playerOperations.Count <= 5)
+        if (endTime - startTime <= 20 || playerOperations.Count <= 5)
             return;
         tempReplay = new PlayerReplay(false);
         NetworkMgr.My.AddReplayData(tempReplay);
