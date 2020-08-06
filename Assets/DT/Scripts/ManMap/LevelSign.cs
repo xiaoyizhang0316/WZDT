@@ -17,6 +17,8 @@ public class LevelSign : MonoBehaviour
 
     public int starRequirement;
 
+    public int initStarRequirement;
+
     public Button LevelButton;
 
     public Text starNeed;
@@ -30,6 +32,7 @@ public class LevelSign : MonoBehaviour
     void Start()
     {
         starNeed = transform.Find("StarNeed").GetComponent<Text>();
+        initStarRequirement = starRequirement;
         LevelButton.onClick.AddListener(() =>
         {
             Debug.Log("1231231231");
