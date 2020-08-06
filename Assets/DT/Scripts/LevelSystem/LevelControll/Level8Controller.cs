@@ -13,7 +13,7 @@ public class Level8Controller : BaseLevelController
             return;
         }
         starTwoStatus = true;
-        starTwoCondition = "资产从未低于-5000¥";
+        starTwoCondition = "资产从未低于-20000¥";
     }
 
     public override void CheckStarThree()
