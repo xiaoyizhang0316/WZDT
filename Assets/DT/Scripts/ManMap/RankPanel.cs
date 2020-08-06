@@ -78,6 +78,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         {
             return;
         }
+        HideAllList();
         title.text = "历史记录";
         currentShowIndex = 0;
         SetButton(false);
@@ -105,6 +106,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         {
             return;
         }
+        HideAllList();
         title.text = "小组排名";
         currentShowIndex = 1;
         if (isOn)
@@ -116,6 +118,7 @@ public class RankPanel : MonoSingleton<RankPanel>
                 ShowRankList(true);
                 ShowMyRank(true);
                 RefreshPageButtons(true);
+                SetButton(true);
             }
             else
             {
@@ -131,6 +134,7 @@ public class RankPanel : MonoSingleton<RankPanel>
                     }
                     ShowRankList(true);
                     RefreshPageButtons(true);
+                    SetButton(true);
                 });
                 NetworkMgr.My.GetGroupRank(currentSceneName, () => {
                     ShowMyRank(true);
@@ -138,7 +142,7 @@ public class RankPanel : MonoSingleton<RankPanel>
                 getGroup = true;
             }
         }
-        SetButton(true);
+        //SetButton(true);
     }
 
     void Global(bool isOn)
@@ -147,6 +151,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         {
             return;
         }
+        HideAllList();
         title.text = "全球排名";
         currentShowIndex = 2;
         if (isOn)
@@ -158,6 +163,7 @@ public class RankPanel : MonoSingleton<RankPanel>
                 ShowRankList(false);
                 ShowMyRank(false);
                 RefreshPageButtons(false);
+                SetButton(true);
             }
             else
             {
@@ -172,6 +178,7 @@ public class RankPanel : MonoSingleton<RankPanel>
                     }
                     ShowRankList(false);
                     RefreshPageButtons(false);
+                    SetButton(true);
                 });
                 NetworkMgr.My.GetGlobalRank(currentSceneName, () => {
                     ShowMyRank(false);
@@ -179,7 +186,7 @@ public class RankPanel : MonoSingleton<RankPanel>
                 getGlobal = true;
             }
         }
-        SetButton(true);
+        
     }
 
     void PrePage()
@@ -314,7 +321,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         {
             for(int i=0; i<childCount; i++)
             {
-                listContent.GetChild(i).gameObject.SetActive(false);
+                //listContent.GetChild(i).gameObject.SetActive(false);
                 if (i < NetworkMgr.My.replayLists.Count)
                 {
                     listContent.GetChild(i).GetComponent<RankItem>().Setup(NetworkMgr.My.replayLists[NetworkMgr.My.replayLists.Count-1-i]);
@@ -335,7 +342,7 @@ public class RankPanel : MonoSingleton<RankPanel>
                 {
                     if (i < childCount)
                     {
-                        listContent.GetChild(i).gameObject.SetActive(false);
+                        //listContent.GetChild(i).gameObject.SetActive(false);
                         if(i + NetworkMgr.My.currentGroupPage * CommonParams.rankPageMaxNum < groupList.Count)
                         {
                             listContent.GetChild(i).GetComponent<RankItem>().Setup(groupList[i+NetworkMgr.My.currentGroupPage*CommonParams.rankPageMaxNum],isGroup);
@@ -356,7 +363,7 @@ public class RankPanel : MonoSingleton<RankPanel>
             {
                 for (int i = 0; i < childCount; i++)
                 {
-                    listContent.GetChild(i).gameObject.SetActive(false);
+                    //listContent.GetChild(i).gameObject.SetActive(false);
                     if (i < /*groupList.Count*/ CommonParams.rankPageMaxNum)
                     {
                         if(i + NetworkMgr.My.currentGroupPage * CommonParams.rankPageMaxNum < groupList.Count)
@@ -377,7 +384,7 @@ public class RankPanel : MonoSingleton<RankPanel>
                 {
                     if (i < childCount)
                     {
-                        listContent.GetChild(i).gameObject.SetActive(false);
+                        //listContent.GetChild(i).gameObject.SetActive(false);
                         if(i + NetworkMgr.My.currentGlobalPage * CommonParams.rankPageMaxNum < globalList.Count)
                         {
                             listContent.GetChild(i).GetComponent<RankItem>().Setup(globalList[i+ NetworkMgr.My.currentGlobalPage * CommonParams.rankPageMaxNum], isGroup);
@@ -398,7 +405,7 @@ public class RankPanel : MonoSingleton<RankPanel>
             {
                 for (int i = 0; i < childCount; i++)
                 {
-                    listContent.GetChild(i).gameObject.SetActive(false);
+                    //listContent.GetChild(i).gameObject.SetActive(false);
                     if (i < /*globalList.Count*/ CommonParams.rankPageMaxNum)
                     {
                         if(i + NetworkMgr.My.currentGlobalPage * CommonParams.rankPageMaxNum < globalList.Count)
@@ -409,6 +416,14 @@ public class RankPanel : MonoSingleton<RankPanel>
                     }
                 }
             }
+        }
+    }
+
+    void HideAllList()
+    {
+        for(int i=0; i < listContent.childCount; i++)
+        {
+            listContent.GetChild(i).gameObject.SetActive(false);
         }
     }
 
