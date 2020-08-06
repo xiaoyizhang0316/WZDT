@@ -17,7 +17,7 @@ public class LevelSign : MonoBehaviour
 
     public int starRequirement;
 
-    public int initStarRequirement;
+    public int actualStarRequirement;
 
     public Button LevelButton;
 
@@ -32,7 +32,6 @@ public class LevelSign : MonoBehaviour
     void Start()
     {
         starNeed = transform.Find("StarNeed").GetComponent<Text>();
-        initStarRequirement = starRequirement;
         LevelButton.onClick.AddListener(() =>
         {
             Debug.Log("1231231231");
@@ -168,7 +167,7 @@ public class LevelSign : MonoBehaviour
     /// </summary>
     public void InitStarNeedText()
     {
-        starNeed.text = starRequirement.ToString();
+        starNeed.text = actualStarRequirement.ToString();
         starNeed.color = CheckPrevStar() ? Color.green : Color.red;
     }
 
@@ -187,6 +186,6 @@ public class LevelSign : MonoBehaviour
                 result += l.starNum;
             }
         }
-        return result >= starRequirement;
+        return result >= actualStarRequirement;
     }
 }

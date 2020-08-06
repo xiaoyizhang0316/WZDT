@@ -15,7 +15,12 @@ public class Level9Controller : BaseLevelController
         {
             targetBoss = FindObjectOfType<BossConsumer>();
             if (targetBoss == null)
+            {
+                starOneStatus = false;
+                starOneCondition = "首领消费者满足超过8次,当前：1";
                 return;
+            }
+
         }
         if (targetBoss.killCount >= 8)
         {
@@ -34,7 +39,12 @@ public class Level9Controller : BaseLevelController
         {
             targetBoss = FindObjectOfType<BossConsumer>();
             if (targetBoss == null)
+            {
+                starTwoStatus = false;
+                starTwoCondition = "首领消费者满足超过15次,当前：1";
                 return;
+            }
+
         }
         if (targetBoss.killCount >= 15)
         {
@@ -53,7 +63,12 @@ public class Level9Controller : BaseLevelController
         {
             targetBoss = FindObjectOfType<BossConsumer>();
             if (targetBoss == null)
+            {
+                starThreeStatus = false;
+                starThreeCondition = "首领消费者满足超过22次,当前：1";
                 return;
+            }
+
         }
         if (targetBoss.killCount >= 22)
         {
