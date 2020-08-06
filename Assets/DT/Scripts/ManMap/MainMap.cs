@@ -26,7 +26,6 @@ public class MainMap : MonoBehaviour
         //NetworkMgr.My.GetAnswers(()=>title.text = NetworkMgr.My.currentAnswer);
         GetChaseLevel();
         GetAnswers();
-
         GetEquips();
     }
 

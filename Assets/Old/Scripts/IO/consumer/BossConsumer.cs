@@ -504,15 +504,18 @@ public class BossConsumer : ConsumeSign
     {
         if (buffList.Count > 0)
         {
-            if (tempBuffList.Contains(buffList[0].buffId))
+            for (int i = 0; i < buffList.Count; i++)
             {
-                int prevBuff = buffList[0].buffId;
-                RemoveBuff(buffList[0]);
-                tempBuffList.Remove(prevBuff);
-                bornBuffList.Remove(prevBuff);
-                if (tempBuffList.Count == 0)
-                    tempBuffList.AddRange(randomList);
-            }
+                if (tempBuffList.Contains(buffList[i].buffId))
+                {
+                    int prevBuff = buffList[i].buffId;
+                    RemoveBuff(buffList[i]);
+                    tempBuffList.Remove(prevBuff);
+                    bornBuffList.Remove(prevBuff);
+                    if (tempBuffList.Count == 0)
+                        tempBuffList.AddRange(randomList);
+                }
+            }         
         }
         int index = Random.Range(0, tempBuffList.Count);
         BuffData buff = GameDataMgr.My.GetBuffDataByID(tempBuffList[index]);
