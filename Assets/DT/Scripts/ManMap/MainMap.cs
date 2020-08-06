@@ -26,6 +26,42 @@ public class MainMap : MonoBehaviour
         GetEquips();
     }
 
+    public void GetChaseLevel()
+    {
+
+    }
+
+    public void InitChaseLevel(int chaseLevel)
+    {
+        foreach (var ls in levelSigns)
+        {
+            //int level = int.Parse( ls.loadScene.Split('_')[1]);
+            switch(chaseLevel)
+            {
+                case 0:
+                    break;
+                case 1:
+                    {
+                        ls.starRequirement = ls.initStarRequirement - ls.initStarRequirement > 2 ? 2 : ls.initStarRequirement;
+                        break;
+                    }
+                case 2:
+                    {
+                        ls.starRequirement = ls.initStarRequirement - ls.initStarRequirement > 5 ? 5 : ls.initStarRequirement;
+                        break;
+                    }
+                case 3:
+                    {
+                        ls.starRequirement = ls.initStarRequirement - ls.initStarRequirement > 7 ? 7 : ls.initStarRequirement;
+                        break;
+                    }
+                default:
+                    break;
+
+            }
+        }
+    }
+
     private void GetAnswers()
     {
         NetworkMgr.My.GetAnswers(() => title.text = NetworkMgr.My.currentAnswer);
