@@ -29,7 +29,12 @@ public class MainMap : MonoBehaviour
 
     public void GetChaseLevel()
     {
-        InitChaseLevel(0);
+        //InitChaseLevel(0);
+        NetworkMgr.My.GetCatchLevel((catchLevel) =>
+        {
+            Debug.Log("catchLevel:" + catchLevel);
+            InitChaseLevel(catchLevel);
+        });
     }
 
     public void InitChaseLevel(int chaseLevel)
