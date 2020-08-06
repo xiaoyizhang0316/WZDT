@@ -133,7 +133,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
             isUseGuide.gameObject.SetActive(true);
             isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
         }
-        if (int.Parse(sceneName.Split('_')[1]) == 1)
+        if (int.Parse(sceneName.Split('_')[1]) == 1 || int.Parse(sceneName.Split('_')[1]) == 9)
         {
             cheatPanel.SetActive(false);
         }
