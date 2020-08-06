@@ -298,7 +298,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         int childCount = listContent.childCount;
         if (childCount <= NetworkMgr.My.replayLists.Count)
         {
-            for(int i= NetworkMgr.My.replayLists.Count-1; i>0; i--)
+            for(int i= NetworkMgr.My.replayLists.Count-1; i>=0; i--)
             {
                 if (NetworkMgr.My.replayLists.Count - 1-i < childCount)
                 {
