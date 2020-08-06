@@ -98,6 +98,9 @@ public class BaseMapRole : MonoBehaviour
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
     }
 
+    /// <summary>
+    /// 根据角色模板初始化角色属性
+    /// </summary>
     public void InitAttribute()
     {
         baseRoleData.effect = baseRoleData.baseRoleData.effect;
@@ -122,6 +125,9 @@ public class BaseMapRole : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 根据角色等级改变模型
+    /// </summary>
     public void CheckLevel()
     {
         if (baseRoleData.baseRoleData.level == 1)
@@ -271,6 +277,9 @@ public class BaseMapRole : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// 重新计算角色属性
+    /// </summary>
     public void ResetAllBuff()
     {
         for (int i = 0; i < buffList.Count; i++)
@@ -517,7 +526,10 @@ public class BaseMapRole : MonoBehaviour
         return bufflist;
     }
 
-
+    /// <summary>
+    /// 隐藏配置交易按钮
+    /// </summary>
+    /// <param name="active"></param>
     public void HideTradeButton(bool active)
     {
         if (tradeButton == null)

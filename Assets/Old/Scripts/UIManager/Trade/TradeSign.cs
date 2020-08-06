@@ -154,6 +154,7 @@ public class TradeSign : MonoBehaviour
             go.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
             tempStart = go.transform.position;
         }
+        gameObject.SetActive(NewCanvasUI.My.isProductLineActive);
     }
 
     /// <summary>
@@ -166,6 +167,7 @@ public class TradeSign : MonoBehaviour
         GameObject go = Instantiate(tradeBuffLine);
         go.transform.SetParent(transform);
         go.GetComponent<DrawMoneyLine>().InitPos(cast.tradePoint.transform, target.tradePoint.transform, tradeData.ID);
+        gameObject.SetActive(NewCanvasUI.My.isInfoLineActive);
     }
 
     /// <summary>
@@ -266,5 +268,42 @@ public class TradeSign : MonoBehaviour
         {
             return tradeData.selectCashFlow == CashFlowType.先钱;
         }
+    }
+
+    private TradeLineItem[] list;
+
+    private LineRenderer infoLine;
+
+    /// <summary>
+    /// 开关显示物流线
+    /// </summary>
+    /// <param name="isActive"></param>
+    public void HideProductLine(bool isActive)
+    {
+        if (list.Length == 0)
+        {
+            list = GetComponentsInChildren<TradeLineItem>();
+            if (list.Length == 0)
+                return;
+        }
+        foreach (TradeLineItem t in list)
+        {
+            t.GetComponent<MeshRenderer>().enabled = isActive;
+        }
+    }
+
+    /// <summary>
+    /// 开关显示信息流线
+    /// </summary>
+    /// <param name="isActive"></param>
+    public void HideInfoLine(bool isActive)
+    {
+        if (infoLine == null)
+        {
+            infoLine = GetComponentInChildren<LineRenderer>();
+            if (infoLine == null)
+                return;
+        }
+        infoLine.enabled = isActive;
     }
 }

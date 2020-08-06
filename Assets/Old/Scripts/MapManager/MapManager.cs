@@ -52,6 +52,12 @@ public class MapManager : MonoSingleton<MapManager>
         return true;
     }
 
+    /// <summary>
+    /// 根据X，Y坐标查找地块
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
     public MapSign GetMapSignByXY(int x,int y)
     {
         foreach(MapSign m in _mapSigns)

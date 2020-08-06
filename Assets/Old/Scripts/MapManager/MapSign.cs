@@ -33,6 +33,10 @@ public class MapSign : MonoBehaviour,IDragHandler
          isCanPlace = GetComponent<MeshRenderer>().enabled && isCanPlace;
     }
 
+    /// <summary>
+    /// 角色失效
+    /// </summary>
+    /// <param name="time"></param>
     public void LostEffect(int time)
     {
         lostEffect = true;
@@ -41,27 +45,25 @@ public class MapSign : MonoBehaviour,IDragHandler
         {
             eff =    Instantiate(    MapManager.My.skillOneEffect,this.transform);
         }).Play();
- 
-  
         transform.DOScale(100f, time).OnComplete(() =>
         {
             Destroy(eff,0.1f);
-
             if (baseMapRole != null)
             {
                 baseMapRole.transform.GetComponent<BaseSkill>().ReUnleashSkills();
-
             }
             lostEffect = false;
-
-
         }).Play();
 
     }
 
+    /// <summary>
+    /// 增加交易成本
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="time"></param>
     public void AddCost(int id,int time )
     {
-        
         addCost = true;
         GameObject eff = null;
         transform.DOScale(100f, 3).OnComplete(() =>
@@ -72,10 +74,9 @@ public class MapSign : MonoBehaviour,IDragHandler
         transform.DOScale(100f, time).OnComplete(() =>
         {
             Destroy(eff,0.1f);
-
-            
+            addCost = false;
         });
-        addCost = false;
+
     }
 
  
@@ -98,6 +99,9 @@ public class MapSign : MonoBehaviour,IDragHandler
         }
     }
 
+    /// <summary>
+    /// 获取在此地块上的角色
+    /// </summary>
     public void  GetRoleByLand()
     {
         weighting = 20;
@@ -120,14 +124,12 @@ public class MapSign : MonoBehaviour,IDragHandler
        GetRoleByLand();
        if (lostEffect)
        {
-       
            if (lostEffect&&baseMapRole!=null)
            {
                baseMapRole.transform.GetComponent<BaseSkill>().CancelSkill();
                
            }
        }
-
        if (addCost)
        {
            if (baseMapRole != null)
@@ -138,6 +140,5 @@ public class MapSign : MonoBehaviour,IDragHandler
                baseb.SetRoleBuff(baseMapRole, baseMapRole, baseMapRole);
            }
        }
-    }
-       
+    } 
 }
