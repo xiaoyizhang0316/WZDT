@@ -28,10 +28,10 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public GameObject commonProductInfo;
     public GameObject pop;
     public GameObject lockedInfo;
+    public GameObject bulletWareHouse;
 
     public BaseMapRole currentNpc;
     public BaseSkill currentSkill;
-
     public GameObject buffTextContent;
     public Text buffText;
 
@@ -135,7 +135,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         specialInfo.SetActive(false);
         commonProductInfo.SetActive(false);
         commonServiceInfo.SetActive(false);
-        
+        bulletWareHouse.SetActive(false);
         lockedInfo.SetActive(false);
     }
 

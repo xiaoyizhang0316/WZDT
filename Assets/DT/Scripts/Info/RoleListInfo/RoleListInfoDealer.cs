@@ -57,7 +57,7 @@ public class RoleListInfoDealer : BaseRoleListInfo
     {
         efficiencyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(role.efficiency/ 120f * 150f,
-                efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f);
+                efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
         
     }
     

@@ -69,7 +69,7 @@ public class RankItem : MonoBehaviour
         SetStars(recordStars, rp.stars);
         recordScore.text = rp.score.ToString();
         recordDate.text = TimeStamp.TimeStampToString(rp.recordTime);
-        recordTimeCount.text = rp.timeCount/60+":"+rp.timeCount%60;
+        recordTimeCount.text = rp.realTime/60+":"+rp.realTime%60;
         if (rp.score == -1)
         {
             GetComponent<Image>().color = Color.gray;
