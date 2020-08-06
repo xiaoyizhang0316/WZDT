@@ -220,6 +220,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public bool isTradeButtonActive = true;
 
+    public bool isProductLineActive = true;
+
+    public bool isInfoLineActive = true;
+
     /// <summary>
     /// 隐藏所有角色头上的创建交易按钮
     /// </summary>
@@ -236,6 +240,26 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 }
             }
             role.HideTradeButton(isTradeButtonActive);
+        }
+    }
+
+    public void HideAllProductLine()
+    {
+        isProductLineActive = !isProductLineActive;
+        foreach (TradeSign sign in TradeManager.My.tradeList.Values)
+        {
+            if (sign.GetComponentInChildren<TradeLineItem>() != null)
+                sign.gameObject.SetActive(isProductLineActive);
+        }
+    }
+
+    public void HideAllInfoLine()
+    {
+        isInfoLineActive = !isInfoLineActive;
+        foreach (TradeSign sign in TradeManager.My.tradeList.Values)
+        {
+            if (sign.GetComponentInChildren<LineRenderer>() != null)
+                sign.gameObject.SetActive(isInfoLineActive);
         }
     }
 }

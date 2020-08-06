@@ -47,8 +47,6 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         {
             NetworkMgr.My.isShowFPS = true;
         }
-        int a = int.MaxValue;
-        print(a);
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(sceneName);
     }

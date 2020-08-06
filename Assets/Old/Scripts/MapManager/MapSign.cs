@@ -112,7 +112,7 @@ public class MapSign : MonoBehaviour,IDragHandler
         {
             if ( hit[j].transform.CompareTag("MapRole"))
             {
-                baseMapRole = hit[j].transform.GetComponent<BaseMapRole>();
+                baseMapRole = hit[j].transform.GetComponentInParent<BaseMapRole>();
                 weighting = baseMapRole.baseRoleData.riskResistance;
             }
         }
