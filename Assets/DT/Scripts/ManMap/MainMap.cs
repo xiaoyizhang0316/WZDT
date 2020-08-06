@@ -26,7 +26,7 @@ public class MainMap : MonoBehaviour
         //NetworkMgr.My.GetAnswers(()=>title.text = NetworkMgr.My.currentAnswer);
         GetChaseLevel();
         GetAnswers();
-        GetLevelProgress();
+
         GetEquips();
     }
 
@@ -37,6 +37,7 @@ public class MainMap : MonoBehaviour
         {
             Debug.Log("catchLevel:" + catchLevel);
             InitChaseLevel(catchLevel);
+            GetLevelProgress();
         });
     }
 
