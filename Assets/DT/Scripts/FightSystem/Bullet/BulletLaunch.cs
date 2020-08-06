@@ -248,7 +248,7 @@ public class BulletLaunch : MonoBehaviour
   public void LanchLeaser(ProductData data, ConsumeSign target,Transform BulletLaunch,BulletLaunch lunch,Transform pos)
     {
         GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Leaser);
-        Debug.Log("初始化子弹"+gameObject.name);
+     
         gameObject.GetComponent<GoodsSign>().productData = data;
        gameObject.GetComponent<GoodsSign>().lunch = lunch;
         gameObject.GetComponent<GoodsSign>().target = target;
@@ -259,7 +259,7 @@ public class BulletLaunch : MonoBehaviour
 
         launchShooter.DOLookAt(target.transform.position, 0.1f).OnComplete(() =>
         {
-            Debug.Log("初始化拖尾"+gameObject.name);
+        
              gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().tile);
             float flyTime = Vector3.Distance(target.transform.position, gameObject.transform.position) / 8f;
 //            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
@@ -269,7 +269,7 @@ public class BulletLaunch : MonoBehaviour
                     isplay = false;
                     if (gameObject.GetComponent<GoodsSign>().target != null)
                     {
-                        Debug.Log("初始化爆炸"+gameObject.name);
+                   
                         gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
 
 
