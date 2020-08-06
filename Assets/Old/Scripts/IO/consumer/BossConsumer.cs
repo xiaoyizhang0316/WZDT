@@ -285,7 +285,7 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     public void AddPlayerResource()
     {
-        StageGoal.My.playerHealth += 30 + (killCount / 3) * 10;
+        StageGoal.My.playerHealth += 30 + (killCount / 5) * 3;
     }
 
     /// <summary>
