@@ -21,6 +21,7 @@ public static class Url
 
     #region player infos
     public static string updatePlayerDatas = ip + "updatePlayerDatas";
+    public static string getCatchLevel = ip + "getPlayerCatchLevel";
     #endregion
 
     #region three words 

@@ -166,6 +166,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         {
             line.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i, datas[i].restMoney / (float)maxAmount * 100f));
             healthLine.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i, datas[i].blood / (float)maxHealth * 100f));
+            //if(i==datas.Count-1)
+            //    Debug.LogError(datas[i].restMoney);
         }
         //line.vectorLine.points2.Add(new Vector2(1326f, Mathf.Min(datas[datas.Count - 1].restMoney / (float)maxAmount * 100f,100f)));
         healthLine.transform.SetAsLastSibling();

@@ -11,6 +11,7 @@ public class MainMap : MonoBehaviour
     public Transform threeWords;
 
     public GameObject chaseText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +32,12 @@ public class MainMap : MonoBehaviour
 
     public void GetChaseLevel()
     {
-        InitChaseLevel(2);
+        //InitChaseLevel(0);
+        NetworkMgr.My.GetCatchLevel((catchLevel) =>
+        {
+            Debug.Log("catchLevel:" + catchLevel);
+            InitChaseLevel(catchLevel);
+        });
     }
 
     public void InitChaseLevel(int chaseLevel)
@@ -56,6 +62,7 @@ public class MainMap : MonoBehaviour
                         chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "1";
                         chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.green;
                         chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-2";
+                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.green;
                         break;
                     }
                 case 2:
@@ -65,6 +72,7 @@ public class MainMap : MonoBehaviour
                         chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "2";
                         chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.yellow;
                         chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-4";
+                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.yellow;
                         break;
                     }
                 case 3:
@@ -74,6 +82,7 @@ public class MainMap : MonoBehaviour
                         chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "3";
                         chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.red;
                         chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-6";
+                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.red;
                         break;
                     }
                 default:
