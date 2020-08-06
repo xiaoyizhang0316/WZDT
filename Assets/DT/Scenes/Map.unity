@@ -810,6 +810,7 @@ MonoBehaviour:
   mission_2: "\u603B\u8D44\u4EA7\u4ECE\u672A\u4F4E\u4E8E-20000"
   mission_3: "\u6D88\u8D39\u8005\u6536\u5165\u5360\u603B\u6536\u516550%\u4EE5\u4E0A"
   starRequirement: 17
+  actualStarRequirement: 0
   LevelButton: {fileID: 241482737}
   starNeed: {fileID: 825304100}
   loadScene: FTE_8
@@ -3275,6 +3276,7 @@ MonoBehaviour:
   mission_2: "\u6240\u6709\u4EA4\u6613\u65B9\u5F0F\u8C03\u4E3A\u6700\u4F18\u8BBE\u7F6E"
   mission_3: "\u4E0D\u653E\u7F6E\u81EA\u6709\u7684\u79CD\u5B50\u5546\u8FC7\u5173"
   starRequirement: 5
+  actualStarRequirement: 0
   LevelButton: {fileID: 1783234902}
   starNeed: {fileID: 1732922699}
   loadScene: FTE_4
@@ -3875,6 +3877,7 @@ RectTransform:
   - {fileID: 1986625606}
   - {fileID: 938053222}
   - {fileID: 416258648}
+  - {fileID: 2105983065}
   m_Father: {fileID: 1441346009}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4234,6 +4237,7 @@ MonoBehaviour:
   mission_2: "\u6EE1\u8DB328\u4E2A\u4E2D\u7EA7\u84DD\u9886\u6D88\u8D39\u8005"
   mission_3: "\u4E0D\u653E\u7F6E\u81EA\u6709\u7684\u96F6\u552E\u5546"
   starRequirement: 1
+  actualStarRequirement: 0
   LevelButton: {fileID: 1824538535}
   starNeed: {fileID: 1260079902}
   loadScene: FTE_2
@@ -5570,6 +5574,7 @@ MonoBehaviour:
   mission_2: 2
   mission_3: 3
   starRequirement: 1
+  actualStarRequirement: 0
   LevelButton: {fileID: 130935242}
   starNeed: {fileID: 1739299197}
   loadScene: FTE_20
@@ -6575,6 +6580,7 @@ MonoBehaviour:
   mission_2: "\u5173\u5361\u5185\u4EFB\u610F\u4E24\u4E2A\u89D2\u8272\u8FBE\u5230LV2"
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u5EA6\u4E0D\u4F4E\u4E8E80%"
   starRequirement: 0
+  actualStarRequirement: 0
   LevelButton: {fileID: 1611530982}
   starNeed: {fileID: 773245645}
   loadScene: FTE_1
@@ -6639,6 +6645,7 @@ MonoBehaviour:
   mission_2: "\u7528\u7F50\u5934\u5F39\u79CD\u6EE1\u8DB310\u4E2A\u6D88\u8D39\u8005"
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60% "
   starRequirement: 14
+  actualStarRequirement: 0
   LevelButton: {fileID: 1527685599}
   starNeed: {fileID: 493810812}
   loadScene: FTE_7
@@ -8248,6 +8255,7 @@ MonoBehaviour:
   mission_2: "\u653E\u7F6E\u4E0D\u591A\u4E8E6\u4E2A\u81EA\u6709\u89D2\u8272"
   mission_3: "\u81F3\u5C115\u4E2A\u81EA\u6709\u89D2\u8272\u5347\u7EA7\u52305\u7EA7"
   starRequirement: 11
+  actualStarRequirement: 0
   LevelButton: {fileID: 782163679}
   starNeed: {fileID: 507238399}
   loadScene: FTE_5
@@ -9247,6 +9255,83 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616301497}
+  m_CullTransparentMesh: 0
+--- !u!1 &1630511350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1630511351}
+  - component: {fileID: 1630511353}
+  - component: {fileID: 1630511352}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1630511351
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630511350}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2105983065}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 671.7, y: 404.27}
+  m_SizeDelta: {x: 218.5, y: 85.445}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1630511352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630511350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 091246786ea4cc04081958f080e58a68, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u8FFD\u8D76\u7B49\u7EA7\uFF1A0"
+--- !u!222 &1630511353
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630511350}
   m_CullTransparentMesh: 0
 --- !u!1 &1649651743 stripped
 GameObject:
@@ -10925,6 +11010,7 @@ MonoBehaviour:
   mission_2: "\u4F7F\u7528\u79D1\u6280\u503C\u89E3\u9501\u6240\u6709\u89D2\u8272"
   mission_3: "\u7D2F\u8BA1\u6682\u505C\u65F6\u95F4\u4E0D\u8D85\u8FC7100\u79D2"
   starRequirement: 12
+  actualStarRequirement: 0
   LevelButton: {fileID: 1531192459}
   starNeed: {fileID: 943068184}
   loadScene: FTE_6
@@ -11488,6 +11574,7 @@ MonoBehaviour:
   mission_2: "\u9996\u9886\u6D88\u8D39\u8005\u6EE1\u8DB3\u8D85\u8FC715\u6B21"
   mission_3: "\u9996\u9886\u6D88\u8D39\u8005\u6EE1\u8DB3\u8D85\u8FC722\u6B21"
   starRequirement: 19
+  actualStarRequirement: 0
   LevelButton: {fileID: 1039402857}
   starNeed: {fileID: 2069409968}
   loadScene: FTE_9
@@ -11626,6 +11713,7 @@ MonoBehaviour:
   mission_2: "\u6EE1\u8DB35\u4E2A\u4F20\u5947\u84DD\u9886\u9700\u6C42 "
   mission_3: "\u6EE1\u610F\u5EA6100%\u8FC7\u5173"
   starRequirement: 3
+  actualStarRequirement: 0
   LevelButton: {fileID: 614579327}
   starNeed: {fileID: 847661372}
   loadScene: FTE_3
@@ -12562,6 +12650,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100692354}
   m_CullTransparentMesh: 0
+--- !u!1 &2105983064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2105983065}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2105983065
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105983064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1630511351}
+  m_Father: {fileID: 596373592}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2108781907
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,31 +29,36 @@ public class MainMap : MonoBehaviour
 
     public void GetChaseLevel()
     {
-        
+        InitChaseLevel(0);
     }
 
     public void InitChaseLevel(int chaseLevel)
     {
         foreach (var ls in levelSigns)
         {
+            if (ls.levelID == 1)
+                continue;
             //int level = int.Parse( ls.loadScene.Split('_')[1]);
             switch(chaseLevel)
             {
                 case 0:
-                    break;
+                    {
+                        ls.actualStarRequirement = ls.starRequirement;
+                        break;
+                    }
                 case 1:
                     {
-                        ls.starRequirement = ls.initStarRequirement - ls.initStarRequirement > 2 ? 2 : ls.initStarRequirement;
+                        ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 2 ? 2 : ls.starRequirement);
                         break;
                     }
                 case 2:
                     {
-                        ls.starRequirement = ls.initStarRequirement - ls.initStarRequirement > 5 ? 5 : ls.initStarRequirement;
+                        ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 4 ? 4 : ls.starRequirement);
                         break;
                     }
                 case 3:
                     {
-                        ls.starRequirement = ls.initStarRequirement - ls.initStarRequirement > 7 ? 7 : ls.initStarRequirement;
+                        ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 6 ? 6 : ls.starRequirement);
                         break;
                     }
                 default:
