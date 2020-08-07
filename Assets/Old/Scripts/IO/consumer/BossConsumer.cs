@@ -482,7 +482,7 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     public void SummonLittle()
     {
-        if (killCount <= 5)
+        if (killCount <= 10)
             return;
         for (int i = 0; i < 8; i++)
         {
@@ -601,7 +601,7 @@ public class BossConsumer : ConsumeSign
     {
         if (GUILayout.RepeatButton("扣血"))
         {
-            ChangeHealth(1000000);
+            ChangeHealth(10000);
         }
 
     }
