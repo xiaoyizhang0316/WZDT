@@ -91,6 +91,11 @@ public class CreateTradeLine : MonoBehaviour
             lineGo.SetActive(false);
             gameObject.SetActive(false);
             NewCanvasUI.My.isSetTrade = false;
+            if (NewCanvasUI.My.isChange)
+            {
+                NewCanvasUI.My.isChange = false;
+                NewCanvasUI.My.HideAllTradeButton();
+            }
         }
     }
 }
