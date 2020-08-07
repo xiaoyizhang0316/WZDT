@@ -333,7 +333,12 @@ public class PlayerInfoManager : MonoBehaviour
             if (input.text.Length > 0)
             {
                 //上传
-     
+             NetworkMgr.My.SetPlayerDatas(input.text, AvatarManager.My.currentAvatarIndex.ToString()+ AvatarManager.My.currenteyeIndex.ToString()+ AvatarManager.My.currentcolorIndex.ToString()+ AvatarManager.My.currentmouthIndex.ToString()+ AvatarManager.My.currentotherIndex,
+                 () =>
+                 {
+                     gameObject.SetActive(false);
+                 });
+             
             }
           
         });
@@ -342,15 +347,16 @@ public class PlayerInfoManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
- ;
+    { 
         if (     input.text.Trim().Length == 0)
         {
             tip.gameObject.SetActive(true);
+            button.interactable = false;
         }
         else
         {
             tip.gameObject.SetActive(false);
+            button.interactable = true;
         }
     }
 }
