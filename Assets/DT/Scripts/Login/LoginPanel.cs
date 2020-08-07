@@ -84,6 +84,10 @@ public class LoginPanel : MonoBehaviour
         }
         else
         {
+            //if (NetworkMgr.My.playerDatas.playerIcon.Equals("0"))
+            //{
+            //    //TODO 创建个人信息
+            //}else 
             if (NetworkMgr.My.playerDatas.threeWordsProgress == 0)
             {
                 // 第一个问题
