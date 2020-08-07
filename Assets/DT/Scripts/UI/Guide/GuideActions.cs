@@ -77,7 +77,7 @@ public class GuideActions : MonoBehaviour
             StartCoroutine(DelayExcute(()=>TradeManager.My.AutoCreateTrade("2", "3"), 2f));
             StartCoroutine(DelayExcute(()=>GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1), 7f));
             //GuideMgr.My.ShowNextStep();
-            StartCoroutine(DelayExcute(()=>GuideMgr.My.ShowNextStep(), 20f));
+            StartCoroutine(DelayExcute(()=>GuideMgr.My.ShowNextStep(), 17f));
         },
         ()=>{
             PlayerPrefs.SetInt("FTE0End",1);
