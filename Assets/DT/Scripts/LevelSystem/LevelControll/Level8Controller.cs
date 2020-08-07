@@ -6,7 +6,7 @@ public class Level8Controller : BaseLevelController
 {
     public override void CheckStarTwo()
     {
-        if (StageGoal.My.playerGold < -5000)
+        if (StageGoal.My.playerGold < -20000)
         {
             starTwoStatus = false;
             CancelInvoke("CheckStarTwo");
