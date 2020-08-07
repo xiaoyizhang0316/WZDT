@@ -177,6 +177,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         return false;
     }
 
+    [HideInInspector]
+    public bool isChange = false;
+
     /// <summary>
     /// 发起交易
     /// </summary>
@@ -188,6 +191,11 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         CreateTradeLineGo.gameObject.SetActive(true);
         CreateTradeLineGo.GetComponent<CreateTradeLine>().InitPos(startRole.tradePoint);
         AudioManager.My.PlaySelectType(GameEnum.AudioClipType.StartTrade);
+        if (isTradeButtonActive)
+        {
+            isChange = true;
+            HideAllTradeButton();
+        }
     }
 
     /// <summary>
@@ -202,6 +210,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         //Panel_CreateTrade.SetActive(true);
         //CreateTradeManager.My.Open(go);
         isSetTrade = false;
+
         //CreateTradeLineGo.SetActive(false);
     }
 

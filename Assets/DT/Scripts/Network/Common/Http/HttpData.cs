@@ -49,4 +49,6 @@ public static class HttpId
     public const int getGlobalRankingID         = 1014;
     public const int getplayerGlobalRankingID   = 1015;
     public const int getplayerGroupRankingID    = 1016;
+    public const int getCatchLevelID            = 1017;
+    public const int setPlayerDatasID           = 1018;
 }

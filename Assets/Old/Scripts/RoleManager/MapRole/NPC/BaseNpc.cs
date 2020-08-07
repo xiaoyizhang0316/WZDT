@@ -47,12 +47,6 @@ public abstract class BaseNpc : MonoBehaviour
             return true;
         }
         return false;
-        //if (StageGoal.My.playerGold < lockNumber)
-        //    return false;
-        //StageGoal.My.CostPlayerGold(lockNumber);
-        //StageGoal.My.Expend(lockNumber, ExpendType.AdditionalCosts, null, "激活NPC");
-        //isLock = false;
-        //return true;
     }
 
     /// <summary>
@@ -103,6 +97,8 @@ public abstract class BaseNpc : MonoBehaviour
             trueModel.SetActive(false);
         }
         Invoke("InitSetLand",0.5f);
+        if (SceneManager.GetActiveScene().name.Equals("FTE_0") || SceneManager.GetActiveScene().name.Equals("FTE_Record"))
+            return;
         RaycastHit[] hit;
         hit = Physics.RaycastAll(transform.position + new Vector3(0f, 5f, 0f), Vector3.down);
         for (int j = 0; j < hit.Length; j++)

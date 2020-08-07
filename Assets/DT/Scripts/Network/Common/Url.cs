@@ -17,10 +17,12 @@ public static class Url
     public static string creatKeyUrl = ip + "createKeyCodes";
     public static string getKeyUrl = ip + "getKeyCodes";
     public static string checkDeviceID = ip + "checkDeviceID";
+    public static string setPlayerDatas = ip + "setPlayerDatas";
     #endregion
 
     #region player infos
     public static string updatePlayerDatas = ip + "updatePlayerDatas";
+    public static string getCatchLevel = ip + "getPlayerCatchLevel";
     #endregion
 
     #region three words 

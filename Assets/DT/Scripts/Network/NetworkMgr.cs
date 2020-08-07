@@ -189,6 +189,51 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     }
 
     /// <summary>
+    /// 设置昵称和头像
+    /// </summary>
+    /// <param name="playerName">昵称</param>
+    /// <param name="playerIcon">头像</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
+    public void SetPlayerDatas(string playerName, string playerIcon, Action doSuccess=null, Action doFail=null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerName", playerName);
+        keyValues.Add("playerIcon", playerIcon);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.setPlayerDatas, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                Debug.Log(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                Debug.Log(response.data);
+                try
+                {
+                    playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    doSuccess?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.setPlayerDatasID));
+    }
+
+    /// <summary>
     /// 更新信息
     /// </summary>
     /// <param name="fteProgress">教学进度 无更新请填 0</param>
@@ -319,6 +364,34 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             SetMask();
         }, keyValues, HttpType.Post, HttpId.getAnswerID));
+    }
+
+    public void GetCatchLevel(Action<int> doSuccess, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        keyValues.Add("groupID", groupID.ToString());
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.getCatchLevel, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                doSuccess( int.Parse(response.data));
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.getCatchLevelID));
     }
     #endregion
 

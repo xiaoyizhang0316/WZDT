@@ -9,6 +9,9 @@ public class MainMap : MonoBehaviour
     public Text title;
     public List<LevelSign> levelSigns;
     public Transform threeWords;
+
+    public GameObject chaseText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,38 +24,65 @@ public class MainMap : MonoBehaviour
     void InitMap()
     {
         //NetworkMgr.My.GetAnswers(()=>title.text = NetworkMgr.My.currentAnswer);
+        GetChaseLevel();
         GetAnswers();
-        GetLevelProgress();
         GetEquips();
     }
 
     public void GetChaseLevel()
     {
-
+        //InitChaseLevel(0);
+        NetworkMgr.My.GetCatchLevel((catchLevel) =>
+        {
+            Debug.Log("catchLevel:" + catchLevel);
+            InitChaseLevel(catchLevel);
+            GetLevelProgress();
+        });
     }
 
     public void InitChaseLevel(int chaseLevel)
     {
         foreach (var ls in levelSigns)
         {
+            if (ls.levelID == 1)
+                continue;
             //int level = int.Parse( ls.loadScene.Split('_')[1]);
             switch(chaseLevel)
             {
                 case 0:
-                    break;
+                    {
+                        ls.actualStarRequirement = ls.starRequirement;
+                        chaseText.SetActive(false);
+                        break;
+                    }
                 case 1:
                     {
-                        ls.starRequirement = ls.initStarRequirement - ls.initStarRequirement > 2 ? 2 : ls.initStarRequirement;
+                        ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 2 ? 2 : ls.starRequirement);
+                        chaseText.SetActive(true);
+                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "1";
+                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.green;
+                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-2";
+                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.green;
                         break;
                     }
                 case 2:
                     {
-                        ls.starRequirement = ls.initStarRequirement - ls.initStarRequirement > 5 ? 5 : ls.initStarRequirement;
+                        ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 4 ? 4 : ls.starRequirement);
+                        chaseText.SetActive(true);
+                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "2";
+                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.yellow;
+                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-4";
+                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.yellow;
                         break;
                     }
                 case 3:
                     {
-                        ls.starRequirement = ls.initStarRequirement - ls.initStarRequirement > 7 ? 7 : ls.initStarRequirement;
+                        ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 6 ? 6 : ls.starRequirement);
+                        chaseText.SetActive(true);
+                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "3";
+                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.red;
+                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-6";
+                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.red;
                         break;
                     }
                 default:
