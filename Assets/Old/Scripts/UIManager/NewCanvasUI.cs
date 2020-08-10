@@ -61,8 +61,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public Button statBtn;
     public Button OptionsBtn;
 
-    public Transform hidePanel;
     #endregion
+
+    public Transform hidePanel;
 
     // Start is called before the first frame update
     void Start()
