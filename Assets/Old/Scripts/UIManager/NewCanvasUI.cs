@@ -78,6 +78,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         statBtn.onClick.AddListener(() =>  DataStatPanel.My.ShowStat());
         OptionsBtn.onClick.AddListener(()=>OptionsPanel.My.ShowOPtionsPanel());
         InitTimeButton();
+        ToggleHidePanelShow();
         Panel_Delete.SetActive(false);
         lose.SetActive(false);
         isTradeButtonActive = true;
