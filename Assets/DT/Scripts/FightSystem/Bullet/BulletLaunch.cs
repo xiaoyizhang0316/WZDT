@@ -44,7 +44,7 @@ public class BulletLaunch : MonoBehaviour
           {
               gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().tile);
 //              gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
-              gameObject.transform.DOPath(pointList.ToArray(), 1).SetEase(sase).OnComplete(() =>
+              gameObject.transform.DOPath(pointList.ToArray(), 0.5f).SetEase(sase).OnComplete(() =>
               {
                   gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
 //                  gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
@@ -181,7 +181,7 @@ public class BulletLaunch : MonoBehaviour
           {
               tow .GetComponent <BulletEffect>().InitBuff(  tow .GetComponent <BulletEffect>().tile);
 
-              tow.transform.DOMove(tow.GetComponent<AutoFireTow>().target.transform.position, 1).SetEase(sase).OnComplete(() =>
+              tow.transform.DOMove(tow.GetComponent<AutoFireTow>().target.transform.position, 0.5f).SetEase(sase).OnComplete(() =>
               {
                   tow .GetComponent <BulletEffect>().InitBuff(  tow .GetComponent <BulletEffect>().explosions);
                   tow .GetComponent <BulletEffect>().explosions.SetActive(false);
