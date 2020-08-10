@@ -344,7 +344,7 @@ public class PlayerInfoManager : MonoBehaviour
         });
         if (!NetworkMgr.My.playerDatas.playerIcon.Equals("0"))
         {
-            gameObject.SetActive(false);
+       gameObject.SetActive(false); 
         }
     }
 

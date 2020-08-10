@@ -81,14 +81,16 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         InitTimeButton();
         Panel_Delete.SetActive(false);
         lose.SetActive(false);
-        AvatarManager.My.AvatarTF = avatarTF;
-        AvatarManager.My.ShowAcatar(int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[0]),
-            int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[1]),
-            int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[2]),
-            int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[3]),
-            int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[4])
-            
+        if (!NetworkMgr.My.playerDatas.playerIcon.Equals("0"))
+        {
+            AvatarManager.My.AvatarTF = avatarTF;
+            AvatarManager.My.ShowAcatar(int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[0]),
+                int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[1]),
+                int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[2]),
+                int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[3]),
+                int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[4])
             );
+        }
     }
 
     // Update is called once per frame
