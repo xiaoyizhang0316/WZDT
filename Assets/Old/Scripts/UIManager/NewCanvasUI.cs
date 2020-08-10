@@ -11,6 +11,7 @@ using static UnityEngine.UIElements.VisualElement;
 
 public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 {
+
     public GameObject Panel_ChoseRole;
     public Role CurrentClickRole;
     public BaseMapRole currentMapRole;
@@ -18,16 +19,12 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public GameObject Panel_TradeSetting;
     public Transform RoleTF;
     public GameObject lose;
-
     /// <summary>
     /// 需要遮挡的UI
     /// </summary>
     public List<GameObject> needReycastTargetPanel;
 
-    public Transform avatarTF;
-
     #region 交易相关变量
-
     /// <summary>
     /// 是否处于设置交易状态
     /// </summary>
@@ -64,6 +61,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public Button statBtn;
     public Button OptionsBtn;
 
+    public Transform hidePanel;
     #endregion
 
     // Start is called before the first frame update
@@ -76,26 +74,20 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause = transform.Find("TimeScale/GamePause").GetComponent<Button>();
         Button_Normal = transform.Find("TimeScale/GameNormal").GetComponent<Button>();
         Button_Accelerate = transform.Find("TimeScale/GameAccelerate").GetComponent<Button>();
-        statBtn.onClick.AddListener(() => DataStatPanel.My.ShowStat());
-        OptionsBtn.onClick.AddListener(() => OptionsPanel.My.ShowOPtionsPanel());
+        statBtn.onClick.AddListener(() =>  DataStatPanel.My.ShowStat());
+        OptionsBtn.onClick.AddListener(()=>OptionsPanel.My.ShowOPtionsPanel());
         InitTimeButton();
         Panel_Delete.SetActive(false);
         lose.SetActive(false);
-        if (!NetworkMgr.My.playerDatas.playerIcon.Equals("0"))
-        {
-            AvatarManager.My.AvatarTF = avatarTF;
-            AvatarManager.My.ShowAcatar(int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[0]),
-                int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[1]),
-                int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[2]),
-                int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[3]),
-                int.Parse(NetworkMgr.My.playerDatas.playerIcon.Split('_')[4])
-            );
-        }
+        isTradeButtonActive = true;
+        isProductLineActive = true;
+        isInfoLineActive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
     }
 
     /// <summary>
@@ -103,18 +95,15 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public void InitTimeButton()
     {
-        Button_Pause.onClick.AddListener(() =>
-        {
+        Button_Pause.onClick.AddListener(()=>{
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
             GamePause();
         });
-        Button_Normal.onClick.AddListener(() =>
-        {
+        Button_Normal.onClick.AddListener(()=> {
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
             GameNormal();
         });
-        Button_Accelerate.onClick.AddListener(() =>
-        {
+        Button_Accelerate.onClick.AddListener(()=> {
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
             GameAccelerate();
         });
@@ -182,8 +171,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         {
             return true;
         }
-
-        for (int i = 0; i < needReycastTargetPanel.Count; i++)
+        for (int i = 0; i <needReycastTargetPanel.Count; i++)
         {
             if (needReycastTargetPanel[i].activeSelf)
             {
@@ -191,11 +179,11 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 return true;
             }
         }
-
         return false;
     }
 
-    [HideInInspector] public bool isChange = false;
+    [HideInInspector]
+    public bool isChange = false;
 
     /// <summary>
     /// 发起交易
@@ -234,7 +222,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void OpenDeletePanel()
     {
         Panel_Delete.SetActive(true);
-        // Panel_Delete.GetComponent<DeleteUIManager>().Init();
+       // Panel_Delete.GetComponent<DeleteUIManager>().Init();
     }
 
     public void LostConfirm()
@@ -265,7 +253,6 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                     continue;
                 }
             }
-
             role.HideTradeButton(isTradeButtonActive);
         }
     }
@@ -287,6 +274,46 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         {
             if (sign.GetComponentInChildren<LineRenderer>() != null)
                 sign.gameObject.SetActive(isInfoLineActive);
+        }
+    }
+
+    private bool isPlaying = false;
+
+    private List<GameObject> hideList = new List<GameObject>();
+
+    public void ToggleHidePanelShow()
+    {
+        if (isPlaying)
+            return;
+        if (hideList.Count == 0)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                hideList.Add(hidePanel.GetChild(i).gameObject);
+            }
+        }
+        if (hidePanel.GetComponent<Image>().fillAmount >= 0.99f)
+        {
+            isPlaying = true;
+            hidePanel.GetComponent<Image>().DOFillAmount(0.25f,0.25f).Play().OnComplete(()=> {
+                isPlaying = false;
+                foreach (GameObject go in hideList)
+                {
+                    go.SetActive(false);
+                }
+            });
+
+        }
+        else
+        {
+            isPlaying = true;
+            hidePanel.GetComponent<Image>().DOFillAmount(1f, 0.25f).Play().OnComplete(() => {
+                isPlaying = false;
+            });
+            foreach (GameObject go in hideList)
+            {
+                go.SetActive(true);
+            }
         }
     }
 }
