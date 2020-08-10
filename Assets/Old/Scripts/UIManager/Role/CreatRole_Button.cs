@@ -191,11 +191,9 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     print("false    ");
                     Destroy(role, 0.01f);
                 }
-
                 break;
             }
         }
-
         if (!isSuccess)
         {
             Destroy(role, 0.01f);
@@ -218,9 +216,11 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+
     }
 }

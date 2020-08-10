@@ -130,14 +130,16 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void CheckLevel()
     {
-        if (baseRoleData.baseRoleData.level == 1)
+        if (levelModels.Count == 0)
+            return;
+        if (baseRoleData.baseRoleData.level <= 2)
         {
 
             levelModels[1].SetActive(false);
             levelModels[2].SetActive(false);
             levelModels[0].SetActive(true);
         }
-        else if (baseRoleData.baseRoleData.level == 3)
+        else if (baseRoleData.baseRoleData.level <= 4)
         {
             levelModels[0].SetActive(false);
             levelModels[2].SetActive(false);
