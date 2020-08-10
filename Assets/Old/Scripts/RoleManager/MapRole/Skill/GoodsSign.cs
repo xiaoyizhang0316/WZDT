@@ -92,7 +92,7 @@ public class GoodsSign : MonoBehaviour
             {
                 twe.Kill();
                 target.OnHit(ref productData);
-                Debug.Log("碰到消费者");
+              
                 gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
 
                 //    GetComponentInChildren<ETFXProjectileScript>().StartShoot();

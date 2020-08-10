@@ -159,7 +159,7 @@ public abstract class BaseSkill : MonoBehaviour
     /// </summary>
     public void CancelSkill()
     {
-        Debug.Log("取消技能" + role.baseRoleData.ID);
+       
         IsOpen = false;
     }
 }
