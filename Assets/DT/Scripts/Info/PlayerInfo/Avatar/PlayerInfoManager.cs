@@ -44,7 +44,7 @@ public class PlayerInfoManager : MonoBehaviour
         mouthL.interactable = false;
         otherL.interactable = false;
         AvatarManager.My.AvatarTF = gameTF;
-        AvatarManager.My.ShowAcatar(0, 0, 0, 0, 0);
+        AvatarManager.My.ShowAcatar(3, 5, 1, 14, 4);
 
         avaL.onClick.AddListener(() =>
         {
@@ -333,7 +333,7 @@ public class PlayerInfoManager : MonoBehaviour
             if (input.text.Length > 0)
             {
                 //上传
-             NetworkMgr.My.SetPlayerDatas(input.text, AvatarManager.My.currentAvatarIndex.ToString()+ AvatarManager.My.currenteyeIndex.ToString()+ AvatarManager.My.currentcolorIndex.ToString()+ AvatarManager.My.currentmouthIndex.ToString()+ AvatarManager.My.currentotherIndex,
+             NetworkMgr.My.SetPlayerDatas(input.text, AvatarManager.My.currentAvatarIndex.ToString()+"_"+ AvatarManager.My.currenteyeIndex.ToString()+"_"+ AvatarManager.My.currentcolorIndex.ToString()+"_"+ AvatarManager.My.currentmouthIndex.ToString()+"_"+ AvatarManager.My.currentotherIndex,
                  () =>
                  {
                      gameObject.SetActive(false);
@@ -342,7 +342,10 @@ public class PlayerInfoManager : MonoBehaviour
             }
           
         });
-        
+        if (!string.IsNullOrEmpty(NetworkMgr.My.playerDatas.playerIcon))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
