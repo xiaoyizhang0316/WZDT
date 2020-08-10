@@ -126,7 +126,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public void Init(string star, string name, string contet, string mission_1, string mission_2, string mission_3, Action loadScene, string sceneName)
     {
         //print(sceneName);
-        if (int.Parse(sceneName.Split('_')[1]) >= 5)
+        if (int.Parse(sceneName.Split('_')[1]) >= 5 && int.Parse(sceneName.Split('_')[1]) <= 8)
             isUseGuide.gameObject.SetActive(false);
         else
         {
