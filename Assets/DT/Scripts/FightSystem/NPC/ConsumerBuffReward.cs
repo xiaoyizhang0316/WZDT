@@ -21,8 +21,7 @@ public class ConsumerBuffReward : BaseExtraSkill
             }
             if (count == 0)
             {
-                StageGoal.My.playerHealth += other.transform.GetComponent<ConsumeSign>().consumeData.liveSatisfy * 80 / 100;
-                //int number = Mathf.Min(other.transform.GetComponent<ConsumeSign>().consumeData.killMoney * 30 / 100, 2000);
+                StageGoal.My.playerHealth += Mathf.Abs(other.transform.GetComponent<ConsumeSign>().consumeData.liveSatisfy * 80 / 100);
                 int number = other.transform.GetComponent<ConsumeSign>().consumeData.killMoney * 30 / 100;
                 StageGoal.My.GetPlayerGold(number);
                 StageGoal.My.Income(number, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
