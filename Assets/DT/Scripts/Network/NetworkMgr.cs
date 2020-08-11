@@ -51,6 +51,47 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         playerEquipsList = new List<PlayerEquip>();
     }
 
+
+    public void PingTest(string ip , Action doSuccess, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("pingData", "valid");
+        //string originIp = Url.ipAddr;
+        //Url.ipAddr = ip;
+        Url.SetIp(ip);
+        StartCoroutine(HttpManager.My.HttpSend(Url.PingIp, (www) => {
+            try
+            {
+
+                HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+                if (response.status == 0)
+                {
+                    HttpManager.My.ShowTip(response.errMsg);
+                    doFail?.Invoke();
+                }
+                else
+                {
+                    if (response.data.Equals("valid"))
+                    {
+
+                        doSuccess?.Invoke();
+                    }
+                    else
+                    {
+                        //Url.ipAddr = originIp;
+                        Url.SetIp(null);
+                        doFail?.Invoke();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Url.SetIp(null);
+                doFail?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.pingTestID));
+    }
     #region login
     /// <summary>
     /// 登录
@@ -65,7 +106,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("username", userName);
         keyValues.Add("password", password);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.loginUrl, (www)=> {
+        StartCoroutine(HttpManager.My.HttpSend(Url.LoginUrl, (www)=> {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == 0)
             {
@@ -100,7 +141,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("playerID", playerID);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.reConnUrl, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.ReConnUrl, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -137,7 +178,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("recordID", loginRecordID);
         keyValues.Add("token", token);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.logout, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.Logout, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             
         }, keyValues, HttpType.Post));
@@ -159,7 +200,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("playerName", playerName);
         keyValues.Add("playerID", playerID);
         keyValues.Add("token", token);
-        StartCoroutine(HttpManager.My.HttpSend(Url.createPlayerDatas, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.CreatePlayerDatas, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if(response.status == -1)
             {
@@ -203,7 +244,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("playerID", playerID);
         keyValues.Add("token", token);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.setPlayerDatas, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.SetPlayerDatas, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -248,7 +289,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("threeWordsProgress", threeWordsProgress.ToString());
         keyValues.Add("playerID", playerID);
         keyValues.Add("token", token);
-        StartCoroutine(HttpManager.My.HttpSend(Url.updatePlayerDatas, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerDatas, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -294,7 +335,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("playerID", playerID);
         keyValues.Add("token", token);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.uploadWords, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.UploadWords, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -333,7 +374,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("playerID", playerID);
         keyValues.Add("token", token);
-        StartCoroutine(HttpManager.My.HttpSend(Url.getAnswers, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetAnswers, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             //Debug.Log(response.errMsg);
             if (response.status == -1)
@@ -373,7 +414,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("token", token);
         keyValues.Add("groupID", groupID.ToString());
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.getCatchLevel, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetCatchLevel, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             
             if (response.status == -1)
@@ -414,7 +455,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("levelProgress", JsonUtility.ToJson(lp));
         keyValues.Add("token", token);
         keyValues.Add("playerID", playerID);
-        StartCoroutine(HttpManager.My.HttpSend(Url.updateLevelProgress, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.UpdateLevelProgress, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -463,7 +504,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("playerID", playerID);
         keyValues.Add("token", token);
-        StartCoroutine(HttpManager.My.HttpSend(Url.getLevelProgress, (www) =>
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetLevelProgress, (www) =>
         {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
@@ -510,7 +551,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("token", token);
         keyValues.Add("playerID", playerID);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.addLevelRecord, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.AddLevelRecord, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if(response.status == 0)
             {
@@ -536,7 +577,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             keyValues.Add("playerID", playerID);
             keyValues.Add("data", CompressUtils.Compress(JsonUtility.ToJson(playerReplay)));
 
-            StartCoroutine(HttpManager.My.HttpSend(Url.addReplayData, (www) => {
+            StartCoroutine(HttpManager.My.HttpSend(Url.AddReplayData, (www) => {
                 HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
                 if (response.status == -1)
                 {
@@ -577,7 +618,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("playerID", playerID);
         keyValues.Add("recordID", recordID);
 
-        StartCoroutine(HttpManager.My.HttpSend( Url.getReplayDatas, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend( Url.GetReplayDatas, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -616,7 +657,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("playerID", playerID);
         keyValues.Add("sceneName", sceneName);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.getReplayLists, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetReplayLists, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -659,7 +700,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("groupID", groupID.ToString());
         currentGroupPage = page;
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.getGroupRankingList, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetGroupRankingList, (www) => {
 
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
@@ -703,7 +744,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("page", page.ToString());
         currentGlobalPage = page;
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.getGlobalRankingList, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetGlobalRankingList, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -741,7 +782,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("playerID", playerID);
         keyValues.Add("sceneName", sceneName);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.getPlayerGlobalRanking, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetPlayerGlobalRanking, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -780,7 +821,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("sceneName", sceneName);
         keyValues.Add("groupID", groupID.ToString());
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.getPlayerGroupRanking, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetPlayerGroupRanking, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -839,7 +880,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("token", token);
         keyValues.Add("playerID", playerID);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.getEquips, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetEquips, (www) => {
             HttpResponse httpResponse = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (httpResponse.status == -1)
             {
@@ -882,7 +923,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("playerEquip", JsonUtility.ToJson(pe));
         //return;
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.addEquip, (www)=> {
+        StartCoroutine(HttpManager.My.HttpSend(Url.AddEquip, (www)=> {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -931,7 +972,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("playerEquips", JsonUtility.ToJson(playerEquips));
         Debug.Log(JsonUtility.ToJson(playerEquips));
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.addEquips, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.AddEquips, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -985,7 +1026,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("json", json);
         keyValues.Add("playerID", "11111");
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.testPost, (www)=> {
+        StartCoroutine(HttpManager.My.HttpSend(Url.TestPost, (www)=> {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             Debug.Log(response.data);
         }, keyValues, HttpType.Post));
