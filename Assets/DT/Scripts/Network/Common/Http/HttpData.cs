@@ -51,4 +51,5 @@ public static class HttpId
     public const int getplayerGroupRankingID    = 1016;
     public const int getCatchLevelID            = 1017;
     public const int setPlayerDatasID           = 1018;
+    public const int pingTestID                 = 1019;
 }

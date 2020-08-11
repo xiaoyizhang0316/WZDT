@@ -154,8 +154,16 @@ public class HttpManager : MonoSingleton<HttpManager>
                 //ShowNetworkStatus(uwr.responseCode);
                 //SetNeedRetryById(retryID, false);
                 retryDic.Remove(retryID);
-                ShowClickTip("网络错误！",()=>SceneManager.LoadScene("Login"));
-                mask.SetActive(false);
+                if (retryID == HttpId.pingTestID)
+                {
+                    action(uwr);
+                }
+                else
+                {
+                    ShowClickTip("网络错误！");
+                    mask.SetActive(false);
+
+                }
                 yield break;
             }
             else

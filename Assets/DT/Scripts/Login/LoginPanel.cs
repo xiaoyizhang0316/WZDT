@@ -4,21 +4,32 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static StageGoal;
+using System.Text.RegularExpressions;
 
 public class LoginPanel : MonoBehaviour
 {
     public Transform playerInfoPanel;
     public Transform threeWordsPanel;
+    public GameObject setServerPanel;
 
     public InputField username_Input;
     public InputField password_Input;
+    public InputField server_Input;
+    public Text server_InputText;
 
     public Toggle savePassword_Toggle;
+    public Toggle userServer_Toggle;
 
     public Button login_Btn;
+    public Button serverConfirm;
+    public Button serverCancel;
+
+    public GameObject notice;
 
     string username = "";
     string password = "";
+    string serverIP = "";
+    string regx = "^(\\d{1,3}\\.){3}\\d{1,3}$";
 
     bool isLogin = false;
 
@@ -29,6 +40,8 @@ public class LoginPanel : MonoBehaviour
         login_Btn.onClick.AddListener(Login);
         username = PlayerPrefs.GetString("username", "0");
         password = PlayerPrefs.GetString("password", "0");
+        serverIP = PlayerPrefs.GetString("server_IP", "0");
+        UserServerOrNot();
         if (username != "0")
         {
             username_Input.text = username;
@@ -42,9 +55,29 @@ public class LoginPanel : MonoBehaviour
         {
             savePassword_Toggle.isOn = true;
         }
+
         //username_Input.ActivateInputField();
         //username_Input.MoveTextEnd(true);
         Test();
+    }
+
+    private void UserServerOrNot()
+    {
+        server_Input.onValueChanged.AddListener((ip) => InputServerIP(ip));
+        server_Input.onEndEdit.AddListener((ip) => InputServerEnd(ip));
+        serverConfirm.onClick.AddListener(ServerConfirm);
+        serverCancel.onClick.AddListener(ServerCancel);
+        if (PlayerPrefs.GetInt("useServer", 0) == 1)
+        {
+            userServer_Toggle.isOn = true;
+            //Url.SetIp(serverIP);
+            NetworkMgr.My.PingTest(serverIP, () => { Debug.Log("有效的服务器地址"); }, () => {
+                HttpManager.My.ShowClickTip("当前使用的自定义的服务器无效，请重新输入正确的IP地址！", ()=> {
+                    setServerPanel.SetActive(true);
+                });
+            });
+        }
+        userServer_Toggle.onValueChanged.AddListener((isOn) => ServerToggleChange(isOn));
     }
 
     private void Login()
@@ -75,7 +108,7 @@ public class LoginPanel : MonoBehaviour
     private void LoginSuccess()
     {
         SavePasswordOrNot();
-        
+        UseServerOrNot();
         if (NetworkMgr.My.playerDatas.status == 0)
         {
             // 创建用户信息
@@ -139,6 +172,20 @@ public class LoginPanel : MonoBehaviour
         }
     }
 
+    private void UseServerOrNot()
+    {
+        if (userServer_Toggle.isOn)
+        {
+            PlayerPrefs.SetInt("useServer", 1);
+            PlayerPrefs.SetString("server_IP", serverIP);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("useServer", 0);
+            PlayerPrefs.SetString("server_IP", "0");
+        }
+    }
+
     private void Update()
     {
         //if (Input.anyKeyDown)
@@ -157,6 +204,68 @@ public class LoginPanel : MonoBehaviour
                 Login();
             }
         //}
+    }
+
+    private void ServerToggleChange(bool isOn)
+    {
+        if (isOn)
+        {
+            setServerPanel.SetActive(true);
+        }
+        else
+        {
+            Url.SetIp(null);
+        }
+    }
+
+    private void InputServerIP(string ip)
+    {
+        //string ip = server_Input.text.Trim();
+        if(!Regex.IsMatch(ip.Trim(), regx))
+        {
+            server_InputText.color = Color.red;
+            notice.SetActive(true);
+            serverConfirm.interactable = false;
+        }
+        else
+        {
+            server_InputText.color = Color.green;
+            notice.SetActive(false);
+            serverConfirm.interactable = true;
+        }
+    }
+
+    private void InputServerEnd(string ip)
+    {
+        if (!Regex.IsMatch(ip.Trim(), regx))
+        {
+            server_InputText.color = Color.red;
+            notice.SetActive(true);
+            serverConfirm.interactable = false;
+        }
+        else
+        {
+            server_InputText.color = Color.green;
+            notice.SetActive(false);
+            serverConfirm.interactable = true;
+        }
+    }
+
+    private void ServerConfirm()
+    {
+        serverIP = server_Input.text.Trim();
+        NetworkMgr.My.PingTest(serverIP, () => {
+            setServerPanel.SetActive(false);
+        }, ()=> {
+            HttpManager.My.ShowClickTip("无效的服务器地址，请重新输入正确的IP地址！");
+        });
+    }
+
+    private void ServerCancel()
+    {
+        userServer_Toggle.isOn = false;
+        Url.SetIp(null);
+        setServerPanel.SetActive(false);
     }
 
     private void Test()
@@ -183,6 +292,11 @@ public class LoginPanel : MonoBehaviour
         //NetworkMgr.My.PintTest(ip,()=> {
         //    Debug.Log("pass");
         //});
+        //string ip = "111.1.0.1t";
+        //if(Regex.IsMatch(ip, regx))
+        //{
+        //    Debug.Log(true);
+        //}
     }
 
     private void TestGetReplayDatas()

@@ -52,7 +52,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     }
 
 
-    public void PintTest(string ip , Action doSuccess, Action doFail = null)
+    public void PingTest(string ip , Action doSuccess, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("pingData", "valid");
@@ -60,28 +60,37 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         //Url.ipAddr = ip;
         Url.SetIp(ip);
         StartCoroutine(HttpManager.My.HttpSend(Url.PingIp, (www) => {
-            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
-            if (response.status == 0)
+            try
             {
-                HttpManager.My.ShowTip(response.errMsg);
-                doFail?.Invoke();
-            }
-            else
-            {
-                if (response.data.Equals("valid"))
-                {
 
-                    doSuccess?.Invoke();
+                HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+                if (response.status == 0)
+                {
+                    HttpManager.My.ShowTip(response.errMsg);
+                    doFail?.Invoke();
                 }
                 else
                 {
-                    //Url.ipAddr = originIp;
-                    Url.SetIp(null);
-                    doFail?.Invoke();
+                    if (response.data.Equals("valid"))
+                    {
+
+                        doSuccess?.Invoke();
+                    }
+                    else
+                    {
+                        //Url.ipAddr = originIp;
+                        Url.SetIp(null);
+                        doFail?.Invoke();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Url.SetIp(null);
+                doFail?.Invoke();
+            }
             SetMask();
-        }, keyValues, HttpType.Get));
+        }, keyValues, HttpType.Get, HttpId.pingTestID));
     }
     #region login
     /// <summary>
