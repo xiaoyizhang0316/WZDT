@@ -281,6 +281,9 @@ public class MapManager : MonoSingleton<MapManager>
 
     private List<double> idList = new List<double>();
 
+    /// <summary>
+    /// 检测是否有重复角色ID
+    /// </summary>
     public void CheckDuplicateID()
     {
         foreach (BaseMapRole role in PlayerData.My.MapRole)
@@ -298,6 +301,9 @@ public class MapManager : MonoSingleton<MapManager>
     
     private List<string> xyList = new List<string>();
 
+    /// <summary>
+    /// 检测是否有重复坐标地块
+    /// </summary>
     public void CheckDuplicate()
     {
         foreach (MapSign sign in _mapSigns)

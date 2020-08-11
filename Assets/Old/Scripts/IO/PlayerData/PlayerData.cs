@@ -335,27 +335,5 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     private void Start()
     {
-        Invoke("CheckDuplicateID", 1f);
     }
-
-    #region 辅助函数
-
-    private List<double> idList;
-
-    public void CheckDuplicateID()
-    {
-        foreach (BaseMapRole role in MapRole)
-        {
-            if (idList.Contains(role.baseRoleData.ID))
-            {
-                print("-----------重复角色ID------------" + role.baseRoleData.ID.ToString());
-            }
-            else
-            {
-                idList.Add(role.baseRoleData.ID);
-            }
-        }
-    }
-
-    #endregion
 }
