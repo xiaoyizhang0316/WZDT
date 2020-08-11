@@ -77,7 +77,7 @@ public class KeyCodeManager : MonoBehaviour
         keyValues.Add("createCount", createDp.captionText.text);
         Debug.LogError(createDp.captionText.text);
         keycodes.Clear();
-        StartCoroutine(HttpManager.My.HttpSend(Url.creatKeyUrl, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.CreatKeyUrl, (www) => {
             ResponseJson rj = JsonUtility.FromJson<ResponseJson>(www.downloadHandler.text);
             if(rj.status == 1)
             {
@@ -113,7 +113,7 @@ public class KeyCodeManager : MonoBehaviour
         keyValues.Add("getCount", getDp.captionText.text);
         Debug.LogError(getDp.captionText.text);
         keycodes.Clear();
-        StartCoroutine(HttpManager.My.HttpSend(Url.getKeyUrl, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetKeyUrl, (www) => {
             ResponseJson rj = JsonUtility.FromJson<ResponseJson>(www.downloadHandler.text);
             if (rj.status == 1)
             {

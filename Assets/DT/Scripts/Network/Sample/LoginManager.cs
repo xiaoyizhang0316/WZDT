@@ -69,7 +69,7 @@ public class LoginManager : MonoBehaviour
             keyValues.Add("username", name);
             keyValues.Add("password", password);
             //Debug.LogError(HttpManager.My);
-            StartCoroutine(HttpManager.My.HttpSend(Url.loginUrl, (www) => {
+            StartCoroutine(HttpManager.My.HttpSend(Url.LoginUrl, (www) => {
                 ResponseTest responseTest = JsonUtility.FromJson<ResponseTest>(www.downloadHandler.text);
                 Debug.Log(responseTest.status);
                 if (responseTest.status == 0)
@@ -106,7 +106,7 @@ public class LoginManager : MonoBehaviour
                 keyValues.Add("username", registerUsername.text);
                 keyValues.Add("password", registerPassword.text);
                 keyValues.Add("keycode", keycode.text);
-                StartCoroutine(HttpManager.My.HttpSend(Url.registerUrl, (www)=>{
+                StartCoroutine(HttpManager.My.HttpSend(Url.RegisterUrl, (www)=>{
                     ResponseJson rj = JsonUtility.FromJson<ResponseJson>(www.downloadHandler.text);
                     if(rj.status == 1)
                     {

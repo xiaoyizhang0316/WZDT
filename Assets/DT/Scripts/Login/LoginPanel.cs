@@ -179,6 +179,10 @@ public class LoginPanel : MonoBehaviour
         //{
         //    Debug.Log(ex.Message);
         //}
+        //string ip = "192.168.1.32";
+        //NetworkMgr.My.PintTest(ip,()=> {
+        //    Debug.Log("pass");
+        //});
     }
 
     private void TestGetReplayDatas()
