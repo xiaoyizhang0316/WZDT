@@ -36,10 +36,7 @@ public class AvatarManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Av
     // Update is called once per frame
     void OnGUI()
     {
-        if (GUILayout.Button("show"))
-        {
-            ShowAcatar(currentAvatarIndex,currenteyeIndex,currentcolorIndex,currentmouthIndex,currentotherIndex);
-        }
+       
     }
 
     public void ShowAcatar(int  AvatarIndex, int eyeIndex ,int colorIndex, int mouthIndex,int otherIndex)

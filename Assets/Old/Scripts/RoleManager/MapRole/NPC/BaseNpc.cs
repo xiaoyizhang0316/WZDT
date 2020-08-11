@@ -57,6 +57,7 @@ public abstract class BaseNpc : MonoBehaviour
         isCanSee = true;
         hideModel.SetActive(false);
         trueModel.SetActive(true);
+        GetComponent<BaseMapRole>().CheckLevel();
     }
 
     /// <summary>
@@ -90,6 +91,7 @@ public abstract class BaseNpc : MonoBehaviour
         {
             hideModel.SetActive(false);
             trueModel.SetActive(true);
+            GetComponent<BaseMapRole>().CheckLevel();
         }
         else
         {

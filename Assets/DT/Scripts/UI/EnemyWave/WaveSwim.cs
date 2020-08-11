@@ -74,7 +74,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
                 twe = transform.DOLocalMoveY(0f, 30f).SetEase(Ease.Linear).OnComplete(() =>
                 {
                     StageGoal.My.timeCount = waitNumber;
-                    print("Timecount: " + StageGoal.My.timeCount);
+                    //print("Timecount: " + StageGoal.My.timeCount);
                     Destroy(gameObject);
                 });
             });
