@@ -85,8 +85,6 @@ public class BulletLaunch : MonoBehaviour
                     {
                         Debug.Log("初始化爆炸"+gameObject.name);
                         gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
-
-
                //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                         gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
                  
