@@ -207,14 +207,14 @@ public class RankItem : MonoBehaviour
             {
                 group.SetActive(true);
                 global.SetActive(false);
-                groupRankPlayerName.text = rankList.playerName;
+                groupRankPlayerName.text = NetworkMgr.My.playerDatas.playerName;// rankList.playerName;
                 
             }
             else
             {
                 group.SetActive(false);
                 global.SetActive(true);
-                globalRankPlayerName.text = rankList.playerName;
+                globalRankPlayerName.text = NetworkMgr.My.playerDatas.playerName;// rankList.playerName;
                 globalRankGroupName.text = rankList.groupName;
                 
             }
@@ -230,14 +230,14 @@ public class RankItem : MonoBehaviour
             {
                 group.SetActive(true);
                 global.SetActive(false);
-                groupRankPlayerName.text = rankList.playerName;
-                
+                groupRankPlayerName.text = NetworkMgr.My.playerDatas.playerName;// rankList.playerName;
+
             }
             else
             {
                 group.SetActive(false);
                 global.SetActive(true);
-                globalRankPlayerName.text = rankList.playerName;
+                globalRankPlayerName.text = NetworkMgr.My.playerDatas.playerName;// rankList.playerName;
                 globalRankGroupName.text = rankList.groupName;
                 
             }
