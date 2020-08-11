@@ -136,6 +136,16 @@ public abstract class BaseSkill : MonoBehaviour
         {
             targetRole.RemoveBuffById(i);
         }
+        if (role.isNpc)
+        {
+            if (role.npcScript.isCanSeeEquip)
+            {
+                foreach (int i in role.npcScript.NPCBuffList)
+                {
+                    targetRole.RemoveBuffById(i);
+                }
+            }
+        }
     }
 
     /// <summary>

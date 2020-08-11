@@ -78,7 +78,6 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         statBtn.onClick.AddListener(() =>  DataStatPanel.My.ShowStat());
         OptionsBtn.onClick.AddListener(()=>OptionsPanel.My.ShowOPtionsPanel());
         InitTimeButton();
-        ToggleHidePanelShow();
         Panel_Delete.SetActive(false);
         lose.SetActive(false);
         isTradeButtonActive = true;
@@ -287,33 +286,25 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     private bool isPlaying = false;
 
-    private List<GameObject> hideList = new List<GameObject>();
+    public List<GameObject> hideList = new List<GameObject>();
 
     /// <summary>
     /// 开关显示3个隐藏按钮
     /// </summary>
-    public void ToggleHidePanelShow()
+    public void ToggleHidePanelShow(bool isRapid = false)
     {
         if (isPlaying)
             return;
-        if (hideList.Count == 0)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                hideList.Add(hidePanel.GetChild(i).gameObject);
-            }
-        }
         if (hidePanel.GetComponent<Image>().fillAmount >= 0.99f)
         {
             isPlaying = true;
-            hidePanel.GetComponent<Image>().DOFillAmount(0.25f,0.2f).Play().SetEase(Ease.Linear).OnComplete(()=> {
+            hidePanel.GetComponent<Image>().DOFillAmount(0.25f, 0.2f).Play().SetEase(Ease.Linear).OnComplete(() => {
                 isPlaying = false;
                 foreach (GameObject go in hideList)
                 {
                     go.SetActive(false);
                 }
             });
-
         }
         else
         {
@@ -326,5 +317,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 go.SetActive(true);
             }
         }
+    }
+
+    private void Awake()
+    {
+
     }
 }

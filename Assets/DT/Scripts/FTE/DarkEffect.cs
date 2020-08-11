@@ -64,7 +64,6 @@ public class DarkEffect : MonoBehaviour
         _mainMaterial.SetInt("_SmoothLength", _smoothLength);
         _mainMaterial.SetColor("_DarkColor", _darkColor);
         _mainMaterial.SetInt("_ItemCnt", _itemDatas.Length); 
-      
         _mainMaterial.SetVectorArray("_Item", _itemDatas);
         Graphics.Blit(source, destination, _mainMaterial);
     }
