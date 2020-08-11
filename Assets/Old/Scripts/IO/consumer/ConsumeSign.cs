@@ -302,6 +302,7 @@ public class ConsumeSign : MonoBehaviour
         {
             per += elementResistance[ProductElementType.Normal] / 100f - 1f;
         }
+
         damage = (int)(damage * per);
     }
 
