@@ -27,7 +27,7 @@ public class FTE_4_Step_2 : BaseStep
     {
    
          MaskManager.My.Open(0,94);
-         MaskManager.My.Open(3,130); 
+     StartCoroutine(MaskManager.My.OpenMask(3,130)); 
          contenText.DOFade(0, 0).OnComplete(() => { 
              contenText.DOFade(1, 1.5f).OnComplete(() =>
              {
