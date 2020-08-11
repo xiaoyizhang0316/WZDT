@@ -134,6 +134,10 @@ public class GameEnum
         /// </summary>
         RubishProcess,
         /// <summary>
+        /// 大数据中心
+        /// </summary>
+        DataCenter,
+        /// <summary>
         /// 任意
         /// </summary>
         All

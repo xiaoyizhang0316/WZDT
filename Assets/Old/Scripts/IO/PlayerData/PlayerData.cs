@@ -335,6 +335,5 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     private void Start()
     {
-
     }
 }

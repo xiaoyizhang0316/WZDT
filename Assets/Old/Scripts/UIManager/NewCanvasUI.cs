@@ -78,6 +78,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         statBtn.onClick.AddListener(() =>  DataStatPanel.My.ShowStat());
         OptionsBtn.onClick.AddListener(()=>OptionsPanel.My.ShowOPtionsPanel());
         InitTimeButton();
+        ToggleHidePanelShow();
         Panel_Delete.SetActive(false);
         lose.SetActive(false);
         isTradeButtonActive = true;
@@ -258,6 +259,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         }
     }
 
+    /// <summary>
+    /// 隐藏所有物流线
+    /// </summary>
     public void HideAllProductLine()
     {
         isProductLineActive = !isProductLineActive;
@@ -268,6 +272,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         }
     }
 
+    /// <summary>
+    /// 隐藏所有信息流线
+    /// </summary>
     public void HideAllInfoLine()
     {
         isInfoLineActive = !isInfoLineActive;
@@ -282,13 +289,16 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     private List<GameObject> hideList = new List<GameObject>();
 
+    /// <summary>
+    /// 开关显示3个隐藏按钮
+    /// </summary>
     public void ToggleHidePanelShow()
     {
         if (isPlaying)
             return;
         if (hideList.Count == 0)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 hideList.Add(hidePanel.GetChild(i).gameObject);
             }
@@ -296,7 +306,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         if (hidePanel.GetComponent<Image>().fillAmount >= 0.99f)
         {
             isPlaying = true;
-            hidePanel.GetComponent<Image>().DOFillAmount(0.25f,0.25f).Play().OnComplete(()=> {
+            hidePanel.GetComponent<Image>().DOFillAmount(0.25f,0.2f).Play().SetEase(Ease.Linear).OnComplete(()=> {
                 isPlaying = false;
                 foreach (GameObject go in hideList)
                 {
@@ -308,7 +318,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         else
         {
             isPlaying = true;
-            hidePanel.GetComponent<Image>().DOFillAmount(1f, 0.25f).Play().OnComplete(() => {
+            hidePanel.GetComponent<Image>().DOFillAmount(1f, 0.2f).Play().SetEase(Ease.Linear).OnComplete(() => {
                 isPlaying = false;
             });
             foreach (GameObject go in hideList)

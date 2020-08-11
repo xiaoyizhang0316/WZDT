@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine; 
 using IOIntensiveFramework.MonoSingleton;
 using static GameEnum;
+using DG.Tweening;
 
 public class MapManager : MonoSingleton<MapManager>
 {
@@ -24,8 +25,10 @@ public class MapManager : MonoSingleton<MapManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        Invoke("CheckDuplicate", 1f);
+        Invoke("CheckDuplicateID", 1f);
     }
+
 
     /// <summary>
     /// 检测地块是否能放置建筑
@@ -273,4 +276,51 @@ public class MapManager : MonoSingleton<MapManager>
             }
         }
     }
+
+    #region 辅助函数
+
+    private List<double> idList = new List<double>();
+
+    /// <summary>
+    /// 检测是否有重复角色ID
+    /// </summary>
+    public void CheckDuplicateID()
+    {
+        foreach (BaseMapRole role in PlayerData.My.MapRole)
+        {
+            if (idList.Contains(role.baseRoleData.ID))
+            {
+                print("-----------重复角色ID------------" + role.baseRoleData.ID.ToString() + role.baseRoleData.baseRoleData.roleName);
+            }
+            else
+            {
+                idList.Add(role.baseRoleData.ID);
+            }
+        }
+    }
+    
+    private List<string> xyList = new List<string>();
+
+    /// <summary>
+    /// 检测是否有重复坐标地块
+    /// </summary>
+    public void CheckDuplicate()
+    {
+        foreach (MapSign sign in _mapSigns)
+        {
+            string str = sign.x.ToString() + " " + sign.y.ToString();
+            if (xyList.Contains(str))
+            {
+                print(str + "------------Duplicate X&Y");
+                sign.transform.DOScale(70f, 0f);
+                GetMapSignByXY(sign.x, sign.y).transform.DOScale(70f, 0f);
+            }
+            else
+            {
+                xyList.Add(str);
+            }
+        }
+    }
+
+    #endregion
 }

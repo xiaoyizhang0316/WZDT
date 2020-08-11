@@ -277,6 +277,8 @@ public class BossConsumer : ConsumeSign
             BossBloodBar.My.boss.sprite = BossBloodBar.My.bossList[3];
             if (killCount == 15)
                 SkillTwo();
+            if (killCount == 20)
+                SummonLittleCircle();
         }
     }
 
@@ -482,7 +484,7 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     public void SummonLittle()
     {
-        if (killCount <= 10)
+        if (killCount <= 5)
             return;
         for (int i = 0; i < 8; i++)
         {
@@ -495,6 +497,15 @@ public class BossConsumer : ConsumeSign
             go.GetComponent<BossSummonConsumer>().consumeData.killMoney = (int)(consumeData.killMoney * 0.1f);
             go.GetComponent<BossSummonConsumer>().consumeData.killSatisfy = 0;
         }
+    }
+
+    /// <summary>
+    /// 循环招小弟
+    /// </summary>
+    public void SummonLittleCircle()
+    {
+        SummonLittle();
+        transform.DOScale(transform.localScale, 74f).OnComplete(SummonLittleCircle);
     }
 
     /// <summary>
