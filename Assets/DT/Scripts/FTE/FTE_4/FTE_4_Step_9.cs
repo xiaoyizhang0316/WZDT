@@ -61,7 +61,11 @@ public class FTE_4_Step_9 : BaseStep
     {
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
         
-
+        for (int i = 0; i <     PlayerData.My.MapRole.Count; i++)
+        {
+            PlayerData.My.MapRole[i].gameObject.SetActive(true);
+                     
+        }
        nextButton.interactable = false;  
     
        MaskManager.My.Close(4,0);
