@@ -32,8 +32,13 @@ public class FTE_4_Step_2 : BaseStep
              contenText.DOFade(1, 1.5f).OnComplete(() =>
              {
                  FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
-                 nextButton.interactable = true; 
-                 modle.SetActive(false);
+                 nextButton.interactable = true;
+                 for (int i = 0; i <     PlayerData.My.MapRole.Count; i++)
+                 {
+                     PlayerData.My.MapRole[i].gameObject.SetActive(false);
+                     
+                 }
+                 npc.gameObject.SetActive(true);
                  PlayNext();
              }).Play(); 
          }).Play(); 
@@ -61,8 +66,7 @@ public class FTE_4_Step_2 : BaseStep
     public override void StopCurrentStep()
     {
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
-        modle.SetActive(true);
-
+     
        nextButton.interactable = false; 
        MaskManager.My.Close(0,0);
        MaskManager.My.Close(1,0);

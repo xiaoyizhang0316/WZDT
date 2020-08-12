@@ -37,12 +37,13 @@ public class FTE_1_Step_29 : BaseStep
         {
             panels[i].gameObject.SetActive(false);
         }
-        RoleListManager.My. OutButton(); 
+
         sign.interactable = true;
         MaskManager.My.Open(12,80);
         MaskManager.My.Open(28,130);
+        
         NewCanvasUI.My.GamePause();
-       
+        RoleListManager.My. OutButton(); 
         contenText.DOFade(1, 0.3f).Play();
         landText.DOFade(1, 0.3f).Play();
 
