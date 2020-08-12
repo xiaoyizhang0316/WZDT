@@ -358,7 +358,7 @@ public class ConsumeSign : MonoBehaviour
         isStart = true;
         isCanSelect = true;
         float time = CalculateTime();
-        tweener = transform.DOPath(pathList.ToArray(), time,PathType.CatmullRom, PathMode.Full3D).OnComplete(OnAlive).SetEase(Ease.Linear).SetLookAt(0f);
+        tweener = transform.DOPath(pathList.ToArray(), time,PathType.CatmullRom, PathMode.Full3D).OnComplete(OnAlive).SetEase(Ease.Linear).SetOptions(AxisConstraint.None,AxisConstraint.Z|AxisConstraint.X).SetLookAt(0f);
         CheckBuffDuration();
     }
 
@@ -467,6 +467,7 @@ public class ConsumeSign : MonoBehaviour
 
     private void Update()
     {
+        print(transform.rotation);
         //print(tweener.ElapsedPercentage(false));
         if(isIgnoreResistance)
         {

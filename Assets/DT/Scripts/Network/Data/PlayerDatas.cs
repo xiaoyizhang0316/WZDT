@@ -187,7 +187,7 @@ public class PlayerReplay
         realTime = StageGoal.My.endTime - StageGoal.My.startTime;
         if(SceneManager.GetActiveScene().name == "FTE_9")
         {
-            bossLevel = GameObject.FindObjectOfType<BossConsumer>().killCount;
+            bossLevel = GameObject.FindObjectOfType<BossConsumer>()==null?0: GameObject.FindObjectOfType<BossConsumer>().killCount;
         }
     }
 }
