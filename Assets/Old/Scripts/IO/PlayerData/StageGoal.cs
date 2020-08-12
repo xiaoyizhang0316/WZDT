@@ -180,13 +180,13 @@ public class StageGoal : MonoSingleton<StageGoal>
             if (!isOverMaxMinus)
             {
                 isOverMaxMinus = true;
-                foreach (BaseMapRole role in PlayerData.My.MapRole)
+            }
+            foreach (BaseMapRole role in PlayerData.My.MapRole)
+            {
+                if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
                 {
-                    if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
-                    {
-                        role.GetComponent<BaseSkill>().CancelSkill();
-                        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
-                    }
+                    role.GetComponent<BaseSkill>().CancelSkill();
+                    AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
                 }
             }
         }
@@ -250,13 +250,13 @@ public class StageGoal : MonoSingleton<StageGoal>
             if (!isOverMaxMinus)
             {
                 isOverMaxMinus = true;
-                foreach (BaseMapRole role in PlayerData.My.MapRole)
+            }
+            foreach (BaseMapRole role in PlayerData.My.MapRole)
+            {
+                if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
                 {
-                    if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
-                    {
-                        role.GetComponent<BaseSkill>().CancelSkill();
-                        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
-                    }
+                    role.GetComponent<BaseSkill>().CancelSkill();
+                    AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
                 }
             }
         }
