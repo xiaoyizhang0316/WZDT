@@ -200,7 +200,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         else
         {
             NetworkMgr.My.currentGlobalPage -= 1;
-            ShowRankList(true);
+            ShowRankList(false);
             RefreshPageButtons(false);
         }
     }
@@ -342,7 +342,7 @@ public class RankPanel : MonoSingleton<RankPanel>
                 {
                     if (i < childCount)
                     {
-                        //listContent.GetChild(i).gameObject.SetActive(false);
+                        listContent.GetChild(i).gameObject.SetActive(false);
                         if(i + NetworkMgr.My.currentGroupPage * CommonParams.rankPageMaxNum < groupList.Count)
                         {
                             listContent.GetChild(i).GetComponent<RankItem>().Setup(groupList[i+NetworkMgr.My.currentGroupPage*CommonParams.rankPageMaxNum],isGroup);
@@ -363,7 +363,7 @@ public class RankPanel : MonoSingleton<RankPanel>
             {
                 for (int i = 0; i < childCount; i++)
                 {
-                    //listContent.GetChild(i).gameObject.SetActive(false);
+                    listContent.GetChild(i).gameObject.SetActive(false);
                     if (i < /*groupList.Count*/ CommonParams.rankPageMaxNum)
                     {
                         if(i + NetworkMgr.My.currentGroupPage * CommonParams.rankPageMaxNum < groupList.Count)
@@ -384,7 +384,7 @@ public class RankPanel : MonoSingleton<RankPanel>
                 {
                     if (i < childCount)
                     {
-                        //listContent.GetChild(i).gameObject.SetActive(false);
+                        listContent.GetChild(i).gameObject.SetActive(false);
                         if(i + NetworkMgr.My.currentGlobalPage * CommonParams.rankPageMaxNum < globalList.Count)
                         {
                             listContent.GetChild(i).GetComponent<RankItem>().Setup(globalList[i+ NetworkMgr.My.currentGlobalPage * CommonParams.rankPageMaxNum], isGroup);
@@ -405,7 +405,7 @@ public class RankPanel : MonoSingleton<RankPanel>
             {
                 for (int i = 0; i < childCount; i++)
                 {
-                    //listContent.GetChild(i).gameObject.SetActive(false);
+                    listContent.GetChild(i).gameObject.SetActive(false);
                     if (i < /*globalList.Count*/ CommonParams.rankPageMaxNum)
                     {
                         if(i + NetworkMgr.My.currentGlobalPage * CommonParams.rankPageMaxNum < globalList.Count)
