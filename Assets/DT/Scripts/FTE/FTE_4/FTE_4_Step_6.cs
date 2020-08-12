@@ -31,7 +31,7 @@ public class FTE_4_Step_6 : BaseStep
          FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
          Debug.Log("第六步执行");
          nextButton.interactable = true; 
-         modle.SetActive(false);
+      
          PlayNext();
          contenText.DOFade(0, 0).OnComplete(() => { 
              contenText.DOFade(1, 1.5f).OnComplete(() =>
@@ -61,7 +61,7 @@ public class FTE_4_Step_6 : BaseStep
     public override void StopCurrentStep()
     {
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
-        modle.SetActive(true);
+ 
  
        MaskManager.My.Close(1,0);
        MaskManager.My.Close(3,0);
