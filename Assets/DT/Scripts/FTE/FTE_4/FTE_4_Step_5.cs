@@ -10,8 +10,7 @@ public class FTE_4_Step_5 : BaseStep
     // Start is called before the first frame update
     void Start()
     {
-        nextButton.onClick.AddListener(() => { StopCurrentStep(); });
-        contenText.color = new Color(1,1,1,0); 
+     
     }
 
     // Update is called once per frame
@@ -22,22 +21,23 @@ public class FTE_4_Step_5 : BaseStep
 
     public override void StartCuttentStep()
     { 
-    
+        nextButton.onClick.AddListener(() => { StopCurrentStep(); });
+        contenText.color = new Color(1,1,1,0); 
         MaskManager.My.Open(1,80); 
 
          contenText.DOFade(0, 0).OnComplete(() => { 
              contenText.DOFade(1, 1.5f).OnComplete(() =>
              {
-                 FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
-                 nextButton.interactable = true;
-               //  PlayNext();
+                 
+                 StopCurrentStep();
+                 //  PlayNext();
              }).Play(); 
          }).Play();  
     }
  
     public override void StopCurrentStep()
     {
-        FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true; 
+       
        nextButton.interactable = false;  
       
 
