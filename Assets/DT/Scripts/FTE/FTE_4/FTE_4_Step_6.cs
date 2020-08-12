@@ -12,8 +12,7 @@ public class FTE_4_Step_6 : BaseStep
     // Start is called before the first frame update
     void Start()
     {
-        nextButton.onClick.AddListener(() => { StopCurrentStep(); });
-        contenText.color = new Color(1,1,1,0);
+     
         
     }
 
@@ -25,34 +24,35 @@ public class FTE_4_Step_6 : BaseStep
 
     public override void StartCuttentStep()
     {
-   
+ 
+        contenText.color = new Color(1,1,1,0);
          MaskManager.My.Open(1,94);
          MaskManager.My.Open(3,130); 
+         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
+         Debug.Log("第六步执行");
+         nextButton.interactable = true; 
+      
+         PlayNext();
          contenText.DOFade(0, 0).OnComplete(() => { 
              contenText.DOFade(1, 1.5f).OnComplete(() =>
              {
-                 FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
-                 nextButton.interactable = true; 
-                 modle.SetActive(false);
-                 PlayNext();
+             
+                 
              }).Play(); 
          }).Play(); 
 
     }
     public void PlayNext()
-    {
-        Debug.Log("检测");
+    { 
         if (npc.isCanSeeEquip)
-        {
-            Debug.Log("检测成功");
+        { 
 
             StopCurrentStep();
         }
         else
         {
             gameObject.transform.DOScale(1, 0.1f).OnComplete(() =>
-            {
-                Debug.Log("检测失败");
+            { 
 
                 PlayNext();
             }).Play();
@@ -61,9 +61,8 @@ public class FTE_4_Step_6 : BaseStep
     public override void StopCurrentStep()
     {
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
-        modle.SetActive(true);
-
-       nextButton.interactable = false;  
+ 
+ 
        MaskManager.My.Close(1,0);
        MaskManager.My.Close(3,0);
        contenText.DOFade(0, 0.8f).OnComplete(() =>
