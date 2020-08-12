@@ -25,8 +25,9 @@ public class MapManager : MonoSingleton<MapManager>
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("CheckDuplicate", 1f);
-        Invoke("CheckDuplicateID", 1f);
+        //Invoke("CheckDuplicate", 1f);
+        //Invoke("CheckDuplicateID", 1f);
+        //Invoke("CheckGrassAvailable", 1f);
     }
 
 
@@ -318,6 +319,18 @@ public class MapManager : MonoSingleton<MapManager>
             else
             {
                 xyList.Add(str);
+            }
+        }
+    }
+
+    public void CheckGrassAvailable()
+    {
+        foreach (MapSign sign in _mapSigns)
+        {
+            if (sign.baseMapRole == null && !sign.isCanPlace && sign.mapType == MapType.Grass)
+            {
+                print("---------empty grass not available!-----" + sign.x +"  " + sign.y);
+                sign.transform.DOScale(70f, 0f);
             }
         }
     }

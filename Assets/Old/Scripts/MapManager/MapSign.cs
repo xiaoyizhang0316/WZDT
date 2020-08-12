@@ -97,6 +97,10 @@ public class MapSign : MonoBehaviour,IDragHandler
         {
             mapType = MapType.Land;
         }
+        if (mapType != MapType.Grass)
+        {
+            isCanPlace = false;
+        }
     }
 
     /// <summary>
@@ -107,7 +111,7 @@ public class MapSign : MonoBehaviour,IDragHandler
         weighting = 20;
         baseMapRole = null;
         RaycastHit[] hit;
-        hit = Physics.RaycastAll(transform.position + new Vector3(0f, -5f, 0f), Vector3.up);
+        hit = Physics.RaycastAll(transform.position + new Vector3(0f, 5f, 0f), Vector3.down);
         for (int j = 0; j < hit.Length; j++)
         {
             if ( hit[j].transform.CompareTag("MapRole"))

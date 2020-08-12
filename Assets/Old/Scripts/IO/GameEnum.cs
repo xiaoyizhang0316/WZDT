@@ -576,4 +576,28 @@ public class GameEnum
         Boss
     }
 
+    public enum CursorType
+    {
+        /// <summary>
+        /// 自己角色
+        /// </summary>
+        Role,
+        /// <summary>
+        /// NPC角色
+        /// </summary>
+        NPC,
+        /// <summary>
+        /// 装备和工人
+        /// </summary>
+        Equip,
+        /// <summary>
+        /// 消费者
+        /// </summary>
+        Consumer,
+        /// <summary>
+        /// 默认
+        /// </summary>
+        Standard
+    }
+
 }
