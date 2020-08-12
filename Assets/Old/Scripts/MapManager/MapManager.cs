@@ -25,7 +25,7 @@ public class MapManager : MonoSingleton<MapManager>
     // Start is called before the first frame update
     void Start()
     {
-        //Invoke("CheckDuplicate", 1f);
+        Invoke("CheckDuplicate", 1f);
         //Invoke("CheckDuplicateID", 1f);
         //Invoke("CheckGrassAvailable", 1f);
     }
