@@ -52,7 +52,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         closeBtn.onClick.AddListener(Close);
     }
 
-    void Close()
+    public void Close()
     {
         statPanel.SetActive(false);
         mask.SetActive(false);
@@ -95,6 +95,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         isShow = false;
         mask.SetActive(true);
         statPanel.SetActive(true);
+        gameObject.SetActive(true);
         totalIncomePerMin.text = (totalIncome * 60 / timeCount).ToString();
         this.totalIncome.text = totalIncome.ToString();
         consumeIncomePerMin.text = (totalConsumeIncome * 60 / timeCount).ToString();
