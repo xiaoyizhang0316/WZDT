@@ -467,11 +467,7 @@ public class ConsumeSign : MonoBehaviour
 
     private void Update()
     {
-<<<<<<< HEAD
-        //print(transform.rotation);
-=======
-       
->>>>>>> 2d429f1ae861c73160b6f10b4bc24e2fbe27b53a
+ 
         //print(tweener.ElapsedPercentage(false));
         if(isIgnoreResistance)
         {
