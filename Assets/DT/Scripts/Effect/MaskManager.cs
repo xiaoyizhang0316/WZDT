@@ -57,6 +57,7 @@ public class MaskManager : MonoSingleton<MaskManager>
     {
         if (darkEffect._darkColor.a <= 0.4f)
         {
+            Debug.Log("改变背景颜色"+darkEffect._darkColor.a);
             darkEffect._darkColor = new Color(0,0,0,   darkEffect._darkColor.a+0.32f);
         }
         else
