@@ -9,9 +9,7 @@ public class FTE_2_Step_1 : BaseStep
     // Start is called before the first frame update
     void Start()
     {
-        nextButton.onClick.AddListener(() => { StopCurrentStep(); });
-        contenText.color = new Color(1,1,1,1);
-        NewCanvasUI.My.GamePause();
+      
     }
 
     // Update is called once per frame
@@ -22,7 +20,10 @@ public class FTE_2_Step_1 : BaseStep
 
     public override void StartCuttentStep()
     {
-   
+        nextButton.onClick.AddListener(() => { StopCurrentStep(); });
+        contenText.color = new Color(1,1,1,1);
+        NewCanvasUI.My.GamePause();
+        nextButton.interactable = false;
          MaskManager.My.Open(0,80);
          contenText.DOFade(0, 0).OnComplete(() => { 
              contenText.DOFade(1, 1.5f).OnComplete(() =>
