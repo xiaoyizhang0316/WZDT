@@ -22,9 +22,11 @@ public class FTE_3_Step_1 : BaseStep
 
     public override void StartCuttentStep()
     {
+        nextButton.interactable = false; 
         NewCanvasUI.My.GamePause();
-         MaskManager.My.Open(0,130);
+     
          contenText.color = new Color(1,1,1,0);
+         MaskManager.My.Open(0,130);
                contenText.DOFade(1, 1.5f).OnComplete(() =>
              {
              
