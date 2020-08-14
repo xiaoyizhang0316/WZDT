@@ -820,15 +820,15 @@ public class StageGoal : MonoSingleton<StageGoal>
             GetTechPoint(1000);
             playerHealth = playerMaxHealth;
         }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            Camera.main.cullingMask = -1;
+        //if (Input.GetKeyDown(KeyCode.U))
+        //{
+        //    Camera.main.cullingMask = -1;
 
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            Camera.main.cullingMask = 279;
-        }
+        //}
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    Camera.main.cullingMask = 279;
+        //}
     }
 
     public void Income(int num, IncomeType incomeType, BaseMapRole npc =null, string otherName="")
