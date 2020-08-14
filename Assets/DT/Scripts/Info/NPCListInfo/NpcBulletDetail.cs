@@ -37,15 +37,12 @@ public class NpcBulletDetail : MonoBehaviour
             buffs[i].gameObject.SetActive(false);
             buffs[i].sprite = buffNull;
             buffs[i].GetComponent<BuffText>().buff = null;
-            if (i < data.buffMaxCount)
-            {
-                buffs[i].transform.parent.gameObject.SetActive(true);
-            }
         }
         for (int i = 0; i < data.buffList.Count; i++)
         {
             buffs[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + data.buffList[i]);
             buffs[i].GetComponent<BuffText>().buff = GameDataMgr.My.GetBuffDataByID(data.buffList[i]);
+            buffs[i].gameObject.SetActive(true);
         }
 
         for (int i = data.buffList.Count; i < data.buffMaxCount; i++)
