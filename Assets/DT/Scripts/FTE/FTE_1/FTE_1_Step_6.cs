@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class FTE_1_Step_6 : BaseStep
 {
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,7 @@ public class FTE_1_Step_6 : BaseStep
 
     public override void StartCuttentStep()
     {
-     //   MaskManager.My.Open(1);
+     //   MaskManager.My.Open(1); 
         nextButton.interactable = false;
         MaskManager.My.Open(4,130);
         contenText.DOFade(0, 0).OnComplete(() => {
@@ -37,8 +39,7 @@ public class FTE_1_Step_6 : BaseStep
 
     public override void StopCurrentStep()
     { 
-        nextButton.interactable = false;  
-
+        nextButton.interactable = false; 
         MaskManager.My.Close(4,0 );
        contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
