@@ -30,9 +30,11 @@ public class NpcBulletDetail : MonoBehaviour
         bullet.sprite = IconSprite;
         this.damage.text = damage.ToString();
         this.loadSpeed.text = loadingSpeed.ToString();
+        
 
         for (int i = 0; i < buffs.Count; i++)
         {
+            buffs[i].gameObject.SetActive(false);
             buffs[i].sprite = buffNull;
             buffs[i].GetComponent<BuffText>().buff = null;
         }
@@ -40,6 +42,12 @@ public class NpcBulletDetail : MonoBehaviour
         {
             buffs[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + data.buffList[i]);
             buffs[i].GetComponent<BuffText>().buff = GameDataMgr.My.GetBuffDataByID(data.buffList[i]);
+            buffs[i].gameObject.SetActive(true);
+        }
+
+        for (int i = data.buffList.Count; i < data.buffMaxCount; i++)
+        {
+            buffs[i].gameObject.SetActive(true);
         }
     }
 }
