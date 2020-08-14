@@ -201,7 +201,17 @@ public class LoginPanel : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Return) && !isLogin)
             {
-                Login();
+                if (setServerPanel.activeInHierarchy)
+                {
+                    if(server_InputText.color == Color.green)
+                    {
+                        ServerConfirm();
+                    }
+                }
+                else
+                {
+                    Login();
+                }
             }
         //}
     }
