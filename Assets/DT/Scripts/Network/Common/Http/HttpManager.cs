@@ -116,7 +116,10 @@ public class HttpManager : MonoSingleton<HttpManager>
                 SetNeedRetryById(retryID, true);
                 if (SceneManager.GetActiveScene().name =="Login" || SceneManager.GetActiveScene().name == "FTE_0")
                 {
-                    ShowTwoClickTip("网络较慢，请重新登录或重试", () => SceneManager.LoadScene("Login"));
+                    ShowTwoClickTip("网络较慢，请重新登录或重试", () => {
+                        if(SceneManager.GetActiveScene().name == "FTE_0")
+                            SceneManager.LoadScene("Login");
+                    });
                 }
                 else
                 {
