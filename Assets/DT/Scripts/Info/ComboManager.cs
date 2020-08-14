@@ -10,22 +10,25 @@ public class ComboManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Com
 
     public GameObject combo;
     public bool isShow;
-    public int combonum=0;
-    public float showTime=0;
+    public int combonum = 0;
+    public float showTime = 0;
+
     public void AddComboNum()
     {
         combonum++;
-        num.text = combonum.ToString();
-        
-        combo.SetActive(true);
-      
-        
 
-        isShow = true;
-        showTime = 0;
-        num.transform.localScale = Vector3.zero;
-        
-        num.transform.DOScale(1+combonum*0.01f, 0.4f).SetEase(Ease.InOutBounce).Play();
+        num.text = combonum.ToString();
+        if (combonum >= 10)
+        {
+            combo.SetActive(true);
+
+
+            isShow = true;
+            showTime = 0;
+            num.transform.localScale = Vector3.zero;
+
+            num.transform.DOScale(1 + combonum * 0.01f, 0.4f).SetEase(Ease.InOutBounce).Play();
+        }
     }
 
     public void Update()
@@ -33,7 +36,7 @@ public class ComboManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Com
         if (isShow)
         {
             showTime += Time.deltaTime;
-            if (showTime > 5)
+            if (showTime > 3)
             {
                 isShow = false;
                 combo.SetActive(false);

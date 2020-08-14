@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class FTE_2_Step_6 : BaseStep
 {
     public GameObject top; 
+    public ScrollRect rect;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class FTE_2_Step_6 : BaseStep
 
     public override void StartCuttentStep()
     {
-        
+        rect.vertical = false;
        
          MaskManager.My.Open(6,90);
          MaskManager.My.Open(5,180);
@@ -68,7 +69,7 @@ public class FTE_2_Step_6 : BaseStep
              {
                  FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
 
-                 
+                
                  PlayNext();
              }).Play(); 
          }).Play(); 
@@ -98,6 +99,7 @@ public class FTE_2_Step_6 : BaseStep
     public override void StopCurrentStep()
     { 
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
+        rect.vertical = true;
 
        MaskManager.My.Close(6,0);
        MaskManager.My.Close(5,0);

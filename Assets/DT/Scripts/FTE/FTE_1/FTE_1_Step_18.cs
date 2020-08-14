@@ -9,7 +9,6 @@ public class FTE_1_Step_18 : BaseStep
     // Start is called before the first frame update
     void Start()
     {
-        contenText.color = new Color(1,1,1,0);
     //    nextButton.onClick.AddListener(() => { StopCurrentStep(); });
     }
 
@@ -21,10 +20,11 @@ public class FTE_1_Step_18 : BaseStep
 
     public override void StartCuttentStep()
     {
-     
+        contenText.color = new Color(1,1,1,0);
+
         contenText.DOFade(0, 0).OnComplete(() => {
            
-            contenText.DOFade(1, 1.5f).OnComplete(() =>
+            contenText.DOFade(1, 1f).OnComplete(() =>
             {
                 MaskManager.My.Open(15,130);
                 MaskManager.My.FadeMask(11,130);

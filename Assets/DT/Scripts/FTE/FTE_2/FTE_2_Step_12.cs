@@ -11,9 +11,7 @@ public class FTE_2_Step_12 : BaseStep
     void Start()
     {
         //nextButton.onClick.AddListener(() => { StopCurrentStep(); });
-        contenText.color = new Color(1,1,1,0);
-        maptext.color = new Color(1,1,1,0);
-        InitMap();
+       
     }
 
     // Update is called once per frame
@@ -24,9 +22,11 @@ public class FTE_2_Step_12 : BaseStep
 
     public override void StartCuttentStep()
     {
-        
+        contenText.color = new Color(1,1,1,0);
+        maptext.color = new Color(1,1,1,0);
+        InitMap();
         MaskManager.My.Open(13,130);
-        MaskManager.My.Open(14,80);
+        StartCoroutine(MaskManager.My.OpenMask(14,80));
      
         contenText.DOFade(0, 0).OnComplete(() =>
         {
