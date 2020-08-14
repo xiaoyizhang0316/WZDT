@@ -167,7 +167,7 @@ public class BulletLaunch : MonoBehaviour
         tow.transform.SetParent(launchShooter);
         tow.transform.localPosition = new Vector3(0, 0.1f, 0);
         tow.GetComponent<AutoFireTow>().data = data;
-        tow.GetComponent<AutoFireTow>().destroyTime = 10;
+        tow.GetComponent<AutoFireTow>().destroyTime = 13;
         tow.GetComponent<AutoFireTow>().launchShooter = launchShooter;
         tow.GetComponent<AutoFireTow>().lunch = this;
         tow.GetComponent<AutoFireTow>().target = GetComponent<BaseMapRole>().shootTarget;
