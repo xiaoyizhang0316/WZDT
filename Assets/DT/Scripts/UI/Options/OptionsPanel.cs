@@ -45,13 +45,29 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
         switch (mt)
         {
             case MusicType.Music:
-                audioMixer.SetFloat("BackGroundVolume", musicSlider.value);
-                PlayerPrefs.SetInt("BackGroundVolume", (int)musicSlider.value);
+                if (musicSlider.value == -20)
+                {
+                    audioMixer.SetFloat("BackGroundVolume", -80);
+                    PlayerPrefs.SetInt("BackGroundVolume", -80);
+                }
+                else
+                {
+                    audioMixer.SetFloat("BackGroundVolume", musicSlider.value);
+                    PlayerPrefs.SetInt("BackGroundVolume", (int)musicSlider.value);
+                }
                 // 设置全局音量大小
                 break;
             case MusicType.Sound:
-                audioMixer.SetFloat("SoundEffectVolume", soundSlider.value);
-                PlayerPrefs.SetInt("SoundEffectVolume", (int)soundSlider.value);
+                if (soundSlider.value == -20)
+                {
+                    audioMixer.SetFloat("SoundEffectVolume", -80);
+                    PlayerPrefs.SetInt("SoundEffectVolume", -80);
+                }
+                else
+                {
+                    audioMixer.SetFloat("SoundEffectVolume", soundSlider.value);
+                    PlayerPrefs.SetInt("SoundEffectVolume", (int)soundSlider.value);
+                }
                 // 设置全局音效声音大小
                 break;
         }
