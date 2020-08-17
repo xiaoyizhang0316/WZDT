@@ -11,11 +11,7 @@ public class FTE_1_Step_9 : BaseStep
     void Start()
     {
       //  nextButton.onClick.AddListener(() => { StopCurrentStep(); });
-        contenText.color = new Color(1,1,1,0);
-        nextButton.onClick.AddListener(() =>
-        {
-            PlayNext();
-        });
+       
     }
 
     // Update is called once per frame
@@ -26,14 +22,20 @@ public class FTE_1_Step_9 : BaseStep
 
     public override void StartCuttentStep()
     {
+        nextButton.interactable = false;
      //   MaskManager.My.Open(1);
-     
+     contenText.color = new Color(1,1,1,0);
+     nextButton.onClick.AddListener(() =>
+     {
+         PlayNext();
+     });
         MaskManager.My.Open(7,130);
         contenText.DOFade(0, 0).OnComplete(() => {
            
             contenText.DOFade(1, 1.5f).OnComplete(() =>
             {
-         
+                nextButton.interactable = true;
+
                  
             }).Play(); 
         }).Play(); 
