@@ -50,7 +50,7 @@ public class ProductMelon_Summon : BaseSkill
             data.damage = (float)(data.damage * 0.3 + role.baseRoleData.effect * 1.5f);
             data.bulletType = BulletType.summon;
             data.loadingSpeed *= 1f - role.baseRoleData.effect / 120f;
-            data.loadingSpeed += 0.5f;
+            data.loadingSpeed += 4f;
             data.buffMaxCount = 4;
             data.damage -= 20;
             try
