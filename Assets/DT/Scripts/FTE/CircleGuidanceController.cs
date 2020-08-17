@@ -152,6 +152,11 @@ public class CircleGuidanceController : MonoBehaviour
     {
         Target = null;
     }
+
+    private void Start()
+    {
+        SetTarget(Target, false);
+    }
 }
 
 public class GuidanceEventPenetrate : MonoBehaviour, ICanvasRaycastFilter
