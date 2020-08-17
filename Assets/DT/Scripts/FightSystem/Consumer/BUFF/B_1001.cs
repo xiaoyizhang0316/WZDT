@@ -38,7 +38,7 @@ public class B_1001 : MonoBehaviour
     {
         if (targetConsume.currentHealth * 2 > targetConsume.consumeData.maxHealth && !isOpen)
         {
-            targetConsume.tweener.timeScale *= 1.3f;
+            targetConsume.tweener.timeScale *= 1.8f;
             isOpen = true;
             PlayAll();
         }
@@ -46,7 +46,7 @@ public class B_1001 : MonoBehaviour
         {
             if (isOpen)
             {
-                targetConsume.tweener.timeScale /= 1.3f;
+                targetConsume.tweener.timeScale /= 1.8f;
                 isOpen = false;
                 StopAll();
             }

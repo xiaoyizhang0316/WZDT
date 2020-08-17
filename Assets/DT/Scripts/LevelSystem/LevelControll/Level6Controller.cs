@@ -23,7 +23,7 @@ public class Level6Controller : BaseLevelController
 
     public override void CheckStarThree()
     {
-        if (StageGoal.My.totalPauseTime <= 100)
+        if (StageGoal.My.totalPauseTime <= 180)
         {
             starThreeStatus = true;
         }
@@ -31,7 +31,7 @@ public class Level6Controller : BaseLevelController
         {
             starThreeStatus = false;
         }
-        starThreeCondition = "累计暂停时间不超过100秒，当前：" + StageGoal.My.totalPauseTime.ToString();
+        starThreeCondition = "累计暂停时间不超过180秒，当前：" + StageGoal.My.totalPauseTime.ToString();
         CheckCheat();
     }
 

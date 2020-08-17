@@ -15,14 +15,7 @@ public class FTE_2_Step_Temp_3 : BaseStep
     void Start()
     {
    
-        button_1.onClick.AddListener(() =>
-        {
-            image_1.SetActive(false);
-            image_2.SetActive(true);
-            button_2.gameObject.SetActive(true);
-            button_1.gameObject.SetActive(false);
-        });
-        button_2.onClick.AddListener(() => { StopCurrentStep(); });
+ 
     }
 
     // Update is called once per frame
@@ -33,7 +26,25 @@ public class FTE_2_Step_Temp_3 : BaseStep
 
     public override void StartCuttentStep()
     { 
-    
+        button_1.onClick.AddListener(() =>
+        {
+            button_1.interactable = false;
+            transform.DOScale(1, 1).OnComplete(() => {   image_1.SetActive(false);
+                image_2.SetActive(true);
+                button_2.gameObject.SetActive(true);
+                button_1.gameObject.SetActive(false); }).Play();
+         
+        });
+        button_2.onClick.AddListener(() =>
+        {
+            button_2.interactable = false;
+            transform.DOScale(1, 1).OnComplete(() =>
+            {
+           
+                StopCurrentStep();
+            }).Play();
+          
+        });
         button_2.gameObject.SetActive(false);
         button_1.gameObject.SetActive(true);
         image_1.SetActive(true);
