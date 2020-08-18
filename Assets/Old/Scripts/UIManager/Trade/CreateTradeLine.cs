@@ -50,11 +50,13 @@ public class CreateTradeLine : MonoBehaviour
                 Physics.Raycast(ray, out RaycastHit hit);
                 if(hit.transform != null)
                 {
-                    if (hit.transform.tag.Equals("MapLand"))
-                    {
-                        Target = hit.transform.position + new Vector3(0f, 1f, 0f);
-                        lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
-                    }
+                    //if (hit.transform.tag.Equals("MapLand"))
+                    //{
+                    //    Target = hit.transform.position + new Vector3(0f, 1f, 0f);
+                    //    lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
+                    //}
+                    lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
+                    Target = hit.point;
                     if (hit.transform.tag.Equals("MapRole"))
                     {
                         targetRole = hit.transform.GetComponentInParent<BaseMapRole>();

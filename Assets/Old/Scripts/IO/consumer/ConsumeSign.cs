@@ -69,6 +69,8 @@ public class ConsumeSign : MonoBehaviour
 
     public int buildingIndex;
 
+    private float scorePer = 1f;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -266,7 +268,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void DeathAward()
     {
-        StageGoal.My.GetSatisfy(consumeData.killSatisfy);
+        StageGoal.My.GetSatisfy((int)(consumeData.killSatisfy * scorePer));
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
         StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
         StageGoal.My.killNumber++;
@@ -302,7 +304,7 @@ public class ConsumeSign : MonoBehaviour
         {
             per += elementResistance[ProductElementType.Normal] / 100f - 1f;
         }
-
+        scorePer = per;
         damage = (int)(damage * per);
     }
 

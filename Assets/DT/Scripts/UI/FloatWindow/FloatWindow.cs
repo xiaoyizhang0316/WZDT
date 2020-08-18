@@ -30,6 +30,18 @@ public class FloatWindow : MonoSingleton<FloatWindow>
         {
             transform.localPosition = new Vector3(transform.localPosition.x, Screen.height / 2 - GetComponent<RectTransform>().sizeDelta.y / 2);
         }
+        if (transform.localPosition.y + GetComponent<RectTransform>().sizeDelta.y / 2 <= -Screen.height / 2)
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, -Screen.height / 2 + GetComponent<RectTransform>().sizeDelta.y / 2);
+        }
+        if (transform.localPosition.x + GetComponent<RectTransform>().sizeDelta.x / 2 >= Screen.width / 2)
+        {
+            transform.localPosition = new Vector3(Screen.width / 2 - GetComponent<RectTransform>().sizeDelta.x / 2, transform.localPosition.y);
+        }
+        if (transform.localPosition.x + GetComponent<RectTransform>().sizeDelta.x / 2 <= -Screen.width / 2)
+        {
+            transform.localPosition = new Vector3(-Screen.width / 2 + GetComponent<RectTransform>().sizeDelta.x / 2, transform.localPosition.y);
+        }
     }
 
     public void Hide()
