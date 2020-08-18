@@ -166,6 +166,41 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
 
+    public void GetJsonDatas(Action<string> doSuccess, Action doFail=null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetJsonDatas, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                //Debug.Log(response.data);
+                try
+                {
+                    string data = CompressUtils.Uncompress(response.data);
+                    doSuccess?.Invoke(data);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.getJsonDatasID));
+    }
+
     /// <summary>
     /// 登出
     /// </summary>
@@ -1030,6 +1065,18 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             Debug.Log(response.data);
         }, keyValues, HttpType.Post));
+    }
+
+    public void TestGet(Action<string> action)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.TestGet, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            Debug.Log(response.data);
+            action(response.data);
+        }, keyValues, HttpType.Get));
     }
     #endregion
 

@@ -69,6 +69,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 玩家操作时间戳列表
     /// </summary>
     public List<PlayerOperation> playerOperations = new List<PlayerOperation>();
+    public StatItemDatasList statItemDatasList=new StatItemDatasList();
 
     #region UI
 
@@ -436,6 +437,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.GamePause(false);
         
         WinManager.My.InitWin();
+        PrintStat();
     }
 
     /// <summary>
@@ -492,6 +494,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
             }
         }
+        
     }
 
     public void CommitLose()
@@ -501,6 +504,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             return;
         tempReplay = new PlayerReplay(false);
         NetworkMgr.My.AddReplayData(tempReplay);
+        PrintStat();
     }
 
     /// <summary>
@@ -963,6 +967,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             dataStats = new List<DataStat>();
         }
         dataStats.Add(new DataStat(playerHealth, playerSatisfy, totalIncome, consumeIncome, totalCost, tradeCost, productCost, playerGold));
+        AddStatItem();
     }
 
     public string ShowStat()
@@ -973,6 +978,48 @@ public class StageGoal : MonoSingleton<StageGoal>
             //list += string.Format($"{ds.blood}\t{ds.score}\t{ds.cost}\t{ds.tradeCost}\t{ds.totalGold}\n");
         }
         return list;
+    }
+
+    private void AddStatItem()
+    {
+        List<StatItemData> statItems = new List<StatItemData>();
+        statItems.Add(new StatItemData("ti", totalIncome * 60 / timeCount, totalIncome, StatItemType.TotalIncome));
+        statItems.Add(new StatItemData("ci", consumeIncome * 60 / timeCount, consumeIncome, StatItemType.ConsumeIncome));
+        statItems.Add(new StatItemData("toc", totalCost * 60 / timeCount, totalCost, StatItemType.TotalCost));
+        statItems.Add(new StatItemData("trc", tradeCost * 60 / timeCount, tradeCost, StatItemType.TradeCost));
+
+        foreach(var key in npcIncomes.Keys)
+        {
+            statItems.Add(new StatItemData(key.baseRoleData.baseRoleData.roleName, npcIncomes[key]*60/timeCount, npcIncomes[key], StatItemType.NpcIncome));
+        }
+
+        foreach(var key in npcIncomesEx.Keys)
+        {
+            statItems.Add(new StatItemData(key, npcIncomesEx[key] * 60 / timeCount, npcIncomesEx[key], StatItemType.NpcIncome));
+        }
+
+        foreach(var key in otherIncomes.Keys)
+        {
+            statItems.Add(new StatItemData(key, otherIncomes[key]*60/timeCount, otherIncomes[key], StatItemType.OtherIncome));
+        }
+
+        foreach(var key in buildingCosts.Keys)
+        {
+            statItems.Add(new StatItemData(key.baseRoleData.baseRoleData.roleName, buildingCosts[key] * 60 / timeCount, buildingCosts[key], StatItemType.BuildCost));
+        }
+
+        foreach(var key in extraCost.Keys)
+        {
+            statItems.Add(new StatItemData(key, 0, extraCost[key], StatItemType.ExtraCost));
+        }
+
+        statItemDatasList.statItemDatasList.Add(new StatItemDatas(statItems));
+
+    }
+
+    private void PrintStat()
+    {
+        Debug.Log(JsonUtility.ToJson(statItemDatasList).ToString());
     }
 
     /// <summary>
