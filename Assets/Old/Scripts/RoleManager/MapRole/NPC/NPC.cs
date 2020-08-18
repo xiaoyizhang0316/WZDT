@@ -14,18 +14,19 @@ public class NPC : BaseNpc
 
     public Animator animator;
 
-    private void OnMouseEnter()
+
+    private void OnMouseOver()
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (isCanSee)
             {
                 string desc = GameDataMgr.My.GetTranslateName(currentRole.baseRoleData.roleType.ToString());
-                FloatWindow.My.Init(transform, desc);
+                RoleFloatWindow.My.Init(transform, desc);
             }
             else
             {
-                FloatWindow.My.Init(transform, "未知角色");
+                RoleFloatWindow.My.Init(transform, "未知角色");
             }
         }
 
@@ -38,7 +39,7 @@ public class NPC : BaseNpc
 
     private void OnMouseExit()
     {
-        FloatWindow.My.Hide();
+        RoleFloatWindow.My.Hide();
         // UIManager.My.Panel_POPInfo.gameObject.SetActive(false);
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
 

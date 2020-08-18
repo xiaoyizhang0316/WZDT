@@ -18,6 +18,7 @@ public class FloatWindow : MonoSingleton<FloatWindow>
         Vector3 V = Input.mousePosition;
         Vector3 V2 = new Vector3(V.x - Screen.width / 2 + 150f, V.y - Screen.height / 2);
         transform.localPosition = V2;
+        //CheckSize();
         CheckPos();
         //print(Input.mousePosition);
         //print(Camera.main.ViewportToScreenPoint(_transform.position));
@@ -53,11 +54,5 @@ public class FloatWindow : MonoSingleton<FloatWindow>
     void Start()
     {
         Hide();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

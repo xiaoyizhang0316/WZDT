@@ -16,12 +16,12 @@ public class RoleDrag : MonoBehaviour
         currentRole = GetComponentInParent<BaseMapRole>().baseRoleData;
     }
 
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             string desc = GameDataMgr.My.GetTranslateName(currentRole.baseRoleData.roleType.ToString());
-            FloatWindow.My.Init(transform, desc);
+            RoleFloatWindow.My.Init(transform, desc);
         }
         //Cursor.SetCursor(cursorTexture,Vector2.zero,CursorMode.Auto);
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
@@ -33,7 +33,7 @@ public class RoleDrag : MonoBehaviour
 
     private void OnMouseExit()
     {
-        FloatWindow.My.Hide();
+        RoleFloatWindow.My.Hide();
         //Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         // UIManager.My.Panel_POPInfo.gameObject.SetActive(false);
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
