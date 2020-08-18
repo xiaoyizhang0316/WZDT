@@ -38,10 +38,7 @@ public class NPC : BaseNpc
 
     private void OnMouseExit()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
-        {
-            FloatWindow.My.Hide();
-        }
+        FloatWindow.My.Hide();
         // UIManager.My.Panel_POPInfo.gameObject.SetActive(false);
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
 

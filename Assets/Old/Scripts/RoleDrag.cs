@@ -33,10 +33,7 @@ public class RoleDrag : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
-        {
-            FloatWindow.My.Hide();
-        }
+        FloatWindow.My.Hide();
         //Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         // UIManager.My.Panel_POPInfo.gameObject.SetActive(false);
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
