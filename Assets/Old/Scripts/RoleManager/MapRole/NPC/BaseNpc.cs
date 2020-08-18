@@ -83,6 +83,11 @@ public abstract class BaseNpc : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        BaseInit();
+    }
+
+    public void BaseInit()
+    {
         GetComponent<BaseMapRole>().npcScript = this;
         GetComponent<BaseMapRole>().isNpc = true;
         GetComponent<BaseMapRole>().baseRoleData.isNpc = true;
@@ -98,7 +103,7 @@ public abstract class BaseNpc : MonoBehaviour
             hideModel.SetActive(true);
             trueModel.SetActive(false);
         }
-        Invoke("InitSetLand",0.5f);
+        Invoke("InitSetLand", 0.5f);
         if (SceneManager.GetActiveScene().name.Equals("FTE_0") || SceneManager.GetActiveScene().name.Equals("FTE_Record"))
             return;
         RaycastHit[] hit;
@@ -113,9 +118,4 @@ public abstract class BaseNpc : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -115,10 +115,15 @@ public class NPC : BaseNpc
     // Start is called before the first frame update
     void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
         PlayerData.My.RoleData.Add(GetComponent<BaseMapRole>().baseRoleData);
         PlayerData.My.MapRole.Add(GetComponent<BaseMapRole>());
         currentRole = GetComponentInParent<BaseMapRole>().baseRoleData;
-        Invoke("AutoSetTrade",0.2f);
+        Invoke("AutoSetTrade", 0.2f);
     }
 
     public void AutoSetTrade()
@@ -131,12 +136,6 @@ public class NPC : BaseNpc
             }
         }
         AnimatorCtr(TradeManager.My.CheckNpcInTrade(currentRole.ID.ToString()));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void AnimatorCtr(bool exist)

@@ -28,6 +28,7 @@ public class MapManager : MonoSingleton<MapManager>
         //Invoke("CheckDuplicate", 1f);
         //Invoke("CheckDuplicateID", 1f);
         //Invoke("CheckGrassAvailable", 1f);
+        //Invoke("TestMethod", 1f);
     }
 
 
@@ -111,9 +112,71 @@ public class MapManager : MonoSingleton<MapManager>
             if (temp != null)
             {
                 temp.isCanPlace = true;
-         
             }
     }
+
+    /// <summary>
+    /// 根据配置表生成NPC并放置到地图上
+    /// </summary>
+    /// <param name="npc"></param>
+    public void PutNPC(NPCSetting npc)
+    {
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/NPC/" + npc.roleType));
+        go.transform.SetParent(GameObject.Find("Role").transform);
+        go.transform.position = GetMapSignByXY(npc.posX, npc.posY).transform.position + new Vector3(0f, 0.3f, 0f);
+        SetNPCAttribute(go,npc);
+        go.name = npc.npcName;
+    }
+
+    /// <summary>
+    /// 设置NPC的属性
+    /// </summary>
+    /// <param name="go"></param>
+    /// <param name="npc"></param>
+    public void SetNPCAttribute(GameObject go, NPCSetting npc)
+    {
+        BaseMapRole role = go.GetComponent<BaseMapRole>();
+        role.baseRoleData.effect = npc.effect;
+        role.baseRoleData.efficiency = npc.efficiency;
+        role.baseRoleData.range = npc.range;
+        role.baseRoleData.tradeCost = npc.tradeCost;
+        role.baseRoleData.riskResistance = npc.risk;
+        role.baseRoleData.baseRoleData.level = npc.level;
+        role.baseRoleData.baseRoleData.roleName = npc.npcName;
+        role.baseRoleData.bulletCapacity = npc.bulletCount;
+        role.baseRoleData.ID = npc.npcID;
+        NPC npcScript = go.GetComponent<NPC>();
+        npcScript.isCanSee = npc.isCanSee;
+        npcScript.isLock = npc.isLock;
+        npcScript.lockNumber = npc.lockNumber;
+        npcScript.isCanSeeEquip = npc.isCanSeeEquip;
+    }
+
+    /// <summary>
+    /// 单元测试
+    /// </summary>
+    public void TestMethod()
+    {
+        NPCSetting npc = new NPCSetting();
+        npc.roleType = "Seed";
+        npc.level = 1;
+        npc.npcName = "dd";
+        npc.effect = 10;
+        npc.efficiency = 10;
+        npc.risk = 10;
+        npc.npcID = 1;
+        npc.tradeCost = 10;
+        npc.range = 10;
+        npc.bulletCount = 10;
+        npc.posX = 15;
+        npc.posY = 21;
+        npc.isCanSee = false;
+        npc.isCanSeeEquip = false;
+        npc.lockNumber = 10;
+        npc.isLock = true;
+        PutNPC(npc);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -276,6 +339,52 @@ public class MapManager : MonoSingleton<MapManager>
         //        interval = 0f;
         //    }
         //}
+    }
+
+    /// <summary>
+    /// NPC配置类
+    /// </summary>
+    public class NPCSetting
+    {
+        public string roleType;
+
+        public int level;
+
+        public string npcName;
+
+        public int effect;
+
+        public double npcID;
+
+        public int efficiency;
+
+        public int risk;
+
+        public int tradeCost;
+
+        public int range;
+
+        public int bulletCount;
+
+        public int posX;
+
+        public int posY;
+
+        public bool isCanSee;
+
+        public bool isLock;
+
+        public bool isCanSeeEquip;
+
+        public int lockNumber;
+
+        public List<int> initBuffList;
+
+        public List<int> hideBuffList;
+
+        public List<int> goodBaseBuffList;
+
+        public List<int> badBaseBuffList;
     }
 
     #region 辅助函数
