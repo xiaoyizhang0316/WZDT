@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using static GameEnum;
 
 public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandler, IPointerExitHandler,
-    IBeginDragHandler, IEndDragHandler, IPointerEnterHandler
+    IBeginDragHandler, IEndDragHandler,IPointerEnterHandler
 {
     public Vector3 world;
 
@@ -216,11 +216,12 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-
+        string desc = GameDataMgr.My.GetTranslateName(type.ToString());
+        RoleFloatWindow.My.Init(transform, desc);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-
+        FloatWindow.My.Hide();
     }
 }

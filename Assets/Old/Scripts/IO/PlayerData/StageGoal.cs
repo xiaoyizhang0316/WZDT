@@ -776,7 +776,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void MenuHide()
     {
-        GetComponent<RectTransform>().DOAnchorPosX(160.27f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
+        GetComponent<RectTransform>().DOAnchorPosX(180.4f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
         }).Play();
@@ -787,7 +787,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void MenuShow()
     {
-        GetComponent<RectTransform>().DOAnchorPosX(-178f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {
+        GetComponent<RectTransform>().DOAnchorPosX(-210f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {
             menuCloseButton.gameObject.SetActive(true);
             menuOpenButton.gameObject.SetActive(false);
         }).Play();

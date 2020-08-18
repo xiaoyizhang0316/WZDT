@@ -62,7 +62,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     /// </summary>
     public void Accerlate()
     {
-        speed = 2f;
+        speed = 4f;
         twe.timeScale = speed;
         play.interactable = true;
         pause.interactable = true;

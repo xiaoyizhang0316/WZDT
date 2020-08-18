@@ -42,6 +42,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
 
     public List<ConsumerTypeData> consumerTypeDatas;
 
+    public List<TranslateData> translateDatas;
+
     /// <summary>
     /// 根据职业类型和等级获取角色模板
     /// </summary>
@@ -192,6 +194,24 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         }
         print("----------------查不到此消费者类别----------------");
         return null;
+    }
+
+    /// <summary>
+    /// 根据名字查找转换后的名字
+    /// </summary>
+    /// <param name="srcName"></param>
+    /// <returns></returns>
+    public string GetTranslateName(string srcName)
+    {
+        foreach (TranslateData t in translateDatas)
+        {
+            if (t.sourceName.Equals(srcName))
+            {
+                return t.translateName;
+            }
+        }
+        Debug.Log("------------找不到该名称的转换词！！-----------");
+        return "未命名";
     }
 
     /// <summary>
@@ -429,6 +449,22 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 }
             }
             consumerTypeDatas.Add(temp);
+        }
+    }
+
+    /// <summary>
+    /// Parse名称转换数据
+    /// </summary>
+    /// <param name="rawData"></param>
+    public void ParseTranslateData(TranslatesData rawData)
+    {
+        translateDatas = new List<TranslateData>();
+        foreach (TranslateItem t in rawData.translateSigns)
+        {
+            TranslateData temp = new TranslateData();
+            temp.sourceName = t.sourceName;
+            temp.translateName = t.translateName;
+            translateDatas.Add(temp);
         }
     }
 
