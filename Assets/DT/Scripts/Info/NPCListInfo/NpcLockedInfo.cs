@@ -15,6 +15,10 @@ public class NpcLockedInfo : MonoBehaviour
 
     public Text unlockCost;
 
+    public Image skillTypeImg;
+
+    public List<Sprite> spriteList;
+
     public void SetInfo(Transform npc, int unlockNumber)
     {
         BaseSkill baseSkill = npc.GetComponent<BaseSkill>();
@@ -62,7 +66,14 @@ public class NpcLockedInfo : MonoBehaviour
                 a++;
             }
         }
-
+        if(npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
+        {
+            skillTypeImg.sprite = spriteList[0];
+        }
+        else
+        {
+            skillTypeImg.sprite = spriteList[1];
+        }
 
     }
 }

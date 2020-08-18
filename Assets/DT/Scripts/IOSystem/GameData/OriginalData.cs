@@ -20,6 +20,8 @@ public class OriginalData : MonoSingleton<OriginalData>
 
     public ConsumerTypesData consumerTypeRawData;
 
+    public TranslatesData translateRawData;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,7 @@ public class OriginalData : MonoSingleton<OriginalData>
         StartCoroutine(ReadStageJson());
         StartCoroutine(ReadRoleTemplateJson());
         StartCoroutine(ReadConsumerTypeJson());
+        StartCoroutine(ReadTranslateJson());
     }
 
     IEnumerator ReadBuffJson()
@@ -172,6 +175,26 @@ public class OriginalData : MonoSingleton<OriginalData>
                 string json = www.text.ToString();
                 consumerTypeRawData = JsonUtility.FromJson<ConsumerTypesData>(json);
                 GameDataMgr.My.ParseConsumerTypeData(consumerTypeRawData);
+            }
+        }
+    }
+
+    IEnumerator ReadTranslateJson()
+    {
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/TranslateData.json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                translateRawData = JsonUtility.FromJson<TranslatesData>(json);
+                GameDataMgr.My.ParseTranslateData(translateRawData);
             }
         }
     }
