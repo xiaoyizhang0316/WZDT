@@ -692,7 +692,8 @@ public class StageGoal : MonoSingleton<StageGoal>
             wudi = true;
             return;
         }
-        StartCoroutine(ReadStageEnemyData(sceneName));
+        //StartCoroutine(ReadStageEnemyData(sceneName));
+        ReadStageEnemyData(sceneName);
         if(sceneName != "FTE_0")
         {
             if (NetworkMgr.My.isUsingHttp)
@@ -727,25 +728,27 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     /// <param name="sceneName"></param>
     /// <returns></returns>
-    IEnumerator ReadStageEnemyData(string sceneName)
+    void ReadStageEnemyData(string sceneName)
     {
-        string path = "file://" + Application.streamingAssetsPath + @"/Data/StageEnemy/" + sceneName + ".json";
-        WWW www = new WWW(@path);
-        yield return www;
-        if (www.isDone)
-        {
-            if (www.error != null)
-            {
-                Debug.Log(www.error);
-                yield return null;
-            }
-            else
-            {
-                string json = www.text.ToString();
+        //string path = "file://" + Application.streamingAssetsPath + @"/Data/StageEnemy/" + sceneName + ".json";
+        //WWW www = new WWW(@path);
+        //yield return www;
+        //if (www.isDone)
+        //{
+        //    if (www.error != null)
+        //    {
+        //        Debug.Log(www.error);
+        //        yield return null;
+        //    }
+        //    else
+        //    {
+        //        string json = www.text.ToString();
+        string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
+        Debug.Log("-------" + json);
                 StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
                 ParseStageEnemyData(stageEnemyData);
-            }
-        }
+        //    }
+        //}
     }
 
     /// <summary>
@@ -983,10 +986,10 @@ public class StageGoal : MonoSingleton<StageGoal>
     private void AddStatItem()
     {
         List<StatItemData> statItems = new List<StatItemData>();
-        statItems.Add(new StatItemData("ti", totalIncome * 60 / timeCount, totalIncome, StatItemType.TotalIncome));
-        statItems.Add(new StatItemData("ci", consumeIncome * 60 / timeCount, consumeIncome, StatItemType.ConsumeIncome));
-        statItems.Add(new StatItemData("toc", totalCost * 60 / timeCount, totalCost, StatItemType.TotalCost));
-        statItems.Add(new StatItemData("trc", tradeCost * 60 / timeCount, tradeCost, StatItemType.TradeCost));
+        statItems.Add(new StatItemData("ti", totalIncome * 60 / (timeCount==0?1:timeCount), totalIncome, StatItemType.TotalIncome));
+        statItems.Add(new StatItemData("ci", consumeIncome * 60 / (timeCount == 0 ? 1 : timeCount), consumeIncome, StatItemType.ConsumeIncome));
+        statItems.Add(new StatItemData("toc", totalCost * 60 / (timeCount == 0 ? 1 : timeCount), totalCost, StatItemType.TotalCost));
+        statItems.Add(new StatItemData("trc", tradeCost * 60 / (timeCount == 0 ? 1 : timeCount), tradeCost, StatItemType.TradeCost));
 
         foreach(var key in npcIncomes.Keys)
         {
