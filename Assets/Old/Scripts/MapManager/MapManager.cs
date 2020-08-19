@@ -4,6 +4,7 @@ using UnityEngine;
 using IOIntensiveFramework.MonoSingleton;
 using static GameEnum;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class MapManager : MonoSingleton<MapManager>
 {
@@ -119,7 +120,7 @@ public class MapManager : MonoSingleton<MapManager>
     /// 根据配置表生成NPC并放置到地图上
     /// </summary>
     /// <param name="npc"></param>
-    public void PutNPC(NPCSetting npc)
+    public void PutNPC(StageNPCData npc)
     {
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/NPC/" + npc.roleType));
         go.transform.SetParent(GameObject.Find("Role").transform);
@@ -133,7 +134,7 @@ public class MapManager : MonoSingleton<MapManager>
     /// </summary>
     /// <param name="go"></param>
     /// <param name="npc"></param>
-    public void SetNPCAttribute(GameObject go, NPCSetting npc)
+    public void SetNPCAttribute(GameObject go, StageNPCData npc)
     {
         BaseMapRole role = go.GetComponent<BaseMapRole>();
         role.baseRoleData.effect = npc.effect;
@@ -152,12 +153,38 @@ public class MapManager : MonoSingleton<MapManager>
         npcScript.isCanSeeEquip = npc.isCanSeeEquip;
     }
 
+    public void InitStageNPCData()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName != "FTE_0")
+        {
+            ReadStageNPCData(sceneName);
+        }
+    }
+
+    public void ReadStageNPCData(string sceneName)
+    {
+        //TODO
+        
+        
+    }
+
+
+    public void ParseStageNPCData(StageNPCsData rawData)
+    {
+        foreach (StageNPCItem s in rawData.stageNPCItems)
+        {
+            StageNPCData npc = new StageNPCData(s);
+            PutNPC(npc);
+        }
+    }
+
     /// <summary>
     /// 单元测试
     /// </summary>
     public void TestMethod()
     {
-        NPCSetting npc = new NPCSetting();
+        StageNPCData npc = new StageNPCData();
         npc.roleType = "Seed";
         npc.level = 1;
         npc.npcName = "dd";
@@ -339,52 +366,6 @@ public class MapManager : MonoSingleton<MapManager>
         //        interval = 0f;
         //    }
         //}
-    }
-
-    /// <summary>
-    /// NPC配置类
-    /// </summary>
-    public class NPCSetting
-    {
-        public string roleType;
-
-        public int level;
-
-        public string npcName;
-
-        public int effect;
-
-        public double npcID;
-
-        public int efficiency;
-
-        public int risk;
-
-        public int tradeCost;
-
-        public int range;
-
-        public int bulletCount;
-
-        public int posX;
-
-        public int posY;
-
-        public bool isCanSee;
-
-        public bool isLock;
-
-        public bool isCanSeeEquip;
-
-        public int lockNumber;
-
-        public List<int> initBuffList;
-
-        public List<int> hideBuffList;
-
-        public List<int> goodBaseBuffList;
-
-        public List<int> badBaseBuffList;
     }
 
     #region 辅助函数

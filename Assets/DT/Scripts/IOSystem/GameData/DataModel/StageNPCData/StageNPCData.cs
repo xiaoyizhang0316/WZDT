@@ -43,4 +43,53 @@ public class StageNPCData
     public List<int> goodBaseBuffList;
 
     public List<int> badBaseBuffList;
+
+    public StageNPCData(StageNPCItem item)
+    {
+        roleType = item.roleType;
+        level = int.Parse(item.level);
+        npcName = item.npcName;
+        effect = int.Parse(item.effect);
+        npcID = double.Parse(item.npcID);
+        efficiency = int.Parse(item.efficiency);
+        risk = int.Parse(item.risk);
+        tradeCost = int.Parse(item.tradeCost);
+        range = int.Parse(item.range);
+        bulletCount = int.Parse(item.bulletCount);
+        posX = int.Parse(item.posX);
+        posY = int.Parse(item.posY);
+        isCanSee = bool.Parse(item.isCanSee);
+        isCanSeeEquip = bool.Parse(item.isCanSeeEquip);
+        isLock = bool.Parse(item.isLock);
+        lockNumber = int.Parse(item.lockNumber);
+        initBuffList = new List<int>();
+        hideBuffList = new List<int>();
+        goodBaseBuffList = new List<int>();
+        badBaseBuffList = new List<int>();
+        foreach (var str in item.initBuffList.Split(','))
+        {
+            if (int.Parse(str) != -1)
+                initBuffList.Add(int.Parse(str));
+        }
+        foreach (var str in item.hideBuffList.Split(','))
+        {
+            if (int.Parse(str) != -1)
+                hideBuffList.Add(int.Parse(str));
+        }
+        foreach (var str in item.goodBaseBuffList.Split(','))
+        {
+            if (int.Parse(str) != -1)
+                goodBaseBuffList.Add(int.Parse(str));
+        }
+        foreach (var str in item.badBaseBuffList.Split(','))
+        {
+            if (int.Parse(str) != -1)
+                badBaseBuffList.Add(int.Parse(str));
+        }
+    }
+
+    public StageNPCData()
+    {
+
+    }
 }

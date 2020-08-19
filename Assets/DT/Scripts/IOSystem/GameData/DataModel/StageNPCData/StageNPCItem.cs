@@ -44,3 +44,8 @@ public class StageNPCItem
 
     public string badBaseBuffList;
 }
+
+public class StageNPCsData
+{
+    public List<StageNPCItem> stageNPCItems = new List<StageNPCItem>();
+}
