@@ -30,6 +30,7 @@ public class MapManager : MonoSingleton<MapManager>
         //Invoke("CheckDuplicateID", 1f);
         //Invoke("CheckGrassAvailable", 1f);
         //Invoke("TestMethod", 1f);
+        InitStageNPCData();
     }
 
 
@@ -165,8 +166,11 @@ public class MapManager : MonoSingleton<MapManager>
     public void ReadStageNPCData(string sceneName)
     {
         //TODO
-        
-        
+        string json = OriginalData.My.jsonDatas.GetLevelData(sceneName, true);
+        Debug.Log("+++++++++" + json);
+        StageNPCsData stageNPCsData = JsonUtility.FromJson< StageNPCsData >(json );
+        Debug.Log("============" + stageNPCsData.stageNPCItems.Count);
+        ParseStageNPCData(stageNPCsData);
     }
 
 
