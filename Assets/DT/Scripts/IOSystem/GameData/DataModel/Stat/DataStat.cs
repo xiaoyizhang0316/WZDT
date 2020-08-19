@@ -58,3 +58,59 @@ public class DataStat
         this.restMoney = restMoney;
     }
 }
+
+[Serializable]
+public class StatItemData
+{
+    public string itemName;
+    public int perMin;
+    public int count;
+    public StatItemType type;
+
+    public StatItemData(string itemName, int perMin, int count, StatItemType type)
+    {
+        this.itemName = itemName;
+        this.perMin = perMin;
+        this.count = count;
+        this.type = type;
+    }
+
+    public override string ToString()
+    {
+        return "{"+itemName+", "+perMin+"/60s, "+count+", "+type;
+    }
+}
+
+[Serializable]
+public class StatItemDatas
+{
+    public List<StatItemData> statItemDatas;
+
+    public StatItemDatas(List<StatItemData> statItemDatas)
+    {
+        this.statItemDatas = statItemDatas;
+    }
+}
+
+[Serializable]
+public class StatItemDatasList
+{
+    public List<StatItemDatas> statItemDatasList;
+
+    public StatItemDatasList()
+    {
+        statItemDatasList = new List<StatItemDatas>();
+    }
+}
+
+public enum StatItemType
+{
+    TotalIncome,
+    ConsumeIncome,
+    TotalCost,
+    TradeCost,
+    NpcIncome,
+    OtherIncome,
+    BuildCost,
+    ExtraCost
+}

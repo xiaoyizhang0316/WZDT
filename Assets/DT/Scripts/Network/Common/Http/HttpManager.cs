@@ -90,8 +90,28 @@ public class HttpManager : MonoSingleton<HttpManager>
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             Debug.Log("网络不可用");
-            retryDic.Remove(retryID);
-            ShowClickTip("网络不可用！", () => SceneManager.LoadScene("Login"));
+            SetNeedRetryById(retryID, true);
+            if (SceneManager.GetActiveScene().name == "Login" || SceneManager.GetActiveScene().name == "FTE_0")
+            {
+                
+                ShowTwoClickTip("网络不可用！请点击取消重新登录或检查网后重试！",  ()=> {
+                    retryDic.Remove(retryID);
+                    if (SceneManager.GetActiveScene().name == "FTE_0"|| SceneManager.GetActiveScene().name == "Map")
+                    {
+                        SceneManager.LoadScene("Login");    
+                    }
+                });
+                mask.SetActive(false);
+            }
+            else
+            {
+                ShowTwoClickTip("网络不可用，请检查网络后重试或返回主界面！", () => {
+                    retryDic.Remove(retryID);
+                    SceneManager.LoadScene("Map");
+                });
+                mask.SetActive(false);
+            }
+            
             yield break;
         }
 
@@ -117,13 +137,21 @@ public class HttpManager : MonoSingleton<HttpManager>
                 if (SceneManager.GetActiveScene().name =="Login" || SceneManager.GetActiveScene().name == "FTE_0")
                 {
                     ShowTwoClickTip("网络较慢，请重新登录或重试", () => {
-                        if(SceneManager.GetActiveScene().name == "FTE_0")
+                        retryDic.Remove(retryID);
+                        if(SceneManager.GetActiveScene().name == "FTE_0"|| SceneManager.GetActiveScene().name == "Map")
+                        {
                             SceneManager.LoadScene("Login");
+                        }
                     });
+                    mask.SetActive(false);
                 }
                 else
                 {
-                    ShowTwoClickTip("网络缓慢，请重试或返回主界面", () => { SceneManager.LoadScene("Map"); });
+                    ShowTwoClickTip("网络缓慢，请重试或返回主界面", () => {
+                        retryDic.Remove(retryID);
+                        SceneManager.LoadScene("Map");
+                    });
+                    mask.SetActive(false);
                 }
                 
 
@@ -151,20 +179,39 @@ public class HttpManager : MonoSingleton<HttpManager>
         }
         else
         {
+            SetNeedRetryById(retryID, true);
             if (!string.IsNullOrEmpty(uwr.error) || uwr.isNetworkError || uwr.isHttpError)
             {
                 Debug.Log(uwr.error+uwr.responseCode);
                 //ShowNetworkStatus(uwr.responseCode);
                 //SetNeedRetryById(retryID, false);
-                retryDic.Remove(retryID);
+                
                 if (retryID == HttpId.pingTestID)
                 {
                     action(uwr);
                 }
                 else
                 {
-                    ShowClickTip("网络错误！");
-                    mask.SetActive(false);
+                    if(SceneManager.GetActiveScene().name == "Login" || SceneManager.GetActiveScene().name == "FTE_0"|| SceneManager.GetActiveScene().name == "Map")
+                    {
+
+                        ShowTwoClickTip("网络错误！请检查网络后重试或点击取消返回登录界面！",()=>{
+                            retryDic.Remove(retryID);
+                            if (SceneManager.GetActiveScene().name == "FTE_0"|| SceneManager.GetActiveScene().name == "Map")
+                            {
+                                SceneManager.LoadScene("Login");
+                            }
+                        });
+                        mask.SetActive(false);
+                    }
+                    else
+                    {
+                        ShowTwoClickTip("网络错误！请检查网络后重试或点击取消返回主界面！", () => {
+                            retryDic.Remove(retryID);
+                            SceneManager.LoadScene("Map");
+                        });
+                        mask.SetActive(false);
+                    }
 
                 }
                 yield break;

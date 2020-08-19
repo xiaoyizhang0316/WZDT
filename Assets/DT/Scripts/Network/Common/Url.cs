@@ -5,6 +5,7 @@ using UnityEngine;
 public static class Url
 {
     private static string ipAddr = "39.106.226.52";
+    //private static string ipAddr = "127.0.0.1";
     private static string port = "8080";
     //private static string ip = "http://39.106.226.52:8080/";
     private static string ip = "http://"+ipAddr+":"+port+"/";
@@ -22,6 +23,7 @@ public static class Url
     private static string getKeyUrl = "getKeyCodes";
     private static string checkDeviceID = "checkDeviceID";
     private static string setPlayerDatas = "setPlayerDatas";
+    private static string getJsonDatas = "getJsonDatas";
     #endregion
 
     #region player infos
@@ -93,6 +95,7 @@ public static class Url
     public static string AddEquips { get => ip + addEquips;  }
     public static string TestPost { get => ip + testPost;  }
     public static string TestGet { get => ip + testGet;  }
+    public static string GetJsonDatas { get => ip + getJsonDatas; }
 
     public static void SetIp(string newIp)
     {

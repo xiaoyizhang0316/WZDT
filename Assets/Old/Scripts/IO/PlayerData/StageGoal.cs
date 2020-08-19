@@ -69,6 +69,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 玩家操作时间戳列表
     /// </summary>
     public List<PlayerOperation> playerOperations = new List<PlayerOperation>();
+    public StatItemDatasList statItemDatasList=new StatItemDatasList();
 
     #region UI
 
@@ -436,6 +437,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.GamePause(false);
         
         WinManager.My.InitWin();
+        PrintStat();
     }
 
     /// <summary>
@@ -492,6 +494,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
             }
         }
+        
     }
 
     public void CommitLose()
@@ -501,6 +504,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             return;
         tempReplay = new PlayerReplay(false);
         NetworkMgr.My.AddReplayData(tempReplay);
+        PrintStat();
     }
 
     /// <summary>
@@ -688,7 +692,8 @@ public class StageGoal : MonoSingleton<StageGoal>
             wudi = true;
             return;
         }
-        StartCoroutine(ReadStageEnemyData(sceneName));
+        //StartCoroutine(ReadStageEnemyData(sceneName));
+        
         if(sceneName != "FTE_0")
         {
             if (NetworkMgr.My.isUsingHttp)
@@ -716,6 +721,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             waitTimeList.Add(i);
         }
+        ReadStageEnemyData(sceneName);
     }
 
     /// <summary>
@@ -723,25 +729,27 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     /// <param name="sceneName"></param>
     /// <returns></returns>
-    IEnumerator ReadStageEnemyData(string sceneName)
+    void ReadStageEnemyData(string sceneName)
     {
-        string path = "file://" + Application.streamingAssetsPath + @"/Data/StageEnemy/" + sceneName + ".json";
-        WWW www = new WWW(@path);
-        yield return www;
-        if (www.isDone)
-        {
-            if (www.error != null)
-            {
-                Debug.Log(www.error);
-                yield return null;
-            }
-            else
-            {
-                string json = www.text.ToString();
+        //string path = "file://" + Application.streamingAssetsPath + @"/Data/StageEnemy/" + sceneName + ".json";
+        //WWW www = new WWW(@path);
+        //yield return www;
+        //if (www.isDone)
+        //{
+        //    if (www.error != null)
+        //    {
+        //        Debug.Log(www.error);
+        //        yield return null;
+        //    }
+        //    else
+        //    {
+        //        string json = www.text.ToString();
+        string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
+        Debug.Log("-------" + json);
                 StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
                 ParseStageEnemyData(stageEnemyData);
-            }
-        }
+        //    }
+        //}
     }
 
     /// <summary>
@@ -823,16 +831,6 @@ public class StageGoal : MonoSingleton<StageGoal>
                 playerHealth = playerMaxHealth;
             }
         }
-           
-        //if (Input.GetKeyDown(KeyCode.U))
-        //{
-        //    Camera.main.cullingMask = -1;
-
-        //}
-        //if (Input.GetKeyDown(KeyCode.I))
-        //{
-        //    Camera.main.cullingMask = 279;
-        //}
     }
 
     public void Income(int num, IncomeType incomeType, BaseMapRole npc =null, string otherName="")
@@ -963,6 +961,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             dataStats = new List<DataStat>();
         }
         dataStats.Add(new DataStat(playerHealth, playerSatisfy, totalIncome, consumeIncome, totalCost, tradeCost, productCost, playerGold));
+        AddStatItem();
     }
 
     public string ShowStat()
@@ -973,6 +972,48 @@ public class StageGoal : MonoSingleton<StageGoal>
             //list += string.Format($"{ds.blood}\t{ds.score}\t{ds.cost}\t{ds.tradeCost}\t{ds.totalGold}\n");
         }
         return list;
+    }
+
+    private void AddStatItem()
+    {
+        List<StatItemData> statItems = new List<StatItemData>();
+        statItems.Add(new StatItemData("ti", totalIncome * 60 / (timeCount==0?1:timeCount), totalIncome, StatItemType.TotalIncome));
+        statItems.Add(new StatItemData("ci", consumeIncome * 60 / (timeCount == 0 ? 1 : timeCount), consumeIncome, StatItemType.ConsumeIncome));
+        statItems.Add(new StatItemData("toc", totalCost * 60 / (timeCount == 0 ? 1 : timeCount), totalCost, StatItemType.TotalCost));
+        statItems.Add(new StatItemData("trc", tradeCost * 60 / (timeCount == 0 ? 1 : timeCount), tradeCost, StatItemType.TradeCost));
+
+        foreach(var key in npcIncomes.Keys)
+        {
+            statItems.Add(new StatItemData(key.baseRoleData.baseRoleData.roleName, npcIncomes[key]*60/timeCount, npcIncomes[key], StatItemType.NpcIncome));
+        }
+
+        foreach(var key in npcIncomesEx.Keys)
+        {
+            statItems.Add(new StatItemData(key, npcIncomesEx[key] * 60 / timeCount, npcIncomesEx[key], StatItemType.NpcIncome));
+        }
+
+        foreach(var key in otherIncomes.Keys)
+        {
+            statItems.Add(new StatItemData(key, otherIncomes[key]*60/timeCount, otherIncomes[key], StatItemType.OtherIncome));
+        }
+
+        foreach(var key in buildingCosts.Keys)
+        {
+            statItems.Add(new StatItemData(key.baseRoleData.baseRoleData.roleName, buildingCosts[key] * 60 / timeCount, buildingCosts[key], StatItemType.BuildCost));
+        }
+
+        foreach(var key in extraCost.Keys)
+        {
+            statItems.Add(new StatItemData(key, 0, extraCost[key], StatItemType.ExtraCost));
+        }
+
+        statItemDatasList.statItemDatasList.Add(new StatItemDatas(statItems));
+
+    }
+
+    private void PrintStat()
+    {
+        Debug.Log(JsonUtility.ToJson(statItemDatasList).ToString());
     }
 
     /// <summary>

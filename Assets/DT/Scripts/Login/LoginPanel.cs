@@ -109,40 +109,44 @@ public class LoginPanel : MonoBehaviour
     {
         SavePasswordOrNot();
         UseServerOrNot();
-        if (NetworkMgr.My.playerDatas.status == 0)
-        {
-            // 创建用户信息
-            // TODO
-            HttpManager.My.ShowTip("创建用户信息");
-        }
-        else
-        {
-            //if (NetworkMgr.My.playerDatas.playerIcon.Equals("0"))
-            //{
-            //    //TODO 创建个人信息
-            //}else 
-            if (NetworkMgr.My.playerDatas.threeWordsProgress == 0)
+        NetworkMgr.My.GetJsonDatas((data) => {
+            OriginalData.My.InitDatas(data);
+            
+            if (NetworkMgr.My.playerDatas.status == 0)
             {
-                // 第一个问题
-                threeWordsPanel.GetComponent<ThreeWordsPanel>().SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
-                threeWordsPanel.GetChild(0).gameObject.SetActive(true);
-                gameObject.SetActive(false);
+                // 创建用户信息
+                // TODO
+                HttpManager.My.ShowTip("创建用户信息");
             }
             else
             {
-                if (NetworkMgr.My.playerDatas.fteProgress==0)
+                //if (NetworkMgr.My.playerDatas.playerIcon.Equals("0"))
+                //{
+                //    //TODO 创建个人信息
+                //}else 
+                if (NetworkMgr.My.playerDatas.threeWordsProgress == 0)
                 {
-                    SceneManager.LoadScene("FTE_0");
+                    // 第一个问题
+                    threeWordsPanel.GetComponent<ThreeWordsPanel>().SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
+                    threeWordsPanel.GetChild(0).gameObject.SetActive(true);
+                    gameObject.SetActive(false);
                 }
                 else
                 {
-                    //NetworkMgr.My.GetLevelProgress();
-                    //NetworkMgr.My.GetPlayerEquips();
-                    //NetworkMgr.My.GetAnswers();
-                    SceneManager.LoadScene("Map");
+                    if (NetworkMgr.My.playerDatas.fteProgress==0)
+                    {
+                        SceneManager.LoadScene("FTE_0");
+                    }
+                    else
+                    {
+                        //NetworkMgr.My.GetLevelProgress();
+                        //NetworkMgr.My.GetPlayerEquips();
+                        //NetworkMgr.My.GetAnswers();
+                        SceneManager.LoadScene("Map");
+                    }
                 }
             }
-        }
+        });
         isLogin = false;
     }
 
@@ -280,33 +284,7 @@ public class LoginPanel : MonoBehaviour
 
     private void Test()
     {
-        //TestGetReplayDatas();
-        //TestLogin();
-        //string json = "{\"playerEquips\":[{\"playerID\":\"999999\",\"equipType\":0,\"equipID\":22202,\"count\":1},{\"playerID\":\"999999\",\"equipType\":1,\"equipID\":10001,\"count\":1},{\"playerID\":\"999999\",\"equipType\":0,\"equipID\":22202,\"count\":1},{\"playerID\":\"999999\",\"equipType\":1,\"equipID\":10001,\"count\":1}]}";
-        //Debug.Log(json);
-        //json.Replace("[{","\"[{");
-        //json.Replace("}]", "}]\"");
-        //Debug.Log(json);
-        //PlayerEquips pes = JsonUtility.FromJson<PlayerEquips>(json);
-        //Debug.Log(pes.playerEquips.Count);
-        //try
-        //{
-        //    ParseEquips pe = JsonUtility.FromJson<ParseEquips>(json);
-        //    Debug.Log(pe.playerEquips.ToString());
-        //}
-        //catch (System.Exception ex)
-        //{
-        //    Debug.Log(ex.Message);
-        //}
-        //string ip = "192.168.1.32";
-        //NetworkMgr.My.PintTest(ip,()=> {
-        //    Debug.Log("pass");
-        //});
-        //string ip = "111.1.0.1t";
-        //if(Regex.IsMatch(ip, regx))
-        //{
-        //    Debug.Log(true);
-        //}
+        //GetJson();
     }
 
     private void TestGetReplayDatas()
@@ -374,5 +352,17 @@ public class LoginPanel : MonoBehaviour
         //playerReplay.win = true;
 
         //NetworkMgr.My.AddReplayData(playerReplay, null, null);
+    }
+
+    private void GetJson()
+    {
+        NetworkMgr.My.TestGet((data) => {
+            Debug.Log(data);
+            data = CompressUtils.Uncompress(data);
+            JsonDatas json = JsonUtility.FromJson<JsonDatas>(data);
+            Debug.Log(json.BuffData);
+            BuffsData buffsData = JsonUtility.FromJson<BuffsData>(json.BuffData);
+            Debug.Log(buffsData.buffSigns.Count);
+        });
     }
 }

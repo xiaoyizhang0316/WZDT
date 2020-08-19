@@ -490,7 +490,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     // Start is called before the first frame update
     void Start()
     {
-        Init();
+        //Init();
     }
 
     // Update is called once per frame
