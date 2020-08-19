@@ -36,6 +36,8 @@ public class StageNPCItem
 
     public string lockNumber;
 
+    public string skillDesc;
+
     public string initBuffList;
 
     public string hideBuffList;

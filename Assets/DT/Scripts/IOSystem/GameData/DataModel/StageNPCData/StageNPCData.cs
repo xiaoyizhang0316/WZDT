@@ -36,6 +36,8 @@ public class StageNPCData
 
     public int lockNumber;
 
+    public string skillDesc;
+
     public List<int> initBuffList;
 
     public List<int> hideBuffList;
@@ -62,6 +64,7 @@ public class StageNPCData
         isCanSeeEquip = bool.Parse(item.isCanSeeEquip);
         isLock = bool.Parse(item.isLock);
         lockNumber = int.Parse(item.lockNumber);
+        skillDesc = item.skillDesc;
         initBuffList = new List<int>();
         hideBuffList = new List<int>();
         goodBaseBuffList = new List<int>();

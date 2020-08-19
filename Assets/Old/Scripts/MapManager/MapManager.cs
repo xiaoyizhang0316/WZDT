@@ -151,6 +151,7 @@ public class MapManager : MonoSingleton<MapManager>
         npcScript.isLock = npc.isLock;
         npcScript.lockNumber = npc.lockNumber;
         npcScript.isCanSeeEquip = npc.isCanSeeEquip;
+        go.GetComponent<BaseSkill>().skillDesc = npc.skillDesc;
     }
 
     public void InitStageNPCData()
@@ -165,8 +166,7 @@ public class MapManager : MonoSingleton<MapManager>
     public void ReadStageNPCData(string sceneName)
     {
         //TODO
-        
-        
+
     }
 
 
