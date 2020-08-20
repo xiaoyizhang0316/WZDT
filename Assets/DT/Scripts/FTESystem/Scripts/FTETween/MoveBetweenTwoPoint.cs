@@ -6,17 +6,36 @@ using UnityEngine.UI;
 
 public class MoveBetweenTwoPoint : BaseTween
 {
+    /// <summary>
+    /// 起始位置X
+    /// </summary>
     public float startX;
 
+    /// <summary>
+    /// 起始位置Y
+    /// </summary>
     public float startY;
 
+    /// <summary>
+    /// 终止位置X
+    /// </summary>
     public float endX;
 
+    /// <summary>
+    /// 终止位置Y
+    /// </summary>
     public float endY;
 
+    /// <summary>
+    /// 动画时间
+    /// </summary>
     public float tweTime;
 
+    /// <summary>
+    /// 等待时间
+    /// </summary>
     public float waitTime;
+
 
     public override void Move()
     {

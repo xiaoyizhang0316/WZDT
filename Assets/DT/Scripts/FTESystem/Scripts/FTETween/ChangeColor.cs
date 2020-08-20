@@ -6,8 +6,14 @@ using DG.Tweening;
 
 public class ChangeColor : BaseTween
 {
+    /// <summary>
+    /// 选择的颜色
+    /// </summary>
     public Color selectColor;
 
+    /// <summary>
+    /// 动画时间
+    /// </summary>
     public float waitTime;
 
     public override void Move()
@@ -16,17 +22,5 @@ public class ChangeColor : BaseTween
         {
             GetComponent<Image>().DOColor(Color.white, waitTime).SetEase(Ease.Linear).Play().OnComplete(Move);
         });
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
