@@ -26,6 +26,15 @@ public class JsonDatas
     public string FTE_7;
     public string FTE_8;
     public string FTE_9;
+    public string NPC_1;
+    public string NPC_2;
+    public string NPC_3;
+    public string NPC_4;
+    public string NPC_5;
+    public string NPC_6;
+    public string NPC_7;
+    public string NPC_8;
+    public string NPC_9;
     //public List<Level> level;
 
     //public string GetLevelDataByID(int id)
@@ -39,29 +48,49 @@ public class JsonDatas
     //       }
     //	return null;
     //   }
-    public string GetLevelData(string sceneName)
+    public string GetLevelData(string sceneName, bool isNPC = false)
     {
         switch (sceneName)
         {
             case "FTE_0":
+                if (isNPC)
+                    return null;
                 return FTE_0;
             case "FTE_1":
+                if (isNPC)
+                    return NPC_1;
                 return FTE_1;
             case "FTE_2":
+                if (isNPC)
+                    return NPC_2;
                 return FTE_2;
             case "FTE_3":
+                if (isNPC)
+                    return NPC_3;
                 return FTE_3;
             case "FTE_4":
+                if (isNPC)
+                    return NPC_4;
                 return FTE_4;
             case "FTE_5":
+                if (isNPC)
+                    return NPC_5;
                 return FTE_5;
             case "FTE_6":
+                if (isNPC)
+                    return NPC_6;
                 return FTE_6;
             case "FTE_7":
+                if (isNPC)
+                    return NPC_7;
                 return FTE_7;
             case "FTE_8":
+                if (isNPC)
+                    return NPC_8;
                 return FTE_8;
             case "FTE_9":
+                if (isNPC)
+                    return NPC_9;
                 return FTE_9;
         }
         return null;

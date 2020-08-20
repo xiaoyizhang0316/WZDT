@@ -6,7 +6,11 @@ using UnityEngine.UI;
 
 public class FTE_1_Step_7 : BaseStep
 {
-    public GameObject mask;
+    //public GameObject mask;
+
+    public GameObject sourceObj;
+
+    public GameObject copyObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,15 +20,18 @@ public class FTE_1_Step_7 : BaseStep
 
     // Update is called once per frame
     void Update()
-    { 
-        
+    {
+        if (copyObj != null)
+            copyObj.transform.localPosition = sourceObj.transform.localPosition;
     }
 
     public override void StartCuttentStep()
     {
      //   MaskManager.My.Open(1);
         nextButton.interactable = false;
-        mask.SetActive(true);
+        copyObj = Instantiate(sourceObj, transform);
+
+        //mask.SetActive(true);
         contenText.DOFade(0, 0).OnComplete(() => {
            
             contenText.DOFade(1, 1.5f).OnComplete(() =>
@@ -39,7 +46,7 @@ public class FTE_1_Step_7 : BaseStep
     public override void StopCurrentStep()
     { 
         nextButton.interactable = false;  
-        mask.SetActive(false);
+        //mask.SetActive(false);
         
        contenText.DOFade(0, 0.8f).OnComplete(() =>
        {

@@ -79,7 +79,6 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
                 });
             });
         }
-
     }
 
     public void OnPointerClick(PointerEventData eventData)

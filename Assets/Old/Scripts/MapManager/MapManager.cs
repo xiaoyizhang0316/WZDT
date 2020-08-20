@@ -30,6 +30,7 @@ public class MapManager : MonoSingleton<MapManager>
         //Invoke("CheckDuplicateID", 1f);
         //Invoke("CheckGrassAvailable", 1f);
         //Invoke("TestMethod", 1f);
+        InitStageNPCData();
     }
 
 
@@ -127,6 +128,8 @@ public class MapManager : MonoSingleton<MapManager>
         go.transform.position = GetMapSignByXY(npc.posX, npc.posY).transform.position + new Vector3(0f, 0.3f, 0f);
         SetNPCAttribute(go,npc);
         go.name = npc.npcName;
+        go.GetComponent<NPC>().BaseInit();
+        go.GetComponent<NPC>().Init();
     }
 
     /// <summary>
@@ -157,7 +160,7 @@ public class MapManager : MonoSingleton<MapManager>
     public void InitStageNPCData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName != "FTE_0")
+        if (int.Parse(sceneName.Split('_')[1]) >4 )
         {
             ReadStageNPCData(sceneName);
         }
@@ -166,7 +169,11 @@ public class MapManager : MonoSingleton<MapManager>
     public void ReadStageNPCData(string sceneName)
     {
         //TODO
-
+        string json = OriginalData.My.jsonDatas.GetLevelData(sceneName, true);
+        Debug.Log("+++++++++" + json);
+        StageNPCsData stageNPCsData = JsonUtility.FromJson< StageNPCsData >(json );
+        Debug.Log("============" + stageNPCsData.stageNPCItems.Count);
+        ParseStageNPCData(stageNPCsData);
     }
 
 

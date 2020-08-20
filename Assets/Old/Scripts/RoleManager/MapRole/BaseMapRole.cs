@@ -122,7 +122,6 @@ public class BaseMapRole : MonoBehaviour
             InitAttribute();
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
-
     }
 
     /// <summary>
@@ -526,6 +525,66 @@ public class BaseMapRole : MonoBehaviour
             }
         }
         return bufflist;
+    }
+
+    /// <summary>
+    /// 打开自发光效果
+    /// </summary>
+    public void LightOn()
+    {
+        if(!isNpc)
+        {
+            MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer m in temp)
+            {
+                foreach (Material item in m.materials)
+                {
+                    item.EnableKeyword("_EMISSION");
+                    item.SetColor("_EmissionColor", Color.HSVToRGB(0.1736111f, 1f, 0.4433962f));
+                }
+            }
+        }
+        else if (npcScript.isCanSee)
+        {
+            MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer m in temp)
+            {
+                foreach (Material item in m.materials)
+                {
+                    item.EnableKeyword("_EMISSION");
+                    item.SetColor("_EmissionColor", Color.HSVToRGB(0.1736111f, 1f, 0.4433962f));
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// 关闭自发光效果
+    /// </summary>
+    public void LightOff()
+    {
+        if (!isNpc)
+        {
+            MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer m in temp)
+            {
+                foreach (Material item in m.materials)
+                {
+                    item.DisableKeyword("_EMISSION");
+                }
+            }
+        }
+        else if (npcScript.isCanSee)
+        {
+            MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer m in temp)
+            {
+                foreach (Material item in m.materials)
+                {
+                    item.DisableKeyword("_EMISSION");
+                }
+            }
+        }
     }
 
     /// <summary>

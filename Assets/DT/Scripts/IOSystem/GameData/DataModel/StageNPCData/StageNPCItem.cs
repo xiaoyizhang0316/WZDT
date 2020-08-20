@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class StageNPCItem
 {
     public string roleType;
@@ -47,6 +49,7 @@ public class StageNPCItem
     public string badBaseBuffList;
 }
 
+[Serializable]
 public class StageNPCsData
 {
     public List<StageNPCItem> stageNPCItems = new List<StageNPCItem>();

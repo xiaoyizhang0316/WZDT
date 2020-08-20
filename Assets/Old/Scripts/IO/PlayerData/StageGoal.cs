@@ -105,6 +105,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Text starThreeText;
 
+    public GameObject consumerLivePrb;
+
     #endregion
 
     #region 统计
@@ -239,6 +241,29 @@ public class StageGoal : MonoSingleton<StageGoal>
     }
 
     /// <summary>
+    /// 消费者到达终点时UI提示
+    /// </summary>
+    public void ConsumerAliveTip()
+    {
+        GameObject go = Instantiate(consumerLivePrb, playerHealthBar.transform);
+        float offsetX = UnityEngine.Random.Range(-10f,10f);
+        float offsetY = UnityEngine.Random.Range(-20f, 20f);
+        go.transform.localPosition = new Vector3(455f + offsetX, offsetY, 0f);
+        Destroy(go, 1.5f);
+    }
+
+    /// <summary>
+    /// 消费者被满意的属性消灭时UI提示
+    /// </summary>
+    public void ConsumerExtraPerTip()
+    {
+        playerSatisfyText.transform.parent.transform.DOScale(new Vector3(1.3f, 1.3f, 1f), 0.3f).Play().SetEase(Ease.Linear).OnComplete(() =>
+        {
+            playerSatisfyText.transform.parent.transform.DOScale(Vector3.one, 0.2f).Play().SetEase(Ease.Linear).timeScale = 1f / DOTween.timeScale;
+        }).timeScale = 1f /DOTween.timeScale;
+    }
+
+    /// <summary>
     /// 玩家获得金币
     /// </summary>
     /// <param name="num"></param>
@@ -342,21 +367,23 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerHealthText.text = (playerHealth / (float)playerMaxHealth).ToString("P");
         if (playerHealth / (float)playerMaxHealth > 0.5f)
         {
+            NewCanvasUI.My.EndLowHealth();
             playerHealthText.color = Color.white;
         }
         else if (playerHealth / (float)playerMaxHealth > 0.2f)
         {
+            NewCanvasUI.My.EndLowHealth();
             playerHealthText.color = Color.yellow;
         }
         else
         {
+            NewCanvasUI.My.StartLowHealth();
             playerHealthText.color = Color.red;
         }
 
         if (!playerTechText.text.Equals(playerTechPoint.ToString()))
         {
             playerTechText.DOText( playerTechPoint.ToString(),0.02f,true,ScrambleMode.Numerals).Play() ;   
-
         }
 
     }

@@ -217,7 +217,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     public void OnPointerEnter(PointerEventData eventData)
     {
         string desc = GameDataMgr.My.GetTranslateName(type.ToString());
-        RoleFloatWindow.My.Init(transform, desc);
+        RoleFloatWindow.My.Init(transform, desc,RoleSkillType.Product);
     }
 
     public void OnPointerExit(PointerEventData eventData)
