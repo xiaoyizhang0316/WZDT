@@ -285,6 +285,11 @@ public class LoginPanel : MonoBehaviour
     private void Test()
     {
         //GetJson();
+        //string t = "_111_1_";
+        //string[] tt = t.Split('_');
+        //Debug.Log(tt.Length);
+        //Debug.Log(tt[0]);
+        //Debug.Log(tt[tt.Length - 1]);
     }
 
     private void TestGetReplayDatas()

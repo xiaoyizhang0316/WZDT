@@ -23,6 +23,11 @@ public class OriginalData : MonoSingleton<OriginalData>
 
     public TranslatesData translateRawData;
 
+    public AnswerStage[] answerStages;
+
+    public QuestionList questionList;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -227,5 +232,26 @@ public class OriginalData : MonoSingleton<OriginalData>
         //}
         translateRawData = JsonUtility.FromJson<TranslatesData>(jsonDatas.TranslateData);
         GameDataMgr.My.ParseTranslateData(translateRawData);
+    }
+
+    IEnumerator ReadQuestionList()
+    {
+        //questionList = JsonUtility.FromJson<QuestionList>(jsonDatas.questions);
+
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/Questions.json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                questionList = JsonUtility.FromJson<QuestionList>(json);
+            }
+        }
     }
 }
