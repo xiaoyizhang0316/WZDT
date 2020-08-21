@@ -222,6 +222,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        FloatWindow.My.Hide();
+        RoleFloatWindow.My.Hide();
     }
 }

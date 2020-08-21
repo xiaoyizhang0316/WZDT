@@ -21,8 +21,8 @@ public class FTE_1_Step_7 : BaseStep
     // Update is called once per frame
     void Update()
     {
-        if (copyObj != null)
-            copyObj.transform.localPosition = sourceObj.transform.localPosition;
+        //if (copyObj != null)
+        //    copyObj.transform.localPosition = sourceObj.transform.localPosition;
     }
 
     public override void StartCuttentStep()
@@ -30,7 +30,7 @@ public class FTE_1_Step_7 : BaseStep
      //   MaskManager.My.Open(1);
         nextButton.interactable = false;
         copyObj = Instantiate(sourceObj, transform);
-
+        copyObj.transform.localPosition = sourceObj.transform.localPosition;
         //mask.SetActive(true);
         contenText.DOFade(0, 0).OnComplete(() => {
            

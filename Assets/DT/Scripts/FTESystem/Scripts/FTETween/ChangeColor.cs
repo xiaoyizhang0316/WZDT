@@ -20,7 +20,14 @@ public class ChangeColor : BaseTween
     {
         GetComponent<Image>().DOColor(selectColor, waitTime).SetEase(Ease.Linear).Play().OnComplete(() =>
         {
-            GetComponent<Image>().DOColor(Color.white, waitTime).SetEase(Ease.Linear).Play().OnComplete(Move);
+            GetComponent<Image>().DOColor(Color.white, waitTime).SetEase(Ease.Linear).Play().OnComplete(()=> {
+                Move();
+            });
         });
+    }
+
+    private void Start()
+    {
+        Move();
     }
 }

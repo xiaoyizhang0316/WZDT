@@ -7,20 +7,46 @@ using UnityEngine.UI;
 public abstract class BaseGuideStep : MonoBehaviour
 {
     /// <summary>
-    /// 当前索引号
+    /// 当前索引
     /// </summary>
     public int currentStepIndex;
-
+    /// <summary>
+    /// 是否开启当前步骤
+    /// </summary>
     public bool isOpen;
+    /// <summary>
+    /// 文本框
+    /// </summary>
     public List<Text> contentText;
+    /// <summary>
+    /// 下一步按钮
+    /// </summary>
     public Button endButton;
-    public List<DarkEffect.Item> CameraTarget;
+    /// <summary>
+    /// 高亮区域
+    /// </summary>
+    public List<DarkEffect.Item> Camera3DTarget;
+
+    /// <summary>
+    /// 需要高亮的UI元素
+    /// </summary>
+    public List<GameObject> highLight2DObjList;
+
+    /// <summary>
+    /// 需要高亮的UI元素复制
+    /// </summary>
+    public List<GameObject> highLightCopyObj;
 
     /// <summary>
     /// 需要检测
     /// </summary>
     public bool needCheck;
 
+    /// <summary>
+    /// 该步等待时间
+    /// </summary>
+    [SerializeField]
+    private float entryTime = 1f;
 
     public void OpenFade()
     {
@@ -35,9 +61,9 @@ public abstract class BaseGuideStep : MonoBehaviour
     public IEnumerator OpenHighLight()
     {
         OpenFade();
-        for (int i = 0; i < CameraTarget.Count; i++)
+        for (int i = 0; i < Camera3DTarget.Count; i++)
         {
-            StartCoroutine(OpenOneHighLight(CameraTarget[i]));
+            StartCoroutine(OpenOneHighLight(Camera3DTarget[i]));
         }
 
         while (!CheckAllHighLightRight())
@@ -54,15 +80,15 @@ public abstract class BaseGuideStep : MonoBehaviour
     public bool CheckAllHighLightRight()
     {
         int count = 0;
-        for (int i = 0; i < CameraTarget.Count; i++)
+        for (int i = 0; i < Camera3DTarget.Count; i++)
         {
-            if (CameraTarget[i].radius == CameraTarget[i].EndRandius)
+            if (Camera3DTarget[i].radius == Camera3DTarget[i].EndRandius)
             {
                 count++;
             }
         }
 
-        if (count == CameraTarget.Count)
+        if (count == Camera3DTarget.Count)
         {
             return true;
         }
@@ -80,10 +106,10 @@ public abstract class BaseGuideStep : MonoBehaviour
     private IEnumerator OpenOneHighLight(DarkEffect.Item item)
     {
         yield return new WaitForSeconds(item.waitTime);
-        for (int i = 0; i < item.EndRandius; i++)
+        for (int i = 0; item.radius < item.EndRandius; i++)
         {
-            item.radius++;
-            yield return new WaitForSeconds(0.01f);
+            item.radius+= item.speed;
+            yield return null;
         }
     }
 
@@ -108,55 +134,69 @@ public abstract class BaseGuideStep : MonoBehaviour
         CloseFade();
     }
 
+    /// <summary>
+    /// 初始化所有需要高亮的UI元素
+    /// </summary>
+    public void ShowAllHighlightUI()
+    {
+        if (highLight2DObjList.Count == 0)
+        {
+            return;
+        }
+        for (int i = 0; i < highLight2DObjList.Count; i++)
+        {
+            GameObject go = Instantiate(highLight2DObjList[i], transform);
+            go.transform.localPosition = highLight2DObjList[i].transform.localPosition;
+            go.transform.SetAsFirstSibling();
+            highLightCopyObj.Add(go);
+        }
+    }
+
     public IEnumerator Play()
     {
         if (!isOpen)
         {
             GuideManager.My.PlayNextIndexGuide();
-            
         }
         else
         {
-            
-        if (!needCheck)
-        {
-            endButton.interactable = false;
-
-            if (endButton != null && endButton.gameObject.activeSelf)
+            if (!needCheck)
             {
-                endButton.onClick.AddListener(() =>
+                endButton.interactable = false;
+
+                if (endButton != null && endButton.gameObject.activeSelf)
                 {
-                    endButton.interactable = false;
-                    StartCoroutine(PlayEnd());
-                    
-                });
+                    endButton.onClick.AddListener(() =>
+                    {
+                        endButton.interactable = false;
+                        StartCoroutine(PlayEnd());
+
+                    });
+                }
             }
-        }
-
-        for (int i = 0; i < CameraTarget.Count; i++)
-        {
-            AddHighLight(CameraTarget[i], i);
-        }
-
-
-        yield return OpenHighLight();
-
-        yield return StepStart();
-        yield return new WaitForSeconds(1);
-        if (needCheck)
-        {
-            while (!ChenkEnd())
+            for (int i = 0; i < Camera3DTarget.Count; i++)
             {
-                yield return null;
+                AddHighLight(Camera3DTarget[i], i);
+            }
+            yield return OpenHighLight();
+            ShowAllHighlightUI();
+            yield return StepStart();
+            
+            yield return new WaitForSeconds(entryTime);
+            if (needCheck)
+            {
+                while (!ChenkEnd())
+                {
+                    yield return null;
+                }
+
+                StartCoroutine(PlayEnd());
             }
 
-            StartCoroutine(PlayEnd());
-        }
-
-        else
-        {
-            endButton.interactable = true;
-        }
+            else
+            {
+                endButton.interactable = true;
+            }
         }
 
     }
@@ -164,7 +204,7 @@ public abstract class BaseGuideStep : MonoBehaviour
     public abstract IEnumerator StepStart();
     public abstract IEnumerator StepEnd();
 
-    
+
     /// <summary>
     /// 检查
     /// </summary>
@@ -176,10 +216,14 @@ public abstract class BaseGuideStep : MonoBehaviour
 
     public IEnumerator PlayEnd()
     {
-        
+
         yield return StepEnd();
+        for (int i = 0; i < highLightCopyObj.Count; i++)
+        {
+            Destroy(highLightCopyObj[i], 0.1f);
+        }
         CloseHighLight();
-   
+
         GuideManager.My.PlayNextIndexGuide();
     }
 }

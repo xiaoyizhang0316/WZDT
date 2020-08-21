@@ -19,14 +19,16 @@ public class FTE_1_1 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-       yield return new WaitForSeconds(1);
+       
        Debug.Log("开始教学 "+currentStepIndex);
+        yield break;
     }
 
     public override IEnumerator StepEnd()
     {
-        yield return new WaitForSeconds(1);
+
         Debug.Log("结束教学 "+currentStepIndex);
+        yield break;
     }
 
   
