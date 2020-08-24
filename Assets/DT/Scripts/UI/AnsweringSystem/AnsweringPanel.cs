@@ -10,13 +10,20 @@ public class AnsweringPanel : MonoBehaviour
 {
     #region component
     public ToggleGroup toggleGroup;
-    
-    public Toggle[] toggles;
+
+    public List<Toggle> toggles = new List<Toggle>();
+    public Transform togglesTransform;
+    public Toggle a_toggle;
+    public Toggle b_toggle;
+    public Toggle c_toggle;
+    public Toggle d_toggle;
     public Text question_text;
     public Text error_text;
-    public Button continue_btn;
+    public Text index_text;
+    //public Button continue_btn;
     public Button next_btn;
     public Button replay_btn;
+    public Text passOFail_text;
 
     public GameObject mask;
     public GameObject replayPanel;
@@ -43,17 +50,23 @@ public class AnsweringPanel : MonoBehaviour
     bool reset = false;
     string sceneName = "";
     List<int> randomList;
+    StringBuilder sb = new StringBuilder();
     #endregion
 
     private void Start()
     {
-        for(int i=0; i< toggles.Length; i++)
-        {
-            toggles[i].onValueChanged.AddListener((isOn) => SelectChioce(isOn, toggles[i].GetComponent<ChoiceItem>()));
-        }
+        a_toggle.onValueChanged.AddListener((isOn) => SelectChioce(isOn, a_toggle.GetComponent<ChoiceItem>()));
+        b_toggle.onValueChanged.AddListener((isOn) => SelectChioce(isOn, b_toggle.GetComponent<ChoiceItem>()));
+        c_toggle.onValueChanged.AddListener((isOn) => SelectChioce(isOn, c_toggle.GetComponent<ChoiceItem>()));
+        d_toggle.onValueChanged.AddListener((isOn) => SelectChioce(isOn, d_toggle.GetComponent<ChoiceItem>()));
         next_btn.onClick.AddListener(NextConfirm);
-        continue_btn.onClick.AddListener(Continue);
+        //continue_btn.onClick.AddListener(Continue);
         replay_btn.onClick.AddListener(Replay);
+        StartCoroutine(TestData.My.ReadQuestionList(() =>
+        {
+            //InitAnsweringPanel();
+        }));
+        Invoke("InitAnsweringPanel", 2);
     }
 
     /// <summary>
@@ -71,20 +84,22 @@ public class AnsweringPanel : MonoBehaviour
     {
         // show error count
         // 获取数量，题目，和错误限制
-        currentAnswerStage = OriginalData.My.answerStages[currentStage];
+        currentAnswerStage = TestData.My.answerStages[currentStage];
+        print(currentStage);
         if (currentAnswerStage.questionCount == -1)
         {
             gameObject.SetActive(false);
             return;
         }
         toDoQuestionsCount = currentAnswerStage.questionCount;
+        print(toDoQuestionsCount);
         errorCount = currentAnswerStage.errorCount;
         error_text.text = errorCount.ToString();
         questionIndex = 0;
         stageQuestions = null;
         InitRandomList();
         toDoQuestions.Clear();
-        stageQuestions = OriginalData.My.questionList.GetStageQuestions(currentStage);
+        stageQuestions = TestData.My.questionList.GetStageQuestions(currentStage);
         GetToDoQuestion();
         gameObject.SetActive(true);
         ShowQuestion();
@@ -95,28 +110,37 @@ public class AnsweringPanel : MonoBehaviour
     /// </summary>
     void GetToDoQuestion()
     {
-        for(int i=0; i< stageQuestions.Count;i++)
+        Debug.Log("Stage q : " + stageQuestions.Count);
+        for(int i=0; i< stageQuestions.Count;)
         {
+            Debug.Log(stageQuestions[i].question_id+" necessary: " + stageQuestions[i].necessary);
             if (stageQuestions[i].necessary == 1 && toDoQuestions.Count<= toDoQuestionsCount)
             {
                 toDoQuestions.Add(stageQuestions[i]);
-                stageQuestions.RemoveAt(i);
+                stageQuestions.Remove(stageQuestions[i]);
+                continue;
             }
+            i++;
         }
-
+        Debug.Log("todo question :" + toDoQuestions.Count);
+        Debug.Log("Stage q : " + stageQuestions.Count);
         if (toDoQuestions.Count < toDoQuestionsCount)
         {
-            for(int i=0; i< toDoQuestionsCount-toDoQuestions.Count; i++)
+            for(int i= toDoQuestions.Count; i< toDoQuestionsCount; i++)
             {
                 if (toDoQuestions.Count >= toDoQuestionsCount)
                 {
                     break;
                 }
-                random = UnityEngine.Random.Range(0, stageQuestions.Count);
+                Debug.Log("Stage q : " + stageQuestions.Count);
+                random = UnityEngine.Random.Range(0, stageQuestions.Count-1);
                 toDoQuestions.Add(stageQuestions[random]);
-                stageQuestions.RemoveAt(random);
+                stageQuestions.Remove(stageQuestions[random]);
+                
             }
         }
+        Debug.Log("Stage q : " + stageQuestions.Count);
+        Debug.Log("todo question :" + toDoQuestions.Count);
     }
 
     /// <summary>
@@ -124,19 +148,22 @@ public class AnsweringPanel : MonoBehaviour
     /// </summary>
     private void ShowQuestion()
     {
+        //index_text.text = toDoQuestionsCount + "-" + (questionIndex+1);
         ResetChoices();
         currentQuestion = GetRandomQuestion();
         if(currentQuestion == null)
         {
             mask.SetActive(true);
-            continue_btn.gameObject.SetActive(true);
+            //continue_btn.gameObject.SetActive(true);
             questionIndex = 0;
             currentStage += 1;
             return;
         }
         SetQuestionType(currentQuestion.isMultiple);
         string[] qu = currentQuestion.question_text.Split('_');
-        StringBuilder sb = new StringBuilder();
+        
+        sb.Clear();
+        sb.Append(toDoQuestionsCount + "-" + (questionIndex+1) + "  ");
         for (int i = 0; i < qu.Length; i++)
         {
             if (i % 2 == 1)
@@ -155,10 +182,10 @@ public class AnsweringPanel : MonoBehaviour
             temp.Add(new Choice(i, ans[i]));
         }
 
-        for(int i=0; i< toggles.Length; i++)
+        for(int i=0; i< togglesTransform.childCount; i++)
         {
-            random = UnityEngine.Random.Range(0, temp.Count);
-            toggles[i].GetComponent<ChoiceItem>().Setup(temp[random]);
+            random = UnityEngine.Random.Range(0, temp.Count-1);
+            togglesTransform.GetChild(i).GetComponent<ChoiceItem>().Setup(temp[random]);
             temp.RemoveAt(random);
         }
     }
@@ -174,13 +201,17 @@ public class AnsweringPanel : MonoBehaviour
         if (questionIndex >= toDoQuestionsCount)
         {
             mask.SetActive(true);
-            continue_btn.gameObject.SetActive(true);
+            //continue_btn.gameObject.SetActive(true);
+            replay_btn.onClick.RemoveAllListeners();
+            replay_btn.onClick.AddListener(() => Continue());
+            passOFail_text.text = "答题通过！";
+            replayPanel.SetActive(true);
             questionIndex = 0;
             currentStage += 1;
         }
         else
         {
-            NextQuestion();
+            ShowQuestion();
         }
     }
 
@@ -189,12 +220,15 @@ public class AnsweringPanel : MonoBehaviour
     /// </summary>
     private void ResetChoices()
     {
+        Debug.Log("reset");
         reset = true;
-        for(int i=0; i< toggles.Length; i++)
+        for(int i=0; i< togglesTransform.childCount; i++)
         {
-            toggles[i].isOn = false;
+            //Debug.Log("------"+i+toggles[i].name);
+            togglesTransform.GetChild(i).GetComponent<Toggle>().isOn = false;
         }
         reset = false;
+        next_btn.interactable = false;
     }
 
     /// <summary>
@@ -202,19 +236,20 @@ public class AnsweringPanel : MonoBehaviour
     /// </summary>
     private void InitStage()
     {
-        sceneName = SceneManager.GetActiveScene().name;
+        //sceneName = SceneManager.GetActiveScene().name;
+        sceneName = "FTE_0";
 
         //TODO
         // 获取当前场景的第一个答题阶段
-        for(int i = 0; i < OriginalData.My.answerStages.Length; i++)
+        for (int i = 0; i < TestData.My.answerStages.Length; i++)
         {
-            if (OriginalData.My.answerStages[i].scene.Equals(sceneName))
+            if (TestData.My.answerStages[i].scene.Equals(sceneName))
             {
-                currentStage = OriginalData.My.answerStages[i].stage;
+                currentStage = TestData.My.answerStages[i].stage;
                 break;
             }
         }
-
+        ShowPanel();
     }
 
     /// <summary>
@@ -243,7 +278,8 @@ public class AnsweringPanel : MonoBehaviour
         else
         {
             answer.Clear();
-            answer.Add(choice.ans_id.ToString());
+            if(isOn)
+                answer.Add(choice.ans_id.ToString());
         }
         if (answer.Count > 0)
         {
@@ -287,6 +323,7 @@ public class AnsweringPanel : MonoBehaviour
     {
         currentStage += 1;
         gameObject.SetActive(false);
+        replayPanel.SetActive(false);
     }
 
     /// <summary>
@@ -294,7 +331,7 @@ public class AnsweringPanel : MonoBehaviour
     /// </summary>
     private void Replay()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
@@ -305,6 +342,9 @@ public class AnsweringPanel : MonoBehaviour
     {
         error_image.SetActive(true);
         yield return new WaitForSeconds(1);
+        replay_btn.onClick.RemoveAllListeners();
+        replay_btn.onClick.AddListener(() => Replay());
+        passOFail_text.text = "答题失败！请重新来过！";
         replayPanel.SetActive(true);
         mask.SetActive(false);
     }
@@ -339,20 +379,20 @@ public class AnsweringPanel : MonoBehaviour
     {
         if (isMultiple)
         {
-            for(int i=0; i< toggles.Length; i++)
+            for(int i=0; i< togglesTransform.childCount; i++)
             {
-                toggles[i].group = null;
+                togglesTransform.GetChild(i).GetComponent<Toggle>().group = null;
             }
             //next_btn.gameObject.SetActive(true);
             multiple_tag.SetActive(true);
         }
         else
         {
-            for (int i = 0; i < toggles.Length; i++)
+            for (int i = 0; i < toggles.Count; i++)
             {
-                toggles[i].group = toggleGroup;
+                togglesTransform.GetChild(i).GetComponent<Toggle>().group = toggleGroup;
             }
-            toggleGroup.allowSwitchOff = false;
+            toggleGroup.allowSwitchOff = true;
             //next_btn.gameObject.SetActive(false);
             multiple_tag.SetActive(false);
         }
@@ -364,8 +404,9 @@ public class AnsweringPanel : MonoBehaviour
         {
             return null;
         }
-        int r = randomList[ UnityEngine.Random.Range(0, randomList.Count)];
+        int r = randomList[ UnityEngine.Random.Range(0, randomList.Count-1)];
         randomList.Remove(r);
+        Debug.Log(r + "," + toDoQuestions.Count);
         return toDoQuestions[r];
     }
 
@@ -375,7 +416,7 @@ public class AnsweringPanel : MonoBehaviour
         randomList = new List<int>();
         for(int i=0; i< toDoQuestionsCount; i++)
         {
-            randomList[i] = i;
+            randomList.Add(i);
         }
     }
 }

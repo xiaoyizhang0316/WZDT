@@ -22,11 +22,13 @@ public class Question
     {
         if (isMultiple)
         {
-            if (select.Count == answer.Length)
+            Debug.Log("多选" + answer);
+            string[] ans = answer.Split('_');
+            if (select.Count == ans.Length)
             {
-                for(int i=0; i< select.Count; i++)
+                for(int i=0; i< ans.Length; i++)
                 {
-                    if (!answer.Contains(select[i]))
+                    if (!select.Contains(ans[i]))
                     {
                         return false;
                     }
