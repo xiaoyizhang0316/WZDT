@@ -85,6 +85,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     /// <param name="npc">Seed,Peasant,Merchant,Dealer,Common(Service Product)</param>
     public void ShowNpcInfo(Transform npc)
     {
+        gameObject.SetActive(true);
         HideAll();
         currentNpc = npc.GetComponent<BaseMapRole>();
         currentSkill = npc.GetComponent<BaseSkill>();

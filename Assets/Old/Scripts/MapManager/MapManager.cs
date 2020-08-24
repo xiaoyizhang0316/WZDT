@@ -128,6 +128,8 @@ public class MapManager : MonoSingleton<MapManager>
         go.transform.position = GetMapSignByXY(npc.posX, npc.posY).transform.position + new Vector3(0f, 0.3f, 0f);
         SetNPCAttribute(go,npc);
         go.name = npc.npcName;
+        go.GetComponent<NPC>().BaseInit();
+        go.GetComponent<NPC>().Init();
     }
 
     /// <summary>
@@ -152,12 +154,13 @@ public class MapManager : MonoSingleton<MapManager>
         npcScript.isLock = npc.isLock;
         npcScript.lockNumber = npc.lockNumber;
         npcScript.isCanSeeEquip = npc.isCanSeeEquip;
+        go.GetComponent<BaseSkill>().skillDesc = npc.skillDesc;
     }
 
     public void InitStageNPCData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName != "FTE_0")
+        if (int.Parse(sceneName.Split('_')[1]) >4 )
         {
             ReadStageNPCData(sceneName);
         }

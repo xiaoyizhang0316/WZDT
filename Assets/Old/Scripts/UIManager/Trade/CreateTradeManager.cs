@@ -73,6 +73,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         Show();
         currentTrade = tradeGo.GetComponent<TradeSign>() ;
         Init();
+        startRolePanel.transform.localPosition = new Vector3(0f, startRolePanel.transform.localPosition.y, startRolePanel.transform.localPosition.z);
+        endRolePanel.transform.localPosition = new Vector3(0f, endRolePanel.transform.localPosition.y, endRolePanel.transform.localPosition.z);
     }
 
     /// <summary>
@@ -264,8 +266,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     /// </summary>
     public void Close()
     {
-        startRolePanel.transform.localPosition = new Vector3(0f, startRolePanel.transform.localPosition.y, startRolePanel.transform.localPosition.z);
-        endRolePanel.transform.localPosition = new Vector3(0f, endRolePanel.transform.localPosition.y, endRolePanel.transform.localPosition.z);
+        
         //transform.localPosition = new Vector3(0f, 1000f, 0f);
         gameObject.SetActive(false);
     }

@@ -44,6 +44,7 @@ public class FTE_1_Step_6 : BaseStep
        contenText.DOFade(0, 0.8f).OnComplete(() =>
        {
            RoleListManager.My.OutButton();
+
            gameObject.SetActive(false); 
           FTESceneManager.My.PlayNextStep();
 

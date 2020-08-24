@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameEnum;
 
 public class RoleFloatWindow : MonoSingleton<RoleFloatWindow>
 {
@@ -11,7 +12,11 @@ public class RoleFloatWindow : MonoSingleton<RoleFloatWindow>
 
     public float y = -1;
 
-    public void Init(Transform _transform, string str)
+    public List<Sprite> spriteList = new List<Sprite>();
+
+    public Image skillTypeImg;
+
+    public void Init(Transform _transform, string str,RoleSkillType skillType)
     {
         showText.text = str;
         //Vector3 V = Input.mousePosition;
@@ -19,6 +24,18 @@ public class RoleFloatWindow : MonoSingleton<RoleFloatWindow>
         Vector3 V2 = new Vector3(V.x - Screen.width / 2 + 120f, V.y - Screen.height / 2);
         transform.localPosition = V2;
         CheckPos();
+        switch(skillType)
+        {
+            case RoleSkillType.Product:
+                skillTypeImg.sprite = spriteList[0];
+                break;
+            case RoleSkillType.Service:
+                skillTypeImg.sprite = spriteList[1];
+                break;
+            default:
+                skillTypeImg.sprite = spriteList[2];
+                break;
+        }    
         //print(Input.mousePosition);
         //print(Camera.main.ViewportToScreenPoint(_transform.position));
         //print(Camera.main.ViewportToWorldPoint(_transform.position));
