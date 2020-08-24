@@ -8,8 +8,15 @@ public abstract class BaseStep : MonoBehaviour
     public Button nextButton;
     public Text contenText;
 
+    
 
-    public  abstract  void StartCuttentStep();
+    public virtual void StartCuttentStep()
+    {
+        
+    }
 
-    public abstract void StopCurrentStep();
+    public virtual void StopCurrentStep()
+    {
+        
+    }
 }

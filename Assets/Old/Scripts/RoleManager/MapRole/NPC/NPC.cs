@@ -22,11 +22,11 @@ public class NPC : BaseNpc
             if (isCanSee)
             {
                 string desc = GameDataMgr.My.GetTranslateName(currentRole.baseRoleData.roleType.ToString());
-                RoleFloatWindow.My.Init(transform, desc);
+                RoleFloatWindow.My.Init(transform, desc,currentRole.baseRoleData.roleSkillType);
             }
             else
             {
-                RoleFloatWindow.My.Init(transform, "未知角色");
+                RoleFloatWindow.My.Init(transform, "未知角色",RoleSkillType.Solution);
             }
         }
 
@@ -65,6 +65,7 @@ public class NPC : BaseNpc
         }
         else if (!EventSystem.current.IsPointerOverGameObject())
         {
+            NewCanvasUI.My.Panel_NPC.SetActive(true);
             //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
             //RoleListInfo.My.Init(currentRole);
             if (isCanSee)
@@ -120,8 +121,10 @@ public class NPC : BaseNpc
 
     public void Init()
     {
-        PlayerData.My.RoleData.Add(GetComponent<BaseMapRole>().baseRoleData);
-        PlayerData.My.MapRole.Add(GetComponent<BaseMapRole>());
+        if (!PlayerData.My.RoleData.Contains(GetComponent<BaseMapRole>().baseRoleData))
+            PlayerData.My.RoleData.Add(GetComponent<BaseMapRole>().baseRoleData);
+        if (!PlayerData.My.MapRole.Contains(GetComponent<BaseMapRole>()))
+            PlayerData.My.MapRole.Add(GetComponent<BaseMapRole>());
         currentRole = GetComponentInParent<BaseMapRole>().baseRoleData;
         Invoke("AutoSetTrade", 0.2f);
     }

@@ -17,6 +17,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public BaseMapRole currentMapRole;
     public GameObject Panel_AssemblyRole;
     public GameObject Panel_TradeSetting;
+    public GameObject lowHealthPanel;
     public Transform RoleTF;
     public GameObject lose;
     /// <summary>
@@ -52,6 +53,12 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public GameObject consumerInfoFloatWindow;
 
+    public GameObject Panel_Option;
+
+    public GameObject Panel_Stat;
+
+    public GameObject Panel_NPC;
+
     public Button Button_Pause;
 
     public Button Button_Normal;
@@ -65,6 +72,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public Transform hidePanel;
 
+    public List<GameObject> panelList = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,8 +84,14 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause = transform.Find("TimeScale/GamePause").GetComponent<Button>();
         Button_Normal = transform.Find("TimeScale/GameNormal").GetComponent<Button>();
         Button_Accelerate = transform.Find("TimeScale/GameAccelerate").GetComponent<Button>();
-        statBtn.onClick.AddListener(() =>  DataStatPanel.My.ShowStat());
-        OptionsBtn.onClick.AddListener(()=>OptionsPanel.My.ShowOPtionsPanel());
+        statBtn.onClick.AddListener(() => {
+            Panel_Stat.SetActive(true);
+            DataStatPanel.My.ShowStat();
+        });
+        OptionsBtn.onClick.AddListener(()=> {
+            Panel_Option.SetActive(true);
+            OptionsPanel.My.ShowOPtionsPanel();
+        });
         InitTimeButton();
         Panel_Delete.SetActive(false);
         lose.SetActive(false);
@@ -88,7 +103,31 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (DOTween.defaultAutoPlay != AutoPlay.None)
+            {
+                GamePause();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            bool isOpenSetting = true;
+            foreach (GameObject go in panelList)
+            {
+                if (go.activeSelf)
+                {
+                    go.SetActive(false);
+                    isOpenSetting = false;
+                }
+            }
+            if (isOpenSetting)
+            {
+                Panel_Option.SetActive(true);
+                OptionsPanel.My.ShowOPtionsPanel();
+            }
+        }
     }
 
     /// <summary>
@@ -202,6 +241,13 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             isChange = true;
             HideAllTradeButton();
         }
+        foreach (BaseMapRole role in PlayerData.My.MapRole)
+        {
+            if (role.baseRoleData.ID != startRole.baseRoleData.ID)
+            {
+                role.LightOn();
+            }
+        }
     }
 
     /// <summary>
@@ -254,6 +300,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                     continue;
                 }
             }
+            role.LightOff();
             role.HideTradeButton(isTradeButtonActive);
         }
     }
@@ -317,6 +364,16 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 go.SetActive(true);
             }
         }
+    }
+
+    public void StartLowHealth()
+    {
+        lowHealthPanel.SetActive(true);
+    }
+
+    public void EndLowHealth()
+    {
+        lowHealthPanel.SetActive(false);
     }
 
     private void Awake()

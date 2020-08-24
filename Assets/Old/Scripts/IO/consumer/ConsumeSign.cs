@@ -269,6 +269,8 @@ public class ConsumeSign : MonoBehaviour
     public virtual void DeathAward()
     {
         StageGoal.My.GetSatisfy((int)(consumeData.killSatisfy * scorePer));
+        if (scorePer > 1f)
+            StageGoal.My.ConsumerExtraPerTip();
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
         StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
         StageGoal.My.killNumber++;
@@ -280,6 +282,7 @@ public class ConsumeSign : MonoBehaviour
     public virtual void LivePunish()
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
+        StageGoal.My.ConsumerAliveTip();
     }
 
     /// <summary>
@@ -304,7 +307,7 @@ public class ConsumeSign : MonoBehaviour
         {
             per += elementResistance[ProductElementType.Normal] / 100f - 1f;
         }
-        scorePer = per;
+        scorePer = Mathf.Max(1f,per);
         damage = (int)(damage * per);
     }
 

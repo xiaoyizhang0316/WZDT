@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -60,6 +61,14 @@ public abstract class BaseNpc : MonoBehaviour
         GetComponent<BaseMapRole>().CheckLevel();
     }
 
+    //public float h;
+
+    //public float s;
+
+    //public float v;
+
+    //private Color color = Color.HSVToRGB(0.1736111f, 1f, 0.4433962f);
+
     /// <summary>
     /// 初始化设置地块占用
     /// </summary>
@@ -78,6 +87,17 @@ public abstract class BaseNpc : MonoBehaviour
                 transform.position = hit[j].transform.position + new Vector3(0f, 0.3f, 0f);
             }
         }
+        //Color.RGBToHSV(color, out h, out s, out v);
+        //GetComponentInChildren<MeshRenderer>().material.EnableKeyword("_EMISSION");
+        //GetComponentInChildren<MeshRenderer>().material.SetColor("_EmissionColor", Color.HSVToRGB(h,s,v));
+
+
+    }
+
+    private void Update()
+    {
+        //Color.RGBToHSV(color, out h, out s, out v);
+        //GetComponentInChildren<MeshRenderer>().material.SetColor("_EmissionColor", Color.HSVToRGB(h, s, v));
     }
 
     // Start is called before the first frame update

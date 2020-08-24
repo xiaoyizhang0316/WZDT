@@ -35,9 +35,10 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
 
     public void ShowOPtionsPanel()
     {
+        gameObject.SetActive(true);
         options.gameObject.SetActive(true);
         mask.SetActive(true);
-        gameObject.SetActive(true);
+        
     }
 
     private void OnSliderValueChanged(float value, MusicType mt)

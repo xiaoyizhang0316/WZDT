@@ -11,6 +11,9 @@ public class DarkEffect : MonoBehaviour
     {
         [SerializeField] public Transform target;
         [SerializeField] public int radius;
+        [SerializeField] public int EndRandius;
+        [SerializeField] public int waitTime;
+        [SerializeField] public int speed = 1;
 
         public Vector3 GetScreenPosition(Camera cam)
         {
@@ -47,7 +50,7 @@ public class DarkEffect : MonoBehaviour
         {
             _itemDatas = new Vector4[_items.Count];
         }
-
+//       Debug.Log(_itemDatas.Length +"_itemDatas.Length "+_items.Count+"_items.Count" );
         _tmpScreenHeight = Screen.height;
         for (int i = 0; i < _items.Count; i++)
         {
@@ -60,12 +63,13 @@ public class DarkEffect : MonoBehaviour
             _tmpVt.w = 0;
             _itemDatas[i] = _tmpVt;
         }
-        
+    
         _mainMaterial.SetInt("_SmoothLength", _smoothLength);
         _mainMaterial.SetColor("_DarkColor", _darkColor);
         _mainMaterial.SetInt("_ItemCnt", _itemDatas.Length); 
         _mainMaterial.SetVectorArray("_Item", _itemDatas);
         Graphics.Blit(source, destination, _mainMaterial);
+    
     }
 }
  
