@@ -63,7 +63,12 @@ public abstract class BaseGuideStep : MonoBehaviour
 
     public IEnumerator OpenHighLight()
     {
-        OpenFade();
+        if (Camera3DTarget.Count > 0 || highLight2DObjList.Count > 0)
+        {
+            OpenFade();
+
+        }
+
         for (int i = 0; i < Camera3DTarget.Count; i++)
         {
             StartCoroutine(OpenOneHighLight(Camera3DTarget[i]));
@@ -155,6 +160,7 @@ public abstract class BaseGuideStep : MonoBehaviour
             GameObject go = Instantiate(highLight2DObjList[i], transform);
             go.transform.position = highLight2DObjList[i].transform.position;
             go.transform.SetAsFirstSibling();
+            go.gameObject.SetActive(true);
             highLightCopyObj.Add(go);
         }
 
