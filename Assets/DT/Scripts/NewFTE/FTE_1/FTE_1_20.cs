@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class FTE_1_20 : BaseGuideStep
 {
     public float waitTime;
- 
+
+    public List<Button> unlockButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +26,15 @@ public class FTE_1_20 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         isover = false;
+        NewCanvasUI.My.GameNormal();
         
         NewCanvasUI.My.Panel_Update.gameObject.SetActive(false);
-        
-     
-        yield return new WaitForSeconds(waitTime);
+
+        foreach (var VARIABLE in unlockButton)
+        {
+            VARIABLE.interactable = true;
+        }
+        yield return new WaitForSeconds(0.2f);
        isover = true;
     }
 
@@ -42,6 +47,13 @@ public class FTE_1_20 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return isover;
+        if (StageGoal.My.timeCount > waitTime)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

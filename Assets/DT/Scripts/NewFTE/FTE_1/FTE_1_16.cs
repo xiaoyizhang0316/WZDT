@@ -34,7 +34,7 @@ public class FTE_1_16 : BaseGuideStep
         {
             LockButton[i].interactable = false;
         }
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(0.2f);
        isover = true;
     }
 
@@ -48,6 +48,13 @@ public class FTE_1_16 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return isover;
+        if (StageGoal.My.timeCount > waitTime)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
