@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using RenderHeads.Media.AVProVideo.Demos;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,9 +33,6 @@ public abstract class BaseGuideStep : MonoBehaviour
     /// </summary>
     public List<GameObject> highLight2DObjList;
     
-    
- 
-
     /// <summary>
     /// 需要高亮的UI元素复制
     /// </summary>
@@ -221,7 +219,7 @@ public abstract class BaseGuideStep : MonoBehaviour
               StartCoroutine(PlayEnd());
             }
 
-            else
+            else if (GetComponentInChildren<VCR>() == null)
             {
                 endButton.interactable = true;
             }

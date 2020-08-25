@@ -57,7 +57,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
       if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
       {
           currentGuideIndex = 0;
-        
+            NewCanvasUI.My.GamePause(false);
       }
 
       else
