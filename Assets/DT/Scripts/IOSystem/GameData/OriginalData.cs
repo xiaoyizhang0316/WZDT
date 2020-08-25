@@ -228,4 +228,5 @@ public class OriginalData : MonoSingleton<OriginalData>
         translateRawData = JsonUtility.FromJson<TranslatesData>(jsonDatas.TranslateData);
         GameDataMgr.My.ParseTranslateData(translateRawData);
     }
+  
 }
