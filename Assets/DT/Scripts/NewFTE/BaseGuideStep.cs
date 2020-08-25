@@ -62,7 +62,7 @@ public abstract class BaseGuideStep : MonoBehaviour
 
     public IEnumerator OpenHighLight()
     {
-        if (Camera3DTarget.Count > 0 || highLight2DObjList.Count > 0)
+        if (Camera3DTarget.Count >= 0 || highLight2DObjList.Count >= 0)
         {
             OpenFade();
 
