@@ -8,6 +8,8 @@ public class FTE_1_20 : BaseGuideStep
     public float waitTime;
 
     public List<Button> unlockButton;
+
+    public List<Button> afterUnlockButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +42,11 @@ public class FTE_1_20 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-  
+        NewCanvasUI.My.GamePause();
+        foreach (var VARIABLE in afterUnlockButton)
+        {
+            VARIABLE.interactable = true;
+        }
         yield break;
     }
 

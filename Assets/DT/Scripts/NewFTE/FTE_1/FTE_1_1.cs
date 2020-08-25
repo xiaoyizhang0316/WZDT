@@ -21,6 +21,7 @@ public class FTE_1_1 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
+        NewCanvasUI.My.GamePause();
        RoleListManager.My.OutButton();
        foreach (var VARIABLE in MapManager.My._mapSigns)
        {
