@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
 using UnityEngine;
@@ -183,6 +184,7 @@ public abstract class BaseGuideStep : MonoBehaviour
             yield return StepStart();
             
             yield return new WaitForSeconds(entryTime);
+            
             if (needCheck)
             {
                 while (!ChenkEnd())
@@ -197,6 +199,7 @@ public abstract class BaseGuideStep : MonoBehaviour
             {
                 endButton.interactable = true;
             }
+            afterEntry?.Invoke();
         }
 
     }
@@ -226,4 +229,6 @@ public abstract class BaseGuideStep : MonoBehaviour
 
         GuideManager.My.PlayNextIndexGuide();
     }
+
+    public Action afterEntry; 
 }
