@@ -19,6 +19,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     /// </summary>
     public int currentGuideIndex;
 
+    public GameObject ftegob;
 
     public void PlayCurrentIndexGuide()
     {
@@ -35,11 +36,13 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         if (currentGuideIndex == -1)
         {
             //当前没有新手引导
+            CloseFTE();
             return;
         }
 
         if (currentGuideIndex >= baseGuideSteps.Count)
         {
+            CloseFTE();
             return;
         }
 
@@ -60,11 +63,17 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
       else
       {
           currentGuideIndex = -1;
+          CloseFTE();
       }
 
       PlayCurrentIndexGuide();
     }
 
+
+    public void CloseFTE()
+    {
+        ftegob.SetActive(false);
+    }
 
     public void PlayNextIndexGuide()
     {

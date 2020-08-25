@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FTE_1_1 : BaseGuideStep
+public class FTE_1_2 : BaseGuideStep
 {
-    
+    public GameObject land;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,21 +16,12 @@ public class FTE_1_1 : BaseGuideStep
     {
         
     }
-
-    public bool isover;
+ 
     
     public override IEnumerator StepStart()
     {
-        NewCanvasUI.My.GamePause();
-       RoleListManager.My.OutButton();
-       foreach (var VARIABLE in MapManager.My._mapSigns)
-       {
-           VARIABLE.isCanPlace = false;
-       }
-       
-       isover = false;
-       yield return new WaitForSeconds(0.4f);
-       isover = true;
+        land.GetComponent<MapSign>().isCanPlace = true;
+        yield return new WaitForSeconds(0.2f); 
     }
 
     public override IEnumerator StepEnd()
@@ -42,6 +33,13 @@ public class FTE_1_1 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return isover;
+        if (land.GetComponent<MapSign>().baseMapRole != null&&land.GetComponent<MapSign>().baseMapRole.baseRoleData.inMap)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -31,6 +31,9 @@ public abstract class BaseGuideStep : MonoBehaviour
     /// 需要高亮的UI元素
     /// </summary>
     public List<GameObject> highLight2DObjList;
+    
+    
+ 
 
     /// <summary>
     /// 需要高亮的UI元素复制
@@ -139,6 +142,10 @@ public abstract class BaseGuideStep : MonoBehaviour
     /// </summary>
     public void ShowAllHighlightUI()
     {
+        foreach (var VARIABLE in GetComponentsInChildren<BaseTween>())
+        {
+            VARIABLE.Move();
+        }
         if (highLight2DObjList.Count == 0)
         {
             return;
@@ -146,14 +153,29 @@ public abstract class BaseGuideStep : MonoBehaviour
         for (int i = 0; i < highLight2DObjList.Count; i++)
         {
             GameObject go = Instantiate(highLight2DObjList[i], transform);
-            go.transform.localPosition = highLight2DObjList[i].transform.localPosition;
+            go.transform.position = highLight2DObjList[i].transform.position;
             go.transform.SetAsFirstSibling();
             highLightCopyObj.Add(go);
         }
+
+     
+        
+    }
+
+
+    public virtual void InitHighlightUI()
+    {
+        
+    }
+
+    public virtual void InitHighlight3d()
+    {
+        
     }
 
     public IEnumerator Play()
     {
+        Debug.Log("开始当前步骤"+GuideManager.My.currentGuideIndex);
         if (!isOpen)
         {
             GuideManager.My.PlayNextIndexGuide();
@@ -174,11 +196,15 @@ public abstract class BaseGuideStep : MonoBehaviour
                     });
                 }
             }
+            InitHighlight3d();
             for (int i = 0; i < Camera3DTarget.Count; i++)
             {
                 AddHighLight(Camera3DTarget[i], i);
             }
+
+  
             yield return OpenHighLight();
+            InitHighlightUI();
             ShowAllHighlightUI();
             yield return StepStart();
             
@@ -187,10 +213,12 @@ public abstract class BaseGuideStep : MonoBehaviour
             {
                 while (!ChenkEnd())
                 {
+                    Debug.Log("当前步骤"+GuideManager.My.currentGuideIndex+"检测中");
                     yield return null;
                 }
+                Debug.Log("当前步骤"+GuideManager.My.currentGuideIndex+"检测成功");
 
-                StartCoroutine(PlayEnd());
+              StartCoroutine(PlayEnd());
             }
 
             else
@@ -216,7 +244,7 @@ public abstract class BaseGuideStep : MonoBehaviour
 
     public IEnumerator PlayEnd()
     {
-
+    Debug.Log("结束当前步骤"+GuideManager.My.currentGuideIndex);
         yield return StepEnd();
         for (int i = 0; i < highLightCopyObj.Count; i++)
         {
