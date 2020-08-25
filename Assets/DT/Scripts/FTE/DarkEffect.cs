@@ -12,7 +12,7 @@ public class DarkEffect : MonoBehaviour
         [SerializeField] public Transform target;
         [SerializeField] public int radius;
         [SerializeField] public int EndRandius;
-        [SerializeField] public int waitTime;
+        [SerializeField] public float waitTime;
         [SerializeField] public int speed = 1;
 
         public Vector3 GetScreenPosition(Camera cam)
