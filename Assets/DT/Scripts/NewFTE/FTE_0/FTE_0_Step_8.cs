@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 
 public class FTE_0_Step_8 : BaseGuideStep
@@ -15,6 +14,7 @@ public class FTE_0_Step_8 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         Debug.Log("结束教学 " + currentStepIndex);
+        // TODO 开启答题
         yield break;
     }
 
