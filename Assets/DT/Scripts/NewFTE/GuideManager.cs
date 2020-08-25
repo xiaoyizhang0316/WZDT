@@ -46,6 +46,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             return;
         }
 
+        
         baseGuideSteps[currentGuideIndex].gameObject.SetActive(true);
         
         StartCoroutine(baseGuideSteps[currentGuideIndex].Play());
@@ -57,7 +58,8 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
       if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
       {
           currentGuideIndex = 0;
-            NewCanvasUI.My.GamePause(false);
+          NewCanvasUI.My.GamePause(false);
+
       }
 
       else
