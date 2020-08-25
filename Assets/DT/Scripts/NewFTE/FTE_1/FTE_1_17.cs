@@ -33,7 +33,8 @@ public class FTE_1_17 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-        
+        NewCanvasUI.My.GamePause();
+        PlayAnim();
         yield return new WaitForSeconds(0.2f); 
     }
 

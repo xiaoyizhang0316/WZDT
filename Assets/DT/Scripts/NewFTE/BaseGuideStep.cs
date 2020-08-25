@@ -13,7 +13,8 @@ public abstract class BaseGuideStep : MonoBehaviour
     /// <summary>
     /// 是否开启当前步骤
     /// </summary>
-    public bool isOpen;
+[SerializeField]
+    private bool isOpen  = true;
     /// <summary>
     /// 文本框
     /// </summary>
@@ -147,10 +148,7 @@ public abstract class BaseGuideStep : MonoBehaviour
     /// </summary>
     public void ShowAllHighlightUI()
     {
-        foreach (var VARIABLE in GetComponentsInChildren<BaseTween>())
-        {
-            VARIABLE.Move();
-        }
+        PlayAnim();
         if (highLight2DObjList.Count == 0)
         {
             return;
@@ -168,6 +166,13 @@ public abstract class BaseGuideStep : MonoBehaviour
         
     }
 
+    public void PlayAnim()
+    {
+        foreach (var VARIABLE in GetComponentsInChildren<BaseTween>())
+        {
+            VARIABLE.Move();
+        }
+    }
 
     public virtual void InitHighlightUI()
     {

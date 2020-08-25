@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class FTE_1_1 : BaseGuideStep
+public class FTE_1_19 : BaseGuideStep
 {
+
+    public UpdateRole update;
     
     // Start is called before the first frame update
     void Start()
@@ -16,31 +19,20 @@ public class FTE_1_1 : BaseGuideStep
     {
         
     }
+ 
+ 
 
-    public bool isover;
-    
     public override IEnumerator StepStart()
     {
-       RoleListManager.My.OutButton();
-       foreach (var VARIABLE in MapManager.My._mapSigns)
-       {
-           VARIABLE.isCanPlace = false;
-       }
        
-       isover = false;
-       yield return new WaitForSeconds(0.4f);
-       isover = true;
+        yield return new WaitForSeconds(0.2f);     
     }
 
     public override IEnumerator StepEnd()
     {
-
-        
+         update.UpdateRole1(); 
         yield break;
     }
 
-    public override bool ChenkEnd()
-    {
-        return isover;
-    }
+    
 }
