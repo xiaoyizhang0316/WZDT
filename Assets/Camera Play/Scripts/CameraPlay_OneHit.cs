@@ -6,7 +6,7 @@ using UnityEngine;
 using System.Collections;
 
 [ExecuteInEditMode]
-public class CameraPlay_Hit : MonoBehaviour
+public class CameraPlay_OneHit : MonoBehaviour
 {
     #region Variables
     public Shader SCShader;
@@ -57,9 +57,9 @@ public class CameraPlay_Hit : MonoBehaviour
             _Fade = Timer;
             AnimationCurve curve = new AnimationCurve();
             curve.AddKey(0, 0);
-            curve.AddKey(0.25f, 0.5f);
-            curve.AddKey(0.50f, 0.8f);
-            curve.AddKey(0.75f, 0.5f);
+            curve.AddKey(0.25f, 0.2f);
+            curve.AddKey(0.50f, 0.5f);
+            curve.AddKey(0.75f, 0.2f);
             curve.AddKey(1, 0);
             float fresult = curve.Evaluate(_Fade);
             material.SetFloat("_TimeX", TimeX);

@@ -63,7 +63,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         isUseGuide.onValueChanged.AddListener((bool b) =>
         {
             //print(b);
-            PlayerPrefs.SetInt("isUseGuide",b ? 1 : 0);
+            PlayerPrefs.SetInt("isUseGuide", b ? 1 : 0);
         });
         cheat1.onValueChanged.AddListener((bool b) =>
         {
@@ -85,10 +85,10 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void Init(string name,string contet,string mission_1,string mission_2,string mission_3,Action loadScene)
+    public void Init(string name, string contet, string mission_1, string mission_2, string mission_3, Action loadScene)
     {
         levelName.text = name;
         content.text = contet;
@@ -113,7 +113,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
 
     void SetBoxStatus(int boxID, string level, Transform child, Sprite opened, Sprite close)
     {
-        if(PlayerPrefs.GetInt("FTE_" + level + "|"+boxID, 0) == 1)
+        if (PlayerPrefs.GetInt("FTE_" + level + "|" + boxID, 0) == 1)
         {
             child.parent.GetComponent<Image>().sprite = opened;
         }
@@ -126,23 +126,20 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public void Init(string star, string name, string contet, string mission_1, string mission_2, string mission_3, Action loadScene, string sceneName)
     {
         //print(sceneName);
-        if (int.Parse(sceneName.Split('_')[1]) >= 5 && int.Parse(sceneName.Split('_')[1]) <= 8)
-            isUseGuide.gameObject.SetActive(false);
+        //if (int.Parse(sceneName.Split('_')[1]) >= 5 && int.Parse(sceneName.Split('_')[1]) <= 8)
+        //    isUseGuide.gameObject.SetActive(false);
+        isUseGuide.gameObject.SetActive(true);
+        if (star[0] == '1')
+        {
+            PlayerPrefs.SetInt("isUseGuide", 0);
+            isUseGuide.interactable = true;
+        }
         else
         {
-            isUseGuide.gameObject.SetActive(true);
-            if (star[0] == '1')
-            {
-                PlayerPrefs.SetInt("isUseGuide", 0);
-                isUseGuide.interactable = true;
-            }
-            else
-            {
-                PlayerPrefs.SetInt("isUseGuide", 1);
-                isUseGuide.interactable = false;
-            }
-            isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
+            PlayerPrefs.SetInt("isUseGuide", 1);
+            isUseGuide.interactable = false;
         }
+        isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
         if (int.Parse(sceneName.Split('_')[1]) == 1 || int.Parse(sceneName.Split('_')[1]) == 9)
         {
             cheatPanel.SetActive(false);
