@@ -17,7 +17,6 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public BaseMapRole currentMapRole;
     public GameObject Panel_AssemblyRole;
     public GameObject Panel_TradeSetting;
-    public GameObject lowHealthPanel;
     public Transform RoleTF;
     public GameObject lose;
     /// <summary>
@@ -366,14 +365,28 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         }
     }
 
+    private bool isStart = false;
+
+    public Color lowHealthColor;
+
     public void StartLowHealth()
     {
-        lowHealthPanel.SetActive(true);
+        if (!isStart)
+        {
+            InvokeRepeating("ShowLowHealthTip", 1f, 2f);
+            isStart = true;
+        }
+    }
+
+    public void ShowLowHealthTip()
+    {
+        CameraPlay.Hit(new Color(1f, 0.1367925f, 0.1367925f,0f), 2f);
     }
 
     public void EndLowHealth()
     {
-        lowHealthPanel.SetActive(false);
+        CancelInvoke("ShowLowHealthTip");
+        isStart = false;
     }
 
     private void Awake()

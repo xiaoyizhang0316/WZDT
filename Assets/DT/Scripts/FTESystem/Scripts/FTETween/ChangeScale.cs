@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
-public class CommonFTEStep : BaseGuideStep
+public class ChangeScale : BaseTween
 {
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,18 +17,8 @@ public class CommonFTEStep : BaseGuideStep
         
     }
 
-    public override IEnumerator StepStart()
+    public override void Move()
     {
-       
- 
-        yield break;
+        transform.DOScale(0.7f, 0.5f).SetLoops(100, LoopType.Yoyo).Play();
     }
-
-    public override IEnumerator StepEnd()
-    {
- 
-        yield break;
-    }
-
-  
 }

@@ -77,17 +77,17 @@ public class TradeIcon : MonoBehaviour
         //UIManager.My.Panel_CreateTrade.SetActive(true);
         if (!NewCanvasUI.My.NeedRayCastPanel() && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 3)
-            {
-                NewCanvasUI.My.Panel_TradeSetting.SetActive(true);
-                CreateTradeManager.My.Open(TradeManager.My.tradeList[tradeId].gameObject);
-            }
-            else
-            {
-                NewCanvasUI.My.Panel_Delete.SetActive(true);
-                string str = "确定要删除此交易吗？";
-                DeleteUIManager.My.Init(str, () => { TradeManager.My.DeleteTrade(tradeId); });
-            }
+            //if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 3)
+            //{
+            NewCanvasUI.My.Panel_TradeSetting.SetActive(true);
+            CreateTradeManager.My.Open(TradeManager.My.tradeList[tradeId].gameObject);
+            //}
+            //else
+            //{
+            //    NewCanvasUI.My.Panel_Delete.SetActive(true);
+            //    string str = "确定要删除此交易吗？";
+            //    DeleteUIManager.My.Init(str, () => { TradeManager.My.DeleteTrade(tradeId); });
+            //}
         }
     }
 

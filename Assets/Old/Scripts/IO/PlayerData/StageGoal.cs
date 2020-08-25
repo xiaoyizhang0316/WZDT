@@ -105,8 +105,6 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Text starThreeText;
 
-    public GameObject consumerLivePrb;
-
     #endregion
 
     #region 统计
@@ -169,6 +167,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 倒计时
     /// </summary>
     public WaveCount waveCountItem;
+
+    public Color tipColor;
 
     /// <summary>
     /// 玩家消耗金币
@@ -245,11 +245,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void ConsumerAliveTip()
     {
-        GameObject go = Instantiate(consumerLivePrb, playerHealthBar.transform);
-        float offsetX = UnityEngine.Random.Range(-10f,10f);
-        float offsetY = UnityEngine.Random.Range(-20f, 20f);
-        go.transform.localPosition = new Vector3(455f + offsetX, offsetY, 0f);
-        Destroy(go, 1.5f);
+        CameraPlay.OneHit(new Color(1f, 0.3896085f, 0.07075471f, 0f),0.5f);
+        //CameraPlay.Hit(tipColor, 0.5f);
     }
 
     /// <summary>
