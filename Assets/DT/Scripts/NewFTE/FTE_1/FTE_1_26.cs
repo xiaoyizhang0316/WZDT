@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FTE_1_15 : BaseGuideStep
+public class FTE_1_26 : BaseGuideStep
 {
-    
+
+    public GameObject panel;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,25 +17,19 @@ public class FTE_1_15 : BaseGuideStep
     {
         
     }
-
  
     
     public override IEnumerator StepStart()
     {
-  
-      
-       yield return new WaitForSeconds(0.4f);
-      
+     
+        yield return new WaitForSeconds(0.2f); 
     }
 
     public override IEnumerator StepEnd()
     {
-
-        NewCanvasUI.My.GameNormal(); 
-     
-       
+        panel.SetActive(false);
         yield break;
     }
 
- 
+   
 }

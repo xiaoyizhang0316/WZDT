@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using DG.Tweening;
 using RenderHeads.Media.AVProVideo.Demos;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,7 @@ public abstract class BaseGuideStep : MonoBehaviour
     /// 是否开启当前步骤
     /// </summary>
 [SerializeField]
-    private bool isOpen  = true;
+    public  bool isOpen  = true;
     /// <summary>
     /// 文本框
     /// </summary>
@@ -168,6 +169,7 @@ public abstract class BaseGuideStep : MonoBehaviour
     {
         foreach (var VARIABLE in GetComponentsInChildren<BaseTween>())
         {
+            VARIABLE.transform.DOScale(1, 0).Play();
             VARIABLE.Move();
         }
     }
@@ -185,6 +187,10 @@ public abstract class BaseGuideStep : MonoBehaviour
     public IEnumerator Play()
     {
         Debug.Log("开始当前步骤"+GuideManager.My.currentGuideIndex);
+        foreach (var VARIABLE in GetComponentsInChildren<BaseTween>())
+        {
+            VARIABLE.transform.DOScale(0,0).Play();
+        }
         if (!isOpen)
         {
             GuideManager.My.PlayNextIndexGuide();

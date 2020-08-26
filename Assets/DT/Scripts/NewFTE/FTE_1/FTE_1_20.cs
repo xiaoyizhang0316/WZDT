@@ -10,6 +10,8 @@ public class FTE_1_20 : BaseGuideStep
     public List<Button> unlockButton;
 
     public List<Button> afterUnlockButton;
+
+    public List<GameObject> panel;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,11 @@ public class FTE_1_20 : BaseGuideStep
         {
             VARIABLE.interactable = true;
         }
+        foreach (var VARIABLE in panel)
+        {
+            VARIABLE.gameObject.SetActive(false); 
+        }
+        
         yield break;
     }
 

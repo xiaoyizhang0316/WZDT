@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class FTE_1_2 : BaseGuideStep
+public class FTE_1_28 : BaseGuideStep
 {
-    public GameObject land;
+
+    public Image image;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,27 +21,29 @@ public class FTE_1_2 : BaseGuideStep
  
     
     public override IEnumerator StepStart()
-    {RoleListManager.My.OutButton();
-        land.GetComponent<MapSign>().isCanPlace = true;
+    {
+     PlayAnim();
         yield return new WaitForSeconds(0.2f); 
     }
 
     public override IEnumerator StepEnd()
     {
-
-        
+     
         yield break;
     }
 
     public override bool ChenkEnd()
     {
-        if (land.GetComponent<MapSign>().baseMapRole != null&&land.GetComponent<MapSign>().baseMapRole.baseRoleData.inMap)
-        {
-            return true;
-        }
-        else
+        if (image.sprite .name .Equals("000"))
         {
             return false;
         }
+
+        else
+        {
+            return true;
+
+        }
+
     }
 }
