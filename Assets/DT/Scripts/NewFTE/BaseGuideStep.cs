@@ -86,7 +86,7 @@ public abstract class BaseGuideStep : MonoBehaviour
         int count = 0;
         for (int i = 0; i < Camera3DTarget.Count; i++)
         {
-            if (Camera3DTarget[i].radius == Camera3DTarget[i].EndRandius)
+            if (Camera3DTarget[i].radius >= Camera3DTarget[i].EndRandius)
             {
                 count++;
             }
@@ -207,6 +207,7 @@ public abstract class BaseGuideStep : MonoBehaviour
             yield return OpenHighLight();
             InitHighlightUI();
             ShowAllHighlightUI();
+            Debug.Log("start start");
             yield return StepStart();
             
             yield return new WaitForSeconds(entryTime);

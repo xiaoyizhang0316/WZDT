@@ -8,6 +8,7 @@ using System;
 
 public class AnsweringPanel : MonoBehaviour
 {
+    public GameObject ansPanel;
     #region component
     public ToggleGroup toggleGroup;
 
@@ -62,11 +63,12 @@ public class AnsweringPanel : MonoBehaviour
         next_btn.onClick.AddListener(NextConfirm);
         //continue_btn.onClick.AddListener(Continue);
         replay_btn.onClick.AddListener(Replay);
-        StartCoroutine(TestData.My.ReadQuestionList(() =>
-        {
-            //InitAnsweringPanel();
-        }));
-        Invoke("InitAnsweringPanel", 2);
+        //StartCoroutine(OriginalData.My.ReadQuestionList(() =>
+        //{
+        //    //InitAnsweringPanel();
+        //}));
+        //Invoke("InitAnsweringPanel", 2);
+        InitAnsweringPanel();
     }
 
     /// <summary>
@@ -84,7 +86,9 @@ public class AnsweringPanel : MonoBehaviour
     {
         // show error count
         // 获取数量，题目，和错误限制
-        currentAnswerStage = TestData.My.answerStages[currentStage];
+        transform.GetComponent<Image>().raycastTarget = true;
+        ansPanel.SetActive(true);
+        currentAnswerStage = OriginalData.My.answerStages[currentStage];
         print(currentStage);
         if (currentAnswerStage.questionCount == -1)
         {
@@ -99,7 +103,7 @@ public class AnsweringPanel : MonoBehaviour
         stageQuestions = null;
         InitRandomList();
         toDoQuestions.Clear();
-        stageQuestions = TestData.My.questionList.GetStageQuestions(currentStage);
+        stageQuestions = OriginalData.My.questionList.GetStageQuestions(currentStage);
         GetToDoQuestion();
         gameObject.SetActive(true);
         ShowQuestion();
@@ -236,20 +240,20 @@ public class AnsweringPanel : MonoBehaviour
     /// </summary>
     private void InitStage()
     {
-        //sceneName = SceneManager.GetActiveScene().name;
-        sceneName = "FTE_0";
+        sceneName = SceneManager.GetActiveScene().name;
+        //sceneName = "FTE_0";
 
         //TODO
         // 获取当前场景的第一个答题阶段
-        for (int i = 0; i < TestData.My.answerStages.Length; i++)
+        for (int i = 0; i < OriginalData.My.answerStages.Length; i++)
         {
-            if (TestData.My.answerStages[i].scene.Equals(sceneName))
+            if (OriginalData.My.answerStages[i].scene.Equals(sceneName))
             {
-                currentStage = TestData.My.answerStages[i].stage;
+                currentStage = OriginalData.My.answerStages[i].stage;
                 break;
             }
         }
-        ShowPanel();
+        //ShowPanel();
     }
 
     /// <summary>
@@ -322,8 +326,30 @@ public class AnsweringPanel : MonoBehaviour
     private void Continue()
     {
         currentStage += 1;
-        gameObject.SetActive(false);
+        mask.SetActive(false);
+        //gameObject.SetActive(false);
+        transform.GetComponent<Image>().raycastTarget = false;
+        ansPanel.SetActive(false);
         replayPanel.SetActive(false);
+        int updateFTE = 0;
+        if(sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
+        {
+                updateFTE = 1;
+        }
+        if(int.Parse(sceneName.Split('_')[1]) <= NetworkMgr.My.playerDatas.fteProgress){
+            updateFTE = 1;
+        }
+        if(updateFTE == 1)
+        {
+            NetworkMgr.My.UpdatePlayerDatas(1, 0, () =>
+            {
+                GuideManager.My.PlayNextIndexGuide();
+            });
+        }
+        else
+        {
+            GuideManager.My.PlayNextIndexGuide();
+        }
     }
 
     /// <summary>

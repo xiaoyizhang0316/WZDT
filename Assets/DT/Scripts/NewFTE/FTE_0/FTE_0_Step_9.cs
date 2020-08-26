@@ -1,20 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class FTE_0_Step_8 : BaseGuideStep
+public class FTE_0_Step_9 : BaseGuideStep
 {
     public GameObject hand;
-
-    private void Start()
-    {
-        StartCoroutine(OwnStep());
-    }
 
     public override IEnumerator StepEnd()
     {
         Debug.Log("结束教学 " + currentStepIndex);
-        
+        // TODO 开启答题
+        SceneManager.LoadScene("FTE_0-2");
         yield break;
     }
 
@@ -22,20 +19,9 @@ public class FTE_0_Step_8 : BaseGuideStep
     {
         Debug.Log("开始教学 " + currentStepIndex);
         afterEntry = HandMove;
-        
-        yield return new WaitForSeconds(2f);
-
+        yield return new WaitForSeconds(0.5f);
         ShowInfos();
-    }
-
-    IEnumerator OwnStep()
-    {
-        yield return new WaitForSeconds(0.5f);
-        TradeManager.My.AutoCreateTrade("0", "1");
-        yield return new WaitForSeconds(0.5f);
-        TradeManager.My.AutoCreateTrade("1", "2");
-        yield return new WaitForSeconds(0.5f);
-        TradeManager.My.AutoCreateTrade("2", "3");
+        yield break;
     }
 
     void HandMove()
@@ -45,7 +31,7 @@ public class FTE_0_Step_8 : BaseGuideStep
 
     void ShowInfos()
     {
-        for(int i=0; i<contentText.Count; i++)
+        for (int i = 0; i < contentText.Count; i++)
         {
             contentText[i].gameObject.SetActive(true);
         }

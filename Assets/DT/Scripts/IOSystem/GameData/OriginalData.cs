@@ -38,6 +38,7 @@ public class OriginalData : MonoSingleton<OriginalData>
         //StartCoroutine(ReadRoleTemplateJson());
         //StartCoroutine(ReadConsumerTypeJson());
         //StartCoroutine(ReadTranslateJson());
+        StartCoroutine(ReadQuestionList());
     }
 
     public void InitDatas(string data)

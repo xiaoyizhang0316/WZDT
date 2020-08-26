@@ -142,7 +142,8 @@ public class LoginPanel : MonoBehaviour
                         //NetworkMgr.My.GetLevelProgress();
                         //NetworkMgr.My.GetPlayerEquips();
                         //NetworkMgr.My.GetAnswers();
-                        SceneManager.LoadScene("Map");
+                        //SceneManager.LoadScene("Map");
+                        SceneManager.LoadScene("FTE_0");
                     }
                 }
             }

@@ -7,10 +7,10 @@ public class HandMove : MonoBehaviour
 {
     public HandType moveType = HandType.Scale;
     bool isActive = false;
-    public Transform target;
-    public bool isSameCanvas = false;
-    private Vector3 startPos;
-    private Vector3 targetPos;
+    //public Transform target;
+    //public bool isSameCanvas = false;
+    public Vector3 startPos;
+    public Vector3 targetPos;
 
     private void Start()
     {
@@ -23,24 +23,7 @@ public class HandMove : MonoBehaviour
         if (!isActive)
         {
             isActive = true;
-            if (target != null)
-            {
-                if (startPos == null)
-                {
-                    startPos = transform.position;
-                }
-                if(targetPos == null)
-                {
-                    if (isSameCanvas)
-                    {
-                        targetPos = target.position;
-                    }
-                    else
-                    {
-                        targetPos = Camera.main.WorldToScreenPoint(target.position);
-                    }
-                }
-            }
+            
             Move();
         }
     }
@@ -63,15 +46,15 @@ public class HandMove : MonoBehaviour
                     });
                     break;
                 case HandType.Move:
-                    transform.DOMove(targetPos, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
+                    transform.DOLocalMove(targetPos, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
                     {
-                        transform.DOMove(startPos, 0.02f).OnComplete(Move);
+                        transform.DOLocalMove(startPos, 0.02f).OnComplete(Move);
                     });
                     break;
                 case HandType.ClickAndMove:
-                    transform.DOMove(targetPos, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
+                    transform.DOLocalMove(targetPos, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
                     {
-                        transform.DOMove(startPos, 0.02f).OnComplete(Move);
+                        transform.DOLocalMove(startPos, 0.02f).OnComplete(Move);
                     });
                     break;
                 default:
