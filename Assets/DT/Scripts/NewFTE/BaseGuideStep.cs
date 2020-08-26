@@ -211,9 +211,9 @@ public abstract class BaseGuideStep : MonoBehaviour
                 AddHighLight(Camera3DTarget[i], i);
             }
 
-  
-            yield return OpenHighLight();
             InitHighlightUI();
+            yield return OpenHighLight();
+       
             ShowAllHighlightUI();
             yield return StepStart();
             
