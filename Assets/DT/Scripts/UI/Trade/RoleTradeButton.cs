@@ -38,7 +38,7 @@ public class RoleTradeButton : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
             if (hit.transform.CompareTag("MapRole"))
             {
-                if (hit.transform.GetComponent<BaseMapRole>().isNpc)
+                if (hit.transform.GetComponentInParent<BaseMapRole>().isNpc)
                 {
                     NewCanvasUI.My.endRole = hit.transform.GetComponent<BaseMapRole>();
                     if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
@@ -52,7 +52,7 @@ public class RoleTradeButton : MonoBehaviour, IDragHandler, IBeginDragHandler, I
                 }
                 else
                 {
-                    NewCanvasUI.My.endRole = hit.transform.GetComponent<BaseMapRole>();
+                    NewCanvasUI.My.endRole = hit.transform.GetComponentInParent<BaseMapRole>();
                     if (NewCanvasUI.My.endRole.baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
                     {
                         if (TradeManager.My.CheckTradeCondition())

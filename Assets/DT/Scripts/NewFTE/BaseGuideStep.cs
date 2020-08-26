@@ -63,23 +63,19 @@ public abstract class BaseGuideStep : MonoBehaviour
 
     public IEnumerator OpenHighLight()
     {
-        if (Camera3DTarget.Count >= 0 || highLight2DObjList.Count >= 0)
+        if (Camera3DTarget.Count > 0 || highLight2DObjList.Count > 0)
         {
             OpenFade();
-
         }
-
         for (int i = 0; i < Camera3DTarget.Count; i++)
         {
             StartCoroutine(OpenOneHighLight(Camera3DTarget[i]));
         }
-
         while (!CheckAllHighLightRight())
         {
             yield return null;
         }
     }
-
 
     /// <summary>
     /// 检查是否所有高亮区域都打开
@@ -95,7 +91,6 @@ public abstract class BaseGuideStep : MonoBehaviour
                 count++;
             }
         }
-
         if (count == Camera3DTarget.Count)
         {
             return true;
@@ -132,10 +127,8 @@ public abstract class BaseGuideStep : MonoBehaviour
         {
             return;
         }
-
         GuideManager.My.darkEffect._items[count] = highLight;
     }
-
 
     public void CloseHighLight()
     {
@@ -215,15 +208,11 @@ public abstract class BaseGuideStep : MonoBehaviour
             {
                 AddHighLight(Camera3DTarget[i], i);
             }
-
-  
-            yield return OpenHighLight();
             InitHighlightUI();
+            yield return OpenHighLight();
             ShowAllHighlightUI();
             yield return StepStart();
-            
             yield return new WaitForSeconds(entryTime);
-
             if (needCheck)
             {
                 while (!ChenkEnd())
@@ -240,12 +229,10 @@ public abstract class BaseGuideStep : MonoBehaviour
                 endButton.interactable = true;
             }
         }
-
     }
 
     public abstract IEnumerator StepStart();
     public abstract IEnumerator StepEnd();
-
 
     /// <summary>
     /// 检查

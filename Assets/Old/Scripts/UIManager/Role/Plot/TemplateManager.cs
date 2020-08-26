@@ -32,7 +32,7 @@ public class TemplateManager : MonoBehaviour
 
     public void OpenMidTemplate(float time)
     {
-        top .GetComponent<Image>().DOFade(0.3f, time).SetUpdate(true);
+        top .GetComponent<Image>().DOFade(0.3f, time).SetUpdate(true).Play();
         top.GetComponent<Image>().raycastTarget = false;
         for (int i = 0; i < top.childCount; i++)
         {
