@@ -15,7 +15,7 @@ public abstract class BaseGuideStep : MonoBehaviour
     /// <summary>
     /// 是否开启当前步骤
     /// </summary>
-[SerializeField]
+    [SerializeField]
     public  bool isOpen  = true;
     /// <summary>
     /// 文本框
@@ -160,14 +160,12 @@ public abstract class BaseGuideStep : MonoBehaviour
             go.gameObject.SetActive(true);
             highLightCopyObj.Add(go);
         }
-
-     
-        
     }
 
     public void PlayAnim()
     {
-        foreach (var VARIABLE in GetComponentsInChildren<BaseTween>())
+        BaseTween[] temp = GetComponentsInChildren<BaseTween>();
+        foreach (var VARIABLE in temp)
         {
             VARIABLE.transform.DOScale(1, 0).Play();
             VARIABLE.Move();
@@ -187,7 +185,8 @@ public abstract class BaseGuideStep : MonoBehaviour
     public IEnumerator Play()
     {
         Debug.Log("开始当前步骤"+GuideManager.My.currentGuideIndex);
-        foreach (var VARIABLE in GetComponentsInChildren<BaseTween>())
+        BaseTween[] temp = GetComponentsInChildren<BaseTween>();
+        foreach (var VARIABLE in temp)
         {
             VARIABLE.transform.DOScale(0,0).Play();
         }
@@ -224,6 +223,7 @@ public abstract class BaseGuideStep : MonoBehaviour
             yield return StepStart();
             
             yield return new WaitForSeconds(entryTime);
+
             if (needCheck)
             {
                 while (!ChenkEnd())
@@ -235,7 +235,6 @@ public abstract class BaseGuideStep : MonoBehaviour
 
               StartCoroutine(PlayEnd());
             }
-
             else if (GetComponentInChildren<VCR>() == null)
             {
                 endButton.interactable = true;

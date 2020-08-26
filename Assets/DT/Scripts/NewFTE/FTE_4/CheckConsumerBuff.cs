@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CheckClosePanel : BaseGuideStep, ICanvasRaycastFilter
+public class CheckConsumerBuff : BaseGuideStep
 {
-    public Transform targetPanel;
+    public Transform targetConsumePanel;
 
     public Transform buffContent;
 
@@ -18,32 +18,19 @@ public class CheckClosePanel : BaseGuideStep, ICanvasRaycastFilter
 
     public override IEnumerator StepStart()
     {
+        GameObject go = Instantiate(targetConsumePanel.GetChild(0).gameObject, transform);
+        go.transform.position = targetConsumePanel.GetChild(0).position;
+        go.transform.SetAsFirstSibling();
+        go.gameObject.SetActive(true);
+        highLightCopyObj.Add(go);
         GameObject goCopy = Instantiate(buffContent.gameObject, transform);
         goCopy.transform.position = buffContent.position;
         goCopy.transform.SetAsFirstSibling();
         goCopy.gameObject.SetActive(true);
         highLightCopyObj.Add(goCopy);
         buffCopy = goCopy.transform;
+        Destroy(buffCopy.GetComponent<FloatWindow>());
         yield break;
-    }
-
-    public override bool ChenkEnd()
-    {
-        return !targetPanel.gameObject.activeInHierarchy;
-    }
-
-    public bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera)
-    {
-        if (highLight2DObjList.Count == 0)
-            return true;
-        for (int i = 0; i < highLight2DObjList.Count; i++)
-        {
-            if (RectTransformUtility.RectangleContainsScreenPoint(highLight2DObjList[i].GetComponent<RectTransform>(), sp, eventCamera))
-            {
-                return false;
-            }
-        }
-        return true;
     }
 
     // Start is called before the first frame update
@@ -58,7 +45,7 @@ public class CheckClosePanel : BaseGuideStep, ICanvasRaycastFilter
         if (buffCopy != null)
         {
             buffCopy.GetComponentInChildren<Text>().text = buffContent.GetComponentInChildren<Text>().text;
-            buffCopy.gameObject.SetActive(buffContent.gameObject.activeInHierarchy);
+            buffCopy.position = buffContent.position;
         }
 
     }

@@ -2,33 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckGJJ : BaseGuideStep
+public class CheckTSJ : BaseGuideStep
 {
-    public Transform targetObj;
+    public Transform targetBuilding;
 
     public override IEnumerator StepEnd()
     {
+        Building[] TEMP = FindObjectsOfType<Building>();
+        for (int i = 0; i < TEMP.Length; i++)
+        {
+            TEMP[i].GetComponent<BoxCollider>().enabled = true;
+        }
         highLight2DObjList[0].SetActive(true);
         yield break;
     }
 
     public override IEnumerator StepStart()
     {
-        NPC[] npcs = FindObjectsOfType<NPC>();
-        for (int i = 0; i < npcs.Length; i++)
+        Building[] TEMP = FindObjectsOfType<Building>();
+        for (int i = 0; i < TEMP.Length; i++)
         {
-            npcs[i].GetComponent<BoxCollider>().enabled = false;
+            TEMP[i].GetComponent<BoxCollider>().enabled = false;
         }
-        targetObj.GetComponent<BoxCollider>().enabled = true;
+        targetBuilding.GetComponent<BoxCollider>().enabled = true;
         highLight2DObjList[0].SetActive(false);
         yield break;
     }
 
     public override bool ChenkEnd()
     {
-        if (targetObj.GetComponent<NPC>().isCanSee)
-            return true;
-        return false;
+        return targetBuilding.GetComponent<Building>().isUseTSJ;
     }
 
     // Start is called before the first frame update

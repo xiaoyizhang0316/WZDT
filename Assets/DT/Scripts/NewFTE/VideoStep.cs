@@ -9,6 +9,7 @@ public class VideoStep : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
+        Destroy(vcr.transform.parent.gameObject);
         yield break;
     }
 

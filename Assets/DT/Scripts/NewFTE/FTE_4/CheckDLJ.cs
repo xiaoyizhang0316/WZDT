@@ -2,31 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckGJJ : BaseGuideStep
+public class CheckDLJ : BaseGuideStep
 {
     public Transform targetObj;
 
     public override IEnumerator StepEnd()
     {
+        NPC[] temp = FindObjectsOfType<NPC>();
+        foreach (var item in temp)
+        {
+            item.GetComponent<BoxCollider>().enabled = true;
+        }
         highLight2DObjList[0].SetActive(true);
         yield break;
     }
 
     public override IEnumerator StepStart()
     {
-        NPC[] npcs = FindObjectsOfType<NPC>();
-        for (int i = 0; i < npcs.Length; i++)
-        {
-            npcs[i].GetComponent<BoxCollider>().enabled = false;
-        }
-        targetObj.GetComponent<BoxCollider>().enabled = true;
         highLight2DObjList[0].SetActive(false);
         yield break;
     }
 
     public override bool ChenkEnd()
     {
-        if (targetObj.GetComponent<NPC>().isCanSee)
+        if (targetObj.GetComponent<NPC>().isCanSeeEquip)
             return true;
         return false;
     }

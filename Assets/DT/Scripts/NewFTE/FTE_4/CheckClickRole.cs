@@ -10,7 +10,14 @@ public class CheckClickRole : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         NewCanvasUI.My.Panel_NPC.SetActive(true);
-        NPCListInfo.My.ShowUnlckPop(targetNPC);
+        if (targetNPC.GetComponent<NPC>().isLock)
+        {
+            NPCListInfo.My.ShowUnlckPop(targetNPC);
+        }
+        else
+        {
+            NPCListInfo.My.ShowNpcInfo(targetNPC);
+        }
         yield break;
     }
 
