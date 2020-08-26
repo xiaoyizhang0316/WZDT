@@ -15,7 +15,7 @@ public abstract class BaseGuideStep : MonoBehaviour
     /// 是否开启当前步骤
     /// </summary>
 [SerializeField]
-    private bool isOpen  = true;
+    public  bool isOpen  = true;
     /// <summary>
     /// 文本框
     /// </summary>

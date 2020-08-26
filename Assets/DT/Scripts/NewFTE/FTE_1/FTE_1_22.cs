@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FTE_1_2 : BaseGuideStep
+public class FTE_1_22 : BaseGuideStep
 {
-    public GameObject land;
+    public MapSign a;
+    public MapSign b;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,26 +20,34 @@ public class FTE_1_2 : BaseGuideStep
  
     
     public override IEnumerator StepStart()
-    {RoleListManager.My.OutButton();
-        land.GetComponent<MapSign>().isCanPlace = true;
+    {
+     
         yield return new WaitForSeconds(0.2f); 
     }
 
     public override IEnumerator StepEnd()
     {
+        foreach (var VARIABLE in MapManager.My._mapSigns)
+        {
+            if (VARIABLE.mapType == GameEnum.MapType.Grass && VARIABLE.baseMapRole == null)
+            {
+                VARIABLE.isCanPlace = true;
 
+            }
+
+        }
         
         yield break;
     }
 
     public override bool ChenkEnd()
     {
-        if (land.GetComponent<MapSign>().baseMapRole != null&&land.GetComponent<MapSign>().baseMapRole.baseRoleData.inMap)
+        if (TradeManager.My.CheckTwoRoleHasTrade(a.baseMapRole.baseRoleData,b.baseMapRole.baseRoleData ))
         {
             return true;
         }
         else
-        {
+        {    
             return false;
         }
     }
