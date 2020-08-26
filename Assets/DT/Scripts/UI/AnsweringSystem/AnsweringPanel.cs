@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 
-public class AnsweringPanel : MonoBehaviour
+public class AnsweringPanel : MonoSingleton<AnsweringPanel>
 {
     public GameObject ansPanel;
     #region component
@@ -49,6 +49,8 @@ public class AnsweringPanel : MonoBehaviour
     List<Question> stageQuestions = new List<Question>();
     int random = 0;
     bool reset = false;
+    bool continueGuide = false;
+    Action doEnd;
     string sceneName = "";
     List<int> randomList;
     StringBuilder sb = new StringBuilder();
@@ -80,10 +82,37 @@ public class AnsweringPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// 显示答题面板
+    /// 开始答题
     /// </summary>
-    public void ShowPanel()
+    /// <param name="guideContinue">答题完成是否继续教学，如果继续，doAfter不用传参。否则需传参</param>
+    /// <param name="doAfter">答题成功后的操作（不继续教学的操作）</param>
+    public void ShowPanel(bool guideContinue, Action doAfter=null)
     {
+        continueGuide = guideContinue;
+        doEnd = null;
+        if (doAfter != null)
+        {
+            doEnd = doAfter;
+        }
+        if (sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
+        {
+
+        }else
+        {
+            if (int.Parse(sceneName.Split('_')[1]) < NetworkMgr.My.playerDatas.fteProgress)
+            {
+                if (continueGuide)
+                {
+                    GuideManager.My.PlayNextIndexGuide();
+                }
+                else
+                {
+                    doEnd?.Invoke();
+                }
+                return;
+            }
+        }
+        
         // show error count
         // 获取数量，题目，和错误限制
         transform.GetComponent<Image>().raycastTarget = true;
@@ -242,7 +271,17 @@ public class AnsweringPanel : MonoBehaviour
     {
         sceneName = SceneManager.GetActiveScene().name;
         //sceneName = "FTE_0";
+        if (sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
+        {
 
+        }
+        else
+        {
+            if (int.Parse(sceneName.Split('_')[1]) < NetworkMgr.My.playerDatas.fteProgress)
+            {
+                return;
+            }
+        }
         //TODO
         // 获取当前场景的第一个答题阶段
         for (int i = 0; i < OriginalData.My.answerStages.Length; i++)
@@ -335,7 +374,7 @@ public class AnsweringPanel : MonoBehaviour
         if(sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
         {
                 updateFTE = 1;
-        }
+        }else
         if(int.Parse(sceneName.Split('_')[1]) <= NetworkMgr.My.playerDatas.fteProgress){
             updateFTE = 1;
         }
@@ -343,12 +382,26 @@ public class AnsweringPanel : MonoBehaviour
         {
             NetworkMgr.My.UpdatePlayerDatas(1, 0, () =>
             {
-                GuideManager.My.PlayNextIndexGuide();
+                if (continueGuide)
+                {
+                    GuideManager.My.PlayNextIndexGuide();
+                }
+                else
+                {
+                    doEnd?.Invoke();
+                }
             });
         }
         else
         {
-            GuideManager.My.PlayNextIndexGuide();
+            if (continueGuide)
+            {
+                GuideManager.My.PlayNextIndexGuide();
+            }
+            else
+            {
+                doEnd?.Invoke();
+            }
         }
     }
 
@@ -357,7 +410,8 @@ public class AnsweringPanel : MonoBehaviour
     /// </summary>
     private void Replay()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        PlayerData.My.Reset();
+        SceneManager.LoadScene(sceneName);
     }
 
     /// <summary>

@@ -133,17 +133,20 @@ public class LoginPanel : MonoBehaviour
                 }
                 else
                 {
+                    if(NetworkMgr.My.playerDatas.fteProgress == -1)
+                    {
+                        SceneManager.LoadScene("FTE_0-1");
+                    }else 
                     if (NetworkMgr.My.playerDatas.fteProgress==0)
                     {
-                        SceneManager.LoadScene("FTE_0");
+                        SceneManager.LoadScene("FTE_0-2");
                     }
                     else
                     {
                         //NetworkMgr.My.GetLevelProgress();
                         //NetworkMgr.My.GetPlayerEquips();
                         //NetworkMgr.My.GetAnswers();
-                        //SceneManager.LoadScene("Map");
-                        SceneManager.LoadScene("FTE_0");
+                        SceneManager.LoadScene("Map");
                     }
                 }
             }

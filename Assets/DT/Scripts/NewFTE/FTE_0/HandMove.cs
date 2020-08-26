@@ -40,27 +40,27 @@ public class HandMove : MonoBehaviour
             switch (moveType)
             {
                 case HandType.Scale:
-                    transform.DOScale(1.2f, 0.7f).SetEase(Ease.Linear).OnComplete(() =>
+                    transform.DOScale(1.2f, 0.7f).SetEase(Ease.Linear).Play().OnComplete(() =>
                     {
-                        transform.DOScale(1, 0.7f).SetEase(Ease.Linear).OnComplete(Move);
+                        transform.DOScale(1, 0.7f).SetEase(Ease.Linear).Play().OnComplete(Move);
                     });
                     break;
                 case HandType.Move:
-                    transform.DOLocalMove(targetPos, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
+                    transform.DOLocalMove(targetPos, 1.5f).SetEase(Ease.Linear).Play().OnComplete(() =>
                     {
-                        transform.DOLocalMove(startPos, 0.02f).OnComplete(Move);
+                        transform.DOLocalMove(startPos, 0.02f).Play().OnComplete(Move);
                     });
                     break;
                 case HandType.ClickAndMove:
-                    transform.DOLocalMove(targetPos, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
+                    transform.DOLocalMove(targetPos, 1.5f).SetEase(Ease.Linear).Play().OnComplete(() =>
                     {
-                        transform.DOLocalMove(startPos, 0.02f).OnComplete(Move);
+                        transform.DOLocalMove(startPos, 0.02f).Play().OnComplete(Move);
                     });
                     break;
                 default:
-                    transform.DOScale(1.2f, 0.7f).SetEase(Ease.Linear).OnComplete(() =>
+                    transform.DOScale(1.2f, 0.7f).SetEase(Ease.Linear).Play().OnComplete(() =>
                     {
-                        transform.DOScale(1, 0.7f).SetEase(Ease.Linear).OnComplete(() =>
+                        transform.DOScale(1, 0.7f).SetEase(Ease.Linear).Play().OnComplete(() =>
                         {
                             Move();
                         });

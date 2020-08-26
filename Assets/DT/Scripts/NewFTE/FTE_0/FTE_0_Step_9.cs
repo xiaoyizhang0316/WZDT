@@ -7,11 +7,18 @@ public class FTE_0_Step_9 : BaseGuideStep
 {
     public GameObject hand;
 
+    public string sceneName = "";
+
     public override IEnumerator StepEnd()
     {
         Debug.Log("结束教学 " + currentStepIndex);
         // TODO 开启答题
-        SceneManager.LoadScene("FTE_0-2");
+        //SceneManager.LoadScene("FTE_0-2");
+        AnsweringPanel.My.ShowPanel(false, () =>
+        {
+            PlayerData.My.Reset();
+            SceneManager.LoadScene(sceneName);
+        });
         yield break;
     }
 
