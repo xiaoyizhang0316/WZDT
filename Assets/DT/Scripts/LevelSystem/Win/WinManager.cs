@@ -538,9 +538,14 @@ public class WinManager : MonoSingleton<WinManager>
         });
         review.onClick.AddListener(() =>
         {
-            NewCanvasUI.My.Panel_Review.SetActive(true);
-            ReviewPanel.My.Init(StageGoal.My.playerOperations);
+         
         });
+    }
+
+    public void InitReview()
+    {
+        NewCanvasUI.My.Panel_Review.SetActive(true);
+        ReviewPanel.My.Init(StageGoal.My.playerOperations);
     }
 
     private void CommitProgress()

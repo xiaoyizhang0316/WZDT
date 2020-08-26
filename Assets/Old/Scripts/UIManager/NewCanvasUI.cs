@@ -80,9 +80,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         CreateTradeLineGo.SetActive(false);
         RoleTF = GameObject.FindGameObjectWithTag("RoleTF").transform;
         GetComponent<Canvas>().worldCamera = Camera.main;
-        Button_Pause = transform.Find("TimeScale/GamePause").GetComponent<Button>();
-        Button_Normal = transform.Find("TimeScale/GameNormal").GetComponent<Button>();
-        Button_Accelerate = transform.Find("TimeScale/GameAccelerate").GetComponent<Button>();
+        //Button_Pause = transform.Find("TimeScale/GamePause").GetComponent<Button>();
+        //Button_Normal = transform.Find("TimeScale/GameNormal").GetComponent<Button>();
+        //Button_Accelerate = transform.Find("TimeScale/GameAccelerate").GetComponent<Button>();
         statBtn.onClick.AddListener(() => {
             Panel_Stat.SetActive(true);
             DataStatPanel.My.ShowStat();
@@ -136,15 +136,15 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         Button_Pause.onClick.AddListener(()=>{
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
-            GamePause();
+            //GamePause();
         });
         Button_Normal.onClick.AddListener(()=> {
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
-            GameNormal();
+            //GameNormal();
         });
         Button_Accelerate.onClick.AddListener(()=> {
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
-            GameAccelerate();
+            //GameAccelerate();
         });
         GameNormal();
     }

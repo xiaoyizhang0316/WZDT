@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class FTE_1_2 : BaseGuideStep
+public class FTE_1_17 : BaseGuideStep
 {
-    public GameObject land;
+   
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -16,24 +19,35 @@ public class FTE_1_2 : BaseGuideStep
     {
         
     }
- 
-    
+
+    private bool isover;
+
+    public override void InitHighlight3d()
+    {
+        Camera3DTarget[0].radius = 0;
+        Camera3DTarget[0].EndRandius= 80;
+        Camera3DTarget[0].target= PlayerData.My.MapRole[0].transform;
+        Camera3DTarget[0].speed=2 ;
+        
+    }
+
     public override IEnumerator StepStart()
-    {RoleListManager.My.OutButton();
-        land.GetComponent<MapSign>().isCanPlace = true;
+    {
+        NewCanvasUI.My.GamePause(false);
+        PlayAnim();
         yield return new WaitForSeconds(0.2f); 
     }
 
     public override IEnumerator StepEnd()
     {
-
+ 
         
         yield break;
     }
 
     public override bool ChenkEnd()
     {
-        if (land.GetComponent<MapSign>().baseMapRole != null&&land.GetComponent<MapSign>().baseMapRole.baseRoleData.inMap)
+        if (NewCanvasUI.My.Panel_Update.activeSelf)
         {
             return true;
         }

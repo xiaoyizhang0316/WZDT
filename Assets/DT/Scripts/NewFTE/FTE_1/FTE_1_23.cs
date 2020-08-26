@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FTE_1_2 : BaseGuideStep
+public class FTE_1_23 : BaseGuideStep
 {
-    public GameObject land;
+
+    public GameObject panel;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,24 +20,26 @@ public class FTE_1_2 : BaseGuideStep
  
     
     public override IEnumerator StepStart()
-    {RoleListManager.My.OutButton();
-        land.GetComponent<MapSign>().isCanPlace = true;
+    {
+     
+        PlayAnim();
         yield return new WaitForSeconds(0.2f); 
     }
 
     public override IEnumerator StepEnd()
     {
-
-        
+     
         yield break;
     }
 
     public override bool ChenkEnd()
     {
-        if (land.GetComponent<MapSign>().baseMapRole != null&&land.GetComponent<MapSign>().baseMapRole.baseRoleData.inMap)
+        if (panel.activeSelf)
         {
+            Debug.Log("当前");
             return true;
         }
+
         else
         {
             return false;

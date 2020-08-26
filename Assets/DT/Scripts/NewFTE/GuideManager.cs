@@ -46,6 +46,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             return;
         }
 
+        
         baseGuideSteps[currentGuideIndex].gameObject.SetActive(true);
         
         StartCoroutine(baseGuideSteps[currentGuideIndex].Play());
@@ -54,17 +55,18 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     // Start is called before the first frame update
     void Start()
     {
-      //if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
-      //{
-      //    currentGuideIndex = 0;
-        
-      //}
+      if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
+      {
+          currentGuideIndex = 0;
+          NewCanvasUI.My.GamePause(false);
 
-      //else
-      //{
-      //    currentGuideIndex = -1;
-      //    CloseFTE();
-      //}
+      }
+
+      else
+      {
+          currentGuideIndex = -1;
+          CloseFTE();
+      }
 
       PlayCurrentIndexGuide();
     }
@@ -85,11 +87,5 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     void Update()
     {
         
-    }
-
-    public void BornEnemy()
-    {
-        Debug.Log("born");
-        StartCoroutine(GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().BornEnemy());
     }
 }
