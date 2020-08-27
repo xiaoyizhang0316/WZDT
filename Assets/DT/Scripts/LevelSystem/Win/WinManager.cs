@@ -538,7 +538,7 @@ public class WinManager : MonoSingleton<WinManager>
         });
         review.onClick.AddListener(() =>
         {
-         
+            InitReview();
         });
     }
 
