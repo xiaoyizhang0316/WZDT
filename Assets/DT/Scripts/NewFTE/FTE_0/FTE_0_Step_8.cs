@@ -5,9 +5,12 @@ using UnityEngine;
 public class FTE_0_Step_8 : BaseGuideStep
 {
     public GameObject hand;
+    public GameObject properties;
 
     private void Start()
     {
+        if (properties != null)
+            properties.SetActive(false);
         StartCoroutine(OwnStep());
     }
 

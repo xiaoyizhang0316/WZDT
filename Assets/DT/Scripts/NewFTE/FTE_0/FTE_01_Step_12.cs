@@ -6,7 +6,9 @@ public class FTE_01_Step_12 : BaseGuideStep
 {
     public override IEnumerator StepEnd()
     {
-        yield break;
+        yield return new WaitForSeconds(0.5f);
+        NewCanvasUI.My.GamePause(false);
+        RoleEditor.My.HideAllRoleSet();
     }
 
     public override IEnumerator StepStart()
@@ -22,18 +24,20 @@ public class FTE_01_Step_12 : BaseGuideStep
         TradeManager.My.AutoCreateTrade("1002", "1003");
         yield return new WaitForSeconds(0.5f);
         TradeManager.My.AutoCreateTrade("1003", "1004");
+        yield return new WaitForSeconds(1);
+        RoleEditor.My.ShowAllRoleSet();
     }
 
-    public override bool ChenkEnd()
-    {
-        if(StageGoal.My.killNumber >= 3)
-        {
-            NewCanvasUI.My.GamePause(false);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    //public override bool ChenkEnd()
+    //{
+    //    if(StageGoal.My.killNumber >= 3)
+    //    {
+    //        NewCanvasUI.My.GamePause(false);
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 }
