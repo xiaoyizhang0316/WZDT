@@ -30,9 +30,19 @@ public class FTE_1_19 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-         update.UpdateRole1(); 
+       
         yield break;
     }
 
-    
+    public override bool ChenkEnd()
+    {
+        if (StageGoal.My.extraCost.ContainsKey("升级") && StageGoal.My.extraCost["升级"] >= 2400)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
