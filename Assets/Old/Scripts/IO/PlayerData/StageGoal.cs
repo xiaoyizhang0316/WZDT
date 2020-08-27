@@ -842,7 +842,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (Input.GetKey(KeyCode.CapsLock))
         {
             if (Input.GetKeyDown(KeyCode.S))
             {

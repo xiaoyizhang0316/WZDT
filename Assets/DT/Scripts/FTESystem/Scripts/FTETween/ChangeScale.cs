@@ -19,6 +19,8 @@ public class ChangeScale : BaseTween
 
     public override void Move()
     {
-        transform.DOScale(0.7f, 0.5f).SetLoops(100, LoopType.Yoyo).Play();
+        transform.DOScale(0.7f, 0.5f).Play().OnComplete(()=> {
+            transform.DOScale(1f, 0.5f).Play().OnComplete(Move);
+        });
     }
 }

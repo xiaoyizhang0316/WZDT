@@ -33,7 +33,8 @@ public class ThreeMirrorSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
         }
         count++;
         isUpMove = true;
-        transform.DOLocalMoveY(   posOut.localPosition .y, 0.3f).OnComplete(() =>
+        transform.DOMoveY(   posOut.position .y, 0.3f).OnComplete(() =>
+        //transform.DOLocalMoveY(transform.localPosition.y + 40f, 0.3f).OnComplete(() =>
         {
             isUpMove = false; 
             
@@ -50,7 +51,7 @@ public class ThreeMirrorSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
 
         count--;
         isDownMove = true;
-        transform.DOLocalMoveY(   posIn.localPosition .y, 0.3f).OnComplete(() => { isDownMove = false; }).Play().timeScale = 1f / DOTween.timeScale;
+        transform.DOMoveY(posIn.position.y, 0.3f).OnComplete(() => { isDownMove = false; }).Play().timeScale = 1f / DOTween.timeScale;
         transform.GetChild(1).transform.DOScale(1f, 0.3f).Play().timeScale = 1f / DOTween.timeScale;
     }
 }

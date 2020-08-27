@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using DG.Tweening;
 using RenderHeads.Media.AVProVideo.Demos;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,7 @@ public abstract class BaseGuideStep : MonoBehaviour
     /// <summary>
     /// 是否开启当前步骤
     /// </summary>
-[SerializeField]
+    [SerializeField]
     public  bool isOpen  = true;
     /// <summary>
     /// 文本框
@@ -53,7 +54,7 @@ public abstract class BaseGuideStep : MonoBehaviour
 
     public void OpenFade()
     {
-        GuideManager.My.darkEffect._darkColor = new Color(0, 0, 0, 0.4f);
+        GuideManager.My.darkEffect._darkColor = new Color(0, 0, 0, 0.6f);
     }
 
     public void CloseFade()
@@ -66,20 +67,16 @@ public abstract class BaseGuideStep : MonoBehaviour
         if (Camera3DTarget.Count > 0 || highLight2DObjList.Count > 0)
         {
             OpenFade();
-
         }
-
         for (int i = 0; i < Camera3DTarget.Count; i++)
         {
             StartCoroutine(OpenOneHighLight(Camera3DTarget[i]));
         }
-
         while (!CheckAllHighLightRight())
         {
             yield return null;
         }
     }
-
 
     /// <summary>
     /// 检查是否所有高亮区域都打开
@@ -95,7 +92,6 @@ public abstract class BaseGuideStep : MonoBehaviour
                 count++;
             }
         }
-
         if (count == Camera3DTarget.Count)
         {
             return true;
@@ -132,10 +128,8 @@ public abstract class BaseGuideStep : MonoBehaviour
         {
             return;
         }
-
         GuideManager.My.darkEffect._items[count] = highLight;
     }
-
 
     public void CloseHighLight()
     {
@@ -160,15 +154,14 @@ public abstract class BaseGuideStep : MonoBehaviour
             go.gameObject.SetActive(true);
             highLightCopyObj.Add(go);
         }
-
-     
-        
     }
 
     public void PlayAnim()
     {
-        foreach (var VARIABLE in GetComponentsInChildren<BaseTween>())
+        BaseTween[] temp = GetComponentsInChildren<BaseTween>();
+        foreach (var VARIABLE in temp)
         {
+            VARIABLE.transform.DOScale(1, 0).Play();
             VARIABLE.Move();
         }
     }
@@ -186,6 +179,11 @@ public abstract class BaseGuideStep : MonoBehaviour
     public IEnumerator Play()
     {
         Debug.Log("开始当前步骤"+GuideManager.My.currentGuideIndex);
+        BaseTween[] temp = GetComponentsInChildren<BaseTween>();
+        foreach (var VARIABLE in temp)
+        {
+            VARIABLE.transform.DOScale(0,0).Play();
+        }
         if (!isOpen)
         {
             GuideManager.My.PlayNextIndexGuide();
@@ -211,14 +209,11 @@ public abstract class BaseGuideStep : MonoBehaviour
             {
                 AddHighLight(Camera3DTarget[i], i);
             }
-
-  
-            yield return OpenHighLight();
             InitHighlightUI();
+            yield return OpenHighLight();
             ShowAllHighlightUI();
             Debug.Log("start start");
             yield return StepStart();
-            
             yield return new WaitForSeconds(entryTime);
             
             if (needCheck)
@@ -232,19 +227,16 @@ public abstract class BaseGuideStep : MonoBehaviour
 
               StartCoroutine(PlayEnd());
             }
-
             else if (GetComponentInChildren<VCR>() == null)
             {
                 endButton.interactable = true;
             }
             afterEntry?.Invoke();
         }
-
     }
 
     public abstract IEnumerator StepStart();
     public abstract IEnumerator StepEnd();
-
 
     /// <summary>
     /// 检查
