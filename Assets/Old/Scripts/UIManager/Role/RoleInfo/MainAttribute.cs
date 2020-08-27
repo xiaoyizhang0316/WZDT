@@ -42,10 +42,4 @@ public class MainAttribute : MonoSingleton<MainAttribute>
     {
         tempItems = GetComponentsInChildren<RoleInfoItem>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

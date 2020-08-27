@@ -61,16 +61,4 @@ public class FloatInfoManager : MonoSingleton<FloatInfoManager>
             Destroy(go);
         }).Play();
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

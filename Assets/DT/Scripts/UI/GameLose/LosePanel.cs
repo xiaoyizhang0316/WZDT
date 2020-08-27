@@ -27,10 +27,4 @@ public class LosePanel : MonoBehaviour
             SceneManager.LoadScene("Map");
         });
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

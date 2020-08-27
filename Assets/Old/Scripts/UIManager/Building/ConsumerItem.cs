@@ -89,10 +89,4 @@ public class ConsumerItem : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
     {
         isSelect.gameObject.SetActive(false);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

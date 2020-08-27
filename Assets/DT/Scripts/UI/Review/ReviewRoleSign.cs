@@ -62,12 +62,6 @@ public class ReviewRoleSign : MonoBehaviour,IPointerClickHandler
         haveColoe = Color.white; 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-     
-    }
-
     public void OnPointerClick(PointerEventData eventData)
     {
          ReviewBuffManager.My.InitRoleBuff(this);

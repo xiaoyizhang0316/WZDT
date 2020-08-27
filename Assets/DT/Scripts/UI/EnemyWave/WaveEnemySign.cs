@@ -21,16 +21,4 @@ public class WaveEnemySign : MonoBehaviour
             go.GetComponent<SingleWaveEnemyInfo>().Init(enemys[i],building.isUseTSJ);
         }
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

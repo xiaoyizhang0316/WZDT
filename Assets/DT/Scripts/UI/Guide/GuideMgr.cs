@@ -30,12 +30,6 @@ public class GuideMgr : MonoSingleton<GuideMgr>
         InitGuide();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void InitGuide()
     {
         // 判断当前教程进行到第几个场景 currentGuidePanel

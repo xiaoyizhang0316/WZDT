@@ -94,12 +94,6 @@ public abstract class BaseNpc : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        //Color.RGBToHSV(color, out h, out s, out v);
-        //GetComponentInChildren<MeshRenderer>().material.SetColor("_EmissionColor", Color.HSVToRGB(h, s, v));
-    }
-
     // Start is called before the first frame update
     void Awake()
     {

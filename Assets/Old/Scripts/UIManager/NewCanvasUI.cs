@@ -393,9 +393,4 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         CancelInvoke("ShowLowHealthTip");
         isStart = false;
     }
-
-    private void Awake()
-    {
-
-    }
 }

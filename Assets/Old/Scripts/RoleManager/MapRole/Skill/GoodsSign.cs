@@ -34,12 +34,6 @@ public class GoodsSign : MonoBehaviour
         // InvokeRepeating(" DeleteEffect()",0.1f,0.1f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void DeleteEffect()
     {
         if (target == null)

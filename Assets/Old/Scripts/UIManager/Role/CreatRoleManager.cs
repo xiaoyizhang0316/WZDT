@@ -544,11 +544,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     /// <summary>
     /// 创建装备啊列表
     /// </summary>

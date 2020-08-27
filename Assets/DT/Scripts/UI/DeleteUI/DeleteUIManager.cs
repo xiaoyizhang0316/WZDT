@@ -21,12 +21,6 @@ public class DeleteUIManager : MonoSingleton<DeleteUIManager>
         });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Init(string content,Action delete)
     {
         this.content.text = content;

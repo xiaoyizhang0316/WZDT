@@ -65,11 +65,6 @@ public class BossBloodBar : IOIntensiveFramework.MonoSingleton.MonoSingleton<Bos
         SetBar(0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public void InitDetalInfo()
     {
         

@@ -32,10 +32,4 @@ public class RecordList : MonoBehaviour
     {
         LevelInfoManager.My.listScript = this;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

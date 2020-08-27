@@ -22,17 +22,6 @@ public class DetalDataSkillInfo : MonoBehaviour
     public Image SZLY;
 
     public Image SZFS;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void InitUI(string skillName,string faqi ,string chengshou ,string chengben ,string jiaoyichengben )
     {

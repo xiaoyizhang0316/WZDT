@@ -29,12 +29,6 @@ public class ReviewBuffManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
         });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void InitRoleBuff(ReviewRoleSign sign)
     {
         buffInfo.SetActive(true);

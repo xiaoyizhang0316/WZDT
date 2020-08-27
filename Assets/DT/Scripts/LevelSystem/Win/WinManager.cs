@@ -572,10 +572,4 @@ public class WinManager : MonoSingleton<WinManager>
             
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

@@ -31,10 +31,4 @@ public class NetErrorPanel : MonoSingleton<NetErrorPanel>
             SceneManager.LoadScene("Login");
         });
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

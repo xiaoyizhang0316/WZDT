@@ -82,12 +82,6 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void Init(string name, string contet, string mission_1, string mission_2, string mission_3, Action loadScene)
     {
         levelName.text = name;

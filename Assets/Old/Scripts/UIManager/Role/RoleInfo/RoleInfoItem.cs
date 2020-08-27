@@ -81,10 +81,4 @@ public class RoleInfoItem : MonoBehaviour
         }
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

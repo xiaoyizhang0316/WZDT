@@ -22,11 +22,6 @@ public class BreathFade : MonoBehaviour
     {
         GetComponent<Image>().DOFade(0.1f, 1.5f).OnComplete(BreathIn).Play().timeScale = 1f / DOTween.timeScale;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

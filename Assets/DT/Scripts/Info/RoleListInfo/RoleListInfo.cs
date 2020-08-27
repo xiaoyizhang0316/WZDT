@@ -68,12 +68,6 @@ public class RoleListInfo : MonoSingleton<RoleListInfo>
         updateRole = transform.Find("RoleInfo/RoleSetting/UpdateRole").GetComponent<Button>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void Init(Role role)
     {
         currentRole = role;

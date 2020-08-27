@@ -14,16 +14,4 @@ public class BubbleManager : MonoSingleton<BubbleManager>
         go.GetComponent<Text>().text = number.ToString();
         go.transform.localPosition = Camera.main.WorldToViewportPoint(t.position);
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -61,10 +61,4 @@ public class ChoseRoleManager : MonoBehaviour
 
         });
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

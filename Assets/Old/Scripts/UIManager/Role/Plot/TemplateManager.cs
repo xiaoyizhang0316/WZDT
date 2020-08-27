@@ -113,9 +113,4 @@ public class TemplateManager : MonoBehaviour
         //    OpenTopTemplate(0.3f);
         //}
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

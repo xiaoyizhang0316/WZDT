@@ -12,18 +12,6 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public Text upgradeNumber;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Init()
     {
         if (RoleUpdateInfo.My.currentRole.baseRoleData.level == 5)

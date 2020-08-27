@@ -35,10 +35,4 @@ public class BaseConsumer : MonoBehaviour
             PulseFunction();
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

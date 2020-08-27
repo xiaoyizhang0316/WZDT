@@ -25,17 +25,6 @@ public class RoleListInfoDealer : BaseRoleListInfo
     public bool isShowProduct;
 
     public GameObject productPrb;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public override void Init(Role role)
     {

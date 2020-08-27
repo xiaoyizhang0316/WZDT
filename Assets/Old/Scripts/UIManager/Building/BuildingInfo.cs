@@ -57,10 +57,4 @@ public class BuildingInfo : MonoSingleton<BuildingInfo>
     {
         MenuHide();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -21,12 +21,6 @@ public class DetalBarInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
         BG.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         showText.gameObject.SetActive(true);
@@ -52,8 +46,7 @@ public class DetalBarInfo : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
         {
             showText.text = merchantString;
             
-        }
-        
+        } 
     }
 
     public void OnPointerExit(PointerEventData eventData)

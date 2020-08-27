@@ -29,8 +29,6 @@ public class GuideStep : MonoBehaviour
 
     void InitStep()
     {
-        
-
         switch (moveType)
         {
             case HandMoveType.Move:
@@ -45,7 +43,6 @@ public class GuideStep : MonoBehaviour
                 DoScale();
                 break;
         }
-        
     }
 
     void DoMove()

@@ -6,17 +6,6 @@ using UnityEngine.EventSystems;
 public class ShowBuffText : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
     public BuffData currentbuffData;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {

@@ -19,12 +19,6 @@ public class ThreeMirrorSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHa
         count = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (isUpMove&&count!=0)
