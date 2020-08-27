@@ -836,8 +836,9 @@ public class StageGoal : MonoSingleton<StageGoal>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.CapsLock))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
+            Debug.Log("Caps");
             if (Input.GetKeyDown(KeyCode.S))
             {
                 DOTween.PlayAll();
