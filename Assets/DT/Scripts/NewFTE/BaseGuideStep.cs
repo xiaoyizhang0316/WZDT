@@ -53,7 +53,7 @@ public abstract class BaseGuideStep : MonoBehaviour
 
     public void OpenFade()
     {
-        GuideManager.My.darkEffect._darkColor = new Color(0, 0, 0, 0.4f);
+        GuideManager.My.darkEffect._darkColor = new Color(0, 0, 0, 0.6f);
     }
 
     public void CloseFade()
