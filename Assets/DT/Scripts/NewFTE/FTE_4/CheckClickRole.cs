@@ -1,15 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using RenderHeads.Media.AVProVideo.Demos;
 using UnityEngine;
 
-public class VideoStep : BaseGuideStep
+public class CheckClickRole : BaseGuideStep
 {
-    public VCR vcr;
+
+    public Transform targetNPC;
 
     public override IEnumerator StepEnd()
     {
-        Destroy(vcr.transform.parent.gameObject);
+        NewCanvasUI.My.Panel_NPC.SetActive(true);
+        if (targetNPC.GetComponent<NPC>().isLock)
+        {
+            NPCListInfo.My.ShowUnlckPop(targetNPC);
+        }
+        else
+        {
+            NPCListInfo.My.ShowNpcInfo(targetNPC);
+        }
         yield break;
     }
 
@@ -21,14 +29,12 @@ public class VideoStep : BaseGuideStep
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (vcr.isFinishWatching)
-        {
-            endButton.interactable = true;
-        }
+        
     }
 }

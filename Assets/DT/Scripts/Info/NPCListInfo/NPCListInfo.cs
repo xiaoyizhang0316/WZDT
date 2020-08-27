@@ -207,8 +207,9 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         currentNpc = npc.GetComponent<BaseMapRole>();
         npcInfo.SetActive(true);
         closeBtn.gameObject.SetActive(true);
-        lockedInfo.GetComponent<NpcLockedInfo>().SetInfo(npc, npc.GetComponent<NPC>().lockNumber);
         lockedInfo.SetActive(true);
+        lockedInfo.GetComponent<NpcLockedInfo>().SetInfo(npc, npc.GetComponent<NPC>().lockNumber);
+
 
 
 

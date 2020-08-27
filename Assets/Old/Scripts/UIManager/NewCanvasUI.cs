@@ -292,6 +292,11 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         isTradeButtonActive = !isTradeButtonActive;
         foreach (BaseMapRole role in PlayerData.My.MapRole)
         {
+            if (isSetTrade)
+            {
+                if (role == startRole)
+                    continue;
+            }
             if (role.isNpc)
             {
                 if (!role.npcScript.isCanSee)
