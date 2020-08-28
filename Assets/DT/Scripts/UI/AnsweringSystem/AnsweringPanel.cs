@@ -166,7 +166,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
                     break;
                 }
                 Debug.Log("Stage q : " + stageQuestions.Count);
-                random = UnityEngine.Random.Range(0, stageQuestions.Count-1);
+                random = UnityEngine.Random.Range(0, stageQuestions.Count);
                 toDoQuestions.Add(stageQuestions[random]);
                 stageQuestions.Remove(stageQuestions[random]);
                 
@@ -217,7 +217,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
 
         for(int i=0; i< togglesTransform.childCount; i++)
         {
-            random = UnityEngine.Random.Range(0, temp.Count-1);
+            random = UnityEngine.Random.Range(0, temp.Count);
             togglesTransform.GetChild(i).GetComponent<ChoiceItem>().Setup(temp[random]);
             temp.RemoveAt(random);
         }
@@ -235,6 +235,24 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         {
             mask.SetActive(true);
             //continue_btn.gameObject.SetActive(true);
+            int updateFTE = 0;
+            if (sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
+            {
+                updateFTE = 1;
+            }
+            else
+            if (int.Parse(sceneName.Split('_')[1]) <= NetworkMgr.My.playerDatas.fteProgress)
+            {
+                updateFTE = 1;
+            }
+            if(updateFTE == 1)
+            {
+
+                NetworkMgr.My.UpdatePlayerDatas(1, 0, () =>
+                {
+                    
+                });
+            }
             replay_btn.onClick.RemoveAllListeners();
             replay_btn.onClick.AddListener(() => Continue());
             passOFail_text.text = "答题通过！";
@@ -370,30 +388,30 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         transform.GetComponent<Image>().raycastTarget = false;
         ansPanel.SetActive(false);
         replayPanel.SetActive(false);
-        int updateFTE = 0;
-        if(sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
-        {
-                updateFTE = 1;
-        }else
-        if(int.Parse(sceneName.Split('_')[1]) <= NetworkMgr.My.playerDatas.fteProgress){
-            updateFTE = 1;
-        }
-        if(updateFTE == 1)
-        {
-            NetworkMgr.My.UpdatePlayerDatas(1, 0, () =>
-            {
-                if (continueGuide)
-                {
-                    GuideManager.My.PlayNextIndexGuide();
-                }
-                else
-                {
-                    doEnd?.Invoke();
-                }
-            });
-        }
-        else
-        {
+        //int updateFTE = 0;
+        //if(sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
+        //{
+        //        updateFTE = 1;
+        //}else
+        //if(int.Parse(sceneName.Split('_')[1]) <= NetworkMgr.My.playerDatas.fteProgress){
+        //    updateFTE = 1;
+        //}
+        //if(updateFTE == 1)
+        //{
+        //    NetworkMgr.My.UpdatePlayerDatas(1, 0, () =>
+        //    {
+        //        if (continueGuide)
+        //        {
+        //            GuideManager.My.PlayNextIndexGuide();
+        //        }
+        //        else
+        //        {
+        //            doEnd?.Invoke();
+        //        }
+        //    });
+        //}
+        //else
+        //{
             if (continueGuide)
             {
                 GuideManager.My.PlayNextIndexGuide();
@@ -402,7 +420,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
             {
                 doEnd?.Invoke();
             }
-        }
+        //}
     }
 
     /// <summary>
@@ -484,7 +502,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         {
             return null;
         }
-        int r = randomList[ UnityEngine.Random.Range(0, randomList.Count-1)];
+        int r = randomList[ UnityEngine.Random.Range(0, randomList.Count)];
         randomList.Remove(r);
         Debug.Log(r + "," + toDoQuestions.Count);
         return toDoQuestions[r];

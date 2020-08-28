@@ -25,6 +25,7 @@ public class FTE_0_Step_9 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         Debug.Log("开始教学 " + currentStepIndex);
+        NewCanvasUI.My.GamePause(false);
         afterEntry = HandMove;
         yield return new WaitForSeconds(0.5f);
         ShowInfos();
