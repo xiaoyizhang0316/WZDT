@@ -26,9 +26,9 @@ public class RoleSet : MonoBehaviour
     int tey = 0;
     int trg = 0;
 
-    Color color0 = Color.white;
-    Color color1 = Color.green;
-    Color color2 = Color.blue;
+    Color color0 = Color.green;
+    Color color1 = Color.yellow;
+    Color color2 = Color.red;
 
     // Start is called before the first frame update
     void Start()
@@ -47,24 +47,24 @@ public class RoleSet : MonoBehaviour
         switch (roleType)
         {
             case RoleType.Seed:
-                prop1.text = "效率 "+(efficiency/20f).ToString("f2")+"/s";
-                prop2.text = "效果 " + effect * 10;
-                cost.text = "固定成本 " + Cost;
+                prop1.text = "效<color=#00000000>效率</color>率: " + (efficiency/20f).ToString("f2")+"/s";
+                prop2.text = "效<color=#00000000>效果</color>果: " + effect * 10;
+                cost.text =  "固定成本: " + Cost;
                 break;
             case RoleType.Peasant:
-                prop1.text = "效率 " + (efficiency / 20f).ToString("f2") + "/s";
-                prop2.text = "效果 " + effect +"%";
-                cost.text = "固定成本 " + Cost;
+                prop1.text = "效<color=#00000000>效率</color>率: " + (efficiency / 20f).ToString("f2") + "/s";
+                prop2.text = "效<color=#00000000>效果</color>果: " + effect +"%";
+                cost.text = "固定成本: " + Cost;
                 break;
             case RoleType.Merchant:
-                prop1.text = "传输速度 " + efficiency+"%";
-                prop2.text = "成本降低 " + (effect *0.3f + 24).ToString("f2")+"%";
-                cost.text = "固定成本 " + Cost;
+                prop1.text = "传输速度: " + efficiency+"%";
+                prop2.text = "成本降低: " + (effect *0.3f + 24).ToString("f2")+"%";
+                cost.text = "固定成本: " + Cost;
                 break;
             case RoleType.Dealer:
-                prop1.text = "发射间隔 " + (1.5f-efficiency * 0.01f  ).ToString("f2")+"s";
-                prop2.text = "范围 " + range;
-                cost.text = "固定成本 " + Cost;
+                prop1.text = "发射间隔: " + (1.5f-efficiency * 0.01f  ).ToString("f2")+"s";
+                prop2.text = "范<color=#00000000>范围</color>围: " + range;
+                cost.text = "固定成本: " + Cost;
                 break;
         }
         //RoleEditor.My.ShowTradeCost();

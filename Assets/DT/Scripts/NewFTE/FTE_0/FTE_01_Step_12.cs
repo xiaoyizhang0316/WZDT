@@ -13,6 +13,7 @@ public class FTE_01_Step_12 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
+        RoleListManager.My.InButton();
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(OwnStep());
     }
@@ -25,6 +26,7 @@ public class FTE_01_Step_12 : BaseGuideStep
         yield return new WaitForSeconds(0.5f);
         TradeManager.My.AutoCreateTrade("1003", "1004");
         yield return new WaitForSeconds(1);
+        
         RoleEditor.My.ShowAllRoleSet();
     }
 

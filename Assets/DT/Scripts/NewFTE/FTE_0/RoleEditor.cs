@@ -57,9 +57,9 @@ public class RoleEditor : MonoSingleton<RoleEditor>
 
     public void ShowTradeCost()
     {
-        tc1.text = "交易成本 " +GetTradeCost(0).ToString();
-        tc2.text = "交易成本 " + GetTradeCost(1).ToString();
-        tc3.text = "交易成本 " + GetTradeCost(2).ToString();
+        tc1.text = GetTradeCost(0).ToString();
+        tc2.text = GetTradeCost(1).ToString();
+        tc3.text = GetTradeCost(2).ToString();
     }
 
     public int  GetTradeCost(int index)
