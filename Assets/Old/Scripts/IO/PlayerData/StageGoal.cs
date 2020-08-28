@@ -463,7 +463,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             stars[2] = "1";
         }
         NewCanvasUI.My.GamePause(false);
-        
+        NewCanvasUI.My.EndLowHealth();
         WinManager.My.InitWin();
         PrintStat();
     }
@@ -498,7 +498,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             NewCanvasUI.My.GamePause(false);
             NewCanvasUI.My.lose.SetActive(true);
-
+            NewCanvasUI.My.EndLowHealth();
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
             if (NetworkMgr.My.isUsingHttp)
             {
