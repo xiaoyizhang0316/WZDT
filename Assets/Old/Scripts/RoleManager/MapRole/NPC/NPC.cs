@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -162,3 +163,44 @@ public class NPC : BaseNpc
         }
     }
 }
+
+//public class Solution
+//{
+//    public int MyAtoi(string str)
+//    {
+//        int result = 0;
+//        if (str == null)
+//            return result;
+//        string[] temp = str.Split(' ');
+//        for (int i = 0; i < temp.Length; i++)
+//        {
+//            if (temp[i].Trim() != "")
+//            {
+//                try
+//                {
+//                    if (Math.Abs(float.Parse(temp[i])) > int.MaxValue)
+//                    {
+//                        if (float.Parse(temp[i]) > int.MaxValue)
+//                        {
+//                            return int.MaxValue;
+//                        }
+//                        else
+//                        {
+//                            return int.MinValue;
+//                        }
+//                    }
+//                    else
+//                    {
+//                        int numb = Math.Floor
+//                        return int.Parse(temp[i]);
+//                    }
+//                }
+//                catch (Exception e)
+//                {
+//                    return 0;
+//                }
+//            }
+//        }
+//        return result;
+//    }
+//}
