@@ -9,6 +9,7 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
     public bool useNetWork = false;
     public string sceneName = "FTE_1";
     public bool showFPS = false;
+    public bool useLocalIp = false;
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -46,6 +47,11 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         if (showFPS)
         {
             NetworkMgr.My.isShowFPS = true;
+        }
+
+        if (useLocalIp)
+        {
+            Url.SetIp(useLocalIp);
         }
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(sceneName);

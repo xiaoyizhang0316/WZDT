@@ -26,6 +26,8 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
     public Button replay_btn;
     public Text passOFail_text;
 
+    public Text keywords;
+
     public GameObject mask;
     public GameObject replayPanel;
     public GameObject correct_image;
@@ -198,19 +200,29 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         }
         SetQuestionType(currentQuestion.isMultiple);
         string[] qu = currentQuestion.question_text.Split('_');
-        
+        index_text.text = (questionIndex + 1) + "/" + toDoQuestionsCount;
         sb.Clear();
-        sb.Append(toDoQuestionsCount + "-" + (questionIndex+1) + "  ");
-        for (int i = 0; i < qu.Length; i++)
-        {
-            if (i % 2 == 1)
-            {
-                sb.Append("<color=green>" + qu[i] + "</color>");
-                continue;
-            }
-            sb.Append(qu[i]);
-        }
+        //sb.Append(toDoQuestionsCount + "-" + (questionIndex+1) + "  ");
+        //for (int i = 0; i < qu.Length; i++)
+        //{
+        //    if (i % 2 == 1)
+        //    {
+        //        sb.Append("<color=green>" + qu[i] + "</color>");
+        //        continue;
+        //    }
+        //    sb.Append(qu[i]);
+        //}
+        sb.Append(qu[0]);
         question_text.text = sb.ToString();
+        if (qu.Length < 2)
+        {
+            keywords.text = "";
+        }
+        else
+        {
+
+            keywords.text = qu[1] ;
+        }
 
         string[] ans = currentQuestion.choices.Split('_');
         temp.Clear();

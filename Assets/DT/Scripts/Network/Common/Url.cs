@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class Url
 {
+    //private static string remote = "39.106.226.52";
+    private static string local = "127.0.0.1";
     private static string ipAddr = "39.106.226.52";
     //private static string ipAddr = "127.0.0.1";
     private static string port = "8080";
@@ -106,6 +108,15 @@ public static class Url
         else
         {
             ip = "http://" + newIp+":" + port + "/";
+        }
+    }
+
+    public static void SetIp(bool useLocal)
+    {
+        if (useLocal)
+        {
+            ipAddr = local;
+            ip = "http://" + local + ":" + port + "/";
         }
     }
 }
