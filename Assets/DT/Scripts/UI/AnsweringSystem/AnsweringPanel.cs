@@ -54,6 +54,9 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
     string sceneName = "";
     List<int> randomList;
     StringBuilder sb = new StringBuilder();
+
+
+    public bool isComplete;
     #endregion
 
     private void Start()
@@ -88,6 +91,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
     /// <param name="doAfter">答题成功后的操作（不继续教学的操作）</param>
     public void ShowPanel(bool guideContinue, Action doAfter=null)
     {
+        isComplete = false;
         continueGuide = guideContinue;
         doEnd = null;
         if (doAfter != null)
@@ -414,7 +418,8 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         //{
             if (continueGuide)
             {
-                GuideManager.My.PlayNextIndexGuide();
+                isComplete = true;
+                //  GuideManager.My.PlayNextIndexGuide();
             }
             else
             {
