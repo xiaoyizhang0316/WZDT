@@ -60,6 +60,22 @@ public class RoleListManager : MonoSingleton<RoleListManager>
         }).Play().timeScale = 1f / DOTween.timeScale;
     }
 
+    public void InButton()
+    {
+        outButton.interactable = false;
+        transform.DOMove(inPos.position, 0.3f).OnComplete(() =>
+        {
+            inButton.gameObject.SetActive(false);
+            outButton.gameObject.SetActive(true);
+            outButton.interactable = true;
+        }).Play().timeScale = 1f / DOTween.timeScale;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+    }
+
     /// <summary>
     /// 创建玩家角色列表  刷新玩家角色列表
     /// </summary>

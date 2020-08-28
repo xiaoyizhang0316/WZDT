@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
 using DG.Tweening;
@@ -86,7 +87,7 @@ public abstract class BaseGuideStep : MonoBehaviour
         int count = 0;
         for (int i = 0; i < Camera3DTarget.Count; i++)
         {
-            if (Camera3DTarget[i].radius == Camera3DTarget[i].EndRandius)
+            if (Camera3DTarget[i].radius >= Camera3DTarget[i].EndRandius)
             {
                 count++;
             }
@@ -211,8 +212,10 @@ public abstract class BaseGuideStep : MonoBehaviour
             InitHighlightUI();
             yield return OpenHighLight();
             ShowAllHighlightUI();
+            Debug.Log("start start");
             yield return StepStart();
             yield return new WaitForSeconds(entryTime);
+            
             if (needCheck)
             {
                 while (!ChenkEnd())
@@ -228,6 +231,7 @@ public abstract class BaseGuideStep : MonoBehaviour
             {
                 endButton.interactable = true;
             }
+            afterEntry?.Invoke();
         }
     }
 
@@ -255,4 +259,6 @@ public abstract class BaseGuideStep : MonoBehaviour
 
         GuideManager.My.PlayNextIndexGuide();
     }
+
+    public Action afterEntry; 
 }

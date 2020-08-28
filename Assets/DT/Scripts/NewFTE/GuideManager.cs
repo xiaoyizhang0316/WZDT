@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<GuideManager>
 {
@@ -55,7 +56,11 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     // Start is called before the first frame update
     void Start()
     {
-      if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
+        if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
+        {
+            currentGuideIndex = 0;
+        }else
+        if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
       {
           currentGuideIndex = 0;
           NewCanvasUI.My.GamePause(false);
@@ -64,8 +69,11 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
       else
       {
-          currentGuideIndex = -1;
-          CloseFTE();
+          
+            
+                currentGuideIndex = -1;
+                CloseFTE();
+            
       }
 
       PlayCurrentIndexGuide();
@@ -87,5 +95,11 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     void Update()
     {
         
+    }
+
+    public void BornEnemy()
+    {
+        Debug.Log("born");
+        StartCoroutine(GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().BornEnemy());
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static GameEnum;
 
@@ -175,6 +176,10 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public void GenerateTradeIcon()
     {
+        if(SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2")
+        {
+            return;
+        }
         GameObject go = Instantiate(tradeIconPrb, transform);
         go.GetComponent<TradeIcon>().Init(tradeData);
         icon = go.GetComponent<TradeIcon>();
