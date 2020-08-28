@@ -155,6 +155,10 @@ public class MapManager : MonoSingleton<MapManager>
         npcScript.lockNumber = npc.lockNumber;
         npcScript.isCanSeeEquip = npc.isCanSeeEquip;
         go.GetComponent<BaseSkill>().skillDesc = npc.skillDesc;
+        go.GetComponent<BaseSkill>().buffList.Clear();
+        go.GetComponent<BaseSkill>().buffList.AddRange(npc.initBuffList);
+        go.GetComponent<NPC>().NPCBuffList.Clear();
+        go.GetComponent<NPC>().NPCBuffList.AddRange(npc.hideBuffList);
     }
 
     public void InitStageNPCData()
