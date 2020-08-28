@@ -27,17 +27,6 @@ public class AvatarManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Av
     public int currentotherIndex;
 
     public GameObject avatarObj;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void OnGUI()
-    {
-       
-    }
 
     public void ShowAcatar(int  AvatarIndex, int eyeIndex ,int colorIndex, int mouthIndex,int otherIndex)
     {

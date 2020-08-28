@@ -245,6 +245,10 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void ConsumerAliveTip()
     {
+        if (SceneManager.GetActiveScene().name == "FTE_0"|| PlayerPrefs.GetInt("isUseGuide") == 1)
+        {
+            return;
+        }
         CameraPlay.OneHit(new Color(1f, 0.3896085f, 0.07075471f, 0f),0.5f);
         //CameraPlay.Hit(tipColor, 0.5f);
     }
@@ -710,9 +714,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if(sceneName == "FTE_Record")
+        if(sceneName == "FTE_Record"||sceneName == "FTE_0-1"||sceneName=="FTE_0-2")
         {
             playerHealth = int.MaxValue;
+            playerGold = int.MaxValue;
+            playerTechPoint = int.MaxValue;
             wudi = true;
             return;
         }
@@ -729,17 +735,17 @@ public class StageGoal : MonoSingleton<StageGoal>
             }
         }
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
-        playerGold = data.startPlayerGold;
+        playerGold =  data.startPlayerGold;
         if (PlayerData.My.cheatIndex1)
             playerGold += 10000;
         playerSatisfy = 0;
         maxMinusGold = -8000;
-        playerHealth = data.startPlayerHealth;
+        playerHealth =  data.startPlayerHealth;
         if (PlayerData.My.cheatIndex3)
             playerHealth = (int)(playerHealth * 1.5f);
         playerMaxHealth = playerHealth;
         maxWaveNumber = data.maxWaveNumber;
-        playerTechPoint = data.startTech;
+        playerTechPoint =  data.startTech;
         currentType = data.stageType;
         foreach (int i in data.waveWaitTime)
         {
@@ -836,8 +842,9 @@ public class StageGoal : MonoSingleton<StageGoal>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.CapsLock))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
+            Debug.Log("Caps");
             if (Input.GetKeyDown(KeyCode.S))
             {
                 DOTween.PlayAll();

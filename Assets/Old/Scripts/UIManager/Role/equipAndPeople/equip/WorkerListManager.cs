@@ -54,15 +54,4 @@ public class WorkerListManager : MonoSingleton<WorkerListManager>
     public Transform workerPos;
 
     public Transform workerPrb;
-    // Start is called before the first frame update
-    void Start()
-    {
-            
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

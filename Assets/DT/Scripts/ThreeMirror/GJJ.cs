@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
     public int costTechNumber;
@@ -64,16 +64,6 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
             }
         }
         Destroy(goCopy);
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-
     }
 
     // Start is called before the first frame update

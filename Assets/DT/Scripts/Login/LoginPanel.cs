@@ -133,9 +133,13 @@ public class LoginPanel : MonoBehaviour
                 }
                 else
                 {
+                    if(NetworkMgr.My.playerDatas.fteProgress == -1)
+                    {
+                        SceneManager.LoadScene("FTE_0-1");
+                    }else 
                     if (NetworkMgr.My.playerDatas.fteProgress==0)
                     {
-                        SceneManager.LoadScene("FTE_0");
+                        SceneManager.LoadScene("FTE_0-2");
                     }
                     else
                     {
@@ -285,6 +289,11 @@ public class LoginPanel : MonoBehaviour
     private void Test()
     {
         //GetJson();
+        //string t = "_111_1_";
+        //string[] tt = t.Split('_');
+        //Debug.Log(tt.Length);
+        //Debug.Log(tt[0]);
+        //Debug.Log(tt[tt.Length - 1]);
     }
 
     private void TestGetReplayDatas()

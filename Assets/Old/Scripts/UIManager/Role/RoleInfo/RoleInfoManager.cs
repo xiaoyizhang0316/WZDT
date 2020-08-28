@@ -32,16 +32,4 @@ public class RoleInfoManager : MonoSingleton<RoleInfoManager>
       //  workerOnEquip.GetComponent<StatusIcon>().status = CreatRoleManager.My.isWorkerOnEquip;
       //  atLeastOne.GetComponent<StatusIcon>().status = CreatRoleManager.My.isAtLeastOneWorkerEquip;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

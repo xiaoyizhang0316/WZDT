@@ -538,7 +538,7 @@ public class WinManager : MonoSingleton<WinManager>
         });
         review.onClick.AddListener(() =>
         {
-         
+            InitReview();
         });
     }
 
@@ -571,11 +571,5 @@ public class WinManager : MonoSingleton<WinManager>
         {
             
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

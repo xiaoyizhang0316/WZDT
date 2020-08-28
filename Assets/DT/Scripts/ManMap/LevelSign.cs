@@ -41,12 +41,6 @@ public class LevelSign : MonoBehaviour
             InitLevel();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Init()
     {
         if (NetworkMgr.My.isUsingHttp)

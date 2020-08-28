@@ -376,6 +376,11 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public void StartLowHealth()
     {
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "FTE_Record" || sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
+        {
+            return;
+        }
         if (!isStart)
         {
             InvokeRepeating("ShowLowHealthTip", 1f, 2f);
@@ -392,10 +397,5 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         CancelInvoke("ShowLowHealthTip");
         isStart = false;
-    }
-
-    private void Awake()
-    {
-
     }
 }

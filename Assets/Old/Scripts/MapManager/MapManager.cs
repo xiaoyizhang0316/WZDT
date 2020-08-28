@@ -155,11 +155,41 @@ public class MapManager : MonoSingleton<MapManager>
         npcScript.lockNumber = npc.lockNumber;
         npcScript.isCanSeeEquip = npc.isCanSeeEquip;
         go.GetComponent<BaseSkill>().skillDesc = npc.skillDesc;
+        go.GetComponent<BaseSkill>().buffList.Clear();
+        go.GetComponent<BaseSkill>().goodBaseBuffs.Clear();
+        go.GetComponent<BaseSkill>().badBaseBuffs.Clear();
+        go.GetComponent<BaseSkill>().buffList.AddRange(npc.initBuffList);
+        go.GetComponent<NPC>().NPCBuffList.Clear();
+        go.GetComponent<NPC>().NPCBuffList.AddRange(npc.hideBuffList);
+        for (int i = 0; i < npc.goodBaseBuffList.Count; i++)
+        {
+            BaseBuff buff = new BaseBuff();
+            BuffData data = GameDataMgr.My.GetBuffDataByID(npc.goodBaseBuffList[i]);
+            buff.Init(data);
+            buff.targetRole = role;
+            buff.castRole = role;
+            buff.buffRole = role;
+            go.GetComponent<BaseSkill>().goodBaseBuffs.Add(buff);
+        }
+        for (int i = 0; i < npc.badBaseBuffList.Count; i++)
+        {
+            BaseBuff buff = new BaseBuff();
+            BuffData data = GameDataMgr.My.GetBuffDataByID(npc.badBaseBuffList[i]);
+            buff.Init(data);
+            buff.targetRole = role;
+            buff.castRole = role;
+            buff.buffRole = role;
+            go.GetComponent<BaseSkill>().badBaseBuffs.Add(buff);
+        }
     }
 
     public void InitStageNPCData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName.Equals("FTE_0-1") || sceneName.Equals("FTE_0-2"))
+        {
+            return;
+        }
         if (int.Parse(sceneName.Split('_')[1]) >4 )
         {
             ReadStageNPCData(sceneName);

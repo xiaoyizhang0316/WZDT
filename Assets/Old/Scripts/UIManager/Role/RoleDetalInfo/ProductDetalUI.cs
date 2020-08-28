@@ -36,12 +36,6 @@ public class ProductDetalUI : MonoSingleton<ProductDetalUI>
         });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void InitUI(ProductData data,Sprite IconSprite ,float damage,float loadingSpeed )
     {
         for (int i = 0; i <buff.Count; i++)

@@ -293,10 +293,4 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     {
         Close();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

@@ -84,10 +84,4 @@ public class ConsumerPopUp : MonoSingleton<ConsumerPopUp>
     {
         MenuHide();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -21,18 +21,6 @@ public class CheckUnlockRole : BaseGuideStep, ICanvasRaycastFilter
         return !targetNpc.isLock;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera)
     {
         if (highLight2DObjList.Count == 0)

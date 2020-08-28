@@ -67,10 +67,4 @@ public class ConsumableInfo : MonoSingleton<ConsumableInfo>
     {
         MenuHide();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

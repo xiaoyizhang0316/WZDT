@@ -192,17 +192,6 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         //isOccupation = worker.GetComponent<DragUI>().CheckAllRight(false);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!isOccupation)
@@ -211,9 +200,5 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.GrabEquip);
             CreatRoleManager.My.CurrentTemplateManager.OpenTopTemplate(0.3f);
         }
-
-
     }
-
-    
 }

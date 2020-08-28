@@ -17,12 +17,6 @@ public class GuidePanel : GuidePanelBase
         InitGuidePanel();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /*protected override void InitGuidePanel()
     {
         base.InitGuidePanel();

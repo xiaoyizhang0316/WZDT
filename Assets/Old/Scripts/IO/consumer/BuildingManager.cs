@@ -47,17 +47,4 @@ public class BuildingManager : MonoSingleton<BuildingManager>
         print("-----------查不到此building-----------");
         return null;
     }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

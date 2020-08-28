@@ -35,6 +35,7 @@ public class JsonDatas
     public string NPC_7;
     public string NPC_8;
     public string NPC_9;
+    public string questions;
     //public List<Level> level;
 
     //public string GetLevelDataByID(int id)

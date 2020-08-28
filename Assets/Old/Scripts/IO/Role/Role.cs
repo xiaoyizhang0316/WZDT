@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
- [Serializable]
 
+[Serializable]
 public class Role 
 {
     
@@ -106,18 +106,6 @@ public class Role
 
     }
 
-
-    
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     /// <summary>
     /// 初始化角色数值，放置多重叠加
     /// </summary>

@@ -60,10 +60,4 @@ public class ConsumableListManager : MonoSingleton<ConsumableListManager>
     {
         Init();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

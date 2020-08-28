@@ -27,12 +27,6 @@ public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
         startPos = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-
     /// <summary>
     /// 检测所有位置是否全部已经放入 isReleased -是否之前放到过地图中
     /// </summary>
