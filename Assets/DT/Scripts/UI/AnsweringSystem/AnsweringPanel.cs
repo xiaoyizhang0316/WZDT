@@ -42,8 +42,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
     public int questionIndex = 0;
     public int errorCount = 0;
     private Question currentQuestion;
-    private AnswerStage currentAnswerStage;
-
+    private AnswerStage currentAnswerStage; 
     private List<Choice> temp = new List<Choice>();
 
     public List<string> answer = new List<string>();
@@ -70,6 +69,20 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         next_btn.onClick.AddListener(NextConfirm);
         //continue_btn.onClick.AddListener(Continue);
         replay_btn.onClick.AddListener(Replay);
+        if (sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
+        {
+
+        }else
+        {
+            if (int.Parse(sceneName.Split('_')[1]) < NetworkMgr.My.playerDatas.fteProgress)
+            {
+                if (continueGuide)
+                {
+                    isComplete = true;
+                }
+           
+            }
+        }
         //StartCoroutine(OriginalData.My.ReadQuestionList(() =>
         //{
         //    //InitAnsweringPanel();
@@ -109,7 +122,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
             {
                 if (continueGuide)
                 {
-                    GuideManager.My.PlayNextIndexGuide();
+                    isComplete = true;
                 }
                 else
                 {

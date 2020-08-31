@@ -19,8 +19,12 @@ public class FTE_1_13 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-       
- 
+
+        if (AnsweringPanel.My.isComplete)
+        {
+            GuideManager.My.baseGuideSteps[14].isOpen = false;
+        }
+
         yield break;
     }
 
