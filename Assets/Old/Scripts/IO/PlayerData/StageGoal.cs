@@ -176,7 +176,22 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void CostPlayerGold(int num)
     {
-        playerGold -= num;
+        if (SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2")
+        {
+            if (playerGold - num <= maxMinusGold)
+            {
+                playerGold =100000;
+            }
+            else
+            {
+                playerGold -= num;
+            }
+        }
+        else
+        {
+
+            playerGold -= num;
+        }
         FloatInfoManager.My.MoneyChange(0 - num);
         if(playerGold < maxMinusGold)
         {
@@ -270,7 +285,21 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void GetPlayerGold(int num)
     {
-        playerGold += num;
+        if(SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2")
+        {
+            if(playerGold+num >= 100000)
+            {
+                playerGold = 100000;
+            }
+            else
+            {
+                playerGold += num;
+            }
+        }
+        else
+        {
+            playerGold += num;
+        }
         FloatInfoManager.My.MoneyChange(num);
         if (playerGold < maxMinusGold)
         {
@@ -716,9 +745,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         string sceneName = SceneManager.GetActiveScene().name;
         if(sceneName == "FTE_Record"||sceneName == "FTE_0-1"||sceneName=="FTE_0-2")
         {
-            playerHealth = int.MaxValue;
-            playerGold = int.MaxValue;
-            playerTechPoint = int.MaxValue;
+            playerHealth = 1000;
+            playerGold = 100000;
+            playerTechPoint = 20000;
             wudi = true;
             return;
         }

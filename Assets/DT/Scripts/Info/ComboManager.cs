@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ComboManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<ComboManager>
@@ -15,7 +16,11 @@ public class ComboManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Com
 
     public void AddComboNum()
     {
-        combonum++;
+        if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
+        {
+            return;
+        }
+            combonum++;
 
         num.text = combonum.ToString();
         if (combonum >= 10)
