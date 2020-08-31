@@ -115,10 +115,15 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             else
             {
-                //Debug.Log(response.data);
+                Debug.Log(response.data);
                 try
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    if (playerDatas.isOutDate)
+                    {
+                        GoToLogin("账号已失效！");
+                        return;
+                    }
                     playerID = playerDatas.playerID;
                     loginRecordID = playerDatas.loginRecordID;
                     token = playerDatas.token;
