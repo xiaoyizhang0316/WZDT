@@ -15,6 +15,7 @@ public class ComboManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Com
 
     public void AddComboNum()
     {
+
         combonum++;
 
         num.text = combonum.ToString();
