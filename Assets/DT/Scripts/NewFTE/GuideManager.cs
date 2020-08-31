@@ -22,6 +22,8 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public GameObject ftegob;
 
+    
+    
     public void PlayCurrentIndexGuide()
     {
 
