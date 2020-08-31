@@ -21,7 +21,7 @@ public class RoleDrag : MonoBehaviour
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             string desc = GameDataMgr.My.GetTranslateName(currentRole.baseRoleData.roleType.ToString());
-            RoleFloatWindow.My.Init(transform, desc,currentRole.baseRoleData.roleSkillType);
+            RoleFloatWindow.My.Init(transform, desc,currentRole.baseRoleData.roleSkillType,currentRole.baseRoleData.roleType);
         }
         //Cursor.SetCursor(cursorTexture,Vector2.zero,CursorMode.Auto);
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);

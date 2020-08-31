@@ -16,7 +16,7 @@ public class RoleFloatWindow : MonoSingleton<RoleFloatWindow>
 
     public Image skillTypeImg;
 
-    public void Init(Transform _transform, string str,RoleSkillType skillType)
+    public void Init(Transform _transform, string str,RoleSkillType skillType,RoleType roleType)
     {
         showText.text = str;
         //Vector3 V = Input.mousePosition;
@@ -35,7 +35,12 @@ public class RoleFloatWindow : MonoSingleton<RoleFloatWindow>
             default:
                 skillTypeImg.sprite = spriteList[2];
                 break;
-        }    
+        }
+        List<RoleType> typeList = new List<RoleType> { RoleType.CanFactory, RoleType.JuiceFactory, RoleType.CutFactory };
+        if (typeList.Contains(roleType))
+        {
+            skillTypeImg.sprite = spriteList[3];
+        }
         //print(Input.mousePosition);
         //print(Camera.main.ViewportToScreenPoint(_transform.position));
         //print(Camera.main.ViewportToWorldPoint(_transform.position));
