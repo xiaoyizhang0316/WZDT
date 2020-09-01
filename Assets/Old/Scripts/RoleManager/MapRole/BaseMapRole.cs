@@ -668,7 +668,6 @@ public class BaseMapRole : MonoBehaviour
             {
                 //if (item.activeInHierarchy)
                 {
-                    print(item.name);
                     foreach (var t in item.GetComponentsInChildren<Transform>())
                     {
                         if (t != null)
