@@ -82,10 +82,9 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         {
             if (int.Parse(sceneName.Split('_')[1]) < NetworkMgr.My.playerDatas.fteProgress)
             {
-                if (continueGuide)
-                {
+              
                     isComplete = true;
-                }
+             
            
             }
         }
