@@ -71,11 +71,11 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             currentGuideIndex = -1;
             CloseFTE();
         }
+        PlayCurrentIndexGuide();
         foreach (var item in NewCanvasUI.My.highLight)
         {
             item.SetActive(false);
         }
-        PlayCurrentIndexGuide();
     }
 
     // Start is called before the first frame update

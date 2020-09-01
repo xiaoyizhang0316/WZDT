@@ -410,7 +410,6 @@ public class StageGoal : MonoSingleton<StageGoal>
             NewCanvasUI.My.StartLowHealth();
             playerHealthText.color = Color.red;
         }
-
         if (!playerTechText.text.Equals(playerTechPoint.ToString()))
         {
             playerTechText.DOText( playerTechPoint.ToString(),0.02f,true,ScrambleMode.Numerals).Play() ;   
@@ -873,7 +872,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            Debug.Log("Caps");
             if (Input.GetKeyDown(KeyCode.S))
             {
                 DOTween.PlayAll();
