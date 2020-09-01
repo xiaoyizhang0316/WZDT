@@ -63,13 +63,13 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         {
             currentGuideIndex = 0;
             NewCanvasUI.My.GamePause(false);
+            guideClose.Init();
         }
         else
         {
             currentGuideIndex = -1;
             CloseFTE();
         }
-        guideClose.Init();
         PlayCurrentIndexGuide();
         foreach (var item in NewCanvasUI.My.highLight)
         {
@@ -81,6 +81,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     void Start()
     {
         Prologue temp = FindObjectOfType<Prologue>();
+        //if(SceneManager.GetActiveScene().name=="FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2")
+        //{
+        //    return;
+        //}
         if (temp == null)
             Init();
     }
