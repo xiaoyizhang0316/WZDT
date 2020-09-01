@@ -6,16 +6,21 @@ using UnityEngine.UI;
 public class CloseGuide : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        if (!AnsweringPanel.My.isComplete|| PlayerPrefs.GetInt("isUseGuide")==0)
+        GuideManager.My.guideClose = this;
+    }
+
+    public void Init()
+    {
+        if (!AnsweringPanel.My.isComplete || PlayerPrefs.GetInt("isUseGuide") == 0)
         {
             gameObject.SetActive(false);
         }
 
         else
         {
-          
+            gameObject.SetActive(true);
         }
 
         GetComponent<Button>().onClick.AddListener(() =>

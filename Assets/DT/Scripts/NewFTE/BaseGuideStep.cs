@@ -218,7 +218,7 @@ public abstract class BaseGuideStep : MonoBehaviour
             
             if (needCheck)
             {
-                while (!ChenkEnd()|| GuideManager.My.ftegob.activeSelf)
+                while (!ChenkEnd() && GuideManager.My.ftegob.activeSelf)
                 {
                     Debug.Log("当前步骤"+GuideManager.My.currentGuideIndex+"检测中");
                     yield return null;
