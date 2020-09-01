@@ -12,6 +12,8 @@ public class MainMap : MonoBehaviour
 
     public GameObject chaseText;
 
+    public Text userLevelText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,34 @@ public class MainMap : MonoBehaviour
         GetChaseLevel();
         GetAnswers();
         GetEquips();
+        GetUserLevel();
+    }
+
+    public void GetUserLevel()
+    {
+        switch(NetworkMgr.My.playerDatas.limit)
+        {
+            case 0:
+                userLevelText.text = "高级用户";
+                userLevelText.color = Color.yellow;
+                break;
+            case 1:
+                userLevelText.text = "体验用户";
+                userLevelText.color = Color.gray;
+                break;
+            case 4:
+                userLevelText.text = "试玩用户";
+                userLevelText.color = Color.blue;
+                break;
+            case 9:
+                userLevelText.text = "正式用户";
+                userLevelText.color = Color.green;
+                break;
+            default:
+                userLevelText.text = "普通用户";
+                userLevelText.color = Color.green;
+                break;
+        }
     }
 
     public void GetChaseLevel()

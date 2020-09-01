@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using static GameEnum;
 using DT.Fight.Bullet;
+using UnityEngine.EventSystems;
 
 public class ConsumeSign : MonoBehaviour
 {
@@ -466,6 +467,8 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         NewCanvasUI.My.consumerInfoFloatWindow.SetActive(true);
         NewCanvasUI.My.consumerInfoFloatWindow.GetComponent<ConsumerFloatWindow>().Init(this);
     }

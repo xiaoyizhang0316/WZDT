@@ -135,6 +135,9 @@ public class BaseMapRole : MonoBehaviour
     {
         if (levelModels.Count == 0)
             return;
+        List<GameEnum.RoleType> typeList = new List<GameEnum.RoleType> { GameEnum.RoleType.Seed, GameEnum.RoleType.Peasant, GameEnum.RoleType.Merchant, GameEnum.RoleType.Dealer };
+        if (!typeList.Contains(baseRoleData.baseRoleData.roleType))
+            return;
         if (baseRoleData.baseRoleData.level <= 2)
         {
 
@@ -534,31 +537,123 @@ public class BaseMapRole : MonoBehaviour
     /// <summary>
     /// 打开自发光效果
     /// </summary>
-    public void LightOn()
+    public void LightOn(BaseMapRole start)
     {
+        
         if(!isNpc)
         {
-            MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
-            foreach (MeshRenderer m in temp)
+            if (TradeConstraint.My.CheckTradeConstraint(start.baseRoleData.baseRoleData.roleType, baseRoleData.baseRoleData.roleType))
             {
-                foreach (Material item in m.materials)
+                foreach (var item in levelModels)
                 {
-                    item.EnableKeyword("_EMISSION");
-                    item.SetColor("_EmissionColor", Color.HSVToRGB(0.1736111f, 1f, 0.4433962f));
+                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    {
+
+                        t.gameObject.layer = 9;
+                    }
+                }
+                BulletLaunch temp;
+                if (TryGetComponent(out temp))
+                {
+                    foreach (var item in temp.paos)
+                    {
+                        foreach (var t in item.GetComponentsInChildren<Transform>())
+                        {
+
+                            t.gameObject.layer = 9;
+                        }
+                    }
                 }
             }
+            else
+            {
+                foreach (var item in levelModels)
+                {
+                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    {
+
+                        t.gameObject.layer = 10;
+                    }
+                }
+                BulletLaunch temp;
+                if (TryGetComponent(out temp))
+                {
+                    foreach (var item in temp.paos)
+                    {
+                        foreach (var t in item.GetComponentsInChildren<Transform>())
+                        {
+
+                            t.gameObject.layer = 10;
+                        }
+                    }
+                }
+            }
+            //MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
+            //foreach (MeshRenderer m in temp)
+            //{
+            //    foreach (Material item in m.materials)
+            //    {
+            //        item.EnableKeyword("_EMISSION");
+            //        item.SetColor("_EmissionColor", Color.HSVToRGB(0.1736111f, 1f, 0.4433962f));
+            //    }
+            //}
         }
-        else if (npcScript.isCanSee)
+        else if (npcScript.isCanSee && !npcScript.isLock)
         {
-            MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
-            foreach (MeshRenderer m in temp)
+            if (TradeConstraint.My.CheckTradeConstraint(start.baseRoleData.baseRoleData.roleType, baseRoleData.baseRoleData.roleType))
             {
-                foreach (Material item in m.materials)
+                foreach (var item in levelModels)
                 {
-                    item.EnableKeyword("_EMISSION");
-                    item.SetColor("_EmissionColor", Color.HSVToRGB(0.1736111f, 1f, 0.4433962f));
+                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    { 
+                        t.gameObject.layer = 9;
+                    }
+                }
+                BulletLaunch temp;
+                if (TryGetComponent(out temp))
+                {
+                    foreach (var item in temp.paos)
+                    {
+                        foreach (var t in item.GetComponentsInChildren<Transform>())
+                        {
+
+                            t.gameObject.layer = 9;
+                        }
+                    }
                 }
             }
+            else
+            {
+                foreach (var item in levelModels)
+                {
+                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    {
+
+                        t.gameObject.layer = 10;
+                    }
+                }
+                BulletLaunch temp;
+                if (TryGetComponent(out temp))
+                {
+                    foreach (var item in temp.paos)
+                    {
+                        foreach (var t in item.GetComponentsInChildren<Transform>())
+                        {
+
+                            t.gameObject.layer = 10;
+                        }
+                    }
+                }
+            }
+            //MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
+            //foreach (MeshRenderer m in temp)
+            //{
+            //    foreach (Material item in m.materials)
+            //    {
+            //        item.EnableKeyword("_EMISSION");
+            //        item.SetColor("_EmissionColor", Color.HSVToRGB(0.1736111f, 1f, 0.4433962f));
+            //    }
+            //}
         }
     }
 
@@ -569,25 +664,71 @@ public class BaseMapRole : MonoBehaviour
     {
         if (!isNpc)
         {
-            MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
-            foreach (MeshRenderer m in temp)
+            foreach (var item in levelModels)
             {
-                foreach (Material item in m.materials)
+                if (item.activeInHierarchy)
                 {
-                    item.DisableKeyword("_EMISSION");
+                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    {
+                        if (t != null)
+                            t.gameObject.layer = 0;
+                    }
                 }
             }
+            BulletLaunch temp;
+            if (TryGetComponent(out temp))
+            {
+                foreach (var item in temp.paos)
+                {
+                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    {
+                        if (t != null)
+                            t.gameObject.layer = 0;
+                    }
+                }
+            }
+            //MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
+            //foreach (MeshRenderer m in temp)
+            //{
+            //    foreach (Material item in m.materials)
+            //    {
+            //        item.DisableKeyword("_EMISSION");
+            //    }
+            //}
         }
-        else if (npcScript.isCanSee)
+        else if (npcScript.isCanSee && !npcScript.isLock)
         {
-            MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
-            foreach (MeshRenderer m in temp)
+            foreach (var item in levelModels)
             {
-                foreach (Material item in m.materials)
+                if (item.activeInHierarchy)
                 {
-                    item.DisableKeyword("_EMISSION");
+                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    {
+                        if (t != null)
+                            t.gameObject.layer = 0;
+                    }
                 }
             }
+            BulletLaunch temp;
+            if (TryGetComponent(out temp))
+            {
+                foreach (var item in temp.paos)
+                {
+                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    {
+                        if (t != null)
+                            t.gameObject.layer = 0;
+                    }
+                }
+            }
+            //MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
+            //foreach (MeshRenderer m in temp)
+            //{
+            //    foreach (Material item in m.materials)
+            //    {
+            //        item.DisableKeyword("_EMISSION");
+            //    }
+            //}
         }
     }
 
