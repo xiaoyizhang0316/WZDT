@@ -517,11 +517,17 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         NextQuestion();
     }
 
+    /// <summary>
+    /// 答题错误
+    /// </summary>
     void WrongAnswer()
     {
         error_image.SetActive(true);
     }
 
+    /// <summary>
+    /// 继续
+    /// </summary>
     void WrongButton()
     {
         
