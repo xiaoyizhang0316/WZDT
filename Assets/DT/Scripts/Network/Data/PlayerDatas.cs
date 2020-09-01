@@ -19,6 +19,10 @@ public class PlayerDatas
     public string loginRecordID;
     public string token;
     public int groupID;
+
+    public bool isOutDate;
+    public int limit;
+    public int privilege;
 }
 
 [Serializable]
