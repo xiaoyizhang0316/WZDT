@@ -22,11 +22,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public GameObject ftegob;
 
-    
+    public CloseGuide guideClose;
     
     public void PlayCurrentIndexGuide()
     {
-
         for (int i = 0; i < baseGuideSteps.Count; i++)
         {
             baseGuideSteps[i].gameObject.SetActive(false);
@@ -49,7 +48,6 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             return;
         }
 
-
         baseGuideSteps[currentGuideIndex].gameObject.SetActive(true);
 
         StartCoroutine(baseGuideSteps[currentGuideIndex].Play());
@@ -71,6 +69,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             currentGuideIndex = -1;
             CloseFTE();
         }
+        guideClose.Init();
         PlayCurrentIndexGuide();
         foreach (var item in NewCanvasUI.My.highLight)
         {

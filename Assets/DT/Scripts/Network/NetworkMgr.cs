@@ -156,6 +156,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             else
             {
                 playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                if (playerDatas.isOutDate)
+                {
+                    GoToLogin("账号失效！");
+                    return;
+                }
                 token = playerDatas.token;
                 if (SceneManager.GetActiveScene().name.StartsWith("FTE")&& SceneManager.GetActiveScene().name!="FTE_0")
                 {
@@ -1047,7 +1052,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 
     private void GoToLogin(string tip)
     {
-        HttpManager.My.ShowClickTip(tip, () => { SceneManager.LoadScene("Login"); });
+       
+        HttpManager.My.ShowClickTip(tip, () => {
+            if(SceneManager.GetActiveScene().name!="Login")
+                Logout();
+            SceneManager.LoadScene("Login"); });
     }
 
     private void ShowReconn(string str=null)
