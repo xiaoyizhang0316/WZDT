@@ -26,6 +26,10 @@ public class FTE_2_8 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         WorkerListManager.My.GetComponent<ScrollRect>().vertical = false;
+        if (AnsweringPanel.My.isComplete)
+        {
+            GuideManager.My.baseGuideSteps[19].isOpen = false;
+        }
         yield break;
          
     }

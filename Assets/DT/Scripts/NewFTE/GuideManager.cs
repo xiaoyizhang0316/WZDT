@@ -71,11 +71,11 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             currentGuideIndex = -1;
             CloseFTE();
         }
+        PlayCurrentIndexGuide();
         foreach (var item in NewCanvasUI.My.highLight)
         {
             item.SetActive(false);
         }
-        PlayCurrentIndexGuide();
     }
 
     // Start is called before the first frame update
@@ -94,6 +94,22 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         {
             item.SetActive(true);
         }
+
+        foreach (var VARIABLE in  darkEffect._items)
+        {
+            VARIABLE.radius = 0;
+        }
+        darkEffect._darkColor =new Color(1,1,1,0);
+        foreach (var VARIABLE in MapManager.My._mapSigns)
+        {
+            if (VARIABLE.mapType == GameEnum.MapType.Grass && VARIABLE.baseMapRole == null)
+            {
+                VARIABLE.isCanPlace = true;
+
+            }
+
+        }
+
     }
 
     public void PlayNextIndexGuide()

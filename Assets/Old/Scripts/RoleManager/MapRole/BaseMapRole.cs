@@ -666,9 +666,8 @@ public class BaseMapRole : MonoBehaviour
         {
             foreach (var item in levelModels)
             {
-                //if (item.activeInHierarchy)
+                if (item.activeInHierarchy)
                 {
-                    print(item.name);
                     foreach (var t in item.GetComponentsInChildren<Transform>())
                     {
                         if (t != null)
@@ -701,7 +700,7 @@ public class BaseMapRole : MonoBehaviour
         {
             foreach (var item in levelModels)
             {
-                //if (item.activeInHierarchy)
+                if (item.activeInHierarchy)
                 {
                     foreach (var t in item.GetComponentsInChildren<Transform>())
                     {

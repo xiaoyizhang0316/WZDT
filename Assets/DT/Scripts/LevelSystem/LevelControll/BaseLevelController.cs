@@ -63,7 +63,9 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
             go.SetActive(true);
             float tempY = go.transform.position.y + 2f;
             go.transform.DOMoveY(tempY, 1f).Play();
+
         }
+        CameraPlay.EarthQuakeShake(2f, 10f, 1f);
     }
 
     /// <summary>
@@ -77,7 +79,9 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
             go.SetActive(true);
             float tempY = go.transform.position.y + 2f;
             go.transform.DOMoveY(tempY, 1f).Play();
+
         }
+        CameraPlay.EarthQuakeShake(2f, 10f, 1f);
     }
 
     /// <summary>
@@ -177,11 +181,11 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     private void Update()
     {
-        if (unlockTime1 == StageGoal.My.timeCount && unlockTime1 > 0 && !isLockFinish1)
+        if (!isLockFinish1 && unlockTime1 <= StageGoal.My.timeCount && unlockTime1 > 0)
         {
             UnlockLand1();
         }
-        if (unlockTime2 == StageGoal.My.timeCount && unlockTime2 > 0 && !isLockFinish2)
+        if (!isLockFinish2 && unlockTime2 <= StageGoal.My.timeCount && unlockTime2 > 0 )
         {
             UnlockLand2();
         }
