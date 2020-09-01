@@ -80,7 +80,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
 
         }else
         {
-            if (int.Parse(sceneName.Split('_')[1]) < NetworkMgr.My.playerDatas.fteProgress)
+            if (int.Parse(sceneName.Split('_')[1]) <= NetworkMgr.My.playerDatas.fteProgress)
             {
               
                     isComplete = true;
@@ -273,20 +273,23 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         {
             mask.SetActive(true);
             //continue_btn.gameObject.SetActive(true);
-            int updateFTE = 0;
-            if (sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
+            int updateFTE = 999;
+            if(sceneName == "FTE_0-1")
             {
-                updateFTE = 1;
+                updateFTE = -1;
+            }else if(sceneName == "FTE_0-2")
+            {
+                updateFTE = 0;
             }
             else
-            if (int.Parse(sceneName.Split('_')[1]) <= NetworkMgr.My.playerDatas.fteProgress)
+            if (int.Parse(sceneName.Split('_')[1]) > NetworkMgr.My.playerDatas.fteProgress)
             {
-                updateFTE = 1;
+                updateFTE = int.Parse(sceneName.Split('_')[1]);
             }
-            if(updateFTE == 1)
+            if(updateFTE != 999)
             {
 
-                NetworkMgr.My.UpdatePlayerDatas(1, 0, () =>
+                NetworkMgr.My.UpdatePlayerDatas(updateFTE, 0, () =>
                 {
                     
                 });
@@ -516,11 +519,17 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         NextQuestion();
     }
 
+    /// <summary>
+    /// 答题错误
+    /// </summary>
     void WrongAnswer()
     {
         error_image.SetActive(true);
     }
 
+    /// <summary>
+    /// 继续
+    /// </summary>
     void WrongButton()
     {
         
