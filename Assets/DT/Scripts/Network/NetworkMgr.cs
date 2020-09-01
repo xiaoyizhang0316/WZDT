@@ -16,6 +16,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     private int groupID = 0;
     private string deviceID;
     public string playerID;
+    public int playerLimit = 1;
     public PlayerDatas playerDatas;
     public int currentLevel = 0;
     public int startTime = 0;
@@ -128,6 +129,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     loginRecordID = playerDatas.loginRecordID;
                     token = playerDatas.token;
                     groupID = playerDatas.groupID;
+                    playerLimit = playerDatas.limit;
                     //Debug.Log(playerID + " " + token);
                     //Debug.Log("token-----" + token);
                     doSuccess?.Invoke();
@@ -162,6 +164,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     return;
                 }
                 token = playerDatas.token;
+                playerLimit = playerDatas.limit;
                 if (SceneManager.GetActiveScene().name.StartsWith("FTE")&& SceneManager.GetActiveScene().name!="FTE_0")
                 {
                     StageGoal.My.CheckAfterReconnect();
