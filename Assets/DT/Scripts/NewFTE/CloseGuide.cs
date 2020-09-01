@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CloseGuide : MonoBehaviour
@@ -13,15 +14,31 @@ public class CloseGuide : MonoBehaviour
 
     public void Init()
     {
-        if (!AnsweringPanel.My.isComplete || PlayerPrefs.GetInt("isUseGuide") == 0)
+        if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) <= 4)
         {
-            gameObject.SetActive(false);
-        }
+            if (!AnsweringPanel.My.isComplete || PlayerPrefs.GetInt("isUseGuide") == 0)
+            {
+                gameObject.SetActive(false);
+            }
 
+            else
+            {
+                gameObject.SetActive(true);
+            }
+        }
         else
         {
-            gameObject.SetActive(true);
+            if (!(NetworkMgr.My.levelProgressList.Count >= int.Parse(SceneManager.GetActiveScene().name.Split('_')[1])) || PlayerPrefs.GetInt("isUseGuide") == 0)
+            {
+                gameObject.SetActive(false);
+            }
+
+            else
+            {
+                gameObject.SetActive(true);
+            }
         }
+
 
         GetComponent<Button>().onClick.AddListener(() =>
         {
