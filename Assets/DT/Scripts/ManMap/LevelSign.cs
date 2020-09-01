@@ -130,7 +130,7 @@ public class LevelSign : MonoBehaviour
             currentStar = "0" + currentStar;
         }
         stars = currentStar;
-        if(lastStar == "000" && loadScene!="FTE_1" || !CheckPrevStar())
+        if(lastStar == "000" && loadScene!="FTE_1" || !CheckPrevStar() || !CheckUserLevel())
         {
             HideAllStars();
             transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
@@ -181,5 +181,10 @@ public class LevelSign : MonoBehaviour
             }
         }
         return result >= actualStarRequirement;
+    }
+
+    public bool CheckUserLevel()
+    {
+        return NetworkMgr.My.playerDatas.limit == 0 ? true : NetworkMgr.My.playerDatas.limit >= levelID ;
     }
 }
