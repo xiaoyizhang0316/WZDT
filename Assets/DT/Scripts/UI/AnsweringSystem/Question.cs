@@ -17,6 +17,8 @@ public class Question
 
     public bool isMultiple;
 
+    public string questionDesc;
+
 
     public bool IsTrueAnswer(List<string> select)
     {

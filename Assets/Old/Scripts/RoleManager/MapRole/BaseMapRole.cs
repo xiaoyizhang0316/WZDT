@@ -598,7 +598,7 @@ public class BaseMapRole : MonoBehaviour
             //    }
             //}
         }
-        else if (npcScript.isCanSee)
+        else if (npcScript.isCanSee && !npcScript.isLock)
         {
             if (TradeConstraint.My.CheckTradeConstraint(start.baseRoleData.baseRoleData.roleType, baseRoleData.baseRoleData.roleType))
             {
@@ -666,9 +666,13 @@ public class BaseMapRole : MonoBehaviour
         {
             foreach (var item in levelModels)
             {
-                foreach (var t in item.GetComponentsInChildren<Transform>())
+                //if (item.activeInHierarchy)
                 {
-                    t.gameObject.layer = 0;
+                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    {
+                        if (t != null)
+                            t.gameObject.layer = 0;
+                    }
                 }
             }
             BulletLaunch temp;
@@ -678,8 +682,8 @@ public class BaseMapRole : MonoBehaviour
                 {
                     foreach (var t in item.GetComponentsInChildren<Transform>())
                     {
-
-                        t.gameObject.layer = 0;
+                        if (t != null)
+                            t.gameObject.layer = 0;
                     }
                 }
             }
@@ -692,13 +696,17 @@ public class BaseMapRole : MonoBehaviour
             //    }
             //}
         }
-        else if (npcScript.isCanSee)
+        else if (npcScript.isCanSee && !npcScript.isLock)
         {
             foreach (var item in levelModels)
             {
-                foreach (var t in item.GetComponentsInChildren<Transform>())
+                //if (item.activeInHierarchy)
                 {
-                    t.gameObject.layer = 0;
+                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    {
+                        if (t != null)
+                            t.gameObject.layer = 0;
+                    }
                 }
             }
             BulletLaunch temp;
@@ -708,8 +716,8 @@ public class BaseMapRole : MonoBehaviour
                 {
                     foreach (var t in item.GetComponentsInChildren<Transform>())
                     {
-
-                        t.gameObject.layer = 0;
+                        if (t != null)
+                            t.gameObject.layer = 0;
                     }
                 }
             }

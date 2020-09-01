@@ -24,7 +24,10 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
     //public Button continue_btn;
     public Button next_btn;
     public Button replay_btn;
+    public Button wrong_btn;
     public Text passOFail_text;
+
+    public Text qDesc;
 
     public Text keywords;
 
@@ -51,6 +54,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
     int random = 0;
     bool reset = false;
     bool continueGuide = false;
+    bool isFail = false;
     Action doEnd;
     string sceneName = "";
     List<int> randomList;
@@ -69,6 +73,8 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         next_btn.onClick.AddListener(NextConfirm);
         //continue_btn.onClick.AddListener(Continue);
         replay_btn.onClick.AddListener(Replay);
+        wrong_btn.onClick.AddListener(WrongButton);
+        sceneName = SceneManager.GetActiveScene().name;
         if (sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
         {
 
@@ -246,9 +252,13 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
 
         for(int i=0; i< togglesTransform.childCount; i++)
         {
-            random = UnityEngine.Random.Range(0, temp.Count);
-            togglesTransform.GetChild(i).GetComponent<ChoiceItem>().Setup(temp[random]);
-            temp.RemoveAt(random);
+            //random = UnityEngine.Random.Range(0, temp.Count);
+            //togglesTransform.GetChild(i).GetComponent<ChoiceItem>().Setup(temp[random]);
+            //temp.RemoveAt(random);
+            if (i < temp.Count)
+            {
+                togglesTransform.GetChild(i).GetComponent<ChoiceItem>().Setup(temp[i]);
+            }
         }
     }
 
@@ -393,16 +403,22 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         }
         else
         {
+            qDesc.text = currentQuestion.questionDesc;
+            qDesc.gameObject.SetActive(true);
             errorCount -= 1;
             error_text.text = errorCount.ToString();
             if (errorCount <= 0)
             {
-                StartCoroutine(ShowReplay());
+                //qDesc.gameObject.SetActive(false);
+                //StartCoroutine(ShowReplay());
+                isFail = true;
             }
             else
             {
-                StartCoroutine(Next(false));
+                isFail = false;
             }
+            wrong_btn.gameObject.SetActive(true);
+            WrongAnswer();
         }
     }
 
@@ -474,6 +490,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         replay_btn.onClick.AddListener(() => Replay());
         passOFail_text.text = "答题失败！请重新来过！";
         replayPanel.SetActive(true);
+        qDesc.gameObject.SetActive(false);
         mask.SetActive(false);
     }
 
@@ -484,19 +501,42 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
     /// <returns></returns>
     IEnumerator Next(bool correct)
     {
-        if (correct)
-        {
+        //if (correct)
+        //{
             correct_image.SetActive(true);
-        }
-        else
-        {
-            error_image.SetActive(true);
-        }
+        //}
+        //else
+        //{
+            //error_image.SetActive(true);
+            
+        //}
         yield return new WaitForSeconds(1);
         mask.SetActive(false);
         correct_image.SetActive(false);
-        error_image.SetActive(false);
+        
         NextQuestion();
+    }
+
+    void WrongAnswer()
+    {
+        error_image.SetActive(true);
+    }
+
+    void WrongButton()
+    {
+        
+        mask.SetActive(false);
+        error_image.SetActive(false);
+        qDesc.gameObject.SetActive(false);
+        wrong_btn.gameObject.SetActive(false);
+        if (isFail)
+        {
+            StartCoroutine(ShowReplay());
+        }
+        else
+        {
+            NextQuestion();
+        }
     }
 
     /// <summary>

@@ -260,7 +260,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void ConsumerAliveTip()
     {
-        if (SceneManager.GetActiveScene().name == "FTE_0"|| PlayerPrefs.GetInt("isUseGuide") == 1)
+        if (SceneManager.GetActiveScene().name.Equals("FTE_0-1")|| GuideManager.My.ftegob.activeInHierarchy || SceneManager.GetActiveScene().name.Equals("FTE_0-2"))
         {
             return;
         }

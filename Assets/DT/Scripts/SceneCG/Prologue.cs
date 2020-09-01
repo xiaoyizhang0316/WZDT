@@ -9,6 +9,10 @@ public class Prologue : MonoBehaviour
     {
         NewCanvasUI.My.GamePause(false);
         CameraPlay.WidescreenH_ON(Color.black,1);
+        foreach (var item in NewCanvasUI.My.highLight)
+        {
+            item.SetActive(false);
+        }
     }
 
     public void PrologueOff()
@@ -20,7 +24,10 @@ public class Prologue : MonoBehaviour
             NewCanvasUI.My.GameNormal();
             GuideManager.My.Init();
         }).Play();
-
+        foreach (var item in NewCanvasUI.My.highLight)
+        {
+            item.SetActive(true);
+        }
     }
 
 
