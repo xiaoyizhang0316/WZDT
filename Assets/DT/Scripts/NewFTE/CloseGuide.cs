@@ -8,7 +8,7 @@ public class CloseGuide : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (AnsweringPanel.My.isComplete)
+        if (!AnsweringPanel.My.isComplete|| PlayerPrefs.GetInt("isUseGuide")==0)
         {
             gameObject.SetActive(false);
         }
