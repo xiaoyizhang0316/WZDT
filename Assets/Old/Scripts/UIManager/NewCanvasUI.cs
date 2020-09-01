@@ -71,6 +71,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public Transform hidePanel;
 
+    public List<GameObject> highLight = new List<GameObject>();
+
     public List<GameObject> panelList = new List<GameObject>();
 
     // Start is called before the first frame update
@@ -244,7 +246,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         {
             if (role.baseRoleData.ID != startRole.baseRoleData.ID)
             {
-                role.LightOn();
+                role.LightOn(startRole);
             }
         }
     }
