@@ -57,9 +57,16 @@ public class TestScript : MonoBehaviour
     {
         
     }
+}
 
-    public void OnMouseDown()
+public class Solution
+{
+    public IList<string> LetterCombinations(string digits)
     {
-        print("21312312312312");
+        List<string> result = new List<string>();
+
+
+
+        return result;
     }
 }
