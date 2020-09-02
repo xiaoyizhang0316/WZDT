@@ -104,29 +104,31 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!SceneManager.GetActiveScene().name.Equals("FTE_0-1") && !SceneManager.GetActiveScene().name.Equals("FTE_0-2"))
         {
-            if (DOTween.defaultAutoPlay != AutoPlay.None)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                GamePause();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            bool isOpenSetting = true;
-            foreach (GameObject go in panelList)
-            {
-                if (go.activeSelf)
+                if (DOTween.defaultAutoPlay != AutoPlay.None)
                 {
-                    go.SetActive(false);
-                    isOpenSetting = false;
+                    GamePause();
                 }
             }
-            if (isOpenSetting)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Panel_Option.SetActive(true);
-                OptionsPanel.My.ShowOPtionsPanel();
+                bool isOpenSetting = true;
+                foreach (GameObject go in panelList)
+                {
+                    if (go.activeSelf)
+                    {
+                        go.SetActive(false);
+                        isOpenSetting = false;
+                    }
+                }
+                if (isOpenSetting)
+                {
+                    Panel_Option.SetActive(true);
+                    OptionsPanel.My.ShowOPtionsPanel();
+                }
             }
         }
     }
