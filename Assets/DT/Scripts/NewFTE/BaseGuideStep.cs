@@ -261,7 +261,8 @@ public abstract class BaseGuideStep : MonoBehaviour
         yield return StepEnd();
         for (int i = 0; i < highLightCopyObj.Count; i++)
         {
-            Destroy(highLightCopyObj[i], 0f);
+            //Destroy(highLightCopyObj[i], 0f);
+            highLightCopyObj[i].SetActive(false);
         }
         CloseHighLight();
 

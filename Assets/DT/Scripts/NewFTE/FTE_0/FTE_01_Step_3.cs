@@ -21,7 +21,7 @@ public class FTE_01_Step_3 : BaseGuideStep
     {
         transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => {
             RoleListManager.My.OutButton();
-            Destroy(transform.GetChild(0).gameObject);
+            //Destroy(transform.GetChild(0).gameObject);
             //isOver = true;
             HideInfos();
             hand.SetActive(false);
