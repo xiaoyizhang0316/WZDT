@@ -17,7 +17,7 @@ public class CloseGuide : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(() =>
         {
             GuideManager.My.CloseFTE();
-            gameObject.SetActive(false);
+            
         });
         if (PlayerPrefs.GetInt("isUseGuide") == 0)
         {
