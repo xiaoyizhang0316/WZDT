@@ -5113,16 +5113,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 471035720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 1241211416}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20.2, y: 41.5}
-  m_SizeDelta: {x: 1263.6, y: 470.1}
+  m_AnchoredPosition: {x: -326, y: -298}
+  m_SizeDelta: {x: 970, y: 524}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &471035722
 MonoBehaviour:
@@ -5142,7 +5142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f16cb7bfd2b46a64488c7a2646f61e9b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11209,7 +11209,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 44de0063ef42a9342a062470a015e089, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11534,41 +11534,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1241211415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4aba4763fb854a94b015799be8878e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 0977eb270e3454374a048a1a8810b558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStepIndex: 10
+  currentStepIndex: 0
   isOpen: 1
   contentText:
   - {fileID: 1680935666}
   endButton: {fileID: 1925332335}
   Camera3DTarget:
-  - target: {fileID: 496702255}
+  - target: {fileID: 974500204}
     radius: 0
-    EndRandius: 80
-    waitTime: 0.2
-    speed: 25
-  - target: {fileID: 1952931478}
-    radius: 0
-    EndRandius: 80
-    waitTime: 0.5
-    speed: 25
-  - target: {fileID: 1784640890}
-    radius: 0
-    EndRandius: 80
-    waitTime: 1
-    speed: 25
-  - target: {fileID: 1869298138}
-    radius: 0
-    EndRandius: 80
-    waitTime: 1.5
-    speed: 25
+    EndRandius: 0
+    waitTime: 0
+    speed: 1
   highLight2DObjList: []
   highLightCopyObj: []
   needCheck: 0
-  entryTime: 0
+  entryTime: 1
   hand: {fileID: 114677443}
-  properties: {fileID: 146163796}
+  image:
+  - {fileID: 471035720}
 --- !u!114 &1241211418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16814,7 +16800,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1680935664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1241211416}
@@ -16822,7 +16808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 310, y: 350}
+  m_AnchoredPosition: {x: 324, y: 363}
   m_SizeDelta: {x: 1024.5, y: 273.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1680935666
@@ -16856,7 +16842,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u79CD\u74DC\u53EF\u79BB\u4E0D\u5F00\u79CD\u5B50\u5546\u3001\u519C\u6C11\u3001\u8D38\u6613\u5546\u3001\u96F6\u552E\u5546\u8FD94\u4E2A\u89D2\u8272\uFF0C\u4ECE\u751F\u4EA7\u8FD0\u8F93\u5230\u9500\u552E\u4ED6\u4EEC\u8D77\u5230\u4E86\u81F3\u5173\u91CD\u8981\u7684\u4F5C\u7528\u3002\r\n"
+  m_Text: "\u5C06\u74DC\u5356\u7ED9\u6D88\u8D39\u8005\u53EF\u4EE5\u5F97\u5230\u4E00\u5B9A\u7684\u6536\u76CA\uFF0C\u4E5F\u662F\u5728WZ\u5E02\u8D5A\u94B1\u7684\u57FA\u7840\u65B9\u5F0F\uFF01\n"
 --- !u!222 &1680935667
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19034,7 +19020,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c2a0932822e3428ba0da56cf7d652e9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 44de0063ef42a9342a062470a015e089, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -22681,6 +22667,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8809343462345750897, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -30.800049
       objectReference: {fileID: 0}
     - target: {fileID: 8891102470485849872, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
