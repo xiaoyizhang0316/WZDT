@@ -58,15 +58,3 @@ public class TestScript : MonoBehaviour
         
     }
 }
-
-public class Solution
-{
-    public IList<string> LetterCombinations(string digits)
-    {
-        List<string> result = new List<string>();
-
-
-
-        return result;
-    }
-}
