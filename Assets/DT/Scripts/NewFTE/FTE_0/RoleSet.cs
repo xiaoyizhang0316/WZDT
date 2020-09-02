@@ -283,7 +283,7 @@ public class RoleSet : MonoBehaviour
     IEnumerator ContinueProductSeed()
     {
         RoleEditor.My.destroyBullets = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         RoleEditor.My.destroyBullets = false;
         role.GetComponent<BaseSkill>().ReUnleashSkills();
     }
