@@ -1,28 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CloseGuide : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        if (!AnsweringPanel.My.isComplete|| PlayerPrefs.GetInt("isUseGuide")==0)
-        {
-            gameObject.SetActive(false);
-        }
+        GuideManager.My.guideClose = this;
+    }
 
-        else
-        {
-          
-        }
-
+    public void Init()
+    {
         GetComponent<Button>().onClick.AddListener(() =>
         {
             GuideManager.My.CloseFTE();
             gameObject.SetActive(false);
         });
+        if (PlayerPrefs.GetInt("isUseGuide") == 0)
+        {
+            gameObject.SetActive(false);
+        }
+        else if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) <= 4)
+        {
+            gameObject.SetActive(AnsweringPanel.My.isComplete);
+        }
+        else 
+        {
+            gameObject.SetActive(NetworkMgr.My.levelProgressList.Count >= int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]));
+        }
+
+
     }
 
     // Update is called once per frame

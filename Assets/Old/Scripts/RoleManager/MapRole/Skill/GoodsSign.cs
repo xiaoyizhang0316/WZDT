@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoodsSign : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class GoodsSign : MonoBehaviour
         CheckColor();
         if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
         {
-            speed = 1f * (1 - role.baseRoleData.efficiency > 80 ? 80f : role.baseRoleData.efficiency / 100f);
+            speed = 1f * (1 - (role.baseRoleData.efficiency > 80 ? 80f : role.baseRoleData.efficiency) / 100f);
         }
 
         // print("bullet start move" + path[count]);
@@ -164,5 +165,16 @@ public class GoodsSign : MonoBehaviour
             speedAdd += v.Value / 100f;
         }
         moveTween.timeScale = speedAdd;
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "FTE_0-2")
+        {
+            if (RoleEditor.My.destroyBullets)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

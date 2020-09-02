@@ -22,11 +22,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public GameObject ftegob;
 
-    
+    public CloseGuide guideClose;
     
     public void PlayCurrentIndexGuide()
     {
-
         for (int i = 0; i < baseGuideSteps.Count; i++)
         {
             baseGuideSteps[i].gameObject.SetActive(false);
@@ -49,7 +48,6 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             return;
         }
 
-
         baseGuideSteps[currentGuideIndex].gameObject.SetActive(true);
 
         StartCoroutine(baseGuideSteps[currentGuideIndex].Play());
@@ -57,6 +55,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public void Init()
     {
+        foreach (var item in NewCanvasUI.My.highLight)
+        {
+            item.SetActive(false);
+        }
         if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
         {
             currentGuideIndex = 0;
@@ -65,23 +67,26 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         {
             currentGuideIndex = 0;
             NewCanvasUI.My.GamePause(false);
+            guideClose.Init();
         }
         else
         {
             currentGuideIndex = -1;
             CloseFTE();
-        }
-        foreach (var item in NewCanvasUI.My.highLight)
-        {
-            item.SetActive(false);
+            guideClose.Init();
         }
         PlayCurrentIndexGuide();
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
         Prologue temp = FindObjectOfType<Prologue>();
+        //if(SceneManager.GetActiveScene().name=="FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2")
+        //{
+        //    return;
+        //}
         if (temp == null)
             Init();
     }

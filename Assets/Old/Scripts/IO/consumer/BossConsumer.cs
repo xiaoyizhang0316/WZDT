@@ -614,6 +614,5 @@ public class BossConsumer : ConsumeSign
         {
             ChangeHealth(10000);
         }
-
     }
 }
