@@ -89,16 +89,16 @@ public class CreateTradeLine : MonoBehaviour
                     lineGo.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
                 }
             }
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            lineGo.SetActive(false);
-            gameObject.SetActive(false);
-            NewCanvasUI.My.isSetTrade = false;
-            if (NewCanvasUI.My.isChange)
+            if (Input.GetMouseButtonUp(0))
             {
-                NewCanvasUI.My.isChange = false;
-                NewCanvasUI.My.HideAllTradeButton();
+                lineGo.SetActive(false);
+                gameObject.SetActive(false);
+                NewCanvasUI.My.isSetTrade = false;
+                if (NewCanvasUI.My.isChange)
+                {
+                    NewCanvasUI.My.isChange = false;
+                    NewCanvasUI.My.HideAllTradeButton();
+                }
             }
         }
     }
