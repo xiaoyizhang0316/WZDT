@@ -260,5 +260,5 @@ public abstract class BaseGuideStep : MonoBehaviour
         GuideManager.My.PlayNextIndexGuide();
     }
 
-    public Action afterEntry; 
+    public Action afterEntry;
 }
