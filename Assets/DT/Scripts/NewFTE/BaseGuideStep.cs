@@ -247,6 +247,14 @@ public abstract class BaseGuideStep : MonoBehaviour
         return true;
     }
 
+    public void Update()
+    {
+        for (int i = 0; i < highLightCopyObj.Count; i++)
+        {
+            highLightCopyObj[i].transform.position = highLight2DObjList[i].transform.position;
+        }
+    }
+
     public IEnumerator PlayEnd()
     {
     Debug.Log("结束当前步骤"+GuideManager.My.currentGuideIndex);

@@ -9,7 +9,7 @@ public class FTE_1_22 : BaseGuideStep
     // Start is called before the first frame update
     void Start()
     {
-        
+        NewCanvasUI.My.Panel_Update.transform.localPosition = new Vector3(0,10000,0);
     }
 
     // Update is called once per frame
@@ -36,7 +36,8 @@ public class FTE_1_22 : BaseGuideStep
             }
 
         }
-        
+        NewCanvasUI.My.Panel_Update.transform.localPosition = new Vector3(0,0,0);
+        NewCanvasUI.My.Panel_Update.SetActive(false);
         yield break;
     }
 
