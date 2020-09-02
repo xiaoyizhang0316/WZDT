@@ -140,7 +140,6 @@ public class TradeManager : MonoSingleton<TradeManager>
                 HttpManager.My.ShowTip("角色未解锁！");
                 return false;
             }
-
         }
         if (end.isNpc)
         {
@@ -149,7 +148,6 @@ public class TradeManager : MonoSingleton<TradeManager>
                 HttpManager.My.ShowTip("角色未解锁！");
                 return false;
             }
-
         }
         return true;
     }
@@ -171,10 +169,14 @@ public class TradeManager : MonoSingleton<TradeManager>
             return true;
     }
 
+    /// <summary>
+    /// 检测发起方和承受方是否可以交易
+    /// </summary>
+    /// <returns></returns>
     public bool CheckTradeConstraint()
     {
         if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product && NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
-            return TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleType);
+            return TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleType,true);
         else
             return true;
     }
@@ -194,7 +196,6 @@ public class TradeManager : MonoSingleton<TradeManager>
                 HttpManager.My.ShowTip("发起方无法进行更多交易！");
                 return false;
             }
-
         }
         if (end.extraSkill != null)
         {
@@ -203,7 +204,6 @@ public class TradeManager : MonoSingleton<TradeManager>
                 HttpManager.My.ShowTip("承受方无法进行更多交易！");
                 return false;
             }
-
         }
         return true;  
     }
@@ -263,7 +263,10 @@ public class TradeManager : MonoSingleton<TradeManager>
         CheckNpcRole(sign);
     }
 
-
+    /// <summary>
+    /// 生成交易时检测NPC角色是否添加
+    /// </summary>
+    /// <param name="sign"></param>
     public void CheckNpcRole(TradeSign sign)
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole));

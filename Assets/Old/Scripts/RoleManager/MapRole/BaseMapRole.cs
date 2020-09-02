@@ -546,10 +546,13 @@ public class BaseMapRole : MonoBehaviour
             {
                 foreach (var item in levelModels)
                 {
-                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    if (item.activeInHierarchy)
                     {
+                        foreach (var t in item.GetComponentsInChildren<Transform>())
+                        {
 
-                        t.gameObject.layer = 9;
+                            t.gameObject.layer = 9;
+                        }
                     }
                 }
                 BulletLaunch temp;
@@ -559,7 +562,6 @@ public class BaseMapRole : MonoBehaviour
                     {
                         foreach (var t in item.GetComponentsInChildren<Transform>())
                         {
-
                             t.gameObject.layer = 9;
                         }
                     }
@@ -569,10 +571,13 @@ public class BaseMapRole : MonoBehaviour
             {
                 foreach (var item in levelModels)
                 {
-                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    if (item.activeInHierarchy)
                     {
+                        foreach (var t in item.GetComponentsInChildren<Transform>())
+                        {
 
-                        t.gameObject.layer = 10;
+                            t.gameObject.layer = 10;
+                        }
                     }
                 }
                 BulletLaunch temp;
@@ -604,9 +609,12 @@ public class BaseMapRole : MonoBehaviour
             {
                 foreach (var item in levelModels)
                 {
-                    foreach (var t in item.GetComponentsInChildren<Transform>())
-                    { 
-                        t.gameObject.layer = 9;
+                    if (item.activeInHierarchy)
+                    {
+                        foreach (var t in item.GetComponentsInChildren<Transform>())
+                        {
+                            t.gameObject.layer = 9;
+                        }
                     }
                 }
                 BulletLaunch temp;
@@ -626,10 +634,13 @@ public class BaseMapRole : MonoBehaviour
             {
                 foreach (var item in levelModels)
                 {
-                    foreach (var t in item.GetComponentsInChildren<Transform>())
+                    if (item.activeInHierarchy)
                     {
+                        foreach (var t in item.GetComponentsInChildren<Transform>())
+                        {
 
-                        t.gameObject.layer = 10;
+                            t.gameObject.layer = 10;
+                        }
                     }
                 }
                 BulletLaunch temp;

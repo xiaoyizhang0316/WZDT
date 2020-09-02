@@ -61,6 +61,8 @@ public class CreateTradeLine : MonoBehaviour
                     {
                         targetRole = hit.transform.GetComponentInParent<BaseMapRole>();
                         Target = hit.transform.GetComponentInParent<BaseMapRole>().tradePoint.position;
+                        if (hit.transform.GetComponentInParent<BaseMapRole>().baseRoleData.ID == NewCanvasUI.My.startRole.baseRoleData.ID)
+                            return;
                         if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product && targetRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
                         {
                             if (!TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, targetRole.baseRoleData.baseRoleData.roleType))
