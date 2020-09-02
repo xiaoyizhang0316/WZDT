@@ -61,23 +61,24 @@ public class CreateTradeLine : MonoBehaviour
                     {
                         targetRole = hit.transform.GetComponentInParent<BaseMapRole>();
                         Target = hit.transform.GetComponentInParent<BaseMapRole>().tradePoint.position;
-                        if (hit.transform.GetComponentInParent<BaseMapRole>().baseRoleData.ID == NewCanvasUI.My.startRole.baseRoleData.ID)
-                            return;
-                        if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product && targetRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
+                        if (hit.transform.GetComponentInParent<BaseMapRole>().baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
                         {
-                            if (!TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, targetRole.baseRoleData.baseRoleData.roleType))
+                            if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product && targetRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
                             {
-                                lineGo.GetComponent<MeshRenderer>().material.color = Color.red;
+                                if (!TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, targetRole.baseRoleData.baseRoleData.roleType))
+                                {
+                                    lineGo.GetComponent<MeshRenderer>().material.color = Color.red;
+                                }
+                                else
+                                {
+                                    lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
+                                }
                             }
                             else
                             {
                                 lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
                             }
-                        }
-                        else
-                        {
-                            lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
-                        }
+                        } 
                     }
                     Vector3 rightPosition = (startTarget.gameObject.transform.position + Target) / 2;
                     Vector3 rightRotation = Target - startTarget.transform.position;
@@ -89,16 +90,16 @@ public class CreateTradeLine : MonoBehaviour
                     lineGo.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
                 }
             }
-            if (Input.GetMouseButtonUp(0))
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            lineGo.SetActive(false);
+            gameObject.SetActive(false);
+            NewCanvasUI.My.isSetTrade = false;
+            if (NewCanvasUI.My.isChange)
             {
-                lineGo.SetActive(false);
-                gameObject.SetActive(false);
-                NewCanvasUI.My.isSetTrade = false;
-                if (NewCanvasUI.My.isChange)
-                {
-                    NewCanvasUI.My.isChange = false;
-                    NewCanvasUI.My.HideAllTradeButton();
-                }
+                NewCanvasUI.My.isChange = false;
+                NewCanvasUI.My.HideAllTradeButton();
             }
         }
     }

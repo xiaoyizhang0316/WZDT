@@ -249,7 +249,7 @@ public abstract class BaseGuideStep : MonoBehaviour
 
     public void Update()
     {
-        for (int i = 0; i < highLightCopyObj.Count; i++)
+        for (int i = 0; i < highLight2DObjList.Count; i++)
         {
             highLightCopyObj[i].transform.position = highLight2DObjList[i].transform.position;
         }
@@ -261,7 +261,8 @@ public abstract class BaseGuideStep : MonoBehaviour
         yield return StepEnd();
         for (int i = 0; i < highLightCopyObj.Count; i++)
         {
-            Destroy(highLightCopyObj[i], 0f);
+            //Destroy(highLightCopyObj[i], 0f);
+            highLightCopyObj[i].SetActive(false);
         }
         CloseHighLight();
 
