@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoodsSign : MonoBehaviour
 {
@@ -164,5 +165,16 @@ public class GoodsSign : MonoBehaviour
             speedAdd += v.Value / 100f;
         }
         moveTween.timeScale = speedAdd;
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "FTE_0-2")
+        {
+            if (RoleEditor.My.destroyBullets)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

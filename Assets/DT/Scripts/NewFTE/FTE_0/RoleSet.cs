@@ -57,12 +57,12 @@ public class RoleSet : MonoBehaviour
                 cost.text = "固定成本: " + Cost;
                 break;
             case RoleType.Merchant:
-                prop1.text = "传输速度: " + efficiency+"%";
-                prop2.text = "成本降低: " + (effect *0.3f + 24).ToString("f2")+"%";
+                prop1.text = "效<color=#00000000>效率</color>率: " + efficiency+"%";
+                prop2.text = "效<color=#00000000>效果</color>果: " + (effect *0.3f + 24).ToString("f2")+"%";
                 cost.text = "固定成本: " + Cost;
                 break;
             case RoleType.Dealer:
-                prop1.text = "发射间隔: " + (1.5f-efficiency * 0.01f  ).ToString("f2")+"s";
+                prop1.text = "效<color=#00000000>效率</color>率: " + (1.5f-efficiency * 0.01f  ).ToString("f2")+"s";
                 prop2.text = "范<color=#00000000>范围</color>围: " + range;
                 cost.text = "固定成本: " + Cost;
                 break;
@@ -152,12 +152,15 @@ public class RoleSet : MonoBehaviour
         switch (valueType)
         {
             case ValueType.Effect:
+                ClearBullets();
+                role.GetComponent<BaseSkill>().CancelSkill();
                 role.GetComponent<BaseMapRole>().baseRoleData.effect += (RoleEditor.My.seed.effect[tva]- RoleEditor.My.seed.effect[lva]);
                 role.GetComponent<BaseMapRole>().baseRoleData.tradeCost += (int)((RoleEditor.My.seed.effect[tva]- RoleEditor.My.seed.effect[lva])* RoleEditor.My.tradeCostOffset);
                 role.GetComponent<BaseMapRole>().baseRoleData.cost += (int)((RoleEditor.My.seed.effect[tva]- RoleEditor.My.seed.effect[lva])* RoleEditor.My.costOffset);
                 role.GetComponent<BaseMapRole>().baseRoleData.riskResistance += (int)((RoleEditor.My.seed.effect[tva]- RoleEditor.My.seed.effect[lva])* RoleEditor.My.riskOffset);
                 effect = role.GetComponent<BaseMapRole>().baseRoleData.effect;
                 Cost = role.GetComponent<BaseMapRole>().baseRoleData.cost;
+                StartCoroutine(ContinueProductSeed());
                 tet = tva;
                 break;
             case ValueType.Efficiency:
@@ -267,6 +270,22 @@ public class RoleSet : MonoBehaviour
         }
 
         ShowValues();
+    }
+
+    private void ClearBullets()
+    {
+        for(int i=0; i < roles.childCount; i++)
+        {
+            roles.GetChild(i).GetComponent<BaseMapRole>().ClearWarehouse();
+        }
+    }
+
+    IEnumerator ContinueProductSeed()
+    {
+        RoleEditor.My.destroyBullets = true;
+        yield return new WaitForSeconds(0.5f);
+        RoleEditor.My.destroyBullets = false;
+        role.GetComponent<BaseSkill>().ReUnleashSkills();
     }
 }
 

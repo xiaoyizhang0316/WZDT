@@ -14,37 +14,25 @@ public class CloseGuide : MonoBehaviour
 
     public void Init()
     {
-        if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) <= 4)
-        {
-            if (!AnsweringPanel.My.isComplete || PlayerPrefs.GetInt("isUseGuide") == 0)
-            {
-                gameObject.SetActive(false);
-            }
-
-            else
-            {
-                gameObject.SetActive(true);
-            }
-        }
-        else
-        {
-            if (!(NetworkMgr.My.levelProgressList.Count >= int.Parse(SceneManager.GetActiveScene().name.Split('_')[1])) || PlayerPrefs.GetInt("isUseGuide") == 0)
-            {
-                gameObject.SetActive(false);
-            }
-
-            else
-            {
-                gameObject.SetActive(true);
-            }
-        }
-
-
         GetComponent<Button>().onClick.AddListener(() =>
         {
             GuideManager.My.CloseFTE();
             gameObject.SetActive(false);
         });
+        if (PlayerPrefs.GetInt("isUseGuide") == 0)
+        {
+            gameObject.SetActive(false);
+        }
+        else if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) <= 4)
+        {
+            gameObject.SetActive(AnsweringPanel.My.isComplete);
+        }
+        else 
+        {
+            gameObject.SetActive(NetworkMgr.My.levelProgressList.Count >= int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]));
+        }
+
+
     }
 
     // Update is called once per frame

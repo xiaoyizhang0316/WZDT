@@ -55,6 +55,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public void Init()
     {
+        foreach (var item in NewCanvasUI.My.highLight)
+        {
+            item.SetActive(false);
+        }
         if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
         {
             currentGuideIndex = 0;
@@ -69,12 +73,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         {
             currentGuideIndex = -1;
             CloseFTE();
+            guideClose.Init();
         }
         PlayCurrentIndexGuide();
-        foreach (var item in NewCanvasUI.My.highLight)
-        {
-            item.SetActive(false);
-        }
+
     }
 
     // Start is called before the first frame update
