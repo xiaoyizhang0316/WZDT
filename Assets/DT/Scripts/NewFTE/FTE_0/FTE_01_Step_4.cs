@@ -42,7 +42,7 @@ public class FTE_01_Step_4 : BaseGuideStep
     {
         if (land.GetComponent<MapSign>().baseMapRole != null && land.GetComponent<MapSign>().baseMapRole.baseRoleData.inMap)
         {
-            Destroy(transform.GetChild(0).gameObject);
+            //Destroy(transform.GetChild(0).gameObject);
             land.GetComponent<MapSign>().baseMapRole.baseRoleData.ID = roleID;
             //if(roleID == 1001)
             //{
