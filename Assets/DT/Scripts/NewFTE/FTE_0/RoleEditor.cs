@@ -22,6 +22,7 @@ public class RoleEditor : MonoSingleton<RoleEditor>
     public Text tc1;
     public Text tc2;
     public Text tc3;
+    public bool destroyBullets = false;
 
     public bool isTrade = false;
     // Start is called before the first frame update

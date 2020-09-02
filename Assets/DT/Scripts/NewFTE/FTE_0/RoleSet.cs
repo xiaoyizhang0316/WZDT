@@ -153,12 +153,14 @@ public class RoleSet : MonoBehaviour
         {
             case ValueType.Effect:
                 ClearBullets();
+                role.GetComponent<BaseSkill>().CancelSkill();
                 role.GetComponent<BaseMapRole>().baseRoleData.effect += (RoleEditor.My.seed.effect[tva]- RoleEditor.My.seed.effect[lva]);
                 role.GetComponent<BaseMapRole>().baseRoleData.tradeCost += (int)((RoleEditor.My.seed.effect[tva]- RoleEditor.My.seed.effect[lva])* RoleEditor.My.tradeCostOffset);
                 role.GetComponent<BaseMapRole>().baseRoleData.cost += (int)((RoleEditor.My.seed.effect[tva]- RoleEditor.My.seed.effect[lva])* RoleEditor.My.costOffset);
                 role.GetComponent<BaseMapRole>().baseRoleData.riskResistance += (int)((RoleEditor.My.seed.effect[tva]- RoleEditor.My.seed.effect[lva])* RoleEditor.My.riskOffset);
                 effect = role.GetComponent<BaseMapRole>().baseRoleData.effect;
                 Cost = role.GetComponent<BaseMapRole>().baseRoleData.cost;
+                StartCoroutine(ContinueProductSeed());
                 tet = tva;
                 break;
             case ValueType.Efficiency:
@@ -276,6 +278,14 @@ public class RoleSet : MonoBehaviour
         {
             roles.GetChild(i).GetComponent<BaseMapRole>().ClearWarehouse();
         }
+    }
+
+    IEnumerator ContinueProductSeed()
+    {
+        RoleEditor.My.destroyBullets = true;
+        yield return new WaitForSeconds(0.5f);
+        RoleEditor.My.destroyBullets = false;
+        role.GetComponent<BaseSkill>().ReUnleashSkills();
     }
 }
 
