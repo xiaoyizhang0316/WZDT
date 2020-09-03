@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class FTE_0_Step_9 : BaseGuideStep
 {
+    public GameObject property;
     public GameObject hand;
 
     public string sceneName = "";
@@ -25,6 +26,10 @@ public class FTE_0_Step_9 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         Debug.Log("开始教学 " + currentStepIndex);
+        if (property != null)
+        {
+            property.SetActive(false);
+        }
         NewCanvasUI.My.GamePause(false);
         afterEntry = HandMove;
         yield return new WaitForSeconds(0.5f);

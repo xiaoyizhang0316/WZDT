@@ -9,8 +9,8 @@ public class FTE_0_Step_8 : BaseGuideStep
 
     private void Start()
     {
-        if (properties != null)
-            properties.SetActive(false);
+        //if (properties != null)
+        //    properties.SetActive(false);
         StartCoroutine(OwnStep());
     }
 
@@ -52,5 +52,15 @@ public class FTE_0_Step_8 : BaseGuideStep
         {
             contentText[i].gameObject.SetActive(true);
         }
+    }
+
+    public override bool ChenkEnd()
+    {
+        if (StageGoal.My.killNumber >= 6)
+        {
+            NewCanvasUI.My.GamePause(false);
+            return true;
+        }
+        return false;
     }
 }
