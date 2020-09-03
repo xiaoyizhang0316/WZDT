@@ -27,7 +27,7 @@
             "question_text": "哪些角色在自身周围有光圈范围显示？_角色基础_",
             "choices": "种子商_农民_贸易商_零售商",
             "answer": "2_3",
-            "isMultiple": "true",
+            "isMultiple": "TRUE",
             "questionDesc": "贸易商和零售商有范围光圈显示，因为他们有范围性的功能"
         },
         {
@@ -91,6 +91,26 @@
             "questionDesc": "当漏掉的消费者人数太多时，增加额外的零售商可以将更多的瓜送给消费者"
         },
         {
+            "stage": "1",
+            "necessary": "0",
+            "question_id": "29",
+            "question_text": "不同种类的消费者都有哪些区别？_消费者_",
+            "choices": "满意度需求_口味偏好_移动速度_满意后给予的奖励",
+            "answer": "0_1_2_3",
+            "isMultiple": "TRUE",
+            "questionDesc": "以上选项都是不同种类消费者的区别"
+        },
+        {
+            "stage": "1",
+            "necessary": "0",
+            "question_id": "30",
+            "question_text": "当场上有大量密集的消费者时，玩家应该进行哪种操作？_游戏进阶_",
+            "choices": "升级种子商_升级农民_升级贸易商_升级零售商",
+            "answer": "3",
+            "isMultiple": "FALSE",
+            "questionDesc": "当场上已经有大量消费者时，升级种子商和农民不会提升已经生产过的瓜的质量了，而升级零售商是最有效的方法"
+        },
+        {
             "stage": "2",
             "necessary": "1",
             "question_id": "9",
@@ -127,7 +147,8 @@
             "question_text": "如果最后一批的消费者只剩几个，但玩家的满意度还剩非常多，接下来哪种情况最有可能发生？_游戏基础_",
             "choices": "玩家顺利通过关卡_关卡失败_关卡进入自由建造模式_以上都不对",
             "answer": "0",
-            "isMultiple": "FALSE"
+            "isMultiple": "FALSE",
+            "questionDesc": "当所有消费者都满意或者到达终点时玩家满意度处于0以上，玩家就会通过关卡"
         },
         {
             "stage": "2",
@@ -148,6 +169,46 @@
             "answer": "3",
             "isMultiple": "FALSE",
             "questionDesc": "提前额外放置零售商可以使玩家可以同时满足的消费者增加"
+        },
+        {
+            "stage": "2",
+            "necessary": "1",
+            "question_id": "31",
+            "question_text": "玩家在什么情况下会失败？_游戏基础_",
+            "choices": "玩家满意度到达0或者以下_玩家金钱到达0或者以下_玩家科技值到达0_玩家不放置任何种子商",
+            "answer": "0",
+            "isMultiple": "FALSE",
+            "questionDesc": "当左上方玩家的满意度到0或者更低时，本关卡会判定为失败"
+        },
+        {
+            "stage": "2",
+            "necessary": "1",
+            "question_id": "32",
+            "question_text": "玩家升级角色后会发生哪些变化？_游戏基础_",
+            "choices": "角色属性值增加_玩家金钱减少_玩家科技值减少_玩家得分增加",
+            "answer": "0_1_3",
+            "isMultiple": "TRUE",
+            "questionDesc": "升级会增加角色的所有属性，而且会花费金钱，但不会消耗科技值，与玩家得分无影响"
+        },
+        {
+            "stage": "2",
+            "necessary": "1",
+            "question_id": "33",
+            "question_text": "玩家的金钱到-8000以下时，会发生什么？_游戏基础_",
+            "choices": "种子商停止运转_玩家无法配置新交易_玩家满意度周期性减少_玩家得分周期性减少",
+            "answer": "0_1",
+            "isMultiple": "TRUE",
+            "questionDesc": "当玩家金钱达到0以下时，玩家无法配置新交易。当玩家金钱到达-8000以下时，所有种子商会停止运转"
+        },
+        {
+            "stage": "2",
+            "necessary": "1",
+            "question_id": "34",
+            "question_text": "游戏中哪些地方会扣除玩家的金钱？_游戏基础_",
+            "choices": "消费者到达终点_玩家的角色_玩家配置的交易_玩家使消费者满意",
+            "answer": "1_2",
+            "isMultiple": "TRUE",
+            "questionDesc": "玩家自己的角色会周期性地扣除固定成本，玩家进行的每笔交易会周期性的扣除交易成本"
         },
         {
             "stage": "3",
@@ -186,7 +247,8 @@
             "question_text": "玩家可以和npc角色进行哪些互动？_游戏基础_",
             "choices": "与npc角色进行交易_删除地图中的npc角色_升级地图中的npc角色_为npc角色配置装备",
             "answer": "0",
-            "isMultiple": "FALSE"
+            "isMultiple": "FALSE",
+            "questionDesc": "玩家只能与npc角色进行交易，无法修改npc的各种属性（升级，配置装备，删除等）"
         },
         {
             "stage": "3",
@@ -195,7 +257,8 @@
             "question_text": "为角色配置装备和人力资源不会改变角色的哪种属性？_游戏基础_",
             "choices": "角色的固定成本_弹药的特殊效果_角色的等级_以上都不对",
             "answer": "2",
-            "isMultiple": "FALSE"
+            "isMultiple": "FALSE",
+            "questionDesc": "目前并没有使角色升级的装备或者人力资源哦！"
         },
         {
             "stage": "3",
@@ -248,6 +311,16 @@
             "questionDesc": "每个星星都会奖励额外的装备和人力资源"
         },
         {
+            "stage": "4",
+            "necessary": "1",
+            "question_id": "35",
+            "question_text": "通常情况下npc角色具有哪些功能？_游戏基础_",
+            "choices": "使玩家的角色升级_使玩家角色的属性提高_对产品进行某些变更_加速游戏时间",
+            "answer": "1_2",
+            "isMultiple": "TRUE",
+            "questionDesc": "npc分为加工型和增益型角色，加工型角色接收产品并输出产品，增益型角色会增强其他角色的属性"
+        },
+        {
             "stage": "5",
             "necessary": "1",
             "question_id": "25",
@@ -286,6 +359,56 @@
             "answer": "2",
             "isMultiple": "FALSE",
             "questionDesc": "无论玩家使用透视镜与否，消费者的隐藏需求都会参与瓜满意度的结算"
+        },
+        {
+            "stage": "5",
+            "necessary": "1",
+            "question_id": "36",
+            "question_text": "玩家的角色的交易成本属性提高时，会发生什么？_游戏基础_",
+            "choices": "玩家的科技值下降_该角色等级下降_与该角色相关的交易扣除的费用升高_玩家满意度降低",
+            "answer": "2",
+            "isMultiple": "FALSE",
+            "questionDesc": "交易扣除的费用与交易双方的交易成本属性和风险属性相关"
+        },
+        {
+            "stage": "5",
+            "necessary": "1",
+            "question_id": "37",
+            "question_text": "当两个生产型角色交易但由于某种原因没有运输产品时，交易会不会扣除费用？_游戏基础_",
+            "choices": "会_不会",
+            "answer": "1",
+            "isMultiple": "FALSE",
+            "questionDesc": "生产型角色之间的交易根据传输的产品个数扣除交易费用，当没有产品传输时，不会扣除交易费用"
+        },
+        {
+            "stage": "5",
+            "necessary": "1",
+            "question_id": "38",
+            "question_text": "当生产型角色与增益型角色交易但生产型角色停止了生产时，交易会不会扣除费用？_游戏基础_",
+            "choices": "会_不会",
+            "answer": "0",
+            "isMultiple": "FALSE",
+            "questionDesc": "生产型角色和增益型角色之间的交易会以一个固定的周期扣除交易费用，无论生产型角色是否维持着生产"
+        },
+        {
+            "stage": "5",
+            "necessary": "1",
+            "question_id": "39",
+            "question_text": "一笔交易中的交易扣除的费用与哪些属性相关？_游戏基础_",
+            "choices": "双方角色的交易成本_双方角色的风险_双方角色的等级_双方角色间的距离",
+            "answer": "0_1",
+            "isMultiple": "TRUE",
+            "questionDesc": "交易扣除的费用只与双方的交易成本属性和风险属性还有交易设置相关"
+        },
+        {
+            "stage": "5",
+            "necessary": "1",
+            "question_id": "40",
+            "question_text": "解锁了一个npc角色会发生什么？_游戏基础_",
+            "choices": "玩家科技值降低_玩家可与该角色配置交易_玩家可更详细地查看该角色信息_以上选项都对",
+            "answer": "3",
+            "isMultiple": "FALSE",
+            "questionDesc": "解锁了一个角色后就可以查看该角色的属性，并且可以对该角色发起交易，但解锁角色需要消耗科技值"
         }
     ]
 }
