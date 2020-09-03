@@ -121,10 +121,13 @@ public class BaseMapRole : MonoBehaviour
         {
             InitAttribute();
         }
-        if (!PlayerData.My.RoleData.Contains(GetComponent<BaseMapRole>().baseRoleData))
-            PlayerData.My.RoleData.Add(GetComponent<BaseMapRole>().baseRoleData);
-        if (!PlayerData.My.MapRole.Contains(GetComponent<BaseMapRole>()))
-            PlayerData.My.MapRole.Add(GetComponent<BaseMapRole>());
+        if (baseRoleData.inMap)
+        {
+            if (!PlayerData.My.RoleData.Contains(GetComponent<BaseMapRole>().baseRoleData))
+                PlayerData.My.RoleData.Add(GetComponent<BaseMapRole>().baseRoleData);
+            if (!PlayerData.My.MapRole.Contains(GetComponent<BaseMapRole>()))
+                PlayerData.My.MapRole.Add(GetComponent<BaseMapRole>());
+        }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
     }
 
