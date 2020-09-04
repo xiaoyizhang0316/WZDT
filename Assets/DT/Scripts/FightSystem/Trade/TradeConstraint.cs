@@ -17,7 +17,7 @@ public class TradeConstraint : MonoSingleton<TradeConstraint>
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <returns></returns>
-    public bool CheckTradeConstraint(RoleType start,RoleType end)
+    public bool CheckTradeConstraint(RoleType start,RoleType end,bool isShow = false)
     {
         for (int i = 0; i < forbiddenTrade.Count; i++)
         {
@@ -25,7 +25,8 @@ public class TradeConstraint : MonoSingleton<TradeConstraint>
             {
                 if (forbiddenTrade[i].endRole == end || forbiddenTrade[i].endRole == RoleType.All)
                 {
-                    HttpManager.My.ShowTip("双方无法形成交易！");
+                    if (isShow)
+                        HttpManager.My.ShowTip("双方无法形成交易！");
                     return false;
                 }
             }

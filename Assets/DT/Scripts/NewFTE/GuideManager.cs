@@ -94,7 +94,6 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public void CloseFTE()
     {
-        
         ftegob.SetActive(false);
         foreach (var item in NewCanvasUI.My.highLight)
         {
@@ -113,7 +112,6 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
                 VARIABLE.isCanPlace = true;
 
             }
-
         }
         guideClose.gameObject.SetActive(false);
     }

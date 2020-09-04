@@ -34,7 +34,7 @@ public class MainMap : MonoBehaviour
 
     public void GetUserLevel()
     {
-        switch(NetworkMgr.My.playerDatas.limit)
+        switch(NetworkMgr.My.playerLimit)
         {
             case 0:
                 userLevelText.text = "高级用户";

@@ -185,6 +185,6 @@ public class LevelSign : MonoBehaviour
 
     public bool CheckUserLevel()
     {
-        return NetworkMgr.My.playerDatas.limit == 0 ? true : NetworkMgr.My.playerDatas.limit >= levelID ;
+        return NetworkMgr.My.playerLimit == 0 ? true : NetworkMgr.My.playerLimit >= levelID ;
     }
 }

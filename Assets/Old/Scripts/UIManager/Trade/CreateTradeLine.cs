@@ -61,21 +61,24 @@ public class CreateTradeLine : MonoBehaviour
                     {
                         targetRole = hit.transform.GetComponentInParent<BaseMapRole>();
                         Target = hit.transform.GetComponentInParent<BaseMapRole>().tradePoint.position;
-                        if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product && targetRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
+                        if (hit.transform.GetComponentInParent<BaseMapRole>().baseRoleData.ID != NewCanvasUI.My.startRole.baseRoleData.ID)
                         {
-                            if (!TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, targetRole.baseRoleData.baseRoleData.roleType))
+                            if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product && targetRole.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
                             {
-                                lineGo.GetComponent<MeshRenderer>().material.color = Color.red;
+                                if (!TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, targetRole.baseRoleData.baseRoleData.roleType))
+                                {
+                                    lineGo.GetComponent<MeshRenderer>().material.color = Color.red;
+                                }
+                                else
+                                {
+                                    lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
+                                }
                             }
                             else
                             {
                                 lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
                             }
-                        }
-                        else
-                        {
-                            lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
-                        }
+                        } 
                     }
                     Vector3 rightPosition = (startTarget.gameObject.transform.position + Target) / 2;
                     Vector3 rightRotation = Target - startTarget.transform.position;
