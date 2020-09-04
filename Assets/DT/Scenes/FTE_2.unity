@@ -4716,10 +4716,45 @@ PrefabInstance:
       propertyPath: land
       value: 
       objectReference: {fileID: 584663409}
+    - target: {fileID: 3170229204551984499, guid: 78f23555c5426614d9a5c61a2ccac455,
+        type: 3}
+      propertyPath: Camera3DTarget.Array.data[0].target
+      value: 
+      objectReference: {fileID: 584663410}
     - target: {fileID: 3170229204551984501, guid: 78f23555c5426614d9a5c61a2ccac455,
         type: 3}
       propertyPath: m_Name
       value: step_0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170229204551984501, guid: 78f23555c5426614d9a5c61a2ccac455,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514868024918631588, guid: 78f23555c5426614d9a5c61a2ccac455,
+        type: 3}
+      propertyPath: endX
+      value: -1162
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514868024918631588, guid: 78f23555c5426614d9a5c61a2ccac455,
+        type: 3}
+      propertyPath: endY
+      value: 740
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514868024918631592, guid: 78f23555c5426614d9a5c61a2ccac455,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514868024918631592, guid: 78f23555c5426614d9a5c61a2ccac455,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1162
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514868024918631592, guid: 78f23555c5426614d9a5c61a2ccac455,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 740
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78f23555c5426614d9a5c61a2ccac455, type: 3}
@@ -5855,6 +5890,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1971699823354625761, guid: 475b7e01d89cadd45b3c8124d9eb040a,
+        type: 3}
+      propertyPath: orthographic size
+      value: 8.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1971699823354625762, guid: 475b7e01d89cadd45b3c8124d9eb040a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9307,6 +9347,12 @@ PrefabInstance:
 --- !u!1 &584663409 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4505506518846899739, guid: 11da08dccc657f74eb9dd6963c414faa,
+    type: 3}
+  m_PrefabInstance: {fileID: 584663408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &584663410 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5685979511983913525, guid: 11da08dccc657f74eb9dd6963c414faa,
     type: 3}
   m_PrefabInstance: {fileID: 584663408}
   m_PrefabAsset: {fileID: 0}
@@ -22781,7 +22827,7 @@ MonoBehaviour:
   contentText: []
   endButton: {fileID: 0}
   Camera3DTarget:
-  - target: {fileID: 0}
+  - target: {fileID: 584663410}
     radius: 0
     EndRandius: 80
     waitTime: 0
@@ -33124,7 +33170,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 369873894}
-  m_PlaneDistance: 17.63
+  m_PlaneDistance: 20
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0

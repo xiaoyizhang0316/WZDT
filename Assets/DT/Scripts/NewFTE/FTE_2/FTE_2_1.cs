@@ -25,8 +25,8 @@ public class FTE_2_1 : BaseGuideStep
     public override IEnumerator StepStart()
     {
          NewCanvasUI.My.GamePause();
-         PlayerData.My.MapRole.Add(seed);
-         PlayerData.My.RoleData.Add(seed.baseRoleData);
+         
+         RoleListManager.My.OutButton();
          yield return new  WaitForSeconds(2f);
          
     }
