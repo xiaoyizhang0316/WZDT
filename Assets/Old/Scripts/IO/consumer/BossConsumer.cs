@@ -399,7 +399,7 @@ public class BossConsumer : ConsumeSign
                 GameObject effect = Instantiate(skillOneEffect, transform);
                 effect.transform.position = transform.position;
                 effect.transform.parent = Camera.main.transform;
-                effect.transform.DOPath(lins.ToArray(), 3).SetEase(Ease.Linear);
+                effect.transform.DOPath(lins.ToArray(), 1).SetEase(Ease.Linear);
                 Destroy(effect, 3);
             }
 
@@ -433,7 +433,7 @@ public class BossConsumer : ConsumeSign
                 GameObject effect = Instantiate(skillTwoEffect, transform);
                 effect.transform.position = transform.position;
                 effect.transform.parent = Camera.main.transform;
-                effect.transform.DOPath(lins.ToArray(), 3).SetEase(Ease.Linear);
+                effect.transform.DOPath(lins.ToArray(), 1).SetEase(Ease.Linear);
                 Destroy(effect, 3);
             }
             SkillTwo();
