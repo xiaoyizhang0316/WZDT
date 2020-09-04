@@ -6,6 +6,10 @@ public class ConsumerBuffReward : BaseExtraSkill
 {
     public List<int> targetBuffRewardList = new List<int>();
 
+    public GameObject effectPrb1;
+
+    public GameObject effectPrb2;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Consumer") && isOpen)
@@ -25,6 +29,12 @@ public class ConsumerBuffReward : BaseExtraSkill
                 int number = other.transform.GetComponent<ConsumeSign>().consumeData.killMoney * 30 / 100;
                 StageGoal.My.GetPlayerGold(number);
                 StageGoal.My.Income(number, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
+                GameObject go = Instantiate(effectPrb1,transform);
+                go.transform.position = other.transform.position;
+                Destroy(go, 1f);
+                GameObject go1 = Instantiate(effectPrb2, transform);
+                go1.transform.position = other.transform.position;
+                Destroy(go1, 1f);
             }
         }
     }
