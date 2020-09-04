@@ -48,8 +48,17 @@ public class ConsumerFloatWindow : MonoBehaviour
             }
             else
             {
-                GameObject go = Instantiate(singleBuffPrb, buffListTF);
-                go.GetComponent<WaveBuffSign>().Init(buffList[i]);
+                if(targetConsume.isIgnoreResistance)
+                {
+                    GameObject go = Instantiate(singleBuffPrb, buffListTF);
+                    go.GetComponent<WaveBuffSign>().Init(203);
+                }
+                else
+                {
+                    GameObject go = Instantiate(singleBuffPrb, buffListTF);
+                    go.GetComponent<WaveBuffSign>().Init(buffList[i]);
+                }
+
             }
         }
         typeName.text = targetConsume.consumeData.consumerName;
