@@ -251,7 +251,8 @@ public abstract class BaseGuideStep : MonoBehaviour
     {
         for (int i = 0; i < highLightCopyObj.Count; i++)
         {
-            highLightCopyObj[i].transform.position = highLight2DObjList[i].transform.position;
+            if (i < highLight2DObjList.Count)
+                highLightCopyObj[i].transform.position = highLight2DObjList[i].transform.position;
         }
     }
 

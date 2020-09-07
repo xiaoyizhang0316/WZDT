@@ -200,9 +200,11 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     /// </summary>
     public void SaveAndQuit()
     {
+        bool isChange = selectCashFlow != currentTrade.tradeData.selectCashFlow;
         SaveTradeData();
         DeleteTradeMenu();
-        RecordChangeTrade(currentTrade);
+        if (isChange)
+            RecordChangeTrade(currentTrade);
     }
 
     /// <summary>

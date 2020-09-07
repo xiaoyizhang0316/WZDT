@@ -30,6 +30,8 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     private int costTech;
 
+    private Image dragImg;
+
     /// <summary>
     /// 窗口开关控制
     /// </summary>
@@ -40,6 +42,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     void Start()
     {
         costTech = GameDataMgr.My.GetModelData(type, 1).costTech;
+        dragImg = transform.Find("Image").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -128,6 +131,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         role.name = tempRole.ID.ToString();
         role.GetComponent<BaseMapRole>().baseRoleData = new Role();
         role.GetComponent<BaseMapRole>().baseRoleData = tempRole;
+        dragImg.raycastTarget = false;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -170,9 +174,12 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                             Destroy(go, 1f);
                             role.transform.DOScale(new Vector3(1.3f, 0.8f, 1.3f), 0.2f).OnComplete(() =>
                                 {
-                                    role.transform.DOScale(1f, 0.15f).Play().timeScale = 1f / DOTween.timeScale;
+                                    role.transform.DOScale(1f, 0.15f).Play().OnComplete(()=> {
+                                        dragImg.raycastTarget = true;
+                                    }).timeScale = 1f / DOTween.timeScale;
                                 }).Play().timeScale = 1f / DOTween.timeScale;
                         }).SetEase(Ease.Linear).Play().timeScale = 1f / DOTween.timeScale;
+
                     role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
                     PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
@@ -190,12 +197,14 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 {
                     print("false    ");
                     Destroy(role, 0.01f);
+                    dragImg.raycastTarget = true;
                 }
                 break;
             }
         }
         if (!isSuccess)
         {
+            dragImg.raycastTarget = true;
             Destroy(role, 0.01f);
         }
     }

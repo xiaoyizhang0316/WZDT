@@ -563,10 +563,7 @@ public class BaseMapRole : MonoBehaviour
                 {
                     foreach (var item in temp.paos)
                     {
-                        foreach (var t in item.GetComponentsInChildren<Transform>())
-                        {
-                            t.gameObject.layer = 9;
-                        }
+                        item.transform.GetChild(0).gameObject.layer = 9;
                     }
                 }
             }
@@ -588,11 +585,7 @@ public class BaseMapRole : MonoBehaviour
                 {
                     foreach (var item in temp.paos)
                     {
-                        foreach (var t in item.GetComponentsInChildren<Transform>())
-                        {
-
-                            t.gameObject.layer = 10;
-                        }
+                        item.transform.GetChild(0).gameObject.layer = 10;
                     }
                 }
             }
@@ -625,11 +618,7 @@ public class BaseMapRole : MonoBehaviour
                 {
                     foreach (var item in temp.paos)
                     {
-                        foreach (var t in item.GetComponentsInChildren<Transform>())
-                        {
-
-                            t.gameObject.layer = 9;
-                        }
+                        item.transform.GetChild(0).gameObject.layer = 9;
                     }
                 }
             }
@@ -651,11 +640,7 @@ public class BaseMapRole : MonoBehaviour
                 {
                     foreach (var item in temp.paos)
                     {
-                        foreach (var t in item.GetComponentsInChildren<Transform>())
-                        {
-
-                            t.gameObject.layer = 10;
-                        }
+                        item.transform.GetChild(0).gameObject.layer = 9;
                     }
                 }
             }
@@ -694,11 +679,7 @@ public class BaseMapRole : MonoBehaviour
             {
                 foreach (var item in temp.paos)
                 {
-                    foreach (var t in item.GetComponentsInChildren<Transform>())
-                    {
-                        if (t != null)
-                            t.gameObject.layer = 0;
-                    }
+                    item.transform.GetChild(0).gameObject.layer = 0;
                 }
             }
             //MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
@@ -728,11 +709,7 @@ public class BaseMapRole : MonoBehaviour
             {
                 foreach (var item in temp.paos)
                 {
-                    foreach (var t in item.GetComponentsInChildren<Transform>())
-                    {
-                        if (t != null)
-                            t.gameObject.layer = 0;
-                    }
+                    item.transform.GetChild(0).gameObject.layer = 0;
                 }
             }
             //MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
