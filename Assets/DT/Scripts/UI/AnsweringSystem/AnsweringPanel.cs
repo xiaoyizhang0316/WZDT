@@ -289,7 +289,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
             if(updateFTE != 999)
             {
 
-                NetworkMgr.My.UpdatePlayerDatas(updateFTE, 0, () =>
+                NetworkMgr.My.UpdatePlayerDatas(updateFTE, 0, "0", () =>
                 {
                     
                 });
