@@ -94,7 +94,7 @@ public class GuideActions : MonoBehaviour
 
     private void UpdateFte()
     {
-        NetworkMgr.My.UpdatePlayerDatas(1, 0);
+        NetworkMgr.My.UpdatePlayerDatas(1, 0, "0");
     }
 
 

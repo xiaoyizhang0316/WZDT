@@ -23,6 +23,7 @@ public class PlayerDatas
     public bool isOutDate;
     public int limit;
     public int privilege;
+    public string roleFound;
 }
 
 [Serializable]

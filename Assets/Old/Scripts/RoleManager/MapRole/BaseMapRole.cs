@@ -640,7 +640,7 @@ public class BaseMapRole : MonoBehaviour
                 {
                     foreach (var item in temp.paos)
                     {
-                        item.transform.GetChild(0).gameObject.layer = 9;
+                        item.transform.GetChild(0).gameObject.layer = 10;
                     }
                 }
             }

@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine.SceneManagement;
+using static GameEnum;
 
 public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 {
@@ -41,6 +42,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     private PlayerEquip playerEquip;
     public PlayerEquips playerEquips;
     public List<PlayerEquip> playerEquipsList;
+    public Dictionary<RoleType, int> roleFoundDic = new Dictionary<RoleType, int>();
     #endregion
 
     private void Start()
@@ -130,6 +132,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     token = playerDatas.token;
                     groupID = playerDatas.groupID;
                     playerLimit = playerDatas.limit;
+                    InitRoleFoundDic(playerDatas.roleFound);
                     //Debug.Log(playerID + " " + token);
                     //Debug.Log("token-----" + token);
                     doSuccess?.Invoke();
@@ -141,6 +144,53 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             SetMask();
         }, keyValues, HttpType.Post, HttpId.loginID));
+    }
+
+    /// <summary>
+    /// 5_17_22_23_24_26 
+    /// </summary>
+    /// <param name="roleFound"></param>
+    private void InitRoleFoundDic(string roleFound)
+    {
+        roleFoundDic.Clear();
+        string[] roleArr= roleFound.Split('_');
+        string[] rfa;
+        if (roleFound.Contains("-"))
+        {
+            for(int i =0; i < roleArr.Length; i++)
+            {
+                rfa = roleArr[i].Split('-');
+                roleFoundDic.Add((RoleType)int.Parse(rfa[0]), int.Parse(rfa[1]));
+            }
+        }
+        else
+        {
+            for (int i = 0; i < roleArr.Length; i++)
+            {
+                roleFoundDic.Add((RoleType)int.Parse(roleArr[i]), 0);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 更新看过的角色
+    /// </summary>
+    public void UpdateRoleFound()
+    {
+        string roleFound = "";
+        //if (roleFoundDic.Count == 0)
+        //{
+        //    roleFound = "0";
+        //}
+        //else
+        //{
+            foreach(var key in roleFoundDic.Keys)
+            {
+                roleFound += (int)key + "-" + roleFoundDic[key] + "_";
+            }
+            roleFound = roleFound.Substring(0, roleFound.Length - 1);
+        //}
+        UpdatePlayerDatas(0, 0, roleFound);
     }
 
     public void ReConnect(Action doSuccess=null)
@@ -165,6 +215,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
                 token = playerDatas.token;
                 playerLimit = playerDatas.limit;
+                InitRoleFoundDic(playerDatas.roleFound);
                 if (SceneManager.GetActiveScene().name.StartsWith("FTE")&& SceneManager.GetActiveScene().name!="FTE_0")
                 {
                     StageGoal.My.CheckAfterReconnect();
@@ -329,12 +380,13 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     /// <param name="threeWordsProgress">三句话进度 无更新请填 0</param>
     /// <param name="doSuccess"></param>
     /// <param name="doFail"></param>
-    public void UpdatePlayerDatas(int fteProgress, int threeWordsProgress,Action doSuccess = null, Action doFail = null)
+    public void UpdatePlayerDatas(int fteProgress, int threeWordsProgress, string roleFound,Action doSuccess = null, Action doFail = null)
     {
         Debug.Log("更新fte"+fteProgress);
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("fteProgress", fteProgress.ToString());
         keyValues.Add("threeWordsProgress", threeWordsProgress.ToString());
+        keyValues.Add("roleFound", roleFound);
         keyValues.Add("playerID", playerID);
         keyValues.Add("token", token);
         StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerDatas, (www) => {
@@ -356,6 +408,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 try
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    InitRoleFoundDic(playerDatas.roleFound);
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
