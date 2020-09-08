@@ -382,7 +382,7 @@ public class HttpManager : MonoSingleton<HttpManager>
     public void ShowTwoClickTip(string tip, Action cancel=null)
     {
         selectTipText.text = tip;
-
+        //selectCancel.transform.GetChild(0).GetComponent<Text>().text = ""
         selectCancel.onClick.RemoveAllListeners();
         selectCancel.onClick.AddListener(() => GotoLogin());
         
@@ -401,6 +401,25 @@ public class HttpManager : MonoSingleton<HttpManager>
                 if(v.needRetry)
                     StartCoroutine( HttpSend(v.url, v.action, v.keyValues, v.httpType, v.httpId));
             }
+            selectTip.gameObject.SetActive(false);
+        });
+        selectTip.gameObject.SetActive(true);
+        mask.SetActive(false);
+    }
+
+    public void ShowTwoClickTip(string tip, Action confirm = null, Action cancel = null)
+    {
+        selectTipText.text = tip;
+        selectCancel.transform.GetChild(0).GetComponent<Text>().text = "继续";
+        selectCancel.onClick.RemoveAllListeners();
+        selectCancel.onClick.AddListener(() => {
+            cancel?.Invoke();
+            selectTip.gameObject.SetActive(false);
+        });
+        selectRetry.transform.GetChild(0).GetComponent<Text>().text = "返回确认";
+        selectRetry.onClick.RemoveAllListeners();
+        selectRetry.onClick.AddListener(() => {
+            confirm?.Invoke();
             selectTip.gameObject.SetActive(false);
         });
         selectTip.gameObject.SetActive(true);
@@ -430,6 +449,8 @@ public class HttpManager : MonoSingleton<HttpManager>
         });
         reConnTip.gameObject.SetActive(true);
     }
+
+    
 
     private void SetNeedRetryById(int id, bool retry)
     {
