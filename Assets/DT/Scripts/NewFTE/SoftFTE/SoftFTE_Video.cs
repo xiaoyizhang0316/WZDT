@@ -22,7 +22,17 @@ public class SoftFTE_Video : SoftFTE_Base
         vcr._videoFiles[0] = type.ToString() + ".mp4";
         vcr._videoFiles[1] = type.ToString() + ".mp4";
         base.Init(type);
+        nextButton.onClick.AddListener(() =>
+        {
+            vcr.PlayingPlayer.CloseVideo();
+            vcr.isFinishWatching = false;
+        });
+    }
 
+    public override void Play()
+    {
+        base.Play();
+        vcr.OnOpenVideoFile();
     }
 
     public override IEnumerator Check()

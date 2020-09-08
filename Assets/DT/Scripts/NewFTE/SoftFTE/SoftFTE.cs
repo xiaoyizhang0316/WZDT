@@ -13,6 +13,10 @@ public class SoftFTE : MonoSingleton<SoftFTE>
 
     public GameObject softFTEObj;
 
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    /// <param name="type"></param>
     public void Init(RoleType type)
     {
         currentIndex = 0;
@@ -23,6 +27,9 @@ public class SoftFTE : MonoSingleton<SoftFTE>
         SoftFTEStart();
     }
 
+    /// <summary>
+    /// 执行下一步
+    /// </summary>
     public void PlayNext()
     {
         if (currentIndex == softList.Count)
@@ -37,6 +44,9 @@ public class SoftFTE : MonoSingleton<SoftFTE>
         }
     }
 
+    /// <summary>
+    /// 软引导开始
+    /// </summary>
     public void SoftFTEStart()
     {
         NewCanvasUI.My.GamePause(false);
@@ -45,6 +55,9 @@ public class SoftFTE : MonoSingleton<SoftFTE>
         Invoke("PlayNext", 1f);
     }
 
+    /// <summary>
+    /// 软引导结束
+    /// </summary>
     public void SoftFTEEnd()
     {
         CameraPlay.WidescreenH_OFF();
@@ -53,8 +66,30 @@ public class SoftFTE : MonoSingleton<SoftFTE>
             NewCanvasUI.My.GameNormal();
             softFTEObj.SetActive(false);
         }).Play();
+        NetworkMgr.My.UpdateRoleFound();
     }
 
+    /// <summary>
+    /// 检测是否是第一次解开角色
+    /// </summary>
+    /// <param name="type"></param>
+    public void CheckUnlockNewRole(RoleType type)
+    {
+        print("type: " +type);
+        if (NetworkMgr.My.roleFoundDic.ContainsKey(type))
+        {
+            print("find type: " + type);
+            if (NetworkMgr.My.roleFoundDic[type] == 0)
+            {
+                Init(type);
+                NetworkMgr.My.roleFoundDic[type] = 1;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 测试用例
+    /// </summary>
     public void Test()
     {
         Init(RoleType.Bank);

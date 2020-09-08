@@ -183,21 +183,28 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
             });
         }
     }
-
+    bool isPopShow = false;
     public void ShowHideTipPop(string tip)
     {
         //useItemPop.GetComponent<NpcPop>()
         npcInfo.SetActive(true);
         HideAll();
         pop.transform.GetChild(0).GetComponent<Text>().text = tip;
+        if (isPopShow)
+        {
+            DOTween.Kill("NPCPOP");
+            pop.transform.GetChild(0).GetComponent<Text>().DOFade(1, 0.01f).Play();
+        }
         pop.SetActive(true);
+        isPopShow = true;
         closeBtn.interactable = false;
-        pop.transform.GetChild(0).GetComponent<Text>().DOFade(0, 2f).OnComplete(()=> {
+        pop.transform.GetChild(0).GetComponent<Text>().DOFade(0, 2f).SetId("NPCPOP").OnComplete(()=> {
             //npcInfo.SetActive(false);
             pop.transform.GetChild(0).GetComponent<Text>().DOFade(1, 0.01f).Play();
             pop.SetActive(false);
             closeBtn.interactable = true;
             closeBtn.gameObject.SetActive(false);
+            isPopShow = false;
         }).Play();
     }
 

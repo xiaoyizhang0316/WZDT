@@ -12,6 +12,7 @@ public class SoftFTE_Base : MonoBehaviour
 
     public virtual void Init(RoleType type)
     {
+        nextButton.onClick.RemoveAllListeners();
         nextButton.onClick.AddListener(() =>
         {
             NextStep();
@@ -20,7 +21,7 @@ public class SoftFTE_Base : MonoBehaviour
         nextButton.interactable = false;
     }
 
-    public void Play()
+    public virtual void Play()
     {
         StartCoroutine(Check());
     }
