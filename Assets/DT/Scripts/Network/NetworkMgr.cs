@@ -178,18 +178,18 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     public void UpdateRoleFound()
     {
         string roleFound = "";
-        if (roleFoundDic.Count == 0)
-        {
-            roleFound = "0";
-        }
-        else
-        {
+        //if (roleFoundDic.Count == 0)
+        //{
+        //    roleFound = "0";
+        //}
+        //else
+        //{
             foreach(var key in roleFoundDic.Keys)
             {
                 roleFound += (int)key + "-" + roleFoundDic[key] + "_";
             }
             roleFound = roleFound.Substring(0, roleFound.Length - 1);
-        }
+        //}
         UpdatePlayerDatas(0, 0, roleFound);
     }
 
