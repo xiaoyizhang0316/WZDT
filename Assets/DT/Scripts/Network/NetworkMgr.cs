@@ -147,7 +147,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     }
 
     /// <summary>
-    /// 5_17_22_23_24_26 
+    /// 5_22_23_24_21_26
     /// </summary>
     /// <param name="roleFound"></param>
     private void InitRoleFoundDic(string roleFound)
