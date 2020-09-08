@@ -54,6 +54,7 @@ MonoBehaviour:
   consumableDatas: []
   stageDatas: []
   consumerTypeDatas: []
+  translateDatas: []
 --- !u!114 &839442226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +67,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f643b48c2e56d47239fee66e92785940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jsonDatas:
+    BuffData: 
+    ConsumableData: 
+    ConsumerTypeData: 
+    EquipData: 
+    RoleTemplateData: 
+    SkillData: 
+    StageData: 
+    TradeSkillData: 
+    WorkerData: 
+    TranslateData: 
+    FTE_0: 
+    FTE_1: 
+    FTE_2: 
+    FTE_3: 
+    FTE_4: 
+    FTE_5: 
+    FTE_6: 
+    FTE_7: 
+    FTE_8: 
+    FTE_9: 
+    NPC_1: 
+    NPC_2: 
+    NPC_3: 
+    NPC_4: 
+    NPC_5: 
+    NPC_6: 
+    NPC_7: 
+    NPC_8: 
+    NPC_9: 
+    questions: 
   buffRawData:
     buffSigns: []
   consumableRawData:
@@ -76,6 +108,9 @@ MonoBehaviour:
     roleTemplateModelItems: []
   consumerTypeRawData:
     consumerTypeSigns: []
+  answerStages: []
+  questionList:
+    questions: []
 --- !u!114 &839442228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +192,7 @@ MonoBehaviour:
   - startRole: 14
     endRole: 1
   - startRole: 3
-    endRole: 26
+    endRole: 27
 --- !u!114 &767562278
 MonoBehaviour:
   m_ObjectHideFlags: 0
