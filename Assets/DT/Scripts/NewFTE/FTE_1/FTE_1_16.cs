@@ -26,7 +26,7 @@ public class FTE_1_16 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         isover = false;
-        
+        GuideManager.My.guideClose.gameObject.SetActive(false);
         NewCanvasUI.My.Panel_Update.gameObject.SetActive(false);
         NewCanvasUI.My.Panel_Update.transform.localPosition = Vector3.zero; 
         
