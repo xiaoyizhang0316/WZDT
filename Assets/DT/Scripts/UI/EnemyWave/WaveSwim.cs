@@ -17,7 +17,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
 
     private Tweener twe;
 
-    public void Init(int number, List<StageEnemyData> datas)
+    public void Init(int number, List<StageEnemyData> datas,int offset = 0)
     {
         waveNumber = number;
         string str = datas[number].point1[0];
@@ -57,18 +57,18 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
             go.GetComponent<Image>().sprite = waveSprites[5];
         }
         int waitNumber = StageGoal.My.waitTimeList[number];
-        if (waitNumber <= 30)
+        if (waitNumber - offset <= 30)
         {
-            transform.localPosition = new Vector3(transform.localPosition.x, -waitNumber * 40f / 3f, transform.localPosition.z);
-            twe = transform.DOLocalMoveY(0f, waitNumber).SetEase(Ease.Linear).OnComplete(() =>
+            transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) * 40f / 3f, transform.localPosition.z);
+            twe = transform.DOLocalMoveY(0f, waitNumber - offset).SetEase(Ease.Linear).OnComplete(() =>
             {
                 Destroy(gameObject);
             });
         }
         else
         {
-            transform.localPosition = new Vector3(transform.localPosition.x, -waitNumber * 2f - 370f, transform.localPosition.z);
-            twe = transform.DOLocalMoveY(-400f, waitNumber - 30f).SetEase(Ease.Linear).OnComplete(() =>
+            transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) * 2f - 370f, transform.localPosition.z);
+            twe = transform.DOLocalMoveY(-400f, waitNumber - 30f - offset).SetEase(Ease.Linear).OnComplete(() =>
             {
                 //print("Timecount before 30: " + StageGoal.My.timeCount);
                 twe = transform.DOLocalMoveY(0f, 30f).SetEase(Ease.Linear).OnComplete(() =>

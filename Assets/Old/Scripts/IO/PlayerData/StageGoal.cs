@@ -105,6 +105,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Text starThreeText;
 
+    public Button skipToFirstWave;
+
     #endregion
 
     #region 统计
@@ -586,6 +588,10 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
                 WaveCount();
             });
+            if (timeCount >= waitTimeList[0] - 5)
+            {
+                skipToFirstWave.gameObject.SetActive(false);
+            }
         }
         else
         {
@@ -601,6 +607,12 @@ public class StageGoal : MonoSingleton<StageGoal>
                 WaveCount();
             });
         }
+    }
+
+    public void SkipFirst()
+    {
+        timeCount = waitTimeList[0] - 5;
+        waveCountItem.Reset(enemyDatas,timeCount);
     }
 
     /// <summary>
@@ -724,6 +736,12 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerSatisfyText = transform.parent.Find("UserInfo/PlayerScore/PlayerScoreText").GetComponent<Text>();
         playerTechText = transform.parent.Find("UserInfo/Image_money/PlayerTech").GetComponent<Text>();
         stageWaveText = transform.parent.Find("UserInfo/Image_level/StageLevel").GetComponent<Text>();
+        skipToFirstWave = transform.parent.Find("TimeScale/SkipFirst").GetComponent<Button>();
+        skipToFirstWave.onClick.AddListener(() =>
+        {
+            SkipFirst();
+            skipToFirstWave.gameObject.SetActive(false);
+        });
         foreach (PlayerGear p in PlayerData.My.playerGears)
         {
             p.isEquiped = false;
