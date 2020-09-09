@@ -5,6 +5,7 @@ using UnityEngine;
 public class FTE_0_Step_2 : BaseGuideStep
 {
     public GameObject hand;
+    public GameObject hand1;
 
     public List<GameObject> image;
     //public GameObject text;
@@ -12,6 +13,10 @@ public class FTE_0_Step_2 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         Debug.Log("结束教学 " + currentStepIndex);
+        if (hand1 != null)
+        {
+            hand1.SetActive(false);
+        }
         yield break;
     }
 
@@ -19,6 +24,10 @@ public class FTE_0_Step_2 : BaseGuideStep
     {
         Debug.Log("开始教学 " + currentStepIndex);
         afterEntry = HandMove;
+        if (hand1 != null)
+        {
+            hand1.SetActive(true);
+        }
         yield return new WaitForSeconds(1);
         ShowInfos();
     }
