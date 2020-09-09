@@ -25,7 +25,8 @@ public class FTE_0_Step_2 : BaseGuideStep
 
     void HandMove()
     {
-        hand.SetActive(true);
+        if(hand!=null)
+            hand.SetActive(true);
     }
 
     void ShowInfos()
