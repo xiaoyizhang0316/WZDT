@@ -28,6 +28,20 @@ public class WaveCount : MonoSingleton<WaveCount>
         }
     }
 
+    public void Reset(List<StageEnemyData> datas,int newStartTime)
+    {
+        for (int i = 0; i < StageGoal.My.maxWaveNumber; i++)
+        {
+            Destroy(transform.Find("Panel").GetChild(3 + i).gameObject,0f);
+        }
+        for (int i = 0; i < StageGoal.My.maxWaveNumber; i++)
+        {
+            GameObject go = Instantiate(singleWavePrb, transform.Find("Panel"));
+            go.GetComponent<WaveSwim>().Init(i, datas, newStartTime);
+        }
+
+    }
+
     /// <summary>
     /// 初始化波数
     /// </summary>
