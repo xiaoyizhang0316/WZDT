@@ -63,6 +63,7 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
        data.role_clearWarehouse = dataDic[DataEnum.角色_清仓.ToString()];
        data.deficitNumber = dataDic[DataEnum.赤字次数.ToString()];
        data.role_checkNpcData = dataDic[DataEnum.角色_查看NPC属性.ToString()];
+       return data;
     }
 
     public void showdic()
