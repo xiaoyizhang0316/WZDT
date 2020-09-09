@@ -14,8 +14,10 @@ public class CloseGuide : MonoBehaviour
 
     public void Init()
     {
+        GetComponent<Button>().onClick.RemoveAllListeners();
         GetComponent<Button>().onClick.AddListener(() =>
         {
+        
             GuideManager.My.CloseFTE();
             
         });
