@@ -130,6 +130,7 @@ public class RoleSet : MonoBehaviour
 
     public void RefreshValues(int lva, int tva, ValueType valueType)
     {
+        RoleEditor.My.isDragEnd = true;
         switch (roleType)
         {
             case RoleType.Seed:
