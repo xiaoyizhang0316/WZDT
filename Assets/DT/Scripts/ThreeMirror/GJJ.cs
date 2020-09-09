@@ -54,6 +54,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             //effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
                             Destroy(effect, 1f);
                             Debug.Log("使用广角镜成功");
+                            DataUploadManager.My.AddData(DataEnum.使用广角镜);
                         }
                         else
                         {

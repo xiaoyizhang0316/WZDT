@@ -85,6 +85,8 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     /// <param name="npc">Seed,Peasant,Merchant,Dealer,Common(Service Product)</param>
     public void ShowNpcInfo(Transform npc)
     {
+        DataUploadManager.My.AddData(DataEnum.角色_查看NPC属性);
+
         gameObject.SetActive(true);
         HideAll();
         currentNpc = npc.GetComponent<BaseMapRole>();
@@ -204,6 +206,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public void ShowUnlckPop(Transform npc)
     {
         HideAll();
+        DataUploadManager.My.AddData(DataEnum.角色_查看未解锁);
         currentNpc = npc.GetComponent<BaseMapRole>();
         npcInfo.SetActive(true);
         closeBtn.gameObject.SetActive(true);

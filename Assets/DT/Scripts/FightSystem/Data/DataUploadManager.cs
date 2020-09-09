@@ -44,7 +44,7 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
        data.trad_optimize = dataDic[DataEnum.交易_优化率.ToString()];
        data.trad_change = dataDic[DataEnum.交易_改交易.ToString()];
        data.use_dlj = dataDic[DataEnum.使用多棱镜.ToString()];
-       data.use_ggj = dataDic[DataEnum.使用广角镜.ToString()];
+       data.use_gjj = dataDic[DataEnum.使用广角镜.ToString()];
        data.use_tsj = dataDic[DataEnum.使用透视镜.ToString()];
        data.time_PauseTime = dataDic[DataEnum.时间_暂停时长.ToString()];
        data.time_PauseTimes = dataDic[DataEnum.时间_暂停次数.ToString()];
@@ -56,8 +56,11 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
        data.equip_add = dataDic[DataEnum.装备_增加.ToString()];
        data.role_deleteRole = dataDic[DataEnum.角色_删除角色.ToString()];
        data.role_update = dataDic[DataEnum.角色_升级.ToString()];
-       data.role_ReleaseRolePercentage = dataDic[DataEnum.角色_放置角色比例.ToString()];
-       data.role_roleNum = dataDic[DataEnum.角色_最终角色数量.ToString()];
+       data.role_ReleaseRolePercentage = dataDic[DataEnum.角色_放置种子商.ToString()]+":"+dataDic[DataEnum.角色_放置农民.ToString()]
+           +":"+ dataDic[DataEnum.角色_放置贸易商.ToString()]+":"+dataDic[DataEnum.角色_放置零售商.ToString()]
+           ;
+       data.role_roleNum = dataDic[DataEnum.角色_放置种子商.ToString()]+ dataDic[DataEnum.角色_放置农民.ToString()]
+                          + dataDic[DataEnum.角色_放置贸易商.ToString()] +dataDic[DataEnum.角色_放置零售商.ToString()];
        data.role_checkUnlockRole = dataDic[DataEnum.角色_查看未解锁.ToString()];
        data.role_checkselfData = dataDic[DataEnum.角色_查看自己属性.ToString()];
        data.role_clearWarehouse = dataDic[DataEnum.角色_清仓.ToString()];

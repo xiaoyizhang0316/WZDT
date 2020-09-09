@@ -38,6 +38,8 @@ public class ProductDetalUI : MonoSingleton<ProductDetalUI>
 
     public void InitUI(ProductData data,Sprite IconSprite ,float damage,float loadingSpeed )
     {
+        
+        DataUploadManager.My.AddData(DataEnum.看子弹属性);
         for (int i = 0; i <buff.Count; i++)
         {
             buff[i].gameObject.SetActive(false);

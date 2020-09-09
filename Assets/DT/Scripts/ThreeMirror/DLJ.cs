@@ -52,6 +52,7 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             TradeManager.My.ChangeNPCRoleRecord(hit.transform.GetComponent<BaseMapRole>());
                             Destroy(effect, 1f);
                             Debug.Log("使用多棱镜成功");
+                            DataUploadManager.My.AddData(DataEnum.使用多棱镜);
                         }
                         else
                         {

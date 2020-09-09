@@ -124,6 +124,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// <param name="roleId"></param>
     public void DeleteRole(double roleId)
     {
+        DataUploadManager.My.AddData(DataEnum.角色_删除角色);
         Role target = GetRoleById(roleId);
         foreach (var v in target.EquipList)
         {
