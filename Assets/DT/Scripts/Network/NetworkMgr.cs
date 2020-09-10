@@ -11,6 +11,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     #region Player datas
     public bool isUsingHttp = false;
     public bool isShowFPS = false;
+    public bool useLocalJson = false;
 
     public string loginRecordID;
     private string token;

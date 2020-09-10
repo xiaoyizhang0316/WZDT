@@ -39,6 +39,11 @@ public class OriginalData : MonoSingleton<OriginalData>
         //StartCoroutine(ReadConsumerTypeJson());
         //StartCoroutine(ReadTranslateJson());
         StartCoroutine(ReadQuestionList());
+        if (NetworkMgr.My.useLocalJson)
+        {
+            StartCoroutine(ReadStageData());
+            StartCoroutine(ReadConsumerType());
+        }
     }
 
     public void InitDatas(string data)
@@ -48,9 +53,13 @@ public class OriginalData : MonoSingleton<OriginalData>
         
         ReadBuffJson();
         ReadConsumableJson();
-        ReadStageJson();
+        if (!NetworkMgr.My.useLocalJson)
+        {
+
+            ReadStageJson();
+            ReadConsumerTypeJson();
+        }
         ReadRoleTemplateJson();
-        ReadConsumerTypeJson();
         ReadTranslateJson();
         ReadEquipJson();
         ReadWorkerJson();
@@ -254,5 +263,49 @@ public class OriginalData : MonoSingleton<OriginalData>
                 questionList = JsonUtility.FromJson<QuestionList>(json);
             }
         }
+    }
+
+    IEnumerator ReadStageData()
+    {
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/StageData.json");
+        //Debug.Log(@"file://" + Application.streamingAssetsPath + @"/Data/BuffData.json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                stageRawData = JsonUtility.FromJson<StagesData>(json);
+        //stageRawData = JsonUtility.FromJson<StagesData>(jsonDatas.StageData);
+                GameDataMgr.My.ParseStageData(stageRawData);
+            }
+        }
+    }
+
+    IEnumerator ReadConsumerType()
+    {
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/ConsumerTypeData.json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                consumerTypeRawData = JsonUtility.FromJson<ConsumerTypesData>(json);
+                GameDataMgr.My.ParseConsumerTypeData(consumerTypeRawData);
+            }
+        }
+        //consumerTypeRawData = JsonUtility.FromJson<ConsumerTypesData>(jsonDatas.ConsumerTypeData);
+        //GameDataMgr.My.ParseConsumerTypeData(consumerTypeRawData);
     }
 }
