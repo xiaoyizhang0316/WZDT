@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,10 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach (DataEnum d in Enum.GetValues(typeof(DataEnum)))
+        {
+            dataDic.Add(d.ToString(), 0);
+        }
     }
 
     // Update is called once per frame
