@@ -386,6 +386,7 @@ public class BaseMapRole : MonoBehaviour
     {
         if (warehouse.Count > baseRoleData.bulletCapacity)
         {
+            DataUploadManager.My.AddData(DataEnum.浪费的瓜);
             return;
         }
         else
@@ -438,6 +439,7 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void ClearWarehouse()
     {
+        DataUploadManager.My.AddData(DataEnum.角色_清仓);
         trash.AddRange(warehouse);
         warehouse.Clear();
     }

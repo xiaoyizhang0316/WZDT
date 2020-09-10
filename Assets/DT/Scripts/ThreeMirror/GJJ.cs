@@ -54,6 +54,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             SoftFTE.My.CheckUnlockNewRole(hit.transform.GetComponentInParent<BaseMapRole>().baseRoleData.baseRoleData.roleType);
                             Destroy(effect, 1f);
                             Debug.Log("使用广角镜成功");
+                            DataUploadManager.My.AddData(DataEnum.使用广角镜);
                         }
                         else
                         {

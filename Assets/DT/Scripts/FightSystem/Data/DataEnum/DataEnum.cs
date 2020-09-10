@@ -17,7 +17,10 @@ public enum DataEnum
   角色_清仓,
   角色_查看自己属性,
   角色_查看NPC属性,
-  角色_放置角色比例,
+  角色_放置种子商,
+  角色_放置农民,
+  角色_放置贸易商,
+  角色_放置零售商,
   交易_发起外部交易,
   交易_发起的内部交易,
   交易_五秒内查看交易的次数,
@@ -53,7 +56,7 @@ public class DataUpload
   /// <summary>
   /// 使用广角镜
   /// </summary>
-  public int use_ggj;
+  public int use_gjj;
 
   /// <summary>
   /// 消费者_口味击杀
@@ -103,7 +106,7 @@ public class DataUpload
   /// <summary>
   /// 角色_放置角色比例
   /// </summary>
-  public int role_ReleaseRolePercentage;
+  public string  role_ReleaseRolePercentage;
 
   /// <summary>
   /// 交易_发起外部交易
@@ -138,7 +141,7 @@ public class DataUpload
   /// <summary>
   /// 交易_优化率
   /// </summary>
-  public int trad_optimize;
+  public float trad_optimize;
 
   /// <summary>
   /// 看子弹属性

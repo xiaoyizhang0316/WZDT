@@ -61,6 +61,7 @@ public class NPC : BaseNpc
                 {
                     NewCanvasUI.My.InitCreateTradePanel();
                     AudioManager.My.PlaySelectType(GameEnum.AudioClipType.EndTrade);
+                    DataUploadManager.My.AddData(DataEnum.交易_发起外部交易);
                 }
             }
         }

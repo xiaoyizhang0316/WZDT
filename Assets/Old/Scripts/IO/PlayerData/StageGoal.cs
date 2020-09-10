@@ -154,6 +154,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public int totalPauseTime = 0;
 
+    public int totalMinusGoldTime = 0;
+
     public int startTime;
 
     public int endTime;
@@ -201,6 +203,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 isOverMaxMinus = true;
                 AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
+                DataUploadManager.My.AddData(DataEnum.赤字次数);
             }
             foreach (BaseMapRole role in PlayerData.My.MapRole)
             {
@@ -310,6 +313,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 isOverMaxMinus = true;
                 AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
+                DataUploadManager.My.AddData(DataEnum.赤字次数);
             }
             foreach (BaseMapRole role in PlayerData.My.MapRole)
             {
@@ -571,6 +575,10 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
+        if (playerGold < 0)
+        {
+            totalMinusGoldTime++;
+        }
         if (currentWave <= maxWaveNumber)
         {
             if (timeCount >= waitTimeList[currentWave - 1])

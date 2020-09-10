@@ -140,6 +140,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         Button_Pause.onClick.AddListener(()=>{
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
+            DataUploadManager.My.AddData(DataEnum.时间_暂停次数);
             //GamePause();
         });
         Button_Normal.onClick.AddListener(()=> {
@@ -265,7 +266,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         //Panel_CreateTrade.SetActive(true);
         //CreateTradeManager.My.Open(go);
         isSetTrade = false;
-
+        DataUploadManager.My.AddData(DataEnum.交易_建交易);
         //CreateTradeLineGo.SetActive(false);
     }
 

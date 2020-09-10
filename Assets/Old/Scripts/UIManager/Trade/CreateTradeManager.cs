@@ -71,7 +71,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     public void Open(GameObject tradeGo)
     {
         Show();
-        currentTrade = tradeGo.GetComponent<TradeSign>() ;
+        currentTrade = tradeGo.GetComponent<TradeSign>();
+        currentTrade.CheckClickTime();
         Init();
         startRolePanel.transform.localPosition = new Vector3(0f, startRolePanel.transform.localPosition.y, startRolePanel.transform.localPosition.z);
         endRolePanel.transform.localPosition = new Vector3(0f, endRolePanel.transform.localPosition.y, endRolePanel.transform.localPosition.z);
@@ -204,7 +205,11 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         SaveTradeData();
         DeleteTradeMenu();
         if (isChange)
+        {
             RecordChangeTrade(currentTrade);
+            DataUploadManager.My.AddData(DataEnum.交易_改交易);
+        }
+
     }
 
     /// <summary>
@@ -250,7 +255,10 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         NewCanvasUI.My.Panel_Delete.SetActive(true);
         gameObject.SetActive(false);
         string str = "确定要删除此交易吗？";
-        DeleteUIManager.My.Init(str, () => { TradeManager.My.DeleteTrade(currentTrade.tradeData.ID); });
+        DeleteUIManager.My.Init(str, () => {
+            TradeManager.My.DeleteTrade(currentTrade.tradeData.ID);
+            DataUploadManager.My.AddData(DataEnum.交易_删交易);
+        });
     }
 
     /// <summary>

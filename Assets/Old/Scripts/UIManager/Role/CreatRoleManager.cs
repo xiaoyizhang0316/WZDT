@@ -173,6 +173,10 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
 
     private bool isPause;
 
+    private List<int> originalEquip = new List<int>();
+
+    private List<int> originalWorker = new List<int>();
+
     /// <summary>
     /// 初始化角色创建界面，将要创建的角色模板赋值给管理类
     /// </summary> 
@@ -190,12 +194,16 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         //print(CurrentRole.baseRoleData.roleType);
         EquipList = new Dictionary<int, Vector3>();
         peoPleList = new Dictionary<int, Vector3>();
+        originalEquip.Clear();
+        originalWorker.Clear();
         foreach (var v in tempRole.EquipList)
         {
+            originalEquip.Add(v.Key);
             EquipList.Add(v.Key, v.Value);
         }
         foreach (var v in tempRole.peoPleList)
         {
+            originalWorker.Add(v.Key);
             peoPleList.Add(v.Key, v.Value);
         }
 
@@ -396,6 +404,38 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                     PlayerData.My.RoleData[i] = CurrentRole;
                 }
             }
+        }
+        if (originalEquip.Count == 0 && originalWorker.Count == 0)
+        {
+            if (CurrentRole.EquipList.Count != 0 || CurrentRole.peoPleList.Count != 0)
+            {
+                DataUploadManager.My.AddData(DataEnum.装备_增加);
+            }
+        }
+        else
+        {
+            bool isChange = false;
+            for (int i = 0; i < originalEquip.Count; i++)
+            {
+                if (!CurrentRole.EquipList.ContainsKey(originalEquip[i]))
+                {
+                    isChange = true;
+                    break;
+                }
+            }
+            for (int i = 0; i < originalWorker.Count; i++)
+            {
+                if (!CurrentRole.peoPleList.ContainsKey(originalWorker[i]))
+                {
+                    isChange = true;
+                    break;
+                }
+
+            }
+            if (isChange)
+            {
+                DataUploadManager.My.AddData(DataEnum.装备_增加);
+            }    
         }
         PlayerData.My.GetMapRoleById(CurrentRole.ID).ResetAllBuff();
         WorkerListManager.My.QuitAndSave();

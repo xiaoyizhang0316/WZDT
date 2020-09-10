@@ -65,6 +65,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             gameObject.SetActive(false);
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要删除" + currentRole.baseRoleData.roleName + "吗？";
+          
             DeleteUIManager.My.Init(str, () => { PlayerData.My.DeleteRole(currentRole.ID); });
         });
         changeRoleButton.onClick.AddListener(() =>
@@ -82,6 +83,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         {
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要清空仓库吗？";
+            
             DeleteUIManager.My.Init(str, () => {
                 PlayerData.My.GetMapRoleById(currentRole.ID).ClearWarehouse();
                 ReInit(currentRole);
@@ -128,6 +130,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             hammer.interactable = true;
         }
         InitBuff();
+        DataUploadManager.My.AddData(DataEnum.角色_查看自己属性);
     }
 
     public void InitBuff()
@@ -190,6 +193,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             dealer.SetActive(true);
             dealer.GetComponent<BaseRoleListInfo>().Init(role);
         }
+        
     }
 
     public void ShowBuffText(string text)

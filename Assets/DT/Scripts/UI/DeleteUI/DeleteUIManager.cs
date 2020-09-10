@@ -29,6 +29,7 @@ public class DeleteUIManager : MonoSingleton<DeleteUIManager>
         this.delete.onClick.AddListener(() =>
         {
             delete();
+        
             gameObject.SetActive(false);
         });
     }
