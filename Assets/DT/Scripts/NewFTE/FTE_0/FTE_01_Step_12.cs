@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class FTE_01_Step_12 : BaseGuideStep
 {
+
+    bool isEnd = false;
     public override IEnumerator StepEnd()
     {
         yield return new WaitForSeconds(0.5f);
-        NewCanvasUI.My.GamePause(false);
-        RoleEditor.My.HideAllRoleSet();
+        //NewCanvasUI.My.GamePause(false);
+        //RoleEditor.My.HideAllRoleSet();
     }
 
     public override IEnumerator StepStart()
@@ -28,18 +30,12 @@ public class FTE_01_Step_12 : BaseGuideStep
         yield return new WaitForSeconds(1);
         
         RoleEditor.My.ShowAllRoleSet();
+        isEnd = true;
     }
 
-    //public override bool ChenkEnd()
-    //{
-    //    if(StageGoal.My.killNumber >= 3)
-    //    {
-    //        NewCanvasUI.My.GamePause(false);
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
+    public override bool ChenkEnd()
+    {
+        
+        return isEnd;
+    }
 }

@@ -25,6 +25,8 @@ public class RoleEditor : MonoSingleton<RoleEditor>
     public bool destroyBullets = false;
 
     public bool isTrade = false;
+
+    public bool isDragEnd = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +42,7 @@ public class RoleEditor : MonoSingleton<RoleEditor>
 
     public void ShowAllRoleSet()
     {
-        for(int i =0; i< sets.childCount; i++)
+        for(int i =0; i< sets.childCount-1; i++)
         {
             sets.GetChild(i).gameObject.SetActive(true);
         }

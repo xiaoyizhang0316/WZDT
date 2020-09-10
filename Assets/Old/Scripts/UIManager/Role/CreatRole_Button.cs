@@ -112,18 +112,26 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             case RoleType.Seed:
                 tempRole.baseRoleData.roleName =
                     StaticRoleName.SeedName[UnityEngine.Random.Range(0, StaticRoleName.SeedName.Length)];
+                DataUploadManager.My.AddData(DataEnum.角色_放置种子商);
+
                 break;
             case RoleType.Peasant:
                 tempRole.baseRoleData.roleName =
                     StaticRoleName.PeasantName[UnityEngine.Random.Range(0, StaticRoleName.PeasantName.Length)];
+                DataUploadManager.My.AddData(DataEnum.角色_放置农民);
+
                 break;
             case RoleType.Merchant:
                 tempRole.baseRoleData.roleName =
                     StaticRoleName.MerchantName[UnityEngine.Random.Range(0, StaticRoleName.MerchantName.Length)];
+                DataUploadManager.My.AddData(DataEnum.角色_放置贸易商);
+
                 break;
             case RoleType.Dealer:
                 tempRole.baseRoleData.roleName =
                     StaticRoleName.DealerName[UnityEngine.Random.Range(0, StaticRoleName.DealerName.Length)];
+                DataUploadManager.My.AddData(DataEnum.角色_放置零售商);
+
                 break;
         }
 
