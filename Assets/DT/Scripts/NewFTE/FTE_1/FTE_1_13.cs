@@ -5,6 +5,7 @@ using UnityEngine;
 public class FTE_1_13 : BaseGuideStep
 {
     public GameObject trade;
+    public bool check = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +21,9 @@ public class FTE_1_13 : BaseGuideStep
     public override IEnumerator StepStart()
     {
 
-        if (AnsweringPanel.My.isComplete)
+        if (check&&AnsweringPanel.My.isComplete)
         {
-            GuideManager.My.baseGuideSteps[14].isOpen = false;
+            GuideManager.My.baseGuideSteps[15].isOpen = false;
         }
 
         yield break;

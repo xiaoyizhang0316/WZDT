@@ -84,7 +84,13 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
             {
               
                     isComplete = true;
-             
+                for (int i = 0; i < GuideManager.My.baseGuideSteps.Count; i++)
+                {
+                    if (GuideManager.My.baseGuideSteps[i].TryGetComponent<FTE_answer>(out FTE_answer answer))
+                    {
+                        GuideManager.My.baseGuideSteps[i].isOpen = false;
+                    }
+                }
            
             }
         }
@@ -289,7 +295,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
             if(updateFTE != 999)
             {
 
-                NetworkMgr.My.UpdatePlayerDatas(updateFTE, 0, () =>
+                NetworkMgr.My.UpdatePlayerDatas(updateFTE, 0, "0", () =>
                 {
                     
                 });
