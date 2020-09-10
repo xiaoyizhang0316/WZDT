@@ -173,6 +173,7 @@ public class PlayerReplay
     public int timeCount;
     public int realTime;
     public int bossLevel;
+    public string behaviorData;
 
     public PlayerReplay(bool isWin)
     {
