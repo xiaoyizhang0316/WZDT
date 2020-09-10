@@ -138,7 +138,7 @@ public class DataUpload
   /// <summary>
   /// 交易_优化率
   /// </summary>
-  public int trad_optimize;
+  public float trad_optimize;
 
   /// <summary>
   /// 看子弹属性

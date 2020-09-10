@@ -32,6 +32,20 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
         
     }
 
+    public void GetStatisticData(DataUpload data)
+    {
+        int count = 0;
+        for (int i = 0; i < TradeManager.My.tradeList.Count; i++)
+        {
+            if (TradeManager.My.tradeList[i].isTradeSettingBest())
+            {
+                count++;
+            }
+        }
+        data.trad_optimize = count / (float)TradeManager.My.tradeList.Count;
+        data.time_PauseTime = StageGoal.My.totalPauseTime;
+        data.percentageTime = StageGoal.My.totalMinusGoldTime;
+    }
 
     public DataUpload GetDataUpload()
     {
@@ -41,7 +55,7 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
        data.trad_delete = dataDic[DataEnum.交易_删交易.ToString()];
        data.trad_DealNpcOrigination = dataDic[DataEnum.交易_发起外部交易.ToString()];
        data.trad_DealSelfOrigination = dataDic[DataEnum.交易_发起的内部交易.ToString()];
-       data.trad_optimize = dataDic[DataEnum.交易_优化率.ToString()];
+       //data.trad_optimize = dataDic[DataEnum.交易_优化率.ToString()];
        data.trad_change = dataDic[DataEnum.交易_改交易.ToString()];
        data.use_dlj = dataDic[DataEnum.使用多棱镜.ToString()];
        data.use_ggj = dataDic[DataEnum.使用广角镜.ToString()];
@@ -63,6 +77,7 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
        data.role_clearWarehouse = dataDic[DataEnum.角色_清仓.ToString()];
        data.deficitNumber = dataDic[DataEnum.赤字次数.ToString()];
        data.role_checkNpcData = dataDic[DataEnum.角色_查看NPC属性.ToString()];
+       GetStatisticData(data);
        return data;
     }
 

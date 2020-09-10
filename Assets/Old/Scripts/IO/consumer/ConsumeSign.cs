@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using static GameEnum;
+using static DataEnum;
 using DT.Fight.Bullet;
 using UnityEngine.EventSystems;
 
@@ -271,7 +272,11 @@ public class ConsumeSign : MonoBehaviour
     {
         StageGoal.My.GetSatisfy((int)(consumeData.killSatisfy * scorePer));
         if (scorePer > 1f)
+        {
             StageGoal.My.ConsumerExtraPerTip();
+            DataUploadManager.My.AddData(消费者_口味击杀);
+        }
+
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
         StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
         StageGoal.My.killNumber++;
