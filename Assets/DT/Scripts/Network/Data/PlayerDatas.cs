@@ -173,6 +173,7 @@ public class PlayerReplay
     public int timeCount;
     public int realTime;
     public int bossLevel;
+    public string behaviorData;
 
     public PlayerReplay(bool isWin)
     {
@@ -194,6 +195,7 @@ public class PlayerReplay
         {
             bossLevel = GameObject.FindObjectOfType<BossConsumer>()==null?0: GameObject.FindObjectOfType<BossConsumer>().killCount;
         }
+        behaviorData = JsonUtility.ToJson(DataUploadManager.My.GetDataUpload());
     }
 }
 
