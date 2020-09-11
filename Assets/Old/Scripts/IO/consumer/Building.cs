@@ -18,10 +18,6 @@ public class Building : MonoBehaviour
 
     public GameObject pathIndicator;
 
-    public int intervalNumber = -1;
-
-    public float intervalLength = 1f;
-
     public bool isFinishSpawn;
 
     public GameObject protalGameObject;
@@ -133,7 +129,6 @@ public class Building : MonoBehaviour
     /// <returns></returns>
     public IEnumerator SpawnWaveConsumer(int waveNumber)
     {
-        int val = 0;
         isFinishSpawn = false;
         if (waveConfigs[waveNumber].Count == 0)
         {
@@ -152,6 +147,9 @@ public class Building : MonoBehaviour
         {
             for (int i = 0; i < w.num; i++)
             {
+                float waitTime = GameDataMgr.My.consumerWaitTime[w.consumerType];
+                Tweener twe = transform.DOScale(1f, waitTime);
+                yield return twe.WaitForCompletion();
                 string path = "Prefabs/Consumer/" + w.consumerType.ToString();
                 GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
                 go.GetComponent<ConsumeSign>().Init(consumerPathList);
@@ -169,15 +167,6 @@ public class Building : MonoBehaviour
                         go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
                     }
                 }
-                float waitTime = 1f;
-                val++;
-                if (val == intervalNumber)
-                {
-                    val = 0;
-                    waitTime = intervalLength;
-                }
-                Tweener twe = transform.DOScale(1f, waitTime);
-                yield return twe.WaitForCompletion();
                 //go.GetComponent<ConsumeSign>().InitRangeBuff();
             }
         }
@@ -187,7 +176,6 @@ public class Building : MonoBehaviour
 
     public IEnumerator BornEnemy()
     {
-        int val = 0;
         ConsumerType ct;
         yield return new WaitForSeconds(0.3f);
         DrawPathLine();
@@ -196,7 +184,7 @@ public class Building : MonoBehaviour
         //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
         while (true)
         {
-            yield return new WaitForSeconds(0.75f);
+            //yield return new WaitForSeconds(0.75f);
             ct = (ConsumerType)(UnityEngine.Random.Range(0, 2)==1?1:8);
             string path = "Prefabs/Consumer/" + ct.ToString();
             GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
@@ -215,13 +203,7 @@ public class Building : MonoBehaviour
             //        go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
             //    }
             //}
-            float waitTime = 1f;
-            val++;
-            if (val == intervalNumber)
-            {
-                val = 0;
-                waitTime = intervalLength;
-            }
+            float waitTime = 0.5f;
             Tweener twe = transform.DOScale(1f, waitTime);
             yield return twe.WaitForCompletion();
         }
