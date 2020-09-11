@@ -33,8 +33,6 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
         //{
         //    dataDic.Add(activity.ToString(), 1);
         //}
-
-
     }
 
     public void GetStatisticData(DataUpload data)
