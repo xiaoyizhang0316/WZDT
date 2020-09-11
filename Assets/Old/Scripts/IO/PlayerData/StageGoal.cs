@@ -829,12 +829,46 @@ public class StageGoal : MonoSingleton<StageGoal>
         //    else
         //    {
         //        string json = www.text.ToString();
-        string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
-        Debug.Log("-------" + json);
-                StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
-                ParseStageEnemyData(stageEnemyData);
+        //string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
+        //Debug.Log("-------" + json);
+        //        StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
+        //        ParseStageEnemyData(stageEnemyData);
         //    }
         //}
+        if (NetworkMgr.My.useLocalJson)
+        {
+            StartCoroutine(GetEnemyData(sceneName));
+        }
+        else
+        {
+            string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
+            //Debug.Log("-------" + json);
+            StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
+            ParseStageEnemyData(stageEnemyData);
+        }
+    }
+
+    IEnumerator GetEnemyData(string sceneName)
+    {
+        string path = "file://" + Application.streamingAssetsPath + @"/Data/StageEnemy/" + sceneName + ".json";
+        WWW www = new WWW(@path);
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                //string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
+        //Debug.Log("-------" + json);
+                StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
+                ParseStageEnemyData(stageEnemyData);
+            }
+        }
     }
 
     /// <summary>
