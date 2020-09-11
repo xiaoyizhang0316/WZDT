@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<DataUploadManager>
@@ -39,9 +40,10 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     public void GetStatisticData(DataUpload data)
     {
         int count = 0;
-        for (int i = 0; i < TradeManager.My.tradeList.Count; i++)
+        List<int> keys = TradeManager.My.tradeList.Keys.ToList();
+        for (int i = 0; i < keys.Count; i++)
         {
-            if (TradeManager.My.tradeList[i].isTradeSettingBest())
+            if (TradeManager.My.tradeList[keys[i]].isTradeSettingBest())
             {
                 count++;
             }
