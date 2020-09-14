@@ -15,6 +15,8 @@ public class WaveCount : MonoSingleton<WaveCount>
 
     public GameObject closeBtn;
 
+    public bool showDetail = false;
+
     /// <summary>
     /// 初始化
     /// </summary>

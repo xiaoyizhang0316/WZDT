@@ -925,6 +925,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         cameraPos = Camera.main.transform.position;
         Stat();
         startTime = TimeStamp.GetCurrentTimeStamp();
+        menuOpenButton.onClick.AddListener(MenuShow);
     }
     private Vector3 cameraPos;
 

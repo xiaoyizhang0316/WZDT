@@ -66,6 +66,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public Button statBtn;
     public Button OptionsBtn;
+    public Button showHideTradeButton;
 
     #endregion
 
@@ -93,6 +94,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             Panel_Option.SetActive(true);
             OptionsPanel.My.ShowOPtionsPanel();
         });
+        showHideTradeButton.onClick.AddListener(ToggleHidePanelShow);
         InitTimeButton();
         Panel_Delete.SetActive(false);
         lose.SetActive(false);
@@ -314,6 +316,33 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         }
     }
 
+    public void ShowAllTradeButton()
+    {
+        foreach (BaseMapRole role in PlayerData.My.MapRole)
+        {
+            if (isSetTrade)
+            {
+                if (role == startRole)
+                    continue;
+            }
+            if (role.isNpc)
+            {
+                if (!role.npcScript.isCanSee)
+                {
+                    continue;
+                }
+            }
+            role.LightOff();
+            role.HideTradeButton(true);
+        }
+
+        foreach (TradeSign sign in TradeManager.My.tradeList.Values)
+        {
+            if (sign.GetComponentInChildren<TradeLineItem>() != null)
+                sign.gameObject.SetActive(true);
+        }
+    }
+
     /// <summary>
     /// 隐藏所有物流线
     /// </summary>
@@ -350,7 +379,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void ToggleHidePanelShow(bool isRapid = false)
     {
         if (isPlaying)
+        {
             return;
+        }
         if (hidePanel.GetComponent<Image>().fillAmount >= 0.99f)
         {
             isPlaying = true;
@@ -365,6 +396,38 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         else
         {
             isPlaying = true;
+
+            hidePanel.GetComponent<Image>().DOFillAmount(1f, 0.2f).Play().SetEase(Ease.Linear).OnComplete(() => {
+                isPlaying = false;
+            });
+            foreach (GameObject go in hideList)
+            {
+                go.SetActive(true);
+            }
+        }
+    }
+
+    public void ToggleHidePanelShow()
+    {
+        if (isPlaying)
+        {
+            return;
+        }
+        if (hidePanel.GetComponent<Image>().fillAmount >= 0.99f)
+        {
+            isPlaying = true;
+            hidePanel.GetComponent<Image>().DOFillAmount(0.25f, 0.2f).Play().SetEase(Ease.Linear).OnComplete(() => {
+                isPlaying = false;
+                foreach (GameObject go in hideList)
+                {
+                    go.SetActive(false);
+                }
+            });
+        }
+        else
+        {
+            isPlaying = true;
+
             hidePanel.GetComponent<Image>().DOFillAmount(1f, 0.2f).Play().SetEase(Ease.Linear).OnComplete(() => {
                 isPlaying = false;
             });
