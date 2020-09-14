@@ -451,7 +451,10 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 }
             }
             consumerTypeDatas.Add(temp);
-            consumerWaitTime.Add(temp.consumerType, float.Parse(c.waitTime));
+            if (NetworkMgr.My.useLocalJson)
+            {
+                consumerWaitTime.Add(temp.consumerType, float.Parse(c.waitTime));
+            }
         }
     }
 
