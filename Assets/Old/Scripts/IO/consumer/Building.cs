@@ -154,7 +154,7 @@ public class Building : MonoBehaviour
                 }
                 else
                 {
-                    waitTime = 0.75f;
+                    waitTime = 1.2f;
                 }
                 Tweener twe = transform.DOScale(1f, waitTime);
                 yield return twe.WaitForCompletion();
