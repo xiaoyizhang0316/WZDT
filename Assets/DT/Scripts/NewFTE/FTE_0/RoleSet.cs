@@ -26,9 +26,9 @@ public class RoleSet : MonoBehaviour
     int tey = 0;
     int trg = 0;
 
-    Color color0 = Color.green;
+    Color color0 = Color.red;
     Color color1 = Color.yellow;
-    Color color2 = Color.red;
+    Color color2 = Color.green;
 
     // Start is called before the first frame update
     void Start()
@@ -130,6 +130,14 @@ public class RoleSet : MonoBehaviour
 
     public void RefreshValues(int lva, int tva, ValueType valueType)
     {
+        if (!RoleEditor.My.isDragEnd)
+        {
+            if (RoleEditor.My.hand != null)
+            {
+                RoleEditor.My.hand.SetActive(false);
+            }
+            RoleEditor.My.isDragEnd = true;
+        }
         RoleEditor.My.isDragEnd = true;
         switch (roleType)
         {

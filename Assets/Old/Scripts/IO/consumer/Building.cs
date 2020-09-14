@@ -211,7 +211,7 @@ public class Building : MonoBehaviour
             //        go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
             //    }
             //}
-            float waitTime = 0.5f;
+            float waitTime = 1.5f;
             Tweener twe = transform.DOScale(1f, waitTime);
             yield return twe.WaitForCompletion();
         }

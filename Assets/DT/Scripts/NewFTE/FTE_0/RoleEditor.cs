@@ -27,6 +27,8 @@ public class RoleEditor : MonoSingleton<RoleEditor>
     public bool isTrade = false;
 
     public bool isDragEnd = false;
+
+    public GameObject hand;
     // Start is called before the first frame update
     void Start()
     {
