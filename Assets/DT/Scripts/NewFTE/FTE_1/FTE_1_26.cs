@@ -27,9 +27,12 @@ public class FTE_1_26 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        panel.SetActive(false);
+        //panel.SetActive(false);
         yield break;
     }
 
-   
+    public override bool ChenkEnd()
+    {
+        return !panel.activeInHierarchy;
+    }
 }
