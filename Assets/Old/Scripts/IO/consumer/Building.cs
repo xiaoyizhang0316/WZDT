@@ -30,6 +30,8 @@ public class Building : MonoBehaviour
 
     public List<Material> materials;
 
+    public float buildingWaitTime;
+
     /// <summary>
     /// 使用透视镜
     /// </summary>
@@ -154,7 +156,7 @@ public class Building : MonoBehaviour
                 }
                 else
                 {
-                    waitTime = 1.2f;
+                    waitTime = 0.75f + buildingWaitTime;
                 }
                 Tweener twe = transform.DOScale(1f, waitTime);
                 yield return twe.WaitForCompletion();
@@ -211,7 +213,7 @@ public class Building : MonoBehaviour
             //        go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
             //    }
             //}
-            float waitTime = 1.5f;
+            float waitTime = 0.5f;
             Tweener twe = transform.DOScale(1f, waitTime);
             yield return twe.WaitForCompletion();
         }
