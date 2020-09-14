@@ -22,9 +22,9 @@ public class ConsumerTypeItem
     public string moveSpeed;
 
     /// <summary>
-    /// 存活时间
+    /// 刷新间隔
     /// </summary>
-    public string liveTime;
+    public string waitTime;
 
     /// <summary>
     /// 同时生产几个
