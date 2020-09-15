@@ -194,7 +194,7 @@ public class Building : MonoBehaviour
         //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
         while (true)
         {
-            //yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(0.75f);
             ct = (ConsumerType)(UnityEngine.Random.Range(0, 2)==1?1:8);
             string path = "Prefabs/Consumer/" + ct.ToString();
             GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
