@@ -53,4 +53,5 @@ public static class HttpId
     public const int setPlayerDatasID           = 1018;
     public const int pingTestID                 = 1019;
     public const int getJsonDatasID             = 1020;
+    public const int getBehaviorDatasID         = 1021;
 }

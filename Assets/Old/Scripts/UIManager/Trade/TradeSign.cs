@@ -38,6 +38,10 @@ public class TradeSign : MonoBehaviour
 
     private int countNumber = 0;
 
+    private int createTime;
+
+    private bool isChecked = false;
+
     public void Init(string start, string end)
     {
         tradeData = new TradeData();
@@ -49,6 +53,7 @@ public class TradeSign : MonoBehaviour
         tradeData.selectSZFS = SZFSType.固定;
         tradeData.selectCashFlow = CashFlowType.先钱;
         tradeData.ID = TradeManager.My.index++;
+        createTime = StageGoal.My.timeCount;
         TradeManager.My.tradeList.Add(tradeData.ID, this);
         SetSkillTarget();
         GenerateTradeLine();
@@ -310,5 +315,14 @@ public class TradeSign : MonoBehaviour
                 return;
         }
         infoLine.enabled = isActive;
+    }
+
+    public void CheckClickTime()
+    {
+        if (StageGoal.My.timeCount - createTime <= 5 && !isChecked)
+        {
+            isChecked = true;
+            DataUploadManager.My.AddData(DataEnum.交易_五秒内查看交易的次数);
+        }
     }
 }

@@ -52,6 +52,7 @@ public static class Url
     private static string getGlobalRankingList = "getGlobalRankingList";
     private static string getPlayerGroupRanking = "getPlayerGroupRanking";
     private static string getPlayerGlobalRanking = "getPlayerGlobalRanking";
+    private static string getBehaviorDatas = "getBehaviorDatas";
     #endregion
 
     #region equip
@@ -98,6 +99,7 @@ public static class Url
     public static string TestPost { get => ip + testPost;  }
     public static string TestGet { get => ip + testGet;  }
     public static string GetJsonDatas { get => ip + getJsonDatas; }
+    public static string GetBehaviorDatas { get => ip + GetBehaviorDatas; }
 
     public static void SetIp(string newIp)
     {

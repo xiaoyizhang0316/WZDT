@@ -6,6 +6,7 @@ public class FTE_1_13 : BaseGuideStep
 {
     public GameObject trade;
     public bool check = false;
+    public bool showDetail = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,10 @@ public class FTE_1_13 : BaseGuideStep
         {
             GuideManager.My.baseGuideSteps[15].isOpen = false;
         }
-
+        if (showDetail)
+        {
+            WaveCount.My.showDetail = true;
+        }
         yield break;
     }
 
@@ -33,6 +37,7 @@ public class FTE_1_13 : BaseGuideStep
     {
       
         trade.SetActive(false);
+        WaveCount.My.showDetail = false ;
         yield break;
     }
 

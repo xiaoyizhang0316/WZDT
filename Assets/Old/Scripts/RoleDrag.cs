@@ -56,6 +56,7 @@ public class RoleDrag : MonoBehaviour
                     print("配置交易成功");
                     NewCanvasUI.My.InitCreateTradePanel();
                     AudioManager.My.PlaySelectType(GameEnum.AudioClipType.EndTrade);
+                    DataUploadManager.My.AddData(DataEnum.交易_发起的内部交易);
                 }
             }
         }

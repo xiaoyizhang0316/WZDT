@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FTE_1_1 : BaseGuideStep
 {
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -44,4 +43,5 @@ public class FTE_1_1 : BaseGuideStep
     {
         return isover;
     }
+
 }

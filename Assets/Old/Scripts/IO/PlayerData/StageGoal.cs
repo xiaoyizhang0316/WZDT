@@ -154,6 +154,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public int totalPauseTime = 0;
 
+    public int totalMinusGoldTime = 0;
+
     public int startTime;
 
     public int endTime;
@@ -201,6 +203,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 isOverMaxMinus = true;
                 AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
+                DataUploadManager.My.AddData(DataEnum.赤字次数);
             }
             foreach (BaseMapRole role in PlayerData.My.MapRole)
             {
@@ -310,6 +313,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 isOverMaxMinus = true;
                 AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
+                DataUploadManager.My.AddData(DataEnum.赤字次数);
             }
             foreach (BaseMapRole role in PlayerData.My.MapRole)
             {
@@ -571,6 +575,10 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
+        if (playerGold < 0)
+        {
+            totalMinusGoldTime++;
+        }
         if (currentWave <= maxWaveNumber)
         {
             if (timeCount >= waitTimeList[currentWave - 1])
@@ -821,12 +829,46 @@ public class StageGoal : MonoSingleton<StageGoal>
         //    else
         //    {
         //        string json = www.text.ToString();
-        string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
-        Debug.Log("-------" + json);
-                StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
-                ParseStageEnemyData(stageEnemyData);
+        //string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
+        //Debug.Log("-------" + json);
+        //        StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
+        //        ParseStageEnemyData(stageEnemyData);
         //    }
         //}
+        if (NetworkMgr.My.useLocalJson)
+        {
+            StartCoroutine(GetEnemyData(sceneName));
+        }
+        else
+        {
+            string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
+            //Debug.Log("-------" + json);
+            StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
+            ParseStageEnemyData(stageEnemyData);
+        }
+    }
+
+    IEnumerator GetEnemyData(string sceneName)
+    {
+        string path = "file://" + Application.streamingAssetsPath + @"/Data/StageEnemy/" + sceneName + ".json";
+        WWW www = new WWW(@path);
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                //string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
+        //Debug.Log("-------" + json);
+                StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
+                ParseStageEnemyData(stageEnemyData);
+            }
+        }
     }
 
     /// <summary>
@@ -883,6 +925,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         cameraPos = Camera.main.transform.position;
         Stat();
         startTime = TimeStamp.GetCurrentTimeStamp();
+        menuOpenButton.onClick.AddListener(MenuShow);
     }
     private Vector3 cameraPos;
 

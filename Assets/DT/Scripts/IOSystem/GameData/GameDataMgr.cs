@@ -44,6 +44,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
 
     public List<TranslateData> translateDatas;
 
+    public Dictionary<ConsumerType, float> consumerWaitTime = new Dictionary<ConsumerType, float>();
+
     /// <summary>
     /// 根据职业类型和等级获取角色模板
     /// </summary>
@@ -449,6 +451,10 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 }
             }
             consumerTypeDatas.Add(temp);
+            if (NetworkMgr.My.useLocalJson)
+            {
+                consumerWaitTime.Add(temp.consumerType, float.Parse(c.waitTime));
+            }
         }
     }
 

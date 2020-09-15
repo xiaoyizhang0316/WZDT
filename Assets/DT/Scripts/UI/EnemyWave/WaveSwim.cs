@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static GameEnum;
+using static DataEnum;
 
 public class WaveSwim : MonoBehaviour,IPointerClickHandler
 {
@@ -83,6 +84,11 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (WaveCount.My.showDetail)
+        {
+            return;
+        }
         WaveCount.My.InitWaveBg(waveNumber);
+        DataUploadManager.My.AddData(消费者_点击进度条);
     }
 }

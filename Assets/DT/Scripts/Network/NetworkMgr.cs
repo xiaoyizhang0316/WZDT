@@ -11,6 +11,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     #region Player datas
     public bool isUsingHttp = false;
     public bool isShowFPS = false;
+    public bool useLocalJson = false;
 
     public string loginRecordID;
     private string token;
@@ -742,6 +743,44 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             SetMask();
         }, keyValues, HttpType.Post, HttpId.getReplayDataID));
+
+    }
+
+    /// <summary>
+    /// 获取某关的行为数据
+    /// </summary>
+    /// <param name="recordID">记录id（从复盘list里获取）</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
+    public void GetBehaviorDatas(string recordID, Action<BehaviourData> doSuccess = null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("recordID", recordID);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetBehaviorDatas, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 1)
+            {
+                string json = CompressUtils.Uncompress(response.data);
+                BehaviourData datas = JsonUtility.FromJson<BehaviourData>(json);
+                //Debug.Log(datas.recordID);
+                //Debug.Log(datas.behaviors);
+                doSuccess?.Invoke(datas);
+            }
+            else
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.getBehaviorDatasID));
 
     }
 
