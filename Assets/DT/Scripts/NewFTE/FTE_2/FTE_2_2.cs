@@ -23,15 +23,21 @@ public class FTE_2_2 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-      
+        for (int i = 0; i <MapManager.My._mapSigns.Count; i++)
+        {
+            MapManager.My._mapSigns[i].isCanPlace = false;
+        }
+
+        MapManager.My.GetMapSignByXY(9, 24).isCanPlace = true;
         yield break;
          
     }
 
     public override IEnumerator StepEnd()
     {
+     
+ 
         yield break;
-        
     }
 
     public override bool ChenkEnd()

@@ -24,13 +24,20 @@ public class FTE_2_6 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-    
+      
         yield break;
          
     }
 
     public override IEnumerator StepEnd()
     {
+        for (int i = 0; i <MapManager.My._mapSigns.Count; i++)
+        {
+            if (MapManager.My._mapSigns[i].mapType == GameEnum.MapType.Grass)
+            {
+                MapManager.My._mapSigns[i].isCanPlace = true;
+            }
+        }
         yield break;
         
     }

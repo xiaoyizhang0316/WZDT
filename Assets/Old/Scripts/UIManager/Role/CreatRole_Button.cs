@@ -37,7 +37,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     /// </summary>
     private bool secondMenuStatus = false;
 
-
+     
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +66,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnDrag(PointerEventData eventData)
     {
+        for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
+        {
+            PlayerData.My.MapRole[i].transform.localScale = Vector3.one;
+        }
         if (SceneManager.GetActiveScene().name == "FTE_1")
         {
             
@@ -97,6 +101,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        
         if (SceneManager.GetActiveScene().name == "FTE_1")
         {
             

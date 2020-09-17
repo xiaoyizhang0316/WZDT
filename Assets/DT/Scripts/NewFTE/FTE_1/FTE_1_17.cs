@@ -35,6 +35,7 @@ public class FTE_1_17 : BaseGuideStep
     {
         NewCanvasUI.My.GamePause(false);
         PlayAnim();
+        NewCanvasUI.My.Panel_Update.transform.localPosition = new Vector3(0,0,0);
         yield return new WaitForSeconds(0.2f); 
     }
 
