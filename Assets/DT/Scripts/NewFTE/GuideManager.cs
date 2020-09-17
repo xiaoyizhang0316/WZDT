@@ -18,7 +18,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     /// <summary>
     /// 当前引导步骤
     /// </summary>
-    public int currentGuideIndex=-1;
+    public int currentGuideIndex;
 
     public GameObject ftegob;
 
@@ -113,7 +113,8 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
             }
         }
-        currentGuideIndex = -1;
+        NewCanvasUI.My.Panel_Update.transform.localPosition = Vector3.one;
+        
         guideClose.gameObject.SetActive(false);
     }
 
