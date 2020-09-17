@@ -21,6 +21,7 @@ public class FTE_1_2 : BaseGuideStep
     public override IEnumerator StepStart()
     {RoleListManager.My.OutButton();
         land.GetComponent<MapSign>().isCanPlace = true;
+        
         yield return new WaitForSeconds(0.2f); 
     }
 

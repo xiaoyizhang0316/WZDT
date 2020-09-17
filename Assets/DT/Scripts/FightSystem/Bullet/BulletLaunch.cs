@@ -77,6 +77,14 @@ public class BulletLaunch : MonoBehaviour
             gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
             float flyTime = Vector3.Distance(target.transform.position, gameObject.transform.position) / 8f;
             //            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
+            if (target == null)
+            {
+                BulletObjectPool.My.RecoveryBullet(gameObject, 0);
+            }
+            else
+            {
+      
+
             lanchNormalTWE = gameObject.transform.DOMove(target.transform.position, flyTime)
                  .SetEase(Ease.Linear).OnComplete(() =>
                  {
@@ -97,6 +105,7 @@ public class BulletLaunch : MonoBehaviour
 
                  });
             gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
+            }
         });
         isplay = true;
     }
