@@ -190,6 +190,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                             role.transform.DOScale(new Vector3(1.3f, 0.8f, 1.3f), 0.2f).OnComplete(() =>
                                 {
                                     role.transform.DOScale(1f, 0.15f).Play().OnComplete(()=> {
+                                        role = null;
                                         dragImg.raycastTarget = true;
                                     }).timeScale = 1f / DOTween.timeScale;
                                 }).Play().timeScale = 1f / DOTween.timeScale;
@@ -207,7 +208,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
                     BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
                     CreateRoleOperationRecord(role.GetComponent<BaseMapRole>());
-                    role = null;
+                    
                 }
                 else
                 {
