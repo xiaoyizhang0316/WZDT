@@ -108,6 +108,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         if (!SceneManager.GetActiveScene().name.Equals("FTE_0-1") && !SceneManager.GetActiveScene().name.Equals("FTE_0-2"))
         {
+            if(GuideManager.My.currentGuideIndex != -1)
+            {
+                return;
+            }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (DOTween.defaultAutoPlay != AutoPlay.None)

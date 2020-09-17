@@ -80,12 +80,12 @@ public class ThreeWordsPanel : MonoBehaviour
         //thisPanel.SetActive(false);
         if (SceneManager.GetActiveScene().name != "Map")
         {
-            if (NetworkMgr.My.playerDatas.fteProgress == -1)
+            if (NetworkMgr.My.playerDatas.fteProgress == -2)
             {
                 SceneManager.LoadScene("FTE_0-1");
             }
             else
-                    if (NetworkMgr.My.playerDatas.fteProgress == 0)
+                    if (NetworkMgr.My.playerDatas.fteProgress == -1)
             {
                 SceneManager.LoadScene("FTE_0-2");
             }

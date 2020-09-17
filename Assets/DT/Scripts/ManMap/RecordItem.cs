@@ -33,6 +33,7 @@ public class RecordItem : MonoBehaviour
 
     public bool isStar3;
 
+
     /// <summary>
 	/// 初始化
 	/// </summary>

@@ -18,7 +18,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     /// <summary>
     /// 当前引导步骤
     /// </summary>
-    public int currentGuideIndex;
+    public int currentGuideIndex=-1;
 
     public GameObject ftegob;
 
@@ -113,6 +113,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
             }
         }
+        currentGuideIndex = -1;
         guideClose.gameObject.SetActive(false);
     }
 
