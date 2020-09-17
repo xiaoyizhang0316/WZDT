@@ -75,7 +75,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             }
         }
 
-
+        if (Input.GetMouseButton(1))
+            return;
+        if (role == null)
+            return;
         if (NewCanvasUI.My.isSetTrade)
             return;
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
@@ -102,6 +105,8 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 return;
             }
         }
+        if (Input.GetMouseButton(1))
+            return;
         if (NewCanvasUI.My.isSetTrade)
             return;
         Role tempRole = new Role();
@@ -156,7 +161,9 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 return;
             }
         }
-        if (NewCanvasUI.My.isSetTrade)
+        if (Input.GetMouseButton(1))
+            return;
+        if (role==null)
             return;
         //UIManager.My.LandCube.transform.DOMoveY(0, 0.5f).SetUpdate(true);
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
@@ -200,6 +207,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
                     BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
                     CreateRoleOperationRecord(role.GetComponent<BaseMapRole>());
+                    role = null;
                 }
                 else
                 {

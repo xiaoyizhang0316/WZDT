@@ -33,6 +33,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     private float speed;
 
+    public List<DataStat> mydataStats;
+
     /// <summary>
     /// 正常速度播放
     /// </summary>
@@ -120,6 +122,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     /// <param name="timeCount"></param>
     public void MapInit(List<PlayerOperation> playerOperations, List<DataStat> datas, int timeCount)
     {
+        mydataStats = datas;
         AutoPlay();
         Pause();
         GenerateMapStates(playerOperations);
