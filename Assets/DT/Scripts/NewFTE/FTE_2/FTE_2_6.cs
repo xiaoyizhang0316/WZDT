@@ -24,7 +24,7 @@ public class FTE_2_6 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-      
+      NPCListInfo.My.npcInfo.gameObject.SetActive(false);
         yield break;
          
     }
