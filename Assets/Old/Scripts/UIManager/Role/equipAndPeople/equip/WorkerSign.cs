@@ -162,6 +162,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnDrag(PointerEventData eventData)
     {
+        time += Time.deltaTime;
         if (worker == null || isOccupation)
         {
             return;
@@ -180,20 +181,29 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
       }
 
     }
-
+    private float time = 0; 
     public void OnEndDrag(PointerEventData eventData)
-    {
-        if (worker == null || isOccupation)
+    {    if (time < 0.3f)
         {
-            return;
+            Destroy(worker);
         }
-        SetOccupyStatus(worker.GetComponent<DragUI>().CheckAllRight(false));
-        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PutEquip);
+        else
+        {
+            if (worker == null || isOccupation)
+            {
+                return;
+            }
+
+            SetOccupyStatus(worker.GetComponent<DragUI>().CheckAllRight(false));
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PutEquip);
+        }
+
         //isOccupation = worker.GetComponent<DragUI>().CheckAllRight(false);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        time = 0;
         if (!isOccupation)
         {
             CreatWorkerOBJ();
