@@ -21,7 +21,7 @@ public class FTE_1_22 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
-     GuideManager.My.guideClose.Init();
+     //GuideManager.My.guideClose.Init();
         yield return new WaitForSeconds(0.2f); 
     }
 
