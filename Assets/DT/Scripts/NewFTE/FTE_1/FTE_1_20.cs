@@ -60,6 +60,7 @@ public class FTE_1_20 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
+        RoleListManager.My.OutButton();
         if (StageGoal.My.timeCount > waitTime)
         {
             return true;
@@ -68,5 +69,6 @@ public class FTE_1_20 : BaseGuideStep
         {
             return false;
         }
+
     }
 }
