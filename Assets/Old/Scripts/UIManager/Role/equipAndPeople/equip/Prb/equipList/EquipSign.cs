@@ -187,6 +187,8 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log(time);
+        time += Time.deltaTime;
         if (Equip == null || isOccupation)
         {
             return;
@@ -212,13 +214,25 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (time < 0.3f)
+        {
+            Destroy(Equip);
+        }
+        else
+        {
+            SetOccupyStatus(Equip.GetComponent<DragUI>().CheckAllRight(false));
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PutEquip);
+        }
+
         //isOccupation =    Equip.GetComponent<DragUI>().CheckAllRight(false);
-        SetOccupyStatus(Equip.GetComponent<DragUI>().CheckAllRight(false));
-        AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PutEquip);
+     
     }
 
+    private float time = 0; 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        time = 0;
+       
         if (!isOccupation)
         {
             CreatEquipOBJ();

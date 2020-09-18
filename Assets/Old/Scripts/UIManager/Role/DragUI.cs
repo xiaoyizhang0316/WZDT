@@ -94,7 +94,7 @@ public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
     public void Adsorb(Vector3 Pos, Action action = null)
     {
         startPos = Pos;
-        Tweener tweener = transform.DOMove(Pos, 0.1f).OnComplete(() => action()).Play();
+        Tweener tweener = transform.DOMove(Pos, 0.05f).OnComplete(() => action()).Play();
         tweener.SetUpdate(true);
     }
 

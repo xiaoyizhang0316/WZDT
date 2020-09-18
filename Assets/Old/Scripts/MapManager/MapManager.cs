@@ -200,9 +200,9 @@ public class MapManager : MonoSingleton<MapManager>
     {
         //TODO
         string json = OriginalData.My.jsonDatas.GetLevelData(sceneName, true);
-        Debug.Log("+++++++++" + json);
+        //Debug.Log("+++++++++" + json);
         StageNPCsData stageNPCsData = JsonUtility.FromJson< StageNPCsData >(json );
-        Debug.Log("============" + stageNPCsData.stageNPCItems.Count);
+        //Debug.Log("============" + stageNPCsData.stageNPCItems.Count);
         ParseStageNPCData(stageNPCsData);
     }
 

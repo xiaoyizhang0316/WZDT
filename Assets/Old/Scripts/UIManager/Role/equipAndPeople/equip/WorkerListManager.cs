@@ -25,6 +25,16 @@ public class WorkerListManager : MonoSingleton<WorkerListManager>
             if (w.isOccupation)
                 w.CheckOccupyStatus();
         }
+        if (GuideManager.My.ftegob.activeSelf)
+        {
+            for (int i = 0; i < transform.Find("Viewport/Content").childCount; i++)
+            {
+                if (     transform.Find("Viewport/Content").GetChild(i).GetComponent<WorkerSign>().ID !=10001 )
+                {
+                    transform.Find("Viewport/Content").GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     /// <summary>

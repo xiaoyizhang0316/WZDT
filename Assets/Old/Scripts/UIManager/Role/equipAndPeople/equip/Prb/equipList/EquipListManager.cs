@@ -23,6 +23,17 @@ public class EquipListManager : MonoSingleton<EquipListManager>
             if (e.isOccupation)
                 e.CheckOccupyStatus();
         }
+
+        if (GuideManager.My.ftegob.activeSelf)
+        {
+            for (int i = 0; i < transform.Find("Viewport/Content").childCount; i++)
+            {
+                if (     transform.Find("Viewport/Content").GetChild(i).GetComponent<EquipSign>().ID != 22202)
+                {
+                    transform.Find("Viewport/Content").GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     /// <summary>

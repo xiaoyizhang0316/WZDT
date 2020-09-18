@@ -28,7 +28,7 @@ public class FTE_2_8 : BaseGuideStep
         WorkerListManager.My.GetComponent<ScrollRect>().vertical = false;
         if (AnsweringPanel.My.isComplete)
         {
-            GuideManager.My.baseGuideSteps[19].isOpen = false;
+            GuideManager.My.baseGuideSteps[20].isOpen = false;
         }
         yield break;
          
