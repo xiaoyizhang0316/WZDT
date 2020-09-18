@@ -260,9 +260,11 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
             //random = UnityEngine.Random.Range(0, temp.Count);
             //togglesTransform.GetChild(i).GetComponent<ChoiceItem>().Setup(temp[random]);
             //temp.RemoveAt(random);
+            togglesTransform.GetChild(i).gameObject.SetActive(false);
             if (i < temp.Count)
             {
                 togglesTransform.GetChild(i).GetComponent<ChoiceItem>().Setup(temp[i]);
+                togglesTransform.GetChild(i).gameObject.SetActive(true);
             }
         }
     }

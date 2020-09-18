@@ -130,8 +130,16 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         }
         else
         {
-            PlayerPrefs.SetInt("isUseGuide", 1);
-            isUseGuide.interactable = false;
+            if(NetworkMgr.My.playerDatas.fteProgress>= int.Parse(sceneName.Split('_')[1]))
+            {
+                PlayerPrefs.SetInt("isUseGuide", 0);
+                isUseGuide.interactable = true;
+            }
+            else
+            {
+                PlayerPrefs.SetInt("isUseGuide", 1);
+                isUseGuide.interactable = false;
+            }
         }
         isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
         if (int.Parse(sceneName.Split('_')[1]) == 1 || int.Parse(sceneName.Split('_')[1]) == 9)

@@ -62,6 +62,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
         {
             currentGuideIndex = 0;
+            PlayerPrefs.SetInt("isUseGuide", 1);
         }
         else if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
         {
