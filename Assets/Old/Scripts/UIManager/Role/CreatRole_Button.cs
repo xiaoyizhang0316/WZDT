@@ -79,7 +79,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             }
         }
 
-
+        if (Input.GetMouseButton(1))
+            return;
+        if (role == null)
+            return;
         if (NewCanvasUI.My.isSetTrade)
             return;
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
@@ -107,6 +110,8 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 return;
             }
         }
+        if (Input.GetMouseButton(1))
+            return;
         if (NewCanvasUI.My.isSetTrade)
             return;
         Role tempRole = new Role();
@@ -161,7 +166,9 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 return;
             }
         }
-        if (NewCanvasUI.My.isSetTrade)
+        if (Input.GetMouseButton(1))
+            return;
+        if (role==null)
             return;
         //UIManager.My.LandCube.transform.DOMoveY(0, 0.5f).SetUpdate(true);
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
@@ -188,6 +195,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                             role.transform.DOScale(new Vector3(1.3f, 0.8f, 1.3f), 0.2f).OnComplete(() =>
                                 {
                                     role.transform.DOScale(1f, 0.15f).Play().OnComplete(()=> {
+                                        role = null;
                                         dragImg.raycastTarget = true;
                                     }).timeScale = 1f / DOTween.timeScale;
                                 }).Play().timeScale = 1f / DOTween.timeScale;
@@ -205,6 +213,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
                     BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
                     CreateRoleOperationRecord(role.GetComponent<BaseMapRole>());
+                    
                 }
                 else
                 {

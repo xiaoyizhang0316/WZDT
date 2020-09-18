@@ -39,9 +39,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (Input.GetMouseButtonUp(1))
-            print("fdsfsdfds");
-        if (goCopy == null)
+        if (goCopy==null)
             return;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray,out RaycastHit hit);
