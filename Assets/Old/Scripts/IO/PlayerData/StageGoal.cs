@@ -59,7 +59,7 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public List<int> waitTimeList = new List<int>();
 
-    public int timeCount = 0;
+    public int timeCount = 1;
 
     public Tweener waveTween;
 
@@ -382,7 +382,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerHealth = playerMaxHealth;
         }
         playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
-        playerGoldText.DOText(playerGold.ToString(), time, true, ScrambleMode.Numerals).Play();
+        playerGoldText.DOText(playerGold.ToString(), time, true, ScrambleMode.None).Play();
 
         if (playerGold > 0)
             playerGoldText.DOColor( Color.white, time) .Play() ;
@@ -391,7 +391,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
             playerGoldText.DOColor(  Color.red, time) .Play() ;
 
-        playerSatisfyText.DOText(playerSatisfy.ToString(), time, true, ScrambleMode.Numerals).Play();
+        playerSatisfyText.DOText(playerSatisfy.ToString(), time, true, ScrambleMode.None).Play();
 
         if (PlayerData.My.cheatIndex1 || PlayerData.My.cheatIndex2 || PlayerData.My.cheatIndex3)
             playerSatisfyText.DOColor( Color.gray, time).Play() ;
@@ -413,7 +413,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             NewCanvasUI.My.StartLowHealth();
             playerHealthText.color = Color.red;
         }
-        playerTechText.DOText(playerTechPoint.ToString(), time, true, ScrambleMode.Numerals).Play();
+        playerTechText.DOText(playerTechPoint.ToString(), time, true, ScrambleMode.None).Play();
     }
 
     /// <summary>
