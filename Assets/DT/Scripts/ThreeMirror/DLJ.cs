@@ -38,7 +38,7 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         {
             if (hit.transform.CompareTag("MapRole"))
             {
-                if (hit.transform.GetComponent<BaseMapRole>().isNpc)
+                if (hit.transform.GetComponentInParent<BaseMapRole>().isNpc)
                 {
                     if (hit.transform.GetComponentInChildren<BaseNpc>().isCanSee && !hit.transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
                     {
