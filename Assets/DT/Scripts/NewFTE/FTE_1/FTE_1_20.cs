@@ -44,7 +44,9 @@ public class FTE_1_20 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
+        
         NewCanvasUI.My.GamePause();
+        RoleListManager.My.OutButton();
         foreach (var VARIABLE in afterUnlockButton)
         {
             VARIABLE.interactable = true;
@@ -60,7 +62,7 @@ public class FTE_1_20 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        RoleListManager.My.OutButton();
+        
         if (StageGoal.My.timeCount > waitTime)
         {
             return true;
