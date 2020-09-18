@@ -75,7 +75,7 @@ public class BulletLaunch : MonoBehaviour
         {
             Debug.Log("初始化拖尾" + gameObject.name);
             gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
-            float flyTime = Vector3.Distance(target.transform.position, gameObject.transform.position) / 8f;
+            float flyTime = Vector3.Distance(target.transform.position, gameObject.transform.position) / 24f;
             //            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
             lanchNormalTWE = gameObject.transform.DOMove(target.transform.position, flyTime)
                  .SetEase(Ease.Linear).OnComplete(() =>

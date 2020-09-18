@@ -18,12 +18,18 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (Input.GetMouseButton(1))
+            return;
         goCopy = Instantiate(gameObject,transform.parent);
         goCopy.transform.DOScale(1f,0f).Play();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (Input.GetMouseButton(1))
+            return;
+        if (goCopy == null)
+            return;
         Vector3 pos = new Vector3();
         RectTransformUtility.ScreenPointToWorldPointInRectangle(goCopy.GetComponent<RectTransform>(), eventData.position,
         Camera.main, out pos);
@@ -33,6 +39,10 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (Input.GetMouseButtonUp(1))
+            print("fdsfsdfds");
+        if (goCopy == null)
+            return;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray,out RaycastHit hit);
         if (hit.transform != null)

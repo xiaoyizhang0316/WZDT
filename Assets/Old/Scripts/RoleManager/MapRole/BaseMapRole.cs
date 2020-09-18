@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
+using static GameEnum;
 
 [Serializable]
 public class BaseMapRole : MonoBehaviour
@@ -547,7 +548,54 @@ public class BaseMapRole : MonoBehaviour
         
         if(!isNpc)
         {
-            if (TradeConstraint.My.CheckTradeConstraint(start.baseRoleData.baseRoleData.roleType, baseRoleData.baseRoleData.roleType))
+            if (start.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product && baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+            {
+                if (TradeConstraint.My.CheckTradeConstraint(start.baseRoleData.baseRoleData.roleType, baseRoleData.baseRoleData.roleType))
+                {
+                    foreach (var item in levelModels)
+                    {
+                        if (item.activeInHierarchy)
+                        {
+                            foreach (var t in item.GetComponentsInChildren<Transform>())
+                            {
+
+                                t.gameObject.layer = 9;
+                            }
+                        }
+                    }
+                    BulletLaunch temp;
+                    if (TryGetComponent(out temp))
+                    {
+                        foreach (var item in temp.paos)
+                        {
+                            item.transform.GetChild(0).gameObject.layer = 9;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var item in levelModels)
+                    {
+                        if (item.activeInHierarchy)
+                        {
+                            foreach (var t in item.GetComponentsInChildren<Transform>())
+                            {
+
+                                t.gameObject.layer = 10;
+                            }
+                        }
+                    }
+                    BulletLaunch temp;
+                    if (TryGetComponent(out temp))
+                    {
+                        foreach (var item in temp.paos)
+                        {
+                            item.transform.GetChild(0).gameObject.layer = 10;
+                        }
+                    }
+                }
+            }
+            else
             {
                 foreach (var item in levelModels)
                 {
@@ -566,28 +614,6 @@ public class BaseMapRole : MonoBehaviour
                     foreach (var item in temp.paos)
                     {
                         item.transform.GetChild(0).gameObject.layer = 9;
-                    }
-                }
-            }
-            else
-            {
-                foreach (var item in levelModels)
-                {
-                    if (item.activeInHierarchy)
-                    {
-                        foreach (var t in item.GetComponentsInChildren<Transform>())
-                        {
-
-                            t.gameObject.layer = 10;
-                        }
-                    }
-                }
-                BulletLaunch temp;
-                if (TryGetComponent(out temp))
-                {
-                    foreach (var item in temp.paos)
-                    {
-                        item.transform.GetChild(0).gameObject.layer = 10;
                     }
                 }
             }
@@ -603,7 +629,53 @@ public class BaseMapRole : MonoBehaviour
         }
         else if (npcScript.isCanSee && !npcScript.isLock)
         {
-            if (TradeConstraint.My.CheckTradeConstraint(start.baseRoleData.baseRoleData.roleType, baseRoleData.baseRoleData.roleType))
+            if (start.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product && baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+            {
+                if (TradeConstraint.My.CheckTradeConstraint(start.baseRoleData.baseRoleData.roleType, baseRoleData.baseRoleData.roleType))
+                {
+                    foreach (var item in levelModels)
+                    {
+                        if (item.activeInHierarchy)
+                        {
+                            foreach (var t in item.GetComponentsInChildren<Transform>())
+                            {
+                                t.gameObject.layer = 9;
+                            }
+                        }
+                    }
+                    BulletLaunch temp;
+                    if (TryGetComponent(out temp))
+                    {
+                        foreach (var item in temp.paos)
+                        {
+                            item.transform.GetChild(0).gameObject.layer = 9;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var item in levelModels)
+                    {
+                        if (item.activeInHierarchy)
+                        {
+                            foreach (var t in item.GetComponentsInChildren<Transform>())
+                            {
+
+                                t.gameObject.layer = 10;
+                            }
+                        }
+                    }
+                    BulletLaunch temp;
+                    if (TryGetComponent(out temp))
+                    {
+                        foreach (var item in temp.paos)
+                        {
+                            item.transform.GetChild(0).gameObject.layer = 10;
+                        }
+                    }
+                }
+            }
+            else
             {
                 foreach (var item in levelModels)
                 {
@@ -623,29 +695,7 @@ public class BaseMapRole : MonoBehaviour
                         item.transform.GetChild(0).gameObject.layer = 9;
                     }
                 }
-            }
-            else
-            {
-                foreach (var item in levelModels)
-                {
-                    if (item.activeInHierarchy)
-                    {
-                        foreach (var t in item.GetComponentsInChildren<Transform>())
-                        {
-
-                            t.gameObject.layer = 10;
-                        }
-                    }
-                }
-                BulletLaunch temp;
-                if (TryGetComponent(out temp))
-                {
-                    foreach (var item in temp.paos)
-                    {
-                        item.transform.GetChild(0).gameObject.layer = 10;
-                    }
-                }
-            }
+            }  
             //MeshRenderer[] temp = GetComponentsInChildren<MeshRenderer>();
             //foreach (MeshRenderer m in temp)
             //{

@@ -372,8 +372,9 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <summary>
     /// 设置两个条的长度    
     /// </summary>
-    public void SetInfo()
+    public void SetInfo(float time = 0.2f)
     {
+        print("time:" + time);
         float per = playerHealth / (float)playerMaxHealth;
         if (per > 1f)
         {
@@ -381,26 +382,21 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerHealth = playerMaxHealth;
         }
         playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
-        if (!playerGoldText.text.Equals(playerGold.ToString()))
-        {
-            playerGoldText.DOText( playerGold.ToString(),0.2f,true,ScrambleMode.Numerals) .Play() ;
-        }
+        playerGoldText.DOText(playerGold.ToString(), time, true, ScrambleMode.Numerals).Play();
 
         if (playerGold > 0)
-            playerGoldText.DOColor( Color.white,0.2f) .Play() ;
+            playerGoldText.DOColor( Color.white, time) .Play() ;
         else if (playerGold >= maxMinusGold)
-            playerGoldText.DOColor(  Color.yellow,0.2f) .Play() ;
+            playerGoldText.DOColor(  Color.yellow, time) .Play() ;
         else
-            playerGoldText.DOColor(  Color.red,0.2f) .Play() ;
-        if (!playerSatisfyText.text.Equals(playerSatisfy.ToString()))
-        {
-            playerSatisfyText.DOText(playerSatisfy.ToString(),0.02f,true,ScrambleMode.Numerals).Play()   ;
-        }
+            playerGoldText.DOColor(  Color.red, time) .Play() ;
+
+        playerSatisfyText.DOText(playerSatisfy.ToString(), time, true, ScrambleMode.Numerals).Play();
 
         if (PlayerData.My.cheatIndex1 || PlayerData.My.cheatIndex2 || PlayerData.My.cheatIndex3)
-            playerSatisfyText.DOColor( Color.gray,0.02f).Play() ;
+            playerSatisfyText.DOColor( Color.gray, time).Play() ;
         else
-            playerSatisfyText.DOColor( Color.white,0.02f).Play() ;
+            playerSatisfyText.DOColor( Color.white, time).Play() ;
         playerHealthText.text = (playerHealth / (float)playerMaxHealth).ToString("P");
         if (playerHealth / (float)playerMaxHealth > 0.5f)
         {
@@ -417,11 +413,51 @@ public class StageGoal : MonoSingleton<StageGoal>
             NewCanvasUI.My.StartLowHealth();
             playerHealthText.color = Color.red;
         }
-        if (!playerTechText.text.Equals(playerTechPoint.ToString()))
-        {
-            playerTechText.DOText( playerTechPoint.ToString(),0.02f,true,ScrambleMode.Numerals).Play() ;   
-        }
+        playerTechText.DOText(playerTechPoint.ToString(), time, true, ScrambleMode.Numerals).Play();
+    }
 
+    /// <summary>
+    /// 设置UI信息
+    /// </summary>
+    public void SetInfoImmidiate()
+    {
+        float per = playerHealth / (float)playerMaxHealth;
+        if (per > 1f)
+        {
+            per = 1f;
+            playerHealth = playerMaxHealth;
+        }
+        playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
+        playerGoldText.text = playerGold.ToString();
+        if (playerGold > 0)
+            playerGoldText.DOColor(Color.white, 0.02f).Play();
+        else if (playerGold >= maxMinusGold)
+            playerGoldText.DOColor(Color.yellow, 0.02f).Play();
+        else
+            playerGoldText.DOColor(Color.red, 0.02f).Play();
+
+        playerSatisfyText.text = playerSatisfy.ToString();
+        if (PlayerData.My.cheatIndex1 || PlayerData.My.cheatIndex2 || PlayerData.My.cheatIndex3)
+            playerSatisfyText.DOColor(Color.gray, 0.02f).Play();
+        else
+            playerSatisfyText.DOColor(Color.white, 0.02f).Play();
+        playerHealthText.text = (playerHealth / (float)playerMaxHealth).ToString("P");
+        if (playerHealth / (float)playerMaxHealth > 0.5f)
+        {
+            NewCanvasUI.My.EndLowHealth();
+            playerHealthText.color = Color.white;
+        }
+        else if (playerHealth / (float)playerMaxHealth > 0.2f)
+        {
+            NewCanvasUI.My.EndLowHealth();
+            playerHealthText.color = Color.yellow;
+        }
+        else
+        {
+            NewCanvasUI.My.StartLowHealth();
+            playerHealthText.color = Color.red;
+        }
+        playerTechText.text = playerTechPoint.ToString();
     }
 
     /// <summary>
@@ -579,6 +615,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             totalMinusGoldTime++;
         }
+        stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
         if (currentWave <= maxWaveNumber)
         {
             if (timeCount >= waitTimeList[currentWave - 1])
@@ -589,7 +626,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 timeCount++;
-                stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+                
                 if (timeCount % 5 == 0)
                 {
                     Stat();
@@ -759,7 +796,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             p.isEquiped = false;
         }
         InitStageData();
-        SetInfo();
+
         WaveCount();
     }
 
@@ -802,6 +839,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         maxWaveNumber = data.maxWaveNumber;
         playerTechPoint =  data.startTech;
         currentType = data.stageType;
+        SetInfoImmidiate();
         foreach (int i in data.waveWaitTime)
         {
             waitTimeList.Add(i);
