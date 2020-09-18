@@ -21,7 +21,7 @@ public class FTE_1_13 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-
+        trade.SetActive(false);
         if (check&&AnsweringPanel.My.isComplete)
         {
             GuideManager.My.baseGuideSteps[15].isOpen = false;
@@ -36,7 +36,7 @@ public class FTE_1_13 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
       
-        trade.SetActive(false);
+ 
         WaveCount.My.showDetail = false ;
         yield break;
     }
