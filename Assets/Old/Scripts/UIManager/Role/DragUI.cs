@@ -43,11 +43,23 @@ public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
         }
         if (index == transform.childCount)
         {
-            Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastpos + transform.position, Save);
+            if (!transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastPlot.GetComponent<PlotSign>().isOccupied)
+            {
+                Remove();
+                Debug.Log("占用销毁"+gameObject.name);
+                Destroy(this.gameObject, 0f);
+                return false;
+            }
+            else
+            {
+                Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastpos + transform.position, Save);
+                return true;
+                
+            }
+
             // Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>(). lastPlot.position,Save);
             //Save();
             //CreatRoleManager.My.CheckAllConditions();
-            return true;
         }
         else
         {
@@ -80,6 +92,7 @@ public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
             }
             else
             {
+                Debug.Log("放下销毁"+gameObject.name);
                 Remove();
                 Destroy(this.gameObject, 0f);
                 // CreatRoleManager.My.CheckAllConditions();

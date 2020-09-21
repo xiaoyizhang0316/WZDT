@@ -25,6 +25,7 @@ public class AutoFireTow : MonoBehaviour
     {
         InvokeRepeating("GetminDisConsumer",0,1);
        // InvokeRepeating("Shoot",1,shootTime);
+       Shoot();
 //        GetComponent<BulletLaunch>().fire .SetActive(false);
         DestotyOBJ();
     }
@@ -80,7 +81,7 @@ public class AutoFireTow : MonoBehaviour
 
     public void Shoot()
     {
-        transform.DOScale(transform.localScale, shootTime).OnComplete(() =>
+        transform.DOScale(1, shootTime).OnComplete(() =>
         {
             if (Asign != null)
             {
@@ -100,7 +101,7 @@ public class AutoFireTow : MonoBehaviour
 
     public void DestotyOBJ()
     {
-        transform.DOScale(0.5f, destroyTime-1).OnComplete(() =>
+        transform.DOScale(1, destroyTime-1).OnComplete(() =>
         {
             
             GameObject gameObject =  Instantiate(boom,transform);
@@ -108,7 +109,7 @@ public class AutoFireTow : MonoBehaviour
             CancelInvoke("Shoot");
             GetComponent<BoomTrigger>().GetConsumerListTow();
         });
-        transform.DOScale(0.5f, destroyTime).OnComplete(() =>
+        transform.DOScale(1, destroyTime).OnComplete(() =>
         { 
             Destroy(gameObject);
         });
