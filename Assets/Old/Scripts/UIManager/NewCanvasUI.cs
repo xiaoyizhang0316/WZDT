@@ -386,6 +386,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         {
             return;
         }
+        if (GuideManager.My.currentGuideIndex != -1)
+        {
+            return;
+        }
         if (hidePanel.GetComponent<Image>().fillAmount >= 0.99f)
         {
             isPlaying = true;
@@ -414,6 +418,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void ToggleHidePanelShow()
     {
         if (isPlaying)
+        {
+            return;
+        }
+        if (GuideManager.My.currentGuideIndex != -1)
         {
             return;
         }
