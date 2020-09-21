@@ -24,7 +24,7 @@ public class AutoFireTow : MonoBehaviour
     void Start()
     {
         InvokeRepeating("GetminDisConsumer",0,1);
-        InvokeRepeating("Shoot",1,shootTime);
+       // InvokeRepeating("Shoot",1,shootTime);
 //        GetComponent<BulletLaunch>().fire .SetActive(false);
         DestotyOBJ();
     }
@@ -80,16 +80,22 @@ public class AutoFireTow : MonoBehaviour
 
     public void Shoot()
     {
-        if (Asign != null)
+        transform.DOScale(transform.localScale, shootTime).OnComplete(() =>
         {
-            //GetComponent<BulletLaunch>().fire .SetActive(true);
+            if (Asign != null)
+            {
+                //GetComponent<BulletLaunch>().fire .SetActive(true);
             
-            GetComponent<BulletLaunch>().LanchLeaser(data, Asign, launchShooter,lunch,transform);
-        }
-        else
-        {
-          //  GetComponent<BulletLaunch>().fire .SetActive(false);
-        }
+                GetComponent<BulletLaunch>().LanchLeaser(data, Asign, launchShooter,lunch,transform);
+            }
+            else
+            {
+                //  GetComponent<BulletLaunch>().fire .SetActive(false);
+            }
+
+            Shoot();
+        });
+    
     }
 
     public void DestotyOBJ()
