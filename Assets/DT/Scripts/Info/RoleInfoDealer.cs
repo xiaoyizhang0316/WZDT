@@ -34,7 +34,7 @@ public class RoleInfoDealer : BaseRoleInfoAdd
 
     public override void Init()
     {
-        fireTime.text = (CreatRoleManager.My.finalEfficiency * -0.01f + 1.5f  ).ToString("#.##")+"s";
+        fireTime.text = (CreatRoleManager.My.finalEfficiency * -0.01f + 1.5f  ).ToString("F2") +"s";
         efficiency.text = CreatRoleManager.My.finalEfficiency.ToString();
         Range.text = (CreatRoleManager.My.finalRange ).ToString() ;
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();
