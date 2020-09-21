@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// 炮弹发射器
@@ -179,14 +180,21 @@ public class BulletLaunch : MonoBehaviour
         tow.GetComponent<AutoFireTow>().destroyTime = 13;
         tow.GetComponent<AutoFireTow>().launchShooter = launchShooter;
         tow.GetComponent<AutoFireTow>().lunch = this;
-        tow.GetComponent<AutoFireTow>().target = GetComponent<BaseMapRole>().shootTarget;
+        if (GetComponent<BaseMapRole>().shootTargetList.Count > 0)
+        {
+            tow.GetComponent<AutoFireTow>().target =GetComponent<BaseMapRole>().shootTargetList[Random.Range(0, GetComponent<BaseMapRole>().shootTargetList.Count)];
+        }
+        else
+        {
+            return;
+        }
+
 
         tow.GetComponent<AutoFireTow>().shootTime = 1f / (GetComponent<BaseMapRole>().baseRoleData.efficiency * 0.04f) * data.loadingSpeed;
         tow.GetComponent<BulletEffect>().InitBufflist(data.buffList);
 
 
-        pointList = DrawLine(tow.transform.position, GetComponent<BaseMapRole>().shootTarget.transform.position);
-        tow.transform.localPosition = new Vector3(0, 0.4f, 0);
+           tow.transform.localPosition = new Vector3(0, 0.4f, 0);
         tow.transform.SetParent(transform);
         launchShooter.DOLookAt(tow.GetComponent<AutoFireTow>().target.transform.position, 0.1f).OnComplete(() =>
           {
