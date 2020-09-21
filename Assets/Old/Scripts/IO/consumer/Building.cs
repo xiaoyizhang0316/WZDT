@@ -150,14 +150,7 @@ public class Building : MonoBehaviour
             for (int i = 0; i < w.num; i++)
             {
                 float waitTime;
-                if (NetworkMgr.My.useLocalJson)
-                {
-                    waitTime = GameDataMgr.My.consumerWaitTime[w.consumerType];
-                }
-                else
-                {
-                    waitTime = 1.3f + buildingWaitTime;
-                }
+                waitTime = GameDataMgr.My.consumerWaitTime[w.consumerType] + buildingWaitTime;
                 Tweener twe = transform.DOScale(1f, waitTime);
                 yield return twe.WaitForCompletion();
                 string path = "Prefabs/Consumer/" + w.consumerType.ToString();
