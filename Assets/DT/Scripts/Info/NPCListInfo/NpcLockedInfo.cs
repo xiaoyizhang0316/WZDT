@@ -30,7 +30,7 @@ public class NpcLockedInfo : MonoBehaviour
 
         unlockCost.text = unlockNumber.ToString();
 
-        timeInterval.text = (1.0f / npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("#.##");
+        timeInterval.text = (1.0f / npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("F2");
 
         int i = 0;
         foreach (var sp in buffs)
