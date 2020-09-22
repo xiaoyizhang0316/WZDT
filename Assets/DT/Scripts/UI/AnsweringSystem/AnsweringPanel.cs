@@ -407,6 +407,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
     private void NextConfirm()
     {
         mask.SetActive(true);
+        next_btn.interactable = false;
         if (currentQuestion.IsTrueAnswer(answer))
         {
             StartCoroutine(Next(true));
@@ -495,11 +496,12 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
     IEnumerator ShowReplay()
     {
         error_image.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         replay_btn.onClick.RemoveAllListeners();
         replay_btn.onClick.AddListener(() => Replay());
         passOFail_text.text = "答题失败！请重新来过！";
         replayPanel.SetActive(true);
+        mask.SetActive(false);
         qDesc.gameObject.SetActive(false);
         mask.SetActive(false);
     }
@@ -520,7 +522,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
             //error_image.SetActive(true);
             
         //}
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.3f);
         mask.SetActive(false);
         correct_image.SetActive(false);
         
@@ -547,6 +549,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         wrong_btn.gameObject.SetActive(false);
         if (isFail)
         {
+            next_btn.interactable = false;
             StartCoroutine(ShowReplay());
         }
         else
