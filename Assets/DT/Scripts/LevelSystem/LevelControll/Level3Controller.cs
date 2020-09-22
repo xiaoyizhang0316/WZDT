@@ -16,11 +16,11 @@ public class Level3Controller : BaseLevelController
 
     public override void CheckStarTwo()
     {
-        if (targetNumber >= 5)
+        if (targetNumber >= 3)
         {
             starTwoStatus = true;
         }
-        starTwoCondition = "满足传奇蓝领数量" + targetNumber.ToString() + "/5";
+        starTwoCondition = "满足传奇蓝领数量" + targetNumber.ToString() + "/3";
     }
 
     public override void CheckStarThree()
