@@ -96,6 +96,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     public void CloseFTE()
     {
         ftegob.SetActive(false);
+        currentGuideIndex = -1;
         foreach (var item in NewCanvasUI.My.highLight)
         {
             item.SetActive(true);

@@ -417,11 +417,11 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public void ToggleHidePanelShow()
     {
-        if (isPlaying)
+        if (GuideManager.My.currentGuideIndex != -1)
         {
             return;
         }
-        if (GuideManager.My.currentGuideIndex != -1)
+        if (isPlaying)
         {
             return;
         }
