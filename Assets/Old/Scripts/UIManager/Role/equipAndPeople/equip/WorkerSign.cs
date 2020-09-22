@@ -191,6 +191,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         {
             if (worker == null || isOccupation)
             {
+                Debug.Log("工人销毁");
                 return;
             }
 

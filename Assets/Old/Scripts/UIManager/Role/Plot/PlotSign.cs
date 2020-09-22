@@ -9,16 +9,21 @@ using UnityEngine;
 public class PlotSign : MonoBehaviour
 {
     public bool isOccupied;
-    
+
+    public GameObject target;
+    public void Start()
+    {
+        isOccupied = false;
+    }
+
     private void OnTriggerStay(Collider other)
     {
        
-        isOccupied = true;
-        
+        isOccupied = true; 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        isOccupied = false;
+        isOccupied = false; 
     }
 }
