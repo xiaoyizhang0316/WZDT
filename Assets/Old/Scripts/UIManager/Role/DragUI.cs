@@ -46,21 +46,21 @@ public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
         }
         if (index == transform.childCount)
         {
-            if (transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastPlot.GetComponent<PlotSign>().target!=null)
-            {
-                Remove();
-                Debug.Log("占用销毁"+gameObject.name);
-                Destroy(this.gameObject, 0f);
-                return false;
-            }
-            else
-            {
+           // if (transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastPlot.GetComponent<PlotSign>().target!=null)
+         //   {
+          //      Remove();
+          //      Debug.Log("占用销毁"+gameObject.name);
+          //      Destroy(this.gameObject, 0f);
+          //      return false;
+          //  }
+          //  else
+          //  {
                 Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastpos + transform.position, Save);
                 transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastPlot.GetComponent<PlotSign>().target =
                     gameObject;
                 return true;
                 
-            }
+        //    }
 
             // Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>(). lastPlot.position,Save);
             //Save();
