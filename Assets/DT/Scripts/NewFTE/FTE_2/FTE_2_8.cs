@@ -37,7 +37,6 @@ public class FTE_2_8 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         WorkerListManager.My.GetComponent<ScrollRect>().vertical = true;
-        MapManager.My.GetMapSignByXY(9, 24).isCanPlace = false;
         yield break;
         
     }
