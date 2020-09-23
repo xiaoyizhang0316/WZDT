@@ -38,6 +38,8 @@ public class FTE_2_6 : BaseGuideStep
                 MapManager.My._mapSigns[i].isCanPlace = true;
             }
         }
+        
+        MapManager.My.GetMapSignByXY(9, 24).isCanPlace = false;
         yield break;
         
     }
