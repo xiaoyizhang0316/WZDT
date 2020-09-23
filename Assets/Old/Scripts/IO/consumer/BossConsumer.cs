@@ -482,11 +482,11 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 召唤小弟
     /// </summary>
-    public void SummonLittle()
+    public void SummonLittle(int number = 8)
     {
         if (killCount <= 5)
             return;
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < number; i++)
         {
             GameObject go = Instantiate(littlePrb, transform.parent);
             go.transform.position = bossPathList[0].position;
@@ -504,8 +504,8 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     public void SummonLittleCircle()
     {
-        SummonLittle();
-        transform.DOScale(transform.localScale, 74f).OnComplete(SummonLittleCircle);
+        SummonLittle(4);
+        transform.DOScale(transform.localScale, 148f).OnComplete(SummonLittleCircle);
     }
 
     /// <summary>
