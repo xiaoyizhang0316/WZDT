@@ -191,6 +191,8 @@ public class BaseMapRole : MonoBehaviour
         {
             result += 0 - endTradeList[i].tradeData.dividePercent;
         }
+        result = Mathf.Min(10, result);
+        result = Mathf.Max(result, -5);
         encourageLevel = result;
     }
 
