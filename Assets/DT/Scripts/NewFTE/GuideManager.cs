@@ -96,6 +96,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     public void CloseFTE()
     {
         ftegob.SetActive(false);
+        currentGuideIndex = -1;
         foreach (var item in NewCanvasUI.My.highLight)
         {
             item.SetActive(true);
@@ -115,7 +116,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             }
         }
         NewCanvasUI.My.Panel_Update.transform.localPosition = Vector3.one;
-        
+        if(guideClose!=null)
         guideClose.gameObject.SetActive(false);
     }
 

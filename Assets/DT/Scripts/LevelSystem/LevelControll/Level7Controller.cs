@@ -15,14 +15,14 @@ public class Level7Controller : BaseLevelController
 
     public override void CheckStarTwo()
     {
-        if (targetNumber >= 16)
+        if (targetNumber >= 45)
             starTwoStatus = true;
-        starTwoCondition = "用罐头满足16个消费者，当前：" + targetNumber.ToString();
+        starTwoCondition = "用罐头满足45个消费者，当前：" + targetNumber.ToString();
     }
 
     public override void CheckStarThree()
     {
-        if (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth > 0.6f)
+        if (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth >= 0.6f)
         {
             starThreeStatus = true;
         }
@@ -30,7 +30,7 @@ public class Level7Controller : BaseLevelController
         {
             starThreeStatus = false;
         }
-        string number = (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth * 100).ToString("##.##") + "%";
+        string number = (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth * 100).ToString("F2") + "%";
         starThreeCondition = "满意度不低于60%，当前：" + number;
         CheckCheat();
     }

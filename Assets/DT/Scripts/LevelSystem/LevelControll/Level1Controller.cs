@@ -35,7 +35,7 @@ public class Level1Controller : BaseLevelController
         {
             starThreeStatus = false;
         }
-        string number = (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth * 100).ToString("##.##") + "%";
+        string number = (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth * 100).ToString("F2") + "%";
         starThreeCondition = "玩家血量不低于80%，当前：" + number;
     }
 }

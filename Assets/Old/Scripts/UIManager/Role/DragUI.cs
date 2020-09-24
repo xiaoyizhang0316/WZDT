@@ -35,19 +35,36 @@ public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
         int index = 0;
         for (int i = 0; i < transform.childCount; i++)
         {
+            Debug.Log(transform.GetChild(i).GetComponent<BaseAssembleUISign>().lastPlot );
+            Debug.Log( transform.GetChild(i).GetComponent<BaseAssembleUISign>().isRelease);
             if (transform.GetChild(i).GetComponent<BaseAssembleUISign>().lastPlot != null &&
                 transform.GetChild(i).GetComponent<BaseAssembleUISign>().isRelease)
             {
+              
                 index++;
             }
         }
         if (index == transform.childCount)
         {
-            Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastpos + transform.position, Save);
+           // if (transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastPlot.GetComponent<PlotSign>().target!=null)
+         //   {
+          //      Remove();
+          //      Debug.Log("占用销毁"+gameObject.name);
+          //      Destroy(this.gameObject, 0f);
+          //      return false;
+          //  }
+          //  else
+          //  {
+                Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastpos + transform.position, Save);
+                transform.GetChild(0).GetComponent<BaseAssembleUISign>().lastPlot.GetComponent<PlotSign>().target =
+                    gameObject;
+                return true;
+                
+        //    }
+
             // Adsorb(transform.GetChild(0).GetComponent<BaseAssembleUISign>(). lastPlot.position,Save);
             //Save();
             //CreatRoleManager.My.CheckAllConditions();
-            return true;
         }
         else
         {
@@ -80,6 +97,7 @@ public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
             }
             else
             {
+                Debug.Log("放下销毁"+gameObject.name);
                 Remove();
                 Destroy(this.gameObject, 0f);
                 // CreatRoleManager.My.CheckAllConditions();

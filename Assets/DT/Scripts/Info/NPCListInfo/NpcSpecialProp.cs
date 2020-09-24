@@ -23,11 +23,11 @@ public class NpcSpecialProp : MonoBehaviour
         switch (npc.baseRoleData.baseRoleData.roleType)
         {
             case GameEnum.RoleType.Seed:
-                prop1.text = (npc.baseRoleData.efficiency / 20f).ToString("#.#") + "/s";
+                prop1.text = (npc.baseRoleData.efficiency / 20f).ToString("F2") + "/s";
                 prop2.text = (npc.baseRoleData.effect * 10).ToString();
                 break;
             case GameEnum.RoleType.Peasant:
-                prop1.text= (npc.baseRoleData.efficiency / 20f).ToString("#.#") + "/s";
+                prop1.text= (npc.baseRoleData.efficiency / 20f).ToString("F2") + "/s";
                 prop2.text = (npc.baseRoleData.effect).ToString() + "%";
                 break;
             case GameEnum.RoleType.Merchant:

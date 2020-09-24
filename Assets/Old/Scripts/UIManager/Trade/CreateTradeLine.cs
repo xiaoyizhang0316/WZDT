@@ -38,13 +38,19 @@ public class CreateTradeLine : MonoBehaviour
     {
         if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType == RoleType.Bank)
         {
-            string str = "利率: " + NewCanvasUI.My.startRole.GetComponent<BankLoan>().CalculateInterest(target) * 100f + "%";
-            FloatWindow.My.Init(str, NewCanvasUI.My.startRole.gameObject.transform);
+            if (!target.isNpc || (target.isNpc && target.npcScript.isCanSee))
+            {
+                string str = "利率: " + NewCanvasUI.My.startRole.GetComponent<BankLoan>().CalculateInterest(target) * 100f + "%";
+                FloatWindow.My.Init(str, NewCanvasUI.My.startRole.gameObject.transform);
+            }
         }
         else if (target.baseRoleData.baseRoleData.roleType == RoleType.Bank)
         {
-            string str = "利率: " + target.GetComponent<BankLoan>().CalculateInterest(NewCanvasUI.My.startRole) * 100f + "%";
-            FloatWindow.My.Init(str,target.gameObject.transform);
+            if (!NewCanvasUI.My.startRole.isNpc || (NewCanvasUI.My.startRole.isNpc && NewCanvasUI.My.startRole.npcScript.isCanSee))
+            {
+                string str = "利率: " + target.GetComponent<BankLoan>().CalculateInterest(NewCanvasUI.My.startRole) * 100f + "%";
+                FloatWindow.My.Init(str, target.gameObject.transform);
+            }
         }
     }
 
@@ -108,6 +114,7 @@ public class CreateTradeLine : MonoBehaviour
             lineGo.SetActive(false);
             gameObject.SetActive(false);
             NewCanvasUI.My.isSetTrade = false;
+            FloatWindow.My.Hide();
             if (NewCanvasUI.My.isChange)
             {
                 NewCanvasUI.My.isChange = false;

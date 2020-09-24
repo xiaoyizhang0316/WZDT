@@ -374,7 +374,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void SetInfo(float time = 0.2f)
     {
-        print("time:" + time);
+//        print("time:" + time);
         float per = playerHealth / (float)playerMaxHealth;
         if (per > 1f)
         {
