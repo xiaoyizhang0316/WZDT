@@ -161,7 +161,8 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     }
 
     public void OnDrag(PointerEventData eventData)
-    {
+    {   if (Input.GetMouseButton(1))
+            return;
         time += Time.deltaTime;
         if (worker == null || isOccupation)
         {
@@ -204,6 +205,8 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (Input.GetMouseButton(1))
+            return;
         time = 0;
         if (!isOccupation)
         {
