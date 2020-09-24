@@ -27,7 +27,7 @@ public class NpcServiceInfo : MonoBehaviour
         icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType.ToString() +
             (npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level == 0?1: npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level));
         level.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level.ToString();
-        timeInv.text = (1.0f/ npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("#.##");
+        timeInv.text = (1.0f/ npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("F2");
         encourageLevel.Init(npc.GetComponent<BaseMapRole>());
         int i = 0;
         foreach (var sp in buffs)
