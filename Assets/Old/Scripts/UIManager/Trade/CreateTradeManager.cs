@@ -313,6 +313,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         currentTrade.tradeData.castRole = castRole;
         currentTrade.tradeData.targetRole = targetRole;
         currentTrade.tradeData.dividePercent = selectDividePercent;
+        currentTrade.startPer = startPer;
+        currentTrade.endPer = endPer;
         currentTrade.UpdateEncourageLevel();
     }
 
