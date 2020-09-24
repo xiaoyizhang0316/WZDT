@@ -23,6 +23,7 @@ public class BankLoan : BaseExtraSkill
         int count = 0;
         StageGoal.My.GetPlayerGold(loanNumber);
         StageGoal.My.Income(loanNumber,IncomeType.Npc, GetComponentInParent<BaseMapRole>());
+        eachReturn = (int)(loanNumber * (1 + CalculateInterest(PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)))) / timeCount);
         while (count < timeCount)
         {
             Tweener twe = transform.DOScale(1f, 20f);
@@ -32,5 +33,14 @@ public class BankLoan : BaseExtraSkill
             count++;
         }
         TradeManager.My.DeleteTrade(sign.tradeData.ID);
+    }
+
+    public float CalculateInterest(BaseMapRole role)
+    {
+        int risk = role.baseRoleData.riskResistance;
+        risk = Mathf.Min(risk, 150);
+        risk = Mathf.Max(risk, 50);
+        print("利率：" + (risk * 0.1f - 3f) / 100f);
+        return (risk * 0.1f - 3f) / 100f;
     }
 }

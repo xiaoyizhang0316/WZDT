@@ -20,6 +20,15 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     public CashFlowType selectCashFlow;
 
     /// <summary>
+    /// 选择的分成比例
+    /// </summary>
+    public int selectDividePercent;
+
+    private float startPer;
+
+    private float endPer;
+
+    /// <summary>
     /// 释放技能者
     /// </summary>
     public string castRole;
@@ -65,6 +74,14 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 
     public Text tradeCostText;
 
+    public Slider divideSlider;
+
+    public List<Image> startStatus;
+
+    public List<Image> endStatus;
+
+    public List<Sprite> encourageStatus;
+
     /// <summary>
     /// 打开并初始化
     /// </summary>
@@ -84,11 +101,15 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     public void Init()
     {
         selectCashFlow = currentTrade.tradeData.selectCashFlow;
+        selectDividePercent = currentTrade.tradeData.dividePercent;
+        startPer = currentTrade.startPer;
+        endPer = currentTrade.endPer;
         castRole = currentTrade.tradeData.castRole;
         targetRole = currentTrade.tradeData.targetRole;
         InitName();
         InitRoleInfo();
         InitCashFlow();
+        InitDivide();
         InitTradeCost();
     }
 
@@ -129,8 +150,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     {
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole));
-        int result = startRole.baseRoleData.tradeCost + endRole.baseRoleData.tradeCost;
-        result += startRole.baseRoleData.riskResistance + endRole.baseRoleData.riskResistance;
+        int result = (int)((startRole.baseRoleData.tradeCost + startRole.baseRoleData.riskResistance)* startPer);
+        result += (int)((endRole.baseRoleData.tradeCost + endRole.baseRoleData.riskResistance) * endPer);
         int result1, result2;
         if (startRole.isNpc || endRole.isNpc)
         {
@@ -168,6 +189,19 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         }
     }
 
+    public void InitDivide()
+    {
+        divideSlider.value = selectDividePercent;
+        startStatus[0].gameObject.SetActive(selectDividePercent != 0);
+        startStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
+        startStatus[0].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
+        startStatus[1].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
+        endStatus[0].gameObject.SetActive(selectDividePercent != 0);
+        endStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
+        endStatus[0].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
+        endStatus[1].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
+    }
+
     /// <summary>
     /// 当现金流结构选项改变时
     /// </summary>
@@ -196,12 +230,60 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         }
     }
 
+    public void OnDivideValueChange()
+    {
+        selectDividePercent = (int)divideSlider.value;
+        switch (selectDividePercent)
+        {
+            case -2:
+                startPer = 0.6f;
+                endPer = 1.4f;
+                break;
+            case -1:
+                startPer = 0.8f;
+                endPer = 1.2f;
+                break;
+            case 0:
+                startPer = 1f;
+                endPer = 1f;
+                break;
+            case 1:
+                startPer = 1.2f;
+                endPer = 0.8f;
+                break;
+            case 2:
+                startPer = 1.4f;
+                endPer = 0.6f;
+                break;
+            default:
+                startPer = 1f;
+                endPer = 1f;
+                break;
+        }
+        startStatus[0].gameObject.SetActive(selectDividePercent != 0);
+        startStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
+        startStatus[0].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
+        startStatus[1].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
+        endStatus[0].gameObject.SetActive(selectDividePercent != 0);
+        endStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
+        endStatus[0].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
+        endStatus[1].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
+        if (selectCashFlow == currentTrade.tradeData.selectCashFlow)
+        {
+            InitTradeCost();
+        }
+        else
+        {
+            tradeCostText.text = "???";
+        }
+    }
+
     /// <summary>
     /// 保存并退出
     /// </summary>
     public void SaveAndQuit()
     {
-        bool isChange = selectCashFlow != currentTrade.tradeData.selectCashFlow;
+        bool isChange = (selectCashFlow != currentTrade.tradeData.selectCashFlow) || (selectDividePercent == currentTrade.tradeData.dividePercent);
         SaveTradeData();
         DeleteTradeMenu();
         if (isChange)
@@ -209,7 +291,6 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
             RecordChangeTrade(currentTrade);
             DataUploadManager.My.AddData(DataEnum.交易_改交易);
         }
-
     }
 
     /// <summary>
@@ -231,6 +312,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         currentTrade.tradeData.selectCashFlow = selectCashFlow;
         currentTrade.tradeData.castRole = castRole;
         currentTrade.tradeData.targetRole = targetRole;
+        currentTrade.tradeData.dividePercent = selectDividePercent;
+        currentTrade.UpdateEncourageLevel();
     }
 
     /// <summary>

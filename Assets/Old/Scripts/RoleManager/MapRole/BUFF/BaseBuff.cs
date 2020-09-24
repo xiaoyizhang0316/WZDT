@@ -484,11 +484,27 @@ public class BaseBuff
         }
         else if (Mathf.Abs(float.Parse(attri[1])) > 1f)
         {
-            num = int.Parse(attri[1]);
+            if (castRole != null)
+            {
+                float add = 1f + castRole.encourageLevel * 0.1f;
+                num = (int)(int.Parse(attri[1]) * add);
+            }
+            else
+            {
+                num = int.Parse(attri[1]);
+            }
         }
         else
         {
-            num = (int)(sourceNum * float.Parse(attri[1]));
+            if (castRole != null)
+            {
+                float add = 1f + castRole.encourageLevel * 0.1f;
+                num = (int)(sourceNum * float.Parse(attri[1]) * add);
+            }
+            else
+            {
+                num = (int)(sourceNum * float.Parse(attri[1]));
+            }
         }
     }
 

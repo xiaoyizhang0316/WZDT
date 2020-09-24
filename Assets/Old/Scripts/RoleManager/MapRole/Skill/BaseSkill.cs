@@ -82,7 +82,16 @@ public abstract class BaseSkill : MonoBehaviour
     public virtual void UnleashSkills()
     {
         isPlay = true;
-        float d = 1f / (role.baseRoleData.efficiency * 0.05f);
+        float add = 1f;
+        if (role.encourageLevel > 0)
+        {
+            add -= role.encourageLevel * 0.05f;
+        }
+        else
+        {
+            add += role.encourageLevel * -0.1f;
+        }
+        float d = 1f / (role.baseRoleData.efficiency * 0.05f) * add;
         transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
         {
             Skill();

@@ -30,6 +30,8 @@ public class StageNPCItem
 
     public string posY;
 
+    public string startEncourageLevel;
+
     public string isCanSee;
 
     public string isLock;

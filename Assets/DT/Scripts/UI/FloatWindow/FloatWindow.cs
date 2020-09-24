@@ -12,12 +12,22 @@ public class FloatWindow : MonoSingleton<FloatWindow>
 
     public float y = -2;
 
-    public void Init(Transform _transform, string str)
+    public void Init(string str, Transform _transform = null)
     {
         showText.text = str;
-        Vector3 V = Input.mousePosition;
-        Vector3 V2 = new Vector3(V.x - Screen.width / 2 + 150f, V.y - Screen.height / 2);
-        transform.localPosition = V2;
+        if (_transform == null)
+        {
+            Vector3 V = Input.mousePosition;
+            Vector3 V2 = new Vector3(V.x - Screen.width / 2 + 150f, V.y - Screen.height / 2);
+            transform.localPosition = V2;
+        }
+        else
+        {
+            Vector2 pos = Camera.main.WorldToScreenPoint(_transform.position);
+            Vector2 newPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(), pos, Camera.main, out newPos);
+            GetComponent<RectTransform>().anchoredPosition = newPos;
+        }
         //CheckSize();
         CheckPos();
         //print(Input.mousePosition);
@@ -47,7 +57,7 @@ public class FloatWindow : MonoSingleton<FloatWindow>
 
     public void Hide()
     {
-        transform.position = new Vector3(10000f,0f,0f);
+        GetComponent<RectTransform>().anchoredPosition = new Vector3(10000f,0f,0f);
     }
 
     // Start is called before the first frame update

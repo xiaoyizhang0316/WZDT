@@ -25,6 +25,7 @@ public class ConsumerBuffReward : BaseExtraSkill
             }
             if (count == 0)
             {
+                other.transform.GetComponent<ConsumeSign>().enterMarketingTime = StageGoal.My.timeCount;
                 StageGoal.My.playerHealth += Mathf.Abs(other.transform.GetComponent<ConsumeSign>().consumeData.liveSatisfy * 80 / 100);
                 int number = other.transform.GetComponent<ConsumeSign>().consumeData.killMoney * 30 / 100;
                 StageGoal.My.GetPlayerGold(number);
@@ -35,6 +36,29 @@ public class ConsumerBuffReward : BaseExtraSkill
                 GameObject go1 = Instantiate(effectPrb2, transform);
                 go1.transform.position = other.transform.position;
                 Destroy(go1, 1f);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Consumer") && isOpen)
+        {
+            if (other.transform.GetComponent<ConsumeSign>().enterMarketingTime > 0)
+            {
+                if ((StageGoal.My.timeCount - other.transform.GetComponent<ConsumeSign>().enterMarketingTime) % 3 == 0)
+                {
+                    StageGoal.My.playerHealth += Mathf.Abs(other.transform.GetComponent<ConsumeSign>().consumeData.liveSatisfy * 80 / 100);
+                    int number = other.transform.GetComponent<ConsumeSign>().consumeData.killMoney * 30 / 100;
+                    StageGoal.My.GetPlayerGold(number);
+                    StageGoal.My.Income(number, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
+                    GameObject go = Instantiate(effectPrb1, transform);
+                    go.transform.position = other.transform.position;
+                    Destroy(go, 1f);
+                    GameObject go1 = Instantiate(effectPrb2, transform);
+                    go1.transform.position = other.transform.position;
+                    Destroy(go1, 1f);
+                }
             }
         }
     }
