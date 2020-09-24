@@ -287,7 +287,7 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     public void AddPlayerResource()
     {
-        StageGoal.My.playerHealth += 30 + (killCount / 5) * 3;
+        StageGoal.My.playerHealth += 30 + (killCount / 3) * 4;
     }
 
     /// <summary>
@@ -482,7 +482,7 @@ public class BossConsumer : ConsumeSign
     /// <summary>
     /// 召唤小弟
     /// </summary>
-    public void SummonLittle(int number = 8)
+    public void SummonLittle(int number = 12)
     {
         if (killCount <= 5)
             return;
@@ -493,7 +493,7 @@ public class BossConsumer : ConsumeSign
             print(tweener.fullPosition);
             float ran = Random.Range(-2f, 2f);
             go.GetComponent<BossSummonConsumer>().Init(bossPathList, tweener.fullPosition + ran, consumeData.moveSpeed);
-            go.GetComponent<BossSummonConsumer>().consumeData.maxHealth = (int)(consumeData.maxHealth * 0.2f);
+            go.GetComponent<BossSummonConsumer>().consumeData.maxHealth = 350 * killCount + 1000;
             go.GetComponent<BossSummonConsumer>().consumeData.killMoney = (int)(consumeData.killMoney * 0.1f);
             go.GetComponent<BossSummonConsumer>().consumeData.killSatisfy = 0;
         }
@@ -504,7 +504,7 @@ public class BossConsumer : ConsumeSign
     /// </summary>
     public void SummonLittleCircle()
     {
-        SummonLittle(4);
+        SummonLittle(6);
         transform.DOScale(transform.localScale, 148f).OnComplete(SummonLittleCircle);
     }
 
