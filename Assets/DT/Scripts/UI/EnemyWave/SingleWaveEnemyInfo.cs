@@ -65,7 +65,7 @@ public class SingleWaveEnemyInfo : MonoBehaviour
     public void FloatWindowShow()
     {
         ConsumerTypeData data = GameDataMgr.My.GetConsumerTypeDataByType(consumeType);
-        FloatWindow.My.Init(typeSprite.transform, data.typeDesc);
+        FloatWindow.My.Init(data.typeDesc);
     }
 
     public void FLoatWindowHide()

@@ -37,6 +37,7 @@ public class NpcSpecialInfo : MonoBehaviour
     public Sprite tow;
     public Sprite seedSpeed;
 
+    public EncourageLevel encourageLevel;
 
     public void SetInfo(BaseMapRole npc, BaseSkill baseSkill, Transform npcTF)
     {
@@ -48,6 +49,7 @@ public class NpcSpecialInfo : MonoBehaviour
         risk.text = npc.baseRoleData.riskResistance.ToString();
         level.text = npc.baseRoleData.baseRoleData.level.ToString();
         HideAll();
+        encourageLevel.Init(npc);
         clearBullets.onClick.RemoveAllListeners();
         clearBullets.onClick.AddListener(()=> {
             NewCanvasUI.My.Panel_Delete.SetActive(true);

@@ -94,6 +94,20 @@ public class BaseMapRole : MonoBehaviour
 
     public GameObject tradeButton;
 
+    /// <summary>
+    /// 激励等级
+    /// </summary>
+    public int encourageLevel;
+
+    /// <summary>
+    /// 初始激励等级
+    /// </summary>
+    public int startEncourageLevel;
+
+    public List<TradeSign> startTradeList = new List<TradeSign>();
+
+    public List<TradeSign> endTradeList = new List<TradeSign>();
+
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
@@ -161,6 +175,23 @@ public class BaseMapRole : MonoBehaviour
             levelModels[1].SetActive(false);
             levelModels[2].SetActive(true);
         }
+    }
+
+    /// <summary>
+    /// 更新激励等级
+    /// </summary>
+    public void RecalculateEncourageLevel()
+    {
+        int result = startEncourageLevel;
+        for (int i = 0; i < startTradeList.Count; i++)
+        {
+            result += startTradeList[i].tradeData.dividePercent;
+        }
+        for (int i = 0; i < endTradeList.Count; i++)
+        {
+            result += 0 - endTradeList[i].tradeData.dividePercent;
+        }
+        encourageLevel = result;
     }
 
     #region 战斗
@@ -231,7 +262,7 @@ public class BaseMapRole : MonoBehaviour
         {
             if (buffList[i].buffId == baseBuff.buffId)
             {
-                return;
+                RemoveBuff(buffList[i]);
             }
         }
         buffList.Add(baseBuff);

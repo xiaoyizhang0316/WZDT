@@ -149,6 +149,8 @@ public class MapManager : MonoSingleton<MapManager>
         role.baseRoleData.baseRoleData.roleName = npc.npcName;
         role.baseRoleData.bulletCapacity = npc.bulletCount;
         role.baseRoleData.ID = npc.npcID;
+        role.startEncourageLevel = npc.startEncourageLevel;
+        role.encourageLevel = npc.startEncourageLevel;
         NPC npcScript = go.GetComponent<NPC>();
         npcScript.isCanSee = npc.isCanSee;
         npcScript.isLock = npc.isLock;

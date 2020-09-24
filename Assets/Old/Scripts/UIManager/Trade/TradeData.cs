@@ -38,6 +38,11 @@ public class TradeData
     public CashFlowType selectCashFlow;
 
     /// <summary>
+    /// 分成比例
+    /// </summary>
+    public int dividePercent;
+
+    /// <summary>
     /// 是否免费
     /// </summary>
     public bool isFree;

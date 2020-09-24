@@ -187,6 +187,8 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (Input.GetMouseButton(1))
+            return;
         Debug.Log(time);
         time += Time.deltaTime;
         if (Equip == null || isOccupation)
@@ -231,6 +233,8 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private float time = 0; 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (Input.GetMouseButton(1))
+            return;
         time = 0;
        
         if (!isOccupation)
