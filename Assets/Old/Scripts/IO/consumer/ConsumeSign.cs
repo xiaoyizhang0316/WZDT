@@ -71,6 +71,8 @@ public class ConsumeSign : MonoBehaviour
 
     public int buildingIndex;
 
+    public int enterMarketingTime = 0;
+
     private float scorePer = 1f;
 
     /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameEnum;
 
 public class CreateTradeLine : MonoBehaviour
 {
@@ -33,6 +34,20 @@ public class CreateTradeLine : MonoBehaviour
         lineGo.GetComponent<MeshRenderer>().material = material;
     }
 
+    public void CheckBank(BaseMapRole target)
+    {
+        if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType == RoleType.Bank)
+        {
+            string str = "利率: " + NewCanvasUI.My.startRole.GetComponent<BankLoan>().CalculateInterest(target) * 100f + "%";
+            FloatWindow.My.Init(str, NewCanvasUI.My.startRole.gameObject.transform);
+        }
+        else if (target.baseRoleData.baseRoleData.roleType == RoleType.Bank)
+        {
+            string str = "利率: " + target.GetComponent<BankLoan>().CalculateInterest(NewCanvasUI.My.startRole) * 100f + "%";
+            FloatWindow.My.Init(str,target.gameObject.transform);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,11 +65,7 @@ public class CreateTradeLine : MonoBehaviour
                 Physics.Raycast(ray, out RaycastHit hit);
                 if(hit.transform != null)
                 {
-                    //if (hit.transform.tag.Equals("MapLand"))
-                    //{
-                    //    Target = hit.transform.position + new Vector3(0f, 1f, 0f);
-                    //    lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
-                    //}
+                    FloatWindow.My.Hide();
                     lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
                     Target = hit.point;
                     if (hit.transform.tag.Equals("MapRole"))
@@ -78,7 +89,8 @@ public class CreateTradeLine : MonoBehaviour
                             {
                                 lineGo.GetComponent<MeshRenderer>().material.color = Color.white;
                             }
-                        } 
+                            CheckBank(targetRole);
+                        }
                     }
                     Vector3 rightPosition = (startTarget.gameObject.transform.position + Target) / 2;
                     Vector3 rightRotation = Target - startTarget.transform.position;

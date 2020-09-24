@@ -34,7 +34,7 @@ public class WaveBuffSign : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (buffId > 0)
         {
             BuffData data = GameDataMgr.My.GetBuffDataByID(buffId);
-            FloatWindow.My.Init(transform, data.BuffDesc);
+            FloatWindow.My.Init(data.BuffDesc);
         }
     }
 

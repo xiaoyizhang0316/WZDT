@@ -15,6 +15,8 @@ public class NpcServiceInfo : MonoBehaviour
     public List<Image> buffs;
     public Text level;
 
+    public EncourageLevel encourageLevel;
+
     public void SetInfo(Transform npc, BaseSkill baseSkill)
     {
         npcName.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleName;
@@ -26,6 +28,7 @@ public class NpcServiceInfo : MonoBehaviour
             (npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level == 0?1: npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level));
         level.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level.ToString();
         timeInv.text = (1.0f/ npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("#.##");
+        encourageLevel.Init(npc.GetComponent<BaseMapRole>());
         int i = 0;
         foreach (var sp in buffs)
         {

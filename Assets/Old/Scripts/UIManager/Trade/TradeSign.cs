@@ -36,6 +36,10 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public Tweener tweener;
 
+    public float startPer;
+
+    public float endPer;
+
     private int countNumber = 0;
 
     private int createTime;
@@ -52,6 +56,9 @@ public class TradeSign : MonoBehaviour
         tradeData.targetRole = end;
         tradeData.selectSZFS = SZFSType.固定;
         tradeData.selectCashFlow = CashFlowType.先钱;
+        tradeData.dividePercent = 0;
+        startPer = 1f;
+        endPer = 1f;
         tradeData.ID = TradeManager.My.index++;
         createTime = StageGoal.My.timeCount;
         TradeManager.My.tradeList.Add(tradeData.ID, this);
@@ -97,6 +104,10 @@ public class TradeSign : MonoBehaviour
     public void AddTradeToRole()
     {
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        start.startTradeList.Add(this);
+        end.endTradeList.Add(this);
         cast.tradeList.Add(this);
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
@@ -219,7 +230,13 @@ public class TradeSign : MonoBehaviour
     public void ClearAllLine()
     {
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         cast.tradeList.Remove(this);
+        start.startTradeList.Remove(this);
+        end.endTradeList.Remove(this);
+        start.RecalculateEncourageLevel();
+        end.RecalculateEncourageLevel();
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
             cast.GetComponent<BaseSkill>().DeteleRoleBuff(tradeData);
@@ -230,6 +247,14 @@ public class TradeSign : MonoBehaviour
         }
     }
 
+    public void UpdateEncourageLevel()
+    {
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        start.RecalculateEncourageLevel();
+        end.RecalculateEncourageLevel();
+    }
+
     /// <summary>
     /// 结算交易成本
     /// </summary>
@@ -237,8 +262,8 @@ public class TradeSign : MonoBehaviour
     {
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
-        int result = startRole.baseRoleData.tradeCost + endRole.baseRoleData.tradeCost;
-        result += startRole.baseRoleData.riskResistance + endRole.baseRoleData.riskResistance;
+        int result = (int)((startRole.baseRoleData.tradeCost + startRole.baseRoleData.riskResistance) * startPer);
+        result += (int)((endRole.baseRoleData.tradeCost + endRole.baseRoleData.riskResistance) * endPer);
         int result1, result2;
         if (startRole.isNpc || endRole.isNpc)
         {

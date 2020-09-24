@@ -39,7 +39,7 @@ public class NpcProductInfo : MonoBehaviour
     public Sprite tow;
     public Text level;
 
-
+    public EncourageLevel encourageLevel;
 
 
     public void SetInfo(Transform npc, BaseSkill baseSkill)
@@ -73,6 +73,7 @@ public class NpcProductInfo : MonoBehaviour
             });
         });
         ShowBullets(npc);
+        encourageLevel.Init(npc.GetComponent<BaseMapRole>());
         bulletWarehourse.SetActive(true);
         int i = 0;
         foreach (var sp in buffs)

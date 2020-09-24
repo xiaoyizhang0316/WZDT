@@ -15,9 +15,9 @@ public class Level7Controller : BaseLevelController
 
     public override void CheckStarTwo()
     {
-        if (targetNumber >= 80)
+        if (targetNumber >= 16)
             starTwoStatus = true;
-        starTwoCondition = "用罐头满足80个消费者，当前：" + targetNumber.ToString();
+        starTwoCondition = "用罐头满足16个消费者，当前：" + targetNumber.ToString();
     }
 
     public override void CheckStarThree()

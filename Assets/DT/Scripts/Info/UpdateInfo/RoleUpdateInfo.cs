@@ -51,6 +51,8 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     public Button createTradeButton;
 
     public Button clearWarehouse;
+
+    public EncourageLevel encourageLevel;
     
     // Start is called before the first frame update
     void Start()
@@ -110,6 +112,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         roleImg.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + role.baseRoleData.roleType.ToString()+role.baseRoleData.level.ToString());
         roleImg.SetNativeSize();
         skillDesc.text = PlayerData.My.GetMapRoleById(role.ID).transform.GetComponent<BaseSkill>().skillDesc;
+        encourageLevel.Init(PlayerData.My.GetMapRoleById(role.ID));
         currentRole = role; 
         seed.SetActive(false);
         peasant.SetActive(false);
