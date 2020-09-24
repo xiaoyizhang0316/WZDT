@@ -26,7 +26,7 @@ public class IncreaseProduct : MonoBehaviour
             result = 0 - (GetComponentInParent<BaseMapRole>().baseRoleData.effect * 0.3f + 24f) / 100f;
             data.OnBuffAdd.Add("14_" + result.ToString());
             buff.Init(data);
-            buff.SetRoleBuff(targetRole, targetRole, targetRole);
+            buff.SetRoleBuff(null, targetRole, targetRole);
         }
     }
 
