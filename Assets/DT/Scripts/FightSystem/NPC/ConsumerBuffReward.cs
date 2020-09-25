@@ -46,8 +46,9 @@ public class ConsumerBuffReward : BaseExtraSkill
         {
             if (other.transform.GetComponent<ConsumeSign>().enterMarketingTime > 0)
             {
-                if ((StageGoal.My.timeCount - other.transform.GetComponent<ConsumeSign>().enterMarketingTime) % 3 == 0)
+                if ((StageGoal.My.timeCount - other.transform.GetComponent<ConsumeSign>().enterMarketingTime) >= 3)
                 {
+                    other.transform.GetComponent<ConsumeSign>().enterMarketingTime = StageGoal.My.timeCount;
                     StageGoal.My.playerHealth += Mathf.Abs(other.transform.GetComponent<ConsumeSign>().consumeData.liveSatisfy * 80 / 100);
                     int number = other.transform.GetComponent<ConsumeSign>().consumeData.killMoney * 30 / 100;
                     StageGoal.My.GetPlayerGold(number);

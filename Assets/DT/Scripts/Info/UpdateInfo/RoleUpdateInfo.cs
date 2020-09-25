@@ -150,6 +150,8 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             roleBuff[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.GetEquipBuffList()[i]);
             roleBuff[i].GetComponent<ShowBuffText>().currentbuffData =
                 GameDataMgr.My.GetBuffDataByID(baseMapRole.GetEquipBuffList()[i]);
+
+
         }
 
         for (int i = 0; i <buffTF.childCount; i++)
@@ -162,6 +164,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
            game.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.buffList[i].buffId.ToString());
            game.GetComponent<ShowBuffText>().currentbuffData =
                baseMapRole.buffList[i].buffData;
+            game.GetComponent<ShowBuffText>().role = baseMapRole.buffList[i].castRole;
         }
     }
 

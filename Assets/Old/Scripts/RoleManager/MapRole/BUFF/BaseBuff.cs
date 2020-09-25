@@ -24,6 +24,8 @@ public class BaseBuff
 
     public int count;
 
+    public string buffDesc = "";
+
     public BaseMapRole castRole;
 
     public BaseMapRole targetRole;

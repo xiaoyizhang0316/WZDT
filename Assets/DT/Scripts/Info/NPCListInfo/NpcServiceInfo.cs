@@ -35,7 +35,7 @@ public class NpcServiceInfo : MonoBehaviour
             if (i < baseSkill.buffList.Count)
             {
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.buffList[i]);
-                sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.buffList[i]));
+                sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.buffList[i]), npc.GetComponent<BaseMapRole>());
             }
             else
             {
@@ -53,7 +53,7 @@ public class NpcServiceInfo : MonoBehaviour
                 if (a < npc.GetComponent<NPC>().NPCBuffList.Count)
                 {
                     buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + npc.GetComponent<NPC>().NPCBuffList[a]);
-                    buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(npc.GetComponent<NPC>().NPCBuffList[a]));
+                    buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(npc.GetComponent<NPC>().NPCBuffList[a]), npc.GetComponent<BaseMapRole>());
                 }
                 else
                 {

@@ -27,7 +27,7 @@ public class Level1Controller : BaseLevelController
 
     public override void CheckStarThree()
     {
-        if (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth >= 0.8f)
+        if (StageGoal.My.playerHealth / (float)StageGoal.My.playerMaxHealth >= 0.795f)
         {
             starThreeStatus = true;
         }
