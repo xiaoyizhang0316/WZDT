@@ -130,6 +130,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
             game.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.buffList[i].buffId.ToString());
             game.GetComponent<BuffText>().buff =
                 baseMapRole.buffList[i].buffData;
+            game.GetComponent<BuffText>().role = baseMapRole.buffList[i].castRole;
         }
     }
 

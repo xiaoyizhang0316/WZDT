@@ -496,6 +496,7 @@ public class BossConsumer : ConsumeSign
             go.GetComponent<BossSummonConsumer>().consumeData.maxHealth = 350 * killCount + 1000;
             go.GetComponent<BossSummonConsumer>().consumeData.killMoney = (int)(consumeData.killMoney * 0.1f);
             go.GetComponent<BossSummonConsumer>().consumeData.killSatisfy = 0;
+            go.GetComponent<BossSummonConsumer>().consumeData.liveSatisfy = 0;
         }
     }
 

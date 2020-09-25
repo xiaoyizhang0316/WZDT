@@ -23,6 +23,8 @@ public class BuffItem
     public string AttackEffect;
 
     public string BuffDesc;
+
+    public string BuffParam;
     /// <summary>
     /// 
     /// </summary>
