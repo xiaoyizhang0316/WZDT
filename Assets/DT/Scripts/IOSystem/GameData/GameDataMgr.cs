@@ -137,6 +137,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 temp.OnBeforeDead.AddRange(b.OnBeforeDead);
                 temp.OnTick.AddRange(b.OnTick);
                 temp.OnProduct.AddRange(b.OnProduct);
+                temp.buffParam.AddRange(b.buffParam);
                 temp.duration = b.duration;
                 temp.interval = b.interval;
                 return temp;
@@ -239,6 +240,14 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.OnTick = b.OnTick.Split(',').ToList();
             temp.duration = int.Parse(b.Duration);
             temp.interval = int.Parse(b.Interval);
+            string[] str = b.BuffParam.Split(',');
+            for (int i = 0; i < str.Length; i++)
+            {
+                if(!str[i].Equals(""))
+                {
+                    temp.buffParam.Add(int.Parse(str[i]));
+                }
+            }
             buffDatas.Add(temp);
         }
         //print(buffDatas.Count);

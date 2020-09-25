@@ -30,7 +30,10 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         //           return;
         //       }
         //   }
-        Debug.Log(0.2446.ToString("F2"));
+        foreach (string str in "sdasdsads*".Split('*'))
+        {
+            Debug.Log("字符: " +str);
+        }
         if (useNetWork)
         {
             NetworkMgr.My.isUsingHttp = true;

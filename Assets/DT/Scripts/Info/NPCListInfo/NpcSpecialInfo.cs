@@ -105,12 +105,12 @@ public class NpcSpecialInfo : MonoBehaviour
             if (i < baseSkill.buffList.Count)
             {
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.buffList[i]);
-                sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.buffList[i]));
+                sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.buffList[i]), npc);
             }
             else if (i - baseSkill.buffList.Count < baseSkill.badSpecialBuffList.Count)
             {
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.badSpecialBuffList[i - baseSkill.buffList.Count]);
-                sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.badSpecialBuffList[i - baseSkill.buffList.Count]));
+                sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.badSpecialBuffList[i - baseSkill.buffList.Count]), npc);
             }
             else
             {
@@ -128,12 +128,12 @@ public class NpcSpecialInfo : MonoBehaviour
                 if (a < npc.GetComponent<NPC>().NPCBuffList.Count)
                 {
                     buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + npc.GetComponent<NPC>().NPCBuffList[a]);
-                    buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(npc.GetComponent<NPC>().NPCBuffList[a]));
+                    buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(npc.GetComponent<NPC>().NPCBuffList[a]), npc);
                 }
                 else if (a - npc.GetComponent<NPC>().NPCBuffList.Count < baseSkill.goodSpecialBuffList.Count)
                 {
                     buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.goodSpecialBuffList[a - npc.GetComponent<NPC>().NPCBuffList.Count]);
-                    buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.goodSpecialBuffList[a - npc.GetComponent<NPC>().NPCBuffList.Count]));
+                    buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.goodSpecialBuffList[a - npc.GetComponent<NPC>().NPCBuffList.Count]), npc);
                 }
                 else
                 {

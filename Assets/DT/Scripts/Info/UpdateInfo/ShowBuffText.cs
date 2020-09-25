@@ -7,10 +7,12 @@ public class ShowBuffText : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
 {
     public BuffData currentbuffData;
 
+    public BaseMapRole role;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         if(currentbuffData != null)
-            RoleUpdateInfo.My.ShowBuffText(currentbuffData.BuffDesc);
+            RoleUpdateInfo.My.ShowBuffText(currentbuffData.GenerateBuffDesc(role));
     }
 
     public void OnPointerExit(PointerEventData eventData)

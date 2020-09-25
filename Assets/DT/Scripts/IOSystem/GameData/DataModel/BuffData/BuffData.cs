@@ -27,6 +27,10 @@ public class BuffData
     /// </summary>
     public string BuffDesc;
 
+    /// <summary>
+    /// buff描述数字
+    /// </summary>
+    public List<int> buffParam;
 
     public ProductElementType elementType;
 
@@ -80,6 +84,44 @@ public class BuffData
         OnTick = new List<string>();
         OnProduct = new List<string>();
         otherFunctions = new Dictionary<int, List<string>>();
+        buffParam = new List<int>();
+    }
+
+    public string GenerateBuffDesc(BaseMapRole role)
+    {
+        string[] tempStr = BuffDesc.Split('*');
+        string result = tempStr[0];
+        float add = 1f;
+        if (role == null)
+        {
+            for (int i = 0; i < buffParam.Count; i++)
+            {
+                result += buffParam[i].ToString() + tempStr[i + 1];
+            }
+            result += tempStr[tempStr.Length - 1];
+            return result;
+        }
+        if (role.baseRoleData.baseRoleData.roleSkillType != RoleSkillType.Service)
+        {
+            if (role.encourageLevel > 0)
+            {
+                add += role.encourageLevel * 0.05f;
+            }
+            else
+            {
+                add += role.encourageLevel * -0.1f;
+            }
+        }
+        else
+        {
+            add += role.encourageLevel * 0.1f;
+        }
+        for (int i = 0; i < buffParam.Count; i++)
+        {
+            result += ((int)(buffParam[i] * add)).ToString() + tempStr[i + 1];
+        }
+        result += tempStr[tempStr.Length - 1];
+        return result;
     }
 }
 
