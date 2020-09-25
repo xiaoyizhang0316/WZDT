@@ -62,10 +62,20 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 techCost.color = Color.white;
             }
         }
+        if (Input.GetMouseButton(1))
+        {
+            Destroy(role, 0f);
+            role = null;
+            RoleFloatWindow.My.Hide();
+            dragImg.raycastTarget = true;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+
+        if (role == null)
+            return;
         for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].transform.localScale = Vector3.one;
@@ -78,11 +88,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 return;
             }
         }
-
-        if (Input.GetMouseButton(1))
-            return;
-        if (role == null)
-            return;
         if (NewCanvasUI.My.isSetTrade)
             return;
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
@@ -219,6 +224,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 {
                     print("false    ");
                     Destroy(role, 0.01f);
+                    RoleFloatWindow.My.Hide();
                     dragImg.raycastTarget = true;
                 }
                 break;
@@ -227,6 +233,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         if (!isSuccess)
         {
             dragImg.raycastTarget = true;
+            RoleFloatWindow.My.Hide();
             Destroy(role, 0.01f);
         }
     }
@@ -255,4 +262,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     {
         RoleFloatWindow.My.Hide();
     }
+
+    
 }

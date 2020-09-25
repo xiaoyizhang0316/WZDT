@@ -42,6 +42,7 @@ public class CreateTradeLine : MonoBehaviour
             {
                 string str = "利率: " + NewCanvasUI.My.startRole.GetComponent<BankLoan>().CalculateInterest(target) * 100f + "%";
                 FloatWindow.My.Init(str, NewCanvasUI.My.startRole.gameObject.transform);
+                RoleFloatWindow.My.Hide();
             }
         }
         else if (target.baseRoleData.baseRoleData.roleType == RoleType.Bank)
@@ -50,6 +51,7 @@ public class CreateTradeLine : MonoBehaviour
             {
                 string str = "利率: " + target.GetComponent<BankLoan>().CalculateInterest(NewCanvasUI.My.startRole) * 100f + "%";
                 FloatWindow.My.Init(str, target.gameObject.transform);
+                RoleFloatWindow.My.Hide();
             }
         }
     }
