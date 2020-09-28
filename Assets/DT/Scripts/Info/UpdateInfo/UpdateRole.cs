@@ -13,8 +13,8 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public Text upgradeNumber;
 
 
-     
-    public Role tempBaseRoleData; 
+    public Role tempBaseRoleData;
+
     public void Init()
     {
         if (RoleUpdateInfo.My.currentRole.baseRoleData.level == 5)
@@ -22,8 +22,9 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             upgradeNumber.gameObject.SetActive(false);
             return;
         }
-        tempBaseRoleData = new Role(); 
-        
+
+        tempBaseRoleData = new Role();
+
         upgradeNumber.gameObject.SetActive(true);
         upgradeNumber.text = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost.ToString();
     }
@@ -34,67 +35,96 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             return;
         }
-        
-        tempBaseRoleData.cost = RoleUpdateInfo.My.currentRole.cost  ;
-        tempBaseRoleData.effect = RoleUpdateInfo.My.currentRole.effect  ;
-        tempBaseRoleData.efficiency = RoleUpdateInfo.My.currentRole.efficiency  ;
-        tempBaseRoleData.range = RoleUpdateInfo.My.currentRole.range  ;
-        tempBaseRoleData.bulletCapacity = RoleUpdateInfo.My.currentRole.bulletCapacity  ;
-        tempBaseRoleData.equipCost = RoleUpdateInfo.My.currentRole.equipCost  ;
-        tempBaseRoleData.landCost = RoleUpdateInfo.My.currentRole.landCost  ;
-        tempBaseRoleData.riskResistance = RoleUpdateInfo.My.currentRole.riskResistance  ;
-        tempBaseRoleData.techAdd = RoleUpdateInfo.My.currentRole.techAdd  ;
-        tempBaseRoleData.tradeCost = RoleUpdateInfo.My.currentRole.tradeCost  ;
-        tempBaseRoleData.workerCost = RoleUpdateInfo.My.currentRole.workerCost  ;
-        tempBaseRoleData.ID = RoleUpdateInfo.My.currentRole.ID  ;
-        tempBaseRoleData.EquipList = RoleUpdateInfo.My.currentRole.EquipList  ;
-        tempBaseRoleData.peoPleList = RoleUpdateInfo.My.currentRole.peoPleList  ;  
-        tempBaseRoleData.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.currentRole.baseRoleData.level+1);
+
+        RoleBaseDataStruct basedata = new RoleBaseDataStruct();
+        basedata.cost = RoleUpdateInfo.My.currentRole.cost - RoleUpdateInfo.My.currentRole.baseRoleData.cost;
+        basedata.effect = RoleUpdateInfo.My.currentRole.effect - RoleUpdateInfo.My.currentRole.baseRoleData.effect;
+        basedata.efficiency = RoleUpdateInfo.My.currentRole.efficiency -
+                              RoleUpdateInfo.My.currentRole.baseRoleData.efficiency;
+        basedata.range = RoleUpdateInfo.My.currentRole.range - RoleUpdateInfo.My.currentRole.baseRoleData.range;
+        basedata.riskResistance = RoleUpdateInfo.My.currentRole.riskResistance -
+                                  RoleUpdateInfo.My.currentRole.baseRoleData.riskResistance;
+        basedata.tradeCost = RoleUpdateInfo.My.currentRole.tradeCost -
+                             RoleUpdateInfo.My.currentRole.baseRoleData.tradeCost;
+
+
+        tempBaseRoleData.cost = RoleUpdateInfo.My.currentRole.cost;
+        tempBaseRoleData.effect = RoleUpdateInfo.My.currentRole.effect;
+        tempBaseRoleData.efficiency = RoleUpdateInfo.My.currentRole.efficiency;
+        tempBaseRoleData.range = RoleUpdateInfo.My.currentRole.range;
+        tempBaseRoleData.bulletCapacity = RoleUpdateInfo.My.currentRole.bulletCapacity;
+        tempBaseRoleData.equipCost = RoleUpdateInfo.My.currentRole.equipCost;
+        tempBaseRoleData.landCost = RoleUpdateInfo.My.currentRole.landCost;
+        tempBaseRoleData.riskResistance = RoleUpdateInfo.My.currentRole.riskResistance;
+        tempBaseRoleData.techAdd = RoleUpdateInfo.My.currentRole.techAdd;
+        tempBaseRoleData.tradeCost = RoleUpdateInfo.My.currentRole.tradeCost;
+        tempBaseRoleData.workerCost = RoleUpdateInfo.My.currentRole.workerCost;
+        tempBaseRoleData.ID = RoleUpdateInfo.My.currentRole.ID;
+        tempBaseRoleData.EquipList = RoleUpdateInfo.My.currentRole.EquipList;
+        tempBaseRoleData.peoPleList = RoleUpdateInfo.My.currentRole.peoPleList;
+        tempBaseRoleData.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType,
+            RoleUpdateInfo.My.currentRole.baseRoleData.level + 1);
         tempBaseRoleData.baseRoleData.roleName = RoleUpdateInfo.My.currentRole.baseRoleData.roleName;
-  
-         
+
+
         tempBaseRoleData.CalculateAllAttribute();
-        RoleUpdateInfo.My.ReInit( tempBaseRoleData);
+        tempBaseRoleData.cost = tempBaseRoleData.baseRoleData.cost + basedata.cost;
+        tempBaseRoleData.effect = tempBaseRoleData.baseRoleData.effect + basedata.effect;
+        tempBaseRoleData.efficiency = tempBaseRoleData.baseRoleData.efficiency + basedata.efficiency;
+        tempBaseRoleData.range = tempBaseRoleData.baseRoleData.range + basedata.range;
+        tempBaseRoleData.riskResistance = tempBaseRoleData.baseRoleData.riskResistance + basedata.riskResistance;
+        tempBaseRoleData.tradeCost = tempBaseRoleData.baseRoleData.tradeCost + basedata.tradeCost;
+        RoleUpdateInfo.My.ReInit(tempBaseRoleData);
         isUpdate = true;
- 
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!isUpdate||!GetComponent<Button>().interactable  )
+        if (!isUpdate || !GetComponent<Button>().interactable)
         {
             return;
         }
 
-     
-        RoleUpdateInfo.My.ReInit(RoleUpdateInfo.My.currentRole );
+        //tempBaseRoleData.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.currentRole.baseRoleData.level);
+        //tempBaseRoleData.baseRoleData.roleName = RoleUpdateInfo.My.currentRole.baseRoleData.roleName;
+
+        //tempBaseRoleData.CalculateAllAttribute();
+        RoleUpdateInfo.My.ReInit(RoleUpdateInfo.My.currentRole);
         isUpdate = false;
     }
 
     private Tweener tew;
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        UpdateRole1();
+        UpdateRole1(eventData);
     }
 
-    public void UpdateRole1()
+    public void UpdateRole1(PointerEventData eventData = null)
     {
-        if (RoleUpdateInfo.My.currentRole.baseRoleData.level == 5 || (tew != null && tew.IsPlaying())||!GetComponent<Button>().interactable   )
+        if (RoleUpdateInfo.My.currentRole.baseRoleData.level == 5 || (tew != null && tew.IsPlaying()) ||
+            !GetComponent<Button>().interactable)
         {
             Debug.Log(hammer.transform.eulerAngles);
             return;
         }
+
         if (RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost <= StageGoal.My.playerGold)
         {
             DataUploadManager.My.AddData(DataEnum.角色_升级);
             GetComponent<Button>().interactable = false;
-           
+
             StageGoal.My.CostPlayerGold(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost);
-            StageGoal.My.Expend(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost, ExpendType.AdditionalCosts, null, "升级");
+            StageGoal.My.Expend(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost, ExpendType.AdditionalCosts,
+                null, "升级");
             UpgradeRoleRecord(RoleUpdateInfo.My.currentRole);
-            RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.currentRole.baseRoleData.level+1);
+            RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(
+                RoleUpdateInfo.My.currentRole.baseRoleData.roleType,
+                RoleUpdateInfo.My.currentRole.baseRoleData.level + 1);
             RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
             RoleUpdateInfo.My.currentRole.baseRoleData.roleName = RoleUpdateInfo.My.roleName;
+        
+            PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ResetAllBuff();
             RoleUpdateInfo.My.Init(RoleUpdateInfo.My.currentRole);
             tew = hammer.transform.DOLocalRotate(new Vector3(0, 0, -42f), 0.3f).SetEase(Ease.InOutBack).OnComplete(() =>
             {
@@ -114,13 +144,20 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 else
                 {
                     upgradeNumber.gameObject.SetActive(true);
-                   
-                    upgradeNumber.text = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost.ToString();
-                    tempBaseRoleData.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.currentRole.baseRoleData.level);
-                    tempBaseRoleData.baseRoleData.roleName = RoleUpdateInfo.My.currentRole.baseRoleData.roleName;
-                    PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ResetAllBuff();
-                    //RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
-                    RoleUpdateInfo.My.ReInit(tempBaseRoleData);
+
+                    if (eventData != null)
+                    {
+                        Debug.Log("初始化下一级");
+                        OnPointerEnter(eventData);
+
+                    }
+
+                    // upgradeNumber.text = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost.ToString();
+                    // tempBaseRoleData.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.currentRole.baseRoleData.level);
+                    // tempBaseRoleData.baseRoleData.roleName = RoleUpdateInfo.My.currentRole.baseRoleData.roleName;
+                    // PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ResetAllBuff();
+                    // //RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
+                    // RoleUpdateInfo.My.ReInit(tempBaseRoleData);
                 }
             }).Play();
         }
