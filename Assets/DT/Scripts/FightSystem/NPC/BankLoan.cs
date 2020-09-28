@@ -38,9 +38,9 @@ public class BankLoan : BaseExtraSkill
     public float CalculateInterest(BaseMapRole role)
     {
         int risk = role.baseRoleData.riskResistance;
-        risk = Mathf.Min(risk, 150);
-        risk = Mathf.Max(risk, 50);
+        risk = Mathf.Min(risk, 180);
+        risk = Mathf.Max(risk, 30);
         //print("利率：" + (risk * 0.1f - 3f) / 100f);
-        return (risk * 0.1f - 3f) / 100f;
+        return Mathf.Round((risk * 0.1333f - 4) * 10 )/ 1000f;
     }
 }

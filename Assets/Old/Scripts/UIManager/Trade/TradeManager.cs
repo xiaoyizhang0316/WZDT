@@ -280,6 +280,7 @@ public class TradeManager : MonoSingleton<TradeManager>
                 param.Add("TRUE");
                 param.Add(start.baseRoleData.baseRoleData.roleName);
                 param.Add(start.baseRoleData.baseRoleData.roleType.ToString());
+                param.Add(start.baseRoleData.baseRoleData.level.ToString());
                 StageGoal.My.RecordOperation(OperationType.PutRole, param);
                 ChangeNPCRoleRecord(start);
             }
@@ -294,6 +295,7 @@ public class TradeManager : MonoSingleton<TradeManager>
                 param.Add("TRUE");
                 param.Add(end.baseRoleData.baseRoleData.roleName);
                 param.Add(end.baseRoleData.baseRoleData.roleType.ToString());
+                param.Add(end.baseRoleData.baseRoleData.level.ToString());
                 StageGoal.My.RecordOperation(OperationType.PutRole, param);
                 ChangeNPCRoleRecord(end);
             }

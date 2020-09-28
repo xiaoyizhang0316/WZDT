@@ -241,7 +241,14 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                 role.isNPC = bool.Parse(p.operationParam[1]);
                 role.roleName = p.operationParam[2];
                 role.roleType = (RoleType)Enum.Parse(typeof(RoleType), p.operationParam[3]);
-                role.level = 1;
+                if (p.operationParam.Count < 5)
+                {
+                    role.level = 1;
+                }
+                else
+                {
+                    role.level = int.Parse(p.operationParam[4]);
+                }
                 role.buffList = new List<int>();
                 result.mapRoles.Add(role);
                 break;
