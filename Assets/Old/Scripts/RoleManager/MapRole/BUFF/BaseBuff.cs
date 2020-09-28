@@ -469,6 +469,19 @@ public class BaseBuff
         }
     }
 
+    public void ResetRoleBuff()
+    {
+        foreach (string str in buffData.OnBuffRemove)
+        {
+            CheckRoleNumber(str);
+        }
+        foreach (string str in buffData.OnBuffAdd)
+        {
+            CheckRoleNumber(str);
+        }
+    }
+
+
     #region 具体计算（三个重载）
 
     /// <summary>

@@ -40,7 +40,7 @@ public class BankLoan : BaseExtraSkill
         int risk = role.baseRoleData.riskResistance;
         risk = Mathf.Min(risk, 150);
         risk = Mathf.Max(risk, 50);
-        print("利率：" + (risk * 0.1f - 3f) / 100f);
+        //print("利率：" + (risk * 0.1f - 3f) / 100f);
         return (risk * 0.1f - 3f) / 100f;
     }
 }
