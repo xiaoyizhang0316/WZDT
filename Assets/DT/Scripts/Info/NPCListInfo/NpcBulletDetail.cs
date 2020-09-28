@@ -29,7 +29,7 @@ public class NpcBulletDetail : MonoBehaviour
         this.productData = data;
         bullet.sprite = IconSprite;
         this.damage.text = damage.ToString();
-        this.loadSpeed.text = loadingSpeed.ToString();
+        this.loadSpeed.text = loadingSpeed.ToString("F2");
         
 
         for (int i = 0; i < buffs.Count; i++)
