@@ -330,13 +330,13 @@ public class BaseMapRole : MonoBehaviour
     {
         for (int i = 0; i < buffList.Count; i++)
         {
-            buffList[i].RoleBuffRemove();
+            buffList[i].ResetRoleBuff();
         }
         baseRoleData.CalculateAllAttribute();
-        for (int i = 0; i < buffList.Count; i++)
-        {
-            buffList[i].RoleBuffAdd();
-        }
+        //for (int i = 0; i < buffList.Count; i++)
+        //{
+        //    buffList[i].RoleBuffAdd();
+        //}
     }
 
     /// <summary>
