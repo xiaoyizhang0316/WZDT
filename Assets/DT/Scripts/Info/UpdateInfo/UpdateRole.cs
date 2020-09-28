@@ -21,6 +21,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             upgradeNumber.gameObject.SetActive(false);
             return;
         }
+        tempBaseRoleData = new Role();
         upgradeNumber.gameObject.SetActive(true);
         upgradeNumber.text = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost.ToString();
     }
@@ -31,6 +32,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             return;
         }
+        
         tempBaseRoleData.cost = RoleUpdateInfo.My.currentRole.cost  ;
         tempBaseRoleData.effect = RoleUpdateInfo.My.currentRole.effect  ;
         tempBaseRoleData.efficiency = RoleUpdateInfo.My.currentRole.efficiency  ;
