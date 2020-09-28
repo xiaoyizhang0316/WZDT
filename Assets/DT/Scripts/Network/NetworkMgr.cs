@@ -109,6 +109,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("username", userName);
         keyValues.Add("password", password);
+        keyValues.Add("DeviceId", deviceID);
 
         StartCoroutine(HttpManager.My.HttpSend(Url.LoginUrl, (www)=> {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
