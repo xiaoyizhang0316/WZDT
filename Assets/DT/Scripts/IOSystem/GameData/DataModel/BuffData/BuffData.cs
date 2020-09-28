@@ -129,5 +129,20 @@ public class BuffData
         }
         return result;
     }
+
+    public string GenerateBuffDesc()
+    {
+        string[] tempStr = BuffDesc.Split('*');
+        string result = tempStr[0];
+        for (int i = 0; i < buffParam.Count; i++)
+        {
+            result += buffParam[i].ToString() + tempStr[i + 1];
+        }
+        if (tempStr.Length > 1)
+        {
+            result += tempStr[tempStr.Length - 1];
+        }
+        return result;
+    }
 }
 

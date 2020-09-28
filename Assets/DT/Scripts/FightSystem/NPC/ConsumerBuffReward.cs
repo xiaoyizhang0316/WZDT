@@ -27,7 +27,7 @@ public class ConsumerBuffReward : BaseExtraSkill
             {
                 other.transform.GetComponent<ConsumeSign>().enterMarketingTime = StageGoal.My.timeCount;
                 StageGoal.My.playerHealth += Mathf.Abs(other.transform.GetComponent<ConsumeSign>().consumeData.liveSatisfy * 80 / 100);
-                int number = other.transform.GetComponent<ConsumeSign>().consumeData.killMoney * 30 / 100;
+                int number = other.transform.GetComponent<ConsumeSign>().consumeData.killMoney * 12 / 100;
                 StageGoal.My.GetPlayerGold(number);
                 StageGoal.My.Income(number, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
                 GameObject go = Instantiate(effectPrb1,transform);
@@ -50,7 +50,7 @@ public class ConsumerBuffReward : BaseExtraSkill
                 {
                     other.transform.GetComponent<ConsumeSign>().enterMarketingTime = StageGoal.My.timeCount;
                     StageGoal.My.playerHealth += Mathf.Abs(other.transform.GetComponent<ConsumeSign>().consumeData.liveSatisfy * 80 / 100);
-                    int number = other.transform.GetComponent<ConsumeSign>().consumeData.killMoney * 30 / 100;
+                    int number = other.transform.GetComponent<ConsumeSign>().consumeData.killMoney * 12 / 100;
                     StageGoal.My.GetPlayerGold(number);
                     StageGoal.My.Income(number, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
                     GameObject go = Instantiate(effectPrb1, transform);

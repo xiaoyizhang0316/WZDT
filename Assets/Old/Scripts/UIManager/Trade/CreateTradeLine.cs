@@ -41,7 +41,7 @@ public class CreateTradeLine : MonoBehaviour
             if (!target.isNpc || (target.isNpc && target.npcScript.isCanSee))
             {
                 string str = "利率: " + NewCanvasUI.My.startRole.GetComponent<BankLoan>().CalculateInterest(target) * 100f + "%";
-                FloatWindow.My.Init(str, NewCanvasUI.My.startRole.gameObject.transform);
+                FloatWindow.My.Init(str, target.gameObject.transform);
                 RoleFloatWindow.My.Hide();
             }
         }
@@ -50,7 +50,7 @@ public class CreateTradeLine : MonoBehaviour
             if (target.npcScript.isCanSee)
             {
                 string str = "利率: " + target.GetComponent<BankLoan>().CalculateInterest(NewCanvasUI.My.startRole) * 100f + "%";
-                FloatWindow.My.Init(str, target.gameObject.transform);
+                FloatWindow.My.Init(str, NewCanvasUI.My.startRole.gameObject.transform);
                 RoleFloatWindow.My.Hide();
             }
         }

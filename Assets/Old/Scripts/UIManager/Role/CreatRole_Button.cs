@@ -249,6 +249,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         param.Add("FALSE");
         param.Add(mapRole.baseRoleData.baseRoleData.roleName);
         param.Add(mapRole.baseRoleData.baseRoleData.roleType.ToString());
+        param.Add(mapRole.baseRoleData.baseRoleData.level.ToString());
         StageGoal.My.RecordOperation(OperationType.PutRole, param);
     }
 

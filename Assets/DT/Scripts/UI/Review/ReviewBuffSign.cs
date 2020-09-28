@@ -8,7 +8,7 @@ public class ReviewBuffSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
 {
     public void OnPointerEnter(PointerEventData eventData)
     {
-        ReviewBuffManager.My.ShowBuffContent( GameDataMgr.My.GetBuffDataByID(int.Parse(GetComponent<Image>().sprite.name)).BuffDesc);
+        ReviewBuffManager.My.ShowBuffContent( GameDataMgr.My.GetBuffDataByID(int.Parse(GetComponent<Image>().sprite.name)).GenerateBuffDesc());
         
     }
 
