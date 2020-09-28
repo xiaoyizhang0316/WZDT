@@ -264,7 +264,8 @@ public class BaseMapRole : MonoBehaviour
         {
             if (buffList[i].buffId == baseBuff.buffId)
             {
-                RemoveBuff(buffList[i]);
+                return;
+                //RemoveBuff(buffList[i]);
             }
         }
         buffList.Add(baseBuff);

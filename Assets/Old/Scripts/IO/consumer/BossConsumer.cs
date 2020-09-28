@@ -536,7 +536,7 @@ public class BossConsumer : ConsumeSign
         baseBuff.SetConsumerBuff(this);
         bornBuffList.Insert(0, tempBuffList[index]);
         BossBloodBar.My.buffImg.GetComponent<WaveBuffSign>().Init(tempBuffList[index]);
-        transform.DOScale(transform.localScale, 10).OnComplete(SwitchElementResistance);
+        transform.DOScale(transform.localScale, 150).OnComplete(SwitchElementResistance);
     }
 
     public MapSign RandomGetMapSign()
