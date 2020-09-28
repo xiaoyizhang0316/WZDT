@@ -98,7 +98,10 @@ public class BuffData
             {
                 result += buffParam[i].ToString() + tempStr[i + 1];
             }
-            result += tempStr[tempStr.Length - 1];
+            if (tempStr.Length > 1)
+            {
+                result += tempStr[tempStr.Length - 1];
+            }
             return result;
         }
         if (role.baseRoleData.baseRoleData.roleSkillType != RoleSkillType.Service)
@@ -120,7 +123,10 @@ public class BuffData
         {
             result += ((int)(buffParam[i] * add)).ToString() + tempStr[i + 1];
         }
-        result += tempStr[tempStr.Length - 1];
+        if (tempStr.Length > 1)
+        {
+            result += tempStr[tempStr.Length - 1];
+        }
         return result;
     }
 }

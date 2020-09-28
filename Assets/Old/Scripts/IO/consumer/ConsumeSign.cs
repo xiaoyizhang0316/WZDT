@@ -290,6 +290,7 @@ public class ConsumeSign : MonoBehaviour
     public virtual void LivePunish()
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
+        StageGoal.My.GetSatisfy((consumeData.killSatisfy * currentHealth / consumeData.maxHealth));
         StageGoal.My.ConsumerAliveTip();
     }
 

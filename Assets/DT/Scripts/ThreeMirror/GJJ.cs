@@ -66,7 +66,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         }
                         else
                         {
-                            NPCListInfo.My.ShowHideTipPop("科技点数不足！");
+                            //NPCListInfo.My.ShowHideTipPop("科技点数不足！");
                         }
                     }
                 }
