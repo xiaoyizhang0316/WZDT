@@ -147,7 +147,7 @@ public class MapSign : MonoBehaviour, IDragHandler
         }
         if (height >= 1)
         {
-            if (baseMapRole != null)
+            if (baseMapRole != null && baseMapRole.baseRoleData.inMap)
             {
                 var buff = GameDataMgr.My.GetBuffDataByID(addRangeBuffId);
                 BaseBuff baseb = new BaseBuff();
