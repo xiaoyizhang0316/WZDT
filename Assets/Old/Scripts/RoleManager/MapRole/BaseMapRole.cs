@@ -194,6 +194,8 @@ public class BaseMapRole : MonoBehaviour
         result = Mathf.Min(10, result);
         result = Mathf.Max(result, -5);
         encourageLevel = result;
+        if (baseRoleData.baseRoleData.roleSkillType != RoleSkillType.Service)
+            ResetAllBuff();
     }
 
     #region 战斗
@@ -328,11 +330,12 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void ResetAllBuff()
     {
+        //baseRoleData.CalculateAllAttribute();
         for (int i = 0; i < buffList.Count; i++)
         {
             buffList[i].ResetRoleBuff();
         }
-        baseRoleData.CalculateAllAttribute();
+
         //for (int i = 0; i < buffList.Count; i++)
         //{
         //    buffList[i].RoleBuffAdd();

@@ -47,7 +47,7 @@ public class CreateTradeLine : MonoBehaviour
         }
         else if (target.baseRoleData.baseRoleData.roleType == RoleType.Bank)
         {
-            if (!NewCanvasUI.My.startRole.isNpc || (NewCanvasUI.My.startRole.isNpc && NewCanvasUI.My.startRole.npcScript.isCanSee))
+            if (target.npcScript.isCanSee)
             {
                 string str = "利率: " + target.GetComponent<BankLoan>().CalculateInterest(NewCanvasUI.My.startRole) * 100f + "%";
                 FloatWindow.My.Init(str, target.gameObject.transform);
