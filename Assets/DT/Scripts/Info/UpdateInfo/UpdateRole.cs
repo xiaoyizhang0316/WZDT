@@ -46,8 +46,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         tempBaseRoleData.workerCost = RoleUpdateInfo.My.currentRole.workerCost  ;
         tempBaseRoleData.ID = RoleUpdateInfo.My.currentRole.ID  ;
         tempBaseRoleData.EquipList = RoleUpdateInfo.My.currentRole.EquipList  ;
-        tempBaseRoleData.peoPleList = RoleUpdateInfo.My.currentRole.peoPleList  ; 
-     
+        tempBaseRoleData.peoPleList = RoleUpdateInfo.My.currentRole.peoPleList  ;  
         tempBaseRoleData.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType, RoleUpdateInfo.My.currentRole.baseRoleData.level+1);
         tempBaseRoleData.baseRoleData.roleName = RoleUpdateInfo.My.currentRole.baseRoleData.roleName;
         //PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ResetAllBuff();
