@@ -419,6 +419,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         if (GuideManager.My.currentGuideIndex != -1)
         {
+            
             return;
         }
         if (isPlaying)
