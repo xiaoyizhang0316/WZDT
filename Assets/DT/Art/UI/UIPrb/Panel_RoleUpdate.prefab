@@ -108,7 +108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 579, y: 145}
+  m_AnchoredPosition: {x: 580.5, y: 118.66498}
   m_SizeDelta: {x: 118.72, y: 35.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2596648967737993430
@@ -422,7 +422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 581, y: 139}
+  m_AnchoredPosition: {x: 579.37, y: 119}
   m_SizeDelta: {x: 116.2, y: 35.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8605736990947310391
@@ -1160,7 +1160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 484, y: 113}
+  m_AnchoredPosition: {x: 485.59985, y: 91.02997}
   m_SizeDelta: {x: 66.83, y: 69.53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7946463230781857170
@@ -1380,7 +1380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 163.3, y: 17}
+  m_AnchoredPosition: {x: 163.3, y: 57.85}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5497980448560225362
@@ -1436,6 +1436,7 @@ MonoBehaviour:
     bulletBuffType: 0
     BuffName: 
     BuffDesc: 
+    buffParam: 
     elementType: 0
     attackEffect: 0
     OnBuffAdd: []
@@ -1445,6 +1446,7 @@ MonoBehaviour:
     OnProduct: []
     duration: 0
     interval: 0
+  role: {fileID: 0}
 --- !u!1 &907064021424238253
 GameObject:
   m_ObjectHideFlags: 0
@@ -2165,6 +2167,38 @@ MonoBehaviour:
   isUpdate: 0
   hammer: {fileID: 7839123636035099913}
   upgradeNumber: {fileID: 8849694684663638687}
+  tempBaseRoleData:
+    baseRoleData:
+      roleName: 
+      roleType: 0
+      roleSkillType: 0
+      level: 0
+      effect: 0
+      efficiency: 0
+      range: 0
+      tradeCost: 0
+      riskResistance: 0
+      cost: 0
+      bulletCapacity: 0
+      costTech: 0
+      upgradeCost: 0
+      SpritePath: 
+      PrePath: 
+      RoleSpacePath: 
+    effect: 0
+    efficiency: 0
+    range: 0
+    tradeCost: 0
+    cost: 0
+    riskResistance: 0
+    bulletCapacity: 0
+    techAdd: 0
+    ID: 0
+    equipCost: 0
+    workerCost: 0
+    landCost: 0
+    inMap: 0
+    isNpc: 0
 --- !u!1 &1263207367784443281
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,7 +2630,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 493.66992, y: 114.38989}
+  m_AnchoredPosition: {x: 492.03992, y: 94.38989}
   m_SizeDelta: {x: 66.83, y: 69.53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2238408925363715545
@@ -2745,7 +2779,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 492.6, y: 119.81001}
+  m_AnchoredPosition: {x: 494.1, y: 93.47499}
   m_SizeDelta: {x: 66.83, y: 69.53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1139020833106038276
@@ -3353,7 +3387,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 582.5, y: 113.33501}
+  m_AnchoredPosition: {x: 584, y: 87}
   m_SizeDelta: {x: 255.42, y: 74.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1748388546990261262
@@ -3633,6 +3667,38 @@ MonoBehaviour:
   isUpdate: 0
   hammer: {fileID: 7839123636035099913}
   upgradeNumber: {fileID: 0}
+  tempBaseRoleData:
+    baseRoleData:
+      roleName: 
+      roleType: 0
+      roleSkillType: 0
+      level: 0
+      effect: 0
+      efficiency: 0
+      range: 0
+      tradeCost: 0
+      riskResistance: 0
+      cost: 0
+      bulletCapacity: 0
+      costTech: 0
+      upgradeCost: 0
+      SpritePath: 
+      PrePath: 
+      RoleSpacePath: 
+    effect: 0
+    efficiency: 0
+    range: 0
+    tradeCost: 0
+    cost: 0
+    riskResistance: 0
+    bulletCapacity: 0
+    techAdd: 0
+    ID: 0
+    equipCost: 0
+    workerCost: 0
+    landCost: 0
+    inMap: 0
+    isNpc: 0
 --- !u!1 &2194794505272448533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3893,7 +3959,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 583.63, y: 109}
+  m_AnchoredPosition: {x: 582, y: 89}
   m_SizeDelta: {x: 224.16, y: 74.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8403014979978427489
@@ -5132,7 +5198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 48.99504, y: 17}
+  m_AnchoredPosition: {x: 48.99504, y: 57.85}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &809747636308653134
@@ -5188,6 +5254,7 @@ MonoBehaviour:
     bulletBuffType: 0
     BuffName: 
     BuffDesc: 
+    buffParam: 
     elementType: 0
     attackEffect: 0
     OnBuffAdd: []
@@ -5197,6 +5264,7 @@ MonoBehaviour:
     OnProduct: []
     duration: 0
     interval: 0
+  role: {fileID: 0}
 --- !u!1 &2985576411881105232
 GameObject:
   m_ObjectHideFlags: 0
@@ -5637,7 +5705,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 482.07007, y: 113.93988}
+  m_AnchoredPosition: {x: 485.07007, y: 92.93988}
   m_SizeDelta: {x: 66.83, y: 69.53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7813530851411652228
@@ -5767,6 +5835,7 @@ MonoBehaviour:
     bulletBuffType: 0
     BuffName: 
     BuffDesc: 
+    buffParam: 
     elementType: 0
     attackEffect: 0
     OnBuffAdd: []
@@ -5776,6 +5845,7 @@ MonoBehaviour:
     OnProduct: []
     duration: 0
     interval: 0
+  role: {fileID: 0}
 --- !u!1 &3619191751881874424
 GameObject:
   m_ObjectHideFlags: 0
@@ -5921,7 +5991,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 573.9, y: 107.61005}
+  m_AnchoredPosition: {x: 573, y: 85}
   m_SizeDelta: {x: 224.29, y: 74.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &317222812382366319
@@ -7106,7 +7176,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45.3, y: 157}
+  m_AnchoredPosition: {x: 46.00001, y: 172.09998}
   m_SizeDelta: {x: 494, y: 168.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6714881726090103570
@@ -7958,7 +8028,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 573, y: 108}
+  m_AnchoredPosition: {x: 576, y: 87}
   m_SizeDelta: {x: 255.42, y: 74.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &225739666890749890
@@ -8571,7 +8641,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -11.675, y: 358.05}
+  m_AnchoredPosition: {x: -8, y: 383}
   m_SizeDelta: {x: 624.65, y: 490}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7875274613203025773
@@ -9742,6 +9812,7 @@ MonoBehaviour:
     bulletBuffType: 0
     BuffName: 
     BuffDesc: 
+    buffParam: 
     elementType: 0
     attackEffect: 0
     OnBuffAdd: []
@@ -9751,6 +9822,7 @@ MonoBehaviour:
     OnProduct: []
     duration: 0
     interval: 0
+  role: {fileID: 0}
 --- !u!1 &5688749614038870784
 GameObject:
   m_ObjectHideFlags: 0
@@ -10243,6 +10315,7 @@ MonoBehaviour:
     bulletBuffType: 0
     BuffName: 
     BuffDesc: 
+    buffParam: 
     elementType: 0
     attackEffect: 0
     OnBuffAdd: []
@@ -10252,6 +10325,7 @@ MonoBehaviour:
     OnProduct: []
     duration: 0
     interval: 0
+  role: {fileID: 0}
 --- !u!1 &5888529228905148976
 GameObject:
   m_ObjectHideFlags: 0
@@ -10312,7 +10386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -11.675, y: 358.05}
+  m_AnchoredPosition: {x: -11.675, y: 383}
   m_SizeDelta: {x: 624.65, y: 490}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6185565443696560515
@@ -12298,7 +12372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 571.4, y: 138.99}
+  m_AnchoredPosition: {x: 572.9999, y: 117.01997}
   m_SizeDelta: {x: 90.12, y: 35.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6578978133000220758
@@ -12949,7 +13023,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 569.43, y: 138.54999}
+  m_AnchoredPosition: {x: 572.43, y: 117.54999}
   m_SizeDelta: {x: 107.89, y: 35.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7715075041168655708
@@ -13141,7 +13215,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -11.675, y: 358.05}
+  m_AnchoredPosition: {x: -11.675, y: 383}
   m_SizeDelta: {x: 624.65, y: 490}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1804544697971136829
@@ -13867,7 +13941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -8.2, y: 351.82}
+  m_AnchoredPosition: {x: -8, y: 383}
   m_SizeDelta: {x: 624.65, y: 490}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8416435045430478764
@@ -15166,7 +15240,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -176.32501, y: 17}
+  m_AnchoredPosition: {x: -176.32501, y: 57.85}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7842507028516836184
@@ -15222,6 +15296,7 @@ MonoBehaviour:
     bulletBuffType: 0
     BuffName: 
     BuffDesc: 
+    buffParam: 
     elementType: 0
     attackEffect: 0
     OnBuffAdd: []
@@ -15231,6 +15306,7 @@ MonoBehaviour:
     OnProduct: []
     duration: 0
     interval: 0
+  role: {fileID: 0}
 --- !u!1 &8084658276333710982
 GameObject:
   m_ObjectHideFlags: 0
@@ -16571,7 +16647,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: 17}
+  m_AnchoredPosition: {x: -62, y: 57.85}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4392239161884707195
@@ -16627,6 +16703,7 @@ MonoBehaviour:
     bulletBuffType: 0
     BuffName: 
     BuffDesc: 
+    buffParam: 
     elementType: 0
     attackEffect: 0
     OnBuffAdd: []
@@ -16636,6 +16713,7 @@ MonoBehaviour:
     OnProduct: []
     duration: 0
     interval: 0
+  role: {fileID: 0}
 --- !u!1 &8590847992434086448
 GameObject:
   m_ObjectHideFlags: 0
@@ -17350,6 +17428,7 @@ MonoBehaviour:
     bulletBuffType: 0
     BuffName: 
     BuffDesc: 
+    buffParam: 
     elementType: 0
     attackEffect: 0
     OnBuffAdd: []
@@ -17359,6 +17438,7 @@ MonoBehaviour:
     OnProduct: []
     duration: 0
     interval: 0
+  role: {fileID: 0}
 --- !u!1 &9208319151786161602
 GameObject:
   m_ObjectHideFlags: 0
@@ -17622,22 +17702,22 @@ PrefabInstance:
     - target: {fileID: 5550602008359207610, guid: 88596a6b740454ed389e7cb4d02b81f2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 308
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5550602008359207610, guid: 88596a6b740454ed389e7cb4d02b81f2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 210
+      value: -290
       objectReference: {fileID: 0}
     - target: {fileID: 5550602008359207610, guid: 88596a6b740454ed389e7cb4d02b81f2,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 576
       objectReference: {fileID: 0}
     - target: {fileID: 5550602008359207610, guid: 88596a6b740454ed389e7cb4d02b81f2,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 5550602008359207610, guid: 88596a6b740454ed389e7cb4d02b81f2,
         type: 3}
