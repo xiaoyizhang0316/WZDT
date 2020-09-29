@@ -13,11 +13,14 @@ public class EncourageLevel : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
 
     public string showStr;
 
+    public Image indexImg;
+
     public void Init(BaseMapRole role)
     {
         currentRole = role;
         showStr = "激励等级0，无任何影响";
         levelText.text = role.encourageLevel.ToString();
+        indexImg.transform.localPosition = new Vector2(-73.3f + role.encourageLevel * 36.7f, indexImg.transform.localPosition.y);
         levelText.color = Color.white;
         if (role.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
