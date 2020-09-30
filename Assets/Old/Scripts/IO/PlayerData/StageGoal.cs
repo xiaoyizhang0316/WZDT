@@ -970,25 +970,25 @@ public class StageGoal : MonoSingleton<StageGoal>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                DOTween.PlayAll();
-                DOTween.timeScale = 16f;
-                DOTween.defaultAutoPlay = AutoPlay.All;
-            }
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                Win();
-            }
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                GetPlayerGold(10000);
-                GetTechPoint(1000);
-                playerHealth = playerMaxHealth;
-            }
-        }
+        //if (Input.GetKey(KeyCode.UpArrow))
+        //{
+        //    if (Input.GetKeyDown(KeyCode.S))
+        //    {
+        //        DOTween.PlayAll();
+        //        DOTween.timeScale = 16f;
+        //        DOTween.defaultAutoPlay = AutoPlay.All;
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.Y))
+        //    {
+        //        Win();
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.M))
+        //    {
+        //        GetPlayerGold(10000);
+        //        GetTechPoint(1000);
+        //        playerHealth = playerMaxHealth;
+        //    }
+        //}
     }
 
     public void Income(int num, IncomeType incomeType, BaseMapRole npc =null, string otherName="")

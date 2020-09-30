@@ -98,10 +98,9 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
 
     public void OnGUI()
     {
-        if (GUILayout.Button("show"))
-        {
-            showdic();
-        }
-
+        //if (GUILayout.Button("show"))
+        //{
+        //    showdic();
+        //}
     }
 }
