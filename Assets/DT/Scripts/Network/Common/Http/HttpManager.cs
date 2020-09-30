@@ -71,8 +71,9 @@ public class HttpManager : MonoSingleton<HttpManager>
     {
         fps = frameCount;
         frameCount = 0;
-        FpsText.text = "FPS "+Mathf.Ceil(fps).ToString();
-        FpsText.color = fps >= 60 ? Color.green : (fps >= 30 ? Color.white : Color.red);
+        //FpsText.text = "FPS "+Mathf.Ceil(fps).ToString();
+        FpsText.text = NetworkMgr.My.playerDatas.playerName;
+        //FpsText.color = fps >= 60 ? Color.green : (fps >= 30 ? Color.white : Color.red);
     }
 
 
