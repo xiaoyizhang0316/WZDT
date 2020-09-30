@@ -28,6 +28,10 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 
     private float endPer;
 
+    public int startRoleTradeCost;
+
+    public int endRoleTradeCost;
+
     /// <summary>
     /// 释放技能者
     /// </summary>
@@ -109,6 +113,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         castRole = currentTrade.tradeData.castRole;
         targetRole = currentTrade.tradeData.targetRole;
         startIsCast = currentTrade.tradeData.castRole.Equals(currentTrade.tradeData.startRole);
+        startRoleTradeCost = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole)).baseRoleData.tradeCost;
+        endRoleTradeCost = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole)).baseRoleData.tradeCost;
         InitName();
         InitRoleInfo();
         InitCashFlow();
@@ -136,9 +142,9 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole));
-        endRolePanel.Find("EndRoleTradeCost").GetComponent<Text>().text = end.baseRoleData.tradeCost.ToString();
+        endRolePanel.Find("EndRoleTradeCost").GetComponent<Text>().text = endRoleTradeCost.ToString();
         endRolePanel.Find("EndRoleRisk").GetComponent<Text>().text = end.baseRoleData.riskResistance.ToString();
-        startRolePanel.Find("StartRoleTradeCost").GetComponent<Text>().text = start.baseRoleData.tradeCost.ToString();
+        startRolePanel.Find("StartRoleTradeCost").GetComponent<Text>().text = startRoleTradeCost.ToString();
         startRolePanel.Find("StartRoleRisk").GetComponent<Text>().text = start.baseRoleData.riskResistance.ToString();
         startName.text = start.baseRoleData.baseRoleData.roleName;
         endName.text = end.baseRoleData.baseRoleData.roleName;
@@ -153,8 +159,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     {
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole));
-        int result = (int)((startRole.baseRoleData.tradeCost + startRole.baseRoleData.riskResistance)* startPer);
-        result += (int)((endRole.baseRoleData.tradeCost + endRole.baseRoleData.riskResistance) * endPer);
+        int result = (int)((startRoleTradeCost * startPer + startRole.baseRoleData.riskResistance));
+        result += (int)((endRoleTradeCost * endPer + endRole.baseRoleData.riskResistance) );
         int result1, result2;
         if (startRole.isNpc || endRole.isNpc)
         {
@@ -271,6 +277,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         {
             endStatus[i].gameObject.SetActive(!startIsCast && Mathf.Abs(selectDividePercent - 4) > i);
         }
+        PredictTradeCostChange();
         if (selectCashFlow == currentTrade.tradeData.selectCashFlow)
         {
             InitTradeCost();
@@ -278,6 +285,22 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         else
         {
             tradeCostText.text = "???";
+        }
+    }
+
+    public void PredictTradeCostChange()
+    {
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole));
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole));
+        if (startIsCast)
+        {
+            startRoleTradeCost = start.baseRoleData.tradeCost + (selectDividePercent - currentTrade.tradeData.dividePercent) * 5;
+            startRolePanel.Find("StartRoleTradeCost").GetComponent<Text>().text = startRoleTradeCost.ToString();
+        }
+        else
+        {
+            endRoleTradeCost = end.baseRoleData.tradeCost + (currentTrade.tradeData.dividePercent - selectDividePercent) * 5;
+            endRolePanel.Find("EndRoleTradeCost").GetComponent<Text>().text = endRoleTradeCost.ToString();
         }
     }
 
