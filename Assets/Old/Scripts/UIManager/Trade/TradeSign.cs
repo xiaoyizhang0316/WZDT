@@ -232,8 +232,8 @@ public class TradeSign : MonoBehaviour
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         cast.tradeList.Remove(this);
-        start.RecalculateEncourageLevel();
-        end.RecalculateEncourageLevel();
+        start.RecalculateEncourageLevel(true);
+        end.RecalculateEncourageLevel(true);
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
             cast.GetComponent<BaseSkill>().DeteleRoleBuff(tradeData);
@@ -247,7 +247,7 @@ public class TradeSign : MonoBehaviour
     public void UpdateEncourageLevel()
     {
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
-        cast.RecalculateEncourageLevel();
+        cast.RecalculateEncourageLevel(true);
     }
 
     /// <summary>
@@ -257,8 +257,8 @@ public class TradeSign : MonoBehaviour
     {
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
-        int result = (int)((startRole.baseRoleData.tradeCost + startRole.baseRoleData.riskResistance) * startPer);
-        result += (int)((endRole.baseRoleData.tradeCost + endRole.baseRoleData.riskResistance) * endPer);
+        int result = (int)((startRole.baseRoleData.tradeCost * startPer + startRole.baseRoleData.riskResistance) );
+        result += (int)((endRole.baseRoleData.tradeCost * endPer + endRole.baseRoleData.riskResistance) );
         int result1, result2;
         if (startRole.isNpc || endRole.isNpc)
         {

@@ -176,10 +176,11 @@ public class BaseMapRole : MonoBehaviour
     /// <summary>
     /// 更新激励等级
     /// </summary>
-    public void RecalculateEncourageLevel()
+    public void RecalculateEncourageLevel(bool isInit = false)
     {
         int result = startEncourageLevel;
-        //baseRoleData.tradeCost -= encourageLevel * 5;
+        if (isInit)
+            baseRoleData.tradeCost -= encourageLevel * 5;
         for (int i = 0; i < tradeList.Count; i++)
         {
             if (tradeList[i].tradeData.startRole.Equals(baseRoleData.ID.ToString()))
@@ -190,13 +191,12 @@ public class BaseMapRole : MonoBehaviour
             {
                 result += 4 - tradeList[i].tradeData.dividePercent;
             }
+            PlayerData.My.GetMapRoleById(double.Parse(tradeList[i].tradeData.targetRole)).ResetAllBuff();
         }
         result = Mathf.Min(10, result);
         result = Mathf.Max(result, -5);
         encourageLevel = result;
-        //baseRoleData.tradeCost += encourageLevel * 5;
-        if (baseRoleData.baseRoleData.roleSkillType != RoleSkillType.Service)
-            ResetAllBuff();
+        baseRoleData.tradeCost += encourageLevel * 5;
     }
 
     #region 战斗
