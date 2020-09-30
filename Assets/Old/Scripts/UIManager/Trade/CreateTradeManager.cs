@@ -82,6 +82,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 
     public List<Sprite> encourageStatus;
 
+    private bool startIsCast;
+
     /// <summary>
     /// 打开并初始化
     /// </summary>
@@ -106,6 +108,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         endPer = currentTrade.endPer;
         castRole = currentTrade.tradeData.castRole;
         targetRole = currentTrade.tradeData.targetRole;
+        startIsCast = currentTrade.tradeData.castRole.Equals(currentTrade.tradeData.startRole);
         InitName();
         InitRoleInfo();
         InitCashFlow();
@@ -192,14 +195,14 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     public void InitDivide()
     {
         divideSlider.value = selectDividePercent;
-        startStatus[0].gameObject.SetActive(selectDividePercent != 0);
-        startStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
-        startStatus[0].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
-        startStatus[1].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
-        endStatus[0].gameObject.SetActive(selectDividePercent != 0);
-        endStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
-        endStatus[0].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
-        endStatus[1].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
+        for (int i = 0; i < startStatus.Count; i++)
+        {
+            startStatus[i].gameObject.SetActive(startIsCast && selectDividePercent > i);
+        }
+        for (int i = 0; i < endStatus.Count; i++)
+        {
+            endStatus[i].gameObject.SetActive(!startIsCast && Mathf.Abs(selectDividePercent - 4) > i);
+        }
     }
 
     /// <summary>
@@ -235,39 +238,39 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         selectDividePercent = (int)divideSlider.value;
         switch (selectDividePercent)
         {
-            case -2:
-                startPer = 0.6f;
-                endPer = 1.4f;
-                break;
-            case -1:
-                startPer = 0.8f;
-                endPer = 1.2f;
-                break;
             case 0:
-                startPer = 1f;
-                endPer = 1f;
+                startPer = startIsCast?1f:0.6f;
+                endPer = startIsCast?1f:1.4f;
                 break;
             case 1:
-                startPer = 1.2f;
-                endPer = 0.8f;
+                startPer = startIsCast?1.1f:0.7f;
+                endPer = startIsCast?0.9f:1.3f;
                 break;
             case 2:
-                startPer = 1.4f;
-                endPer = 0.6f;
+                startPer = startIsCast?1.2f:0.8f;
+                endPer = startIsCast?0.8f:1.2f;
+                break;
+            case 3:
+                startPer = startIsCast?1.3f:0.9f;
+                endPer = startIsCast?0.7f:1.1f;
+                break;
+            case 4:
+                startPer = startIsCast?1.4f:1f;
+                endPer = startIsCast?0.6f:1f;
                 break;
             default:
                 startPer = 1f;
                 endPer = 1f;
                 break;
         }
-        startStatus[0].gameObject.SetActive(selectDividePercent != 0);
-        startStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
-        startStatus[0].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
-        startStatus[1].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
-        endStatus[0].gameObject.SetActive(selectDividePercent != 0);
-        endStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
-        endStatus[0].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
-        endStatus[1].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
+        for (int i = 0; i < startStatus.Count; i++)
+        {
+            startStatus[i].gameObject.SetActive(startIsCast && selectDividePercent > i);
+        }
+        for (int i = 0; i < endStatus.Count; i++)
+        {
+            endStatus[i].gameObject.SetActive(!startIsCast && Mathf.Abs(selectDividePercent - 4) > i);
+        }
         if (selectCashFlow == currentTrade.tradeData.selectCashFlow)
         {
             InitTradeCost();
