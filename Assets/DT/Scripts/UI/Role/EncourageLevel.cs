@@ -26,22 +26,22 @@ public class EncourageLevel : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
         {
             if (role.encourageLevel > 0)
             {
-                showStr = "激励等级" + role.encourageLevel.ToString() + " 角色的增益效果提高" + (role.encourageLevel * 10).ToString("##.##") +"%";
+                showStr = "激励等级" + role.encourageLevel.ToString() + " 角色的增益效果提高" + (role.encourageLevel * 10).ToString("##.##") +"%,交易成本提高" + (role.encourageLevel * 5).ToString();
             }
             else if (role.encourageLevel < 0)
             {
-                showStr = "激励等级" + role.encourageLevel.ToString() + " 角色的增益效果降低" + (role.encourageLevel * -10).ToString("##.##") + "%";
+                showStr = "激励等级" + role.encourageLevel.ToString() + " 角色的增益效果降低" + (role.encourageLevel * -10).ToString("##.##") + "%,交易成本降低" + (role.encourageLevel * 5).ToString();
             }
         }
         else
         {
             if (role.encourageLevel > 0)
             {
-                showStr = "激励等级" + role.encourageLevel.ToString() + " 角色的生产速率提高" + (role.encourageLevel * 5).ToString("##.##") + "%";
+                showStr = "激励等级" + role.encourageLevel.ToString() + " 角色的生产速率提高" + (role.encourageLevel * 5).ToString("##.##") + "%,交易成本提高" + (role.encourageLevel * 5).ToString();
             }
             else if (role.encourageLevel < 0)
             {
-                showStr = "激励等级" + role.encourageLevel.ToString() + " 角色的生产速率降低" + (role.encourageLevel * -10).ToString("##.##") + "%";
+                showStr = "激励等级" + role.encourageLevel.ToString() + " 角色的生产速率降低" + (role.encourageLevel * -10).ToString("##.##") + "%,交易成本降低" + (role.encourageLevel * 5).ToString();
             }
         }
     }
