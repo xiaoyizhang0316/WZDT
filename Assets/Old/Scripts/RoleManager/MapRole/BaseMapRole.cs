@@ -104,10 +104,6 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public int startEncourageLevel;
 
-    public List<TradeSign> startTradeList = new List<TradeSign>();
-
-    public List<TradeSign> endTradeList = new List<TradeSign>();
-
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
@@ -183,17 +179,22 @@ public class BaseMapRole : MonoBehaviour
     public void RecalculateEncourageLevel()
     {
         int result = startEncourageLevel;
-        for (int i = 0; i < startTradeList.Count; i++)
+        //baseRoleData.tradeCost -= encourageLevel * 5;
+        for (int i = 0; i < tradeList.Count; i++)
         {
-            result += startTradeList[i].tradeData.dividePercent;
-        }
-        for (int i = 0; i < endTradeList.Count; i++)
-        {
-            result += 0 - endTradeList[i].tradeData.dividePercent;
+            if (tradeList[i].tradeData.startRole.Equals(baseRoleData.ID.ToString()))
+            {
+                result += tradeList[i].tradeData.dividePercent;
+            }
+            else
+            {
+                result += 4 - tradeList[i].tradeData.dividePercent;
+            }
         }
         result = Mathf.Min(10, result);
         result = Mathf.Max(result, -5);
         encourageLevel = result;
+        //baseRoleData.tradeCost += encourageLevel * 5;
         if (baseRoleData.baseRoleData.roleSkillType != RoleSkillType.Service)
             ResetAllBuff();
     }
@@ -330,16 +331,10 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void ResetAllBuff()
     {
-        //baseRoleData.CalculateAllAttribute();
         for (int i = 0; i < buffList.Count; i++)
         {
             buffList[i].ResetRoleBuff();
         }
-
-        //for (int i = 0; i < buffList.Count; i++)
-        //{
-        //    buffList[i].RoleBuffAdd();
-        //}
     }
 
     /// <summary>
