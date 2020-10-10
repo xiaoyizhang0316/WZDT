@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class TestMulti : NetworkBehaviour
 {
@@ -9,6 +10,7 @@ public class TestMulti : NetworkBehaviour
     public void RpcTest()
     {
         Debug.Log("dasds213124eadfadfdsf34321e2");
+        GetComponent<Image>().color = Color.red;
         transform.position += Vector3.one;
     }
 
