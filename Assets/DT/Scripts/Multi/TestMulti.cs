@@ -12,5 +12,12 @@ public class TestMulti : NetworkBehaviour
         transform.position += Vector3.one;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Debug.Log("dasds213124eadfadfdsf34321e2");
+        }
+    }
 
 }

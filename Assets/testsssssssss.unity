@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 1021487202}
   - component: {fileID: 1021487201}
   - component: {fileID: 1021487205}
+  - component: {fileID: 1021487206}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -423,7 +424,7 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &1021487202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,7 +478,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &1021487203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +527,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30860b0b99dce49e297b9f68f5319d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1021487206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021487199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d6c522af31447398568cc65334232b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!1 &1260818753
 GameObject:
   m_ObjectHideFlags: 0

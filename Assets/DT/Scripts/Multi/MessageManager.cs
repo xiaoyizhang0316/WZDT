@@ -59,5 +59,6 @@ public class MessageManager : NetworkBehaviour
     public void RpcTest()
     {
         Debug.Log("dasds213124eadfadfdsf34321e2");
+        
     }
 }
