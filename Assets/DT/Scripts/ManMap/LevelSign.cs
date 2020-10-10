@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelSign : NetworkBehaviour
+public class LevelSign : MonoBehaviour
 {
     public int levelID = 0;
     public string levelName;
@@ -48,7 +48,7 @@ public class LevelSign : NetworkBehaviour
         {
             LevelInfoManager.My.Init(stars, levelName, content, mission_1, mission_2, mission_3, () =>
             {
-                RpcLoadTargetScene(loadScene);
+                MessageManager.my.RpcLoadTargetScene(loadScene);
             }, loadScene);
             //NetworkMgr.My.GetReplayLists(loadScene,()=> {
             //    LevelInfoManager.My.listScript.Init(NetworkMgr.My.replayLists);
@@ -62,13 +62,6 @@ public class LevelSign : NetworkBehaviour
                 //RpcLoadTargetScene();
             });
         }
-    }
-
-    [ClientRpc]
-    void RpcLoadTargetScene(string loadScene)
-    {
-        Debug.Log("sadasdasdsad");
-        SceneManager.LoadScene(loadScene);
     }
 
     public void OnClick(string recordID)

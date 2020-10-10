@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class MessageManager : NetworkBehaviour
 {
@@ -45,5 +46,12 @@ public class MessageManager : NetworkBehaviour
         DOTween.PlayAll();
         DOTween.timeScale = 2f;
         DOTween.defaultAutoPlay = AutoPlay.All;
+    }
+
+    [ClientRpc]
+    public void RpcLoadTargetScene(string loadScene)
+    {
+        Debug.Log("sadasdasdsad");
+        SceneManager.LoadScene(loadScene);
     }
 }
