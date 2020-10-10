@@ -48,7 +48,7 @@ public class LevelSign : NetworkBehaviour
         {
             LevelInfoManager.My.Init(stars, levelName, content, mission_1, mission_2, mission_3, () =>
             {
-                RpcLoadTargetScene();
+                RpcLoadTargetScene(loadScene);
             }, loadScene);
             //NetworkMgr.My.GetReplayLists(loadScene,()=> {
             //    LevelInfoManager.My.listScript.Init(NetworkMgr.My.replayLists);
@@ -59,13 +59,13 @@ public class LevelSign : NetworkBehaviour
         {
             LevelInfoManager.My.Init(levelName, content, mission_1, mission_2, mission_3, () =>
             {
-                RpcLoadTargetScene();
+                //RpcLoadTargetScene();
             });
         }
     }
 
     [ClientRpc]
-    public void RpcLoadTargetScene()
+    public void RpcLoadTargetScene(string loadScene)
     {
         Debug.Log("sadasdasdsad");
         SceneManager.LoadScene(loadScene);
