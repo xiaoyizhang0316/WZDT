@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelSign : MonoBehaviour
+public class LevelSign : NetworkBehaviour
 {
     public int levelID = 0;
     public string levelName;
@@ -58,9 +59,15 @@ public class LevelSign : MonoBehaviour
         {
             LevelInfoManager.My.Init(levelName, content, mission_1, mission_2, mission_3, () =>
             {
-                SceneManager.LoadScene(loadScene);
+                RpcLoadTargetScene();
             });
         }
+    }
+
+    [ClientRpc]
+    public void RpcLoadTargetScene()
+    {
+        SceneManager.LoadScene(loadScene);
     }
 
     public void OnClick(string recordID)
