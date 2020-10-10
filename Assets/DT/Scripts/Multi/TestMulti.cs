@@ -16,7 +16,7 @@ public class TestMulti : NetworkBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Debug.Log("dasds213124eadfadfdsf34321e2");
+            RpcTest();
         }
     }
 
