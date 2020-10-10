@@ -30,7 +30,7 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         //           return;
         //       }
         //   }
-        Debug.Log(SystemInfo.deviceUniqueIdentifier);
+        Debug.Log(PlayerData.GetIP(PlayerData.ADDRESSFAM.IPv4));
         foreach (string str in "sdasdsads*".Split('*'))
         {
             Debug.Log("字符: " +str);
