@@ -44,7 +44,6 @@ public class LevelSign : NetworkBehaviour
 
     public void Init()
     {
-        RpcLoadTargetScene(loadScene);
         if (NetworkMgr.My.isUsingHttp)
         {
             LevelInfoManager.My.Init(stars, levelName, content, mission_1, mission_2, mission_3, () =>
@@ -66,10 +65,10 @@ public class LevelSign : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcLoadTargetScene(string loadScene)
+    void RpcLoadTargetScene(string loadScene)
     {
         Debug.Log("sadasdasdsad");
-        SceneManager.LoadScene("FTE_1");
+        SceneManager.LoadScene(loadScene);
     }
 
     public void OnClick(string recordID)
