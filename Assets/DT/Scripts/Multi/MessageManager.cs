@@ -54,4 +54,10 @@ public class MessageManager : NetworkBehaviour
         Debug.Log("sadasdasdsad");
         SceneManager.LoadScene(loadScene);
     }
+
+    [ClientRpc]
+    public void RpcTest()
+    {
+        Debug.Log("dasds213124eadfadfdsf34321e2");
+    }
 }
