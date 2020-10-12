@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class Client : MonoBehaviour
 {
     private string staInfo = "NULL";             //状态信息
-    private string inputIp = "10.175.229.183";   //输入ip地址
+    private string inputIp = "192.168.1.22";   //输入ip地址
     private string inputPort = "6000";           //输入端口号
     public string inputMes = "NULL";             //发送的消息
     private int recTimes = 0;                    //接收到信息的次数

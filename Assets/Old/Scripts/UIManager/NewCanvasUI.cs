@@ -174,6 +174,13 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             InvokeRepeating("CountPauseTime", 1f, 1f);
         else
             CancelInvoke("CountPauseTime");
+        if (PlayerData.My.server != null)
+        {
+
+            string str = "ChangeTimeScale|";
+            str += "0";
+            PlayerData.My.server.SendToClientMsg(str);
+        }
     }
 
     /// <summary>
@@ -188,6 +195,13 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
         CancelInvoke("CountPauseTime");
+        if (PlayerData.My.server != null)
+        {
+
+            string str = "ChangeTimeScale|";
+            str += "1";
+            PlayerData.My.server.SendToClientMsg(str);
+        }
     }
 
     /// <summary>
@@ -202,6 +216,13 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = false;
         CancelInvoke("CountPauseTime");
+        if (PlayerData.My.server != null)
+        {
+
+            string str = "ChangeTimeScale|";
+            str += "2";
+            PlayerData.My.server.SendToClientMsg(str);
+        }
     }
 
     /// <summary>
