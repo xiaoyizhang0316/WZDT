@@ -85,7 +85,7 @@ public class Client : MonoBehaviour
                 recMes = Encoding.UTF8.GetString(buffer, 0, len);
 
                 Debug.Log("客户端接收到的数据 ： " + recMes);
-                NetManager.Receivemsg(recMes);
+                NetManager.My.Receivemsg(recMes);
                 recTimes ++;
                 staInfo = "接收到一次数据，接收次数为 ：" + recTimes;
                 Debug.Log("接收次数为：" + recTimes);

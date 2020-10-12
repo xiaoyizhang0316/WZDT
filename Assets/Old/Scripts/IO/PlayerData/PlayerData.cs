@@ -342,6 +342,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     private void Start()
     {
-        NetManager.Init();
+        NetManager.My.Init();
     }
 }
