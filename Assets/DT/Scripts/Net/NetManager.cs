@@ -9,20 +9,20 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class NetManager
+public class NetManager : MonoSingleton<NetManager>
 {
 
     public delegate void msgAction(string str);
 
-    public static Dictionary<string, msgAction> listeners;
+    public Dictionary<string, msgAction> listeners;
 
-    public static void OnLoadScene(string str)
+    public void OnLoadScene(string str)
     {
         Debug.Log(str);
         SceneManager.LoadScene(str);
     }
 
-    public static void Receivemsg(string str)
+    public void Receivemsg(string str)
     {
         string methodName = str.Split('|')[0];
         if (listeners.ContainsKey(methodName))
@@ -33,7 +33,7 @@ public static class NetManager
         }
     }
 
-    public static string GetIP(ADDRESSFAM Addfam)
+    public string GetIP(ADDRESSFAM Addfam)
     {
         //Return null if ADDRESSFAM is Ipv6 but Os does not support it
         if (Addfam == ADDRESSFAM.IPv6 && !Socket.OSSupportsIPv6)
@@ -77,7 +77,7 @@ public static class NetManager
         return output;
     }
 
-    public static void Init()
+    public void Init()
     {
         Debug.Log("construct");
         listeners = new Dictionary<string, msgAction>();
