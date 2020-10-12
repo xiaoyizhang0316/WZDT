@@ -14,12 +14,12 @@ public class Server : MonoBehaviour
     private string recMes = "NULL";                        //接收到的信息
     private int recTimes = 0;                              //接收到的信息次数 
 
-    private string inputIp = "10.175.229.183";             //ip地址
+    private string inputIp = "192.168.1.22";             //ip地址
     private string inputPort = "6000";                     //端口值
     private string inputMessage = "NULL";                  //用以发送的信息   
 
     private Socket socketWatch;                            //用以监听的套接字
-    private Socket socketSend;                             //用以和客户端通信的套接字
+    private Socket socketSend;                             //用以和客户端通信的套接字S
 
     private bool isSendData = false;                       //是否点击发送数据按钮
     private bool clickConnectBtn = false;                  //是否点击监听按钮
