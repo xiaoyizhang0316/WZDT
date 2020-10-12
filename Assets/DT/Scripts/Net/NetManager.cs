@@ -18,7 +18,7 @@ public static class NetManager
 
     public static void OnLoadScene(string str)
     {
-
+        Debug.Log(str);
         SceneManager.LoadScene(str);
     }
 
@@ -27,6 +27,7 @@ public static class NetManager
         string methodName = str.Split('|')[0];
         if (listeners.ContainsKey(methodName))
         {
+            Debug.Log(methodName);
             string args = str.Split('|')[1];
             listeners[methodName](args);
         }
