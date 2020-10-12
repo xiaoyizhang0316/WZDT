@@ -61,7 +61,10 @@ public class Server : MonoBehaviour
             Debug.Log("监听成功!");
             info = "监听成功";
 
-            socketWatch.Listen(10);                         //设置监听，最大同时连接10台
+            socketWatch.Listen(1);                         //设置监听，最大同时连接10台
+
+            PlayerData.My.server = this;
+            PlayerData.My.isServer = true;
 
             //创建监听线程
             Thread thread = new Thread(Listen);
@@ -130,7 +133,7 @@ public class Server : MonoBehaviour
     /// <summary>
     /// 服务器端不停的向客户端发送消息
     /// </summary>
-    void SendMessage(object o)
+    public void SendMessage(object o)
     {
         try
         {
@@ -151,6 +154,12 @@ public class Server : MonoBehaviour
             }
         }
         catch { }
+    }
+
+    public void SendToClientMsg(string str)
+    {
+        inputMessage = str;
+        isSendData = true;
     }
 
     private void OnDisable()
