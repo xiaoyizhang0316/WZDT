@@ -21,6 +21,12 @@ public class ReturnToMap : MonoBehaviour
         StageGoal.My.CommitLose();
         PlayerData.My.Reset();
         SceneManager.LoadScene("Map");
+        if (PlayerData.My.server != null)
+        {
+
+            string str = "LoadScene|Map";
+            PlayerData.My.server.SendToClientMsg(str);
+        }
     }
 
     void Cancel()

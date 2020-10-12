@@ -529,6 +529,12 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 PlayerData.My.Reset();
                 SceneManager.LoadScene("Map");
+                if (PlayerData.My.server != null)
+                {
+
+                    string str = "LoadScene|Map";
+                    PlayerData.My.server.SendToClientMsg(str);
+                }
             }
             else
             {
