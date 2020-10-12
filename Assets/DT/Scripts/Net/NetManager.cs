@@ -29,6 +29,7 @@ public class NetManager : MonoSingleton<NetManager>
     {
         loadSceneName = str;
         SceneManager.LoadScene(str);
+        PlayerData.My.Reset();
     }
 
     public void OnCreateRole(string str)
