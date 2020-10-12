@@ -6,6 +6,7 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static GameEnum;
@@ -27,38 +28,56 @@ public class NetManager : MonoSingleton<NetManager>
     public void OnLoadScene(string str)
     {
         loadSceneName = str;
-        isLoadScene = true;
+        SceneManager.LoadScene(str);
     }
 
     public void OnCreateRole(string str)
     {
-        try
+        string[] args = str.Split(',');
+        RoleType type = (RoleType)Enum.Parse(typeof(RoleType), args[0]);
+        Role tempRole = new Role();
+        int x = int.Parse(args[3]);
+        int y = int.Parse(args[4]);
+        tempRole.baseRoleData = GameDataMgr.My.GetModelData(type, 1);
+        tempRole.ID = double.Parse(args[2]);
+        tempRole.baseRoleData.roleName = args[1];
+
+        GameObject role = Instantiate(Resources.Load<GameObject>("Prefabs/Role/" + args[0] + "_1"), NewCanvasUI.My.RoleTF.transform);
+        role.name = tempRole.ID.ToString();
+        role.GetComponent<BaseMapRole>().baseRoleData = new Role();
+        role.GetComponent<BaseMapRole>().baseRoleData = tempRole;
+        role.transform.position = MapManager.My.GetMapSignByXY(x, y).transform.position + new Vector3(0f, 0.3f, 0f);
+        PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
+        PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
+        MapManager.My.SetLand(x, y, role.GetComponent<BaseMapRole>());
+        role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
+    }
+
+    public void OnChangeTimeScale(string str)
+    {
+        int select = int.Parse(str);
+        switch(select)
         {
-            string[] args = str.Split(',');
-            RoleType type = (RoleType)Enum.Parse(typeof(RoleType), args[0]);
-            Role tempRole = new Role();
-            int x = int.Parse(args[3]);
-            int y = int.Parse(args[4]);
-            tempRole.baseRoleData = GameDataMgr.My.GetModelData(type, 1);
-            tempRole.ID = double.Parse(args[2]);
-            tempRole.baseRoleData.roleName = args[1];
-
-            GameObject role = Instantiate(Resources.Load<GameObject>("Prefabs/Role/" + args[0] + "_1"), NewCanvasUI.My.RoleTF.transform);
-            role.name = tempRole.ID.ToString();
-            role.GetComponent<BaseMapRole>().baseRoleData = new Role();
-            role.GetComponent<BaseMapRole>().baseRoleData = tempRole;
-            role.transform.position = MapManager.My.GetMapSignByXY(x, y).transform.position + new Vector3(0f, 0.3f, 0f);
-            PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
-            PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
-            MapManager.My.SetLand(x, y, role.GetComponent<BaseMapRole>());
-            role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
-
+            case 0:
+                DOTween.PauseAll();
+                DOTween.defaultAutoPlay = AutoPlay.None;
+                break;
+            case 1:
+                DOTween.PlayAll();
+                DOTween.timeScale = 1f;
+                DOTween.defaultAutoPlay = AutoPlay.All;
+                break;
+            case 2:
+                DOTween.PlayAll();
+                DOTween.timeScale = 2f;
+                DOTween.defaultAutoPlay = AutoPlay.All;
+                break;
+            default:
+                DOTween.PlayAll();
+                DOTween.timeScale = 1f;
+                DOTween.defaultAutoPlay = AutoPlay.All;
+                break;
         }
-        catch (Exception ex)
-        {
-            Debug.Log(ex.Message);
-        }
-
     }
 
     public void Receivemsg(string str)
@@ -69,7 +88,7 @@ public class NetManager : MonoSingleton<NetManager>
             Debug.Log(methodName);
             string args = str.Split('|')[1];
             //actionActions.Add(listeners[methodName]);
-            listNoDelayActions.Add(new NoDelayedQueueItem {action = listeners[methodName],param = args });
+            listNoDelayActions.Add(new NoDelayedQueueItem { action = listeners[methodName], param = args });
         }
     }
 
@@ -123,6 +142,7 @@ public class NetManager : MonoSingleton<NetManager>
         listeners = new Dictionary<string, Action<string>>();
         listeners.Add("LoadScene", OnLoadScene);
         listeners.Add("CreateRole", OnCreateRole);
+        listeners.Add("ChangeTimeScale", OnChangeTimeScale);
     }
 
     public string loadSceneName;
@@ -135,8 +155,16 @@ public class NetManager : MonoSingleton<NetManager>
     {
         if (listNoDelayActions.Count > 0)
         {
-            listNoDelayActions[0].action(listNoDelayActions[0].param);
-            listNoDelayActions.RemoveAt(0);
+            try
+            {
+                listNoDelayActions[0].action(listNoDelayActions[0].param);
+                listNoDelayActions.RemoveAt(0);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message);
+            }
+
         }
     }
 
