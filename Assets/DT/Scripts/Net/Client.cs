@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.IO;
-
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,6 +55,8 @@ public class Client : MonoBehaviour
             Thread s_thread = new Thread(SendMessage);          //开启新的线程，不停的给服务器发送消息
             s_thread.IsBackground = true;
             s_thread.Start();
+            PlayerData.My.Client = this;
+            PlayerData.My.isServer = false;
         }
         catch (Exception)
         {
@@ -84,7 +85,7 @@ public class Client : MonoBehaviour
                 recMes = Encoding.UTF8.GetString(buffer, 0, len);
 
                 Debug.Log("客户端接收到的数据 ： " + recMes);
-
+                NetManager.Receivemsg(recMes);
                 recTimes ++;
                 staInfo = "接收到一次数据，接收次数为 ：" + recTimes;
                 Debug.Log("接收次数为：" + recTimes);

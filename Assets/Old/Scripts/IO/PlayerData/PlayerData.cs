@@ -48,6 +48,12 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public bool cheatIndex3 = false;
 
+    public Client Client;
+
+    public Server server;
+
+    public bool isServer = true;
+
     /// <summary>
     /// 通过名字获得Role信息
     /// </summary>
@@ -336,5 +342,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     private void Start()
     {
+        NetManager.Init();
     }
 }

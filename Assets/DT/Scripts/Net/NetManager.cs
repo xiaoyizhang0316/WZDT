@@ -7,10 +7,30 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class NetManager
 {
 
+    public delegate void msgAction(string str);
+
+    public static Dictionary<string, msgAction> listeners;
+
+    public static void OnLoadScene(string str)
+    {
+
+        SceneManager.LoadScene(str);
+    }
+
+    public static void Receivemsg(string str)
+    {
+        string methodName = str.Split('|')[0];
+        if (listeners.ContainsKey(methodName))
+        {
+            string args = str.Split('|')[1];
+            listeners[methodName](args);
+        }
+    }
 
     public static string GetIP(ADDRESSFAM Addfam)
     {
@@ -56,6 +76,12 @@ public static class NetManager
         return output;
     }
 
+    public static void Init()
+    {
+        Debug.Log("construct");
+        listeners = new Dictionary<string, msgAction>();
+        listeners.Add("LoadScene", OnLoadScene);
+    }
 
 }
 public enum ADDRESSFAM
