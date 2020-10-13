@@ -115,16 +115,26 @@ public class NetManager : MonoSingleton<NetManager>
     public void UpdateRoleEquipAndWorker(string str)
     {
         double roleId = double.Parse(str.Split(',')[0]);
-        List<string> qeuip = str.Split(',')[0].Split('&')[0].Split('_').ToList();
-        List<string> worker = str.Split(',')[0].Split('&')[1].Split('_').ToList();
+        List<string> qeuip = str.Split(',')[1].Split('&')[0].Split('_').ToList();
+        List<string> worker = str.Split(',')[1].Split('&')[1].Split('_').ToList();
         Role target = PlayerData.My.GetRoleById(roleId);
+        target.EquipList.Clear();
+        target.peoPleList.Clear();
         for (int i = 0; i < qeuip.Count; i++)
         {
+            if (qeuip[i].Length == 0)
+            {
+                break;
+            }
             target.EquipList.Add(int.Parse(qeuip[i]), new Vector3());
         }
 
         for (int i = 0; i < worker.Count; i++)
         {
+            if (worker[i].Length == 0)
+            {
+                break;
+            }
             target.peoPleList.Add(int.Parse(worker[i]), new Vector3());
         }
 
@@ -163,6 +173,15 @@ public class NetManager : MonoSingleton<NetManager>
             finalTechAdd += tempData.techAdd;
             target.workerCost += tempData.cost;
         }
+        target.effect = finalEffect;
+        target.efficiency = finalEfficiency;
+        target.riskResistance = finalRiskResistance;
+        target.range = finalRange;
+        target.cost = finalCost;
+        target.tradeCost = finalTradeCost;
+        target.bulletCapacity = finalBulletCapacity;
+        target.techAdd = finalTechAdd;
+        PlayerData.My.GetMapRoleById(target.ID).ResetAllBuff();
     }
 
     #endregion
@@ -304,6 +323,7 @@ public class NetManager : MonoSingleton<NetManager>
     {
         int gold = int.Parse(str);
         StageGoal.My.playerGold = gold;
+        StageGoal.My.SetInfo();
     }
     /// <summary>
     /// 改变生命值
@@ -313,6 +333,7 @@ public class NetManager : MonoSingleton<NetManager>
     {
         int  health = int.Parse(str);
         StageGoal.My.playerHealth = health;
+        StageGoal.My.SetInfo();
     }
 
     /// <summary>
@@ -323,6 +344,7 @@ public class NetManager : MonoSingleton<NetManager>
     {
         int  Satisfy = int.Parse(str);
         StageGoal.My.playerSatisfy = Satisfy;
+        StageGoal.My.SetInfo();
     }
 
     /// <summary>
@@ -333,6 +355,7 @@ public class NetManager : MonoSingleton<NetManager>
     {
         int  Tech = int.Parse(str);
         StageGoal.My.playerTechPoint = Tech;
+        StageGoal.My.SetInfo();
     }
 
     public void Receivemsg(string str)
@@ -405,6 +428,7 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("CreateTrade", OnCreateTrade);
         listeners.Add("DeleteTrade",OnDeleteTrade);
         listeners.Add("ChangeTrade", OnChangeTrade);
+        listeners.Add("UseThreeMirror", OnUseThreeMirror);
         listeners.Add("UpdateRole", UpdateRole);
         listeners.Add("UpdateRoleEquipAndWorker", UpdateRoleEquipAndWorker);
         listeners.Add("OnGoldChange", OnGoldChange);
@@ -418,15 +442,15 @@ public class NetManager : MonoSingleton<NetManager>
     {
         if (listNoDelayActions.Count > 0)
         {
-            try
+            //try
             {
                 listNoDelayActions[0].action(listNoDelayActions[0].param);
                 listNoDelayActions.RemoveAt(0);
             }
-            catch (Exception ex)
-            {
-                Debug.Log(ex.Message);
-            }
+            //catch (Exception ex)
+            //{
+            //Debug.Log(ex.Message);
+            //}
         }
     }
 

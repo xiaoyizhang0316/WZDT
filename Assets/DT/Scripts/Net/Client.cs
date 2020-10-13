@@ -65,6 +65,12 @@ public class Client : MonoBehaviour
         }
     }
 
+    private Stack<char> msg = new Stack<char>();
+
+    private bool isStart = false;
+
+    private string orderMsg = "";
+
     /// <summary>
     /// 接收服务端返回的消息
     /// </summary>
@@ -83,9 +89,30 @@ public class Client : MonoBehaviour
                 }
 
                 recMes = Encoding.UTF8.GetString(buffer, 0, len);
-
+                char[] tempList = recMes.ToCharArray();
+                for (int i = tempList.Length - 1; i >= 0; i--)
+                {
+                    msg.Push(tempList[i]);
+                }
+                while (msg.Count > 0)
+                {
+                    if (msg.Pop() == '(')
+                    {
+                        isStart = true;
+                    }
+                    else if (msg.Pop() == ')')
+                    {
+                        isStart = false;
+                        NetManager.My.Receivemsg(orderMsg);
+                        orderMsg = "";
+                    }
+                    else if (isStart)
+                    {
+                        orderMsg += msg.Pop();
+                    }
+                }
                 Debug.Log("客户端接收到的数据 ： " + recMes);
-                NetManager.My.Receivemsg(recMes);
+                
                 recTimes ++;
                 staInfo = "接收到一次数据，接收次数为 ：" + recTimes;
                 Debug.Log("接收次数为：" + recTimes);
