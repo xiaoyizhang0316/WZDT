@@ -190,7 +190,7 @@ public class NetManager : MonoSingleton<NetManager>
     /// <param name="str"></param>
     public void OnUnlockRole(string str)
     {
-        double id = double.Parse(str.Split(',')[1]);
+        double id = double.Parse(str);
         BaseMapRole role = PlayerData.My.GetMapRoleById(id);
         role.npcScript.isLock = false;
         StageGoal.My.CostTp(role.npcScript.lockNumber, CostTpType.Unlock);
