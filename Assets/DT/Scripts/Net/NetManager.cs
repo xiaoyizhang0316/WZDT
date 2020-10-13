@@ -25,6 +25,10 @@ public class NetManager : MonoSingleton<NetManager>
 
     public Dictionary<string, Action<string>> listeners;
 
+    /// <summary>
+    /// 切换场景同步调用
+    /// </summary>
+    /// <param name="str"></param>
     public void OnLoadScene(string str)
     {
         loadSceneName = str;
@@ -32,6 +36,10 @@ public class NetManager : MonoSingleton<NetManager>
         PlayerData.My.Reset();
     }
 
+    /// <summary>
+    /// 创建角色同步调用
+    /// </summary>
+    /// <param name="str"></param>
     public void OnCreateRole(string str)
     {
         string[] args = str.Split(',');
@@ -54,6 +62,36 @@ public class NetManager : MonoSingleton<NetManager>
         role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
     }
 
+    /// <summary>
+    /// 删除角色调用
+    /// </summary>
+    /// <param name="str"></param>
+    public void OnDeleteRole(string str)
+    {
+        double roleId = double.Parse(str);
+        Role target = PlayerData.My.GetRoleById(roleId);
+        foreach (var v in target.EquipList)
+        {
+            PlayerData.My.SetGearStatus(v.Key, false);
+        }
+        foreach (var v in target.peoPleList)
+        {
+            PlayerData.My.SetWorkerStatus(v.Key, false);
+        }
+        TradeManager.My.DeleteRoleAllTrade(roleId);
+        BaseMapRole mapRole = PlayerData.My.GetMapRoleById(roleId);
+        if (StageGoal.My.timeCount - mapRole.putTime <= 5)
+            StageGoal.My.GetTechPoint(target.baseRoleData.costTech);
+        PlayerData.My.RoleData.Remove(target);
+        PlayerData.My.MapRole.Remove(mapRole);
+        MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
+        Destroy(mapRole.gameObject);
+    }
+
+    /// <summary>
+    /// 变更时间速率同步调用
+    /// </summary>
+    /// <param name="str"></param>
     public void OnChangeTimeScale(string str)
     {
         int select = int.Parse(str);
@@ -80,6 +118,7 @@ public class NetManager : MonoSingleton<NetManager>
                 break;
         }
     }
+
 
     public void Receivemsg(string str)
     {

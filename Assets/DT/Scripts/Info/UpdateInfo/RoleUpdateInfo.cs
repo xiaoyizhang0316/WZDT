@@ -68,7 +68,15 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要删除" + currentRole.baseRoleData.roleName + "吗？";
           
-            DeleteUIManager.My.Init(str, () => { PlayerData.My.DeleteRole(currentRole.ID); });
+            DeleteUIManager.My.Init(str, () => {
+                PlayerData.My.DeleteRole(currentRole.ID);
+                if (PlayerData.My.server != null)
+                {
+                    string str = "DeleteRole|";
+                    str += currentRole.ID.ToString();
+                    PlayerData.My.server.SendToClientMsg(str);
+                }
+            });
         });
         changeRoleButton.onClick.AddListener(() =>
         {
