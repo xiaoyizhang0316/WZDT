@@ -124,7 +124,8 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public void CheckBuffLineTradeCost()
     {
-        tweener = transform.DOScale(1f, 10f).OnComplete(()=> {
+        tweener = transform.DOScale(1f, 10f).OnComplete(() =>
+        {
             BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
             cast.GetComponent<BaseSkill>().AddRoleBuff(tradeData);
             CalculateTC();
@@ -191,7 +192,7 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public void GenerateTradeIcon()
     {
-        if(SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2")
+        if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
         {
             return;
         }
@@ -217,8 +218,16 @@ public class TradeSign : MonoBehaviour
         countNumber++;
         if (countNumber == 10)
         {
-            CalculateTC();
+            int cost = CalculateTC();
             countNumber = 0;
+            if (!PlayerData.My.isSingle)
+            {
+                string str = "OnGoldChange|" + (0 - cost).ToString();
+                if (PlayerData.My.isServer)
+                {
+                    PlayerData.My.server.SendToClientMsg(str);
+                }
+            }
         }
         return posList;
     }
@@ -253,12 +262,12 @@ public class TradeSign : MonoBehaviour
     /// <summary>
     /// 结算交易成本
     /// </summary>
-    public void CalculateTC()
+    public int CalculateTC()
     {
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
-        int result = (int)((startRole.baseRoleData.tradeCost * startPer + startRole.baseRoleData.riskResistance) );
-        result += (int)((endRole.baseRoleData.tradeCost * endPer + endRole.baseRoleData.riskResistance) );
+        int result = (int)((startRole.baseRoleData.tradeCost * startPer + startRole.baseRoleData.riskResistance));
+        result += (int)((endRole.baseRoleData.tradeCost * endPer + endRole.baseRoleData.riskResistance));
         int result1, result2;
         if (startRole.isNpc || endRole.isNpc)
         {
@@ -280,6 +289,7 @@ public class TradeSign : MonoBehaviour
         }
         StageGoal.My.CostPlayerGold(result);
         StageGoal.My.Expend(result, ExpendType.TradeCosts);
+        return result;
     }
 
     /// <summary>

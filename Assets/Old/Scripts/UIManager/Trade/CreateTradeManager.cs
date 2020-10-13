@@ -342,15 +342,22 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         currentTrade.startPer = startPer;
         currentTrade.endPer = endPer;
         currentTrade.UpdateEncourageLevel();
-        if (PlayerData.My.server != null)
+        if (!PlayerData.My.isSingle)
         {
-            string str1 = "ChangeTrade|";
-            str1 += currentTrade.tradeData.ID.ToString();
-            str1 += "," + selectCashFlow.ToString();
-            str1 += "," + selectDividePercent;
-            str1 += "," + startPer;
-            str1 += "," + endPer;
-            PlayerData.My.server.SendToClientMsg(str1);
+                string str1 = "ChangeTrade|";
+                str1 += currentTrade.tradeData.ID.ToString();
+                str1 += "," + selectCashFlow.ToString();
+                str1 += "," + selectDividePercent;
+                str1 += "," + startPer;
+                str1 += "," + endPer;
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str1);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str1);
+            }
         }
     }
 
@@ -378,11 +385,18 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         string str = "确定要删除此交易吗？";
         DeleteUIManager.My.Init(str, () => {
             TradeManager.My.DeleteTrade(currentTrade.tradeData.ID);
-            if (PlayerData.My.server != null)
+            if (!PlayerData.My.isSingle)
             {
                 string str1 = "DeleteTrade|";
                 str1 += currentTrade.tradeData.ID.ToString();
-                PlayerData.My.server.SendToClientMsg(str1);
+                if (PlayerData.My.isServer)
+                {
+                    PlayerData.My.server.SendToClientMsg(str1);
+                }
+                else
+                {
+                    PlayerData.My.client.SendToServerMsg(str1);
+                }
             }
             DataUploadManager.My.AddData(DataEnum.交易_删交易);
         });

@@ -63,13 +63,20 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             Destroy(effect, 1f);
                             Debug.Log("使用广角镜成功");
                             DataUploadManager.My.AddData(DataEnum.使用广角镜);
-                            if (PlayerData.My.server != null)
+                            if (!PlayerData.My.isSingle)
                             {
                                 string str1 = "UseThreeMirror|";
                                 str1 += "0";
                                 str1 += "," + hit.transform.GetComponentInParent<BaseMapRole>().baseRoleData.ID.ToString();
                                 str1 += "," + costTechNumber.ToString();
-                                PlayerData.My.server.SendToClientMsg(str1);
+                                if (PlayerData.My.isServer)
+                                {
+                                    PlayerData.My.server.SendToClientMsg(str1);
+                                }
+                                else
+                                {
+                                    PlayerData.My.client.SendToServerMsg(str1);
+                                }
                             }
                         }
                         else

@@ -48,11 +48,13 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public bool cheatIndex3 = false;
 
-    public Client Client;
+    public Client client;
 
     public Server server;
 
     public bool isServer = true;
+
+    public bool isSingle = true;
 
     /// <summary>
     /// 通过名字获得Role信息

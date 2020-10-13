@@ -411,10 +411,16 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                 str1 += "_"; 
             }
         }
-        if (PlayerData.My.server != null)
+        if (!PlayerData.My.isSingle)
         {
-          
-            PlayerData.My.server.SendToClientMsg(str1);
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str1);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str1);
+            }
         }
         for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
         {

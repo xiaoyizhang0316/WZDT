@@ -55,8 +55,9 @@ public class Client : MonoBehaviour
             Thread s_thread = new Thread(SendMessage);          //开启新的线程，不停的给服务器发送消息
             s_thread.IsBackground = true;
             s_thread.Start();
-            PlayerData.My.Client = this;
+            PlayerData.My.client = this;
             PlayerData.My.isServer = false;
+            PlayerData.My.isSingle = false;
         }
         catch (Exception)
         {
@@ -125,6 +126,16 @@ public class Client : MonoBehaviour
     /// <summary>
     /// 向服务器发送消息
     /// </summary>
+    /// <param name="str"></param>
+    public void SendToServerMsg(string str)
+    {
+        inputMes = str;
+        clickSend = true;
+    }
+
+    /// <summary>
+    /// 向服务器发送消息
+    /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
     void SendMessage()
@@ -138,7 +149,7 @@ public class Client : MonoBehaviour
                     clickSend = false;
                     string msg = inputMes;
                     byte[] buffer = new byte[1024 * 6];
-                    buffer = Encoding.UTF8.GetBytes(msg);
+                    buffer = Encoding.UTF8.GetBytes("(" + msg + ")");
                     socketSend.Send(buffer);
                     Debug.Log("发送的数据为：" + msg);
                 }
@@ -151,20 +162,20 @@ public class Client : MonoBehaviour
     private void OnDisable()
     {
         Debug.Log("begin OnDisable()");
-
         if (socketSend.Connected)
         {
             try
             {
                 socketSend.Shutdown(SocketShutdown.Both);    //禁用Socket的发送和接收功能
                 socketSend.Close();                          //关闭Socket连接并释放所有相关资源
+                PlayerData.My.isSingle = true;
+                PlayerData.My.client = null;
             }
             catch (Exception e)
             {
                 print(e.Message);
             }
         }
-
         Debug.Log("end OnDisable()");
     }
 

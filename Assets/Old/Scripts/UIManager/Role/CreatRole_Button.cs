@@ -218,15 +218,21 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
                     BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
                     CreateRoleOperationRecord(role.GetComponent<BaseMapRole>());
-                    if (PlayerData.My.server != null)
+                    if (!PlayerData.My.isSingle)
                     {
-
                         string str = "CreateRole|";
                         str += role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType.ToString() + ",";
                         str += role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleName + ",";
                         str += role.GetComponent<BaseMapRole>().baseRoleData.ID.ToString() + ",";
                         str += x.ToString() + "," + y.ToString();
-                        PlayerData.My.server.SendToClientMsg(str);
+                        if (PlayerData.My.isServer)
+                        {
+                            PlayerData.My.server.SendToClientMsg(str);
+                        }
+                        else
+                        {
+                            PlayerData.My.client.SendToServerMsg(str);
+                        }
                     }
                 }
                 else

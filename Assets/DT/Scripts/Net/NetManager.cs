@@ -63,6 +63,8 @@ public class NetManager : MonoSingleton<NetManager>
         role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
         StageGoal.My.CostTechPoint(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech);
         StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech,CostTpType.Build);
+        role.GetComponent<BaseMapRole>().MonthlyCost();
+        role.GetComponent<BaseMapRole>().AddTechPoint();
     }
 
     /// <summary>
@@ -330,6 +332,53 @@ public class NetManager : MonoSingleton<NetManager>
 
     #endregion
 
+    #region 消费者
+
+    /// <summary>
+    /// 消费者死亡回调
+    /// </summary>
+    /// <param name="str"></param>
+    public void OnConsumerDead(string str)
+    {
+        int id = int.Parse(str.Split(',')[0]);
+        ConsumeSign[] signs = FindObjectsOfType<ConsumeSign>();
+        int score = int.Parse(str.Split(',')[1]);
+        int gold = int.Parse(str.Split(',')[2]);
+        for (int i = 0; i < signs.Length; i++)
+        {
+            if (signs[i].gameObject.GetInstanceID() == id)
+            {
+                Destroy(signs[i].gameObject);
+                StageGoal.My.GetSatisfy(score);
+                StageGoal.My.GetPlayerGold(gold);
+                StageGoal.My.Income(gold, IncomeType.Consume);
+                StageGoal.My.killNumber++;
+                break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 消费者移动速度变化回调
+    /// </summary>
+    /// <param name="str"></param>
+    public void OnConsumerChangeSpeed(string str)
+    {
+        int id = int.Parse(str.Split(',')[0]);
+        float speedAdd = float.Parse(str.Split(',')[1]);
+        ConsumeSign[] signs = FindObjectsOfType<ConsumeSign>();
+        for (int i = 0; i < signs.Length; i++)
+        {
+            if (signs[i].gameObject.GetInstanceID() == id)
+            {
+                signs[i].tweener.timeScale += speedAdd;
+                break;
+            }
+        }
+    }
+
+    #endregion
+
     /// <summary>
     /// 改变金钱
     /// </summary>
@@ -337,8 +386,14 @@ public class NetManager : MonoSingleton<NetManager>
     public void OnGoldChange(string str)
     {
         int gold = int.Parse(str);
-        StageGoal.My.playerGold = gold;
-        StageGoal.My.SetInfo();
+        if (gold >= 0)
+        {
+            StageGoal.My.GetPlayerGold(gold);
+        }
+        else
+        {
+            StageGoal.My.CostPlayerGold(0 - gold);
+        }
     }
     /// <summary>
     /// 改变生命值
@@ -347,8 +402,7 @@ public class NetManager : MonoSingleton<NetManager>
     public void OnHealthChange(string str)
     {
         int  health = int.Parse(str);
-        StageGoal.My.playerHealth = health;
-        StageGoal.My.SetInfo();
+        StageGoal.My.LostHealth(health);
     }
 
     /// <summary>
@@ -358,8 +412,7 @@ public class NetManager : MonoSingleton<NetManager>
     public void OnPlayerSatisfyChange(string str)
     {
         int  Satisfy = int.Parse(str);
-        StageGoal.My.playerSatisfy = Satisfy;
-        StageGoal.My.SetInfo();
+        StageGoal.My.GetSatisfy(Satisfy);
     }
 
     /// <summary>
@@ -369,8 +422,14 @@ public class NetManager : MonoSingleton<NetManager>
     public void OnTechPointChange(string str)
     {
         int  Tech = int.Parse(str);
-        StageGoal.My.playerTechPoint = Tech;
-        StageGoal.My.SetInfo();
+        if (Tech >= 0)
+        {
+            StageGoal.My.GetTechPoint(Tech);
+        }
+        else
+        {
+            StageGoal.My.CostTechPoint(0 - Tech);
+        }
     }
 
     public void Receivemsg(string str)
@@ -451,8 +510,8 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("OnHealthChange", OnHealthChange);
         listeners.Add("OnTechPointChange", OnTechPointChange);
         listeners.Add("UnlockRole", OnUnlockRole);
-
-
+        listeners.Add("ConsumerDead", OnConsumerDead);
+        listeners.Add("ConsumerChangeSpeed",OnConsumerChangeSpeed);
     }
 
     private void Update()

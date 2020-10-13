@@ -20,23 +20,35 @@ public class LosePanel : MonoBehaviour
         retryButton.onClick.AddListener(()=> {
             PlayerData.My.Reset();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            if (PlayerData.My.server != null)
+            if (!PlayerData.My.isSingle)
             {
-
                 string str = "LoadScene|";
                 str += SceneManager.GetActiveScene().name;
-                PlayerData.My.server.SendToClientMsg(str);
+                if (PlayerData.My.isServer)
+                {
+                    PlayerData.My.server.SendToClientMsg(str);
+                }
+                else
+                {
+                    PlayerData.My.client.SendToServerMsg(str);
+                }
             }
         });
 
         returnButton.onClick.AddListener(()=> {
             PlayerData.My.Reset();
             SceneManager.LoadScene("Map");
-            if (PlayerData.My.server != null)
+            if (!PlayerData.My.isSingle)
             {
-
                 string str = "LoadScene|Map";
-                PlayerData.My.server.SendToClientMsg(str);
+                if (PlayerData.My.isServer)
+                {
+                    PlayerData.My.server.SendToClientMsg(str);
+                }
+                else
+                {
+                    PlayerData.My.client.SendToServerMsg(str);
+                }
             }
         });
     }

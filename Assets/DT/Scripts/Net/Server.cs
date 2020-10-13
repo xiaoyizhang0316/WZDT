@@ -65,6 +65,7 @@ public class Server : MonoBehaviour
 
             PlayerData.My.server = this;
             PlayerData.My.isServer = true;
+            PlayerData.My.isSingle = false;
 
             //创建监听线程
             Thread thread = new Thread(Listen);
@@ -101,6 +102,12 @@ public class Server : MonoBehaviour
         catch { }
     }
 
+        private Stack<char> msg = new Stack<char>();
+
+    private bool isStart = false;
+
+    private string orderMsg = "";
+
     /// <summary>
     /// 服务器端不停的接收客户端发来的消息
     /// </summary>
@@ -121,7 +128,30 @@ public class Server : MonoBehaviour
 
                 Debug.Log("接收到的消息：" + socketSend.RemoteEndPoint + ":" + str);
                 recMes = str;
-
+                char[] tempList = recMes.ToCharArray();
+                for (int i = tempList.Length - 1; i >= 0; i--)
+                {
+                    msg.Push(tempList[i]);
+                }
+                while (msg.Count > 0)
+                {
+                    if (msg.Peek() == '(')
+                    {
+                        msg.Pop();
+                        isStart = true;
+                    }
+                    else if (msg.Peek() == ')')
+                    {
+                        msg.Pop();
+                        isStart = false;
+                        NetManager.My.Receivemsg(orderMsg);
+                        orderMsg = "";
+                    }
+                    else if (isStart)
+                    {
+                        orderMsg += msg.Pop();
+                    }
+                }
                 recTimes ++;
                 info = "接收到一次数据，接收次数为：" + recTimes;
                 Debug.Log("接收数据次数：" + recTimes);
@@ -173,7 +203,9 @@ public class Server : MonoBehaviour
                 socketWatch.Close();                          //关闭Socket连接并释放所有相关资源
 
                 socketSend.Shutdown(SocketShutdown.Both);     //禁用Socket的发送和接收功能
-                socketSend.Close();                           //关闭Socket连接并释放所有相关资源           
+                socketSend.Close();                           //关闭Socket连接并释放所有相关资源
+                PlayerData.My.isSingle = true;
+                PlayerData.My.server = null;
             }
             catch (Exception e)
             {
@@ -205,7 +237,7 @@ public class Server : MonoBehaviour
 
         GUI.Label(new Rect(65, 160, 80, 20), "本机ip地址：");
 
-        inputIp = GUI.TextField(new Rect(155, 160, 100, 20), inputIp, 20);
+        inputIp = GUI.TextField(new Rect(155, 160, 100, 20), NetManager.My.GetIP(ADDRESSFAM.IPv4), 20);
 
         GUI.Label(new Rect(65, 200, 80, 20), "本机端口号：");
 

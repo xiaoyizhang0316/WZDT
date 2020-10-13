@@ -227,6 +227,17 @@ public class ConsumeSign : MonoBehaviour
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
         ComboManager.My.AddComboNum();
+        if (!PlayerData.My.isSingle)
+        {
+            string str = "ConsumerDead|";
+            str += gameObject.GetInstanceID().ToString() + ",";
+            str += ((int)(consumeData.killSatisfy * scorePer)).ToString() + ",";
+            str += consumeData.killMoney.ToString();
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+        }
     }
 
     /// <summary>
@@ -278,7 +289,6 @@ public class ConsumeSign : MonoBehaviour
             StageGoal.My.ConsumerExtraPerTip();
             DataUploadManager.My.AddData(消费者_口味击杀);
         }
-
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
         StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
         StageGoal.My.killNumber++;
@@ -415,6 +425,16 @@ public class ConsumeSign : MonoBehaviour
     {
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
+        if (!PlayerData.My.isSingle)
+        {
+            string str = "ConsumerChangeSpeed|";
+            str += gameObject.GetInstanceID().ToString() + ",";
+            str += speedAdd.ToString();
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+        }
         //print("移动速度：" + tweener.timeScale.ToString());
     }
 

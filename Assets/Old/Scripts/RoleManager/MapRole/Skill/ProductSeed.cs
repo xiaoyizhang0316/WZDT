@@ -12,6 +12,10 @@ public class ProductSeed : BaseSkill
     private int currentCount = 0;
     public override void Skill()
     {
+        if (!PlayerData.My.isSingle && !PlayerData.My.isServer)
+        {
+            return;
+        }
         if (role.tradeList.Count <= 0)
         {
             return;
