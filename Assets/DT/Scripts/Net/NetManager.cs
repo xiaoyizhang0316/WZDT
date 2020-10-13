@@ -31,7 +31,6 @@ public class NetManager : MonoSingleton<NetManager>
     /// <param name="str"></param>
     public void OnLoadScene(string str)
     {
-        loadSceneName = str;
         SceneManager.LoadScene(str);
         PlayerData.My.Reset();
     }
@@ -50,7 +49,6 @@ public class NetManager : MonoSingleton<NetManager>
         tempRole.baseRoleData = GameDataMgr.My.GetModelData(type, 1);
         tempRole.ID = double.Parse(args[2]);
         tempRole.baseRoleData.roleName = args[1];
-
         GameObject role = Instantiate(Resources.Load<GameObject>("Prefabs/Role/" + args[0] + "_1"), NewCanvasUI.My.RoleTF.transform);
         role.name = tempRole.ID.ToString();
         role.GetComponent<BaseMapRole>().baseRoleData = new Role();
@@ -60,6 +58,8 @@ public class NetManager : MonoSingleton<NetManager>
         PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
         MapManager.My.SetLand(x, y, role.GetComponent<BaseMapRole>());
         role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
+        StageGoal.My.CostTechPoint(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech);
+        StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech,CostTpType.Build);
     }
 
     /// <summary>
@@ -119,6 +119,103 @@ public class NetManager : MonoSingleton<NetManager>
         }
     }
 
+    /// <summary>
+    /// 使用三镜调用
+    /// </summary>
+    /// <param name="str"></param>
+    public void OnUseThreeMirror(string str)
+    {
+        int option = int.Parse(str.Split(',')[0]);
+        switch (option)
+        {
+            case 0:
+                {
+                    double id = double.Parse(str.Split(',')[1]);
+                    BaseMapRole role = PlayerData.My.GetMapRoleById(id);
+                    role.npcScript.DetectNPCRole();
+                    int techNumber = int.Parse(str.Split(',')[2]);
+                    StageGoal.My.CostTechPoint(techNumber);
+                    StageGoal.My.CostTp(techNumber, CostTpType.Mirror);
+                    break;
+                }
+            case 1:
+                {
+                    double id = double.Parse(str.Split(',')[1]);
+                    BaseMapRole role = PlayerData.My.GetMapRoleById(id);
+                    role.npcScript.isCanSeeEquip = true;
+                    int techNumber = int.Parse(str.Split(',')[2]);
+                    StageGoal.My.CostTechPoint(techNumber);
+                    StageGoal.My.CostTp(techNumber, CostTpType.Mirror);
+                    break;
+                }
+            case 2:
+                {
+                    int id = int.Parse(str.Split(',')[1]);
+                    BuildingManager.My.GetBuildingByIndex(id).UseTSJ();
+                    int techNumber = int.Parse(str.Split(',')[2]);
+                    StageGoal.My.CostTechPoint(techNumber);
+                    StageGoal.My.CostTp(techNumber, CostTpType.Mirror);
+                    break;
+                }
+            default:
+                break;
+        }
+    }
+
+    #region 交易  
+
+    /// <summary>
+    /// 创建交易调用
+    /// </summary>
+    /// <param name="str"></param>
+    public void OnCreateTrade(string str)
+    {
+        string start = str.Split(',')[0];
+        string end = str.Split(',')[1];
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Trade/TradeSign"));
+        go.transform.SetParent(TradeManager.My.transform);
+        go.GetComponent<TradeSign>().Init(start, end);
+    }
+
+    /// <summary>
+    /// 删除交易调用
+    /// </summary>
+    /// <param name="str"></param>
+    public void OnDeleteTrade(string str)
+    {
+        int ID = int.Parse(str);
+        if (TradeManager.My.tradeList.ContainsKey(ID))
+        {
+            TradeSign temp = TradeManager.My.tradeList[ID];
+            TradeManager.My.tradeList.Remove(ID);
+            temp.ClearAllLine();
+            Destroy(temp.gameObject, 0f);
+            if (NewCanvasUI.My.Panel_TradeSetting.activeSelf)
+                CreateTradeManager.My.Close();
+        }
+    }
+
+    /// <summary>
+    /// 配置交易调用
+    /// </summary>
+    public void OnChangeTrade(string str)
+    {
+        int Id = int.Parse(str.Split(',')[0]);
+        CashFlowType cashFlow = (CashFlowType)Enum.Parse(typeof(CashFlowType), str.Split(',')[1]);
+        int dividePer = int.Parse(str.Split(',')[2]);
+        float startP = float.Parse(str.Split(',')[3]);
+        float endP = float.Parse(str.Split(',')[4]);
+        if (TradeManager.My.tradeList.ContainsKey(Id))
+        {
+            TradeManager.My.tradeList[Id].tradeData.selectCashFlow = cashFlow;
+            TradeManager.My.tradeList[Id].tradeData.dividePercent = dividePer;
+            TradeManager.My.tradeList[Id].startPer = startP;
+            TradeManager.My.tradeList[Id].endPer = endP;
+            TradeManager.My.tradeList[Id].UpdateEncourageLevel();
+        }
+    }
+
+    #endregion
 
     public void Receivemsg(string str)
     {
@@ -183,13 +280,11 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("LoadScene", OnLoadScene);
         listeners.Add("CreateRole", OnCreateRole);
         listeners.Add("ChangeTimeScale", OnChangeTimeScale);
+        listeners.Add("DeleteRole", OnDeleteRole);
+        listeners.Add("CreateTrade", OnCreateTrade);
+        listeners.Add("DeleteTrade",OnDeleteTrade);
+        listeners.Add("ChangeTrade", OnChangeTrade);
     }
-
-    public string loadSceneName;
-
-    public bool isLoadScene = false;
-
-    public bool isCreateRole = false;
 
     private void Update()
     {

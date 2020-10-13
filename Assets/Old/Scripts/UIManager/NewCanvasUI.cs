@@ -290,6 +290,12 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         go.transform.SetParent(TradeManager.My.transform);
         go.GetComponent<TradeSign>().Init(startRole.baseRoleData.ID.ToString(), endRole.baseRoleData.ID.ToString());
         TradeManager.My.CreateTradeRecord(go.GetComponent<TradeSign>());
+        if (PlayerData.My.server != null)
+        {
+            string str1 = "CreateTrade|";
+            str1 += startRole.baseRoleData.ID.ToString() + "," + endRole.baseRoleData.ID.ToString();
+            PlayerData.My.server.SendToClientMsg(str1);
+        }
         //Panel_CreateTrade.SetActive(true);
         //CreateTradeManager.My.Open(go);
         isSetTrade = false;
