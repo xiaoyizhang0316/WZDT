@@ -72,9 +72,9 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                 PlayerData.My.DeleteRole(currentRole.ID);
                 if (PlayerData.My.server != null)
                 {
-                    string str = "DeleteRole|";
-                    str += currentRole.ID.ToString();
-                    PlayerData.My.server.SendToClientMsg(str);
+                    string str1 = "DeleteRole|";
+                    str1 += currentRole.ID.ToString();
+                    PlayerData.My.server.SendToClientMsg(str1);
                 }
             });
         });
