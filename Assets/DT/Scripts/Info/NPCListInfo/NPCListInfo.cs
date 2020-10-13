@@ -246,7 +246,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
             {
 
                 string str = "UnlockRole|";
-                str += npc.GetComponent<BaseMapRole>().baseRoleData.ID.ToString() + ",";
+                str += npc.GetComponent<BaseMapRole>().baseRoleData.ID.ToString();
                 PlayerData.My.server.SendToClientMsg(str);
             }
         }
