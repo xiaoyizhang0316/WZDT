@@ -143,7 +143,7 @@ public class Server : MonoBehaviour
                 if(isSendData)
                 {
                     isSendData = false;
-
+                    inputMessage = "(" + inputMessage + ")";
                     byte[] sendByte = Encoding.UTF8.GetBytes(inputMessage);
 
                     Debug.Log("发送的数据为 :" + inputMessage);
