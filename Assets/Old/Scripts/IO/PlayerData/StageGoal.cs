@@ -196,6 +196,13 @@ public class StageGoal : MonoSingleton<StageGoal>
 
             playerGold -= num;
         }
+        if (PlayerData.My.server != null)
+        {
+            string str1 = "OnGoldChange|";
+            str1 += playerGold.ToString();
+           
+            PlayerData.My.server.SendToClientMsg(str1);
+        }
         FloatInfoManager.My.MoneyChange(0 - num);
         if(playerGold < maxMinusGold)
         {
@@ -246,6 +253,13 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         FloatInfoManager.My.TechChange(0 - num);
         playerTechPoint -= num;
+        if (PlayerData.My.server != null)
+        {
+            string str1 = "OnTechPointChange|";
+            str1 += playerTechPoint.ToString();
+           
+            PlayerData.My.server.SendToClientMsg(str1);
+        }
         SetInfo();
         return true;
     }
@@ -258,6 +272,13 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         FloatInfoManager.My.TechChange(num);
         playerTechPoint += num;
+        if (PlayerData.My.server != null)
+        {
+            string str1 = "OnTechPointChange|";
+            str1 += playerTechPoint.ToString();
+           
+            PlayerData.My.server.SendToClientMsg(str1);
+        }
         SetInfo();
     }
 
@@ -307,6 +328,13 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerGold += num;
         }
         FloatInfoManager.My.MoneyChange(num);
+        if (PlayerData.My.server != null)
+        {
+            string str1 = "OnGoldChange|";
+            str1 += playerGold.ToString();
+           
+            PlayerData.My.server.SendToClientMsg(str1);
+        }
         if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -355,6 +383,13 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             playerSatisfy += num;
         }
+        if (PlayerData.My.server != null)
+        {
+            string str1 = "OnPlayerSatisfyChange|";
+            str1 += playerSatisfy.ToString();
+           
+            PlayerData.My.server.SendToClientMsg(str1);
+        }
         SetInfo();
     }
 
@@ -365,6 +400,13 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void LostHealth(int num)
     {
         playerHealth += num;
+        if (PlayerData.My.server != null)
+        {
+            string str1 = "OnHealthChange|";
+            str1 += playerHealth.ToString();
+           
+            PlayerData.My.server.SendToClientMsg(str1);
+        }
         SetInfo();
         CheckDead();
     }
