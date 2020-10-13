@@ -186,6 +186,21 @@ public class NetManager : MonoSingleton<NetManager>
         PlayerData.My.GetMapRoleById(target.ID).ResetAllBuff();
     }
 
+    /// <summary>
+    /// 解锁角色时调用
+    /// </summary>
+    /// <param name="str"></param>
+    public void OnUnlockRole(string str)
+    {
+        double id = double.Parse(str.Split(',')[1]);
+        BaseMapRole role = PlayerData.My.GetMapRoleById(id);
+        role.npcScript.isLock = false;
+        StageGoal.My.CostTp(role.npcScript.lockNumber, CostTpType.Unlock);
+        FloatInfoManager.My.TechChange(0 - role.npcScript.lockNumber);
+        StageGoal.My.playerTechPoint -= role.npcScript.lockNumber;
+        StageGoal.My.SetInfo();
+    }
+
     #endregion
 
     /// <summary>
@@ -437,22 +452,24 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("OnPlayerSatisfyChange", OnPlayerSatisfyChange);
         listeners.Add("OnHealthChange", OnHealthChange);
         listeners.Add("OnTechPointChange", OnTechPointChange);
-        
+        listeners.Add("UnlockRole", OnUnlockRole);
+
+
     }
 
     private void Update()
     {
         if (listNoDelayActions.Count > 0)
         {
-            //try
+            try
             {
                 listNoDelayActions[0].action(listNoDelayActions[0].param);
                 listNoDelayActions.RemoveAt(0);
             }
-            //catch (Exception ex)
-            //{
-            //Debug.Log(ex.Message);
-            //}
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message);
+            }
         }
     }
 

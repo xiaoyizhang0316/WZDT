@@ -87,7 +87,6 @@ public class Client : MonoBehaviour
                 {
                     break;
                 }
-
                 recMes = Encoding.UTF8.GetString(buffer, 0, len);
                 char[] tempList = recMes.ToCharArray();
                 for (int i = tempList.Length - 1; i >= 0; i--)
@@ -96,12 +95,14 @@ public class Client : MonoBehaviour
                 }
                 while (msg.Count > 0)
                 {
-                    if (msg.Pop() == '(')
+                    if (msg.Peek() == '(')
                     {
+                        msg.Pop();
                         isStart = true;
                     }
-                    else if (msg.Pop() == ')')
+                    else if (msg.Peek() == ')')
                     {
+                        msg.Pop();
                         isStart = false;
                         NetManager.My.Receivemsg(orderMsg);
                         orderMsg = "";
