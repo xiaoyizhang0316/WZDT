@@ -111,6 +111,14 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         if (RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost <= StageGoal.My.playerGold)
         {
+            if (PlayerData.My.server != null)
+            {
+                string str1 = "UpdateRole|";
+                str1 += RoleUpdateInfo.My.currentRole.ID.ToString();
+                str1 += ",";
+                str1 += RoleUpdateInfo.My.currentRole.baseRoleData.roleName.ToString();
+                PlayerData.My.server.SendToClientMsg(str1);
+            }
             DataUploadManager.My.AddData(DataEnum.角色_升级);
             GetComponent<Button>().interactable = false;
 

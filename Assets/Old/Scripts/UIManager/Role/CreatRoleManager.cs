@@ -386,14 +386,35 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         List<int> keys = EquipList.Keys.ToList();
         CurrentRole.EquipList.Clear();
         CurrentRole.peoPleList.Clear();
+        string str1 = "UpdateRoleEquipAndWorker|";
+        str1 += RoleUpdateInfo.My.currentRole.ID.ToString();
+        str1 += ",";
+      
         for (int i = 0; i < keys.Count; i++)
         {
             CurrentRole.EquipList.Add(keys[i], EquipList[keys[i]]);
+            str1 += keys[i].ToString();
+            if (keys.Count - 1 > i)
+            {
+                str1 += "_"; 
+            } 
         }
+
+        str1 += "&";
         List<int> keys2 = peoPleList.Keys.ToList();
         for (int i = 0; i < keys2.Count; i++)
         {
             CurrentRole.peoPleList.Add(keys2[i], peoPleList[keys2[i]]);
+            str1 += keys2[i].ToString();
+            if (keys2.Count - 1 > i)
+            {
+                str1 += "_"; 
+            }
+        }
+        if (PlayerData.My.server != null)
+        {
+          
+            PlayerData.My.server.SendToClientMsg(str1);
         }
         for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
         {
