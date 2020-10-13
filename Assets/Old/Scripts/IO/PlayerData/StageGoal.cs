@@ -196,13 +196,6 @@ public class StageGoal : MonoSingleton<StageGoal>
 
             playerGold -= num;
         }
-        if (PlayerData.My.server != null)
-        {
-            string str1 = "OnGoldChange|";
-            str1 += playerGold.ToString();
-           
-            PlayerData.My.server.SendToClientMsg(str1);
-        }
         FloatInfoManager.My.MoneyChange(0 - num);
         if(playerGold < maxMinusGold)
         {
@@ -328,13 +321,6 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerGold += num;
         }
         FloatInfoManager.My.MoneyChange(num);
-        if (PlayerData.My.server != null)
-        {
-            string str1 = "OnGoldChange|";
-            str1 += playerGold.ToString();
-           
-            PlayerData.My.server.SendToClientMsg(str1);
-        }
         if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
