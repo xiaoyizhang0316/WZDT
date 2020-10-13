@@ -246,13 +246,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         FloatInfoManager.My.TechChange(0 - num);
         playerTechPoint -= num;
-        if (PlayerData.My.server != null)
-        {
-            string str1 = "OnTechPointChange|";
-            str1 += playerTechPoint.ToString();
-           
-            PlayerData.My.server.SendToClientMsg(str1);
-        }
         SetInfo();
         return true;
     }
@@ -265,13 +258,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         FloatInfoManager.My.TechChange(num);
         playerTechPoint += num;
-        if (PlayerData.My.server != null)
-        {
-            string str1 = "OnTechPointChange|";
-            str1 += playerTechPoint.ToString();
-           
-            PlayerData.My.server.SendToClientMsg(str1);
-        }
         SetInfo();
     }
 
