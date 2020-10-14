@@ -46,12 +46,18 @@ public class RoleListInfo : MonoSingleton<RoleListInfo>
             string str = "确定要删除" + currentRole.baseRoleData.roleName + "吗？";
             DeleteUIManager.My.Init(str,()=> {
                 PlayerData.My.DeleteRole(currentRole.ID);
-                if (PlayerData.My.server != null)
+                if (!PlayerData.My.isSOLO)
                 {
-
                     string str1 = "DeleteRole|";
                     str1 += currentRole.ID.ToString();
-                    PlayerData.My.server.SendToClientMsg(str1);
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str1);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str1);
+                    }
                 }
             });
         });

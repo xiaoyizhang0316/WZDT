@@ -449,14 +449,6 @@ public class NetManager : MonoSingleton<NetManager>
     }
 
 
-    /// <summary>
-    /// 确定职责
-    /// </summary>
-    public void ConfirmDuty(string str)
-    {
-       PlayerData.My.InitPlayerRightControl(str.Split(',')[0],str.Split(',')[1],str.Split(',')[2],str.Split(',')[3],str.Split(',')[4],str.Split(',')[5],str.Split(',')[6],str.Split(',')[7]);
-    }
-
     public string GetIP(ADDRESSFAM Addfam)
     {
         //Return null if ADDRESSFAM is Ipv6 but Os does not support it
@@ -522,14 +514,8 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("OnHealthChange", OnHealthChange);
         listeners.Add("OnTechPointChange", OnTechPointChange);
         listeners.Add("UnlockRole", OnUnlockRole);
-<<<<<<< HEAD
-        listeners.Add("ConfirmDuty", ConfirmDuty);
-
-
-=======
         listeners.Add("ConsumerDead", OnConsumerDead);
         listeners.Add("ConsumerChangeSpeed",OnConsumerChangeSpeed);
->>>>>>> origin/zxY-Multi
     }
 
     private void Update()

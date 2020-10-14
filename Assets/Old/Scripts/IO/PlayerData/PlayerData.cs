@@ -48,7 +48,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public bool cheatIndex3 = false;
 
-    public Client Client;
+    public Client client;
 
     public Server server;
 

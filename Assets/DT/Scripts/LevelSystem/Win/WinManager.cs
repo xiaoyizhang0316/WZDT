@@ -126,12 +126,18 @@ public class WinManager : MonoSingleton<WinManager>
         retry.onClick.AddListener(() => {
             PlayerData.My.Reset();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            if (PlayerData.My.server != null)
+            if (!PlayerData.My.isSOLO)
             {
-
                 string str = "LoadScene|";
                 str += SceneManager.GetActiveScene().name;
-                PlayerData.My.server.SendToClientMsg(str);
+                if (PlayerData.My.isServer)
+                {
+                    PlayerData.My.server.SendToClientMsg(str);
+                }
+                else
+                {
+                    PlayerData.My.client.SendToServerMsg(str);
+                }
             }
         });
         boxs.SetActive(false);
@@ -536,11 +542,17 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 PlayerData.My.Reset();
                 SceneManager.LoadScene("Map");
-                if (PlayerData.My.server != null)
+                if (!PlayerData.My.isSOLO)
                 {
-
                     string str = "LoadScene|Map";
-                    PlayerData.My.server.SendToClientMsg(str);
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str);
+                    }
                 }
             }
             else

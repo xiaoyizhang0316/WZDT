@@ -61,13 +61,20 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             Destroy(effect, 1f);
                             Debug.Log("使用多棱镜成功");
                             DataUploadManager.My.AddData(DataEnum.使用多棱镜);
-                            if (PlayerData.My.server != null)
+                            if (!PlayerData.My.isSOLO)
                             {
                                 string str1 = "UseThreeMirror|";
                                 str1 += "1";
                                 str1 += "," + hit.transform.GetComponentInParent<BaseMapRole>().baseRoleData.ID.ToString();
                                 str1 += "," + costTechNumber.ToString();
-                                PlayerData.My.server.SendToClientMsg(str1);
+                                if (PlayerData.My.isServer)
+                                {
+                                    PlayerData.My.server.SendToClientMsg(str1);
+                                }
+                                else
+                                {
+                                    PlayerData.My.client.SendToServerMsg(str1);
+                                }
                             }
                         }
                         else

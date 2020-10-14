@@ -63,8 +63,6 @@ public class NetManager : MonoSingleton<NetManager>
         role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
         StageGoal.My.CostTechPoint(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech);
         StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech,CostTpType.Build);
-        role.GetComponent<BaseMapRole>().MonthlyCost();
-        role.GetComponent<BaseMapRole>().AddTechPoint();
     }
 
     /// <summary>
@@ -334,55 +332,6 @@ public class NetManager : MonoSingleton<NetManager>
 
     #endregion
 
-    #region 消费者
-
-    /// <summary>
-    /// 消费者死亡回调
-    /// </summary>
-    /// <param name="str"></param>
-    public void OnConsumerDead(string str)
-    {
-        int id = int.Parse(str.Split(',')[0]);
-        ConsumeSign[] signs = FindObjectsOfType<ConsumeSign>();
-        int score = int.Parse(str.Split(',')[1]);
-        int gold = int.Parse(str.Split(',')[2]);
-        for (int i = 0; i < signs.Length; i++)
-        {
-            if (signs[i].gameObject.GetInstanceID() == id)
-            {
-                signs[i].Stop();
-                signs[i].spriteLogo.GetComponent<SpriteRenderer>().color = Color.green;
-                Destroy(signs[i].gameObject,0.5f);
-                StageGoal.My.GetSatisfy(score);
-                StageGoal.My.GetPlayerGold(gold);
-                StageGoal.My.Income(gold, IncomeType.Consume);
-                StageGoal.My.killNumber++;
-                break;
-            }
-        }
-    }
-
-    /// <summary>
-    /// 消费者移动速度变化回调
-    /// </summary>
-    /// <param name="str"></param>
-    public void OnConsumerChangeSpeed(string str)
-    {
-        int id = int.Parse(str.Split(',')[0]);
-        float speedAdd = float.Parse(str.Split(',')[1]);
-        ConsumeSign[] signs = FindObjectsOfType<ConsumeSign>();
-        for (int i = 0; i < signs.Length; i++)
-        {
-            if (signs[i].gameObject.GetInstanceID() == id)
-            {
-                signs[i].tweener.timeScale += speedAdd;
-                break;
-            }
-        }
-    }
-
-    #endregion
-
     /// <summary>
     /// 改变金钱
     /// </summary>
@@ -390,14 +339,8 @@ public class NetManager : MonoSingleton<NetManager>
     public void OnGoldChange(string str)
     {
         int gold = int.Parse(str);
-        if (gold >= 0)
-        {
-            StageGoal.My.GetPlayerGold(gold);
-        }
-        else
-        {
-            StageGoal.My.CostPlayerGold(0 - gold);
-        }
+        StageGoal.My.playerGold = gold;
+        StageGoal.My.SetInfo();
     }
     /// <summary>
     /// 改变生命值
@@ -406,7 +349,8 @@ public class NetManager : MonoSingleton<NetManager>
     public void OnHealthChange(string str)
     {
         int  health = int.Parse(str);
-        StageGoal.My.LostHealth(health);
+        StageGoal.My.playerHealth = health;
+        StageGoal.My.SetInfo();
     }
 
     /// <summary>
@@ -416,7 +360,8 @@ public class NetManager : MonoSingleton<NetManager>
     public void OnPlayerSatisfyChange(string str)
     {
         int  Satisfy = int.Parse(str);
-        StageGoal.My.GetSatisfy(Satisfy);
+        StageGoal.My.playerSatisfy = Satisfy;
+        StageGoal.My.SetInfo();
     }
 
     /// <summary>
@@ -426,14 +371,8 @@ public class NetManager : MonoSingleton<NetManager>
     public void OnTechPointChange(string str)
     {
         int  Tech = int.Parse(str);
-        if (Tech >= 0)
-        {
-            StageGoal.My.GetTechPoint(Tech);
-        }
-        else
-        {
-            StageGoal.My.CostTechPoint(0 - Tech);
-        }
+        StageGoal.My.playerTechPoint = Tech;
+        StageGoal.My.SetInfo();
     }
 
     public void Receivemsg(string str)
@@ -522,14 +461,9 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("OnHealthChange", OnHealthChange);
         listeners.Add("OnTechPointChange", OnTechPointChange);
         listeners.Add("UnlockRole", OnUnlockRole);
-<<<<<<< HEAD
         listeners.Add("ConfirmDuty", ConfirmDuty);
 
 
-=======
-        listeners.Add("ConsumerDead", OnConsumerDead);
-        listeners.Add("ConsumerChangeSpeed",OnConsumerChangeSpeed);
->>>>>>> origin/zxY-Multi
     }
 
     private void Update()

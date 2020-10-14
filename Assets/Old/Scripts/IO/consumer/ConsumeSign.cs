@@ -67,6 +67,8 @@ public class ConsumeSign : MonoBehaviour
 
     public GameObject sheep;
 
+    public GameObject spriteLogo;
+
     public BulletType lastHitType;
 
     public int buildingIndex;
@@ -107,6 +109,15 @@ public class ConsumeSign : MonoBehaviour
         go.transform.localPosition = Vector3.zero + new Vector3(0, 3.5f, 0);
         InitPath(paths);
         InitAndMove();
+        //if (PlayerData.My.isSingle || PlayerData.My.isServer)
+        //{
+        //    spriteLogo.SetActive(false);
+        //}
+        //else
+        {
+            self.SetActive(false);
+            go.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -227,6 +238,17 @@ public class ConsumeSign : MonoBehaviour
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
         ComboManager.My.AddComboNum();
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ConsumerDead|";
+            str += gameObject.GetInstanceID().ToString() + ",";
+            str += ((int)(consumeData.killSatisfy * scorePer)).ToString() + ",";
+            str += consumeData.killMoney.ToString();
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+        }
     }
 
     /// <summary>
@@ -278,7 +300,6 @@ public class ConsumeSign : MonoBehaviour
             StageGoal.My.ConsumerExtraPerTip();
             DataUploadManager.My.AddData(消费者_口味击杀);
         }
-
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
         StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
         StageGoal.My.killNumber++;
@@ -415,6 +436,16 @@ public class ConsumeSign : MonoBehaviour
     {
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ConsumerChangeSpeed|";
+            str += gameObject.GetInstanceID().ToString() + ",";
+            str += speedAdd.ToString();
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+        }
         //print("移动速度：" + tweener.timeScale.ToString());
     }
 
@@ -485,30 +516,34 @@ public class ConsumeSign : MonoBehaviour
     {
  
         //print(tweener.ElapsedPercentage(false));
-        if(isIgnoreResistance)
+        if (PlayerData.My.isSOLO || PlayerData.My.isServer)
         {
-            try
+            if (isIgnoreResistance)
             {
-                self.SetActive(false);
-                sheep.SetActive(true);
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    self.SetActive(false);
+                    sheep.SetActive(true);
+                }
+                catch (Exception ex)
+                {
 
+                }
+            }
+            else
+            {
+                try
+                {
+                    self.SetActive(true);
+                    sheep.SetActive(false);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
         }
-        else
-        {
-            try
-            {
-                self.SetActive(true);
-                sheep.SetActive(false);
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
+        spriteLogo.transform.eulerAngles = new Vector3(-90,0,-135);
     }
 
     private void Start()

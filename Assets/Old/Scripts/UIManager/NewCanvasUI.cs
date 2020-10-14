@@ -174,12 +174,18 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             InvokeRepeating("CountPauseTime", 1f, 1f);
         else
             CancelInvoke("CountPauseTime");
-        if (PlayerData.My.server != null)
+        if (!PlayerData.My.isSOLO)
         {
-
             string str = "ChangeTimeScale|";
             str += "0";
-            PlayerData.My.server.SendToClientMsg(str);
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str);
+            }
         }
     }
 
@@ -195,12 +201,18 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
         CancelInvoke("CountPauseTime");
-        if (PlayerData.My.server != null)
+        if (!PlayerData.My.isSOLO)
         {
-
             string str = "ChangeTimeScale|";
             str += "1";
-            PlayerData.My.server.SendToClientMsg(str);
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str);
+            }
         }
     }
 
@@ -216,12 +228,18 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = false;
         CancelInvoke("CountPauseTime");
-        if (PlayerData.My.server != null)
+        if (!PlayerData.My.isSOLO)
         {
-
             string str = "ChangeTimeScale|";
             str += "2";
-            PlayerData.My.server.SendToClientMsg(str);
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str);
+            }
         }
     }
 
@@ -290,11 +308,18 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         go.transform.SetParent(TradeManager.My.transform);
         go.GetComponent<TradeSign>().Init(startRole.baseRoleData.ID.ToString(), endRole.baseRoleData.ID.ToString());
         TradeManager.My.CreateTradeRecord(go.GetComponent<TradeSign>());
-        if (PlayerData.My.server != null)
+        if (!PlayerData.My.isSOLO)
         {
             string str1 = "CreateTrade|";
             str1 += startRole.baseRoleData.ID.ToString() + "," + endRole.baseRoleData.ID.ToString();
-            PlayerData.My.server.SendToClientMsg(str1);
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str1);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str1);
+            }
         }
         //Panel_CreateTrade.SetActive(true);
         //CreateTradeManager.My.Open(go);

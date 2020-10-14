@@ -355,13 +355,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             playerSatisfy += num;
         }
-        if (PlayerData.My.server != null)
-        {
-            string str1 = "OnPlayerSatisfyChange|";
-            str1 += playerSatisfy.ToString();
-           
-            PlayerData.My.server.SendToClientMsg(str1);
-        }
         SetInfo();
     }
 
@@ -372,13 +365,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void LostHealth(int num)
     {
         playerHealth += num;
-        if (PlayerData.My.server != null)
-        {
-            string str1 = "OnHealthChange|";
-            str1 += playerHealth.ToString();
-           
-            PlayerData.My.server.SendToClientMsg(str1);
-        }
         SetInfo();
         CheckDead();
     }
