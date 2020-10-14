@@ -41,6 +41,8 @@ public class Server : MonoBehaviour
     {
         try
         {
+            PlayerData.My.isSOLO = false;
+            PlayerData.My.InitPlayerRightControl();
             int _port = Convert.ToInt32(inputPort);         //获取端口号
             string _ip = inputIp;                           //获取ip地址
 
