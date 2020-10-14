@@ -412,38 +412,23 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// <summary>
     /// 初始化角色权限控制
     /// </summary>
-    public void InitPlayerRightControl()
+    public void InitPlayerRightControl( string UseThreeMirror,string creatRole,string deleteRole,string updateRole,string changeEquipAndWorker
+    ,string changeTrad,string creatTrad,string deleteTrad
+    
+    )
     {
-        if ( !PlayerData.My.isSOLO)
-        {
-            ///服务器 主手
+     
             SwitchLevel =0;
-            changeTime = 1;
-            UseThreeMirror = 2;
-            creatRole = 1;
-            deleteRole = 1;
-            updateRole = 2;
-            changeEquipAndWorker = 2;
-            changeTrad = 2;
-            creatTrad = 2;
-            deleteTrad = 2;
-        }
+            this.changeTime = int.Parse(creatRole);
+            this.UseThreeMirror = int.Parse(UseThreeMirror);
+            this.creatRole =int.Parse(creatRole);
+            this.deleteRole = int.Parse(deleteRole);
+            this.updateRole = int.Parse(updateRole);
+            this.changeEquipAndWorker = int.Parse(changeEquipAndWorker);
+            this.changeTrad = int.Parse(changeTrad);
+            this.creatTrad = int.Parse(creatTrad);
+            this.deleteTrad = int.Parse(deleteTrad);
       
-        else
-        {
-            ///单机
-            ///
-            SwitchLevel = 0;
-            changeTime = 0;
-            UseThreeMirror = 0;
-            creatRole = 0;
-            deleteRole =  0;
-            updateRole =0;
-            changeEquipAndWorker =0;
-            changeTrad =0;
-            creatTrad = 0;
-            deleteTrad =0;
-        }
     }
 
     #endregion
