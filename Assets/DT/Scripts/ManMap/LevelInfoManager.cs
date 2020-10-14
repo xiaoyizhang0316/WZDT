@@ -46,6 +46,8 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public RecordList listScript;
 
     public GameObject rankPanel;
+
+    public Toggle conduty;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +61,29 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
             rankPanel.SetActive(false);
 
         });
-        play.onClick.AddListener(() => { loadScene(); });
+        play.onClick.AddListener(() =>
+        {
+            if (PlayerData.My.server != null)
+            {
+                string str1 = "ConfirmDuty|";
+                if (conduty.isOn)
+                {
+                    str1 += "1,0,0,1,1,1,1,1"; 
+                      NetManager.My.ConfirmDuty("1,0,0,1,1,1,1,1");
+                }
+                else
+                {
+                    str1 += "0,1,1,0,0,0,0,0"; 
+                    NetManager.My.ConfirmDuty( "0,1,1,0,0,0,0,0");
+
+                } 
+                PlayerData.My.server.SendToClientMsg(str1);
+            }
+            
+            loadScene(); 
+            
+            
+        });
         isUseGuide.onValueChanged.AddListener((bool b) =>
         {
             //print(b);

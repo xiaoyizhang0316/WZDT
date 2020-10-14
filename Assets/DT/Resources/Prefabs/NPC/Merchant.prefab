@@ -113,6 +113,7 @@ MonoBehaviour:
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  roleSprite: {fileID: 0}
 --- !u!65 &3989839872042212707
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5150,8 +5151,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9052759022237808555}
   - component: {fileID: 2589207303263616095}
+  - component: {fileID: 6941193417723004358}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: RoleSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5221,6 +5223,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6941193417723004358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5233961305992070356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144418fa5539746c69eaf1919b93ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapRole: {fileID: 0}
+  sprite: {fileID: 0}
 --- !u!1 &5644780332803344250
 GameObject:
   m_ObjectHideFlags: 0

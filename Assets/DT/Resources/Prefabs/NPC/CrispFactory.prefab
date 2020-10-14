@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4883212203896397689}
   - component: {fileID: 1471353838232177208}
+  - component: {fileID: 7221567295392223527}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: RoleSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,6 +82,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7221567295392223527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217296014545591557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144418fa5539746c69eaf1919b93ec0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapRole: {fileID: 0}
+  sprite: {fileID: 0}
 --- !u!1 &2281123613445168673
 GameObject:
   m_ObjectHideFlags: 0
@@ -5006,6 +5021,7 @@ MonoBehaviour:
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  roleSprite: {fileID: 0}
 --- !u!114 &1876834373110284189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14565,9 +14581,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1726600395069491e83e0ae98863bd73, type: 3}
---- !u!1 &8356161616418611410 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5300660795826964129, guid: 1726600395069491e83e0ae98863bd73,
+--- !u!4 &4086737753865565148 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 202578467310278063, guid: 1726600395069491e83e0ae98863bd73,
     type: 3}
   m_PrefabInstance: {fileID: 4213317971658516083}
   m_PrefabAsset: {fileID: 0}
@@ -14577,9 +14593,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4213317971658516083}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4086737753865565148 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 202578467310278063, guid: 1726600395069491e83e0ae98863bd73,
+--- !u!1 &8356161616418611410 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5300660795826964129, guid: 1726600395069491e83e0ae98863bd73,
     type: 3}
   m_PrefabInstance: {fileID: 4213317971658516083}
   m_PrefabAsset: {fileID: 0}
