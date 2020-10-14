@@ -521,15 +521,10 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("OnPlayerSatisfyChange", OnPlayerSatisfyChange);
         listeners.Add("OnHealthChange", OnHealthChange);
         listeners.Add("OnTechPointChange", OnTechPointChange);
-        listeners.Add("UnlockRole", OnUnlockRole);
-<<<<<<< HEAD
-        listeners.Add("ConfirmDuty", ConfirmDuty);
-
-
-=======
+        listeners.Add("UnlockRole", OnUnlockRole); 
+        listeners.Add("ConfirmDuty", ConfirmDuty); 
         listeners.Add("ConsumerDead", OnConsumerDead);
-        listeners.Add("ConsumerChangeSpeed",OnConsumerChangeSpeed);
->>>>>>> origin/zxY-Multi
+        listeners.Add("ConsumerChangeSpeed",OnConsumerChangeSpeed); 
     }
 
     private void Update()
