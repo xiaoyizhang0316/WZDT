@@ -24,7 +24,7 @@ public class PermissionManager : MonoSingleton<PermissionManager>
     /// </summary>
     public void InitUI()
     {
-        if (PlayerData.My.server != null || PlayerData.My.isSOLO)
+        if (PlayerData.My.creatRole ==PlayerData.My.playerDutyID)
         {
             severCanvas.SetActive(true);
         }
