@@ -348,7 +348,9 @@ public class NetManager : MonoSingleton<NetManager>
         {
             if (signs[i].gameObject.GetInstanceID() == id)
             {
-                Destroy(signs[i].gameObject);
+                signs[i].Stop();
+                signs[i].spriteLogo.GetComponent<SpriteRenderer>().color = Color.green;
+                Destroy(signs[i].gameObject,0.8f);
                 StageGoal.My.GetSatisfy(score);
                 StageGoal.My.GetPlayerGold(gold);
                 StageGoal.My.Income(gold, IncomeType.Consume);

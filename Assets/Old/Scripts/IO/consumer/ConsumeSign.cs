@@ -67,6 +67,8 @@ public class ConsumeSign : MonoBehaviour
 
     public GameObject sheep;
 
+    public GameObject spriteLogo;
+
     public BulletType lastHitType;
 
     public int buildingIndex;
@@ -107,6 +109,15 @@ public class ConsumeSign : MonoBehaviour
         go.transform.localPosition = Vector3.zero + new Vector3(0, 3.5f, 0);
         InitPath(paths);
         InitAndMove();
+        //if (PlayerData.My.isSingle || PlayerData.My.isServer)
+        //{
+        //    spriteLogo.SetActive(false);
+        //}
+        //else
+        {
+            self.SetActive(false);
+            go.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -505,30 +516,34 @@ public class ConsumeSign : MonoBehaviour
     {
  
         //print(tweener.ElapsedPercentage(false));
-        if(isIgnoreResistance)
+        if (PlayerData.My.isSingle || PlayerData.My.isServer)
         {
-            try
+            if (isIgnoreResistance)
             {
-                self.SetActive(false);
-                sheep.SetActive(true);
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    self.SetActive(false);
+                    sheep.SetActive(true);
+                }
+                catch (Exception ex)
+                {
 
+                }
+            }
+            else
+            {
+                try
+                {
+                    self.SetActive(true);
+                    sheep.SetActive(false);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
         }
-        else
-        {
-            try
-            {
-                self.SetActive(true);
-                sheep.SetActive(false);
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
+        spriteLogo.transform.eulerAngles = new Vector3(-90,0,-135);
     }
 
     private void Start()

@@ -172,8 +172,8 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         InvokeRepeating("CheckStarOne", 0f, 1f);
         InvokeRepeating("UpdateInfo", 0.1f, 1f);
         HideLande();
-        //Camera.main.transform.DOMove(newCameraPos, 2f);
-        //Camera.main.transform.DORotate(newCameraRot, 2f);
+        Camera.main.transform.DOMove(newCameraPos, 2f);
+        Camera.main.transform.DORotate(newCameraRot, 2f);
     }
 
     public void CheckCheat()
