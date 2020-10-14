@@ -70,7 +70,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
           
             DeleteUIManager.My.Init(str, () => {
                 PlayerData.My.DeleteRole(currentRole.ID);
-                if (!PlayerData.My.isSingle)
+                if (!PlayerData.My.isSOLO)
                 {
                     string str1 = "DeleteRole|";
                     str1 += currentRole.ID.ToString();

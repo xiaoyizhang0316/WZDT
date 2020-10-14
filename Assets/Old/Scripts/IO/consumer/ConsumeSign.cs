@@ -238,7 +238,7 @@ public class ConsumeSign : MonoBehaviour
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
         ComboManager.My.AddComboNum();
-        if (!PlayerData.My.isSingle)
+        if (!PlayerData.My.isSOLO)
         {
             string str = "ConsumerDead|";
             str += gameObject.GetInstanceID().ToString() + ",";
@@ -436,7 +436,7 @@ public class ConsumeSign : MonoBehaviour
     {
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
-        if (!PlayerData.My.isSingle)
+        if (!PlayerData.My.isSOLO)
         {
             string str = "ConsumerChangeSpeed|";
             str += gameObject.GetInstanceID().ToString() + ",";
@@ -516,7 +516,7 @@ public class ConsumeSign : MonoBehaviour
     {
  
         //print(tweener.ElapsedPercentage(false));
-        if (PlayerData.My.isSingle || PlayerData.My.isServer)
+        if (PlayerData.My.isSOLO || PlayerData.My.isServer)
         {
             if (isIgnoreResistance)
             {

@@ -220,7 +220,7 @@ public class TradeSign : MonoBehaviour
         {
             int cost = CalculateTC();
             countNumber = 0;
-            if (!PlayerData.My.isSingle)
+            if (!PlayerData.My.isSOLO)
             {
                 string str = "OnGoldChange|" + (0 - cost).ToString();
                 if (PlayerData.My.isServer)

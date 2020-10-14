@@ -58,7 +58,7 @@ public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         effect.transform.localPosition = Vector3.zero;
                         Debug.Log("使用透视镜成功");
                         DataUploadManager.My.AddData(DataEnum.使用透视镜);
-                        if (!PlayerData.My.isSingle)
+                        if (!PlayerData.My.isSOLO)
                         {
                             string str1 = "UseThreeMirror|";
                             str1 += "2";

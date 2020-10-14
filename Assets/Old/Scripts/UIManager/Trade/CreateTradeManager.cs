@@ -342,7 +342,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         currentTrade.startPer = startPer;
         currentTrade.endPer = endPer;
         currentTrade.UpdateEncourageLevel();
-        if (!PlayerData.My.isSingle)
+        if (!PlayerData.My.isSOLO)
         {
                 string str1 = "ChangeTrade|";
                 str1 += currentTrade.tradeData.ID.ToString();
@@ -385,7 +385,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         string str = "确定要删除此交易吗？";
         DeleteUIManager.My.Init(str, () => {
             TradeManager.My.DeleteTrade(currentTrade.tradeData.ID);
-            if (!PlayerData.My.isSingle)
+            if (!PlayerData.My.isSOLO)
             {
                 string str1 = "DeleteTrade|";
                 str1 += currentTrade.tradeData.ID.ToString();

@@ -63,7 +63,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             Destroy(effect, 1f);
                             Debug.Log("使用广角镜成功");
                             DataUploadManager.My.AddData(DataEnum.使用广角镜);
-                            if (!PlayerData.My.isSingle)
+                            if (!PlayerData.My.isSOLO)
                             {
                                 string str1 = "UseThreeMirror|";
                                 str1 += "0";

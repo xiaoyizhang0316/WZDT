@@ -411,7 +411,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                 str1 += "_"; 
             }
         }
-        if (!PlayerData.My.isSingle)
+        if (!PlayerData.My.isSOLO)
         {
             if (PlayerData.My.isServer)
             {

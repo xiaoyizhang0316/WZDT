@@ -1178,6 +1178,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         Debug.Log(JsonUtility.ToJson(statItemDatasList).ToString());
     }
 
+   
     /// <summary>
     /// 玩家操作结构
     /// </summary>

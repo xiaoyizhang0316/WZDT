@@ -47,7 +47,7 @@ public class LevelSign : MonoBehaviour
         {
             LevelInfoManager.My.Init(stars, levelName, content, mission_1, mission_2, mission_3, () =>
             {
-                if (!PlayerData.My.isSingle)
+                if (!PlayerData.My.isSOLO)
                 {
                     string str = "LoadScene|" + loadScene;
                     if (PlayerData.My.isServer)

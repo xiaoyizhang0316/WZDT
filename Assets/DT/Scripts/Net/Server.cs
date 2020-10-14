@@ -41,6 +41,8 @@ public class Server : MonoBehaviour
     {
         try
         {
+            PlayerData.My.isSOLO = false;
+            PlayerData.My.InitPlayerRightControl();
             int _port = Convert.ToInt32(inputPort);         //获取端口号
             string _ip = inputIp;                           //获取ip地址
 
@@ -65,8 +67,7 @@ public class Server : MonoBehaviour
 
             PlayerData.My.server = this;
             PlayerData.My.isServer = true;
-            PlayerData.My.isSingle = false;
-
+            PlayerData.My.playerDutyID = 0;
             //创建监听线程
             Thread thread = new Thread(Listen);
             thread.IsBackground = true;
@@ -204,7 +205,7 @@ public class Server : MonoBehaviour
 
                 socketSend.Shutdown(SocketShutdown.Both);     //禁用Socket的发送和接收功能
                 socketSend.Close();                           //关闭Socket连接并释放所有相关资源
-                PlayerData.My.isSingle = true;
+                PlayerData.My.isSOLO = true;
                 PlayerData.My.server = null;
             }
             catch (Exception e)

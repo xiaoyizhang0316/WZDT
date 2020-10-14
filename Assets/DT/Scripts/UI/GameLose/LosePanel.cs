@@ -20,7 +20,7 @@ public class LosePanel : MonoBehaviour
         retryButton.onClick.AddListener(()=> {
             PlayerData.My.Reset();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            if (!PlayerData.My.isSingle)
+            if (!PlayerData.My.isSOLO)
             {
                 string str = "LoadScene|";
                 str += SceneManager.GetActiveScene().name;
@@ -38,7 +38,7 @@ public class LosePanel : MonoBehaviour
         returnButton.onClick.AddListener(()=> {
             PlayerData.My.Reset();
             SceneManager.LoadScene("Map");
-            if (!PlayerData.My.isSingle)
+            if (!PlayerData.My.isSOLO)
             {
                 string str = "LoadScene|Map";
                 if (PlayerData.My.isServer)

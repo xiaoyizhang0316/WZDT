@@ -111,7 +111,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         if (RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost <= StageGoal.My.playerGold)
         {
-            if (!PlayerData.My.isSingle)
+            if (!PlayerData.My.isSOLO)
             {
                 string str1 = "UpdateRole|";
                 str1 += RoleUpdateInfo.My.currentRole.ID.ToString();

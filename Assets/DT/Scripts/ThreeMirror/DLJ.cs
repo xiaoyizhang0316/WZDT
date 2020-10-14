@@ -61,7 +61,7 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             Destroy(effect, 1f);
                             Debug.Log("使用多棱镜成功");
                             DataUploadManager.My.AddData(DataEnum.使用多棱镜);
-                            if (!PlayerData.My.isSingle)
+                            if (!PlayerData.My.isSOLO)
                             {
                                 string str1 = "UseThreeMirror|";
                                 str1 += "1";

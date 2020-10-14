@@ -109,6 +109,8 @@ public class NetManager : MonoSingleton<NetManager>
         target.baseRoleData.roleName = str.Split(',')[1];
         PlayerData.My.GetMapRoleById(target.ID).RecalculateEncourageLevel();
         PlayerData.My.GetMapRoleById(target.ID).ResetAllBuff();
+        StageGoal.My.CostPlayerGold(target.baseRoleData.upgradeCost);
+        StageGoal.My.Expend(target.baseRoleData.upgradeCost, ExpendType.AdditionalCosts,   null, "升级");
     }
 
     /// <summary>
@@ -350,7 +352,7 @@ public class NetManager : MonoSingleton<NetManager>
             {
                 signs[i].Stop();
                 signs[i].spriteLogo.GetComponent<SpriteRenderer>().color = Color.green;
-                Destroy(signs[i].gameObject,0.8f);
+                Destroy(signs[i].gameObject,0.5f);
                 StageGoal.My.GetSatisfy(score);
                 StageGoal.My.GetPlayerGold(gold);
                 StageGoal.My.Income(gold, IncomeType.Consume);
