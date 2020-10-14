@@ -351,6 +351,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     
     #region 玩家权限
 
+    public int playerDutyID= 0 ;
     /// <summary>
     /// 0---单人玩家 1- 主手   2 ---副手
     /// </summary>
@@ -416,7 +417,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         if ( !PlayerData.My.isSOLO)
         {
             ///服务器 主手
-            SwitchLevel = 1;
+            SwitchLevel =0;
             changeTime = 1;
             UseThreeMirror = 2;
             creatRole = 1;

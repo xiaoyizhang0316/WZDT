@@ -67,7 +67,8 @@ public class Server : MonoBehaviour
 
             PlayerData.My.server = this;
             PlayerData.My.isServer = true;
-
+            PlayerData.My.playerDutyID = 0;
+ 
             //创建监听线程
             Thread thread = new Thread(Listen);
             thread.IsBackground = true;
