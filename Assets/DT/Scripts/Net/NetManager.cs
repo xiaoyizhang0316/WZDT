@@ -65,6 +65,7 @@ public class NetManager : MonoSingleton<NetManager>
         StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech,CostTpType.Build);
         role.GetComponent<BaseMapRole>().MonthlyCost();
         role.GetComponent<BaseMapRole>().AddTechPoint();
+        role.GetComponent<BaseMapRole>().CheckRoleDuty();
     }
 
     /// <summary>
@@ -342,24 +343,18 @@ public class NetManager : MonoSingleton<NetManager>
     /// <param name="str"></param>
     public void OnConsumerDead(string str)
     {
-        int id = int.Parse(str.Split(',')[0]);
-        ConsumeSign[] signs = FindObjectsOfType<ConsumeSign>();
-        int score = int.Parse(str.Split(',')[1]);
-        int gold = int.Parse(str.Split(',')[2]);
-        for (int i = 0; i < signs.Length; i++)
-        {
-            if (signs[i].gameObject.GetInstanceID() == id)
-            {
-                signs[i].Stop();
-                signs[i].spriteLogo.GetComponent<SpriteRenderer>().color = Color.green;
-                Destroy(signs[i].gameObject,0.5f);
-                StageGoal.My.GetSatisfy(score);
-                StageGoal.My.GetPlayerGold(gold);
-                StageGoal.My.Income(gold, IncomeType.Consume);
-                StageGoal.My.killNumber++;
-                break;
-            }
-        }
+        int buildingId = int.Parse(str.Split(',')[0]);
+        int consumerIndex = int.Parse(str.Split(',')[1]);
+        int score = int.Parse(str.Split(',')[2]);
+        int gold = int.Parse(str.Split(',')[3]);
+        Building building = BuildingManager.My.GetBuildingByIndex(buildingId);
+        building.consumeSigns[consumerIndex].Stop();
+        building.consumeSigns[consumerIndex].spriteLogo.GetComponent<SpriteRenderer>().color = Color.green;
+        Destroy(building.consumeSigns[consumerIndex].gameObject, 0.5f);
+        StageGoal.My.GetSatisfy(score);
+        StageGoal.My.GetPlayerGold(gold);
+        StageGoal.My.Income(gold, IncomeType.Consume);
+        StageGoal.My.killNumber++;
     }
 
     /// <summary>

@@ -144,17 +144,19 @@ public class BaseMapRole : MonoBehaviour
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
     }
 
+    /// <summary>
+    /// 根据职责隐藏某些物体
+    /// </summary>
     public void CheckRoleDuty()
     {
-        //if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
-        //{
-        //    roleSprite.gameObject.SetActive(false);
-        //}
-        //else
+        if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
+        {
+            roleSprite.gameObject.SetActive(false);
+        }
+        else
         {
             roleSprite.gameObject.SetActive(true);
             roleSprite.CheckSprite();
-            
         }
     }
 
