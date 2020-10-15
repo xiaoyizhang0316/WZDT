@@ -111,15 +111,6 @@ public class ConsumeSign : MonoBehaviour
         go.transform.localPosition = Vector3.zero + new Vector3(0, 3.5f, 0);
         InitPath(paths);
         InitAndMove();
-        //if (PlayerData.My.isSingle || PlayerData.My.isServer)
-        //{
-        //    spriteLogo.SetActive(false);
-        //}
-        //else
-        {
-            self.SetActive(false);
-            go.SetActive(false);
-        }
     }
 
     /// <summary>

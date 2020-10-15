@@ -65,7 +65,6 @@ public class NetManager : MonoSingleton<NetManager>
         StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech,CostTpType.Build);
         role.GetComponent<BaseMapRole>().MonthlyCost();
         role.GetComponent<BaseMapRole>().AddTechPoint();
-        role.GetComponent<BaseMapRole>().CheckRoleDuty();
     }
 
     /// <summary>
@@ -103,6 +102,8 @@ public class NetManager : MonoSingleton<NetManager>
     {
         double roleId = double.Parse(str.Split(',')[0]);
         Role target = PlayerData.My.GetRoleById(roleId);
+        StageGoal.My.CostPlayerGold(target.baseRoleData.upgradeCost);
+        StageGoal.My.Expend(target.baseRoleData.upgradeCost, ExpendType.AdditionalCosts, null, "升级");
         target.baseRoleData = GameDataMgr.My.GetModelData(
             target.baseRoleData.roleType,
             target.baseRoleData.level + 1);
@@ -110,8 +111,7 @@ public class NetManager : MonoSingleton<NetManager>
         target.baseRoleData.roleName = str.Split(',')[1];
         PlayerData.My.GetMapRoleById(target.ID).RecalculateEncourageLevel();
         PlayerData.My.GetMapRoleById(target.ID).ResetAllBuff();
-        StageGoal.My.CostPlayerGold(target.baseRoleData.upgradeCost);
-        StageGoal.My.Expend(target.baseRoleData.upgradeCost, ExpendType.AdditionalCosts,   null, "升级");
+        
     }
 
     /// <summary>
@@ -566,15 +566,15 @@ public class NetManager : MonoSingleton<NetManager>
     {
         if (listNoDelayActions.Count > 0)
         {
-            try
+            //try
             {
                 listNoDelayActions[0].action(listNoDelayActions[0].param);
                 listNoDelayActions.RemoveAt(0);
             }
-            catch (Exception ex)
-            {
-                Debug.Log(ex.Message);
-            }
+            //catch (Exception ex)
+            //{
+            //    Debug.Log(ex.Message);
+            //}
         }
     }
 
