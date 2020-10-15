@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PermissionManager : MonoSingleton<PermissionManager>
@@ -24,12 +25,24 @@ public class PermissionManager : MonoSingleton<PermissionManager>
     /// </summary>
     public void InitUI()
     {
+
         if (PlayerData.My.creatRole ==PlayerData.My.playerDutyID)
         {
             severCanvas.SetActive(true);
+            foreach (BaseMapRole role in PlayerData.My.MapRole)
+            {
+                role.CheckRoleDuty();
+            }
         }
         else
         {
+            Camera.main.transform.DOMove(BaseLevelController.My.newCameraPos, 2f);
+            Camera.main.transform.DORotate(BaseLevelController.My.newCameraRot, 2f).OnComplete(() => {
+                foreach (BaseMapRole role in PlayerData.My.MapRole)
+                {
+                    role.CheckRoleDuty();
+                }
+            });
             clientCanvas.SetActive(true);
         }
     }
