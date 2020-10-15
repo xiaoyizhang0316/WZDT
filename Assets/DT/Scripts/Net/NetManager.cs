@@ -65,7 +65,7 @@ public class NetManager : MonoSingleton<NetManager>
         StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech,CostTpType.Build);
         role.GetComponent<BaseMapRole>().MonthlyCost();
         role.GetComponent<BaseMapRole>().AddTechPoint();
-        //role.GetComponent<BaseMapRole>().CheckRoleDuty();
+        role.GetComponent<BaseMapRole>().CheckRoleDuty();
     }
 
     /// <summary>
