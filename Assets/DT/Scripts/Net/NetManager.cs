@@ -102,6 +102,8 @@ public class NetManager : MonoSingleton<NetManager>
     {
         double roleId = double.Parse(str.Split(',')[0]);
         Role target = PlayerData.My.GetRoleById(roleId);
+        StageGoal.My.CostPlayerGold(target.baseRoleData.upgradeCost);
+        StageGoal.My.Expend(target.baseRoleData.upgradeCost, ExpendType.AdditionalCosts, null, "升级");
         target.baseRoleData = GameDataMgr.My.GetModelData(
             target.baseRoleData.roleType,
             target.baseRoleData.level + 1);
@@ -109,8 +111,7 @@ public class NetManager : MonoSingleton<NetManager>
         target.baseRoleData.roleName = str.Split(',')[1];
         PlayerData.My.GetMapRoleById(target.ID).RecalculateEncourageLevel();
         PlayerData.My.GetMapRoleById(target.ID).ResetAllBuff();
-        StageGoal.My.CostPlayerGold(target.baseRoleData.upgradeCost);
-        StageGoal.My.Expend(target.baseRoleData.upgradeCost, ExpendType.AdditionalCosts,   null, "升级");
+        
     }
 
     /// <summary>
