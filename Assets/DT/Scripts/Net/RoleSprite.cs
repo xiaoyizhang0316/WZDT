@@ -60,6 +60,10 @@ public class RoleSprite : MonoBehaviour
         lockSprite = GetComponentsInChildren<SpriteRenderer>()[1];
         mapRole.roleSprite = this;
         gameObject.SetActive(false);
+        if (!mapRole.isNpc)
+        {
+            mapRole.CheckRoleDuty();
+        }
     }
 
     // Update is called once per frame
