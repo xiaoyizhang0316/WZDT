@@ -24,6 +24,14 @@ public class MissionConfirm : MonoSingleton<MissionConfirm>
     /// </summary>
     public Button start;
 
+    public Button close;
+    
+    public bool Ready;
+
+    public bool subReady;
+    public Sprite red;
+    public Sprite redReady;
+    public Sprite blue;
     /// <summary>
     /// 修改职责
     /// </summary>
@@ -66,12 +74,61 @@ public class MissionConfirm : MonoSingleton<MissionConfirm>
         }
     }
 
+    public void InitReady()
+    {
+        if (Ready)
+        {
+            start.transform.GetChild(0).GetComponent<Text>().text = "取消";
+            start.GetComponent<Image>().sprite = redReady;
+        }
+
+        else
+        {
+            start.transform.GetChild(0).GetComponent<Text>().text = "准备"; 
+            start.GetComponent<Image>().sprite = red;
+        }
+
+        if (Ready && subReady&& PlayerData.My.isServer)
+        {
+            start.transform.GetChild(0).GetComponent<Text>().text = "开始"; 
+            start.GetComponent<Image>().sprite = blue;
+        }
+    }
+
 // Start is called before the first frame update
     void Start()
     {
         GetUserName();
         InitName();
-        start.onClick.AddListener(() => { LevelInfoManager.My.loadScene(); });
+        start.onClick.AddListener(() =>
+        {
+            if (Ready && subReady&& PlayerData.My.isServer)
+            {
+                LevelInfoManager.My.loadScene();
+            }
+
+            else 
+            {
+                Ready = !Ready;
+                if (!PlayerData.My.isServer)
+                {
+                    string str1 = "OnReady|";
+                    if (Ready)
+                    {
+                        str1 += 1.ToString();
+
+                    }
+
+                    else
+                    {
+                        str1 += 0.ToString();
+                        
+                    }
+                    PlayerData.My.client.SendToServerMsg(str1); 
+                }
+            }
+ 
+        });
         mainButton.onClick.AddListener(() =>
         {
             if (PlayerData.My.isServer)
@@ -111,11 +168,17 @@ public class MissionConfirm : MonoSingleton<MissionConfirm>
             }
 
         });
+        
+        close.onClick.AddListener(() =>
+        {
+            gameObject.SetActive(false);
+        });
     }
 
     // Update is called once per frame
     void Update()
     {
         MissionConfirm.My.InitName();
+        InitReady();
     }
 }

@@ -476,6 +476,19 @@ public class NetManager : MonoSingleton<NetManager>
         MissionConfirm.My.InitName();
     }
 
+    public void OnClientReady(string str)
+    {
+        if (str == "1")
+        {
+            MissionConfirm.My.subReady = true;
+        }
+        else
+        {
+            MissionConfirm.My.subReady = false;
+            
+        }
+    }
+
     public string GetIP(ADDRESSFAM Addfam)
     {
         //Return null if ADDRESSFAM is Ipv6 but Os does not support it
@@ -546,6 +559,7 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("GetUserName",GetUserName); 
         listeners.Add("OpenDutyConfirmUI",OpenDutyConfirmUI); 
         listeners.Add("UpdateDutyUI",UpdateDutyUI); 
+        listeners.Add("OnReady",OnClientReady); 
     }
 
     private void Update()
