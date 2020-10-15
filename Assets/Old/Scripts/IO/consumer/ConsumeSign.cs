@@ -516,8 +516,9 @@ public class ConsumeSign : MonoBehaviour
     {
  
         //print(tweener.ElapsedPercentage(false));
-        if (PlayerData.My.isSOLO || PlayerData.My.isServer)
+        if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
+            spriteLogo.gameObject.SetActive(false);
             if (isIgnoreResistance)
             {
                 try
@@ -543,7 +544,14 @@ public class ConsumeSign : MonoBehaviour
                 }
             }
         }
-        spriteLogo.transform.eulerAngles = new Vector3(-90,0,-135);
+        else
+        {
+            self.SetActive(false);
+            sheep.SetActive(false);
+            spriteLogo.gameObject.SetActive(true);
+            spriteLogo.transform.eulerAngles = new Vector3(-90, 0, -135);
+        }
+        
     }
 
     private void Start()

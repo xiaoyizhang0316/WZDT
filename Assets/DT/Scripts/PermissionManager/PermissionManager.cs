@@ -8,9 +8,9 @@ public class PermissionManager : MonoSingleton<PermissionManager>
     public GameObject severCanvas;
     public GameObject clientCanvas;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        InitUI();
     }
 
     // Update is called once per frame

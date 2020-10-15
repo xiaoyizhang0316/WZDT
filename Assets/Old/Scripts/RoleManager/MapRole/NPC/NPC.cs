@@ -30,7 +30,6 @@ public class NPC : BaseNpc
                 RoleFloatWindow.My.Init(transform, "未知角色",RoleSkillType.Solution, RoleType.All);
             }
         }
-
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
         //if (UIManager.My.Panel_POPInfo.GetComponent<POPRoleManager>().InitPOPRole(gameObject.transform.parent.GetComponent<BaseMapRole>()))
         //{
