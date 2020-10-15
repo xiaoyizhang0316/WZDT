@@ -87,8 +87,7 @@ public class MissionConfirm : MonoSingleton<MissionConfirm>
                 //        str1 += "0,1,1,0,0,0,0,0"; 
                 //        NetManager.My.ConfirmDuty( "0,1,1,0,0,0,0,0");
 
-                //    } 
-                InitName();
+                //    }  
                 PlayerData.My.server.SendToClientMsg(str1);
                 PlayerData.My.server.SendToClientMsg("UpdateDutyUI|1");
             }
@@ -107,8 +106,7 @@ public class MissionConfirm : MonoSingleton<MissionConfirm>
                 //    {
                    str1 += "0,1,1,0,0,0,0,0"; 
                    NetManager.My.ConfirmDuty( "0,1,1,0,0,0,0,0");
-                   PlayerData.My.server.SendToClientMsg("UpdateDutyUI|1");
-                   InitName();
+                   PlayerData.My.server.SendToClientMsg("UpdateDutyUI|1"); 
                    PlayerData.My.server.SendToClientMsg(str1);
 
                 //    } 
@@ -120,5 +118,6 @@ public class MissionConfirm : MonoSingleton<MissionConfirm>
     // Update is called once per frame
     void Update()
     {
+        MissionConfirm.My.InitName();
     }
 }

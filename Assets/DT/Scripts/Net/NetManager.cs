@@ -460,7 +460,7 @@ public class NetManager : MonoSingleton<NetManager>
     public void GetUserName(string str)
     {
         MissionConfirm.My.subName = str;
-        MissionConfirm.My.InitName();
+     
     }
 
     /// <summary>
