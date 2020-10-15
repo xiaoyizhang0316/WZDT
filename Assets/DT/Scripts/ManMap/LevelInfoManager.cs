@@ -48,6 +48,8 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public GameObject rankPanel;
 
     public Toggle conduty;
+
+    public GameObject missionConfirm;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,21 +68,27 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
             if (PlayerData.My.server != null)
             {
                 string str1 = "ConfirmDuty|";
-                if (conduty.isOn)
-                {
+             //  if (conduty.isOn)
+             //  {
                     str1 += "1,0,0,1,1,1,1,1"; 
                       NetManager.My.ConfirmDuty("1,0,0,1,1,1,1,1");
-                }
-                else
-                {
-                    str1 += "0,1,1,0,0,0,0,0"; 
-                    NetManager.My.ConfirmDuty( "0,1,1,0,0,0,0,0");
+           //    }
+           //    else
+           //    {
+           //        str1 += "0,1,1,0,0,0,0,0"; 
+           //        NetManager.My.ConfirmDuty( "0,1,1,0,0,0,0,0");
 
-                } 
+           //    } 
                 PlayerData.My.server.SendToClientMsg(str1);
+                PlayerData.My.server.SendToClientMsg("OpenDutyConfirmUI|1");
+                 missionConfirm.SetActive(true);
             }
-            
-            loadScene(); 
+            else
+            {
+                if(PlayerData.My.isSOLO)
+                loadScene(); 
+                
+            }
             
             
         });

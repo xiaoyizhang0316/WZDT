@@ -452,6 +452,29 @@ public class NetManager : MonoSingleton<NetManager>
        PlayerData.My.InitPlayerRightControl(str.Split(',')[0],str.Split(',')[1],str.Split(',')[2],str.Split(',')[3],str.Split(',')[4],str.Split(',')[5],str.Split(',')[6],str.Split(',')[7]);
     }
 
+
+    /// <summary>
+    /// 获得玩家名称
+    /// </summary>
+    /// <param name="str"></param>
+    public void GetUserName(string str)
+    {
+        MissionConfirm.My.subName = str;
+    }
+
+    /// <summary>
+    /// 打开职责确认UI
+    /// </summary>
+    public void OpenDutyConfirmUI(string str)
+    {
+        LevelInfoManager.My.missionConfirm.SetActive(true);
+    }
+
+    public void UpdateDutyUI(string str)
+    {
+        MissionConfirm.My.InitName();
+    }
+
     public string GetIP(ADDRESSFAM Addfam)
     {
         //Return null if ADDRESSFAM is Ipv6 but Os does not support it
@@ -519,7 +542,9 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("UnlockRole", OnUnlockRole); 
         listeners.Add("ConfirmDuty", ConfirmDuty); 
         listeners.Add("ConsumerDead", OnConsumerDead);
-        listeners.Add("ConsumerChangeSpeed",OnConsumerChangeSpeed); 
+        listeners.Add("GetUserName",GetUserName); 
+        listeners.Add("OpenDutyConfirmUI",OpenDutyConfirmUI); 
+        listeners.Add("UpdateDutyUI",UpdateDutyUI); 
     }
 
     private void Update()
