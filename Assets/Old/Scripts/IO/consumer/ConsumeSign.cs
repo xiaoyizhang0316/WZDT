@@ -73,6 +73,8 @@ public class ConsumeSign : MonoBehaviour
 
     public int buildingIndex;
 
+    public int consumerIndex;
+
     public int enterMarketingTime = 0;
 
     private float scorePer = 1f;
@@ -241,7 +243,7 @@ public class ConsumeSign : MonoBehaviour
         if (!PlayerData.My.isSOLO)
         {
             string str = "ConsumerDead|";
-            str += gameObject.GetInstanceID().ToString() + ",";
+            str += buildingIndex.ToString() + "," + consumerIndex.ToString() + ",";
             str += ((int)(consumeData.killSatisfy * scorePer)).ToString() + ",";
             str += consumeData.killMoney.ToString();
             if (PlayerData.My.isServer)

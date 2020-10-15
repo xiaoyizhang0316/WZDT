@@ -9,6 +9,8 @@ public class RoleSprite : MonoBehaviour
 
     public SpriteRenderer sprite;
 
+    public SpriteRenderer lockSprite;
+
     public void CheckSprite()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -55,6 +57,7 @@ public class RoleSprite : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         mapRole = GetComponentInParent<BaseMapRole>();
+        lockSprite = GetComponentsInChildren<SpriteRenderer>()[1];
         mapRole.roleSprite = this;
         gameObject.SetActive(false);
     }
@@ -62,6 +65,13 @@ public class RoleSprite : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(mapRole.isNpc && mapRole.npcScript.isCanSee && mapRole.npcScript.isLock)
+        {
+            lockSprite.gameObject.SetActive(true);
+        }
+        else
+        {
+            lockSprite.gameObject.SetActive(false);
+        }
     }
 }

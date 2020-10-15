@@ -7,9 +7,10 @@ public class Prologue : MonoBehaviour
 {
     public void PrologueOn()
     {
+
         NewCanvasUI.My.GamePause(false);
         GuideManager.My.guideClose.gameObject.SetActive(false);
-        CameraPlay.WidescreenH_ON(Color.black,1);
+        CameraPlay.WidescreenH_ON(Color.black, 1);
     }
 
     public void PrologueOff()
