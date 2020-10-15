@@ -24,6 +24,7 @@ public class MissionConfirm : MonoSingleton<MissionConfirm>
     /// </summary>
     public Button start;
 
+    public Button close;
     /// <summary>
     /// 修改职责
     /// </summary>
@@ -110,6 +111,11 @@ public class MissionConfirm : MonoSingleton<MissionConfirm>
                 //    } 
             }
 
+        });
+        
+        close.onClick.AddListener(() =>
+        {
+            gameObject.SetActive(false);
         });
     }
 
