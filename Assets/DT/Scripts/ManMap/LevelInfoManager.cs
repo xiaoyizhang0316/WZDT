@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using UnityEngine.UI;
@@ -79,9 +80,13 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
            //        NetManager.My.ConfirmDuty( "0,1,1,0,0,0,0,0");
 
            //    } 
-                PlayerData.My.server.SendToClientMsg(str1);
-                PlayerData.My.server.SendToClientMsg("OpenDutyConfirmUI|1");
-                 missionConfirm.SetActive(true);
+                 
+                 PlayerData.My.server.SendToClientMsg(str1);
+                transform.DORotate(Vector3.zero,0.5f ).OnComplete(()=>{
+                    PlayerData.My.server.SendToClientMsg("OpenDutyConfirmUI|1");
+                    missionConfirm.SetActive(true);
+                });
+         
             }
             else
             {
