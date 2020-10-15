@@ -552,15 +552,15 @@ public class NetManager : MonoSingleton<NetManager>
     {
         if (listNoDelayActions.Count > 0)
         {
-            try
+            //try
             {
                 listNoDelayActions[0].action(listNoDelayActions[0].param);
                 listNoDelayActions.RemoveAt(0);
             }
-            catch (Exception ex)
-            {
-                Debug.Log(ex.Message);
-            }
+            //catch (Exception ex)
+            //{
+            //    Debug.Log(ex.Message);
+            //}
         }
     }
 
