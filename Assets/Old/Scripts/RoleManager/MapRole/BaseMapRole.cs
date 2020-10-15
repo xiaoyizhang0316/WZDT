@@ -846,6 +846,8 @@ public class BaseMapRole : MonoBehaviour
     /// <param name="active"></param>
     public void HideTradeButton(bool active)
     {
+        if (PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+            return;
         if (tradeButton == null)
             tradeButton = GetComponentInChildren<RoleTradeButton>().transform.parent.gameObject;
         tradeButton.SetActive(active);
