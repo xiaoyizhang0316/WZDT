@@ -24,6 +24,7 @@ public class Server : MonoBehaviour
     private bool isSendData = false;                       //是否点击发送数据按钮
     private bool clickConnectBtn = false;                  //是否点击监听按钮
 
+  
     void Start()
     {
 
