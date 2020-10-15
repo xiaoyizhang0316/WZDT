@@ -164,15 +164,40 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         starThreeStatus = true;
     }
 
+    public bool isAllReady = false;
+
+    public void CheckGameStart()
+    {
+        if (PlayerData.My.isSOLO)
+        {
+            DOTween.PlayAll();
+            DOTween.timeScale = 1f;
+            DOTween.defaultAutoPlay = AutoPlay.All;
+        }
+        else if (isAllReady)
+        {
+            DOTween.PlayAll();
+            DOTween.timeScale = 1f;
+            DOTween.defaultAutoPlay = AutoPlay.All;
+        }
+    }
+
     // Start is called before the first frame update
     public virtual void Start()
     {
+        DOTween.PauseAll();
+        DOTween.defaultAutoPlay = AutoPlay.None;
         InvokeRepeating("CheckStarTwo", 0f, 1f);
         InvokeRepeating("CheckStarThree", 0f, 1f);
         InvokeRepeating("CheckStarOne", 0f, 1f);
         InvokeRepeating("UpdateInfo", 0.1f, 1f);
         HideLande();
-
+        if (!PlayerData.My.isSOLO && !PlayerData.My.isServer)
+        {
+            string str = "OnGameReady|1";
+            PlayerData.My.client.SendToServerMsg(str);
+        }
+        CheckGameStart();
     }
 
     public void CheckCheat()

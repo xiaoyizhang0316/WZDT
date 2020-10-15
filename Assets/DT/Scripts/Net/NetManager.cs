@@ -431,6 +431,12 @@ public class NetManager : MonoSingleton<NetManager>
         }
     }
 
+    public void OnGameReady(string str)
+    {
+        BaseLevelController.My.isAllReady = true;
+        BaseLevelController.My.CheckGameStart();
+    }
+
     public void Receivemsg(string str)
     {
         string methodName = str.Split('|')[0];
@@ -559,7 +565,8 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("GetUserName",GetUserName); 
         listeners.Add("OpenDutyConfirmUI",OpenDutyConfirmUI); 
         listeners.Add("UpdateDutyUI",UpdateDutyUI); 
-        listeners.Add("OnReady",OnClientReady); 
+        listeners.Add("OnReady",OnClientReady);
+        listeners.Add("OnGameReady", OnGameReady);
     }
 
     private void Update()
