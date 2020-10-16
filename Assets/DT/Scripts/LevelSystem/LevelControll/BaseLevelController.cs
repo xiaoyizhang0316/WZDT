@@ -56,6 +56,10 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     public Vector3 newCameraRot;
 
+    public float orthoSize;
+
+    public GameObject emojiPrb;
+
     /// <summary>
     /// 改变地形
     /// </summary>
@@ -219,5 +223,19 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         {
             UnlockLand2();
         }
+        //if (Input.GetKey(KeyCode.LeftArrow))
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Alpha1))
+        //    {
+        //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //        Physics.Raycast(ray, out RaycastHit hit);
+        //        if (hit.transform != null)
+        //        {
+        //            GameObject go = Instantiate(emojiPrb);
+        //            go.transform.position = hit.point;
+        //            //Destroy(go, 1f);
+        //        }
+        //    }
+        //}
     }
 }

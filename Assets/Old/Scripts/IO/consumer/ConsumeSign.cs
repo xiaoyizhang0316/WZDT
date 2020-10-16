@@ -507,7 +507,6 @@ public class ConsumeSign : MonoBehaviour
 
     private void Update()
     {
- 
         //print(tweener.ElapsedPercentage(false));
         if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
