@@ -2,16 +2,39 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PermissionManager : MonoSingleton<PermissionManager>
 {
 
     public GameObject severCanvas;
     public GameObject clientCanvas;
+
+    public Button Button_consumer;
+    public Button Button_financial;
+    public Button Button_RoleInfo;
     // Start is called before the first frame update
     void Awake()
     {
         InitUI();
+    }
+
+    public void Start()
+    {
+        Button_consumer.onClick.AddListener(() =>
+        {
+            
+        });
+        
+        Button_financial.onClick.AddListener(() =>
+        {
+            
+        });
+        
+        Button_RoleInfo.onClick.AddListener(() =>
+        {
+            
+        });
     }
 
     // Update is called once per frame
