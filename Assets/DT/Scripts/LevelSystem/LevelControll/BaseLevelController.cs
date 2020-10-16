@@ -186,6 +186,15 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         }
     }
 
+    public void GenerateEmoji(Vector3 pos)
+    {
+        GameObject go = Instantiate(emojiPrb);
+        go.transform.position = pos;
+        go.transform.LookAt(Camera.main.transform);
+        go.transform.Translate(Vector3.forward);
+        Destroy(go, 1f);
+    }
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -223,19 +232,29 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         {
             UnlockLand2();
         }
-        //if (Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Alpha1))
-        //    {
-        //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //        Physics.Raycast(ray, out RaycastHit hit);
-        //        if (hit.transform != null)
-        //        {
-        //            GameObject go = Instantiate(emojiPrb);
-        //            go.transform.position = hit.point;
-        //            //Destroy(go, 1f);
-        //        }
-        //    }
-        //}
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Physics.Raycast(ray, out RaycastHit hit);
+                if (hit.transform != null)
+                {
+                    //GenerateEmoji(hit.point);
+                    if(!PlayerData.My.isSOLO)
+                    {
+                        string str = "Emoji|" + hit.point.x + "," + hit.point.y + "," + hit.point.z;
+                        if (PlayerData.My.isServer)
+                        {
+                            PlayerData.My.server.SendToClientMsg(str);
+                        }
+                        else
+                        {
+                            PlayerData.My.client.SendToServerMsg(str);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

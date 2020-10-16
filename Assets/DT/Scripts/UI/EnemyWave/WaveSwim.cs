@@ -26,36 +26,72 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
         {
             GameObject go =Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[0];
+            Client_WaveNumber client_Wave;
+            if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
+            {
+                client_Wave.waveNumber = waveNumber;
+                client_Wave.buildingNumber = 0;
+            }
         }
         str = datas[number].point2[0];
         if (str.Split('_').Length != 1)
         {
             GameObject go = Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[1];
+            Client_WaveNumber client_Wave;
+            if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
+            {
+                client_Wave.waveNumber = waveNumber;
+                client_Wave.buildingNumber = 1;
+            }
         }
         str = datas[number].point3[0];
         if (str.Split('_').Length != 1)
         {
             GameObject go = Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[2];
+            Client_WaveNumber client_Wave;
+            if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
+            {
+                client_Wave.waveNumber = waveNumber;
+                client_Wave.buildingNumber = 2;
+            }
         }
         str = datas[number].point4[0];
         if (str.Split('_').Length != 1)
         {
             GameObject go = Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[3];
+            Client_WaveNumber client_Wave;
+            if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
+            {
+                client_Wave.waveNumber = waveNumber;
+                client_Wave.buildingNumber = 3;
+            }
         }
         str = datas[number].point5[0];
         if (str.Split('_').Length != 1)
         {
             GameObject go = Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[4];
+            Client_WaveNumber client_Wave;
+            if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
+            {
+                client_Wave.waveNumber = waveNumber;
+                client_Wave.buildingNumber = 4;
+            }
         }
         str = datas[number].point6[0];
         if (str.Split('_').Length != 1)
         {
             GameObject go = Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[5];
+            Client_WaveNumber client_Wave;
+            if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
+            {
+                client_Wave.waveNumber = waveNumber;
+                client_Wave.buildingNumber = 5;
+            }
         }
         int waitNumber = StageGoal.My.waitTimeList[number];
         if (waitNumber - offset <= 30)

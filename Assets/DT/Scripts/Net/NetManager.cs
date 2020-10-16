@@ -495,6 +495,14 @@ public class NetManager : MonoSingleton<NetManager>
         }
     }
 
+    public void OnGenerateEmoji(string str)
+    {
+        float x = float.Parse(str.Split(',')[0]);
+        float y = float.Parse(str.Split(',')[1]);
+        float z = float.Parse(str.Split(',')[2]);
+        BaseLevelController.My.GenerateEmoji(new Vector3(x, y, z));
+    }
+
     public string GetIP(ADDRESSFAM Addfam)
     {
         //Return null if ADDRESSFAM is Ipv6 but Os does not support it
@@ -567,6 +575,7 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("UpdateDutyUI",UpdateDutyUI); 
         listeners.Add("OnReady",OnClientReady);
         listeners.Add("OnGameReady", OnGameReady);
+        listeners.Add("Emoji", OnGenerateEmoji);
     }
 
     private void Update()

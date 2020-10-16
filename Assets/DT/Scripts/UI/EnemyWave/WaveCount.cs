@@ -102,41 +102,46 @@ public class WaveCount : MonoSingleton<WaveCount>
         closeBtn.SetActive(true);
         ClearWaveBg();
         StageEnemyData data = StageGoal.My.enemyDatas[waveNumber];
-        string str = data.point1[0];
-        if (str.Split('_').Length != 1)
+        switch (buildingIndex)
         {
-            GameObject go = Instantiate(spotEnemyPrb, waveBg);
-            go.GetComponent<WaveEnemySign>().Init(0, data.point1);
-        }
-        str = data.point2[0];
-        if (str.Split('_').Length != 1)
-        {
-            GameObject go = Instantiate(spotEnemyPrb, waveBg);
-            go.GetComponent<WaveEnemySign>().Init(1, data.point2);
-        }
-        str = data.point3[0];
-        if (str.Split('_').Length != 1)
-        {
-            GameObject go = Instantiate(spotEnemyPrb, waveBg);
-            go.GetComponent<WaveEnemySign>().Init(2, data.point3);
-        }
-        str = data.point4[0];
-        if (str.Split('_').Length != 1)
-        {
-            GameObject go = Instantiate(spotEnemyPrb, waveBg);
-            go.GetComponent<WaveEnemySign>().Init(3, data.point4);
-        }
-        str = data.point5[0];
-        if (str.Split('_').Length != 1)
-        {
-            GameObject go = Instantiate(spotEnemyPrb, waveBg);
-            go.GetComponent<WaveEnemySign>().Init(4, data.point5);
-        }
-        str = data.point6[0];
-        if (str.Split('_').Length != 1)
-        {
-            GameObject go = Instantiate(spotEnemyPrb, waveBg);
-            go.GetComponent<WaveEnemySign>().Init(5, data.point6);
+            case 0:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(0, data.point1);
+                    break;
+                }
+            case 1:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(1, data.point2);
+                    break;
+                }
+            case 2:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(2, data.point3);
+                    break;
+                }
+            case 3:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(3, data.point4);
+                    break;
+                }
+            case 4:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(4, data.point5);
+                    break;
+                }
+            case 5:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(5, data.point6);
+                    break;
+                }
+            default:
+                break;
         }
     }
 
