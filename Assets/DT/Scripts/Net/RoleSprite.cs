@@ -74,6 +74,8 @@ public class RoleSprite : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
+            NewCanvasUI.My.Panel_NPC.SetActive(false);
+            NewCanvasUI.My.Panel_Update.SetActive(false);
             if (mapRole.isNpc)
             {
                 NewCanvasUI.My.Panel_NPC.SetActive(true);
