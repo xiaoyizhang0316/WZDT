@@ -15,6 +15,7 @@ public class BaseMapRole : MonoBehaviour
     /// <summary>
     /// 仓库
     /// </summary>
+    
     public List<ProductData> warehouse;
 
     public List<ProductData> trash = new List<ProductData>();
@@ -853,6 +854,42 @@ public class BaseMapRole : MonoBehaviour
         tradeButton.SetActive(active);
     }
 
+
+
+    public string GetWarehouseJson()
+    {
+        List<ProductData> data = new List<ProductData>();
+        for (int i = 0; i <warehouse.Count; i++)
+        {
+            bool issame =false;
+            for (int j = 0; j <data.Count; j++)
+            {
+                if (data[j].CheckSame(warehouse[i]))
+                {
+                    issame = true; 
+                    data[j].RepeatBulletCount++;
+                    break;
+          
+                }
+            }
+
+            if (!issame)
+            {
+                data.Add(warehouse[i]);
+            }
+
+        }
+
+        List<SendProductData> sendProductddata = new List<SendProductData>();
+        for (int i = 0; i < data.Count; i++)
+        { 
+            sendProductddata.Add(new SendProductData(data[i]));
+        }
+        SendProductDataList list = new SendProductDataList();
+        list.datas = sendProductddata;
+        Debug.Log(JsonUtility.ToJson(list) );
+        return JsonUtility.ToJson(list);
+    }
 
     private void OnDestroy()
     {
