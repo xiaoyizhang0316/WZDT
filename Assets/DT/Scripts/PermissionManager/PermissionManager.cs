@@ -23,17 +23,17 @@ public class PermissionManager : MonoSingleton<PermissionManager>
     {
         Button_consumer.onClick.AddListener(() =>
         {
-            
+
         });
-        
+
         Button_financial.onClick.AddListener(() =>
         {
-            
+
         });
-        
+
         Button_RoleInfo.onClick.AddListener(() =>
         {
-            
+
         });
     }
 

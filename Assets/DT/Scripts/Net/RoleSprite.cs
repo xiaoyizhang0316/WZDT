@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using static GameEnum;
 
 public class RoleSprite : MonoBehaviour
@@ -49,7 +51,56 @@ public class RoleSprite : MonoBehaviour
 
     public void OnMouseOver()
     {
-        Debug.Log("ffasdsadsad");
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            if (!mapRole.isNpc ||(mapRole.isNpc && mapRole.npcScript.isCanSee))
+            {
+                string desc = GameDataMgr.My.GetTranslateName(mapRole.baseRoleData.baseRoleData.roleType.ToString());
+                RoleFloatWindow.My.Init(transform, desc, mapRole.baseRoleData.baseRoleData.roleSkillType, mapRole.baseRoleData.baseRoleData.roleType);
+            }
+            else
+            {
+                RoleFloatWindow.My.Init(transform, "未知角色", RoleSkillType.Solution, RoleType.All);
+            }
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        RoleFloatWindow.My.Hide();
+    }
+
+    public void OnMouseUp()
+    {
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            if (mapRole.isNpc)
+            {
+                NewCanvasUI.My.Panel_NPC.SetActive(true);
+                //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
+                //RoleListInfo.My.Init(currentRole);
+                if (mapRole.npcScript.isCanSee)
+                {
+                    if (mapRole.npcScript.isLock)
+                    {
+                        NPCListInfo.My.ShowUnlckPop(mapRole.transform);
+                    }
+                    else
+                    {
+                        NPCListInfo.My.ShowNpcInfo(mapRole.transform);
+                    }
+                }
+                else if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 3)
+                {
+                    NPCListInfo.My.ShowHideTipPop("使用广角镜发现角色");
+                }
+            }
+            else
+            {
+                NewCanvasUI.My.Panel_Update.SetActive(true);
+                RoleUpdateInfo.My.Init(mapRole.baseRoleData);
+            }
+        }
     }
 
     // Start is called before the first frame update
