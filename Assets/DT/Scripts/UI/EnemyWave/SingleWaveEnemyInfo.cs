@@ -77,14 +77,15 @@ public class SingleWaveEnemyInfo : MonoBehaviour
             }
             else
             {
-                GameObject go = Instantiate(singleBuffPrb, buffListTF);
                 if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
                 {
+                    GameObject go = Instantiate(singleBuffPrb, buffListTF);
                     go.GetComponent<WaveBuffSign>().Init(buffList[i]);
                 }
                 else
                 {
-                    go.GetComponent<WaveBuffSign>().InitClient(buffList[i]);
+                    GameObject go1 = GetComponentsInChildren<WaveBuffSign>()[i].gameObject;
+                    go1.GetComponent<WaveBuffSign>().InitClient(buffList[i]);
                 }
             }
         }
@@ -93,6 +94,7 @@ public class SingleWaveEnemyInfo : MonoBehaviour
             consumerName.text = data.typeDesc;
             consumerGold.text = data.killMoney.ToString();
             consumerHealth.text = data.maxHealth.ToString();
+            GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x, 114f + (buffList.Count - 2) * 40);
         }
     }
 

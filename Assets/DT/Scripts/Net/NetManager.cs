@@ -491,10 +491,13 @@ public class NetManager : MonoSingleton<NetManager>
         else
         {
             MissionConfirm.My.subReady = false;
-            
         }
     }
 
+    /// <summary>
+    /// 发送表情函数回调
+    /// </summary>
+    /// <param name="str"></param>
     public void OnGenerateEmoji(string str)
     {
         float x = float.Parse(str.Split(',')[0]);

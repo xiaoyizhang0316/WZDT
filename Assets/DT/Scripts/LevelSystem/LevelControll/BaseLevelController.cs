@@ -191,7 +191,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         GameObject go = Instantiate(emojiPrb);
         go.transform.position = pos;
         go.transform.LookAt(Camera.main.transform);
-        go.transform.Translate(Vector3.forward);
+        go.transform.Translate(Vector3.forward * 10f);
         Destroy(go, 1f);
     }
 
