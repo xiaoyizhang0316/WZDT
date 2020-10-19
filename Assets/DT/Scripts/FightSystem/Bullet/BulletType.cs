@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace DT.Fight.Bullet
 {
+    [Serializable]
     public enum BulletType
     {
         Seed = 0 ,
