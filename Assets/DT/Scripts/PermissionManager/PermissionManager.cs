@@ -10,6 +10,8 @@ public class PermissionManager : MonoSingleton<PermissionManager>
     public GameObject severCanvas;
     public GameObject clientCanvas;
 
+    public GameObject soloCanvas;
+    
     public Button Button_consumer;
     public Button Button_financial;
     public Button Button_RoleInfo;
@@ -21,6 +23,7 @@ public class PermissionManager : MonoSingleton<PermissionManager>
 
     public void Start()
     {
+     
         Button_consumer.onClick.AddListener(() =>
         {
             
