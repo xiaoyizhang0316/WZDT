@@ -67,13 +67,14 @@ public class PermissionManager : MonoSingleton<PermissionManager>
         }
         else
         {
-            Camera.main.transform.DOMove(BaseLevelController.My.newCameraPos, 2f);
+            Camera.main.transform.DOMove(BaseLevelController.My.newCameraPos, 2f).Play();
+            //Camera.main.DOOrthoSize(BaseLevelController.My.orthoSize, 2f).Play();
             Camera.main.transform.DORotate(BaseLevelController.My.newCameraRot, 2f).OnComplete(() => {
                 foreach (BaseMapRole role in PlayerData.My.MapRole)
                 {
                     role.CheckRoleDuty();
                 }
-            });
+            }).Play();
             clientCanvas.SetActive(true);
         }
     }

@@ -507,11 +507,11 @@ public class ConsumeSign : MonoBehaviour
 
     private void Update()
     {
- 
         //print(tweener.ElapsedPercentage(false));
         if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
             spriteLogo.gameObject.SetActive(false);
+            hud.gameObject.SetActive(true);
             if (isIgnoreResistance)
             {
                 try
@@ -541,6 +541,7 @@ public class ConsumeSign : MonoBehaviour
         {
             self.SetActive(false);
             sheep.SetActive(false);
+            hud.gameObject.SetActive(false);
             spriteLogo.gameObject.SetActive(true);
             spriteLogo.transform.eulerAngles = new Vector3(-90, 0, -135);
         }

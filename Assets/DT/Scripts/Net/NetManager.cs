@@ -491,8 +491,19 @@ public class NetManager : MonoSingleton<NetManager>
         else
         {
             MissionConfirm.My.subReady = false;
-            
         }
+    }
+
+    /// <summary>
+    /// 发送表情函数回调
+    /// </summary>
+    /// <param name="str"></param>
+    public void OnGenerateEmoji(string str)
+    {
+        float x = float.Parse(str.Split(',')[0]);
+        float y = float.Parse(str.Split(',')[1]);
+        float z = float.Parse(str.Split(',')[2]);
+        BaseLevelController.My.GenerateEmoji(new Vector3(x, y, z));
     }
 
     public string GetIP(ADDRESSFAM Addfam)
@@ -567,6 +578,7 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("UpdateDutyUI",UpdateDutyUI); 
         listeners.Add("OnReady",OnClientReady);
         listeners.Add("OnGameReady", OnGameReady);
+        listeners.Add("Emoji", OnGenerateEmoji);
     }
 
     private void Update()

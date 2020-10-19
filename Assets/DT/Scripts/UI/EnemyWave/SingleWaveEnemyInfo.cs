@@ -16,6 +16,13 @@ public class SingleWaveEnemyInfo : MonoBehaviour
     public GameObject singleBuffPrb;
 
     public Transform buffListTF;
+
+    public Text consumerName;
+
+    public Text consumerGold;
+
+    public Text consumerHealth;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -26,7 +33,7 @@ public class SingleWaveEnemyInfo : MonoBehaviour
         consumeType = (ConsumerType)Enum.Parse(typeof(ConsumerType), list[0]);
         string path = "Sprite/ConsumerType/" + consumeType.ToString();
         typeSprite.sprite = Resources.Load<Sprite>(path);
-        enemyNum.text = int.Parse(list[1]).ToString();
+        enemyNum.text = "x" + int.Parse(list[1]).ToString();
         //string[] buffList = list[2].Split('|');
         List<int> buffList = new List<int>();
         ConsumerTypeData data = GameDataMgr.My.GetConsumerTypeDataByType(consumeType);
@@ -46,19 +53,48 @@ public class SingleWaveEnemyInfo : MonoBehaviour
                 if (isCanSeeBuff)
                 {
                     GameObject go = Instantiate(singleBuffPrb, buffListTF);
-                    go.GetComponent<WaveBuffSign>().Init(buffList[i]);
+                    if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
+                    {
+                        go.GetComponent<WaveBuffSign>().Init(buffList[i]);
+                    }
+                    else
+                    {
+                        go.GetComponent<WaveBuffSign>().InitClient(buffList[i]);
+                    }
                 }
                 else
                 {
                     GameObject go = Instantiate(singleBuffPrb, buffListTF);
-                    go.GetComponent<WaveBuffSign>().Init(999);
+                    if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
+                    {
+                        go.GetComponent<WaveBuffSign>().Init(999);
+                    }
+                    else
+                    {
+                        go.GetComponent<WaveBuffSign>().InitClient(999);
+                    }
                 }
             }
             else
             {
-                GameObject go = Instantiate(singleBuffPrb, buffListTF);
-                go.GetComponent<WaveBuffSign>().Init(buffList[i]);
+                if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
+                {
+                    GameObject go = Instantiate(singleBuffPrb, buffListTF);
+                    go.GetComponent<WaveBuffSign>().Init(buffList[i]);
+                }
+                else
+                {
+                    GameObject go1 = GetComponentsInChildren<WaveBuffSign>()[i].gameObject;
+                    go1.GetComponent<WaveBuffSign>().InitClient(buffList[i]);
+                }
             }
+        }
+        if (PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+        {
+            consumerName.text = data.typeDesc;
+            consumerGold.text = data.killMoney.ToString();
+            consumerHealth.text = data.maxHealth.ToString();
+            GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x, 114f + (buffList.Count - 2) * 40);
         }
     }
 
