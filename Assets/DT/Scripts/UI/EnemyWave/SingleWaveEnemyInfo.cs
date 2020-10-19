@@ -94,7 +94,7 @@ public class SingleWaveEnemyInfo : MonoBehaviour
             consumerName.text = data.typeDesc;
             consumerGold.text = data.killMoney.ToString();
             consumerHealth.text = data.maxHealth.ToString();
-            GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x, 114f + (buffList.Count - 2) * 40);
+            GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x, 160 + (buffList.Count - 2) * 51);
         }
     }
 
