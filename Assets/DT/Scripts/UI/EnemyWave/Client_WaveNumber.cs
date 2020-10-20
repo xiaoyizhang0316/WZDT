@@ -15,6 +15,8 @@ public class Client_WaveNumber : MonoBehaviour,IPointerClickHandler
         {
             return;
         }
+        BuildingManager.My.HideAllPath();
+        BuildingManager.My.GetBuildingByIndex(buildingNumber).ShowPathLine();
         WaveCount.My.InitWaveBg(waveNumber, buildingNumber);
     }
 

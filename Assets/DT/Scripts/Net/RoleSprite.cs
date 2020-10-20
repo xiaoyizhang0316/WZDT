@@ -13,6 +13,8 @@ public class RoleSprite : MonoBehaviour
 
     public SpriteRenderer lockSprite;
 
+    public List<GameObject> roleEffect;
+
     public void CheckSprite()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -76,6 +78,10 @@ public class RoleSprite : MonoBehaviour
         {
             NewCanvasUI.My.Panel_NPC.SetActive(false);
             NewCanvasUI.My.Panel_Update.SetActive(false);
+            foreach (GameObject item in roleEffect)
+            {
+                item.SetActive(false);
+            }
             if (mapRole.isNpc)
             {
                 NewCanvasUI.My.Panel_NPC.SetActive(true);
@@ -103,6 +109,11 @@ public class RoleSprite : MonoBehaviour
                 RoleUpdateInfo.My.Init(mapRole.baseRoleData);
             }
         }
+    }
+
+    public void ActiveRoleEffect(int index)
+    {
+        roleEffect[index].SetActive(true);
     }
 
     // Start is called before the first frame update
