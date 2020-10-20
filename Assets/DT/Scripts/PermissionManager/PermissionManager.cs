@@ -15,6 +15,8 @@ public class PermissionManager : MonoSingleton<PermissionManager>
     public Button Button_consumer;
     public Button Button_financial;
     public Button Button_RoleInfo;
+
+    public bool isnpc;
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,17 +28,24 @@ public class PermissionManager : MonoSingleton<PermissionManager>
      
         Button_consumer.onClick.AddListener(() =>
         {
-
+          WaveCount.My.transform.SetAsLastSibling();
         });
 
         Button_financial.onClick.AddListener(() =>
         {
-
+         DataStatPanel.My.transform.SetAsLastSibling();
         });
 
         Button_RoleInfo.onClick.AddListener(() =>
         {
-
+            if (isnpc)
+            {
+                NPCListInfo.My.transform.SetAsLastSibling();
+            }
+            else
+            {
+                RoleUpdateInfo.My.transform.SetAsLastSibling();
+            }
         });
     }
 

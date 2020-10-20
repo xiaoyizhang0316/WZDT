@@ -76,15 +76,15 @@ public class RoleSprite : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
-            NewCanvasUI.My.Panel_NPC.SetActive(false);
-            NewCanvasUI.My.Panel_Update.SetActive(false);
+           
             foreach (GameObject item in roleEffect)
             {
                 item.SetActive(false);
             }
             if (mapRole.isNpc)
             {
-                NewCanvasUI.My.Panel_NPC.SetActive(true);
+                PermissionManager.My.isnpc = true;
+                NewCanvasUI.My.Panel_NPC.transform.SetAsLastSibling();
                 //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
                 //RoleListInfo.My.Init(currentRole);
                 if (mapRole.npcScript.isCanSee)
@@ -105,7 +105,10 @@ public class RoleSprite : MonoBehaviour
             }
             else
             {
-                NewCanvasUI.My.Panel_Update.SetActive(true);
+                PermissionManager.My.isnpc = false;
+
+                NewCanvasUI.My.Panel_Update.transform.SetAsLastSibling();
+
                 RoleUpdateInfo.My.Init(mapRole.baseRoleData);
             }
         }
