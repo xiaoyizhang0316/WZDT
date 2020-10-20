@@ -283,6 +283,12 @@ public class NetManager : MonoSingleton<NetManager>
         }
     }
 
+    public void OnOpenGuide(string str)
+    {
+        bool active = bool.Parse(str);
+        NewCanvasUI.My.watchGuidePanel.SetActive(active);
+    }
+
     #region 交易  
 
     /// <summary>
@@ -582,6 +588,7 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("OnReady",OnClientReady);
         listeners.Add("OnGameReady", OnGameReady);
         listeners.Add("Emoji", OnGenerateEmoji);
+        listeners.Add("OpenGuide", OnOpenGuide);
     }
 
     private void Update()

@@ -76,6 +76,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public List<GameObject> panelList = new List<GameObject>();
 
+    public GameObject watchGuidePanel;
+
     // Start is called before the first frame update
     void Start()
     {
