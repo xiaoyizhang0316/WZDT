@@ -112,6 +112,20 @@ public class RoleSprite : MonoBehaviour
 
                 RoleUpdateInfo.My.Init(mapRole.baseRoleData);
             }
+
+            if (!PlayerData.My.isSOLO)
+            {
+                string str1 = "GetRoleBuilet|";
+                str1 += mapRole.baseRoleData.ID;
+                if (PlayerData.My.isServer)
+                {
+                
+                }
+                else
+                {
+                    PlayerData.My.client.SendToServerMsg(str1);
+                }
+            }
         }
     }
 

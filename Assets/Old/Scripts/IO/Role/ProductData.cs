@@ -21,7 +21,16 @@ public class ProductData
         buffList.AddRange(data.buffList);
         buffMaxCount = data.buffMaxCount;
     }
-
+    public ProductData( SendProductData data)
+    {
+        bulletType = data.bulletType;
+        damage = data.damage;
+        loadingSpeed = data.loadingSpeed;
+        buffList =new List<int>() ;
+        buffList.AddRange(data.buffList);
+        buffMaxCount = data.buffMaxCount;
+        RepeatBulletCount = data.count;
+    }
     public BulletType bulletType;
 
     /// <summary>

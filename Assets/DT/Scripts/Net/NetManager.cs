@@ -289,6 +289,61 @@ public class NetManager : MonoSingleton<NetManager>
         NewCanvasUI.My.watchGuidePanel.SetActive(active);
     }
 
+    public void GetRoleBuilet(string str)
+    {
+      string json =   PlayerData.My.GetMapRoleById(double.Parse(str)).GetWarehouseJson();
+      if (!PlayerData.My.isSOLO)
+      {
+          string str1 = "SendRoleBuilet|";
+          str1 += str+"%";
+
+          str1 += json;
+          if (PlayerData.My.isServer)
+          {
+              PlayerData.My.server.SendToClientMsg(str1);
+          }
+      }
+    }
+
+    public void SendRoleBuilet(string str)
+    {
+        string id = str.Split('%')[0];
+    BaseMapRole role =     PlayerData.My.GetMapRoleById(double.Parse(id));
+        SendProductDataList list =  JsonUtility.FromJson<SendProductDataList>(str.Split('%')[1]);
+        for (int i = 0; i <list.datas.Count; i++)
+        {
+            role.warehouse.Add(new ProductData(list.datas[i]));
+        }
+        if (role.isNpc)
+        {
+            PermissionManager.My.isnpc = true; 
+            //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
+            //RoleListInfo.My.Init(currentRole);
+            if (role.npcScript.isCanSee)
+            {
+                if (role.npcScript.isLock)
+                {
+                    NPCListInfo.My.ShowUnlckPop(role.transform);
+                }
+                else
+                {
+                    NPCListInfo.My.ShowNpcInfo(role.transform);
+                }
+            }
+            else if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 3)
+            {
+                NPCListInfo.My.ShowHideTipPop("使用广角镜发现角色");
+            }
+        }
+        else
+        {
+            PermissionManager.My.isnpc = false;
+ 
+
+            RoleUpdateInfo.My.Init(role.baseRoleData);
+        }
+    }
+
     #region 交易  
 
     /// <summary>
@@ -589,6 +644,8 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("OnGameReady", OnGameReady);
         listeners.Add("Emoji", OnGenerateEmoji);
         listeners.Add("OpenGuide", OnOpenGuide);
+        listeners.Add("GetRoleBuilet", GetRoleBuilet);
+        listeners.Add("SendRoleBuilet", SendRoleBuilet);
     }
 
     private void Update()

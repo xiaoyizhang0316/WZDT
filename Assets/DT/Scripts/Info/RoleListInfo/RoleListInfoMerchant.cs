@@ -88,6 +88,15 @@ public class RoleListInfoMerchant : BaseRoleListInfo
 
             }
         
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.GetComponent<ProductSeed>()
+                    .productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            }
         }
     }
 }

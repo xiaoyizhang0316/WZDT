@@ -127,7 +127,6 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             if (VARIABLE.mapType == GameEnum.MapType.Grass && VARIABLE.baseMapRole == null)
             {
                 VARIABLE.isCanPlace = true;
-
             }
         }
         if (!PlayerData.My.isSOLO)
