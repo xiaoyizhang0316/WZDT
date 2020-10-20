@@ -66,6 +66,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public void Init()
     {
+        if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+        {
+            return;
+        }
         foreach (var item in NewCanvasUI.My.highLight)
         {
             item.SetActive(false);

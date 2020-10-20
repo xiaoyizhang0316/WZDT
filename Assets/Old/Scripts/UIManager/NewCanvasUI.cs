@@ -159,6 +159,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
             //GameAccelerate();
         });
+        if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+            return;
         GameNormal();
     }
 
@@ -203,6 +205,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
         CancelInvoke("CountPauseTime");
+        Debug.Log("Pause");
         if (!PlayerData.My.isSOLO)
         {
             string str = "ChangeTimeScale|";
