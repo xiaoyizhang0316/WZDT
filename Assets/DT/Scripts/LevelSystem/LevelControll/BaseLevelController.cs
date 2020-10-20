@@ -172,6 +172,10 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     public void CheckGameStart()
     {
+        if (PlayerPrefs.GetInt("isUseGuide") == 1)
+        {
+            return;
+        }
         if (PlayerData.My.isSOLO)
         {
             DOTween.PlayAll();

@@ -159,9 +159,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
             //GameAccelerate();
         });
-        if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
-            return;
-        GameNormal();
+        Button_Normal.interactable = false;
+        //if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+        //    return;
+        //GameNormal();
     }
 
     /// <summary>
