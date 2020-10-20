@@ -40,6 +40,7 @@ public class Building : MonoBehaviour
     public void UseTSJ()
     {
         countDownSprite.transform.parent.gameObject.SetActive(true);
+        countDownSprite.transform.parent.LookAt(Camera.main.transform);
         isUseTSJ = true;
         countDownSprite.fillAmount = 1f;
         countDownSprite.DOFillAmount(0f, 20f).OnComplete(() =>

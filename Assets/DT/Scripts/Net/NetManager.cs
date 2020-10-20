@@ -65,6 +65,7 @@ public class NetManager : MonoSingleton<NetManager>
         StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech,CostTpType.Build);
         role.GetComponent<BaseMapRole>().MonthlyCost();
         role.GetComponent<BaseMapRole>().AddTechPoint();
+        role.GetComponent<BaseMapRole>().roleSprite.ActiveRoleEffect(0);
     }
 
     /// <summary>
@@ -111,7 +112,7 @@ public class NetManager : MonoSingleton<NetManager>
         target.baseRoleData.roleName = str.Split(',')[1];
         PlayerData.My.GetMapRoleById(target.ID).RecalculateEncourageLevel();
         PlayerData.My.GetMapRoleById(target.ID).ResetAllBuff();
-        
+        PlayerData.My.GetMapRoleById(target.ID).roleSprite.ActiveRoleEffect(2);
     }
 
     /// <summary>
@@ -187,6 +188,7 @@ public class NetManager : MonoSingleton<NetManager>
         target.bulletCapacity = finalBulletCapacity;
         target.techAdd = finalTechAdd;
         PlayerData.My.GetMapRoleById(target.ID).ResetAllBuff();
+        PlayerData.My.GetMapRoleById(target.ID).roleSprite.ActiveRoleEffect(1);
     }
 
     /// <summary>
