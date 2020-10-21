@@ -82,7 +82,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
            //    } 
                  
                  PlayerData.My.server.SendToClientMsg(str1);
-                transform.DORotate(Vector3.zero,0.5f ).OnComplete(()=>{
+                transform.DORotate(Vector3.zero,0.5f ).Play().OnComplete(()=>{
                     PlayerData.My.server.SendToClientMsg("OpenDutyConfirmUI|1");
                     missionConfirm.SetActive(true);
                 });

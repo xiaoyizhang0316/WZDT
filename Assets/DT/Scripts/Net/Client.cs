@@ -163,6 +163,10 @@ public class Client : MonoBehaviour
     private void OnDisable()
     {
         Debug.Log("begin OnDisable()");
+
+        string str = "GroupDismiss|1";
+        SendToServerMsg(str);
+
         if (socketSend.Connected)
         {
             try
@@ -178,6 +182,24 @@ public class Client : MonoBehaviour
             }
         }
         Debug.Log("end OnDisable()");
+    }
+
+    public void Disconect()
+    {
+        if (socketSend.Connected)
+        {
+            try
+            {
+                socketSend.Shutdown(SocketShutdown.Both);    //禁用Socket的发送和接收功能
+                socketSend.Close();                          //关闭Socket连接并释放所有相关资源
+                PlayerData.My.isSOLO = true;
+                PlayerData.My.client = null;
+            }
+            catch (Exception e)
+            {
+                print(e.Message);
+            }
+        }
     }
 
     //用户界面

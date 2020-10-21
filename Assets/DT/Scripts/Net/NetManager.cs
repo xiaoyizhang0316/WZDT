@@ -571,6 +571,22 @@ public class NetManager : MonoSingleton<NetManager>
         BaseLevelController.My.GenerateEmoji(new Vector3(x, y, z));
     }
 
+    public void OnGroupDismiss(string str)
+    {
+        SceneManager.LoadScene("Map");
+        PlayerData.My.isSOLO = true;
+        PlayerData.My.playerDutyID = 0;
+        PlayerData.My.InitPlayerRightControl("0", "0", "0", "0", "0", "0", "0", "0");
+        if (PlayerData.My.server != null)
+        {
+            PlayerData.My.server.Disconect();
+        }
+        if (PlayerData.My.client != null)
+        {
+            PlayerData.My.client.Disconect();
+        }
+    }
+
     public string GetIP(ADDRESSFAM Addfam)
     {
         //Return null if ADDRESSFAM is Ipv6 but Os does not support it
@@ -647,6 +663,7 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("OpenGuide", OnOpenGuide);
         listeners.Add("GetRoleBuilet", GetRoleBuilet);
         listeners.Add("SendRoleBuilet", SendRoleBuilet);
+        listeners.Add("GroupDismiss", OnGroupDismiss);
     }
 
     private void Update()
