@@ -33,6 +33,7 @@ public class PermissionManager : MonoSingleton<PermissionManager>
 
         Button_financial.onClick.AddListener(() =>
         {
+            DataStatPanel.My.ShowStat();
          DataStatPanel.My.transform.SetAsLastSibling();
         });
 
