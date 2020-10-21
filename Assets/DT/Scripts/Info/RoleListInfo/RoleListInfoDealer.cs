@@ -79,8 +79,7 @@ public class RoleListInfoDealer : BaseRoleListInfo
             }
             if (PlayerData.My.client != null)
             {
-                Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.GetComponent<ProductSeed>()
-                    .productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+                Pruductgame.GetComponentInChildren<Text>().text =  baseMapRole.warehouse[i].RepeatBulletCount.ToString() ;
             }
             else
             {
