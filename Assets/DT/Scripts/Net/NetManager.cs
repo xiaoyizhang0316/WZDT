@@ -310,6 +310,7 @@ public class NetManager : MonoSingleton<NetManager>
         string id = str.Split('%')[0];
     BaseMapRole role =     PlayerData.My.GetMapRoleById(double.Parse(id));
         SendProductDataList list =  JsonUtility.FromJson<SendProductDataList>(str.Split('%')[1]);
+        role.warehouse.Clear();
         for (int i = 0; i <list.datas.Count; i++)
         {
             role.warehouse.Add(new ProductData(list.datas[i]));

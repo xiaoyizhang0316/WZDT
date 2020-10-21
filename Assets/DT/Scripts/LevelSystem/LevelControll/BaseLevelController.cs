@@ -184,9 +184,16 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         }
         else if (isAllReady)
         {
-            DOTween.PlayAll();
-            DOTween.timeScale = 1f;
-            DOTween.defaultAutoPlay = AutoPlay.All;
+            if (PlayerData.My.isServer)
+            {
+                NewCanvasUI.My.GameNormal();
+            }
+            else
+            {
+                DOTween.PlayAll();
+                DOTween.timeScale = 1f;
+                DOTween.defaultAutoPlay = AutoPlay.All;
+            }
         }
     }
 
