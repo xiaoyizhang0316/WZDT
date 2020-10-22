@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class MakeGroupPanel : MonoSingleton<MakeGroupPanel>
 {
-
     public Button makeGroupButton;
 
     public Button joinButton;
@@ -16,16 +15,16 @@ public class MakeGroupPanel : MonoSingleton<MakeGroupPanel>
 
     public InputField groupName;
 
-    public void MakeGroup()
+    public bool MakeGroup()
     {
         int portNum = int.Parse(port.text);
-        PlayerData.My.transform.GetComponent<Server>().SetUpServer(portNum);
+        return PlayerData.My.transform.GetComponent<Server>().SetUpServer(portNum);
     }
 
-    public void JoinGroup()
+    public bool JoinGroup()
     {
         int portNum = int.Parse(port.text);
-        PlayerData.My.transform.GetComponent<Client>().ConnectToServer(ip.text, portNum);
+        return PlayerData.My.transform.GetComponent<Client>().ConnectToServer(ip.text, portNum);
     }
 
     public void Show()
@@ -44,10 +43,12 @@ public class MakeGroupPanel : MonoSingleton<MakeGroupPanel>
         port.text = "3101";
         makeGroupButton.onClick.AddListener(() =>
         {
-            MakeGroup();
+            if (MakeGroup())
+                Hide();
         });
         joinButton.onClick.AddListener(() => {
-            JoinGroup();
+            if (JoinGroup())
+                Hide();
         });
         Hide();
     }

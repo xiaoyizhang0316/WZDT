@@ -32,7 +32,7 @@ public class Client : MonoBehaviour
     }
 
     //建立链接
-    public void ConnectToServer(string ipAddr, int portNum)
+    public bool ConnectToServer(string ipAddr, int portNum)
     {
         try
         {
@@ -61,11 +61,13 @@ public class Client : MonoBehaviour
             string str = "SetUpGroup|";
             ///发送队员的信息  
             SendToServerMsg(str);
+            return true;
         }
         catch (Exception)
         {
             Debug.Log("IP或者端口号错误......");
             staInfo = "IP或者端口号错误......";
+            return false;
         }
     }
 
@@ -207,36 +209,36 @@ public class Client : MonoBehaviour
     //用户界面
     void OnGUI()
     {
-        GUI.color = Color.white;
+        //GUI.color = Color.white;
 
-        GUI.Label(new Rect(650, 10, 60, 20), "状态信息");
+        //GUI.Label(new Rect(650, 10, 60, 20), "状态信息");
 
-        GUI.Label(new Rect(710, 10, 80, 60), staInfo);
+        //GUI.Label(new Rect(710, 10, 80, 60), staInfo);
 
-        GUI.Label(new Rect(650, 70, 50, 20), "服务器ip地址");
+        //GUI.Label(new Rect(650, 70, 50, 20), "服务器ip地址");
 
-        inputIp = GUI.TextField(new Rect(710, 70, 100, 20), inputIp, 20);
+        //inputIp = GUI.TextField(new Rect(710, 70, 100, 20), inputIp, 20);
 
-        GUI.Label(new Rect(650, 110, 50, 20), "服务器端口");
+        //GUI.Label(new Rect(650, 110, 50, 20), "服务器端口");
 
-        inputPort = GUI.TextField(new Rect(800, 110, 100, 20), inputPort, 20);
+        //inputPort = GUI.TextField(new Rect(800, 110, 100, 20), inputPort, 20);
 
-        GUI.Label(new Rect(650, 150, 80, 20), "接收到消息：");
+        //GUI.Label(new Rect(650, 150, 80, 20), "接收到消息：");
 
-        GUI.Label(new Rect(800, 150, 80, 20), recMes);
+        //GUI.Label(new Rect(800, 150, 80, 20), recMes);
 
-        GUI.Label(new Rect(650, 190, 80, 20), "发送的消息：");
+        //GUI.Label(new Rect(650, 190, 80, 20), "发送的消息：");
 
-        inputMes = GUI.TextField(new Rect(850, 190, 100, 20), inputMes, 20);
+        //inputMes = GUI.TextField(new Rect(850, 190, 100, 20), inputMes, 20);
 
-        if (GUI.Button(new Rect(650, 230, 60, 20), "开始连接"))
-        {
-            //ConnectToServer();
-        }
+        //if (GUI.Button(new Rect(650, 230, 60, 20), "开始连接"))
+        //{
+        //    //ConnectToServer();
+        //}
 
-        if (GUI.Button(new Rect(650, 270, 60, 20), "发送信息"))
-        {
-            clickSend = true;
-        }
+        //if (GUI.Button(new Rect(650, 270, 60, 20), "发送信息"))
+        //{
+        //    clickSend = true;
+        //}
     }
 }

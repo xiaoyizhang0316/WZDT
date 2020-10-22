@@ -38,7 +38,7 @@ public class Server : MonoBehaviour
     #region Server
 
     //建立tcp通信链接(Server)
-    public void SetUpServer(int portNumber)
+    public bool SetUpServer(int portNumber)
     {
         try
         {
@@ -74,8 +74,11 @@ public class Server : MonoBehaviour
             Thread thread = new Thread(Listen);
             thread.IsBackground = true;
             thread.Start(socketWatch);
+            return true;
         }
-        catch { }
+        catch {
+            return false;
+        }
     }
 
     /// <summary>
@@ -243,37 +246,37 @@ public class Server : MonoBehaviour
     //交互界面
     void OnGUI()
     {
-        GUI.color = Color.white;
+        //GUI.color = Color.white;
 
-        GUI.Label(new Rect(65, 10, 80, 20), "状态信息");
+        //GUI.Label(new Rect(65, 10, 80, 20), "状态信息");
 
-        GUI.Label(new Rect(155, 10, 80, 70), info);
+        //GUI.Label(new Rect(155, 10, 80, 70), info);
 
-        GUI.Label(new Rect(65, 80, 80, 20), "接收到消息：");
+        //GUI.Label(new Rect(65, 80, 80, 20), "接收到消息：");
 
-        GUI.Label(new Rect(155, 80, 80, 20), recMes);
+        //GUI.Label(new Rect(155, 80, 80, 20), recMes);
 
-        GUI.Label(new Rect(65, 120, 80, 20), "发送的消息：");
+        //GUI.Label(new Rect(65, 120, 80, 20), "发送的消息：");
 
-        inputMessage = GUI.TextField(new Rect(155, 120, 100, 20), inputMessage, 20);
+        //inputMessage = GUI.TextField(new Rect(155, 120, 100, 20), inputMessage, 20);
 
-        GUI.Label(new Rect(65, 160, 80, 20), "本机ip地址：");
+        //GUI.Label(new Rect(65, 160, 80, 20), "本机ip地址：");
 
-        inputIp = GUI.TextField(new Rect(155, 160, 100, 20), NetManager.My.GetIP(ADDRESSFAM.IPv4), 20);
+        //inputIp = GUI.TextField(new Rect(155, 160, 100, 20), NetManager.My.GetIP(ADDRESSFAM.IPv4), 20);
 
-        GUI.Label(new Rect(65, 200, 80, 20), "本机端口号：");
+        //GUI.Label(new Rect(65, 200, 80, 20), "本机端口号：");
 
-        inputPort = GUI.TextField(new Rect(155, 200, 100, 20), inputPort, 20);
+        //inputPort = GUI.TextField(new Rect(155, 200, 100, 20), inputPort, 20);
 
-        if (GUI.Button(new Rect(65, 240, 60, 20), "开始监听"))
-        {
-            //SetUpServer();
-        }
+        //if (GUI.Button(new Rect(65, 240, 60, 20), "开始监听"))
+        //{
+        //    //SetUpServer();
+        //}
 
-        if (GUI.Button(new Rect(65, 280, 60, 20), "发送数据"))
-        {
-            isSendData = true;
-        }
+        //if (GUI.Button(new Rect(65, 280, 60, 20), "发送数据"))
+        //{
+        //    isSendData = true;
+        //}
     }
 }
 
