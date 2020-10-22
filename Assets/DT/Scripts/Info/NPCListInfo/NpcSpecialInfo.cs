@@ -55,6 +55,19 @@ public class NpcSpecialInfo : MonoBehaviour
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要清空仓库吗？";
             DeleteUIManager.My.Init(str, () => {
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str1 = "ClearWarehouse|";
+                    str1 += npc.baseRoleData.ID.ToString();
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str1);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str1);
+                    }
+                }
                 //PlayerData.My.GetMapRoleById(npc.baseRoleData.ID).ClearWarehouse();
                 npc.ClearWarehouse();
                 SetInfo(npc, baseSkill, npcTF);

@@ -211,6 +211,41 @@ public class NetManager : MonoSingleton<NetManager>
         StageGoal.My.SetInfo();
     }
 
+    public void ClearWarehouse(string str)
+    {
+        double id = double.Parse(str);
+        BaseMapRole role = PlayerData.My.GetMapRoleById(id);
+        role.ClearWarehouse();
+        if (role.isNpc)
+        {
+            //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
+            //RoleListInfo.My.Init(currentRole);
+            if (role.npcScript.isCanSee)
+            {
+                PermissionManager.My.isnpc = true;
+                NewCanvasUI.My.Panel_NPC.SetActive(true);
+                if (role.npcScript.isLock)
+                {
+                    NPCListInfo.My.ShowUnlckPop(role.transform);
+                }
+                else
+                {
+                    NPCListInfo.My.ShowNpcInfo(role.transform);
+                }
+            }
+            else if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 3)
+            {
+                // NPCListInfo.My.ShowHideTipPop("使用广角镜发现角色");
+            }
+        }
+        else
+        {
+            PermissionManager.My.isnpc = false;
+            NewCanvasUI.My.Panel_Update.SetActive(true);
+            RoleUpdateInfo.My.ReInit(role.baseRoleData);
+        }
+    }
+
     #endregion
 
     /// <summary>
@@ -682,6 +717,7 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("SendRoleBuilet", SendRoleBuilet);
         listeners.Add("GroupDismiss", OnGroupDismiss);
         listeners.Add("SetUpGroup", SetupGroup);
+        listeners.Add("ClearWarehouse", ClearWarehouse);
     }
 
     private void Update()

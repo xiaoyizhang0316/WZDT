@@ -25,6 +25,7 @@ public class PermissionManager : MonoSingleton<PermissionManager>
     private Transform buttonParent;
 
     public List<Sprite> sprites;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -74,7 +75,9 @@ public class PermissionManager : MonoSingleton<PermissionManager>
         Button_financial.GetComponent<Image>().sprite = sprites[1];
         if (lastSelectRole == null)
         {
-            //空panel
+            Transform nullRole = NPCListInfo.My.transform.parent.Find("nullRole");
+            nullRole.SetAsLastSibling();
+            Button_RoleInfo.transform.SetParent(nullRole);
         }
         else if (lastSelectRole.isNpc)
         {
@@ -85,7 +88,9 @@ public class PermissionManager : MonoSingleton<PermissionManager>
             }
             else
             {
-                //抹布panel
+                Transform unknownRole = NPCListInfo.My.transform.parent.Find("unknownRole");
+                unknownRole.SetAsLastSibling();
+                Button_RoleInfo.transform.SetParent(unknownRole);
             }
         }
         else
@@ -127,7 +132,7 @@ public class PermissionManager : MonoSingleton<PermissionManager>
         else
         {
             Camera.main.transform.DOMove(BaseLevelController.My.newCameraPos, 2f).Play();
-            //Camera.main.DOOrthoSize(BaseLevelController.My.orthoSize, 2f).Play();
+            Camera.main.DOOrthoSize(BaseLevelController.My.orthoSize, 2f).Play();
             Camera.main.transform.DORotate(BaseLevelController.My.newCameraRot, 2f).OnComplete(() => {
                 foreach (BaseMapRole role in PlayerData.My.MapRole)
                 {

@@ -85,13 +85,13 @@ public class RoleSprite : MonoBehaviour
             PermissionManager.My.InitRolePanel();
             if (mapRole.isNpc)
             {
-                PermissionManager.My.isnpc = true;
-                NewCanvasUI.My.Panel_NPC.SetActive(true);
-                NewCanvasUI.My.Panel_NPC.transform.SetAsLastSibling();
                 //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
                 //RoleListInfo.My.Init(currentRole);
                 if (mapRole.npcScript.isCanSee)
                 {
+                    PermissionManager.My.isnpc = true;
+                    NewCanvasUI.My.Panel_NPC.SetActive(true);
+                    NewCanvasUI.My.Panel_NPC.transform.SetAsLastSibling();
                     if (mapRole.npcScript.isLock)
                     {
                         NPCListInfo.My.ShowUnlckPop(mapRole.transform);
