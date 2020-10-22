@@ -49,7 +49,6 @@ public class Client : MonoBehaviour
             socketSend.Connect(point);
             Debug.Log("连接成功 , " + " ip = " + ip + " port = " + _port);
             staInfo = ip + ":" + _port + "  连接成功";
-
             Thread r_thread = new Thread(Received);             //开启新的线程，不停的接收服务器发来的消息
             r_thread.IsBackground = true;
             r_thread.Start();
@@ -59,6 +58,9 @@ public class Client : MonoBehaviour
             s_thread.Start();
             PlayerData.My.client = this;
             PlayerData.My.isServer = false;
+            string str = "SetUpGroup|";
+            ///发送队员的信息  
+            SendToServerMsg(str);
         }
         catch (Exception)
         {

@@ -539,6 +539,160 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     }
     #endregion
 
+    #region team
+    public List<TeamAcount> teamAcounts = new List<TeamAcount>();
+    public TeamAcount currentBattleTeamAcount;
+    public TeamAcount onTeam;
+    public bool isOnTeamBattle = false;
+
+    public void GetPlayerTeamList(Action doSuccess, Action doFail)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetTeamAcounts, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                TeamAcounts tas = JsonUtility.FromJson<TeamAcounts>(response.data);
+                teamAcounts.Clear();
+                for(int i = 0; i< tas.teamAcounts.Count; i++)
+                {
+                    //if(tas.teamAcounts[i].isDisbanded == false)
+                    //{
+                    //    onTeam = tas.teamAcounts[i];
+                    //}
+                    teamAcounts.Add(tas.teamAcounts[i]);
+                }
+                doSuccess();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.GetTeamAcounts));
+    }
+
+    public void GetCurrentTeam(Action doSuccess=null, Action doFail=null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetCurrentTeamAcount, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                onTeam = JsonUtility.FromJson<TeamAcount>(response.data);
+                 
+                //ChangeTeamAcountList(currentBattleTeamAcount);
+                doSuccess();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.GetCurrentTeamAcount));
+    }
+
+    public void BuildTeam(string teamName, List<PlayerDatas> playerDatas,Action doSuccess=null, Action doFail=null)
+    {
+        TeamPlayers teamPlayers = new TeamPlayers(playerDatas);
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        keyValues.Add("groupID", groupID.ToString());
+        keyValues.Add("teamName", teamName);
+        keyValues.Add("playerIDs", teamPlayers.playerIDs);
+        keyValues.Add("playerNames", teamPlayers.playerNames);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.CreateTeamAcount, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                onTeam = JsonUtility.FromJson<TeamAcount>(response.data);
+                currentBattleTeamAcount = onTeam;
+                ChangeTeamAcountList(currentBattleTeamAcount);
+                isOnTeamBattle = true;
+                doSuccess();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.CreateTeamAcount));
+    }
+
+    public void ExitTeam(Action doSuccess, Action doFail)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        keyValues.Add("teamID", onTeam.teamID);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.SetTeamDisbanded, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                TeamAcount ta = JsonUtility.FromJson<TeamAcount>(response.data);
+                onTeam = null;
+                ChangeTeamAcountList(ta);
+                doSuccess();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.SetTeamDisbanded));
+    }
+
+    private void ChangeTeamAcountList(TeamAcount ta)
+    {
+        for(int i=0; i<teamAcounts.Count; i++)
+        {
+            if (teamAcounts[i].teamID == ta.teamID)
+            {
+                teamAcounts.RemoveAt(i);
+                break;
+            }
+        }
+        teamAcounts.Add(ta);
+    }
+    #endregion
+
     #region Level
     /// <summary>
     /// 更新过关信息
@@ -664,7 +818,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
     #endregion
-
+    public TeamConfiguration teamConfiguration;
+    public bool isServer = false;
     /// <summary>
     /// 上传复盘数据
     /// </summary>
@@ -679,6 +834,19 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             keyValues.Add("token", token);
             keyValues.Add("playerID", playerID);
             keyValues.Add("data", CompressUtils.Compress(JsonUtility.ToJson(playerReplay)));
+            if (isOnTeamBattle)
+            {
+                if(isServer)// is server
+                {
+                    keyValues.Add("teamID", currentBattleTeamAcount.teamID);
+                    keyValues.Add("teamName", currentBattleTeamAcount.teamName);
+                    keyValues.Add("teamConfiguration", JsonUtility.ToJson(teamConfiguration));
+                }
+                else
+                {
+                    return;
+                }
+            }
 
             StartCoroutine(HttpManager.My.HttpSend(Url.AddReplayData, (www) => {
                 HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);

@@ -175,6 +175,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Pause.interactable = false;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = true;
+        //MessageManager.my.RpcGamePause();
         if (isCount)
             InvokeRepeating("CountPauseTime", 1f, 1f);
         else
@@ -202,6 +203,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         DOTween.PlayAll();
         DOTween.timeScale = 1f;
         DOTween.defaultAutoPlay = AutoPlay.All;
+        //MessageManager.my.RpcGameNormal();
         Button_Pause.interactable = true;
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
@@ -230,6 +232,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         DOTween.PlayAll();
         DOTween.timeScale = 2f;
         DOTween.defaultAutoPlay = AutoPlay.All;
+        //MessageManager.my.RpcGameAccerlarate();
         Button_Pause.interactable = true;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = false;

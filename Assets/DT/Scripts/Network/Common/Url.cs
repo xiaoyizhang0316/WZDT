@@ -62,6 +62,18 @@ public static class Url
     private static string addEquips = "addEquips";
     #endregion
 
+    #region team
+    private static string createTeamAcount = "createTeamAcount";
+    private static string getTeamAcounts = "getTeamAcounts";
+    private static string setTeamDisbanded = "setTeamDisbanded";
+    private static string getCurrentTeamAcount = "getCurrentTeamAcount";
+    #endregion
+
+    #region player status
+    private static string setPlayerStatusScene = "setPlayerStatusScene";
+
+    #endregion
+
     #region test
     private static string testPost = "testPost";
     private static string testGet = "testGet";
@@ -100,6 +112,11 @@ public static class Url
     public static string TestGet { get => ip + testGet;  }
     public static string GetJsonDatas { get => ip + getJsonDatas; }
     public static string GetBehaviorDatas { get => ip + GetBehaviorDatas; }
+    public static string SetTeamDisbanded { get => ip+setTeamDisbanded;}
+    public static string GetTeamAcounts { get => ip+getTeamAcounts;}
+    public static string CreateTeamAcount { get => ip+createTeamAcount;}
+    public static string SetPlayerStatusScene { get => ip+setPlayerStatusScene; }
+    public static string GetCurrentTeamAcount { get => getCurrentTeamAcount; set => getCurrentTeamAcount = value; }
 
     public static void SetIp(string newIp)
     {

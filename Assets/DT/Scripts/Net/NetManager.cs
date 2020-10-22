@@ -94,6 +94,10 @@ public class NetManager : MonoSingleton<NetManager>
         PlayerData.My.RoleData.Remove(target);
         PlayerData.My.MapRole.Remove(mapRole);
         MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
+        if (PermissionManager.My.currentSelectPanel == 2)
+        {
+            PermissionManager.My.InitRolePanel();
+        }
         Destroy(mapRole.gameObject);
     }
 
@@ -205,6 +209,41 @@ public class NetManager : MonoSingleton<NetManager>
         FloatInfoManager.My.TechChange(0 - role.npcScript.lockNumber);
         StageGoal.My.playerTechPoint -= role.npcScript.lockNumber;
         StageGoal.My.SetInfo();
+    }
+
+    public void ClearWarehouse(string str)
+    {
+        double id = double.Parse(str);
+        BaseMapRole role = PlayerData.My.GetMapRoleById(id);
+        role.ClearWarehouse();
+        if (role.isNpc)
+        {
+            //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
+            //RoleListInfo.My.Init(currentRole);
+            if (role.npcScript.isCanSee)
+            {
+                PermissionManager.My.isnpc = true;
+                NewCanvasUI.My.Panel_NPC.SetActive(true);
+                if (role.npcScript.isLock)
+                {
+                    NPCListInfo.My.ShowUnlckPop(role.transform);
+                }
+                else
+                {
+                    NPCListInfo.My.ShowNpcInfo(role.transform);
+                }
+            }
+            else if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 3)
+            {
+                // NPCListInfo.My.ShowHideTipPop("使用广角镜发现角色");
+            }
+        }
+        else
+        {
+            PermissionManager.My.isnpc = false;
+            NewCanvasUI.My.Panel_Update.SetActive(true);
+            RoleUpdateInfo.My.ReInit(role.baseRoleData);
+        }
     }
 
     #endregion
@@ -496,10 +535,23 @@ public class NetManager : MonoSingleton<NetManager>
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="str"></param>
     public void OnGameReady(string str)
     {
         BaseLevelController.My.isAllReady = true;
         BaseLevelController.My.CheckGameStart();
+    }
+
+    /// <summary>
+    /// 队长接收队员的信息并建立队伍
+    /// </summary>
+    /// <param name="str"></param>
+    public void SetupGroup(string str)
+    {
+
     }
 
     public void Receivemsg(string str)
@@ -664,6 +716,8 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("GetRoleBuilet", GetRoleBuilet);
         listeners.Add("SendRoleBuilet", SendRoleBuilet);
         listeners.Add("GroupDismiss", OnGroupDismiss);
+        listeners.Add("SetUpGroup", SetupGroup);
+        listeners.Add("ClearWarehouse", ClearWarehouse);
     }
 
     private void Update()
