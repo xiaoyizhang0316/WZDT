@@ -15,6 +15,7 @@ public class BaseMapRole : MonoBehaviour
     /// <summary>
     /// 仓库
     /// </summary>
+    
     public List<ProductData> warehouse;
 
     public List<ProductData> trash = new List<ProductData>();
@@ -104,6 +105,8 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public int startEncourageLevel;
 
+    public RoleSprite roleSprite;
+
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
@@ -143,34 +146,66 @@ public class BaseMapRole : MonoBehaviour
     }
 
     /// <summary>
+    /// 根据职责隐藏某些物体
+    /// </summary>
+    public void CheckRoleDuty()
+    {
+        if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
+        {
+            roleSprite.gameObject.SetActive(false);
+        }
+        else
+        {
+            roleSprite.gameObject.SetActive(true);
+            roleSprite.CheckSprite();
+        }
+    }
+
+    /// <summary>
     /// 根据角色等级改变模型
     /// </summary>
     public void CheckLevel()
     {
-        if (levelModels.Count == 0)
-            return;
-        List<GameEnum.RoleType> typeList = new List<GameEnum.RoleType> { GameEnum.RoleType.Seed, GameEnum.RoleType.Peasant, GameEnum.RoleType.Merchant, GameEnum.RoleType.Dealer };
-        if (!typeList.Contains(baseRoleData.baseRoleData.roleType))
-            return;
-        if (baseRoleData.baseRoleData.level <= 2)
+        if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
+            if (levelModels.Count == 0)
+                return;
+            List<GameEnum.RoleType> typeList = new List<GameEnum.RoleType> { GameEnum.RoleType.Seed, GameEnum.RoleType.Peasant, GameEnum.RoleType.Merchant, GameEnum.RoleType.Dealer };
+            if (!typeList.Contains(baseRoleData.baseRoleData.roleType))
+                return;
+            if (baseRoleData.baseRoleData.level <= 2)
+            {
 
-            levelModels[1].SetActive(false);
-            levelModels[2].SetActive(false);
-            levelModels[0].SetActive(true);
+                levelModels[1].SetActive(false);
+                levelModels[2].SetActive(false);
+                levelModels[0].SetActive(true);
+            }
+            else if (baseRoleData.baseRoleData.level <= 4)
+            {
+                levelModels[0].SetActive(false);
+                levelModels[2].SetActive(false);
+                levelModels[1].SetActive(true);
+            }
+            else if (baseRoleData.baseRoleData.level == 5)
+            {
+                levelModels[0].SetActive(false);
+                levelModels[1].SetActive(false);
+                levelModels[2].SetActive(true);
+            }
         }
-        else if (baseRoleData.baseRoleData.level <= 4)
+        else
         {
-            levelModels[0].SetActive(false);
-            levelModels[2].SetActive(false);
-            levelModels[1].SetActive(true);
+            if (roleSprite != null)
+            {
+                roleSprite.CheckSprite();
+            }
+            else
+            {
+                roleSprite = GetComponentInChildren<RoleSprite>();
+                roleSprite.CheckSprite();
+            }
         }
-        else if (baseRoleData.baseRoleData.level == 5)
-        {
-            levelModels[0].SetActive(false);
-            levelModels[1].SetActive(false);
-            levelModels[2].SetActive(true);
-        }
+
     }
 
     /// <summary>
@@ -577,7 +612,6 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void LightOn(BaseMapRole start)
     {
-        
         if(!isNpc)
         {
             if (start.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product && baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
@@ -813,11 +847,49 @@ public class BaseMapRole : MonoBehaviour
     /// <param name="active"></param>
     public void HideTradeButton(bool active)
     {
+        if (PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+            return;
         if (tradeButton == null)
             tradeButton = GetComponentInChildren<RoleTradeButton>().transform.parent.gameObject;
         tradeButton.SetActive(active);
     }
 
+
+
+    public string GetWarehouseJson()
+    {
+        List<ProductData> data = new List<ProductData>();
+        for (int i = 0; i <warehouse.Count; i++)
+        {
+            bool issame =false;
+            for (int j = 0; j <data.Count; j++)
+            {
+                if (data[j].CheckSame(warehouse[i]))
+                {
+                    issame = true; 
+                    data[j].RepeatBulletCount++;
+                    break;
+          
+                }
+            }
+
+            if (!issame)
+            {
+                data.Add(warehouse[i]);
+            }
+
+        }
+
+        List<SendProductData> sendProductddata = new List<SendProductData>();
+        for (int i = 0; i < data.Count; i++)
+        { 
+            sendProductddata.Add(new SendProductData(data[i]));
+        }
+        SendProductDataList list = new SendProductDataList();
+        list.datas = sendProductddata;
+        Debug.Log(JsonUtility.ToJson(list) );
+        return JsonUtility.ToJson(list);
+    }
 
     private void OnDestroy()
     {

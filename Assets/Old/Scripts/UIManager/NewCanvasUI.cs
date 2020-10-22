@@ -76,6 +76,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public List<GameObject> panelList = new List<GameObject>();
 
+    public GameObject watchGuidePanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -157,7 +159,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
             //GameAccelerate();
         });
-        GameNormal();
+        Button_Normal.interactable = false;
+        //if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+        //    return;
+        //GameNormal();
     }
 
     /// <summary>
@@ -175,6 +180,19 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             InvokeRepeating("CountPauseTime", 1f, 1f);
         else
             CancelInvoke("CountPauseTime");
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ChangeTimeScale|";
+            str += "0";
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str);
+            }
+        }
     }
 
     /// <summary>
@@ -190,6 +208,20 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
         CancelInvoke("CountPauseTime");
+        Debug.Log("Pause");
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ChangeTimeScale|";
+            str += "1";
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str);
+            }
+        }
     }
 
     /// <summary>
@@ -205,6 +237,19 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = false;
         CancelInvoke("CountPauseTime");
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ChangeTimeScale|";
+            str += "2";
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str);
+            }
+        }
     }
 
     /// <summary>
@@ -272,6 +317,19 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         go.transform.SetParent(TradeManager.My.transform);
         go.GetComponent<TradeSign>().Init(startRole.baseRoleData.ID.ToString(), endRole.baseRoleData.ID.ToString());
         TradeManager.My.CreateTradeRecord(go.GetComponent<TradeSign>());
+        if (!PlayerData.My.isSOLO)
+        {
+            string str1 = "CreateTrade|";
+            str1 += startRole.baseRoleData.ID.ToString() + "," + endRole.baseRoleData.ID.ToString();
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str1);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str1);
+            }
+        }
         //Panel_CreateTrade.SetActive(true);
         //CreateTradeManager.My.Open(go);
         isSetTrade = false;

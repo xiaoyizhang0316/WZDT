@@ -48,19 +48,34 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
             {
                 if (hit.transform.GetComponentInParent<BaseMapRole>().isNpc)
                 {
-                    if (hit.transform.GetComponentInChildren<BaseNpc>().isCanSee && !hit.transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
+                    if (hit.transform.GetComponentInParent<BaseMapRole>().npcScript.isCanSee && !hit.transform.GetComponentInParent<BaseMapRole>().npcScript.isCanSeeEquip)
                     {
                         if (StageGoal.My.CostTechPoint(costTechNumber))
                         {
                             StageGoal.My.CostTp(costTechNumber, CostTpType.Mirror);
                             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
-                            hit.transform.GetComponentInChildren<BaseNpc>().isCanSeeEquip = true;
+                            hit.transform.GetComponentInParent<BaseMapRole>().npcScript.isCanSeeEquip = true;
                             GameObject effect = Instantiate(effectPrb, hit.transform);
                             effect.transform.localPosition = Vector3.zero;
-                            TradeManager.My.ChangeNPCRoleRecord(hit.transform.GetComponent<BaseMapRole>());
+                            TradeManager.My.ChangeNPCRoleRecord(hit.transform.GetComponentInParent<BaseMapRole>());
                             Destroy(effect, 1f);
                             Debug.Log("使用多棱镜成功");
                             DataUploadManager.My.AddData(DataEnum.使用多棱镜);
+                            if (!PlayerData.My.isSOLO)
+                            {
+                                string str1 = "UseThreeMirror|";
+                                str1 += "1";
+                                str1 += "," + hit.transform.GetComponentInParent<BaseMapRole>().baseRoleData.ID.ToString();
+                                str1 += "," + costTechNumber.ToString();
+                                if (PlayerData.My.isServer)
+                                {
+                                    PlayerData.My.server.SendToClientMsg(str1);
+                                }
+                                else
+                                {
+                                    PlayerData.My.client.SendToServerMsg(str1);
+                                }
+                            }
                         }
                         else
                         {

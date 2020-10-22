@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,6 +47,10 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public RecordList listScript;
 
     public GameObject rankPanel;
+
+    public Toggle conduty;
+
+    public GameObject missionConfirm;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +64,39 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
             rankPanel.SetActive(false);
 
         });
-        play.onClick.AddListener(() => { loadScene(); });
+        play.onClick.AddListener(() =>
+        {
+            if (PlayerData.My.server != null)
+            {
+                string str1 = "ConfirmDuty|";
+             //  if (conduty.isOn)
+             //  {
+                    str1 += "1,0,0,1,1,1,1,1"; 
+                      NetManager.My.ConfirmDuty("1,0,0,1,1,1,1,1");
+           //    }
+           //    else
+           //    {
+           //        str1 += "0,1,1,0,0,0,0,0"; 
+           //        NetManager.My.ConfirmDuty( "0,1,1,0,0,0,0,0");
+
+           //    } 
+                 
+                 PlayerData.My.server.SendToClientMsg(str1);
+                transform.DORotate(Vector3.zero,0.5f ).Play().OnComplete(()=>{
+                    PlayerData.My.server.SendToClientMsg("OpenDutyConfirmUI|1");
+                    missionConfirm.SetActive(true);
+                });
+         
+            }
+            else
+            {
+                if(PlayerData.My.isSOLO)
+                loadScene(); 
+                
+            }
+            
+            
+        });
         isUseGuide.onValueChanged.AddListener((bool b) =>
         {
             //print(b);

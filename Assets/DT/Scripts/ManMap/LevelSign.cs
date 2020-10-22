@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelSign : NetworkBehaviour
+public class LevelSign : MonoBehaviour
 {
     public int levelID = 0;
     public string levelName;
@@ -48,7 +47,19 @@ public class LevelSign : NetworkBehaviour
         {
             LevelInfoManager.My.Init(stars, levelName, content, mission_1, mission_2, mission_3, () =>
             {
-                RpcLoadTargetScene();
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str = "LoadScene|" + loadScene;
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str);
+                    }
+                }
+                SceneManager.LoadScene(loadScene);
             }, loadScene);
             //NetworkMgr.My.GetReplayLists(loadScene,()=> {
             //    LevelInfoManager.My.listScript.Init(NetworkMgr.My.replayLists);
@@ -59,16 +70,9 @@ public class LevelSign : NetworkBehaviour
         {
             LevelInfoManager.My.Init(levelName, content, mission_1, mission_2, mission_3, () =>
             {
-                //RpcLoadTargetScene();
+                SceneManager.LoadScene(loadScene);
             });
         }
-    }
-
-    [ClientRpc]
-    void RpcLoadTargetScene()
-    {
-        Debug.Log("sadasdasdsad");
-        SceneManager.LoadScene("FTE_1");
     }
 
     public void OnClick(string recordID)
@@ -138,7 +142,7 @@ public class LevelSign : NetworkBehaviour
             currentStar = "0" + currentStar;
         }
         stars = currentStar;
-        if(lastStar == "000" && loadScene!="FTE_1" || !CheckPrevStar() || !CheckUserLevel())
+        if(lastStar == "000" && loadScene!="FTE_1" || !CheckPrevStar() || !CheckUserLevel() ||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
         {
             HideAllStars();
             transform.GetChild(0).GetComponent<Image>().raycastTarget = false;

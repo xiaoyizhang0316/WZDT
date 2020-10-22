@@ -74,9 +74,21 @@ public class RoleListInfoSeed : BaseRoleListInfo
         {
             //Debug.Log(i + "||" + baseMapRole.GetComponent<ProductSeed>().productDatas.Count);
             GameObject Pruductgame = Instantiate(productPrb, productTF);
+         
+
             Pruductgame.GetComponent<ProductSign>().currentProduct =
                 baseMapRole.GetComponent<ProductSeed>().productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i];
             Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.seedSpeed;
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.GetComponent<ProductSeed>()
+                    .productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            }
+
         }
     }
 }

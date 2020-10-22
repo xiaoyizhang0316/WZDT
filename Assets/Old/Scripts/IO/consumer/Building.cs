@@ -32,12 +32,15 @@ public class Building : MonoBehaviour
 
     public float buildingWaitTime;
 
+    public List<ConsumeSign> consumeSigns = new List<ConsumeSign>();
+
     /// <summary>
     /// 使用透视镜
     /// </summary>
     public void UseTSJ()
     {
         countDownSprite.transform.parent.gameObject.SetActive(true);
+        countDownSprite.transform.parent.LookAt(Camera.main.transform);
         isUseTSJ = true;
         countDownSprite.fillAmount = 1f;
         countDownSprite.DOFillAmount(0f, 20f).OnComplete(() =>
@@ -143,8 +146,10 @@ public class Building : MonoBehaviour
             protalGameObject.transform.DOScale(new Vector3(1,1,0.52f), 1);
         }
         List<WaveConfig> result = new List<WaveConfig>();
+        consumeSigns.Clear();
         result.AddRange(waveConfigs[waveNumber]);
         result.AddRange(extraConsumer);
+        int index = 0;
         foreach (WaveConfig w in result)
         {
             for (int i = 0; i < w.num; i++)
@@ -157,6 +162,9 @@ public class Building : MonoBehaviour
                 GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
                 go.GetComponent<ConsumeSign>().Init(consumerPathList);
                 go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+                go.GetComponent<ConsumeSign>().consumerIndex = index;
+                consumeSigns.Add(go.GetComponent<ConsumeSign>());
+                index++;
                 go.transform.position = transform.position;
                 go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
                 foreach (int num in w.buffList)

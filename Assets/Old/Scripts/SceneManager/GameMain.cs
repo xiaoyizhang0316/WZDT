@@ -12,6 +12,8 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
     public bool useLocalIp = false;
 
     public bool useLocalJson = false;
+
+    public static int mainThreadId;
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -30,7 +32,8 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         //           return;
         //       }
         //   }
-        Debug.Log(PlayerData.GetIP(PlayerData.ADDRESSFAM.IPv4));
+        Debug.Log(SystemInfo.deviceUniqueIdentifier);
+        mainThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
         foreach (string str in "sdasdsads*".Split('*'))
         {
             Debug.Log("字符: " +str);
@@ -72,7 +75,7 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
     public void LoadScene(string name)
     {
         sceneName = name;
-        SceneManager.LoadScene("GameMain");
+        SceneManager.LoadScene(name);
     }
 
     private void OnGUI()
@@ -82,4 +85,6 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
             Application.Quit();
         }
     }
+
+
 }

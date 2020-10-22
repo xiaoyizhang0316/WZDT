@@ -92,6 +92,59 @@ public class WaveCount : MonoSingleton<WaveCount>
         }
     }
 
+    /// <summary>
+    /// 初始化波数
+    /// </summary>
+    /// <param name="waveNumber"></param>
+    public void InitWaveBg(int waveNumber,int buildingIndex)
+    {
+        waveBg.gameObject.SetActive(true);
+        closeBtn.SetActive(true);
+        ClearWaveBg();
+        StageEnemyData data = StageGoal.My.enemyDatas[waveNumber];
+        switch (buildingIndex)
+        {
+            case 0:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(0, data.point1);
+                    break;
+                }
+            case 1:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(1, data.point2);
+                    break;
+                }
+            case 2:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(2, data.point3);
+                    break;
+                }
+            case 3:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(3, data.point4);
+                    break;
+                }
+            case 4:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(4, data.point5);
+                    break;
+                }
+            case 5:
+                {
+                    GameObject go = Instantiate(spotEnemyPrb, waveBg);
+                    go.GetComponent<WaveEnemySign>().Init(5, data.point6);
+                    break;
+                }
+            default:
+                break;
+        }
+    }
+
     public void ClearWaveBg()
     {
         for (int i = 0; i < waveBg.childCount; i++)

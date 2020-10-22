@@ -44,7 +44,22 @@ public class RoleListInfo : MonoSingleton<RoleListInfo>
             close.gameObject.SetActive(false);
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要删除" + currentRole.baseRoleData.roleName + "吗？";
-            DeleteUIManager.My.Init(str,()=> { PlayerData.My.DeleteRole(currentRole.ID); });
+            DeleteUIManager.My.Init(str,()=> {
+                PlayerData.My.DeleteRole(currentRole.ID);
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str1 = "DeleteRole|";
+                    str1 += currentRole.ID.ToString();
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str1);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str1);
+                    }
+                }
+            });
         });
         startTrade.onClick.AddListener(() =>
         {
