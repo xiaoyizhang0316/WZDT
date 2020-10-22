@@ -94,6 +94,10 @@ public class NetManager : MonoSingleton<NetManager>
         PlayerData.My.RoleData.Remove(target);
         PlayerData.My.MapRole.Remove(mapRole);
         MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
+        if (PermissionManager.My.currentSelectPanel == 2)
+        {
+            PermissionManager.My.InitRolePanel();
+        }
         Destroy(mapRole.gameObject);
     }
 

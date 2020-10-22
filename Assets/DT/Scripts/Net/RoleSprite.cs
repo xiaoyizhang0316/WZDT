@@ -81,6 +81,8 @@ public class RoleSprite : MonoBehaviour
             {
                 item.SetActive(false);
             }
+            PermissionManager.My.lastSelectRole = mapRole;
+            PermissionManager.My.InitRolePanel();
             if (mapRole.isNpc)
             {
                 PermissionManager.My.isnpc = true;
@@ -101,7 +103,7 @@ public class RoleSprite : MonoBehaviour
                 }
                 else if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 3)
                 {
-                    NPCListInfo.My.ShowHideTipPop("使用广角镜发现角色");
+                   // NPCListInfo.My.ShowHideTipPop("使用广角镜发现角色");
                 }
             }
             else
