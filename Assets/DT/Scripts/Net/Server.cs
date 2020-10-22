@@ -38,7 +38,7 @@ public class Server : MonoBehaviour
     #region Server
 
     //建立tcp通信链接(Server)
-    private void SetUpServer()
+    public void SetUpServer(int portNumber)
     {
         try
         {
@@ -47,16 +47,18 @@ public class Server : MonoBehaviour
             string _ip = inputIp;                           //获取ip地址
 
             Debug.Log(" ip 地址是 ：" + _ip);
-            Debug.Log(" 端口号是 ：" + _port);
+            Debug.Log(" 端口号是 ：" + portNumber);
+
+            string ipAddr = NetManager.My.GetIP(ADDRESSFAM.IPv4);
 
             clickConnectBtn = true;                         //点击了监听按钮
 
-            info = "ip地址是 ： " + _ip + "端口号是 ： " + _port;
+            info = "ip地址是 ： " + ipAddr + "端口号是 ： " + portNumber;
 
             //点击开始监听时 在服务端创建一个负责监听IP和端口号的Socket
             socketWatch = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPAddress ip = IPAddress.Parse(_ip);
-            IPEndPoint point = new IPEndPoint(ip, _port);   //创建对象端口
+            IPAddress ip = IPAddress.Parse(ipAddr);
+            IPEndPoint point = new IPEndPoint(ip, portNumber);   //创建对象端口
 
             socketWatch.Bind(point);                        //绑定端口号
 
@@ -265,7 +267,7 @@ public class Server : MonoBehaviour
 
         if (GUI.Button(new Rect(65, 240, 60, 20), "开始监听"))
         {
-            SetUpServer();
+            //SetUpServer();
         }
 
         if (GUI.Button(new Rect(65, 280, 60, 20), "发送数据"))

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static StageGoal;
 using System.Text.RegularExpressions;
+using DG.Tweening;
 
 public class LoginPanel : MonoBehaviour
 {
@@ -33,11 +34,17 @@ public class LoginPanel : MonoBehaviour
 
     bool isLogin = false;
 
+    public List<Transform> left = new List<Transform>();
+
+    public List<Transform> right = new List<Transform>();
+
     // Start is called before the first frame update
     void Start()
     {
         //PlayerPrefs.DeleteAll();
         login_Btn.onClick.AddListener(Login);
+        transform.localPosition = new Vector3(0, 500, 0);
+        transform.DOLocalMoveY(-35f, 0.8f).Play();
         username = PlayerPrefs.GetString("username", "0");
         password = PlayerPrefs.GetString("password", "0");
         serverIP = PlayerPrefs.GetString("server_IP", "0");
