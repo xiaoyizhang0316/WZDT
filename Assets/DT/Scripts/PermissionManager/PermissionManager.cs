@@ -17,6 +17,8 @@ public class PermissionManager : MonoSingleton<PermissionManager>
     public Button Button_RoleInfo;
 
     public bool isnpc;
+
+    private Transform buttonParent;
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,27 +27,38 @@ public class PermissionManager : MonoSingleton<PermissionManager>
 
     public void Start()
     {
-     
+        buttonParent = Button_financial.transform.parent;
+        Button_consumer.transform.SetParent(WaveCount.My.transform);
         Button_consumer.onClick.AddListener(() =>
         {
-          WaveCount.My.transform.SetAsLastSibling();
+            WaveCount.My.transform.SetAsLastSibling();
+            Button_consumer.transform.SetParent(WaveCount.My.transform);
+            Button_financial.transform.SetParent(buttonParent);
+            Button_RoleInfo.transform.SetParent(buttonParent);
         });
 
         Button_financial.onClick.AddListener(() =>
         {
             DataStatPanel.My.ShowStat();
-         DataStatPanel.My.transform.SetAsLastSibling();
+            DataStatPanel.My.transform.SetAsLastSibling();
+            Button_consumer.transform.SetParent(buttonParent);
+            Button_financial.transform.SetParent(DataStatPanel.My.transform);
+            Button_RoleInfo.transform.SetParent(buttonParent);
         });
 
         Button_RoleInfo.onClick.AddListener(() =>
         {
+            Button_consumer.transform.SetParent(buttonParent);
+            Button_financial.transform.SetParent(buttonParent);
             if (isnpc)
             {
                 NPCListInfo.My.transform.SetAsLastSibling();
+                Button_RoleInfo.transform.SetParent(NPCListInfo.My.transform);
             }
             else
             {
                 RoleUpdateInfo.My.transform.SetAsLastSibling();
+                Button_RoleInfo.transform.SetParent(RoleUpdateInfo.My.transform);
             }
         });
     }

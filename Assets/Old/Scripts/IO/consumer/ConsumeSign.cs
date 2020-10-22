@@ -288,10 +288,12 @@ public class ConsumeSign : MonoBehaviour
     public virtual void DeathAward()
     {
         StageGoal.My.GetSatisfy((int)(consumeData.killSatisfy * scorePer));
+        StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy);
         if (scorePer > 1f)
         {
             StageGoal.My.ConsumerExtraPerTip();
             DataUploadManager.My.AddData(消费者_口味击杀);
+            StageGoal.My.ScoreGet(ScoreType.口味额外得分, (int)(consumeData.killSatisfy * (scorePer - 1f)));
         }
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
         StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
@@ -305,6 +307,7 @@ public class ConsumeSign : MonoBehaviour
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
         StageGoal.My.GetSatisfy((consumeData.killSatisfy * currentHealth / consumeData.maxHealth));
+        StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy * currentHealth / consumeData.maxHealth);
         StageGoal.My.ConsumerAliveTip();
     }
 

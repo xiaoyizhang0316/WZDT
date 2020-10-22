@@ -142,7 +142,7 @@ public class LevelSign : MonoBehaviour
             currentStar = "0" + currentStar;
         }
         stars = currentStar;
-        if(lastStar == "000" && loadScene!="FTE_1" || !CheckPrevStar() || !CheckUserLevel())
+        if(lastStar == "000" && loadScene!="FTE_1" || !CheckPrevStar() || !CheckUserLevel() ||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
         {
             HideAllStars();
             transform.GetChild(0).GetComponent<Image>().raycastTarget = false;

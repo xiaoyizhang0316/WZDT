@@ -74,6 +74,8 @@ public class WinManager : MonoSingleton<WinManager>
     public GameObject effect_1;
     public GameObject effect_2;
     public GameObject effect_3;
+
+    public Text scoreInfo;
     void AddEquipGear(List<GearData> gearDatas)
     {
         foreach (var g in gearDatas)
@@ -110,6 +112,7 @@ public class WinManager : MonoSingleton<WinManager>
         effect_2.SetActive(false);
         effect_3.SetActive(false);
         StageGoal.My.endTime = TimeStamp.GetCurrentTimeStamp();
+        InitScoreText();
         star1Con.text = BaseLevelController.My.starOneCondition;
         star2Con.text = BaseLevelController.My.starTwoCondition;
         star3Con.text = BaseLevelController.My.starThreeCondition;
@@ -371,6 +374,16 @@ public class WinManager : MonoSingleton<WinManager>
 
         }
         CheckNext();
+    }
+
+    public void InitScoreText()
+    {
+        string str = "";
+        foreach (var item in StageGoal.My.scoreStats)
+        {
+            str += item.Key.ToString() + ":" + item.Value + "  ";
+        }
+        scoreInfo.text = str;
     }
 
     private void UploadReplayData()

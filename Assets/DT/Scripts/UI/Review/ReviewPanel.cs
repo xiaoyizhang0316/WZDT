@@ -156,6 +156,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     {
         if (datas.Count == 0)
             return;
+        float score = 0;
         int maxAmount = datas[0].restMoney;
         int maxHealth = datas[0].blood;
         for (int i = 0; i < datas.Count; i++)
@@ -169,6 +170,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         {
             line.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i, datas[i].restMoney / (float)maxAmount * 100f));
             healthLine.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i, datas[i].blood / (float)maxHealth * 100f));
+            //if (datas[i].restMoney > 0)
+            //    score += datas[i].restMoney * 0.05f;
             //if(i==datas.Count-1)
             //    Debug.LogError(datas[i].restMoney);
         }
@@ -177,6 +180,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         healthLine.vectorLine.Draw();
         line.transform.SetAsLastSibling();
         line.vectorLine.Draw();
+        //Debug.Log(score / 4);
     }
 
     /// <summary>
