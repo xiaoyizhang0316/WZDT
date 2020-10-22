@@ -496,10 +496,23 @@ public class NetManager : MonoSingleton<NetManager>
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="str"></param>
     public void OnGameReady(string str)
     {
         BaseLevelController.My.isAllReady = true;
         BaseLevelController.My.CheckGameStart();
+    }
+
+    /// <summary>
+    /// 队长接收队员的信息并建立队伍
+    /// </summary>
+    /// <param name="str"></param>
+    public void SetupGroup(string str)
+    {
+
     }
 
     public void Receivemsg(string str)
@@ -664,6 +677,7 @@ public class NetManager : MonoSingleton<NetManager>
         listeners.Add("GetRoleBuilet", GetRoleBuilet);
         listeners.Add("SendRoleBuilet", SendRoleBuilet);
         listeners.Add("GroupDismiss", OnGroupDismiss);
+        listeners.Add("SetUpGroup", SetupGroup);
     }
 
     private void Update()
