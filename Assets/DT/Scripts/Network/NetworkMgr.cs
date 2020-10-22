@@ -834,9 +834,9 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             keyValues.Add("token", token);
             keyValues.Add("playerID", playerID);
             keyValues.Add("data", CompressUtils.Compress(JsonUtility.ToJson(playerReplay)));
-            if (isOnTeamBattle)
+            if (!PlayerData.My.isSOLO)
             {
-                if(isServer)// is server
+                if(PlayerData.My.isServer)// is server
                 {
                     keyValues.Add("teamID", currentBattleTeamAcount.teamID);
                     keyValues.Add("teamName", currentBattleTeamAcount.teamName);
