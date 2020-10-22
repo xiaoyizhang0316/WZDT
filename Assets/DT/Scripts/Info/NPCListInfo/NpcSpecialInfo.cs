@@ -50,6 +50,7 @@ public class NpcSpecialInfo : MonoBehaviour
         level.text = npc.baseRoleData.baseRoleData.level.ToString();
         HideAll();
         encourageLevel.Init(npc);
+        ClearBulletContent();
         clearBullets.onClick.RemoveAllListeners();
         clearBullets.onClick.AddListener(()=> {
             NewCanvasUI.My.Panel_Delete.SetActive(true);
@@ -173,7 +174,17 @@ public class NpcSpecialInfo : MonoBehaviour
             Pruductgame.GetComponent<NpcBulletSign>().currentProduct =
                 npc.GetComponent<ProductSeed>().productDatas[npc.GetComponent<ProductSeed>().productDatas.Count - i];
             Pruductgame.GetComponent<Image>().sprite = seedSpeed;
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = npc.GetComponent<BaseMapRole>().GetComponent<ProductSeed>()
+                    .productDatas[npc.GetComponent<BaseMapRole>().GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            }
         }
+
     }
 
     void ShowPeasantBullet(Transform npc)
@@ -192,6 +203,15 @@ public class NpcSpecialInfo : MonoBehaviour
             Pruductgame.GetComponent<NpcBulletSign>().currentProduct =
                 npc.GetComponent<ProductMelon>().productDatas[npc.GetComponent<ProductMelon>().productDatas.Count - i];
             Pruductgame.GetComponent<Image>().sprite = normallpp;
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = npc.GetComponent<BaseMapRole>().GetComponent<ProductSeed>()
+                    .productDatas[npc.GetComponent<BaseMapRole>().GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            }
         }
     }
 
@@ -222,6 +242,14 @@ public class NpcSpecialInfo : MonoBehaviour
                     break;
 
             }
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.warehouse[i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            }
 
         }
     }
@@ -248,6 +276,14 @@ public class NpcSpecialInfo : MonoBehaviour
                 case BulletType.summon:
                     Pruductgame.GetComponent<Image>().sprite = tow;
                     break;
+            }
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.warehouse[i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
             }
         }
     }
