@@ -147,6 +147,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Dictionary<string, int> extraCost = new Dictionary<string, int>();
 
+    public Dictionary<ScoreType, int> scoreStats = new Dictionary<ScoreType, int>();
+
     int starNum = 1;
     string[] stars = new string[] { "1", "0", "0" };
     PlayerReplay tempReplay;
@@ -631,6 +633,14 @@ public class StageGoal : MonoSingleton<StageGoal>
                 {
                     Stat();
                 }
+                if (timeCount % 20 == 0)
+                {
+                    if (playerGold > 0)
+                    {
+                        GetSatisfy((int)(playerGold * 0.05f));
+                        ScoreGet(ScoreType.金钱得分, (int)(playerGold * 0.05f));
+                    }
+                }
                 WaveCount();
             });
             if (timeCount >= waitTimeList[0] - 5)
@@ -649,11 +659,22 @@ public class StageGoal : MonoSingleton<StageGoal>
                 {
                     Stat();
                 }
+                if (timeCount % 20 == 0)
+                {
+                    if (playerGold > 0)
+                    {
+                        GetSatisfy((int)(playerGold * 0.05f));
+                        ScoreGet(ScoreType.金钱得分, (int)(playerGold * 0.05f));
+                    }
+                }
                 WaveCount();
             });
         }
     }
 
+    /// <summary>
+    /// 快进到第一波怪生成前5秒的时间
+    /// </summary>
     public void SkipFirst()
     {
         timeCount = waitTimeList[0] - 5;
@@ -1115,6 +1136,19 @@ public class StageGoal : MonoSingleton<StageGoal>
                 break;
         }
     }
+
+    public void ScoreGet(ScoreType type,int num)
+    {
+        if (scoreStats.ContainsKey(type))
+        {
+            scoreStats[type] += num;
+        }
+        else
+        {
+            scoreStats.Add(type, num);
+        }
+    }
+
 
     private void Stat()
     {
