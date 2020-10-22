@@ -54,4 +54,9 @@ public static class HttpId
     public const int pingTestID                 = 1019;
     public const int getJsonDatasID             = 1020;
     public const int getBehaviorDatasID         = 1021;
+    public const int CreateTeamAcount           = 1022;
+    public const int GetTeamAcounts             = 1023;
+    public const int SetTeamDisbanded           = 1024;
+    public const int SetPlayerStatusScene       = 1025;
+    public const int GetCurrentTeamAcount       = 1026;
 }
