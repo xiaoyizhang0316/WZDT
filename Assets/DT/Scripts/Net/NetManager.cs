@@ -541,8 +541,8 @@ public class NetManager : MonoSingleton<NetManager>
     /// <param name="str"></param>
     public void OnGameReady(string str)
     {
-        BaseLevelController.My.isAllReady = true;
-        BaseLevelController.My.CheckGameStart();
+        PlayerData.My.isAllReady = true;
+        PlayerData.My.CheckGameStart();
     }
 
     /// <summary>
