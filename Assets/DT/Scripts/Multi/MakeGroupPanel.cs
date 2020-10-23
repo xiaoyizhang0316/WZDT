@@ -15,13 +15,15 @@ public class MakeGroupPanel : MonoSingleton<MakeGroupPanel>
 
     public InputField groupName;
 
-    public bool MakeGroup()
+    public Text errorInfo;
+
+    public string MakeGroup()
     {
         int portNum = int.Parse(port.text);
         return PlayerData.My.transform.GetComponent<Server>().SetUpServer(portNum);
     }
 
-    public bool JoinGroup()
+    public string JoinGroup()
     {
         int portNum = int.Parse(port.text);
         return PlayerData.My.transform.GetComponent<Client>().ConnectToServer(ip.text, portNum);
@@ -30,11 +32,19 @@ public class MakeGroupPanel : MonoSingleton<MakeGroupPanel>
     public void Show()
     {
         transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -559);
+        errorInfo.gameObject.SetActive(false);
     }
 
     public void Hide()
     {
         transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(10000,10000);
+        errorInfo.gameObject.SetActive(false);
+    }
+
+    public void SetErrorInfo(string str)
+    {
+        errorInfo.gameObject.SetActive(true);
+        errorInfo.text = str;
     }
 
     private void Start()
@@ -43,12 +53,32 @@ public class MakeGroupPanel : MonoSingleton<MakeGroupPanel>
         port.text = "3101";
         makeGroupButton.onClick.AddListener(() =>
         {
-            if (MakeGroup())
+            if (groupName.text.Trim().Length == 0)
+            {
+                string str1 = "队伍名不能为空！";
+                SetErrorInfo(str1);
+                return;
+            }
+            string str = MakeGroup();
+            if (str.Equals("true"))
+            {
                 Hide();
+            }
+            else
+            {
+                SetErrorInfo(str);
+            }
         });
         joinButton.onClick.AddListener(() => {
-            if (JoinGroup())
+            string str = JoinGroup();
+            if (str.Equals("true"))
+            {
                 Hide();
+            }
+            else
+            {
+                SetErrorInfo(str);
+            }
         });
         Hide();
     }

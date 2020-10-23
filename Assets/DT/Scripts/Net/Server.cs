@@ -38,7 +38,7 @@ public class Server : MonoBehaviour
     #region Server
 
     //建立tcp通信链接(Server)
-    public bool SetUpServer(int portNumber)
+    public string SetUpServer(int portNumber)
     {
         try
         {
@@ -74,10 +74,10 @@ public class Server : MonoBehaviour
             Thread thread = new Thread(Listen);
             thread.IsBackground = true;
             thread.Start(socketWatch);
-            return true;
+            return "true";
         }
         catch {
-            return false;
+            return "端口号已被占用!";
         }
     }
 

@@ -32,7 +32,7 @@ public class Client : MonoBehaviour
     }
 
     //建立链接
-    public bool ConnectToServer(string ipAddr, int portNum)
+    public string ConnectToServer(string ipAddr, int portNum)
     {
         try
         {
@@ -61,13 +61,13 @@ public class Client : MonoBehaviour
             string str = "SetUpGroup|";
             ///发送队员的信息  
             SendToServerMsg(str);
-            return true;
+            return "true";
         }
         catch (Exception)
         {
             Debug.Log("IP或者端口号错误......");
             staInfo = "IP或者端口号错误......";
-            return false;
+            return staInfo;
         }
     }
 
