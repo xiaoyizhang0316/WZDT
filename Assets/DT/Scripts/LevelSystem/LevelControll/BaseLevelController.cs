@@ -168,35 +168,6 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         starThreeStatus = true;
     }
 
-    public bool isAllReady = false;
-
-    public void CheckGameStart()
-    {
-        if (PlayerPrefs.GetInt("isUseGuide") == 1)
-        {
-            return;
-        }
-        if (PlayerData.My.isSOLO)
-        {
-            DOTween.PlayAll();
-            DOTween.timeScale = 1f;
-            DOTween.defaultAutoPlay = AutoPlay.All;
-        }
-        else if (isAllReady)
-        {
-            if (PlayerData.My.isServer)
-            {
-                NewCanvasUI.My.GameNormal();
-            }
-            else
-            {
-                DOTween.PlayAll();
-                DOTween.timeScale = 1f;
-                DOTween.defaultAutoPlay = AutoPlay.All;
-            }
-        }
-    }
-
     public void GenerateEmoji(Vector3 pos)
     {
         GameObject go = Instantiate(emojiPrb);
@@ -221,7 +192,8 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
             string str = "OnGameReady|1";
             PlayerData.My.client.SendToServerMsg(str);
         }
-        CheckGameStart();
+        PlayerData.My.isLocalReady = true;
+        PlayerData.My.CheckGameStart();
     }
 
     public void CheckCheat()

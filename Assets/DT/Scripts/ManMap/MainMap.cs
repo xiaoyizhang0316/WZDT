@@ -30,6 +30,8 @@ public class MainMap : MonoBehaviour
         GetAnswers();
         GetEquips();
         GetUserLevel();
+        PlayerData.My.isAllReady = false;
+        PlayerData.My.isLocalReady = false;
     }
 
     public void GetUserLevel()
