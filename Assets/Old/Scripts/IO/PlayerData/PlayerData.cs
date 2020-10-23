@@ -440,6 +440,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public void CheckGameStart()
     {
+        Debug.Log("检测ready");
         if (PlayerPrefs.GetInt("isUseGuide") == 1)
         {
             return;
@@ -451,9 +452,10 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             DOTween.defaultAutoPlay = AutoPlay.All;
         }
         else if (isAllReady && isLocalReady)
-        {
+        { 
             if (isServer)
             {
+                Debug.Log("server ready");
                 NewCanvasUI.My.GameNormal();
             }
             else
