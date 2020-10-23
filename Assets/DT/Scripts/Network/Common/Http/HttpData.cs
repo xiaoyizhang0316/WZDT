@@ -59,4 +59,5 @@ public static class HttpId
     public const int SetTeamDisbanded           = 1024;
     public const int SetPlayerStatusScene       = 1025;
     public const int GetCurrentTeamAcount       = 1026;
+    public const int GetPoorPlayerEquips        = 1027;
 }

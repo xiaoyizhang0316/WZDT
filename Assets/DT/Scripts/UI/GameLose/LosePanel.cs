@@ -27,11 +27,16 @@ public class LosePanel : MonoBehaviour
                 if (PlayerData.My.isServer)
                 {
                     PlayerData.My.server.SendToClientMsg(str);
+                    NetworkMgr.My.SetPlayerStatus(SceneManager.GetActiveScene().name, NetworkMgr.My.currentBattleTeamAcount.teamID);
                 }
                 else
                 {
                     PlayerData.My.client.SendToServerMsg(str);
                 }
+            }
+            else
+            {
+                NetworkMgr.My.SetPlayerStatus(SceneManager.GetActiveScene().name, "");
             }
         });
 
@@ -44,11 +49,16 @@ public class LosePanel : MonoBehaviour
                 if (PlayerData.My.isServer)
                 {
                     PlayerData.My.server.SendToClientMsg(str);
+                    NetworkMgr.My.SetPlayerStatus("Map", NetworkMgr.My.currentBattleTeamAcount.teamID);
                 }
                 else
                 {
                     PlayerData.My.client.SendToServerMsg(str);
                 }
+            }
+            else
+            {
+                NetworkMgr.My.SetPlayerStatus("Map", "");
             }
         });
     }

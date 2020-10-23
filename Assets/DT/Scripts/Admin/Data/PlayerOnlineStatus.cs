@@ -20,5 +20,5 @@ public class PlayerOnlineStatus
 [Serializable]
 public class PlayerOnlineStatuses
 {
-	public List<PlayerStatus> playerStatuses;
+	public List<PlayerOnlineStatus> playerStatuses;
 }

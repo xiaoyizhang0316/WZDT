@@ -551,7 +551,24 @@ public class NetManager : MonoSingleton<NetManager>
     /// <param name="str"></param>
     public void SetupGroup(string str)
     {
+        string[] strArr = str.Split('_');
+        PlayerDatas p2 = JsonUtility.FromJson<PlayerDatas>(strArr[0]);
+        List<PlayerDatas> playerDatasList = new List<PlayerDatas>();
+        playerDatasList.Add(NetworkMgr.My.playerDatas);
+        playerDatasList.Add(p2);
 
+        //TODO team name
+        NetworkMgr.My.BuildTeam("TODO teamName",playerDatasList, ()=> {
+            // TODO 刷新队伍名，将队伍信息传给队员
+            //NetworkMgr.My.currentBattleTeamAcount.teamName;
+            if (int.Parse(strArr[1]) < NetworkMgr.My.levelProgressList.Count)
+            {
+                // TODO 刷新地图
+                NetworkMgr.My.poorPlayerID = p2.playerID;
+            }
+        }, ()=> {
+            // TODO 创建失败，解散房间
+        });
     }
 
     public void Receivemsg(string str)
@@ -625,6 +642,13 @@ public class NetManager : MonoSingleton<NetManager>
 
     public void OnGroupDismiss(string str)
     {
+        if (SceneManager.GetActiveScene().name.StartsWith("FTE"))
+        {
+            if (PlayerData.My.isServer)
+            {
+                NetworkMgr.My.SetPlayerStatus("Map", NetworkMgr.My.currentBattleTeamAcount.teamID);
+            }
+        }
         SceneManager.LoadScene("Map");
         PlayerData.My.isSOLO = true;
         PlayerData.My.playerDutyID = 0;

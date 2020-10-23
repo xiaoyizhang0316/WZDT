@@ -561,11 +561,16 @@ public class WinManager : MonoSingleton<WinManager>
                     if (PlayerData.My.isServer)
                     {
                         PlayerData.My.server.SendToClientMsg(str);
+                        NetworkMgr.My.SetPlayerStatus("Map", NetworkMgr.My.currentBattleTeamAcount.teamID);
                     }
                     else
                     {
                         PlayerData.My.client.SendToServerMsg(str);
                     }
+                }
+                else
+                {
+                    NetworkMgr.My.SetPlayerStatus("Map", "");
                 }
             }
             else
@@ -589,7 +594,7 @@ public class WinManager : MonoSingleton<WinManager>
     private void CommitProgress()
     {
         NetworkMgr.My.UpdateLevelProgress(NetworkMgr.My.currentLevel, stars, starArr[0] + starArr[1] + starArr[2],
-                    starArr[0] + starArr[1] + starArr[2], 0, () =>
+                    starArr[0] + starArr[1] + starArr[2], StageGoal.My.playerSatisfy, () =>
                     {
                         //PlayerData.My.Reset();
                         //SceneManager.LoadScene("Map");

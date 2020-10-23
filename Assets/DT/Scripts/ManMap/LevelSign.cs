@@ -59,7 +59,23 @@ public class LevelSign : MonoBehaviour
                         PlayerData.My.client.SendToServerMsg(str);
                     }
                 }
-                SceneManager.LoadScene(loadScene);
+                if (!PlayerData.My.isSOLO)
+                {
+                    if (PlayerData.My.isServer)
+                    {
+                        NetworkMgr.My.GetPoorPlayerEquips((data) =>
+                        {
+                            PlayerData.My.InitPlayerEquip(data);
+                            SceneManager.LoadScene(loadScene);
+                            NetworkMgr.My.SetPlayerStatus(loadScene, NetworkMgr.My.currentBattleTeamAcount.teamID);
+                        });
+                    }
+                }
+                else
+                {
+                    SceneManager.LoadScene(loadScene);
+                    NetworkMgr.My.SetPlayerStatus(loadScene, "");
+                }
             }, loadScene);
             //NetworkMgr.My.GetReplayLists(loadScene,()=> {
             //    LevelInfoManager.My.listScript.Init(NetworkMgr.My.replayLists);
