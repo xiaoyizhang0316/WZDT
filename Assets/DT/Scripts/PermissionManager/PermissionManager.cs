@@ -120,6 +120,11 @@ public class PermissionManager : MonoSingleton<PermissionManager>
     /// </summary>
     public void InitUI()
     {
+        if (PlayerData.My.isSOLO)
+        {
+            soloCanvas.SetActive(true);
+            return;
+        }
 
         if (PlayerData.My.creatRole ==PlayerData.My.playerDutyID)
         {
