@@ -87,7 +87,7 @@ public class GuideActions : MonoBehaviour
             }
             PlayerData.My.Reset();
             SceneManager.LoadScene("FTE_1");
-            
+            NetworkMgr.My.SetPlayerStatus("FTE_1", "");
         }
         };
     }

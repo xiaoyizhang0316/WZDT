@@ -44,16 +44,15 @@ public class TeamRole
 	public string playerID;
 	public string playerName;
 	public bool isCaptain;
-	public string playerPosition;
 	public string playerDuty;
 
-	public TeamRole(string playerID, string playerName, bool captain, string postion, string duty)
+	public TeamRole(string playerID, string playerName, bool captain, string duty)
     {
 		this.playerID = playerID;
 		this.playerName = playerName;
 		this.isCaptain = captain;
-		this.playerPosition = postion;
 		this.playerDuty = duty;
+		//PlayerData.My.creatRole==PlayerData.My.playerDutyID
     }
 }
 
