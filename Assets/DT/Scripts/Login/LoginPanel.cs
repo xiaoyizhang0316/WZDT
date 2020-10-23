@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static StageGoal;
 using System.Text.RegularExpressions;
+using DG.Tweening;
 
 public class LoginPanel : MonoBehaviour
 {
@@ -33,11 +34,18 @@ public class LoginPanel : MonoBehaviour
 
     bool isLogin = false;
 
+    public List<Transform> left = new List<Transform>();
+
+    public List<Transform> right = new List<Transform>();
+
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(PeopleEffect());
         //PlayerPrefs.DeleteAll();
         login_Btn.onClick.AddListener(Login);
+        transform.localPosition = new Vector3(0, 500, 0);
+        transform.DOLocalMoveY(-35f, 0.8f).Play();
         username = PlayerPrefs.GetString("username", "0");
         password = PlayerPrefs.GetString("password", "0");
         serverIP = PlayerPrefs.GetString("server_IP", "0");
@@ -376,5 +384,38 @@ public class LoginPanel : MonoBehaviour
             BuffsData buffsData = JsonUtility.FromJson<BuffsData>(json.BuffData);
             Debug.Log(buffsData.buffSigns.Count);
         });
+    }
+
+
+
+    public IEnumerator PeopleEffect()
+    {
+        for (int i = 0; i < left.Count; i++)
+        {
+            left[i].transform.DOLocalMove(left[i].transform.localPosition - new Vector3(3000,3000),0.01f);
+        }
+        for (int i = 0; i < right.Count; i++)
+        {
+            right[i].transform.DOLocalMove(right[i].transform.localPosition + new Vector3( 3000, -3000),0.01f);
+        }
+      yield return new WaitForSeconds(0.4f);
+        for (int i = 0; i <  left.Count; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+                        left[i].transform.DOLocalMove(left[i].transform.localPosition +new Vector3(+3000,+3000),0.8f);
+                        yield return new WaitForSeconds(0.1f);
+
+                        right[i].transform.DOLocalMove(right[i].transform.localPosition - new Vector3( 3000, -3000),0.8f);
+
+        }
+        yield return new WaitForSeconds(0.2f);
+        for (int i = 0; i <  left.Count; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+            left[i].transform.DOLocalJump(    left[i].transform.localPosition+new Vector3(0,10,0), 10,1,0.3f).SetLoops(100);
+            yield return new WaitForSeconds(0.1f);
+
+            right[i].transform.DOLocalJump(right[i].transform.localPosition+new Vector3(0,10,0),10,1,0.3f).SetLoops(100);
+        }
     }
 }

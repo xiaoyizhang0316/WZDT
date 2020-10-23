@@ -859,8 +859,10 @@ public class BaseMapRole : MonoBehaviour
     public string GetWarehouseJson()
     {
         List<ProductData> data = new List<ProductData>();
+         
         for (int i = 0; i <warehouse.Count; i++)
         {
+            warehouse[i].RepeatBulletCount = 0;
             bool issame =false;
             for (int j = 0; j <data.Count; j++)
             {

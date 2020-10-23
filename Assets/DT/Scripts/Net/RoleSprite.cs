@@ -81,15 +81,17 @@ public class RoleSprite : MonoBehaviour
             {
                 item.SetActive(false);
             }
+            PermissionManager.My.lastSelectRole = mapRole;
+            PermissionManager.My.InitRolePanel();
             if (mapRole.isNpc)
             {
-                PermissionManager.My.isnpc = true;
-                NewCanvasUI.My.Panel_NPC.SetActive(true);
-                NewCanvasUI.My.Panel_NPC.transform.SetAsLastSibling();
                 //NewCanvasUI.My.Panel_RoleInfo.SetActive(true);
                 //RoleListInfo.My.Init(currentRole);
                 if (mapRole.npcScript.isCanSee)
                 {
+                    PermissionManager.My.isnpc = true;
+                    NewCanvasUI.My.Panel_NPC.SetActive(true);
+                    NewCanvasUI.My.Panel_NPC.transform.SetAsLastSibling();
                     if (mapRole.npcScript.isLock)
                     {
                         NPCListInfo.My.ShowUnlckPop(mapRole.transform);
@@ -101,7 +103,7 @@ public class RoleSprite : MonoBehaviour
                 }
                 else if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 3)
                 {
-                    NPCListInfo.My.ShowHideTipPop("使用广角镜发现角色");
+                   // NPCListInfo.My.ShowHideTipPop("使用广角镜发现角色");
                 }
             }
             else

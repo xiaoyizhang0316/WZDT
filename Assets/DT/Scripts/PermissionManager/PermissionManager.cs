@@ -18,7 +18,14 @@ public class PermissionManager : MonoSingleton<PermissionManager>
 
     public bool isnpc;
 
+    public BaseMapRole lastSelectRole;
+
+    public int currentSelectPanel = 0;
+
     private Transform buttonParent;
+
+    public List<Sprite> sprites;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,8 +40,12 @@ public class PermissionManager : MonoSingleton<PermissionManager>
         {
             WaveCount.My.transform.SetAsLastSibling();
             Button_consumer.transform.SetParent(WaveCount.My.transform);
+            Button_consumer.GetComponent<Image>().sprite = sprites[0];
             Button_financial.transform.SetParent(buttonParent);
+            Button_financial.GetComponent<Image>().sprite = sprites[1];
             Button_RoleInfo.transform.SetParent(buttonParent);
+            Button_RoleInfo.GetComponent<Image>().sprite = sprites[1];
+            currentSelectPanel = 0;
         });
 
         Button_financial.onClick.AddListener(() =>
@@ -42,25 +53,52 @@ public class PermissionManager : MonoSingleton<PermissionManager>
             DataStatPanel.My.ShowStat();
             DataStatPanel.My.transform.SetAsLastSibling();
             Button_consumer.transform.SetParent(buttonParent);
+            Button_consumer.GetComponent<Image>().sprite = sprites[1];
             Button_financial.transform.SetParent(DataStatPanel.My.transform);
+            Button_financial.GetComponent<Image>().sprite = sprites[0];
             Button_RoleInfo.transform.SetParent(buttonParent);
+            Button_RoleInfo.GetComponent<Image>().sprite = sprites[1];
+            currentSelectPanel = 1;
         });
-
         Button_RoleInfo.onClick.AddListener(() =>
         {
-            Button_consumer.transform.SetParent(buttonParent);
-            Button_financial.transform.SetParent(buttonParent);
-            if (isnpc)
+            InitRolePanel();
+        });
+    }
+
+    public void InitRolePanel()
+    {
+        Button_consumer.transform.SetParent(buttonParent);
+        Button_consumer.GetComponent<Image>().sprite = sprites[1];
+        Button_RoleInfo.GetComponent<Image>().sprite = sprites[0];
+        Button_financial.transform.SetParent(buttonParent);
+        Button_financial.GetComponent<Image>().sprite = sprites[1];
+        if (lastSelectRole == null)
+        {
+            Transform nullRole = NPCListInfo.My.transform.parent.Find("nullRole");
+            nullRole.SetAsLastSibling();
+            Button_RoleInfo.transform.SetParent(nullRole);
+        }
+        else if (lastSelectRole.isNpc)
+        {
+            if (lastSelectRole.npcScript.isCanSee)
             {
                 NPCListInfo.My.transform.SetAsLastSibling();
                 Button_RoleInfo.transform.SetParent(NPCListInfo.My.transform);
             }
             else
             {
-                RoleUpdateInfo.My.transform.SetAsLastSibling();
-                Button_RoleInfo.transform.SetParent(RoleUpdateInfo.My.transform);
+                Transform unknownRole = NPCListInfo.My.transform.parent.Find("unknownRole");
+                unknownRole.SetAsLastSibling();
+                Button_RoleInfo.transform.SetParent(unknownRole);
             }
-        });
+        }
+        else
+        {
+            RoleUpdateInfo.My.transform.SetAsLastSibling();
+            Button_RoleInfo.transform.SetParent(RoleUpdateInfo.My.transform);
+        }
+        currentSelectPanel = 2;
     }
 
     public void OnGUI()
@@ -74,7 +112,7 @@ public class PermissionManager : MonoSingleton<PermissionManager>
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /// <summary>
@@ -94,7 +132,7 @@ public class PermissionManager : MonoSingleton<PermissionManager>
         else
         {
             Camera.main.transform.DOMove(BaseLevelController.My.newCameraPos, 2f).Play();
-            //Camera.main.DOOrthoSize(BaseLevelController.My.orthoSize, 2f).Play();
+            Camera.main.DOOrthoSize(BaseLevelController.My.orthoSize, 2f).Play();
             Camera.main.transform.DORotate(BaseLevelController.My.newCameraRot, 2f).OnComplete(() => {
                 foreach (BaseMapRole role in PlayerData.My.MapRole)
                 {

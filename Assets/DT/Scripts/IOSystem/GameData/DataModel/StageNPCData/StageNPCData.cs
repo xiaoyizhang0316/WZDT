@@ -63,8 +63,8 @@ public class StageNPCData
         bulletCount = int.Parse(item.bulletCount);
         posX = int.Parse(item.posX);
         posY = int.Parse(item.posY);
-        //startEncourageLevel = int.Parse(item.startEncourageLevel);
-        startEncourageLevel = 0;
+        startEncourageLevel = int.Parse(item.startEncourageLevel);
+        //startEncourageLevel = 0;
         isCanSee = bool.Parse(item.isCanSee);
         isCanSeeEquip = bool.Parse(item.isCanSeeEquip);
         isLock = bool.Parse(item.isLock);
