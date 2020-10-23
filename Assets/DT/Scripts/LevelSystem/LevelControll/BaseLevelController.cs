@@ -192,8 +192,11 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
             string str = "OnGameReady|1";
             PlayerData.My.client.SendToServerMsg(str);
         }
-        PlayerData.My.isLocalReady = true;
-        PlayerData.My.CheckGameStart();
+        if (!PlayerData.My.isSOLO)
+        {
+            PlayerData.My.isLocalReady = true;
+            PlayerData.My.CheckGameStart();
+        }
     }
 
     public void CheckCheat()
