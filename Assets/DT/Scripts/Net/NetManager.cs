@@ -551,7 +551,7 @@ public class NetManager : MonoSingleton<NetManager>
     /// <param name="str"></param>
     public void SetupGroup(string str)
     {
-        string[] strArr = str.Split('_');
+        string[] strArr = str.Split('%');
         PlayerDatas p2 = JsonUtility.FromJson<PlayerDatas>(strArr[0]);
         List<PlayerDatas> playerDatasList = new List<PlayerDatas>();
         playerDatasList.Add(NetworkMgr.My.playerDatas);
