@@ -151,13 +151,13 @@ public class RankItem : MonoBehaviour
                 if (rankList.isTeamwork)
                 {
                     teamTag.SetActive(true);
-                    globalRankPlayerName.text = rankList.teamName;
+                    groupRankPlayerName.text = rankList.teamName;
                     //globalRankGroupName.text = rankList.groupName;
                 }
                 else
                 {
                     teamTag.SetActive(false);
-                    globalRankPlayerName.text = rankList.playerName;
+                    groupRankPlayerName.text = rankList.playerName;
                     //globalRankGroupName.text = rankList.groupName;
                 }
                 //groupRankPlayerName.text = rankList.playerName;
