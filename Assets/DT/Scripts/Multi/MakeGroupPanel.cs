@@ -57,7 +57,7 @@ public class MakeGroupPanel : MonoSingleton<MakeGroupPanel>
             {
                 string str1 = "队伍名不能为空！";
                 SetErrorInfo(str1);
-                return;
+                return; 
             }
             string str = MakeGroup();
             if (str.Equals("true"))
