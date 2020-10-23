@@ -60,6 +60,7 @@ public static class Url
     private static string getEquips = "getPlayerEquips";
     private static string deleteEquip = "deleteEquip";
     private static string addEquips = "addEquips";
+    private static string getPoorPlayerEquips = "getPoorPlayerEquips";
     #endregion
 
     #region team
@@ -116,7 +117,8 @@ public static class Url
     public static string GetTeamAcounts { get => ip+getTeamAcounts;}
     public static string CreateTeamAcount { get => ip+createTeamAcount;}
     public static string SetPlayerStatusScene { get => ip+setPlayerStatusScene; }
-    public static string GetCurrentTeamAcount { get => getCurrentTeamAcount; set => getCurrentTeamAcount = value; }
+    public static string GetCurrentTeamAcount { get => getCurrentTeamAcount; }
+    public static string GetPoorPlayerEquips { get => getPoorPlayerEquips; }
 
     public static void SetIp(string newIp)
     {

@@ -59,6 +59,9 @@ public class Client : MonoBehaviour
             PlayerData.My.client = this;
             PlayerData.My.isServer = false;
             string str = "SetUpGroup|";
+            string playerDatas = JsonUtility.ToJson(NetworkMgr.My.playerDatas).ToString();
+            str += playerDatas;
+            str += "_" + NetworkMgr.My.levelProgressList.Count;
             ///发送队员的信息  
             SendToServerMsg(str);
         }

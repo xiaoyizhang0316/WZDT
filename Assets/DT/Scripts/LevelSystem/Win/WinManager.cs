@@ -561,11 +561,16 @@ public class WinManager : MonoSingleton<WinManager>
                     if (PlayerData.My.isServer)
                     {
                         PlayerData.My.server.SendToClientMsg(str);
+                        NetworkMgr.My.SetPlayerStatus("Map", NetworkMgr.My.currentBattleTeamAcount.teamID);
                     }
                     else
                     {
                         PlayerData.My.client.SendToServerMsg(str);
                     }
+                }
+                else
+                {
+                    NetworkMgr.My.SetPlayerStatus("Map", "");
                 }
             }
             else

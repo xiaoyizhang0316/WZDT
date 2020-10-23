@@ -348,6 +348,17 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         lose.SetActive(false);
         PlayerData.My.Reset();
         SceneManager.LoadScene("Map");
+        if (PlayerData.My.isSOLO)
+        {
+            NetworkMgr.My.SetPlayerStatus("Map", "");
+        }
+        else
+        {
+            if (PlayerData.My.isServer)
+            {
+                NetworkMgr.My.SetPlayerStatus("Map", NetworkMgr.My.currentBattleTeamAcount.teamID);
+            }
+        }
     }
 
     public bool isTradeButtonActive = true;

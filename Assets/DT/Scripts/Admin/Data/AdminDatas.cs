@@ -146,6 +146,23 @@ public class GroupLevelPassDetails
     public List<GroupLevelPassDetail> groupLevelPassDetails;
 }
 
+[Serializable]
+public class PlayerThreeWord
+{
+    public string playerID;
+    public string playerName;
+    public string word1;
+    public string word2;
+    public string word3;
+    public int groupID;
+}
+
+[Serializable]
+public class PlayerThreeWordList
+{
+    public List<PlayerThreeWord> playerThreeWords;
+}
+
 public class AdminUrls
 {
     private static string ip = "http://127.0.0.1:8080/";
@@ -163,4 +180,6 @@ public class AdminUrls
     public static string adminLogin = ip + "adminLogin";
     public static string getGroupLevelPassDetail = ip + "getGroupLevelPassDetail";
     public static string getGroupTryLevelPassDetail = ip + "getGroupTryLevelPassDetail";
+    public static string getGroupPlayerThreeWords = ip + "getGroupPlayerThreeWords";
+    public static string getGroupPlayerStatus = ip + "getGroupPlayerStatus";
 }

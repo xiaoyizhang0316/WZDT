@@ -82,15 +82,18 @@ public class ThreeWordsPanel : MonoBehaviour
         {
             if (NetworkMgr.My.playerDatas.fteProgress == -2)
             {
+                NetworkMgr.My.SetPlayerStatus("FTE_0-1", "");
                 SceneManager.LoadScene("FTE_0-1");
             }
             else
                     if (NetworkMgr.My.playerDatas.fteProgress == -1)
             {
+                NetworkMgr.My.SetPlayerStatus("FTE_0-2", "");
                 SceneManager.LoadScene("FTE_0-2");
             }
             else
             {
+                NetworkMgr.My.SetPlayerStatus("Map", "");
                 SceneManager.LoadScene("Map");
             }
 
