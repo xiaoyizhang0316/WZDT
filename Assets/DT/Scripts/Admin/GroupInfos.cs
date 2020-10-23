@@ -32,6 +32,7 @@ public class GroupInfos : MonoBehaviour
     public Toggle playerPlayCount_tg;
     public Toggle playerWinCount_tg;
     public Toggle playerTimeCount_tg;
+    public Toggle playerTotalScore_tg;
 
     public List<Button> levelButtons;
 
@@ -54,6 +55,7 @@ public class GroupInfos : MonoBehaviour
         playerPlayCount_tg.onValueChanged.AddListener((isOn) => { ShowCountToggle(isOn); });
         playerWinCount_tg.onValueChanged.AddListener((isOn) => { ShowWinToggle(isOn); });
         playerTimeCount_tg.onValueChanged.AddListener((isOn) => { ShowTimeToggle(isOn); });
+        playerTotalScore_tg.onValueChanged.AddListener((isOn) => { ShowTotalScoreToggle(isOn); });
         if (AdminManager.My.playerDatas.levelID == 12)
         {
             close.gameObject.SetActive(false);
@@ -386,6 +388,27 @@ public class GroupInfos : MonoBehaviour
         }
     }
 
+    private void ShowTotalScoreToggle(bool isOn)
+    {
+        if (isOn)
+        {
+            if (index == 5)
+            {
+                return;
+            }
+            else
+            {
+                ClearContent();
+                index = 5;
+                ShowPlayerTotalScoreInfos(AdminManager.My.playerTotalScores);
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
+
     /// <summary>
     /// 显示小组总体信息
     /// </summary>
@@ -411,6 +434,16 @@ public class GroupInfos : MonoBehaviour
             GameObject go = Instantiate(groupItem, itemContent);
             GroupItemSample gis = go.GetComponent<GroupItemSample>();
             gis.Setup(playCounts[i], isTime);
+        }
+    }
+
+    private void ShowPlayerTotalScoreInfos(List<PlayerTotalScore> totalScores, bool isTime = false)
+    {
+        for (int i = 0; i < totalScores.Count; i++)
+        {
+            GameObject go = Instantiate(groupItem, itemContent);
+            GroupItemSample gis = go.GetComponent<GroupItemSample>();
+            gis.Setup(totalScores[i]);
         }
     }
 

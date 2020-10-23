@@ -163,6 +163,22 @@ public class PlayerThreeWordList
     public List<PlayerThreeWord> playerThreeWords;
 }
 
+[Serializable]
+public class PlayerTotalScore
+{
+    public string playerID;
+    public string playerName;
+    public int totalScore;
+    public int groupID;
+    public int teamIDInGroup;
+}
+
+[Serializable]
+public class PlayerTotalScores
+{
+    public List<PlayerTotalScore> playerTotalScores;
+}
+
 public class AdminUrls
 {
     private static string ip = "http://127.0.0.1:8080/";
@@ -182,4 +198,5 @@ public class AdminUrls
     public static string getGroupTryLevelPassDetail = ip + "getGroupTryLevelPassDetail";
     public static string getGroupPlayerThreeWords = ip + "getGroupPlayerThreeWords";
     public static string getGroupPlayerStatus = ip + "getGroupPlayerStatus";
+    public static string getGroupPlayerTotalScore = ip + "getGroupPlayerTotalScore";
 }

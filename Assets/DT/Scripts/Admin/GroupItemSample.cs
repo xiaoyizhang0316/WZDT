@@ -96,4 +96,14 @@ public class GroupItemSample : MonoBehaviour
             levels[8].text = gplpc.level9.ToString();
         }
     }
+
+    public void Setup(PlayerTotalScore totalScore)
+    {
+        names.text = totalScore.playerName;
+        levels[0].text = totalScore.totalScore.ToString();
+        for(int i=1; i<levels.Count; i++)
+        {
+            levels[i].text = "";
+        }
+    }
 }

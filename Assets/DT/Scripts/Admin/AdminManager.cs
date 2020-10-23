@@ -65,6 +65,8 @@ public class AdminManager : MonoSingleton<AdminManager>
     public Dictionary<string, GroupPlayer> tryGroupPlayers = new Dictionary<string, GroupPlayer>();
 
     public Dictionary<string,GroupPlayer> groupPlayers = new Dictionary<string, GroupPlayer>();
+
+    public List<PlayerTotalScore> playerTotalScores = new List<PlayerTotalScore>();
     #endregion
 
     // Start is called before the first frame update
@@ -194,6 +196,7 @@ public class AdminManager : MonoSingleton<AdminManager>
                 GetGroupPlayerLevelPlayCount(groupID,() => { GetGroupLevelPass(groupID,()=> ShowGroupTotalInfos(GetGroupTotalPlayCountByGroupID(groupID))); });
                 GetGroupPlayerLevelWinCount(groupID, () => { });
                 GetGroupPlayerLevelTimeCount(groupID, () => { });
+                GetGroupPlayerTotalScore(groupID, () => { });
             });
         }
         else
@@ -277,6 +280,7 @@ public class AdminManager : MonoSingleton<AdminManager>
                 GetGroupPlayerLevelPlayCount(lastGroupID, () => { GetGroupLevelPass(lastGroupID, () => ShowGroupTotalInfos(GetGroupTotalPlayCountByGroupID(lastGroupID))); });
                 GetGroupPlayerLevelWinCount(lastGroupID, () => { });
                 GetGroupPlayerLevelTimeCount(lastGroupID, () => { });
+                GetGroupPlayerTotalScore(lastGroupID, () => { });
             });
         }
         else
@@ -288,6 +292,7 @@ public class AdminManager : MonoSingleton<AdminManager>
                     GetGroupPlayerLevelPlayCount(lastGroupID, () => { });
                     GetGroupPlayerLevelWinCount(lastGroupID, () => { });
                     GetGroupPlayerLevelTimeCount(lastGroupID, () => { });
+                    GetGroupPlayerTotalScore(lastGroupID, () => { });
                 });
             }
         }
@@ -775,6 +780,32 @@ public class AdminManager : MonoSingleton<AdminManager>
             }
             HttpManager.My.mask.SetActive(false);
         }, keyValues, HttpType.Get, 10015));
+    }
+
+    public void GetGroupPlayerTotalScore(int groupID,Action doEnd)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("groupID", groupID.ToString());
+        StartCoroutine(HttpManager.My.HttpSend(AdminUrls.getGroupPlayerTotalScore, www => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+            }
+            else
+            {
+                PlayerTotalScores pos = JsonUtility.FromJson<PlayerTotalScores>(response.data);
+                playerTotalScores.Clear();
+                for (int i = 0; i < pos.playerTotalScores.Count; i++)
+                {
+                    playerTotalScores.Add(pos.playerTotalScores[i]);
+                }
+                Debug.Log(playerTotalScores.Count);
+                playerTotalScores.Sort((x, y) => -x.totalScore.CompareTo(y.totalScore));
+                doEnd?.Invoke();
+            }
+            HttpManager.My.mask.SetActive(false);
+        }, keyValues, HttpType.Get, 10016));
     }
     #endregion
 }

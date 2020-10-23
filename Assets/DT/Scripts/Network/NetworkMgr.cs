@@ -813,7 +813,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     keyValues.Add("teamID", currentBattleTeamAcount.teamID);
                     keyValues.Add("teamName", currentBattleTeamAcount.teamName);
-                    keyValues.Add("teamConfiguration", JsonUtility.ToJson(teamConfiguration));
+                    keyValues.Add("teamConfiguration", "");
                 }
                 else
                 {
