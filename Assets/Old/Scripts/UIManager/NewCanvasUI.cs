@@ -170,6 +170,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public void GamePause(bool isCount = true)
     {
+        Debug.Log("暂停");
         DOTween.PauseAll();
         DOTween.defaultAutoPlay = AutoPlay.None;
         Button_Pause.interactable = false;

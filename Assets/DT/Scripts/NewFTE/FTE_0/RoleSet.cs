@@ -29,6 +29,7 @@ public class RoleSet : MonoBehaviour
     Color color0 = Color.red;
     Color color1 = Color.yellow;
     Color color2 = Color.green;
+    bool bling = false;
 
     // Start is called before the first frame update
     void Start()
@@ -50,28 +51,33 @@ public class RoleSet : MonoBehaviour
                 prop1.text = "效<color=#00000000>效率</color>率: " + (efficiency/20f).ToString("f2")+"/s";
                 prop2.text = "效<color=#00000000>效果</color>果: " + effect * 10;
                 cost.text =  "固定成本: " + Cost;
-                cost.GetComponent<TextBling>().StartBling(Cost);
+                if(bling)
+                    cost.GetComponent<TextBling>().StartBling(Cost);
                 break;
             case RoleType.Peasant:
                 prop1.text = "效<color=#00000000>效率</color>率: " + (efficiency / 20f).ToString("f2") + "/s";
                 prop2.text = "效<color=#00000000>效果</color>果: " + effect +"%";
                 cost.text = "固定成本: " + Cost;
-                cost.GetComponent<TextBling>().StartBling(Cost);
+                if (bling)
+                    cost.GetComponent<TextBling>().StartBling(Cost);
                 break;
             case RoleType.Merchant:
                 prop1.text = "效<color=#00000000>效率</color>率: " + efficiency+"%";
                 prop2.text = "效<color=#00000000>效果</color>果: " + (effect *0.3f + 24).ToString("f2")+"%";
                 cost.text = "固定成本: " + Cost;
-                cost.GetComponent<TextBling>().StartBling(Cost);
+                if (bling)
+                    cost.GetComponent<TextBling>().StartBling(Cost);
                 break;
             case RoleType.Dealer:
                 prop1.text = "效<color=#00000000>效率</color>率: " + (1.5f-efficiency * 0.01f  ).ToString("f2")+"s";
                 prop2.text = "范<color=#00000000>范围</color>围: " + range;
                 cost.text = "固定成本: " + Cost;
-                cost.GetComponent<TextBling>().StartBling(Cost);
+                if (bling)
+                    cost.GetComponent<TextBling>().StartBling(Cost);
                 break;
         }
         //RoleEditor.My.ShowTradeCost();
+        bling = true;
     }
 
     void SwitchTextColor()
@@ -80,66 +86,94 @@ public class RoleSet : MonoBehaviour
         {
             if (trg == 0)
             {
-                //prop2.color = color0;
-                prop2.GetComponent<TextBling>().StartBling(color0);
+                if (bling)
+                {
+                    prop2.GetComponent<TextBling>().StartBling(color0);
+                }
+                else
+                {
+                    prop2.color = color0;
+                }
             }
             else if (trg == 1)
             {
-                //prop2.color = color1;
-                prop2.GetComponent<TextBling>().StartBling(color1);
+                if(bling)
+                    prop2.GetComponent<TextBling>().StartBling(color1);
+                else
+                    prop2.color = color1;
             }
             else
             {
-                //prop2.color = color2;
-                prop2.GetComponent<TextBling>().StartBling(color2);
+                if (bling)
+                    prop2.GetComponent<TextBling>().StartBling(color2);
+                else
+                    prop2.color = color2;
             }
             if (tey == 0)
             {
-                //prop1.color = color0;
-                prop1.GetComponent<TextBling>().StartBling(color0);
+                if (bling)
+                    prop1.GetComponent<TextBling>().StartBling(color0);
+                else
+                    prop1.color = color0;
             }
             else if (tey == 1)
             {
-                //prop1.color = color1;
-                prop1.GetComponent<TextBling>().StartBling(color1);
+                if (bling)
+                    prop1.GetComponent<TextBling>().StartBling(color1);
+                else
+                    prop1.color = color1;
             }
             else
             {
-                //prop1.color = color2;
-                prop1.GetComponent<TextBling>().StartBling(color2);
+                if (bling)
+                    prop1.GetComponent<TextBling>().StartBling(color2);
+                else
+                    prop1.color = color2;
             }
         }
         else
         {
             if (tet == 0)
             {
-                //prop2.color = color0;
-                prop2.GetComponent<TextBling>().StartBling(color0);
+                if (bling)
+                    prop2.GetComponent<TextBling>().StartBling(color0);
+                else
+                    prop2.color = color0;
             }
             else if (tet == 1)
             {
-                //prop2.color = color1;
-                prop2.GetComponent<TextBling>().StartBling(color1);
+                if (bling)
+                    prop2.GetComponent<TextBling>().StartBling(color1);
+                else
+                    prop2.color = color1;
             }
             else
             {
-                //prop2.color = color2;
-                prop2.GetComponent<TextBling>().StartBling(color2);
+                if (bling)
+                    prop2.GetComponent<TextBling>().StartBling(color2);
+                else
+                    prop2.color = color2;
             }
             if (tey == 0)
             {
-                //prop1.color = color0;
-                prop1.GetComponent<TextBling>().StartBling(color0);
+                if (bling)
+                    prop1.GetComponent<TextBling>().StartBling(color0);
+                else
+                    prop1.color = color0;
             }
             else if (tey == 1)
             {
-                //prop1.color = color1;
-                prop1.GetComponent<TextBling>().StartBling(color1);
+                if (bling)
+                    prop1.GetComponent<TextBling>().StartBling(color1);
+                else
+                    prop1.color = color1;
             }
             else
             {
-                //prop1.color = color2;
-                prop1.GetComponent<TextBling>().StartBling(color2);
+                if (bling)
+                    prop1.GetComponent<TextBling>().StartBling(color2);
+                else
+                    prop1.color = color2;
             }
         }
     }

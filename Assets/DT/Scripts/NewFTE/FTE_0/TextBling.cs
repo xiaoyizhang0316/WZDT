@@ -10,6 +10,7 @@ public class TextBling : MonoBehaviour
     Color startColor;
     Color endColor;
     int value;
+    //bool bling = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class TextBling : MonoBehaviour
         {
             startColor = GetComponent<Text>().color;
         }
+        //bling = true;
         StartTextBling();
         StartCoroutine(TweenStop());
     }
@@ -34,15 +36,16 @@ public class TextBling : MonoBehaviour
     public void StartBling(int values)
     {
         startColor = GetComponent<Text>().color;
-        if (values > value)
-        {
-            endColor = Color.red;
-        }
-        else
-        {
+        //if (values > value)
+        //{
+           // endColor = Color.red;
+        //}
+        //else
+        //{
             endColor = Color.green;
-        }
+        //}
         value = values;
+        //bling = true;
         //GetComponent<Text>().text = value.ToString();
         StartTextBling();
         StartCoroutine(Stop());
@@ -50,15 +53,18 @@ public class TextBling : MonoBehaviour
 
     void StartTextBling()
     {
-        tween = GetComponent<Text>().DOColor(startColor, 0.4f).OnComplete(() => {
-            GetComponent<Text>().DOColor(endColor, 0.4f).OnComplete(() => StartTextBling());
-        });
+        //bling = true;
+        //if(bling)
+            tween = GetComponent<Text>().DOColor(startColor, 0.4f).OnComplete(() => {
+                GetComponent<Text>().DOColor(endColor, 0.4f).OnComplete(() => StartTextBling());
+            });
     }
 
     IEnumerator TweenStop()
     {
         yield return new WaitForSeconds(2);
         tween.Kill();
+        //bling = false;
         GetComponent<Text>().color = endColor;
         startColor = endColor;
     }
@@ -67,6 +73,7 @@ public class TextBling : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         tween.Kill();
+        //bling = false;
         GetComponent<Text>().color = startColor;
         //startColor = endColor;
     }
