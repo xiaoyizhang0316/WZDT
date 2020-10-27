@@ -28,6 +28,7 @@ public class MessageManager : NetworkBehaviour
     [ClientRpc]
     public void RpcGamePause(bool isCount = true)
     {
+        Debug.LogWarning("RPC");
         DOTween.PauseAll();
         DOTween.defaultAutoPlay = AutoPlay.None;
     }

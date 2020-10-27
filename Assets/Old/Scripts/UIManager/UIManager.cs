@@ -252,6 +252,7 @@ public class UIManager : MonoSingleton<UIManager>
     {
         //Time.timeScale = 0.01f;
         //Time.fixedDeltaTime = 0.0005f;
+        Debug.LogWarning("UIManager ");
         DOTween.PauseAll();
         Button_Pause.GetComponent<Button>().interactable = false;
         Button_Normal.GetComponent<Button>().interactable = true;
