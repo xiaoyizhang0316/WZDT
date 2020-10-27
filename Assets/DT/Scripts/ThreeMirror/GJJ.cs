@@ -49,13 +49,13 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
             {
                 if (hit.transform.GetComponentInParent<BaseMapRole>().isNpc)
                 {
-                    if (!hit.transform.GetComponentInChildren<BaseNpc>().isCanSee)
+                    if (!hit.transform.GetComponentInParent<BaseMapRole>().npcScript.isCanSee)
                     {
                         if (StageGoal.My.CostTechPoint(costTechNumber))
                         {
                             StageGoal.My.CostTp(costTechNumber, CostTpType.Mirror);
                             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
-                            hit.transform.GetComponentInChildren<BaseNpc>().DetectNPCRole();
+                            hit.transform.GetComponentInParent<BaseMapRole>().npcScript.DetectNPCRole();
                             GameObject effect = Instantiate(effectPrb, hit.transform);
                             effect.transform.localPosition = Vector3.zero;
                             hit.transform.GetComponentInParent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
@@ -63,6 +63,21 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             Destroy(effect, 1f);
                             Debug.Log("使用广角镜成功");
                             DataUploadManager.My.AddData(DataEnum.使用广角镜);
+                            if (!PlayerData.My.isSOLO)
+                            {
+                                string str1 = "UseThreeMirror|";
+                                str1 += "0";
+                                str1 += "," + hit.transform.GetComponentInParent<BaseMapRole>().baseRoleData.ID.ToString();
+                                str1 += "," + costTechNumber.ToString();
+                                if (PlayerData.My.isServer)
+                                {
+                                    PlayerData.My.server.SendToClientMsg(str1);
+                                }
+                                else
+                                {
+                                    PlayerData.My.client.SendToServerMsg(str1);
+                                }
+                            }
                         }
                         else
                         {

@@ -77,6 +77,15 @@ public class RoleListInfoDealer : BaseRoleListInfo
                     Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.tow;
                     break;
             }
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text =  baseMapRole.warehouse[i].RepeatBulletCount.ToString() ;
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            }
         }
+    
     }
 }

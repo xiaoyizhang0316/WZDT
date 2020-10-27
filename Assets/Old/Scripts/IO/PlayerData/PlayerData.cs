@@ -48,6 +48,16 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public bool cheatIndex3 = false;
 
+    public Client client;
+
+    public Server server;
+
+    public bool isServer = true;
+
+    /// <summary>
+    /// 单人模式
+    /// </summary>
+    public bool isSOLO = true;
     /// <summary>
     /// 通过名字获得Role信息
     /// </summary>
@@ -336,5 +346,90 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     private void Start()
     {
+        NetManager.My.Init();
     }
+    
+    #region 玩家权限
+
+    public int playerDutyID= 0 ;
+    /// <summary>
+    /// 0---单人玩家 1- 主手   2 ---副手
+    /// </summary>
+
+    ///切换关卡
+    public int SwitchLevel = 0;
+
+    /// <summary>
+    /// 改变时间
+    /// </summary>
+    public int changeTime = 0;
+
+    /// <summary>
+    /// 使用三镜
+    /// </summary>
+    /// <returns></returns>
+    public int UseThreeMirror = 0;
+
+    /// <summary>
+    /// 创建角色
+    /// </summary>
+    public int creatRole = 0;
+
+    /// <summary>
+    /// 删除角儿
+    /// </summary>
+    public int deleteRole = 0;
+
+    
+    /// <summary>
+    ///  更新角色
+    /// </summary>
+    public int updateRole = 0;
+
+    /// <summary>
+    ///  修改角色装备和人力
+    /// </summary>
+    public int changeEquipAndWorker = 0;
+
+    /// <summary>
+    /// 修改交易
+    /// </summary>
+    public int changeTrad = 0;
+
+    /// <summary>
+    /// 创建交易
+    /// </summary>
+    public int creatTrad = 0;
+
+
+    /// <summary>
+    /// 删除交易
+    /// </summary>
+    public int deleteTrad = 0;
+
+
+
+    /// <summary>
+    /// 初始化角色权限控制
+    /// </summary>
+    public void InitPlayerRightControl( string UseThreeMirror,string creatRole,string deleteRole,string updateRole,string changeEquipAndWorker
+    ,string changeTrad,string creatTrad,string deleteTrad
+    
+    )
+    {
+     
+            SwitchLevel =0;
+            this.changeTime = int.Parse(creatRole);
+            this.UseThreeMirror = int.Parse(UseThreeMirror);
+            this.creatRole =int.Parse(creatRole);
+            this.deleteRole = int.Parse(deleteRole);
+            this.updateRole = int.Parse(updateRole);
+            this.changeEquipAndWorker = int.Parse(changeEquipAndWorker);
+            this.changeTrad = int.Parse(changeTrad);
+            this.creatTrad = int.Parse(creatTrad);
+            this.deleteTrad = int.Parse(deleteTrad);
+      
+    }
+
+    #endregion
 }

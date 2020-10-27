@@ -47,7 +47,35 @@ public class LevelSign : MonoBehaviour
         {
             LevelInfoManager.My.Init(stars, levelName, content, mission_1, mission_2, mission_3, () =>
             {
-                SceneManager.LoadScene(loadScene);
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str = "LoadScene|" + loadScene;
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str);
+                    }
+                }
+                if (!PlayerData.My.isSOLO)
+                {
+                    if (PlayerData.My.isServer)
+                    {
+                        NetworkMgr.My.GetPoorPlayerEquips((data) =>
+                        {
+                            PlayerData.My.InitPlayerEquip(data);
+                            SceneManager.LoadScene(loadScene);
+                            NetworkMgr.My.SetPlayerStatus(loadScene, NetworkMgr.My.currentBattleTeamAcount.teamID);
+                        });
+                    }
+                }
+                else
+                {
+                    SceneManager.LoadScene(loadScene);
+                    NetworkMgr.My.SetPlayerStatus(loadScene, "");
+                }
             }, loadScene);
             //NetworkMgr.My.GetReplayLists(loadScene,()=> {
             //    LevelInfoManager.My.listScript.Init(NetworkMgr.My.replayLists);
@@ -130,7 +158,7 @@ public class LevelSign : MonoBehaviour
             currentStar = "0" + currentStar;
         }
         stars = currentStar;
-        if(lastStar == "000" && loadScene!="FTE_1" || !CheckPrevStar() || !CheckUserLevel())
+        if(lastStar == "000" && loadScene!="FTE_1" || !CheckPrevStar() || !CheckUserLevel() ||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
         {
             HideAllStars();
             transform.GetChild(0).GetComponent<Image>().raycastTarget = false;

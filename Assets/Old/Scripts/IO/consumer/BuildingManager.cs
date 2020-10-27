@@ -47,4 +47,15 @@ public class BuildingManager : MonoSingleton<BuildingManager>
         print("-----------查不到此building-----------");
         return null;
     }
+
+    /// <summary>
+    /// 隐藏所有建筑路线
+    /// </summary>
+    public void HideAllPath()
+    {
+        foreach (Building item in buildings)
+        {
+            item.StopShowPathLine();
+        }
+    }
 }

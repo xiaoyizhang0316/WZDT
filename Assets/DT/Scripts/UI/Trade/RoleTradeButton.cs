@@ -153,20 +153,28 @@ public class RoleTradeButton : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     // Update is called once per frame
     void Update()
     {
-        transform.parent.LookAt(Camera.main.transform.position);
-        GetComponent<Image>().fillAmount = currentRole.warehouse.Count / (float)currentRole.baseRoleData.bulletCapacity;
-        if (currentRole.isNpc)
+        if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
-            if (currentRole.npcScript.isLock)
+            transform.parent.LookAt(Camera.main.transform.position);
+            GetComponent<Image>().fillAmount = currentRole.warehouse.Count / (float)currentRole.baseRoleData.bulletCapacity;
+            if (currentRole.isNpc)
             {
-                lockImage.SetActive(true);
-                unlockImage.SetActive(false);
-            }
-            else
-            {
-                lockImage.SetActive(false);
-                unlockImage.SetActive(true);
+                if (currentRole.npcScript.isLock)
+                {
+                    lockImage.SetActive(true);
+                    unlockImage.SetActive(false);
+                }
+                else
+                {
+                    lockImage.SetActive(false);
+                    unlockImage.SetActive(true);
+                }
             }
         }
+        else
+        {
+            transform.parent.gameObject.SetActive(false);
+        }
+
     }
 }

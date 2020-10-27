@@ -67,9 +67,13 @@ public class ConsumeSign : MonoBehaviour
 
     public GameObject sheep;
 
+    public GameObject spriteLogo;
+
     public BulletType lastHitType;
 
     public int buildingIndex;
+
+    public int consumerIndex;
 
     public int enterMarketingTime = 0;
 
@@ -227,6 +231,17 @@ public class ConsumeSign : MonoBehaviour
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
         ComboManager.My.AddComboNum();
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ConsumerDead|";
+            str += buildingIndex.ToString() + "," + consumerIndex.ToString() + ",";
+            str += ((int)(consumeData.killSatisfy * scorePer)).ToString() + ",";
+            str += consumeData.killMoney.ToString();
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+        }
     }
 
     /// <summary>
@@ -273,12 +288,13 @@ public class ConsumeSign : MonoBehaviour
     public virtual void DeathAward()
     {
         StageGoal.My.GetSatisfy((int)(consumeData.killSatisfy * scorePer));
+        StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy);
         if (scorePer > 1f)
         {
             StageGoal.My.ConsumerExtraPerTip();
             DataUploadManager.My.AddData(消费者_口味击杀);
+            StageGoal.My.ScoreGet(ScoreType.口味额外得分, (int)(consumeData.killSatisfy * (scorePer - 1f)));
         }
-
         StageGoal.My.GetPlayerGold(consumeData.killMoney);
         StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
         StageGoal.My.killNumber++;
@@ -291,6 +307,7 @@ public class ConsumeSign : MonoBehaviour
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
         StageGoal.My.GetSatisfy((consumeData.killSatisfy * currentHealth / consumeData.maxHealth));
+        StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy * currentHealth / consumeData.maxHealth);
         StageGoal.My.ConsumerAliveTip();
     }
 
@@ -415,6 +432,16 @@ public class ConsumeSign : MonoBehaviour
     {
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ConsumerChangeSpeed|";
+            str += gameObject.GetInstanceID().ToString() + ",";
+            str += speedAdd.ToString();
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+        }
         //print("移动速度：" + tweener.timeScale.ToString());
     }
 
@@ -483,32 +510,45 @@ public class ConsumeSign : MonoBehaviour
 
     private void Update()
     {
- 
         //print(tweener.ElapsedPercentage(false));
-        if(isIgnoreResistance)
+        if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
-            try
+            spriteLogo.gameObject.SetActive(false);
+            hud.gameObject.SetActive(true);
+            if (isIgnoreResistance)
             {
-                self.SetActive(false);
-                sheep.SetActive(true);
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    self.SetActive(false);
+                    sheep.SetActive(true);
+                }
+                catch (Exception ex)
+                {
 
+                }
+            }
+            else
+            {
+                try
+                {
+                    self.SetActive(true);
+                    sheep.SetActive(false);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
         }
         else
         {
-            try
-            {
-                self.SetActive(true);
-                sheep.SetActive(false);
-            }
-            catch (Exception ex)
-            {
-
-            }
+            self.SetActive(false);
+            sheep.SetActive(false);
+            hud.gameObject.SetActive(false);
+            spriteLogo.gameObject.SetActive(true);
+            spriteLogo.transform.eulerAngles = new Vector3(-90, 0, -135);
         }
+        
     }
 
     private void Start()

@@ -47,7 +47,18 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             CloseFTE();
             return;
         }
-
+        if (!PlayerData.My.isSOLO)
+        {
+            string str1 = "OpenGuide|true";
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str1);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str1);
+            }
+        }
         baseGuideSteps[currentGuideIndex].gameObject.SetActive(true);
 
         StartCoroutine(baseGuideSteps[currentGuideIndex].Play());
@@ -55,6 +66,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public void Init()
     {
+        if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+        {
+            return;
+        }
         foreach (var item in NewCanvasUI.My.highLight)
         {
             item.SetActive(false);
@@ -112,12 +127,23 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             if (VARIABLE.mapType == GameEnum.MapType.Grass && VARIABLE.baseMapRole == null)
             {
                 VARIABLE.isCanPlace = true;
-
+            }
+        }
+        if (!PlayerData.My.isSOLO)
+        {
+            string str1 = "OpenGuide|false";
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str1);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str1);
             }
         }
         NewCanvasUI.My.Panel_Update.transform.localPosition = Vector3.one;
         if(guideClose!=null)
-        guideClose.gameObject.SetActive(false);
+            guideClose.gameObject.SetActive(false);
     }
 
     public void PlayNextIndexGuide()

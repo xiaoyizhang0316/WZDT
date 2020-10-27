@@ -13,6 +13,7 @@ public class RankItem : MonoBehaviour
     public GameObject rankStarsAndScore;
     public GameObject bossLevelAndScore;
     public GameObject noRank;
+    public GameObject teamTag;
     //public List<Sprite> rankSprites;
     public Image rankSprite;
     public Text rankText;
@@ -79,6 +80,14 @@ public class RankItem : MonoBehaviour
             GetComponent<Image>().color = Color.red;
             SetStars(recordStars, "000");
         }
+        if (rp.isTeamwork)
+        {
+            teamTag.SetActive(true);
+        }
+        else
+        {
+            teamTag.SetActive(false);
+        }
     }
 
     public void Setup(RankList rankList, bool isGroup)
@@ -139,7 +148,19 @@ public class RankItem : MonoBehaviour
             {
                 group.SetActive(true);
                 global.SetActive(false);
-                groupRankPlayerName.text = rankList.playerName;
+                if (rankList.isTeamwork)
+                {
+                    teamTag.SetActive(true);
+                    globalRankPlayerName.text = rankList.teamName;
+                    //globalRankGroupName.text = rankList.groupName;
+                }
+                else
+                {
+                    teamTag.SetActive(false);
+                    globalRankPlayerName.text = rankList.playerName;
+                    //globalRankGroupName.text = rankList.groupName;
+                }
+                //groupRankPlayerName.text = rankList.playerName;
                 rank = rankList.rank - NetworkMgr.My.currentGroupPage * CommonParams.rankPageMaxNum;
                 if (rank <= 0)
                 {
@@ -154,8 +175,18 @@ public class RankItem : MonoBehaviour
             {
                 group.SetActive(false);
                 global.SetActive(true);
-                globalRankPlayerName.text = rankList.playerName;
-                globalRankGroupName.text = rankList.groupName;
+                if (rankList.isTeamwork)
+                {
+                    teamTag.SetActive(true);
+                    globalRankPlayerName.text = rankList.teamName;
+                    globalRankGroupName.text = rankList.groupName;
+                }
+                else {
+                    teamTag.SetActive(false);
+                    globalRankPlayerName.text = rankList.playerName;
+                    globalRankGroupName.text = rankList.groupName;
+                }
+
                 rank = rankList.rank - NetworkMgr.My.currentGlobalPage * CommonParams.rankPageMaxNum;
                 if (rank <= 0)
                 {

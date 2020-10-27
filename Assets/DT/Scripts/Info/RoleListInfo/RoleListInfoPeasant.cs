@@ -76,6 +76,15 @@ public class RoleListInfoPeasant : BaseRoleListInfo
             Pruductgame.GetComponent<ProductSign>().currentProduct =
                 baseMapRole.GetComponent<ProductMelon>().productDatas[    baseMapRole.GetComponent<ProductMelon>().productDatas.Count-i];
             Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.normallpp;
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.GetComponent<ProductSeed>()
+                    .productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            }
         }
     }
 }
