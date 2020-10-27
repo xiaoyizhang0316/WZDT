@@ -60,6 +60,11 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     public GameObject emojiPrb;
 
+    public string winkey1;
+
+    public string winkey2;
+
+    public string winkey3;
     /// <summary>
     /// 改变地形
     /// </summary>
@@ -196,6 +201,10 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         {
             PlayerData.My.isLocalReady = true;
             PlayerData.My.CheckGameStart();
+        }
+        else
+        {
+            NewCanvasUI.My.GameNormal();
         }
     }
 

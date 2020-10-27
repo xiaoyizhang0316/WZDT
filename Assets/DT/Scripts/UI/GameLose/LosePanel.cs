@@ -9,6 +9,10 @@ public class LosePanel : MonoBehaviour
     public Button reviewButton;
     public Button retryButton;
     public Button returnButton;
+
+    public Text winkey1;
+    public Text winkey2;
+    public Text winkey3;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,5 +65,13 @@ public class LosePanel : MonoBehaviour
                 NetworkMgr.My.SetPlayerStatus("Map", "");
             }
         });
+        InitWinKey();
+    }
+
+    public void InitWinKey()
+    {
+        winkey1.text = BaseLevelController.My.winkey1;
+        winkey2.text = BaseLevelController.My.winkey2;
+        winkey3.text = BaseLevelController.My.winkey3;
     }
 }
