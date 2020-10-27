@@ -13035,6 +13035,11 @@ MonoBehaviour:
   unlockTime2: 0
   newCameraPos: {x: 0, y: 0, z: 0}
   newCameraRot: {x: 0, y: 0, z: 0}
+  orthoSize: 0
+  emojiPrb: {fileID: 0}
+  winkey1: "- \u4E00\u4E2A\u89D2\u8272\u53EF\u4EE5\u4E0E\u591A\u4E2A\u89D2\u8272\u540C\u65F6\u53D1\u751F\u4EA4\u6613"
+  winkey2: "- \u89D2\u8272\u53EF\u4EE5\u5347\u7EA7\uFF01"
+  winkey3: "- \u96F6\u552E\u5546\u653E\u5728\u8DEF\u8FB9\u53EF\u4EE5\u8986\u76D6\u5230\u6700\u591A\u7684\u6D88\u8D39\u8005"
 --- !u!4 &663343719
 Transform:
   m_ObjectHideFlags: 0
@@ -48461,6 +48466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!1 &1649441488074299336
 GameObject:
   m_ObjectHideFlags: 0
@@ -48670,6 +48677,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!1 &1757814236322530872
 GameObject:
   m_ObjectHideFlags: 0
@@ -49044,6 +49053,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!222 &1872608997352962345
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -49194,6 +49205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!224 &1952829068515733142
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49389,6 +49402,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!114 &2030447306500488398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50200,12 +50215,12 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 70.19
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -70.19
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -50225,7 +50240,7 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -50235,7 +50250,7 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -52838,6 +52853,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!1 &3196496972045119017
 GameObject:
   m_ObjectHideFlags: 0
@@ -55707,7 +55724,7 @@ PrefabInstance:
     - target: {fileID: 1524684002725430674, guid: 85fe392a72f094c308403fccad24ad89,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -19.6
+      value: 142
       objectReference: {fileID: 0}
     - target: {fileID: 1524684002725430674, guid: 85fe392a72f094c308403fccad24ad89,
         type: 3}
@@ -55723,6 +55740,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 623.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1524684002725430674, guid: 85fe392a72f094c308403fccad24ad89,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1770098873570565170, guid: 85fe392a72f094c308403fccad24ad89,
         type: 3}
@@ -55854,6 +55876,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7552369061392644436, guid: 85fe392a72f094c308403fccad24ad89,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8441845331449945631, guid: 85fe392a72f094c308403fccad24ad89,
         type: 3}
       propertyPath: m_Name
@@ -55862,7 +55889,7 @@ PrefabInstance:
     - target: {fileID: 8441845331449945631, guid: 85fe392a72f094c308403fccad24ad89,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85fe392a72f094c308403fccad24ad89, type: 3}
@@ -57210,6 +57237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!222 &4855319192993930195
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -57882,6 +57911,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!1 &5082366167603411869
 GameObject:
   m_ObjectHideFlags: 0
@@ -58075,12 +58106,12 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 392.78
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -58100,7 +58131,7 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -58110,7 +58141,7 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -58226,6 +58257,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!114 &5135554394081507142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58786,6 +58819,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!1 &5359301263334944075
 GameObject:
   m_ObjectHideFlags: 0
@@ -59610,6 +59645,7 @@ MonoBehaviour:
   - {fileID: 3526596019213086926}
   - {fileID: 53902535759023586}
   - {fileID: 4975615105415830964}
+  watchGuidePanel: {fileID: 0}
   isChange: 0
   isTradeButtonActive: 1
   isProductLineActive: 1
@@ -61117,12 +61153,12 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 553.98
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -61142,7 +61178,7 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -61152,7 +61188,7 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -63301,6 +63337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!114 &6274345231740189766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65097,6 +65135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!224 &6651621789735126152
 RectTransform:
   m_ObjectHideFlags: 0
@@ -69787,6 +69827,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!114 &7247962432852300167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70783,12 +70825,12 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 231.58
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -70808,7 +70850,7 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -70818,7 +70860,7 @@ PrefabInstance:
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7647105566308214474, guid: ca4383b3f1afb5843a2674eb955d4f49,
         type: 3}
@@ -72248,6 +72290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!1 &8058277881853539132
 GameObject:
   m_ObjectHideFlags: 0
@@ -73854,6 +73898,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!1 &8738548351019892362
 GameObject:
   m_ObjectHideFlags: 0
@@ -74316,6 +74362,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
+  buffImg: {fileID: 0}
+  buffDesc: {fileID: 0}
 --- !u!222 &8930983303777283144
 CanvasRenderer:
   m_ObjectHideFlags: 0

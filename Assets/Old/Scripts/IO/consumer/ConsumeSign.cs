@@ -7,6 +7,7 @@ using static GameEnum;
 using static DataEnum;
 using DT.Fight.Bullet;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ConsumeSign : MonoBehaviour
 {
@@ -226,7 +227,10 @@ public class ConsumeSign : MonoBehaviour
         {
             return;
         }
-        BaseLevelController.My.CountKillNumber(this); 
+        if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1")
+        {
+            BaseLevelController.My.CountKillNumber(this);
+        }
         DeathAward();
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
