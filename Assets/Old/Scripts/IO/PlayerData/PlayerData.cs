@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using static GameEnum;
@@ -432,4 +433,37 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     }
 
     #endregion
+
+    public bool isAllReady = false;
+
+    public bool isLocalReady = false;
+
+    public void CheckGameStart()
+    {
+        Debug.Log("检测ready");
+        if (PlayerPrefs.GetInt("isUseGuide") == 1)
+        {
+            return;
+        }
+        if (isSOLO)
+        {
+            DOTween.PlayAll();
+            DOTween.timeScale = 1f;
+            DOTween.defaultAutoPlay = AutoPlay.All;
+        }
+        else if (isAllReady && isLocalReady)
+        { 
+            if (isServer)
+            {
+                Debug.Log("server ready");
+                NewCanvasUI.My.GameNormal();
+            }
+            else
+            {
+                DOTween.PlayAll();
+                DOTween.timeScale = 1f;
+                DOTween.defaultAutoPlay = AutoPlay.All;
+            }
+        }
+    }
 }
