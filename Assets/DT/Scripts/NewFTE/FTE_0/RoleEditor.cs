@@ -63,8 +63,11 @@ public class RoleEditor : MonoSingleton<RoleEditor>
     public void ShowTradeCost()
     {
         tc1.text = GetTradeCost(0).ToString();
+        tc1.GetComponent<TextBling>().StartBling(GetTradeCost(0));
         tc2.text = GetTradeCost(1).ToString();
+        tc2.GetComponent<TextBling>().StartBling(GetTradeCost(1));
         tc3.text = GetTradeCost(2).ToString();
+        tc3.GetComponent<TextBling>().StartBling(GetTradeCost(2));
     }
 
     public int  GetTradeCost(int index)
