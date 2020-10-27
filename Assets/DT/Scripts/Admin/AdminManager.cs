@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,6 +6,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class AdminManager : MonoSingleton<AdminManager>
+=======
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class AdminManager : MonoSingleton<AdminManager>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
 {
     public int lastGroupID = -1;
     public int currentGroupID = -1;
@@ -31,6 +41,7 @@ public class AdminManager : MonoSingleton<AdminManager>
     public Button exit_btn;
     #endregion
 
+<<<<<<< HEAD
     #region datas
     private int lastRefreshTime = 0;
     static int refreshInterval = 10;
@@ -50,6 +61,27 @@ public class AdminManager : MonoSingleton<AdminManager>
 
     public List<GroupPlayerLevelPlayCount> playerPlayCount = new List<GroupPlayerLevelPlayCount>();
 
+=======
+    #region datas
+    private int lastRefreshTime = 0;
+    static int refreshInterval = 10;
+
+    int timeCount = 0;
+    public List<PlayerGroup> playerGroups = new List<PlayerGroup>();
+
+    public TotalPlayCount totalPlayCount;
+
+    public PlayerDatas playerDatas;
+
+    public List<LevelPlayCount> levelPlayCounts = new List<LevelPlayCount>();
+
+    public List<GroupTotalPlayCount> groupTotalPlayCounts = new List<GroupTotalPlayCount>();
+
+    public List<GroupLevelPlayCount> playerLevelPlayCounts = new List<GroupLevelPlayCount>();
+
+    public List<GroupPlayerLevelPlayCount> playerPlayCount = new List<GroupPlayerLevelPlayCount>();
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     public List<GroupPlayerLevelPlayCount> playerWinCount = new List<GroupPlayerLevelPlayCount>();
 
     public List<GroupPlayerLevelPlayCount> playerTimeCount = new List<GroupPlayerLevelPlayCount>();
@@ -70,12 +102,21 @@ public class AdminManager : MonoSingleton<AdminManager>
     #endregion
 
     // Start is called before the first frame update
+<<<<<<< HEAD
     void Start()
     {
         //ShowGroupsAndTotalData();
 
         InitRefreshButton();
         exit_btn.onClick.AddListener(Exit);
+=======
+    void Start()
+    {
+        //ShowGroupsAndTotalData();
+
+        InitRefreshButton();
+        exit_btn.onClick.AddListener(Exit);
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     }
 
     /// <summary>
@@ -96,8 +137,13 @@ public class AdminManager : MonoSingleton<AdminManager>
     private void InitRefreshButton()
     {
         //refresh.gameObject.SetActive(true);
+<<<<<<< HEAD
         refresh.onClick.AddListener(Refresh);
         lastRefreshTime = PlayerPrefs.GetInt("lastRefreshTime", 0);
+=======
+        refresh.onClick.AddListener(Refresh);
+        lastRefreshTime = PlayerPrefs.GetInt("lastRefreshTime", 0);
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
         lastRefreshTimeText.text = lastRefreshTime == 0 ? "" : TimeStamp.TimeStampToDateString(lastRefreshTime);
         if (lastRefreshTime == 0)
         {
@@ -375,14 +421,22 @@ public class AdminManager : MonoSingleton<AdminManager>
     }
     #endregion
 
+<<<<<<< HEAD
     #region 获取后台数据
+=======
+    #region 获取后台数据
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     /// <summary>
     /// 管理员登录
     /// </summary>
     /// <param name="userName"></param>
     /// <param name="password"></param>
     /// <param name="doSuccess"></param>
+<<<<<<< HEAD
     /// <param name="doFail"></param>
+=======
+    /// <param name="doFail"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     public void Login(string userName, string password, Action doSuccess = null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -411,10 +465,17 @@ public class AdminManager : MonoSingleton<AdminManager>
             }
             HttpManager.My.mask.SetActive(false);
         }, keyValues, HttpType.Post, 10010));
+<<<<<<< HEAD
     }
     /// <summary>
     /// 获取分组列表
     /// </summary>
+=======
+    }
+    /// <summary>
+    /// 获取分组列表
+    /// </summary>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void GetPlayerGroups(Action doEnd)
     {
         if (playerGroups.Count > 0)
@@ -441,11 +502,19 @@ public class AdminManager : MonoSingleton<AdminManager>
             }
             HttpManager.My.mask.SetActive(false);
         }, keyValues, HttpType.Get, 10001));
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 获取整体数据
     /// </summary>
+=======
+    }
+
+    /// <summary>
+    /// 获取整体数据
+    /// </summary>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void GetTotalPlayCount(Action doEnd)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -463,11 +532,19 @@ public class AdminManager : MonoSingleton<AdminManager>
             }
             HttpManager.My.mask.SetActive(false);
         }, keyValues, HttpType.Get, 10002));
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 获取每关的数据
     /// </summary>
+=======
+    }
+
+    /// <summary>
+    /// 获取每关的数据
+    /// </summary>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void GetLevelPlayCount(Action doEnd)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -490,11 +567,19 @@ public class AdminManager : MonoSingleton<AdminManager>
             }
             HttpManager.My.mask.SetActive(false);
         }, keyValues, HttpType.Get, 10003));
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 获取各小组的整体数据
     /// </summary>
+=======
+    }
+
+    /// <summary>
+    /// 获取各小组的整体数据
+    /// </summary>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void GetGroupTotalPlayCount(Action doEnd)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -546,8 +631,13 @@ public class AdminManager : MonoSingleton<AdminManager>
             }
             HttpManager.My.mask.SetActive(false);
         }, keyValues, HttpType.Get, 10005));
+<<<<<<< HEAD
     }
 
+=======
+    }
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     /// <summary>
     /// 获取小组的每关的整体数据
     /// </summary>
@@ -575,12 +665,21 @@ public class AdminManager : MonoSingleton<AdminManager>
             }
             HttpManager.My.mask.SetActive(false);
         }, keyValues, HttpType.Get, 10009));
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 获取小组用户的每关的游玩次数
     /// </summary>
     /// <param name="groupID"></param>
+=======
+    }
+
+    /// <summary>
+    /// 获取小组用户的每关的游玩次数
+    /// </summary>
+    /// <param name="groupID"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void GetGroupPlayerLevelPlayCount(int groupID, Action doEnd)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -609,12 +708,21 @@ public class AdminManager : MonoSingleton<AdminManager>
             }
             HttpManager.My.mask.SetActive(false);
         }, keyValues, HttpType.Get, 10006));
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 获取小组用户的每关的胜利的次数
     /// </summary>
     /// <param name="groupID"></param>
+=======
+    }
+
+    /// <summary>
+    /// 获取小组用户的每关的胜利的次数
+    /// </summary>
+    /// <param name="groupID"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void GetGroupPlayerLevelWinCount(int groupID, Action doEnd)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -637,12 +745,21 @@ public class AdminManager : MonoSingleton<AdminManager>
             }
             HttpManager.My.mask.SetActive(false);
         }, keyValues, HttpType.Get, 10007));
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 获取小组用户的每关的游玩时间
     /// </summary>
     /// <param name="groupID"></param>
+=======
+    }
+
+    /// <summary>
+    /// 获取小组用户的每关的游玩时间
+    /// </summary>
+    /// <param name="groupID"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void GetGroupPlayerLevelTimeCount(int groupID, Action doEnd)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -807,5 +924,10 @@ public class AdminManager : MonoSingleton<AdminManager>
             HttpManager.My.mask.SetActive(false);
         }, keyValues, HttpType.Get, 10016));
     }
+<<<<<<< HEAD
     #endregion
 }
+=======
+    #endregion
+}
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47

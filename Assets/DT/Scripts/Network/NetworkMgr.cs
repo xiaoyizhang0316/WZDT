@@ -183,6 +183,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("teamID", teamID);
 
         StartCoroutine(HttpManager.My.HttpSend(Url.SetPlayerStatusScene, (www) => {
+<<<<<<< HEAD
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -201,6 +202,26 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 
                 doSuccess?.Invoke();
             }
+=======
+            //HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            //if (response.status == -1)
+            //{
+            //    ShowReconn();
+            //    return;
+            //}
+            //if (response.status == 0)
+            //{
+            //    HttpManager.My.ShowTip(response.errMsg);
+            //    Debug.Log(response.errMsg);
+            //    doFail?.Invoke();
+            //}
+            //else
+            //{
+            //    Debug.Log(response.data);
+                
+            //    doSuccess?.Invoke();
+            //}
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
             SetMask();
         }, keyValues, HttpType.Post));
     }
@@ -1192,6 +1213,10 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     {
         if (poorPlayerID.Equals(""))
         {
+<<<<<<< HEAD
+=======
+            doSuccess(new List<PlayerEquip>());
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
             return;
         }
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();

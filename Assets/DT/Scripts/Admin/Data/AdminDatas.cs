@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,25 +23,66 @@ public class PlayerGroups
 }
 
 [Serializable]
+=======
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+public class AdminDatas 
+{
+    
+}
+
+[Serializable]
+public class PlayerGroup
+{
+    public int groupID;
+    public string groupName;
+}
+
+[Serializable]
+public class PlayerGroups
+{
+    public List<PlayerGroup> playerGroups;
+}
+
+[Serializable]
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
 public class TotalPlayCount
 {
     public int total;
     public int win;
     public int times;
+<<<<<<< HEAD
 }
 
 [Serializable]
+=======
+}
+
+[Serializable]
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
 public class LevelPlayCount
 {
     public string levelName;
     public int playCount;
     public int winCount;
+<<<<<<< HEAD
     public int times;
 }
 
 [Serializable]
 public class LevelPlayCounts
 {
+=======
+    public int times;
+}
+
+[Serializable]
+public class LevelPlayCounts
+{
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     public List<LevelPlayCount> levelPlayCounts;
 }
 

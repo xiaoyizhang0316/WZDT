@@ -63,9 +63,20 @@ public class LevelSign : MonoBehaviour
                 {
                     if (PlayerData.My.isServer)
                     {
+<<<<<<< HEAD
                         NetworkMgr.My.GetPoorPlayerEquips((data) =>
                         {
                             PlayerData.My.InitPlayerEquip(data);
+=======
+                        //SceneManager.LoadScene(loadScene);
+                        NetworkMgr.My.GetPoorPlayerEquips((data) =>
+                        {
+                            Debug.Log("装备回调");
+                            if (data.Count != 0)
+                            {
+                                PlayerData.My.InitPlayerEquip(data);
+                            }
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
                             SceneManager.LoadScene(loadScene);
                             NetworkMgr.My.SetPlayerStatus(loadScene, NetworkMgr.My.currentBattleTeamAcount.teamID);
                         });

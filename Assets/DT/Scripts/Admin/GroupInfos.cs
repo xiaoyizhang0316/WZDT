@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,23 +8,43 @@ using UnityEngine.UI;
 public class GroupInfos : MonoBehaviour
 {
     public Transform itemContent;
+=======
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GroupInfos : MonoBehaviour
+{
+    public Transform itemContent;
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     public GameObject groupItem;
 
     public Transform detailInfoPanel;
     public GameObject detailInfoItem;
     public Transform detailContent;
+<<<<<<< HEAD
     #region data
+=======
+    #region data
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     List<GroupItemInfo> groupItemInfos = new List<GroupItemInfo>();
 
     GroupTotalPlayCount groupTotal;
 
     private int index = -1;
     #endregion
+<<<<<<< HEAD
     #region UI
+=======
+    #region UI
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     public Text playCount;
     public Text winCount;
     public Text totalTimes;
     public Text winRates;
+<<<<<<< HEAD
     public Text perTime;
     public Text totalPeople;
 
@@ -31,6 +52,15 @@ public class GroupInfos : MonoBehaviour
     public Toggle groupTotal_tg;
     public Toggle playerPlayCount_tg;
     public Toggle playerWinCount_tg;
+=======
+    public Text perTime;
+    public Text totalPeople;
+
+    public Text groupName;
+    public Toggle groupTotal_tg;
+    public Toggle playerPlayCount_tg;
+    public Toggle playerWinCount_tg;
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     public Toggle playerTimeCount_tg;
     public Toggle playerTotalScore_tg;
 
@@ -47,8 +77,13 @@ public class GroupInfos : MonoBehaviour
     public Button scoreSort_btn;
 
     private bool isSortByScore = false;
+<<<<<<< HEAD
     #endregion
 
+=======
+    #endregion
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void Start()
     {
         groupTotal_tg.onValueChanged.AddListener((isOn) => { ShowTotalToggle(isOn); });
@@ -69,12 +104,21 @@ public class GroupInfos : MonoBehaviour
         timeSort_btn.onClick.AddListener(() => Sort(false));
         scoreSort_btn.onClick.AddListener(() => Sort(true));
         InitLevelButtons();
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 显示小组的信息
     /// </summary>
     /// <param name="gtpc"></param>
+=======
+    }
+
+    /// <summary>
+    /// 显示小组的信息
+    /// </summary>
+    /// <param name="gtpc"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     public void ShowInfos(GroupTotalPlayCount gtpc)
     {
         detailInfoPanel.gameObject.SetActive(false);
@@ -106,11 +150,19 @@ public class GroupInfos : MonoBehaviour
             groupItemInfos[6].levels.Add((float)AdminManager.My.levelPasses[i].passNum/AdminManager.My.playerPlayCount.Count);
         }
         ShowGroupTotal();
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 显示小组的总体数据
     /// </summary>
+=======
+    }
+
+    /// <summary>
+    /// 显示小组的总体数据
+    /// </summary>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     public void ShowTotal()
     {
         int validPeople = GetValidPeople();
@@ -124,11 +176,19 @@ public class GroupInfos : MonoBehaviour
         totalPeople.text = AdminManager.My.playerPlayCount.Count.ToString();
         PlayerGroup group = AdminManager.My.GetPlayerGroupByGroupID(groupTotal.groupID);
         groupName.text = group == null ? "" : group.groupName;
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 初始化关卡详细通过信息按钮
     /// </summary>
+=======
+    }
+
+    /// <summary>
+    /// 初始化关卡详细通过信息按钮
+    /// </summary>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void InitLevelButtons()
     {
         //for(int i=0; i<levelButtons.Count; i++)
@@ -145,12 +205,21 @@ public class GroupInfos : MonoBehaviour
         levelButtons[6].onClick.AddListener(() => GetLevelPassDetail(7));
         levelButtons[7].onClick.AddListener(() => GetLevelPassDetail(8));
         levelButtons[8].onClick.AddListener(() => GetLevelPassDetail(9));
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 获取某关详细的通过情况
     /// </summary>
     /// <param name="levelID"></param>
+=======
+    }
+
+    /// <summary>
+    /// 获取某关详细的通过情况
+    /// </summary>
+    /// <param name="levelID"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void GetLevelPassDetail(int levelID)
     {
         ClearDetailContent();
@@ -171,11 +240,19 @@ public class GroupInfos : MonoBehaviour
 
             });
         }
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 处理并展示详细通过情况
     /// </summary>
+=======
+    }
+
+    /// <summary>
+    /// 处理并展示详细通过情况
+    /// </summary>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void DealWithPassDetailData()
     {
         ClearDetailContent();
@@ -187,22 +264,33 @@ public class GroupInfos : MonoBehaviour
             LevelDetailInfo ldi = go.GetComponent<LevelDetailInfo>();
             ldi.Setup(AdminManager.My.levelPassDetails[i], num);
             num++;
+<<<<<<< HEAD
         }
 
+=======
+        }
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
         foreach (string key in tryGroupPlayer.Keys)
         {
             GameObject go = Instantiate(detailInfoItem, detailContent);
             LevelDetailInfo ldi = go.GetComponent<LevelDetailInfo>();
             ldi.Setup(tryGroupPlayer[key], num, true);
             num++;
+<<<<<<< HEAD
         }
 
+=======
+        }
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
         foreach (string key in groupPlayers.Keys)
         {
             GameObject go = Instantiate(detailInfoItem, detailContent);
             LevelDetailInfo ldi = go.GetComponent<LevelDetailInfo>();
             ldi.Setup(groupPlayers[key], num);
             num++;
+<<<<<<< HEAD
         }
     }
 
@@ -210,6 +298,15 @@ public class GroupInfos : MonoBehaviour
     /// 排序
     /// </summary>
     /// <param name="byScore"></param>
+=======
+        }
+    }
+
+    /// <summary>
+    /// 排序
+    /// </summary>
+    /// <param name="byScore"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void Sort(bool byScore)
     {
         if (isSortByScore == byScore)
@@ -226,12 +323,21 @@ public class GroupInfos : MonoBehaviour
         }
         isSortByScore = byScore;
         DealWithPassDetailData();
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 获取未通过的人数
     /// </summary>
     /// <param name="doEnd"></param>
+=======
+    }
+
+    /// <summary>
+    /// 获取未通过的人数
+    /// </summary>
+    /// <param name="doEnd"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void GetNotPass(Action doEnd )
     {
         groupPlayers.Clear();
@@ -267,12 +373,21 @@ public class GroupInfos : MonoBehaviour
             }
         }
         doEnd?.Invoke();
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 获取小组实际游玩的人数
     /// </summary>
     /// <returns></returns>
+=======
+    }
+
+    /// <summary>
+    /// 获取小组实际游玩的人数
+    /// </summary>
+    /// <returns></returns>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     int  GetValidPeople()
     {
         int validPeople = 0;
@@ -286,12 +401,21 @@ public class GroupInfos : MonoBehaviour
         Debug.Log(groupTotal.times / 3600.0);
         Debug.Log(validPeople);
         return validPeople;
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 显示小组总体信息的toggle事件
     /// </summary>
     /// <param name="isOn"></param>
+=======
+    }
+
+    /// <summary>
+    /// 显示小组总体信息的toggle事件
+    /// </summary>
+    /// <param name="isOn"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void ShowTotalToggle(bool isOn)
     {
         if (isOn)
@@ -311,12 +435,21 @@ public class GroupInfos : MonoBehaviour
         {
             return;
         }
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 显示组员游玩次数信息的toggle事件
     /// </summary>
     /// <param name="isOn"></param>
+=======
+    }
+
+    /// <summary>
+    /// 显示组员游玩次数信息的toggle事件
+    /// </summary>
+    /// <param name="isOn"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void ShowCountToggle(bool isOn)
     {
         if (isOn)
@@ -336,12 +469,21 @@ public class GroupInfos : MonoBehaviour
         {
             return;
         }
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 显示小组组员胜利次数信息的toggle事件
     /// </summary>
     /// <param name="isOn"></param>
+=======
+    }
+
+    /// <summary>
+    /// 显示小组组员胜利次数信息的toggle事件
+    /// </summary>
+    /// <param name="isOn"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void ShowWinToggle(bool isOn)
     {
         if (isOn)
@@ -361,12 +503,21 @@ public class GroupInfos : MonoBehaviour
         {
             return;
         }
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 显示小组组员每关游玩时间信息的toggle事件
     /// </summary>
     /// <param name="isOn"></param>
+=======
+    }
+
+    /// <summary>
+    /// 显示小组组员每关游玩时间信息的toggle事件
+    /// </summary>
+    /// <param name="isOn"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void ShowTimeToggle(bool isOn)
     {
         if (isOn)
@@ -386,8 +537,13 @@ public class GroupInfos : MonoBehaviour
         {
             return;
         }
+<<<<<<< HEAD
     }
 
+=======
+    }
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void ShowTotalScoreToggle(bool isOn)
     {
         if (isOn)
@@ -407,11 +563,19 @@ public class GroupInfos : MonoBehaviour
         {
             return;
         }
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 显示小组总体信息
     /// </summary>
+=======
+    }
+
+    /// <summary>
+    /// 显示小组总体信息
+    /// </summary>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void ShowGroupTotal()
     {
         for(int i = 0; i < groupItemInfos.Count; i++)
@@ -420,13 +584,22 @@ public class GroupInfos : MonoBehaviour
             GroupItemSample gis = go.GetComponent<GroupItemSample>();
             gis.Setup(groupItemInfos[i]);
         }
+<<<<<<< HEAD
     }
 
+=======
+    }
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     /// <summary>
     /// 显示组员信息
     /// </summary>
     /// <param name="playCounts"></param>
+<<<<<<< HEAD
     /// <param name="isTime"></param>
+=======
+    /// <param name="isTime"></param>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void ShowPlayerInfos(List<GroupPlayerLevelPlayCount> playCounts, bool isTime=false)
     {
         for (int i = 0; i < playCounts.Count; i++)
@@ -435,8 +608,13 @@ public class GroupInfos : MonoBehaviour
             GroupItemSample gis = go.GetComponent<GroupItemSample>();
             gis.Setup(playCounts[i], isTime);
         }
+<<<<<<< HEAD
     }
 
+=======
+    }
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void ShowPlayerTotalScoreInfos(List<PlayerTotalScore> totalScores, bool isTime = false)
     {
         for (int i = 0; i < totalScores.Count; i++)
@@ -445,8 +623,13 @@ public class GroupInfos : MonoBehaviour
             GroupItemSample gis = go.GetComponent<GroupItemSample>();
             gis.Setup(totalScores[i]);
         }
+<<<<<<< HEAD
     }
 
+=======
+    }
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void ClearContent()
     {
         //for(int i=0; i< itemContent.childCount; i++)
@@ -458,8 +641,13 @@ public class GroupInfos : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+<<<<<<< HEAD
     }
 
+=======
+    }
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void ClearDetailContent()
     {
         //for (int i = 0; i < detailContent.childCount; i++)
@@ -471,33 +659,58 @@ public class GroupInfos : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 关闭
     /// </summary>
+=======
+    }
+
+    /// <summary>
+    /// 关闭
+    /// </summary>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void Close()
     {
         gameObject.SetActive(false);
         Sort(false);
         detailInfoPanel.gameObject.SetActive(false);
         ClearContent();
+<<<<<<< HEAD
     }
 
     /// <summary>
     /// 关闭通过详情
     /// </summary>
+=======
+    }
+
+    /// <summary>
+    /// 关闭通过详情
+    /// </summary>
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void DetailClose()
     {
         ClearDetailContent();
         Sort(false);
         detailInfoPanel.gameObject.SetActive(false);
+<<<<<<< HEAD
     }
 }
 
 
 public class GroupItemInfo
 {
+=======
+    }
+}
+
+
+public class GroupItemInfo
+{
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     public string itemName;
     public List<float> levels;
 

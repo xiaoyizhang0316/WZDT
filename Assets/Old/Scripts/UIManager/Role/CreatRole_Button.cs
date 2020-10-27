@@ -216,7 +216,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().MonthlyCost();
                     role.GetComponent<BaseMapRole>().AddTechPoint();
                     role.GetComponent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
-                    BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
+                    if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1")
+                    {
+                        BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
+                    }
                     CreateRoleOperationRecord(role.GetComponent<BaseMapRole>());
                     if (!PlayerData.My.isSOLO)
                     {

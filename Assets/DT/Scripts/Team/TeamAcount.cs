@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,34 @@ public class TeamAcounts
 [Serializable]
 public class TeamConfiguration
 {
+=======
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+[Serializable]
+public class TeamAcount
+{
+	public string teamID;
+	public string playerIDs;
+	public string playerNames;
+	public string groupID;
+	public string teamName;
+	public bool isDisbanded;
+	public int createTime;
+}
+
+[Serializable]
+public class TeamAcounts
+{
+	public List<TeamAcount> teamAcounts;
+}
+
+[Serializable]
+public class TeamConfiguration
+{
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
 	public string playerIDs;
 	public string playerNames;
 	public string captain;

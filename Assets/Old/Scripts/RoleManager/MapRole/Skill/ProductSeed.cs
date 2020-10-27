@@ -12,7 +12,11 @@ public class ProductSeed : BaseSkill
     private int currentCount = 0;
     public override void Skill()
     {
+<<<<<<< HEAD
         if (!PlayerData.My.isSOLO && !PlayerData.My.isServer)
+=======
+        if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
         {
             return;
         }

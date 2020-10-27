@@ -168,6 +168,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         starThreeStatus = true;
     }
 
+<<<<<<< HEAD
     public bool isAllReady = false;
 
     public void CheckGameStart()
@@ -197,6 +198,8 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         }
     }
 
+=======
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     public void GenerateEmoji(Vector3 pos)
     {
         GameObject go = Instantiate(emojiPrb);
@@ -221,7 +224,15 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
             string str = "OnGameReady|1";
             PlayerData.My.client.SendToServerMsg(str);
         }
+<<<<<<< HEAD
         CheckGameStart();
+=======
+        if (!PlayerData.My.isSOLO)
+        {
+            PlayerData.My.isLocalReady = true;
+            PlayerData.My.CheckGameStart();
+        }
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     }
 
     public void CheckCheat()

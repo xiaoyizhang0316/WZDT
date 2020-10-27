@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,25 @@ public class GroupSample : MonoBehaviour
     private Button btn;
 
 
+=======
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GroupSample : MonoBehaviour
+{
+    public int groupID = 0;
+    private Text groupName;
+    private Text totalCount;
+    private Text winCount;
+    private Text totalTimes;
+    private Text winRates;
+    private Text time;
+    private Button btn;
+
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     public void Setup( PlayerGroup pg, GroupTotalPlayCount playCount)
     {
         Init();
@@ -38,8 +58,13 @@ public class GroupSample : MonoBehaviour
         winRates.text = (((float)playCount.win / playCount.total) * 100).ToString("F2") + "%";
         //time.text = (playCount.times * 1.0 / playCount.total / 60).ToString("F2") + "m";
         time.text = AdminManager.My.GetTimeString(playCount.times / playCount.total);
+<<<<<<< HEAD
     }
 
+=======
+    }
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void Init()
     {
         groupName = transform.Find("Name").GetComponent<Text>();
@@ -49,6 +74,7 @@ public class GroupSample : MonoBehaviour
         winRates = transform.Find("WinRate").GetComponent<Text>();
         time = transform.Find("Time").GetComponent<Text>();
         btn = transform.GetComponent<Button>();
+<<<<<<< HEAD
     }
 
     private void OnClick()
@@ -56,3 +82,12 @@ public class GroupSample : MonoBehaviour
         AdminManager.My.ClickShowGroupMoreInfos(groupID);
     }
 }
+=======
+    }
+
+    private void OnClick()
+    {
+        AdminManager.My.ClickShowGroupMoreInfos(groupID);
+    }
+}
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47

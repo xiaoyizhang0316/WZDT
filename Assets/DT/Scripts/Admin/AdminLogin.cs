@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,38 @@ public class AdminLogin : MonoBehaviour
         
     }
 
+=======
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class AdminLogin : MonoBehaviour
+{
+    public InputField username_input;
+    public InputField password_input;
+
+    public Button login_btn;
+
+    string username = "";
+    string password = "";
+    // Start is called before the first frame update
+    void Start()
+    {
+        username = PlayerPrefs.GetString("adminUsername", "");
+        password = PlayerPrefs.GetString("adminPassword", "");
+        username_input.text = username;
+        password_input.text = password;
+        login_btn.onClick.AddListener(Login);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
     private void Login()
     {
         username = username_input.text.Replace(" ", "");
@@ -59,5 +92,10 @@ public class AdminLogin : MonoBehaviour
                 password_input.text = "";
             });
         }
+<<<<<<< HEAD
     }
 }
+=======
+    }
+}
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47

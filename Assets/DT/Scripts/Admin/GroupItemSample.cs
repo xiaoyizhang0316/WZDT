@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,19 @@ public class GroupItemSample : MonoBehaviour
     public Text names;
     public List<Text> levels;
     #endregion
+=======
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GroupItemSample : MonoBehaviour
+{
+    #region UI
+    public Text names;
+    public List<Text> levels;
+    #endregion
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
 
     public void Setup(GroupItemInfo info)
     {
@@ -106,4 +120,8 @@ public class GroupItemSample : MonoBehaviour
             levels[i].text = "";
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 15ac25df35d06066a4c7fbf2ef2f15d90fa4aa47
