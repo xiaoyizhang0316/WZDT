@@ -66,7 +66,8 @@ public class DarkEffect : MonoBehaviour
             {
                 _tmpVt.y = _tmpPos.y;
             }
-            _tmpVt.z = _tmpItem.radius;
+            float per = Mathf.Max(Screen.width / 1920f,Screen.height / 1080f);
+            _tmpVt.z = _tmpItem.radius * per;
             _tmpVt.w = 0;
             _itemDatas[i] = _tmpVt;
         }
