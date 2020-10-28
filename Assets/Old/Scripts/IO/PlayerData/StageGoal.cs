@@ -571,6 +571,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             NewCanvasUI.My.GamePause(false);
             NewCanvasUI.My.lose.SetActive(true);
+            NewCanvasUI.My.lose.GetComponent<LosePanel>().InitOtherKey();
             NewCanvasUI.My.EndLowHealth();
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
             if (NetworkMgr.My.isUsingHttp)
@@ -595,7 +596,6 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
             }
         }
-        
     }
 
     public void CommitLose()
