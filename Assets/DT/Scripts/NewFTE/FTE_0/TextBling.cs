@@ -10,7 +10,7 @@ public class TextBling : MonoBehaviour
     Color startColor;
     Color endColor;
     int value;
-    //bool bling = false;
+    bool bling = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,18 +19,21 @@ public class TextBling : MonoBehaviour
 
     public void StartBling(Color endColor)
     {
-        if (this.endColor == endColor)
+        if (startColor == new Color())
+        {
+            startColor = GetComponent<Text>().color;
+        }
+        Debug.Log(gameObject.name+"+"+startColor + "," + endColor);
+        if (this.startColor == endColor)
         {
             return;
         }
         this.endColor = endColor;
-        if (startColor == null)
-        {
-            startColor = GetComponent<Text>().color;
-        }
-        //bling = true;
+        
+        bling = true;
         StartTextBling();
-        StartCoroutine(TweenStop());
+        //StartCoroutine(TweenStop());
+        Invoke("TweenStop", 2);
     }
 
     public void StartBling(int values)
@@ -42,39 +45,43 @@ public class TextBling : MonoBehaviour
         //}
         //else
         //{
-            endColor = Color.green;
+            endColor = Color.yellow;
         //}
         value = values;
-        //bling = true;
+        bling = true;
         //GetComponent<Text>().text = value.ToString();
         StartTextBling();
-        StartCoroutine(Stop());
+        //StartCoroutine(Stop());
+        Invoke("Stop", 2);
     }
 
     void StartTextBling()
     {
         //bling = true;
-        //if(bling)
-            tween = GetComponent<Text>().DOColor(startColor, 0.4f).OnComplete(() => {
-                GetComponent<Text>().DOColor(endColor, 0.4f).OnComplete(() => StartTextBling());
+        if(bling)
+            tween = GetComponent<Text>().DOFade(0, 0.4f).OnComplete(() => {
+                GetComponent<Text>().DOFade(1, 0.4f).OnComplete(() => StartTextBling());
             });
     }
 
-    IEnumerator TweenStop()
+    void TweenStop()
     {
-        yield return new WaitForSeconds(2);
+        //yield return new WaitForSeconds(2);
         tween.Kill();
-        //bling = false;
+        bling = false;
         GetComponent<Text>().color = endColor;
+        GetComponent<Text>().DOFade(1, 0.01f);
         startColor = endColor;
     }
 
-    IEnumerator Stop()
+    void Stop()
     {
-        yield return new WaitForSeconds(2);
+       // yield return new WaitForSeconds(2);
         tween.Kill();
-        //bling = false;
-        GetComponent<Text>().color = startColor;
+        bling = false;
+        //GetComponent<Text>().color = startColor;
+        GetComponent<Text>().DOFade(1, 0.01f);
         //startColor = endColor;
+        CancelInvoke("Stop");
     }
 }
