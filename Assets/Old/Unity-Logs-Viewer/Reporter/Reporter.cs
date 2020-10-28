@@ -1652,7 +1652,7 @@ public class Reporter : MonoBehaviour
 		if (gestureLength > gestureBase && gestureSum.magnitude < gestureBase / 2) {
 			gestureDetector.Clear();
 			gestureCount++;
-			if (gestureCount >= numOfCircleToShow)
+			if (gestureCount >= numOfCircleToShow && Input.GetKey(KeyCode.UpArrow))
 				return true;
 		}
 

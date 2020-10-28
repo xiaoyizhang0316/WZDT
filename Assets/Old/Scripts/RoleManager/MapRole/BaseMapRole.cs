@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static GameEnum;
 
 [Serializable]
@@ -106,6 +107,8 @@ public class BaseMapRole : MonoBehaviour
     public int startEncourageLevel;
 
     public RoleSprite roleSprite;
+
+    public GameObject emptyGearSprite;
 
     public void InitBaseRoleData()
     {
@@ -896,5 +899,28 @@ public class BaseMapRole : MonoBehaviour
     private void OnDestroy()
     {
 
+    }
+    List<string> sceneName = new List<string> { "FTE_1", "FTE_0-1", "FTE_0-2" };
+
+    private void Update()
+    {
+        if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+        {
+            if (!isNpc)
+            {
+                if (baseRoleData.EquipList.Count == 0 && baseRoleData.peoPleList.Count == 0 && baseRoleData.inMap)
+                {
+                    emptyGearSprite.SetActive(true);
+                }
+                else
+                {
+                    emptyGearSprite.SetActive(false);
+                }
+            }
+        }
+        else if (!isNpc)
+        {
+            emptyGearSprite.SetActive(false);
+        }
     }
 }

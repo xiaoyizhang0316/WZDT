@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
@@ -53,6 +54,8 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     public Button clearWarehouse;
 
     public EncourageLevel encourageLevel;
+
+    public GameObject emptyEquip;
     
     // Start is called before the first frame update
     void Start()
@@ -122,10 +125,26 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         buffcontent.SetActive(false);
     }
 
+    List<string> sceneName = new List<string> { "FTE_1", "FTE_0-1", "FTE_0-2" };
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+        {
+            if (currentRole != null && currentRole.EquipList.Count == 0 && currentRole.peoPleList.Count == 0)
+            {
+                emptyEquip.SetActive(true);
+            }
+            else
+            {
+                emptyEquip.SetActive(false);
+            }
+        }
+        else
+        {
+            emptyEquip.SetActive(false);
+        }
     }
 
     public void SetDependency()
