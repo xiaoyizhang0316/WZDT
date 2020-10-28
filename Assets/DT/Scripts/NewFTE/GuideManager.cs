@@ -68,6 +68,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     {
         if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
         {
+            FindObjectOfType<CloseGuide>().gameObject.SetActive(false);
             return;
         }
         foreach (var item in NewCanvasUI.My.highLight)
