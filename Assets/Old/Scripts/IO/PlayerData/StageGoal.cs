@@ -243,7 +243,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (playerTechPoint < num)
         {
-            HttpManager.My.ShowTip("科技值不足！");
+            HttpManager.My.ShowTip("Mega值不足！");
             return false;
         }
         FloatInfoManager.My.TechChange(0 - num);
