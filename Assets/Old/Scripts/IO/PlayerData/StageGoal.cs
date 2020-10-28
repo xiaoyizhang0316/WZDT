@@ -1225,4 +1225,17 @@ public class StageGoal : MonoSingleton<StageGoal>
 
         public List<string> operationParam;
     }
+    private void OnGUI()
+    {
+        if (GUILayout.Button("扣血"))
+        {
+            QualitySettings.IncreaseLevel();
+            Debug.Log(QualitySettings.GetQualityLevel());
+        }
+        if (GUILayout.Button("扣血123"))
+        {
+            QualitySettings.DecreaseLevel();
+            Debug.Log(QualitySettings.GetQualityLevel());
+        }
+    }
 }
