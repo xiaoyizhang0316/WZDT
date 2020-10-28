@@ -1,21 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class ToFTE0 : MonoBehaviour
+public class ToMap : MonoBehaviour
 {
-    public void LoadFTE0()
-    {
-        SceneManager.LoadScene("FTE_0-2");
-
-    }
-
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetComponent<Button>().onClick.AddListener(()=> {
+            NetworkMgr.My.ConnectToMap();
+        });
     }
 
     // Update is called once per frame
