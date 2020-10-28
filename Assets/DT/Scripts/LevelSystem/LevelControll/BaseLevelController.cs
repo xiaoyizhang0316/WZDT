@@ -185,6 +185,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     // Start is called before the first frame update
     public virtual void Start()
     {
+        Debug.LogWarning("base level controller start");
         DOTween.PauseAll();
         DOTween.defaultAutoPlay = AutoPlay.None;
         InvokeRepeating("CheckStarTwo", 0f, 1f);
@@ -202,7 +203,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
             PlayerData.My.isLocalReady = true;
             PlayerData.My.CheckGameStart();
         }
-        else
+        else if (PlayerPrefs.GetInt("isUseGuide") == 0)
         {
             NewCanvasUI.My.GameNormal();
         }

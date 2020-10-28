@@ -66,10 +66,9 @@ public class TeamPlayers
 		playerDatas.Sort((x, y) => x.playerID.CompareTo(y.playerID));
 		for(int i=0; i<playerDatas.Count; i++)
         {
-			playerIDs += playerDatas[i].playerID+"_";
+			playerIDs += "-"+playerDatas[i].playerID;
 			playerNames += playerDatas[i].playerName + "_";
         }
-		playerIDs = playerIDs.Substring(0, playerIDs.Length - 1);
-		playerNames = playerNames.Substring(0, playerNames.Length - 1);
+		playerIDs +="-";
     }
 }

@@ -258,6 +258,7 @@ public class NetManager : MonoSingleton<NetManager>
         switch (select)
         {
             case 0:
+                Debug.LogWarning("Net change");
                 DOTween.PauseAll();
                 DOTween.defaultAutoPlay = AutoPlay.None;
                 break;

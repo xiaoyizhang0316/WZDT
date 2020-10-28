@@ -13,6 +13,7 @@ public class LosePanel : MonoBehaviour
     public Text winkey1;
     public Text winkey2;
     public Text winkey3;
+    public List<Text> otherWinKey = new List<Text>();
     // Start is called before the first frame update
     void Start()
     {
@@ -73,5 +74,37 @@ public class LosePanel : MonoBehaviour
         winkey1.text = BaseLevelController.My.winkey1;
         winkey2.text = BaseLevelController.My.winkey2;
         winkey3.text = BaseLevelController.My.winkey3;
+    }
+
+    public void InitOtherKey()
+    {
+        int count = 0;
+        if (StageGoal.My.playerGold >= 10000)
+        {
+            otherWinKey[count].gameObject.SetActive(true);
+            otherWinKey[count].text = "-投入资金给角色升级可以满足更多的消费者";
+            count++;
+        }
+        bool flag = false;
+        foreach (BaseMapRole item in PlayerData.My.MapRole)
+        {
+            if (!item.isNpc && item.baseRoleData.EquipList.Count == 0 && item.baseRoleData.peoPleList.Count == 0)
+            {
+                flag = true;
+                break;
+            }
+        }
+        if (flag)
+        {
+            otherWinKey[count].gameObject.SetActive(true);
+            otherWinKey[count].text = "-为自己的角色安装装备可以满足更多的消费者";
+            count++;
+        }
+        if (StageGoal.My.currentWave <= 3 && StageGoal.My.playerGold <= -5000 && count < 2)
+        {
+            otherWinKey[count].gameObject.SetActive(true);
+            otherWinKey[count].text = "-前期需要一定的现金流来保证所有角色的运转";
+            count++;
+        }
     }
 }

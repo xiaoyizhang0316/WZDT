@@ -18,7 +18,7 @@ public class Level6Controller : BaseLevelController
         }
         if (count == 11)
             starTwoStatus = true;
-        starTwoCondition = "使用科技值解锁所有角色，当前：" + count.ToString() + "/11";
+        starTwoCondition = "使用Mega值解锁所有角色，当前：" + count.ToString() + "/11";
     }
 
     public override void CheckStarThree()

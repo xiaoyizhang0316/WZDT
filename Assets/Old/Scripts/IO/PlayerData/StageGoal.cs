@@ -243,7 +243,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (playerTechPoint < num)
         {
-            HttpManager.My.ShowTip("科技值不足！");
+            HttpManager.My.ShowTip("Mega值不足！");
             return false;
         }
         FloatInfoManager.My.TechChange(0 - num);
@@ -571,6 +571,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             NewCanvasUI.My.GamePause(false);
             NewCanvasUI.My.lose.SetActive(true);
+            NewCanvasUI.My.lose.GetComponent<LosePanel>().InitOtherKey();
             NewCanvasUI.My.EndLowHealth();
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
             if (NetworkMgr.My.isUsingHttp)
@@ -595,7 +596,6 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
             }
         }
-        
     }
 
     public void CommitLose()
@@ -1224,5 +1224,18 @@ public class StageGoal : MonoSingleton<StageGoal>
         public OperationType type;
 
         public List<string> operationParam;
+    }
+    private void OnGUI()
+    {
+        if (GUILayout.Button("扣血"))
+        {
+            QualitySettings.IncreaseLevel();
+            Debug.Log(QualitySettings.GetQualityLevel());
+        }
+        if (GUILayout.Button("扣血123"))
+        {
+            QualitySettings.DecreaseLevel();
+            Debug.Log(QualitySettings.GetQualityLevel());
+        }
     }
 }
