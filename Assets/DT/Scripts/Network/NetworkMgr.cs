@@ -263,6 +263,38 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
 
+    public void ConnectToMap(Action doSuccess = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.ReConnUrl, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                GoToLogin("连接失败！");
+                return;
+            }
+            else
+            {
+                playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                if (playerDatas.isOutDate)
+                {
+                    GoToLogin("账号失效！");
+                    return;
+                }
+                token = playerDatas.token;
+                playerLimit = playerDatas.limit;
+                InitRoleFoundDic(playerDatas.roleFound);
+                
+                SceneManager.LoadScene("Map");
+                
+                doSuccess?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post));
+    }
+
     public void GetJsonDatas(Action<string> doSuccess, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
