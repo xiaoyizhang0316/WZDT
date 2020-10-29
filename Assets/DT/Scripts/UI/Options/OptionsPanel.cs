@@ -20,6 +20,8 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
     public AudioMixer audioMixer;
 
     public Slider qualitySelect;
+
+    public Toggle fullScreenSwitch;
     
     // Start is called before the first frame update
     void Start()
@@ -84,6 +86,12 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
     public void InitQualitySetting()
     {
         qualitySelect.value = QualitySettings.GetQualityLevel();
+        fullScreenSwitch.isOn = Screen.fullScreen;
+    }
+
+    public void OnFullScreenValueChange()
+    {
+        Screen.SetResolution(1920, 1080, fullScreenSwitch.isOn);
     }
 
     public void Close()
