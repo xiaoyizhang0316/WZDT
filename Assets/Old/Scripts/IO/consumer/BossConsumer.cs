@@ -583,29 +583,40 @@ public class BossConsumer : ConsumeSign
     private void Update()
     {
         //print(tweener.ElapsedPercentage(false));
-        if (isIgnoreResistance)
+        if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
-            try
+            spriteLogo.gameObject.SetActive(false);
+            if (isIgnoreResistance)
             {
-                self.SetActive(false);
-                sheep.SetActive(true);
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    self.SetActive(false);
+                    sheep.SetActive(true);
+                }
+                catch (Exception ex)
+                {
 
+                }
+            }
+            else
+            {
+                try
+                {
+                    self.SetActive(true);
+                    sheep.SetActive(false);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
         }
         else
         {
-            try
-            {
-                self.SetActive(true);
-                sheep.SetActive(false);
-            }
-            catch (Exception ex)
-            {
-
-            }
+            self.SetActive(false);
+            sheep.SetActive(false);
+            spriteLogo.gameObject.SetActive(true);
+            spriteLogo.transform.eulerAngles = new Vector3(-90, 0, -135);
         }
     }
 
