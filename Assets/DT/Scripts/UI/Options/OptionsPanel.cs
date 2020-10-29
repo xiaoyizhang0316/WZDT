@@ -86,7 +86,7 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
     public void InitQualitySetting()
     {
         qualitySelect.value = QualitySettings.GetQualityLevel();
-        fullScreenSwitch.isOn = Screen.fullScreen;
+        fullScreenSwitch.SetIsOnWithoutNotify(Screen.fullScreen);
     }
 
     public void OnFullScreenValueChange()
