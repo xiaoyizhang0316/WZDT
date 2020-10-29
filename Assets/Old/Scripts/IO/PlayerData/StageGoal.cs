@@ -1229,13 +1229,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (GUILayout.Button("扣血"))
         {
-            QualitySettings.IncreaseLevel();
-            Debug.Log(QualitySettings.GetQualityLevel());
+            Screen.SetResolution(1920, 1080, false);
         }
-        if (GUILayout.Button("扣血123"))
+        if (GUILayout.Button("扣血12312321"))
         {
-            QualitySettings.DecreaseLevel();
-            Debug.Log(QualitySettings.GetQualityLevel());
+            Screen.SetResolution(1920, 1080, true);
         }
     }
 }
