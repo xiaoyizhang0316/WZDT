@@ -58,8 +58,16 @@ public class DarkEffect : MonoBehaviour
       
             _tmpPos = _tmpItem.GetScreenPosition(_mainCamera);
             _tmpVt.x = _tmpPos.x;
-            _tmpVt.y = _tmpScreenHeight - _tmpPos.y;
-            _tmpVt.z = _tmpItem.radius;
+            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+            {
+                _tmpVt.y = (_tmpScreenHeight - _tmpPos.y);
+            }
+            else if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer)
+            {
+                _tmpVt.y = _tmpPos.y;
+            }
+            float per = Mathf.Max(Screen.width / 1920f,Screen.height / 1080f);
+            _tmpVt.z = _tmpItem.radius * per;
             _tmpVt.w = 0;
             _itemDatas[i] = _tmpVt;
         }

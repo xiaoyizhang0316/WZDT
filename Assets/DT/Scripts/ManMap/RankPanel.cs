@@ -24,6 +24,7 @@ public class RankPanel : MonoSingleton<RankPanel>
     public string lastSceneName = "";
 
     private int currentShowIndex = -1;
+    private static int timeInterval = 10;
 
     //private List<ReplayList> replayLists = new List<ReplayList>();
     public List<RankList> groupList = new List<RankList>();
@@ -200,6 +201,8 @@ public class RankPanel : MonoSingleton<RankPanel>
     {
         groupList.Clear();
         globalList.Clear();
+        PlayerPrefs.SetInt("rankFreshTime", TimeStamp.GetCurrentTimeStamp());
+        TimeCountDown(timeInterval - 1);
         if (currentShowIndex == 0)
         {
             HideAllList();
@@ -460,6 +463,18 @@ public class RankPanel : MonoSingleton<RankPanel>
     {
         playerRankObj.SetActive(show);
         pageButtons.SetActive(show);
+        //if (NetworkMgr.My.playerDatas.levelID >= 12) {
+
+            refresh_btn.gameObject.SetActive(show);
+        if (show)
+        {
+            RefreshTimeCount();
+        }
+        //}
+        //else
+        //{
+        //    refresh_btn.gameObject.SetActive(false);
+        //}
     }
 
     void ShowRecordList()
@@ -656,6 +671,46 @@ public class RankPanel : MonoSingleton<RankPanel>
             {
                 nextPage.interactable = false;
             }
+        }
+    }
+
+    void RefreshTimeCount()
+    {
+        int currentTime = TimeStamp.GetCurrentTimeStamp();
+        int lastRefreshTime = PlayerPrefs.GetInt("rankFreshTime", 0);
+        int gap = currentTime - lastRefreshTime;
+        if (lastRefreshTime == 0|| gap>=timeInterval)
+        {
+            refresh_btn.transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            
+            TimeCountDown(timeInterval- gap);
+        }
+    }
+    int timeCountDown = 0;
+    void TimeCountDown(int interval)
+    {
+        CancelInvoke("RankCountDown");
+        refresh_btn.interactable = false;
+        timeCountDown = interval + 1;
+        InvokeRepeating("RankCountDown", 0, 1);
+    }
+
+    void RankCountDown()
+    {
+        timeCountDown -= 1;
+        if (timeCountDown <= 0)
+        {
+            refresh_btn.transform.GetChild(0).gameObject.SetActive(false);
+            refresh_btn.interactable = true;
+            CancelInvoke("RankCountDown");
+        }
+        else
+        {
+            refresh_btn.transform.GetChild(0).gameObject.SetActive(true);
+            refresh_btn.transform.GetChild(0).GetComponent<Text>().text = timeCountDown + "s";
         }
     }
 }

@@ -203,7 +203,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
             PlayerData.My.isLocalReady = true;
             PlayerData.My.CheckGameStart();
         }
-        else
+        else if (PlayerPrefs.GetInt("isUseGuide") == 0)
         {
             NewCanvasUI.My.GameNormal();
         }
