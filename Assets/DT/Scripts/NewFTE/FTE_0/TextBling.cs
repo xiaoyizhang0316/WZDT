@@ -82,6 +82,6 @@ public class TextBling : MonoBehaviour
         //GetComponent<Text>().color = startColor;
         GetComponent<Text>().DOFade(1, 0.01f);
         //startColor = endColor;
-        CancelInvoke("Stop");
+        //CancelInvoke("Stop");
     }
 }
