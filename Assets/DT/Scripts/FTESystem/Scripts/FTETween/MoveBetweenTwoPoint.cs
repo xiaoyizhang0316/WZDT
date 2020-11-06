@@ -39,15 +39,17 @@ public class MoveBetweenTwoPoint : BaseTween
 
     public override void Move()
     {
-        GetComponent<RectTransform>().DOAnchorPos(new Vector2(endX, endY), tweTime).SetEase(Ease.Linear).OnComplete(() =>
+        float yOffset = 16f * Screen.height / 9f / Screen.width;
+        Debug.Log(yOffset);
+        GetComponent<RectTransform>().DOAnchorPos(new Vector2(endX, endY ), tweTime).SetEase(Ease.Linear).OnComplete(() =>
         {
             GetComponent<Image>().DOFade(0f, 0f).Play();
             transform.DOScale(transform.localScale, waitTime).OnComplete(() =>
             {
                 GetComponent<Image>().DOFade(1f, 0f).Play();
-                GetComponent<RectTransform>().anchoredPosition = new Vector2(startX, startY);
+                GetComponent<RectTransform>().anchoredPosition = new Vector2(startX, startY );
                 Move();
             }).Play();
-        }).Play();
-    }
+        }).Play();    }
+   
 }

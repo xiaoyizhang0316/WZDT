@@ -127,6 +127,23 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 }
             }
             DataUploadManager.My.AddData(DataEnum.角色_升级);
+            switch (RoleUpdateInfo.My.currentRole.baseRoleData.roleType)
+            {
+                case GameEnum.RoleType.Seed:
+                    DataUploadManager.My.AddData(DataEnum.角色_升级种子商);
+                    break;
+                case GameEnum.RoleType.Peasant:
+                    DataUploadManager.My.AddData(DataEnum.角色_升级农民);
+                    break;
+                case GameEnum.RoleType.Merchant:
+                    DataUploadManager.My.AddData(DataEnum.角色_升级贸易商);
+                    break;
+                case GameEnum.RoleType.Dealer:
+                    DataUploadManager.My.AddData(DataEnum.角色_升级零售商);
+                    break;
+                default:
+                    break;
+            }
             GetComponent<Button>().interactable = false;
 
             StageGoal.My.CostPlayerGold(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost);

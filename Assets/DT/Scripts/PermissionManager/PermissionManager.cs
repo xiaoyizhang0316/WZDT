@@ -101,13 +101,7 @@ public class PermissionManager : MonoSingleton<PermissionManager>
         currentSelectPanel = 2;
     }
 
-    public void OnGUI()
-    {
-        if (GUILayout.Button("123"))
-        {
-            Debug.Log(PlayerData.My.MapRole[PlayerData.My.MapRole.Count-1].GetWarehouseJson());
-        }
-    }
+   
 
     // Update is called once per frame
     void Update()
