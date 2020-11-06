@@ -566,6 +566,8 @@ public class NetManager : MonoSingleton<NetManager>
             {
                 // TODO 刷新地图
                 NetworkMgr.My.poorPlayerID = p2.playerID;
+                SceneManager.LoadScene("Map");
+                PlayerData.My.server.SendToClientMsg("LoadScene|Map");
             }
         }, ()=> {
             // TODO 创建失败，解散房间
