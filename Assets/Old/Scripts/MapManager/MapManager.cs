@@ -74,7 +74,7 @@ public class MapManager : MonoSingleton<MapManager>
                 return m;
             }
         }
-        print("-----未找到地块-----");
+        print("-----未找到地块-----" + x + "||||" + y);
         return null;
     }
 
