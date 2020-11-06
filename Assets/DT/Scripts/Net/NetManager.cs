@@ -557,9 +557,9 @@ public class NetManager : MonoSingleton<NetManager>
         List<PlayerDatas> playerDatasList = new List<PlayerDatas>();
         playerDatasList.Add(NetworkMgr.My.playerDatas);
         playerDatasList.Add(p2);
-
+       // MakeGroupPanel.My.groupName.text;
         //TODO team name
-        NetworkMgr.My.BuildTeam("TODO teamName",playerDatasList, ()=> {
+        NetworkMgr.My.BuildTeam(MakeGroupPanel.My.groupName.text, playerDatasList, ()=> {
             // TODO 刷新队伍名，将队伍信息传给队员
             //NetworkMgr.My.currentBattleTeamAcount.teamName;
             if (int.Parse(strArr[1]) < NetworkMgr.My.levelProgressList.Count)
