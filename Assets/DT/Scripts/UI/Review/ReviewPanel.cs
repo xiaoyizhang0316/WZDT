@@ -128,6 +128,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         GenerateMapStates(playerOperations);
         playSlider.maxValue = timeCount;
         playSlider.value = 0;
+        ReviewManager.My.content.GetComponent<RectTransform>().localPosition = Vector3.zero; 
         InitMoneyLine(datas, timeCount);
         Show();
     }
@@ -325,8 +326,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                     {
                         if (result.mapTrades[i].tradeId == int.Parse(p.operationParam[0]))
                         {
-                            Debug.Log("改变了交易结构  ");
-                            Debug.Log((CashFlowType)Enum.Parse(typeof(CashFlowType), p.operationParam[1]));
+                            //Debug.Log("改变了交易结构  ");
+                            //Debug.Log((CashFlowType)Enum.Parse(typeof(CashFlowType), p.operationParam[1]));
                             result.mapTrades[i].SetCashFlow((CashFlowType)Enum.Parse(typeof(CashFlowType), p.operationParam[1]));
                             break;
                         }
