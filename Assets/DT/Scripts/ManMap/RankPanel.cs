@@ -113,6 +113,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         HideAllList();
         title.text = "小组排名";
         currentShowIndex = 1;
+        
         if (isOn)
         {
             Debug.Log("group");
@@ -167,7 +168,14 @@ public class RankPanel : MonoSingleton<RankPanel>
             if (getGlobal)
             {
                 ShowRankList(false);
-                ShowMyRank(false);
+                if (NetworkMgr.My.playerGroupInfo.joinRank == 0)
+                {
+                    playerRankObj.GetComponent<RankItem>().SetMyRank("所在组不参与排行");
+                }
+                else
+                {
+                    ShowMyRank(false);
+                }
                 RefreshPageButtons(false);
                 SetButton(true);
             }
@@ -187,10 +195,17 @@ public class RankPanel : MonoSingleton<RankPanel>
                     RefreshPageButtons(false);
                     SetButton(true);
                 });
-                NetworkMgr.My.GetGlobalRank(currentSceneName, () =>
+                if (NetworkMgr.My.playerGroupInfo.joinRank == 0)
                 {
-                    ShowMyRank(false);
-                });
+                    playerRankObj.GetComponent<RankItem>().SetMyRank("所在组不参与排行");
+                }
+                else
+                {
+                    NetworkMgr.My.GetGlobalRank(currentSceneName, () =>
+                    {
+                        ShowMyRank(false);
+                    });
+                }
                 getGlobal = true;
             }
         }
@@ -199,8 +214,6 @@ public class RankPanel : MonoSingleton<RankPanel>
 
     public void Refresh()
     {
-        groupList.Clear();
-        globalList.Clear();
         PlayerPrefs.SetInt("rankFreshTime", TimeStamp.GetCurrentTimeStamp());
         TimeCountDown(timeInterval - 1);
         if (currentShowIndex == 0)
@@ -220,88 +233,47 @@ public class RankPanel : MonoSingleton<RankPanel>
             });
             getRecord = true;
 
-            NetworkMgr.My.GetGlobalRankingList(currentSceneName, NetworkMgr.My.currentGlobalPage, (gList) =>
-            {
-                foreach (var g in gList)
-                {
-                    groupList.Add(g);
-                }
-                if (gList.Count > 10)
-                {
-                    groupList.RemoveAt(groupList.Count - 1);
-                }
-            });
-            NetworkMgr.My.GetGlobalRank(currentSceneName, () =>
-            {
-
-            });
-            NetworkMgr.My.GetGroupRankingList(currentSceneName, NetworkMgr.My.currentGroupPage, (gList) =>
-            {
-                foreach (var g in gList)
-                {
-                    groupList.Add(g);
-                }
-                if (gList.Count > 10)
-                {
-                    groupList.RemoveAt(groupList.Count - 1);
-                }
-            });
-            NetworkMgr.My.GetGroupRank(currentSceneName, () =>
-            {
-
-            });
+            getGlobal = false;
+            getGroup = false;
         }
         else
         if (currentShowIndex == 1)
         {
             HideAllList();
+            groupList.Clear();
             title.text = "小组排名";
             currentShowIndex = 1;
             NetworkMgr.My.currentGlobalPage = 0;
             NetworkMgr.My.currentGroupPage = 0;
-            NetworkMgr.My.GetGroupRankingList(currentSceneName, NetworkMgr.My.currentGroupPage, (gList) =>
-            {
-
-                foreach (var g in gList)
+            
+                NetworkMgr.My.GetGroupRankingList(currentSceneName, NetworkMgr.My.currentGroupPage, (gList) =>
                 {
-                    groupList.Add(g);
-                }
-                if (gList.Count > 10)
+                    foreach (var g in gList)
+                    {
+                        groupList.Add(g);
+                    }
+                    if (gList.Count > 10)
+                    {
+                        groupList.RemoveAt(groupList.Count - 1);
+                    }
+                    ShowRankList(true);
+                    RefreshPageButtons(true);
+                    SetButton(true);
+                });
+                NetworkMgr.My.GetGroupRank(currentSceneName, () =>
                 {
-                    groupList.RemoveAt(groupList.Count - 1);
-                }
-                ShowRankList(true);
-                RefreshPageButtons(true);
-                SetButton(true);
-            });
-            NetworkMgr.My.GetGroupRank(currentSceneName, () =>
-            {
-                ShowMyRank(true);
-            });
+                    ShowMyRank(true);
+                });
+            
             getGroup = true;
-            NetworkMgr.My.GetReplayLists(currentSceneName, () =>
-            {
-
-            });
-            NetworkMgr.My.GetGlobalRankingList(currentSceneName, NetworkMgr.My.currentGlobalPage, (gList) =>
-            {
-                foreach (var g in gList)
-                {
-                    groupList.Add(g);
-                }
-                if (gList.Count > 10)
-                {
-                    groupList.RemoveAt(groupList.Count - 1);
-                }
-            });
-            NetworkMgr.My.GetGlobalRank(currentSceneName, () =>
-            {
-
-            });
+            getGlobal = false;
+            globalList.Clear();
+            
         }
         else
         {
             HideAllList();
+            globalList.Clear();
             title.text = "全球排名";
             currentShowIndex = 2;
 
@@ -323,32 +295,25 @@ public class RankPanel : MonoSingleton<RankPanel>
                 RefreshPageButtons(false);
                 SetButton(true);
             });
-            NetworkMgr.My.GetGlobalRank(currentSceneName, () =>
+            if (NetworkMgr.My.playerGroupInfo.joinRank == 0)
             {
-                ShowMyRank(false);
-            });
+                playerRankObj.GetComponent<RankItem>().SetMyRank("所在组不参与排行");
+            }
+            else
+            {
+                NetworkMgr.My.GetGlobalRank(currentSceneName, () =>
+                {
+                    ShowMyRank(false);
+                });
+            }
+            //NetworkMgr.My.GetGlobalRank(currentSceneName, () =>
+            //{
+            //    ShowMyRank(false);
+            //});
             getGlobal = true;
-
-            NetworkMgr.My.GetReplayLists(currentSceneName, () =>
-            {
-
-            });
-
-            NetworkMgr.My.GetGroupRankingList(currentSceneName, NetworkMgr.My.currentGroupPage, (gList) =>
-            {
-                foreach (var g in gList)
-                {
-                    groupList.Add(g);
-                }
-                if (gList.Count > 10)
-                {
-                    groupList.RemoveAt(groupList.Count - 1);
-                }
-            });
-            NetworkMgr.My.GetGroupRank(currentSceneName, () =>
-            {
-
-            });
+            getRecord = false;
+            getGroup = false;
+            groupList.Clear();
         }
     }
 
@@ -465,7 +430,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         pageButtons.SetActive(show);
         //if (NetworkMgr.My.playerDatas.levelID >= 12) {
 
-            refresh_btn.gameObject.SetActive(show);
+        refresh_btn.gameObject.SetActive(show);
         if (show)
         {
             RefreshTimeCount();
@@ -679,14 +644,14 @@ public class RankPanel : MonoSingleton<RankPanel>
         int currentTime = TimeStamp.GetCurrentTimeStamp();
         int lastRefreshTime = PlayerPrefs.GetInt("rankFreshTime", 0);
         int gap = currentTime - lastRefreshTime;
-        if (lastRefreshTime == 0|| gap>=timeInterval)
+        if (lastRefreshTime == 0 || gap >= timeInterval)
         {
             refresh_btn.transform.GetChild(0).gameObject.SetActive(false);
         }
         else
         {
-            
-            TimeCountDown(timeInterval- gap);
+
+            TimeCountDown(timeInterval - gap);
         }
     }
     int timeCountDown = 0;

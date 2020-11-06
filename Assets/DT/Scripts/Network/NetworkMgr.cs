@@ -604,6 +604,36 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             SetMask();
         }, keyValues, HttpType.Get, HttpId.getCatchLevelID));
     }
+    public PlayerGroupInfo playerGroupInfo;
+    public void GetPlayerGroupInfo(Action doSuccess, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        keyValues.Add("groupID", groupID.ToString());
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetPlayerGroupInfo, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                Debug.LogWarning(response.data);
+                playerGroupInfo = JsonUtility.FromJson<PlayerGroupInfo>(response.data);
+                doSuccess();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.GetPlayerGroupInfo));
+    }
     #endregion
 
     #region team
