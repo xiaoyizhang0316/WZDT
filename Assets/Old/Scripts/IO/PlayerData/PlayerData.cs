@@ -466,4 +466,30 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             }
         }
     }
+
+    public string GetEquipUseDetail()
+    {
+        int useCount = 0;
+        for(int i=0; i < playerGears.Count; i++)
+        {
+            if (playerGears[i].isEquiped)
+            {
+                useCount++;
+            }
+        }
+        return useCount + "_" + playerGears.Count;
+    }
+
+    public string GetWorkerUseDetail()
+    {
+        int useCount = 0;
+        for (int i = 0; i < playerWorkers.Count; i++)
+        {
+            if (playerWorkers[i].isEquiped)
+            {
+                useCount++;
+            }
+        }
+        return useCount + "_" + playerWorkers.Count;
+    }
 }

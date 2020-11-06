@@ -60,4 +60,5 @@ public static class HttpId
     public const int SetPlayerStatusScene       = 1025;
     public const int GetCurrentTeamAcount       = 1026;
     public const int GetPoorPlayerEquips        = 1027;
+    public const int GetPlayerGroupInfo         = 1028;
 }
