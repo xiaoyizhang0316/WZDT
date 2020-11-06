@@ -49,15 +49,27 @@ public class RoleListManager : MonoSingleton<RoleListManager>
         });
     }
 
-    public void OutButton()
+    public void OutButton(bool isImmediately = false)
     {
         outButton.interactable = false;
+        if (isImmediately)
+        {
+            transform.position = outPos.position;
+            outButton.gameObject.SetActive(false);
+            inButton.gameObject.SetActive(true);
+            inButton.interactable = true;
+        }
+        else
+        {
+ 
+
         transform.DOMove(outPos.position,0.3f).OnComplete(() =>
         {
             outButton.gameObject.SetActive(false);
             inButton.gameObject.SetActive(true);
             inButton.interactable = true;
         }).Play().timeScale = 1f / DOTween.timeScale;
+        }
     }
 
     public void InButton()
