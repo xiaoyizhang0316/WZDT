@@ -27,6 +27,7 @@ public enum DataEnum
     角色_查看自己贸易商属性,
     角色_查看自己零售商属性,
     角色_查看NPC属性,
+    角色_查看角色Buff,
     角色_放置种子商,
     角色_放置农民,
     角色_放置贸易商,
@@ -120,6 +121,7 @@ public class DataUpload
     public int role_checkPeasantData;
     public int role_checkMerchantData;
     public int role_checkDealerData;
+    public int role_checkBuff;
 
     /// <summary>
     /// 角色_查看Npc属性

@@ -46,9 +46,9 @@ public class HandMove : MonoBehaviour
                     });
                     break;
                 case HandType.Move:
-                    transform.DOLocalMove(targetPos, 1.5f).SetEase(Ease.Linear).Play().OnComplete(() =>
+                    GetComponent<RectTransform>().DOAnchorPos(targetPos, 1.5f).SetEase(Ease.Linear).Play().OnComplete(() =>
                     {
-                        transform.DOLocalMove(startPos, 0.02f).Play().OnComplete(Move);
+                        GetComponent<RectTransform>().DOAnchorPos(startPos, 0.02f).Play().OnComplete(Move);
                     });
                     break;
                 case HandType.ClickAndMove:
