@@ -106,6 +106,8 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public int startEncourageLevel;
 
+    public int totalUpgradeCost;
+
     public RoleSprite roleSprite;
 
     public GameObject emptyGearSprite;
@@ -512,6 +514,11 @@ public class BaseMapRole : MonoBehaviour
     {
         DataUploadManager.My.AddData(DataEnum.角色_清仓);
         trash.AddRange(warehouse);
+        if (PlayerData.My.guanJianZiYuanNengLi[5])
+        {
+            int totalGold = warehouse.Count * 10;
+            StageGoal.My.GetPlayerGold(totalGold);
+        }
         warehouse.Clear();
     }
 

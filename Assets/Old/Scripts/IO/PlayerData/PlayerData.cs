@@ -38,10 +38,17 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// </summary>
     public List<PlayerConsumable> playerConsumables = new List<PlayerConsumable>();
 
-    /// <summary>
-    /// 玩家技能解锁状态
-    /// </summary>
-    public Dictionary<int, bool> tradeSkillLock = new Dictionary<int, bool>();
+    public List<bool> dingWei = new List<bool>{ true, true, true, true, true, true };
+
+    public List<bool> yeWuXiTong = new List<bool> { true, true, true, true, true, true };
+
+    public List<bool> guanJianZiYuanNengLi = new List<bool> { true, true, true, true, true, true };
+
+    public List<bool> yingLiMoShi = new List<bool> { true, true, true, true, true, true };
+
+    public List<bool> xianJinLiu = new List<bool> { true, true, true, true, true, true };
+
+    public List<bool> qiYeJiaZhi = new List<bool> { true, true, true, true, true, true };
 
     public bool cheatIndex1 = false;
 
@@ -53,11 +60,10 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public Server server;
 
+    //是否是主机
     public bool isServer = true;
 
-    /// <summary>
-    /// 单人模式
-    /// </summary>
+    //是否是单人模式
     public bool isSOLO = true;
     /// <summary>
     /// 通过名字获得Role信息
@@ -137,6 +143,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     {
         DataUploadManager.My.AddData(DataEnum.角色_删除角色);
         Role target = GetRoleById(roleId);
+
         foreach (var v in target.EquipList)
         {
             SetGearStatus(v.Key, false);
@@ -149,6 +156,16 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         BaseMapRole mapRole = GetMapRoleById(roleId);
         if (StageGoal.My.timeCount - mapRole.putTime <= 5)
             StageGoal.My.GetTechPoint(target.baseRoleData.costTech);
+        if (guanJianZiYuanNengLi[2])
+        {
+            if (StageGoal.My.timeCount - mapRole.putTime > 5)
+            {
+                int returnTech = GameDataMgr.My.GetModelData(target.baseRoleData.roleType, 1).costTech * 30 / 100;
+                StageGoal.My.GetTechPoint(returnTech);
+            }
+            int returnGold = mapRole.totalUpgradeCost * 30 / 100;
+            StageGoal.My.GetPlayerGold(returnGold);
+        }
         RoleData.Remove(target);
         MapRole.Remove(mapRole);
         MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
@@ -343,6 +360,91 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     public void WinReset()
     {
         MapRole.Clear();
+    }
+
+    /// <summary>
+    /// 读取天赋配置字符串
+    /// </summary>
+    /// <param name="str"></param>
+    public void ParsePlayerTalent(string str)
+    {
+        string[] talentList = str.Split('-');
+        if (talentList.Length != 6)
+        {
+            Debug.LogWarning("天赋读取错误！");
+        }
+        else
+        {
+            char[] temp = talentList[0].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                dingWei[i] = temp[i].Equals('1');
+            }
+            temp = talentList[1].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                guanJianZiYuanNengLi[i] = temp[i].Equals('1');
+            }
+            temp = talentList[2].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                yeWuXiTong[i] = temp[i].Equals('1');
+            }
+            temp = talentList[3].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                xianJinLiu[i] = temp[i].Equals('1');
+            }
+            temp = talentList[4].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                yingLiMoShi[i] = temp[i].Equals('1');
+            }
+            temp = talentList[5].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                qiYeJiaZhi[i] = temp[i].Equals('1');
+            }
+        }    
+    }
+
+    /// <summary>
+    /// 生成玩家天赋字符串
+    /// </summary>
+    /// <returns></returns>
+    public string GeneratePlayerTalent()
+    {
+        string result = "";
+        for (int i = 0; i < dingWei.Count; i++)
+        {
+            result += dingWei[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < guanJianZiYuanNengLi.Count; i++)
+        {
+            result += guanJianZiYuanNengLi[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < yeWuXiTong.Count; i++)
+        {
+            result += yeWuXiTong[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < xianJinLiu.Count; i++)
+        {
+            result += xianJinLiu[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < yingLiMoShi.Count; i++)
+        {
+            result += yingLiMoShi[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < qiYeJiaZhi.Count; i++)
+        {
+            result += qiYeJiaZhi[i] ? '1' : '0';
+        }
+        return result;
     }
 
     private void Start()
