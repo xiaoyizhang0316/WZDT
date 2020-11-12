@@ -32,6 +32,7 @@ public static class Url
     private static string updatePlayerDatas = "updatePlayerDatas";
     private static string getCatchLevel = "getPlayerCatchLevel";
     private static string getPlayerGroupInfo = "getPlayerGroupInfo";
+    private static string updatePlayerTalent = "updatePlayerTalent";
     #endregion
 
     #region three words 
@@ -121,6 +122,7 @@ public static class Url
     public static string GetCurrentTeamAcount { get => ip+ getCurrentTeamAcount; }
     public static string GetPoorPlayerEquips { get =>ip+ getPoorPlayerEquips; }
     public static string GetPlayerGroupInfo { get =>ip+ getPlayerGroupInfo;  }
+    public static string UpdatePlayerTalent { get => ip+ updatePlayerTalent; }
 
     public static void SetIp(string newIp)
     {

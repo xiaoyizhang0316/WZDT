@@ -26,6 +26,7 @@ public class PlayerDatas
     public string roleFound;
 
     public int levelID;
+    public string talent;
 }
 
 [Serializable]

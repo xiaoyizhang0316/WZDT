@@ -309,7 +309,13 @@ public class TalentPanel : MonoSingleton<TalentPanel>
         {
             PlayerData.My.qiYeJiaZhi[i] = qiYeJiaZhi[i].isSelect;
         }
-        Close();
+        NetworkMgr.My.UpdateTalent(
+            ()=> {
+            Close();
+        },()=> {
+            HttpManager.My.ShowTip("保存失败！");
+        });
+        //Close();
     }
 
     /// <summary>

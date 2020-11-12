@@ -61,4 +61,5 @@ public static class HttpId
     public const int GetCurrentTeamAcount       = 1026;
     public const int GetPoorPlayerEquips        = 1027;
     public const int GetPlayerGroupInfo         = 1028;
+    public const int UpdatePlayerTalent         = 1029;
 }
