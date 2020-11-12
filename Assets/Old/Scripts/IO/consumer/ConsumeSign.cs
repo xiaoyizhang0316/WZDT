@@ -287,7 +287,7 @@ public class ConsumeSign : MonoBehaviour
                 ConsumerType.BluecollarLegendary,ConsumerType.WhitecollarLegendary};
             if (lists.Contains(consumerType) && PlayerData.My.dingWei[4])
             {
-                num = num * 110 / 100;
+                num = num * 120 / 100;
             }
             if (PlayerData.My.yingLiMoShi[5])
             {
@@ -319,11 +319,11 @@ public class ConsumeSign : MonoBehaviour
         {
             if (PlayerData.My.qiYeJiaZhi[1])
             {
-                scorePer *= 1.1f;
+                scorePer *= 1.2f;
             }
             if (PlayerData.My.qiYeJiaZhi[2])
             {
-                StageGoal.My.LostHealth(1);
+                StageGoal.My.LostHealth(2);
             }
             StageGoal.My.ConsumerExtraPerTip();
             DataUploadManager.My.AddData(消费者_口味击杀);
