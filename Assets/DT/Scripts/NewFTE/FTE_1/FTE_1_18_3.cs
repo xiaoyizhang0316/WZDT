@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FTE_1_10 : BaseGuideStep
+public class FTE_1_18_3 : BaseGuideStep
 {
     public GameObject UI;
     // Start is called before the first frame update
@@ -29,7 +29,7 @@ public class FTE_1_10 : BaseGuideStep
 
     public override void InitHighlight3d()
     {
-        Camera3DTarget[0].target = TradeManager.My.tradeList[2].icon.transform;
+        
         
     }
 
