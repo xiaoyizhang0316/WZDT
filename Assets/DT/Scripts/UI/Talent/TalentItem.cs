@@ -99,6 +99,10 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
                 }
                 CheckStatus();
             }
+            else
+            {
+                TalentPanel.My.ShowNoTalentInfo();
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -334,6 +335,24 @@ public class TalentPanel : MonoSingleton<TalentPanel>
     public void UpdateTalentPoint()
     {
         restPoint.text = (totalPoint - usedPoint).ToString() + "/" + totalPoint.ToString();
+    }
+
+    private bool isRunning = false;
+
+    public void ShowNoTalentInfo()
+    {
+        if (isRunning)
+        {
+            return;
+        }
+        else
+        {
+            isRunning = true;
+            restPoint.DOBlendableColor(Color.red, 0.5f).Play().SetLoops(3).OnComplete(()=> {
+                isRunning = false;
+                restPoint.color = Color.white;
+            });
+        }
     }
 
     public void Start()

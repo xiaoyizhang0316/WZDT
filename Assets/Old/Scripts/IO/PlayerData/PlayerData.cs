@@ -368,7 +368,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// <param name="str"></param>
     public void ParsePlayerTalent(string str)
     {
-        string[] talentList = str.Split('-');
+        string[] talentList = str.Split('_');
         if (talentList.Length != 6)
         {
             Debug.LogWarning("天赋读取错误！");
