@@ -524,7 +524,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         BaseLevelController.My.CancelInvoke("CheckStarOne");
         BaseLevelController.My.CancelInvoke("CheckStarThree");
         BaseLevelController.My.CancelInvoke("UpdateInfo");
-        
+        if (PlayerData.My.qiYeJiaZhi[4])
+        {
+            GetSatisfy(playerSatisfy * 10);
+        }
         if (BaseLevelController.My.starTwoStatus)
         {
             starNum += 1;
@@ -646,7 +649,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                         ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
                         if (PlayerData.My.xianJinLiu[5])
                         {
-                            GetPlayerGold(playerGold * 5 / 100);
+                            GetPlayerGold(playerGold * 10 / 100);
                         }
                     }
                     if (PlayerData.My.yeWuXiTong[3])
@@ -696,7 +699,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                         ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
                         if (PlayerData.My.xianJinLiu[5])
                         {
-                            GetPlayerGold(playerGold * 5 / 100);
+                            GetPlayerGold(playerGold * 10 / 100);
                         }
                     }
                     if (PlayerData.My.yeWuXiTong[3])

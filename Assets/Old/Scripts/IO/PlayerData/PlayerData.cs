@@ -160,10 +160,10 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         {
             if (StageGoal.My.timeCount - mapRole.putTime > 5)
             {
-                int returnTech = GameDataMgr.My.GetModelData(target.baseRoleData.roleType, 1).costTech * 30 / 100;
+                int returnTech = GameDataMgr.My.GetModelData(target.baseRoleData.roleType, 1).costTech * 50 / 100;
                 StageGoal.My.GetTechPoint(returnTech);
             }
-            int returnGold = mapRole.totalUpgradeCost * 30 / 100;
+            int returnGold = mapRole.totalUpgradeCost * 50 / 100;
             StageGoal.My.GetPlayerGold(returnGold);
         }
         RoleData.Remove(target);

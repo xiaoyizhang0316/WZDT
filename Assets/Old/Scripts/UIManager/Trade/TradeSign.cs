@@ -232,7 +232,7 @@ public class TradeSign : MonoBehaviour
             if (PlayerData.My.yeWuXiTong[2])
             {
                 int number = UnityEngine.Random.Range(0, 101);
-                if (number > 10)
+                if (number > 20)
                 {
                     int cost = CalculateTC();
                     countNumber = 0;
@@ -343,7 +343,7 @@ public class TradeSign : MonoBehaviour
             result = result2;
             if (PlayerData.My.xianJinLiu[1])
             {
-                result = result * 90 / 100;
+                result = result * 80 / 100;
             }
         }
         else
@@ -352,12 +352,16 @@ public class TradeSign : MonoBehaviour
         }
         if (PlayerData.My.xianJinLiu[0])
         {
-            result = result * 95 / 100;
+            result = result * 90 / 100;
+        }
+        if (PlayerData.My.yeWuXiTong[5])
+        {
+            result = result * 110 / 100;
         }
         if (isOutTrade && PlayerData.My.qiYeJiaZhi[5])
         {
-            StageGoal.My.GetSatisfy((int)(result * 0.1f));
-            StageGoal.My.ScoreGet(ScoreType.金钱得分, (int)(result * 0.1f));
+            StageGoal.My.GetSatisfy((int)(result * 0.2f));
+            StageGoal.My.ScoreGet(ScoreType.金钱得分, (int)(result * 0.2f));
         }
         StageGoal.My.CostPlayerGold(result);
         StageGoal.My.Expend(result, ExpendType.TradeCosts);

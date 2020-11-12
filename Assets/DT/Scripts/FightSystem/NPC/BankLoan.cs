@@ -24,7 +24,7 @@ public class BankLoan : BaseExtraSkill
         int actualLoan = loanNumber;
         if (PlayerData.My.yingLiMoShi[2])
         {
-            actualLoan = actualLoan * 110 / 100;
+            actualLoan = actualLoan * 120 / 100;
         }
         StageGoal.My.GetPlayerGold(actualLoan);
         StageGoal.My.Income(actualLoan, IncomeType.Npc, GetComponentInParent<BaseMapRole>());

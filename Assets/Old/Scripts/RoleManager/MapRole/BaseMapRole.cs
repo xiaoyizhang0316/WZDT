@@ -412,8 +412,13 @@ public class BaseMapRole : MonoBehaviour
     {
         transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
-            StageGoal.My.CostPlayerGold(baseRoleData.cost);
-            StageGoal.My.Expend(baseRoleData.cost, ExpendType.ProductCosts, this);
+            int costNum = baseRoleData.cost;
+            if (PlayerData.My.yeWuXiTong[5])
+            {
+                StageGoal.My.GetPlayerGold(baseRoleData.peoPleList.Count * 100);
+            }
+            StageGoal.My.CostPlayerGold(costNum);
+            StageGoal.My.Expend(costNum, ExpendType.ProductCosts, this);
             MonthlyCost();
         });
     }
@@ -530,7 +535,7 @@ public class BaseMapRole : MonoBehaviour
         trash.AddRange(warehouse);
         if (PlayerData.My.guanJianZiYuanNengLi[5])
         {
-            int totalGold = warehouse.Count * 10;
+            int totalGold = warehouse.Count * 80;
             StageGoal.My.GetPlayerGold(totalGold);
         }
         warehouse.Clear();

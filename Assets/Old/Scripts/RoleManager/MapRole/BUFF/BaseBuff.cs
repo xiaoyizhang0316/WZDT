@@ -527,7 +527,7 @@ public class BaseBuff
                 num = (int)(int.Parse(attri[1]) * add);
                 if (PlayerData.My.yeWuXiTong[1])
                 {
-                    num = num * 110 / 100;
+                    num = num * 120 / 100;
                 }
             }
             else
@@ -551,7 +551,7 @@ public class BaseBuff
                 num = (int)(sourceNum * float.Parse(attri[1]) * add);
                 if (PlayerData.My.yeWuXiTong[1])
                 {
-                    num = num * 110 / 100;
+                    num = num * 120 / 100;
                 }
             }
             else
