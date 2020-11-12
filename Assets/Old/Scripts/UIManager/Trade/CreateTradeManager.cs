@@ -86,7 +86,9 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 
     public List<Sprite> encourageStatus;
 
-    private bool startIsCast;
+    public Text startDivideStatus;
+
+    public Text endDivideStatus;
 
     /// <summary>
     /// 打开并初始化
@@ -112,7 +114,6 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         endPer = currentTrade.endPer;
         castRole = currentTrade.tradeData.castRole;
         targetRole = currentTrade.tradeData.targetRole;
-        startIsCast = currentTrade.tradeData.castRole.Equals(currentTrade.tradeData.startRole);
         startRoleTradeCost = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole)).baseRoleData.tradeCost;
         endRoleTradeCost = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole)).baseRoleData.tradeCost;
         InitName();
@@ -209,15 +210,21 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         endStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
         endStatus[0].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
         endStatus[1].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
-        //divideSlider.value = selectDividePercent;
-        //for (int i = 0; i < startStatus.Count; i++)
-        //{
-        //    startStatus[i].gameObject.SetActive(startIsCast && selectDividePercent > i);
-        //}
-        //for (int i = 0; i < endStatus.Count; i++)
-        //{
-        //    endStatus[i].gameObject.SetActive(!startIsCast && Mathf.Abs(selectDividePercent - 4) > i);
-        //}
+        if (divideSlider.value == -2)
+        {
+            endDivideStatus.text = "剩余";
+            startDivideStatus.text = "固定";
+        }
+        else if (divideSlider.value == 2)
+        {
+            endDivideStatus.text = "固定";
+            startDivideStatus.text = "剩余";
+        }
+        else
+        {
+            endDivideStatus.text = "分成";
+            startDivideStatus.text = "分成";
+        }
     }
 
     /// <summary>
@@ -256,22 +263,32 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
             case -2:
                 startPer = 0.6f;
                 endPer = 1.4f;
+                endDivideStatus.text = "剩余";
+                startDivideStatus.text = "固定";
                 break;
             case -1:
                 startPer = 0.8f;
                 endPer = 1.2f;
+                endDivideStatus.text = "分成";
+                startDivideStatus.text = "分成";
                 break;
             case 0:
                 startPer = 1f;
                 endPer = 1f;
+                endDivideStatus.text = "分成";
+                startDivideStatus.text = "分成";
                 break;
             case 1:
                 startPer = 1.2f;
                 endPer = 0.8f;
+                endDivideStatus.text = "分成";
+                startDivideStatus.text = "分成";
                 break;
             case 2:
                 startPer = 1.4f;
                 endPer = 0.6f;
+                endDivideStatus.text = "固定";
+                startDivideStatus.text = "剩余";
                 break;
             default:
                 startPer = 1f;

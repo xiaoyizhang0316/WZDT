@@ -10,6 +10,19 @@ public class ProductMelon_Lightning : BaseSkill
     private int currentCount = 0;
 
     public Animator anim;
+
+    public new void Start()
+    {
+        base.Start();
+        if (PlayerData.My.dingWei[5])
+        {
+            var buff = GameDataMgr.My.GetBuffDataByID(10016);
+            BaseBuff baseb = new BaseBuff();
+            baseb.Init(buff);
+            baseb.SetRoleBuff(null, role, role);
+        }
+    }
+
     public void Update()
     {
         if (IsOpen&&isAnimPlaying)

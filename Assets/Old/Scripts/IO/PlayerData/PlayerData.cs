@@ -42,7 +42,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public List<bool> yeWuXiTong = new List<bool> { true, true, true, true, true, true };
 
-    public List<bool> guanJianZiYuanNengLi = new List<bool> { true, true, true, true, true, true };
+    public List<bool> guanJianZiYuanNengLi = new List<bool> { true, true, true, true, false, true };
 
     public List<bool> yingLiMoShi = new List<bool> { true, true, true, true, true, true };
 

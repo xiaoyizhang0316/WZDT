@@ -524,10 +524,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         BaseLevelController.My.CancelInvoke("CheckStarOne");
         BaseLevelController.My.CancelInvoke("CheckStarThree");
         BaseLevelController.My.CancelInvoke("UpdateInfo");
-        if (PlayerData.My.qiYeJiaZhi[4])
-        {
-            GetSatisfy(playerSatisfy * 10);
-        }
         if (BaseLevelController.My.starTwoStatus)
         {
             starNum += 1;

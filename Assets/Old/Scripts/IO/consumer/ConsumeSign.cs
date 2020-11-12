@@ -253,6 +253,15 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void OnAlive()
     {
+        if (PlayerData.My.qiYeJiaZhi[4])
+        {
+            int number = UnityEngine.Random.Range(0, 101);
+            if (number <= 30)
+            {
+                tweener.Restart();
+                return;
+            }
+        }
         LivePunish();
         Stop();
         Destroy(gameObject);

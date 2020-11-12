@@ -30,8 +30,6 @@ public class TalentButton : MonoBehaviour
 
     private bool isRunning = false;
 
-    public float z;
-
     public void ShowAvailalbeInfo()
     {
         if (isRunning)
@@ -40,9 +38,30 @@ public class TalentButton : MonoBehaviour
         }
         else
         {
+            //isRunning = true;
+            //twe = CanAddTalent.transform.DOShakeRotation(0.2f, new Vector3(0f, 0f, z), vib, ran).OnComplete(() =>
+            //{
+            //    isRunning = false;
+            //});
             isRunning = true;
-            twe = CanAddTalent.transform.DOShakeRotation(0.5f, new Vector3(0f, 0f, z),3,90).OnComplete(()=> {
-                isRunning = false;
+            twe = CanAddTalent.transform.DORotate(new Vector3(0f,0f,-8f),0.03f).Play().OnComplete(()=> {
+                twe = CanAddTalent.transform.DORotate(new Vector3(0f, 0f, 8f), 0.06f).Play().OnComplete(() =>
+                {
+                    twe = CanAddTalent.transform.DORotate(new Vector3(0f, 0f, -8f), 0.06f).Play().OnComplete(() =>
+                    {
+                        twe = CanAddTalent.transform.DORotate(new Vector3(0f, 0f, 8f), 0.06f).Play().OnComplete(()=> {
+                            twe = CanAddTalent.transform.DORotate(new Vector3(0f, 0f, -8f), 0.06f).Play().OnComplete(() =>
+                            {
+                                twe = CanAddTalent.transform.DORotate(new Vector3(0f, 0f, 8f), 0.06f).Play().OnComplete(() => {
+                                    CanAddTalent.transform.DORotate(new Vector3(0f, 0f, 0f), 0f).Play();
+                                    CanAddTalent.transform.DORotate(new Vector3(0f, 0f, 0f), 1f).Play().OnComplete(()=> {
+                                        isRunning = false;
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
             });
         }
     }

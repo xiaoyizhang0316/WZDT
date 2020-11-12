@@ -8,6 +8,19 @@ using UnityEngine;
 public class ProductMelon_Summon : BaseSkill
 {
     private int currentCount = 0;
+
+    public new void Start()
+    {
+        base.Start();
+        if (PlayerData.My.dingWei[5])
+        {
+            var buff = GameDataMgr.My.GetBuffDataByID(10016);
+            BaseBuff baseb = new BaseBuff();
+            baseb.Init(buff);
+            baseb.SetRoleBuff(null, role, role);
+        }
+    }
+
     public override void Skill()
     {
         if (role.tradeList.Count == 0)
