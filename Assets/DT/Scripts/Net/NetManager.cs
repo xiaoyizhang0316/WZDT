@@ -453,6 +453,7 @@ public class NetManager : MonoSingleton<NetManager>
         int score = int.Parse(str.Split(',')[2]);
         int gold = int.Parse(str.Split(',')[3]);
         Building building = BuildingManager.My.GetBuildingByIndex(buildingId);
+        //Debug.Log("building:" + buildingId + "Consumer:" + consumerIndex);
         building.consumeSigns[consumerIndex].Stop();
         building.consumeSigns[consumerIndex].spriteLogo.GetComponent<SpriteRenderer>().color = Color.green;
         Destroy(building.consumeSigns[consumerIndex].gameObject, 0.5f);
@@ -557,15 +558,17 @@ public class NetManager : MonoSingleton<NetManager>
         List<PlayerDatas> playerDatasList = new List<PlayerDatas>();
         playerDatasList.Add(NetworkMgr.My.playerDatas);
         playerDatasList.Add(p2);
-
+       // MakeGroupPanel.My.groupName.text;
         //TODO team name
-        NetworkMgr.My.BuildTeam("TODO teamName",playerDatasList, ()=> {
+        NetworkMgr.My.BuildTeam(MakeGroupPanel.My.groupName.text, playerDatasList, ()=> {
             // TODO 刷新队伍名，将队伍信息传给队员
             //NetworkMgr.My.currentBattleTeamAcount.teamName;
             if (int.Parse(strArr[1]) < NetworkMgr.My.levelProgressList.Count)
             {
                 // TODO 刷新地图
                 NetworkMgr.My.poorPlayerID = p2.playerID;
+                SceneManager.LoadScene("Map");
+                PlayerData.My.server.SendToClientMsg("LoadScene|Map");
             }
         }, ()=> {
             // TODO 创建失败，解散房间

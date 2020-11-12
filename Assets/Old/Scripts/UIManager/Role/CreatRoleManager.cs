@@ -306,15 +306,25 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void CalculateAllAttribute()
     {
+        float costAdd = 1f;
+        float effectAdd = 1f;
+        if (PlayerData.My.guanJianZiYuanNengLi[0])
+        {
+            costAdd = 0.8f;
+        }
+        if (PlayerData.My.guanJianZiYuanNengLi[3])
+        {
+            effectAdd = 1.2f;
+        }
         InitRoleValue();
         foreach (var i in EquipList)
         {
             GearData tempData = GameDataMgr.My.GetGearData(i.Key);
-            finalEffect += tempData.effect;
-            finalEfficiency += tempData.efficiency;
-            finalRange += tempData.range;
+            finalEffect += (int)(tempData.effect * effectAdd);
+            finalEfficiency += (int)(tempData.efficiency * effectAdd);
+            finalRange += (int)(tempData.range * effectAdd);
             finalTradeCost += tempData.tradeCost;
-            finalCost += tempData.cost;
+            finalCost += (int)(tempData.cost * costAdd);
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             CurrentRole.equipCost += tempData.cost;
@@ -323,11 +333,11 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         foreach (var i in peoPleList)
         {
             WorkerData tempData = GameDataMgr.My.GetWorkerData(i.Key);
-            finalEffect += tempData.effect;
-            finalEfficiency += tempData.efficiency;
-            finalRange += tempData.range;
+            finalEffect += (int)(tempData.effect * effectAdd);
+            finalEfficiency += (int)(tempData.efficiency * effectAdd);
+            finalRange += (int)(tempData.range * effectAdd);
             finalTradeCost += tempData.tradeCost;
-            finalCost += tempData.cost;
+            finalCost += (int)(tempData.cost * costAdd);
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             finalTechAdd += tempData.techAdd;

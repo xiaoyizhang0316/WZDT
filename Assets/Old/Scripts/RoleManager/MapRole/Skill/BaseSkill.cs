@@ -85,11 +85,25 @@ public abstract class BaseSkill : MonoBehaviour
         float add = 1f;
         if (role.encourageLevel > 0)
         {
-            add -= role.encourageLevel * 0.05f;
+            if(PlayerData.My.yingLiMoShi[3])
+            {
+                add -= role.encourageLevel * 0.08f;
+            }
+            else
+            {
+                add -= role.encourageLevel * 0.05f;
+            }
         }
         else
         {
-            add += role.encourageLevel * -0.1f;
+            if (PlayerData.My.yingLiMoShi[3])
+            {
+                add += role.encourageLevel * -0.07f;
+            }
+            else
+            {
+                add += role.encourageLevel * -0.1f;
+            }
         }
         float d = 1f / (role.baseRoleData.efficiency * 0.05f) * add;
         transform.DORotate(transform.eulerAngles, d).OnComplete(() =>

@@ -30,11 +30,16 @@ public class ProductMelon_Lightning : BaseSkill
         {
             return;
         }
-        if (role.warehouse.Count > 3 && role.warehouse[0].bulletType == BulletType.NormalPP)
+        int numberNeed = 3;
+        if (PlayerData.My.dingWei[5])
+        {
+            numberNeed--;
+        }
+        if (role.warehouse.Count > numberNeed && role.warehouse[0].bulletType == BulletType.NormalPP)
         {
             print("产闪电链");
             ProductData data = role.warehouse[0];
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < numberNeed - 1; i++)
             {
                 role.warehouse.RemoveAt(0);
             }

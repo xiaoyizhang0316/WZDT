@@ -8,16 +8,24 @@ using UnityEngine;
 public class ProductMelon_Boom : BaseSkill
 {
     private int currentCount = 0;
+
+
+
     public override void Skill()
     {
         if (role.tradeList.Count == 0)
         {
             return;
         }
-        if (role.warehouse.Count > 2 && role.warehouse[0].bulletType == BulletType.NormalPP)
+        int numberNeed = 2;
+        if (PlayerData.My.dingWei[5])
+        {
+            numberNeed--;
+        }
+        if (role.warehouse.Count > numberNeed && role.warehouse[0].bulletType == BulletType.NormalPP)
         {
             ProductData data = role.warehouse[0];
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < numberNeed - 1; i++)
             {
                 role.warehouse.RemoveAt(0);
             }

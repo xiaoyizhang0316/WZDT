@@ -637,8 +637,32 @@ public class StageGoal : MonoSingleton<StageGoal>
                 {
                     if (playerGold > 0)
                     {
-                        GetSatisfy((int)(playerGold * 0.05f));
-                        ScoreGet(ScoreType.金钱得分, (int)(playerGold * 0.05f));
+                        float add = 0.05f;
+                        if (PlayerData.My.qiYeJiaZhi[3])
+                        {
+                            add = 0.1f;
+                        }
+                        GetSatisfy((int)(playerGold * add));
+                        ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
+                        if (PlayerData.My.xianJinLiu[5])
+                        {
+                            GetPlayerGold(playerGold * 5 / 100);
+                        }
+                    }
+                    if (PlayerData.My.yeWuXiTong[3])
+                    {
+                        int count = 0;
+                        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                        {
+                            if (!PlayerData.My.MapRole[i].isNpc)
+                            {
+                                count++;
+                            }
+                        }
+                        if (count <= 2)
+                        {
+                            GetTechPoint(20);
+                        }
                     }
                 }
                 WaveCount();
@@ -663,8 +687,32 @@ public class StageGoal : MonoSingleton<StageGoal>
                 {
                     if (playerGold > 0)
                     {
-                        GetSatisfy((int)(playerGold * 0.05f));
-                        ScoreGet(ScoreType.金钱得分, (int)(playerGold * 0.05f));
+                        float add = 0.05f;
+                        if (PlayerData.My.qiYeJiaZhi[3])
+                        {
+                            add = 0.1f;
+                        }
+                        GetSatisfy((int)(playerGold * add));
+                        ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
+                        if (PlayerData.My.xianJinLiu[5])
+                        {
+                            GetPlayerGold(playerGold * 5 / 100);
+                        }
+                    }
+                    if (PlayerData.My.yeWuXiTong[3])
+                    {
+                        int count = 0;
+                        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                        {
+                            if (!PlayerData.My.MapRole[i].isNpc)
+                            {
+                                count++;
+                            }
+                        }
+                        if (count <= 2)
+                        {
+                            GetTechPoint(20);
+                        }
                     }
                 }
                 WaveCount();
@@ -850,9 +898,22 @@ public class StageGoal : MonoSingleton<StageGoal>
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
         playerGold =  data.startPlayerGold;
         if (PlayerData.My.cheatIndex1)
+        {
             playerGold += 10000;
+        }
+
+        if (PlayerData.My.dingWei[0])
+        {
+            playerGold = playerGold * 110 / 100;
+        }
+
         playerSatisfy = 0;
+
         maxMinusGold = -8000;
+        if (PlayerData.My.xianJinLiu[2])
+        {
+            maxMinusGold = -12000;
+        }
         playerHealth =  data.startPlayerHealth;
         if (PlayerData.My.cheatIndex3)
             playerHealth = (int)(playerHealth * 1.5f);
