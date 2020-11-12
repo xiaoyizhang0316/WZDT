@@ -30,9 +30,14 @@ public class FloatWindow : MonoSingleton<FloatWindow>
         }
         //CheckSize();
         CheckPos();
-        //print(Input.mousePosition);
-        //print(Camera.main.ViewportToScreenPoint(_transform.position));
-        //print(Camera.main.ViewportToWorldPoint(_transform.position));
+    }
+
+    public void Init2D(string str, Transform _transform)
+    {
+        showText.text = str;
+        Vector3 pos = Camera.main.WorldToScreenPoint(_transform.position);
+        Vector3 newPos = Camera.main.ScreenToWorldPoint(pos);
+        transform.position = newPos + new Vector3(15,0,0);
     }
 
     public void CheckPos()

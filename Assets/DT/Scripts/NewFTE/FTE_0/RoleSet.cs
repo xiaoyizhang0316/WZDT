@@ -221,6 +221,7 @@ public class RoleSet : MonoBehaviour
                 Cost = role.GetComponent<BaseMapRole>().baseRoleData.cost;
                 StartCoroutine(ContinueProductSeed());
                 tet = tva;
+                FTE_0_BulletDetail.My.SetBullet(effect);
                 break;
             case ValueType.Efficiency:
                 role.GetComponent<BaseMapRole>().baseRoleData.efficiency += (RoleEditor.My.seed.efficiency[tva] - RoleEditor.My.seed.efficiency[lva]);
@@ -250,6 +251,7 @@ public class RoleSet : MonoBehaviour
                 effect = role.GetComponent<BaseMapRole>().baseRoleData.effect;
                 Cost = role.GetComponent<BaseMapRole>().baseRoleData.cost;
                 tet = tva;
+                FTE_0_BulletDetail.My.SetBullet1(effect);
                 break;
             case ValueType.Efficiency:
                 role.GetComponent<BaseMapRole>().baseRoleData.efficiency += (RoleEditor.My.peasant.efficiency[tva] - RoleEditor.My.peasant.efficiency[lva]);

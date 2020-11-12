@@ -6,6 +6,7 @@ public class FTE_0_Step_8 : BaseGuideStep
 {
     public GameObject hand;
     public GameObject properties;
+    public GameObject money;
 
     private void Start()
     {
@@ -39,6 +40,7 @@ public class FTE_0_Step_8 : BaseGuideStep
         TradeManager.My.AutoCreateTrade("1", "2");
         yield return new WaitForSeconds(0.5f);
         TradeManager.My.AutoCreateTrade("2", "3");
+        money.SetActive(true);
     }
 
     void HandMove()
@@ -56,11 +58,12 @@ public class FTE_0_Step_8 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        if (StageGoal.My.killNumber >= 6)
-        {
-            NewCanvasUI.My.GamePause(false);
-            return true;
-        }
-        return false;
+        //if (StageGoal.My.killNumber >= 6)
+        //{
+        //    NewCanvasUI.My.GamePause(false);
+        //    return true;
+        //}
+        //return false;
+        return FTE_0_OtherOp.My.consumeDie;
     }
 }

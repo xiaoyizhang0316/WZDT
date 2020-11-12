@@ -59,6 +59,13 @@ public class TradeSign : MonoBehaviour
         tradeData.dividePercent = 0;
         startPer = 1f;
         endPer = 1f;
+        if (PlayerData.My.xianJinLiu[3])
+        {
+            if (!isTradeSettingBest())
+            {
+                tradeData.selectCashFlow = CashFlowType.后钱;
+            }
+        }
         tradeData.ID = TradeManager.My.index++;
         createTime = StageGoal.My.timeCount;
         TradeManager.My.tradeList.Add(tradeData.ID, this);
@@ -107,6 +114,10 @@ public class TradeSign : MonoBehaviour
     public void AddTradeToRole()
     {
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        start.startTradeList.Add(this);
+        end.endTradeList.Add(this);
         cast.tradeList.Add(this);
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
@@ -218,14 +229,38 @@ public class TradeSign : MonoBehaviour
         countNumber++;
         if (countNumber == 10)
         {
-            int cost = CalculateTC();
-            countNumber = 0;
-            if (!PlayerData.My.isSOLO)
+            if (PlayerData.My.yeWuXiTong[2])
             {
-                string str = "OnGoldChange|" + (0 - cost).ToString();
-                if (PlayerData.My.isServer)
+                int number = UnityEngine.Random.Range(0, 101);
+                if (number > 20)
                 {
-                    PlayerData.My.server.SendToClientMsg(str);
+                    int cost = CalculateTC();
+                    countNumber = 0;
+                    if (!PlayerData.My.isSOLO)
+                    {
+                        string str = "OnGoldChange|" + (0 - cost).ToString();
+                        if (PlayerData.My.isServer)
+                        {
+                            PlayerData.My.server.SendToClientMsg(str);
+                        }
+                    }
+                }
+                else
+                {
+                    countNumber = 0;
+                }
+            }
+            else
+            {
+                int cost = CalculateTC();
+                countNumber = 0;
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str = "OnGoldChange|" + (0 - cost).ToString();
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str);
+                    }
                 }
             }
         }
@@ -241,6 +276,8 @@ public class TradeSign : MonoBehaviour
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         cast.tradeList.Remove(this);
+        start.startTradeList.Remove(this);
+        end.endTradeList.Remove(this);
         start.RecalculateEncourageLevel(true);
         end.RecalculateEncourageLevel(true);
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
@@ -255,8 +292,12 @@ public class TradeSign : MonoBehaviour
 
     public void UpdateEncourageLevel()
     {
-        BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
-        cast.RecalculateEncourageLevel(true);
+        //BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        start.RecalculateEncourageLevel(true);
+        end.RecalculateEncourageLevel(true);
+        //cast.RecalculateEncourageLevel(true);
     }
 
     /// <summary>
@@ -269,10 +310,28 @@ public class TradeSign : MonoBehaviour
         int result = (int)((startRole.baseRoleData.tradeCost * startPer + startRole.baseRoleData.riskResistance));
         result += (int)((endRole.baseRoleData.tradeCost * endPer + endRole.baseRoleData.riskResistance));
         int result1, result2;
+        bool isOutTrade = false;
         if (startRole.isNpc || endRole.isNpc)
         {
+            isOutTrade = true;
             result1 = (int)(result * 0.6f);
             result2 = (int)(result * 0.3f);
+            if (PlayerData.My.xianJinLiu[4])
+            {
+                int count = 0;
+                for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                {
+                    if (!PlayerData.My.MapRole[i].isNpc)
+                    {
+                        count++;
+                    }
+                }
+                if (count <= 3)
+                {
+                    result1 = result1 * 80 / 100;
+                    result2 = result2 * 80 / 100;
+                }
+            }
         }
         else
         {
@@ -282,10 +341,27 @@ public class TradeSign : MonoBehaviour
         if (isTradeSettingBest())
         {
             result = result2;
+            if (PlayerData.My.xianJinLiu[1])
+            {
+                result = result * 80 / 100;
+            }
         }
         else
         {
             result = result1;
+        }
+        if (PlayerData.My.xianJinLiu[0])
+        {
+            result = result * 90 / 100;
+        }
+        if (PlayerData.My.yeWuXiTong[5])
+        {
+            result = result * 110 / 100;
+        }
+        if (isOutTrade && PlayerData.My.qiYeJiaZhi[5])
+        {
+            StageGoal.My.GetSatisfy((int)(result * 0.2f));
+            StageGoal.My.ScoreGet(ScoreType.金钱得分, (int)(result * 0.2f));
         }
         StageGoal.My.CostPlayerGold(result);
         StageGoal.My.Expend(result, ExpendType.TradeCosts);

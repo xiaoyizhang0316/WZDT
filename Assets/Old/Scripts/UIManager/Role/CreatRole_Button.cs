@@ -216,6 +216,18 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().MonthlyCost();
                     role.GetComponent<BaseMapRole>().AddTechPoint();
                     role.GetComponent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
+                    if (PlayerData.My.yingLiMoShi[4])
+                    {
+                        role.GetComponent<BaseMapRole>().startEncourageLevel += 2;
+                        role.GetComponent<BaseMapRole>().encourageLevel += 2;
+                    }
+                    if (PlayerData.My.dingWei[1])
+                    {
+                        if (hit[j].transform.GetComponent<MapSign>().isNearWater)
+                        {
+                            //TODO赋予水边BUFF
+                        }
+                    }
                     if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1")
                     {
                         BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);

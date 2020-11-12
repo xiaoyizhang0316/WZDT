@@ -21,9 +21,14 @@ public class BankLoan : BaseExtraSkill
     public IEnumerator StartLoan(TradeSign sign)
     {
         int count = 0;
-        StageGoal.My.GetPlayerGold(loanNumber);
-        StageGoal.My.Income(loanNumber,IncomeType.Npc, GetComponentInParent<BaseMapRole>());
-        eachReturn = (int)(loanNumber * (1 + CalculateInterest(PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)))) / timeCount);
+        int actualLoan = loanNumber;
+        if (PlayerData.My.yingLiMoShi[2])
+        {
+            actualLoan = actualLoan * 120 / 100;
+        }
+        StageGoal.My.GetPlayerGold(actualLoan);
+        StageGoal.My.Income(actualLoan, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
+        eachReturn = (int)(actualLoan * (1 + CalculateInterest(PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)))) / timeCount);
         while (count < timeCount)
         {
             Tweener twe = transform.DOScale(1f, 20f);

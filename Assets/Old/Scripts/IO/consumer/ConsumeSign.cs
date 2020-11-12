@@ -231,6 +231,10 @@ public class ConsumeSign : MonoBehaviour
         {
             BaseLevelController.My.CountKillNumber(this);
         }
+        if(SceneManager.GetActiveScene().name == "FTE_0-1")
+        {
+            FTE_0_OtherOp.My.InstantiateFlyMoney(transform.position);
+        }
         DeathAward();
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
@@ -279,6 +283,18 @@ public class ConsumeSign : MonoBehaviour
     {
         if (isCanSelect)
         {
+            List<ConsumerType> lists = new List<ConsumerType> { ConsumerType.OldpaoLegendary,ConsumerType.GoldencollarLegendary,ConsumerType.EliteLegendary,
+                ConsumerType.BluecollarLegendary,ConsumerType.WhitecollarLegendary};
+            if (lists.Contains(consumerType) && PlayerData.My.dingWei[4])
+            {
+                num = num * 120 / 100;
+            }
+            if (PlayerData.My.yingLiMoShi[5])
+            {
+                int gold = (int)(num * 0.7f);
+                StageGoal.My.GetPlayerGold(gold);
+                StageGoal.My.Income(gold, IncomeType.Consume);
+            }
             currentHealth += num;
             if (currentHealth <= 0)
                 currentHealth = 0;
@@ -291,16 +307,38 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void DeathAward()
     {
-        StageGoal.My.GetSatisfy((int)(consumeData.killSatisfy * scorePer));
+        int baseScore = consumeData.killSatisfy;
+        if (PlayerData.My.qiYeJiaZhi[0])
+        {
+            baseScore = baseScore * 110 / 100;
+        }
+
+        StageGoal.My.GetSatisfy(baseScore);
         StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy);
         if (scorePer > 1f)
         {
+            if (PlayerData.My.qiYeJiaZhi[1])
+            {
+                scorePer *= 1.2f;
+            }
+            if (PlayerData.My.qiYeJiaZhi[2])
+            {
+                StageGoal.My.LostHealth(2);
+            }
             StageGoal.My.ConsumerExtraPerTip();
             DataUploadManager.My.AddData(消费者_口味击杀);
-            StageGoal.My.ScoreGet(ScoreType.口味额外得分, (int)(consumeData.killSatisfy * (scorePer - 1f)));
+            StageGoal.My.ScoreGet(ScoreType.口味额外得分, (int)(baseScore * (scorePer - 1f)));
         }
-        StageGoal.My.GetPlayerGold(consumeData.killMoney);
-        StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
+        int baseGold = consumeData.killMoney;
+        if (PlayerData.My.yingLiMoShi[0])
+        {
+            baseGold = baseGold * 110 / 100;
+        }
+        if (!PlayerData.My.yingLiMoShi[5])
+        {
+            StageGoal.My.GetPlayerGold(baseGold);
+            StageGoal.My.Income(baseGold, IncomeType.Consume);
+        }
         StageGoal.My.killNumber++;
     }
 
@@ -336,6 +374,10 @@ public class ConsumeSign : MonoBehaviour
         if (isNormal)
         {
             per += elementResistance[ProductElementType.Normal] / 100f - 1f;
+        }
+        if (per < 1f && PlayerData.My.dingWei[2])
+        {
+            per = Mathf.Min(0.9f, per + 0.1f);
         }
         scorePer = Mathf.Max(1f,per);
         damage = (int)(damage * per);

@@ -167,7 +167,12 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         dealer.SetActive(false);
         nextLevel = role.baseRoleData.level+1;
         currentLevel = role.baseRoleData.level;
-        GetComponentInChildren<UpdateRole>().Init();
+        if (GetComponentInChildren<UpdateRole>())
+        {
+            GetComponentInChildren<UpdateRole>().Init();
+
+        }
+
         ReInit(role);
         if (currentLevel >= 5)
         {
@@ -181,6 +186,23 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         }
         InitBuff();
         DataUploadManager.My.AddData(DataEnum.角色_查看自己属性);
+        switch (role.baseRoleData.roleType)
+        {
+            case GameEnum.RoleType.Seed:
+                DataUploadManager.My.AddData(DataEnum.角色_查看自己种子商属性);
+                break;
+            case GameEnum.RoleType.Peasant:
+                DataUploadManager.My.AddData(DataEnum.角色_查看自己农民属性);
+                break;
+            case GameEnum.RoleType.Merchant:
+                DataUploadManager.My.AddData(DataEnum.角色_查看自己贸易商属性);
+                break;
+            case GameEnum.RoleType.Dealer:
+                DataUploadManager.My.AddData(DataEnum.角色_查看自己零售商属性);
+                break;
+            default:
+                break;
+        }
     }
 
     public void InitBuff()

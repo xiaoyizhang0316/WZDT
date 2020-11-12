@@ -72,8 +72,14 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
         data.checkbullet = dataDic[DataEnum.看子弹属性.ToString()];
         data.percentageTime = dataDic[DataEnum.统计付钱时间占比.ToString()];
         data.equip_add = dataDic[DataEnum.装备_增加.ToString()];
+        data.equip_useDetail = PlayerData.My.GetEquipUseDetail();
+        data.equip_workerDetail = PlayerData.My.GetWorkerUseDetail();
         data.role_deleteRole = dataDic[DataEnum.角色_删除角色.ToString()];
         data.role_update = dataDic[DataEnum.角色_升级.ToString()];
+        data.role_updateSeed = dataDic[DataEnum.角色_升级种子商.ToString()];
+        data.role_updatePeasant = dataDic[DataEnum.角色_升级农民.ToString()];
+        data.role_updateMerchant = dataDic[DataEnum.角色_升级贸易商.ToString()];
+        data.role_updateDealer = dataDic[DataEnum.角色_升级零售商.ToString()];
         data.role_ReleaseRolePercentage = dataDic[DataEnum.角色_放置种子商.ToString()] + ":" + dataDic[DataEnum.角色_放置农民.ToString()]
             + ":" + dataDic[DataEnum.角色_放置贸易商.ToString()] + ":" + dataDic[DataEnum.角色_放置零售商.ToString()]
             ;
@@ -81,9 +87,14 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
                            + dataDic[DataEnum.角色_放置贸易商.ToString()] + dataDic[DataEnum.角色_放置零售商.ToString()];
         data.role_checkUnlockRole = dataDic[DataEnum.角色_查看未解锁.ToString()];
         data.role_checkselfData = dataDic[DataEnum.角色_查看自己属性.ToString()];
+        data.role_checkSeedData = dataDic[DataEnum.角色_查看自己种子商属性.ToString()];
+        data.role_checkPeasantData = dataDic[DataEnum.角色_查看自己农民属性.ToString()];
+        data.role_checkMerchantData = dataDic[DataEnum.角色_查看自己贸易商属性.ToString()];
+        data.role_checkDealerData = dataDic[DataEnum.角色_查看自己零售商属性.ToString()];
         data.role_clearWarehouse = dataDic[DataEnum.角色_清仓.ToString()];
         data.deficitNumber = dataDic[DataEnum.赤字次数.ToString()];
         data.role_checkNpcData = dataDic[DataEnum.角色_查看NPC属性.ToString()];
+        data.role_checkBuff = dataDic[DataEnum.角色_查看角色Buff.ToString()];
         GetStatisticData(data);
         return data;
     }

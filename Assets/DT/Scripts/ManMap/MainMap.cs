@@ -30,6 +30,7 @@ public class MainMap : MonoBehaviour
         GetAnswers();
         GetEquips();
         GetUserLevel();
+        NetworkMgr.My.GetPlayerGroupInfo(()=> { });
         PlayerData.My.isAllReady = false;
         PlayerData.My.isLocalReady = false;
     }

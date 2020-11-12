@@ -74,7 +74,7 @@ public class MapManager : MonoSingleton<MapManager>
                 return m;
             }
         }
-        print("-----未找到地块-----");
+        print("-----未找到地块-----" + x + "||||" + y);
         return null;
     }
 
@@ -150,6 +150,10 @@ public class MapManager : MonoSingleton<MapManager>
         role.baseRoleData.bulletCapacity = npc.bulletCount;
         role.baseRoleData.ID = npc.npcID;
         role.startEncourageLevel = npc.startEncourageLevel;
+        if (PlayerData.My.yingLiMoShi[4])
+        {
+            role.startEncourageLevel += 2;
+        }
         role.encourageLevel = npc.startEncourageLevel;
         NPC npcScript = go.GetComponent<NPC>();
         npcScript.isCanSee = npc.isCanSee;

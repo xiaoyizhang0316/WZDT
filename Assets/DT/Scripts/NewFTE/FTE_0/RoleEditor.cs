@@ -17,6 +17,8 @@ public class RoleEditor : MonoSingleton<RoleEditor>
     public float riskOffset;
     public float costOffset;
 
+    public List<Slider> sliders;
+
     public Transform roles;
     public Transform sets;
     public Text tc1;
@@ -29,10 +31,12 @@ public class RoleEditor : MonoSingleton<RoleEditor>
     public bool isDragEnd = false;
 
     public GameObject hand;
+
+    public GameObject bulletDetail;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //SetAllSlider(false);
     }
 
     // Update is called once per frame
@@ -42,13 +46,30 @@ public class RoleEditor : MonoSingleton<RoleEditor>
             ShowTradeCost();
     }
 
+    public void SetAllSlider(bool canSlider)
+    {
+        for(int i=0; i< sliders.Count; i++)
+        {
+            sliders[i].interactable = canSlider;
+        }
+    }
+
     public void ShowAllRoleSet()
     {
         for(int i =0; i< sets.childCount-1; i++)
         {
             sets.GetChild(i).gameObject.SetActive(true);
         }
+
+        FTE_0_BulletDetail.My.SetBullet(seed.effect[0]);
+        FTE_0_BulletDetail.My.SetBullet1(peasant.effect[0]);
+        ShowBulletDetail();
         isTrade = true;
+    }
+
+    void ShowBulletDetail()
+    {
+        bulletDetail.SetActive(true);
     }
 
     public void HideAllRoleSet()

@@ -212,11 +212,12 @@ public class RankItem : MonoBehaviour
 
     }
 
-    public void SetMyRank()
+    public void SetMyRank(string tip="未上榜")
     {
         recordInfos.SetActive(false);
         rankInfos.SetActive(false);
         replay_btn.gameObject.SetActive(false);
+        noRank.GetComponent<Text>().text = tip;
         noRank.SetActive(true);
     }
 

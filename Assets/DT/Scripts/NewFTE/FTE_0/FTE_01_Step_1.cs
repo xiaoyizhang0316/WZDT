@@ -49,7 +49,7 @@ public class FTE_01_Step_1 : BaseGuideStep
         }
         yield return new WaitForSeconds(0.5f);
         GuideManager.My.BornEnemy();
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(7.5f);
         isOver = true;
     }
 

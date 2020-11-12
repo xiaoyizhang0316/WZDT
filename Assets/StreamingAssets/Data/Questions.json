@@ -8,7 +8,7 @@
             "choices": "喜好_购买力_需求量_头发长度",
             "answer": "3",
             "isMultiple": "FALSE",
-            "questionDesc": "消费者的喜好，购买力，需求量都对游戏目标产生影响"
+            "questionDesc": "消费者的喜好，购买力，需求量都对游戏目标是否达成产生影响"
         },
         {
             "stage": "0",
@@ -64,7 +64,7 @@
             "stage": "1",
             "necessary": "1",
             "question_id": "6",
-            "question_text": "零售商最好放在地图中的哪些位置？_游戏基础_",
+            "question_text": "通常情况下，在某个关卡中，零售商最好放在关卡中的哪些位置？_游戏基础_",
             "choices": "道路旁边_消费者出生地旁边_终点旁边_地图边缘",
             "answer": "0",
             "isMultiple": "FALSE",
@@ -215,7 +215,7 @@
             "necessary": "1",
             "question_id": "15",
             "question_text": "如果玩家为种子商配了一个带有软属性的装备，当产出的瓜送到讨厌软的消费者手中时会发生什么？_消费者_",
-            "choices": "瓜造成的伤害减少_消费者移动速度加快_玩家金钱减少_玩家Mega值减少",
+            "choices": "瓜提供的满意度减少_消费者移动速度加快_玩家金钱减少_玩家Mega值减少",
             "answer": "0",
             "isMultiple": "FALSE",
             "questionDesc": "消费者不仅有喜欢的属性，还会有讨厌的属性，消费者收到含有讨厌属性的瓜时满意度增加的量会降低"
@@ -225,7 +225,7 @@
             "necessary": "1",
             "question_id": "16",
             "question_text": "如果玩家想获得额外的Mega值，此时玩家应该做什么？_Mega值_",
-            "choices": "为玩家的角色配置装备_为玩家的角色配置人力资源_配置额外的交易_删除玩家的角色",
+            "choices": "为玩家的角色配置装备_为玩家的角色配置人力资源_升级玩家的角色_删除玩家的角色",
             "answer": "1",
             "isMultiple": "FALSE",
             "questionDesc": "配置人力资源会周期性地增加玩家的Mega值"
@@ -244,18 +244,18 @@
             "stage": "3",
             "necessary": "1",
             "question_id": "18",
-            "question_text": "玩家可以和npc角色进行哪些互动？_游戏基础_",
-            "choices": "与npc角色进行交易_删除地图中的npc角色_升级地图中的npc角色_为npc角色配置装备",
+            "question_text": "玩家可以和外部角色进行哪些互动？_游戏基础_",
+            "choices": "与外部角色进行交易_删除地图中的外部角色_升级地图中的外部角色_为外部角色配置装备",
             "answer": "0",
             "isMultiple": "FALSE",
-            "questionDesc": "玩家只能与npc角色进行交易，无法修改npc的各种属性（升级，配置装备，删除等）"
+            "questionDesc": "玩家只能与外部角色进行交易，无法修改外部角色的各种属性（升级，配置装备，删除等）"
         },
         {
             "stage": "3",
             "necessary": "1",
             "question_id": "19",
             "question_text": "为角色配置装备和人力资源不会改变角色的哪种属性？_游戏基础_",
-            "choices": "角色的固定成本_弹药的特殊效果_角色的等级_以上都不对",
+            "choices": "角色的固定成本_瓜的特殊效果_角色的等级_以上都不对",
             "answer": "2",
             "isMultiple": "FALSE",
             "questionDesc": "目前并没有使角色升级的装备或者人力资源哦！"
@@ -264,7 +264,7 @@
             "stage": "3",
             "necessary": "0",
             "question_id": "20",
-            "question_text": "当地图中有多个消费者生成点和出口时，玩家应该怎么做？_游戏基础_",
+            "question_text": "当地图中有多个消费者生成点和出口时，玩家应该怎么做？_游戏进阶_",
             "choices": "根据消费者波数信息逐渐扩张_一开始就笼罩所有的路线_从始至终专精于一条路线_以上都不对",
             "answer": "0",
             "isMultiple": "FALSE",
@@ -288,7 +288,7 @@
             "choices": "击中的所有消费者都会受软属性影响_击中的所有消费者都不会受软属性影响_随机一部分的消费者会受软属性影响_以上都不对",
             "answer": "0",
             "isMultiple": "FALSE",
-            "questionDesc": "果汁会影响打击到的所有的消费者"
+            "questionDesc": "果汁会影响接触到的所有的消费者"
         },
         {
             "stage": "4",
@@ -305,7 +305,7 @@
             "necessary": "1",
             "question_id": "24",
             "question_text": "将以前的关卡评星从1星提高到3星有什么好处？_游戏基础_",
-            "choices": "额外的装备和人力资源_额外的初始金钱_额外的初始Mega点_以上都不对",
+            "choices": "获得额外的装备和人力资源_获得额外的初始金钱_获得额外的初始Mega点_以上都不对",
             "answer": "0",
             "isMultiple": "FALSE",
             "questionDesc": "每个星星都会奖励额外的装备和人力资源"
@@ -314,11 +314,11 @@
             "stage": "4",
             "necessary": "1",
             "question_id": "35",
-            "question_text": "通常情况下npc角色具有哪些功能？_游戏基础_",
+            "question_text": "通常情况下外部角色具有哪些功能？_游戏基础_",
             "choices": "使玩家的角色升级_使玩家角色的属性提高_对产品进行某些变更_加速游戏时间",
             "answer": "1_2",
             "isMultiple": "TRUE",
-            "questionDesc": "npc分为加工型和增益型角色，加工型角色接收产品并输出产品，增益型角色会增强其他角色的属性"
+            "questionDesc": "外部角色分为加工型和增益型角色，加工型角色接收产品并输出产品，增益型角色会增强其他角色的属性"
         },
         {
             "stage": "5",
@@ -344,18 +344,18 @@
             "stage": "5",
             "necessary": "1",
             "question_id": "27",
-            "question_text": "如果玩家与未解锁的npc角色发起交易，会发生什么？_游戏基础_",
-            "choices": "自动解锁该npc并生成交易_自动解锁npc_无任何效果_玩家受到惩罚，金钱减少",
+            "question_text": "如果玩家与未解锁的外部角色发起交易，会发生什么？_游戏基础_",
+            "choices": "自动解锁该外部角色并生成交易_自动解锁外部角色_无任何效果_玩家受到惩罚，金钱减少",
             "answer": "2",
             "isMultiple": "FALSE",
-            "questionDesc": "玩家只能与已经解锁的npc角色进行交易"
+            "questionDesc": "玩家只能与已经解锁的外部角色进行交易"
         },
         {
             "stage": "5",
             "necessary": "1",
             "question_id": "28",
-            "question_text": "玩家使用软属性的瓜送给喜欢软的消费者，但瓜的伤害反而减少了，最可能的原因是什么？_游戏基础_",
-            "choices": "该玩家运气不好_零售商的位置不好_没有使用透视镜查看消费者的隐藏需求，消费者的隐藏需求可能是更讨厌软_玩家使用了npc角色而没用自己的角色",
+            "question_text": "玩家使用软属性的瓜送给喜欢软的消费者，但瓜提供的满意度反而减少了，最可能的原因是什么？_游戏基础_",
+            "choices": "该玩家运气不好_零售商的位置不好_没有使用透视镜查看消费者的隐藏需求，消费者的隐藏需求可能是更讨厌软_玩家使用了外部角色而没用自己的角色",
             "answer": "2",
             "isMultiple": "FALSE",
             "questionDesc": "无论玩家使用透视镜与否，消费者的隐藏需求都会参与瓜满意度的结算"
@@ -404,11 +404,21 @@
             "stage": "5",
             "necessary": "1",
             "question_id": "40",
-            "question_text": "解锁了一个npc角色会发生什么？_游戏基础_",
+            "question_text": "解锁了一个外部角色会发生什么？_游戏基础_",
             "choices": "玩家Mega值降低_玩家可与该角色配置交易_玩家可更详细地查看该角色信息_以上选项都对",
             "answer": "3",
             "isMultiple": "FALSE",
             "questionDesc": "解锁了一个角色后就可以查看该角色的属性，并且可以对该角色发起交易，但解锁角色需要消耗Mega值"
+        },
+        {
+            "stage": "5",
+            "necessary": "1",
+            "question_id": "41",
+            "question_text": "先后钱设置的正确与否与什么元素有关？_游戏基础_",
+            "choices": "角色的位置_角色的交易成本属性_角色的风险属性_角色的等级",
+            "answer": "2",
+            "isMultiple": "FALSE",
+            "questionDesc": "先后钱设置的正确与否与交易双方的风险属性有关，核心思路是要分摊交易双方的风险"
         }
     ]
 }
