@@ -14,7 +14,7 @@ public class FTE_0_Step_5 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         next = false;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(15);
         next = true;
     }
 

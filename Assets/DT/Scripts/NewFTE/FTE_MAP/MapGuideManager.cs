@@ -5,43 +5,89 @@ using UnityEngine.SceneManagement;
 
 public class MapGuideManager : GuideManager
 {
-    public override void Init()
+    public override IEnumerator Init()
     {
+        StartCoroutine(OriginalData.My.ReadFTETexts(SceneManager.GetActiveScene().name.Split('_')[1]));
         if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
         {
             FindObjectOfType<CloseGuide>().gameObject.SetActive(false);
-            return;
-        }
-        //foreach (var item in NewCanvasUI.My.highLight)
-        //{
-        //    item.SetActive(false);
-        //}
-
-        //if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
-        //{
-        //    currentGuideIndex = 0;
-        //    PlayerPrefs.SetInt("isUseGuide", 1);
-        //}
-        //else
-        if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
-        {
-            //currentGuideIndex = 0;
-
-            //NewCanvasUI.My.GamePause(false);
-            //guideClose.Init();
-
-
         }
         else
         {
-            currentGuideIndex = -1;
-            CloseFTE();
+            foreach (var item in NewCanvasUI.My.highLight)
+            {
+                item.SetActive(false);
+            }
 
-            //guideClose.Init();
+            //if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
+            //{
+            //    currentGuideIndex = 0;
+            //    PlayerPrefs.SetInt("isUseGuide", 1);
+            //}
+            //else
+            if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
+            {
+                //currentGuideIndex = 0;
+                //NewCanvasUI.My.GamePause(false);
+                //guideClose.Init();
+            }
+            else
+            {
+                currentGuideIndex = -1;
+                CloseFTE();
+                //guideClose.Init();
+            }
 
+            while (true)
+            {
+                yield return null;
+                if (OriginalData.My.fteData.datas.Count > 0)
+                {
+                    break;
+
+                }
+            }
+
+            PlayCurrentIndexGuide();
         }
-        PlayCurrentIndexGuide();
     }
+    //public void Init()
+    //{
+    //    if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+    //    {
+    //        FindObjectOfType<CloseGuide>().gameObject.SetActive(false);
+    //        return;
+    //    }
+    //    //foreach (var item in NewCanvasUI.My.highLight)
+    //    //{
+    //    //    item.SetActive(false);
+    //    //}
+
+    //    //if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
+    //    //{
+    //    //    currentGuideIndex = 0;
+    //    //    PlayerPrefs.SetInt("isUseGuide", 1);
+    //    //}
+    //    //else
+    //    if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
+    //    {
+    //        //currentGuideIndex = 0;
+
+    //        //NewCanvasUI.My.GamePause(false);
+    //        //guideClose.Init();
+
+
+    //    }
+    //    else
+    //    {
+    //        currentGuideIndex = -1;
+    //        CloseFTE();
+
+    //        //guideClose.Init();
+
+    //    }
+    //    PlayCurrentIndexGuide();
+    //}
 
     public override void CloseFTE()
     {
