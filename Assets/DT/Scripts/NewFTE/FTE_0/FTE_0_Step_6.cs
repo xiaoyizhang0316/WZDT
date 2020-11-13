@@ -15,8 +15,8 @@ public class FTE_0_Step_6 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         Debug.Log("结束教学 " + currentStepIndex);
+        NewCanvasUI.My.GameNormal();
         money.transform.DOScale(1f, 0f).Play();
-        NewCanvasUI.My.GamePause(false);
         yield break;
     }
 
@@ -26,6 +26,7 @@ public class FTE_0_Step_6 : BaseGuideStep
         afterEntry = HandMove;
        
         yield return new WaitForSeconds(1);
+        
         ShowInfos();
     }
 

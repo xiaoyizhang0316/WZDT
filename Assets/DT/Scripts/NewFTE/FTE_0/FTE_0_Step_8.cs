@@ -36,6 +36,7 @@ public class FTE_0_Step_8 : BaseGuideStep
 
     IEnumerator OwnStep()
     {
+        NewCanvasUI.My.GamePause(false);
         yield return new WaitForSeconds(0.5f);
         TradeManager.My.AutoCreateTrade("0", "1");
         yield return new WaitForSeconds(0.5f);
@@ -43,6 +44,7 @@ public class FTE_0_Step_8 : BaseGuideStep
         yield return new WaitForSeconds(0.5f);
         TradeManager.My.AutoCreateTrade("2", "3");
         //money.transform.DOScale(1f, 0f).Play();
+
         isOver = true;
     }
 
@@ -69,7 +71,7 @@ public class FTE_0_Step_8 : BaseGuideStep
         //return false;
         if (isOver)
         {
-            NewCanvasUI.My.GamePause(false);
+            //NewCanvasUI.My.GamePause(false);
             return true;
         }
         return false ;
