@@ -51,10 +51,13 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public Toggle conduty;
 
     public GameObject missionConfirm;
+    public string currentSceneName = "";
+    public bool stepOver = false;
     // Start is called before the first frame update
     void Start()
     {
         panel.SetActive(false);
+        stepOver = false;
         listScript.gameObject.SetActive(false);
         rankPanel.SetActive(false);
         close.onClick.AddListener(() =>
@@ -90,9 +93,15 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
             }
             else
             {
-                if(PlayerData.My.isSOLO)
+                if (PlayerData.My.isSOLO)
+                {
+                    
                 loadScene(); 
-                
+                }
+                if (currentSceneName.Equals("FTE_2"))
+                {
+                    stepOver = true;
+                }
             }
             
             
@@ -160,6 +169,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         //if (int.Parse(sceneName.Split('_')[1]) >= 5 && int.Parse(sceneName.Split('_')[1]) <= 8)
         //    isUseGuide.gameObject.SetActive(false);
         isUseGuide.gameObject.SetActive(true);
+        currentSceneName = sceneName;
         if (star[0] == '1')
         {
             PlayerPrefs.SetInt("isUseGuide", 0);

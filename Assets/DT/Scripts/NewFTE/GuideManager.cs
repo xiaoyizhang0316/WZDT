@@ -64,17 +64,18 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         StartCoroutine(baseGuideSteps[currentGuideIndex].Play());
     }
 
-    public void Init()
+    public virtual void Init()
     {
         if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
         {
             FindObjectOfType<CloseGuide>().gameObject.SetActive(false);
             return;
         }
-        foreach (var item in NewCanvasUI.My.highLight)
-        {
-            item.SetActive(false);
-        }
+            foreach (var item in NewCanvasUI.My.highLight)
+            {
+                item.SetActive(false);
+            }
+        
         if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
         {
             currentGuideIndex = 0;
@@ -83,14 +84,19 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         else if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
         {
             currentGuideIndex = 0;
-            NewCanvasUI.My.GamePause(false);
-            guideClose.Init();
+            
+                NewCanvasUI.My.GamePause(false);
+                guideClose.Init();
+
+            
         }
         else
         {
             currentGuideIndex = -1;
             CloseFTE();
-            guideClose.Init();
+            
+                guideClose.Init();
+            
         }
         PlayCurrentIndexGuide();
 
@@ -109,7 +115,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     }
 
 
-    public void CloseFTE()
+    public virtual void CloseFTE()
     {
         ftegob.SetActive(false);
         currentGuideIndex = -1;
