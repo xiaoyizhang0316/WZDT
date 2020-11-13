@@ -105,6 +105,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         isTradeButtonActive = true;
         isProductLineActive = true;
         isInfoLineActive = true;
+        Init1_4UI();
     }
 
 
@@ -115,11 +116,12 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void Init1_4UI()
     {
         switch (NetworkMgr.My.levelProgressList.Count  )
+        //switch (1  )
         {
             case 0:
                 Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(false);
-                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>().interactable = false;
-                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>().interactable = false;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled = false;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled = false;
                 Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
                 Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
                 Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().productTF.gameObject.SetActive(false);
@@ -129,8 +131,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             break;
             case 1:
                 Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(false);
-                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>().interactable = false;
-                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>().interactable = false;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled= false;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled = false;
                 Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
                 Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
                 Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().productTF.gameObject.SetActive(false);
@@ -143,8 +145,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 //装备
                 Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
                 //先后前
-                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>().interactable = false;
-                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>().interactable = false;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled= false;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled = false;
                 Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
                 Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
                // 风险交易成本
@@ -153,7 +155,52 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().productTF.gameObject.SetActive(false);
                 Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().productTF.gameObject.SetActive(false);
                 break;     
+            case 3:
+                //装备
+                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
+                //先后前
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled = false;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled = false;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
+                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
+                // 风险交易成本
+                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().productTF.gameObject.SetActive(false);
+                break;     
+            case 4:
+                //装备
+                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
+                //先后前
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled = true;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled = true;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "先钱";
+                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "后钱";
+                // 风险交易成本
+                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().productTF.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().productTF.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().productTF.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().productTF.gameObject.SetActive(true);
+                break;    
+            default:
+                //装备
+                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
+                //先后前
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled = true;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled= true;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "先钱";
+                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "后钱";
+                // 风险交易成本
+                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().productTF.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().productTF.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().productTF.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().productTF.gameObject.SetActive(true);
+                break;    
+
+                
         }
+          
         
     }
 
