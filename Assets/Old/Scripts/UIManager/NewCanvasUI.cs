@@ -19,6 +19,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public GameObject Panel_TradeSetting;
     public Transform RoleTF;
     public GameObject lose;
+    
+    
     /// <summary>
     /// 需要遮挡的UI
     /// </summary>
@@ -103,6 +105,56 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         isTradeButtonActive = true;
         isProductLineActive = true;
         isInfoLineActive = true;
+    }
+
+
+
+    /// <summary>
+    /// 将1-4关未开启的UI关闭、开启
+    /// </summary>
+    public void Init1_4UI()
+    {
+        switch (NetworkMgr.My.levelProgressList.Count  )
+        {
+            case 0:
+                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(false);
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>().interactable = false;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>().interactable = false;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
+                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
+                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().productTF.gameObject.SetActive(false);
+            break;
+            case 1:
+                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(false);
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>().interactable = false;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>().interactable = false;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
+                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
+                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().productTF.gameObject.SetActive(false);
+
+           break;     
+            case 2:
+                //装备
+                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
+                //先后前
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>().interactable = false;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>().interactable = false;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
+                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
+               // 风险交易成本
+                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().productTF.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().productTF.gameObject.SetActive(false);
+                break;     
+        }
+        
     }
 
     // Update is called once per frame

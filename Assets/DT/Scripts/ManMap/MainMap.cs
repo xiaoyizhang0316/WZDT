@@ -35,6 +35,10 @@ public class MainMap : MonoBehaviour
         PlayerData.My.isLocalReady = false;
     }
 
+    public void LockLevel()
+    {
+        
+    }
     public void GetUserLevel()
     {
         switch(NetworkMgr.My.playerLimit)

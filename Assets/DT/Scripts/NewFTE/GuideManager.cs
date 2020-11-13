@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<GuideManager>
 {
@@ -23,18 +24,84 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     public GameObject ftegob;
 
     public CloseGuide guideClose;
-    
+
+
+    /// <summary>
+    /// 查找当前教学文案
+    /// </summary>
+    /// <param name="step">第几步</param>
+    /// <param name="index">Text索引</param>
+    /// <returns></returns>
+    public string GetCurrentSetpText(int step, int index)
+    {
+        for (int i = 0; i < OriginalData.My.fteData.datas.Count; i++)
+        {
+            if (OriginalData.My.fteData.datas[i].stepID == step)
+            {
+                if (index == 0)
+                {
+                    return OriginalData.My.fteData.datas[i].textContent_1;
+                }
+
+                if (index == 1)
+                {
+                    return OriginalData.My.fteData.datas[i].textContent_2;
+                }
+
+                if (index == 2)
+                {
+                    return OriginalData.My.fteData.datas[i].textContent_3;
+                }
+
+                if (index == 3)
+                {
+                    return OriginalData.My.fteData.datas[i].textContent_4;
+                }
+
+                if (index == 4)
+                {
+                    return OriginalData.My.fteData.datas[i].textContent_5;
+                }
+            }
+        }
+
+        Debug.Log("Setp" + step + "index" + index);
+        return "";
+    }
+
     public void PlayCurrentIndexGuide()
     {
         for (int i = 0; i < baseGuideSteps.Count; i++)
         {
             baseGuideSteps[i].gameObject.SetActive(false);
+            if (baseGuideSteps[i].isOpen)
+            {
+                Text[] text = baseGuideSteps[i].transform.GetComponentsInChildren<Text>();
+                for (int j = 0; j < text.Length; j++)
+                {
+                    if (text[j].gameObject.activeSelf && text[j].transform.parent == this.baseGuideSteps[i].transform)
+                    {
+                        if (!baseGuideSteps[i].contentText.Contains(text[j]))
+                        {
+                            baseGuideSteps[i].contentText.Add(text[j]);
+
+                        }
+
+                    }
+                }
+
+                for (int j = 0; j < baseGuideSteps[i].contentText.Count; j++)
+                {
+                    baseGuideSteps[i].contentText[j].text = GetCurrentSetpText(i, j);
+                }
+            }
         }
 
         for (int i = 0; i < darkEffect._items.Count; i++)
         {
             darkEffect._items[i].radius = 0;
         }
+
         if (currentGuideIndex == -1)
         {
             //当前没有新手引导
@@ -47,6 +114,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             CloseFTE();
             return;
         }
+
         if (!PlayerData.My.isSOLO)
         {
             string str1 = "OpenGuide|true";
@@ -59,41 +127,56 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
                 PlayerData.My.client.SendToServerMsg(str1);
             }
         }
+
         baseGuideSteps[currentGuideIndex].gameObject.SetActive(true);
 
         StartCoroutine(baseGuideSteps[currentGuideIndex].Play());
     }
 
-    public void Init()
+    public IEnumerator Init()
     {
+        StartCoroutine(OriginalData.My.ReadFTETexts(SceneManager.GetActiveScene().name.Split('_')[1]));
         if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
         {
             FindObjectOfType<CloseGuide>().gameObject.SetActive(false);
-            return;
-        }
-        foreach (var item in NewCanvasUI.My.highLight)
-        {
-            item.SetActive(false);
-        }
-        if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
-        {
-            currentGuideIndex = 0;
-            PlayerPrefs.SetInt("isUseGuide", 1);
-        }
-        else if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
-        {
-            currentGuideIndex = 0;
-            NewCanvasUI.My.GamePause(false);
-            guideClose.Init();
         }
         else
         {
-            currentGuideIndex = -1;
-            CloseFTE();
-            guideClose.Init();
-        }
-        PlayCurrentIndexGuide();
+            foreach (var item in NewCanvasUI.My.highLight)
+            {
+                item.SetActive(false);
+            }
 
+            if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
+            {
+                currentGuideIndex = 0;
+                PlayerPrefs.SetInt("isUseGuide", 1);
+            }
+            else if (currentGuideIndex >= 0 && PlayerPrefs.GetInt("isUseGuide") == 1)
+            {
+                currentGuideIndex = 0;
+                NewCanvasUI.My.GamePause(false);
+                guideClose.Init();
+            }
+            else
+            {
+                currentGuideIndex = -1;
+                CloseFTE();
+                guideClose.Init();
+            }
+
+            while (true)
+            {
+                yield return null;
+                if (OriginalData.My.fteData.datas.Count > 0)
+                {
+                    break;
+                    
+                }
+            }
+
+            PlayCurrentIndexGuide();
+        }
     }
 
     // Start is called before the first frame update
@@ -105,7 +188,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         //    return;
         //}
         if (temp == null)
-            Init();
+           StartCoroutine(Init()) ;
     }
 
 
@@ -118,11 +201,12 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             item.SetActive(true);
         }
 
-        foreach (var VARIABLE in  darkEffect._items)
+        foreach (var VARIABLE in darkEffect._items)
         {
             VARIABLE.radius = 0;
         }
-        darkEffect._darkColor =new Color(1,1,1,0);
+
+        darkEffect._darkColor = new Color(1, 1, 1, 0);
         foreach (var VARIABLE in MapManager.My._mapSigns)
         {
             if (VARIABLE.mapType == GameEnum.MapType.Grass && VARIABLE.baseMapRole == null)
@@ -130,6 +214,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
                 VARIABLE.isCanPlace = true;
             }
         }
+
         if (!PlayerData.My.isSOLO)
         {
             string str1 = "OpenGuide|false";
@@ -142,8 +227,9 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
                 PlayerData.My.client.SendToServerMsg(str1);
             }
         }
+
         NewCanvasUI.My.Panel_Update.transform.localPosition = Vector3.one;
-        if(guideClose!=null)
+        if (guideClose != null)
             guideClose.gameObject.SetActive(false);
     }
 
@@ -156,7 +242,6 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     // Update is called once per frame
     void Update()
     {
-
     }
 
     public void BornEnemy()
