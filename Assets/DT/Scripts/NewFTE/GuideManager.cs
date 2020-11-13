@@ -133,7 +133,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         StartCoroutine(baseGuideSteps[currentGuideIndex].Play());
     }
 
-    public IEnumerator Init()
+    public virtual IEnumerator Init()
     {
         StartCoroutine(OriginalData.My.ReadFTETexts(SceneManager.GetActiveScene().name.Split('_')[1]));
         if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
@@ -192,7 +192,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     }
 
 
-    public void CloseFTE()
+    public virtual void CloseFTE()
     {
         ftegob.SetActive(false);
         currentGuideIndex = -1;

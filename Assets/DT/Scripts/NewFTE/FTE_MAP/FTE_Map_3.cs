@@ -2,27 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FTE_0_Step_5 : BaseGuideStep
+public class FTE_Map_3 : BaseGuideStep
 {
-    public Transform border;
-    bool next = false;
+    public GameObject openTargetPanel;
+
     public override IEnumerator StepEnd()
     {
-        yield break;
+        throw new System.NotImplementedException();
     }
 
     public override IEnumerator StepStart()
     {
-        next = false;
-        yield return new WaitForSeconds(15);
-        next = true;
+        throw new System.NotImplementedException();
     }
 
     public override bool ChenkEnd()
     {
-        if (next)
+        if (openTargetPanel.activeInHierarchy)
         {
-            NewCanvasUI.My.GamePause(false);
             return true;
         }
         return false;

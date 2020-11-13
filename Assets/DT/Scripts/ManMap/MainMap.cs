@@ -35,10 +35,6 @@ public class MainMap : MonoBehaviour
         PlayerData.My.isLocalReady = false;
     }
 
-    public void LockLevel()
-    {
-        
-    }
     public void GetUserLevel()
     {
         switch(NetworkMgr.My.playerLimit)
@@ -140,8 +136,8 @@ public class MainMap : MonoBehaviour
         if (NetworkMgr.My.levelProgresses == null)
         {
             NetworkMgr.My.GetLevelProgress(() => {
-                InitLevel();
                 threeWords.gameObject.SetActive(true);
+                InitLevel();
             }, () => {
                 if (NetworkMgr.My.playerDatas.fteProgress > 1)
                 {
@@ -150,15 +146,15 @@ public class MainMap : MonoBehaviour
                 }
                 else
                 {
-                    InitLevel();
                     threeWords.gameObject.SetActive(true);
+                    InitLevel();
                 }
             });
         }
         else
         {
-            InitLevel();
             threeWords.gameObject.SetActive(true);
+            InitLevel();
         }
     }
 
