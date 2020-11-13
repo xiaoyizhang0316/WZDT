@@ -27,7 +27,7 @@ public class RoleListInfoMerchant : BaseRoleListInfo
     public bool isShowProduct;
 
     public GameObject productPrb;
-
+    public GameObject tradText;
     public override void Init(Role role)
     {
         effect.text = role.effect.ToString();

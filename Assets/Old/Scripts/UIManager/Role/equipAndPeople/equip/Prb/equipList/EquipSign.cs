@@ -73,6 +73,9 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private Vector2 startPos;
 
     private GameObject cam;
+
+
+    public GameObject LevelUI;
     private void Awake()
     {
         EquipListManager.My._signs.Add(this);

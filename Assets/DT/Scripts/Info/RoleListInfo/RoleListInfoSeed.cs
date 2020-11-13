@@ -28,6 +28,7 @@ public class RoleListInfoSeed : BaseRoleListInfo
 
     public GameObject productPrb;
 
+    public GameObject tradText;
     public override void Init(Role role)
     {
         effect.text = role.effect.ToString();
