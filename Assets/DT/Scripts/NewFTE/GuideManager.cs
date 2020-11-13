@@ -74,27 +74,27 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         for (int i = 0; i < baseGuideSteps.Count; i++)
         {
             baseGuideSteps[i].gameObject.SetActive(false);
-            if (baseGuideSteps[i].isOpen)
-            {
-                Text[] text = baseGuideSteps[i].transform.GetComponentsInChildren<Text>();
-                for (int j = 0; j < text.Length; j++)
-                {
-                    if (text[j].gameObject.activeSelf && text[j].transform.parent == this.baseGuideSteps[i].transform)
-                    {
-                        if (!baseGuideSteps[i].contentText.Contains(text[j]))
-                        {
-                            baseGuideSteps[i].contentText.Add(text[j]);
+        //if (baseGuideSteps[i].isOpen)
+        //{
+        //    Text[] text = baseGuideSteps[i].transform.GetComponentsInChildren<Text>();
+        //    for (int j = 0; j < text.Length; j++)
+        //    {
+        //        if (text[j].gameObject.activeSelf && text[j].transform.parent == this.baseGuideSteps[i].transform)
+        //        {
+        //            if (!baseGuideSteps[i].contentText.Contains(text[j]))
+        //            {
+        //                baseGuideSteps[i].contentText.Add(text[j]);
 
-                        }
+        //            }
 
-                    }
-                }
+        //        }
+        //    }
 
-                for (int j = 0; j < baseGuideSteps[i].contentText.Count; j++)
-                {
-                    baseGuideSteps[i].contentText[j].text = GetCurrentSetpText(i, j);
-                }
-            }
+        //    for (int j = 0; j < baseGuideSteps[i].contentText.Count; j++)
+        //    {
+        //        baseGuideSteps[i].contentText[j].text = GetCurrentSetpText(i, j);
+        //    }
+        //    }
         }
 
         for (int i = 0; i < darkEffect._items.Count; i++)
