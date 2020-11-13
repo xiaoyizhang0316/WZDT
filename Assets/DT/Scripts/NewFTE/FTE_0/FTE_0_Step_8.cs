@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class FTE_0_Step_8 : BaseGuideStep
 {
@@ -40,7 +41,7 @@ public class FTE_0_Step_8 : BaseGuideStep
         TradeManager.My.AutoCreateTrade("1", "2");
         yield return new WaitForSeconds(0.5f);
         TradeManager.My.AutoCreateTrade("2", "3");
-        money.SetActive(true);
+        money.transform.DOScale(1f, 0f).Play();
     }
 
     void HandMove()

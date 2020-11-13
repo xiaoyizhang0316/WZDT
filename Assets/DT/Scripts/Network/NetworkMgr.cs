@@ -135,7 +135,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     groupID = playerDatas.groupID;
                     playerLimit = playerDatas.limit;
                     InitRoleFoundDic(playerDatas.roleFound);
-                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
+                    //PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     //Debug.Log(playerID + " " + token);
                     //Debug.Log("token-----" + token);
                     doSuccess?.Invoke();
