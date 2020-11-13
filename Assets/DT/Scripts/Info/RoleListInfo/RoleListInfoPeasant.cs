@@ -27,6 +27,7 @@ public class RoleListInfoPeasant : BaseRoleListInfo
     public bool isShowProduct;
 
     public GameObject productPrb;
+    public GameObject tradText;
 
     public override void Init(Role role)
     {

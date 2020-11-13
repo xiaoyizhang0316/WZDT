@@ -26,6 +26,7 @@ public class RoleListInfoDealer : BaseRoleListInfo
 
     public GameObject productPrb;
 
+    public GameObject tradText;
     public override void Init(Role role)
     {
       
