@@ -474,6 +474,70 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     }
 
     /// <summary>
+    /// 生成天赋简化字符串
+    /// </summary>
+    /// <returns></returns>
+    public string GeneratePlayerTalentReview()
+    {
+        string result = "";
+        int count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (dingWei[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (guanJianZiYuanNengLi[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (yeWuXiTong[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (xianJinLiu[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if(yingLiMoShi[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if(qiYeJiaZhi[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        return result;
+    }
+
+    /// <summary>
     /// 生成玩家天赋字符串
     /// </summary>
     /// <returns></returns>
