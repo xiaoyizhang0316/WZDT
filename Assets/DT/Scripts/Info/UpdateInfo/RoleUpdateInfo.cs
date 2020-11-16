@@ -110,7 +110,6 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                 str = "确定要将仓库中的产品低价处理吗?";
             }
 
-            
             DeleteUIManager.My.Init(str, () => {
                 if (!PlayerData.My.isSOLO)
                 {
@@ -209,6 +208,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         if (PlayerData.My.guanJianZiYuanNengLi[5])
         {
             clearWarehouse.GetComponentInChildren<Text>().text = "清仓(" + PlayerData.My.GetMapRoleById(role.ID).CountWarehouseIncome() + ")";
+            clearWarehouse.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Talent/Warehouse");
         }
         ReInit(role);
         if (currentLevel >= 5)

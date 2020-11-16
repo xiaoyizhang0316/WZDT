@@ -551,6 +551,10 @@ public class GameEnum
         /// </summary>
         UpgradeRole,
         /// <summary>
+        /// 出售角色
+        /// </summary>
+        SellRole,
+        /// <summary>
         /// 发起交易
         /// </summary>
         CreateTrade,

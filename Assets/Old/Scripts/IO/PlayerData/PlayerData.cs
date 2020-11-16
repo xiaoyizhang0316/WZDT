@@ -183,15 +183,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     {
         DataUploadManager.My.AddData(DataEnum.角色_删除角色);
         Role target = GetRoleById(roleId);
-
-        //foreach (var v in target.EquipList)
-        //{
-        //    SetGearStatus(v.Key, false);
-        //}
-        //foreach (var v in target.peoPleList)
-        //{
-        //    SetWorkerStatus(v.Key, false);
-        //}
         TradeManager.My.DeleteRoleAllTrade(roleId);
         BaseMapRole mapRole = GetMapRoleById(roleId);
         MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
@@ -199,7 +190,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
         RoleData.Remove(target);
         MapRole.Remove(mapRole);
-        DeleleRoleOperationRecord(mapRole);
+        SellRoleOperationRecord(mapRole);
         Destroy(mapRole.gameObject);
     }
 
@@ -220,6 +211,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         role.baseRoleData.ID = mapRole.baseRoleData.ID;
         role.startEncourageLevel = mapRole.startEncourageLevel;
         role.encourageLevel = mapRole.startEncourageLevel;
+        role.isSell = true;
         NPC npcScript = go.GetComponent<NPC>();
         npcScript.isCanSee = true;
         npcScript.isLock =false;
@@ -240,6 +232,13 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         List<string> param = new List<string>();
         param.Add(mapRole.baseRoleData.ID.ToString());
         StageGoal.My.RecordOperation(OperationType.DeleteRole, param);
+    }
+
+    public void SellRoleOperationRecord(BaseMapRole mapRole)
+    {
+        List<string> param = new List<string>();
+        param.Add(mapRole.baseRoleData.ID.ToString());
+        StageGoal.My.RecordOperation(OperationType.SellRole, param);
     }
 
     /// <summary>

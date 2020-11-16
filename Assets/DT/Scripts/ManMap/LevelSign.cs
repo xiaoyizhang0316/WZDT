@@ -285,6 +285,7 @@ public class LevelSign : MonoBehaviour
                 }
                 else
                 {
+                    transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
                     if (currentStar[0] == '0')
                     {
                         transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);

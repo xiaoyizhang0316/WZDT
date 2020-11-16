@@ -304,7 +304,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     {
         for (int i = 0; i < signs.Count; i++)
         {
-            if (signs[i].isInit && signs[i].role.roleId == ID)
+            if (signs[i].isInit && (Mathf.Abs((float)signs[i].role.roleId - (float)ID) < 0.1f) )
             {
                 return true;
             }

@@ -35,6 +35,10 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public List<DataStat> mydataStats;
 
+    public string talent;
+
+    public Transform talentPanel;
+
     /// <summary>
     /// 正常速度播放
     /// </summary>
@@ -120,7 +124,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     /// <param name="playerOperations"></param>
     /// <param name="datas"></param>
     /// <param name="timeCount"></param>
-    public void MapInit(List<PlayerOperation> playerOperations, List<DataStat> datas, int timeCount)
+    public void MapInit(List<PlayerOperation> playerOperations, List<DataStat> datas, int timeCount,string talent)
     {
         mydataStats = datas;
         AutoPlay();
@@ -131,6 +135,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         ReviewManager.My.content.GetComponent<RectTransform>().localPosition = Vector3.zero; 
         InitMoneyLine(datas, timeCount);
         Show();
+        InitTalentPanel(talent);
     }
 
     /// <summary>
@@ -146,6 +151,22 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         playSlider.value = 0;
         //line = playSlider.transform.GetChild(0).GetComponent<VectorObject2D>();
         InitMoneyLine(StageGoal.My.dataStats, StageGoal.My.timeCount);
+        InitTalentPanel(PlayerData.My.GeneratePlayerTalentReview());
+    }
+
+    public void InitTalentPanel(string talentStr)
+    {
+        if (talentStr.Length != 6)
+        {
+            Debug.LogWarning("--------复盘天赋读取错误！");
+            talentStr = "000000";
+        }
+        Text[] list = talentPanel.GetComponentsInChildren<Text>();
+        char[] charList = talentStr.ToCharArray();
+        for (int i = 0; i < 6; i++)
+        {
+            list[i + 1].text = charList[i].ToString();
+        }
     }
 
     /// <summary>
@@ -308,6 +329,18 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                     temp.operationParams = new List<string>();
                     temp.operationParams.Add(p.operationParam[0]);
                     result.specialOperations.Add(temp);
+                    break;
+                }
+            case OperationType.SellRole:
+                {
+                    for (int i = 0; i < result.mapRoles.Count; i++)
+                    {
+                        if (Mathf.Abs((float)(result.mapRoles[i].roleId - double.Parse(p.operationParam[0]))) <= 0.01f)
+                        {
+                            result.mapRoles[i].isNPC = true;
+                            break;
+                        }
+                    }
                     break;
                 }
             case OperationType.CreateTrade:

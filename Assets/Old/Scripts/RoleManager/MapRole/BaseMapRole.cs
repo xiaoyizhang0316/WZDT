@@ -116,6 +116,8 @@ public class BaseMapRole : MonoBehaviour
 
     public GameObject emptyGearSprite;
 
+    public bool isSell = false;
+
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
