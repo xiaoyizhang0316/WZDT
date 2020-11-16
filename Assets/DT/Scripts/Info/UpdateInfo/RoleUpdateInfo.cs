@@ -53,6 +53,8 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public Button clearWarehouse;
 
+    public Button sellRole;
+
     public EncourageLevel encourageLevel;
 
     public GameObject emptyEquip;
@@ -122,6 +124,28 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                 ReInit(currentRole);
             });
         });
+        sellRole.onClick.AddListener(() => {
+            gameObject.SetActive(false);
+            NewCanvasUI.My.Panel_Delete.SetActive(true);
+            string str = "确定要出售" + currentRole.baseRoleData.roleName + "吗？";
+
+            DeleteUIManager.My.Init(str, () => {
+                PlayerData.My.SellRole(currentRole.ID);
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str1 = "DeleteRole|";
+                    str1 += currentRole.ID.ToString();
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str1);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str1);
+                    }
+                }
+            });
+        });
         buffcontent.SetActive(false);
     }
 
@@ -172,7 +196,11 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             GetComponentInChildren<UpdateRole>().Init();
 
         }
-
+        sellRole.gameObject.SetActive(false);
+        if (PlayerData.My.yeWuXiTong[5] && role.baseRoleData.level >= 3)
+        {
+            sellRole.gameObject.SetActive(true);
+        }
         ReInit(role);
         if (currentLevel >= 5)
         {

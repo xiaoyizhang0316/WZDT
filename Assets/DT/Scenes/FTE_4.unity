@@ -34019,7 +34019,6 @@ GameObject:
   - component: {fileID: 4239762238003943289}
   - component: {fileID: 4239762238003943290}
   - component: {fileID: 4239762238003943291}
-  - component: {fileID: 4239762238003943292}
   - component: {fileID: 4239762238003943293}
   - component: {fileID: 4239762238003943294}
   - component: {fileID: 4239762238003943295}
@@ -34028,6 +34027,7 @@ GameObject:
   - component: {fileID: 8200452596216692722}
   - component: {fileID: 506421897778017419}
   - component: {fileID: 4239762237830983467}
+  - component: {fileID: 4239762238003943283}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -34035,6 +34035,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4239762238003943283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4239762238003943282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f6487d21a03404cb21b245f0242e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 4239762238003943291}
+  suppressBlockAutoSelect: 0
+  waitForFrames: 1
 --- !u!4 &4239762238003943289
 Transform:
   m_ObjectHideFlags: 0
@@ -34074,9 +34089,8 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 4239762238003943295}
-  selectedCommands:
-  - {fileID: 4239762238003943281}
+  - {fileID: 4239762238003943291}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 0
@@ -34111,27 +34125,12 @@ MonoBehaviour:
   itemId: 0
   blockName: Start
   description: 
-  eventHandler: {fileID: 4239762238003943292}
+  eventHandler: {fileID: 4239762238003943283}
   commandList:
   - {fileID: 4239762238003943293}
   - {fileID: 4239762238003943294}
   - {fileID: 4239762238003943280}
   suppressAllAutoSelections: 0
---- !u!114 &4239762238003943292
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4239762238003943282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f6487d21a03404cb21b245f0242e79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 4239762238003943291}
-  suppressBlockAutoSelect: 0
-  waitForFrames: 1
 --- !u!114 &4239762238003943293
 MonoBehaviour:
   m_ObjectHideFlags: 2

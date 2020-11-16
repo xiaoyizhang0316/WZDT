@@ -35,7 +35,7 @@ public class ProductMelon_Boom : BaseSkill
         if (role.warehouse.Count > numberNeed && role.warehouse[0].bulletType == BulletType.NormalPP)
         {
             ProductData data = role.warehouse[0];
-            for (int i = 0; i < numberNeed - 1; i++)
+            for (int i = 0; i < numberNeed ; i++)
             {
                 role.warehouse.RemoveAt(0);
             }

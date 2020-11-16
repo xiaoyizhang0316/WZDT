@@ -337,10 +337,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             finalEfficiency += (int)(tempData.efficiency * effectAdd);
             finalRange += (int)(tempData.range * effectAdd);
             finalTradeCost += tempData.tradeCost;
-            if (!PlayerData.My.yeWuXiTong[5])
-            {
-                finalCost += (int)(tempData.cost * costAdd);
-            }
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             finalTechAdd += tempData.techAdd;

@@ -414,10 +414,6 @@ public class BaseMapRole : MonoBehaviour
         transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             int costNum = baseRoleData.cost;
-            if (PlayerData.My.yeWuXiTong[5])
-            {
-                StageGoal.My.GetPlayerGold(baseRoleData.peoPleList.Count * 100);
-            }
             StageGoal.My.CostPlayerGold(costNum);
             StageGoal.My.Expend(costNum, ExpendType.ProductCosts, this);
             MonthlyCost();

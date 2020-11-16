@@ -24,12 +24,15 @@ public class TalentPanel : MonoSingleton<TalentPanel>
 
     public int usedPoint;
 
+    public TalentDesc talentDesc;
+
     /// <summary>
     /// 初始化
     /// </summary>
     public void Init()
     {
         usedPoint = 0;
+        talentDesc.Close();
         for (int i = 0; i < dingWei.Count; i++)
         {
             dingWei[i].isSelect = PlayerData.My.dingWei[i];
@@ -107,6 +110,10 @@ public class TalentPanel : MonoSingleton<TalentPanel>
         {
             LockTalent(5);
             LockTalent(6);
+        }
+        for (int i = 1; i < 7; i++)
+        {
+            CheckLabel(i);
         }
         CountTotalTalentPoint();
         UpdateTalentPoint();
@@ -223,6 +230,74 @@ public class TalentPanel : MonoSingleton<TalentPanel>
     }
 
     /// <summary>
+    /// 检测是否显示文字
+    /// </summary>
+    /// <param name="index"></param>
+    public void CheckLabel(int index)
+    {
+        string str = "";
+        switch (index)
+        {
+            case 1:
+                {
+                    if (PlayerData.My.isOneFinish[0])
+                    {
+                        str = "定位";
+                    }
+                    dingWei[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
+                    break;
+                }
+            case 2:
+                {
+                    if (PlayerData.My.isOneFinish[1])
+                    {
+                        str = "关键资源能力";
+                    }
+                    guanJianZiYuanNengLi[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
+                    break;
+                }
+            case 3:
+                {
+                    if (PlayerData.My.isOneFinish[2])
+                    {
+                        str = "业务系统";
+                    }
+                    yeWuXiTong[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
+                    break;
+                }
+            case 4:
+                {
+                    if (PlayerData.My.isOneFinish[3])
+                    {
+                        str = "现金流结构";
+                    }
+                    xianJinLiu[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
+                    break;
+                }
+            case 5:
+                {
+                    if (PlayerData.My.isOneFinish[4])
+                    {
+                        str = "盈利模式";
+                    }
+                    yingLiMoShi[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
+                    break;
+                }
+            case 6:
+                {
+                    if (PlayerData.My.isOneFinish[5])
+                    {
+                        str = "企业价值";
+                    }
+                    qiYeJiaZhi[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
+                    break;
+                }
+            default:
+                break;
+        }
+    }
+
+    /// <summary>
     /// 统计总共可用天赋点数
     /// </summary>
     public void CountTotalTalentPoint()
@@ -327,6 +402,16 @@ public class TalentPanel : MonoSingleton<TalentPanel>
     {
         GetComponent<RectTransform>().anchoredPosition = new Vector2(1012f, -54.5f);
         Init();
+    }
+
+    public void OpenTalentDesc(TalentItem item)
+    {
+        talentDesc.Init(item);
+    }
+
+    public void CloseTalentDesc()
+    {
+        talentDesc.Close();
     }
 
     /// <summary>

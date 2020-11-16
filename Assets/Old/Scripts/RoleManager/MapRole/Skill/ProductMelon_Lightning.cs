@@ -52,7 +52,7 @@ public class ProductMelon_Lightning : BaseSkill
         {
             print("产闪电链");
             ProductData data = role.warehouse[0];
-            for (int i = 0; i < numberNeed - 1; i++)
+            for (int i = 0; i < numberNeed; i++)
             {
                 role.warehouse.RemoveAt(0);
             }

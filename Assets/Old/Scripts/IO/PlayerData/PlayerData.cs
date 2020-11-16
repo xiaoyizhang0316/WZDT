@@ -50,6 +50,8 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public List<bool> qiYeJiaZhi = new List<bool> { true, true, true, true, true, true };
 
+    public List<bool> isOneFinish = new List<bool> { false, false, false, false, false, false };
+
     public bool cheatIndex1 = false;
 
     public bool cheatIndex2 = false;
@@ -171,6 +173,62 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
         DeleleRoleOperationRecord(mapRole);
         Destroy(mapRole.gameObject);
+    }
+
+    /// <summary>
+    /// 卖角色
+    /// </summary>
+    public void SellRole(double roleId)
+    {
+        DataUploadManager.My.AddData(DataEnum.角色_删除角色);
+        Role target = GetRoleById(roleId);
+
+        //foreach (var v in target.EquipList)
+        //{
+        //    SetGearStatus(v.Key, false);
+        //}
+        //foreach (var v in target.peoPleList)
+        //{
+        //    SetWorkerStatus(v.Key, false);
+        //}
+        TradeManager.My.DeleteRoleAllTrade(roleId);
+        BaseMapRole mapRole = GetMapRoleById(roleId);
+        MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
+        SetSellNPC(mapRole);
+
+        RoleData.Remove(target);
+        MapRole.Remove(mapRole);
+        DeleleRoleOperationRecord(mapRole);
+        Destroy(mapRole.gameObject);
+    }
+
+    public void SetSellNPC(BaseMapRole mapRole)
+    {
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/NPC/" + mapRole.baseRoleData.baseRoleData.roleType));
+        go.transform.SetParent(GameObject.Find("Role").transform);
+        go.transform.position = MapManager.My.GetMapSignByXY(mapRole.posX, mapRole.posY).transform.position + new Vector3(0f, 0.3f, 0f);
+        BaseMapRole role = go.GetComponent<BaseMapRole>();
+        role.baseRoleData.effect = mapRole.baseRoleData.effect;
+        role.baseRoleData.efficiency = mapRole.baseRoleData.efficiency;
+        role.baseRoleData.range = mapRole.baseRoleData.range;
+        role.baseRoleData.tradeCost = mapRole.baseRoleData.tradeCost + mapRole.baseRoleData.cost * 50 / 100;
+        role.baseRoleData.riskResistance = mapRole.baseRoleData.riskResistance;
+        role.baseRoleData.baseRoleData.level = mapRole.baseRoleData.baseRoleData.level;
+        role.baseRoleData.baseRoleData.roleName = mapRole.baseRoleData.baseRoleData.roleName;
+        role.baseRoleData.bulletCapacity = mapRole.baseRoleData.bulletCapacity;
+        role.baseRoleData.ID = mapRole.baseRoleData.ID;
+        role.startEncourageLevel = mapRole.startEncourageLevel;
+        role.encourageLevel = mapRole.startEncourageLevel;
+        NPC npcScript = go.GetComponent<NPC>();
+        npcScript.isCanSee = true;
+        npcScript.isLock =false;
+        npcScript.lockNumber = 0;
+        npcScript.isCanSeeEquip = true;
+        go.GetComponent<BaseSkill>().buffList.AddRange(mapRole.GetEquipBuffList());
+        go.GetComponent<NPC>().NPCBuffList.Clear();
+        go.name = mapRole.baseRoleData.baseRoleData.roleName;
+        go.GetComponent<NPC>().BaseInit();
+        go.GetComponent<NPC>().Init();
     }
 
     /// <summary>
@@ -405,6 +463,11 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             {
                 qiYeJiaZhi[i] = temp[i].Equals('1');
             }
+            temp = talentList[6].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                isOneFinish[i] = temp[i].Equals('1');
+            }
         }    
     }
 
@@ -443,6 +506,11 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         for (int i = 0; i < qiYeJiaZhi.Count; i++)
         {
             result += qiYeJiaZhi[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < isOneFinish.Count; i++)
+        {
+            result += isOneFinish[i] ? '1' : '0';
         }
         return result;
     }
