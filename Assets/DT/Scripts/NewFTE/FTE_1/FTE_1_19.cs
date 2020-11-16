@@ -38,11 +38,14 @@ public class FTE_1_19 : BaseGuideStep
     {
         if (StageGoal.My.extraCost.ContainsKey("升级") && StageGoal.My.extraCost["升级"] >= 2400)
         {
+            Debug.Log("正确返回");
             return true;
         }
         else
         {
-            return false;
+           // Debug.Log("失败返回"+StageGoal.My.extraCost.ContainsKey("升级")+":"+(StageGoal.My.extraCost["升级"] >= 2400));
+           Debug.Log("失败"); 
+           return false;
         }
     }
 }
