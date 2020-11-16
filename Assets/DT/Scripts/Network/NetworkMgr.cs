@@ -951,6 +951,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             keyValues.Add("token", token);
             keyValues.Add("playerID", playerID);
             keyValues.Add("data", CompressUtils.Compress(JsonUtility.ToJson(playerReplay)));
+            keyValues.Add("talent", PlayerData.My.GeneratePlayerTalentReview());
             if (!PlayerData.My.isSOLO)
             {
                 if(PlayerData.My.isServer)// is server

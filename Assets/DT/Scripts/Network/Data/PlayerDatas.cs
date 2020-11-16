@@ -218,6 +218,7 @@ public class ReplayList
     public bool isTeamwork;
     public string teamName;
     public string teamConfiguration;
+    public string talent;
 }
 
 [Serializable]
@@ -263,6 +264,7 @@ public class RankList
     public bool isTeamwork;
     public string teamName;
     public string teamConfiguration;
+    public string talent;
     public int rank;
 }
 
