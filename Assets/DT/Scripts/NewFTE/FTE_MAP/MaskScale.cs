@@ -10,8 +10,8 @@ public class MaskScale : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.DOScale(startScale, 0.01f).OnComplete(()=> {
-            transform.DOScale(endScale, 0.75f);
+        transform.DOScale(startScale, 0.01f).Play().OnComplete(()=> {
+            transform.DOScale(endScale, 0.75f).Play();
         });
     }
 
