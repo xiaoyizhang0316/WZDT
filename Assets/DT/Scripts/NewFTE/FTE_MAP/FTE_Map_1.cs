@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class FTE_Map_1 : BaseGuideStep
 {
+    public GameObject hand;
     public override IEnumerator StepEnd()
     {
-        throw new System.NotImplementedException();
+        yield break;
     }
 
     public override IEnumerator StepStart()
     {
-        throw new System.NotImplementedException();
+        yield return new WaitForSeconds(0.5f);
+        hand.SetActive(true);
+        ShowInfos();
     }
 
     public override bool ChenkEnd()
@@ -20,7 +23,7 @@ public class FTE_Map_1 : BaseGuideStep
         {
             if (LevelInfoManager.My.currentSceneName.Equals("FTE_2"))
             {
-                LevelInfoManager.My.close.interactable = false;
+                //LevelInfoManager.My.close.interactable = false;
                 return true;
             }
             else
@@ -32,5 +35,13 @@ public class FTE_Map_1 : BaseGuideStep
             }
         }
         return false;
+    }
+    void ShowInfos()
+    {
+        for (int i = 0; i < contentText.Count; i++)
+        {
+            contentText[i].gameObject.SetActive(true);
+        }
+
     }
 }

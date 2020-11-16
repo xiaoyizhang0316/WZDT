@@ -271,7 +271,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("unlockStatus", unlockStatus);
         keyValues.Add("playerID", playerID);
         keyValues.Add("token", token);
-        StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerTalent, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerUnlockStatus, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -300,7 +300,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post, HttpId.UpdatePlayerTalent));
+        }, keyValues, HttpType.Post, HttpId.UpdatePlayerUnlockStatus));
     }
 
     public void ReConnect(Action doSuccess=null)
@@ -908,6 +908,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 catch (Exception ex)
                 {
                     Debug.Log(ex.TargetSite);
+                    Debug.Log(ex.StackTrace);
                     Debug.Log(ex.Message);
                 }
             }

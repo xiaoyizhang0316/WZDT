@@ -332,6 +332,7 @@ public class TalentPanel : MonoSingleton<TalentPanel>
     public void Open()
     {
         GetComponent<RectTransform>().anchoredPosition = new Vector2(1012f, -54.5f);
+        MapGuideManager.My.GetComponent<MapObject>().isTalentPanelOpen = true;
         Init();
     }
 
