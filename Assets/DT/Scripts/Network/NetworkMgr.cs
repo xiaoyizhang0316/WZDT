@@ -135,6 +135,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     groupID = playerDatas.groupID;
                     playerLimit = playerDatas.limit;
                     InitRoleFoundDic(playerDatas.roleFound);
+                    //PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     //Debug.Log(playerID + " " + token);
                     //Debug.Log("token-----" + token);
                     doSuccess?.Invoke();
@@ -226,6 +227,82 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         UpdatePlayerDatas(0, 0, roleFound);
     }
 
+    public void UpdateTalent( Action doSuccess = null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("talent", PlayerData.My.GeneratePlayerTalent());
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerTalent, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                Debug.Log(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                Debug.Log(response.data);
+                try
+                {
+                    playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    InitRoleFoundDic(playerDatas.roleFound);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
+                    doSuccess?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.UpdatePlayerTalent));
+    }
+
+    public void UpdateUnlockStatus(string unlockStatus, Action doSuccess = null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("unlockStatus", unlockStatus);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerTalent, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                Debug.Log(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                Debug.Log(response.data);
+                try
+                {
+                    playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    InitRoleFoundDic(playerDatas.roleFound);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
+                    doSuccess?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.UpdatePlayerTalent));
+    }
+
     public void ReConnect(Action doSuccess=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -249,6 +326,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 token = playerDatas.token;
                 playerLimit = playerDatas.limit;
                 InitRoleFoundDic(playerDatas.roleFound);
+                PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                 if (SceneManager.GetActiveScene().name.StartsWith("FTE")&& SceneManager.GetActiveScene().name!="FTE_0")
                 {
                     StageGoal.My.CheckAfterReconnect();
@@ -286,7 +364,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 token = playerDatas.token;
                 playerLimit = playerDatas.limit;
                 InitRoleFoundDic(playerDatas.roleFound);
-                
+                PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                 SceneManager.LoadScene("Map");
                 
                 doSuccess?.Invoke();
@@ -478,6 +556,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
                     InitRoleFoundDic(playerDatas.roleFound);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -523,6 +602,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     //Debug.Log(response.data);
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    InitRoleFoundDic(playerDatas.roleFound);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)

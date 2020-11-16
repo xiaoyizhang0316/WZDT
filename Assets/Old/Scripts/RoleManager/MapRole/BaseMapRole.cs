@@ -106,6 +106,12 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public int startEncourageLevel;
 
+    public List<TradeSign> startTradeList = new List<TradeSign>();
+
+    public List<TradeSign> endTradeList = new List<TradeSign>();
+
+    public int totalUpgradeCost;
+
     public RoleSprite roleSprite;
 
     public GameObject emptyGearSprite;
@@ -219,17 +225,27 @@ public class BaseMapRole : MonoBehaviour
         int result = startEncourageLevel;
         if (isInit)
             baseRoleData.tradeCost -= encourageLevel * 5;
-        for (int i = 0; i < tradeList.Count; i++)
+        //for (int i = 0; i < tradeList.Count; i++)
+        //{
+        //    if (tradeList[i].tradeData.startRole.Equals(baseRoleData.ID.ToString()))
+        //    {
+        //        result += tradeList[i].tradeData.dividePercent;
+        //    }
+        //    else
+        //    {
+        //        result += 4 - tradeList[i].tradeData.dividePercent;
+        //    }
+            
+        //}
+        for (int i = 0; i < startTradeList.Count; i++)
         {
-            if (tradeList[i].tradeData.startRole.Equals(baseRoleData.ID.ToString()))
-            {
-                result += tradeList[i].tradeData.dividePercent;
-            }
-            else
-            {
-                result += 4 - tradeList[i].tradeData.dividePercent;
-            }
-            PlayerData.My.GetMapRoleById(double.Parse(tradeList[i].tradeData.targetRole)).ResetAllBuff();
+            result += startTradeList[i].tradeData.dividePercent;
+            PlayerData.My.GetMapRoleById(double.Parse(startTradeList[i].tradeData.targetRole)).ResetAllBuff();
+        }
+        for (int i = 0; i < endTradeList.Count; i++)
+        {
+            result += 0 - endTradeList[i].tradeData.dividePercent;
+            PlayerData.My.GetMapRoleById(double.Parse(endTradeList[i].tradeData.targetRole)).ResetAllBuff();
         }
         result = Mathf.Min(10, result);
         result = Mathf.Max(result, -5);
@@ -396,8 +412,13 @@ public class BaseMapRole : MonoBehaviour
     {
         transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
-            StageGoal.My.CostPlayerGold(baseRoleData.cost);
-            StageGoal.My.Expend(baseRoleData.cost, ExpendType.ProductCosts, this);
+            int costNum = baseRoleData.cost;
+            if (PlayerData.My.yeWuXiTong[5])
+            {
+                StageGoal.My.GetPlayerGold(baseRoleData.peoPleList.Count * 100);
+            }
+            StageGoal.My.CostPlayerGold(costNum);
+            StageGoal.My.Expend(costNum, ExpendType.ProductCosts, this);
             MonthlyCost();
         });
     }
@@ -512,6 +533,11 @@ public class BaseMapRole : MonoBehaviour
     {
         DataUploadManager.My.AddData(DataEnum.角色_清仓);
         trash.AddRange(warehouse);
+        if (PlayerData.My.guanJianZiYuanNengLi[5])
+        {
+            int totalGold = warehouse.Count * 80;
+            StageGoal.My.GetPlayerGold(totalGold);
+        }
         warehouse.Clear();
     }
 

@@ -222,6 +222,11 @@ public class TradeManager : MonoSingleton<TradeManager>
             return true;
         else
         {
+            if (PlayerData.My.yeWuXiTong[4])
+            {
+                if (!start.isNpc && !end.isNpc)
+                    return true;
+            }
             HttpManager.My.ShowTip("玩家金钱已达负数！无法发起新交易！");
             return false;
         }
