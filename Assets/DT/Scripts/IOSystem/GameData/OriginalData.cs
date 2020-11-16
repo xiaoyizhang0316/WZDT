@@ -27,6 +27,7 @@ public class OriginalData : MonoSingleton<OriginalData>
 
     public QuestionList questionList;
 
+    public FTEData fteData;
 
     // Start is called before the first frame update
     void Start()
@@ -38,8 +39,8 @@ public class OriginalData : MonoSingleton<OriginalData>
         //StartCoroutine(ReadRoleTemplateJson());
         //StartCoroutine(ReadConsumerTypeJson());
         //StartCoroutine(ReadTranslateJson());
-        StartCoroutine(ReadQuestionList());
-        
+        StartCoroutine(ReadQuestionList()); 
+
     }
 
     public void InitDatas(string data)
@@ -87,6 +88,26 @@ public class OriginalData : MonoSingleton<OriginalData>
         GameDataMgr.My.ParseBuffData(buffRawData);
         //    }
         //}
+    }
+
+
+  public   IEnumerator    ReadFTETexts(string sceneindex)
+    {
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/FTEText_"+sceneindex+".json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                fteData = JsonUtility.FromJson<FTEData>(json);
+            }
+        }
     }
 
     void ReadConsumableJson()

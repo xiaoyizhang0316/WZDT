@@ -71,6 +71,7 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
         {
             if (isSelect)
             {
+                MapGuideManager.My.GetComponent<MapObject>().clickTalentItem = true;
                 if (nextItem == null)
                 {
                     TalentPanel.My.usedPoint--;
@@ -105,6 +106,7 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
                     TalentPanel.My.CheckLabel(index);
                 }
                 CheckStatus();
+                MapGuideManager.My.GetComponent<MapObject>().clickTalentItem = true;
             }
             else
             {

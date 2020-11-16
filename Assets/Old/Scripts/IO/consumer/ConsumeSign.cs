@@ -231,6 +231,10 @@ public class ConsumeSign : MonoBehaviour
         {
             BaseLevelController.My.CountKillNumber(this);
         }
+        if(SceneManager.GetActiveScene().name == "FTE_0-1")
+        {
+            FTE_0_OtherOp.My.InstantiateFlyMoney(transform.position);
+        }
         DeathAward();
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);

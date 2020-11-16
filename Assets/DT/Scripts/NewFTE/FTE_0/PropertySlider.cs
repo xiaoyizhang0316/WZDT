@@ -29,7 +29,7 @@ public class PropertySlider : MonoBehaviour, IPointerUpHandler
         OnValueChange(slider.value);
     }
 
-    void OnValueChange(float value)
+    public void OnValueChange(float value)
     {
         if (value > 0.5f && value < 1.5f)
         {
@@ -56,7 +56,15 @@ public class PropertySlider : MonoBehaviour, IPointerUpHandler
 
     void SetBaseMapRolePropertys()
     {
-        transform.parent.GetComponent<RoleSet>().RefreshValues((int)lastValue, (int)trueValue, valueType);
+        if (!RoleEditor.My.isDragEnd)
+        {
+            transform.parent.GetComponent<FTE_01_Step15>().sliderValue = (int)trueValue;
+            transform.parent.GetComponent<FTE_01_Step15>().currentSlider.transform.parent.GetComponent<RoleSet>().RefreshValues((int)lastValue, (int)trueValue, valueType);
+        }
+        else
+        {
+            transform.parent.GetComponent<RoleSet>().RefreshValues((int)lastValue, (int)trueValue, valueType);
+        }
         lastValue = trueValue;
     }
 }

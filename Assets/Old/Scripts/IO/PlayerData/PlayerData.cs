@@ -427,12 +427,14 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     public void ParsePlayerTalent(string str)
     {
         string[] talentList = str.Split('_');
-        if (talentList.Length != 6)
+        if (talentList.Length != 7)
         {
+            Debug.Log(str);
             Debug.LogWarning("天赋读取错误！");
         }
         else
         {
+            Debug.Log(str);
             char[] temp = talentList[0].ToCharArray();
             for (int i = 0; i < 6; i++)
             {

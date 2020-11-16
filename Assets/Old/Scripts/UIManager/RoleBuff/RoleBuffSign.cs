@@ -12,6 +12,8 @@ public class RoleBuffSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
 
     public Image maskImage;
 
+    private int startTime = 0;
+
     public void Init(BaseBuff buff)
     {
         buffsign = buff;
@@ -21,10 +23,17 @@ public class RoleBuffSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
             BuffInfo.My.Init(buffsign);
+        startTime = TimeStamp.GetCurrentTimeStamp();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
             BuffInfo.My.MenuHide();
+        if(TimeStamp.GetCurrentTimeStamp()-startTime>=2 && startTime != 0)
+        {
+            DataUploadManager.My.AddData(DataEnum.角色_查看角色Buff);
+            //startTime = 0;
+        }
+        startTime = 0;
     }
 }

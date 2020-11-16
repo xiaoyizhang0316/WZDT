@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FTE_0_Step_2 : BaseGuideStep
 {
@@ -9,6 +10,8 @@ public class FTE_0_Step_2 : BaseGuideStep
 
     public List<GameObject> image;
     //public GameObject text;
+
+    public Image propBg;
 
     public override IEnumerator StepEnd()
     {
@@ -48,6 +51,15 @@ public class FTE_0_Step_2 : BaseGuideStep
         for(int i=0; i<image.Count; i++)
         {
             image[i].SetActive(true);
+        }
+        ShowBg();
+    }
+
+    void ShowBg()
+    {
+        if (propBg != null)
+        {
+            propBg.color = Color.white;
         }
     }
 }

@@ -22,7 +22,7 @@ public class FTE_1_1 : BaseGuideStep
     {
         NewCanvasUI.My.GamePause();
        RoleListManager.My.OutButton();
-
+       RoleUpdateInfo.My.changeRoleButton.gameObject.SetActive(false);
        NewCanvasUI.My.Panel_Update.transform.localPosition = new Vector3(0,5000,0);
        foreach (var VARIABLE in MapManager.My._mapSigns)
        {

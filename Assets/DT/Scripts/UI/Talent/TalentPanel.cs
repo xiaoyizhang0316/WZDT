@@ -314,6 +314,49 @@ public class TalentPanel : MonoSingleton<TalentPanel>
                 totalPoint += NetworkMgr.My.levelProgresses.levelProgresses[i].starNum * 2;
             }
         }
+        usedPoint = 0;
+        for (int i = 0; i < dingWei.Count; i++)
+        {
+            if (PlayerData.My.dingWei[i])
+            {
+                usedPoint++;
+            }
+        }
+        for (int i = 0; i < yeWuXiTong.Count; i++)
+        {
+            if (PlayerData.My.yeWuXiTong[i])
+            {
+                usedPoint++;
+            }
+        }
+        for (int i = 0; i < guanJianZiYuanNengLi.Count; i++)
+        {
+            if (PlayerData.My.guanJianZiYuanNengLi[i])
+            {
+                usedPoint++;
+            }
+        }
+        for (int i = 0; i < yingLiMoShi.Count; i++)
+        {
+            if (PlayerData.My.yingLiMoShi[i])
+            {
+                usedPoint++;
+            }
+        }
+        for (int i = 0; i < xianJinLiu.Count; i++)
+        {
+            if (PlayerData.My.xianJinLiu[i])
+            {
+                usedPoint++;
+            }
+        }
+        for (int i = 0; i < qiYeJiaZhi.Count; i++)
+        {
+            if (PlayerData.My.qiYeJiaZhi[i])
+            {
+                usedPoint++;
+            }
+        }
     }
 
     /// <summary>
@@ -384,7 +427,13 @@ public class TalentPanel : MonoSingleton<TalentPanel>
         {
             PlayerData.My.qiYeJiaZhi[i] = qiYeJiaZhi[i].isSelect;
         }
-        Close();
+        NetworkMgr.My.UpdateTalent(
+            ()=> {
+            Close();
+        },()=> {
+            HttpManager.My.ShowTip("保存失败！");
+        });
+        //Close();
     }
 
     /// <summary>
@@ -401,6 +450,7 @@ public class TalentPanel : MonoSingleton<TalentPanel>
     public void Open()
     {
         GetComponent<RectTransform>().anchoredPosition = new Vector2(1012f, -54.5f);
+        MapGuideManager.My.GetComponent<MapObject>().isTalentPanelOpen = true;
         Init();
     }
 

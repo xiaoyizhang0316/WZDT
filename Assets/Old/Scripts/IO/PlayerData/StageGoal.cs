@@ -186,7 +186,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             if (playerGold - num <= maxMinusGold)
             {
-                playerGold =100000;
+                playerGold =10000000;
             }
             else
             {
@@ -295,9 +295,9 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if(SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2")
         {
-            if(playerGold+num >= 100000)
+            if(playerGold+num >= 10000000)
             {
-                playerGold = 100000;
+                playerGold = 10000000;
             }
             else
             {

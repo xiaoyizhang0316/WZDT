@@ -21,7 +21,7 @@ public class Prologue : MonoBehaviour
         {
             NewCanvasUI.My.GameNormal();
             GuideManager.My.guideClose.gameObject.SetActive(true);
-            GuideManager.My.Init();
+           StartCoroutine( GuideManager.My.Init());
         }).Play();
     } 
 }

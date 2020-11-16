@@ -24,7 +24,7 @@ public class FTE_1_10 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        yield return new WaitForSeconds(0.2f); 
+        yield return null;
     }
 
     public override void InitHighlight3d()
