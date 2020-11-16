@@ -91,6 +91,16 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     /// <param name="_isEquiped"></param>
     public void Init(int id, bool _isEquiped)
     {
+        if (NetworkMgr.My.levelProgressList.Count >= 4)
+        {
+            LevelUI.SetActive(true);
+        }
+        else
+        {
+            LevelUI.SetActive(false);
+            
+        }
+
         ID = id;
         SetOccupyStatus(_isEquiped);
         gearData = GameDataMgr.My.GetGearData(id);
