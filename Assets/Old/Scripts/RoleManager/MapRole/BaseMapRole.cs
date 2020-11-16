@@ -532,10 +532,50 @@ public class BaseMapRole : MonoBehaviour
         trash.AddRange(warehouse);
         if (PlayerData.My.guanJianZiYuanNengLi[5])
         {
-            int totalGold = warehouse.Count * 80;
+            int totalGold = CountWarehouseIncome();
             StageGoal.My.GetPlayerGold(totalGold);
+            StageGoal.My.Income(totalGold,IncomeType.Other,null,"低价处理");
         }
         warehouse.Clear();
+    }
+
+    public int CountWarehouseIncome()
+    {
+        float result = 0;
+        for (int i = 0; i < warehouse.Count; i++)
+        {
+            switch (warehouse[i].bulletType)
+            {
+                case BulletType.Seed:
+                    {
+                        result += warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.NormalPP:
+                    {
+                        result += 10f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.Bomb:
+                    {
+                        result += 70f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.Lightning:
+                    {
+                        result += 115f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.summon:
+                    {
+                        result += 200f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+        return (int)result;
     }
 
     /// <summary>

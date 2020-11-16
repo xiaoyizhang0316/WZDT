@@ -167,6 +167,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             }
             int returnGold = mapRole.totalUpgradeCost * 50 / 100;
             StageGoal.My.GetPlayerGold(returnGold);
+            StageGoal.My.Income(returnGold,IncomeType.Other,null,"删除返现");
         }
         RoleData.Remove(target);
         MapRole.Remove(mapRole);
