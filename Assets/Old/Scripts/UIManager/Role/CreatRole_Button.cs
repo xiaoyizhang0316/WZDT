@@ -225,7 +225,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     {
                         if (hit[j].transform.GetComponent<MapSign>().isNearWater)
                         {
-                            //TODO赋予水边BUFF
+                            var buff = GameDataMgr.My.GetBuffDataByID(10012);
+                            BaseBuff baseb = new BaseBuff();
+                            baseb.Init(buff);
+                            baseb.SetRoleBuff(null, role.GetComponent<BaseMapRole>(), role.GetComponent<BaseMapRole>());
                         }
                     }
                     if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1")

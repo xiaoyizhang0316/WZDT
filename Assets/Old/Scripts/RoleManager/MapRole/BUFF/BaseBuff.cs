@@ -175,7 +175,7 @@ public class BaseBuff
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <param name="target"></param>
-    public void SetRoleBuff(BaseMapRole _castRole, BaseMapRole target, BaseMapRole _buffRole)
+    public void SetRoleBuff(BaseMapRole _castRole = null, BaseMapRole target = null, BaseMapRole _buffRole = null)
     {
         castRole = _castRole;
         targetRole = target;

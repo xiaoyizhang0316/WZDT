@@ -116,6 +116,8 @@ public class BaseMapRole : MonoBehaviour
 
     public GameObject emptyGearSprite;
 
+    public bool isSell = false;
+
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
@@ -152,6 +154,7 @@ public class BaseMapRole : MonoBehaviour
                 PlayerData.My.MapRole.Add(GetComponent<BaseMapRole>());
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
+        CheckTalentBuff();
     }
 
     /// <summary>
@@ -413,10 +416,6 @@ public class BaseMapRole : MonoBehaviour
         transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             int costNum = baseRoleData.cost;
-            if (PlayerData.My.yeWuXiTong[5])
-            {
-                StageGoal.My.GetPlayerGold(baseRoleData.peoPleList.Count * 100);
-            }
             StageGoal.My.CostPlayerGold(costNum);
             StageGoal.My.Expend(costNum, ExpendType.ProductCosts, this);
             MonthlyCost();
@@ -535,10 +534,50 @@ public class BaseMapRole : MonoBehaviour
         trash.AddRange(warehouse);
         if (PlayerData.My.guanJianZiYuanNengLi[5])
         {
-            int totalGold = warehouse.Count * 80;
+            int totalGold = CountWarehouseIncome();
             StageGoal.My.GetPlayerGold(totalGold);
+            StageGoal.My.Income(totalGold,IncomeType.Other,null,"低价处理");
         }
         warehouse.Clear();
+    }
+
+    public int CountWarehouseIncome()
+    {
+        float result = 0;
+        for (int i = 0; i < warehouse.Count; i++)
+        {
+            switch (warehouse[i].bulletType)
+            {
+                case BulletType.Seed:
+                    {
+                        result += warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.NormalPP:
+                    {
+                        result += 10f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.Bomb:
+                    {
+                        result += 70f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.Lightning:
+                    {
+                        result += 115f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.summon:
+                    {
+                        result += 200f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+        return (int)result;
     }
 
     /// <summary>
@@ -883,7 +922,46 @@ public class BaseMapRole : MonoBehaviour
         tradeButton.SetActive(active);
     }
 
-
+    public void CheckTalentBuff()
+    {
+        if (!isNpc)
+        {
+            if (PlayerData.My.guanJianZiYuanNengLi[1])
+            {
+                var buff = GameDataMgr.My.GetBuffDataByID(10022);
+                BaseBuff baseb = new BaseBuff();
+                baseb.Init(buff);
+                baseb.SetRoleBuff(null, this, this);
+            }
+            if (PlayerData.My.guanJianZiYuanNengLi[2])
+            {
+                var buff = GameDataMgr.My.GetBuffDataByID(10023);
+                BaseBuff baseb = new BaseBuff();
+                baseb.Init(buff);
+                baseb.SetRoleBuff(null, this, this);
+            }
+        }
+        if (baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+        {
+            if (PlayerData.My.guanJianZiYuanNengLi[5])
+            {
+                var buff = GameDataMgr.My.GetBuffDataByID(10026);
+                BaseBuff baseb = new BaseBuff();
+                baseb.Init(buff);
+                baseb.SetRoleBuff(null, this, this);
+            }
+        }
+        if (baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        {
+            if (PlayerData.My.yeWuXiTong[1])
+            {
+                var buff = GameDataMgr.My.GetBuffDataByID(10032);
+                BaseBuff baseb = new BaseBuff();
+                baseb.Init(buff);
+                baseb.SetRoleBuff(null, this, this);
+            }
+        }
+    }
 
     public string GetWarehouseJson()
     {

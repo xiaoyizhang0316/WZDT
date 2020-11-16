@@ -354,10 +354,6 @@ public class TradeSign : MonoBehaviour
         {
             result = result * 90 / 100;
         }
-        if (PlayerData.My.yeWuXiTong[5])
-        {
-            result = result * 110 / 100;
-        }
         if (isOutTrade && PlayerData.My.qiYeJiaZhi[5])
         {
             StageGoal.My.GetSatisfy((int)(result * 0.2f));

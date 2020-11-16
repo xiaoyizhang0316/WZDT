@@ -10,6 +10,8 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
 
     public TalentItem nextItem;
 
+    public string talentTitle;
+
     public string talentDesc;
 
     public bool isSelect;
@@ -69,6 +71,7 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
         {
             if (isSelect)
             {
+                MapGuideManager.My.GetComponent<MapObject>().clickTalentItem = true;
                 if (nextItem == null)
                 {
                     TalentPanel.My.usedPoint--;
@@ -97,7 +100,13 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
                 {
                     nextItem.CheckStatus();
                 }
+                else
+                {
+                    PlayerData.My.isOneFinish[index - 1] = true;
+                    TalentPanel.My.CheckLabel(index);
+                }
                 CheckStatus();
+                MapGuideManager.My.GetComponent<MapObject>().clickTalentItem = true;
             }
             else
             {
@@ -108,11 +117,11 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        FloatWindow.My.Init2D(talentDesc,transform);
+        TalentPanel.My.OpenTalentDesc(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        FloatWindow.My.Hide();
+        //TalentPanel.My.CloseTalentDesc();
     }
 }

@@ -8,6 +8,19 @@ using UnityEngine;
 public class ProductMelon_Summon : BaseSkill
 {
     private int currentCount = 0;
+
+    public new void Start()
+    {
+        base.Start();
+        if (PlayerData.My.dingWei[5])
+        {
+            var buff = GameDataMgr.My.GetBuffDataByID(10016);
+            BaseBuff baseb = new BaseBuff();
+            baseb.Init(buff);
+            baseb.SetRoleBuff(null, role, role);
+        }
+    }
+
     public override void Skill()
     {
         if (role.tradeList.Count == 0)
@@ -22,7 +35,7 @@ public class ProductMelon_Summon : BaseSkill
         if (role.warehouse.Count > numberNeed && role.warehouse[0].bulletType == BulletType.NormalPP)
         {
             ProductData data = role.warehouse[0];
-            for (int i = 0; i < numberNeed - 1; i++)
+            for (int i = 0; i < numberNeed; i++)
             {
                 role.warehouse.RemoveAt(0);
             }

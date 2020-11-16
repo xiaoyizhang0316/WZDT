@@ -26,11 +26,24 @@ public class TalentButton : MonoBehaviour
             twe.Kill();
             isRunning = false;
         }
+        try
+        {
+            if (NetworkMgr.My.levelProgresses.levelProgresses.Count >= 4)
+            {
+                transform.DOScale(1, 0).Play();
+            }
+            else
+            {
+                transform.DOScale(0, 0).Play();
+            }
+        }
+        catch (System.Exception ex)
+        {
+
+        }
     }
 
     private bool isRunning = false;
-
-    public float z;
 
     public void ShowAvailalbeInfo()
     {
@@ -41,8 +54,24 @@ public class TalentButton : MonoBehaviour
         else
         {
             isRunning = true;
-            twe = CanAddTalent.transform.DOShakeRotation(0.5f, new Vector3(0f, 0f, z),3,90).OnComplete(()=> {
-                isRunning = false;
+            twe = CanAddTalent.transform.DORotate(new Vector3(0f,0f,-8f),0.03f).Play().OnComplete(()=> {
+                twe = CanAddTalent.transform.DORotate(new Vector3(0f, 0f, 8f), 0.06f).Play().OnComplete(() =>
+                {
+                    twe = CanAddTalent.transform.DORotate(new Vector3(0f, 0f, -8f), 0.06f).Play().OnComplete(() =>
+                    {
+                        twe = CanAddTalent.transform.DORotate(new Vector3(0f, 0f, 8f), 0.06f).Play().OnComplete(()=> {
+                            twe = CanAddTalent.transform.DORotate(new Vector3(0f, 0f, -8f), 0.06f).Play().OnComplete(() =>
+                            {
+                                twe = CanAddTalent.transform.DORotate(new Vector3(0f, 0f, 8f), 0.06f).Play().OnComplete(() => {
+                                    CanAddTalent.transform.DORotate(new Vector3(0f, 0f, 0f), 0f).Play();
+                                    CanAddTalent.transform.DORotate(new Vector3(0f, 0f, 0f), 1f).Play().OnComplete(()=> {
+                                        isRunning = false;
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
             });
         }
     }
@@ -50,12 +79,14 @@ public class TalentButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.DOScale(0, 0).Play();
         InvokeRepeating("CheckAvailableTalent", 0f, 1f);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

@@ -33,6 +33,7 @@ public class RecordItem : MonoBehaviour
 
     public bool isStar3;
 
+    public string talent = "";
 
     /// <summary>
 	/// 初始化
@@ -73,6 +74,7 @@ public class RecordItem : MonoBehaviour
         isStar3 = temp[2].Equals('1');
         GetComponent<Button>().onClick.AddListener(GetReplayById);
         InitBg();
+        talent = replay.talent;
     }
 
     /// <summary>
@@ -87,7 +89,7 @@ public class RecordItem : MonoBehaviour
             string str1 = "{ \"dataStats\":" + datas.dataStats + "}";
             PlayerStatus status = JsonUtility.FromJson<PlayerStatus>(str1);
             Debug.Log("获取录像成功");
-            ReviewPanel.My.MapInit(operations.playerOperations, status.dataStats, (status.dataStats.Count - 1) * 5);
+            ReviewPanel.My.MapInit(operations.playerOperations, status.dataStats, (status.dataStats.Count - 1) * 5,talent);
         });
     }
 

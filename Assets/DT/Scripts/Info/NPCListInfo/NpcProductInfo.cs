@@ -65,6 +65,10 @@ public class NpcProductInfo : MonoBehaviour
         clearBullets.onClick.AddListener(() => {
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要清空仓库吗？";
+            if (PlayerData.My.guanJianZiYuanNengLi[5])
+            {
+                str = "确定要将仓库中的产品低价处理吗?";
+            }
             DeleteUIManager.My.Init(str, () => {
                 if (!PlayerData.My.isSOLO)
                 {
@@ -85,6 +89,11 @@ public class NpcProductInfo : MonoBehaviour
                 ClearBulletContent();
             });
         });
+        if (PlayerData.My.guanJianZiYuanNengLi[5])
+        {
+            clearBullets.GetComponentInChildren<Text>().text = "清仓(" + PlayerData.My.GetMapRoleById(npc.GetComponent<BaseMapRole>().baseRoleData.ID).CountWarehouseIncome() + ")";
+            clearBullets.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Talent/Warehouse");
+        }
         ShowBullets(npc);
         encourageLevel.Init(npc.GetComponent<BaseMapRole>());
         bulletWarehourse.SetActive(true);
