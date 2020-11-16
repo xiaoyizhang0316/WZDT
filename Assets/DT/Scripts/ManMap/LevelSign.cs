@@ -185,8 +185,6 @@ public class LevelSign : MonoBehaviour
         }
         else
         {
-            Debug.Log(levelID);
-            Debug.Log(currentStar);
             if (currentStar.Equals("000"))
             {
                 if (NetworkMgr.My.playerDatas.unlockStatus.Split('_')[levelID - 1].Equals("0"))
