@@ -106,8 +106,8 @@ public class ThreeWordsPanel : MonoSingleton<ThreeWordsPanel>
         }
         else
         {
-            thisPanel.SetActive(false);
-            map.GetComponent<MainMap>().title.text = input;
+            NetworkMgr.My.SetPlayerStatus("Map", "");
+            SceneManager.LoadScene("Map");
         }
     }
 

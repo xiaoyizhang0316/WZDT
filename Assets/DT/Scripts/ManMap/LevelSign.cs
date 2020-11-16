@@ -185,6 +185,8 @@ public class LevelSign : MonoBehaviour
         }
         else
         {
+            //Debug.Log(levelID);
+            //Debug.Log(currentStar);
             if (currentStar.Equals("000"))
             {
                 if (NetworkMgr.My.playerDatas.unlockStatus.Split('_')[levelID - 1].Equals("0"))
@@ -197,6 +199,7 @@ public class LevelSign : MonoBehaviour
                     {
                         newStatus += "_"+arr[i];
                     }
+                    Debug.Log(newStatus);
                     // 解锁动画
                     // fade
                     //transform.GetChild(0).GetComponent<Image>().DOFade(0, 0.75f).OnComplete(()=> {
@@ -226,25 +229,15 @@ public class LevelSign : MonoBehaviour
                     //});
 
                     // scale
-                    transform.GetChild(0).DOScale(0, 0.75f).OnComplete(() =>
+                    transform.GetChild(0).DOScale(0, 0.75f).Play().OnComplete(() =>
                     {
+                        //Debug.Log("do scale");
                         transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
-                        transform.GetChild(0).DOScale(1, 0.5f).OnComplete(() =>
+                        transform.GetChild(0).DOScale(1, 0.5f).Play().OnComplete(() =>
                         {
-                            Debug.Log("donghua");
+                            //Debug.Log("donghua");
                             //transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
-                            if (currentStar[0] == '0')
-                            {
-                                transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
-                            }
-                            if (currentStar[1] == '0')
-                            {
-                                transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
-                            }
-                            if (currentStar[2] == '0')
-                            {
-                                transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
-                            }
+                            
                             if (levelID == 2)
                             {
                                 // 开启引导
@@ -277,8 +270,21 @@ public class LevelSign : MonoBehaviour
                     //        MapGuideManager.My.PlayCurrentIndexGuide();
                     //    }
                     //});
+                    if (currentStar[0] == '0')
+                    {
+                        transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (currentStar[1] == '0')
+                    {
+                        transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (currentStar[2] == '0')
+                    {
+                        transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                    }
                     if (levelID != 1&& levelID!=2&& levelID != 5)
                     {
+                        //Debug.Log("update status");
                         NetworkMgr.My.UpdateUnlockStatus(newStatus);
                     }
                     
