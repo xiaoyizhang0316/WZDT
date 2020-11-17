@@ -126,6 +126,10 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
                 nextItem.CancleTalent();
             }
         }
+        else
+        {
+            CheckStatus();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -42,10 +42,10 @@ public class FTE_0_Step_3 : BaseGuideStep
                 role.transform.DOScale(1f, 0.15f);
             });
         });
-        if(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
-        {
-            GuideManager.My.BornEnemy();
-        }
+        //if(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
+        //{
+        //    GuideManager.My.BornEnemy();
+        //}
     }
 
     void HandMove()

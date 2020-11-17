@@ -161,7 +161,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
             Debug.LogWarning("--------复盘天赋读取错误！");
             talentStr = "000000";
         }
-        if (NetworkMgr.My.levelProgresses.levelProgresses.Count < 4)
+        if (NetworkMgr.My.levelProgressList.Count < 4)
         {
             talentPanel.DOScale(0f, 0f).Play();
             return;

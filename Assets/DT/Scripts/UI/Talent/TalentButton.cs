@@ -28,7 +28,7 @@ public class TalentButton : MonoBehaviour
         }
         try
         {
-            if (NetworkMgr.My.levelProgresses.levelProgresses.Count >= 4)
+            if (NetworkMgr.My.levelProgressList.Count >= 4)
             {
                 transform.DOScale(1, 0).Play();
             }
