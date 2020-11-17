@@ -34,7 +34,7 @@
             "stage": "0",
             "necessary": "1",
             "question_id": "3",
-            "question_text": "当种子商生产完种子后，应该将种子运输到哪个角色？_角色功能_",
+            "question_text": "当种子商生产完种子后，应该将种子运输到哪个角色进行下一步加工？_角色功能_",
             "choices": "另一个种子商_农民_贸易商_零售商",
             "answer": "1",
             "isMultiple": "FALSE",
@@ -45,7 +45,7 @@
             "necessary": "1",
             "question_id": "4",
             "question_text": "种子商决定瓜的哪种属性？_角色功能_",
-            "choices": "瓜的品质_装填加成_甜度_脆度",
+            "choices": "瓜的品质_上架时间_甜度_脆度",
             "answer": "0",
             "isMultiple": "FALSE",
             "questionDesc": "种子商的效果决定了瓜的质量，种子商效果越高，瓜质量越好"
@@ -55,10 +55,10 @@
             "necessary": "1",
             "question_id": "5",
             "question_text": "农民决定瓜的哪种属性？_角色功能_",
-            "choices": "瓜的品质_装填加成_甜度_脆度",
+            "choices": "瓜的品质_上架时间_甜度_脆度",
             "answer": "1",
             "isMultiple": "FALSE",
-            "questionDesc": "农民的效果决定了瓜的装填加速，农民的效果越高，瓜的装填加速越快"
+            "questionDesc": "农民的效果决定了瓜的上架时间，农民的效果越高，瓜的上架时间越短"
         },
         {
             "stage": "1",
@@ -104,7 +104,7 @@
             "stage": "1",
             "necessary": "0",
             "question_id": "30",
-            "question_text": "当场上有大量密集的消费者时，玩家应该进行哪种操作？_游戏进阶_",
+            "question_text": "当场上有大量的消费者时，玩家应该进行哪种操作？_游戏进阶_",
             "choices": "升级种子商_升级农民_升级贸易商_升级零售商",
             "answer": "3",
             "isMultiple": "FALSE",
@@ -134,7 +134,7 @@
             "stage": "2",
             "necessary": "1",
             "question_id": "11",
-            "question_text": "当种子商和农民距离过远时，哪种操作可以增加种子的传输效率？_游戏基础_",
+            "question_text": "当种子商和农民距离过远时，哪种操作可以增加种子的传输速度？_游戏基础_",
             "choices": "在路线上摆放一个贸易商_提升种子商的效率值_提升农民的效果值_以上都不对",
             "answer": "0",
             "isMultiple": "FALSE",
@@ -164,7 +164,7 @@
             "stage": "2",
             "necessary": "0",
             "question_id": "14",
-            "question_text": "如果接下来会出一大批消费者，玩家最应该进行哪个行动？_游戏进阶_",
+            "question_text": "如果接下来会出一大批消费者，且玩家的库存足够，玩家最应该进行哪个行动？_游戏进阶_",
             "choices": "额外放置一个种子商_额外放置一个农民_额外放置一个贸易商_额外放置一个零售商",
             "answer": "3",
             "isMultiple": "FALSE",
@@ -185,10 +185,10 @@
             "necessary": "1",
             "question_id": "32",
             "question_text": "玩家升级角色后会发生哪些变化？_游戏基础_",
-            "choices": "角色属性值增加_玩家金钱减少_玩家Mega值减少_玩家得分增加",
+            "choices": "角色属性值增加_角色固定成本增加_玩家Mega值减少_玩家得分增加",
             "answer": "0_1",
             "isMultiple": "TRUE",
-            "questionDesc": "升级会增加角色的所有属性，而且会花费金钱，但不会消耗Mega值，与玩家得分无影响"
+            "questionDesc": "升级会增加角色的所有属性，包括固定成本，但不会消耗Mega值，与玩家得分无影响"
         },
         {
             "stage": "2",
