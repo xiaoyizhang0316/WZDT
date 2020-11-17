@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class FTE_01_Step_1 : BaseGuideStep
 {
@@ -48,7 +49,15 @@ public class FTE_01_Step_1 : BaseGuideStep
            roadList[i].DOLocalMoveY(0, 0.2f);
         }
         yield return new WaitForSeconds(0.5f);
-        GuideManager.My.BornEnemy();
+        if (SceneManager.GetActiveScene().name.Equals("FTE_0-1"))
+        {
+
+            GuideManager.My.BornEnemy1();
+        }
+        else
+        {
+            GuideManager.My.BornEnemy1();
+        }
         yield return new WaitForSeconds(7.5f);
         isOver = true;
     }

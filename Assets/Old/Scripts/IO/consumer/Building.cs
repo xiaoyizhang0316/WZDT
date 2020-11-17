@@ -195,8 +195,43 @@ public class Building : MonoBehaviour
         //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
         while (true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.8f);
             ct = (ConsumerType)(UnityEngine.Random.Range(0, 2)==1?1:8);
+            string path = "Prefabs/Consumer/" + ct.ToString();
+            GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+            go.GetComponent<ConsumeSign>().Init(consumerPathList);
+            go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+            go.transform.position = transform.position;
+            go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+            //foreach (int num in w.buffList)
+            //{
+            //    if (num != -1)
+            //    {
+            //        BuffData buff = GameDataMgr.My.GetBuffDataByID(num);
+            //        BaseBuff baseBuff = new BaseBuff();
+            //        baseBuff.Init(buff);
+            //        baseBuff.SetConsumerBuff(go.GetComponent<ConsumeSign>());
+            //        go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
+            //    }
+            //}
+            float waitTime = 0.4f;
+            Tweener twe = transform.DOScale(1f, waitTime);
+            yield return twe.WaitForCompletion();
+        }
+    }
+
+    public IEnumerator BornEnemy1()
+    {
+        ConsumerType ct;
+        yield return new WaitForSeconds(0.3f);
+        DrawPathLine();
+        protalGameObject.transform.DOScale(new Vector3(1, 1, 0.52f), 1);
+        yield return new WaitForSeconds(0.5f);
+        //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            ct = (ConsumerType)(UnityEngine.Random.Range(0, 2) == 1 ? 1 : 8);
             string path = "Prefabs/Consumer/" + ct.ToString();
             GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
             go.GetComponent<ConsumeSign>().Init(consumerPathList);
