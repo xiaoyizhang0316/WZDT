@@ -81,7 +81,7 @@ public class TalentPanel : MonoSingleton<TalentPanel>
                 usedPoint++;
             }
         }
-        if (NetworkMgr.My.levelProgresses.levelProgresses.Count >= 4)
+        if (NetworkMgr.My.levelProgressList.Count >= 4)
         {
             UnlockTalent(1);
             UnlockTalent(2);
@@ -91,7 +91,7 @@ public class TalentPanel : MonoSingleton<TalentPanel>
             LockTalent(1);
             LockTalent(2);
         }
-        if (NetworkMgr.My.levelProgresses.levelProgresses.Count >= 5)
+        if (NetworkMgr.My.levelProgressList.Count >= 5)
         {
             UnlockTalent(3);
             UnlockTalent(4);
@@ -101,7 +101,7 @@ public class TalentPanel : MonoSingleton<TalentPanel>
             LockTalent(3);
             LockTalent(4);
         }
-        if (NetworkMgr.My.levelProgresses.levelProgresses.Count >= 6)
+        if (NetworkMgr.My.levelProgressList.Count >= 6)
         {
             UnlockTalent(5);
             UnlockTalent(6);
@@ -303,15 +303,15 @@ public class TalentPanel : MonoSingleton<TalentPanel>
     public void CountTotalTalentPoint()
     {
         totalPoint = 0;
-        for (int i = 0; i < NetworkMgr.My.levelProgresses.levelProgresses.Count; i++)
+        for (int i = 0; i < NetworkMgr.My.levelProgressList.Count; i++)
         {
             if (i <= 3)
             {
-                totalPoint += NetworkMgr.My.levelProgresses.levelProgresses[i].starNum;
+                totalPoint += NetworkMgr.My.levelProgressList[i].starNum;
             }
             else
             {
-                totalPoint += NetworkMgr.My.levelProgresses.levelProgresses[i].starNum * 2;
+                totalPoint += NetworkMgr.My.levelProgressList[i].starNum;
             }
         }
         usedPoint = 0;
