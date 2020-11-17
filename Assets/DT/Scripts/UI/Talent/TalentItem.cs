@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -88,6 +89,12 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
                     CheckStatus();
                     nextItem.CancleTalent();
                 }
+                if (PlayerData.My.isOneFinish[index - 1])
+                {
+                    transform.parent.Find("Label").DOScale(1.4f, 0.25f).Play().OnComplete(() => {
+                        transform.parent.Find("Label").DOScale(1f, 0.25f);
+                    });
+                }
             }
             else if (TalentPanel.My.totalPoint - TalentPanel.My.usedPoint > 0)
             {
@@ -102,6 +109,12 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
                 {
                     PlayerData.My.isOneFinish[index - 1] = true;
                     TalentPanel.My.CheckLabel(index);
+                }
+                if (PlayerData.My.isOneFinish[index - 1])
+                {
+                    transform.parent.Find("Label").DOScale(1.4f, 0.25f).Play().OnComplete(() => {
+                        transform.parent.Find("Label").DOScale(1f, 0.25f);
+                    });
                 }
                 CheckStatus();
                 MapGuideManager.My.GetComponent<MapObject>().clickTalentItem = true;
