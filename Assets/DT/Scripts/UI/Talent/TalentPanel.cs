@@ -430,7 +430,8 @@ public class TalentPanel : MonoSingleton<TalentPanel>
         NetworkMgr.My.UpdateTalent(
             ()=> {
             Close();
-        },()=> {
+                MapGuideManager.My.GetComponent<MapObject>().isTalentPanelOpen = false;
+            },()=> {
             HttpManager.My.ShowTip("保存失败！");
         });
         //Close();

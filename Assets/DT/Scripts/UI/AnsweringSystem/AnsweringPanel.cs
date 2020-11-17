@@ -485,8 +485,12 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
     /// </summary>
     private void Replay()
     {
-        PlayerData.My.Reset();
-        SceneManager.LoadScene(sceneName);
+        //PlayerData.My.Reset();
+        //SceneManager.LoadScene(sceneName);
+        questionIndex = 0;
+        replayPanel.SetActive(false);
+        error_image.SetActive(false);
+        ShowPanel(continueGuide, doEnd);
     }
 
     /// <summary>

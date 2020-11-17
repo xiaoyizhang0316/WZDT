@@ -244,6 +244,12 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     {
     }
 
+    public void BornEnemy1()
+    {
+        Debug.Log("born");
+        StartCoroutine(GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().BornEnemy1());
+    }
+
     public void BornEnemy()
     {
         Debug.Log("born");

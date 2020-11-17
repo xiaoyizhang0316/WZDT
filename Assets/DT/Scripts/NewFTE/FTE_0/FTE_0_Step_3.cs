@@ -13,7 +13,7 @@ public class FTE_0_Step_3 : BaseGuideStep
 
     private void Start()
     {
-        StartCoroutine(OwnStep());
+        //StartCoroutine(OwnStep());
     }
 
     public override IEnumerator StepEnd()
