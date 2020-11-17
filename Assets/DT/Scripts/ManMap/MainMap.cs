@@ -133,8 +133,8 @@ public class MainMap : MonoBehaviour
     private void GetLevelProgress()
     {
         //Debug.Log("get ");
-        //if (NetworkMgr.My.levelProgresses == null)
-        //{
+        if (NetworkMgr.My.levelProgresses == null)
+        {
             NetworkMgr.My.GetLevelProgress(() => {
                 threeWords.gameObject.SetActive(true);
                 InitLevel();
@@ -150,12 +150,12 @@ public class MainMap : MonoBehaviour
                     InitLevel();
                 }
             });
-        //}
-        //else
-        //{
-        //    threeWords.gameObject.SetActive(true);
-        //    InitLevel();
-        //}
+        }
+        else
+        {
+            threeWords.gameObject.SetActive(true);
+            InitLevel();
+        }
     }
 
     private void GetEquips()
