@@ -130,7 +130,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().productTF.gameObject.SetActive(false);
             break;
             case 1:
-                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
                 Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled= false;
                 Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled = false;
                 Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
