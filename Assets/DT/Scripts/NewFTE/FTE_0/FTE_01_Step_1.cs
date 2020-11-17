@@ -56,7 +56,7 @@ public class FTE_01_Step_1 : BaseGuideStep
         }
         else
         {
-            GuideManager.My.BornEnemy1();
+            GuideManager.My.BornEnemy();
         }
         yield return new WaitForSeconds(7.5f);
         isOver = true;
