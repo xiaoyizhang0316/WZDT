@@ -129,7 +129,7 @@ public class TalentPanel : MonoSingleton<TalentPanel>
         {
             case 1:
                 {
-                    dingWei[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = false;
+                    dingWei[0].transform.parent.Find("lockImg").DOScale(0, 0).Play();
                     foreach (TalentItem item in dingWei)
                     {
                         item.CheckStatus();
@@ -138,7 +138,7 @@ public class TalentPanel : MonoSingleton<TalentPanel>
                 }
             case 2:
                 {
-                    guanJianZiYuanNengLi[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = false;
+                    guanJianZiYuanNengLi[0].transform.parent.Find("lockImg").DOScale(0, 0).Play();
                     foreach (TalentItem item in guanJianZiYuanNengLi)
                     {
                         item.CheckStatus();
@@ -147,7 +147,7 @@ public class TalentPanel : MonoSingleton<TalentPanel>
                 }
             case 3:
                 {
-                    yeWuXiTong[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = false;
+                    yeWuXiTong[0].transform.parent.Find("lockImg").DOScale(0, 0).Play();
                     foreach (TalentItem item in yeWuXiTong)
                     {
                         item.CheckStatus();
@@ -156,7 +156,7 @@ public class TalentPanel : MonoSingleton<TalentPanel>
                 }
             case 4:
                 {
-                    xianJinLiu[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = false;
+                    xianJinLiu[0].transform.parent.Find("lockImg").DOScale(0, 0).Play();
                     foreach (TalentItem item in xianJinLiu)
                     {
                         item.CheckStatus();
@@ -165,7 +165,7 @@ public class TalentPanel : MonoSingleton<TalentPanel>
                 }
             case 5:
                 {
-                    yingLiMoShi[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = false;
+                    yingLiMoShi[0].transform.parent.Find("lockImg").DOScale(0, 0).Play();
                     foreach (TalentItem item in yingLiMoShi)
                     {
                         item.CheckStatus();
@@ -174,7 +174,7 @@ public class TalentPanel : MonoSingleton<TalentPanel>
                 }
             case 6:
                 {
-                    qiYeJiaZhi[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = false;
+                    qiYeJiaZhi[0].transform.parent.Find("lockImg").DOScale(0, 0).Play();
                     foreach (TalentItem item in qiYeJiaZhi)
                     {
                         item.CheckStatus();
@@ -196,32 +196,32 @@ public class TalentPanel : MonoSingleton<TalentPanel>
         {
             case 1:
                 {
-                    dingWei[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = true;
+                    dingWei[0].transform.parent.Find("lockImg").DOScale(1, 0).Play();
                     break;
                 }
             case 2:
                 {
-                    guanJianZiYuanNengLi[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = true;
+                    guanJianZiYuanNengLi[0].transform.parent.Find("lockImg").DOScale(1, 0).Play();
                     break;
                 }
             case 3:
                 {
-                    yeWuXiTong[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = true;
+                    yeWuXiTong[0].transform.parent.Find("lockImg").DOScale(1, 0).Play();
                     break;
                 }
             case 4:
                 {
-                    xianJinLiu[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = true;
+                    xianJinLiu[0].transform.parent.Find("lockImg").DOScale(1, 0).Play();
                     break;
                 }
             case 5:
                 {
-                    yingLiMoShi[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = true;
+                    yingLiMoShi[0].transform.parent.Find("lockImg").DOScale(1, 0).Play();
                     break;
                 }
             case 6:
                 {
-                    qiYeJiaZhi[0].transform.parent.Find("lockImg").GetComponent<Image>().enabled = true;
+                    qiYeJiaZhi[0].transform.parent.Find("lockImg").DOScale(1, 0).Play();
                     break;
                 }
             default:

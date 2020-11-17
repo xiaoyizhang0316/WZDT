@@ -81,14 +81,12 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
                 }
                 else
                 {
-                    if (!nextItem.isSelect)
-                    {
-                        TalentPanel.My.usedPoint--;
-                        TalentPanel.My.UpdateTalentPoint();
-                        isSelect = false;
-                        nextItem.CheckStatus();
-                        CheckStatus();
-                    }
+                    TalentPanel.My.usedPoint--;
+                    TalentPanel.My.UpdateTalentPoint();
+                    isSelect = false;
+
+                    CheckStatus();
+                    nextItem.CancleTalent();
                 }
             }
             else if (TalentPanel.My.totalPoint - TalentPanel.My.usedPoint > 0)
@@ -111,6 +109,21 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
             else
             {
                 TalentPanel.My.ShowNoTalentInfo();
+            }
+        }
+    }
+
+    public void CancleTalent()
+    {
+        if (isSelect)
+        {
+            TalentPanel.My.usedPoint--;
+            TalentPanel.My.UpdateTalentPoint();
+            isSelect = false;
+            CheckStatus();
+            if (nextItem != null)
+            {
+                nextItem.CancleTalent();
             }
         }
     }
