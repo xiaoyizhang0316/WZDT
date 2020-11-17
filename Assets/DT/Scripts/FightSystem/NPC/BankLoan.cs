@@ -48,4 +48,16 @@ public class BankLoan : BaseExtraSkill
         //print("利率：" + (risk * 0.1f - 3f) / 100f);
         return Mathf.Round((risk * 0.1333f - 4) * 10 )/ 1000f;
     }
+
+    private new void Start()
+    {
+        base.Start();
+        if (PlayerData.My.yeWuXiTong[1])
+        {
+            var buff = GameDataMgr.My.GetBuffDataByID(10053);
+            BaseBuff baseb = new BaseBuff();
+            baseb.Init(buff);
+            baseb.SetRoleBuff(null, GetComponentInParent<BaseMapRole>(), GetComponentInParent<BaseMapRole>());
+        }
+    }
 }

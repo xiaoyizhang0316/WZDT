@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
@@ -84,28 +85,83 @@ public class BulletLaunch : MonoBehaviour
             }
             else
             {
-      
-
-            lanchNormalTWE = gameObject.transform.DOMove(target.transform.position, flyTime)
-                 .SetEase(Ease.Linear).OnComplete(() =>
-                 {
-                     isplay = false;
-                     if (gameObject.GetComponent<GoodsSign>().target != null)
-                     {
-                         Debug.Log("初始化爆炸" + gameObject.name);
-                         gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
+                lanchNormalTWE = gameObject.transform.DOMove(target.transform.position, flyTime).SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    isplay = false;
+                    if (gameObject.GetComponent<GoodsSign>().target != null)
+                    {
+                        Debug.Log("初始化爆炸" + gameObject.name);
+                        gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
                         //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                         gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
 
-                         BulletObjectPool.My.RecoveryBullet(gameObject, 0.3f);
-                     }
-                     else
-                     {
-                         BulletObjectPool.My.RecoveryBullet(gameObject, 0.3f);
-                     }
+                        if (PlayerData.My.dingWei[4])
+                        {
+                            int number = UnityEngine.Random.Range(0, 101);
+                            if (number <= 10)
+                            {
+                                List<ConsumeSign> consumeSigns = FindObjectsOfType<ConsumeSign>().ToList();
+                                int targetIndex = -1;
+                                float minDis = 99999f;
+                                for (int i = 0; i < consumeSigns.Count; i++)
+                                {
+                                    if (consumeSigns[i].GetInstanceID() != target.GetInstanceID() && consumeSigns[i].isCanSelect && minDis >= Vector3.Distance(target.transform.position, consumeSigns[i].transform.position))
+                                    {
+                                        minDis = Vector3.Distance(target.transform.position, consumeSigns[i].transform.position);
+                                        if (minDis <= 3)
+                                        {
+                                            targetIndex = i;
+                                        }
+                                    }
+                                }
+                                if (targetIndex != -1)
+                                {
+                                    GameObject go = BulletObjectPool.My.GetBullet(BulletType.NormalPP);
+                                    Debug.Log("初始化子弹" + go.name);
+                                    go.GetComponent<GoodsSign>().productData = data;
+                                    go.GetComponent<GoodsSign>().lunch = this;
+                                    go.GetComponent<GoodsSign>().target = consumeSigns[targetIndex];
+                                    go.transform.SetParent(target.transform);
+                                    go.GetComponent<BulletEffect>().InitBufflist(go.GetComponent<GoodsSign>().productData.buffList);
 
-                 });
-            gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
+                                    go.transform.localPosition = new Vector3(0, 0.5f, 0);
+                                    go.transform.SetParent(target.transform);
+
+                                    Debug.Log("初始化拖尾" + go.name);
+                                    go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().tile);
+                                    float flyTime2 = Vector3.Distance(consumeSigns[targetIndex].transform.position, go.transform.position) / 24f;
+                                    //            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
+                                    if (consumeSigns[targetIndex] == null)
+                                    {
+                                        BulletObjectPool.My.RecoveryBullet(go, 0);
+                                    }
+                                    else
+                                    {
+                                        go.transform.DOMove(consumeSigns[targetIndex].transform.position, flyTime2).SetEase(Ease.Linear).OnComplete(() =>
+                                        {
+                                            isplay = false;
+                                            if (go.GetComponent<GoodsSign>().target != null)
+                                            {
+                                                Debug.Log("初始化爆炸" + go.name);
+                                                go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().explosions);
+                                                //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
+                                                go.GetComponent<GoodsSign>().target.OnHit(ref data);
+                                                BulletObjectPool.My.RecoveryBullet(go, 0.3f);
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                        BulletObjectPool.My.RecoveryBullet(gameObject, 0.3f);
+                    }
+                    else
+                    {
+                        BulletObjectPool.My.RecoveryBullet(gameObject, 0.3f);
+                    }
+
+                });
+                gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
             }
         });
         isplay = true;
@@ -144,24 +200,69 @@ public class BulletLaunch : MonoBehaviour
         gameObject.transform.localPosition = new Vector3(0, 0f, 0);
         gameObject.GetComponent<BulletEffect>().InitBufflist(gameObject.GetComponent<GoodsSign>().productData.buffList);
         launchShooter.DOLookAt(gameObject.GetComponent<GoodsSign>().target.transform.position, 0.1f).OnComplete(() =>
-    {
-        gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
-        float flyTime = Vector3.Distance(gameObject.GetComponent<GoodsSign>().target.transform.position, gameObject.transform.position) / 10f;
-        lanchNormalTWE = gameObject.transform.DOMove(gameObject.GetComponent<GoodsSign>().target.transform.position, 0.5f)
-            .SetEase(sase).OnComplete(() =>
-            {
-                isplay = false;
-                if (gameObject.GetComponent<GoodsSign>().target != null)
+        {
+            gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
+            float flyTime = Vector3.Distance(gameObject.GetComponent<GoodsSign>().target.transform.position, gameObject.transform.position) / 10f;
+            lanchNormalTWE = gameObject.transform.DOMove(gameObject.GetComponent<GoodsSign>().target.transform.position, 0.5f)
+                .SetEase(sase).OnComplete(() =>
                 {
-                    gameObject.GetComponent<LightningTrigger>()
-                        .GetTriggerList(gameObject.GetComponent<GoodsSign>().target, data);
-                }
-                else
-                {
-                    BulletObjectPool.My.RecoveryBullet(gameObject, 0.3f);
-                }
-            });
-    });
+                    isplay = false;
+                    if (gameObject.GetComponent<GoodsSign>().target != null)
+                    {
+                        gameObject.GetComponent<LightningTrigger>()
+                            .GetTriggerList(gameObject.GetComponent<GoodsSign>().target, data);
+
+                        if (PlayerData.My.dingWei[4])
+                        {
+                            int number = UnityEngine.Random.Range(0, 101);
+                            if (number <= 10)
+                            {
+                                List<ConsumeSign> consumeSigns = FindObjectsOfType<ConsumeSign>().ToList();
+                                int targetIndex = -1;
+                                float minDis = 99999f;
+                                for (int i = 0; i < consumeSigns.Count; i++)
+                                {
+                                    if (consumeSigns[i].GetInstanceID() != gameObject.GetComponent<GoodsSign>().target.GetInstanceID() && consumeSigns[i].isCanSelect && minDis >= Vector3.Distance(gameObject.GetComponent<GoodsSign>().target.transform.position, consumeSigns[i].transform.position))
+                                    {
+                                        minDis = Vector3.Distance(gameObject.GetComponent<GoodsSign>().target.transform.position, consumeSigns[i].transform.position);
+                                        if (minDis <= 3)
+                                        {
+                                            targetIndex = i;
+                                        }
+                                    }
+                                }
+                                if (targetIndex != -1)
+                                {
+                                    GameObject go = BulletObjectPool.My.GetBullet(BulletType.Lightning);
+                                    go.GetComponent<GoodsSign>().productData = data;
+                                    go.GetComponent<GoodsSign>().lunch = this;
+                                    go.GetComponent<GoodsSign>().target = consumeSigns[targetIndex];
+                                    go.transform.SetParent(launchShooter);
+                                    go.transform.position = go.GetComponent<GoodsSign>().target.transform.position;
+                                    go.GetComponent<BulletEffect>().InitBufflist(go.GetComponent<GoodsSign>().productData.buffList);
+                                    go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().tile);
+                                    float flyTime2 = Vector3.Distance(go.GetComponent<GoodsSign>().target.transform.position, go.transform.position) / 10f;
+                                    go.transform.DOMove(go.GetComponent<GoodsSign>().target.transform.position, 0.5f).SetEase(sase).OnComplete(() =>
+                                    {
+                                        if (go.GetComponent<GoodsSign>().target != null)
+                                        {
+                                            go.GetComponent<LightningTrigger>().GetTriggerList(go.GetComponent<GoodsSign>().target, data);
+                                        }
+                                        else
+                                        {
+                                            BulletObjectPool.My.RecoveryBullet(go, 0.3f);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        BulletObjectPool.My.RecoveryBullet(gameObject, 0.3f);
+                    }
+                });
+        });
         gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
         isplay = true;
     }
@@ -182,7 +283,7 @@ public class BulletLaunch : MonoBehaviour
         tow.GetComponent<AutoFireTow>().lunch = this;
         if (GetComponent<BaseMapRole>().shootTargetList.Count > 0)
         {
-            tow.GetComponent<AutoFireTow>().target =GetComponent<BaseMapRole>().shootTargetList[Random.Range(0, GetComponent<BaseMapRole>().shootTargetList.Count)];
+            tow.GetComponent<AutoFireTow>().target = GetComponent<BaseMapRole>().shootTargetList[Random.Range(0, GetComponent<BaseMapRole>().shootTargetList.Count)];
         }
         else
         {
@@ -194,12 +295,11 @@ public class BulletLaunch : MonoBehaviour
         tow.GetComponent<BulletEffect>().InitBufflist(data.buffList);
 
 
-           tow.transform.localPosition = new Vector3(0, 0.4f, 0);
+        tow.transform.localPosition = new Vector3(0, 0.4f, 0);
         tow.transform.SetParent(transform);
         launchShooter.DOLookAt(tow.GetComponent<AutoFireTow>().target.transform.position, 0.1f).OnComplete(() =>
           {
               tow.GetComponent<BulletEffect>().InitBuff(tow.GetComponent<BulletEffect>().tile);
-
               tow.transform.DOMove(tow.GetComponent<AutoFireTow>().target.transform.position, 0.5f).SetEase(sase).OnComplete(() =>
               {
                   tow.GetComponent<BulletEffect>().InitBuff(tow.GetComponent<BulletEffect>().explosions);
@@ -208,7 +308,52 @@ public class BulletLaunch : MonoBehaviour
                   tow.transform.GetChild(3).gameObject.SetActive(true);
                   tow.GetComponent<AutoFireTow>().isupdate = true;
 
-
+                  if (PlayerData.My.dingWei[4])
+                  {
+                      int number = UnityEngine.Random.Range(0, 101);
+                      if (number <= 10)
+                      {
+                          List<ConsumeSign> consumeSigns = FindObjectsOfType<ConsumeSign>().ToList();
+                          int targetIndex = -1;
+                          float minDis = 99999f;
+                          for (int i = 0; i < consumeSigns.Count; i++)
+                          {
+                              if (consumeSigns[i].GetInstanceID() != tow.GetComponent<AutoFireTow>().target.GetInstanceID() && consumeSigns[i].isCanSelect && minDis >= Vector3.Distance(tow.GetComponent<AutoFireTow>().target.transform.position, consumeSigns[i].transform.position))
+                              {
+                                  minDis = Vector3.Distance(tow.GetComponent<AutoFireTow>().target.transform.position, consumeSigns[i].transform.position);
+                                  if (minDis <= 3)
+                                  {
+                                      targetIndex = i;
+                                  }
+                              }
+                          }
+                          if (targetIndex != -1)
+                          {
+                              List<Vector3> pointList2 = new List<Vector3>();
+                              GameObject towPrb2 = Resources.Load<GameObject>("Bullet/Tow");
+                              GameObject tow2 = Instantiate(towPrb2);
+                              tow2.transform.SetParent(launchShooter);
+                              tow2.transform.position = tow.GetComponent<AutoFireTow>().target.transform.position;
+                              tow2.GetComponent<AutoFireTow>().data = data;
+                              tow2.GetComponent<AutoFireTow>().destroyTime = 13;
+                              tow2.GetComponent<AutoFireTow>().launchShooter = launchShooter;
+                              tow2.GetComponent<AutoFireTow>().lunch = this;
+                              tow2.GetComponent<AutoFireTow>().target = consumeSigns[targetIndex];
+                              tow2.GetComponent<AutoFireTow>().shootTime = 1f / (GetComponent<BaseMapRole>().baseRoleData.efficiency * 0.04f) * data.loadingSpeed;
+                              tow2.GetComponent<BulletEffect>().InitBufflist(data.buffList);
+                              tow2.transform.SetParent(transform);
+                              tow2.GetComponent<BulletEffect>().InitBuff(tow2.GetComponent<BulletEffect>().tile);
+                              tow2.transform.DOMove(tow2.GetComponent<AutoFireTow>().target.transform.position, 0.5f).SetEase(sase).OnComplete(() =>
+                              {
+                                  tow2.GetComponent<BulletEffect>().InitBuff(tow2.GetComponent<BulletEffect>().explosions);
+                                  tow2.GetComponent<BulletEffect>().explosions.SetActive(false);
+                                  tow2.GetComponent<BulletEffect>().tile.SetActive(false);
+                                  tow2.transform.GetChild(3).gameObject.SetActive(true);
+                                  tow2.GetComponent<AutoFireTow>().isupdate = true;
+                              });
+                          }
+                      }
+                  }
               });
           });
     }
@@ -292,8 +437,8 @@ public class BulletLaunch : MonoBehaviour
                          gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
 
 
-                        //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
-                        gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
+                         //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
+                         gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
 
                          BulletObjectPool.My.RecoveryBullet(gameObject, 0.3f);
                      }

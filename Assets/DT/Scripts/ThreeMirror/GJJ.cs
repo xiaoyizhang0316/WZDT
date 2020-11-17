@@ -92,7 +92,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void AutoUseGJJ()
     {
-        transform.DOMove(transform.position, 30f).OnComplete(() =>
+        transform.DORotateQuaternion(transform.rotation, 30f).OnComplete(() =>
         {
             List<BaseMapRole> roleList = new List<BaseMapRole>();
             for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
@@ -131,7 +131,6 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                 }
                 AutoUseGJJ();
             }
-
         }).Play();
     }
 
@@ -141,7 +140,9 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         costNumber.text = costTechNumber.ToString();
         if (PlayerData.My.guanJianZiYuanNengLi[4])
         {
-            AutoUseGJJ();
+            transform.DORotateQuaternion(transform.rotation, 180f).OnComplete(() => {
+                AutoUseGJJ();
+            });
         }
     }
 

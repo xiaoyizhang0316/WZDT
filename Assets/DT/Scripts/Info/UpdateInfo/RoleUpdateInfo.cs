@@ -53,6 +53,8 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public Button clearWarehouse;
 
+    public Button sellRole;
+
     public EncourageLevel encourageLevel;
 
     public GameObject emptyEquip;
@@ -103,7 +105,11 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         {
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要清空仓库吗？";
-            
+            if (PlayerData.My.guanJianZiYuanNengLi[5])
+            {
+                str = "确定要将仓库中的产品低价处理吗?";
+            }
+
             DeleteUIManager.My.Init(str, () => {
                 if (!PlayerData.My.isSOLO)
                 {
@@ -120,6 +126,28 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                 }
                 PlayerData.My.GetMapRoleById(currentRole.ID).ClearWarehouse();
                 ReInit(currentRole);
+            });
+        });
+        sellRole.onClick.AddListener(() => {
+            gameObject.SetActive(false);
+            NewCanvasUI.My.Panel_Delete.SetActive(true);
+            string str = "确定要出售" + currentRole.baseRoleData.roleName + "吗？";
+
+            DeleteUIManager.My.Init(str, () => {
+                PlayerData.My.SellRole(currentRole.ID);
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str1 = "DeleteRole|";
+                    str1 += currentRole.ID.ToString();
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str1);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str1);
+                    }
+                }
             });
         });
         buffcontent.SetActive(false);
@@ -172,7 +200,16 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             GetComponentInChildren<UpdateRole>().Init();
 
         }
-
+        sellRole.gameObject.SetActive(false);
+        if (PlayerData.My.yeWuXiTong[5] && role.baseRoleData.level >= 3)
+        {
+            sellRole.gameObject.SetActive(true);
+        }
+        if (PlayerData.My.guanJianZiYuanNengLi[5])
+        {
+            clearWarehouse.GetComponentInChildren<Text>().text = "清仓(" + PlayerData.My.GetMapRoleById(role.ID).CountWarehouseIncome() + ")";
+            clearWarehouse.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Talent/Warehouse");
+        }
         ReInit(role);
         if (currentLevel >= 5)
         {

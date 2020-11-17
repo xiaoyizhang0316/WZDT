@@ -10,6 +10,8 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
 
     public TalentItem nextItem;
 
+    public string talentTitle;
+
     public string talentDesc;
 
     public bool isSelect;
@@ -69,6 +71,7 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
         {
             if (isSelect)
             {
+                MapGuideManager.My.GetComponent<MapObject>().clickTalentItem = true;
                 if (nextItem == null)
                 {
                     TalentPanel.My.usedPoint--;
@@ -78,14 +81,12 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
                 }
                 else
                 {
-                    if (!nextItem.isSelect)
-                    {
-                        TalentPanel.My.usedPoint--;
-                        TalentPanel.My.UpdateTalentPoint();
-                        isSelect = false;
-                        nextItem.CheckStatus();
-                        CheckStatus();
-                    }
+                    TalentPanel.My.usedPoint--;
+                    TalentPanel.My.UpdateTalentPoint();
+                    isSelect = false;
+
+                    CheckStatus();
+                    nextItem.CancleTalent();
                 }
             }
             else if (TalentPanel.My.totalPoint - TalentPanel.My.usedPoint > 0)
@@ -97,7 +98,13 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
                 {
                     nextItem.CheckStatus();
                 }
+                else
+                {
+                    PlayerData.My.isOneFinish[index - 1] = true;
+                    TalentPanel.My.CheckLabel(index);
+                }
                 CheckStatus();
+                MapGuideManager.My.GetComponent<MapObject>().clickTalentItem = true;
             }
             else
             {
@@ -106,13 +113,28 @@ public class TalentItem : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
         }
     }
 
+    public void CancleTalent()
+    {
+        if (isSelect)
+        {
+            TalentPanel.My.usedPoint--;
+            TalentPanel.My.UpdateTalentPoint();
+            isSelect = false;
+            CheckStatus();
+            if (nextItem != null)
+            {
+                nextItem.CancleTalent();
+            }
+        }
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        FloatWindow.My.Init2D(talentDesc,transform);
+        TalentPanel.My.OpenTalentDesc(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        FloatWindow.My.Hide();
+        //TalentPanel.My.CloseTalentDesc();
     }
 }

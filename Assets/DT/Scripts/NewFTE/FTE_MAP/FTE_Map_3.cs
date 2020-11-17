@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class FTE_Map_3 : BaseGuideStep
 {
-    public GameObject openTargetPanel;
 
+    public GameObject hand;
     public override IEnumerator StepEnd()
     {
-        throw new System.NotImplementedException();
+        yield break;
     }
 
     public override IEnumerator StepStart()
     {
-        throw new System.NotImplementedException();
+        yield return new WaitForSeconds(0.5f);
+        hand.SetActive(true);
+        ShowInfos();
     }
 
     public override bool ChenkEnd()
     {
-        if (openTargetPanel.activeInHierarchy)
+        
+        return MapGuideManager.My.GetComponent<MapObject>().isTalentPanelOpen;
+    }
+
+    void ShowInfos()
+    {
+        for (int i = 0; i < contentText.Count; i++)
         {
-            return true;
+            contentText[i].gameObject.SetActive(true);
         }
-        return false;
+
     }
 }

@@ -42,13 +42,15 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public List<bool> yeWuXiTong = new List<bool> { true, true, true, true, true, true };
 
-    public List<bool> guanJianZiYuanNengLi = new List<bool> { true, true, true, true, true, true };
+    public List<bool> guanJianZiYuanNengLi = new List<bool> { true, true, true, true, false, true };
 
     public List<bool> yingLiMoShi = new List<bool> { true, true, true, true, true, true };
 
     public List<bool> xianJinLiu = new List<bool> { true, true, true, true, true, true };
 
     public List<bool> qiYeJiaZhi = new List<bool> { true, true, true, true, true, true };
+
+    public List<bool> isOneFinish = new List<bool> { false, false, false, false, false, false };
 
     public bool cheatIndex1 = false;
 
@@ -165,12 +167,61 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             }
             int returnGold = mapRole.totalUpgradeCost * 50 / 100;
             StageGoal.My.GetPlayerGold(returnGold);
+            StageGoal.My.Income(returnGold,IncomeType.Other,null,"删除返现");
         }
         RoleData.Remove(target);
         MapRole.Remove(mapRole);
         MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
         DeleleRoleOperationRecord(mapRole);
         Destroy(mapRole.gameObject);
+    }
+
+    /// <summary>
+    /// 卖角色
+    /// </summary>
+    public void SellRole(double roleId)
+    {
+        DataUploadManager.My.AddData(DataEnum.角色_删除角色);
+        Role target = GetRoleById(roleId);
+        TradeManager.My.DeleteRoleAllTrade(roleId);
+        BaseMapRole mapRole = GetMapRoleById(roleId);
+        MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
+        SetSellNPC(mapRole);
+
+        RoleData.Remove(target);
+        MapRole.Remove(mapRole);
+        SellRoleOperationRecord(mapRole);
+        Destroy(mapRole.gameObject);
+    }
+
+    public void SetSellNPC(BaseMapRole mapRole)
+    {
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/NPC/" + mapRole.baseRoleData.baseRoleData.roleType));
+        go.transform.SetParent(GameObject.Find("Role").transform);
+        go.transform.position = MapManager.My.GetMapSignByXY(mapRole.posX, mapRole.posY).transform.position + new Vector3(0f, 0.3f, 0f);
+        BaseMapRole role = go.GetComponent<BaseMapRole>();
+        role.baseRoleData.effect = mapRole.baseRoleData.effect;
+        role.baseRoleData.efficiency = mapRole.baseRoleData.efficiency;
+        role.baseRoleData.range = mapRole.baseRoleData.range;
+        role.baseRoleData.tradeCost = mapRole.baseRoleData.tradeCost + mapRole.baseRoleData.cost * 50 / 100;
+        role.baseRoleData.riskResistance = mapRole.baseRoleData.riskResistance;
+        role.baseRoleData.baseRoleData.level = mapRole.baseRoleData.baseRoleData.level;
+        role.baseRoleData.baseRoleData.roleName = mapRole.baseRoleData.baseRoleData.roleName;
+        role.baseRoleData.bulletCapacity = mapRole.baseRoleData.bulletCapacity;
+        role.baseRoleData.ID = mapRole.baseRoleData.ID;
+        role.startEncourageLevel = mapRole.startEncourageLevel;
+        role.encourageLevel = mapRole.startEncourageLevel;
+        role.isSell = true;
+        NPC npcScript = go.GetComponent<NPC>();
+        npcScript.isCanSee = true;
+        npcScript.isLock =false;
+        npcScript.lockNumber = 0;
+        npcScript.isCanSeeEquip = true;
+        go.GetComponent<BaseSkill>().buffList.AddRange(mapRole.GetEquipBuffList());
+        go.GetComponent<NPC>().NPCBuffList.Clear();
+        go.name = mapRole.baseRoleData.baseRoleData.roleName;
+        go.GetComponent<NPC>().BaseInit();
+        go.GetComponent<NPC>().Init();
     }
 
     /// <summary>
@@ -181,6 +232,13 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         List<string> param = new List<string>();
         param.Add(mapRole.baseRoleData.ID.ToString());
         StageGoal.My.RecordOperation(OperationType.DeleteRole, param);
+    }
+
+    public void SellRoleOperationRecord(BaseMapRole mapRole)
+    {
+        List<string> param = new List<string>();
+        param.Add(mapRole.baseRoleData.ID.ToString());
+        StageGoal.My.RecordOperation(OperationType.SellRole, param);
     }
 
     /// <summary>
@@ -369,12 +427,14 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     public void ParsePlayerTalent(string str)
     {
         string[] talentList = str.Split('_');
-        if (talentList.Length != 6)
+        if (talentList.Length != 7)
         {
+            Debug.Log(str);
             Debug.LogWarning("天赋读取错误！");
         }
         else
         {
+            Debug.Log(str);
             char[] temp = talentList[0].ToCharArray();
             for (int i = 0; i < 6; i++)
             {
@@ -405,7 +465,76 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             {
                 qiYeJiaZhi[i] = temp[i].Equals('1');
             }
+            temp = talentList[6].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                isOneFinish[i] = temp[i].Equals('1');
+            }
         }    
+    }
+
+    /// <summary>
+    /// 生成天赋简化字符串
+    /// </summary>
+    /// <returns></returns>
+    public string GeneratePlayerTalentReview()
+    {
+        string result = "";
+        int count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (dingWei[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (guanJianZiYuanNengLi[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (yeWuXiTong[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (xianJinLiu[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if(yingLiMoShi[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if(qiYeJiaZhi[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        return result;
     }
 
     /// <summary>
@@ -443,6 +572,11 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         for (int i = 0; i < qiYeJiaZhi.Count; i++)
         {
             result += qiYeJiaZhi[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < isOneFinish.Count; i++)
+        {
+            result += isOneFinish[i] ? '1' : '0';
         }
         return result;
     }

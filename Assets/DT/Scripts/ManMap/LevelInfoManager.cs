@@ -37,6 +37,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public Action loadScene;
 
     public Sprite levelLockImage;
+    public Sprite levelUnlockImage;
     public Sprite box1OpenedImage;
     public Sprite box2OpenedImage;
     public Sprite box3OpenedImage;
@@ -52,12 +53,12 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
 
     public GameObject missionConfirm;
     public string currentSceneName = "";
-    public bool stepOver = false;
+    //public bool stepOver = false;
     // Start is called before the first frame update
     void Start()
     {
         panel.SetActive(false);
-        stepOver = false;
+        //stepOver = false;
         listScript.gameObject.SetActive(false);
         rankPanel.SetActive(false);
         close.onClick.AddListener(() =>
@@ -98,10 +99,10 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
                     
                 loadScene(); 
                 }
-                if (currentSceneName.Equals("FTE_2"))
-                {
-                    stepOver = true;
-                }
+                //if (currentSceneName.Equals("FTE_2"))
+                //{
+                //    stepOver = true;
+                //}
             }
             
             

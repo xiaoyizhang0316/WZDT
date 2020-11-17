@@ -55,6 +55,10 @@ public class NpcSpecialInfo : MonoBehaviour
         clearBullets.onClick.AddListener(()=> {
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要清空仓库吗？";
+            if (PlayerData.My.guanJianZiYuanNengLi[5])
+            {
+                str = "确定要将仓库中的产品低价处理吗?";
+            }
             DeleteUIManager.My.Init(str, () => {
                 if (!PlayerData.My.isSOLO)
                 {
@@ -76,6 +80,11 @@ public class NpcSpecialInfo : MonoBehaviour
             });
         });
         icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.baseRoleData.baseRoleData.roleType.ToString() + (npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level == 0 ? 1 : npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level).ToString());
+        if (PlayerData.My.guanJianZiYuanNengLi[5])
+        {
+            clearBullets.GetComponentInChildren<Text>().text = "清仓(" + PlayerData.My.GetMapRoleById(npc.baseRoleData.ID).CountWarehouseIncome() + ")";
+            clearBullets.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Talent/Warehouse");
+        }
         //ClearBulletContent();
         switch (npc.baseRoleData.baseRoleData.roleType)
         {

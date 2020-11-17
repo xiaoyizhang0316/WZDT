@@ -36,7 +36,7 @@ public class FTE_1_19 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        if (StageGoal.My.extraCost.ContainsKey("升级") && StageGoal.My.extraCost["升级"] >= 2400)
+        if (StageGoal.My.extraCost.ContainsKey("升级") && StageGoal.My.extraCost["升级"] >= 10)
         {
             Debug.Log("正确返回");
             return true;

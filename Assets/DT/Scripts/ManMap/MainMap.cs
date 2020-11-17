@@ -181,6 +181,7 @@ public class MainMap : MonoBehaviour
                 ls.InitLevel(GetStar(level), GetStar(level - 1));
             }
         }
+        TalentPanel.My.Init();
     }
 
     string GetStar(int level)

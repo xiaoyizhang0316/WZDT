@@ -561,7 +561,11 @@ public class GameEnum
         /// <summary>
         /// 修改交易
         /// </summary>
-        ChangeTrade
+        ChangeTrade,
+        /// <summary>
+        /// 出售角色
+        /// </summary>
+        SellRole,
     }
 
     public enum StageType

@@ -135,7 +135,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     groupID = playerDatas.groupID;
                     playerLimit = playerDatas.limit;
                     InitRoleFoundDic(playerDatas.roleFound);
-                    //PlayerData.My.ParsePlayerTalent(playerDatas.talent);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     //Debug.Log(playerID + " " + token);
                     //Debug.Log("token-----" + token);
                     doSuccess?.Invoke();
@@ -271,7 +271,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("unlockStatus", unlockStatus);
         keyValues.Add("playerID", playerID);
         keyValues.Add("token", token);
-        StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerTalent, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerUnlockStatus, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -300,7 +300,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
             }
             SetMask();
-        }, keyValues, HttpType.Post, HttpId.UpdatePlayerTalent));
+        }, keyValues, HttpType.Post, HttpId.UpdatePlayerUnlockStatus));
     }
 
     public void ReConnect(Action doSuccess=null)
@@ -908,6 +908,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 catch (Exception ex)
                 {
                     Debug.Log(ex.TargetSite);
+                    Debug.Log(ex.StackTrace);
                     Debug.Log(ex.Message);
                 }
             }
@@ -950,6 +951,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             keyValues.Add("token", token);
             keyValues.Add("playerID", playerID);
             keyValues.Add("data", CompressUtils.Compress(JsonUtility.ToJson(playerReplay)));
+            keyValues.Add("talent", PlayerData.My.GeneratePlayerTalentReview());
             if (!PlayerData.My.isSOLO)
             {
                 if(PlayerData.My.isServer)// is server

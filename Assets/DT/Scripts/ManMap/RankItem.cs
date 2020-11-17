@@ -39,6 +39,9 @@ public class RankItem : MonoBehaviour
     public Text bossLevelScore;
 
     private string recordID = "";
+
+    public string talent = "";
+
     int rank = 0;
     //Color _color = Color.white;;
     void Start()
@@ -56,7 +59,7 @@ public class RankItem : MonoBehaviour
             string str1 = "{ \"dataStats\":" + datas.dataStats + "}";
             PlayerStatus status = JsonUtility.FromJson<PlayerStatus>(str1);
             Debug.Log("获取录像成功");
-            ReviewPanel.My.MapInit(operations.playerOperations, status.dataStats, (status.dataStats.Count - 1) * 5);
+            ReviewPanel.My.MapInit(operations.playerOperations, status.dataStats, (status.dataStats.Count - 1) * 5,talent);
         });
     }
 
@@ -71,6 +74,7 @@ public class RankItem : MonoBehaviour
         recordScore.text = rp.score.ToString();
         recordDate.text = TimeStamp.TimeStampToString(rp.recordTime);
         recordTimeCount.text = rp.realTime/60+":"+rp.realTime%60;
+        talent = rp.talent;
         if (rp.score == -1)
         {
             GetComponent<Image>().color = Color.gray;
