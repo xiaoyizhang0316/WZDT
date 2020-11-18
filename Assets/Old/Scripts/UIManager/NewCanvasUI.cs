@@ -641,7 +641,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         }
     }
 
-    public void ShowLowHealthTip()
+    public void ShowLowHealthTip()                           
     {
         CameraPlay.Hit(new Color(1f, 0.1367925f, 0.1367925f,0f), 2f);
     }

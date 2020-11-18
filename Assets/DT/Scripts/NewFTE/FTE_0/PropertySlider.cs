@@ -54,6 +54,13 @@ public class PropertySlider : MonoBehaviour, IPointerUpHandler
         SetBaseMapRolePropertys();
     }
 
+    public void SetValue(float value)
+    {
+        slider.value = value;
+        trueValue = value;
+        lastValue = value;
+    }
+
     void SetBaseMapRolePropertys()
     {
         if (!RoleEditor.My.isDragEnd)
