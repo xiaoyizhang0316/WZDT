@@ -645,8 +645,8 @@ public class StageGoal : MonoSingleton<StageGoal>
                         ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
                         if (PlayerData.My.xianJinLiu[5])
                         {
-                            GetPlayerGold(playerGold * 10 / 100);
-                            Income(playerGold * 10 / 100,IncomeType.Other,null,"利息");
+                            GetPlayerGold(playerGold * 5 / 100);
+                            Income(playerGold * 5 / 100,IncomeType.Other,null,"利息");
                         }
                     }
                     if (PlayerData.My.yeWuXiTong[3])
@@ -696,7 +696,8 @@ public class StageGoal : MonoSingleton<StageGoal>
                         ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
                         if (PlayerData.My.xianJinLiu[5])
                         {
-                            GetPlayerGold(playerGold * 10 / 100);
+                            GetPlayerGold(playerGold * 5 / 100);
+                            Income(playerGold * 5 / 100, IncomeType.Other, null, "利息");
                         }
                     }
                     if (PlayerData.My.yeWuXiTong[3])
