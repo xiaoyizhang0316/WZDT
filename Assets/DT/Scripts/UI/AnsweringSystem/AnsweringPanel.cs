@@ -490,6 +490,7 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         questionIndex = 0;
         replayPanel.SetActive(false);
         error_image.SetActive(false);
+        answer.Clear();
         ShowPanel(continueGuide, doEnd);
     }
 
