@@ -431,6 +431,34 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         {
             Debug.Log(str);
             Debug.LogWarning("天赋读取错误！");
+            for (int i = 0; i < 6; i++)
+            {
+                dingWei[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                guanJianZiYuanNengLi[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                yeWuXiTong[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                xianJinLiu[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                yingLiMoShi[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                qiYeJiaZhi[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                isOneFinish[i] = false;
+            }
         }
         else
         {

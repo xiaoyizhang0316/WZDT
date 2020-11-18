@@ -34,8 +34,12 @@ public class FTE_01_Step15 : BaseGuideStep
         if (RoleEditor.My.isDragEnd)
         {
             RoleEditor.My.isDragEnd = false;
+            if (currentSlider.name.Equals("Range"))
+            {
+                RoleEditor.My.isDragEnd = true;
+            }
             //currentSlider.interactable = false;
-            currentSlider.value = sliderValue;
+            currentSlider.GetComponent<PropertySlider>().SetValue(sliderValue);
             currentSlider.gameObject.SetActive(true);
             hand.SetActive(false);
             return true;
