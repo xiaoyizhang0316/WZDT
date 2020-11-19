@@ -167,8 +167,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 //先后前
                 Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled = true;
                 Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled= true;
-                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "先钱";
-                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "后钱";
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "先结算";
+                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "后结算";
                 // 风险交易成本
                 Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().tradText.gameObject.SetActive(true);
                 Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(true);
