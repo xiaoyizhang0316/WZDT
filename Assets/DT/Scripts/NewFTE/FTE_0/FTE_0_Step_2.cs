@@ -13,6 +13,9 @@ public class FTE_0_Step_2 : BaseGuideStep
 
     public Image propBg;
 
+    public List<GameObject> highLight2DObjListOwn;
+    public List<GameObject> ownObjCopy=new List<GameObject>();
+
     public override IEnumerator StepEnd()
     {
         Debug.Log("结束教学 " + currentStepIndex);
@@ -32,6 +35,7 @@ public class FTE_0_Step_2 : BaseGuideStep
             hand1.SetActive(true);
         }
         yield return new WaitForSeconds(1);
+        ShowAllHighlightUIOwn();
         ShowInfos();
     }
 
@@ -60,6 +64,23 @@ public class FTE_0_Step_2 : BaseGuideStep
         if (propBg != null)
         {
             propBg.color = Color.white;
+        }
+    }
+
+    public void ShowAllHighlightUIOwn()
+    {
+       
+        if (highLight2DObjListOwn.Count == 0)
+        {
+            return;
+        }
+        for (int i = 0; i < highLight2DObjListOwn.Count; i++)
+        {
+            GameObject go = Instantiate(highLight2DObjListOwn[i], transform);
+            go.transform.position = highLight2DObjListOwn[i].transform.position;
+            go.transform.SetAsFirstSibling();
+            go.gameObject.SetActive(true);
+            ownObjCopy.Add(go);
         }
     }
 }
