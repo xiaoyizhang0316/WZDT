@@ -7,7 +7,7 @@ public class MapGuideManager : GuideManager
 {
     public override IEnumerator Init()
     {
-        StartCoroutine(OriginalData.My.ReadFTETexts(SceneManager.GetActiveScene().name.Split('_')[1]));
+       // StartCoroutine(OriginalData.My.ReadFTETexts(SceneManager.GetActiveScene().name.Split('_')[1]));
         if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
         {
             FindObjectOfType<CloseGuide>().gameObject.SetActive(false);
