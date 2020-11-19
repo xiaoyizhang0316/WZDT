@@ -69,18 +69,17 @@ public class FTE_0_Step_2 : BaseGuideStep
 
     public void ShowAllHighlightUIOwn()
     {
-       
-        if (highLight2DObjListOwn.Count == 0)
+
+        if (highLight2DObjListOwn.Count != 0)
         {
-            return;
-        }
-        for (int i = 0; i < highLight2DObjListOwn.Count; i++)
-        {
-            GameObject go = Instantiate(highLight2DObjListOwn[i], transform);
-            go.transform.position = highLight2DObjListOwn[i].transform.position;
-            go.transform.SetAsFirstSibling();
-            go.gameObject.SetActive(true);
-            ownObjCopy.Add(go);
+            for (int i = 0; i < highLight2DObjListOwn.Count; i++)
+            {
+                GameObject go = Instantiate(highLight2DObjListOwn[i], transform);
+                go.transform.position = highLight2DObjListOwn[i].transform.position;
+                go.transform.SetAsFirstSibling();
+                go.gameObject.SetActive(true);
+                ownObjCopy.Add(go);
+            }
         }
     }
 }
