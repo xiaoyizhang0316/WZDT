@@ -205,12 +205,22 @@ public class ConsumeSign : MonoBehaviour
         {
             lastHitType = data.bulletType;
             CheckAttackEffect(ref data);
+            CheckProduct(ref data);
             int realDamage = (int)data.damage;
             CheckBulletElement(ref realDamage, data);
             CheckDebuff(data);
             ChangeHealth(realDamage);
             if (transform.TryGetComponent(out Animator ani))
                 ani.SetBool("OnHit", true);
+        }
+    }
+
+    public void CheckProduct(ref ProductData data)
+    {
+        BaseCSB[] buffs = GetComponentsInChildren<BaseCSB>();
+        foreach (var item in buffs)
+        {
+            item.OnProduct(ref data);
         }
     }
 
