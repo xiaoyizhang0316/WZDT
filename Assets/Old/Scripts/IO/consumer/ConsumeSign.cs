@@ -205,12 +205,22 @@ public class ConsumeSign : MonoBehaviour
         {
             lastHitType = data.bulletType;
             CheckAttackEffect(ref data);
+            CheckProduct(ref data);
             int realDamage = (int)data.damage;
             CheckBulletElement(ref realDamage, data);
             CheckDebuff(data);
             ChangeHealth(realDamage);
             if (transform.TryGetComponent(out Animator ani))
                 ani.SetBool("OnHit", true);
+        }
+    }
+
+    public void CheckProduct(ref ProductData data)
+    {
+        BaseCSB[] buffs = GetComponentsInChildren<BaseCSB>();
+        foreach (var item in buffs)
+        {
+            item.OnProduct(ref data);
         }
     }
 
@@ -300,7 +310,7 @@ public class ConsumeSign : MonoBehaviour
             }
             if (PlayerData.My.yingLiMoShi[5])
             {
-                int gold = (int)(num * 0.7f);
+                int gold = (int)(num * 0.3f);
                 StageGoal.My.GetPlayerGold(gold);
                 StageGoal.My.Income(gold, IncomeType.Consume);
             }

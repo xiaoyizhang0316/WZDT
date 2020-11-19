@@ -144,7 +144,7 @@ public class BaseBuff
     /// 产品相关
     /// </summary>
     /// <param name="data"></param>
-    public void OnProduct(ref ProductData data)
+    public virtual void OnProduct(ref ProductData data)
     {
         foreach (string str in buffData.OnProduct)
         {

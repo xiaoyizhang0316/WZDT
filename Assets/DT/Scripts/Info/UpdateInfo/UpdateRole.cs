@@ -29,7 +29,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         int costNumber = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost;
         if (PlayerData.My.guanJianZiYuanNengLi[1])
         {
-            costNumber = costNumber * 80 / 100;
+            costNumber = costNumber * 90 / 100;
         }
         upgradeNumber.text = costNumber.ToString();
     }
@@ -117,7 +117,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         int costNumber = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost;
         if (PlayerData.My.guanJianZiYuanNengLi[1])
         {
-            costNumber = costNumber * 80 / 100;
+            costNumber = costNumber * 90 / 100;
         }
         if (costNumber <= StageGoal.My.playerGold)
         {
