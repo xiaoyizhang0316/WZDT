@@ -50,7 +50,24 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
         risk .text =  CreatRoleManager.My.finalRiskResistance.ToString();
         montyCost.text =  CreatRoleManager.My.finalCost.ToString();
         technology.text = CreatRoleManager.My.finalTechAdd.ToString();
-
+        if (NetworkMgr.My.levelProgressList.Count >=3)
+        {
+            transform.Find("Image_TradCost").gameObject.SetActive(true);
+            transform.Find("Text_TradCost").gameObject.SetActive(true);
+            transform.Find("Text_TradCost").gameObject.SetActive(true);
+            transform.Find("Image_risk").gameObject.SetActive(true);
+            transform.Find("Text_risk").gameObject.SetActive(true);
+            transform.Find("Text_riskchi").gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.Find("Image_TradCost").gameObject.SetActive(false);
+            transform.Find("Text_TradCost").gameObject.SetActive(false);
+            transform.Find("Text_TradCost").gameObject.SetActive(false);
+            transform.Find("Image_risk").gameObject.SetActive(false);
+            transform.Find("Text_risk").gameObject.SetActive(false);
+            transform.Find("Text_riskchi").gameObject.SetActive(false);
+        }
     }
 
     public override void UpdateBar()
