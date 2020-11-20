@@ -76,6 +76,10 @@ public class WinManager : MonoSingleton<WinManager>
     public GameObject effect_3;
 
     public Text scoreInfo;
+
+    public Button tips;
+    
+    
     void AddEquipGear(List<GearData> gearDatas)
     {
         foreach (var g in gearDatas)
@@ -105,6 +109,17 @@ public class WinManager : MonoSingleton<WinManager>
         }
     }
 
+    public void Update()
+    {
+        if (returnMap.interactable)
+        {
+            tips.gameObject.SetActive(false);
+        }
+        else
+        {
+            tips.gameObject.SetActive(true);
+        }
+    }
 
     public void InitWin()
     {
