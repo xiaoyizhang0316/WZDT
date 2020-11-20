@@ -48,11 +48,11 @@ public class OriginalData : MonoSingleton<OriginalData>
         jsonDatas = JsonUtility.FromJson<JsonDatas>(data);
         Debug.Log("---------" + jsonDatas.BuffData);
         
-        ReadBuffJson();
+
         ReadConsumableJson();
         if (!NetworkMgr.My.useLocalJson)
         {
-
+            ReadBuffJson();
             ReadStageJson();
             ReadConsumerTypeJson();
         }
@@ -60,6 +60,7 @@ public class OriginalData : MonoSingleton<OriginalData>
         {
             StartCoroutine(ReadStageData());
             StartCoroutine(ReadConsumerType());
+            StartCoroutine(ReadBuffData());
         }
         ReadRoleTemplateJson();
         ReadTranslateJson();
@@ -283,6 +284,28 @@ public class OriginalData : MonoSingleton<OriginalData>
             {
                 string json = www.text.ToString();
                 questionList = JsonUtility.FromJson<QuestionList>(json);
+            }
+        }
+    }
+
+    IEnumerator ReadBuffData()
+    {
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/BuffData.json");
+        //Debug.Log(@"file://" + Application.streamingAssetsPath + @"/Data/BuffData.json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                buffRawData = JsonUtility.FromJson<BuffsData>(json);
+                //buffRawData = JsonUtility.FromJson<BuffsData>(jsonDatas.BuffData);
+        GameDataMgr.My.ParseBuffData(buffRawData);
             }
         }
     }

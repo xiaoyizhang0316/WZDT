@@ -71,6 +71,8 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public void PlayCurrentIndexGuide()
     {
+        if(!ftegob.activeInHierarchy)
+            ftegob.SetActive(true);
         for (int i = 0; i < baseGuideSteps.Count; i++)
         {
             baseGuideSteps[i].gameObject.SetActive(false);

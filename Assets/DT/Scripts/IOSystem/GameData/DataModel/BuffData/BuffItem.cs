@@ -24,7 +24,7 @@ public class BuffItem
 
     public string BuffDesc;
 
-    public string BuffParam;
+    public string BuffParam = "";
     /// <summary>
     /// 
     /// </summary>
