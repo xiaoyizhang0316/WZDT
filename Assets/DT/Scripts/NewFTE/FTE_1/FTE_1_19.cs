@@ -24,7 +24,7 @@ public class FTE_1_19 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-       
+       ProductDetalUI.My.panel.SetActive(false);
         yield return new WaitForSeconds(0.2f);     
     }
 
@@ -39,6 +39,7 @@ public class FTE_1_19 : BaseGuideStep
         if (StageGoal.My.extraCost.ContainsKey("升级") && StageGoal.My.extraCost["升级"] >= 10)
         {
             Debug.Log("正确返回");
+            NewCanvasUI.My.Panel_Update.SetActive(false);
             return true;
         }
         else
