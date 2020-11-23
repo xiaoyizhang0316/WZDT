@@ -91,7 +91,7 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     /// <param name="_isEquiped"></param>
     public void Init(int id, bool _isEquiped)
     {
-        if (NetworkMgr.My.levelProgressList.Count >= 4)
+        if (NetworkMgr.My.levelProgressList.Count >=3)
         {
             LevelUI.SetActive(true);
         }

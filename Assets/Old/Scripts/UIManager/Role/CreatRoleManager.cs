@@ -340,6 +340,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             finalTechAdd += tempData.techAdd;
+            finalCost +=(int)(tempData.cost * costAdd);
             CurrentRole.workerCost += tempData.cost;
         }
         FinalCheck();

@@ -71,7 +71,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void Init(int id, bool Occupation)
     {
         ID = id;
-        if (NetworkMgr.My.levelProgressList.Count >= 4)
+        if (NetworkMgr.My.levelProgressList.Count >=3)
         {
             levelUI.SetActive(true);
         }

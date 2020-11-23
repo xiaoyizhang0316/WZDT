@@ -7,7 +7,7 @@ public class ToFTE0 : MonoBehaviour
 {
     public void LoadFTE0()
     {
-        SceneManager.LoadScene("FTE_0-2");
+        SceneManager.LoadScene("FTE_0-1");
 
     }
 
