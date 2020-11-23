@@ -11,7 +11,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// <summary>
     /// 所有交易的列表
     /// </summary>
-    public Dictionary<int, TradeSign> tradeList;
+    public Dictionary<int, TradeSign> tradeList=new Dictionary<int, TradeSign>();
 
     /// <summary>
     /// 删除指定ID的交易
