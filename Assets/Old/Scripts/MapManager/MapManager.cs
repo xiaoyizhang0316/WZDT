@@ -205,7 +205,25 @@ public class MapManager : MonoSingleton<MapManager>
     public void ReadStageNPCData(string sceneName)
     {
         //TODO
-        string json = OriginalData.My.jsonDatas.GetLevelData(sceneName, true);
+        string json;
+        if (!NetworkMgr.My.useLocalJson)
+        {
+            json = OriginalData.My.jsonDatas.GetLevelData(sceneName, true);
+        }
+        else
+        {
+            WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/StageNPC/" + sceneName + ".json");
+            while(true)
+            {
+                if (www.isDone)
+                {
+                    json = www.text.ToString();
+                    break;
+                }
+            }
+            
+        }
+
         //Debug.Log("+++++++++" + json);
         StageNPCsData stageNPCsData = JsonUtility.FromJson< StageNPCsData >(json );
         //Debug.Log("============" + stageNPCsData.stageNPCItems.Count);

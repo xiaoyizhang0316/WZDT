@@ -55,14 +55,16 @@ public class OriginalData : MonoSingleton<OriginalData>
             ReadBuffJson();
             ReadStageJson();
             ReadConsumerTypeJson();
+            ReadRoleTemplateJson();
         }
         else
         {
             StartCoroutine(ReadStageData());
             StartCoroutine(ReadConsumerType());
             StartCoroutine(ReadBuffData());
+            StartCoroutine(ReadRoleTemplateData());
         }
-        ReadRoleTemplateJson();
+
         ReadTranslateJson();
         ReadEquipJson();
         ReadWorkerJson();
@@ -352,5 +354,27 @@ public class OriginalData : MonoSingleton<OriginalData>
         }
         //consumerTypeRawData = JsonUtility.FromJson<ConsumerTypesData>(jsonDatas.ConsumerTypeData);
         //GameDataMgr.My.ParseConsumerTypeData(consumerTypeRawData);
+    }
+
+    IEnumerator ReadRoleTemplateData()
+    {
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/RoleTemplateData.json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                roleTemplateRawData = JsonUtility.FromJson<RoleTemplateModelsData>(json);
+                GameDataMgr.My.ParseRoleTemplateData(roleTemplateRawData);
+            }
+        }
+        //roleTemplateRawData = JsonUtility.FromJson<RoleTemplateModelsData>(jsonDatas.RoleTemplateData);
+        GameDataMgr.My.ParseRoleTemplateData(roleTemplateRawData);
     }
 }
