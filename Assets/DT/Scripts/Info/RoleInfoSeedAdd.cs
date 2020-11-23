@@ -54,7 +54,7 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
         {
             transform.Find("Image_TradCost").gameObject.SetActive(true);
             transform.Find("Text_TradCost").gameObject.SetActive(true);
-            transform.Find("Text_TradCost").gameObject.SetActive(true);
+            transform.Find("Text_Trad").gameObject.SetActive(true);
             transform.Find("Image_risk").gameObject.SetActive(true);
             transform.Find("Text_risk").gameObject.SetActive(true);
             transform.Find("Text_riskchi").gameObject.SetActive(true);
@@ -63,7 +63,7 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
         {
             transform.Find("Image_TradCost").gameObject.SetActive(false);
             transform.Find("Text_TradCost").gameObject.SetActive(false);
-            transform.Find("Text_TradCost").gameObject.SetActive(false);
+            transform.Find("Text_Trad").gameObject.SetActive(false);
             transform.Find("Image_risk").gameObject.SetActive(false);
             transform.Find("Text_risk").gameObject.SetActive(false);
             transform.Find("Text_riskchi").gameObject.SetActive(false);
