@@ -133,7 +133,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(false);
                 Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().tradText.gameObject.SetActive(false);
                 Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().tradText.gameObject.SetActive(false);
-            break;
+                CreateTradeManager.My.startRolePanel.gameObject.SetActive(false);
+                CreateTradeManager.My.endRolePanel.gameObject.SetActive(false);
+                CreateTradeManager.My.divideSlider.gameObject.SetActive(false);
+                break;
             case 1:
                 Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
                 Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled= false;
@@ -144,7 +147,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(false);
                 Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().tradText.gameObject.SetActive(false);
                 Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().tradText.gameObject.SetActive(false);
-
+                CreateTradeManager.My.startRolePanel.gameObject.SetActive(false);
+                CreateTradeManager.My.endRolePanel.gameObject.SetActive(false);
+                CreateTradeManager.My.divideSlider.gameObject.SetActive(false);
            break;     
             case 2:
                 //装备
@@ -154,6 +159,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled = false;
                 Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
                 Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
+                CreateTradeManager.My.startRolePanel.gameObject.SetActive(false);
+                CreateTradeManager.My.endRolePanel.gameObject.SetActive(false);
+                CreateTradeManager.My.divideSlider.gameObject.SetActive(false);
                // 风险交易成本
                 Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().tradText.gameObject.SetActive(false);
                 Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(false);
@@ -169,6 +177,9 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled= true;
                 Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "先结算";
                 Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "后结算";
+                CreateTradeManager.My.startRolePanel.gameObject.SetActive(true);
+                CreateTradeManager.My.endRolePanel.gameObject.SetActive(true);
+                CreateTradeManager.My.divideSlider.gameObject.SetActive(true);
                 // 风险交易成本
                 Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().tradText.gameObject.SetActive(true);
                 Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(true);

@@ -46,11 +46,15 @@ public class DarkEffect : MonoBehaviour
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        if (_itemDatas == null || _itemDatas.Length != _items.Count)
+        //if (_itemDatas == null || _itemDatas.Length != _items.Count)
+        //{
+        //    _itemDatas = new Vector4[_items.Count];
+        //}
+        if (_itemDatas == null)
         {
             _itemDatas = new Vector4[_items.Count];
         }
-//       Debug.Log(_itemDatas.Length +"_itemDatas.Length "+_items.Count+"_items.Count" );
+        //       Debug.Log(_itemDatas.Length +"_itemDatas.Length "+_items.Count+"_items.Count" );
         _tmpScreenHeight = Screen.height;
         for (int i = 0; i < _items.Count; i++)
         {
