@@ -231,7 +231,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         }
 
         NewCanvasUI.My.Panel_Update.transform.localPosition = Vector3.one;
-        NewCanvasUI.My.Panel_Update.SetActive(false);
+        NewCanvasUI.My.Panel_Update.SetActive(false); 
+        NewCanvasUI.My.Panel_NPC.transform.localPosition=new Vector3(0,0,0); 
+        NewCanvasUI.My.Panel_NPC.SetActive(false);
+       
         if (guideClose != null)
             guideClose.gameObject.SetActive(false);
     }
