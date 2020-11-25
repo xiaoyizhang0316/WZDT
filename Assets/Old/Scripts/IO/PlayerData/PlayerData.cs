@@ -38,17 +38,17 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// </summary>
     public List<PlayerConsumable> playerConsumables = new List<PlayerConsumable>();
 
-    public List<bool> dingWei = new List<bool>{ true, true, true, true, true, true };
+    public List<bool> dingWei = new List<bool>{ false, false, false, false, false, false };
 
-    public List<bool> yeWuXiTong = new List<bool> { true, true, true, true, true, true };
+    public List<bool> yeWuXiTong = new List<bool> { false, false, false, false, false, false };
 
-    public List<bool> guanJianZiYuanNengLi = new List<bool> { true, true, true, true, false, true };
+    public List<bool> guanJianZiYuanNengLi = new List<bool> { false, false, false, false, false, false };
 
-    public List<bool> yingLiMoShi = new List<bool> { true, true, true, true, true, true };
+    public List<bool> yingLiMoShi = new List<bool> { false, false, false, false, false, false };
 
-    public List<bool> xianJinLiu = new List<bool> { true, true, true, true, true, true };
+    public List<bool> xianJinLiu = new List<bool> { false, false, false, false, false, false };
 
-    public List<bool> qiYeJiaZhi = new List<bool> { true, true, true, true, true, true };
+    public List<bool> qiYeJiaZhi = new List<bool> { false, false, false, false, false, false };
 
     public List<bool> isOneFinish = new List<bool> { false, false, false, false, false, false };
 
