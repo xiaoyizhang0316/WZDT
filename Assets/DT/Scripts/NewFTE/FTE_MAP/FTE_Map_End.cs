@@ -46,7 +46,7 @@ public class FTE_Map_End : BaseGuideStep
     void EndInvoke()
     {
         string[] arr = NetworkMgr.My.playerDatas.unlockStatus.Split('_');
-        arr[4] = "1";
+        arr[3 ]= "1";
         string newStatus = "1";
         for (int i = 1; i < arr.Length; i++)
         {
