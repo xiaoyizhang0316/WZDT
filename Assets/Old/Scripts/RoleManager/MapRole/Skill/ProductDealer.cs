@@ -20,6 +20,10 @@ public class ProductDealer : BaseSkill
                 CancelSkill();
                 return;
             }
+            if (role.encourageLevel <= -3)
+            {
+                return;
+            }
             ProductData data = role.warehouse[0];
             role.warehouse.RemoveAt(0);
             for (int i = 0; i < role.GetEquipBuffList().Count; i++)
