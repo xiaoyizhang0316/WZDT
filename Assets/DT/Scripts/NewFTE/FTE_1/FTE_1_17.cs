@@ -42,8 +42,6 @@ public class FTE_1_17 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
- 
-        
         yield break;
     }
 
