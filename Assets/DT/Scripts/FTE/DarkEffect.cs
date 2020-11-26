@@ -50,10 +50,10 @@ public class DarkEffect : MonoBehaviour
         //{
         //    _itemDatas = new Vector4[_items.Count];
         //}
-        if (_itemDatas == null)
-        {
+        //if (_itemDatas == null)
+        //{
             _itemDatas = new Vector4[_items.Count];
-        }
+        //}
         //       Debug.Log(_itemDatas.Length +"_itemDatas.Length "+_items.Count+"_items.Count" );
         _tmpScreenHeight = Screen.height;
         for (int i = 0; i < _items.Count; i++)
