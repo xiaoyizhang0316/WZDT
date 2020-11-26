@@ -20,6 +20,10 @@ public class ProductSeed : BaseSkill
         {
             return;
         }
+        if (role.encourageLevel <= -3)
+        {
+            return;
+        }
         //Debug.Log("产种子");
         ProductData data = new ProductData();
         data.buffList = new List<int>();

@@ -16,6 +16,10 @@ public class ProductMelon : BaseSkill
         {
             return;
         }
+        if (role.encourageLevel <= -3)
+        {
+            return;
+        }
         if (role.warehouse.Count > 0 && role.warehouse[0].bulletType == BulletType.Seed)
         {
             ProductData data = role.warehouse[0];

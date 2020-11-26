@@ -116,6 +116,8 @@ public class BaseMapRole : MonoBehaviour
 
     public GameObject emptyGearSprite;
 
+    public GameObject stopWorkSprite;
+
     public bool isSell = false;
 
     public void InitBaseRoleData()
@@ -1021,10 +1023,29 @@ public class BaseMapRole : MonoBehaviour
                     emptyGearSprite.SetActive(false);
                 }
             }
+            if (stopWorkSprite != null)
+            {
+                if (encourageLevel <= -3)
+                {
+                    stopWorkSprite.gameObject.SetActive(true);
+                }
+                else
+                {
+                    stopWorkSprite.gameObject.SetActive(false);
+                }
+            }
         }
-        else if (!isNpc)
+        else
         {
-            emptyGearSprite.SetActive(false);
+            if (!isNpc)
+            {
+                emptyGearSprite.SetActive(false);
+            }
+            if (stopWorkSprite != null)
+            {
+                stopWorkSprite.gameObject.SetActive(false);
+            }
+
         }
     }
 }
