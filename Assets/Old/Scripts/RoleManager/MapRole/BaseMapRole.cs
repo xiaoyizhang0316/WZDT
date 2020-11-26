@@ -1025,7 +1025,7 @@ public class BaseMapRole : MonoBehaviour
             }
             if (stopWorkSprite != null)
             {
-                if (encourageLevel <= -3)
+                if (encourageLevel <= -3 && !(isNpc && npcScript.isLock))
                 {
                     stopWorkSprite.gameObject.SetActive(true);
                 }
