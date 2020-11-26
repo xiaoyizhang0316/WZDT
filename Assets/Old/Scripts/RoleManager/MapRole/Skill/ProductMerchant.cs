@@ -22,6 +22,10 @@ public class ProductMerchant : BaseSkill
         {
             return;
         }
+        if (role.encourageLevel <= -3)
+        {
+            return;
+        }
         if (role.warehouse.Count > 0)
         {
             try
