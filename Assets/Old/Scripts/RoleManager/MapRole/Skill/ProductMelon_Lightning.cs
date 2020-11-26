@@ -43,6 +43,10 @@ public class ProductMelon_Lightning : BaseSkill
         {
             return;
         }
+        if (role.encourageLevel <= -3)
+        {
+            return;
+        }
         int numberNeed = 3;
         if (PlayerData.My.dingWei[5])
         {

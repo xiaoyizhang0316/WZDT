@@ -27,6 +27,10 @@ public class ProductMelon_Summon : BaseSkill
         {
             return;
         }
+        if (role.encourageLevel <= -3)
+        {
+            return;
+        }
         int numberNeed = 5;
         if (PlayerData.My.dingWei[5])
         {

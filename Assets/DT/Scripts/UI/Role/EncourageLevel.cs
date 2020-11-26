@@ -41,7 +41,13 @@ public class EncourageLevel : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
             }
             else if (role.encourageLevel < 0)
             {
+
                 showStr = "激励等级" + role.encourageLevel.ToString() + " 角色的生产速率降低" + (role.encourageLevel * -10).ToString("##.##") + "%,交易成本降低" + (role.encourageLevel * 5).ToString();
+                if (role.encourageLevel <= -3)
+                {
+                    levelText.color = Color.red;
+                    showStr = "激励等级" + role.encourageLevel.ToString() + " 角色停止生产!,交易成本降低" + (role.encourageLevel * 5).ToString();
+                }
             }
         }
     }
