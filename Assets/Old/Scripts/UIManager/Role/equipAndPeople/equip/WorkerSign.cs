@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler 
@@ -71,7 +72,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void Init(int id, bool Occupation)
     {
         ID = id;
-        if (NetworkMgr.My.levelProgressList.Count >=3)
+        if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) >3)
         {
             levelUI.SetActive(true);
         }
