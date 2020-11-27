@@ -232,7 +232,7 @@ public class TradeSign : MonoBehaviour
             if (PlayerData.My.yeWuXiTong[2])
             {
                 int number = UnityEngine.Random.Range(0, 101);
-                if (number > 20)
+                if (number > 10)
                 {
                     int cost = CalculateTC();
                     countNumber = 0;
@@ -328,8 +328,8 @@ public class TradeSign : MonoBehaviour
                 }
                 if (count <= 3)
                 {
-                    result1 = result1 * 80 / 100;
-                    result2 = result2 * 80 / 100;
+                    result1 = result1 * 90 / 100;
+                    result2 = result2 * 90 / 100;
                 }
             }
         }
@@ -343,7 +343,7 @@ public class TradeSign : MonoBehaviour
             result = result2;
             if (PlayerData.My.xianJinLiu[1])
             {
-                result = result * 80 / 100;
+                result = result * 95 / 100;
             }
         }
         else
@@ -352,7 +352,7 @@ public class TradeSign : MonoBehaviour
         }
         if (PlayerData.My.xianJinLiu[0])
         {
-            result = result * 90 / 100;
+            result = result * 95 / 100;
         }
         if (isOutTrade && PlayerData.My.qiYeJiaZhi[5])
         {

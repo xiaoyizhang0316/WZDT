@@ -100,7 +100,7 @@ public abstract class BaseNpc : MonoBehaviour
         BaseInit();
         if(PlayerData.My.yeWuXiTong[0])
         {
-            lockNumber = lockNumber * 80 / 100;
+            lockNumber = lockNumber * 90 / 100;
         }
     }
 

@@ -203,7 +203,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         role.baseRoleData.effect = mapRole.baseRoleData.effect;
         role.baseRoleData.efficiency = mapRole.baseRoleData.efficiency;
         role.baseRoleData.range = mapRole.baseRoleData.range;
-        role.baseRoleData.tradeCost = mapRole.baseRoleData.tradeCost + mapRole.baseRoleData.cost * 50 / 100;
+        role.baseRoleData.tradeCost = mapRole.baseRoleData.tradeCost + mapRole.baseRoleData.cost * 40 / 100;
         role.baseRoleData.riskResistance = mapRole.baseRoleData.riskResistance;
         role.baseRoleData.baseRoleData.level = mapRole.baseRoleData.baseRoleData.level;
         role.baseRoleData.baseRoleData.roleName = mapRole.baseRoleData.baseRoleData.roleName;
