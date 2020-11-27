@@ -282,7 +282,7 @@ public class LevelSign : MonoBehaviour
                     {
                         transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
                     }
-                    if (levelID != 1&& levelID!=2&& levelID != 5)
+                    if (levelID != 1&& levelID!=2&& levelID != 4)
                     {
                         //Debug.Log("update status");
                         NetworkMgr.My.UpdateUnlockStatus(newStatus);
