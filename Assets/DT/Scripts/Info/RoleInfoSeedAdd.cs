@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RoleInfoSeedAdd : BaseRoleInfoAdd
@@ -50,7 +51,7 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
         risk .text =  CreatRoleManager.My.finalRiskResistance.ToString();
         montyCost.text =  CreatRoleManager.My.finalCost.ToString();
         technology.text = CreatRoleManager.My.finalTechAdd.ToString();
-        if (NetworkMgr.My.levelProgressList.Count >=3)
+        if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) >3)
         {
             transform.Find("Image_TradCost").gameObject.SetActive(true);
             transform.Find("Text_TradCost").gameObject.SetActive(true);

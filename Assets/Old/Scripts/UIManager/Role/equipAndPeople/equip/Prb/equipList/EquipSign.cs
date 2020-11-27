@@ -5,6 +5,7 @@ using DG.Tweening;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -91,7 +92,7 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     /// <param name="_isEquiped"></param>
     public void Init(int id, bool _isEquiped)
     {
-        if (NetworkMgr.My.levelProgressList.Count >=3)
+        if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1])  >3)
         {
             LevelUI.SetActive(true);
         }
