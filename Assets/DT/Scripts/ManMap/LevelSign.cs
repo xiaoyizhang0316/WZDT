@@ -321,31 +321,32 @@ public class LevelSign : MonoBehaviour
                 {
                     transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
                 }
-            }
-
-            if (levelID == 5)
-            {
-                // 判断开启天赋教学
-                if (NetworkMgr.My.playerDatas.unlockStatus.Split('_')[levelID - 1].Equals("0"))
+                if (levelID == 4)
                 {
-                    // 开启教学
-                    //GuideManager.My.currentGuideIndex = 2;
-                    MapGuideManager.My.GetComponent<MapObject>().openCG.SetActive(true);
-                    // 上传关卡解锁状态
-                    //string[] arr = NetworkMgr.My.playerDatas.unlockStatus.Split('_');
-                    //arr[levelID - 1] = "1";
-                    //string newStatus = "1";
-                    //for (int i = 1; i < arr.Length; i++)
-                    //{
-                    //    newStatus += "_"+arr[i];
-                    //}
-                    //NetworkMgr.My.UpdateUnlockStatus(newStatus, () => {
-                        
-                    //}, () => {
-                    //    HttpManager.My.ShowTip("解锁关卡出错");
-                    //});
+                    // 判断开启天赋教学
+                    if (NetworkMgr.My.playerDatas.unlockStatus.Split('_')[levelID - 1].Equals("0"))
+                    {
+                        // 开启教学
+                        //GuideManager.My.currentGuideIndex = 2;
+                        MapGuideManager.My.GetComponent<MapObject>().openCG.SetActive(true);
+                        // 上传关卡解锁状态
+                        //string[] arr = NetworkMgr.My.playerDatas.unlockStatus.Split('_');
+                        //arr[levelID - 1] = "1";
+                        //string newStatus = "1";
+                        //for (int i = 1; i < arr.Length; i++)
+                        //{
+                        //    newStatus += "_"+arr[i];
+                        //}
+                        //NetworkMgr.My.UpdateUnlockStatus(newStatus, () => {
+
+                        //}, () => {
+                        //    HttpManager.My.ShowTip("解锁关卡出错");
+                        //});
+                    }
                 }
             }
+
+            
         }
         LevelButton.onClick.RemoveAllListeners();
         LevelButton.onClick.AddListener(Init);

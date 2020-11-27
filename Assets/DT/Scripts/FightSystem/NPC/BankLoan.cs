@@ -52,7 +52,7 @@ public class BankLoan : BaseExtraSkill
     private new void Start()
     {
         base.Start();
-        if (PlayerData.My.yeWuXiTong[1])
+        if (PlayerData.My.yingLiMoShi[2])
         {
             var buff = GameDataMgr.My.GetBuffDataByID(10053);
             BaseBuff baseb = new BaseBuff();
