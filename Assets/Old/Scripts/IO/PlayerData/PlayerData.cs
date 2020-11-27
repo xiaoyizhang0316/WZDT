@@ -67,6 +67,8 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     //是否是单人模式
     public bool isSOLO = true;
+    
+    
     /// <summary>
     /// 通过名字获得Role信息
     /// </summary>
