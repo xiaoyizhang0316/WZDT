@@ -304,7 +304,7 @@ public class ConsumeSign : MonoBehaviour
         {
             List<ConsumerType> lists = new List<ConsumerType> { ConsumerType.OldpaoLegendary,ConsumerType.GoldencollarLegendary,ConsumerType.EliteLegendary,
                 ConsumerType.BluecollarLegendary,ConsumerType.WhitecollarLegendary};
-            if (lists.Contains(consumerType) && PlayerData.My.dingWei[4])
+            if (lists.Contains(consumerType) && PlayerData.My.dingWei[3])
             {
                 num = num * 120 / 100;
             }
