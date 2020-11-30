@@ -115,8 +115,8 @@ public class NetManager : MonoSingleton<NetManager>
             target.baseRoleData.level + 1);
         target.CalculateAllAttribute();
         target.baseRoleData.roleName = str.Split(',')[1];
+        PlayerData.My.GetMapRoleById(target.ID).ReaddAllBuff();
         PlayerData.My.GetMapRoleById(target.ID).RecalculateEncourageLevel();
-        PlayerData.My.GetMapRoleById(target.ID).ResetAllBuff();
         PlayerData.My.GetMapRoleById(target.ID).roleSprite.ActiveRoleEffect(2);
     }
 
@@ -192,7 +192,7 @@ public class NetManager : MonoSingleton<NetManager>
         target.tradeCost = finalTradeCost;
         target.bulletCapacity = finalBulletCapacity;
         target.techAdd = finalTechAdd;
-        PlayerData.My.GetMapRoleById(target.ID).ResetAllBuff();
+        PlayerData.My.GetMapRoleById(target.ID).ReaddAllBuff();
         PlayerData.My.GetMapRoleById(target.ID).roleSprite.ActiveRoleEffect(1);
     }
 

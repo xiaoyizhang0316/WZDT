@@ -474,7 +474,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                 DataUploadManager.My.AddData(DataEnum.装备_增加);
             }    
         }
-        PlayerData.My.GetMapRoleById(CurrentRole.ID).ResetAllBuff();
+        PlayerData.My.GetMapRoleById(CurrentRole.ID).ReaddAllBuff();
         WorkerListManager.My.QuitAndSave();
         EquipListManager.My.QuitAndSave();
         ChangeRoleRecord(CurrentRole);
