@@ -612,7 +612,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     private void Start()
     {
         NetManager.My.Init();
-        Time.maximumDeltaTime = 0.02f;
+        //Time.maximumDeltaTime = 0.02f;
     }
     
     #region 玩家权限
