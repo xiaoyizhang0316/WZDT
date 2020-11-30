@@ -165,8 +165,8 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 RoleUpdateInfo.My.currentRole.baseRoleData.level + 1);
             RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
             RoleUpdateInfo.My.currentRole.baseRoleData.roleName = RoleUpdateInfo.My.roleName;
+            PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ReaddAllBuff();
             PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).RecalculateEncourageLevel();
-            PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ResetAllBuff();
             PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).totalUpgradeCost += costNumber;
             RoleUpdateInfo.My.Init(RoleUpdateInfo.My.currentRole);
             tew = hammer.transform.DOLocalRotate(new Vector3(0, 0, -42f), 0.3f).SetEase(Ease.InOutBack).OnComplete(() =>
