@@ -51,7 +51,7 @@ public class BaikeItem : MonoBehaviour
 
     public void Show()
     {
-        SoftFTE.My.InitMap(type);
+        SoftFTE.My.Init(type);
         BaikePanel.My.Hide();
     }
 }
