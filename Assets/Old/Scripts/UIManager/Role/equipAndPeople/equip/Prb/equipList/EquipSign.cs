@@ -203,7 +203,6 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         if (Input.GetMouseButton(1))
             return;
-        Debug.Log(time);
         time += Time.deltaTime;
         if (Equip == null || isOccupation)
         {

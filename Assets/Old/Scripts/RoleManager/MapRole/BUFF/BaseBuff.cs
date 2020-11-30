@@ -495,6 +495,13 @@ public class BaseBuff
         }
     }
 
+    public void ReaddRoleBuff()
+    {
+        foreach (string str in buffData.OnBuffAdd)
+        {
+            CheckRoleNumber(str);
+        }
+    }
 
     #region 具体计算（三个重载）
 

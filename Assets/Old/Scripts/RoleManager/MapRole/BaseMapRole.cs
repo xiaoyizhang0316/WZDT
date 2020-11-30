@@ -396,6 +396,14 @@ public class BaseMapRole : MonoBehaviour
         }
     }
 
+    public void ReaddAllBuff()
+    {
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            buffList[i].ReaddRoleBuff();
+        }
+    }
+
     /// <summary>
     /// 当濒临破产时
     /// </summary>
