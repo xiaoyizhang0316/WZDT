@@ -16,6 +16,7 @@ public class BaikeItem : MonoBehaviour
     {
         isFound = _isFound;
         type = _type;
+        GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + _type.ToString() + "1");
         if (isFound)
         {
             typeName.text = InitName(_type);
@@ -51,7 +52,7 @@ public class BaikeItem : MonoBehaviour
 
     public void Show()
     {
-        SoftFTE.My.InitMap(type);
+        SoftFTE.My.Init(type);
         BaikePanel.My.Hide();
     }
 }
