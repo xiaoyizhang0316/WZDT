@@ -85,9 +85,12 @@ public class MakeGroupPanel : MonoSingleton<MakeGroupPanel>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            Show();
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                Show();
+            }
         }
     }
 }
