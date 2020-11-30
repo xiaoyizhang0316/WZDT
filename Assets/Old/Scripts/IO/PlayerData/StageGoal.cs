@@ -1061,9 +1061,12 @@ public class StageGoal : MonoSingleton<StageGoal>
             //    DOTween.timeScale = 16f;
             //    DOTween.defaultAutoPlay = AutoPlay.All;
             //}
-            if (Input.GetKeyDown(KeyCode.Y))
+            if (Input.GetKey(KeyCode.DownArrow))
             {
-                Win();
+                if (Input.GetKeyDown(KeyCode.Y))
+                {
+                    Win();
+                }    
             }
             //if (Input.GetKeyDown(KeyCode.M))
             //{
