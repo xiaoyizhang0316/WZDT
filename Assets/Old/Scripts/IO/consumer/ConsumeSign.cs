@@ -310,7 +310,7 @@ public class ConsumeSign : MonoBehaviour
             }
             if (PlayerData.My.yingLiMoShi[5])
             {
-                int gold = (int)(num * 0.3f);
+                int gold = (int)(num * 0.45f);
                 StageGoal.My.GetPlayerGold(gold);
                 StageGoal.My.Income(gold, IncomeType.Consume);
             }
