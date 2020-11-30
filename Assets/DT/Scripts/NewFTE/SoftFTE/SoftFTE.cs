@@ -27,6 +27,16 @@ public class SoftFTE : MonoSingleton<SoftFTE>
         SoftFTEStart();
     }
 
+    public void InitMap(RoleType type)
+    {
+        currentIndex = 0;
+        for (int i = 0; i < softList.Count; i++)
+        {
+            softList[i].Init(type);
+        }
+        SoftFTEMapStart();
+    }
+
     /// <summary>
     /// 执行下一步
     /// </summary>
@@ -55,6 +65,13 @@ public class SoftFTE : MonoSingleton<SoftFTE>
         Invoke("PlayNext", 1f);
     }
 
+    public void SoftFTEMapStart()
+    {
+        softFTEObj.SetActive(true);
+        CameraPlay.WidescreenH_ON(Color.black, 1);
+        Invoke("PlayNext", 1f);
+    }
+
     /// <summary>
     /// 软引导结束
     /// </summary>
@@ -63,7 +80,7 @@ public class SoftFTE : MonoSingleton<SoftFTE>
         CameraPlay.WidescreenH_OFF();
         transform.DOScale(transform.localScale, 1).OnComplete(() =>
         {
-            NewCanvasUI.My.GameNormal();
+            //NewCanvasUI.My.GameNormal();
             softFTEObj.SetActive(false);
         }).Play();
         NetworkMgr.My.UpdateRoleFound();
