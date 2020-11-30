@@ -756,4 +756,15 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         }
         return useCount + "_" + playerWorkers.Count;
     }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                Screen.SetResolution(1920, 1080, true);
+            }
+        }
+    }
 }
