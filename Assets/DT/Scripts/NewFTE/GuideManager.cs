@@ -245,6 +245,12 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         PlayCurrentIndexGuide();
     }
 
+    public void PlayLastIndexGuide()
+    {
+        currentGuideIndex--;
+        PlayCurrentIndexGuide();
+    }
+
     // Update is called once per frame
     void Update()
     {
