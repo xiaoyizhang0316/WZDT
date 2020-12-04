@@ -612,6 +612,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     private void Start()
     {
         NetManager.My.Init();
+        //Application.targetFrameRate = 60;
         //Time.maximumDeltaTime = 0.02f;
     }
     
