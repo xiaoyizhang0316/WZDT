@@ -40,7 +40,7 @@ public class MoveBetweenTwoPoint : BaseTween
     public override void Move()
     {
         float yOffset = 16f * Screen.height / 9f / Screen.width;
-        Debug.Log(yOffset);
+        
         GetComponent<RectTransform>().DOAnchorPos(new Vector2(endX, endY ), tweTime).SetEase(Ease.Linear).OnComplete(() =>
         {
             GetComponent<Image>().DOFade(0f, 0f).Play();
