@@ -27,6 +27,7 @@ public class OriginalData : MonoSingleton<OriginalData>
 
     public QuestionList questionList;
 
+    public FTEData fteData;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,7 @@ public class OriginalData : MonoSingleton<OriginalData>
         //StartCoroutine(ReadRoleTemplateJson());
         //StartCoroutine(ReadConsumerTypeJson());
         //StartCoroutine(ReadTranslateJson());
-        StartCoroutine(ReadQuestionList());
+        StartCoroutine(ReadQuestionList()); 
 
     }
 
@@ -47,20 +48,23 @@ public class OriginalData : MonoSingleton<OriginalData>
         jsonDatas = JsonUtility.FromJson<JsonDatas>(data);
         Debug.Log("---------" + jsonDatas.BuffData);
         
-        ReadBuffJson();
+
         ReadConsumableJson();
         if (!NetworkMgr.My.useLocalJson)
         {
-
+            ReadBuffJson();
             ReadStageJson();
             ReadConsumerTypeJson();
+            ReadRoleTemplateJson();
         }
         else
         {
             StartCoroutine(ReadStageData());
             StartCoroutine(ReadConsumerType());
+            StartCoroutine(ReadBuffData());
+            StartCoroutine(ReadRoleTemplateData());
         }
-        ReadRoleTemplateJson();
+
         ReadTranslateJson();
         ReadEquipJson();
         ReadWorkerJson();
@@ -87,6 +91,26 @@ public class OriginalData : MonoSingleton<OriginalData>
         GameDataMgr.My.ParseBuffData(buffRawData);
         //    }
         //}
+    }
+
+
+  public   IEnumerator    ReadFTETexts(string sceneindex)
+    {
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/FTEText_"+sceneindex+".json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                fteData = JsonUtility.FromJson<FTEData>(json);
+            }
+        }
     }
 
     void ReadConsumableJson()
@@ -266,6 +290,28 @@ public class OriginalData : MonoSingleton<OriginalData>
         }
     }
 
+    IEnumerator ReadBuffData()
+    {
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/BuffData.json");
+        //Debug.Log(@"file://" + Application.streamingAssetsPath + @"/Data/BuffData.json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                buffRawData = JsonUtility.FromJson<BuffsData>(json);
+                //buffRawData = JsonUtility.FromJson<BuffsData>(jsonDatas.BuffData);
+        GameDataMgr.My.ParseBuffData(buffRawData);
+            }
+        }
+    }
+
     IEnumerator ReadStageData()
     {
         WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/StageData.json");
@@ -308,5 +354,27 @@ public class OriginalData : MonoSingleton<OriginalData>
         }
         //consumerTypeRawData = JsonUtility.FromJson<ConsumerTypesData>(jsonDatas.ConsumerTypeData);
         //GameDataMgr.My.ParseConsumerTypeData(consumerTypeRawData);
+    }
+
+    IEnumerator ReadRoleTemplateData()
+    {
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/RoleTemplateData.json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                roleTemplateRawData = JsonUtility.FromJson<RoleTemplateModelsData>(json);
+                GameDataMgr.My.ParseRoleTemplateData(roleTemplateRawData);
+            }
+        }
+        //roleTemplateRawData = JsonUtility.FromJson<RoleTemplateModelsData>(jsonDatas.RoleTemplateData);
+        GameDataMgr.My.ParseRoleTemplateData(roleTemplateRawData);
     }
 }

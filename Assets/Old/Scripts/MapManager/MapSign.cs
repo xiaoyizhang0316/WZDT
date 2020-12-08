@@ -27,6 +27,8 @@ public class MapSign : MonoBehaviour, IDragHandler
 
 
     public int weighting;
+
+    public bool isNearWater;
     // Start is called before the first frame update
     private void Awake()
     {

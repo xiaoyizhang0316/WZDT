@@ -42,6 +42,8 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     public GameObject levelupPrb;
     public GameObject changeEquipPrb;
     public GameObject changeTradePrb;
+
+    public Transform content;
     public void ShowCurrentReview(int index)
     {
         if (this.index == index)
@@ -50,6 +52,8 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         }
 
         this.index = index;
+        
+        
         ClearRolesLines();
 
         CreatRoles();
@@ -63,6 +67,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         CreatEffect();
     }
 
+  
 
     public ReviewPanel.ReviewRole GetRoleByMapRoles(double ID)
     {
@@ -119,7 +124,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             }
         }
 
-        if (type == GameEnum.RoleType.Peasant)
+     else   if (type == GameEnum.RoleType.Peasant)
         {
             for (int i = 0; i < peasant.childCount; i++)
             {
@@ -131,11 +136,11 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             }
         }
 
-        if (type == GameEnum.RoleType.CutFactory || type == GameEnum.RoleType.CanFactory ||
+      else  if (type == GameEnum.RoleType.CutFactory || type == GameEnum.RoleType.CanFactory ||
             type == GameEnum.RoleType.CrispFactory || type == GameEnum.RoleType.JuiceFactory ||
             type == GameEnum.RoleType.PackageFactory || type == GameEnum.RoleType.SweetFactory ||
             type == GameEnum.RoleType.WholesaleFactory || type == GameEnum.RoleType.SoftFactory ||
-            type == GameEnum.RoleType.Merchant
+            type == GameEnum.RoleType.Merchant  
         )
 
         {
@@ -149,8 +154,9 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             }
         }
 
-        if (type == GameEnum.RoleType.Dealer)
-        {
+     else   if (type == GameEnum.RoleType.Dealer)
+        { 
+
             for (int i = 0; i < dealer.childCount; i++)
             {
                 if (!dealer.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
@@ -159,10 +165,10 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                     return dealer.GetChild(i).GetComponent<ReviewRoleSign>();
                 }
             }
+            
         }
 
-
-        Debug.Log("都已经初始化");
+      
         return null;
     }
 
@@ -175,24 +181,21 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             {
                 var signs = GetRoleByMapRoleSigns(Double.Parse(panel.mapStates[index].specialOperations[i].operationParams[0]));
                 GameObject game = Instantiate(levelupPrb, effectTF);
-                game.transform.localPosition = signs.transform.localPosition;
-                Debug.Log("当前ID" + signs.role.roleName + "升级角色");
+                game.transform.localPosition = signs.transform.localPosition; 
                 Destroy(game, 1f);
             }
             if (panel.mapStates[index].specialOperations[i].type == GameEnum.OperationType.ChangeRole)
             {
                 var signs = GetRoleByMapRoleSigns(Double.Parse(panel.mapStates[index].specialOperations[i].operationParams[0]));
                 GameObject game = Instantiate(changeEquipPrb, effectTF);
-                game.transform.localPosition = signs.transform.localPosition;
-                Debug.Log("当前ID" + signs.role.roleName + "更改装备");
+                game.transform.localPosition = signs.transform.localPosition; 
 
                 Destroy(game, 1f);
             }
             if (panel.mapStates[index].specialOperations[i].type == GameEnum.OperationType.ChangeTrade)
             {
                 var signs = GetLineById(int.Parse(panel.mapStates[index].specialOperations[i].operationParams[0]));
-                GameObject game = Instantiate(changeTradePrb, effectTF);
-                Debug.Log("当前ID" + signs.name + "更改交易");
+                GameObject game = Instantiate(changeTradePrb, effectTF); 
                 game.transform.localPosition = signs.transform.localPosition;
 
                 Destroy(game, 1f);
@@ -205,10 +208,15 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         for (int j = 0; j < panel.mapStates[index].mapRoles.Count; j++)
         {
             //生成生产性角色
-            //Debug.Log(panel.mapStates[index].mapRoles[j].roleType + "j");
-            ReviewRoleSign sign;
+             if (panel.mapStates[index].mapRoles[j].roleId == 90018)
+             {
+                 Debug.Log(panel.mapStates[index].mapRoles[j].roleType + "index"+index+"j:"+j);
 
-            sign = GetRoleSign(panel.mapStates[index].mapRoles[j].roleType);
+             }
+
+             ReviewRoleSign sign; 
+
+            sign = GetRoleSign(panel.mapStates[index].mapRoles[j].roleType); 
             if (sign != null)
             {
                 sign.InitRole(panel.mapStates[index].mapRoles[j], false);
@@ -231,13 +239,14 @@ public class ReviewManager : MonoSingleton<ReviewManager>
                         panel.mapStates[index].mapRoles[j].level);
             }
         }
-
+              
         for (int j = 0; j < panel.mapStates[index].mapTrades.Count; j++)
         {
             var starrole = GetRoleByMapRoles(panel.mapStates[index].mapTrades[j].startRole);
             var endrole = GetRoleByMapRoles(panel.mapStates[index].mapTrades[j].endRole);
             if (!CheckRole(starrole.roleId))
             {
+                Debug.Log("RoleType"+endrole.roleType);
                 GetRoleSign(endrole.roleType)
                     .InitRole(starrole, true);
             }
@@ -249,10 +258,17 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     {
         for (int j = 0; j < panel.mapStates[index].mapTrades.Count; j++)
         {
+            if (GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole) == null ||
+                GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole) == null)
+            {
+                continue;
+            }
+
             if (panel.mapStates[index].mapTrades[j].cashFlowType == GameEnum.CashFlowType.先钱)
             {
-                //Debug.Log("当前" + index + "j" + j);
-                DrawLine(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).gameObject,
+                 Debug.Log("当前" + index + "j" + j);
+           
+                 DrawLine(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).gameObject,
                     GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).gameObject
                     , j, "先");
             }
@@ -288,7 +304,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     {
         for (int i = 0; i < signs.Count; i++)
         {
-            if (signs[i].isInit && signs[i].role.roleId == ID)
+            if (signs[i].isInit && (Mathf.Abs((float)signs[i].role.roleId - (float)ID) < 0.1f) )
             {
                 return true;
             }
@@ -388,6 +404,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
     void DrawLine(GameObject posA, GameObject posB, int index, string money)
     {
+        Debug.Log("A"+posA.name+"B"+posB.name);
         GameObject line = Instantiate(linePrb, lineTF);
         lines.Add(line);
         line.GetComponent<WMG_Link>().id = panel.mapStates[this.index].mapTrades[index].tradeId;
@@ -482,7 +499,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
     // Start is called before the first frame update
     void Start()
     {
-
+      
     }
 
     // Update is called once per frame

@@ -26,7 +26,12 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         tempBaseRoleData = new Role();
 
         upgradeNumber.gameObject.SetActive(true);
-        upgradeNumber.text = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost.ToString();
+        int costNumber = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost;
+        if (PlayerData.My.guanJianZiYuanNengLi[1])
+        {
+            costNumber = costNumber * 90 / 100;
+        }
+        upgradeNumber.text = costNumber.ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -109,13 +114,50 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             return;
         }
 
-        if (RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost <= StageGoal.My.playerGold)
+        int costNumber = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost;
+        if (PlayerData.My.guanJianZiYuanNengLi[1])
         {
+            costNumber = costNumber * 90 / 100;
+        }
+        if (costNumber <= StageGoal.My.playerGold)
+        {
+            if (!PlayerData.My.isSOLO)
+            {
+                string str1 = "UpdateRole|";
+                str1 += RoleUpdateInfo.My.currentRole.ID.ToString();
+                str1 += ",";
+                str1 += RoleUpdateInfo.My.currentRole.baseRoleData.roleName.ToString();
+                if (PlayerData.My.isServer)
+                {
+                    PlayerData.My.server.SendToClientMsg(str1);
+                }
+                else
+                {
+                    PlayerData.My.client.SendToServerMsg(str1);
+                }
+            }
             DataUploadManager.My.AddData(DataEnum.角色_升级);
+            switch (RoleUpdateInfo.My.currentRole.baseRoleData.roleType)
+            {
+                case GameEnum.RoleType.Seed:
+                    DataUploadManager.My.AddData(DataEnum.角色_升级种子商);
+                    break;
+                case GameEnum.RoleType.Peasant:
+                    DataUploadManager.My.AddData(DataEnum.角色_升级农民);
+                    break;
+                case GameEnum.RoleType.Merchant:
+                    DataUploadManager.My.AddData(DataEnum.角色_升级贸易商);
+                    break;
+                case GameEnum.RoleType.Dealer:
+                    DataUploadManager.My.AddData(DataEnum.角色_升级零售商);
+                    break;
+                default:
+                    break;
+            }
             GetComponent<Button>().interactable = false;
 
-            StageGoal.My.CostPlayerGold(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost);
-            StageGoal.My.Expend(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost, ExpendType.AdditionalCosts,
+            StageGoal.My.CostPlayerGold(costNumber);
+            StageGoal.My.Expend(costNumber, ExpendType.AdditionalCosts,
                 null, "升级");
             UpgradeRoleRecord(RoleUpdateInfo.My.currentRole);
             RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(
@@ -123,8 +165,9 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 RoleUpdateInfo.My.currentRole.baseRoleData.level + 1);
             RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
             RoleUpdateInfo.My.currentRole.baseRoleData.roleName = RoleUpdateInfo.My.roleName;
+            PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ReaddAllBuff();
             PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).RecalculateEncourageLevel();
-            PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ResetAllBuff();
+            PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).totalUpgradeCost += costNumber;
             RoleUpdateInfo.My.Init(RoleUpdateInfo.My.currentRole);
             tew = hammer.transform.DOLocalRotate(new Vector3(0, 0, -42f), 0.3f).SetEase(Ease.InOutBack).OnComplete(() =>
             {

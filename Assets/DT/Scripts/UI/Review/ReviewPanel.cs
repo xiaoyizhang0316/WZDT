@@ -35,6 +35,10 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public List<DataStat> mydataStats;
 
+    public string talent;
+
+    public Transform talentPanel;
+
     /// <summary>
     /// 正常速度播放
     /// </summary>
@@ -120,7 +124,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     /// <param name="playerOperations"></param>
     /// <param name="datas"></param>
     /// <param name="timeCount"></param>
-    public void MapInit(List<PlayerOperation> playerOperations, List<DataStat> datas, int timeCount)
+    public void MapInit(List<PlayerOperation> playerOperations, List<DataStat> datas, int timeCount,string talent)
     {
         mydataStats = datas;
         AutoPlay();
@@ -128,8 +132,10 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         GenerateMapStates(playerOperations);
         playSlider.maxValue = timeCount;
         playSlider.value = 0;
+        ReviewManager.My.content.GetComponent<RectTransform>().localPosition = Vector3.zero; 
         InitMoneyLine(datas, timeCount);
         Show();
+        InitTalentPanel(talent);
     }
 
     /// <summary>
@@ -145,6 +151,27 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         playSlider.value = 0;
         //line = playSlider.transform.GetChild(0).GetComponent<VectorObject2D>();
         InitMoneyLine(StageGoal.My.dataStats, StageGoal.My.timeCount);
+        InitTalentPanel(PlayerData.My.GeneratePlayerTalentReview());
+    }
+
+    public void InitTalentPanel(string talentStr)
+    {
+        if (talentStr == null || talentStr.Length != 6)
+        {
+            Debug.LogWarning("--------复盘天赋读取错误！");
+            talentStr = "000000";
+        }
+        if (NetworkMgr.My.levelProgressList.Count < 4)
+        {
+            talentPanel.DOScale(0f, 0f).Play();
+            return;
+        }
+        Text[] list = talentPanel.GetComponentsInChildren<Text>();
+        char[] charList = talentStr.ToCharArray();
+        for (int i = 0; i < 6; i++)
+        {
+            list[i + 1].text = charList[i].ToString();
+        }
     }
 
     /// <summary>
@@ -156,6 +183,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     {
         if (datas.Count == 0)
             return;
+        float score = 0;
         int maxAmount = datas[0].restMoney;
         int maxHealth = datas[0].blood;
         for (int i = 0; i < datas.Count; i++)
@@ -169,6 +197,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         {
             line.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i, datas[i].restMoney / (float)maxAmount * 100f));
             healthLine.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i, datas[i].blood / (float)maxHealth * 100f));
+            //if (datas[i].restMoney > 0)
+            //    score += datas[i].restMoney * 0.05f;
             //if(i==datas.Count-1)
             //    Debug.LogError(datas[i].restMoney);
         }
@@ -177,6 +207,7 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         healthLine.vectorLine.Draw();
         line.transform.SetAsLastSibling();
         line.vectorLine.Draw();
+        //Debug.Log(score / 4);
     }
 
     /// <summary>
@@ -305,6 +336,18 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                     result.specialOperations.Add(temp);
                     break;
                 }
+            case OperationType.SellRole:
+                {
+                    for (int i = 0; i < result.mapRoles.Count; i++)
+                    {
+                        if (Mathf.Abs((float)(result.mapRoles[i].roleId - double.Parse(p.operationParam[0]))) <= 0.01f)
+                        {
+                            result.mapRoles[i].isNPC = true;
+                            break;
+                        }
+                    }
+                    break;
+                }
             case OperationType.CreateTrade:
                 {
                     ReviewTrade tempTrade = new ReviewTrade();
@@ -321,8 +364,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                     {
                         if (result.mapTrades[i].tradeId == int.Parse(p.operationParam[0]))
                         {
-                            Debug.Log("改变了交易结构  ");
-                            Debug.Log((CashFlowType)Enum.Parse(typeof(CashFlowType), p.operationParam[1]));
+                            //Debug.Log("改变了交易结构  ");
+                            //Debug.Log((CashFlowType)Enum.Parse(typeof(CashFlowType), p.operationParam[1]));
                             result.mapTrades[i].SetCashFlow((CashFlowType)Enum.Parse(typeof(CashFlowType), p.operationParam[1]));
                             break;
                         }

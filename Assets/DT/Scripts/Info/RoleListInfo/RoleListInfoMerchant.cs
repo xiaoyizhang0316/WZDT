@@ -27,7 +27,7 @@ public class RoleListInfoMerchant : BaseRoleListInfo
     public bool isShowProduct;
 
     public GameObject productPrb;
-
+    public GameObject tradText;
     public override void Init(Role role)
     {
         effect.text = role.effect.ToString();
@@ -88,6 +88,14 @@ public class RoleListInfoMerchant : BaseRoleListInfo
 
             }
         
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.warehouse[i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            }
         }
     }
 }

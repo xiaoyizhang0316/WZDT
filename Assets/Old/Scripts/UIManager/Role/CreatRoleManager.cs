@@ -306,15 +306,25 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void CalculateAllAttribute()
     {
+        float costAdd = 1f;
+        float effectAdd = 1f;
+        if (PlayerData.My.guanJianZiYuanNengLi[0])
+        {
+            costAdd = 0.8f;
+        }
+        if (PlayerData.My.guanJianZiYuanNengLi[3])
+        {
+            effectAdd = 1.2f;
+        }
         InitRoleValue();
         foreach (var i in EquipList)
         {
             GearData tempData = GameDataMgr.My.GetGearData(i.Key);
-            finalEffect += tempData.effect;
-            finalEfficiency += tempData.efficiency;
-            finalRange += tempData.range;
+            finalEffect += (int)(tempData.effect * effectAdd);
+            finalEfficiency += (int)(tempData.efficiency * effectAdd);
+            finalRange += (int)(tempData.range * effectAdd);
             finalTradeCost += tempData.tradeCost;
-            finalCost += tempData.cost;
+            finalCost += (int)(tempData.cost * costAdd);
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             CurrentRole.equipCost += tempData.cost;
@@ -323,14 +333,14 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         foreach (var i in peoPleList)
         {
             WorkerData tempData = GameDataMgr.My.GetWorkerData(i.Key);
-            finalEffect += tempData.effect;
-            finalEfficiency += tempData.efficiency;
-            finalRange += tempData.range;
+            finalEffect += (int)(tempData.effect * effectAdd);
+            finalEfficiency += (int)(tempData.efficiency * effectAdd);
+            finalRange += (int)(tempData.range * effectAdd);
             finalTradeCost += tempData.tradeCost;
-            finalCost += tempData.cost;
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             finalTechAdd += tempData.techAdd;
+            finalCost +=(int)(tempData.cost * costAdd);
             CurrentRole.workerCost += tempData.cost;
         }
         FinalCheck();
@@ -386,14 +396,41 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         List<int> keys = EquipList.Keys.ToList();
         CurrentRole.EquipList.Clear();
         CurrentRole.peoPleList.Clear();
+        string str1 = "UpdateRoleEquipAndWorker|";
+        str1 += RoleUpdateInfo.My.currentRole.ID.ToString();
+        str1 += ",";
+      
         for (int i = 0; i < keys.Count; i++)
         {
             CurrentRole.EquipList.Add(keys[i], EquipList[keys[i]]);
+            str1 += keys[i].ToString();
+            if (keys.Count - 1 > i)
+            {
+                str1 += "_"; 
+            } 
         }
+
+        str1 += "&";
         List<int> keys2 = peoPleList.Keys.ToList();
         for (int i = 0; i < keys2.Count; i++)
         {
             CurrentRole.peoPleList.Add(keys2[i], peoPleList[keys2[i]]);
+            str1 += keys2[i].ToString();
+            if (keys2.Count - 1 > i)
+            {
+                str1 += "_"; 
+            }
+        }
+        if (!PlayerData.My.isSOLO)
+        {
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str1);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str1);
+            }
         }
         for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
         {
@@ -437,7 +474,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                 DataUploadManager.My.AddData(DataEnum.装备_增加);
             }    
         }
-        PlayerData.My.GetMapRoleById(CurrentRole.ID).ResetAllBuff();
+        PlayerData.My.GetMapRoleById(CurrentRole.ID).ReaddAllBuff();
         WorkerListManager.My.QuitAndSave();
         EquipListManager.My.QuitAndSave();
         ChangeRoleRecord(CurrentRole);

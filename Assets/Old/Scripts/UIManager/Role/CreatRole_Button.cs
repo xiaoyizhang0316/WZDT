@@ -216,9 +216,42 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().MonthlyCost();
                     role.GetComponent<BaseMapRole>().AddTechPoint();
                     role.GetComponent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
-                    BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
+                    if (PlayerData.My.yingLiMoShi[4])
+                    {
+                        role.GetComponent<BaseMapRole>().startEncourageLevel += 2;
+                        role.GetComponent<BaseMapRole>().encourageLevel += 2;
+                    }
+                    if (PlayerData.My.dingWei[1])
+                    {
+                        if (hit[j].transform.GetComponent<MapSign>().isNearWater)
+                        {
+                            var buff = GameDataMgr.My.GetBuffDataByID(10012);
+                            BaseBuff baseb = new BaseBuff();
+                            baseb.Init(buff);
+                            baseb.SetRoleBuff(null, role.GetComponent<BaseMapRole>(), role.GetComponent<BaseMapRole>());
+                        }
+                    }
+                    if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1")
+                    {
+                        BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
+                    }
                     CreateRoleOperationRecord(role.GetComponent<BaseMapRole>());
-                    
+                    if (!PlayerData.My.isSOLO)
+                    {
+                        string str = "CreateRole|";
+                        str += role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType.ToString() + ",";
+                        str += role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleName + ",";
+                        str += role.GetComponent<BaseMapRole>().baseRoleData.ID.ToString() + ",";
+                        str += x.ToString() + "," + y.ToString();
+                        if (PlayerData.My.isServer)
+                        {
+                            PlayerData.My.server.SendToClientMsg(str);
+                        }
+                        else
+                        {
+                            PlayerData.My.client.SendToServerMsg(str);
+                        }
+                    }
                 }
                 else
                 {

@@ -24,6 +24,10 @@ public class PlayerDatas
     public int limit;
     public int privilege;
     public string roleFound;
+
+    public int levelID;
+    public string talent;
+    public string unlockStatus;
 }
 
 [Serializable]
@@ -210,6 +214,11 @@ public class ReplayList
     public string stars;
     public int timeCount;
     public int realTime;
+    public int bossLevel;
+    public bool isTeamwork;
+    public string teamName;
+    public string teamConfiguration;
+    public string talent;
 }
 
 [Serializable]
@@ -252,6 +261,10 @@ public class RankList
     public string playerName;
     public int bossLevel;
     public string groupName;
+    public bool isTeamwork;
+    public string teamName;
+    public string teamConfiguration;
+    public string talent;
     public int rank;
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class LevelSign : MonoBehaviour
 {
@@ -15,13 +16,13 @@ public class LevelSign : MonoBehaviour
     public string mission_2;
     public string mission_3;
 
-    public int starRequirement;
+    //public int starRequirement;
 
-    public int actualStarRequirement;
+    //public int actualStarRequirement;
 
     public Button LevelButton;
 
-    public Text starNeed;
+    //public Text starNeed;
 
     public string loadScene;
     string stars="";
@@ -31,7 +32,7 @@ public class LevelSign : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        starNeed = transform.Find("StarNeed").GetComponent<Text>();
+        //starNeed = transform.Find("StarNeed").GetComponent<Text>();
         LevelButton.onClick.AddListener(() =>
         {
             Debug.Log("1231231231");
@@ -47,7 +48,40 @@ public class LevelSign : MonoBehaviour
         {
             LevelInfoManager.My.Init(stars, levelName, content, mission_1, mission_2, mission_3, () =>
             {
-                SceneManager.LoadScene(loadScene);
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str = "LoadScene|" + loadScene;
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str);
+                    }
+                }
+                if (!PlayerData.My.isSOLO)
+                {
+                    if (PlayerData.My.isServer)
+                    {
+                        //SceneManager.LoadScene(loadScene);
+                        NetworkMgr.My.GetPoorPlayerEquips((data) =>
+                        {
+                            Debug.Log("装备回调");
+                            if (data.Count != 0)
+                            {
+                                PlayerData.My.InitPlayerEquip(data);
+                            }
+                            SceneManager.LoadScene(loadScene);
+                            NetworkMgr.My.SetPlayerStatus(loadScene, NetworkMgr.My.currentBattleTeamAcount.teamID);
+                        });
+                    }
+                }
+                else
+                {
+                    SceneManager.LoadScene(loadScene);
+                    NetworkMgr.My.SetPlayerStatus(loadScene, "");
+                }
             }, loadScene);
             //NetworkMgr.My.GetReplayLists(loadScene,()=> {
             //    LevelInfoManager.My.listScript.Init(NetworkMgr.My.replayLists);
@@ -130,7 +164,20 @@ public class LevelSign : MonoBehaviour
             currentStar = "0" + currentStar;
         }
         stars = currentStar;
-        if(lastStar == "000" && loadScene!="FTE_1" || !CheckPrevStar() || !CheckUserLevel())
+
+        if (NetworkMgr.My.levelProgressList.Count >= 4 && NetworkMgr.My.playerDatas.threeWordsProgress == 1)
+        {
+            ThreeWordsPanel.My.OpenAnswerInputField();
+            return;
+        }
+        else if (NetworkMgr.My.levelProgressList.Count >= 8 && NetworkMgr.My.playerDatas.threeWordsProgress == 2)
+        {
+            ThreeWordsPanel.My.OpenAnswerInputField();
+            return;
+        }
+        if(levelID!=1)
+            transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
+        if (lastStar == "000" && loadScene!="FTE_1" ||  !CheckUserLevel() ||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
         {
             HideAllStars();
             transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
@@ -138,50 +185,200 @@ public class LevelSign : MonoBehaviour
         }
         else
         {
-            if (currentStar[0] == '0')
+            //Debug.Log(levelID);
+            //Debug.Log(currentStar);
+            if (currentStar.Equals("000"))
             {
-                transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                if (NetworkMgr.My.playerDatas.unlockStatus.Split('_')[levelID - 1].Equals("0"))
+                {
+                    // 上传关卡解锁状态
+                    string[] arr = NetworkMgr.My.playerDatas.unlockStatus.Split('_');
+                    arr[levelID - 1] = "1";
+                    string newStatus = "1";
+                    for(int i=1; i< arr.Length; i++)
+                    {
+                        newStatus += "_"+arr[i];
+                    }
+                    Debug.Log(newStatus);
+                    // 解锁动画
+                    // fade
+                    //transform.GetChild(0).GetComponent<Image>().DOFade(0, 0.75f).OnComplete(()=> {
+                    //    transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                    //    transform.GetChild(0).GetComponent<Image>().DOFade(1, 0.75f).OnComplete(()=> {
+                    //        Debug.Log("donghua");
+                    //        //transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                    //        if (currentStar[0] == '0')
+                    //        {
+                    //            transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                    //        }
+                    //        if (currentStar[1] == '0')
+                    //        {
+                    //            transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                    //        }
+                    //        if (currentStar[2] == '0')
+                    //        {
+                    //            transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                    //        }
+                    //        if (levelID == 2)
+                    //        {
+                    //            // 开启引导
+                    //            MapGuideManager.My.currentGuideIndex = 0;
+                    //            MapGuideManager.My.PlayCurrentIndexGuide();
+                    //        }
+                    //    });
+                    //});
+
+                    // scale
+                    transform.GetChild(0).DOScale(0, 0.75f).Play().OnComplete(() =>
+                    {
+                        //Debug.Log("do scale");
+                        transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                        transform.GetChild(0).DOScale(1, 0.5f).Play().OnComplete(() =>
+                        {
+                            //Debug.Log("donghua");
+                            //transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                            
+                            if (levelID == 2)
+                            {
+                                // 开启引导
+                                MapGuideManager.My.currentGuideIndex = 0;
+                                MapGuideManager.My.PlayCurrentIndexGuide();
+                            }
+                        });
+                    });
+
+                    // shake
+                    //transform.GetChild(0).DOShakePosition(1, new Vector3(10, 10, 10), 10, 180).OnComplete(()=> {
+                    //    Debug.Log("donghua");
+                    //    transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                    //    if (currentStar[0] == '0')
+                    //    {
+                    //        transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                    //    }
+                    //    if (currentStar[1] == '0')
+                    //    {
+                    //        transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                    //    }
+                    //    if (currentStar[2] == '0')
+                    //    {
+                    //        transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                    //    }
+                    //    if (levelID == 2)
+                    //    {
+                    //        // 开启引导
+                    //        MapGuideManager.My.currentGuideIndex = 0;
+                    //        MapGuideManager.My.PlayCurrentIndexGuide();
+                    //    }
+                    //});
+                    if (currentStar[0] == '0')
+                    {
+                        transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (currentStar[1] == '0')
+                    {
+                        transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (currentStar[2] == '0')
+                    {
+                        transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (levelID != 1&& levelID!=2&& levelID != 4)
+                    {
+                        //Debug.Log("update status");
+                        NetworkMgr.My.UpdateUnlockStatus(newStatus);
+                    }
+                    
+                }
+                else
+                {
+                    transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                    if (currentStar[0] == '0')
+                    {
+                        transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (currentStar[1] == '0')
+                    {
+                        transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (currentStar[2] == '0')
+                    {
+                        transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                    }
+                }
             }
-            if (currentStar[1] == '0')
+            else
             {
-                transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                if (currentStar[0] == '0')
+                {
+                    transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                }
+                if (currentStar[1] == '0')
+                {
+                    transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                }
+                if (currentStar[2] == '0')
+                {
+                    transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                }
+                if (levelID == 4)
+                {
+                    // 判断开启天赋教学
+                    if (NetworkMgr.My.playerDatas.unlockStatus.Split('_')[levelID - 1].Equals("0"))
+                    {
+                        // 开启教学
+                        //GuideManager.My.currentGuideIndex = 2;
+                        MapGuideManager.My.GetComponent<MapObject>().openCG.SetActive(true);
+                        // 上传关卡解锁状态
+                        //string[] arr = NetworkMgr.My.playerDatas.unlockStatus.Split('_');
+                        //arr[levelID - 1] = "1";
+                        //string newStatus = "1";
+                        //for (int i = 1; i < arr.Length; i++)
+                        //{
+                        //    newStatus += "_"+arr[i];
+                        //}
+                        //NetworkMgr.My.UpdateUnlockStatus(newStatus, () => {
+
+                        //}, () => {
+                        //    HttpManager.My.ShowTip("解锁关卡出错");
+                        //});
+                    }
+                }
             }
-            if (currentStar[2] == '0')
-            {
-                transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
-            }
+
+            
         }
         LevelButton.onClick.RemoveAllListeners();
         LevelButton.onClick.AddListener(Init);
-        InitStarNeedText();
+        //InitStarNeedText();
     }
 
-    /// <summary>
-    /// 初始化关卡星数需求文字颜色
-    /// </summary>
-    public void InitStarNeedText()
-    {
-        starNeed.text = actualStarRequirement.ToString();
-        starNeed.color = CheckPrevStar() ? Color.green : Color.red;
-    }
+    ///// <summary>
+    ///// 初始化关卡星数需求文字颜色
+    ///// </summary>
+    //public void InitStarNeedText()
+    //{
+    //    starNeed.text = actualStarRequirement.ToString();
+    //    starNeed.color = CheckPrevStar() ? Color.green : Color.red;
+    //}
 
     /// <summary>
     /// 检测之前所有关卡的星数有没有达到要求
     /// </summary>
     /// <returns></returns>
-    public bool CheckPrevStar()
-    {
-        int index = int.Parse(loadScene.Split('_')[1]);
-        int result = 0;
-        foreach (LevelProgress l in NetworkMgr.My.levelProgressList)
-        {
-            if (l.levelID < index)
-            {
-                result += l.starNum;
-            }
-        }
-        return result >= actualStarRequirement;
-    }
+    //public bool CheckPrevStar()
+    //{
+    //    int index = int.Parse(loadScene.Split('_')[1]);
+    //    int result = 0;
+    //    foreach (LevelProgress l in NetworkMgr.My.levelProgressList)
+    //    {
+    //        if (l.levelID < index)
+    //        {
+    //            result += l.starNum;
+    //        }
+    //    }
+    //    return result >= actualStarRequirement;
+    //}
 
     public bool CheckUserLevel()
     {

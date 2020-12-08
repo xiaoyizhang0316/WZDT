@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler 
@@ -54,8 +55,9 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     /// 当创建销毁时候或者保存角色时候调整占用状态
     /// </summary>
     public bool isOccupation;
-    public int ID; 
+    public int ID;
 
+    public GameObject levelUI;
     public WorkerData workerData;
 
     private void Awake()
@@ -70,6 +72,16 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void Init(int id, bool Occupation)
     {
         ID = id;
+        if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) >3)
+        {
+            levelUI.SetActive(true);
+        }
+        else
+        {
+            levelUI.SetActive(false);
+            
+        }
+
         SetOccupyStatus(Occupation);
         workerData = GameDataMgr.My.GetWorkerData(id);
         effect.text = workerData.effect.ToString();

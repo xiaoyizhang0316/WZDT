@@ -144,7 +144,7 @@ public class BaseBuff
     /// 产品相关
     /// </summary>
     /// <param name="data"></param>
-    public void OnProduct(ref ProductData data)
+    public virtual void OnProduct(ref ProductData data)
     {
         foreach (string str in buffData.OnProduct)
         {
@@ -175,7 +175,7 @@ public class BaseBuff
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <param name="target"></param>
-    public void SetRoleBuff(BaseMapRole _castRole, BaseMapRole target, BaseMapRole _buffRole)
+    public void SetRoleBuff(BaseMapRole _castRole = null, BaseMapRole target = null, BaseMapRole _buffRole = null)
     {
         castRole = _castRole;
         targetRole = target;
@@ -218,14 +218,28 @@ public class BaseBuff
             case -1:
                 break;
             case 1:
-                CalculateNumber(str, ref buffConfig.playerGoldChange, StageGoal.My.playerGold);
-                StageGoal.My.GetPlayerGold(buffConfig.playerGoldChange);
-                if (targetConsume != null)
-                    StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Other,null,buffName);
-                else if (castRole.isNpc)
-                    StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Npc,castRole);
-                //StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Npc, castRole);
-                break;
+                {
+                    CalculateNumber(str, ref buffConfig.playerGoldChange, StageGoal.My.playerGold);
+                    int goldChange = buffConfig.playerGoldChange;
+                    if (PlayerData.My.yingLiMoShi[1])
+                    {
+                        if (targetConsume != null)
+                        {
+                            goldChange = goldChange * 120 / 100;
+                        }
+                        else if (castRole.isNpc)
+                        {
+                            goldChange = goldChange * 120 / 100;
+                        }
+                    }
+                    StageGoal.My.GetPlayerGold(goldChange);
+                    if (targetConsume != null)
+                        StageGoal.My.Income(goldChange, IncomeType.Other, null, buffName);
+                    else if (castRole.isNpc)
+                        StageGoal.My.Income(goldChange, IncomeType.Npc, castRole);
+                    //StageGoal.My.Income(buffConfig.playerGoldChange, IncomeType.Npc, castRole);
+                    break;
+                }
             case 2:
                 CalculateNumber(str, ref buffConfig.playerSatisfyChange, StageGoal.My.playerSatisfy);
                 StageGoal.My.GetSatisfy(buffConfig.playerSatisfyChange);
@@ -481,6 +495,13 @@ public class BaseBuff
         }
     }
 
+    public void ReaddRoleBuff()
+    {
+        foreach (string str in buffData.OnBuffAdd)
+        {
+            CheckRoleNumber(str);
+        }
+    }
 
     #region 具体计算（三个重载）
 
@@ -501,8 +522,20 @@ public class BaseBuff
         {
             if (castRole != null)
             {
-                float add = 1f + castRole.encourageLevel * 0.1f;
+                float add;
+                if (PlayerData.My.yingLiMoShi[3])
+                {
+                    add = 1f + castRole.encourageLevel * 0.15f;
+                }
+                else
+                {
+                    add = 1f + castRole.encourageLevel * 0.1f;
+                }
                 num = (int)(int.Parse(attri[1]) * add);
+                if (PlayerData.My.yeWuXiTong[1])
+                {
+                    num = num * 110 / 100;
+                }
             }
             else
             {
@@ -513,8 +546,20 @@ public class BaseBuff
         {
             if (castRole != null)
             {
-                float add = 1f + castRole.encourageLevel * 0.1f;
+                float add;
+                if (PlayerData.My.yingLiMoShi[3])
+                {
+                    add = 1f + castRole.encourageLevel * 0.15f;
+                }
+                else
+                {
+                    add = 1f + castRole.encourageLevel * 0.1f;
+                }
                 num = (int)(sourceNum * float.Parse(attri[1]) * add);
+                if (PlayerData.My.yeWuXiTong[1])
+                {
+                    num = num * 110 / 100;
+                }
             }
             else
             {

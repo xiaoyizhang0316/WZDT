@@ -147,6 +147,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Dictionary<string, int> extraCost = new Dictionary<string, int>();
 
+    public Dictionary<ScoreType, int> scoreStats = new Dictionary<ScoreType, int>();
+
     int starNum = 1;
     string[] stars = new string[] { "1", "0", "0" };
     PlayerReplay tempReplay;
@@ -184,7 +186,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             if (playerGold - num <= maxMinusGold)
             {
-                playerGold =100000;
+                playerGold =10000000;
             }
             else
             {
@@ -241,7 +243,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (playerTechPoint < num)
         {
-            HttpManager.My.ShowTip("科技值不足！");
+            HttpManager.My.ShowTip("Mega值不足！");
             return false;
         }
         FloatInfoManager.My.TechChange(0 - num);
@@ -293,9 +295,9 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if(SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2")
         {
-            if(playerGold+num >= 100000)
+            if(playerGold+num >= 10000000)
             {
-                playerGold = 100000;
+                playerGold = 10000000;
             }
             else
             {
@@ -522,7 +524,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         BaseLevelController.My.CancelInvoke("CheckStarOne");
         BaseLevelController.My.CancelInvoke("CheckStarThree");
         BaseLevelController.My.CancelInvoke("UpdateInfo");
-        
         if (BaseLevelController.My.starTwoStatus)
         {
             starNum += 1;
@@ -569,6 +570,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             NewCanvasUI.My.GamePause(false);
             NewCanvasUI.My.lose.SetActive(true);
+            NewCanvasUI.My.lose.GetComponent<LosePanel>().InitOtherKey();
             NewCanvasUI.My.EndLowHealth();
             //NewCanvasUI.My.Panel_Lose.SetActive(true);
             if (NetworkMgr.My.isUsingHttp)
@@ -593,7 +595,6 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
             }
         }
-        
     }
 
     public void CommitLose()
@@ -631,6 +632,39 @@ public class StageGoal : MonoSingleton<StageGoal>
                 {
                     Stat();
                 }
+                if (timeCount % 20 == 0)
+                {
+                    if (playerGold > 0)
+                    {
+                        float add = 0.05f;
+                        if (PlayerData.My.qiYeJiaZhi[3])
+                        {
+                            add = 0.1f;
+                        }
+                        GetSatisfy((int)(playerGold * add));
+                        ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
+                        if (PlayerData.My.xianJinLiu[5])
+                        {
+                            GetPlayerGold(playerGold * 5 / 100);
+                            Income(playerGold * 5 / 100,IncomeType.Other,null,"利息");
+                        }
+                    }
+                    if (PlayerData.My.yeWuXiTong[3])
+                    {
+                        int count = 0;
+                        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                        {
+                            if (!PlayerData.My.MapRole[i].isNpc)
+                            {
+                                count++;
+                            }
+                        }
+                        if (count <= 2)
+                        {
+                            GetTechPoint(20);
+                        }
+                    }
+                }
                 WaveCount();
             });
             if (timeCount >= waitTimeList[0] - 5)
@@ -649,11 +683,47 @@ public class StageGoal : MonoSingleton<StageGoal>
                 {
                     Stat();
                 }
+                if (timeCount % 20 == 0)
+                {
+                    if (playerGold > 0)
+                    {
+                        float add = 0.05f;
+                        if (PlayerData.My.qiYeJiaZhi[3])
+                        {
+                            add = 0.1f;
+                        }
+                        GetSatisfy((int)(playerGold * add));
+                        ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
+                        if (PlayerData.My.xianJinLiu[5])
+                        {
+                            GetPlayerGold(playerGold * 5 / 100);
+                            Income(playerGold * 5 / 100, IncomeType.Other, null, "利息");
+                        }
+                    }
+                    if (PlayerData.My.yeWuXiTong[3])
+                    {
+                        int count = 0;
+                        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                        {
+                            if (!PlayerData.My.MapRole[i].isNpc)
+                            {
+                                count++;
+                            }
+                        }
+                        if (count <= 2)
+                        {
+                            GetTechPoint(20);
+                        }
+                    }
+                }
                 WaveCount();
             });
         }
     }
 
+    /// <summary>
+    /// 快进到第一波怪生成前5秒的时间
+    /// </summary>
     public void SkipFirst()
     {
         timeCount = waitTimeList[0] - 5;
@@ -829,9 +899,22 @@ public class StageGoal : MonoSingleton<StageGoal>
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
         playerGold =  data.startPlayerGold;
         if (PlayerData.My.cheatIndex1)
+        {
             playerGold += 10000;
+        }
+
+        if (PlayerData.My.dingWei[0])
+        {
+            playerGold = playerGold * 110 / 100;
+        }
+
         playerSatisfy = 0;
+
         maxMinusGold = -8000;
+        if (PlayerData.My.xianJinLiu[2])
+        {
+            maxMinusGold = -12000;
+        }
         playerHealth =  data.startPlayerHealth;
         if (PlayerData.My.cheatIndex3)
             playerHealth = (int)(playerHealth * 1.5f);
@@ -970,25 +1053,32 @@ public class StageGoal : MonoSingleton<StageGoal>
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKey(KeyCode.UpArrow))
-        //{
-        //    if (Input.GetKeyDown(KeyCode.S))
-        //    {
-        //        DOTween.PlayAll();
-        //        DOTween.timeScale = 16f;
-        //        DOTween.defaultAutoPlay = AutoPlay.All;
-        //    }
-        //    if (Input.GetKeyDown(KeyCode.Y))
-        //    {
-        //        Win();
-        //    }
-        //    if (Input.GetKeyDown(KeyCode.M))
-        //    {
-        //        GetPlayerGold(10000);
-        //        GetTechPoint(1000);
-        //        playerHealth = playerMaxHealth;
-        //    }
-        //}
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            //if (Input.GetKeyDown(KeyCode.S))
+            //{
+            //    DOTween.PlayAll();
+            //    DOTween.timeScale = 16f;
+            //    DOTween.defaultAutoPlay = AutoPlay.All;
+            //}
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                if (Input.GetKeyDown(KeyCode.Y))
+                {
+                    Win();
+                }    
+            }
+            //if (Input.GetKeyDown(KeyCode.M))
+            //{
+            //    GetPlayerGold(10000);
+            //    GetTechPoint(1000);
+            //    playerHealth = playerMaxHealth;
+            //}
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                Lose();
+            }
+        }
     }
 
     public void Income(int num, IncomeType incomeType, BaseMapRole npc =null, string otherName="")
@@ -1112,6 +1202,19 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
     }
 
+    public void ScoreGet(ScoreType type,int num)
+    {
+        if (scoreStats.ContainsKey(type))
+        {
+            scoreStats[type] += num;
+        }
+        else
+        {
+            scoreStats.Add(type, num);
+        }
+    }
+
+
     private void Stat()
     {
         if(dataStats == null)
@@ -1174,6 +1277,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         Debug.Log(JsonUtility.ToJson(statItemDatasList).ToString());
     }
 
+   
     /// <summary>
     /// 玩家操作结构
     /// </summary>
@@ -1185,5 +1289,16 @@ public class StageGoal : MonoSingleton<StageGoal>
         public OperationType type;
 
         public List<string> operationParam;
+    }
+    private void OnGUI()
+    {
+        //if (GUILayout.Button("扣血"))
+        //{
+        //    Screen.SetResolution(1920, 1080, false);
+        //}
+        //if (GUILayout.Button("扣血12312321"))
+        //{
+        //    Screen.SetResolution(1920, 1080, true);
+        //}
     }
 }

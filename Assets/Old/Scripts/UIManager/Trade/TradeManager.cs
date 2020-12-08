@@ -11,7 +11,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// <summary>
     /// 所有交易的列表
     /// </summary>
-    public Dictionary<int, TradeSign> tradeList;
+    public Dictionary<int, TradeSign> tradeList=new Dictionary<int, TradeSign>();
 
     /// <summary>
     /// 删除指定ID的交易
@@ -36,7 +36,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole));
-        if (start.baseRoleData.isNpc && start.baseRoleData.baseRoleData.roleType != RoleType.Bank)
+        if (start.baseRoleData.isNpc && start.baseRoleData.baseRoleData.roleType != RoleType.Bank && !start.isSell)
         {
             if (CheckTradeCount(sign.tradeData.startRole) < 1)
             {
@@ -46,7 +46,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             }
             start.GetComponent<NPC>().AnimatorCtr(CheckNpcInTrade(sign.tradeData.startRole));
         }
-        if (end.baseRoleData.isNpc && end.baseRoleData.baseRoleData.roleType != RoleType.Bank)
+        if (end.baseRoleData.isNpc && end.baseRoleData.baseRoleData.roleType != RoleType.Bank && !end.isSell)
         {
             if (CheckTradeCount(sign.tradeData.endRole) < 1)
             {
@@ -222,6 +222,11 @@ public class TradeManager : MonoSingleton<TradeManager>
             return true;
         else
         {
+            if (PlayerData.My.yeWuXiTong[4])
+            {
+                if (!start.isNpc && !end.isNpc)
+                    return true;
+            }
             HttpManager.My.ShowTip("玩家金钱已达负数！无法发起新交易！");
             return false;
         }
@@ -271,7 +276,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole));
-        if (start.baseRoleData.isNpc)
+        if (start.baseRoleData.isNpc && !start.isSell)
         {
             if (CheckTradeCount(sign.tradeData.startRole) <= 1)
             {
@@ -286,7 +291,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             }
             start.GetComponent<NPC>().AnimatorCtr(true);
         }
-        if (end.baseRoleData.isNpc)
+        if (end.baseRoleData.isNpc && !end.isSell)
         {
             if (CheckTradeCount(sign.tradeData.endRole) <= 1)
             {

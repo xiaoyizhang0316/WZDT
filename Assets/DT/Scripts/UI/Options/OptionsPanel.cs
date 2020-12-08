@@ -18,6 +18,10 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
     public Button returnToMap;
 
     public AudioMixer audioMixer;
+
+    public Slider qualitySelect;
+
+    public Toggle fullScreenSwitch;
     
     // Start is called before the first frame update
     void Start()
@@ -38,7 +42,7 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
         gameObject.SetActive(true);
         options.gameObject.SetActive(true);
         mask.SetActive(true);
-        
+        InitQualitySetting();
     }
 
     private void OnSliderValueChanged(float value, MusicType mt)
@@ -72,6 +76,22 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
                 // 设置全局音效声音大小
                 break;
         }
+    }
+
+    public void OnQualityValueChange()
+    {
+        QualitySettings.SetQualityLevel((int)qualitySelect.value);
+    }
+
+    public void InitQualitySetting()
+    {
+        qualitySelect.value = QualitySettings.GetQualityLevel();
+        fullScreenSwitch.SetIsOnWithoutNotify(Screen.fullScreen);
+    }
+
+    public void OnFullScreenValueChange()
+    {
+        Screen.SetResolution(1920, 1080, fullScreenSwitch.isOn);
     }
 
     public void Close()

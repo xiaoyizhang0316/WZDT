@@ -19,6 +19,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public GameObject Panel_TradeSetting;
     public Transform RoleTF;
     public GameObject lose;
+    
+    
     /// <summary>
     /// 需要遮挡的UI
     /// </summary>
@@ -76,9 +78,16 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public List<GameObject> panelList = new List<GameObject>();
 
+    public GameObject watchGuidePanel;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Map")
+        {
+            return;
+        }
+
         CreateTradeLineGo = FindObjectOfType<CreateTradeLine>().gameObject;
         CreateTradeLineGo.SetActive(false);
         RoleTF = GameObject.FindGameObjectWithTag("RoleTF").transform;
@@ -101,6 +110,104 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         isTradeButtonActive = true;
         isProductLineActive = true;
         isInfoLineActive = true;
+        Init1_4UI();
+    }
+
+
+
+    /// <summary>
+    /// 将1-4关未开启的UI关闭、开启
+    /// </summary>
+    public void Init1_4UI()
+    {
+        if (SceneManager.GetActiveScene().name == "Map" || SceneManager.GetActiveScene().name == "FTE_0-1" ||
+            SceneManager.GetActiveScene().name == "FTE_0-2")
+        {
+            return;
+        }
+
+        switch (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]))
+        //switch (1  )
+        {
+            case 0:
+           break;
+            case 1: 
+                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(false);
+                 
+                    Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled= false;
+                    Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled = false;
+                    Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
+                    Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
+              
+                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().tradText.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().tradText.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().tradText.gameObject.SetActive(false);
+                CreateTradeManager.My.startRolePanel.gameObject.SetActive(false);
+                CreateTradeManager.My.endRolePanel.gameObject.SetActive(false);
+                CreateTradeManager.My.divideSlider.gameObject.SetActive(false);
+             
+           break;     
+            case 2:
+            case 3:
+                //装备
+                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
+                //先后前
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled= false;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled = false;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
+                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
+                CreateTradeManager.My.startRolePanel.gameObject.SetActive(false);
+                CreateTradeManager.My.endRolePanel.gameObject.SetActive(false);
+                CreateTradeManager.My.divideSlider.gameObject.SetActive(false);
+               // 风险交易成本
+                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().tradText.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().tradText.gameObject.SetActive(false);
+                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().tradText.gameObject.SetActive(false);
+                break;     
+          
+            case 4:
+            case 5:
+                //装备
+                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
+                //先后前
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled = true;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled= true;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "先结算";
+                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "后结算";
+                CreateTradeManager.My.startRolePanel.gameObject.SetActive(true);
+                CreateTradeManager.My.endRolePanel.gameObject.SetActive(true);
+                CreateTradeManager.My.divideSlider.gameObject.SetActive(false);
+                // 风险交易成本
+                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().tradText.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().tradText.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().tradText.gameObject.SetActive(true);
+                break;    
+     
+            default:
+                //装备
+                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
+                //先后前
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled = true;
+                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled= true;
+                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "先结算";
+                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "后结算";
+                CreateTradeManager.My.startRolePanel.gameObject.SetActive(true);
+                CreateTradeManager.My.endRolePanel.gameObject.SetActive(true);
+                CreateTradeManager.My.divideSlider.gameObject.SetActive(true);
+                // 风险交易成本
+                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().tradText.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().tradText.gameObject.SetActive(true);
+                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().tradText.gameObject.SetActive(true);
+                break;    
+
+                
+        }
+          
+        
     }
 
     // Update is called once per frame
@@ -157,7 +264,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
             //GameAccelerate();
         });
-        GameNormal();
+        Button_Normal.interactable = false;
+        //if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+        //    return;
+        //GameNormal();
     }
 
     /// <summary>
@@ -165,15 +275,30 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public void GamePause(bool isCount = true)
     {
+        Debug.Log("game pause");
         DOTween.PauseAll();
         DOTween.defaultAutoPlay = AutoPlay.None;
         Button_Pause.interactable = false;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = true;
+        //MessageManager.my.RpcGamePause();
         if (isCount)
             InvokeRepeating("CountPauseTime", 1f, 1f);
         else
             CancelInvoke("CountPauseTime");
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ChangeTimeScale|";
+            str += "0";
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str);
+            }
+        }
     }
 
     /// <summary>
@@ -184,10 +309,25 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         DOTween.PlayAll();
         DOTween.timeScale = 1f;
         DOTween.defaultAutoPlay = AutoPlay.All;
+        //MessageManager.my.RpcGameNormal();
         Button_Pause.interactable = true;
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
         CancelInvoke("CountPauseTime");
+        Debug.Log("Pause");
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ChangeTimeScale|";
+            str += "1";
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str);
+            }
+        }
     }
 
     /// <summary>
@@ -198,10 +338,24 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         DOTween.PlayAll();
         DOTween.timeScale = 2f;
         DOTween.defaultAutoPlay = AutoPlay.All;
+        //MessageManager.my.RpcGameAccerlarate();
         Button_Pause.interactable = true;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = false;
         CancelInvoke("CountPauseTime");
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ChangeTimeScale|";
+            str += "2";
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str);
+            }
+        }
     }
 
     /// <summary>
@@ -269,6 +423,19 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         go.transform.SetParent(TradeManager.My.transform);
         go.GetComponent<TradeSign>().Init(startRole.baseRoleData.ID.ToString(), endRole.baseRoleData.ID.ToString());
         TradeManager.My.CreateTradeRecord(go.GetComponent<TradeSign>());
+        if (!PlayerData.My.isSOLO)
+        {
+            string str1 = "CreateTrade|";
+            str1 += startRole.baseRoleData.ID.ToString() + "," + endRole.baseRoleData.ID.ToString();
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str1);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str1);
+            }
+        }
         //Panel_CreateTrade.SetActive(true);
         //CreateTradeManager.My.Open(go);
         isSetTrade = false;
@@ -287,6 +454,17 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         lose.SetActive(false);
         PlayerData.My.Reset();
         SceneManager.LoadScene("Map");
+        if (PlayerData.My.isSOLO)
+        {
+            NetworkMgr.My.SetPlayerStatus("Map", "");
+        }
+        else
+        {
+            if (PlayerData.My.isServer)
+            {
+                NetworkMgr.My.SetPlayerStatus("Map", NetworkMgr.My.currentBattleTeamAcount.teamID);
+            }
+        }
     }
 
     public bool isTradeButtonActive = true;
@@ -469,7 +647,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         }
     }
 
-    public void ShowLowHealthTip()
+    public void ShowLowHealthTip()                           
     {
         CameraPlay.Hit(new Color(1f, 0.1367925f, 0.1367925f,0f), 2f);
     }

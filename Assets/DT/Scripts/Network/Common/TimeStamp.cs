@@ -35,4 +35,14 @@ public static class TimeStamp
     {
         return startTime.AddSeconds(timeStamp).ToLocalTime().ToString("yyyy/MM/dd HH:mm");
     }
+
+    /// <summary>
+    /// 时间戳转时间，精确到秒
+    /// </summary>
+    /// <param name="timeStamp">时间戳</param>
+    /// <returns></returns>
+    public static string TimeStampToDateString(int timeStamp)
+    {
+        return startTime.AddSeconds(timeStamp).ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
+    }
 }

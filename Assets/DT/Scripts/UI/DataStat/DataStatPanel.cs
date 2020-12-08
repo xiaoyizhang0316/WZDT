@@ -45,6 +45,8 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     public bool isShow = false;
     private bool isIncomeRefreshing = false;
     private bool isExpendRefreshing = false;
+    public GameObject income;
+    public GameObject expend;
 
     // Start is called before the first frame update
     void Start()
@@ -529,5 +531,27 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         this.extraCost.text = extraCostStr;
 
         isExpendRefreshing = false;
+    }
+
+    private bool isSwitch = true; 
+    /// <summary>
+    /// 切换收支
+    /// </summary>
+    public void SwitchIncome()
+    {
+ 
+        income.SetActive(true);
+        expend.SetActive(false);
+     
+    }
+    /// <summary>
+    /// 切换收支
+    /// </summary>
+    public void SwitchOutcome()
+    {
+ 
+        income.SetActive(false);
+        expend.SetActive(true);
+     
     }
 }

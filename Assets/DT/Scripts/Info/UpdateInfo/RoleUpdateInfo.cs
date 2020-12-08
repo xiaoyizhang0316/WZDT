@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
@@ -52,7 +53,11 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public Button clearWarehouse;
 
+    public Button sellRole;
+
     public EncourageLevel encourageLevel;
+
+    public GameObject emptyEquip;
     
     // Start is called before the first frame update
     void Start()
@@ -68,7 +73,22 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要删除" + currentRole.baseRoleData.roleName + "吗？";
           
-            DeleteUIManager.My.Init(str, () => { PlayerData.My.DeleteRole(currentRole.ID); });
+            DeleteUIManager.My.Init(str, () => {
+                PlayerData.My.DeleteRole(currentRole.ID);
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str1 = "DeleteRole|";
+                    str1 += currentRole.ID.ToString();
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str1);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str1);
+                    }
+                }
+            });
         });
         changeRoleButton.onClick.AddListener(() =>
         {
@@ -85,19 +105,74 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         {
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要清空仓库吗？";
-            
+            if (PlayerData.My.guanJianZiYuanNengLi[5])
+            {
+                str = "确定要将仓库中的产品低价处理吗?";
+            }
+
             DeleteUIManager.My.Init(str, () => {
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str1 = "ClearWarehouse|";
+                    str1 += currentRole.ID.ToString();
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str1);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str1);
+                    }
+                }
                 PlayerData.My.GetMapRoleById(currentRole.ID).ClearWarehouse();
                 ReInit(currentRole);
+            });
+        });
+        sellRole.onClick.AddListener(() => {
+            gameObject.SetActive(false);
+            NewCanvasUI.My.Panel_Delete.SetActive(true);
+            string str = "确定要出售" + currentRole.baseRoleData.roleName + "吗？";
+
+            DeleteUIManager.My.Init(str, () => {
+                PlayerData.My.SellRole(currentRole.ID);
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str1 = "DeleteRole|";
+                    str1 += currentRole.ID.ToString();
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str1);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str1);
+                    }
+                }
             });
         });
         buffcontent.SetActive(false);
     }
 
+    List<string> sceneName = new List<string> { "FTE_1", "FTE_0-1", "FTE_0-2" };
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+        {
+            if (currentRole != null && currentRole.EquipList.Count == 0 && currentRole.peoPleList.Count == 0)
+            {
+                emptyEquip.SetActive(true);
+            }
+            else
+            {
+                emptyEquip.SetActive(false);
+            }
+        }
+        else
+        {
+            emptyEquip.SetActive(false);
+        }
     }
 
     public void SetDependency()
@@ -120,7 +195,21 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         dealer.SetActive(false);
         nextLevel = role.baseRoleData.level+1;
         currentLevel = role.baseRoleData.level;
-        GetComponentInChildren<UpdateRole>().Init();
+        if (GetComponentInChildren<UpdateRole>())
+        {
+            GetComponentInChildren<UpdateRole>().Init();
+
+        }
+        sellRole.gameObject.SetActive(false);
+        if (PlayerData.My.yeWuXiTong[5] && role.baseRoleData.level >= 3)
+        {
+            sellRole.gameObject.SetActive(true);
+        }
+        if (PlayerData.My.guanJianZiYuanNengLi[5])
+        {
+            clearWarehouse.GetComponentInChildren<Text>().text = "清仓(" + PlayerData.My.GetMapRoleById(role.ID).CountWarehouseIncome() + ")";
+            clearWarehouse.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Talent/Warehouse");
+        }
         ReInit(role);
         if (currentLevel >= 5)
         {
@@ -134,6 +223,23 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         }
         InitBuff();
         DataUploadManager.My.AddData(DataEnum.角色_查看自己属性);
+        switch (role.baseRoleData.roleType)
+        {
+            case GameEnum.RoleType.Seed:
+                DataUploadManager.My.AddData(DataEnum.角色_查看自己种子商属性);
+                break;
+            case GameEnum.RoleType.Peasant:
+                DataUploadManager.My.AddData(DataEnum.角色_查看自己农民属性);
+                break;
+            case GameEnum.RoleType.Merchant:
+                DataUploadManager.My.AddData(DataEnum.角色_查看自己贸易商属性);
+                break;
+            case GameEnum.RoleType.Dealer:
+                DataUploadManager.My.AddData(DataEnum.角色_查看自己零售商属性);
+                break;
+            default:
+                break;
+        }
     }
 
     public void InitBuff()

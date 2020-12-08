@@ -12,7 +12,15 @@ public class ProductSeed : BaseSkill
     private int currentCount = 0;
     public override void Skill()
     {
+        if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+        {
+            return;
+        }
         if (role.tradeList.Count <= 0)
+        {
+            return;
+        }
+        if (role.encourageLevel <= -3)
         {
             return;
         }

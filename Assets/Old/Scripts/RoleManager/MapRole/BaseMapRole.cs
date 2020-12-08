@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static GameEnum;
 
 [Serializable]
@@ -15,6 +16,7 @@ public class BaseMapRole : MonoBehaviour
     /// <summary>
     /// 仓库
     /// </summary>
+    
     public List<ProductData> warehouse;
 
     public List<ProductData> trash = new List<ProductData>();
@@ -104,6 +106,20 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public int startEncourageLevel;
 
+    public List<TradeSign> startTradeList = new List<TradeSign>();
+
+    public List<TradeSign> endTradeList = new List<TradeSign>();
+
+    public int totalUpgradeCost;
+
+    public RoleSprite roleSprite;
+
+    public GameObject emptyGearSprite;
+
+    public GameObject stopWorkSprite;
+
+    public bool isSell = false;
+
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
@@ -140,6 +156,23 @@ public class BaseMapRole : MonoBehaviour
                 PlayerData.My.MapRole.Add(GetComponent<BaseMapRole>());
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
+        CheckTalentBuff();
+    }
+
+    /// <summary>
+    /// 根据职责隐藏某些物体
+    /// </summary>
+    public void CheckRoleDuty()
+    {
+        if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
+        {
+            roleSprite.gameObject.SetActive(false);
+        }
+        else
+        {
+            roleSprite.gameObject.SetActive(true);
+            roleSprite.CheckSprite();
+        }
     }
 
     /// <summary>
@@ -147,30 +180,46 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void CheckLevel()
     {
-        if (levelModels.Count == 0)
-            return;
-        List<GameEnum.RoleType> typeList = new List<GameEnum.RoleType> { GameEnum.RoleType.Seed, GameEnum.RoleType.Peasant, GameEnum.RoleType.Merchant, GameEnum.RoleType.Dealer };
-        if (!typeList.Contains(baseRoleData.baseRoleData.roleType))
-            return;
-        if (baseRoleData.baseRoleData.level <= 2)
+        if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
+            if (levelModels.Count == 0)
+                return;
+            List<GameEnum.RoleType> typeList = new List<GameEnum.RoleType> { GameEnum.RoleType.Seed, GameEnum.RoleType.Peasant, GameEnum.RoleType.Merchant, GameEnum.RoleType.Dealer };
+            if (!typeList.Contains(baseRoleData.baseRoleData.roleType))
+                return;
+            if (baseRoleData.baseRoleData.level <= 2)
+            {
 
-            levelModels[1].SetActive(false);
-            levelModels[2].SetActive(false);
-            levelModels[0].SetActive(true);
+                levelModels[1].SetActive(false);
+                levelModels[2].SetActive(false);
+                levelModels[0].SetActive(true);
+            }
+            else if (baseRoleData.baseRoleData.level <= 4)
+            {
+                levelModels[0].SetActive(false);
+                levelModels[2].SetActive(false);
+                levelModels[1].SetActive(true);
+            }
+            else if (baseRoleData.baseRoleData.level == 5)
+            {
+                levelModels[0].SetActive(false);
+                levelModels[1].SetActive(false);
+                levelModels[2].SetActive(true);
+            }
         }
-        else if (baseRoleData.baseRoleData.level <= 4)
+        else
         {
-            levelModels[0].SetActive(false);
-            levelModels[2].SetActive(false);
-            levelModels[1].SetActive(true);
+            if (roleSprite != null)
+            {
+                roleSprite.CheckSprite();
+            }
+            else
+            {
+                roleSprite = GetComponentInChildren<RoleSprite>();
+                roleSprite.CheckSprite();
+            }
         }
-        else if (baseRoleData.baseRoleData.level == 5)
-        {
-            levelModels[0].SetActive(false);
-            levelModels[1].SetActive(false);
-            levelModels[2].SetActive(true);
-        }
+
     }
 
     /// <summary>
@@ -181,17 +230,27 @@ public class BaseMapRole : MonoBehaviour
         int result = startEncourageLevel;
         if (isInit)
             baseRoleData.tradeCost -= encourageLevel * 5;
-        for (int i = 0; i < tradeList.Count; i++)
+        //for (int i = 0; i < tradeList.Count; i++)
+        //{
+        //    if (tradeList[i].tradeData.startRole.Equals(baseRoleData.ID.ToString()))
+        //    {
+        //        result += tradeList[i].tradeData.dividePercent;
+        //    }
+        //    else
+        //    {
+        //        result += 4 - tradeList[i].tradeData.dividePercent;
+        //    }
+            
+        //}
+        for (int i = 0; i < startTradeList.Count; i++)
         {
-            if (tradeList[i].tradeData.startRole.Equals(baseRoleData.ID.ToString()))
-            {
-                result += tradeList[i].tradeData.dividePercent;
-            }
-            else
-            {
-                result += 4 - tradeList[i].tradeData.dividePercent;
-            }
-            PlayerData.My.GetMapRoleById(double.Parse(tradeList[i].tradeData.targetRole)).ResetAllBuff();
+            result += startTradeList[i].tradeData.dividePercent;
+            PlayerData.My.GetMapRoleById(double.Parse(startTradeList[i].tradeData.targetRole)).ResetAllBuff();
+        }
+        for (int i = 0; i < endTradeList.Count; i++)
+        {
+            result += 0 - endTradeList[i].tradeData.dividePercent;
+            PlayerData.My.GetMapRoleById(double.Parse(endTradeList[i].tradeData.targetRole)).ResetAllBuff();
         }
         result = Mathf.Min(10, result);
         result = Mathf.Max(result, -5);
@@ -337,6 +396,14 @@ public class BaseMapRole : MonoBehaviour
         }
     }
 
+    public void ReaddAllBuff()
+    {
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            buffList[i].ReaddRoleBuff();
+        }
+    }
+
     /// <summary>
     /// 当濒临破产时
     /// </summary>
@@ -358,8 +425,9 @@ public class BaseMapRole : MonoBehaviour
     {
         transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
-            StageGoal.My.CostPlayerGold(baseRoleData.cost);
-            StageGoal.My.Expend(baseRoleData.cost, ExpendType.ProductCosts, this);
+            int costNum = baseRoleData.cost;
+            StageGoal.My.CostPlayerGold(costNum);
+            StageGoal.My.Expend(costNum, ExpendType.ProductCosts, this);
             MonthlyCost();
         });
     }
@@ -474,7 +542,52 @@ public class BaseMapRole : MonoBehaviour
     {
         DataUploadManager.My.AddData(DataEnum.角色_清仓);
         trash.AddRange(warehouse);
+        if (PlayerData.My.guanJianZiYuanNengLi[5])
+        {
+            int totalGold = CountWarehouseIncome();
+            StageGoal.My.GetPlayerGold(totalGold);
+            StageGoal.My.Income(totalGold,IncomeType.Other,null,"低价处理");
+        }
         warehouse.Clear();
+    }
+
+    public int CountWarehouseIncome()
+    {
+        float result = 0;
+        for (int i = 0; i < warehouse.Count; i++)
+        {
+            switch (warehouse[i].bulletType)
+            {
+                case BulletType.Seed:
+                    {
+                        result += warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.NormalPP:
+                    {
+                        result += 10f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.Bomb:
+                    {
+                        result += 70f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.Lightning:
+                    {
+                        result += 115f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                case BulletType.summon:
+                    {
+                        result += 200f + warehouse[i].damage * 0.1f;
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+        return (int)result;
     }
 
     /// <summary>
@@ -577,7 +690,6 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void LightOn(BaseMapRole start)
     {
-        
         if(!isNpc)
         {
             if (start.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product && baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
@@ -813,14 +925,135 @@ public class BaseMapRole : MonoBehaviour
     /// <param name="active"></param>
     public void HideTradeButton(bool active)
     {
+        if (PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+            return;
         if (tradeButton == null)
             tradeButton = GetComponentInChildren<RoleTradeButton>().transform.parent.gameObject;
         tradeButton.SetActive(active);
     }
 
+    public void CheckTalentBuff()
+    {
+        if (!isNpc)
+        {
+            if (PlayerData.My.guanJianZiYuanNengLi[1])
+            {
+                var buff = GameDataMgr.My.GetBuffDataByID(10022);
+                BaseBuff baseb = new BaseBuff();
+                baseb.Init(buff);
+                baseb.SetRoleBuff(null, this, this);
+            }
+            if (PlayerData.My.guanJianZiYuanNengLi[2])
+            {
+                var buff = GameDataMgr.My.GetBuffDataByID(10023);
+                BaseBuff baseb = new BaseBuff();
+                baseb.Init(buff);
+                baseb.SetRoleBuff(null, this, this);
+            }
+        }
+        if (baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+        {
+            if (PlayerData.My.guanJianZiYuanNengLi[5])
+            {
+                var buff = GameDataMgr.My.GetBuffDataByID(10026);
+                BaseBuff baseb = new BaseBuff();
+                baseb.Init(buff);
+                baseb.SetRoleBuff(null, this, this);
+            }
+        }
+        if (baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        {
+            if (PlayerData.My.yeWuXiTong[1])
+            {
+                var buff = GameDataMgr.My.GetBuffDataByID(10032);
+                BaseBuff baseb = new BaseBuff();
+                baseb.Init(buff);
+                baseb.SetRoleBuff(null, this, this);
+            }
+        }
+    }
+
+    public string GetWarehouseJson()
+    {
+        List<ProductData> data = new List<ProductData>();
+         
+        for (int i = 0; i <warehouse.Count; i++)
+        {
+            warehouse[i].RepeatBulletCount = 0;
+            bool issame =false;
+            for (int j = 0; j <data.Count; j++)
+            {
+                if (data[j].CheckSame(warehouse[i]))
+                {
+                    issame = true; 
+                    data[j].RepeatBulletCount++;
+                    break;
+          
+                }
+            }
+
+            if (!issame)
+            {
+                data.Add(warehouse[i]);
+            }
+
+        }
+
+        List<SendProductData> sendProductddata = new List<SendProductData>();
+        for (int i = 0; i < data.Count; i++)
+        { 
+            sendProductddata.Add(new SendProductData(data[i]));
+        }
+        SendProductDataList list = new SendProductDataList();
+        list.datas = sendProductddata;
+        Debug.Log(JsonUtility.ToJson(list) );
+        return JsonUtility.ToJson(list);
+    }
 
     private void OnDestroy()
     {
 
+    }
+    List<string> sceneName = new List<string> { "FTE_1", "FTE_0-1", "FTE_0-2" };
+
+    private void Update()
+    {
+        if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+        {
+            if (!isNpc)
+            {
+                if (baseRoleData.EquipList.Count == 0 && baseRoleData.peoPleList.Count == 0 && baseRoleData.inMap)
+                {
+                    emptyGearSprite.SetActive(true);
+                }
+                else
+                {
+                    emptyGearSprite.SetActive(false);
+                }
+            }
+            if (stopWorkSprite != null)
+            {
+                if (encourageLevel <= -3 && !(isNpc && npcScript.isLock))
+                {
+                    stopWorkSprite.gameObject.SetActive(true);
+                }
+                else
+                {
+                    stopWorkSprite.gameObject.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            if (!isNpc)
+            {
+                emptyGearSprite.SetActive(false);
+            }
+            if (stopWorkSprite != null)
+            {
+                stopWorkSprite.gameObject.SetActive(false);
+            }
+
+        }
     }
 }

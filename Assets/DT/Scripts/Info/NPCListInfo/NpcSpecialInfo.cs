@@ -50,11 +50,29 @@ public class NpcSpecialInfo : MonoBehaviour
         level.text = npc.baseRoleData.baseRoleData.level.ToString();
         HideAll();
         encourageLevel.Init(npc);
+        ClearBulletContent();
         clearBullets.onClick.RemoveAllListeners();
         clearBullets.onClick.AddListener(()=> {
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要清空仓库吗？";
+            if (PlayerData.My.guanJianZiYuanNengLi[5])
+            {
+                str = "确定要将仓库中的产品低价处理吗?";
+            }
             DeleteUIManager.My.Init(str, () => {
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str1 = "ClearWarehouse|";
+                    str1 += npc.baseRoleData.ID.ToString();
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str1);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str1);
+                    }
+                }
                 //PlayerData.My.GetMapRoleById(npc.baseRoleData.ID).ClearWarehouse();
                 npc.ClearWarehouse();
                 SetInfo(npc, baseSkill, npcTF);
@@ -62,6 +80,11 @@ public class NpcSpecialInfo : MonoBehaviour
             });
         });
         icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.baseRoleData.baseRoleData.roleType.ToString() + (npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level == 0 ? 1 : npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level).ToString());
+        if (PlayerData.My.guanJianZiYuanNengLi[5])
+        {
+            clearBullets.GetComponentInChildren<Text>().text = "清仓(" + PlayerData.My.GetMapRoleById(npc.baseRoleData.ID).CountWarehouseIncome() + ")";
+            clearBullets.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Talent/Warehouse");
+        }
         //ClearBulletContent();
         switch (npc.baseRoleData.baseRoleData.roleType)
         {
@@ -160,7 +183,17 @@ public class NpcSpecialInfo : MonoBehaviour
             Pruductgame.GetComponent<NpcBulletSign>().currentProduct =
                 npc.GetComponent<ProductSeed>().productDatas[npc.GetComponent<ProductSeed>().productDatas.Count - i];
             Pruductgame.GetComponent<Image>().sprite = seedSpeed;
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = npc.GetComponent<BaseMapRole>().GetComponent<ProductSeed>()
+                    .productDatas[npc.GetComponent<BaseMapRole>().GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            }
         }
+
     }
 
     void ShowPeasantBullet(Transform npc)
@@ -179,6 +212,15 @@ public class NpcSpecialInfo : MonoBehaviour
             Pruductgame.GetComponent<NpcBulletSign>().currentProduct =
                 npc.GetComponent<ProductMelon>().productDatas[npc.GetComponent<ProductMelon>().productDatas.Count - i];
             Pruductgame.GetComponent<Image>().sprite = normallpp;
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = npc.GetComponent<BaseMapRole>().GetComponent<ProductSeed>()
+                    .productDatas[npc.GetComponent<BaseMapRole>().GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            }
         }
     }
 
@@ -209,6 +251,14 @@ public class NpcSpecialInfo : MonoBehaviour
                     break;
 
             }
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.warehouse[i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            }
 
         }
     }
@@ -235,6 +285,14 @@ public class NpcSpecialInfo : MonoBehaviour
                 case BulletType.summon:
                     Pruductgame.GetComponent<Image>().sprite = tow;
                     break;
+            }
+            if (PlayerData.My.client != null)
+            {
+                Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.warehouse[i].RepeatBulletCount.ToString();
+            }
+            else
+            {
+                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
             }
         }
     }

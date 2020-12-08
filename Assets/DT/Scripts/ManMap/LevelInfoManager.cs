@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +37,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public Action loadScene;
 
     public Sprite levelLockImage;
+    public Sprite levelUnlockImage;
     public Sprite box1OpenedImage;
     public Sprite box2OpenedImage;
     public Sprite box3OpenedImage;
@@ -46,10 +48,17 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
     public RecordList listScript;
 
     public GameObject rankPanel;
+
+    public Toggle conduty;
+
+    public GameObject missionConfirm;
+    public string currentSceneName = "";
+    //public bool stepOver = false;
     // Start is called before the first frame update
     void Start()
     {
         panel.SetActive(false);
+        //stepOver = false;
         listScript.gameObject.SetActive(false);
         rankPanel.SetActive(false);
         close.onClick.AddListener(() =>
@@ -59,7 +68,45 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
             rankPanel.SetActive(false);
 
         });
-        play.onClick.AddListener(() => { loadScene(); });
+        play.onClick.AddListener(() =>
+        {
+            if (PlayerData.My.server != null)
+            {
+                string str1 = "ConfirmDuty|";
+             //  if (conduty.isOn)
+             //  {
+                    str1 += "1,0,0,1,1,1,1,1"; 
+                      NetManager.My.ConfirmDuty("1,0,0,1,1,1,1,1");
+           //    }
+           //    else
+           //    {
+           //        str1 += "0,1,1,0,0,0,0,0"; 
+           //        NetManager.My.ConfirmDuty( "0,1,1,0,0,0,0,0");
+
+           //    } 
+                 
+                 PlayerData.My.server.SendToClientMsg(str1);
+                transform.DORotate(Vector3.zero,0.5f ).Play().OnComplete(()=>{
+                    PlayerData.My.server.SendToClientMsg("OpenDutyConfirmUI|1");
+                    missionConfirm.SetActive(true);
+                });
+         
+            }
+            else
+            {
+                if (PlayerData.My.isSOLO)
+                {
+                    
+                loadScene(); 
+                }
+                //if (currentSceneName.Equals("FTE_2"))
+                //{
+                //    stepOver = true;
+                //}
+            }
+            
+            
+        });
         isUseGuide.onValueChanged.AddListener((bool b) =>
         {
             //print(b);
@@ -123,6 +170,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         //if (int.Parse(sceneName.Split('_')[1]) >= 5 && int.Parse(sceneName.Split('_')[1]) <= 8)
         //    isUseGuide.gameObject.SetActive(false);
         isUseGuide.gameObject.SetActive(true);
+        currentSceneName = sceneName;
         if (star[0] == '1')
         {
             PlayerPrefs.SetInt("isUseGuide", 0);

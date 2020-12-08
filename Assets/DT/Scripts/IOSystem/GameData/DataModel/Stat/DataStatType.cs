@@ -34,3 +34,11 @@ public enum CostTpType
     Mirror,
     Unlock
 }
+
+public enum ScoreType
+{
+    消费者得分,
+    口味额外得分,
+    金钱得分,
+    其他得分
+}

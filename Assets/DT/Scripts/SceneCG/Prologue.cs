@@ -7,9 +7,10 @@ public class Prologue : MonoBehaviour
 {
     public void PrologueOn()
     {
+
         NewCanvasUI.My.GamePause(false);
         GuideManager.My.guideClose.gameObject.SetActive(false);
-        CameraPlay.WidescreenH_ON(Color.black,1);
+        CameraPlay.WidescreenH_ON(Color.black, 1);
     }
 
     public void PrologueOff()
@@ -20,7 +21,7 @@ public class Prologue : MonoBehaviour
         {
             NewCanvasUI.My.GameNormal();
             GuideManager.My.guideClose.gameObject.SetActive(true);
-            GuideManager.My.Init();
+           StartCoroutine( GuideManager.My.Init());
         }).Play();
     } 
 }

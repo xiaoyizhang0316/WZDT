@@ -135,6 +135,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     groupID = playerDatas.groupID;
                     playerLimit = playerDatas.limit;
                     InitRoleFoundDic(playerDatas.roleFound);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     //Debug.Log(playerID + " " + token);
                     //Debug.Log("token-----" + token);
                     doSuccess?.Invoke();
@@ -174,6 +175,37 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }
     }
 
+    public void SetPlayerStatus(string sceneName, string teamID, Action doSuccess=null, Action doFail=null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        keyValues.Add("sceneName", sceneName);
+        keyValues.Add("teamID", teamID);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.SetPlayerStatusScene, (www) => {
+            //HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            //if (response.status == -1)
+            //{
+            //    ShowReconn();
+            //    return;
+            //}
+            //if (response.status == 0)
+            //{
+            //    HttpManager.My.ShowTip(response.errMsg);
+            //    Debug.Log(response.errMsg);
+            //    doFail?.Invoke();
+            //}
+            //else
+            //{
+            //    Debug.Log(response.data);
+                
+            //    doSuccess?.Invoke();
+            //}
+            SetMask();
+        }, keyValues, HttpType.Post));
+    }
+
     /// <summary>
     /// 更新看过的角色
     /// </summary>
@@ -193,6 +225,82 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             roleFound = roleFound.Substring(0, roleFound.Length - 1);
         //}
         UpdatePlayerDatas(0, 0, roleFound);
+    }
+
+    public void UpdateTalent( Action doSuccess = null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("talent", PlayerData.My.GeneratePlayerTalent());
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerTalent, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                Debug.Log(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                Debug.Log(response.data);
+                try
+                {
+                    playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    InitRoleFoundDic(playerDatas.roleFound);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
+                    doSuccess?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.UpdatePlayerTalent));
+    }
+
+    public void UpdateUnlockStatus(string unlockStatus, Action doSuccess = null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("unlockStatus", unlockStatus);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerUnlockStatus, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                Debug.Log(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                Debug.Log(response.data);
+                try
+                {
+                    playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    InitRoleFoundDic(playerDatas.roleFound);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
+                    doSuccess?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.UpdatePlayerUnlockStatus));
     }
 
     public void ReConnect(Action doSuccess=null)
@@ -218,6 +326,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 token = playerDatas.token;
                 playerLimit = playerDatas.limit;
                 InitRoleFoundDic(playerDatas.roleFound);
+                PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                 if (SceneManager.GetActiveScene().name.StartsWith("FTE")&& SceneManager.GetActiveScene().name!="FTE_0")
                 {
                     StageGoal.My.CheckAfterReconnect();
@@ -226,6 +335,38 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     SceneManager.LoadScene("Map");
                 }
+                doSuccess?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post));
+    }
+
+    public void ConnectToMap(Action doSuccess = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.ReConnUrl, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                GoToLogin("连接失败！");
+                return;
+            }
+            else
+            {
+                playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                if (playerDatas.isOutDate)
+                {
+                    GoToLogin("账号失效！");
+                    return;
+                }
+                token = playerDatas.token;
+                playerLimit = playerDatas.limit;
+                InitRoleFoundDic(playerDatas.roleFound);
+                PlayerData.My.ParsePlayerTalent(playerDatas.talent);
+                SceneManager.LoadScene("Map");
+                
                 doSuccess?.Invoke();
             }
             SetMask();
@@ -278,6 +419,10 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("playerID", playerID);
         keyValues.Add("recordID", loginRecordID);
         keyValues.Add("token", token);
+        if (!PlayerData.My.isSOLO)
+        {
+            keyValues.Add("teamID", currentBattleTeamAcount.teamID);
+        }
 
         StartCoroutine(HttpManager.My.HttpSend(Url.Logout, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
@@ -411,6 +556,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
                     InitRoleFoundDic(playerDatas.roleFound);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -456,6 +602,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     //Debug.Log(response.data);
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    InitRoleFoundDic(playerDatas.roleFound);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -536,6 +684,128 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             SetMask();
         }, keyValues, HttpType.Get, HttpId.getCatchLevelID));
+    }
+    public PlayerGroupInfo playerGroupInfo;
+    public void GetPlayerGroupInfo(Action doSuccess, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        keyValues.Add("groupID", groupID.ToString());
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetPlayerGroupInfo, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                Debug.LogWarning(response.data);
+                playerGroupInfo = JsonUtility.FromJson<PlayerGroupInfo>(response.data);
+                doSuccess();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.GetPlayerGroupInfo));
+    }
+    #endregion
+
+    #region team
+    public List<TeamAcount> teamAcounts = new List<TeamAcount>();
+    public TeamAcount currentBattleTeamAcount;
+    public TeamAcount onTeam;
+    public bool isOnTeamBattle = false;
+
+    public void GetPlayerTeamList(Action doSuccess, Action doFail)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetTeamAcounts, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                TeamAcounts tas = JsonUtility.FromJson<TeamAcounts>(response.data);
+                teamAcounts.Clear();
+                for(int i = 0; i< tas.teamAcounts.Count; i++)
+                {
+                    //if(tas.teamAcounts[i].isDisbanded == false)
+                    //{
+                    //    onTeam = tas.teamAcounts[i];
+                    //}
+                    teamAcounts.Add(tas.teamAcounts[i]);
+                }
+                doSuccess();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.GetTeamAcounts));
+    }
+
+    public void BuildTeam(string teamName, List<PlayerDatas> playerDatas,Action doSuccess=null, Action doFail=null)
+    {
+        TeamPlayers teamPlayers = new TeamPlayers(playerDatas);
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        keyValues.Add("groupID", groupID.ToString());
+        keyValues.Add("teamName", teamName);
+        keyValues.Add("playerIDs", teamPlayers.playerIDs);
+        keyValues.Add("playerNames", teamPlayers.playerNames);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.CreateTeamAcount, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                currentBattleTeamAcount = JsonUtility.FromJson<TeamAcount>(response.data);
+                ChangeTeamAcountList(currentBattleTeamAcount);
+                isOnTeamBattle = true;
+                doSuccess();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.CreateTeamAcount));
+    }
+
+    private void ChangeTeamAcountList(TeamAcount ta)
+    {
+        for(int i=0; i<teamAcounts.Count; i++)
+        {
+            if (teamAcounts[i].teamID == ta.teamID)
+            {
+                teamAcounts.RemoveAt(i);
+                break;
+            }
+        }
+        teamAcounts.Add(ta);
     }
     #endregion
 
@@ -638,6 +908,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 catch (Exception ex)
                 {
                     Debug.Log(ex.TargetSite);
+                    Debug.Log(ex.StackTrace);
                     Debug.Log(ex.Message);
                 }
             }
@@ -664,7 +935,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
     #endregion
-
+    public TeamConfiguration teamConfiguration;
+    public bool isServer = false;
     /// <summary>
     /// 上传复盘数据
     /// </summary>
@@ -679,6 +951,20 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             keyValues.Add("token", token);
             keyValues.Add("playerID", playerID);
             keyValues.Add("data", CompressUtils.Compress(JsonUtility.ToJson(playerReplay)));
+            keyValues.Add("talent", PlayerData.My.GeneratePlayerTalentReview());
+            if (!PlayerData.My.isSOLO)
+            {
+                if(PlayerData.My.isServer)// is server
+                {
+                    keyValues.Add("teamID", currentBattleTeamAcount.teamID);
+                    keyValues.Add("teamName", currentBattleTeamAcount.teamName);
+                    keyValues.Add("teamConfiguration", "");
+                }
+                else
+                {
+                    return;
+                }
+            }
 
             StartCoroutine(HttpManager.My.HttpSend(Url.AddReplayData, (www) => {
                 HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
@@ -1033,6 +1319,44 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 playerEquips = JsonUtility.FromJson<PlayerEquips>(httpResponse.data);
                 playerEquipsList.Clear();
                 foreach(var pe in playerEquips.playerEquips)
+                {
+                    playerEquipsList.Add(pe);
+                }
+                Debug.LogWarning(playerEquipsList.Count + "=========playerequip");
+                doSuccess?.Invoke(playerEquipsList);
+            }
+            else
+            {
+                doFail?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.getEquipID));
+    }
+    public string poorPlayerID = "";
+    public void GetPoorPlayerEquips(Action<List<PlayerEquip>> doSuccess = null, Action doFail = null)
+    {
+        if (poorPlayerID.Equals(""))
+        {
+            doSuccess(new List<PlayerEquip>());
+            return;
+        }
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("poorPlayerID", poorPlayerID);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetEquips, (www) => {
+            HttpResponse httpResponse = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (httpResponse.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (httpResponse.status == 1)
+            {
+                playerEquips = JsonUtility.FromJson<PlayerEquips>(httpResponse.data);
+                playerEquipsList.Clear();
+                foreach (var pe in playerEquips.playerEquips)
                 {
                     playerEquipsList.Add(pe);
                 }

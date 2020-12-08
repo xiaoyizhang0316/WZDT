@@ -460,7 +460,14 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 }
             }
             consumerTypeDatas.Add(temp);
-            consumerWaitTime.Add(temp.consumerType, float.Parse(c.waitTime));
+            if (consumerWaitTime.ContainsKey(temp.consumerType))
+            {
+                consumerWaitTime[temp.consumerType] = float.Parse(c.waitTime);
+            }
+            else
+            {
+                consumerWaitTime.Add(temp.consumerType, float.Parse(c.waitTime));
+            }
         }
     }
 

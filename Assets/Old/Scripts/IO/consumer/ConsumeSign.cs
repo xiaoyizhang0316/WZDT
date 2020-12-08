@@ -7,6 +7,7 @@ using static GameEnum;
 using static DataEnum;
 using DT.Fight.Bullet;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ConsumeSign : MonoBehaviour
 {
@@ -67,9 +68,13 @@ public class ConsumeSign : MonoBehaviour
 
     public GameObject sheep;
 
+    public GameObject spriteLogo;
+
     public BulletType lastHitType;
 
     public int buildingIndex;
+
+    public int consumerIndex;
 
     public int enterMarketingTime = 0;
 
@@ -200,12 +205,22 @@ public class ConsumeSign : MonoBehaviour
         {
             lastHitType = data.bulletType;
             CheckAttackEffect(ref data);
+            CheckProduct(ref data);
             int realDamage = (int)data.damage;
             CheckBulletElement(ref realDamage, data);
             CheckDebuff(data);
             ChangeHealth(realDamage);
             if (transform.TryGetComponent(out Animator ani))
                 ani.SetBool("OnHit", true);
+        }
+    }
+
+    public void CheckProduct(ref ProductData data)
+    {
+        BaseCSB[] buffs = GetComponentsInChildren<BaseCSB>();
+        foreach (var item in buffs)
+        {
+            item.OnProduct(ref data);
         }
     }
 
@@ -222,11 +237,29 @@ public class ConsumeSign : MonoBehaviour
         {
             return;
         }
-        BaseLevelController.My.CountKillNumber(this); 
+        if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1")
+        {
+            BaseLevelController.My.CountKillNumber(this);
+        }
+        if(SceneManager.GetActiveScene().name == "FTE_0-1")
+        {
+            FTE_0_OtherOp.My.InstantiateFlyMoney(transform.position);
+        }
         DeathAward();
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
         ComboManager.My.AddComboNum();
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ConsumerDead|";
+            str += buildingIndex.ToString() + "," + consumerIndex.ToString() + ",";
+            str += ((int)(consumeData.killSatisfy * scorePer)).ToString() + ",";
+            str += consumeData.killMoney.ToString();
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+        }
     }
 
     /// <summary>
@@ -234,6 +267,15 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void OnAlive()
     {
+        if (PlayerData.My.qiYeJiaZhi[4])
+        {
+            int number = UnityEngine.Random.Range(0, 101);
+            if (number <= 30)
+            {
+                tweener.Restart();
+                return;
+            }
+        }
         LivePunish();
         Stop();
         Destroy(gameObject);
@@ -260,6 +302,18 @@ public class ConsumeSign : MonoBehaviour
     {
         if (isCanSelect)
         {
+            List<ConsumerType> lists = new List<ConsumerType> { ConsumerType.OldpaoLegendary,ConsumerType.GoldencollarLegendary,ConsumerType.EliteLegendary,
+                ConsumerType.BluecollarLegendary,ConsumerType.WhitecollarLegendary};
+            if (lists.Contains(consumerType) && PlayerData.My.dingWei[3])
+            {
+                num = num * 120 / 100;
+            }
+            if (PlayerData.My.yingLiMoShi[5])
+            {
+                int gold = (int)(num * 0.45f);
+                StageGoal.My.GetPlayerGold(gold);
+                StageGoal.My.Income(gold, IncomeType.Consume);
+            }
             currentHealth += num;
             if (currentHealth <= 0)
                 currentHealth = 0;
@@ -272,15 +326,38 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void DeathAward()
     {
-        StageGoal.My.GetSatisfy((int)(consumeData.killSatisfy * scorePer));
-        if (scorePer > 1f)
+        int baseScore = consumeData.killSatisfy;
+        if (PlayerData.My.qiYeJiaZhi[0])
         {
-            StageGoal.My.ConsumerExtraPerTip();
-            DataUploadManager.My.AddData(消费者_口味击杀);
+            baseScore = baseScore * 110 / 100;
         }
 
-        StageGoal.My.GetPlayerGold(consumeData.killMoney);
-        StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
+        StageGoal.My.GetSatisfy(baseScore);
+        StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy);
+        if (scorePer > 1f)
+        {
+            if (PlayerData.My.qiYeJiaZhi[1])
+            {
+                scorePer *= 1.2f;
+            }
+            if (PlayerData.My.qiYeJiaZhi[2])
+            {
+                StageGoal.My.LostHealth(2);
+            }
+            StageGoal.My.ConsumerExtraPerTip();
+            DataUploadManager.My.AddData(消费者_口味击杀);
+            StageGoal.My.ScoreGet(ScoreType.口味额外得分, (int)(baseScore * (scorePer - 1f)));
+        }
+        int baseGold = consumeData.killMoney;
+        if (PlayerData.My.yingLiMoShi[0])
+        {
+            baseGold = baseGold * 110 / 100;
+        }
+        if (!PlayerData.My.yingLiMoShi[5])
+        {
+            StageGoal.My.GetPlayerGold(baseGold);
+            StageGoal.My.Income(baseGold, IncomeType.Consume);
+        }
         StageGoal.My.killNumber++;
     }
 
@@ -291,6 +368,7 @@ public class ConsumeSign : MonoBehaviour
     {
         StageGoal.My.LostHealth(consumeData.liveSatisfy);
         StageGoal.My.GetSatisfy((consumeData.killSatisfy * currentHealth / consumeData.maxHealth));
+        StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy * currentHealth / consumeData.maxHealth);
         StageGoal.My.ConsumerAliveTip();
     }
 
@@ -315,6 +393,10 @@ public class ConsumeSign : MonoBehaviour
         if (isNormal)
         {
             per += elementResistance[ProductElementType.Normal] / 100f - 1f;
+        }
+        if (per < 1f && PlayerData.My.dingWei[2])
+        {
+            per = Mathf.Min(0.9f, per + 0.1f);
         }
         scorePer = Mathf.Max(1f,per);
         damage = (int)(damage * per);
@@ -415,6 +497,16 @@ public class ConsumeSign : MonoBehaviour
     {
         float speedAdd = num / 100f;
         tweener.timeScale += speedAdd;
+        if (!PlayerData.My.isSOLO)
+        {
+            string str = "ConsumerChangeSpeed|";
+            str += gameObject.GetInstanceID().ToString() + ",";
+            str += speedAdd.ToString();
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str);
+            }
+        }
         //print("移动速度：" + tweener.timeScale.ToString());
     }
 
@@ -483,32 +575,45 @@ public class ConsumeSign : MonoBehaviour
 
     private void Update()
     {
- 
         //print(tweener.ElapsedPercentage(false));
-        if(isIgnoreResistance)
+        if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
-            try
+            spriteLogo.gameObject.SetActive(false);
+            hud.gameObject.SetActive(true);
+            if (isIgnoreResistance)
             {
-                self.SetActive(false);
-                sheep.SetActive(true);
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    self.SetActive(false);
+                    sheep.SetActive(true);
+                }
+                catch (Exception ex)
+                {
 
+                }
+            }
+            else
+            {
+                try
+                {
+                    self.SetActive(true);
+                    sheep.SetActive(false);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
         }
         else
         {
-            try
-            {
-                self.SetActive(true);
-                sheep.SetActive(false);
-            }
-            catch (Exception ex)
-            {
-
-            }
+            self.SetActive(false);
+            sheep.SetActive(false);
+            hud.gameObject.SetActive(false);
+            spriteLogo.gameObject.SetActive(true);
+            spriteLogo.transform.eulerAngles = new Vector3(-90, 0, -135);
         }
+        
     }
 
     private void Start()

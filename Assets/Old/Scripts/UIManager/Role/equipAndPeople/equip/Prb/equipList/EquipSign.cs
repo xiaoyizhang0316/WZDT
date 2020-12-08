@@ -5,6 +5,7 @@ using DG.Tweening;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -73,6 +74,9 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private Vector2 startPos;
 
     private GameObject cam;
+
+
+    public GameObject LevelUI;
     private void Awake()
     {
         EquipListManager.My._signs.Add(this);
@@ -88,6 +92,16 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     /// <param name="_isEquiped"></param>
     public void Init(int id, bool _isEquiped)
     {
+        if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1])  >3)
+        {
+            LevelUI.SetActive(true);
+        }
+        else
+        {
+            LevelUI.SetActive(false);
+            
+        }
+
         ID = id;
         SetOccupyStatus(_isEquiped);
         gearData = GameDataMgr.My.GetGearData(id);
@@ -189,7 +203,6 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         if (Input.GetMouseButton(1))
             return;
-        Debug.Log(time);
         time += Time.deltaTime;
         if (Equip == null || isOccupation)
         {

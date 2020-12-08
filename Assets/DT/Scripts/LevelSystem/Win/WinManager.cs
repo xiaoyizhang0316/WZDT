@@ -74,6 +74,12 @@ public class WinManager : MonoSingleton<WinManager>
     public GameObject effect_1;
     public GameObject effect_2;
     public GameObject effect_3;
+
+    public Text scoreInfo;
+
+    public Button tips;
+    
+    
     void AddEquipGear(List<GearData> gearDatas)
     {
         foreach (var g in gearDatas)
@@ -103,6 +109,17 @@ public class WinManager : MonoSingleton<WinManager>
         }
     }
 
+    public void Update()
+    {
+        if (returnMap.interactable)
+        {
+            tips.gameObject.SetActive(false);
+        }
+        else
+        {
+            tips.gameObject.SetActive(true);
+        }
+    }
 
     public void InitWin()
     {
@@ -110,6 +127,7 @@ public class WinManager : MonoSingleton<WinManager>
         effect_2.SetActive(false);
         effect_3.SetActive(false);
         StageGoal.My.endTime = TimeStamp.GetCurrentTimeStamp();
+        InitScoreText();
         star1Con.text = BaseLevelController.My.starOneCondition;
         star2Con.text = BaseLevelController.My.starTwoCondition;
         star3Con.text = BaseLevelController.My.starThreeCondition;
@@ -126,6 +144,19 @@ public class WinManager : MonoSingleton<WinManager>
         retry.onClick.AddListener(() => {
             PlayerData.My.Reset();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (!PlayerData.My.isSOLO)
+            {
+                string str = "LoadScene|";
+                str += SceneManager.GetActiveScene().name;
+                if (PlayerData.My.isServer)
+                {
+                    PlayerData.My.server.SendToClientMsg(str);
+                }
+                else
+                {
+                    PlayerData.My.client.SendToServerMsg(str);
+                }
+            }
         });
         boxs.SetActive(false);
         isStar_0 = BaseLevelController.My.starOneStatus;
@@ -360,6 +391,16 @@ public class WinManager : MonoSingleton<WinManager>
         CheckNext();
     }
 
+    public void InitScoreText()
+    {
+        string str = "";
+        foreach (var item in StageGoal.My.scoreStats)
+        {
+            str += item.Key.ToString() + ":" + item.Value + "  ";
+        }
+        scoreInfo.text = str;
+    }
+
     private void UploadReplayData()
     {
         NetworkMgr.My.AddReplayData(tempReplay);
@@ -529,6 +570,23 @@ public class WinManager : MonoSingleton<WinManager>
             {
                 PlayerData.My.Reset();
                 SceneManager.LoadScene("Map");
+                if (!PlayerData.My.isSOLO)
+                {
+                    string str = "LoadScene|Map";
+                    if (PlayerData.My.isServer)
+                    {
+                        PlayerData.My.server.SendToClientMsg(str);
+                        NetworkMgr.My.SetPlayerStatus("Map", NetworkMgr.My.currentBattleTeamAcount.teamID);
+                    }
+                    else
+                    {
+                        PlayerData.My.client.SendToServerMsg(str);
+                    }
+                }
+                else
+                {
+                    NetworkMgr.My.SetPlayerStatus("Map", "");
+                }
             }
             else
             {
@@ -551,7 +609,7 @@ public class WinManager : MonoSingleton<WinManager>
     private void CommitProgress()
     {
         NetworkMgr.My.UpdateLevelProgress(NetworkMgr.My.currentLevel, stars, starArr[0] + starArr[1] + starArr[2],
-                    starArr[0] + starArr[1] + starArr[2], 0, () =>
+                    starArr[0] + starArr[1] + starArr[2], StageGoal.My.playerSatisfy, () =>
                     {
                         //PlayerData.My.Reset();
                         //SceneManager.LoadScene("Map");

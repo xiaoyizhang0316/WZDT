@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using static GameEnum;
@@ -37,10 +38,19 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// </summary>
     public List<PlayerConsumable> playerConsumables = new List<PlayerConsumable>();
 
-    /// <summary>
-    /// 玩家技能解锁状态
-    /// </summary>
-    public Dictionary<int, bool> tradeSkillLock = new Dictionary<int, bool>();
+    public List<bool> dingWei = new List<bool>{ false, false, false, false, false, false };
+
+    public List<bool> yeWuXiTong = new List<bool> { false, false, false, false, false, false };
+
+    public List<bool> guanJianZiYuanNengLi = new List<bool> { false, false, false, false, false, false };
+
+    public List<bool> yingLiMoShi = new List<bool> { false, false, false, false, false, false };
+
+    public List<bool> xianJinLiu = new List<bool> { false, false, false, false, false, false };
+
+    public List<bool> qiYeJiaZhi = new List<bool> { false, false, false, false, false, false };
+
+    public List<bool> isOneFinish = new List<bool> { false, false, false, false, false, false };
 
     public bool cheatIndex1 = false;
 
@@ -48,6 +58,15 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public bool cheatIndex3 = false;
 
+    public Client client;
+
+    public Server server;
+
+    //是否是主机
+    public bool isServer = true;
+
+    //是否是单人模式
+    public bool isSOLO = true;
     /// <summary>
     /// 通过名字获得Role信息
     /// </summary>
@@ -126,6 +145,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     {
         DataUploadManager.My.AddData(DataEnum.角色_删除角色);
         Role target = GetRoleById(roleId);
+
         foreach (var v in target.EquipList)
         {
             SetGearStatus(v.Key, false);
@@ -138,11 +158,70 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         BaseMapRole mapRole = GetMapRoleById(roleId);
         if (StageGoal.My.timeCount - mapRole.putTime <= 5)
             StageGoal.My.GetTechPoint(target.baseRoleData.costTech);
+        if (guanJianZiYuanNengLi[2])
+        {
+            if (StageGoal.My.timeCount - mapRole.putTime > 5)
+            {
+                int returnTech = GameDataMgr.My.GetModelData(target.baseRoleData.roleType, 1).costTech * 50 / 100;
+                StageGoal.My.GetTechPoint(returnTech);
+            }
+            int returnGold = mapRole.totalUpgradeCost * 50 / 100;
+            StageGoal.My.GetPlayerGold(returnGold);
+            StageGoal.My.Income(returnGold,IncomeType.Other,null,"删除返现");
+        }
         RoleData.Remove(target);
         MapRole.Remove(mapRole);
         MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
         DeleleRoleOperationRecord(mapRole);
         Destroy(mapRole.gameObject);
+    }
+
+    /// <summary>
+    /// 卖角色
+    /// </summary>
+    public void SellRole(double roleId)
+    {
+        DataUploadManager.My.AddData(DataEnum.角色_删除角色);
+        Role target = GetRoleById(roleId);
+        TradeManager.My.DeleteRoleAllTrade(roleId);
+        BaseMapRole mapRole = GetMapRoleById(roleId);
+        MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
+        SetSellNPC(mapRole);
+
+        RoleData.Remove(target);
+        MapRole.Remove(mapRole);
+        SellRoleOperationRecord(mapRole);
+        Destroy(mapRole.gameObject);
+    }
+
+    public void SetSellNPC(BaseMapRole mapRole)
+    {
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/NPC/" + mapRole.baseRoleData.baseRoleData.roleType));
+        go.transform.SetParent(GameObject.Find("Role").transform);
+        go.transform.position = MapManager.My.GetMapSignByXY(mapRole.posX, mapRole.posY).transform.position + new Vector3(0f, 0.3f, 0f);
+        BaseMapRole role = go.GetComponent<BaseMapRole>();
+        role.baseRoleData.effect = mapRole.baseRoleData.effect;
+        role.baseRoleData.efficiency = mapRole.baseRoleData.efficiency;
+        role.baseRoleData.range = mapRole.baseRoleData.range;
+        role.baseRoleData.tradeCost = mapRole.baseRoleData.tradeCost + mapRole.baseRoleData.cost * 40 / 100;
+        role.baseRoleData.riskResistance = mapRole.baseRoleData.riskResistance;
+        role.baseRoleData.baseRoleData.level = mapRole.baseRoleData.baseRoleData.level;
+        role.baseRoleData.baseRoleData.roleName = mapRole.baseRoleData.baseRoleData.roleName;
+        role.baseRoleData.bulletCapacity = mapRole.baseRoleData.bulletCapacity;
+        role.baseRoleData.ID = mapRole.baseRoleData.ID;
+        role.startEncourageLevel = mapRole.startEncourageLevel;
+        role.encourageLevel = mapRole.startEncourageLevel;
+        role.isSell = true;
+        NPC npcScript = go.GetComponent<NPC>();
+        npcScript.isCanSee = true;
+        npcScript.isLock =false;
+        npcScript.lockNumber = 0;
+        npcScript.isCanSeeEquip = true;
+        go.GetComponent<BaseSkill>().buffList.AddRange(mapRole.GetEquipBuffList());
+        go.GetComponent<NPC>().NPCBuffList.Clear();
+        go.name = mapRole.baseRoleData.baseRoleData.roleName;
+        go.GetComponent<NPC>().BaseInit();
+        go.GetComponent<NPC>().Init();
     }
 
     /// <summary>
@@ -153,6 +232,13 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         List<string> param = new List<string>();
         param.Add(mapRole.baseRoleData.ID.ToString());
         StageGoal.My.RecordOperation(OperationType.DeleteRole, param);
+    }
+
+    public void SellRoleOperationRecord(BaseMapRole mapRole)
+    {
+        List<string> param = new List<string>();
+        param.Add(mapRole.baseRoleData.ID.ToString());
+        StageGoal.My.RecordOperation(OperationType.SellRole, param);
     }
 
     /// <summary>
@@ -334,7 +420,353 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         MapRole.Clear();
     }
 
+    /// <summary>
+    /// 读取天赋配置字符串
+    /// </summary>
+    /// <param name="str"></param>
+    public void ParsePlayerTalent(string str)
+    {
+        string[] talentList = str.Split('_');
+        if (talentList.Length != 7)
+        {
+            Debug.Log(str);
+            Debug.LogWarning("天赋读取错误！");
+            for (int i = 0; i < 6; i++)
+            {
+                dingWei[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                guanJianZiYuanNengLi[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                yeWuXiTong[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                xianJinLiu[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                yingLiMoShi[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                qiYeJiaZhi[i] = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                isOneFinish[i] = false;
+            }
+        }
+        else
+        {
+            Debug.Log(str);
+            char[] temp = talentList[0].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                dingWei[i] = temp[i].Equals('1');
+            }
+            temp = talentList[1].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                guanJianZiYuanNengLi[i] = temp[i].Equals('1');
+            }
+            temp = talentList[2].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                yeWuXiTong[i] = temp[i].Equals('1');
+            }
+            temp = talentList[3].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                xianJinLiu[i] = temp[i].Equals('1');
+            }
+            temp = talentList[4].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                yingLiMoShi[i] = temp[i].Equals('1');
+            }
+            temp = talentList[5].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                qiYeJiaZhi[i] = temp[i].Equals('1');
+            }
+            temp = talentList[6].ToCharArray();
+            for (int i = 0; i < 6; i++)
+            {
+                isOneFinish[i] = temp[i].Equals('1');
+            }
+        }    
+    }
+
+    /// <summary>
+    /// 生成天赋简化字符串
+    /// </summary>
+    /// <returns></returns>
+    public string GeneratePlayerTalentReview()
+    {
+        string result = "";
+        int count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (dingWei[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (guanJianZiYuanNengLi[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (yeWuXiTong[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if (xianJinLiu[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if(yingLiMoShi[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        count = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            if(qiYeJiaZhi[i])
+            {
+                count++;
+            }
+        }
+        result += count.ToString();
+        return result;
+    }
+
+    /// <summary>
+    /// 生成玩家天赋字符串
+    /// </summary>
+    /// <returns></returns>
+    public string GeneratePlayerTalent()
+    {
+        string result = "";
+        for (int i = 0; i < dingWei.Count; i++)
+        {
+            result += dingWei[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < guanJianZiYuanNengLi.Count; i++)
+        {
+            result += guanJianZiYuanNengLi[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < yeWuXiTong.Count; i++)
+        {
+            result += yeWuXiTong[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < xianJinLiu.Count; i++)
+        {
+            result += xianJinLiu[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < yingLiMoShi.Count; i++)
+        {
+            result += yingLiMoShi[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < qiYeJiaZhi.Count; i++)
+        {
+            result += qiYeJiaZhi[i] ? '1' : '0';
+        }
+        result += '_';
+        for (int i = 0; i < isOneFinish.Count; i++)
+        {
+            result += isOneFinish[i] ? '1' : '0';
+        }
+        return result;
+    }
+
     private void Start()
     {
+        NetManager.My.Init();
+        //Application.targetFrameRate = 60;
+        //Time.maximumDeltaTime = 0.02f;
+    }
+    
+    #region 玩家权限
+
+    public int playerDutyID= 0 ;
+    /// <summary>
+    /// 0---单人玩家 1- 主手   2 ---副手
+    /// </summary>
+
+    ///切换关卡
+    public int SwitchLevel = 0;
+
+    /// <summary>
+    /// 改变时间
+    /// </summary>
+    public int changeTime = 0;
+
+    /// <summary>
+    /// 使用三镜
+    /// </summary>
+    /// <returns></returns>
+    public int UseThreeMirror = 0;
+
+    /// <summary>
+    /// 创建角色
+    /// </summary>
+    public int creatRole = 0;
+
+    /// <summary>
+    /// 删除角儿
+    /// </summary>
+    public int deleteRole = 0;
+
+    
+    /// <summary>
+    ///  更新角色
+    /// </summary>
+    public int updateRole = 0;
+
+    /// <summary>
+    ///  修改角色装备和人力
+    /// </summary>
+    public int changeEquipAndWorker = 0;
+
+    /// <summary>
+    /// 修改交易
+    /// </summary>
+    public int changeTrad = 0;
+
+    /// <summary>
+    /// 创建交易
+    /// </summary>
+    public int creatTrad = 0;
+
+
+    /// <summary>
+    /// 删除交易
+    /// </summary>
+    public int deleteTrad = 0;
+
+
+
+    /// <summary>
+    /// 初始化角色权限控制
+    /// </summary>
+    public void InitPlayerRightControl( string UseThreeMirror,string creatRole,string deleteRole,string updateRole,string changeEquipAndWorker
+    ,string changeTrad,string creatTrad,string deleteTrad
+    
+    )
+    {
+     
+            SwitchLevel =0;
+            this.changeTime = int.Parse(creatRole);
+            this.UseThreeMirror = int.Parse(UseThreeMirror);
+            this.creatRole =int.Parse(creatRole);
+            this.deleteRole = int.Parse(deleteRole);
+            this.updateRole = int.Parse(updateRole);
+            this.changeEquipAndWorker = int.Parse(changeEquipAndWorker);
+            this.changeTrad = int.Parse(changeTrad);
+            this.creatTrad = int.Parse(creatTrad);
+            this.deleteTrad = int.Parse(deleteTrad);
+      
+    }
+
+    #endregion
+
+    public bool isAllReady = false;
+
+    public bool isLocalReady = false;
+
+    public void CheckGameStart()
+    {
+        Debug.Log("检测ready");
+        if (PlayerPrefs.GetInt("isUseGuide") == 1)
+        {
+            return;
+        }
+        if (isSOLO)
+        {
+            DOTween.PlayAll();
+            DOTween.timeScale = 1f;
+            DOTween.defaultAutoPlay = AutoPlay.All;
+        }
+        else if (isAllReady && isLocalReady)
+        { 
+            if (isServer)
+            {
+                Debug.Log("server ready");
+                NewCanvasUI.My.GameNormal();
+            }
+            else
+            {
+                DOTween.PlayAll();
+                DOTween.timeScale = 1f;
+                DOTween.defaultAutoPlay = AutoPlay.All;
+            }
+        }
+    }
+
+    public string GetEquipUseDetail()
+    {
+        int useCount = 0;
+        for(int i=0; i < playerGears.Count; i++)
+        {
+            if (playerGears[i].isEquiped)
+            {
+                useCount++;
+            }
+        }
+        return useCount + "_" + playerGears.Count;
+    }
+
+    public string GetWorkerUseDetail()
+    {
+        int useCount = 0;
+        for (int i = 0; i < playerWorkers.Count; i++)
+        {
+            if (playerWorkers[i].isEquiped)
+            {
+                useCount++;
+            }
+        }
+        return useCount + "_" + playerWorkers.Count;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                Screen.SetResolution(1920, 1080, true);
+            }
+        }
     }
 }

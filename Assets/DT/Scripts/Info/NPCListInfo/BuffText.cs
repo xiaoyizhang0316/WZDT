@@ -9,6 +9,8 @@ public class BuffText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public BaseMapRole role;
 
+    private int startTime = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,13 +25,23 @@ public class BuffText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
-        if(buff!=null)
+        if (buff != null)
+        {
+            startTime = TimeStamp.GetCurrentTimeStamp() ;
             NPCListInfo.My.ShowBuffInfo(buff.GenerateBuffDesc(role));
+        }
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
         NPCListInfo.My.HideBuffInfo();
+        if (TimeStamp.GetCurrentTimeStamp() - startTime >= 2 && startTime!=0)
+        {
+            // 记录操作
+            DataUploadManager.My.AddData(DataEnum.角色_查看角色Buff);
+            //startTime = 0;
+        }
+        startTime = 0;
     }
 
     public void Reset()

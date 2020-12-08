@@ -21,9 +21,14 @@ public class BankLoan : BaseExtraSkill
     public IEnumerator StartLoan(TradeSign sign)
     {
         int count = 0;
-        StageGoal.My.GetPlayerGold(loanNumber);
-        StageGoal.My.Income(loanNumber,IncomeType.Npc, GetComponentInParent<BaseMapRole>());
-        eachReturn = (int)(loanNumber * (1 + CalculateInterest(PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)))) / timeCount);
+        int actualLoan = loanNumber;
+        if (PlayerData.My.yingLiMoShi[2])
+        {
+            actualLoan = actualLoan * 120 / 100;
+        }
+        StageGoal.My.GetPlayerGold(actualLoan);
+        StageGoal.My.Income(actualLoan, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
+        eachReturn = (int)(actualLoan * (1 + CalculateInterest(PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)))) / timeCount);
         while (count < timeCount)
         {
             Tweener twe = transform.DOScale(1f, 20f);
@@ -42,5 +47,17 @@ public class BankLoan : BaseExtraSkill
         risk = Mathf.Max(risk, 30);
         //print("利率：" + (risk * 0.1f - 3f) / 100f);
         return Mathf.Round((risk * 0.1333f - 4) * 10 )/ 1000f;
+    }
+
+    private new void Start()
+    {
+        base.Start();
+        if (PlayerData.My.yingLiMoShi[2])
+        {
+            var buff = GameDataMgr.My.GetBuffDataByID(10053);
+            BaseBuff baseb = new BaseBuff();
+            baseb.Init(buff);
+            baseb.SetRoleBuff(null, GetComponentInParent<BaseMapRole>(), GetComponentInParent<BaseMapRole>());
+        }
     }
 }

@@ -32,12 +32,15 @@ public class Building : MonoBehaviour
 
     public float buildingWaitTime;
 
+    public List<ConsumeSign> consumeSigns = new List<ConsumeSign>();
+
     /// <summary>
     /// 使用透视镜
     /// </summary>
     public void UseTSJ()
     {
         countDownSprite.transform.parent.gameObject.SetActive(true);
+        countDownSprite.transform.parent.LookAt(Camera.main.transform);
         isUseTSJ = true;
         countDownSprite.fillAmount = 1f;
         countDownSprite.DOFillAmount(0f, 20f).OnComplete(() =>
@@ -143,8 +146,10 @@ public class Building : MonoBehaviour
             protalGameObject.transform.DOScale(new Vector3(1,1,0.52f), 1);
         }
         List<WaveConfig> result = new List<WaveConfig>();
+        consumeSigns.Clear();
         result.AddRange(waveConfigs[waveNumber]);
         result.AddRange(extraConsumer);
+        int index = 0;
         foreach (WaveConfig w in result)
         {
             for (int i = 0; i < w.num; i++)
@@ -157,6 +162,9 @@ public class Building : MonoBehaviour
                 GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
                 go.GetComponent<ConsumeSign>().Init(consumerPathList);
                 go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+                go.GetComponent<ConsumeSign>().consumerIndex = index;
+                consumeSigns.Add(go.GetComponent<ConsumeSign>());
+                index++;
                 go.transform.position = transform.position;
                 go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
                 foreach (int num in w.buffList)
@@ -187,8 +195,43 @@ public class Building : MonoBehaviour
         //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
         while (true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.7f);
             ct = (ConsumerType)(UnityEngine.Random.Range(0, 2)==1?1:8);
+            string path = "Prefabs/Consumer/" + ct.ToString();
+            GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+            go.GetComponent<ConsumeSign>().Init(consumerPathList);
+            go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+            go.transform.position = transform.position;
+            go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+            //foreach (int num in w.buffList)
+            //{
+            //    if (num != -1)
+            //    {
+            //        BuffData buff = GameDataMgr.My.GetBuffDataByID(num);
+            //        BaseBuff baseBuff = new BaseBuff();
+            //        baseBuff.Init(buff);
+            //        baseBuff.SetConsumerBuff(go.GetComponent<ConsumeSign>());
+            //        go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
+            //    }
+            //}
+            float waitTime = 0.35f;
+            Tweener twe = transform.DOScale(1f, waitTime);
+            yield return twe.WaitForCompletion();
+        }
+    }
+
+    public IEnumerator BornEnemy1()
+    {
+        ConsumerType ct;
+        yield return new WaitForSeconds(0.3f);
+        DrawPathLine();
+        protalGameObject.transform.DOScale(new Vector3(1, 1, 0.52f), 1);
+        yield return new WaitForSeconds(0.5f);
+        //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            ct = (ConsumerType)(UnityEngine.Random.Range(0, 2) == 1 ? 1 : 8);
             string path = "Prefabs/Consumer/" + ct.ToString();
             GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
             go.GetComponent<ConsumeSign>().Init(consumerPathList);

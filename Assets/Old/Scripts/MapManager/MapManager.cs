@@ -74,7 +74,7 @@ public class MapManager : MonoSingleton<MapManager>
                 return m;
             }
         }
-        print("-----未找到地块-----");
+        print("-----未找到地块-----" + x + "||||" + y);
         return null;
     }
 
@@ -150,13 +150,17 @@ public class MapManager : MonoSingleton<MapManager>
         role.baseRoleData.bulletCapacity = npc.bulletCount;
         role.baseRoleData.ID = npc.npcID;
         role.startEncourageLevel = npc.startEncourageLevel;
+        if (PlayerData.My.yingLiMoShi[4])
+        {
+            role.startEncourageLevel += 2;
+        }
         role.encourageLevel = npc.startEncourageLevel;
         NPC npcScript = go.GetComponent<NPC>();
         npcScript.isCanSee = npc.isCanSee;
         npcScript.isLock = npc.isLock;
         npcScript.lockNumber = npc.lockNumber;
         npcScript.isCanSeeEquip = npc.isCanSeeEquip;
-        go.GetComponent<BaseSkill>().skillDesc = npc.skillDesc;
+        //go.GetComponent<BaseSkill>().skillDesc = npc.skillDesc;
         go.GetComponent<BaseSkill>().buffList.Clear();
         go.GetComponent<BaseSkill>().goodBaseBuffs.Clear();
         go.GetComponent<BaseSkill>().badBaseBuffs.Clear();
@@ -201,7 +205,25 @@ public class MapManager : MonoSingleton<MapManager>
     public void ReadStageNPCData(string sceneName)
     {
         //TODO
-        string json = OriginalData.My.jsonDatas.GetLevelData(sceneName, true);
+        string json;
+        if (!NetworkMgr.My.useLocalJson)
+        {
+            json = OriginalData.My.jsonDatas.GetLevelData(sceneName, true);
+        }
+        else
+        {
+            WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/StageNPC/" + sceneName + ".json");
+            while(true)
+            {
+                if (www.isDone)
+                {
+                    json = www.text.ToString();
+                    break;
+                }
+            }
+            
+        }
+
         //Debug.Log("+++++++++" + json);
         StageNPCsData stageNPCsData = JsonUtility.FromJson< StageNPCsData >(json );
         //Debug.Log("============" + stageNPCsData.stageNPCItems.Count);

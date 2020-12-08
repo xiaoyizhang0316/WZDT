@@ -193,9 +193,11 @@ public class BossConsumer : ConsumeSign
     public override void DeathAward()
     {
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
-        StageGoal.My.GetPlayerGold(consumeData.killMoney);
-        StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
-
+        if (!PlayerData.My.yingLiMoShi[5])
+        {
+            StageGoal.My.GetPlayerGold(consumeData.killMoney);
+            StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
+        }
     }
 
 
@@ -313,6 +315,12 @@ public class BossConsumer : ConsumeSign
         {
             currentHealth += num;
             StageGoal.My.GetSatisfy(num);
+            if (PlayerData.My.yingLiMoShi[5])
+            {
+                int gold = (int)(num * 0.45f);
+                StageGoal.My.GetPlayerGold(gold);
+                StageGoal.My.Income(gold, IncomeType.Consume);
+            }
             if (currentHealth <= 0)
                 currentHealth = 0;
             HealthCheck();
@@ -583,37 +591,42 @@ public class BossConsumer : ConsumeSign
     private void Update()
     {
         //print(tweener.ElapsedPercentage(false));
-        if (isIgnoreResistance)
+        if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
-            try
+            spriteLogo.gameObject.SetActive(false);
+            if (isIgnoreResistance)
             {
-                self.SetActive(false);
-                sheep.SetActive(true);
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    self.SetActive(false);
+                    sheep.SetActive(true);
+                }
+                catch (Exception ex)
+                {
 
+                }
+            }
+            else
+            {
+                try
+                {
+                    self.SetActive(true);
+                    sheep.SetActive(false);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
         }
         else
         {
-            try
-            {
-                self.SetActive(true);
-                sheep.SetActive(false);
-            }
-            catch (Exception ex)
-            {
-
-            }
+            self.SetActive(false);
+            sheep.SetActive(false);
+            spriteLogo.gameObject.SetActive(true);
+            spriteLogo.transform.eulerAngles = new Vector3(-90, 0, -135);
         }
     }
 
-    private void OnGUI()
-    {
-        if (GUILayout.RepeatButton("扣血"))
-        {
-            ChangeHealth(10000);
-        }
-    }
+
 }

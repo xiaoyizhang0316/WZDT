@@ -86,7 +86,9 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 
     public List<Sprite> encourageStatus;
 
-    private bool startIsCast;
+    public Text startDivideStatus;
+
+    public Text endDivideStatus;
 
     /// <summary>
     /// 打开并初始化
@@ -112,7 +114,6 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         endPer = currentTrade.endPer;
         castRole = currentTrade.tradeData.castRole;
         targetRole = currentTrade.tradeData.targetRole;
-        startIsCast = currentTrade.tradeData.castRole.Equals(currentTrade.tradeData.startRole);
         startRoleTradeCost = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole)).baseRoleData.tradeCost;
         endRoleTradeCost = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole)).baseRoleData.tradeCost;
         InitName();
@@ -201,13 +202,28 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     public void InitDivide()
     {
         divideSlider.value = selectDividePercent;
-        for (int i = 0; i < startStatus.Count; i++)
+        startStatus[0].gameObject.SetActive(selectDividePercent != 0);
+        startStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
+        startStatus[0].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
+        startStatus[1].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
+        endStatus[0].gameObject.SetActive(selectDividePercent != 0);
+        endStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
+        endStatus[0].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
+        endStatus[1].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
+        if (divideSlider.value == -2)
         {
-            startStatus[i].gameObject.SetActive(startIsCast && selectDividePercent > i);
+            endDivideStatus.text = "剩余";
+            startDivideStatus.text = "固定";
         }
-        for (int i = 0; i < endStatus.Count; i++)
+        else if (divideSlider.value == 2)
         {
-            endStatus[i].gameObject.SetActive(!startIsCast && Mathf.Abs(selectDividePercent - 4) > i);
+            endDivideStatus.text = "固定";
+            startDivideStatus.text = "剩余";
+        }
+        else
+        {
+            endDivideStatus.text = "分成";
+            startDivideStatus.text = "分成";
         }
     }
 
@@ -244,39 +260,49 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         selectDividePercent = (int)divideSlider.value;
         switch (selectDividePercent)
         {
+            case -2:
+                startPer = 0.6f;
+                endPer = 1.4f;
+                endDivideStatus.text = "剩余";
+                startDivideStatus.text = "固定";
+                break;
+            case -1:
+                startPer = 0.8f;
+                endPer = 1.2f;
+                endDivideStatus.text = "分成";
+                startDivideStatus.text = "分成";
+                break;
             case 0:
-                startPer = startIsCast?1f:0.6f;
-                endPer = startIsCast?1f:1.4f;
+                startPer = 1f;
+                endPer = 1f;
+                endDivideStatus.text = "分成";
+                startDivideStatus.text = "分成";
                 break;
             case 1:
-                startPer = startIsCast?1.1f:0.7f;
-                endPer = startIsCast?0.9f:1.3f;
+                startPer = 1.2f;
+                endPer = 0.8f;
+                endDivideStatus.text = "分成";
+                startDivideStatus.text = "分成";
                 break;
             case 2:
-                startPer = startIsCast?1.2f:0.8f;
-                endPer = startIsCast?0.8f:1.2f;
-                break;
-            case 3:
-                startPer = startIsCast?1.3f:0.9f;
-                endPer = startIsCast?0.7f:1.1f;
-                break;
-            case 4:
-                startPer = startIsCast?1.4f:1f;
-                endPer = startIsCast?0.6f:1f;
+                startPer = 1.4f;
+                endPer = 0.6f;
+                endDivideStatus.text = "固定";
+                startDivideStatus.text = "剩余";
                 break;
             default:
                 startPer = 1f;
                 endPer = 1f;
                 break;
         }
-        for (int i = 0; i < startStatus.Count; i++)
-        {
-            startStatus[i].gameObject.SetActive(startIsCast && selectDividePercent > i);
-        }
-        for (int i = 0; i < endStatus.Count; i++)
-        {
-            endStatus[i].gameObject.SetActive(!startIsCast && Mathf.Abs(selectDividePercent - 4) > i);
-        }
+        startStatus[0].gameObject.SetActive(selectDividePercent != 0);
+        startStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
+        startStatus[0].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
+        startStatus[1].sprite = encourageStatus[selectDividePercent > 0 ? 0 : 1];
+        endStatus[0].gameObject.SetActive(selectDividePercent != 0);
+        endStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
+        endStatus[0].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
+        endStatus[1].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
         PredictTradeCostChange();
         if (selectCashFlow == currentTrade.tradeData.selectCashFlow)
         {
@@ -292,16 +318,10 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole));
-        if (startIsCast)
-        {
-            startRoleTradeCost = start.baseRoleData.tradeCost + (selectDividePercent - currentTrade.tradeData.dividePercent) * 5;
-            startRolePanel.Find("StartRoleTradeCost").GetComponent<Text>().text = startRoleTradeCost.ToString();
-        }
-        else
-        {
-            endRoleTradeCost = end.baseRoleData.tradeCost + (currentTrade.tradeData.dividePercent - selectDividePercent) * 5;
-            endRolePanel.Find("EndRoleTradeCost").GetComponent<Text>().text = endRoleTradeCost.ToString();
-        }
+        startRoleTradeCost = start.baseRoleData.tradeCost + (selectDividePercent - currentTrade.tradeData.dividePercent) * 5;
+        startRolePanel.Find("StartRoleTradeCost").GetComponent<Text>().text = startRoleTradeCost.ToString();
+        endRoleTradeCost = end.baseRoleData.tradeCost + (currentTrade.tradeData.dividePercent - selectDividePercent) * 5;
+        endRolePanel.Find("EndRoleTradeCost").GetComponent<Text>().text = endRoleTradeCost.ToString();
     }
 
     /// <summary>
@@ -342,6 +362,23 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         currentTrade.startPer = startPer;
         currentTrade.endPer = endPer;
         currentTrade.UpdateEncourageLevel();
+        if (!PlayerData.My.isSOLO)
+        {
+                string str1 = "ChangeTrade|";
+                str1 += currentTrade.tradeData.ID.ToString();
+                str1 += "," + selectCashFlow.ToString();
+                str1 += "," + selectDividePercent;
+                str1 += "," + startPer;
+                str1 += "," + endPer;
+            if (PlayerData.My.isServer)
+            {
+                PlayerData.My.server.SendToClientMsg(str1);
+            }
+            else
+            {
+                PlayerData.My.client.SendToServerMsg(str1);
+            }
+        }
     }
 
     /// <summary>
@@ -368,6 +405,19 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         string str = "确定要删除此交易吗？";
         DeleteUIManager.My.Init(str, () => {
             TradeManager.My.DeleteTrade(currentTrade.tradeData.ID);
+            if (!PlayerData.My.isSOLO)
+            {
+                string str1 = "DeleteTrade|";
+                str1 += currentTrade.tradeData.ID.ToString();
+                if (PlayerData.My.isServer)
+                {
+                    PlayerData.My.server.SendToClientMsg(str1);
+                }
+                else
+                {
+                    PlayerData.My.client.SendToServerMsg(str1);
+                }
+            }
             DataUploadManager.My.AddData(DataEnum.交易_删交易);
         });
     }

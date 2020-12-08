@@ -24,7 +24,7 @@ public class FTE_2_1 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-         NewCanvasUI.My.GamePause();
+         NewCanvasUI.My.GamePause(false);
          
          RoleListManager.My.OutButton();
          yield return new  WaitForSeconds(2f);

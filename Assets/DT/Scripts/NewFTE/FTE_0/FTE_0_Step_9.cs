@@ -29,6 +29,7 @@ public class FTE_0_Step_9 : BaseGuideStep
         if (property != null)
         {
             property.SetActive(false);
+            //RoleEditor.My.SetAllSlider(true);
         }
         NewCanvasUI.My.GamePause(false);
         afterEntry = HandMove;

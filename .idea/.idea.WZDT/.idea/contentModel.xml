@@ -265,6 +265,18 @@
             </e>
           </e>
           <e p="Scripts" t="Include">
+            <e p="Admin" t="Include">
+              <e p="AdminLogin.cs" t="Include" />
+              <e p="AdminManager.cs" t="Include" />
+              <e p="Data" t="Include">
+                <e p="AdminDatas.cs" t="Include" />
+                <e p="PlayerOnlineStatus.cs" t="Include" />
+              </e>
+              <e p="GroupInfos.cs" t="Include" />
+              <e p="GroupItemSample.cs" t="Include" />
+              <e p="GroupSample.cs" t="Include" />
+              <e p="LevelDetailInfo.cs" t="Include" />
+            </e>
             <e p="Audio" t="Include">
               <e p="AudioManager.cs" t="Include" />
             </e>
@@ -304,6 +316,9 @@
                 <e p="BUFF" t="Include">
                   <e p="B_1001.cs" t="Include" />
                   <e p="B_1002.cs" t="Include" />
+                  <e p="BaseCSB.cs" t="Include" />
+                  <e p="CSB_2001.cs" t="Include" />
+                  <e p="CSB_2002.cs" t="Include" />
                 </e>
                 <e p="ConsumerBuffRange.cs" t="Include" />
                 <e p="Elite" t="Include">
@@ -446,6 +461,7 @@
                 <e p="FTEManager.cs" t="Include" />
                 <e p="FTEStep.cs" t="Include" />
                 <e p="FTETween" t="Include">
+                  <e p="AutoSequenceFrame.cs" t="Include" />
                   <e p="BaseTween.cs" t="Include" />
                   <e p="ChangeColor.cs" t="Include" />
                   <e p="ChangeScale.cs" t="Include" />
@@ -577,6 +593,8 @@
                 <e p="Level9Controller.cs" t="Include" />
               </e>
               <e p="Win" t="Include">
+                <e p="BoxEffect.cs" t="Include" />
+                <e p="tipsWin.cs" t="Include" />
                 <e p="WinManager.cs" t="Include" />
               </e>
             </e>
@@ -587,10 +605,24 @@
               <e p="LevelInfoManager.cs" t="Include" />
               <e p="LevelSign.cs" t="Include" />
               <e p="MainMap.cs" t="Include" />
+              <e p="PlayerGroupInfo.cs" t="Include" />
               <e p="RankItem.cs" t="Include" />
               <e p="RankPanel.cs" t="Include" />
               <e p="RecordItem.cs" t="Include" />
               <e p="RecordList.cs" t="Include" />
+              <e p="ToMap.cs" t="Include" />
+              <e p="ToScene.cs" t="Include" />
+            </e>
+            <e p="Multi" t="Include">
+              <e p="MakeGroupPanel.cs" t="Include" />
+              <e p="MessageManager.cs" t="Include" />
+              <e p="TestMulti.cs" t="Include" />
+            </e>
+            <e p="Net" t="Include">
+              <e p="Client.cs" t="Include" />
+              <e p="NetManager.cs" t="Include" />
+              <e p="RoleSprite.cs" t="Include" />
+              <e p="Server.cs" t="Include" />
             </e>
             <e p="Network" t="Include">
               <e p="Common" t="Include">
@@ -626,28 +658,39 @@
               <e p="CommonFTEStep.cs" t="Include" />
               <e p="FTE_0" t="Include">
                 <e p="EditPanel.cs" t="Include" />
+                <e p="FlyMoney.cs" t="Include" />
+                <e p="FTE_01_Step15.cs" t="Include" />
                 <e p="FTE_01_Step_1.cs" t="Include" />
                 <e p="FTE_01_Step_12.cs" t="Include" />
                 <e p="FTE_01_Step_13.cs" t="Include" />
+                <e p="FTE_01_Step_14.cs" t="Include" />
                 <e p="FTE_01_Step_3.cs" t="Include" />
                 <e p="FTE_01_Step_4.cs" t="Include" />
+                <e p="FTE_0_BulletDetail.cs" t="Include" />
+                <e p="FTE_0_OtherOp.cs" t="Include" />
                 <e p="FTE_0_Step_1.cs" t="Include" />
                 <e p="FTE_0_Step_2.cs" t="Include" />
                 <e p="FTE_0_Step_3.cs" t="Include" />
+                <e p="FTE_0_Step_4.cs" t="Include" />
+                <e p="FTE_0_Step_5.cs" t="Include" />
+                <e p="FTE_0_Step_6.cs" t="Include" />
                 <e p="FTE_0_Step_8.cs" t="Include" />
                 <e p="FTE_0_Step_9.cs" t="Include" />
                 <e p="HandMove.cs" t="Include" />
                 <e p="PropertySlider.cs" t="Include" />
                 <e p="RoleEditor.cs" t="Include" />
                 <e p="RoleSet.cs" t="Include" />
+                <e p="TextBling.cs" t="Include" />
               </e>
               <e p="FTE_1" t="Include">
                 <e p="FTE_1_1.cs" t="Include" />
                 <e p="FTE_1_10.cs" t="Include" />
                 <e p="FTE_1_13.cs" t="Include" />
+                <e p="FTE_1_13_2.cs" t="Include" />
                 <e p="FTE_1_15.cs" t="Include" />
                 <e p="FTE_1_16.cs" t="Include" />
                 <e p="FTE_1_17.cs" t="Include" />
+                <e p="FTE_1_18_3.cs" t="Include" />
                 <e p="FTE_1_19.cs" t="Include" />
                 <e p="FTE_1_2.cs" t="Include" />
                 <e p="FTE_1_20.cs" t="Include" />
@@ -668,6 +711,7 @@
               </e>
               <e p="FTE_3" t="Include">
                 <e p="FTE_3_1.cs" t="Include" />
+                <e p="FTE_3_creatTrad.cs" t="Include" />
               </e>
               <e p="FTE_4" t="Include">
                 <e p="CheckClickRole.cs" t="Include" />
@@ -679,6 +723,20 @@
                 <e p="CheckTSJ.cs" t="Include" />
                 <e p="CheckUnlockRole.cs" t="Include" />
               </e>
+              <e p="FTE_MAP" t="Include">
+                <e p="FTE_Map_1.cs" t="Include" />
+                <e p="FTE_Map_2.cs" t="Include" />
+                <e p="FTE_Map_3.cs" t="Include" />
+                <e p="FTE_Map_4.cs" t="Include" />
+                <e p="FTE_Map_5.cs" t="Include" />
+                <e p="FTE_Map_Common.cs" t="Include" />
+                <e p="FTE_Map_End.cs" t="Include" />
+                <e p="MapGuideManager.cs" t="Include" />
+                <e p="MapObject.cs" t="Include" />
+                <e p="MapPrologue.cs" t="Include" />
+                <e p="MaskScale.cs" t="Include" />
+              </e>
+              <e p="FTEData.cs" t="Include" />
               <e p="GuideManager.cs" t="Include" />
               <e p="SoftFTE" t="Include">
                 <e p="SoftFTE.cs" t="Include" />
@@ -688,6 +746,10 @@
                 <e p="SoftFTEData.cs" t="Include" />
               </e>
               <e p="VideoStep.cs" t="Include" />
+            </e>
+            <e p="PermissionManager" t="Include">
+              <e p="MissionConfirm.cs" t="Include" />
+              <e p="PermissionManager.cs" t="Include" />
             </e>
             <e p="RoleSystem" t="Include">
               <e p="Merchant" t="Include">
@@ -700,6 +762,9 @@
             </e>
             <e p="SceneCG" t="Include">
               <e p="Prologue.cs" t="Include" />
+            </e>
+            <e p="Team" t="Include">
+              <e p="TeamAcount.cs" t="Include" />
             </e>
             <e p="Test" t="Include">
               <e p="ToFTE0.cs" t="Include" />
@@ -736,6 +801,7 @@
                 <e p="DeleteUIManager.cs" t="Include" />
               </e>
               <e p="EnemyWave" t="Include">
+                <e p="Client_WaveNumber.cs" t="Include" />
                 <e p="SingleWaveEnemyInfo.cs" t="Include" />
                 <e p="WaveBuffSign.cs" t="Include" />
                 <e p="WaveCount.cs" t="Include" />
@@ -776,6 +842,12 @@
               </e>
               <e p="Role" t="Include">
                 <e p="EncourageLevel.cs" t="Include" />
+              </e>
+              <e p="Talent" t="Include">
+                <e p="TalentButton.cs" t="Include" />
+                <e p="TalentDesc.cs" t="Include" />
+                <e p="TalentItem.cs" t="Include" />
+                <e p="TalentPanel.cs" t="Include" />
               </e>
               <e p="Trade" t="Include">
                 <e p="RoleTradeButton.cs" t="Include" />
@@ -2085,6 +2157,7 @@
             </e>
           </e>
         </e>
+        <e p="NewBehaviourScript.cs" t="Include" />
         <e p="Old" t="Include">
           <e p="a" t="Include">
             <e p="UISkewImage.cs" t="Include" />
