@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 4371678819205436131}
   - component: {fileID: -157732035512335884}
   - component: {fileID: 6591667872335039924}
+  - component: {fileID: 6148037846226945737}
   m_Layer: 0
   m_Name: WholesaleFactory
   m_TagString: MapRole
@@ -118,7 +119,7 @@ MonoBehaviour:
     baseRoleData:
       roleName: "NPC\u6279\u53D1\u5E02\u573A"
       roleType: 10
-      roleSkillType: 0
+      roleSkillType: 1
       level: 0
       effect: 0
       efficiency: 0
@@ -177,6 +178,7 @@ MonoBehaviour:
   startEncourageLevel: 0
   startTradeList: []
   endTradeList: []
+  tasteBuffList: 
   totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
@@ -228,6 +230,22 @@ MonoBehaviour:
   buffList: 
   animationPart: []
   productDatas: []
+--- !u!114 &6148037846226945737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680699951593780966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1a4513a69c24adaa8f64bd86b03d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOpen: 0
+  extraSkillDesc: 
+  maxTradeLimit: -1
+  tasteBuffId: 301
 --- !u!1 &2304728287747825073
 GameObject:
   m_ObjectHideFlags: 0

@@ -110,6 +110,8 @@ public class BaseMapRole : MonoBehaviour
 
     public List<TradeSign> endTradeList = new List<TradeSign>();
 
+    public List<int> tasteBuffList = new List<int>();
+
     public int totalUpgradeCost;
 
     public RoleSprite roleSprite;
@@ -651,6 +653,10 @@ public class BaseMapRole : MonoBehaviour
     public List<int> GetEquipBuffList()
     {
         List<int> bufflist = new List<int>();
+        for (int i = 0; i < tasteBuffList.Count; i++)
+        {
+            bufflist.Add(tasteBuffList[i]);
+        }
         if (isNpc)
         {
             if (GetComponent<BaseNpc>().isCanSeeEquip)

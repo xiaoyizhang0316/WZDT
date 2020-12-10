@@ -4882,6 +4882,7 @@ GameObject:
   - component: {fileID: 1761720248758557462}
   - component: {fileID: 1876834373110284189}
   - component: {fileID: 6276455492902670409}
+  - component: {fileID: 1923684923635664215}
   m_Layer: 0
   m_Name: PackageFactory
   m_TagString: MapRole
@@ -4952,7 +4953,7 @@ MonoBehaviour:
     baseRoleData:
       roleName: "\u5305\u88C5\u5382"
       roleType: 11
-      roleSkillType: 0
+      roleSkillType: 1
       level: 0
       effect: 20
       efficiency: 20
@@ -5011,6 +5012,7 @@ MonoBehaviour:
   startEncourageLevel: 0
   startTradeList: []
   endTradeList: []
+  tasteBuffList: 
   totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
@@ -5062,6 +5064,22 @@ MonoBehaviour:
   buffList: 2e010000
   animationPart: []
   productDatas: []
+--- !u!114 &1923684923635664215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370970118229831483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1a4513a69c24adaa8f64bd86b03d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOpen: 0
+  extraSkillDesc: 
+  maxTradeLimit: -1
+  tasteBuffId: 302
 --- !u!1 &4720203674094380097
 GameObject:
   m_ObjectHideFlags: 0
