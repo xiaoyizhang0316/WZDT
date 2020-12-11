@@ -371,7 +371,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
         {
             if (dealer.GetChild(i).GetComponent<ReviewRoleSign>().isInit)
             {
-                tempList.Add(dealer.GetChild(i).GetComponent<ReviewRoleSign>());
+                tempList.Add(dealer.GetChild(i).GetComponent<ReviewRoleSign>());    
             }
         }
 
