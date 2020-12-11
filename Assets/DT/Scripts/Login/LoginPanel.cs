@@ -165,14 +165,17 @@ public class LoginPanel : MonoBehaviour
         isLogin = false;
     }
 
-    private void LoginFail()
+    private void LoginFail(bool deletePwd, string errMsg)
     {
-        password_Input.text = "";
-        PlayerPrefs.DeleteKey("username");
-        PlayerPrefs.DeleteKey("password");
-        HttpManager.My.ShowTip("用户名或密码错误，请重新输入!");
-        username_Input.ActivateInputField();
-        username_Input.MoveTextEnd(true);
+        HttpManager.My.ShowTip(errMsg);
+        if (deletePwd)
+        {
+            password_Input.text = "";
+            PlayerPrefs.DeleteKey("username");
+            PlayerPrefs.DeleteKey("password");
+            username_Input.ActivateInputField();
+            username_Input.MoveTextEnd(true);
+        }
         isLogin = false;
     }
 

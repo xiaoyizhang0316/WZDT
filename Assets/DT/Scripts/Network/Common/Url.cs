@@ -17,7 +17,9 @@ public static class Url
     #endregion
     #region login
     private static string loginUrl = "login";
+    private static string newLoginUrl = "newLogin";
     private static string reConnUrl = "reconnect";
+    private static string newReConnUrl = "newReconnect";
     private static string registerUrl = "register";
     private static string logout = "logout";
     private static string createPlayerDatas = "createPlayerDatas";
@@ -78,6 +80,11 @@ public static class Url
 
     #endregion
 
+    #region match
+    private static string addPlayerScore = "addPlayerScore";
+    private static string getGroupPlayerScore = "getGroupPlayerScore";
+    #endregion
+
     #region test
     private static string testPost = "testPost";
     private static string testGet = "testGet";
@@ -125,6 +132,10 @@ public static class Url
     public static string GetPlayerGroupInfo { get =>ip+ getPlayerGroupInfo;  }
     public static string UpdatePlayerTalent { get => ip+ updatePlayerTalent; }
     public static string UpdatePlayerUnlockStatus { get =>ip+ updatePlayerUnlockStatus; }
+    public static string GetGroupPlayerScore { get =>ip+ getGroupPlayerScore; }
+    public static string AddPlayerScore { get =>ip+ addPlayerScore;  }
+    public static string NewLoginUrl { get => ip+newLoginUrl; }
+    public static string NewReConnUrl { get => ip+newReConnUrl; }
 
     public static void SetIp(string newIp)
     {

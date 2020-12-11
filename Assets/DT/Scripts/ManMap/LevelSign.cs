@@ -353,6 +353,40 @@ public class LevelSign : MonoBehaviour
         //InitStarNeedText();
     }
 
+    /// <summary>
+    /// for level 9
+    /// </summary>
+    /// <param name="isOpen"></param>
+    /// <param name="stars"></param>
+    public void InitLevel(bool isOpen, string currentStar)
+    {
+        if (isOpen)
+        {
+            transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+            if (currentStar[0] == '0')
+            {
+                transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+            }
+            if (currentStar[1] == '0')
+            {
+                transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+            }
+            if (currentStar[2] == '0')
+            {
+                transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+            }
+            stars = currentStar;
+            LevelButton.onClick.RemoveAllListeners();
+            LevelButton.onClick.AddListener(Init);
+        }
+        else
+        {
+            HideAllStars();
+            transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
+            transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
+        }
+    }
+
     ///// <summary>
     ///// 初始化关卡星数需求文字颜色
     ///// </summary>
