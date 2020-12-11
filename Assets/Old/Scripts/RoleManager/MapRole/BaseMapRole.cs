@@ -487,9 +487,9 @@ public class BaseMapRole : MonoBehaviour
 
     public void AddPruductToWareHouse(ProductData data)
     {
-        if (warehouse.Count > baseRoleData.bulletCapacity)
+        if (warehouse.Count >= baseRoleData.bulletCapacity)
         {
-            DataUploadManager.My.AddData(DataEnum.浪费的瓜);
+            //DataUploadManager.My.AddData(DataEnum.浪费的瓜);
             return;
         }
         else

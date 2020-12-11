@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler,IPointerEnterHandler
 {
 
     public Image Image_shape;
@@ -277,5 +277,8 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
     }
 
-
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        
+    }
 }
