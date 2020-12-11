@@ -1421,6 +1421,38 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             SetMask();
         }, keyValues, HttpType.Get, HttpId.GetGroupPlayerScore));
     }
+
+    public void GetGroupScoreStatus( Action doSuccess = null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        
+        keyValues.Add("groupID", groupID.ToString());
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetGroupScoreStatus, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == 0)
+            {
+                Debug.LogWarning(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                if (response.status == 1)
+                {
+                    Debug.LogWarning("计分中...");
+                    stopMatch = false;
+                }
+                else
+                {
+                    Debug.LogWarning("计分停止...");
+                    stopMatch = true;
+                }
+                doSuccess?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.AddPlayerScore));
+    }
     #endregion
 
     #region equip

@@ -24,7 +24,7 @@ public class RTSample : MonoBehaviour
             rank_img.sprite = rank_pic[rank - 1];
         }
         playerName.text = prt.playerName;
-        bossLevel.text = prt.bossLevel.ToString();
+        bossLevel.text = (prt.bossLevel==0?1:prt.bossLevel).ToString();
         score.text = prt.score.ToString();
         if (NetworkMgr.My.stopMatch)
         {

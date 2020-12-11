@@ -1332,6 +1332,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             NetworkMgr.My.AddScore(lastScore, GameObject.FindObjectOfType<BossConsumer>() == null ? 0 : GameObject.FindObjectOfType<BossConsumer>().killCount, false, () => {
                 if (NetworkMgr.My.stopMatch)
                 {
+                    Debug.LogWarning("停止计分");
                     CancelInvoke("UpdateRTScore");
                 }
             });
