@@ -75,7 +75,7 @@ public class DataUpload
     /// <summary>
     /// 消费者_口味击杀
     /// </summary>
-    public int consumer_tasteskill;
+    public string consumer_tasteskill;
 
     /// <summary>
     /// 消费者_点击进度条

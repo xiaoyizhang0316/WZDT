@@ -386,7 +386,7 @@ public class WinManager : MonoSingleton<WinManager>
             UploadReplayData();
             UploadGetEquip();
             CommitProgress();
-
+            
         }
         CheckNext();
     }

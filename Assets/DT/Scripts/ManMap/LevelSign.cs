@@ -16,13 +16,13 @@ public class LevelSign : MonoBehaviour
     public string mission_2;
     public string mission_3;
 
-    public int starRequirement;
+    //public int starRequirement;
 
-    public int actualStarRequirement;
+    //public int actualStarRequirement;
 
     public Button LevelButton;
 
-    public Text starNeed;
+    //public Text starNeed;
 
     public string loadScene;
     string stars="";
@@ -32,7 +32,7 @@ public class LevelSign : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        starNeed = transform.Find("StarNeed").GetComponent<Text>();
+        //starNeed = transform.Find("StarNeed").GetComponent<Text>();
         LevelButton.onClick.AddListener(() =>
         {
             Debug.Log("1231231231");
@@ -177,7 +177,7 @@ public class LevelSign : MonoBehaviour
         }
         if(levelID!=1)
             transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
-        if (lastStar == "000" && loadScene!="FTE_1" || !CheckPrevStar() || !CheckUserLevel() ||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
+        if (lastStar == "000" && loadScene!="FTE_1" ||  !CheckUserLevel() ||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
         {
             HideAllStars();
             transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
@@ -350,35 +350,69 @@ public class LevelSign : MonoBehaviour
         }
         LevelButton.onClick.RemoveAllListeners();
         LevelButton.onClick.AddListener(Init);
-        InitStarNeedText();
+        //InitStarNeedText();
     }
 
     /// <summary>
-    /// 初始化关卡星数需求文字颜色
+    /// for level 9
     /// </summary>
-    public void InitStarNeedText()
+    /// <param name="isOpen"></param>
+    /// <param name="stars"></param>
+    public void InitLevel(bool isOpen, string currentStar)
     {
-        starNeed.text = actualStarRequirement.ToString();
-        starNeed.color = CheckPrevStar() ? Color.green : Color.red;
+        if (isOpen)
+        {
+            transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+            if (currentStar[0] == '0')
+            {
+                transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+            }
+            if (currentStar[1] == '0')
+            {
+                transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+            }
+            if (currentStar[2] == '0')
+            {
+                transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+            }
+            stars = currentStar;
+            LevelButton.onClick.RemoveAllListeners();
+            LevelButton.onClick.AddListener(Init);
+        }
+        else
+        {
+            HideAllStars();
+            transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
+            transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
+        }
     }
+
+    ///// <summary>
+    ///// 初始化关卡星数需求文字颜色
+    ///// </summary>
+    //public void InitStarNeedText()
+    //{
+    //    starNeed.text = actualStarRequirement.ToString();
+    //    starNeed.color = CheckPrevStar() ? Color.green : Color.red;
+    //}
 
     /// <summary>
     /// 检测之前所有关卡的星数有没有达到要求
     /// </summary>
     /// <returns></returns>
-    public bool CheckPrevStar()
-    {
-        int index = int.Parse(loadScene.Split('_')[1]);
-        int result = 0;
-        foreach (LevelProgress l in NetworkMgr.My.levelProgressList)
-        {
-            if (l.levelID < index)
-            {
-                result += l.starNum;
-            }
-        }
-        return result >= actualStarRequirement;
-    }
+    //public bool CheckPrevStar()
+    //{
+    //    int index = int.Parse(loadScene.Split('_')[1]);
+    //    int result = 0;
+    //    foreach (LevelProgress l in NetworkMgr.My.levelProgressList)
+    //    {
+    //        if (l.levelID < index)
+    //        {
+    //            result += l.starNum;
+    //        }
+    //    }
+    //    return result >= actualStarRequirement;
+    //}
 
     public bool CheckUserLevel()
     {

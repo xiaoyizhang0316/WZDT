@@ -2,15 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMap : MonoBehaviour
 {
     public Text title;
     public List<LevelSign> levelSigns;
-    public Transform threeWords;
 
-    public GameObject chaseText;
+    public LevelSign lastLevel;
+    public Transform threeWords;
 
     public Text userLevelText;
 
@@ -26,13 +27,51 @@ public class MainMap : MonoBehaviour
     void InitMap()
     {
         //NetworkMgr.My.GetAnswers(()=>title.text = NetworkMgr.My.currentAnswer);
-        GetChaseLevel();
+        //GetChaseLevel();
         GetAnswers();
         GetEquips();
         GetUserLevel();
-        NetworkMgr.My.GetPlayerGroupInfo(()=> { });
+        GetLevelProgress();
+        
         PlayerData.My.isAllReady = false;
         PlayerData.My.isLocalReady = false;
+    }
+
+    private void GetGroupInfos()
+    {
+        NetworkMgr.My.GetPlayerGroupInfo(() => {
+            if (NetworkMgr.My.playerGroupInfo.outdateTime < TimeStamp.GetCurrentTimeStamp() && NetworkMgr.My.playerGroupInfo.outdateTime != 0)
+            {
+                // 账号过期
+                HttpManager.My.ShowClickTip("账号已失效！", () => SceneManager.LoadScene("Login"));
+                return;
+                //SceneManager.LoadScene("Login");
+            }
+            if (NetworkMgr.My.playerGroupInfo.isLoginLimit)
+            {
+                HttpManager.My.ShowClickTip("限制登陆！", () => SceneManager.LoadScene("Login"));
+                return;
+            }
+
+            // 是否解锁第9关
+            if (NetworkMgr.My.playerGroupInfo.isOpenLastLevel)
+            {
+                // 解锁第9关
+                string stars = GetStar(9);
+                if (stars.Equals(""))
+                {
+                    lastLevel.InitLevel(true, "000");
+                }
+                else
+                {
+                    lastLevel.InitLevel(true, stars);
+                }
+            }
+            else
+            {
+                lastLevel.InitLevel(false, "");
+            }
+        });
     }
 
     public void GetUserLevel()
@@ -62,68 +101,68 @@ public class MainMap : MonoBehaviour
         }
     }
 
-    public void GetChaseLevel()
-    {
-        //InitChaseLevel(0);
-        NetworkMgr.My.GetCatchLevel((catchLevel) =>
-        {
-            Debug.Log("catchLevel:" + catchLevel);
-            InitChaseLevel(catchLevel);
-            GetLevelProgress();
-        });
-    }
+    //public void GetChaseLevel()
+    //{
+    //    //InitChaseLevel(0);
+    //    NetworkMgr.My.GetCatchLevel((catchLevel) =>
+    //    {
+    //        Debug.Log("catchLevel:" + catchLevel);
+    //        //InitChaseLevel(catchLevel);
 
-    public void InitChaseLevel(int chaseLevel)
-    {
-        foreach (var ls in levelSigns)
-        {
-            if (ls.levelID == 1)
-                continue;
-            //int level = int.Parse( ls.loadScene.Split('_')[1]);
-            switch(chaseLevel)
-            {
-                case 0:
-                    {
-                        ls.actualStarRequirement = ls.starRequirement;
-                        chaseText.SetActive(false);
-                        break;
-                    }
-                case 1:
-                    {
-                        ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 2 ? 2 : ls.starRequirement);
-                        chaseText.SetActive(true);
-                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "1";
-                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.green;
-                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-2";
-                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.green;
-                        break;
-                    }
-                case 2:
-                    {
-                        ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 4 ? 4 : ls.starRequirement);
-                        chaseText.SetActive(true);
-                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "2";
-                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.yellow;
-                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-4";
-                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.yellow;
-                        break;
-                    }
-                case 3:
-                    {
-                        ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 6 ? 6 : ls.starRequirement);
-                        chaseText.SetActive(true);
-                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "3";
-                        chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.red;
-                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-6";
-                        chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.red;
-                        break;
-                    }
-                default:
-                    break;
+    //    });
+    //}
 
-            }
-        }
-    }
+    //public void InitChaseLevel(int chaseLevel)
+    //{
+    //    foreach (var ls in levelSigns)
+    //    {
+    //        if (ls.levelID == 1)
+    //            continue;
+    //        //int level = int.Parse( ls.loadScene.Split('_')[1]);
+    //        switch(chaseLevel)
+    //        {
+    //            case 0:
+    //                {
+    //                    ls.actualStarRequirement = ls.starRequirement;
+    //                    chaseText.SetActive(false);
+    //                    break;
+    //                }
+    //            case 1:
+    //                {
+    //                    ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 2 ? 2 : ls.starRequirement);
+    //                    chaseText.SetActive(true);
+    //                    chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "1";
+    //                    chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.green;
+    //                    chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-2";
+    //                    chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.green;
+    //                    break;
+    //                }
+    //            case 2:
+    //                {
+    //                    ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 4 ? 4 : ls.starRequirement);
+    //                    chaseText.SetActive(true);
+    //                    chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "2";
+    //                    chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.yellow;
+    //                    chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-4";
+    //                    chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.yellow;
+    //                    break;
+    //                }
+    //            case 3:
+    //                {
+    //                    ls.actualStarRequirement = ls.starRequirement - (ls.starRequirement > 6 ? 6 : ls.starRequirement);
+    //                    chaseText.SetActive(true);
+    //                    chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().text = "3";
+    //                    chaseText.transform.Find("ChaseLevel1").GetComponent<Text>().color = Color.red;
+    //                    chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().text = "所有关卡需求星数-6";
+    //                    chaseText.transform.Find("ChaseLevel2").GetComponent<Text>().color = Color.red;
+    //                    break;
+    //                }
+    //            default:
+    //                break;
+
+    //        }
+    //    }
+    //}
 
     private void GetAnswers()
     {
@@ -181,6 +220,7 @@ public class MainMap : MonoBehaviour
                 ls.InitLevel(GetStar(level), GetStar(level - 1));
             }
         }
+        GetGroupInfos();
         TalentPanel.My.Init();
     }
 

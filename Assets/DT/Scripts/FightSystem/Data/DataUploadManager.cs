@@ -67,7 +67,7 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
         //data.time_PauseTime = dataDic[DataEnum.时间_暂停时长.ToString()];
         data.time_PauseTimes = dataDic[DataEnum.时间_暂停次数.ToString()];
         data.wastefulbullet = dataDic[DataEnum.浪费的瓜.ToString()];
-        data.consumer_tasteskill = dataDic[DataEnum.消费者_口味击杀.ToString()];
+        data.consumer_tasteskill = dataDic[DataEnum.消费者_口味击杀.ToString()]+"_" +StageGoal.My.killNumber;
         data.consumer_ClicksProgressBar = dataDic[DataEnum.消费者_点击进度条.ToString()];
         data.checkbullet = dataDic[DataEnum.看子弹属性.ToString()];
         data.percentageTime = dataDic[DataEnum.统计付钱时间占比.ToString()];
