@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler,IPointerEnterHandler
+public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler,IPointerEnterHandler,IPointerExitHandler
 {
 
     public Image Image_shape;
@@ -279,6 +279,22 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
+        if(isOccupation)
+        {
+            for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+            {
+                if (PlayerData.My.MapRole[i].baseRoleData.EquipList.ContainsKey(ID) && !PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleName.Equals(CreatRoleManager.My.CurrentRole.baseRoleData.roleName))
+                {
+                    string str = "该设备已在 " + PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleName + "中使用!";
+                    FloatWindow.My.Init(str);
+                    return;
+                }
+            }
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        FloatWindow.My.Hide();
     }
 }

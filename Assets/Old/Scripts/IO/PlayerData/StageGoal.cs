@@ -623,6 +623,8 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 BuildingManager.My.WaveSpawnConsumer(currentWave);
                 currentWave++;
+                stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+                stageWaveText.transform.DOPunchScale(new Vector3(1.3f,1.3f,1.3f), 1f,1).Play();
             }
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {

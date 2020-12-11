@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler 
+public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler,IPointerEnterHandler,IPointerExitHandler
 {
     public Image Image_shape;
    
@@ -226,5 +226,26 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.GrabEquip);
             CreatRoleManager.My.CurrentTemplateManager.OpenTopTemplate(0.3f);
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (isOccupation)
+        {
+            for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+            {
+                if (PlayerData.My.MapRole[i].baseRoleData.peoPleList.ContainsKey(ID) && !PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleName.Equals(CreatRoleManager.My.CurrentRole.baseRoleData.roleName))
+                {
+                    string str = "该工人已在 " + PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleName + "中使用!";
+                    FloatWindow.My.Init(str);
+                    return;
+                }
+            }
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        FloatWindow.My.Hide();
     }
 }
