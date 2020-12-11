@@ -110,6 +110,8 @@ public class BaseMapRole : MonoBehaviour
 
     public List<TradeSign> endTradeList = new List<TradeSign>();
 
+    public List<int> tasteBuffList = new List<int>();
+
     public int totalUpgradeCost;
 
     public RoleSprite roleSprite;
@@ -485,9 +487,9 @@ public class BaseMapRole : MonoBehaviour
 
     public void AddPruductToWareHouse(ProductData data)
     {
-        if (warehouse.Count > baseRoleData.bulletCapacity)
+        if (warehouse.Count >= baseRoleData.bulletCapacity)
         {
-            DataUploadManager.My.AddData(DataEnum.浪费的瓜);
+            //DataUploadManager.My.AddData(DataEnum.浪费的瓜);
             return;
         }
         else
@@ -651,6 +653,10 @@ public class BaseMapRole : MonoBehaviour
     public List<int> GetEquipBuffList()
     {
         List<int> bufflist = new List<int>();
+        for (int i = 0; i < tasteBuffList.Count; i++)
+        {
+            bufflist.Add(tasteBuffList[i]);
+        }
         if (isNpc)
         {
             if (GetComponent<BaseNpc>().isCanSeeEquip)

@@ -63,8 +63,21 @@ public class GoodsSign : MonoBehaviour
             }
             else
             {
-                role.AddPruductToWareHouse(productData);
-                Destroy(this.gameObject, 0.01f);
+                if (role.warehouse.Count >= role.baseRoleData.bulletCapacity)
+                {
+                    DataUploadManager.My.AddData(DataEnum.浪费的瓜);
+                    Vector3 pos = path[path.Count - 1] + new Vector3(UnityEngine.Random.Range(-3f, 3f), 0, UnityEngine.Random.Range(-3f, 3f));
+                    transform.DOMove(pos, speed).OnComplete(()=> {
+                        Destroy(this.gameObject, 0.01f);
+                    });
+                    transform.GetComponent<MeshRenderer>().material.DOColor(Color.black, "_EmissionColor", speed).Play();
+                }
+                else
+                {
+                    role.AddPruductToWareHouse(productData);
+                    Destroy(this.gameObject, 0.01f);
+                }
+
             }
 
         }).SetEase(Ease.Linear);
