@@ -194,6 +194,10 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         Destroy(mapRole.gameObject);
     }
 
+    /// <summary>
+    /// 卖角色（建立NPC角色）
+    /// </summary>
+    /// <param name="mapRole"></param>
     public void SetSellNPC(BaseMapRole mapRole)
     {
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/NPC/" + mapRole.baseRoleData.baseRoleData.roleType));
@@ -234,11 +238,49 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         StageGoal.My.RecordOperation(OperationType.DeleteRole, param);
     }
 
+    /// <summary>
+    /// 记录卖出角色的操作
+    /// </summary>
+    /// <param name="mapRole"></param>
     public void SellRoleOperationRecord(BaseMapRole mapRole)
     {
         List<string> param = new List<string>();
         param.Add(mapRole.baseRoleData.ID.ToString());
         StageGoal.My.RecordOperation(OperationType.SellRole, param);
+    }
+
+    /// <summary>
+    /// 获得当前可用装备数量
+    /// </summary>
+    /// <returns></returns>
+    public int GetAvailableEquipNumber()
+    {
+        int result = 0;
+        for (int i = 0; i < playerGears.Count; i++)
+        {
+            if (!playerGears[i].isEquiped)
+            {
+                result++;
+            }
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// 获得当前可用工人数量
+    /// </summary>
+    /// <returns></returns>
+    public int GetAvailableWorkerNumber()
+    {
+        int result = 0;
+        for (int i = 0; i < playerWorkers.Count; i++)
+        {
+            if (!playerWorkers[i].isEquiped)
+            {
+                result++;
+            }
+        }
+        return result;
     }
 
     /// <summary>

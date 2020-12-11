@@ -1022,44 +1022,51 @@ public class BaseMapRole : MonoBehaviour
     }
     List<string> sceneName = new List<string> { "FTE_1", "FTE_0-1", "FTE_0-2" };
 
+    private float interval = 1f;
+
     private void Update()
     {
-        if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+        interval += Time.deltaTime;
+        if (interval >= 1f)
         {
-            if (!isNpc)
+            if (!sceneName.Contains(SceneManager.GetActiveScene().name))
             {
-                if (baseRoleData.EquipList.Count == 0 && baseRoleData.peoPleList.Count == 0 && baseRoleData.inMap)
+                if (!isNpc)
                 {
-                    emptyGearSprite.SetActive(true);
+                    if (baseRoleData.EquipList.Count == 0 && baseRoleData.peoPleList.Count == 0 &&
+                        (PlayerData.My.GetAvailableWorkerNumber() > 0 || PlayerData.My.GetAvailableEquipNumber() > 0) && baseRoleData.inMap)
+                    {
+                        emptyGearSprite.SetActive(true);
+                    }
+                    else
+                    {
+                        emptyGearSprite.SetActive(false);
+                    }
                 }
-                else
+                if (stopWorkSprite != null)
+                {
+                    if (encourageLevel <= -3 && !(isNpc && npcScript.isLock))
+                    {
+                        stopWorkSprite.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        stopWorkSprite.gameObject.SetActive(false);
+                    }
+                }
+            }
+            else
+            {
+                if (!isNpc)
                 {
                     emptyGearSprite.SetActive(false);
                 }
-            }
-            if (stopWorkSprite != null)
-            {
-                if (encourageLevel <= -3 && !(isNpc && npcScript.isLock))
-                {
-                    stopWorkSprite.gameObject.SetActive(true);
-                }
-                else
+                if (stopWorkSprite != null)
                 {
                     stopWorkSprite.gameObject.SetActive(false);
                 }
             }
-        }
-        else
-        {
-            if (!isNpc)
-            {
-                emptyGearSprite.SetActive(false);
-            }
-            if (stopWorkSprite != null)
-            {
-                stopWorkSprite.gameObject.SetActive(false);
-            }
-
+            interval = 0f;
         }
     }
 }
