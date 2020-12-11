@@ -9486,6 +9486,7 @@ GameObject:
   - component: {fileID: 1761720248758557462}
   - component: {fileID: 1876834373110284189}
   - component: {fileID: 6276455492902670409}
+  - component: {fileID: 5129114786414650442}
   m_Layer: 0
   m_Name: SweetFactory
   m_TagString: MapRole
@@ -9556,7 +9557,7 @@ MonoBehaviour:
     baseRoleData:
       roleName: "NPC\u8F6F\u74DC\u52A0\u5DE5\u5382"
       roleType: 14
-      roleSkillType: 0
+      roleSkillType: 1
       level: 20
       effect: 20
       efficiency: 20
@@ -9615,6 +9616,7 @@ MonoBehaviour:
   startEncourageLevel: 0
   startTradeList: []
   endTradeList: []
+  tasteBuffList: 
   totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
@@ -9666,6 +9668,22 @@ MonoBehaviour:
   buffList: 31010000
   animationPart: []
   productDatas: []
+--- !u!114 &5129114786414650442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370970118229831483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1a4513a69c24adaa8f64bd86b03d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOpen: 1
+  extraSkillDesc: 
+  maxTradeLimit: -1
+  tasteBuffId: 305
 --- !u!1 &6025488763262003144
 GameObject:
   m_ObjectHideFlags: 0
@@ -14462,15 +14480,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4349f534abb534007841873edff1f3fe, type: 3}
---- !u!1 &4362902875407242174 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8045772783410336990, guid: 4349f534abb534007841873edff1f3fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 5991043951795111776}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &781230311449764269 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6481535761466992333, guid: 4349f534abb534007841873edff1f3fe,
+    type: 3}
+  m_PrefabInstance: {fileID: 5991043951795111776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4362902875407242174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8045772783410336990, guid: 4349f534abb534007841873edff1f3fe,
     type: 3}
   m_PrefabInstance: {fileID: 5991043951795111776}
   m_PrefabAsset: {fileID: 0}

@@ -110,6 +110,8 @@ public class BaseMapRole : MonoBehaviour
 
     public List<TradeSign> endTradeList = new List<TradeSign>();
 
+    public List<int> tasteBuffList = new List<int>();
+
     public int totalUpgradeCost;
 
     public RoleSprite roleSprite;
@@ -485,9 +487,9 @@ public class BaseMapRole : MonoBehaviour
 
     public void AddPruductToWareHouse(ProductData data)
     {
-        if (warehouse.Count > baseRoleData.bulletCapacity)
+        if (warehouse.Count >= baseRoleData.bulletCapacity)
         {
-            DataUploadManager.My.AddData(DataEnum.浪费的瓜);
+            //DataUploadManager.My.AddData(DataEnum.浪费的瓜);
             return;
         }
         else
@@ -651,6 +653,10 @@ public class BaseMapRole : MonoBehaviour
     public List<int> GetEquipBuffList()
     {
         List<int> bufflist = new List<int>();
+        for (int i = 0; i < tasteBuffList.Count; i++)
+        {
+            bufflist.Add(tasteBuffList[i]);
+        }
         if (isNpc)
         {
             if (GetComponent<BaseNpc>().isCanSeeEquip)
@@ -1016,44 +1022,51 @@ public class BaseMapRole : MonoBehaviour
     }
     List<string> sceneName = new List<string> { "FTE_1", "FTE_0-1", "FTE_0-2" };
 
+    private float interval = 1f;
+
     private void Update()
     {
-        if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+        interval += Time.deltaTime;
+        if (interval >= 1f)
         {
-            if (!isNpc)
+            if (!sceneName.Contains(SceneManager.GetActiveScene().name))
             {
-                if (baseRoleData.EquipList.Count == 0 && baseRoleData.peoPleList.Count == 0 && baseRoleData.inMap)
+                if (!isNpc)
                 {
-                    emptyGearSprite.SetActive(true);
+                    if (baseRoleData.EquipList.Count == 0 && baseRoleData.peoPleList.Count == 0 &&
+                        (PlayerData.My.GetAvailableWorkerNumber() > 0 || PlayerData.My.GetAvailableEquipNumber() > 0) && baseRoleData.inMap)
+                    {
+                        emptyGearSprite.SetActive(true);
+                    }
+                    else
+                    {
+                        emptyGearSprite.SetActive(false);
+                    }
                 }
-                else
+                if (stopWorkSprite != null)
+                {
+                    if (encourageLevel <= -3 && !(isNpc && npcScript.isLock))
+                    {
+                        stopWorkSprite.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        stopWorkSprite.gameObject.SetActive(false);
+                    }
+                }
+            }
+            else
+            {
+                if (!isNpc)
                 {
                     emptyGearSprite.SetActive(false);
                 }
-            }
-            if (stopWorkSprite != null)
-            {
-                if (encourageLevel <= -3 && !(isNpc && npcScript.isLock))
-                {
-                    stopWorkSprite.gameObject.SetActive(true);
-                }
-                else
+                if (stopWorkSprite != null)
                 {
                     stopWorkSprite.gameObject.SetActive(false);
                 }
             }
-        }
-        else
-        {
-            if (!isNpc)
-            {
-                emptyGearSprite.SetActive(false);
-            }
-            if (stopWorkSprite != null)
-            {
-                stopWorkSprite.gameObject.SetActive(false);
-            }
-
+            interval = 0f;
         }
     }
 }
