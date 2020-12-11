@@ -349,6 +349,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void GetSatisfy(int num)
     {
+        CheckIsInvoke();
         if(int.MaxValue - playerSatisfy < num)
         {
             playerSatisfy = int.MaxValue;
@@ -1334,6 +1335,19 @@ public class StageGoal : MonoSingleton<StageGoal>
                     CancelInvoke("UpdateRTScore");
                 }
             });
+        }
+    }
+
+    void CheckIsInvoke()
+    {
+        if (SceneManager.GetActiveScene().name.Equals("FTE_9") && NetworkMgr.My.playerGroupInfo.isOpenMatch)
+        {
+            if(!NetworkMgr.My.stopMatch&& !IsInvoking("UpdateRTScore"))
+            {
+                Debug.LogWarning("意外停止上传分数，重新开启上传");
+                InitRtScore();
+            }
+            Debug.LogWarning("检测是否已停止上传分数");
         }
     }
 
