@@ -13,6 +13,11 @@ public class TabManager : MonoBehaviour
     public Transform tf;
 
     public GameObject line;
+
+    /// <summary>
+    /// 虚线
+    /// </summary>
+    public GameObject linexu;
     // Start is called before the first frame update
     void Start()
     {
@@ -87,7 +92,21 @@ public class TabManager : MonoBehaviour
     {
         foreach (var VARIABLE in TradeManager.My.tradeList)
         {
-            GameObject lineobj = Instantiate(line,tf);
+            GameObject lineobj;
+            if (PlayerData.My.GetMapRoleById(double.Parse(VARIABLE.Value.tradeData.startRole)).baseRoleData.baseRoleData
+                    .roleSkillType == GameEnum.RoleSkillType.Service ||
+                PlayerData.My.GetMapRoleById(double.Parse(VARIABLE.Value.tradeData.endRole)).baseRoleData.baseRoleData
+                    .roleSkillType == GameEnum.RoleSkillType.Service
+            )
+            {
+                  lineobj = Instantiate(this.linexu,tf);
+
+            }
+            else
+            {
+                lineobj = Instantiate(line,tf);
+            }
+
             lineobj.GetComponentInChildren<Text>().text = VARIABLE.Value.CalculateTC().ToString();
             lineobj.GetComponent<WMG_Link>().id = VARIABLE.Key;
             lineobj.GetComponent<WMG_Link>().fromNode = GetRoleUI(VARIABLE.Value.tradeData.startRole);
