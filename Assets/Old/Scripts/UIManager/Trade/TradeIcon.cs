@@ -36,7 +36,7 @@ public class TradeIcon : MonoBehaviour
         end = endRole.tradePoint;
         transform.position = (startRole.tradePoint.position + endRole.tradePoint.position) / 2f + new Vector3(0f, 0.3f, 0f);
         CheckPos();
-        GetComponentInChildren<SpriteRenderer>().DOFade(0.2f, 0.2f).Play().timeScale = 1f / DOTween.timeScale;
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.2f).Play().timeScale = 1f / DOTween.timeScale;
     }
 
     private int checkCount = 0;
@@ -104,6 +104,6 @@ public class TradeIcon : MonoBehaviour
     /// </summary>
     public void OnMouseExit()
     {
-        GetComponentInChildren<SpriteRenderer>().DOFade(0.2f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
     }
 }
