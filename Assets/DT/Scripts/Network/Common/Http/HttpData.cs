@@ -65,5 +65,6 @@ public static class HttpId
     public const int UpdatePlayerUnlockStatus   = 1030;
     public const int AddPlayerScore             = 1031;
     public const int GetGroupPlayerScore        = 1032;
-    public const int GetGroupScoreStatus        = 1032;
+    public const int GetGroupScoreStatus        = 1033;
+    public const int UpdatePlayerFTE            = 1034;
 }

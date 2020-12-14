@@ -28,6 +28,7 @@ public class PlayerDatas
     public int levelID;
     public string talent;
     public string unlockStatus;
+    public string fte;
 }
 
 [Serializable]

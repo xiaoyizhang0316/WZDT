@@ -575,6 +575,45 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             SetMask();
         }, keyValues, HttpType.Post, HttpId.updatePlayerDatasID));
     }
+
+    public void UpdatePlayerFTE(string fte, Action doSuccess = null, Action doFail = null)
+    {
+        Debug.Log("更新fte" + fte);
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("fteProgress", fte);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerFTE, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                Debug.Log(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                Debug.Log(response.data);
+                try
+                {
+                    playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    InitRoleFoundDic(playerDatas.roleFound);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
+                    doSuccess?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.UpdatePlayerFTE));
+    }
     #endregion
 
     #region three words
