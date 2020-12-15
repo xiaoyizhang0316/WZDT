@@ -404,7 +404,7 @@ public class TradeSign : MonoBehaviour
         }
     }
 
-    /// <summary>
+    /// <summary> 
     /// 开关显示信息流线
     /// </summary>
     /// <param name="isActive"></param>

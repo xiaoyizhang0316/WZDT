@@ -11,4 +11,9 @@ public class PlayerGroupInfo
     public string groupDesc;
     public int catchLevel;
     public int joinRank;
+	public bool isOpenLastLevel;
+    public bool isLoginLimit;
+    public int levelLimit;
+    public int outdateTime;
+    public bool isOpenMatch;
 }

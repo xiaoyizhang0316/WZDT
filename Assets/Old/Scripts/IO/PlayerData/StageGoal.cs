@@ -536,6 +536,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         NewCanvasUI.My.GamePause(false);
         NewCanvasUI.My.EndLowHealth();
+        UpdatePlayerScoreEnd();
         WinManager.My.InitWin();
         PrintStat();
     }
@@ -588,6 +589,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 NewCanvasUI.My.GamePause(false);
                 NewCanvasUI.My.lose.SetActive(true);
+                
                 //NewCanvasUI.My.Panel_Lose.SetActive(true);
                 if (NetworkMgr.My.isUsingHttp)
                 {
@@ -600,6 +602,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CommitLose()
     {
         endTime = TimeStamp.GetCurrentTimeStamp();
+        UpdatePlayerScoreEnd();
+        Debug.LogWarning("game time: " + (endTime - startTime) + "   operations nums: " + playerOperations.Count);
         if (endTime - startTime <= 20 || playerOperations.Count <= 5)
             return;
         tempReplay = new PlayerReplay(false);
@@ -1049,6 +1053,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         Stat();
         startTime = TimeStamp.GetCurrentTimeStamp();
         menuOpenButton.onClick.AddListener(MenuShow);
+        // 在第九关实时上传分数
+        InitRtScore();
     }
     private Vector3 cameraPos;
 
@@ -1302,5 +1308,46 @@ public class StageGoal : MonoSingleton<StageGoal>
         //{
         //    Screen.SetResolution(1920, 1080, true);
         //}
+    }
+
+    private int lastScore = 0;
+
+    // 判断开启实时分数上传
+    private void InitRtScore()
+    {
+        if (SceneManager.GetActiveScene().name.Equals("FTE_9"))
+        {
+            if(/*NetworkMgr.My.playerDatas.levelID<12 &&*/ NetworkMgr.My.playerGroupInfo.isOpenMatch)
+            {
+                InvokeRepeating("UpdateRTScore", 0.5f, 5);
+            }
+        }
+    }
+
+    // 在第九关实时更新分数
+    private void UpdateRTScore()
+    {
+        if (playerSatisfy > lastScore)
+        {
+            lastScore = playerSatisfy;
+            NetworkMgr.My.AddScore(lastScore, GameObject.FindObjectOfType<BossConsumer>() == null ? 0 : GameObject.FindObjectOfType<BossConsumer>().killCount, false, () => {
+                if (NetworkMgr.My.stopMatch)
+                {
+                    CancelInvoke("UpdateRTScore");
+                }
+            });
+        }
+    }
+
+    // 在第九关，结束时上传最终分数
+    public void UpdatePlayerScoreEnd()
+    {
+        if(SceneManager.GetActiveScene().name.Equals("FTE_9")&& /*NetworkMgr.My.playerDatas.levelID < 12 &&*/ NetworkMgr.My.playerGroupInfo.isOpenMatch&&!NetworkMgr.My.stopMatch)
+        {
+            CancelInvoke("UpdateRTScore");
+            NetworkMgr.My.AddScore(playerSatisfy, GameObject.FindObjectOfType<BossConsumer>() == null ? 0 : GameObject.FindObjectOfType<BossConsumer>().killCount, true, () => {
+                
+            });
+        }
     }
 }
