@@ -424,70 +424,70 @@ public class LevelSign : MonoBehaviour
                     lastFte.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
                     if (NetworkMgr.My.playerDatas.unlockStatus.Split('_')[levelID - 1].Equals("0"))
                     {
-                    // 上传关卡解锁状态
-                    string[] arr = NetworkMgr.My.playerDatas.unlockStatus.Split('_');
-                    arr[levelID - 1] = "1";
-                    string newStatus = "1";
-                    for(int i=1; i< arr.Length; i++)
-                    {
-                        newStatus += "_"+arr[i];
-                    }
-                    Debug.Log(newStatus);
-                    // 解锁动画
-                    // scale
-                    transform.GetChild(0).DOScale(0, 0.75f).Play().OnComplete(() =>
-                    {
-                        //Debug.Log("do scale");
-                        transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
-                        transform.GetChild(0).DOScale(1, 0.5f).Play().OnComplete(() =>
+                        // 上传关卡解锁状态
+                        string[] arr = NetworkMgr.My.playerDatas.unlockStatus.Split('_');
+                        arr[levelID - 1] = "1";
+                        string newStatus = "1";
+                        for(int i=1; i< arr.Length; i++)
                         {
-                            //Debug.Log("donghua");
-                            //transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
-                            
-                            if (levelID == 2)
+                            newStatus += "_"+arr[i];
+                        }
+                        Debug.Log(newStatus);
+                        // 解锁动画
+                        // scale
+                        transform.GetChild(0).DOScale(0, 0.75f).Play().OnComplete(() =>
+                        {
+                            //Debug.Log("do scale");
+                            transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                            transform.GetChild(0).DOScale(1, 0.5f).Play().OnComplete(() =>
                             {
-                                // 开启引导
-                                MapGuideManager.My.currentGuideIndex = 0;
-                                MapGuideManager.My.PlayCurrentIndexGuide();
-                            }
+                                //Debug.Log("donghua");
+                                //transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                                
+                                if (levelID == 2)
+                                {
+                                    // 开启引导
+                                    MapGuideManager.My.currentGuideIndex = 0;
+                                    MapGuideManager.My.PlayCurrentIndexGuide();
+                                }
+                            });
                         });
-                    });
 
-                    if (currentStar[0] == '0')
-                    {
-                        transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                        if (currentStar[0] == '0')
+                        {
+                            transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                        }
+                        if (currentStar[1] == '0')
+                        {
+                            transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                        }
+                        if (currentStar[2] == '0')
+                        {
+                            transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                        }
+                        if (levelID != 1&& levelID!=2&& levelID != 4)
+                        {
+                            //Debug.Log("update status");
+                            NetworkMgr.My.UpdateUnlockStatus(newStatus);
+                        }
+                        
                     }
-                    if (currentStar[1] == '0')
+                    else
                     {
-                        transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                        transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                        if (currentStar[0] == '0')
+                        {
+                            transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                        }
+                        if (currentStar[1] == '0')
+                        {
+                            transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                        }
+                        if (currentStar[2] == '0')
+                        {
+                            transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                        }
                     }
-                    if (currentStar[2] == '0')
-                    {
-                        transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
-                    }
-                    if (levelID != 1&& levelID!=2&& levelID != 4)
-                    {
-                        //Debug.Log("update status");
-                        NetworkMgr.My.UpdateUnlockStatus(newStatus);
-                    }
-                    
-                }
-                else
-                {
-                    transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
-                    if (currentStar[0] == '0')
-                    {
-                        transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
-                    }
-                    if (currentStar[1] == '0')
-                    {
-                        transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
-                    }
-                    if (currentStar[2] == '0')
-                    {
-                        transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
-                    }
-                }
                 }
             }
             else
