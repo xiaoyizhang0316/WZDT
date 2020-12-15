@@ -149,7 +149,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
                 item.SetActive(false);
             }
 
-            if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
+            if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2"|| SceneManager.GetActiveScene().name == "FTE_0.5")
             {
                 currentGuideIndex = 0;
                 PlayerPrefs.SetInt("isUseGuide", 1);
@@ -167,17 +167,18 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
                 guideClose.Init();
             }
 
-            while (true)
-            {
-                yield return null;
-                if (OriginalData.My.fteData.datas.Count > 0)
-                {
-                    break;
-                    
-                }
-            }
+        //   while (true)
+        //   {
+        //       yield return null;
+        //       if (OriginalData.My.fteData.datas.Count > 0)
+        //       {
+        //           break;
+        //           
+        //       }
+        //   }
 
             PlayCurrentIndexGuide();
+            yield return null;
         }
     }
 

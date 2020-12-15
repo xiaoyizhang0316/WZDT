@@ -349,7 +349,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void GetSatisfy(int num)
     {
-        CheckIsInvoke();
         if(int.MaxValue - playerSatisfy < num)
         {
             playerSatisfy = int.MaxValue;
@@ -883,7 +882,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if(sceneName == "FTE_Record"||sceneName == "FTE_0-1"||sceneName=="FTE_0-2"||sceneName=="FTE_1.5")
+        if(sceneName == "FTE_Record"||sceneName == "FTE_0-1"||sceneName=="FTE_0-2"||sceneName=="FTE_0.5")
         {
             playerHealth = 1000;
             playerGold = 100000;
@@ -1334,23 +1333,9 @@ public class StageGoal : MonoSingleton<StageGoal>
             NetworkMgr.My.AddScore(lastScore, GameObject.FindObjectOfType<BossConsumer>() == null ? 0 : GameObject.FindObjectOfType<BossConsumer>().killCount, false, () => {
                 if (NetworkMgr.My.stopMatch)
                 {
-                    Debug.LogWarning("停止计分");
                     CancelInvoke("UpdateRTScore");
                 }
             });
-        }
-    }
-
-    void CheckIsInvoke()
-    {
-        if (SceneManager.GetActiveScene().name.Equals("FTE_9") && NetworkMgr.My.playerGroupInfo.isOpenMatch)
-        {
-            if(!NetworkMgr.My.stopMatch&& !IsInvoking("UpdateRTScore"))
-            {
-                Debug.LogWarning("意外停止上传分数，重新开启上传");
-                InitRtScore();
-            }
-            Debug.LogWarning("检测是否已停止上传分数");
         }
     }
 
