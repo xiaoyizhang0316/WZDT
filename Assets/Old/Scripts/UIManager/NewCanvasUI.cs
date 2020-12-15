@@ -121,7 +121,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void Init1_4UI()
     {
         if (SceneManager.GetActiveScene().name == "Map" || SceneManager.GetActiveScene().name == "FTE_0-1" ||
-            SceneManager.GetActiveScene().name == "FTE_0-2")
+            SceneManager.GetActiveScene().name == "FTE_0-2"||
+            SceneManager.GetActiveScene().name == "FTE_0.5")
         {
             return;
         }
