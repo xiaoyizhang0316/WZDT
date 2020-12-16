@@ -18,7 +18,7 @@ public class MissionSign : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        MissionManager.My.signs.Add(this);
     }
 
     // Update is called once per frame

@@ -7,8 +7,8 @@ public class FTE_0_5_2 : BaseGuideStep
 {
     public List<GameObject> land;
     public List<GameObject> Seedtesting;
-    
-    
+
+    public GameObject roleImage;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +18,7 @@ public class FTE_0_5_2 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        
-        
+      
         yield return new WaitForSeconds(1f);
         for (int i = 0; i <land.Count; i++)
         {
@@ -38,7 +37,18 @@ public class FTE_0_5_2 : BaseGuideStep
             Seedtesting[i].transform.DOLocalMoveY(0.3f, 1f).Play();
 
         }
-      
+         
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        {
+           
+            PlayerData.My.MapRole[i].tradeButton.SetActive(false);
+             
+        }
+        RoleListManager.My.OutButton();
+
+        yield return new WaitForSeconds(1f);
+
+        roleImage.gameObject.SetActive(false);
     }
 
     public override IEnumerator StepEnd()
@@ -56,6 +66,7 @@ public class FTE_0_5_2 : BaseGuideStep
         {
             if (PlayerData.My.RoleData[i].baseRoleData.roleType == GameEnum.RoleType.Seed)
             {
+                PlayerData.My.MapRole[i].tradeButton.SetActive(false);
                 return true;
             }
         }

@@ -154,6 +154,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         role.name = tempRole.ID.ToString();
         role.GetComponent<BaseMapRole>().baseRoleData = new Role();
         role.GetComponent<BaseMapRole>().baseRoleData = tempRole;
+        role.GetComponent<BaseMapRole>().HideTradeButton(false);
         dragImg.raycastTarget = false;
     }
 
