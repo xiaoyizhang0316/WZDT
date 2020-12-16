@@ -144,10 +144,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         }
         else
         {
-            foreach (var item in NewCanvasUI.My.highLight)
-            {
-                item.SetActive(false);
-            }
+          //  foreach (var item in NewCanvasUI.My.highLight)
+          //  {
+          //      item.SetActive(false);
+          //  }
 
             if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2"|| SceneManager.GetActiveScene().name == "FTE_0.5"
                 || SceneManager.GetActiveScene().name == "FTE_1.5")
