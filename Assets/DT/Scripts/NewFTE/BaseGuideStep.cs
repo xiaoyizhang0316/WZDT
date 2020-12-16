@@ -192,6 +192,7 @@ public abstract class BaseGuideStep : MonoBehaviour
 
     public IEnumerator Play()
     {
+        
         for (int i = 0; i < MissionManager.My.signs.Count; i++)
         {
             Destroy(MissionManager.My.signs[i].gameObject);
@@ -228,6 +229,8 @@ public abstract class BaseGuideStep : MonoBehaviour
                     });
                 }
             }
+
+            InitMission();
             InitHighlight3d();
             for (int i = 0; i < Camera3DTarget.Count; i++)
             {
