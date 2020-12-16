@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MissionManager : MonoBehaviour
+public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<MissionManager>
 {
     public Text missionText;
 

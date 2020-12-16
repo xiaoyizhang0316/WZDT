@@ -43,5 +43,9 @@ public class MissionSign : MonoBehaviour
 
 
     }
-    
+
+    public void OnDestroy()
+    {
+        MissionManager.My.signs.Remove(this);
+    }
 }
