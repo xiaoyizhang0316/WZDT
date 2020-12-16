@@ -11,7 +11,8 @@ public class FTE_1_5_Start : BaseGuideStep
         yield return new WaitForSeconds(0.5f);
         // 升级免费，更换角色模版
         // 生成消费者
-        yield return new WaitForSeconds(2);
+        NewGuideManager.My.BornEnemy();
+        yield return new WaitForSeconds(4);
         isEnd = true;
     }
 

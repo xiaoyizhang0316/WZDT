@@ -237,7 +237,7 @@ public class ConsumeSign : MonoBehaviour
         {
             return;
         }
-        if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1")
+        if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1"&& SceneManager.GetActiveScene().name != "FTE_1.5")
         {
             BaseLevelController.My.CountKillNumber(this);
         }

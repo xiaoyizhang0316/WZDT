@@ -48,7 +48,7 @@ public class FTE_TypeWord : MonoBehaviour
             }
             txt.text = content.Substring(0, length);
             length++;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.06f);
         }
 
         TypeOver();

@@ -268,7 +268,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void ConsumerAliveTip()
     {
-        if (SceneManager.GetActiveScene().name.Equals("FTE_0-1")|| GuideManager.My.ftegob.activeInHierarchy || SceneManager.GetActiveScene().name.Equals("FTE_0-2"))
+        if (SceneManager.GetActiveScene().name.Equals("FTE_0-1")|| GuideManager.My.ftegob.activeInHierarchy || SceneManager.GetActiveScene().name.Equals("FTE_0-2")
+            || SceneManager.GetActiveScene().name.Equals("FTE_1.5"))
         {
             return;
         }
@@ -882,12 +883,14 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if(sceneName == "FTE_Record"||sceneName == "FTE_0-1"||sceneName=="FTE_0-2"||sceneName=="FTE_0.5")
+        if(sceneName == "FTE_Record"||sceneName == "FTE_0-1"||sceneName=="FTE_0-2"||sceneName=="FTE_0.5"||sceneName=="FTE_1.5")
         {
             playerHealth = 1000;
+            playerMaxHealth = 1000;
             playerGold = 100000;
             playerTechPoint = 20000;
             wudi = true;
+            SetInfoImmidiate();
             return;
         }
         //StartCoroutine(ReadStageEnemyData(sceneName));

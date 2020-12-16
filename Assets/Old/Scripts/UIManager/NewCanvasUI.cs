@@ -122,7 +122,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         if (SceneManager.GetActiveScene().name == "Map" || SceneManager.GetActiveScene().name == "FTE_0-1" ||
             SceneManager.GetActiveScene().name == "FTE_0-2"||
-            SceneManager.GetActiveScene().name == "FTE_0.5")
+            SceneManager.GetActiveScene().name == "FTE_0.5"||
+            SceneManager.GetActiveScene().name == "FTE_1.5")
         {
             return;
         }
@@ -637,7 +638,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void StartLowHealth()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName == "FTE_Record" || sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
+        if (sceneName == "FTE_Record" || sceneName == "FTE_0-1" || sceneName == "FTE_0-2" || sceneName == "FTE_1.5")
         {
             return;
         }
