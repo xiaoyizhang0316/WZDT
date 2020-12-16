@@ -51,7 +51,8 @@ public abstract class BaseGuideStep : MonoBehaviour
     /// </summary>
     [SerializeField]
     private float entryTime = 1f;
-
+ 
+    public MissionDatas missiondatas;
     public void OpenFade()
     {
         GuideManager.My.darkEffect._darkColor = new Color(0, 0, 0, 0.6f);
@@ -176,8 +177,24 @@ public abstract class BaseGuideStep : MonoBehaviour
         
     }
 
+    public void InitMission()
+    {
+        if (missiondatas != null)
+        {
+            for (int i = 0; i < missiondatas.data.Count; i++)
+            {
+                MissionManager.My.AddMission(missiondatas.data[i]);
+            }
+        }
+    }
+
     public IEnumerator Play()
     {
+        for (int i = 0; i < MissionManager.My.signs.Count; i++)
+        {
+            Destroy(MissionManager.My.signs[i].gameObject);
+        }
+        
         Debug.Log("开始当前步骤"+GuideManager.My.currentGuideIndex);
         BaseTween[] temp = GetComponentsInChildren<BaseTween>();
         foreach (var VARIABLE in temp)
