@@ -51,7 +51,8 @@ public abstract class BaseGuideStep : MonoBehaviour
     /// </summary>
     [SerializeField]
     private float entryTime = 1f;
-
+ 
+    public MissionDatas missiondatas;
     public void OpenFade()
     {
         GuideManager.My.darkEffect._darkColor = new Color(0, 0, 0, 0.6f);

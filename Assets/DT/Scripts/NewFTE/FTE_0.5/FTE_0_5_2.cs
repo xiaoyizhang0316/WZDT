@@ -7,6 +7,8 @@ public class FTE_0_5_2 : BaseGuideStep
 {
     public List<GameObject> land;
     public List<GameObject> Seedtesting;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,7 @@ public class FTE_0_5_2 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        NewCanvasUI.My.GamePause(false);
+    
         yield return new WaitForSeconds(1f);
         for (int i = 0; i <land.Count; i++)
         {
@@ -36,6 +38,8 @@ public class FTE_0_5_2 : BaseGuideStep
         for (int i = 0; i < Seedtesting.Count; i++)
         {
             Seedtesting[i].SetActive(true);
+            Seedtesting[i].transform.DOLocalMoveY(0.3f, 1f).Play();
+
         }
         yield return new WaitForSeconds(1f);
     }
