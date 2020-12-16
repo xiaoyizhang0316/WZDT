@@ -18,17 +18,14 @@ public class FTE_0_5_2 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-    
+        
+        
         yield return new WaitForSeconds(1f);
         for (int i = 0; i <land.Count; i++)
         {
             land[i].transform.DOLocalMoveY(-5, 1f).Play();
         }
-      
-    }
-
-    public override IEnumerator StepEnd()
-    { 
+        yield return new WaitForSeconds(1f);
         for (int i = 0; i <land.Count; i++)
         {
             land[i].transform.DOLocalMoveY(0, 1f).Play();
@@ -41,11 +38,30 @@ public class FTE_0_5_2 : BaseGuideStep
             Seedtesting[i].transform.DOLocalMoveY(0.3f, 1f).Play();
 
         }
-        yield return new WaitForSeconds(1f);
+      
     }
 
-    void Update()
+    public override IEnumerator StepEnd()
     {
+        missiondatas.data[0].currentNum = 1; 
+        missiondatas.data[0].isFinish= true; 
         
+      yield break;
+      ;
     }
+
+    public override bool ChenkEnd()
+    {
+        for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
+        {
+            if (PlayerData.My.RoleData[i].baseRoleData.roleType == GameEnum.RoleType.Seed)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+ 
 }

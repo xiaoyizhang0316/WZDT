@@ -53,6 +53,8 @@ public abstract class BaseGuideStep : MonoBehaviour
     private float entryTime = 1f;
  
     public MissionDatas missiondatas;
+
+    public string missionTitle;
     public void OpenFade()
     {
         GuideManager.My.darkEffect._darkColor = new Color(0, 0, 0, 0.6f);
@@ -190,11 +192,17 @@ public abstract class BaseGuideStep : MonoBehaviour
 
     public IEnumerator Play()
     {
+        
         for (int i = 0; i < MissionManager.My.signs.Count; i++)
         {
             Destroy(MissionManager.My.signs[i].gameObject);
         }
-        
+
+        if (missiondatas.data.Count > 0)
+        {
+            MissionManager.My.ChangeTital(missionTitle);
+        }
+
         Debug.Log("开始当前步骤"+GuideManager.My.currentGuideIndex);
         BaseTween[] temp = GetComponentsInChildren<BaseTween>();
         foreach (var VARIABLE in temp)
@@ -221,6 +229,8 @@ public abstract class BaseGuideStep : MonoBehaviour
                     });
                 }
             }
+
+            InitMission();
             InitHighlight3d();
             for (int i = 0; i < Camera3DTarget.Count; i++)
             {
