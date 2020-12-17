@@ -264,7 +264,8 @@ public class Building : MonoBehaviour
         List<Vector3> list = new List<Vector3>();
         for (int i = 0; i < consumerPathList.Count; i++)
         {
-            list.Add(consumerPathList[i].position + new Vector3(0f, 0.1f, 0f));
+            Vector3 pos = consumerPathList[i].position + new Vector3(0f, 0.1f, 0f);
+            list.Add(pos);
         }
         GameObject go = Instantiate(pathIndicator, transform);
         go.transform.position = transform.position;

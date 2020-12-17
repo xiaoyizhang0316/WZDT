@@ -425,6 +425,10 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void MonthlyCost()
     {
+        if (SceneManager.GetActiveScene().name.Equals("FTE_1"))
+        {
+            return;
+        }
         transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             int costNum = baseRoleData.cost;
