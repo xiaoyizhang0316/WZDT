@@ -24,14 +24,7 @@ public class MissionSign : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (data.maxNum == 0)
-        {
-            currentNum.text = "";
-        }
-        else
-        {
-            currentNum.text = this.data.currentNum.ToString();
-        }
+        currentNum.text = this.data.currentNum.ToString();
         if (data.isFinish)
         {
             sign.color = Color.green;
@@ -49,10 +42,9 @@ public class MissionSign : MonoBehaviour
         }
         else
         {
-            currentNum.text = "";
-            maxNum.text = "";
+            currentNum.gameObject.SetActive(false);
+            maxNum.gameObject.SetActive(false);
         }
-
 
     }
 

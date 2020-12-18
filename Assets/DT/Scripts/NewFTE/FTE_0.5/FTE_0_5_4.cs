@@ -9,7 +9,9 @@ public class FTE_0_5_4 : BaseGuideStep
 
     public GameObject roleInfo;
     public GameObject bulletInfo;
- 
+
+    public GameObject roleinfoTip;
+    public GameObject buildTip;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,9 +28,10 @@ public class FTE_0_5_4 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-       
-        missiondatas.data[0].isFinish= true; 
-        
+
+        roleinfoTip.SetActive(false);
+        buildTip.SetActive(false);
+
       yield break; 
     }
 
@@ -36,6 +39,8 @@ public class FTE_0_5_4 : BaseGuideStep
     {
         if (roleInfo.activeSelf)
         {
+         //   roleinfoTip.SetActive(true);
+            buildTip.SetActive(true);
             missiondatas.data[0].currentNum= 1;
             missiondatas.data[0].isFinish= true;
         }
@@ -46,7 +51,16 @@ public class FTE_0_5_4 : BaseGuideStep
             missiondatas.data[1].isFinish= true;
         }
 
-        return false;
+        if (missiondatas.data[0].isFinish &&missiondatas.data[1].isFinish)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+
+        }
+
 
     }
 

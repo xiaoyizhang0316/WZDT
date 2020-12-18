@@ -18,7 +18,8 @@ public class FTE_0_5_2 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-      
+        PlayerData.My.playerGears.Clear();
+        PlayerData.My.playerWorkers.Clear();
         yield return new WaitForSeconds(1f);
         for (int i = 0; i <land.Count; i++)
         {
