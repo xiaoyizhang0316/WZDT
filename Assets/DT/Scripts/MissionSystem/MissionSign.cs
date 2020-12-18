@@ -35,12 +35,16 @@ public class MissionSign : MonoBehaviour
     {
         this.data = data;
         contentText.text = this.data.content;
-        if (data.maxNum >= 0)
+        if (data.maxNum > 0)
         {
             currentNum.text = this.data.currentNum.ToString();
             maxNum.text = "/"+this.data.maxNum.ToString();
         }
-
+        else
+        {
+            currentNum.gameObject.SetActive(false);
+            maxNum.gameObject.SetActive(false);
+        }
 
     }
 
