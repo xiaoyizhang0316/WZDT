@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class FTE_1_5_Goal1 : BaseGuideStep
 {
+    public GameObject tabPanel;
+    public int finalCost = 0;
     public override IEnumerator StepStart()
     {
-        InvokeRepeating("CheckGoal", 0, 1);
+        InvokeRepeating("CheckGoal", 0, 0.5f);
         yield return new WaitForSeconds(0.5f);
     }
 
     public override IEnumerator StepEnd()
     {
+        tabPanel.SetActive(true);
+        GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().isBorn = false;
         CancelInvoke();
-        yield break;
+        yield return new WaitForSeconds(2);
     }
 
     public override bool ChenkEnd()
@@ -29,9 +33,10 @@ public class FTE_1_5_Goal1 : BaseGuideStep
             missiondatas.data[0].isFinish = true;
         }
 
-        missiondatas.data[1].currentNum = StageGoal.My.totalCost;
+        missiondatas.data[1].currentNum = StageGoal.My.totalCost*60/(StageGoal.My.timeCount==0?1:StageGoal.My.timeCount);
         if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
         {
+            finalCost = missiondatas.data[1].currentNum;
             missiondatas.data[1].isFinish = true;
         }
     }

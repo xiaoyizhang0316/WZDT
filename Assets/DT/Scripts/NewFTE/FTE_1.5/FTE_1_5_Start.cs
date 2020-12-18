@@ -8,10 +8,12 @@ public class FTE_1_5_Start : BaseGuideStep
     public override IEnumerator StepStart()
     {
         isEnd = false;
+        PlayerData.My.playerGears.Clear();
+        PlayerData.My.playerWorkers.Clear();
         yield return new WaitForSeconds(0.5f);
         // 升级免费，更换角色模版
         // 生成消费者
-        NewGuideManager.My.BornEnemy();
+        NewGuideManager.My.BornEnemy1();
         yield return new WaitForSeconds(4);
         isEnd = true;
     }

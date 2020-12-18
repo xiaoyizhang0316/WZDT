@@ -24,7 +24,14 @@ public class MissionSign : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentNum.text = this.data.currentNum.ToString();
+        if (data.maxNum == 0)
+        {
+            currentNum.text = "";
+        }
+        else
+        {
+            currentNum.text = this.data.currentNum.ToString();
+        }
         if (data.isFinish)
         {
             sign.color = Color.green;
@@ -35,10 +42,15 @@ public class MissionSign : MonoBehaviour
     {
         this.data = data;
         contentText.text = this.data.content;
-        if (data.maxNum >= 0)
+        if (data.maxNum > 0)
         {
             currentNum.text = this.data.currentNum.ToString();
             maxNum.text = "/"+this.data.maxNum.ToString();
+        }
+        else
+        {
+            currentNum.text = "";
+            maxNum.text = "";
         }
 
 

@@ -220,15 +220,17 @@ public class Building : MonoBehaviour
         }
     }
 
+    public bool isBorn = false;
     public IEnumerator BornEnemy1()
     {
         ConsumerType ct;
+        isBorn = true;
         yield return new WaitForSeconds(0.3f);
         DrawPathLine();
         protalGameObject.transform.DOScale(new Vector3(1, 1, 0.52f), 1);
         yield return new WaitForSeconds(0.5f);
         //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
-        while (true)
+        while (isBorn)
         {
             yield return new WaitForSeconds(1f);
             ct = (ConsumerType)(UnityEngine.Random.Range(0, 2) == 1 ? 1 : 8);
