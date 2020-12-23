@@ -237,13 +237,24 @@ public class ConsumeSign : MonoBehaviour
         {
             return;
         }
-        if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1"&& SceneManager.GetActiveScene().name != "FTE_1.5")
+        if (SceneManager.GetActiveScene().name != "FTE_0-2" 
+            && SceneManager.GetActiveScene().name != "FTE_0-1"
+            && SceneManager.GetActiveScene().name != "FTE_1.5"
+            && SceneManager.GetActiveScene().name != "FTE_2.5")
         {
             BaseLevelController.My.CountKillNumber(this);
         }
         if(SceneManager.GetActiveScene().name == "FTE_0-1")
         {
             FTE_0_OtherOp.My.InstantiateFlyMoney(transform.position);
+        }
+
+        if (SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+        {
+            if (scorePer > 1)
+            {
+                FTE_2_5_Manager.My.CheckTasteKill(buildingIndex);
+            }
         }
         DeathAward();
         Stop();

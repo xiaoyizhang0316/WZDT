@@ -38,6 +38,8 @@ public class FTE_1_5_Goal7 : BaseGuideStep
         if (missiondatas.data[0].isFinish == false)
         {
             missiondatas.data[0].currentNum = StageGoal.My.killNumber;
+            missiondatas.data[1].currentNum = (StageGoal.My.totalCost - currentCost) * 60 /
+                                              (StageGoal.My.timeCount - currentTimeCount);
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
                 missiondatas.data[0].isFinish = true;

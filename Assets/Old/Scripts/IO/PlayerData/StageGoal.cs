@@ -269,7 +269,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void ConsumerAliveTip()
     {
         if (SceneManager.GetActiveScene().name.Equals("FTE_0-1")|| GuideManager.My.ftegob.activeInHierarchy || SceneManager.GetActiveScene().name.Equals("FTE_0-2")
-            || SceneManager.GetActiveScene().name.Equals("FTE_1.5"))
+            || SceneManager.GetActiveScene().name.Equals("FTE_1.5")|| SceneManager.GetActiveScene().name == "FTE_2.5")
         {
             return;
         }
@@ -883,7 +883,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if(sceneName == "FTE_Record"||sceneName == "FTE_0-1"||sceneName=="FTE_0-2"||sceneName=="FTE_0.5"||sceneName=="FTE_1.5")
+        if(sceneName == "FTE_Record"||sceneName == "FTE_0-1"||sceneName=="FTE_0-2"||sceneName=="FTE_0.5"
+           ||sceneName=="FTE_1.5"|| sceneName == "FTE_2.5")
         {
             playerHealth = 1000;
             playerMaxHealth = 1000;

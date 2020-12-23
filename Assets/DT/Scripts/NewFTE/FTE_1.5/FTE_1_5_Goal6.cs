@@ -32,7 +32,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
         if (missiondatas.data[0].isFinish == false)
         {
             rate = (float)(StageGoal.My.totalIncome - currentIncome - StageGoal.My.totalCost + currentCost) /
-                   (StageGoal.My.totalIncome - currentIncome);
+                   ((StageGoal.My.totalIncome - currentIncome)==0?1:(StageGoal.My.totalIncome - currentIncome));
             missiondatas.data[0].currentNum = (int)rate;
             if (rate >= missiondatas.data[0].maxNum)
             {
