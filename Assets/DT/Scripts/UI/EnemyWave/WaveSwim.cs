@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static GameEnum;
 using static DataEnum;
@@ -146,6 +147,12 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
     {
         if (WaveCount.My.showDetail)
         {
+            return;
+        }
+
+        if (SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+        {
+            WaveCount.My.InitWave();
             return;
         }
         WaveCount.My.InitWaveBg(waveNumber);

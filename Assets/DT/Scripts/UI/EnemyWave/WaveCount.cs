@@ -91,6 +91,19 @@ public class WaveCount : MonoSingleton<WaveCount>
             go.GetComponent<WaveEnemySign>().Init(5, data.point6);
         }
     }
+/// <summary>
+/// for FTE_2.5
+/// </summary>
+    public void InitWave()
+    {
+        waveBg.gameObject.SetActive(true);
+        closeBtn.SetActive(true);
+        ClearWaveBg();
+        List<string> strList = new List<string>();
+        strList.Add("OldpaoRare_6_454");
+        GameObject go = Instantiate(spotEnemyPrb,waveBg);
+        go.GetComponent<WaveEnemySign>().Init(0, strList);
+    }
 
     /// <summary>
     /// 初始化波数

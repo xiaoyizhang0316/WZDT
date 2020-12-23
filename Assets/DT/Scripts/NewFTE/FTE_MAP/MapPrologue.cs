@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapPrologue : MonoBehaviour
 {
@@ -12,8 +13,12 @@ public class MapPrologue : MonoBehaviour
     public void PrologueOff()
     {
         CameraPlay.WidescreenH_OFF();
-        MapGuideManager.My.currentGuideIndex = 2;
-        MapGuideManager.My.PlayCurrentIndexGuide();
+        if (SceneManager.GetActiveScene().name == "Map")
+        {
+            MapGuideManager.My.currentGuideIndex = 2;
+            MapGuideManager.My.PlayCurrentIndexGuide();
+        }
+
         gameObject.SetActive(false);
     }
 }

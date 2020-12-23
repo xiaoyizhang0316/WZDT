@@ -16,6 +16,7 @@ public class RTPanel : MonoBehaviour
 
     public void InitRTPanel()
     {
+        NetworkMgr.My.GetGroupScoreStatus();
         NetworkMgr.My.GetPlayerGroupInfo(() =>
         {
             if (LevelInfoManager.My.currentSceneName.Equals("FTE_9"))

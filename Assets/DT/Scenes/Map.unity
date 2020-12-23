@@ -186,6 +186,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 265370230}
   image: []
 --- !u!114 &6666408
@@ -736,6 +739,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 1490662820}
   image: []
 --- !u!114 &50636340
@@ -2048,6 +2054,7 @@ MonoBehaviour:
   mission_3: "\u975E\u6D88\u8D39\u8005\u6536\u5165\u5360\u603B\u6536\u516530%\u4EE5\u4E0A"
   LevelButton: {fileID: 241482737}
   loadScene: FTE_8
+  lastFte: {fileID: 0}
 --- !u!1 &168451096
 GameObject:
   m_ObjectHideFlags: 0
@@ -3374,6 +3381,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 230473617}
   m_CullTransparentMesh: 0
+--- !u!1 &233861087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 233861088}
+  - component: {fileID: 233861090}
+  - component: {fileID: 233861089}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &233861088
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233861087}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1076027056}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 7}
+  m_SizeDelta: {x: 0, y: -14.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &233861089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233861087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 091246786ea4cc04081958f080e58a68, type: 3}
+    m_FontSize: 24
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 1.5
+--- !u!222 &233861090
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233861087}
+  m_CullTransparentMesh: 0
 --- !u!1 &239571584
 GameObject:
   m_ObjectHideFlags: 0
@@ -3889,6 +3973,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 1397974345}
   image: []
 --- !u!114 &247947912
@@ -5403,6 +5490,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 1
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 2103071358}
 --- !u!114 &337590806
 MonoBehaviour:
@@ -5504,6 +5594,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 1
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 1188139564}
 --- !u!114 &339120800
 MonoBehaviour:
@@ -6504,6 +6597,7 @@ MonoBehaviour:
   mission_3: "\u4E0D\u653E\u7F6E\u5185\u90E8\u7684\u79CD\u5B50\u5546"
   LevelButton: {fileID: 1783234902}
   loadScene: FTE_4
+  lastFte: {fileID: 0}
 --- !u!1001 &441788278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6902,6 +6996,138 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472253991}
+  m_CullTransparentMesh: 0
+--- !u!1 &486089214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 486089215}
+  - component: {fileID: 486089219}
+  - component: {fileID: 486089218}
+  - component: {fileID: 486089217}
+  - component: {fileID: 486089216}
+  m_Layer: 5
+  m_Name: Logout (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &486089215
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486089214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 701245673}
+  m_Father: {fileID: 1441346009}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -78.3, y: -255.5}
+  m_SizeDelta: {x: 134.19995, y: 67.70001}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &486089216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486089214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7734e9ad89394eb8a26ce7fbd62ea72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: FTE_0.5
+--- !u!114 &486089217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486089214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 486089218}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &486089218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486089214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b4f95316ff179b24d974902189c908a6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &486089219
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486089214}
   m_CullTransparentMesh: 0
 --- !u!1 &487697619
 GameObject:
@@ -9362,6 +9588,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 29796373}
   image: []
 --- !u!114 &668170985
@@ -9461,6 +9690,84 @@ MonoBehaviour:
   mission_3: "\u4E0D\u653E\u7F6E\u5185\u90E8\u96F6\u552E\u5546"
   LevelButton: {fileID: 1824538535}
   loadScene: FTE_2
+  lastFte: {fileID: 0}
+--- !u!1 &701245672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 701245673}
+  - component: {fileID: 701245675}
+  - component: {fileID: 701245674}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &701245673
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701245672}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 486089215}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 7}
+  m_SizeDelta: {x: 0, y: -14.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &701245674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701245672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 091246786ea4cc04081958f080e58a68, type: 3}
+    m_FontSize: 24
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 1
+--- !u!222 &701245675
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701245672}
+  m_CullTransparentMesh: 0
 --- !u!1 &701352065
 GameObject:
   m_ObjectHideFlags: 0
@@ -12373,6 +12680,7 @@ MonoBehaviour:
   mission_3: 3
   LevelButton: {fileID: 130935242}
   loadScene: FTE_20
+  lastFte: {fileID: 0}
 --- !u!1 &938917646
 GameObject:
   m_ObjectHideFlags: 0
@@ -13198,6 +13506,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 1
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 34049845}
 --- !u!114 &995519329
 MonoBehaviour:
@@ -14111,6 +14422,138 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073640666}
   m_CullTransparentMesh: 0
+--- !u!1 &1076027055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1076027056}
+  - component: {fileID: 1076027060}
+  - component: {fileID: 1076027059}
+  - component: {fileID: 1076027058}
+  - component: {fileID: 1076027057}
+  m_Layer: 5
+  m_Name: Logout (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1076027056
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076027055}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 233861088}
+  m_Father: {fileID: 1441346009}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -78.3, y: -333.8}
+  m_SizeDelta: {x: 134.19995, y: 67.70001}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1076027057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076027055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7734e9ad89394eb8a26ce7fbd62ea72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: FTE_2.5
+--- !u!114 &1076027058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076027055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1076027059}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1076027059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076027055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b4f95316ff179b24d974902189c908a6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1076027060
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076027055}
+  m_CullTransparentMesh: 0
 --- !u!1 &1114530722
 GameObject:
   m_ObjectHideFlags: 0
@@ -14396,6 +14839,7 @@ MonoBehaviour:
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u5EA6\u4E0D\u4F4E\u4E8E80%"
   LevelButton: {fileID: 1611530982}
   loadScene: FTE_1
+  lastFte: {fileID: 0}
 --- !u!1 &1162739761
 GameObject:
   m_ObjectHideFlags: 0
@@ -14648,6 +15092,7 @@ MonoBehaviour:
   mission_3: "\u8FC7\u5173\u65F6\u6EE1\u610F\u6761\u4E0D\u4F4E\u4E8E60% "
   LevelButton: {fileID: 1527685599}
   loadScene: FTE_7
+  lastFte: {fileID: 0}
 --- !u!1 &1188139564
 GameObject:
   m_ObjectHideFlags: 0
@@ -17143,6 +17588,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 1639951281}
   image: []
 --- !u!114 &1353357619
@@ -17985,6 +18433,8 @@ RectTransform:
   - {fileID: 472253992}
   - {fileID: 1191091837}
   - {fileID: 1035126083}
+  - {fileID: 486089215}
+  - {fileID: 1076027056}
   m_Father: {fileID: 1981530435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18635,6 +19085,7 @@ MonoBehaviour:
   mission_3: "\u81F3\u5C113\u4E2A\u5185\u90E8\u89D2\u8272\u5347\u52305\u7EA7"
   LevelButton: {fileID: 782163679}
   loadScene: FTE_5
+  lastFte: {fileID: 0}
 --- !u!1 &1503463857
 GameObject:
   m_ObjectHideFlags: 0
@@ -20789,6 +21240,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 1
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
 --- !u!114 &1607016673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21546,6 +22000,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 340952414}
   image: []
 --- !u!114 &1644609166
@@ -23190,6 +23647,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 1503463857}
   image: []
 --- !u!114 &1780477483
@@ -24506,6 +24966,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 528972618}
   image: []
 --- !u!114 &1827628963
@@ -25180,6 +25643,7 @@ MonoBehaviour:
   mission_3: "\u7D2F\u8BA1\u6682\u505C\u65F6\u95F4\u4E0D\u8D85\u8FC7180\u79D2"
   LevelButton: {fileID: 1531192459}
   loadScene: FTE_6
+  lastFte: {fileID: 0}
 --- !u!1 &1894729307
 GameObject:
   m_ObjectHideFlags: 0
@@ -26756,6 +27220,7 @@ MonoBehaviour:
   mission_3: "\u9996\u9886\u6D88\u8D39\u8005\u6EE1\u8DB3\u8D85\u8FC722\u6B21"
   LevelButton: {fileID: 1039402857}
   loadScene: FTE_9
+  lastFte: {fileID: 0}
 --- !u!1 &1994188982
 GameObject:
   m_ObjectHideFlags: 0
@@ -26891,6 +27356,7 @@ MonoBehaviour:
   mission_3: "\u6EE1\u610F\u5EA6100%\u8FC7\u5173"
   LevelButton: {fileID: 614579327}
   loadScene: FTE_3
+  lastFte: {fileID: 0}
 --- !u!1 &2006630815
 GameObject:
   m_ObjectHideFlags: 0
@@ -29158,6 +29624,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 1
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 3703960080622818539}
 --- !u!222 &3703960080183982826
 CanvasRenderer:
@@ -31490,6 +31959,9 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 1
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
   hand: {fileID: 6404824647694977289}
 --- !u!222 &6404824647263676168
 CanvasRenderer:
