@@ -49,6 +49,7 @@ public class ProductMerchant : BaseSkill
                     return;
                 }
                 ProductData data = role.warehouse[0];
+                maxCount = 0;
                 role.warehouse.RemoveAt(0);
                 for (int i = 0; i < role.GetEquipBuffList().Count; i++)
                 {
