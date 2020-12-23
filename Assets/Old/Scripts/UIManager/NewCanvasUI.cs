@@ -110,7 +110,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         isTradeButtonActive = true;
         isProductLineActive = true;
         isInfoLineActive = true;
-        Init1_4UI();
+       // Init1_4UI();
     }
 
 
