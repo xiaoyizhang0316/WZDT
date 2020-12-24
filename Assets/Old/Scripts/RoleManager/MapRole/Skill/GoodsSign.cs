@@ -248,5 +248,13 @@ public class GoodsSign : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        if (SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+        {
+            if (FTE_2_5_Manager.My.isClearGoods)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

@@ -18,12 +18,12 @@ public class FTE_2_5_Goal3 : BaseGuideStep
     public GameObject endPoint3;
     public override IEnumerator StepStart()
     {
-        peasant1.SetActive(false);
-        peasant2.SetActive(false);
-        peasant3.SetActive(false);
-        bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5(305);
-        bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5(304);
-        bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5(303);
+        PlayerData.My.DeleteRole( peasant1.GetComponent<BaseMapRole>().baseRoleData.ID);
+        PlayerData.My.DeleteRole( peasant2.GetComponent<BaseMapRole>().baseRoleData.ID);
+        PlayerData.My.DeleteRole( peasant3.GetComponent<BaseMapRole>().baseRoleData.ID);
+        StartCoroutine( bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5(305));
+        StartCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5(304));
+        StartCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5(303));
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);
         yield return new WaitForSeconds(0.5f);
     }
@@ -34,12 +34,7 @@ public class FTE_2_5_Goal3 : BaseGuideStep
         bornPoint2.GetComponent<Building>().isBornForFTE_2_5 = false;
         bornPoint3.GetComponent<Building>().isBornForFTE_2_5 = false;
         yield return new WaitForSeconds(2f);
-        bornPoint1.SetActive(false);
-        bornPoint2.SetActive(false);
-        bornPoint3.SetActive(false);
-        endPoint1.SetActive(false);
-        endPoint2.SetActive(false);
-        endPoint3.SetActive(false);
+        ClearConsumer();
     }
 
     public override bool ChenkEnd()
@@ -71,6 +66,36 @@ public class FTE_2_5_Goal3 : BaseGuideStep
             if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
             {
                 missiondatas.data[2].isFinish = true;
+            }
+        }
+    }
+
+    void ClearConsumer()
+    {
+        foreach (Transform child in bornPoint1.transform)
+        {
+            if (child.GetComponent<ConsumeSign>())
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        
+        foreach (Transform child in bornPoint2.transform)
+        {
+            if (child.GetComponent<ConsumeSign>())
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        
+        bornPoint2.SetActive(false);
+        endPoint2.SetActive(false);
+        
+        foreach (Transform child in bornPoint3.transform)
+        {
+            if (child.GetComponent<ConsumeSign>())
+            {
+                Destroy(child.gameObject);
             }
         }
     }
