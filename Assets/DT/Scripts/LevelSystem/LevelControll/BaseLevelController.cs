@@ -65,6 +65,8 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     public string winkey2;
 
     public string winkey3;
+
+    public bool tradeCostMoney;
     /// <summary>
     /// 改变地形
     /// </summary>

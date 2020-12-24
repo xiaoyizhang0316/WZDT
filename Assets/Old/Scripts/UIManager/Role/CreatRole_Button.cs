@@ -234,6 +234,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     }
                     if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1"
                                                                         && SceneManager.GetActiveScene().name != "FTE_0.5"&& SceneManager.GetActiveScene().name != "FTE_1.5"
+                                                                        && SceneManager.GetActiveScene().name != "FTE_2.5"
                         )
                     {
                         BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);

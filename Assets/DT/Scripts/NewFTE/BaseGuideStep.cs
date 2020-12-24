@@ -283,7 +283,7 @@ public abstract class BaseGuideStep : MonoBehaviour
         }
     }
 
-    public IEnumerator PlayEnd()
+    public virtual IEnumerator PlayEnd()
     {
     Debug.Log("结束当前步骤"+GuideManager.My.currentGuideIndex);
         yield return StepEnd();

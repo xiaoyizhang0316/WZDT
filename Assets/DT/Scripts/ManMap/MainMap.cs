@@ -14,6 +14,7 @@ public class MainMap : MonoBehaviour
     public Transform threeWords;
 
     public Text userLevelText;
+    
 
     // Start is called before the first frame update
     void Start()
