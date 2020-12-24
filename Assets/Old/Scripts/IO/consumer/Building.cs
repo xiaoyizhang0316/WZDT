@@ -256,6 +256,32 @@ public class Building : MonoBehaviour
     }
 
     /// <summary>
+    /// 生成一波消费者
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="number"></param>
+    /// <returns></returns>
+    public IEnumerator BornSingleTypeConsumer(ConsumerType type, int number)
+    {
+        DrawPathLine();
+        protalGameObject.transform.DOScale(new Vector3(1, 1, 0.52f), 1);
+        for (int i = 0; i < number; i++)
+        {
+            float waitTime;
+            waitTime = GameDataMgr.My.consumerWaitTime[type] + buildingWaitTime;
+            Tweener twe = transform.DOScale(1f, waitTime);
+            yield return twe.WaitForCompletion();
+            string path = "Prefabs/Consumer/" + type.ToString();
+            GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+            go.GetComponent<ConsumeSign>().Init(consumerPathList);
+            go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+            consumeSigns.Add(go.GetComponent<ConsumeSign>());
+            go.transform.position = transform.position;
+            go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+        }
+    }
+
+    /// <summary>
     /// 生成消费者路径线路
     /// </summary>
     public void DrawPathLine()

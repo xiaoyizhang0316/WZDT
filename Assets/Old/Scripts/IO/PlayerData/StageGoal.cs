@@ -962,17 +962,18 @@ public class StageGoal : MonoSingleton<StageGoal>
         //        ParseStageEnemyData(stageEnemyData);
         //    }
         //}
-        if (NetworkMgr.My.useLocalJson)
-        {
-            StartCoroutine(GetEnemyData(sceneName));
-        }
-        else
-        {
-            string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
-            //Debug.Log("-------" + json);
-            StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
-            ParseStageEnemyData(stageEnemyData);
-        }
+        //if (NetworkMgr.My.useLocalJson)
+        //{
+        //    StartCoroutine(GetEnemyData(sceneName));
+        //}
+        //else
+        //{
+        //    string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
+        //    //Debug.Log("-------" + json);
+        //    StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
+        //    ParseStageEnemyData(stageEnemyData);
+        //}
+        StartCoroutine(GetEnemyData(sceneName));
     }
 
     IEnumerator GetEnemyData(string sceneName)
