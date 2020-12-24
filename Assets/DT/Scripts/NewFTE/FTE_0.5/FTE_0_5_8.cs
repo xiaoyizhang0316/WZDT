@@ -63,6 +63,14 @@ public class FTE_0_5_8 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
+        if (role1.warehouse.Count == role1.baseRoleData.bulletCapacity)
+        {
+            role1.warehouse.Clear();
+        }
+        if (role2.warehouse.Count == role2.baseRoleData.bulletCapacity)
+        {
+            role2.warehouse.Clear();
+        }
         for (int j = 0; j < role1.warehouse.Count; j++)
         {
             if (role1.warehouse[j].damage < seed1targetdamege)
@@ -82,12 +90,13 @@ public class FTE_0_5_8 : BaseGuideStep
         if ((StageGoal.My.timeCount - time) % 60 == 0)
         {
             role2.warehouse.Clear();
+            time = StageGoal.My.timeCount;
         }
 
-        missiondatas.data[0].currentNum = role2.warehouse.Count; 
+        missiondatas.data[1].currentNum = role2.warehouse.Count; 
         currentRate =(int)( (float)(role2.warehouse.Count)/ (float)(StageGoal.My.timeCount - time)  * 60);
 
-        if (currentRate >= targetRate&&role2.warehouse.Count > missiondatas.data[0].maxNum)
+        if (currentRate >= targetRate&&role2.warehouse.Count > missiondatas.data[1].maxNum)
         {
             missiondatas.data[1].isFinish = true;
          

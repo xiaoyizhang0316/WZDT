@@ -76,6 +76,7 @@ public class FTE_0_5_10 : BaseGuideStep
         if ((StageGoal.My.timeCount - time) % 60 == 0)
         {
             role2.warehouse.Clear();
+            time = StageGoal.My.timeCount;
         }
 
         missiondatas.data[1].currentNum = role2.warehouse.Count; 

@@ -59,21 +59,32 @@ public class FTE_0_5_11 : BaseGuideStep
             }
         }
 
-        info.text = "剩余时间 : "+(shengyuTime- (StageGoal.My.timeCount-time)) +"质监站1剩余："+(role.baseRoleData.bulletCapacity-role.warehouse.Count)
-                    +"           质监站2剩余："+(role1.baseRoleData.bulletCapacity-role1.warehouse.Count)
-            ;
+        info.text = "剩余时间 : "+(shengyuTime- (StageGoal.My.timeCount-time)) ;
         if ((StageGoal.My.timeCount - time) % shengyuTime == 0)
         {
             role.warehouse.Clear();
             role1.warehouse.Clear();
-        }
-  
-        if ( role.warehouse.Count > missiondatas.data[0].maxNum&& role1.warehouse.Count > missiondatas.data[1].maxNum)
-        {
-            missiondatas.data[0].isFinish = true; 
-            return true;
+            time = StageGoal.My.timeCount;
         }
 
+        missiondatas.data[0].currentNum = role.warehouse.Count;  
+        missiondatas.data[1].currentNum = role1.warehouse.Count;  
+
+        if (missiondatas.data[0].currentNum > missiondatas.data[0].maxNum)
+        {
+            missiondatas.data[0].isFinish = true; 
+           
+        }
+        if (missiondatas.data[1].currentNum > missiondatas.data[1].maxNum)
+        {
+            missiondatas.data[1].isFinish = true; 
+           
+        }
+
+        if (missiondatas.data[0].isFinish && missiondatas.data[1].isFinish)
+        {
+            return true;
+        }
         else
         {
             return false;
