@@ -48,6 +48,14 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
                 PlayerData.My.DeleteRole(PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().baseRoleData.ID);
             }
         }
+
+        foreach (Transform child in bornPoint.transform)
+        {
+            if (child.GetComponent<ConsumeSign>())
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
 
     public override bool ChenkEnd()

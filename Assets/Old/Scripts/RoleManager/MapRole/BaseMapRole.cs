@@ -155,7 +155,13 @@ public class BaseMapRole : MonoBehaviour
             if (!PlayerData.My.RoleData.Contains(GetComponent<BaseMapRole>().baseRoleData))
                 PlayerData.My.RoleData.Add(GetComponent<BaseMapRole>().baseRoleData);
             if (!PlayerData.My.MapRole.Contains(GetComponent<BaseMapRole>()))
+            {
                 PlayerData.My.MapRole.Add(GetComponent<BaseMapRole>());
+                if (!isNpc)
+                {
+                    PlayerData.My.RoleCountStatic(GetComponent<BaseMapRole>(), 1);
+                }
+            }
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
         CheckTalentBuff();
