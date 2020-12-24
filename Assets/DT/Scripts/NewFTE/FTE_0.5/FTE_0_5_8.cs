@@ -12,9 +12,18 @@ public class FTE_0_5_8 : BaseGuideStep
 
     public BaseMapRole role2;
 
-    public BaseMapRole role0;
-    public List<GameObject> land;
-    public List<GameObject> Seedtesting;
+    public int seed1targetdamege;
+    public Text info;
+    /// <summary>
+    /// 目标速率
+    /// </summary>
+    public int targetRate;
+    int time;
+
+    /// <summary>
+    /// 当前速率
+    /// </summary>
+    public int currentRate;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,25 +32,27 @@ public class FTE_0_5_8 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        PlayerData.My.DeleteRole(role0.baseRoleData.ID);
-        yield return new WaitForSeconds(1f);
-        for (int i = 0; i <land.Count; i++)
-        {
-            land[i].transform.DOLocalMoveY(-5, 1f).Play();
-        }
-        yield return new WaitForSeconds(1f);
-        for (int i = 0; i <land.Count; i++)
-        {
-            land[i].transform.DOLocalMoveY(0, 1f).Play();
-       
-        }
+        time = StageGoal.My.timeCount;
+        role1.warehouse.Clear();
+        role2.warehouse.Clear();
+  yield return new WaitForSeconds(1f);
+ //  for (int i = 0; i <land.Count; i++)
+ //  {
+ //      land[i].transform.DOLocalMoveY(-5, 1f).Play();
+ //  }
+ //  yield return new WaitForSeconds(1f);
+ //  for (int i = 0; i <land.Count; i++)
+ //  {
+ //      land[i].transform.DOLocalMoveY(0, 1f).Play();
+ // 
+ //  }
 
-        for (int i = 0; i < Seedtesting.Count; i++)
-        {
-            Seedtesting[i].SetActive(true);
-            Seedtesting[i].transform.DOLocalMoveY(0.3f, 1f).Play();
+ //  for (int i = 0; i < Seedtesting.Count; i++)
+ //  {
+ //      Seedtesting[i].SetActive(true);
+ //      Seedtesting[i].transform.DOLocalMoveY(0.3f, 1f).Play();
 
-        }
+ //  }
     }
 
     public override IEnumerator StepEnd()
@@ -54,39 +65,42 @@ public class FTE_0_5_8 : BaseGuideStep
     {
         for (int j = 0; j < role1.warehouse.Count; j++)
         {
-            if (role1.warehouse[j].damage < 50)
+            if (role1.warehouse[j].damage < seed1targetdamege)
             {
                 role1.warehouse.Remove(role1.warehouse[j]);
             }
         }
-        for (int j = 0; j <  role2.warehouse.Count; j++)
-        {
-            if (role2.warehouse[j].damage < 50)
-            {
-                role2.warehouse.Remove(role2.warehouse[j]);
-            }
-        }
-
+       
         missiondatas.data[0].currentNum = role1.warehouse.Count;
-        missiondatas.data[1].currentNum = role2.warehouse.Count;
-
+     
         if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
         {
             missiondatas.data[0].isFinish = true;
            
         }
-
-        if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
+        info.text = "目标效率为："+targetRate+"/60s                  当前效率为："+currentRate+"/60s";
+        if ((StageGoal.My.timeCount - time) % 60 == 0)
         {
-            missiondatas.data[1].isFinish = true;
-           
+            role2.warehouse.Clear();
         }
 
-        if (missiondatas.data[0].isFinish && missiondatas.data[1].isFinish)
+        missiondatas.data[0].currentNum = role2.warehouse.Count; 
+        currentRate =(int)( (float)(role2.warehouse.Count)/ (float)(StageGoal.My.timeCount - time)  * 60);
+
+        if (currentRate >= targetRate&&role2.warehouse.Count > missiondatas.data[0].maxNum)
+        {
+            missiondatas.data[1].isFinish = true;
+         
+        }
+
+        if (  missiondatas.data[1].isFinish &&  missiondatas.data[0].isFinish )
         {
             return true;
         }
+        else
+        {
+            return false;
+        }
 
-        return false;
     }
 }

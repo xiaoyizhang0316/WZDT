@@ -10,33 +10,29 @@ public class FTE_0_5_10 : BaseGuideStep
 {
 
     public BaseMapRole role;
+    public BaseMapRole role2;
+    int time;
 
-    public BaseMapRole roleseed;
-    public BaseMapRole roleseed1;
-    public BaseMapRole rolenongmin;
-    public BaseMapRole npc1;
-    public BaseMapRole npc2;
+    public Text info;
+    /// <summary>
+    /// 目标速率
+    /// </summary>
+    public int targetRate;
+
+    public int targetdamege;
+    public int targetdamege2;
+ 
+    /// <summary>
+    /// 当前速率
+    /// </summary>
+    public int currentRate;
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
-        {
-            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
-            {
-                roleseed = PlayerData.My.MapRole[i];
-            }
-        }
-        PlayerData.My.DeleteRole(roleseed.baseRoleData.ID);
-        PlayerData.My.DeleteRole(npc1.baseRoleData.ID);
-        PlayerData.My.DeleteRole(npc2.baseRoleData.ID);
-        
-        for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
-        {
-            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant&&!PlayerData.My.MapRole[i].isNpc)
-            {
-                rolenongmin = PlayerData.My.MapRole[i];
-            }
-        }
+        time = StageGoal.My.timeCount;
+        role.warehouse.Clear();
+        role2.warehouse.Clear();
+
         yield return null;
     }
 
@@ -51,7 +47,7 @@ public class FTE_0_5_10 : BaseGuideStep
        
         for (int i = 0; i <  role.warehouse.Count; i++)
         {
-            if (role.warehouse[i].damage < 80)
+            if (role.warehouse[i].damage < targetdamege)
             {
                 role.warehouse.Remove(role.warehouse[i]);
             }
@@ -63,33 +59,36 @@ public class FTE_0_5_10 : BaseGuideStep
             missiondatas.data[0].isFinish = true;
             
         }
-
-        for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
+ 
+        
+        
+        
+        
+        for (int i = 0; i < role2.warehouse.Count; i++)
         {
-            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed )
+            if (role2.warehouse[i].damage <targetdamege2)
             {
-                missiondatas.data[1].isFinish = true;
-                missiondatas.data[1].currentNum = 1;
-                roleseed1 = PlayerData.My.MapRole[i];
+                role2.warehouse.Remove(role2.warehouse[i]);
             }
         }
 
-        if (roleseed1 == null)
+        info.text = "目标效率为："+targetRate+"/60s                  当前效率为："+currentRate+"/60s";
+        if ((StageGoal.My.timeCount - time) % 60 == 0)
         {
-          
+            role2.warehouse.Clear();
         }
-        else
-        {
-            if (TradeManager.My.CheckTwoRoleHasTrade(roleseed1.baseRoleData, rolenongmin.baseRoleData))
-            {
-                missiondatas.data[2].isFinish = true;
-                missiondatas.data[2].currentNum = 1;
-            }
 
+        missiondatas.data[1].currentNum = role2.warehouse.Count; 
+        currentRate =(int)( (float)(role2.warehouse.Count)/ (float)(StageGoal.My.timeCount - time)  * 60);
+
+        if (currentRate >= targetRate&&role2.warehouse.Count > missiondatas.data[1].maxNum)
+        {
+            missiondatas.data[1].isFinish = true;
+            return true;
         }
 
   
-        if (missiondatas.data[0].isFinish && missiondatas.data[1].isFinish && missiondatas.data[2].isFinish)
+        if (missiondatas.data[0].isFinish && missiondatas.data[1].isFinish )
         {
             return true;
             

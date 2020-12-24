@@ -26,14 +26,21 @@ public class FTE_0_5_9 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
+        int count = 0;
+
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant&&!PlayerData.My.MapRole[i].isNpc)
             {
-            
-                    missiondatas.data[0].isFinish = true;
-                    missiondatas.data[0].currentNum = 1;
-                    return true;
+                count++;
+                   
+            }
+
+            if (count >= 2)
+            {
+                missiondatas.data[0].isFinish = true;
+                missiondatas.data[0].currentNum = count;
+                return true;
 
             }
         }

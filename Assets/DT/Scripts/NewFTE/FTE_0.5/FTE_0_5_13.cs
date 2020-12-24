@@ -6,32 +6,45 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 
-public class FTE_0_5_11 : BaseGuideStep
+public class FTE_0_5_13 : BaseGuideStep
 {
 
     public BaseMapRole role;
     public BaseMapRole role1;
+    public BaseMapRole nongmin;
+    public BaseMapRole maoyi;
+    
+    
 
     int time;
 
     public int shengyuTime;
-    public Text info;
-    /// <summary>
-    /// 目标速率
-    /// </summary>
-    public int targetRate;
-
-    public int targetdamege;
-    /// <summary>
-    /// 当前速率
-    /// </summary>
-    public int currentRate;
+    public Text info; 
+    public int targetdamege; 
+    
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
         time = StageGoal.My.timeCount;
         role.warehouse.Clear();
-        
+
+       for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                    {
+                        if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
+                        {
+
+                            maoyi = PlayerData.My.MapRole[i];
+                        }
+                    }
+       for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+       {
+           if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant&&!PlayerData.My.MapRole[i].isNpc)
+           {
+
+               nongmin = PlayerData.My.MapRole[i];
+           }
+       }
+
         yield return null;
     }
 
@@ -71,9 +84,20 @@ public class FTE_0_5_11 : BaseGuideStep
         if ( role.warehouse.Count > missiondatas.data[0].maxNum&& role1.warehouse.Count > missiondatas.data[1].maxNum)
         {
             missiondatas.data[0].isFinish = true; 
-            return true;
+      
         }
 
+
+        if (TradeManager.My.CheckTwoRoleHasTrade(nongmin.baseRoleData, maoyi.baseRoleData))
+        {
+            missiondatas.data[1].isFinish = true; 
+            
+        }
+
+        if (missiondatas.data[0].isFinish && missiondatas.data[1].isFinish)
+        {
+            return true;
+        }
         else
         {
             return false;

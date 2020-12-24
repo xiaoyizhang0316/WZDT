@@ -21,23 +21,23 @@ public class FTE_0_5_2 : BaseGuideStep
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
         yield return new WaitForSeconds(1f);
-        for (int i = 0; i <land.Count; i++)
-        {
-            land[i].transform.DOLocalMoveY(-5, 1f).Play();
-        }
-        yield return new WaitForSeconds(1f);
-        for (int i = 0; i <land.Count; i++)
-        {
-            land[i].transform.DOLocalMoveY(0, 1f).Play();
-       
-        }
+      // for (int i = 0; i <land.Count; i++)
+      // {
+      //     land[i].transform.DOLocalMoveY(-5, 1f).Play();
+      // }
+      // yield return new WaitForSeconds(1f);
+      // for (int i = 0; i <land.Count; i++)
+      // {
+      //     land[i].transform.DOLocalMoveY(0, 1f).Play();
+      //
+      // }
 
-        for (int i = 0; i < Seedtesting.Count; i++)
-        {
-            Seedtesting[i].SetActive(true);
-            Seedtesting[i].transform.DOLocalMoveY(0.3f, 1f).Play();
+      // for (int i = 0; i < Seedtesting.Count; i++)
+      // {
+      //     Seedtesting[i].SetActive(true);
+      //     Seedtesting[i].transform.DOLocalMoveY(0.3f, 1f).Play();
 
-        }
+      // }
          
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
