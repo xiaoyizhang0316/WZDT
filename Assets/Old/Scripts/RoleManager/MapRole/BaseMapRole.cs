@@ -146,6 +146,7 @@ public class BaseMapRole : MonoBehaviour
     {
         buffList = new List<BaseBuff>();
         CheckBuffDuration();
+        encourageLevel = startEncourageLevel;
         if (!isNpc)
         {
             InitAttribute();
