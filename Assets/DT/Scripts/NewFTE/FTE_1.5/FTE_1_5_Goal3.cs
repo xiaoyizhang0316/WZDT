@@ -9,6 +9,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     //public Transform emptyPlace;
     public Transform place;
     public Transform peasant;
+    public GameObject costPanel;
     //public GameObject statPanel;
     private int count = 0;
     private int lastCost = 0;
@@ -18,6 +19,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     {
         lastCost = StageGoal.My.totalCost;
         lastTimeCount = StageGoal.My.timeCount;
+        costPanel.GetComponent<CostPanel>().InitCostPanel(lastCost,lastTimeCount);
         //emptyPlace.DOMoveY(-6, 0.5f).OnComplete(() =>
         //{
         peasant.gameObject.SetActive(true);
@@ -32,6 +34,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     {
         CancelInvoke();
         yield return new WaitForSeconds(2f);
+        costPanel.GetComponent<CostPanel>().HideAllCost();
     }
 
     public override bool ChenkEnd()
@@ -50,6 +53,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
         if (missiondatas.data[1].isFinish == false)
         {
             currentCost = (StageGoal.My.totalCost-lastCost) * 60 / ((StageGoal.My.timeCount-lastTimeCount)==0?1:(StageGoal.My.timeCount-lastTimeCount));
+            costPanel.GetComponent<CostPanel>().ShowAllCost(currentCost);
             missiondatas.data[1].currentNum = currentCost;
             if (missiondatas.data[0].isFinish)
             {
