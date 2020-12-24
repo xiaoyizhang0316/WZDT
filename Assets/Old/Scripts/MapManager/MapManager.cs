@@ -192,7 +192,8 @@ public class MapManager : MonoSingleton<MapManager>
     public void InitStageNPCData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName.Equals("FTE_0-1") || sceneName.Equals("FTE_0-2"))
+        if (sceneName.Equals("FTE_0-1") || sceneName.Equals("FTE_0-2")|| sceneName.Equals("FTE_0.5")
+            || sceneName.Equals("FTE_2.5"))
         {
             return;
         }

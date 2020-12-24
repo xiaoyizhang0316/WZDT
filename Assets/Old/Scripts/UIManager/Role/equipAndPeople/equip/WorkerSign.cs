@@ -72,15 +72,15 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void Init(int id, bool Occupation)
     {
         ID = id;
-        if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) >3)
-        {
-            levelUI.SetActive(true);
-        }
-        else
-        {
-            levelUI.SetActive(false);
-            
-        }
+     //  if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) >3)
+     //  {
+     //      levelUI.SetActive(true);
+     //  }
+     //  else
+     //  {
+     //      levelUI.SetActive(false);
+     //      
+     //  }
 
         SetOccupyStatus(Occupation);
         workerData = GameDataMgr.My.GetWorkerData(id);

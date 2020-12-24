@@ -36,6 +36,7 @@ public static class Url
     private static string getPlayerGroupInfo = "getPlayerGroupInfo";
     private static string updatePlayerTalent = "updatePlayerTalent";
     private static string updatePlayerUnlockStatus = "updatePlayerUnlockStatus";
+    private static string updatePlayerFTE = "updatePlayerFTE";
     #endregion
 
     #region three words 
@@ -83,6 +84,7 @@ public static class Url
     #region match
     private static string addPlayerScore = "addPlayerScore";
     private static string getGroupPlayerScore = "getGroupPlayerScore";
+    private static string getGroupScoreStatus = "getGroupScoreStatus";
     #endregion
 
     #region test
@@ -136,6 +138,8 @@ public static class Url
     public static string AddPlayerScore { get =>ip+ addPlayerScore;  }
     public static string NewLoginUrl { get => ip+newLoginUrl; }
     public static string NewReConnUrl { get => ip+newReConnUrl; }
+    public static string GetGroupScoreStatus { get => ip+getGroupScoreStatus; }
+    public static string UpdatePlayerFTE { get => ip+updatePlayerFTE; }
 
     public static void SetIp(string newIp)
     {
