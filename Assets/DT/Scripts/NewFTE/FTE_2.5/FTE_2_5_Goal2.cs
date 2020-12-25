@@ -45,6 +45,8 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         {
             PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
         }
+        FTE_2_5_Manager.My.isClearGoods = false;
+        NewCanvasUI.My.GameNormal();
     }
 
     public override bool ChenkEnd()
@@ -67,7 +69,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         if (missiondatas.data[1].isFinish == false)
         {
             CheckSeed(peasant2, 304);
-            missiondatas.data[1].currentNum = sweetCount;
+            missiondatas.data[1].currentNum = crispCount;
             if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
             {
                 missiondatas.data[1].isFinish = true;
@@ -77,7 +79,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         if (missiondatas.data[2].isFinish == false)
         {
             CheckSeed(peasant3, 303);
-            missiondatas.data[2].currentNum = sweetCount;
+            missiondatas.data[2].currentNum = softCount;
             if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
             {
                 missiondatas.data[2].isFinish = true;

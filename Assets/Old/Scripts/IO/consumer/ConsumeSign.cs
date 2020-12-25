@@ -251,10 +251,9 @@ public class ConsumeSign : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
         {
-            if (scorePer > 1)
-            {
+            
                 FTE_2_5_Manager.My.CheckTasteKill(buildingIndex);
-            }
+            
         }
         DeathAward();
         Stop();
