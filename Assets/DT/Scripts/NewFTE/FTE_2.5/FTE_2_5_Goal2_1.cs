@@ -5,27 +5,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class FTE_2_5_Goal2 : BaseGuideStep
+public class FTE_2_5_Goal2_1 : BaseGuideStep
 {
     // 0.32 
     public Transform peasant1;
     public Transform peasant2;
     public Transform peasant3;
-    public Transform place1;
-    public Transform place2;
-    public Transform place3;
-    public GameObject oldPlace1;
-    public GameObject oldPlace2;
-    public GameObject oldPlace3;
     private int sweetCount = 0;
     private int crispCount = 0;
     private int softCount = 0;
     public override IEnumerator StepStart()
     {
-        peasant1.gameObject.SetActive(true);
-        peasant2.gameObject.SetActive(true);
-        peasant3.gameObject.SetActive(true);
-        SeedBuildRise();
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);
         yield return new WaitForSeconds(0.5f);
     }
@@ -33,18 +23,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        NewCanvasUI.My.GamePause(false);
-        DoEnd();
-        yield return new WaitForSeconds(1f);
-    }
-
-    void DoEnd()
-    {
-        FTE_2_5_Manager.My.isClearGoods = true;
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
-        }
+        yield return new WaitForSeconds(2f);
     }
 
     public override bool ChenkEnd()
@@ -93,7 +72,8 @@ public class FTE_2_5_Goal2 : BaseGuideStep
             if (peasant.GetComponent<BaseMapRole>().warehouse[i].buffList.Contains(buff))
             {
                 tempCount++;
-            }else
+            }
+            else
             {
                 peasant.GetComponent<BaseMapRole>().warehouse.Remove(peasant.GetComponent<BaseMapRole>().warehouse[i]);
             }
@@ -112,24 +92,5 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         }
 
         tempCount = 0;
-    }
-
-    void SeedBuildRise()
-    {
-        oldPlace1.transform.DOMoveY(-10, 0.5f).OnComplete(() =>
-        {
-            place1.DOMoveY(0, 0.5f);
-            peasant1.DOMoveY(0.35f, 0.5f);
-        });
-        oldPlace2.transform.DOMoveY(-10, 0.5f).OnComplete(() =>
-        {
-            place2.DOMoveY(0, 0.5f);
-            peasant2.DOMoveY(0.35f, 0.5f);
-        });
-        oldPlace3.transform.DOMoveY(-10, 0.5f).OnComplete(() =>
-        {
-            place3.DOMoveY(0, 0.5f);
-            peasant3.DOMoveY(0.35f, 0.5f);
-        });
     }
 }

@@ -11,8 +11,10 @@ public class FTE_2_5_Goal1 : BaseGuideStep
     public GameObject wave;
     public override IEnumerator StepStart()
     {
-        PlayerData.My.playerGears.Clear();
-        PlayerData.My.playerWorkers.Clear();
+        /*PlayerData.My.playerGears.Clear();
+        PlayerData.My.playerWorkers.Clear();*/
+        wave.SetActive(true);
+        FTE_2_5_Manager.My.GetComponent<FTE_2_5_Limit>().needLimit = true;
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);
         yield return new WaitForSeconds(0.5f);
     }

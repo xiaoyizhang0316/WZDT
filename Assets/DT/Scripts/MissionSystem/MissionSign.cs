@@ -15,10 +15,13 @@ public class MissionSign : MonoBehaviour
     public MissionData data;
 
     public Image sign;
+
+    private Color signColor;
     // Start is called before the first frame update
     void Start()
     {
         MissionManager.My.signs.Add(this);
+        signColor = sign.color;
     }
 
     // Update is called once per frame
@@ -28,6 +31,10 @@ public class MissionSign : MonoBehaviour
         if (data.isFinish)
         {
             sign.color = Color.green;
+        }
+        else
+        {
+            sign.color = signColor;
         }
     }
 

@@ -174,6 +174,8 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
         DeleleRoleOperationRecord(mapRole);
         Destroy(mapRole.gameObject);
+        if(!mapRole.isNpc)
+            RoleCountStatic(mapRole,-1);
     }
 
     /// <summary>
@@ -192,6 +194,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         MapRole.Remove(mapRole);
         SellRoleOperationRecord(mapRole);
         Destroy(mapRole.gameObject);
+        RoleCountStatic(mapRole,-1);
     }
 
     /// <summary>
@@ -809,6 +812,30 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             {
                 Screen.SetResolution(1920, 1080, true);
             }
+        }
+    }
+
+    public int seedCount;
+    public int peasantCount;
+    public int merchantCount;
+    public int dealerCount;
+
+    public void RoleCountStatic(BaseMapRole role, int count)
+    {
+        switch (role.baseRoleData.baseRoleData.roleType)
+        {
+            case RoleType.Seed:
+                seedCount += count;
+                break;
+            case RoleType.Peasant:
+                peasantCount += count;
+                break;
+            case RoleType.Merchant:
+                merchantCount += count;
+                break;
+            case RoleType.Dealer:
+                dealerCount += count;
+                break;
         }
     }
 }

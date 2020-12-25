@@ -7,8 +7,10 @@ using DG.Tweening;
 public class FTE_1_5_Goal3 : BaseGuideStep
 {
     //public Transform emptyPlace;
+    public int limitTime = 0;
     public Transform place;
     public Transform peasant;
+    public GameObject costPanel;
     //public GameObject statPanel;
     private int count = 0;
     private int lastCost = 0;
@@ -16,8 +18,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     private int currentCost = 0;
     public override IEnumerator StepStart()
     {
-        lastCost = StageGoal.My.totalCost;
-        lastTimeCount = StageGoal.My.timeCount;
+        Reset();
         //emptyPlace.DOMoveY(-6, 0.5f).OnComplete(() =>
         //{
         peasant.gameObject.SetActive(true);
@@ -32,6 +33,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     {
         CancelInvoke();
         yield return new WaitForSeconds(2f);
+        costPanel.GetComponent<CostPanel>().HideAllCost();
     }
 
     public override bool ChenkEnd()
@@ -42,23 +44,51 @@ public class FTE_1_5_Goal3 : BaseGuideStep
 
     void CheckGoal()
     {
+        if (StageGoal.My.timeCount - lastTimeCount >= limitTime)
+        {
+            missiondatas.data[0].isFinish = false;
+            missiondatas.data[1].isFinish = false;
+            Reset();
+            return;
+        }
         if (missiondatas.data[0].isFinish == false && CheckBullet())
         {
             missiondatas.data[0].isFinish = true;
         }
 
-        if (missiondatas.data[1].isFinish == false)
+        
+        currentCost = StageGoal.My.totalCost-lastCost ;
+        costPanel.GetComponent<CostPanel>().ShowAllCost(currentCost);
+        missiondatas.data[1].currentNum = currentCost;
+
+        if (missiondatas.data[1].currentNum <= missiondatas.data[1].maxNum)
         {
-            currentCost = (StageGoal.My.totalCost-lastCost) * 60 / ((StageGoal.My.timeCount-lastTimeCount)==0?1:(StageGoal.My.timeCount-lastTimeCount));
-            missiondatas.data[1].currentNum = currentCost;
-            if (missiondatas.data[0].isFinish)
-            {
-                if (currentCost <= missiondatas.data[1].maxNum)
-                {
-                    missiondatas.data[1].isFinish = true;
-                }
-            }
+            missiondatas.data[1].isFinish = true;
         }
+        else
+        {
+            missiondatas.data[0].isFinish = false;
+            missiondatas.data[1].isFinish = false;
+            Reset();
+        }
+        
+    }
+
+    void Reset()
+    {
+        CancelInvoke();
+        NewCanvasUI.My.GamePause(false);
+        FTE_1_5_Manager.My.isClearGoods=true;
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        {
+            PlayerData.My.MapRole[i].ClearWarehouse();
+        }
+        lastCost = StageGoal.My.totalCost;
+        lastTimeCount = StageGoal.My.timeCount;
+        costPanel.GetComponent<CostPanel>().InitCostPanel(lastCost,lastTimeCount);
+        InvokeRepeating("CheckGoal",0, 0.2f);
+        FTE_1_5_Manager.My.isClearGoods=false;
+        NewCanvasUI.My.GameNormal();
     }
 
     bool CheckBullet()

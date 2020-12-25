@@ -10,6 +10,8 @@ public class FTE_2_5_Manager : MonoSingleton<FTE_2_5_Manager>
     public int packageKillNum = 0;
     public int saleKillNum = 0;
 
+    public bool isClearGoods = false;
+
     public void CheckTasteKill(int index)
     {
         switch (index)
