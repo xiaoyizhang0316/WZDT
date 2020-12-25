@@ -13,14 +13,16 @@ public class FTE_0_5_13 : BaseGuideStep
     public BaseMapRole role1;
     public BaseMapRole nongmin;
     public BaseMapRole maoyi;
-    
-    
+
+    public int roleTargetCount;
+    public int role1TargetCount;
 
     int time;
 
     public int shengyuTime;
     public Text info; 
     public int targetdamege; 
+    public int targetdamege1; 
     
     // Update is called once per frame
     public override IEnumerator StepStart()
@@ -66,22 +68,22 @@ public class FTE_0_5_13 : BaseGuideStep
         }
         for (int i = 0; i < role1.warehouse.Count; i++)
         {
-            if (role1.warehouse[i].damage <targetdamege)
+            if (role1.warehouse[i].damage <targetdamege1)
             {
                 role1.warehouse.Remove(role1.warehouse[i]);
             }
         }
 
-        info.text = "剩余时间 : "+(shengyuTime- (StageGoal.My.timeCount-time)) +"质监站1剩余："+(role.baseRoleData.bulletCapacity-role.warehouse.Count)
-                    +"           质监站2剩余："+(role1.baseRoleData.bulletCapacity-role1.warehouse.Count)
-            ;
+        info.text = "剩余时间 : "+(shengyuTime- (StageGoal.My.timeCount-time)) +"  质监站1剩余："+(roleTargetCount-role.warehouse.Count)
+                    +"           质监站2剩余："+(role1TargetCount-role1.warehouse.Count);
         if ((StageGoal.My.timeCount - time) % shengyuTime == 0)
         {
             role.warehouse.Clear();
             role1.warehouse.Clear();
+            time = StageGoal.My.timeCount ;
         }
   
-        if ( role.warehouse.Count > missiondatas.data[0].maxNum&& role1.warehouse.Count > missiondatas.data[1].maxNum)
+        if ( role.warehouse.Count >roleTargetCount&& role1.warehouse.Count >role1TargetCount)
         {
             missiondatas.data[0].isFinish = true; 
       

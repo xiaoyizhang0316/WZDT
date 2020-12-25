@@ -37,7 +37,7 @@ public class FTE_0_5_10_1 : BaseGuideStep
 
         if (count <= 1)
         {
-            missiondatas.data[0].isFinish = true;
+            missiondatas.data[1].isFinish = true;
         }
 
 
@@ -54,7 +54,7 @@ public class FTE_0_5_10_1 : BaseGuideStep
 
         if (count1 <= 1)
         {
-            missiondatas.data[1].isFinish = true;
+            missiondatas.data[0].isFinish = true;
         }
 
 

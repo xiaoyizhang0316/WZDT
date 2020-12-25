@@ -21,7 +21,11 @@ public class FTE_0_5_11 : BaseGuideStep
     /// </summary>
     public int targetRate;
 
+    public int roleTargetCount;
+    public int role1TargetCount;
+    
     public int targetdamege;
+    public int targetdamege1;
     /// <summary>
     /// 当前速率
     /// </summary>
@@ -53,42 +57,29 @@ public class FTE_0_5_11 : BaseGuideStep
         }
         for (int i = 0; i < role1.warehouse.Count; i++)
         {
-            if (role1.warehouse[i].damage <targetdamege)
+            if (role1.warehouse[i].damage <targetdamege1)
             {
                 role1.warehouse.Remove(role1.warehouse[i]);
             }
         }
 
-        info.text = "剩余时间 : "+(shengyuTime- (StageGoal.My.timeCount-time)) ;
+        info.text = "剩余时间 : "+(shengyuTime- (StageGoal.My.timeCount-time)) +"  质监站1剩余："+(roleTargetCount-role.warehouse.Count)
+                    +"           质监站2剩余："+(role1TargetCount-role1.warehouse.Count)
+            ;
         if ((StageGoal.My.timeCount - time) % shengyuTime == 0)
         {
             role.warehouse.Clear();
             role1.warehouse.Clear();
             time = StageGoal.My.timeCount;
         }
-
-        missiondatas.data[0].currentNum = role.warehouse.Count;  
-        missiondatas.data[1].currentNum = role1.warehouse.Count;  
-
-        if (missiondatas.data[0].currentNum > missiondatas.data[0].maxNum)
-        {
-            missiondatas.data[0].isFinish = true; 
-           
-        }
-        if (missiondatas.data[1].currentNum > missiondatas.data[1].maxNum)
-        {
-            missiondatas.data[1].isFinish = true; 
-           
-        }
-
-        if (missiondatas.data[0].isFinish && missiondatas.data[1].isFinish)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
  
+        if ( role.warehouse.Count >roleTargetCount&& role1.warehouse.Count >role1TargetCount)
+        {
+            missiondatas.data[0].isFinish = true;
+            return true; 
+        }
+
+        return false;
+
     }
 }
