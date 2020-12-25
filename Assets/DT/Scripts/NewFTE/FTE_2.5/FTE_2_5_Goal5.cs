@@ -17,12 +17,32 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     {
         FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GameNormal();
-        bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5(302);
+        FTE_2_5_Manager.My.packageKillNum = 0;
+        FTE_2_5_Manager.My.saleKillNum = 0;
+        FTE_2_5_Manager.My.nolikeKillNum = 0;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
+        /*bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5(302);
         bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5(301);
-        bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5(-1);
+        bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5(-1);*/
+        BornPackage();
+        BornSale();
+        BornNoLike();
         InvokeRepeating("CheckGoal", 1f, 0.1f);
         InvokeRepeating("CheckBuffOut", 3, 30);
         yield return new WaitForSeconds(0.5f);
+    }
+
+    void BornPackage()
+    {
+        StartCoroutine(bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5_1(302, 12));
+    }
+    void BornSale()
+    {
+        StartCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5_1(301, 12));
+    }
+    void BornNoLike()
+    {
+        StartCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5_1(-1, 12));
     }
 
     public override IEnumerator StepEnd()
@@ -43,7 +63,72 @@ public class FTE_2_5_Goal5 : BaseGuideStep
 
     void CheckGoal()
     {
+        if (missiondatas.data[0].isFinish == false)
+        {
+            missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
+            if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
+            {
+                missiondatas.data[0].isFinish = true;
+            }
+            else
+            {
+                if (!CheckHasConsume(bornPoint1.transform))
+                {
+                    FTE_2_5_Manager.My.packageKillNum = 0;
+                    missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
+                    BornPackage();
+                }
+            }
+        }
         
+        if (missiondatas.data[1].isFinish == false)
+        {
+            missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
+            if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
+            {
+                missiondatas.data[1].isFinish = true;
+            }
+            else
+            {
+                if (!CheckHasConsume(bornPoint2.transform))
+                {
+                    FTE_2_5_Manager.My.saleKillNum = 0;
+                    missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
+                    BornSale();
+                }
+            }
+        }
+        
+        if (missiondatas.data[2].isFinish == false)
+        {
+            missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;
+            if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
+            {
+                missiondatas.data[2].isFinish = true;
+            }
+            else
+            {
+                if (!CheckHasConsume(bornPoint3.transform))
+                {
+                    FTE_2_5_Manager.My.nolikeKillNum = 0;
+                    missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;
+                    BornNoLike();
+                }
+            }
+        }
+    }
+
+    bool CheckHasConsume(Transform point)
+    {
+        foreach (Transform child in point)
+        {
+            if (child.GetComponent<ConsumableSign>())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void CheckBuffOut()

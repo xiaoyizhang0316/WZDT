@@ -35,10 +35,10 @@ public class FTE_1_5_Dialogue : BaseGuideStep
         if (img != null)
         {
             img.SetActive(true);
-            img.GetComponent<RectTransform>().DOAnchorPos(new Vector2(-700, -285), 0.3f);
+            img.GetComponent<RectTransform>().DOAnchorPos(new Vector2(-700, -285), 0.3f).Play();
         }
 
-        endButton.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, -390), 0.3f).OnComplete(() =>
+        endButton.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, -390), 0.3f).Play().OnComplete(() =>
         {
             if (txt.Count>0)
             {

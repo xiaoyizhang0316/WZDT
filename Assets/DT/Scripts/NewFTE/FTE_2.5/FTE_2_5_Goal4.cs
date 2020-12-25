@@ -38,7 +38,7 @@ public class FTE_2_5_Goal4 : BaseGuideStep
     {
         if (missiondatas.data[0].isFinish == false)
         {
-            missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
+            //missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
                 missiondatas.data[0].isFinish = true;
@@ -47,7 +47,7 @@ public class FTE_2_5_Goal4 : BaseGuideStep
         
         if (missiondatas.data[1].isFinish == false)
         {
-            missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
+            //missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
             if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
             {
                 missiondatas.data[1].isFinish = true;
