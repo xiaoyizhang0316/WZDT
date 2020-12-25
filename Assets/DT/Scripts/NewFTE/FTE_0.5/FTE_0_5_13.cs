@@ -29,6 +29,7 @@ public class FTE_0_5_13 : BaseGuideStep
     {
         time = StageGoal.My.timeCount;
         role.warehouse.Clear();
+        role1.warehouse.Clear();
 
        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
                     {
