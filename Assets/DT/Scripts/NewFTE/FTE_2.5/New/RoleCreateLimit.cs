@@ -35,8 +35,16 @@ public class RoleCreateLimit : MonoBehaviour
             }
             else
             {
-                seedButton.GetComponent<CreatRole_Button>().enabled = true;
-                seedLock.SetActive(false);
+                if (limitSeedCount == -1)
+                {
+                    seedButton.GetComponent<CreatRole_Button>().enabled = false;
+                    seedLock.SetActive(true);
+                }
+                else
+                {
+                    seedButton.GetComponent<CreatRole_Button>().enabled = true;
+                    seedLock.SetActive(false);
+                }
             }
             
             if (PlayerData.My.peasantCount >= limitPeasantCount && limitPeasantCount!=0)
@@ -46,8 +54,16 @@ public class RoleCreateLimit : MonoBehaviour
             }
             else
             {
-                peasantButton.GetComponent<CreatRole_Button>().enabled = true;
-                peasantLock.SetActive(false);
+                if (limitPeasantCount == -1)
+                {
+                    peasantButton.GetComponent<CreatRole_Button>().enabled = false;
+                    peasantLock.SetActive(true);
+                }
+                else
+                {
+                    peasantButton.GetComponent<CreatRole_Button>().enabled = true;
+                    peasantLock.SetActive(false);
+                }
             }
             
             if (PlayerData.My.merchantCount >= limitMerchantCount && limitMerchantCount!=0)
@@ -57,8 +73,15 @@ public class RoleCreateLimit : MonoBehaviour
             }
             else
             {
-                merchantButton.GetComponent<CreatRole_Button>().enabled = true;
-                merchantLock.SetActive(false);
+                if (limitMerchantCount == -1)
+                {
+                    merchantButton.GetComponent<CreatRole_Button>().enabled = false;
+                    merchantLock.SetActive(true);
+                }
+                else{
+                    merchantButton.GetComponent<CreatRole_Button>().enabled = true;
+                    merchantLock.SetActive(false);
+                }
             }
             
             if (PlayerData.My.dealerCount >= limitDealerCount && limitDealerCount !=0)
@@ -68,8 +91,16 @@ public class RoleCreateLimit : MonoBehaviour
             }
             else
             {
-                dealerButton.GetComponent<CreatRole_Button>().enabled = true;
-                dealerLock.SetActive(false);
+                if (limitDealerCount == -1)
+                {
+                    dealerButton.GetComponent<CreatRole_Button>().enabled = false;
+                    dealerLock.SetActive(true);
+                }
+                else
+                {
+                    dealerButton.GetComponent<CreatRole_Button>().enabled = true;
+                    dealerLock.SetActive(false);
+                }
             }
         }
     }

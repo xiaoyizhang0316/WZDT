@@ -20,9 +20,9 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     {
         firstButton.SetActive(true);
         lastButton.SetActive(true);
-        startStar.transform.DOScale(Vector3.one, 0.02f);
-        endStar.transform.DOScale(Vector3.one, 0.02f);
-        slider.transform.DOScale(Vector3.one, 0.02f);
+        startStar.transform.DOScale(Vector3.one, 0.02f).Play();
+        endStar.transform.DOScale(Vector3.one, 0.02f).Play();
+        slider.transform.DOScale(Vector3.one, 0.02f).Play();
         encorageLevel.SetActive(true);
         FTE_2_5_Manager.My.isClearGoods = false;
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);

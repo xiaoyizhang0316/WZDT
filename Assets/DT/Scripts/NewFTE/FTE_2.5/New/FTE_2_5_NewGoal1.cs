@@ -45,6 +45,15 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
 
     void CheckGoal()
     {
+        if (StageGoal.My.timeCount >= limitTime)
+        {
+            NewCanvasUI.My.GamePause(false);
+            missiondatas.data[1].isFinish = false;
+            missiondatas.data[0].isFinish = false;
+            openCG.SetActive(true);
+            CancelInvoke();
+            return;
+        }
         if (missiondatas.data[0].isFinish == false)
         {
             missiondatas.data[0].currentNum = qualityCenter.GetComponent<BaseMapRole>().warehouse.Count;
