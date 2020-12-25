@@ -9,11 +9,13 @@ public class FTE_1_5_Goal1 : BaseGuideStep
     public GameObject costPanel;
 
     public int limitTime;
+    private int currentTime = 0;
     private bool fail;
     public override IEnumerator StepStart()
     {
         InvokeRepeating("CheckGoal", 0, 0.5f);
-        costPanel.GetComponent<CostPanel>().InitCostPanel(0,0);
+        currentTime = StageGoal.My.timeCount;
+        costPanel.GetComponent<CostPanel>().InitCostPanel(0,currentTime);
         yield return new WaitForSeconds(0.5f);
     }
 
@@ -33,6 +35,13 @@ public class FTE_1_5_Goal1 : BaseGuideStep
 
     void CheckGoal()
     {
+        if (StageGoal.My.timeCount - currentTime >= limitTime)
+        {
+            fail = true;
+            missiondatas.data[0].isFinish = false;
+            missiondatas.data[1].isFinish = false;
+            return;
+        }
         if (missiondatas.data[0].isFinish == false)
         {
             missiondatas.data[0].currentNum = StageGoal.My.killNumber;
@@ -43,7 +52,7 @@ public class FTE_1_5_Goal1 : BaseGuideStep
         }
         
         missiondatas.data[1].currentNum = StageGoal.My.totalCost;
-        costPanel.GetComponent<CostPanel>().ShowAllCost(missiondatas.data[1].currentNum);
+        costPanel.GetComponent<CostPanel>().ShowAllCost(missiondatas.data[1].currentNum,limitTime);
         if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
         {
             finalCost = missiondatas.data[1].currentNum;
