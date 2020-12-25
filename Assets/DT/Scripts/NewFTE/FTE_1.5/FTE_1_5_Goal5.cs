@@ -9,7 +9,8 @@ public class FTE_1_5_Goal5 : BaseGuideStep
     private int currentIncome = 0;
     public override IEnumerator StepStart()
     {
-        fruitQT.SetActive(false);
+        //fruitQT.SetActive(false);
+        PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
         currentIncome = StageGoal.My.totalIncome;
         //StageGoal.My.totalIncome = 0;
         NewGuideManager.My.BornEnemy1();

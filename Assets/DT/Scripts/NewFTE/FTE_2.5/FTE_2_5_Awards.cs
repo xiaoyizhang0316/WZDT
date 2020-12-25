@@ -8,9 +8,10 @@ public class FTE_2_5_Awards : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-        PlayerData.My.GetNewGear(21104);
-        PlayerData.My.GetNewGear(22202);
+        PlayerData.My.GetNewGear(99909);
+        PlayerData.My.GetNewGear(22203);
         awards.SetActive(true);
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = false;
         yield return new WaitForSeconds(0.5f);
     }
 

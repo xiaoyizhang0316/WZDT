@@ -13,7 +13,7 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
     public GameObject missionPrb;
     public GameObject mainMissionPrb;
 
-    public List<MissionSign> signs;
+    public List<MissionSign> signs=new List<MissionSign>();
 
     public void AddMission(MissionData data)
     {
