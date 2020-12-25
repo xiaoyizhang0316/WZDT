@@ -1054,6 +1054,7 @@ public class BaseMapRole : MonoBehaviour
         return JsonUtility.ToJson(list);
     }
 
+    
     private void OnDestroy()
     {
 
