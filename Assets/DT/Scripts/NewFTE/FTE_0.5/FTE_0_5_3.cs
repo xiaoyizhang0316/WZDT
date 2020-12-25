@@ -35,6 +35,7 @@ public class FTE_0_5_3 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
+        TradeManager.My.HideAllIcon();
         if (maprole.warehouse.Count > 10)
         {
             return true;

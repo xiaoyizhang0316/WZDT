@@ -9,6 +9,8 @@ public class FTE_0_5_2 : BaseGuideStep
     public List<GameObject> Seedtesting;
 
     public GameObject roleImage;
+
+    public GameObject red;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class FTE_0_5_2 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        StageGoal.My.maxRoleLevel = 1;
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 2).upgradeCost = 0;
@@ -90,13 +93,15 @@ public class FTE_0_5_2 : BaseGuideStep
         yield return new WaitForSeconds(1f);
 
         roleImage.gameObject.SetActive(false);
+        red.SetActive(true);
     }
 
     public override IEnumerator StepEnd()
     {
         missiondatas.data[0].currentNum = 1; 
         missiondatas.data[0].isFinish= true; 
-        
+        red.SetActive(false);
+
       yield break;
       ;
     }

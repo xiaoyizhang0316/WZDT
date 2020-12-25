@@ -83,6 +83,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     // Start is called before the first frame update
     void Start()
     {
+        StageGoal.My.maxRoleLevel = 5;
         if (SceneManager.GetActiveScene().name == "Map")
         {
             return;
