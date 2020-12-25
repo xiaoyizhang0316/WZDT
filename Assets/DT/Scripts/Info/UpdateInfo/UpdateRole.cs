@@ -17,8 +17,12 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void Init()
     {
-        if (RoleUpdateInfo.My.currentRole.baseRoleData.level == 5)
+        GetComponent<Button>().interactable = true;
+
+        if (RoleUpdateInfo.My.currentRole.baseRoleData.level ==StageGoal.My.maxRoleLevel)
         {
+            GetComponent<Button>().interactable = false;
+
             upgradeNumber.gameObject.SetActive(false);
             return;
         }
@@ -36,7 +40,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isUpdate || !GetComponent<Button>().interactable || RoleUpdateInfo.My.currentRole.baseRoleData.level == 5)
+        if (isUpdate || !GetComponent<Button>().interactable || RoleUpdateInfo.My.currentRole.baseRoleData.level ==StageGoal.My.maxRoleLevel)
         {
             return;
         }
@@ -107,7 +111,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void UpdateRole1(PointerEventData eventData = null)
     {
-        if (RoleUpdateInfo.My.currentRole.baseRoleData.level == 5 || (tew != null && tew.IsPlaying()) ||
+        if (RoleUpdateInfo.My.currentRole.baseRoleData.level == StageGoal.My.maxRoleLevel || (tew != null && tew.IsPlaying()) ||
             !GetComponent<Button>().interactable)
         {
             Debug.Log(hammer.transform.eulerAngles);
@@ -180,9 +184,10 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
                 GetComponent<Button>().interactable = true;
                 PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).CheckLevel();
-                if (RoleUpdateInfo.My.currentRole.baseRoleData.level == 5)
+                if (RoleUpdateInfo.My.currentRole.baseRoleData.level == StageGoal.My.maxRoleLevel)
                 {
                     upgradeNumber.gameObject.SetActive(false);
+                    GetComponent<Button>().interactable = false;
                 }
                 else
                 {

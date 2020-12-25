@@ -176,6 +176,7 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Color tipColor;
 
+    public int maxRoleLevel = 5;
     /// <summary>
     /// 玩家消耗金币
     /// </summary>
