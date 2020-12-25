@@ -18,7 +18,7 @@ public class FTE_0_5_3 : BaseGuideStep
     public override IEnumerator StepStart()
     {
       
-        yield return new WaitForSeconds(1f);
+        
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].tradeButton.transform.localScale = Vector3.zero;
@@ -26,6 +26,8 @@ public class FTE_0_5_3 : BaseGuideStep
             PlayerData.My.MapRole[i].tradeButton.gameObject.SetActive(true);
             PlayerData.My.MapRole[i].tradeButton.transform.DOScale(Vector3.one, 0.7f).SetEase(Ease.OutBounce);
         }
+        yield break;
+
     }
 
     public override IEnumerator StepEnd()
