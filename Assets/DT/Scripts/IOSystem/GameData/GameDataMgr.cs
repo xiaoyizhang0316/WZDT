@@ -59,22 +59,22 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             if (r.level == level && roleType.ToString().Equals(r.roleType.ToString()))
             {
                 BaseRoleData data = new BaseRoleData();
-                data.bulletCapacity = r.bulletCapacity;
-                data.effect = r.effect;
-                data.efficiency = r.efficiency;
-                data.cost = r.cost;
-                data.level = r.level;
-                data.range = r.range;
-                data.roleSkillType = r.roleSkillType;
-                data.riskResistance = r.riskResistance;
-                data.roleType = r.roleType;
-                data.tradeCost = r.tradeCost;
-                data.PrePath = r.PrePath;
-                data.RoleSpacePath = r.RoleSpacePath;
-                data.SpritePath = r.SpritePath;
-                data.upgradeCost = r.upgradeCost;
+                data.bulletCapacity = r.tempRoleData.bulletCapacity;
+                data.effect = r.tempRoleData.effect;
+                data.efficiency = r.tempRoleData.efficiency;
+                data.cost = r.tempRoleData.cost;
+                data.level = r.tempRoleData.level;
+                data.range = r.tempRoleData.range;
+                data.roleSkillType = r.tempRoleData.roleSkillType;
+                data.riskResistance = r.tempRoleData.riskResistance;
+                data.roleType = r.tempRoleData.roleType;
+                data.tradeCost = r.tempRoleData.tradeCost;
+                data.PrePath = r.tempRoleData.PrePath;
+                data.RoleSpacePath = r.tempRoleData.RoleSpacePath;
+                data.SpritePath = r.tempRoleData.SpritePath;
+                data.upgradeCost = r.tempRoleData.upgradeCost;
                 data.roleName = "";
-                data.costTech = r.costTech;
+                data.costTech = r.tempRoleData.costTech;
                 return data;
             }
         }
