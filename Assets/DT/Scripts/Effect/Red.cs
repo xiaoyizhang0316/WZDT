@@ -9,6 +9,7 @@ public class Red : MonoBehaviour
     void Start()
     {
         transform.DOLocalJump(Vector3.up,10,3,1).SetLoops(-1);
+      
     }
 
     // Update is called once per frame
