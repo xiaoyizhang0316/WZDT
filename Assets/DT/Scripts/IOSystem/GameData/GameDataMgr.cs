@@ -83,6 +83,25 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     }
 
     /// <summary>
+    /// 根据职业类型和等级获取角色模板
+    /// </summary>
+    /// <param name="roleType"></param>
+    /// <param name="level"></param>
+    /// <returns></returns>
+    public BaseRoleData GetModelDataFTE(RoleType roleType, int level)
+    {
+        foreach (RoleTemplateModelData r in roleTemplateModelDatas)
+        {
+            if (r.level == level && roleType.ToString().Equals(r.roleType.ToString()))
+            {
+                return r.tempRoleData;
+            }
+        }
+        print("------------查不到此角色模板!-----------");
+        return null;
+    }
+
+    /// <summary>
     /// 根据ID获取装备
     /// </summary>
     /// <param name="id"></param>
