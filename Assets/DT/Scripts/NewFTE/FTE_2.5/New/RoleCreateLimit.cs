@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FTE_2_5_Limit : MonoBehaviour
+public class RoleCreateLimit : MonoBehaviour
 {
     public bool needLimit = false;
     public int limitSeedCount = 0;
