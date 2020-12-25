@@ -84,7 +84,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
 
         
         missiondatas.data[1].currentNum = StageGoal.My.totalCost - currentCost ;
-        costPanel.GetComponent<CostPanel>().ShowAllCost(missiondatas.data[1].currentNum);
+        costPanel.GetComponent<CostPanel>().ShowAllCost(missiondatas.data[1].currentNum, limitTime);
         if (missiondatas.data[1].currentNum <= missiondatas.data[1].maxNum && missiondatas.data[0].isFinish)
         {
             missiondatas.data[1].isFinish = true;

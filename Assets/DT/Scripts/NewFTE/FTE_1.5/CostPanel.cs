@@ -9,9 +9,11 @@ public class CostPanel : MonoBehaviour
     public Text totalCostText;
     public Text tradeCostText;
     public Text otherCostText;
+    public Text timeCostText;
     private static string totalTextString = "总的周期成本：";
     private static string tradeTextString = "交易的周期成本：";
     private static string otherTextString = "其他的周期成本：";
+    private static string timeTextString = "剩余时间：";
 
     private int startTotalCost;
     private int startTradeCost;
@@ -31,7 +33,7 @@ public class CostPanel : MonoBehaviour
         startTimeCount = timeCount;
     }
 
-    public void ShowAllCost(int totalCost)
+    public void ShowAllCost(int totalCost, int limitTime=-1)
     {
         currentPeriod = StageGoal.My.timeCount - startTimeCount;
         
@@ -42,6 +44,14 @@ public class CostPanel : MonoBehaviour
             (StageGoal.My.tradeCost - startTradeCost);
         otherCostText.text = otherTextString +
                              (StageGoal.My.productCost + StageGoal.My.extraCosts - startOtherCost);
+        if (limitTime == -1)
+        {
+            timeCostText.text = timeTextString +"- s";
+        }
+        else
+        {
+            timeCostText.text = timeTextString + (limitTime - currentPeriod) + " s";
+        }
     }
 
     public void HideAllCost()

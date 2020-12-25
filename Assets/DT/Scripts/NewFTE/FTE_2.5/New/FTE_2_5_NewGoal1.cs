@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FTE_2_5_NewGoal1 : BaseGuideStep
 {
-    public int limitTime = 0;
+    public int limitTime = 40;
     public GameObject qualityCenter;
     public GameObject costPanel;
     public GameObject openCG;
@@ -57,7 +57,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         }
         
         missiondatas.data[1].currentNum = StageGoal.My.totalCost ;
-        costPanel.GetComponent<CostPanel>().ShowAllCost(missiondatas.data[1].currentNum);
+        costPanel.GetComponent<CostPanel>().ShowAllCost(missiondatas.data[1].currentNum, limitTime);
 
         if (missiondatas.data[1].currentNum > missiondatas.data[1].maxNum)
         {
@@ -67,7 +67,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         }
         else
         {
-            missiondatas.data[0].isFinish = true;
+            missiondatas.data[1].isFinish = true;
         }
     }
 }
