@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FTE_2_5_Awards : BaseGuideStep
+public class FTE_1_5_AwardsAdd : BaseGuideStep
 {
     public GameObject awards;
 
     public override IEnumerator StepStart()
     {
-        PlayerData.My.GetNewGear(99909);
-        PlayerData.My.GetNewGear(22203);
+        PlayerData.My.GetNewGear(21101);
+        PlayerData.My.GetNewGear(21102);
+        PlayerData.My.GetNewGear(21103);
+        PlayerData.My.GetNewGear(21105);
         awards.SetActive(true);
-        FTE_2_5_Manager.My.GetComponent<FTE_2_5_Limit>().needLimit = false;
         yield return new WaitForSeconds(0.5f);
     }
 

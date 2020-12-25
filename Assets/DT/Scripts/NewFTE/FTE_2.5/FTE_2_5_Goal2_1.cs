@@ -22,10 +22,8 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
+        CancelInvoke();
         yield return new WaitForSeconds(2f);
-        PlayerData.My.DeleteRole(25004);
-        PlayerData.My.DeleteRole(25005);
-        PlayerData.My.DeleteRole(25006);
     }
 
     public override bool ChenkEnd()

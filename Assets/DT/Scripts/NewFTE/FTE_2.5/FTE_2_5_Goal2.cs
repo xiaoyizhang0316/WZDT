@@ -33,7 +33,18 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        yield return new WaitForSeconds(2f);
+        NewCanvasUI.My.GamePause(false);
+        DoEnd();
+        yield return new WaitForSeconds(1f);
+    }
+
+    void DoEnd()
+    {
+        FTE_2_5_Manager.My.isClearGoods = true;
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        {
+            PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
+        }
     }
 
     public override bool ChenkEnd()

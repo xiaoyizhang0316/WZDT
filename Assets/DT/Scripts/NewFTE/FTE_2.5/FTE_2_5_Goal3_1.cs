@@ -22,17 +22,31 @@ public class FTE_2_5_Goal3_1 : BaseGuideStep
         seed.SetActive(true);
         peasant.SetActive(true);
         merchant.SetActive(true);
+        FTE_2_5_Manager.My.isClearGoods = false;
+        NewCanvasUI.My.GameNormal();
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);
         yield return new WaitForSeconds(0.5f);
     }
 
     public override IEnumerator StepEnd()
     {
-        yield return new WaitForSeconds(2f);
-        
+        CancelInvoke();
+        NewCanvasUI.My.GamePause(false);
+        yield return new WaitForSeconds(1f);
+        PlayerData.My.DeleteRole(25007);
+        PlayerData.My.DeleteRole(25008);
+        PlayerData.My.DeleteRole(25009);
+        DoEnd();
     }
     
-    
+    void DoEnd()
+    {
+        FTE_2_5_Manager.My.isClearGoods = true;
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        {
+            PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
+        }
+    }
 
     public override bool ChenkEnd()
     {
