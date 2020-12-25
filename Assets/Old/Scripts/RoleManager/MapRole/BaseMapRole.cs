@@ -122,6 +122,8 @@ public class BaseMapRole : MonoBehaviour
 
     public bool isSell = false;
 
+    public GameObject ringEffect;
+
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
