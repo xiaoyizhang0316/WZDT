@@ -346,6 +346,28 @@ public class TradeManager : MonoSingleton<TradeManager>
         return false;
     }
 
+    /// <summary>
+    /// 显示所有交易图标
+    /// </summary>
+    public void ShowAllIcon()
+    {
+        for (int i = 0; i < tradeList.Count; i++)
+        {
+            tradeList[i].icon.ShowIcon();
+        }
+    }
+
+    /// <summary>
+    /// 隐藏所有交易图标
+    /// </summary>
+    public void HideAllIcon()
+    {
+        for (int i = 0; i < tradeList.Count; i++)
+        {
+            tradeList[i].icon.HideIcon();
+        }
+    }
+
     private void OnDestroy()
     {
         
