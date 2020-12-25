@@ -41,7 +41,7 @@ public class FTE_0_5_16 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-      
+        missiondatas.data[0].currentNum = StageGoal.My.killNumber;
 
         if (StageGoal.My.killNumber > missiondatas.data[0].maxNum)
         {
