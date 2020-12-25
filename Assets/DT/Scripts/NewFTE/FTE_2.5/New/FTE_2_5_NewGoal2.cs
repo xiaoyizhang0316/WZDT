@@ -11,6 +11,7 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     public GameObject lastButton;
     public GameObject startStar;
     public GameObject endStar;
+    public GameObject slider;
     public GameObject encorageLevel;
 
     public GameObject border1;
@@ -21,6 +22,7 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
         lastButton.SetActive(true);
         startStar.transform.DOScale(Vector3.one, 0.02f);
         endStar.transform.DOScale(Vector3.one, 0.02f);
+        slider.transform.DOScale(Vector3.one, 0.02f);
         encorageLevel.SetActive(true);
         FTE_2_5_Manager.My.isClearGoods = false;
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
@@ -50,10 +52,10 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
                     missiondatas.data[0].isFinish = true;
                     border1.SetActive(false);
                 }
-                else
-                {
-                    border1.SetActive(false);
-                }
+                
+            }else
+            {
+                border1.SetActive(false);
             }
         }
 
@@ -67,10 +69,10 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
                     missiondatas.data[1].isFinish = true;
                     border2.SetActive(false);
                 }
-                else
-                {
-                    border2.SetActive(false);
-                }
+                
+            }else
+            {
+                border2.SetActive(false);
             }
         }
     }
