@@ -222,9 +222,7 @@ public class MapManager : MonoSingleton<MapManager>
                     break;
                 }
             }
-            
         }
-
         //Debug.Log("+++++++++" + json);
         StageNPCsData stageNPCsData = JsonUtility.FromJson< StageNPCsData >(json );
         //Debug.Log("============" + stageNPCsData.stageNPCItems.Count);
@@ -265,7 +263,6 @@ public class MapManager : MonoSingleton<MapManager>
         npc.isLock = true;
         PutNPC(npc);
     }
-
 
     // Update is called once per frame
     void Update()
