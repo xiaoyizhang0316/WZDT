@@ -406,7 +406,43 @@ public class GameEnum
         /// <summary>
         /// 首领
         /// </summary>
-        Boss
+        Boss,
+        /// <summary>
+        /// 假人
+        /// </summary>
+        ConsumerModel1,
+        /// <summary>
+        /// 假人
+        /// </summary>
+        ConsumerModel2,
+        /// <summary>
+        /// 假人
+        /// </summary>
+        ConsumerModel3,
+        /// <summary>
+        /// 假人
+        /// </summary>
+        ConsumerModel4,
+        /// <summary>
+        /// 假人
+        /// </summary>
+        ConsumerModel5,
+        /// <summary>
+        /// 假人
+        /// </summary>
+        ConsumerModel6,
+        /// <summary>
+        /// 假人
+        /// </summary>
+        ConsumerModel7,
+        /// <summary>
+        /// 假人
+        /// </summary>
+        ConsumerModel8,
+        /// <summary>
+        /// 假人
+        /// </summary>
+        ConsumerModel9,
     }
 
     public enum BulletBuffType
