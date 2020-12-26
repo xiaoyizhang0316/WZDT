@@ -406,7 +406,11 @@ public class GameEnum
         /// <summary>
         /// 首领
         /// </summary>
-        Boss
+        Boss,
+        /// <summary>
+        /// 假人
+        /// </summary>
+        ConsumerModel
     }
 
     public enum BulletBuffType
