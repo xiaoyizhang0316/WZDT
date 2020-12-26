@@ -15,6 +15,8 @@ public class MissionData
     public bool isMainmission;
 
     public bool isFinish;
+
+    public bool isFail;
 }
 
 [Serializable]

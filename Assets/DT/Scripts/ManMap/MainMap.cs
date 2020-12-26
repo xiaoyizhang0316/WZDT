@@ -33,9 +33,15 @@ public class MainMap : MonoBehaviour
         GetEquips();
         GetUserLevel();
         GetLevelProgress();
+        GetRoleTemplateData();
         
         PlayerData.My.isAllReady = false;
         PlayerData.My.isLocalReady = false;
+    }
+
+    void GetRoleTemplateData()
+    {
+        OriginalData.My.ReadRoleTemplateJson();
     }
 
     private void GetGroupInfos()
@@ -222,7 +228,7 @@ public class MainMap : MonoBehaviour
             }
         }
         GetGroupInfos();
-        TalentPanel.My.Init();
+        //TalentPanel.My.Init();
     }
 
     string GetFTEProgress()
@@ -255,6 +261,8 @@ public class MainMap : MonoBehaviour
         {
             fte = NetworkMgr.My.playerDatas.fte;
         }
+
+        InitFTELevel(fte);
 
         return fte;
     }

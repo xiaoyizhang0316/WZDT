@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class FTE_2_5_NewGoal4 : BaseGuideStep
 {
+    public int costLimit;
     public int limitTime;
     public GameObject costPanel;
     public GameObject bornPoint;
@@ -68,11 +69,20 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
     {
         if (StageGoal.My.timeCount - currentTimeCount >= limitTime)
         {
+            missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
-            missiondatas.data[1].isFinish = false;
             Reset();
             return;
         }
+        costPanel.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost - currentCost, limitTime);
+        if (StageGoal.My.totalCost - currentCost >= costLimit)
+        {
+            missiondatas.data[0].isFail = true;
+            missiondatas.data[0].isFinish = false;
+            Reset();
+            return;
+        }
+        
         if (missiondatas.data[0].isFinish == false)
         {
             missiondatas.data[0].currentNum = StageGoal.My.killNumber;
@@ -83,7 +93,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         }
 
         
-        missiondatas.data[1].currentNum = StageGoal.My.totalCost - currentCost ;
+        /*missiondatas.data[1].currentNum = StageGoal.My.totalCost - currentCost ;
         costPanel.GetComponent<CostPanel>().ShowAllCost(missiondatas.data[1].currentNum, limitTime);
         if (missiondatas.data[1].currentNum <= missiondatas.data[1].maxNum )
         {
@@ -94,7 +104,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
             missiondatas.data[0].isFinish = false;
             missiondatas.data[1].isFinish = false;
             Reset();
-        }
+        }*/
         
     }
     
@@ -103,6 +113,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         CancelInvoke();
         NewCanvasUI.My.GamePause(false);
         StageGoal.My.killNumber = 0;
+        missiondatas.data[0].isFail = false;
         FTE_2_5_Manager.My.isClearGoods=true;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {

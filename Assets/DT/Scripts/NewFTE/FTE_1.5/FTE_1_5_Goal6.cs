@@ -32,6 +32,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     {
         CancelInvoke();
         yield return new WaitForSeconds(2f);
+        costPanel.GetComponent<CostPanel>().HideAllCost();
     }
 
     public override bool ChenkEnd()
@@ -43,6 +44,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     {
         if (StageGoal.My.timeCount - currentCost >= limitTime)
         {
+            missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             Reset();
             return;
@@ -67,6 +69,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
         NewCanvasUI.My.GamePause(false);
         //StageGoal.My.killNumber = 0;
         FTE_1_5_Manager.My.isClearGoods=true;
+        missiondatas.data[0].isFail = false;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].ClearWarehouse();

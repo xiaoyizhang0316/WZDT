@@ -52,7 +52,7 @@ public class CostPanel : MonoBehaviour
                              (StageGoal.My.productCost + StageGoal.My.extraCosts - startOtherCost);
         if (limitTime == -1)
         {
-            timeCostText.text = timeTextString +"- s";
+            timeCostText.text = timeTextString +"不限时";
         }
         else
         {

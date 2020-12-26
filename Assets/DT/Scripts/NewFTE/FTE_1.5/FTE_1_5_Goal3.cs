@@ -7,6 +7,7 @@ using DG.Tweening;
 public class FTE_1_5_Goal3 : BaseGuideStep
 {
     //public Transform emptyPlace;
+    public int costLimit;
     public int limitTime = 0;
     public Transform place;
     public Transform peasant;
@@ -39,27 +40,37 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     public override bool ChenkEnd()
     {
         
-        return missiondatas.data[0].isFinish &&missiondatas.data[1].isFinish;
+        return missiondatas.data[0].isFinish;
     }
 
     void CheckGoal()
     {
         if (StageGoal.My.timeCount - lastTimeCount >= limitTime)
         {
+            missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
-            missiondatas.data[1].isFinish = false;
             Reset();
             return;
         }
+        
+        currentCost = StageGoal.My.totalCost-lastCost ;
+        costPanel.GetComponent<CostPanel>().ShowAllCost(currentCost, limitTime);
+        if (currentCost >= costLimit)
+        {
+            missiondatas.data[0].isFail = true;
+            missiondatas.data[0].isFinish = false;
+            Reset();
+            return;
+        }
+        
         if (missiondatas.data[0].isFinish == false && CheckBullet())
         {
             missiondatas.data[0].isFinish = true;
         }
 
         
-        currentCost = StageGoal.My.totalCost-lastCost ;
-        costPanel.GetComponent<CostPanel>().ShowAllCost(currentCost, limitTime);
-        missiondatas.data[1].currentNum = currentCost;
+        
+        /*missiondatas.data[1].currentNum = currentCost;
 
         if (missiondatas.data[1].currentNum <= missiondatas.data[1].maxNum)
         {
@@ -70,7 +81,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
             missiondatas.data[0].isFinish = false;
             missiondatas.data[1].isFinish = false;
             Reset();
-        }
+        }*/
         
     }
 
@@ -79,6 +90,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
         CancelInvoke();
         NewCanvasUI.My.GamePause(false);
         FTE_1_5_Manager.My.isClearGoods=true;
+        missiondatas.data[0].isFail = false;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].ClearWarehouse();

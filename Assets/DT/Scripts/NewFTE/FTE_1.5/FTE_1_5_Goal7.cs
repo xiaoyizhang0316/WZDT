@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FTE_1_5_Goal7 : BaseGuideStep
 {
+    public int costLimit;
     public int limitTime = 0;
     private int currentTimeCount = 0;
     private int currentCost = 0;
@@ -39,8 +40,16 @@ public class FTE_1_5_Goal7 : BaseGuideStep
     {
         if (StageGoal.My.timeCount - currentTimeCount >= limitTime)
         {
+            missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
-            missiondatas.data[1].isFinish = false;
+            Reset();
+            return;
+        }
+        costPanel.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost-currentCost,limitTime);
+        if (StageGoal.My.totalCost - currentCost >= costLimit)
+        {
+            missiondatas.data[0].isFail = true;
+            missiondatas.data[0].isFinish = false;
             Reset();
             return;
         }
@@ -54,7 +63,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
         }
 
         
-            missiondatas.data[1].currentNum = (StageGoal.My.totalCost - currentCost) * 60 /
+            /*missiondatas.data[1].currentNum = (StageGoal.My.totalCost - currentCost) * 60 /
                                               ((StageGoal.My.timeCount - currentTimeCount)==0?1:(StageGoal.My.timeCount - currentTimeCount));
             costPanel.GetComponent<CostPanel>().ShowAllCost(missiondatas.data[1].currentNum,limitTime);
             if (missiondatas.data[1].currentNum <= missiondatas.data[1].maxNum)
@@ -66,7 +75,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
                 missiondatas.data[0].isFinish = false;
                 missiondatas.data[1].isFinish = false;
                 Reset();
-            }
+            }*/
         
     }
     
@@ -75,6 +84,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
         CancelInvoke();
         NewCanvasUI.My.GamePause(false);
         StageGoal.My.killNumber = 0;
+        missiondatas.data[0].isFail = false;
         FTE_1_5_Manager.My.isClearGoods=true;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {

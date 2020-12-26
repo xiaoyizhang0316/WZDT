@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FTE_2_5_NewGoal3 : BaseGuideStep
 {
+    public int costLimit;
     public int limitTime = 0;
     public GameObject costPanel;
     public GameObject qualityCenter;
@@ -46,11 +47,21 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
     {
         if (StageGoal.My.timeCount - currentTimeCount >= limitTime)
         {
+            missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
-            missiondatas.data[1].isFinish = false;
             Reset();
             return;
         }
+        
+        costPanel.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost - currentCost, limitTime);
+        if (StageGoal.My.totalCost - currentCost >= costLimit)
+        {
+            missiondatas.data[0].isFail = true;
+            missiondatas.data[0].isFinish = false;
+            Reset();
+            return;
+        }
+        
         if (missiondatas.data[0].isFinish == false)
         {
             missiondatas.data[0].currentNum = qualityCenter.GetComponent<BaseMapRole>().warehouse.Count;
@@ -62,7 +73,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         }
 
         
-        missiondatas.data[1].currentNum = StageGoal.My.totalCost - currentCost;
+        /*missiondatas.data[1].currentNum = StageGoal.My.totalCost - currentCost;
         costPanel.GetComponent<CostPanel>().ShowAllCost(missiondatas.data[1].currentNum, limitTime);
         if (missiondatas.data[1].currentNum <= missiondatas.data[1].maxNum)
         {
@@ -73,7 +84,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
             missiondatas.data[0].isFinish = false;
             missiondatas.data[1].isFinish = false;
             Reset();
-        }
+        }*/
     }
     
     void Reset()
@@ -82,6 +93,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         NewCanvasUI.My.GamePause(false);
         //StageGoal.My.killNumber = 0;
         FTE_2_5_Manager.My.isClearGoods=true;
+        missiondatas.data[0].isFail = false;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].ClearWarehouse();
