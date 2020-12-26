@@ -7,11 +7,15 @@ public class FTE_1_5_Goal5 : BaseGuideStep
 {
     public GameObject fruitQT;
     private int currentIncome = 0;
+    private int currentCost = 0;
+    public GameObject costImage;
     public override IEnumerator StepStart()
     {
         //fruitQT.SetActive(false);
         PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
         currentIncome = StageGoal.My.totalIncome;
+        currentCost = StageGoal.My.totalCost;
+        costImage.GetComponent<CostPanel>().InitCostPanel(currentCost, StageGoal.My.timeCount);
         //StageGoal.My.totalIncome = 0;
         NewGuideManager.My.BornEnemy1();
         InvokeRepeating("CheckGoal",0, 0.2f);
@@ -22,6 +26,7 @@ public class FTE_1_5_Goal5 : BaseGuideStep
     {
         CancelInvoke();
         yield return new WaitForSeconds(2f);
+        costImage.GetComponent<CostPanel>().HideAllCost();
     }
 
     public override bool ChenkEnd()
@@ -33,7 +38,9 @@ public class FTE_1_5_Goal5 : BaseGuideStep
     {
         if (missiondatas.data[0].isFinish == false)
         {
-            missiondatas.data[0].currentNum = StageGoal.My.totalIncome-currentIncome;
+            missiondatas.data[0].currentNum = StageGoal.My.totalIncome-currentIncome-StageGoal.My.totalCost+currentCost;
+            costImage.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost-currentCost);
+            costImage.GetComponent<CostPanel>().ShowAllIncome(StageGoal.My.totalIncome-currentIncome, StageGoal.My.totalCost-currentCost);
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
                 missiondatas.data[0].isFinish = true;

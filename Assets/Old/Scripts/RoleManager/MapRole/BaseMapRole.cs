@@ -122,6 +122,8 @@ public class BaseMapRole : MonoBehaviour
 
     public bool isSell = false;
 
+    public GameObject ringEffect;
+
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
@@ -146,6 +148,7 @@ public class BaseMapRole : MonoBehaviour
     {
         buffList = new List<BaseBuff>();
         CheckBuffDuration();
+        encourageLevel = startEncourageLevel;
         if (!isNpc)
         {
             InitAttribute();
@@ -236,6 +239,10 @@ public class BaseMapRole : MonoBehaviour
     public void RecalculateEncourageLevel(bool isInit = false)
     {
         int result = startEncourageLevel;
+        if (CheckAllTradeBest())
+        {
+            result++;
+        }
         if (isInit)
             baseRoleData.tradeCost -= encourageLevel * 5;
         //for (int i = 0; i < tradeList.Count; i++)
@@ -264,6 +271,29 @@ public class BaseMapRole : MonoBehaviour
         result = Mathf.Max(result, -5);
         encourageLevel = result;
         baseRoleData.tradeCost += encourageLevel * 5;
+    }
+
+    public bool CheckAllTradeBest()
+    {
+        if (startTradeList.Count == 0 && endTradeList.Count == 0)
+        {
+            return false;
+        }
+        for (int i = 0; i < startTradeList.Count; i++)
+        {
+            if (!startTradeList[i].isTradeSettingBest())
+            {
+                return false;
+            }
+        }
+        for (int i = 0; i < endTradeList.Count; i++)
+        {
+            if (!endTradeList[i].isTradeSettingBest())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     #region 战斗
@@ -1026,6 +1056,7 @@ public class BaseMapRole : MonoBehaviour
         return JsonUtility.ToJson(list);
     }
 
+    
     private void OnDestroy()
     {
 

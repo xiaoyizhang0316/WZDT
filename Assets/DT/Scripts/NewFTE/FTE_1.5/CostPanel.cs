@@ -10,9 +10,9 @@ public class CostPanel : MonoBehaviour
     public Text tradeCostText;
     public Text otherCostText;
     public Text timeCostText;
-    private static string totalTextString = "总的周期成本：";
-    private static string tradeTextString = "交易的周期成本：";
-    private static string otherTextString = "其他的周期成本：";
+    private static string totalTextString = "总成本：";
+    private static string tradeTextString = "交易的成本：";
+    private static string otherTextString = "其他成本：";
     private static string timeTextString = "剩余时间：";
 
     private int startTotalCost;
@@ -20,6 +20,12 @@ public class CostPanel : MonoBehaviour
     private int startOtherCost;
     private int startTimeCount;
     private int currentPeriod;
+
+    public GameObject incomeImage;
+    public Text totalIncomeText;
+    public Text profitText;
+    private static string totalIncomeString = "总收入：";
+    private static string profitString = "利润：";
 
     public void InitCostPanel(int cost, int timeCount)
     {
@@ -54,8 +60,16 @@ public class CostPanel : MonoBehaviour
         }
     }
 
+    public void ShowAllIncome(int income, int outcome)
+    {
+        incomeImage.SetActive(true);
+        totalIncomeText.text = totalIncomeString + income;
+        profitText.text = profitString + (income - outcome);
+    }
+
     public void HideAllCost()
     {
         costImage.SetActive(false);
+        incomeImage.SetActive(false);
     }
 }

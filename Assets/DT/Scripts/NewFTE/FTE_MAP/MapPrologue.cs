@@ -7,12 +7,12 @@ public class MapPrologue : MonoBehaviour
 {
     public void PrologueOn()
     {
-        CameraPlay.WidescreenH_ON(Color.black, 1);
+        //CameraPlay.WidescreenH_ON(Color.black, 1);
     }
 
     public void PrologueOff()
     {
-        CameraPlay.WidescreenH_OFF();
+        //CameraPlay.WidescreenH_OFF();
         if (SceneManager.GetActiveScene().name == "Map")
         {
             MapGuideManager.My.currentGuideIndex = 2;

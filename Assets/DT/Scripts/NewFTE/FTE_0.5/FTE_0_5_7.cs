@@ -19,15 +19,7 @@ public class FTE_0_5_7 : BaseGuideStep
     public override IEnumerator StepStart()
     {
 
-        for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
-        {
-            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant)
-            {
-                role = PlayerData.My.MapRole[i];
-            }
-            
-        }
-        
+   
         
         yield return new WaitForSeconds(1f);
       

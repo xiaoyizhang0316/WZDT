@@ -219,7 +219,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             clearWarehouse.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Talent/Warehouse");
         }
         ReInit(role);
-        if (currentLevel >= 5)
+        if (currentLevel >= StageGoal.My.maxRoleLevel)
         {
             update.interactable = false;
             hammer.interactable = false;

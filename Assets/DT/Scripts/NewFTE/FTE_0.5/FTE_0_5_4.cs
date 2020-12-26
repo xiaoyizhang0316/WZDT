@@ -37,6 +37,8 @@ public class FTE_0_5_4 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
+        TradeManager.My.HideAllIcon();
+
         if (roleInfo.activeSelf)
         {
          //   roleinfoTip.SetActive(true);
