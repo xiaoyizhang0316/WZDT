@@ -24,7 +24,7 @@ public class FTE_1_13 : BaseGuideStep
         trade.SetActive(false);
         if (check&&AnsweringPanel.My.isComplete)
         {
-            GuideManager.My.baseGuideSteps[15].isOpen = false;
+        //    GuideManager.My.baseGuideSteps[15].isOpen = false;
         }
         if (showDetail)
         {

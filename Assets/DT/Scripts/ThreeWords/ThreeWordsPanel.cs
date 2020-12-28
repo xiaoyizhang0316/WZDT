@@ -15,6 +15,8 @@ public class ThreeWordsPanel : MonoSingleton<ThreeWordsPanel>
     public GameObject thisPanel;
 
     public Transform map;
+    public Text tip;
+    private int currentCount;
 
     string input="";
     // Start is called before the first frame update
@@ -56,7 +58,28 @@ public class ThreeWordsPanel : MonoSingleton<ThreeWordsPanel>
     private void OnEdit(string edit)
     {
         submit_btn.interactable = false;
+        //Debug.LogError( answer_input.caretPosition);
         answer_input.MoveTextEnd(true);
+        //answer_input.caretBlinkRate = 0.5f;
+        if (answer_input.text.Length != currentCount)
+        {
+            currentCount = answer_input.text.Length;
+            if (currentCount == 0)
+            {
+                tip.text = "";
+            }
+            else
+            {
+                if (currentCount >= 20)
+                {
+                    tip.text = "<color=red>已达输入上限！</color>";
+                }
+                else
+                {
+                    tip.text = "已输入<color=green>" + currentCount + "</color>字";
+                }
+            }
+        }
     }
 
     private void OnEndEdit(string edit)

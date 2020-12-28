@@ -92,6 +92,24 @@ public class TradeIcon : MonoBehaviour
     }
 
     /// <summary>
+    /// 显示交易图标
+    /// </summary>
+    public void ShowIcon()
+    {
+        GetComponent<BoxCollider>().enabled = true;
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.2f).Play();
+    }
+
+    /// <summary>
+    /// 隐藏交易图标
+    /// </summary>
+    public void HideIcon()
+    {
+        GetComponent<BoxCollider>().enabled = false;
+        GetComponentInChildren<SpriteRenderer>().DOFade(0f, 0f).Play();
+    }
+
+    /// <summary>
     /// 鼠标进入显现
     /// </summary>
     public void OnMouseEnter()

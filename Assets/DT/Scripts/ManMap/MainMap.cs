@@ -2,15 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMap : MonoBehaviour
 {
     public Text title;
     public List<LevelSign> levelSigns;
+
+    public LevelSign lastLevel;
     public Transform threeWords;
 
     public Text userLevelText;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -29,9 +33,46 @@ public class MainMap : MonoBehaviour
         GetEquips();
         GetUserLevel();
         GetLevelProgress();
-        NetworkMgr.My.GetPlayerGroupInfo(()=> { });
+        
         PlayerData.My.isAllReady = false;
         PlayerData.My.isLocalReady = false;
+    }
+
+    private void GetGroupInfos()
+    {
+        NetworkMgr.My.GetPlayerGroupInfo(() => {
+            if (NetworkMgr.My.playerGroupInfo.outdateTime < TimeStamp.GetCurrentTimeStamp() && NetworkMgr.My.playerGroupInfo.outdateTime != 0)
+            {
+                // 账号过期
+                HttpManager.My.ShowClickTip("账号已失效！", () => SceneManager.LoadScene("Login"));
+                return;
+                //SceneManager.LoadScene("Login");
+            }
+            if (NetworkMgr.My.playerGroupInfo.isLoginLimit)
+            {
+                HttpManager.My.ShowClickTip("限制登陆！", () => SceneManager.LoadScene("Login"));
+                return;
+            }
+
+            // 是否解锁第9关
+            if (NetworkMgr.My.playerGroupInfo.isOpenLastLevel)
+            {
+                // 解锁第9关
+                string stars = GetStar(9);
+                if (stars.Equals(""))
+                {
+                    lastLevel.InitLevel(true, "000");
+                }
+                else
+                {
+                    lastLevel.InitLevel(true, stars);
+                }
+            }
+            else
+            {
+                lastLevel.InitLevel(false, "");
+            }
+        });
     }
 
     public void GetUserLevel()
@@ -180,6 +221,7 @@ public class MainMap : MonoBehaviour
                 ls.InitLevel(GetStar(level), GetStar(level - 1));
             }
         }
+        GetGroupInfos();
         TalentPanel.My.Init();
     }
 

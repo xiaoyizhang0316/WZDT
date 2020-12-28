@@ -176,6 +176,7 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Color tipColor;
 
+    public int maxRoleLevel = 5;
     /// <summary>
     /// 玩家消耗金币
     /// </summary>
@@ -268,7 +269,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void ConsumerAliveTip()
     {
-        if (SceneManager.GetActiveScene().name.Equals("FTE_0-1")|| GuideManager.My.ftegob.activeInHierarchy || SceneManager.GetActiveScene().name.Equals("FTE_0-2"))
+        if (SceneManager.GetActiveScene().name.Equals("FTE_0-1")|| GuideManager.My.ftegob.activeInHierarchy || SceneManager.GetActiveScene().name.Equals("FTE_0-2")
+            || SceneManager.GetActiveScene().name.Equals("FTE_1.5")|| SceneManager.GetActiveScene().name == "FTE_2.5")
         {
             return;
         }
@@ -536,6 +538,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         NewCanvasUI.My.GamePause(false);
         NewCanvasUI.My.EndLowHealth();
+        UpdatePlayerScoreEnd();
         WinManager.My.InitWin();
         PrintStat();
     }
@@ -588,6 +591,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 NewCanvasUI.My.GamePause(false);
                 NewCanvasUI.My.lose.SetActive(true);
+                
                 //NewCanvasUI.My.Panel_Lose.SetActive(true);
                 if (NetworkMgr.My.isUsingHttp)
                 {
@@ -600,6 +604,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void CommitLose()
     {
         endTime = TimeStamp.GetCurrentTimeStamp();
+        UpdatePlayerScoreEnd();
+        Debug.LogWarning("game time: " + (endTime - startTime) + "   operations nums: " + playerOperations.Count);
         if (endTime - startTime <= 20 || playerOperations.Count <= 5)
             return;
         tempReplay = new PlayerReplay(false);
@@ -623,6 +629,8 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 BuildingManager.My.WaveSpawnConsumer(currentWave);
                 currentWave++;
+                stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+                stageWaveText.transform.DOPunchScale(new Vector3(1.3f,1.3f,1.3f), 1f,1).Play();
             }
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
@@ -876,12 +884,15 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if(sceneName == "FTE_Record"||sceneName == "FTE_0-1"||sceneName=="FTE_0-2")
+        if(sceneName == "FTE_Record"||sceneName == "FTE_0-1"||sceneName=="FTE_0-2"||sceneName=="FTE_0.5"
+           ||sceneName=="FTE_1.5"|| sceneName == "FTE_2.5")
         {
             playerHealth = 1000;
+            playerMaxHealth = 1000;
             playerGold = 100000;
             playerTechPoint = 20000;
             wudi = true;
+            SetInfoImmidiate();
             return;
         }
         //StartCoroutine(ReadStageEnemyData(sceneName));
@@ -956,17 +967,18 @@ public class StageGoal : MonoSingleton<StageGoal>
         //        ParseStageEnemyData(stageEnemyData);
         //    }
         //}
-        if (NetworkMgr.My.useLocalJson)
-        {
-            StartCoroutine(GetEnemyData(sceneName));
-        }
-        else
-        {
-            string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
-            //Debug.Log("-------" + json);
-            StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
-            ParseStageEnemyData(stageEnemyData);
-        }
+        //if (NetworkMgr.My.useLocalJson)
+        //{
+        //    StartCoroutine(GetEnemyData(sceneName));
+        //}
+        //else
+        //{
+        //    string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
+        //    //Debug.Log("-------" + json);
+        //    StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
+        //    ParseStageEnemyData(stageEnemyData);
+        //}
+        StartCoroutine(GetEnemyData(sceneName));
     }
 
     IEnumerator GetEnemyData(string sceneName)
@@ -1047,6 +1059,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         Stat();
         startTime = TimeStamp.GetCurrentTimeStamp();
         menuOpenButton.onClick.AddListener(MenuShow);
+        // 在第九关实时上传分数
+        InitRtScore();
     }
     private Vector3 cameraPos;
 
@@ -1300,5 +1314,46 @@ public class StageGoal : MonoSingleton<StageGoal>
         //{
         //    Screen.SetResolution(1920, 1080, true);
         //}
+    }
+
+    private int lastScore = 0;
+
+    // 判断开启实时分数上传
+    private void InitRtScore()
+    {
+        if (SceneManager.GetActiveScene().name.Equals("FTE_9"))
+        {
+            if(/*NetworkMgr.My.playerDatas.levelID<12 &&*/ NetworkMgr.My.playerGroupInfo.isOpenMatch)
+            {
+                InvokeRepeating("UpdateRTScore", 0.5f, 5);
+            }
+        }
+    }
+
+    // 在第九关实时更新分数
+    private void UpdateRTScore()
+    {
+        if (playerSatisfy > lastScore)
+        {
+            lastScore = playerSatisfy;
+            NetworkMgr.My.AddScore(lastScore, GameObject.FindObjectOfType<BossConsumer>() == null ? 0 : GameObject.FindObjectOfType<BossConsumer>().killCount, false, () => {
+                if (NetworkMgr.My.stopMatch)
+                {
+                    CancelInvoke("UpdateRTScore");
+                }
+            });
+        }
+    }
+
+    // 在第九关，结束时上传最终分数
+    public void UpdatePlayerScoreEnd()
+    {
+        if(SceneManager.GetActiveScene().name.Equals("FTE_9")&& /*NetworkMgr.My.playerDatas.levelID < 12 &&*/ NetworkMgr.My.playerGroupInfo.isOpenMatch&&!NetworkMgr.My.stopMatch)
+        {
+            CancelInvoke("UpdateRTScore");
+            NetworkMgr.My.AddScore(playerSatisfy, GameObject.FindObjectOfType<BossConsumer>() == null ? 0 : GameObject.FindObjectOfType<BossConsumer>().killCount, true, () => {
+                
+            });
+        }
     }
 }

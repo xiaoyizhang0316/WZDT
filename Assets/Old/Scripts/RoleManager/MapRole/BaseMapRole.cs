@@ -110,6 +110,8 @@ public class BaseMapRole : MonoBehaviour
 
     public List<TradeSign> endTradeList = new List<TradeSign>();
 
+    public List<int> tasteBuffList = new List<int>();
+
     public int totalUpgradeCost;
 
     public RoleSprite roleSprite;
@@ -119,6 +121,8 @@ public class BaseMapRole : MonoBehaviour
     public GameObject stopWorkSprite;
 
     public bool isSell = false;
+
+    public GameObject ringEffect;
 
     public void InitBaseRoleData()
     {
@@ -144,6 +148,7 @@ public class BaseMapRole : MonoBehaviour
     {
         buffList = new List<BaseBuff>();
         CheckBuffDuration();
+        encourageLevel = startEncourageLevel;
         if (!isNpc)
         {
             InitAttribute();
@@ -153,7 +158,13 @@ public class BaseMapRole : MonoBehaviour
             if (!PlayerData.My.RoleData.Contains(GetComponent<BaseMapRole>().baseRoleData))
                 PlayerData.My.RoleData.Add(GetComponent<BaseMapRole>().baseRoleData);
             if (!PlayerData.My.MapRole.Contains(GetComponent<BaseMapRole>()))
+            {
                 PlayerData.My.MapRole.Add(GetComponent<BaseMapRole>());
+                /*if (!isNpc)
+                {
+                    PlayerData.My.RoleCountStatic(GetComponent<BaseMapRole>(), 1);
+                }*/
+            }
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
         CheckTalentBuff();
@@ -228,6 +239,10 @@ public class BaseMapRole : MonoBehaviour
     public void RecalculateEncourageLevel(bool isInit = false)
     {
         int result = startEncourageLevel;
+        if (CheckAllTradeBest())
+        {
+            result++;
+        }
         if (isInit)
             baseRoleData.tradeCost -= encourageLevel * 5;
         //for (int i = 0; i < tradeList.Count; i++)
@@ -256,6 +271,29 @@ public class BaseMapRole : MonoBehaviour
         result = Mathf.Max(result, -5);
         encourageLevel = result;
         baseRoleData.tradeCost += encourageLevel * 5;
+    }
+
+    public bool CheckAllTradeBest()
+    {
+        if (startTradeList.Count == 0 && endTradeList.Count == 0)
+        {
+            return false;
+        }
+        for (int i = 0; i < startTradeList.Count; i++)
+        {
+            if (!startTradeList[i].isTradeSettingBest())
+            {
+                return false;
+            }
+        }
+        for (int i = 0; i < endTradeList.Count; i++)
+        {
+            if (!endTradeList[i].isTradeSettingBest())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     #region 战斗
@@ -423,6 +461,10 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void MonthlyCost()
     {
+        if (SceneManager.GetActiveScene().name.Equals("FTE_1"))
+        {
+            return;
+        }
         transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
         {
             int costNum = baseRoleData.cost;
@@ -485,9 +527,9 @@ public class BaseMapRole : MonoBehaviour
 
     public void AddPruductToWareHouse(ProductData data)
     {
-        if (warehouse.Count > baseRoleData.bulletCapacity)
+        if (warehouse.Count >= baseRoleData.bulletCapacity)
         {
-            DataUploadManager.My.AddData(DataEnum.浪费的瓜);
+            //DataUploadManager.My.AddData(DataEnum.浪费的瓜);
             return;
         }
         else
@@ -651,6 +693,10 @@ public class BaseMapRole : MonoBehaviour
     public List<int> GetEquipBuffList()
     {
         List<int> bufflist = new List<int>();
+        for (int i = 0; i < tasteBuffList.Count; i++)
+        {
+            bufflist.Add(tasteBuffList[i]);
+        }
         if (isNpc)
         {
             if (GetComponent<BaseNpc>().isCanSeeEquip)
@@ -1010,50 +1056,58 @@ public class BaseMapRole : MonoBehaviour
         return JsonUtility.ToJson(list);
     }
 
+    
     private void OnDestroy()
     {
 
     }
     List<string> sceneName = new List<string> { "FTE_1", "FTE_0-1", "FTE_0-2" };
 
+    private float interval = 1f;
+
     private void Update()
     {
-        if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+        interval += Time.deltaTime;
+        if (interval >= 1f)
         {
-            if (!isNpc)
+            if (!sceneName.Contains(SceneManager.GetActiveScene().name))
             {
-                if (baseRoleData.EquipList.Count == 0 && baseRoleData.peoPleList.Count == 0 && baseRoleData.inMap)
+                if (!isNpc)
                 {
-                    emptyGearSprite.SetActive(true);
+                    if (baseRoleData.EquipList.Count == 0 && baseRoleData.peoPleList.Count == 0 &&
+                        (PlayerData.My.GetAvailableWorkerNumber() > 0 || PlayerData.My.GetAvailableEquipNumber() > 0) && baseRoleData.inMap)
+                    {
+                        emptyGearSprite.SetActive(true);
+                    }
+                    else
+                    {
+                        emptyGearSprite.SetActive(false);
+                    }
                 }
-                else
+                if (stopWorkSprite != null)
+                {
+                    if (encourageLevel <= -3 && !(isNpc && npcScript.isLock))
+                    {
+                        stopWorkSprite.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        stopWorkSprite.gameObject.SetActive(false);
+                    }
+                }
+            }
+            else
+            {
+                if (!isNpc)
                 {
                     emptyGearSprite.SetActive(false);
                 }
-            }
-            if (stopWorkSprite != null)
-            {
-                if (encourageLevel <= -3 && !(isNpc && npcScript.isLock))
-                {
-                    stopWorkSprite.gameObject.SetActive(true);
-                }
-                else
+                if (stopWorkSprite != null)
                 {
                     stopWorkSprite.gameObject.SetActive(false);
                 }
             }
-        }
-        else
-        {
-            if (!isNpc)
-            {
-                emptyGearSprite.SetActive(false);
-            }
-            if (stopWorkSprite != null)
-            {
-                stopWorkSprite.gameObject.SetActive(false);
-            }
-
+            interval = 0f;
         }
     }
 }

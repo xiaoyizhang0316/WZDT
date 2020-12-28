@@ -28,6 +28,7 @@ public class PlayerDatas
     public int levelID;
     public string talent;
     public string unlockStatus;
+    public string fte;
 }
 
 [Serializable]
@@ -73,6 +74,10 @@ public class LevelProgress
         this.levelStar = levelStar;
         this.rewardStatus = rewardStatus;
         this.score = score;
+        if (PlayerData.My.cheatIndex1 || PlayerData.My.cheatIndex2 || PlayerData.My.cheatIndex3)
+            this.score = -1;
+        else
+            this.score = score;
     }
 }
 

@@ -144,12 +144,13 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         }
         else
         {
-            foreach (var item in NewCanvasUI.My.highLight)
-            {
-                item.SetActive(false);
-            }
+          //  foreach (var item in NewCanvasUI.My.highLight)
+          //  {
+          //      item.SetActive(false);
+          //  }
 
-            if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
+            if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2"|| SceneManager.GetActiveScene().name == "FTE_0.5"
+                || SceneManager.GetActiveScene().name == "FTE_1.5"|| SceneManager.GetActiveScene().name == "FTE_2.5")
             {
                 currentGuideIndex = 0;
                 PlayerPrefs.SetInt("isUseGuide", 1);
@@ -167,17 +168,18 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
                 guideClose.Init();
             }
 
-            while (true)
-            {
-                yield return null;
-                if (OriginalData.My.fteData.datas.Count > 0)
-                {
-                    break;
-                    
-                }
-            }
+        //   while (true)
+        //   {
+        //       yield return null;
+        //       if (OriginalData.My.fteData.datas.Count > 0)
+        //       {
+        //           break;
+        //           
+        //       }
+        //   }
 
             PlayCurrentIndexGuide();
+            yield return null;
         }
     }
 
@@ -230,11 +232,8 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             }
         }
 
-        NewCanvasUI.My.Panel_Update.transform.localPosition = Vector3.one;
-        NewCanvasUI.My.Panel_Update.SetActive(false); 
-        NewCanvasUI.My.Panel_NPC.transform.localPosition=new Vector3(0,0,0); 
-        NewCanvasUI.My.Panel_NPC.SetActive(false);
-       
+      
+      
         if (guideClose != null)
             guideClose.gameObject.SetActive(false);
     }
@@ -242,6 +241,12 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     public void PlayNextIndexGuide()
     {
         currentGuideIndex++;
+        PlayCurrentIndexGuide();
+    }
+
+    public void PlayLastIndexGuide()
+    {
+        currentGuideIndex--;
         PlayCurrentIndexGuide();
     }
 

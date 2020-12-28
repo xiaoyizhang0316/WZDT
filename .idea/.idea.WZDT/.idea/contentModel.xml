@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\Yseer\.Rider2019.1\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Yseer\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_WZDT.-483654169.00" t="ExcludeRecursive" />
-    <e p="D:\Code\WZDT" t="IncludeRecursive">
+    <e p="C:\Users\Yseer\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_WZDT.-261439066.00" t="ExcludeRecursive" />
+    <e p="D:\Code\codingWZDZ\WZDT" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
@@ -280,11 +280,16 @@
             <e p="Audio" t="Include">
               <e p="AudioManager.cs" t="Include" />
             </e>
+            <e p="CacheSystem" t="Include">
+              <e p="CacheData.cs" t="Include" />
+              <e p="CacheSystem.cs" t="Include" />
+            </e>
             <e p="Effect" t="Include">
               <e p="BulletEffect.cs" t="Include" />
               <e p="BulletEffectSign.cs" t="Include" />
               <e p="EffectMove.cs" t="Include" />
               <e p="MaskManager.cs" t="Include" />
+              <e p="Red.cs" t="Include" />
               <e p="RotateEffect.cs" t="Include" />
             </e>
             <e p="EffectFlower.cs" t="Include" />
@@ -319,6 +324,10 @@
                   <e p="BaseCSB.cs" t="Include" />
                   <e p="CSB_2001.cs" t="Include" />
                   <e p="CSB_2002.cs" t="Include" />
+                  <e p="CSB_2003.cs" t="Include" />
+                  <e p="CSB_2004.cs" t="Include" />
+                  <e p="CSB_2005.cs" t="Include" />
+                  <e p="CSB_2006.cs" t="Include" />
                 </e>
                 <e p="ConsumerBuffRange.cs" t="Include" />
                 <e p="Elite" t="Include">
@@ -360,6 +369,7 @@
                 <e p="ExtraConsumer.cs" t="Include" />
                 <e p="RubishProcess.cs" t="Include" />
                 <e p="RubishProcessItem.cs" t="Include" />
+                <e p="TasteFactory.cs" t="Include" />
                 <e p="Youtuber.cs" t="Include" />
                 <e p="YoutuberItem.cs" t="Include" />
               </e>
@@ -610,8 +620,18 @@
               <e p="RankPanel.cs" t="Include" />
               <e p="RecordItem.cs" t="Include" />
               <e p="RecordList.cs" t="Include" />
+              <e p="RT" t="Include">
+                <e p="RTDatas.cs" t="Include" />
+                <e p="RTPanel.cs" t="Include" />
+                <e p="RTSample.cs" t="Include" />
+              </e>
               <e p="ToMap.cs" t="Include" />
               <e p="ToScene.cs" t="Include" />
+            </e>
+            <e p="MissionSystem" t="Include">
+              <e p="MissionData.cs" t="Include" />
+              <e p="MissionManager.cs" t="Include" />
+              <e p="MissionSign.cs" t="Include" />
             </e>
             <e p="Multi" t="Include">
               <e p="MakeGroupPanel.cs" t="Include" />
@@ -656,6 +676,7 @@
               <e p="ClickStartButton.cs" t="Include" />
               <e p="CloseGuide.cs" t="Include" />
               <e p="CommonFTEStep.cs" t="Include" />
+              <e p="CommonText.cs" t="Include" />
               <e p="FTE_0" t="Include">
                 <e p="EditPanel.cs" t="Include" />
                 <e p="FlyMoney.cs" t="Include" />
@@ -682,6 +703,28 @@
                 <e p="RoleSet.cs" t="Include" />
                 <e p="TextBling.cs" t="Include" />
               </e>
+              <e p="FTE_0.5" t="Include">
+                <e p="FTE_0_5_1.cs" t="Include" />
+                <e p="FTE_0_5_10.cs" t="Include" />
+                <e p="FTE_0_5_10_1.cs" t="Include" />
+                <e p="FTE_0_5_11.cs" t="Include" />
+                <e p="FTE_0_5_12.cs" t="Include" />
+                <e p="FTE_0_5_13.cs" t="Include" />
+                <e p="FTE_0_5_14.cs" t="Include" />
+                <e p="FTE_0_5_15.cs" t="Include" />
+                <e p="FTE_0_5_16.cs" t="Include" />
+                <e p="FTE_0_5_2.cs" t="Include" />
+                <e p="FTE_0_5_3.cs" t="Include" />
+                <e p="FTE_0_5_4.cs" t="Include" />
+                <e p="FTE_0_5_5.cs" t="Include" />
+                <e p="FTE_0_5_6.cs" t="Include" />
+                <e p="FTE_0_5_6_1.cs" t="Include" />
+                <e p="FTE_0_5_6_2.cs" t="Include" />
+                <e p="FTE_0_5_7.cs" t="Include" />
+                <e p="FTE_0_5_8.cs" t="Include" />
+                <e p="FTE_0_5_9.cs" t="Include" />
+                <e p="FTE_0_5Manager.cs" t="Include" />
+              </e>
               <e p="FTE_1" t="Include">
                 <e p="FTE_1_1.cs" t="Include" />
                 <e p="FTE_1_10.cs" t="Include" />
@@ -702,12 +745,59 @@
                 <e p="FTE_1_7.cs" t="Include" />
                 <e p="FTE_answer.cs" t="Include" />
               </e>
+              <e p="FTE_1.5" t="Include">
+                <e p="CostPanel.cs" t="Include" />
+                <e p="dialog" t="Include">
+                  <e p="FTE_1_5_Dialog2Do.cs" t="Include" />
+                  <e p="FTE_1_5_Dialog3Do.cs" t="Include" />
+                  <e p="FTE_DialogDoBase.cs" t="Include" />
+                </e>
+                <e p="FTE_1_5_Awards.cs" t="Include" />
+                <e p="FTE_1_5_AwardsAdd.cs" t="Include" />
+                <e p="FTE_1_5_Common.cs" t="Include" />
+                <e p="FTE_1_5_Dialogue.cs" t="Include" />
+                <e p="FTE_1_5_Goal1.cs" t="Include" />
+                <e p="FTE_1_5_Goal2.cs" t="Include" />
+                <e p="FTE_1_5_Goal3.cs" t="Include" />
+                <e p="FTE_1_5_Goal4.cs" t="Include" />
+                <e p="FTE_1_5_Goal5.cs" t="Include" />
+                <e p="FTE_1_5_Goal6.cs" t="Include" />
+                <e p="FTE_1_5_Goal7.cs" t="Include" />
+                <e p="FTE_1_5_Manager.cs" t="Include" />
+                <e p="FTE_1_5_Start.cs" t="Include" />
+                <e p="FTE_TypeWord.cs" t="Include" />
+                <e p="MouseOnThis.cs" t="Include" />
+                <e p="NewGuideManager.cs" t="Include" />
+              </e>
               <e p="FTE_2" t="Include">
                 <e p="FTE_2_1.cs" t="Include" />
                 <e p="FTE_2_2.cs" t="Include" />
                 <e p="FTE_2_6.cs" t="Include" />
                 <e p="FTE_2_7.cs" t="Include" />
                 <e p="FTE_2_8.cs" t="Include" />
+              </e>
+              <e p="FTE_2.5" t="Include">
+                <e p="FTE_2_5_Awards.cs" t="Include" />
+                <e p="FTE_2_5_Dialog1Do.cs" t="Include" />
+                <e p="FTE_2_5_Dialog2Do.cs" t="Include" />
+                <e p="FTE_2_5_DialogADDDo.cs" t="Include" />
+                <e p="FTE_2_5_Goal1.cs" t="Include" />
+                <e p="FTE_2_5_Goal2.cs" t="Include" />
+                <e p="FTE_2_5_Goal2_1.cs" t="Include" />
+                <e p="FTE_2_5_Goal3.cs" t="Include" />
+                <e p="FTE_2_5_Goal3_1.cs" t="Include" />
+                <e p="FTE_2_5_Goal4.cs" t="Include" />
+                <e p="FTE_2_5_Goal5.cs" t="Include" />
+                <e p="FTE_2_5_Manager.cs" t="Include" />
+                <e p="FTE_2_5_Tip.cs" t="Include" />
+                <e p="New" t="Include">
+                  <e p="FTE_2_5_NewGoal1.cs" t="Include" />
+                  <e p="FTE_2_5_NewGoal2.cs" t="Include" />
+                  <e p="FTE_2_5_NewGoal3.cs" t="Include" />
+                  <e p="FTE_2_5_NewGoal4.cs" t="Include" />
+                  <e p="FTE_2_5_Prologue.cs" t="Include" />
+                  <e p="RoleCreateLimit.cs" t="Include" />
+                </e>
               </e>
               <e p="FTE_3" t="Include">
                 <e p="FTE_3_1.cs" t="Include" />
@@ -737,7 +827,12 @@
                 <e p="MaskScale.cs" t="Include" />
               </e>
               <e p="FTEData.cs" t="Include" />
+              <e p="FTEOther" t="Include">
+                <e p="FTE_PathLine.cs" t="Include" />
+                <e p="FTE_RingCycleItem.cs" t="Include" />
+              </e>
               <e p="GuideManager.cs" t="Include" />
+              <e p="PlayLastGuide.cs" t="Include" />
               <e p="SoftFTE" t="Include">
                 <e p="SoftFTE.cs" t="Include" />
                 <e p="SoftFTE_Base.cs" t="Include" />
@@ -763,6 +858,12 @@
             <e p="SceneCG" t="Include">
               <e p="Prologue.cs" t="Include" />
             </e>
+            <e p="TAB" t="Include">
+              <e p="TABManager" t="Include">
+                <e p="RoleUISign.cs" t="Include" />
+                <e p="TabManager.cs" t="Include" />
+              </e>
+            </e>
             <e p="Team" t="Include">
               <e p="TeamAcount.cs" t="Include" />
             </e>
@@ -786,6 +887,11 @@
                 <e p="ChoiceItem.cs" t="Include" />
                 <e p="Question.cs" t="Include" />
                 <e p="TestData.cs" t="Include" />
+              </e>
+              <e p="Baike" t="Include">
+                <e p="BaikeButton.cs" t="Include" />
+                <e p="BaikeItem.cs" t="Include" />
+                <e p="BaikePanel.cs" t="Include" />
               </e>
               <e p="Bubble" t="Include">
                 <e p="FloatInfoManager.cs" t="Include" />
@@ -867,6 +973,9 @@
           <e p="Shaders" t="Include">
             <e p="ScreenSpaceOutlineShader.shader" t="Include" />
           </e>
+        </e>
+        <e p="Editor" t="Include">
+          <e p="ChcheText.cs" t="Include" />
         </e>
         <e p="Epic Toon FX" t="Include">
           <e p="Demo" t="Include">
@@ -2480,6 +2589,30 @@
             </e>
           </e>
         </e>
+        <e p="Plugins" t="Include">
+          <e p="JSON" t="Include">
+            <e p="JsonDotNet" t="Include">
+              <e p="link.xml" t="Include" />
+            </e>
+            <e p="JsonHelper.cs" t="Include" />
+            <e p="LitJson" t="Include">
+              <e p="IJsonWrapper.cs" t="Include" />
+              <e p="JsonData.cs" t="Include" />
+              <e p="JsonException.cs" t="Include" />
+              <e p="JsonMapper.cs" t="Include" />
+              <e p="JsonMockWrapper.cs" t="Include" />
+              <e p="JsonReader.cs" t="Include" />
+              <e p="JsonWriter.cs" t="Include" />
+              <e p="Lexer.cs" t="Include" />
+              <e p="Netstandard15Polyfill.cs" t="Include" />
+              <e p="ParserToken.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Prefs" t="Include">
+            <e p="MyPrefs.cs" t="Include" />
+            <e p="PrefsManager.cs" t="Include" />
+          </e>
+        </e>
         <e p="Quantum Theory" t="Include">
           <e p="Polyworld" t="Include">
             <e p="Editor" t="Include">
@@ -2568,6 +2701,12 @@
           </e>
           <e p="Sprites" t="Include">
             <e p="EmojiOne Attribution.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Vectrosity" t="Include">
+          <e p="Vectrosity Documentation" t="Include">
+            <e p="Vectrosity changelog.txt" t="Include" />
+            <e p="Vectrosity5 Upgrade Guide.txt" t="Include" />
           </e>
         </e>
       </e>

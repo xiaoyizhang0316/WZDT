@@ -51,24 +51,24 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
         risk .text =  CreatRoleManager.My.finalRiskResistance.ToString();
         montyCost.text =  CreatRoleManager.My.finalCost.ToString();
         technology.text = CreatRoleManager.My.finalTechAdd.ToString();
-        if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) >3)
-        {
-            transform.Find("Image_TradCost").gameObject.SetActive(true);
-            transform.Find("Text_TradCost").gameObject.SetActive(true);
-            transform.Find("Text_Trad").gameObject.SetActive(true);
-            transform.Find("Image_risk").gameObject.SetActive(true);
-            transform.Find("Text_risk").gameObject.SetActive(true);
-            transform.Find("Text_riskchi").gameObject.SetActive(true);
-        }
-        else
-        {
-            transform.Find("Image_TradCost").gameObject.SetActive(false);
-            transform.Find("Text_TradCost").gameObject.SetActive(false);
-            transform.Find("Text_Trad").gameObject.SetActive(false);
-            transform.Find("Image_risk").gameObject.SetActive(false);
-            transform.Find("Text_risk").gameObject.SetActive(false);
-            transform.Find("Text_riskchi").gameObject.SetActive(false);
-        }
+     //   if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) >3)
+     //   {
+     //       transform.Find("Image_TradCost").gameObject.SetActive(true);
+     //       transform.Find("Text_TradCost").gameObject.SetActive(true);
+     //       transform.Find("Text_Trad").gameObject.SetActive(true);
+     //       transform.Find("Image_risk").gameObject.SetActive(true);
+     //       transform.Find("Text_risk").gameObject.SetActive(true);
+     //       transform.Find("Text_riskchi").gameObject.SetActive(true);
+     //   }
+     //   else
+     //   {
+     //       transform.Find("Image_TradCost").gameObject.SetActive(false);
+     //       transform.Find("Text_TradCost").gameObject.SetActive(false);
+     //       transform.Find("Text_Trad").gameObject.SetActive(false);
+     //       transform.Find("Image_risk").gameObject.SetActive(false);
+     //       transform.Find("Text_risk").gameObject.SetActive(false);
+     //       transform.Find("Text_riskchi").gameObject.SetActive(false);
+     //   }
     }
 
     public override void UpdateBar()
@@ -93,6 +93,8 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
                 tempBuffList.Add(data.buffList[0]);
             }
         }
+        BaseMapRole role = PlayerData.My.GetMapRoleById(CreatRoleManager.My.CurrentRole.ID);
+        tempBuffList.AddRange(role.tasteBuffList);
         for (int i = 0; i < 4; i++)
         {
             try

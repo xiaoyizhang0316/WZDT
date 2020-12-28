@@ -155,23 +155,31 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     List<string> sceneName = new List<string> { "FTE_1", "FTE_0-1", "FTE_0-2" };
 
+    private float interval = 1f;
+
     // Update is called once per frame
     void Update()
     {
-        if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+        interval += Time.deltaTime;
+        if (interval >= 1f)
         {
-            if (currentRole != null && currentRole.EquipList.Count == 0 && currentRole.peoPleList.Count == 0)
+            if (!sceneName.Contains(SceneManager.GetActiveScene().name))
             {
-                emptyEquip.SetActive(true);
+                if (currentRole != null && currentRole.EquipList.Count == 0 && currentRole.peoPleList.Count == 0
+                    && (PlayerData.My.GetAvailableWorkerNumber() > 0 || PlayerData.My.GetAvailableEquipNumber() > 0))
+                {
+                    emptyEquip.SetActive(true);
+                }
+                else
+                {
+                    emptyEquip.SetActive(false);
+                }
             }
             else
             {
                 emptyEquip.SetActive(false);
             }
-        }
-        else
-        {
-            emptyEquip.SetActive(false);
+            interval = 0f;
         }
     }
 
@@ -211,7 +219,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             clearWarehouse.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Talent/Warehouse");
         }
         ReInit(role);
-        if (currentLevel >= 5)
+        if (currentLevel >= StageGoal.My.maxRoleLevel)
         {
             update.interactable = false;
             hammer.interactable = false;
@@ -256,8 +264,6 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             roleBuff[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.GetEquipBuffList()[i]);
             roleBuff[i].GetComponent<ShowBuffText>().currentbuffData =
                 GameDataMgr.My.GetBuffDataByID(baseMapRole.GetEquipBuffList()[i]);
-
-
         }
 
         for (int i = 0; i <buffTF.childCount; i++)

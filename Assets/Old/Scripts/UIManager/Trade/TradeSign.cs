@@ -305,6 +305,10 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public int CalculateTC()
     {
+        if (SceneManager.GetActiveScene().name.Equals("FTE_1"))
+        {
+            return 0;
+        }
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         int result = (int)((startRole.baseRoleData.tradeCost * startPer + startRole.baseRoleData.riskResistance));
@@ -404,7 +408,7 @@ public class TradeSign : MonoBehaviour
         }
     }
 
-    /// <summary>
+    /// <summary> 
     /// 开关显示信息流线
     /// </summary>
     /// <param name="isActive"></param>

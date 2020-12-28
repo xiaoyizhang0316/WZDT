@@ -83,6 +83,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     // Start is called before the first frame update
     void Start()
     {
+        StageGoal.My.maxRoleLevel = 5;
         if (SceneManager.GetActiveScene().name == "Map")
         {
             return;
@@ -110,7 +111,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         isTradeButtonActive = true;
         isProductLineActive = true;
         isInfoLineActive = true;
-        Init1_4UI();
+       // Init1_4UI();
     }
 
 
@@ -121,7 +122,11 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void Init1_4UI()
     {
         if (SceneManager.GetActiveScene().name == "Map" || SceneManager.GetActiveScene().name == "FTE_0-1" ||
-            SceneManager.GetActiveScene().name == "FTE_0-2")
+            SceneManager.GetActiveScene().name == "FTE_0-2"||
+            SceneManager.GetActiveScene().name == "FTE_0.5"||
+            SceneManager.GetActiveScene().name == "FTE_1.5"
+            ||
+            SceneManager.GetActiveScene().name == "FTE_2.5")
         {
             return;
         }
@@ -636,7 +641,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void StartLowHealth()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName == "FTE_Record" || sceneName == "FTE_0-1" || sceneName == "FTE_0-2")
+        if (sceneName == "FTE_Record" || sceneName == "FTE_0-1" || sceneName == "FTE_0-2" || sceneName == "FTE_1.5"
+            || sceneName == "FTE_2.5")
         {
             return;
         }

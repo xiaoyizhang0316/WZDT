@@ -53,6 +53,8 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
 
     public GameObject missionConfirm;
     public string currentSceneName = "";
+
+    public Transform rtPanel;
     //public bool stepOver = false;
     // Start is called before the first frame update
     void Start()
@@ -66,7 +68,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
             panel.SetActive(false);
             listScript.gameObject.SetActive(false);
             rankPanel.SetActive(false);
-
+            rtPanel.GetComponent<RTPanel>().Close();
         });
         play.onClick.AddListener(() =>
         {
@@ -213,6 +215,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         InitBoxs(star);
         //listScript.gameObject.SetActive(true);
         rankPanel.SetActive(true);
+        rtPanel.GetComponent<RTPanel>().InitRTPanel();
     }
 
     void InitBoxs(string star)

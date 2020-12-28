@@ -154,6 +154,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         role.name = tempRole.ID.ToString();
         role.GetComponent<BaseMapRole>().baseRoleData = new Role();
         role.GetComponent<BaseMapRole>().baseRoleData = tempRole;
+        role.GetComponent<BaseMapRole>().HideTradeButton(false);
         dragImg.raycastTarget = false;
     }
 
@@ -231,10 +232,14 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                             baseb.SetRoleBuff(null, role.GetComponent<BaseMapRole>(), role.GetComponent<BaseMapRole>());
                         }
                     }
-                    if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1")
+                    if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1"
+                                                                        && SceneManager.GetActiveScene().name != "FTE_0.5"&& SceneManager.GetActiveScene().name != "FTE_1.5"
+                                                                        && SceneManager.GetActiveScene().name != "FTE_2.5"
+                        )
                     {
                         BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
                     }
+                    PlayerData.My.RoleCountStatic(role.GetComponent<BaseMapRole>(),1);
                     CreateRoleOperationRecord(role.GetComponent<BaseMapRole>());
                     if (!PlayerData.My.isSOLO)
                     {

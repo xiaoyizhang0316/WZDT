@@ -220,15 +220,91 @@ public class Building : MonoBehaviour
         }
     }
 
-    public IEnumerator BornEnemy1()
+    public bool isBornForFTE_2_5 = false;
+    public IEnumerator BornEnemyForFTE_2_5(int buffnum)
     {
         ConsumerType ct;
+        isBornForFTE_2_5 = true;
         yield return new WaitForSeconds(0.3f);
         DrawPathLine();
         protalGameObject.transform.DOScale(new Vector3(1, 1, 0.52f), 1);
         yield return new WaitForSeconds(0.5f);
         //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
-        while (true)
+        while (isBornForFTE_2_5)
+        {
+            yield return new WaitForSeconds(0.7f);
+            ct = (ConsumerType)(UnityEngine.Random.Range(0, 2)==1?1:8);
+            string path = "Prefabs/Consumer/" + ct.ToString();
+            GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+            go.GetComponent<ConsumeSign>().Init(consumerPathList);
+            go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+            go.transform.position = transform.position;
+            go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+            
+                if (buffnum != -1)
+                {
+                    BuffData buff = GameDataMgr.My.GetBuffDataByID(buffnum);
+                    BaseBuff baseBuff = new BaseBuff();
+                    baseBuff.Init(buff);
+                    baseBuff.SetConsumerBuff(go.GetComponent<ConsumeSign>());
+                    go.GetComponent<ConsumeSign>().bornBuffList.Add(buffnum);
+                }
+            
+            float waitTime = 0.35f;
+            Tweener twe = transform.DOScale(1f, waitTime);
+            yield return twe.WaitForCompletion();
+        }
+    }
+    
+    public IEnumerator BornEnemyForFTE_2_5_1(int buffnum, int count)
+    {
+        ConsumerType ct;
+        //isBornForFTE_2_5 = true;
+        yield return new WaitForSeconds(0.3f);
+        DrawPathLine();
+        protalGameObject.transform.DOScale(new Vector3(1, 1, 0.52f), 1);
+        yield return new WaitForSeconds(0.5f);
+        //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
+        //while (isBornForFTE_2_5)
+        //{
+            for (int i = 0; i < count; i++)
+            {
+                yield return new WaitForSeconds(0.7f);
+                ct = (ConsumerType)(UnityEngine.Random.Range(0, 2)==1?1:8);
+                string path = "Prefabs/Consumer/" + ct.ToString();
+                GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+                go.GetComponent<ConsumeSign>().Init(consumerPathList);
+                go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+                go.transform.position = transform.position;
+                go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+            
+                if (buffnum != -1)
+                {
+                    BuffData buff = GameDataMgr.My.GetBuffDataByID(buffnum);
+                    BaseBuff baseBuff = new BaseBuff();
+                    baseBuff.Init(buff);
+                    baseBuff.SetConsumerBuff(go.GetComponent<ConsumeSign>());
+                    go.GetComponent<ConsumeSign>().bornBuffList.Add(buffnum);
+                }
+            
+                float waitTime = 0.35f;
+                Tweener twe = transform.DOScale(1f, waitTime);
+                yield return twe.WaitForCompletion();
+            }
+        //}
+    }
+
+    public bool isBorn = false;
+    public IEnumerator BornEnemy1()
+    {
+        ConsumerType ct;
+        isBorn = true;
+        yield return new WaitForSeconds(0.3f);
+        DrawPathLine();
+        protalGameObject.transform.DOScale(new Vector3(1, 1, 0.52f), 1);
+        yield return new WaitForSeconds(0.5f);
+        //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
+        while (isBorn)
         {
             yield return new WaitForSeconds(1f);
             ct = (ConsumerType)(UnityEngine.Random.Range(0, 2) == 1 ? 1 : 8);
@@ -256,6 +332,32 @@ public class Building : MonoBehaviour
     }
 
     /// <summary>
+    /// 生成一波消费者
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="number"></param>
+    /// <returns></returns>
+    public IEnumerator BornSingleTypeConsumer(ConsumerType type, int number)
+    {
+        DrawPathLine();
+        protalGameObject.transform.DOScale(new Vector3(1, 1, 0.52f), 1);
+        for (int i = 0; i < number; i++)
+        {
+            float waitTime;
+            waitTime = GameDataMgr.My.consumerWaitTime[type] + buildingWaitTime;
+            Tweener twe = transform.DOScale(1f, waitTime);
+            yield return twe.WaitForCompletion();
+            string path = "Prefabs/Consumer/" + type.ToString();
+            GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+            go.GetComponent<ConsumeSign>().Init(consumerPathList);
+            go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+            consumeSigns.Add(go.GetComponent<ConsumeSign>());
+            go.transform.position = transform.position;
+            go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+        }
+    }
+
+    /// <summary>
     /// 生成消费者路径线路
     /// </summary>
     public void DrawPathLine()
@@ -264,7 +366,8 @@ public class Building : MonoBehaviour
         List<Vector3> list = new List<Vector3>();
         for (int i = 0; i < consumerPathList.Count; i++)
         {
-            list.Add(consumerPathList[i].position + new Vector3(0f, 0.1f, 0f));
+            Vector3 pos = consumerPathList[i].position + new Vector3(0f, 0.1f, 0f);
+            list.Add(pos);
         }
         GameObject go = Instantiate(pathIndicator, transform);
         go.transform.position = transform.position;

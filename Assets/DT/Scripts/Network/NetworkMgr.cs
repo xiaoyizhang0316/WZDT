@@ -104,19 +104,27 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     /// <param name="password">密码</param>
     /// <param name="doSuccess"></param>
     /// <param name="doFail"></param>
-    public void Login(string userName, string password, Action doSuccess = null, Action doFail = null)
+    public void Login(string userName, string password, Action doSuccess = null, Action<bool,string> doFail= null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("username", userName);
         keyValues.Add("password", password);
         keyValues.Add("DeviceId", deviceID);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.LoginUrl, (www)=> {
+        StartCoroutine(HttpManager.My.HttpSend(Url.NewLoginUrl, (www)=> {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == 0)
             {
-                HttpManager.My.ShowTip(response.errMsg);
-                doFail?.Invoke();
+                //HttpManager.My.ShowTip(response.errMsg);
+                if (response.data.Contains("密码"))
+                {
+                    doFail?.Invoke(true,response.data);
+                }
+                else
+                {
+
+                doFail?.Invoke(false,response.data);
+                }
             }
             else
             {
@@ -308,7 +316,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("playerID", playerID);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.ReConnUrl, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.NewReConnUrl, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
@@ -566,6 +574,45 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             SetMask();
         }, keyValues, HttpType.Post, HttpId.updatePlayerDatasID));
+    }
+
+    public void UpdatePlayerFTE(string fte, Action doSuccess = null, Action doFail = null)
+    {
+        Debug.Log("更新fte" + fte);
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("fteProgress", fte);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerFTE, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip(response.errMsg);
+                Debug.Log(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                Debug.Log(response.data);
+                try
+                {
+                    playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    InitRoleFoundDic(playerDatas.roleFound);
+                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
+                    doSuccess?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.UpdatePlayerFTE));
     }
     #endregion
 
@@ -1292,6 +1339,158 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 return levelProgressList[i];
         }
         return null;
+    }
+    #endregion
+
+    #region match
+    public void AddScore(int score, int bossLevel, bool isEnd, Action doSuccess=null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("token", token);
+        //keyValues.Add("groupID", groupID.ToString());
+        PlayerRTScore prt = new PlayerRTScore();
+        prt.playerID = playerID;
+        prt.playerName = playerDatas.playerName;
+        prt.groupID = groupID;
+        prt.score = score;
+        prt.bossLevel = bossLevel;
+        prt.isGameEnd = isEnd;
+        keyValues.Add("playerScore", JsonUtility.ToJson(prt).ToString());
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.AddPlayerScore, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == -1)
+            {
+                NewCanvasUI.My.GamePause();
+                ShowReconn();
+                return;
+            }
+            
+            if (response.status == 0)
+            {
+                Debug.LogWarning(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                if (response.status == 2)
+                {
+                    stopMatch = true;
+                    Debug.LogWarning("停止计分！");
+                }
+                else
+                {
+                    Debug.LogWarning(response.data);
+                }
+                doSuccess?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.AddPlayerScore));
+    }
+    public List<PlayerRTScore> playerRTScores = new List<PlayerRTScore>();
+    public bool stopMatch = false;
+    public void GetGroupRTScore( Action doSuccess=null, Action doFail=null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        
+        keyValues.Add("groupID", groupID.ToString());
+        Debug.LogWarning("groupID "+groupID);
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetGroupPlayerScore, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+
+            if (response.status == 0)
+            {
+                Debug.LogWarning(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                if (response.status == 2)
+                {
+                    stopMatch = true;
+                    Debug.LogWarning("停止计分！");
+                    Debug.LogWarning(response.data);
+                    PlayerRTScoreList prts = JsonUtility.FromJson<PlayerRTScoreList>(response.data);
+                    playerRTScores.Clear();
+                    for (int i = 0; i < prts.prts.Count; i++)
+                    {
+                        playerRTScores.Add(prts.prts[i]);
+                    }
+                    playerRTScores.Sort((x, y) => {
+                        if (x.bossLevel == y.bossLevel)
+                        {
+                            return -x.score.CompareTo(y.score);
+                        }
+                        else
+                        {
+                            return -x.bossLevel.CompareTo(y.bossLevel);
+                        }
+                    });
+                }
+                else
+                {
+                    Debug.LogWarning(response.data);
+                    PlayerRTScoreList prts = JsonUtility.FromJson<PlayerRTScoreList>(response.data);
+                    playerRTScores.Clear();
+                    for(int i=0; i< prts.prts.Count; i++)
+                    {
+                        playerRTScores.Add(prts.prts[i]);
+                    }
+                    playerRTScores.Sort((x, y) => {
+                        if (x.bossLevel == y.bossLevel)
+                        {
+                            return -x.score.CompareTo(y.score);
+                        }
+                        else
+                        {
+                            return -x.bossLevel.CompareTo(y.bossLevel);
+                        }
+                    });
+                }
+                    doSuccess?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Get, HttpId.GetGroupPlayerScore));
+    }
+
+    public void GetGroupScoreStatus( Action doSuccess = null, Action doFail = null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        
+        keyValues.Add("groupID", groupID.ToString());
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetGroupScoreStatus, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+            if (response.status == 0)
+            {
+                Debug.LogWarning(response.errMsg);
+                doFail?.Invoke();
+            }
+            else
+            {
+                if (response.status == 1)
+                {
+                    Debug.LogWarning("计分中...");
+                    stopMatch = false;
+                }
+                else
+                {
+                    Debug.LogWarning("计分停止...");
+                    stopMatch = true;
+                }
+                doSuccess?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.AddPlayerScore));
     }
     #endregion
 

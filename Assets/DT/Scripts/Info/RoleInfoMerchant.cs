@@ -67,6 +67,8 @@ public class RoleInfoMerchant : BaseRoleInfoAdd
                 tempBuffList.Add(data.buffList[0]);
             }
         }
+        BaseMapRole role = PlayerData.My.GetMapRoleById(CreatRoleManager.My.CurrentRole.ID);
+        tempBuffList.AddRange(role.tasteBuffList);
         for (int i = 0; i < 4; i++)
         {
             try
