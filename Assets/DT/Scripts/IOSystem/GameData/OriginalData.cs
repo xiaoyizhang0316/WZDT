@@ -205,7 +205,7 @@ public class OriginalData : MonoSingleton<OriginalData>
         GameDataMgr.My.ParseWorkerData(workerRawData);
     }
 
-    void ReadRoleTemplateJson()
+    public void ReadRoleTemplateJson()
     {
         //WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/RoleTemplateData.json");
         //yield return www;

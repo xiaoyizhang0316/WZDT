@@ -193,7 +193,7 @@ public class MapManager : MonoSingleton<MapManager>
     {
         string sceneName = SceneManager.GetActiveScene().name;
         if (sceneName.Equals("FTE_0-1") || sceneName.Equals("FTE_0-2")|| sceneName.Equals("FTE_0.5")
-            || sceneName.Equals("FTE_2.5"))
+            || sceneName.Equals("FTE_1.5")|| sceneName.Equals("FTE_2.5"))
         {
             return;
         }

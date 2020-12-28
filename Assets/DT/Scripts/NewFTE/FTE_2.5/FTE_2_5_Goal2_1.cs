@@ -16,6 +16,13 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
     private int softCount = 0;
     public override IEnumerator StepStart()
     {
+        FTE_2_5_Manager.My.isClearGoods = true;
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        {
+            PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
+        }
+        FTE_2_5_Manager.My.isClearGoods = false; 
+        NewCanvasUI.My.GameNormal();
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);
         yield return new WaitForSeconds(0.5f);
     }
@@ -46,7 +53,7 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
         if (missiondatas.data[1].isFinish == false)
         {
             CheckSeed(peasant2, 304);
-            missiondatas.data[1].currentNum = sweetCount;
+            missiondatas.data[1].currentNum = crispCount;
             if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
             {
                 missiondatas.data[1].isFinish = true;
@@ -56,7 +63,7 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
         if (missiondatas.data[2].isFinish == false)
         {
             CheckSeed(peasant3, 303);
-            missiondatas.data[2].currentNum = sweetCount;
+            missiondatas.data[2].currentNum = softCount;
             if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
             {
                 missiondatas.data[2].isFinish = true;
