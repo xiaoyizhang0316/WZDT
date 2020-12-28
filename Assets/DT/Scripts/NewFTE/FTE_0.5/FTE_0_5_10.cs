@@ -43,7 +43,7 @@ public class FTE_0_5_10 : BaseGuideStep
     }
     public void ChangeColor(ProductData data)
     {
-        if (data.damage > targetdamege)
+        if (data.damage >= targetdamege)
         {
             FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC1_ran,FTE_0_5Manager.My.bg );
         }
@@ -55,7 +55,7 @@ public class FTE_0_5_10 : BaseGuideStep
     } 
     public void ChangeColor1(ProductData data)
     {
-        if (data.damage > targetdamege2)
+        if (data.damage >= targetdamege2)
         {
             FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.sg );
         }
