@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 1269853123510718441}
   - component: {fileID: 7837505864205989343}
   - component: {fileID: 4609684238554499366}
+  - component: {fileID: 1629094681010721}
+  - component: {fileID: 9196940109637044467}
   m_Layer: 0
-  m_Name: "\u65B0\u624B"
-  m_TagString: Untagged
+  m_Name: "\u65B0\u624B\u7528\u5730\u5757-\u7070"
+  m_TagString: MapLand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2865473987873357306}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 49.969704, y: 2.412, z: 56.46621}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: 49.969704, y: 0, z: 56.46621}
+  m_LocalScale: {x: 101, y: 101, z: 101}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,3 +82,38 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1629094681010721
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865473987873357306}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.015115164, y: 0.018367125, z: 0.0052504535}
+  m_Center: {x: 0.000050373674, y: 0.00030088128, z: 0.0004888707}
+--- !u!114 &9196940109637044467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865473987873357306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec3be78b58f5df4aaf6328695ad3191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapType: 0
+  x: 0
+  y: 0
+  height: 0
+  isCanPlace: 1
+  lostEffect: 0
+  addCost: 0
+  baseMapRole: {fileID: 0}
+  weighting: 0
+  isNearWater: 0

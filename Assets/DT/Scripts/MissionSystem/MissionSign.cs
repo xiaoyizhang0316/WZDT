@@ -28,13 +28,19 @@ public class MissionSign : MonoBehaviour
     void Update()
     {
         currentNum.text = this.data.currentNum.ToString();
-        if (data.isFinish)
+        if (data.isFail)
         {
-            sign.color = Color.green;
+            sign.color = Color.red;
         }
         else
         {
-            sign.color = signColor;
+            if (data.isFinish)
+            {
+                sign.color = Color.green;
+            }else 
+            {
+                sign.color = signColor;
+            }
         }
     }
 

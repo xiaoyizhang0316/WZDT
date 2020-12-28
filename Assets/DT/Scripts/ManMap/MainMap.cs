@@ -33,9 +33,15 @@ public class MainMap : MonoBehaviour
         GetEquips();
         GetUserLevel();
         GetLevelProgress();
+        GetRoleTemplateData();
         
         PlayerData.My.isAllReady = false;
         PlayerData.My.isLocalReady = false;
+    }
+
+    void GetRoleTemplateData()
+    {
+        OriginalData.My.ReadRoleTemplateJson();
     }
 
     private void GetGroupInfos()
@@ -222,7 +228,48 @@ public class MainMap : MonoBehaviour
             }
         }
         GetGroupInfos();
-        TalentPanel.My.Init();
+        //TalentPanel.My.Init();
+    }
+
+    string GetFTEProgress()
+    {
+        string fte = "";
+        switch (NetworkMgr.My.levelProgressList.Count)
+        {
+            case 0:
+                fte= "0";
+                break;
+            case 1:
+                fte= "0.5";
+                break;
+            case 2:
+                fte = "1.5";
+                break;
+            case 3:
+                fte = "2.5";
+                break;
+            default:
+                fte = "2.5";
+                break;
+        }
+
+        if (float.Parse(NetworkMgr.My.playerDatas.fte) < float.Parse(fte))
+        {
+            NetworkMgr.My.UpdatePlayerFTE(fte);
+        }
+        else
+        {
+            fte = NetworkMgr.My.playerDatas.fte;
+        }
+
+        InitFTELevel(fte);
+
+        return fte;
+    }
+
+    void InitFTELevel(string fte)
+    {
+        
     }
 
     string GetStar(int level)
