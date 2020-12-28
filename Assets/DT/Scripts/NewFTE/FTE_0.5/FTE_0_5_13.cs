@@ -30,6 +30,9 @@ public class FTE_0_5_13 : BaseGuideStep
         time = StageGoal.My.timeCount;
         role.warehouse.Clear();
         role1.warehouse.Clear();
+        role.baseRoleData.bulletCapacity = 20;
+        role1.baseRoleData.bulletCapacity = 70;
+
         role.OnMoved += ChangeColor;
         role1.OnMoved += ChangeColor1;
        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
