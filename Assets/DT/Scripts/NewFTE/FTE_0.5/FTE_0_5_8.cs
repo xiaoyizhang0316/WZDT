@@ -103,6 +103,12 @@ public class FTE_0_5_8 : BaseGuideStep
          
         }
 
+        else
+        {
+            missiondatas.data[1].isFinish = false;
+
+        }
+
         if (  missiondatas.data[1].isFinish &&  missiondatas.data[0].isFinish )
         {
             return true;
