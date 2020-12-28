@@ -40,7 +40,7 @@ public class FTE_0_5_7 : BaseGuideStep
         
                     for (int j = 0; j <  role.warehouse.Count; j++)
                     {
-                        if (role.warehouse[j].damage < 40)
+                        if (role.warehouse[j].damage < 240)
                         {
                             role.warehouse.Remove(role.warehouse[j]);
                         }

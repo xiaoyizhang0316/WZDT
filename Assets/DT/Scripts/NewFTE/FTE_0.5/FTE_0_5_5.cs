@@ -27,10 +27,10 @@ public class FTE_0_5_5 : BaseGuideStep
         NewCanvasUI.My.Panel_Update.SetActive(false);
         dailog.SetActive(true);
 
-        PlayerData.My.GetNewGear(22401);
-        PlayerData.My.GetNewGear(22402);
-        PlayerData.My.GetNewGear(22403);
-        PlayerData.My.GetNewGear(22404);
+        PlayerData.My.GetNewGear(90000);
+        PlayerData.My.GetNewGear(90001);
+        PlayerData.My.GetNewGear(90002);
+        PlayerData.My.GetNewGear(90003);
         yield return new WaitForSeconds(1f);
         
 

@@ -48,17 +48,16 @@ public class FTE_0_5_15 : BaseGuideStep
     public void Addxiaofei()
         {
             StartCoroutine(BuildingManager.My.buildings[0]
-                .BornSingleTypeConsumer(GameEnum.ConsumerType.OldpaoNormal, count));
+                .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel1, count));
         
         }
 
     public override IEnumerator StepEnd()
     {
         CancelInvoke("Addxiaofei");
-        PlayerData.My.GetNewGear(22301);
-        PlayerData.My.GetNewGear(22302);
-        PlayerData.My.GetNewGear(22303);
-        PlayerData.My.GetNewGear(22304); 
+        PlayerData.My.GetNewGear(90004);
+        PlayerData.My.GetNewGear(90005);
+        PlayerData.My.GetNewGear(90006);
         roleImage.SetActive(true);
         yield return new WaitForSeconds(1f);
         roleImage.SetActive(false);
