@@ -13,6 +13,7 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     public GameObject endStar;
     public GameObject slider;
     public GameObject encorageLevel;
+    public List<GameObject> npcEncorageLevel;
 
     public GameObject border1;
     public GameObject border2;
@@ -24,6 +25,10 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
         endStar.transform.DOScale(Vector3.one, 0.02f).Play();
         slider.transform.DOScale(Vector3.one, 0.02f).Play();
         encorageLevel.SetActive(true);
+        for (int i = 0; i < npcEncorageLevel.Count; i++)
+        {
+            npcEncorageLevel[i].SetActive(true);
+        }
         FTE_2_5_Manager.My.isClearGoods = false;
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         yield return new WaitForSeconds(0.5f);

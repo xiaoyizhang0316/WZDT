@@ -17,6 +17,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     public GameObject oldPlace1;
     public GameObject oldPlace2;
     public GameObject oldPlace3;
+    public Transform tradeMgr;
     private int sweetCount = 0;
     private int crispCount = 0;
     private int softCount = 0;
@@ -41,6 +42,10 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     void DoEnd()
     {
         FTE_2_5_Manager.My.isClearGoods = true;
+        foreach (Transform trade in tradeMgr)
+        {
+            TradeManager.My.DeleteTrade(trade.GetComponent<TradeSign>().tradeData.ID);
+        }
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
