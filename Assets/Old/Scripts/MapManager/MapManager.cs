@@ -133,6 +133,23 @@ public class MapManager : MonoSingleton<MapManager>
     }
 
     /// <summary>
+    /// 随机摆放NPC位置
+    /// </summary>
+    /// <param name="npc"></param>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    public void PutNPCRandom(StageNPCData npc,int x,int y)
+    {
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/NPC/" + npc.roleType));
+        go.transform.SetParent(GameObject.Find("Role").transform);
+        go.transform.position = GetMapSignByXY(x, y).transform.position + new Vector3(0f, 0.3f, 0f);
+        SetNPCAttribute(go, npc);
+        go.name = npc.npcName;
+        go.GetComponent<NPC>().BaseInit();
+        go.GetComponent<NPC>().Init();
+    }
+
+    /// <summary>
     /// 设置NPC的属性
     /// </summary>
     /// <param name="go"></param>
@@ -232,11 +249,45 @@ public class MapManager : MonoSingleton<MapManager>
 
     public void ParseStageNPCData(StageNPCsData rawData)
     {
-        foreach (StageNPCItem s in rawData.stageNPCItems)
+        //npc随机位置
+        if (SceneManager.GetActiveScene().name.Equals("FTE_7"))
         {
-            StageNPCData npc = new StageNPCData(s);
-            PutNPC(npc);
+            List<StageNPCData> npcs = new List<StageNPCData>();
+            List<string> pos = new List<string>();
+            foreach (StageNPCItem s in rawData.stageNPCItems)
+            {
+                StageNPCData npc = new StageNPCData(s);
+                if (npc.roleType.Equals("Dealer"))
+                {
+                    PutNPC(npc);
+                }
+                else
+                {
+                    string tempPos = s.posX.ToString() + "," + s.posY.ToString();
+                    pos.Add(tempPos);
+                    npcs.Add(npc);
+                }
+            }
+            for (int i = 0; i < npcs.Count; i++)
+            {
+                int index = Random.Range(0, pos.Count);
+                int x = int.Parse(pos[index].Split(',')[0]);
+                int y = int.Parse(pos[index].Split(',')[1]);
+                pos.RemoveAt(index);
+                PutNPCRandom(npcs[i], x, y);
+            }
+
         }
+        //npc非随机位置
+        else
+        {
+            foreach (StageNPCItem s in rawData.stageNPCItems)
+            {
+                StageNPCData npc = new StageNPCData(s);
+                PutNPC(npc);
+            }
+        }
+
     }
 
     /// <summary>
