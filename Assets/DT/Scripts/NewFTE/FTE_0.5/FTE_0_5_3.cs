@@ -15,6 +15,7 @@ public class FTE_0_5_3 : BaseGuideStep
     {
       NewCanvasUI.My.GameNormal();
     
+      maprole.ringEffect.SetActive(true);
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].tradeButton.transform.localScale = Vector3.zero;
@@ -35,6 +36,11 @@ public class FTE_0_5_3 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        {
+            if(   PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
+                PlayerData.My.MapRole[i].ringEffect.SetActive(true);
+        }
         TradeManager.My.HideAllIcon();
         if (maprole.warehouse.Count > 10)
         {

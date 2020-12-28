@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class Red : MonoBehaviour
 {
+     
     // Start is called before the first frame update
     void Start()
     {
-        transform.DOLocalJump(Vector3.up,10,3,1).SetLoops(-1);
+        transform.DOLocalJump(transform.localPosition+new Vector3(0,1,0), 10,3,1).SetLoops(-1).Play();
       
     }
 

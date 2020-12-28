@@ -59,8 +59,10 @@ public class FTE_0_5_15 : BaseGuideStep
         PlayerData.My.GetNewGear(22302);
         PlayerData.My.GetNewGear(22303);
         PlayerData.My.GetNewGear(22304); 
+        roleImage.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        roleImage.SetActive(false);
 
-        yield break;
     }
 
     public override bool ChenkEnd()

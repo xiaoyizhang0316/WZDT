@@ -20,6 +20,7 @@ public class FTE_0_5_16 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        StageGoal.My.maxRoleLevel = 5;
         InvokeRepeating("Addxiaofei",1,time);
        
         yield return new WaitForSeconds(1f);

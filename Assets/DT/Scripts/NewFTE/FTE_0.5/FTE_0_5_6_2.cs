@@ -43,6 +43,11 @@ public class FTE_0_5_6_2 : BaseGuideStep
     public override bool ChenkEnd()
     {
 
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        {
+            if(   PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
+                PlayerData.My.MapRole[i].tradeButton.SetActive(true);
+        }
         for (int i = 0; i < role.warehouse.Count; i++)
         {
             if (role.warehouse[i].damage <targetdamege)

@@ -32,6 +32,7 @@ public class FTE_0_5_8 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        StageGoal.My.maxRoleLevel = 2;
         time = StageGoal.My.timeCount;
         role1.warehouse.Clear();
         role2.warehouse.Clear();

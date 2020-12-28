@@ -12,7 +12,7 @@ public class FTE_0_5_10_1 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
-      
+      TradeManager.My.ShowAllIcon();
         yield return null;
     }
 

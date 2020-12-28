@@ -44,7 +44,7 @@ public class FTE_0_5_10 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-       
+        StageGoal.My.maxRoleLevel = 3;
         for (int i = 0; i <  role.warehouse.Count; i++)
         {
             if (role.warehouse[i].damage < targetdamege)
