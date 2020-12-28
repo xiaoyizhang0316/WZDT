@@ -14,9 +14,6 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     public Transform place1;
     public Transform place2;
     public Transform place3;
-    public GameObject oldPlace1;
-    public GameObject oldPlace2;
-    public GameObject oldPlace3;
     public Transform tradeMgr;
     private int sweetCount = 0;
     private int crispCount = 0;
@@ -123,20 +120,17 @@ public class FTE_2_5_Goal2 : BaseGuideStep
 
     void SeedBuildRise()
     {
-        oldPlace1.transform.DOMoveY(-10, 0.5f).OnComplete(() =>
-        {
-            place1.DOMoveY(0, 0.5f);
-            peasant1.DOMoveY(0.35f, 0.5f);
-        });
-        oldPlace2.transform.DOMoveY(-10, 0.5f).OnComplete(() =>
-        {
-            place2.DOMoveY(0, 0.5f);
-            peasant2.DOMoveY(0.35f, 0.5f);
-        });
-        oldPlace3.transform.DOMoveY(-10, 0.5f).OnComplete(() =>
-        {
-            place3.DOMoveY(0, 0.5f);
-            peasant3.DOMoveY(0.35f, 0.5f);
-        });
+        
+            place1.DOMoveY(0, 1f).Play();
+            peasant1.DOMoveY(0.32f, 1f).Play();
+        
+        
+            place2.DOMoveY(0, 1f).Play();
+            peasant2.DOMoveY(0.32f, 1f).Play();
+        
+        
+            place3.DOMoveY(0, 1f).Play();
+            peasant3.DOMoveY(0.32f, 1f).Play();
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Fungus;
 using UnityEngine;
 
@@ -12,14 +13,20 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     private int income=0;
 
     public GameObject seed;
+    public GameObject seedPlace;
     public GameObject merchant;
+    public GameObject merchantPlace;
     public int limitTime;
     public GameObject costPanel;
     
     public override IEnumerator StepStart()
     {
-        seed.SetActive(true);
+        /*seed.SetActive(true);
         merchant.SetActive(true);
+        seed.transform.DOMoveY(0.32f, 0.5f).Play();
+        seedPlace.transform.DOMoveY(0, 0.5f).Play();
+        merchant.transform.DOMoveY(0.32f, 0.5f).Play();        
+        merchantPlace.transform.DOMoveY(0, 0.5f).Play();*/
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;

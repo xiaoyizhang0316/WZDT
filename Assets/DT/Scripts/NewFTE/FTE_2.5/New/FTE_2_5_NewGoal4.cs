@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,11 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
     public GameObject costPanel;
     public GameObject bornPoint;
     public GameObject dealer1;
+    public GameObject place1;
     public GameObject dealer2;
+    public GameObject place2;
     public GameObject dealer3;
+    public GameObject place3;
     public Transform tradeMgr;
     public Transform roles;
     private int currentCost;
@@ -25,6 +29,12 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         dealer1.SetActive(true);
         dealer2.SetActive(true);
         dealer3.SetActive(true);
+        dealer1.transform.DOMoveY(0.32f, 1f).Play();
+        place1.transform.DOMoveY(0f, 1f).Play();
+        dealer2.transform.DOMoveY(0.32f, 1f).Play();
+        place2.transform.DOMoveY(0f, 1f).Play();
+        dealer3.transform.DOMoveY(0.32f, 1f).Play();
+        place3.transform.DOMoveY(0f, 1f).Play();
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
         StartCoroutine( bornPoint.GetComponent<Building>().BornEnemyForFTE_2_5(-1));
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class FTE_2_5_NewGoal3 : BaseGuideStep
@@ -8,6 +9,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
     public int limitTime = 0;
     public GameObject costPanel;
     public GameObject qualityCenter;
+    public GameObject place;
     private int currentCost = 0;
     private int currentTimeCount;
     public override IEnumerator StepStart()
@@ -25,7 +27,9 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         CancelInvoke();
         yield return new WaitForSeconds(1f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
-        PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID);
+        place.transform.DOMoveY(-8.32f, 0.5f);
+        qualityCenter.transform.DOMoveY(-8f, 0.5f).Play().OnComplete(()=>PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID));
+        
         FTE_2_5_Manager.My.isClearGoods = true;
         DoEnd();
     }

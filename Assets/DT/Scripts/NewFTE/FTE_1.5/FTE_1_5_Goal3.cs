@@ -23,8 +23,8 @@ public class FTE_1_5_Goal3 : BaseGuideStep
         //emptyPlace.DOMoveY(-6, 0.5f).OnComplete(() =>
         //{
         peasant.gameObject.SetActive(true);
-            place.DOMoveY(0, 0.5f);
-            peasant.DOMoveY(0.3f, 0.5f);
+            place.DOMoveY(0, 1f).Play();
+            peasant.DOMoveY(0.32f, 1f).Play();
         //});
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);

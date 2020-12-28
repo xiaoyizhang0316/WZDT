@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class FTE_2_5_DialogADDDo : FTE_DialogDoBase
@@ -11,6 +12,10 @@ public class FTE_2_5_DialogADDDo : FTE_DialogDoBase
     public GameObject seed;
     public GameObject peasant;
     public GameObject merchant;
+
+    public GameObject place1;
+    public GameObject place2;
+    public GameObject place3;
 
     public Transform roles;
     public override void DoStart()
@@ -39,5 +44,12 @@ public class FTE_2_5_DialogADDDo : FTE_DialogDoBase
         seed.SetActive(true);
         peasant.SetActive(true);
         merchant.SetActive(true);
+
+        seed.transform.DOMoveY(0.32f, 1f).Play();
+        place1.transform.DOMoveY(0f, 1f).Play();
+        peasant.transform.DOMoveY(0.32f, 1f).Play();
+        place2.transform.DOMoveY(0f, 1f).Play();
+        merchant.transform.DOMoveY(0.32f, 1f).Play();
+        place3.transform.DOMoveY(0f, 1f).Play();
     }
 }
