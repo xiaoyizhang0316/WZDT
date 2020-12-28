@@ -58,6 +58,9 @@ public class OriginalData : MonoSingleton<OriginalData>
             ReadStageJson();
             ReadConsumerTypeJson();
             ReadRoleTemplateJson();
+            ReadEquipJson();
+            ReadWorkerJson();
+
         }
         else
         {
@@ -65,11 +68,12 @@ public class OriginalData : MonoSingleton<OriginalData>
             StartCoroutine(ReadConsumerType());
             StartCoroutine(ReadBuffData());
             StartCoroutine(ReadRoleTemplateData());
+            StartCoroutine(ReadEquipData());
+            StartCoroutine(ReadWorkerData());
         }
 
         ReadTranslateJson();
-        ReadEquipJson();
-        ReadWorkerJson();
+        
         GameDataMgr.My.Init();
     }
 
@@ -183,6 +187,26 @@ public class OriginalData : MonoSingleton<OriginalData>
         GameDataMgr.My.ParseEquipData(gearRawData);
     }
 
+    IEnumerator ReadEquipData()
+    {
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/EquipData.json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                gearRawData = JsonUtility.FromJson<GearsData>(json);
+                GameDataMgr.My.ParseEquipData(gearRawData);
+            }
+        }
+    }
+
     void ReadWorkerJson()
     {
         //WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/WorkerData.json");
@@ -203,6 +227,26 @@ public class OriginalData : MonoSingleton<OriginalData>
         //}
         workerRawData = JsonUtility.FromJson<WorkersData>(jsonDatas.WorkerData);
         GameDataMgr.My.ParseWorkerData(workerRawData);
+    }
+
+    IEnumerator ReadWorkerData()
+    {
+        WWW www = new WWW(@"file://" + Application.streamingAssetsPath + @"/Data/WorkerData.json");
+        yield return www;
+        if (www.isDone)
+        {
+            if (www.error != null)
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            else
+            {
+                string json = www.text.ToString();
+                workerRawData = JsonUtility.FromJson<WorkersData>(json);
+                GameDataMgr.My.ParseWorkerData(workerRawData);
+            }
+        }
     }
 
     public void ReadRoleTemplateJson()
