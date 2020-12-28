@@ -102,6 +102,32 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     }
 
     /// <summary>
+    /// 设置模板数据
+    /// </summary>
+    public void SetModuleData(RoleType roleType,int level , int cost ,int effect,int efficiency,int range,int costTech,
+    int riskResistance,int tradeCost,int upgradeCost
+    )
+    {
+        BaseRoleData data = new BaseRoleData();
+        foreach (RoleTemplateModelData r in roleTemplateModelDatas)
+        {
+            if (r.level == level && roleType.ToString().Equals(r.roleType.ToString()))
+            {
+                data =  r.tempRoleData;
+            }
+        }
+
+        data.cost = cost;
+        data.effect = effect;
+        data.efficiency = efficiency;
+        data.range = range;
+        data.costTech = costTech;
+        data.riskResistance = riskResistance;
+        data.tradeCost = tradeCost;
+        data.upgradeCost = upgradeCost; 
+    }
+
+    /// <summary>
     /// 根据ID获取装备
     /// </summary>
     /// <param name="id"></param>
