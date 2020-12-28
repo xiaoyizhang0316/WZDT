@@ -16,8 +16,8 @@ public class FTE_1_5_Goal7 : BaseGuideStep
         StageGoal.My.killNumber = 0;
         //missiondatas.data[1].content += "<color=red>\n上次的周期成本是" + goal1.finalCost + "</color>";
         MissionData missionData = new MissionData();
-        missionData.content="<color=red>\n上次的周期成本是" + FTE_1_5_Manager.My.goal1FinalCost + "</color>";
-        missionData.isFinish = true;
+        missionData.content="上次的周期成本是<color=red>" + FTE_1_5_Manager.My.goal1FinalCost + "</color>";
+        missionData.isFail = true;
         MissionManager.My.AddMission(missionData);
         Reset();
         //InvokeRepeating("CheckGoal",0, 0.2f);
@@ -33,7 +33,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return missiondatas.data[0].isFinish && missiondatas.data[1].isFinish;
+        return missiondatas.data[0].isFinish;
     }
 
     void CheckGoal()
