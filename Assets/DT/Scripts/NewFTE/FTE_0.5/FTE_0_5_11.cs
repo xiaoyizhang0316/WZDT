@@ -33,6 +33,8 @@ public class FTE_0_5_11 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+                                    role.OnMoved += ChangeColor;
+                                    role1.OnMoved += ChangeColor1;
         time = StageGoal.My.timeCount;
         role.warehouse.Clear();
         
@@ -44,7 +46,30 @@ public class FTE_0_5_11 : BaseGuideStep
         yield break;
     }
 
+    public void ChangeColor(ProductData data)
+    {
+        if (data.damage >targetdamege)
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC1_ran,FTE_0_5Manager.My.bg );
+        }
 
+        else
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC1_ran,FTE_0_5Manager.My.br ); 
+        }
+    }
+    public void ChangeColor1(ProductData data)
+    {
+        if (data.damage >targetdamege1)
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.sg );
+        }
+
+        else
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.sr ); 
+        }
+    }
     public override bool ChenkEnd()
     {
 
