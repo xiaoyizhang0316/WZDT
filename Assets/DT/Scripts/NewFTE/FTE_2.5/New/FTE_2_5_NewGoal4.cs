@@ -12,6 +12,8 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
     public GameObject dealer1;
     public GameObject dealer2;
     public GameObject dealer3;
+    public Transform tradeMgr;
+    public Transform roles;
     private int currentCost;
     private int currentTimeCount;
     public override IEnumerator StepStart()
@@ -33,21 +35,30 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
     {
         CancelInvoke();
         bornPoint.GetComponent<Building>().isBornForFTE_2_5 = false;
+        DoEnd();
         yield return new WaitForSeconds(1f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
-        DoEnd();
     }
 
     private void DoEnd()
     {
-        PlayerData.My.DeleteRole(dealer1.GetComponent<BaseMapRole>().baseRoleData.ID);
+        /*PlayerData.My.DeleteRole(dealer1.GetComponent<BaseMapRole>().baseRoleData.ID);
         PlayerData.My.DeleteRole(dealer2.GetComponent<BaseMapRole>().baseRoleData.ID);
-        PlayerData.My.DeleteRole(dealer3.GetComponent<BaseMapRole>().baseRoleData.ID);
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        PlayerData.My.DeleteRole(dealer3.GetComponent<BaseMapRole>().baseRoleData.ID);*/
+        foreach (Transform trade in tradeMgr)
         {
-            if (!PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().isNpc)
+            TradeManager.My.DeleteTrade(trade.GetComponent<TradeSign>().tradeData.ID);
+        }
+
+        foreach (Transform role in roles)
+        {
+            if (!role.GetComponent<BaseMapRole>().isNpc && role.gameObject.activeInHierarchy)
             {
-                PlayerData.My.DeleteRole(PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().baseRoleData.ID);
+                PlayerData.My.DeleteRole(role.GetComponent<BaseMapRole>().baseRoleData.ID);
+            }
+            else
+            {
+                role.GetComponent<BaseMapRole>().ClearWarehouse();
             }
         }
 
@@ -62,7 +73,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return missiondatas.data[0].isFinish && missiondatas.data[1].isFinish;
+        return missiondatas.data[0].isFinish ;
     }
 
     void CheckGoal()

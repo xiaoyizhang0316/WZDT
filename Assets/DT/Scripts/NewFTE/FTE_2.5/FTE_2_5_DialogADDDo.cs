@@ -11,6 +11,8 @@ public class FTE_2_5_DialogADDDo : FTE_DialogDoBase
     public GameObject seed;
     public GameObject peasant;
     public GameObject merchant;
+
+    public Transform roles;
     public override void DoStart()
     {
         soft.GetComponent<BaseMapRole>().encourageLevel = -3;
@@ -19,11 +21,15 @@ public class FTE_2_5_DialogADDDo : FTE_DialogDoBase
         crisp.GetComponent<BaseMapRole>().startEncourageLevel = -3;
         sweet.GetComponent<BaseMapRole>().encourageLevel = -3;
         sweet.GetComponent<BaseMapRole>().startEncourageLevel = -3;
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        foreach (Transform role in roles)
         {
-            if (!PlayerData.My.MapRole[i].isNpc)
+            if (!role.GetComponent<BaseMapRole>().isNpc && role.gameObject.activeInHierarchy)
             {
-                PlayerData.My.DeleteRole(PlayerData.My.MapRole[i].baseRoleData.ID);
+                PlayerData.My.DeleteRole(role.GetComponent<BaseMapRole>().baseRoleData.ID);
+            }
+            else
+            {
+                role.GetComponent<BaseMapRole>().ClearWarehouse();
             }
         }
     }

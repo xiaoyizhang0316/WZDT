@@ -68,7 +68,7 @@ public class FTE_2_5_Goal3_1 : BaseGuideStep
         if (missiondatas.data[1].isFinish == false)
         {
             CheckSeed(peasant2, 304);
-            missiondatas.data[1].currentNum = sweetCount;
+            missiondatas.data[1].currentNum = crispCount;
             if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
             {
                 missiondatas.data[1].isFinish = true;
@@ -78,7 +78,7 @@ public class FTE_2_5_Goal3_1 : BaseGuideStep
         if (missiondatas.data[2].isFinish == false)
         {
             CheckSeed(peasant3, 303);
-            missiondatas.data[2].currentNum = sweetCount;
+            missiondatas.data[2].currentNum = softCount;
             if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
             {
                 missiondatas.data[2].isFinish = true;

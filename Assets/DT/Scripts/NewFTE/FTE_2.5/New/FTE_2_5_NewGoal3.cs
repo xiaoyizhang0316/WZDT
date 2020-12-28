@@ -40,7 +40,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return missiondatas.data[0].isFinish && missiondatas.data[1].isFinish;
+        return missiondatas.data[0].isFinish ;
     }
 
     void CheckGoal()

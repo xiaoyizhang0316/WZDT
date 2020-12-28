@@ -19,7 +19,7 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
         FTE_2_5_Manager.My.isClearGoods = true;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
-            PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
+            PlayerData.My.MapRole[i].ClearWarehouse();
         }
         FTE_2_5_Manager.My.isClearGoods = false; 
         NewCanvasUI.My.GameNormal();
