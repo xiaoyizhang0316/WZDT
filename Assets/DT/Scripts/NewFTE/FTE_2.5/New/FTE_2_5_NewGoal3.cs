@@ -31,12 +31,12 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
     {
         CancelInvoke();
         qualityCenter.GetComponent<QualityRole>().needCheck = false;
-        yield return new WaitForSeconds(1f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
         //place.transform.DOMoveY(-8.32f, 0.5f);
         qualityCenter.transform.DOMoveY(-8f, 0.5f).Play().OnComplete(()=>PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID));
-        
+
         FTE_2_5_Manager.My.isClearGoods = true;
+        yield return new WaitForSeconds(1f);
         DoEnd();
     }
 
