@@ -156,16 +156,17 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public void InitTalentPanel(string talentStr)
     {
-        if (talentStr == null || talentStr.Length != 6)
-        {
-            Debug.LogWarning("--------复盘天赋读取错误！");
-            talentStr = "000000";
-        }
-        if (NetworkMgr.My.levelProgressList.Count < 4)
-        {
-            talentPanel.DOScale(0f, 0f).Play();
+        //if (talentStr == null || talentStr.Length != 6)
+        //{
+        //    Debug.LogWarning("--------复盘天赋读取错误！");
+        //    talentStr = "000000";
+        //}
+        //if (NetworkMgr.My.levelProgressList.Count < 4)
+        //{
+        talentPanel.gameObject.SetActive(false);
+            //talentPanel.DOScale(0f, 0f).Play();
             return;
-        }
+        //}
         Text[] list = talentPanel.GetComponentsInChildren<Text>();
         char[] charList = talentStr.ToCharArray();
         for (int i = 0; i < 6; i++)

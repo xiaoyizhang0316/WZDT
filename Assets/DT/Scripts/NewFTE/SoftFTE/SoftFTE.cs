@@ -92,7 +92,6 @@ public class SoftFTE : MonoSingleton<SoftFTE>
     /// <param name="type"></param>
     public void CheckUnlockNewRole(RoleType type)
     {
-        print("type: " +type);
         if (NetworkMgr.My.roleFoundDic.ContainsKey(type))
         {
             print("find type: " + type);
