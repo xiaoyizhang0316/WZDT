@@ -23,6 +23,7 @@ public class FTE_0_5_15 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        StageGoal.My.killNumber = 0;
         InvokeRepeating("Addxiaofei",1,time);
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
@@ -70,8 +71,8 @@ public class FTE_0_5_15 : BaseGuideStep
         {
             missiondatas.data[0].isFinish = true;
         }
-
-        if (StageGoal.My.killNumber > missiondatas.data[1].maxNum)
+        missiondatas.data[1].currentNum = StageGoal.My.killNumber;
+        if (StageGoal.My.killNumber >= missiondatas.data[1].maxNum)
         {
             missiondatas.data[1].isFinish = true;
         }
