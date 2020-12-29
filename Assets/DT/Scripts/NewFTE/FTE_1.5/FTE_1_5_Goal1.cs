@@ -16,6 +16,7 @@ public class FTE_1_5_Goal1 : BaseGuideStep
     {
         InvokeRepeating("CheckGoal", 0, 0.5f);
         currentTime = StageGoal.My.timeCount;
+        NewCanvasUI.My.GamePause(false);
         costPanel.GetComponent<CostPanel>().InitCostPanel(0,currentTime);
         yield return new WaitForSeconds(0.5f);
     }
