@@ -256,7 +256,7 @@ public class Building : MonoBehaviour
         }
     }
     
-    public IEnumerator BornEnemyForFTE_2_5_1(int buffnum, int count)
+    public IEnumerator BornEnemyForFTE_2_5_1(int type, int count)
     {
         ConsumerType ct;
         //isBornForFTE_2_5 = true;
@@ -270,7 +270,7 @@ public class Building : MonoBehaviour
             for (int i = 0; i < count; i++)
             {
                 yield return new WaitForSeconds(0.7f);
-                ct = (ConsumerType)(UnityEngine.Random.Range(0, 2)==1?1:8);
+                ct = (ConsumerType)type;
                 string path = "Prefabs/Consumer/" + ct.ToString();
                 GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
                 go.GetComponent<ConsumeSign>().Init(consumerPathList);
@@ -278,14 +278,14 @@ public class Building : MonoBehaviour
                 go.transform.position = transform.position;
                 go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
             
-                if (buffnum != -1)
+                /*if (buffnum != -1)
                 {
                     BuffData buff = GameDataMgr.My.GetBuffDataByID(buffnum);
                     BaseBuff baseBuff = new BaseBuff();
                     baseBuff.Init(buff);
                     baseBuff.SetConsumerBuff(go.GetComponent<ConsumeSign>());
                     go.GetComponent<ConsumeSign>().bornBuffList.Add(buffnum);
-                }
+                }*/
             
                 float waitTime = 0.35f;
                 Tweener twe = transform.DOScale(1f, waitTime);

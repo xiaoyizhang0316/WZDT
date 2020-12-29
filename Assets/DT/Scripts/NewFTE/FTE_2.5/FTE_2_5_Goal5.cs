@@ -65,17 +65,17 @@ public class FTE_2_5_Goal5 : BaseGuideStep
 
     void BornPackage()
     {
-        StartCoroutine(bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5_1(302, 12));
+        StartCoroutine(bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5_1(27, 12));
         InvokeRepeating("CheckPackage", 2f, 0.5f);
     }
     void BornSale()
     {
-        StartCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5_1(301, 12));
+        StartCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5_1(28, 12));
         InvokeRepeating("CheckSale", 2f, 0.5f);
     }
     void BornNoLike()
     {
-        StartCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5_1(-1, 12));
+        StartCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5_1(29, 12));
         InvokeRepeating("CheckNolike", 2f, 0.5f);
     }
 
