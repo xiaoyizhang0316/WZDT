@@ -14,7 +14,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     public List<GameObject> factorys;
     public List<GameObject> places;
 
-    public GameObject endPanel;
+    //public GameObject endPanel;
 
     private List<BaseMapRole> dealers;
     public override IEnumerator StepStart()
@@ -25,7 +25,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         FTE_2_5_Manager.My.packageKillNum = 0;
         FTE_2_5_Manager.My.saleKillNum = 0;
         FTE_2_5_Manager.My.nolikeKillNum = 0;
-        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = false;
         /*bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5(302);
         bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5(301);
         bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5(-1);*/
@@ -70,12 +70,12 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        endPanel.GetComponent<Button>().onClick.AddListener(() =>
+        /*endPanel.GetComponent<Button>().onClick.AddListener(() =>
         {
             NetworkMgr.My.UpdatePlayerFTE("2.5", ()=>SceneManager.LoadScene("Map"));
-        });
+        });*/
         yield return new WaitForSeconds(1f);
-        endPanel.SetActive(true);
+        //endPanel.SetActive(true);
     }
 
     public override bool ChenkEnd()
