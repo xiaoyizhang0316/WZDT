@@ -165,6 +165,7 @@ public class LevelSign : MonoBehaviour
         {
             currentStar = "0" + currentStar;
         }
+        Debug.Log(currentStar);
         stars = currentStar;
 
         if (NetworkMgr.My.levelProgressList.Count >= 4 && NetworkMgr.My.playerDatas.threeWordsProgress == 1)

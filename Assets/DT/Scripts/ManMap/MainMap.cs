@@ -186,6 +186,7 @@ public class MainMap : MonoBehaviour
             NetworkMgr.My.GetLevelProgress(() => {
                 threeWords.gameObject.SetActive(true);
                 InitLevel();
+                //InitNewLevel();
             }, () => {
                 if (NetworkMgr.My.playerDatas.fteProgress > 1)
                 {
@@ -196,6 +197,7 @@ public class MainMap : MonoBehaviour
                 {
                     threeWords.gameObject.SetActive(true);
                     InitLevel();
+                    //InitNewLevel();
                 }
             });
         }
@@ -203,6 +205,7 @@ public class MainMap : MonoBehaviour
         {
             threeWords.gameObject.SetActive(true);
             InitLevel();
+            //InitNewLevel();
         }
     }
 
@@ -233,6 +236,25 @@ public class MainMap : MonoBehaviour
         //TalentPanel.My.Init();
     }
 
+    void InitNewLevel()
+    {
+        string fte = GetFTEProgress();
+        foreach(var ls in levelSigns)
+        {
+            //int level = int.Parse( ls.loadScene.Split('_')[1]);
+            int level = ls.levelID;
+            if (level == 1)
+            {
+                ls.InitNewLevel(GetStar(level), "", fte);
+            }
+            else
+            {
+                ls.InitNewLevel(GetStar(level), GetStar(level - 1),fte);
+            }
+        }
+        GetGroupInfos();
+    }
+
     string GetFTEProgress()
     {
         string fte = "";
@@ -255,7 +277,7 @@ public class MainMap : MonoBehaviour
                 break;
         }
 
-        if (float.Parse(NetworkMgr.My.playerDatas.fte) < float.Parse(fte))
+        if (float.Parse(NetworkMgr.My.playerDatas.fte.Equals("")?"0":NetworkMgr.My.playerDatas.fte) < float.Parse(fte))
         {
             NetworkMgr.My.UpdatePlayerFTE(fte);
         }
@@ -271,13 +293,55 @@ public class MainMap : MonoBehaviour
 
     void InitFTELevel(string fte)
     {
+        SetTeachLevelStatus(teachLevels[0], false);
         switch (fte)
         {
            case "0":
-               teachLevels[0].SetActive(true);
-               teachLevels[1].SetActive(true);
-               teachLevels[2].SetActive(true);
+               SetTeachLevelStatus(teachLevels[1], true);
+               SetTeachLevelStatus(teachLevels[2], true);
                break;
+           case "0.5":
+               if (NetworkMgr.My.levelProgressList.Count == 1)
+               {
+                   SetTeachLevelStatus(teachLevels[1], false);
+               }
+               else
+               {
+                   SetTeachLevelStatus(teachLevels[1], true);
+               }
+               SetTeachLevelStatus(teachLevels[2], true);
+               break;
+           case "1.5":
+               SetTeachLevelStatus(teachLevels[1], false);
+               if (NetworkMgr.My.levelProgressList.Count == 2)
+               {
+                   SetTeachLevelStatus(teachLevels[2], false);
+               }
+               else
+               {
+                   SetTeachLevelStatus(teachLevels[2], true);
+               }
+               break;
+           case "2.5":
+               SetTeachLevelStatus(teachLevels[1], false);
+               SetTeachLevelStatus(teachLevels[2], false);
+               break;
+        }
+    }
+
+    void SetTeachLevelStatus(GameObject level, bool isLock)
+    {
+        if (isLock)
+        {
+            level.GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
+            level.GetComponent<ToScene>().enabled = false;
+            level.GetComponent<Button>().enabled = false;
+        }
+        else
+        {
+            level.GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+            level.GetComponent<ToScene>().enabled = true;
+            level.GetComponent<Button>().enabled = true;
         }
     }
 
