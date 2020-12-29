@@ -27,7 +27,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         BornPackage();
         BornSale();
         BornNoLike();
-        InvokeRepeating("CheckGoal", 1f, 0.1f);
+        //InvokeRepeating("CheckGoal", 2f, 0.5f);
         InvokeRepeating("CheckBuffOut", 3, 30);
         yield return new WaitForSeconds(0.5f);
     }
@@ -35,14 +35,17 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     void BornPackage()
     {
         StartCoroutine(bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5_1(302, 12));
+        InvokeRepeating("CheckPackage", 2f, 0.5f);
     }
     void BornSale()
     {
         StartCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5_1(301, 12));
+        InvokeRepeating("CheckSale", 2f, 0.5f);
     }
     void BornNoLike()
     {
         StartCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5_1(-1, 12));
+        InvokeRepeating("CheckNolike", 2f, 0.5f);
     }
 
     public override IEnumerator StepEnd()
@@ -58,10 +61,10 @@ public class FTE_2_5_Goal5 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return missiondatas.data[0].isFinish&&missiondatas.data[1].isFinish&&missiondatas.data[2].isFinish&&missiondatas.data[3].isFinish;
+        return missiondatas.data[0].isFinish&&missiondatas.data[1].isFinish&&missiondatas.data[2].isFinish;
     }
 
-    void CheckGoal()
+    void CheckPackage()
     {
         if (missiondatas.data[0].isFinish == false)
         {
@@ -74,13 +77,17 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             {
                 if (!CheckHasConsume(bornPoint1.transform))
                 {
+                    CancelInvoke("CheckPackage");
                     FTE_2_5_Manager.My.packageKillNum = 0;
                     missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
                     BornPackage();
                 }
             }
         }
-        
+    }
+
+    void CheckSale()
+    {
         if (missiondatas.data[1].isFinish == false)
         {
             missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
@@ -92,13 +99,17 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             {
                 if (!CheckHasConsume(bornPoint2.transform))
                 {
+                    CancelInvoke("CheckSale");
                     FTE_2_5_Manager.My.saleKillNum = 0;
                     missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
                     BornSale();
                 }
             }
         }
-        
+    }
+
+    void CheckNolike()
+    {
         if (missiondatas.data[2].isFinish == false)
         {
             missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;
@@ -110,6 +121,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             {
                 if (!CheckHasConsume(bornPoint3.transform))
                 {
+                    CancelInvoke("CheckNolike");
                     FTE_2_5_Manager.My.nolikeKillNum = 0;
                     missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;
                     BornNoLike();
@@ -120,12 +132,9 @@ public class FTE_2_5_Goal5 : BaseGuideStep
 
     bool CheckHasConsume(Transform point)
     {
-        foreach (Transform child in point)
+        if (point.childCount > 4)
         {
-            if (child.GetComponent<ConsumableSign>())
-            {
-                return true;
-            }
+            return true;
         }
 
         return false;

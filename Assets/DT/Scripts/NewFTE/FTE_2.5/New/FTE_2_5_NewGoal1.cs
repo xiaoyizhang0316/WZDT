@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class FTE_2_5_NewGoal1 : BaseGuideStep
@@ -7,6 +8,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
     public int costLimit;
     public int limitTime = 40;
     public GameObject qualityCenter;
+    public GameObject place;
     public GameObject costPanel;
     public GameObject openCG;
 
@@ -15,6 +17,10 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
     {
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
+        qualityCenter.SetActive(true);
+        qualityCenter.transform.DOMoveY(0.32f, 1f);
+        qualityCenter.GetComponent<QualityRole>().needCheck = false;
+        //place.transform.DOMoveY(0f, 1f);
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         costPanel.GetComponent<CostPanel>().InitCostPanel(0,0);
         isEnd = false;
