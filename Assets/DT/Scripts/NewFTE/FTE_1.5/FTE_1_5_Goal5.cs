@@ -14,7 +14,7 @@ public class FTE_1_5_Goal5 : BaseGuideStep
     {
         //fruitQT.SetActive(false);
         PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
-        Destroy(place);
+        //Destroy(place);
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
         costImage.GetComponent<CostPanel>().InitCostPanel(currentCost, StageGoal.My.timeCount);

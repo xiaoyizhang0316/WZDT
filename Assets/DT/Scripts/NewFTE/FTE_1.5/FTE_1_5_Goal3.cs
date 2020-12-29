@@ -9,7 +9,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     //public Transform emptyPlace;
     public int costLimit;
     public int limitTime = 0;
-    public Transform place;
+    public int needQuality = 0;
     public Transform peasant;
     public GameObject costPanel;
     //public GameObject statPanel;
@@ -23,8 +23,10 @@ public class FTE_1_5_Goal3 : BaseGuideStep
         //emptyPlace.DOMoveY(-6, 0.5f).OnComplete(() =>
         //{
         peasant.gameObject.SetActive(true);
-            place.DOMoveY(0, 1f).Play();
             peasant.DOMoveY(0.32f, 1f).Play();
+            peasant.GetComponent<QualityRole>().checkQuality = needQuality;
+            peasant.GetComponent<QualityRole>().checkBuff = -1;
+            peasant.GetComponent<QualityRole>().needCheck = true;
         //});
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
@@ -33,6 +35,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        peasant.GetComponent<QualityRole>().needCheck = false;
         yield return new WaitForSeconds(2f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
     }
@@ -63,9 +66,13 @@ public class FTE_1_5_Goal3 : BaseGuideStep
             return;
         }
         
-        if (missiondatas.data[0].isFinish == false && CheckBullet())
+        if (missiondatas.data[0].isFinish == false )
         {
-            missiondatas.data[0].isFinish = true;
+            missiondatas.data[0].currentNum = peasant.GetComponent<BaseMapRole>().warehouse.Count;
+            if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
+            {
+                missiondatas.data[0].isFinish = true;
+            }
         }
 
         

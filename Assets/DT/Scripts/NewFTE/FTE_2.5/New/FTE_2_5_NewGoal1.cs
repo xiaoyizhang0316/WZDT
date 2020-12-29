@@ -19,7 +19,8 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         PlayerData.My.playerWorkers.Clear();
         qualityCenter.SetActive(true);
         qualityCenter.transform.DOMoveY(0.32f, 1f);
-        place.transform.DOMoveY(0f, 1f);
+        qualityCenter.GetComponent<QualityRole>().needCheck = false;
+        //place.transform.DOMoveY(0f, 1f);
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         costPanel.GetComponent<CostPanel>().InitCostPanel(0,0);
         isEnd = false;
