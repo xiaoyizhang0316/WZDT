@@ -30,23 +30,23 @@ public class FTE_2_5_DialogADDDo : FTE_DialogDoBase
         sweet.GetComponent<BaseMapRole>().encourageLevel = -3;
         sweet.GetComponent<BaseMapRole>().startEncourageLevel = -3;
 
-        sweet.transform.DOMoveY(-8, 1f).OnComplete(() =>
+        sweet.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
         {
             sweet.SetActive(false);
         });
-        sweetPlace.transform.DOMoveY(-8.32f, 1f);
+        sweetPlace.transform.DOMoveY(-8.32f, 1f).Play();
         
-        soft.transform.DOMoveY(-8, 1f).OnComplete(() =>
+        soft.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
         {
             soft.SetActive(false);
         });
-        softPlace.transform.DOMoveY(-8.32f, 1f);
+        softPlace.transform.DOMoveY(-8.32f, 1f).Play();
         
-        crisp.transform.DOMoveY(-8, 1f).OnComplete(() =>
+        crisp.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
         {
             crisp.SetActive(false);
         });
-        crispPlace.transform.DOMoveY(-8.32f, 1f);
+        crispPlace.transform.DOMoveY(-8.32f, 1f).Play();
         
         foreach (Transform role in roles)
         {

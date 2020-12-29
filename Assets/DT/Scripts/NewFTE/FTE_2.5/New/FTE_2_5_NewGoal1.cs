@@ -19,6 +19,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
         RoleSet();
+        NewCanvasUI.My.GamePause(false);
         qualityCenter.SetActive(true);
         qualityCenter.transform.DOMoveY(0.32f, 1f);
         qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
