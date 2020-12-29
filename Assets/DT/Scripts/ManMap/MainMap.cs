@@ -14,6 +14,8 @@ public class MainMap : MonoBehaviour
     public Transform threeWords;
 
     public Text userLevelText;
+
+    public List<GameObject> teachLevels;
     
 
     // Start is called before the first frame update
@@ -269,7 +271,14 @@ public class MainMap : MonoBehaviour
 
     void InitFTELevel(string fte)
     {
-        
+        switch (fte)
+        {
+           case "0":
+               teachLevels[0].SetActive(true);
+               teachLevels[1].SetActive(true);
+               teachLevels[2].SetActive(true);
+               break;
+        }
     }
 
     string GetStar(int level)
