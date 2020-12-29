@@ -943,7 +943,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 try
                 {
                     levelProgresses = JsonUtility.FromJson<LevelProgresses>(response.data);
-                    //Debug.LogWarning(levelProgresses.levelProgresses.Count+"-------------------");
+                    Debug.LogWarning(levelProgresses.levelProgresses.Count+"-------------------");
                     levelProgressList.Clear();
                     foreach (var lp in levelProgresses.levelProgresses)
                     {
