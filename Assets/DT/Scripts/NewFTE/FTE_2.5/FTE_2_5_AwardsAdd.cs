@@ -8,6 +8,8 @@ public class FTE_2_5_AwardsAdd : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
+        PlayerData.My.playerGears.Clear();
+        PlayerData.My.playerWorkers.Clear();
         PlayerData.My.GetNewGear(90013);
         PlayerData.My.GetNewGear(90014);
         PlayerData.My.GetNewGear(90015);

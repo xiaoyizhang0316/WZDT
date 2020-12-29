@@ -12,22 +12,23 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
     public GameObject place;
     public GameObject costPanel;
     public GameObject openCG;
+    private int currentTime = 0;
 
     public bool isEnd;
     public override IEnumerator StepStart()
     {
-        PlayerData.My.playerGears.Clear();
-        PlayerData.My.playerWorkers.Clear();
+        StageGoal.My.maxRoleLevel = 1;
         RoleSet();
         NewCanvasUI.My.GamePause(false);
+        currentTime = StageGoal.My.timeCount;
         qualityCenter.SetActive(true);
-        qualityCenter.transform.DOMoveY(0.32f, 1f);
+        qualityCenter.transform.DOMoveY(0.32f, 1f).Play();
         qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
         qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
         qualityCenter.GetComponent<QualityRole>().needCheck = true;
         //place.transform.DOMoveY(0f, 1f);
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
-        costPanel.GetComponent<CostPanel>().InitCostPanel(0,0);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(0,currentTime);
         isEnd = false;
         yield return new WaitForSeconds(0.5f);
     }
@@ -58,7 +59,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
 
     void CheckGoal()
     {
-        if (StageGoal.My.timeCount >= limitTime)
+        if (StageGoal.My.timeCount -currentTime>= limitTime)
         {
             NewCanvasUI.My.GamePause(false);
 
