@@ -18,6 +18,11 @@ public class NPC : BaseNpc
 
     private void OnMouseOver()
     {
+        List<string> sceneList = new List<string>() { "FTE_0,5", "FTE_1.5", "FTE_2.5"};
+        if (sceneList.Contains(SceneManager.GetActiveScene().name))
+        {
+            return;
+        }
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (isCanSee)

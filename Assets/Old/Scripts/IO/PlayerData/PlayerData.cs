@@ -472,10 +472,10 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     public void ParsePlayerTalent(string str)
     {
         string[] talentList = str.Split('_');
-        if (talentList.Length != 7)
-        {
-            Debug.Log(str);
-            Debug.LogWarning("天赋读取错误！");
+        //if (talentList.Length != 7)
+        //{
+        //    Debug.Log(str);
+        //    Debug.LogWarning("天赋读取错误！");
             for (int i = 0; i < 6; i++)
             {
                 dingWei[i] = false;
@@ -504,46 +504,46 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             {
                 isOneFinish[i] = false;
             }
-        }
-        else
-        {
-            Debug.Log(str);
-            char[] temp = talentList[0].ToCharArray();
-            for (int i = 0; i < 6; i++)
-            {
-                dingWei[i] = temp[i].Equals('1');
-            }
-            temp = talentList[1].ToCharArray();
-            for (int i = 0; i < 6; i++)
-            {
-                guanJianZiYuanNengLi[i] = temp[i].Equals('1');
-            }
-            temp = talentList[2].ToCharArray();
-            for (int i = 0; i < 6; i++)
-            {
-                yeWuXiTong[i] = temp[i].Equals('1');
-            }
-            temp = talentList[3].ToCharArray();
-            for (int i = 0; i < 6; i++)
-            {
-                xianJinLiu[i] = temp[i].Equals('1');
-            }
-            temp = talentList[4].ToCharArray();
-            for (int i = 0; i < 6; i++)
-            {
-                yingLiMoShi[i] = temp[i].Equals('1');
-            }
-            temp = talentList[5].ToCharArray();
-            for (int i = 0; i < 6; i++)
-            {
-                qiYeJiaZhi[i] = temp[i].Equals('1');
-            }
-            temp = talentList[6].ToCharArray();
-            for (int i = 0; i < 6; i++)
-            {
-                isOneFinish[i] = temp[i].Equals('1');
-            }
-        }    
+       // }
+        //else
+        //{
+        //    Debug.Log(str);
+        //    char[] temp = talentList[0].ToCharArray();
+        //    for (int i = 0; i < 6; i++)
+        //    {
+        //        dingWei[i] = temp[i].Equals('1');
+        //    }
+        //    temp = talentList[1].ToCharArray();
+        //    for (int i = 0; i < 6; i++)
+        //    {
+        //        guanJianZiYuanNengLi[i] = temp[i].Equals('1');
+        //    }
+        //    temp = talentList[2].ToCharArray();
+        //    for (int i = 0; i < 6; i++)
+        //    {
+        //        yeWuXiTong[i] = temp[i].Equals('1');
+        //    }
+        //    temp = talentList[3].ToCharArray();
+        //    for (int i = 0; i < 6; i++)
+        //    {
+        //        xianJinLiu[i] = temp[i].Equals('1');
+        //    }
+        //    temp = talentList[4].ToCharArray();
+        //    for (int i = 0; i < 6; i++)
+        //    {
+        //        yingLiMoShi[i] = temp[i].Equals('1');
+        //    }
+        //    temp = talentList[5].ToCharArray();
+        //    for (int i = 0; i < 6; i++)
+        //    {
+        //        qiYeJiaZhi[i] = temp[i].Equals('1');
+        //    }
+        //    temp = talentList[6].ToCharArray();
+        //    for (int i = 0; i < 6; i++)
+        //    {
+        //        isOneFinish[i] = temp[i].Equals('1');
+        //    }
+        //}    
     }
 
     /// <summary>
