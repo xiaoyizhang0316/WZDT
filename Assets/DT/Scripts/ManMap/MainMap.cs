@@ -185,8 +185,8 @@ public class MainMap : MonoBehaviour
         {
             NetworkMgr.My.GetLevelProgress(() => {
                 threeWords.gameObject.SetActive(true);
-                InitLevel();
-                //InitNewLevel();
+                //InitLevel();
+                InitNewLevel();
             }, () => {
                 if (NetworkMgr.My.playerDatas.fteProgress > 1)
                 {
@@ -196,16 +196,16 @@ public class MainMap : MonoBehaviour
                 else
                 {
                     threeWords.gameObject.SetActive(true);
-                    InitLevel();
-                    //InitNewLevel();
+                    //InitLevel();
+                    InitNewLevel();
                 }
             });
         }
         else
         {
             threeWords.gameObject.SetActive(true);
-            InitLevel();
-            //InitNewLevel();
+            //InitLevel();
+            InitNewLevel();
         }
     }
 

@@ -18,7 +18,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         StageGoal.My.maxRoleLevel = 1;
-        RoleSet();
+        //RoleSet();
         NewCanvasUI.My.GamePause(false);
         currentTime = StageGoal.My.timeCount;
         qualityCenter.SetActive(true);
