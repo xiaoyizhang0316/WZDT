@@ -20,6 +20,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     private int softCount = 0;
     public override IEnumerator StepStart()
     {
+        NewCanvasUI.My.GameNormal();
         peasant1.gameObject.SetActive(true);
         peasant2.gameObject.SetActive(true);
         peasant3.gameObject.SetActive(true);
