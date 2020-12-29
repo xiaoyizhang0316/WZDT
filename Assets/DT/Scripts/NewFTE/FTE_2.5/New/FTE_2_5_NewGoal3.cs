@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FTE_2_5_NewGoal3 : BaseGuideStep
 {
+    public int needQuality;
     public int costLimit;
     public int limitTime = 0;
     public GameObject costPanel;
@@ -16,6 +17,9 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
     {
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
+        qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
+        qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
+        qualityCenter.GetComponent<QualityRole>().needCheck = true;
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
         NewCanvasUI.My.GameNormal();
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
@@ -25,9 +29,10 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        qualityCenter.GetComponent<QualityRole>().needCheck = false;
         yield return new WaitForSeconds(1f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
-        place.transform.DOMoveY(-8.32f, 0.5f);
+        //place.transform.DOMoveY(-8.32f, 0.5f);
         qualityCenter.transform.DOMoveY(-8f, 0.5f).Play().OnComplete(()=>PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID));
         
         FTE_2_5_Manager.My.isClearGoods = true;

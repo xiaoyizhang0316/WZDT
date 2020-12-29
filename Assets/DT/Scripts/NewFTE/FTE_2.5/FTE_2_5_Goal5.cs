@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,11 +11,15 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     public GameObject bornPoint2;
     public GameObject bornPoint3;
 
+    public List<GameObject> factorys;
+    public List<GameObject> places;
+
     public GameObject endPanel;
 
     private List<BaseMapRole> dealers;
     public override IEnumerator StepStart()
     {
+        FactoryUp();
         FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GameNormal();
         FTE_2_5_Manager.My.packageKillNum = 0;
@@ -30,6 +35,20 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         //InvokeRepeating("CheckGoal", 2f, 0.5f);
         InvokeRepeating("CheckBuffOut", 3, 30);
         yield return new WaitForSeconds(0.5f);
+    }
+
+    void FactoryUp()
+    {
+        for (int i = 0; i < factorys.Count; i++)
+        {
+            factorys[i].SetActive(true);
+            factorys[i].transform.DOMoveY(0.32f, 1f);
+        }
+
+        for (int i = 0; i < places.Count; i++)
+        {
+            places[i].transform.DOMoveY(0, 1);
+        }
     }
 
     void BornPackage()

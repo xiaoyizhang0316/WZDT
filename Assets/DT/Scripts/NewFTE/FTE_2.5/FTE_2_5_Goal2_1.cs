@@ -30,9 +30,18 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        PlayerData.My.DeleteRole(peasant1.GetComponent<BaseMapRole>().baseRoleData.ID);
-        PlayerData.My.DeleteRole(peasant2.GetComponent<BaseMapRole>().baseRoleData.ID);
-        PlayerData.My.DeleteRole(peasant3.GetComponent<BaseMapRole>().baseRoleData.ID);
+        peasant1.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+        {
+            PlayerData.My.DeleteRole(peasant1.GetComponent<BaseMapRole>().baseRoleData.ID);
+        });
+        peasant2.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+        {
+            PlayerData.My.DeleteRole(peasant2.GetComponent<BaseMapRole>().baseRoleData.ID);
+        });
+        peasant3.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+        {
+            PlayerData.My.DeleteRole(peasant3.GetComponent<BaseMapRole>().baseRoleData.ID);
+        });
         yield return new WaitForSeconds(2f);
     }
 
