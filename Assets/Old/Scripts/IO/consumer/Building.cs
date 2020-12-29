@@ -233,7 +233,7 @@ public class Building : MonoBehaviour
         while (isBornForFTE_2_5)
         {
             yield return new WaitForSeconds(0.7f);
-            ct = (ConsumerType)(UnityEngine.Random.Range(0, 2)==1?1:8);
+            ct = (ConsumerType)26;
             string path = "Prefabs/Consumer/" + ct.ToString();
             GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
             go.GetComponent<ConsumeSign>().Init(consumerPathList);
