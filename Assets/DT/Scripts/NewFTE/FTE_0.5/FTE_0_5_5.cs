@@ -24,6 +24,7 @@ public class FTE_0_5_5 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        NewCanvasUI.My.Panel_Update.GetComponent<ProductDetalUI>().panel.SetActive(false);
         NewCanvasUI.My.Panel_Update.SetActive(false);
         dailog.SetActive(true);
 

@@ -25,6 +25,14 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
     public Renderer dealerJC1_ran;
     public Renderer dealerJC2_ran;
 
+    public void Update()
+    {
+        if (StageGoal.My.playerGold <= 100)
+        {
+            StageGoal.My.playerGold = 1000000;
+        }
+    }
+
     public void Start()
     {
         seerJC1.SetActive(false);
@@ -36,7 +44,7 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
     public void UpRole(GameObject role)
     {
         role.SetActive(true);
-        role.transform.DOLocalMoveY(0,0.5f).Play();
+        role.transform.DOLocalMoveY(1,1).Play();
         
     }
 
@@ -44,7 +52,7 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
     {
         role.SetActive(false);
 
-        role.transform.DOLocalMoveY(-5,0.5f).Play();
+        role.transform.DOLocalMoveY(-5,1).Play();
         
     }
 
