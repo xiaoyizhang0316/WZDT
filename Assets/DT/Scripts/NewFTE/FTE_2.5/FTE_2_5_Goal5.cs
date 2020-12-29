@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,17 +11,21 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     public GameObject bornPoint2;
     public GameObject bornPoint3;
 
-    public GameObject endPanel;
+    public List<GameObject> factorys;
+    public List<GameObject> places;
+
+    //public GameObject endPanel;
 
     private List<BaseMapRole> dealers;
     public override IEnumerator StepStart()
     {
+        FactoryUp();
         FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GameNormal();
         FTE_2_5_Manager.My.packageKillNum = 0;
         FTE_2_5_Manager.My.saleKillNum = 0;
         FTE_2_5_Manager.My.nolikeKillNum = 0;
-        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = false;
         /*bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5(302);
         bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5(301);
         bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5(-1);*/
@@ -30,6 +35,20 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         //InvokeRepeating("CheckGoal", 2f, 0.5f);
         InvokeRepeating("CheckBuffOut", 3, 30);
         yield return new WaitForSeconds(0.5f);
+    }
+
+    void FactoryUp()
+    {
+        for (int i = 0; i < factorys.Count; i++)
+        {
+            factorys[i].SetActive(true);
+            factorys[i].transform.DOMoveY(0.32f, 1f).Play();
+        }
+
+        for (int i = 0; i < places.Count; i++)
+        {
+            places[i].transform.DOMoveY(0, 1).Play();
+        }
     }
 
     void BornPackage()
@@ -51,12 +70,12 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        endPanel.GetComponent<Button>().onClick.AddListener(() =>
+        /*endPanel.GetComponent<Button>().onClick.AddListener(() =>
         {
             NetworkMgr.My.UpdatePlayerFTE("2.5", ()=>SceneManager.LoadScene("Map"));
-        });
+        });*/
         yield return new WaitForSeconds(1f);
-        endPanel.SetActive(true);
+        //endPanel.SetActive(true);
     }
 
     public override bool ChenkEnd()

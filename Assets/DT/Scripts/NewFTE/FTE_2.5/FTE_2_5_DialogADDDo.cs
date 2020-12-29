@@ -8,6 +8,9 @@ public class FTE_2_5_DialogADDDo : FTE_DialogDoBase
     public GameObject soft;
     public GameObject crisp;
     public GameObject sweet;
+    public GameObject softPlace;
+    public GameObject crispPlace;
+    public GameObject sweetPlace;
 
     public GameObject seed;
     public GameObject peasant;
@@ -26,6 +29,25 @@ public class FTE_2_5_DialogADDDo : FTE_DialogDoBase
         crisp.GetComponent<BaseMapRole>().startEncourageLevel = -3;
         sweet.GetComponent<BaseMapRole>().encourageLevel = -3;
         sweet.GetComponent<BaseMapRole>().startEncourageLevel = -3;
+
+        sweet.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+        {
+            sweet.SetActive(false);
+        });
+        sweetPlace.transform.DOMoveY(-8.32f, 1f).Play();
+        
+        soft.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+        {
+            soft.SetActive(false);
+        });
+        softPlace.transform.DOMoveY(-8.32f, 1f).Play();
+        
+        crisp.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+        {
+            crisp.SetActive(false);
+        });
+        crispPlace.transform.DOMoveY(-8.32f, 1f).Play();
+        
         foreach (Transform role in roles)
         {
             if (!role.GetComponent<BaseMapRole>().isNpc && role.gameObject.activeInHierarchy)

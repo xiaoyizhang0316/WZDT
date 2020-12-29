@@ -26,6 +26,9 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         StageGoal.My.killNumber = 0;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = true;
+        
         dealer1.SetActive(true);
         dealer2.SetActive(true);
         dealer3.SetActive(true);
