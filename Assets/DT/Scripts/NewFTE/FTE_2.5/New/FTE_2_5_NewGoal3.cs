@@ -17,6 +17,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
     {
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
+        NewCanvasUI.My.GamePause(false);
         qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
         qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
         qualityCenter.GetComponent<QualityRole>().needCheck = true;

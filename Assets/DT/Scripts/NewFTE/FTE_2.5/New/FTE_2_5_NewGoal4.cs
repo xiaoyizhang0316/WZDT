@@ -28,16 +28,16 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         currentTimeCount = StageGoal.My.timeCount;
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = true;
-        
+        NewCanvasUI.My.GamePause(false);
         dealer1.SetActive(true);
-        dealer2.SetActive(true);
-        dealer3.SetActive(true);
+        //dealer2.SetActive(true);
+        //dealer3.SetActive(true);
         dealer1.transform.DOMoveY(0.32f, 1f).Play();
         place1.transform.DOMoveY(0f, 1f).Play();
-        dealer2.transform.DOMoveY(0.32f, 1f).Play();
-        place2.transform.DOMoveY(0f, 1f).Play();
-        dealer3.transform.DOMoveY(0.32f, 1f).Play();
-        place3.transform.DOMoveY(0f, 1f).Play();
+        //dealer2.transform.DOMoveY(0.32f, 1f).Play();
+        //place2.transform.DOMoveY(0f, 1f).Play();
+        //dealer3.transform.DOMoveY(0.32f, 1f).Play();
+        //place3.transform.DOMoveY(0f, 1f).Play();
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
         StartCoroutine( bornPoint.GetComponent<Building>().BornEnemyForFTE_2_5(-1));
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);

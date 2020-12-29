@@ -12,6 +12,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
     public GameObject place;
     public GameObject costPanel;
     public GameObject openCG;
+    public Transform tradeMgr;
     private int currentTime = 0;
 
     public bool isEnd;
@@ -49,6 +50,11 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
+        }
+
+        foreach (Transform child in tradeMgr)
+        {
+            TradeManager.My.DeleteTrade(child.GetComponent<TradeSign>().tradeData.ID);
         }
     }
 
