@@ -61,7 +61,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return missiondatas.data[0].isFinish&&missiondatas.data[1].isFinish&&missiondatas.data[2].isFinish&&missiondatas.data[3].isFinish;
+        return missiondatas.data[0].isFinish&&missiondatas.data[1].isFinish&&missiondatas.data[2].isFinish;
     }
 
     void CheckPackage()
