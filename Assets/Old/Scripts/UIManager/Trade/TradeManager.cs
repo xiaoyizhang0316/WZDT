@@ -351,10 +351,14 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// </summary>
     public void ShowAllIcon()
     {
-        for (int i = 0; i < tradeList.Count; i++)
+        foreach (var item in tradeList)
         {
-            tradeList[i].icon.ShowIcon();
+            item.Value.icon.ShowIcon();
         }
+        //for (int i = 0; i < tradeList.Count; i++)
+       // {
+           // tradeList[i].icon.ShowIcon();
+       // }
     }
 
     /// <summary>
@@ -362,10 +366,14 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// </summary>
     public void HideAllIcon()
     {
-        for (int i = 0; i < tradeList.Count; i++)
+        foreach (var item in tradeList)
         {
-            tradeList[i].icon.HideIcon();
+            item.Value.icon.HideIcon();
         }
+       // for (int i = 0; i < tradeList.Count; i++)
+       // {
+            //tradeList[i].icon.HideIcon();
+       // }
     }
 
     private void OnDestroy()

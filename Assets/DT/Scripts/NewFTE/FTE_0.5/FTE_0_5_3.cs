@@ -14,7 +14,8 @@ public class FTE_0_5_3 : BaseGuideStep
     public override IEnumerator StepStart()
     {
       NewCanvasUI.My.GameNormal();
-    
+      maprole.OnMoved += ChangeColor;
+     FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.seerJC1);
       maprole.ringEffect.SetActive(true);
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
@@ -53,7 +54,20 @@ public class FTE_0_5_3 : BaseGuideStep
 
         }
 
+      
     }
 
- 
+
+    public void ChangeColor(ProductData data)
+    {
+        if (data.damage > 0)
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.seerJC1_ran,FTE_0_5Manager.My.sg );
+        }
+
+        else
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.seerJC1_ran,FTE_0_5Manager.My.sr ); 
+        }
+    }
 }
