@@ -12,6 +12,7 @@ public class FTE_1_5_Goal1 : BaseGuideStep
     public int limitTime;
     private int currentTime = 0;
     private bool fail;
+    public GameObject bornPoint;
     public override IEnumerator StepStart()
     {
         InvokeRepeating("CheckGoal", 0, 0.5f);
@@ -24,7 +25,7 @@ public class FTE_1_5_Goal1 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         tabPanel.SetActive(true);
-        GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().isBorn = false;
+        bornPoint.GetComponent<Building>().isBorn = false;
         CancelInvoke();
         
         yield return new WaitForSeconds(2);
@@ -52,6 +53,7 @@ public class FTE_1_5_Goal1 : BaseGuideStep
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             FTE_1_5_Manager.My.goal1FinalCost = StageGoal.My.totalCost;
+            HttpManager.My.ShowTip("超出成本限制，任务失败！");
             return;
         }
         

@@ -12,6 +12,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
     //public FTE_1_5_Goal1 goal1;
     public GameObject costPanel;
     public GameObject openCG;
+    public GameObject bornPoint;
     public override IEnumerator StepStart()
     {
         StageGoal.My.killNumber = 0;
@@ -20,6 +21,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
         missionData.content="上次的周期成本是<color=red>" + FTE_1_5_Manager.My.goal1FinalCost + "</color>";
         missionData.isFail = true;
         MissionManager.My.AddMission(missionData);
+        bornPoint.GetComponent<Building>().BornEnemy1(25);
         Reset();
         //InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
@@ -28,6 +30,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        bornPoint.GetComponent<Building>().isBorn = false;
         yield return new WaitForSeconds(2f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
         openCG.SetActive(true);
@@ -42,6 +45,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
     {
         if (StageGoal.My.timeCount - currentTimeCount >= limitTime)
         {
+            HttpManager.My.ShowTip("超出时间限制，任务重置！");
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             Reset();
@@ -50,6 +54,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
         costPanel.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost-currentCost,limitTime);
         if (StageGoal.My.totalCost - currentCost >= costLimit)
         {
+            HttpManager.My.ShowTip("超出成本限制，任务重置！");
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             Reset();

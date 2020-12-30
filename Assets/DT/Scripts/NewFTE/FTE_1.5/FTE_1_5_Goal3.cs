@@ -50,6 +50,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     {
         if (StageGoal.My.timeCount - lastTimeCount >= limitTime)
         {
+            HttpManager.My.ShowTip("超出时间限制，任务重置！");
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             Reset();
@@ -60,6 +61,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
         costPanel.GetComponent<CostPanel>().ShowAllCost(currentCost, limitTime);
         if (currentCost >= costLimit)
         {
+            HttpManager.My.ShowTip("超出成本限制，任务重置！");
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             Reset();
