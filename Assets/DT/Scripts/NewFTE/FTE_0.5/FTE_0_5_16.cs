@@ -21,7 +21,13 @@ public class FTE_0_5_16 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         StageGoal.My.maxRoleLevel = 5;
-        Addxiaofei();
+        t =     transform.DOScale(1, 1).OnComplete(() =>
+        {
+            StartCoroutine(BuildingManager.My.buildings[0]
+                .BornSingleTypeConsumer(type, count));
+            StageGoal.My.killNumber = 0;
+            Addxiaofei();
+        });
 
         yield return new WaitForSeconds(1f);
 

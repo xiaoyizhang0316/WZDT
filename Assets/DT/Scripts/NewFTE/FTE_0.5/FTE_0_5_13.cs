@@ -86,7 +86,15 @@ public class FTE_0_5_13 : BaseGuideStep
     }
     public override bool ChenkEnd()
     {
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
 
+        }
         for (int i = 0; i < role.warehouse.Count; i++)
         {
             if (role.warehouse[i].damage <targetdamege)

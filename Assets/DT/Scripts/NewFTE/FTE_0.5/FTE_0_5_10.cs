@@ -68,6 +68,15 @@ public class FTE_0_5_10 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+
+        }
         StageGoal.My.maxRoleLevel = 3;
         
         TradeManager.My.ShowAllIcon();
