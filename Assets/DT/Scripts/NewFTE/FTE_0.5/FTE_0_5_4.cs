@@ -21,7 +21,7 @@ public class FTE_0_5_4 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-      
+        buildTip.SetActive(true);
         yield return new WaitForSeconds(1f);
      
     }

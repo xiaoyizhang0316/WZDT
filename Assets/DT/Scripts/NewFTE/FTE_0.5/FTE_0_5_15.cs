@@ -24,7 +24,7 @@ public class FTE_0_5_15 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         StageGoal.My.killNumber = 0;
-        InvokeRepeating("Addxiaofei",1,time);
+        Addxiaofei();
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
@@ -46,16 +46,21 @@ public class FTE_0_5_15 : BaseGuideStep
 
     }
 
+    private Tween t;
     public void Addxiaofei()
+    {
+        t =     transform.DOScale(1, time).OnComplete(() =>
         {
             StartCoroutine(BuildingManager.My.buildings[0]
                 .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel1, count));
-        
+            Addxiaofei();
+        });
+          
         }
 
     public override IEnumerator StepEnd()
     {
-        CancelInvoke("Addxiaofei");
+       t.Kill();
         PlayerData.My.GetNewGear(90004);
         PlayerData.My.GetNewGear(90005);
         PlayerData.My.GetNewGear(90006);
