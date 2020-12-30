@@ -22,7 +22,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
         qualityCenter.GetComponent<QualityRole>().needCheck = true;
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
-        NewCanvasUI.My.GameNormal();
+        //NewCanvasUI.My.GameNormal();
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         yield return new WaitForSeconds(0.5f);
     }

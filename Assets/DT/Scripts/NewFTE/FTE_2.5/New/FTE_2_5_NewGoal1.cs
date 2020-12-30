@@ -37,12 +37,11 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        yield return new WaitForSeconds(0.5f);
-        costPanel.GetComponent<CostPanel>().HideAllCost();
-        //qualityCenter.GetComponent<BaseMapRole>().ClearWarehouse();
         qualityCenter.GetComponent<QualityRole>().needCheck = false;
-        DoEnd();
+        costPanel.GetComponent<CostPanel>().HideAllCost();
         FTE_2_5_Manager.My.isClearGoods = true;
+        yield return new WaitForSeconds(1f);
+        DoEnd();
     }
 
     void DoEnd()
