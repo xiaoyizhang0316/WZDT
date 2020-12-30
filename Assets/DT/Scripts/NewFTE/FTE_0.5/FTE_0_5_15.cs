@@ -24,7 +24,12 @@ public class FTE_0_5_15 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         StageGoal.My.killNumber = 0;
-        Addxiaofei();
+        t =     transform.DOScale(1, 1).OnComplete(() =>
+        {
+            StartCoroutine(BuildingManager.My.buildings[0]
+                .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel1, count));
+            Addxiaofei();
+        });
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
