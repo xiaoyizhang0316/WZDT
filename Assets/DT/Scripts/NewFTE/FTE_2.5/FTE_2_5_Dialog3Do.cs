@@ -16,6 +16,8 @@ public class FTE_2_5_Dialog3Do : FTE_DialogDoBase
     {
         endPanel.GetComponent<Button>().onClick.AddListener(() =>
         {
+            PlayerData.My.playerGears.Clear();
+            PlayerData.My.playerWorkers.Clear();
             NetworkMgr.My.UpdatePlayerFTE("2.5", ()=>SceneManager.LoadScene("Map"));
         });
        

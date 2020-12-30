@@ -108,6 +108,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             {
                 if (!CheckHasConsume(bornPoint1.transform))
                 {
+                    HttpManager.My.ShowTip("任务1完成条件已无法满足，该任务重置！");
                     CancelInvoke("CheckPackage");
                     FTE_2_5_Manager.My.packageKillNum = 0;
                     missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
@@ -130,6 +131,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             {
                 if (!CheckHasConsume(bornPoint2.transform))
                 {
+                    HttpManager.My.ShowTip("任务2完成条件已无法满足，该任务重置！");
                     CancelInvoke("CheckSale");
                     FTE_2_5_Manager.My.saleKillNum = 0;
                     missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
@@ -152,6 +154,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             {
                 if (!CheckHasConsume(bornPoint3.transform))
                 {
+                    HttpManager.My.ShowTip("任务3完成条件已无法满足，该任务重置！");
                     CancelInvoke("CheckNolike");
                     FTE_2_5_Manager.My.nolikeKillNum = 0;
                     missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;

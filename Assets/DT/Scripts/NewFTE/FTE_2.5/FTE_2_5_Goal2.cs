@@ -21,6 +21,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         NewCanvasUI.My.GameNormal();
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitPeasantCount = 3;
         peasant1.gameObject.SetActive(true);
         peasant2.gameObject.SetActive(true);
         peasant3.gameObject.SetActive(true);
