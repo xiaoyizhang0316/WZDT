@@ -255,10 +255,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     {
     }
 
-    public void BornEnemy1()
+    public void BornEnemy1(int type=-1)
     {
         Debug.Log("born");
-        StartCoroutine(GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().BornEnemy1());
+        StartCoroutine(GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().BornEnemy1(type));
     }
 
     public void BornEnemy()

@@ -31,7 +31,11 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         FTE_2_5_Manager.My.packageKillNum = 0;
         FTE_2_5_Manager.My.saleKillNum = 0;
         FTE_2_5_Manager.My.nolikeKillNum = 0;
-        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = false;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = true;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitSeedCount = 2;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitPeasantCount = 2;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitMerchantCount = 2;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
         dealer2.SetActive(true);
         dealer3.SetActive(true);
         dealer2.transform.DOMoveY(0.32f, 1).Play();

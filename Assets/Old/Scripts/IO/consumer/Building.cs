@@ -295,7 +295,7 @@ public class Building : MonoBehaviour
     }
 
     public bool isBorn = false;
-    public IEnumerator BornEnemy1()
+    public IEnumerator BornEnemy1(int type=-1)
     {
         ConsumerType ct;
         isBorn = true;
@@ -307,7 +307,14 @@ public class Building : MonoBehaviour
         while (isBorn)
         {
             yield return new WaitForSeconds(1f);
-            ct = (ConsumerType)(UnityEngine.Random.Range(0, 2) == 1 ? 1 : 8);
+            if (type == -1)
+            {
+                ct = (ConsumerType)(UnityEngine.Random.Range(0, 2) == 1 ? 1 : 8);
+            }
+            else
+            {
+                ct = (ConsumerType) type;
+            }
             string path = "Prefabs/Consumer/" + ct.ToString();
             GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
             go.GetComponent<ConsumeSign>().Init(consumerPathList);

@@ -18,15 +18,16 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     public GameObject merchantPlace;
     public int limitTime;
     public GameObject costPanel;
+    public GameObject bornPoint;
     
     public override IEnumerator StepStart()
     {
-        /*seed.SetActive(true);
+        seed.SetActive(true);
         merchant.SetActive(true);
         seed.transform.DOMoveY(0.32f, 0.5f).Play();
         seedPlace.transform.DOMoveY(0, 0.5f).Play();
         merchant.transform.DOMoveY(0.32f, 0.5f).Play();        
-        merchantPlace.transform.DOMoveY(0, 0.5f).Play();*/
+        merchantPlace.transform.DOMoveY(0, 0.5f).Play();
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
@@ -38,6 +39,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        bornPoint.GetComponent<Building>().isBorn = false;
         yield return new WaitForSeconds(2f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
     }
@@ -51,6 +53,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     {
         if (StageGoal.My.timeCount - currentCost >= limitTime)
         {
+            HttpManager.My.ShowTip("超出时间限制，任务重置！");
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             Reset();
