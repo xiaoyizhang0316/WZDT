@@ -21,7 +21,8 @@ public class FTE_1_5_Goal7 : BaseGuideStep
         missionData.content="上次的周期成本是<color=red>" + FTE_1_5_Manager.My.goal1FinalCost + "</color>";
         missionData.isFail = true;
         MissionManager.My.AddMission(missionData);
-        bornPoint.GetComponent<Building>().BornEnemy1(25);
+        //StartCoroutine( bornPoint.GetComponent<Building>().BornEnemy1(25));
+        NewGuideManager.My.BornEnemy1(25);
         Reset();
         //InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
