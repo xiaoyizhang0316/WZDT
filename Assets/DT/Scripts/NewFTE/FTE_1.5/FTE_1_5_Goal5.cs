@@ -6,18 +6,22 @@ using UnityEngine;
 public class FTE_1_5_Goal5 : BaseGuideStep
 {
     public GameObject fruitQT;
+    public GameObject place;
     private int currentIncome = 0;
     private int currentCost = 0;
     public GameObject costImage;
+    public GameObject bornPoint;
     public override IEnumerator StepStart()
     {
         //fruitQT.SetActive(false);
         PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
+        //Destroy(place);
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
         costImage.GetComponent<CostPanel>().InitCostPanel(currentCost, StageGoal.My.timeCount);
         //StageGoal.My.totalIncome = 0;
-        NewGuideManager.My.BornEnemy1();
+        //NewGuideManager.My.BornEnemy1(30);
+        bornPoint.GetComponent<Building>().BornEnemy1(30);
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
     }

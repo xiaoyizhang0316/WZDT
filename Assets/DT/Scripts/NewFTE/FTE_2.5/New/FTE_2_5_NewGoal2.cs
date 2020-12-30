@@ -14,7 +14,7 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     public GameObject slider;
     public GameObject encorageLevel;
     public List<GameObject> npcEncorageLevel;
-
+    public Transform tradeMgr;
     public GameObject border1;
     public GameObject border2;
     public override IEnumerator StepStart()
@@ -37,6 +37,10 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        foreach (Transform child in tradeMgr)
+        {
+            TradeManager.My.DeleteTrade(child.GetComponent<TradeSign>().tradeData.ID);
+        }
         yield return new WaitForSeconds(0.5f);
     }
 

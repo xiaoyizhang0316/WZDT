@@ -183,9 +183,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void CostPlayerGold(int num)
     {
-        if (SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2")
+        if (SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2"
+                                                           || SceneManager.GetActiveScene().name == "FTE_1.5"
+                                                           || SceneManager.GetActiveScene().name == "FTE_2.5")
         {
-            if (playerGold - num <= maxMinusGold)
+            if (playerGold - num <= 10000)
             {
                 playerGold =10000000;
             }

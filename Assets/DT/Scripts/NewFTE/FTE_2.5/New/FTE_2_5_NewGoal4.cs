@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,11 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
     public GameObject costPanel;
     public GameObject bornPoint;
     public GameObject dealer1;
+    public GameObject place1;
     public GameObject dealer2;
+    public GameObject place2;
     public GameObject dealer3;
+    public GameObject place3;
     public Transform tradeMgr;
     public Transform roles;
     private int currentCost;
@@ -22,9 +26,18 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         StageGoal.My.killNumber = 0;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = true;
+        NewCanvasUI.My.GamePause(false);
         dealer1.SetActive(true);
-        dealer2.SetActive(true);
-        dealer3.SetActive(true);
+        //dealer2.SetActive(true);
+        //dealer3.SetActive(true);
+        dealer1.transform.DOMoveY(0.32f, 1f).Play();
+        place1.transform.DOMoveY(0f, 1f).Play();
+        //dealer2.transform.DOMoveY(0.32f, 1f).Play();
+        //place2.transform.DOMoveY(0f, 1f).Play();
+        //dealer3.transform.DOMoveY(0.32f, 1f).Play();
+        //place3.transform.DOMoveY(0f, 1f).Play();
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
         StartCoroutine( bornPoint.GetComponent<Building>().BornEnemyForFTE_2_5(-1));
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
@@ -80,6 +93,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
     {
         if (StageGoal.My.timeCount - currentTimeCount >= limitTime)
         {
+            HttpManager.My.ShowTip("已超出时间限制，任务重置！");
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             Reset();
@@ -88,6 +102,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         costPanel.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost - currentCost, limitTime);
         if (StageGoal.My.totalCost - currentCost >= costLimit)
         {
+            HttpManager.My.ShowTip("已超出成本限制，任务重置！");
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             Reset();

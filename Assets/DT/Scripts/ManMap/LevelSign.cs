@@ -165,6 +165,7 @@ public class LevelSign : MonoBehaviour
         {
             currentStar = "0" + currentStar;
         }
+        Debug.Log(currentStar);
         stars = currentStar;
 
         if (NetworkMgr.My.levelProgressList.Count >= 4 && NetworkMgr.My.playerDatas.threeWordsProgress == 1)
@@ -378,7 +379,7 @@ public class LevelSign : MonoBehaviour
             return;
         }
 
-        if (lastStar.Equals("000")||CheckLockLevel(fte)|| ! CheckUserLevel()||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
+        if ((lastStar.Equals("000")&& levelID!=1)||CheckLockLevel(fte)|| ! CheckUserLevel()||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
         {
             HideAllStars();
             transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
@@ -407,17 +408,17 @@ public class LevelSign : MonoBehaviour
 
     bool CheckLockLevel(string fte)
     {
-        if (levelID == 1 && float.Parse( fte)<=0.5f)
+        if (levelID == 1 && float.Parse( fte)<0.5f)
         {
             return true;
         }
 
-        if (levelID == 2 && float.Parse( fte)<=1.5f)
+        if (levelID == 2 && float.Parse( fte)<1.5f)
         {
             return true;
         }
 
-        if (levelID == 3 && float.Parse( fte)<=2.5f)
+        if (levelID == 3 && float.Parse( fte)<2.5f)
         {
             return true;
         }

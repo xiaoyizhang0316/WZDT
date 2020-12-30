@@ -580,7 +580,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     {
         Debug.Log("更新fte" + fte);
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
-        keyValues.Add("fteProgress", fte);
+        keyValues.Add("fte", fte);
         keyValues.Add("playerID", playerID);
         keyValues.Add("token", token);
         StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerFTE, (www) => {
@@ -943,7 +943,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 try
                 {
                     levelProgresses = JsonUtility.FromJson<LevelProgresses>(response.data);
-                    //Debug.LogWarning(levelProgresses.levelProgresses.Count+"-------------------");
+                    Debug.LogWarning(levelProgresses.levelProgresses.Count+"-------------------");
                     levelProgressList.Clear();
                     foreach (var lp in levelProgresses.levelProgresses)
                     {

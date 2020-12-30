@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,58 +11,95 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     public GameObject bornPoint2;
     public GameObject bornPoint3;
 
-    public GameObject endPanel;
+    public GameObject dealer2;
+    public GameObject dealer3;
+    public GameObject place2;
+    public GameObject place3;
+    
+
+    public List<GameObject> factorys;
+    public List<GameObject> places;
+
+    //public GameObject endPanel;
 
     private List<BaseMapRole> dealers;
     public override IEnumerator StepStart()
     {
+        FactoryUp();
         FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GameNormal();
         FTE_2_5_Manager.My.packageKillNum = 0;
         FTE_2_5_Manager.My.saleKillNum = 0;
         FTE_2_5_Manager.My.nolikeKillNum = 0;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = true;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitSeedCount = 2;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitPeasantCount = 2;
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitMerchantCount = 2;
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
+        dealer2.SetActive(true);
+        dealer3.SetActive(true);
+        dealer2.transform.DOMoveY(0.32f, 1).Play();
+        place2.transform.DOMoveY(0, 1).Play();
+        dealer3.transform.DOMoveY(0.32f, 1).Play();
+        place3.transform.DOMoveY(0, 1).Play();
         /*bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5(302);
         bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5(301);
         bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5(-1);*/
         BornPackage();
         BornSale();
         BornNoLike();
-        InvokeRepeating("CheckGoal", 1f, 0.1f);
+        //InvokeRepeating("CheckGoal", 2f, 0.5f);
         InvokeRepeating("CheckBuffOut", 3, 30);
         yield return new WaitForSeconds(0.5f);
     }
 
+    void FactoryUp()
+    {
+        for (int i = 0; i < factorys.Count; i++)
+        {
+            factorys[i].SetActive(true);
+            factorys[i].transform.DOMoveY(0.32f, 1f).Play();
+        }
+
+        for (int i = 0; i < places.Count; i++)
+        {
+            places[i].transform.DOMoveY(0, 1).Play();
+        }
+    }
+
     void BornPackage()
     {
-        StartCoroutine(bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5_1(302, 12));
+        StartCoroutine(bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5_1(27, 12));
+        InvokeRepeating("CheckPackage", 2f, 0.5f);
     }
     void BornSale()
     {
-        StartCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5_1(301, 12));
+        StartCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5_1(28, 12));
+        InvokeRepeating("CheckSale", 2f, 0.5f);
     }
     void BornNoLike()
     {
-        StartCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5_1(-1, 12));
+        StartCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5_1(29, 12));
+        InvokeRepeating("CheckNolike", 2f, 0.5f);
     }
 
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        endPanel.GetComponent<Button>().onClick.AddListener(() =>
+        /*endPanel.GetComponent<Button>().onClick.AddListener(() =>
         {
             NetworkMgr.My.UpdatePlayerFTE("2.5", ()=>SceneManager.LoadScene("Map"));
-        });
+        });*/
         yield return new WaitForSeconds(1f);
-        endPanel.SetActive(true);
+        //endPanel.SetActive(true);
     }
 
     public override bool ChenkEnd()
     {
-        return missiondatas.data[0].isFinish&&missiondatas.data[1].isFinish&&missiondatas.data[2].isFinish&&missiondatas.data[3].isFinish;
+        return missiondatas.data[0].isFinish&&missiondatas.data[1].isFinish&&missiondatas.data[2].isFinish;
     }
 
-    void CheckGoal()
+    void CheckPackage()
     {
         if (missiondatas.data[0].isFinish == false)
         {
@@ -74,13 +112,18 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             {
                 if (!CheckHasConsume(bornPoint1.transform))
                 {
+                    HttpManager.My.ShowTip("任务1完成条件已无法满足，该任务重置！");
+                    CancelInvoke("CheckPackage");
                     FTE_2_5_Manager.My.packageKillNum = 0;
                     missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
                     BornPackage();
                 }
             }
         }
-        
+    }
+
+    void CheckSale()
+    {
         if (missiondatas.data[1].isFinish == false)
         {
             missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
@@ -92,13 +135,18 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             {
                 if (!CheckHasConsume(bornPoint2.transform))
                 {
+                    HttpManager.My.ShowTip("任务2完成条件已无法满足，该任务重置！");
+                    CancelInvoke("CheckSale");
                     FTE_2_5_Manager.My.saleKillNum = 0;
                     missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
                     BornSale();
                 }
             }
         }
-        
+    }
+
+    void CheckNolike()
+    {
         if (missiondatas.data[2].isFinish == false)
         {
             missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;
@@ -110,6 +158,8 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             {
                 if (!CheckHasConsume(bornPoint3.transform))
                 {
+                    HttpManager.My.ShowTip("任务3完成条件已无法满足，该任务重置！");
+                    CancelInvoke("CheckNolike");
                     FTE_2_5_Manager.My.nolikeKillNum = 0;
                     missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;
                     BornNoLike();
@@ -120,12 +170,9 @@ public class FTE_2_5_Goal5 : BaseGuideStep
 
     bool CheckHasConsume(Transform point)
     {
-        foreach (Transform child in point)
+        if (point.childCount > 4)
         {
-            if (child.GetComponent<ConsumableSign>())
-            {
-                return true;
-            }
+            return true;
         }
 
         return false;

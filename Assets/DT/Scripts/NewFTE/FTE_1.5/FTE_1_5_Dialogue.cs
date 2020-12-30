@@ -7,7 +7,7 @@ using DG.Tweening;
 public class FTE_1_5_Dialogue : BaseGuideStep
 {
     public GameObject img;
-    public List<GameObject> txt;
+    public Transform dialogTexts;
     private int currentDialog = 0;
     public override IEnumerator StepStart()
     {
@@ -40,9 +40,9 @@ public class FTE_1_5_Dialogue : BaseGuideStep
 
         endButton.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, -390), 0.3f).Play().OnComplete(() =>
         {
-            if (txt.Count>0)
+            if (dialogTexts.childCount>0)
             {
-                txt[0].SetActive(true);
+                dialogTexts.GetChild(0).gameObject.SetActive(true);
             }
         });
     }
@@ -56,9 +56,9 @@ public class FTE_1_5_Dialogue : BaseGuideStep
 
     public override IEnumerator PlayEnd()
     {
-        if (txt[currentDialog].GetComponent<FTE_TypeWord>().isTyping)
+        if (dialogTexts.GetChild(currentDialog).GetComponent<FTE_TypeWord>().isTyping)
         {
-            txt[currentDialog].GetComponent<FTE_TypeWord>().StopType();
+            dialogTexts.GetChild(currentDialog).GetComponent<FTE_TypeWord>().StopType();
             Debug.Log("typing");
             endButton.interactable = true;
             yield break;
@@ -66,10 +66,10 @@ public class FTE_1_5_Dialogue : BaseGuideStep
         else
         {
             currentDialog++;
-            if (currentDialog < txt.Count)
+            if (currentDialog < dialogTexts.childCount)
             {
-                txt[currentDialog-1].SetActive(false);
-                txt[currentDialog].SetActive(true);
+                dialogTexts.GetChild(currentDialog-1).gameObject.SetActive(false);
+                dialogTexts.GetChild(currentDialog).gameObject.SetActive(true);
                 Debug.Log("next");
                 endButton.interactable = true;
                 yield break;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Fungus;
 using UnityEngine;
 
@@ -12,14 +13,21 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     private int income=0;
 
     public GameObject seed;
+    public GameObject seedPlace;
     public GameObject merchant;
+    public GameObject merchantPlace;
     public int limitTime;
     public GameObject costPanel;
+    public GameObject bornPoint;
     
     public override IEnumerator StepStart()
     {
         seed.SetActive(true);
         merchant.SetActive(true);
+        seed.transform.DOMoveY(0.32f, 0.5f).Play();
+        seedPlace.transform.DOMoveY(0, 0.5f).Play();
+        merchant.transform.DOMoveY(0.32f, 0.5f).Play();        
+        merchantPlace.transform.DOMoveY(0, 0.5f).Play();
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
@@ -31,6 +39,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        bornPoint.GetComponent<Building>().isBorn = false;
         yield return new WaitForSeconds(2f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
     }
@@ -44,6 +53,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     {
         if (StageGoal.My.timeCount - currentCost >= limitTime)
         {
+            HttpManager.My.ShowTip("超出时间限制，任务重置！");
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             Reset();
