@@ -10,7 +10,7 @@ public class FTE_2_5_Dialog3 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         openCG.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
     }
 
     public override bool ChenkEnd()

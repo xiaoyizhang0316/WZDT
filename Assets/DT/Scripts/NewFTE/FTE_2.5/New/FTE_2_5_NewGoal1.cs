@@ -77,8 +77,8 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         costPanel.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost, limitTime);
         if (StageGoal.My.totalCost >= costLimit)
         {
-            HttpManager.My.ShowTip("已超出成本限制，任务失败！");
             NewCanvasUI.My.GamePause(false);
+            HttpManager.My.ShowTip("已超出成本限制，任务失败！");
 
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
