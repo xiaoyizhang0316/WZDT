@@ -45,7 +45,7 @@ public class RoleFloatWindow : MonoSingleton<RoleFloatWindow>
         //print(Camera.main.ViewportToScreenPoint(_transform.position));
         //print(Camera.main.ViewportToWorldPoint(_transform.position));
     }
-
+ 
     public void CheckPos()
     {
         if (transform.localPosition.y + GetComponent<RectTransform>().sizeDelta.y / 2 >= Screen.height / 2)
