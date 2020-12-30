@@ -11,6 +11,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
     private int currentCost = 0;
     //public FTE_1_5_Goal1 goal1;
     public GameObject costPanel;
+    public GameObject openCG;
     public override IEnumerator StepStart()
     {
         StageGoal.My.killNumber = 0;
@@ -29,6 +30,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
         CancelInvoke();
         yield return new WaitForSeconds(2f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
+        openCG.SetActive(true);
     }
 
     public override bool ChenkEnd()

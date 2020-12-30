@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class FTE_1_5_Start : BaseGuideStep
 {
-    private bool isEnd = false;
+    public bool isEnd = false;
+    public GameObject openCG;
     public override IEnumerator StepStart()
     {
         isEnd = false;
         RoleSet();
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
+        openCG.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         // 升级免费，更换角色模版
         // 生成消费者
         NewGuideManager.My.BornEnemy1();
-        yield return new WaitForSeconds(4);
-        isEnd = true;
     }
 
     public override IEnumerator StepEnd()
@@ -26,7 +26,7 @@ public class FTE_1_5_Start : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return isEnd;
+        return !openCG.activeInHierarchy;
     }
     
     void RoleSet()
