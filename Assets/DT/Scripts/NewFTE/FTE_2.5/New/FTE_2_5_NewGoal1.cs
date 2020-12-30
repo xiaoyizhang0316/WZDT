@@ -56,7 +56,9 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return isEnd;
+        if(isEnd)
+            return !openCG.activeInHierarchy;
+        return false;
     }
 
     void CheckGoal()
@@ -68,18 +70,21 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             openCG.SetActive(true);
+            isEnd = true;
             CancelInvoke();
             return;
         }
         costPanel.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost, limitTime);
         if (StageGoal.My.totalCost >= costLimit)
         {
+            HttpManager.My.ShowTip("已超出成本限制，任务失败！");
             NewCanvasUI.My.GamePause(false);
 
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
             openCG.SetActive(true);
             CancelInvoke();
+            isEnd = true;
             return;
         }
         if (missiondatas.data[0].isFinish == false)
