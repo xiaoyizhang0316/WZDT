@@ -23,11 +23,13 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     //public GameObject endPanel;
 
     private List<BaseMapRole> dealers;
+    private int currentTimeCount = 0;
     public override IEnumerator StepStart()
     {
         FactoryUp();
         FTE_2_5_Manager.My.isClearGoods = false;
-        NewCanvasUI.My.GameNormal();
+        NewCanvasUI.My.GamePause(false);
+        currentTimeCount = StageGoal.My.timeCount;
         FTE_2_5_Manager.My.packageKillNum = 0;
         FTE_2_5_Manager.My.saleKillNum = 0;
         FTE_2_5_Manager.My.nolikeKillNum = 0;
@@ -114,7 +116,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             }
             else
             {
-                if (!CheckHasConsume(bornPoint1.transform))
+                if (!CheckHasConsume(bornPoint1.transform) && (StageGoal.My.timeCount-currentTimeCount>3))
                 {
                     isPackageFail = true;
                     CancelInvoke("CheckPackage");
@@ -139,7 +141,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             }
             else
             {
-                if (!CheckHasConsume(bornPoint2.transform))
+                if (!CheckHasConsume(bornPoint2.transform)&& (StageGoal.My.timeCount-currentTimeCount>3))
                 {
                     isSaleFail = true;
                     CancelInvoke("CheckSale");
@@ -164,7 +166,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             }
             else
             {
-                if (!CheckHasConsume(bornPoint3.transform))
+                if (!CheckHasConsume(bornPoint3.transform)&& (StageGoal.My.timeCount-currentTimeCount>3))
                 {
                     isNoLikeFail = true;
                     CancelInvoke("CheckNolike");
@@ -198,6 +200,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
             StageGoal.My.playerSatisfy = 0;
             StageGoal.My.playerSatisfyText.text = "0";
+            currentTimeCount = StageGoal.My.timeCount;
             BornNoLike();
             BornSale();
             BornPackage();
