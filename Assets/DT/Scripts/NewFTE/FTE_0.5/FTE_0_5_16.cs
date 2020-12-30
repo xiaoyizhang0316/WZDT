@@ -27,7 +27,7 @@ public class FTE_0_5_16 : BaseGuideStep
                 .BornSingleTypeConsumer(type, count));
             StageGoal.My.killNumber = 0;
             Addxiaofei();
-        });
+        }).Play();
 
         yield return new WaitForSeconds(1f);
 
@@ -43,7 +43,7 @@ public class FTE_0_5_16 : BaseGuideStep
                     .BornSingleTypeConsumer(type, count));
                 StageGoal.My.killNumber = 0;
                 Addxiaofei();
-            });
+            }).Play();
         }
 
     public override IEnumerator StepEnd()
