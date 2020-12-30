@@ -703,7 +703,8 @@ public class StageGoal : MonoSingleton<StageGoal>
                         {
                             add = 0.1f;
                         }
-                        GetSatisfy((int)(playerGold * add));
+                        if(!SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+                            GetSatisfy((int)(playerGold * add));
                         ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
                         if (PlayerData.My.xianJinLiu[5])
                         {

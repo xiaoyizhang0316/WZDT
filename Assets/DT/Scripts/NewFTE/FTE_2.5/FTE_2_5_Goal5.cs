@@ -26,9 +26,9 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     private int currentTimeCount = 0;
     public override IEnumerator StepStart()
     {
-        FactoryUp();
         FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GamePause(false);
+        FactoryUp();
         currentTimeCount = StageGoal.My.timeCount;
         FTE_2_5_Manager.My.packageKillNum = 0;
         FTE_2_5_Manager.My.saleKillNum = 0;
@@ -119,6 +119,8 @@ public class FTE_2_5_Goal5 : BaseGuideStep
                 if (!CheckHasConsume(bornPoint1.transform) && (StageGoal.My.timeCount-currentTimeCount>3))
                 {
                     isPackageFail = true;
+                    missiondatas.data[0].isFail = true;
+
                     CancelInvoke("CheckPackage");
                     /*HttpManager.My.ShowTip("任务1完成条件已无法满足，该任务重置！");
                     CancelInvoke("CheckPackage");
@@ -144,6 +146,8 @@ public class FTE_2_5_Goal5 : BaseGuideStep
                 if (!CheckHasConsume(bornPoint2.transform)&& (StageGoal.My.timeCount-currentTimeCount>3))
                 {
                     isSaleFail = true;
+                    missiondatas.data[1].isFail = true;
+
                     CancelInvoke("CheckSale");
                     /*HttpManager.My.ShowTip("任务2完成条件已无法满足，该任务重置！");
                     CancelInvoke("CheckSale");
@@ -169,6 +173,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
                 if (!CheckHasConsume(bornPoint3.transform)&& (StageGoal.My.timeCount-currentTimeCount>3))
                 {
                     isNoLikeFail = true;
+                    missiondatas.data[2].isFail = true;
                     CancelInvoke("CheckNolike");
                     /*HttpManager.My.ShowTip("任务3完成条件已无法满足，该任务重置！");
                     CancelInvoke("CheckNolike");
@@ -194,10 +199,19 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             isNoLikeFail = false;
             FTE_2_5_Manager.My.nolikeKillNum = 0;
             missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;
+            missiondatas.data[2].isFinish = false;
+            missiondatas.data[2].isFail = false;
+
             FTE_2_5_Manager.My.saleKillNum = 0;
             missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
+            missiondatas.data[1].isFinish = false;
+            missiondatas.data[1].isFail = false;
+
             FTE_2_5_Manager.My.packageKillNum = 0;
             missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
+            missiondatas.data[0].isFinish = false;
+            missiondatas.data[0].isFail = false;
+
             StageGoal.My.playerSatisfy = 0;
             StageGoal.My.playerSatisfyText.text = "0";
             currentTimeCount = StageGoal.My.timeCount;
