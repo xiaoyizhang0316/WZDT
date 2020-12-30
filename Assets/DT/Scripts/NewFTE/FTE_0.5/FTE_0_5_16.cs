@@ -21,17 +21,23 @@ public class FTE_0_5_16 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         StageGoal.My.maxRoleLevel = 5;
-        InvokeRepeating("Addxiaofei",1,time);
-       
+        Addxiaofei();
+
         yield return new WaitForSeconds(1f);
 
     }
+    private Tween t;
 
     public void Addxiaofei()
         {
-            StartCoroutine(BuildingManager.My.buildings[0]
-                .BornSingleTypeConsumer(type, count));
-            StageGoal.My.killNumber = 0;
+      
+            t =     transform.DOScale(1, time).OnComplete(() =>
+            {
+                StartCoroutine(BuildingManager.My.buildings[0]
+                    .BornSingleTypeConsumer(type, count));
+                StageGoal.My.killNumber = 0;
+                Addxiaofei();
+            });
         }
 
     public override IEnumerator StepEnd()
@@ -43,7 +49,7 @@ public class FTE_0_5_16 : BaseGuideStep
     public override bool ChenkEnd()
     {
         missiondatas.data[0].currentNum = StageGoal.My.killNumber;
-
+        t.Kill();
         if (StageGoal.My.killNumber > missiondatas.data[0].maxNum)
         {
             missiondatas.data[0].isFinish = true;
