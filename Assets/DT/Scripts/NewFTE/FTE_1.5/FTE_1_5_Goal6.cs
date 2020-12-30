@@ -31,6 +31,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
+        StartCoroutine( bornPoint.GetComponent<Building>().BornEnemy1(30));
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);

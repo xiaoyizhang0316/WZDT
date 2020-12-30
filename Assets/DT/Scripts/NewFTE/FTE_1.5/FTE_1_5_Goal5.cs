@@ -30,6 +30,7 @@ public class FTE_1_5_Goal5 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        bornPoint.GetComponent<Building>().isBorn = false;
         yield return new WaitForSeconds(2f);
         costImage.GetComponent<CostPanel>().HideAllCost();
     }
