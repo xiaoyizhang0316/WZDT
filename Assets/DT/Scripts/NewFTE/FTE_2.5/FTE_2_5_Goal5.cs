@@ -11,6 +11,12 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     public GameObject bornPoint2;
     public GameObject bornPoint3;
 
+    public GameObject dealer2;
+    public GameObject dealer3;
+    public GameObject place2;
+    public GameObject place3;
+    
+
     public List<GameObject> factorys;
     public List<GameObject> places;
 
@@ -26,6 +32,12 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         FTE_2_5_Manager.My.saleKillNum = 0;
         FTE_2_5_Manager.My.nolikeKillNum = 0;
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = false;
+        dealer2.SetActive(true);
+        dealer3.SetActive(true);
+        dealer2.transform.DOMoveY(0.32f, 1).Play();
+        place2.transform.DOMoveY(0, 1).Play();
+        dealer3.transform.DOMoveY(0.32f, 1).Play();
+        place3.transform.DOMoveY(0, 1).Play();
         /*bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5(302);
         bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5(301);
         bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5(-1);*/
@@ -53,17 +65,17 @@ public class FTE_2_5_Goal5 : BaseGuideStep
 
     void BornPackage()
     {
-        StartCoroutine(bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5_1(302, 12));
+        StartCoroutine(bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5_1(27, 12));
         InvokeRepeating("CheckPackage", 2f, 0.5f);
     }
     void BornSale()
     {
-        StartCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5_1(301, 12));
+        StartCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5_1(28, 12));
         InvokeRepeating("CheckSale", 2f, 0.5f);
     }
     void BornNoLike()
     {
-        StartCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5_1(-1, 12));
+        StartCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5_1(29, 12));
         InvokeRepeating("CheckNolike", 2f, 0.5f);
     }
 
