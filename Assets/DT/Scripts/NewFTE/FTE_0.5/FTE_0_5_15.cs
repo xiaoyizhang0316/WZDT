@@ -24,7 +24,7 @@ public class FTE_0_5_15 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         StageGoal.My.killNumber = 0;
-        t =     transform.DOScale(1, 1).OnComplete(() =>
+         transform.DOScale(1, 1).OnComplete(() =>
         {
             StartCoroutine(BuildingManager.My.buildings[0]
                 .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel1, count));
@@ -52,9 +52,10 @@ public class FTE_0_5_15 : BaseGuideStep
     }
 
     private Tween t;
+   
     public void Addxiaofei()
     {
-        t =     transform.DOScale(1, time).OnComplete(() =>
+          t= transform.DOScale(1, time).OnComplete(() =>
         {
             StartCoroutine(BuildingManager.My.buildings[0]
                 .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel1, count));
@@ -65,7 +66,8 @@ public class FTE_0_5_15 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-       t.Kill();
+      
+        t.Kill();
    
         roleImage.SetActive(true);
         yield return new WaitForSeconds(1f);

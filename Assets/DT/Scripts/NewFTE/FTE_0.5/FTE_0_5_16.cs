@@ -21,7 +21,7 @@ public class FTE_0_5_16 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         StageGoal.My.maxRoleLevel = 5;
-        t =     transform.DOScale(1, 1).OnComplete(() =>
+        transform.DOScale(1, 1).OnComplete(() =>
         {
             StartCoroutine(BuildingManager.My.buildings[0]
                 .BornSingleTypeConsumer(type, count));
@@ -37,7 +37,7 @@ public class FTE_0_5_16 : BaseGuideStep
     public void Addxiaofei()
         {
       
-            t =     transform.DOScale(1, time).OnComplete(() =>
+      t=       transform.DOScale(1, time).OnComplete(() =>
             {
                 StartCoroutine(BuildingManager.My.buildings[0]
                     .BornSingleTypeConsumer(type, count));
@@ -48,14 +48,14 @@ public class FTE_0_5_16 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        CancelInvoke("Addxiaofei"); 
+        t.Kill();
         yield break;
     }
 
     public override bool ChenkEnd()
     {
         missiondatas.data[0].currentNum = StageGoal.My.killNumber;
-        t.Kill();
+     
         if (StageGoal.My.killNumber > missiondatas.data[0].maxNum)
         {
             missiondatas.data[0].isFinish = true;
