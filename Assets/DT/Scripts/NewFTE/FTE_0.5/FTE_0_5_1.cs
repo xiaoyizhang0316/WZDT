@@ -29,7 +29,7 @@ public class FTE_0_5_1 : BaseGuideStep
         for (int i = 0; i < equipAdd.Count; i++)
         {
               PlayerData.My.GetNewGear(equipAdd[i]);
-              if (isUpLoad&& float.Parse(NetworkMgr.My.playerDatas.fte)<0.5f )
+              if (isUpLoad&& float.Parse(NetworkMgr.My.playerDatas.fte)<=0.5f )
               {
                   NetworkMgr.My.AddEquip(equipAdd[i],0,1);
               }
@@ -42,7 +42,7 @@ public class FTE_0_5_1 : BaseGuideStep
        
         }
 
-        if (isUpLoad&&float.Parse(NetworkMgr.My.playerDatas.fte)<0.5f)
+        if (isUpLoad&&float.Parse(NetworkMgr.My.playerDatas.fte)<=0.5f)
         {
             info.SetActive(true);
 
