@@ -8,10 +8,10 @@ public class FTE_1_5_AwardsAdd : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
+        PlayerData.My.GetNewGear(90007);
+        PlayerData.My.GetNewGear(90008);
         PlayerData.My.GetNewGear(90009);
         PlayerData.My.GetNewGear(90010);
-        PlayerData.My.GetNewGear(90011);
-        PlayerData.My.GetNewGear(90012);
         awards.SetActive(true);
         yield return new WaitForSeconds(0.5f);
     }

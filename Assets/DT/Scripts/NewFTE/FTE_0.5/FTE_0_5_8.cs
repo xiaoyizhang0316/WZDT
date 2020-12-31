@@ -88,6 +88,15 @@ public class FTE_0_5_8 : BaseGuideStep
     }
     public override bool ChenkEnd()
     {
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+
+        }
         if (role1.warehouse.Count == role1.baseRoleData.bulletCapacity)
         {
             role1.warehouse.Clear();
