@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +28,9 @@ public class CostPanel : MonoBehaviour
     public Text profitText;
     private static string totalIncomeString = "总收入：";
     private static string profitString = "利润：";
+
+    public GameObject equipPanel;
+    public GameObject missionPanel;
 
     public void InitCostPanel(int cost, int timeCount)
     {
@@ -71,5 +76,32 @@ public class CostPanel : MonoBehaviour
     {
         costImage.SetActive(false);
         incomeImage.SetActive(false);
+    }
+
+    private bool needShow = false;
+    private void Update()
+    {
+        if (equipPanel != null && equipPanel.activeInHierarchy)
+        {
+            if (missionPanel != null && missionPanel.activeInHierarchy)
+            {
+                missionPanel.transform.DOScale(Vector3.zero, 0.02f).Play();
+            }
+
+            transform.DOScale(Vector3.zero, 0.02f).Play();
+
+        }
+        else
+        {
+            if (missionPanel.transform.localScale == Vector3.zero)
+            {
+                missionPanel.transform.DOScale(Vector3.one, 0.02f).Play();
+            }
+
+            if (transform.localScale == Vector3.zero)
+            {
+                transform.DOScale(Vector3.one, 0.02f).Play();
+            }
+        }
     }
 }

@@ -239,6 +239,7 @@ public class BaseMapRole : MonoBehaviour
     public void RecalculateEncourageLevel(bool isInit = false)
     {
         int result = startEncourageLevel;
+        result += baseRoleData.gearEncourageAdd;
         if (CheckAllTradeBest())
         {
             result++;

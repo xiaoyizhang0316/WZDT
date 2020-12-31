@@ -29,15 +29,6 @@ public class FTE_0_5_10_1 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
-        {
-            transform.GetChild(0).gameObject.SetActive(false);
-        }
-        else
-        {
-            transform.GetChild(0).gameObject.SetActive(true);
-
-        }
         int count = 0;
 
         for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
