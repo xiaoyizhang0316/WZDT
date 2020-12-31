@@ -21,9 +21,9 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     {
         firstButton.SetActive(true);
         lastButton.SetActive(true);
-        startStar.transform.DOScale(Vector3.one, 0.02f).Play();
+        /*startStar.transform.DOScale(Vector3.one, 0.02f).Play();
         endStar.transform.DOScale(Vector3.one, 0.02f).Play();
-        slider.transform.DOScale(Vector3.one, 0.02f).Play();
+        slider.transform.DOScale(Vector3.one, 0.02f).Play();*/
         encorageLevel.SetActive(true);
         for (int i = 0; i < npcEncorageLevel.Count; i++)
         {
