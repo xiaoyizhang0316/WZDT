@@ -52,7 +52,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         BornNoLike();
         InvokeRepeating("CheckReset", 3, 0.5f);
         //InvokeRepeating("CheckGoal", 2f, 0.5f);
-        InvokeRepeating("CheckBuffOut", 3, 30);
+        InvokeRepeating("CheckBuffOut", 3, 5);
         yield return new WaitForSeconds(0.5f);
     }
 
@@ -129,6 +129,12 @@ public class FTE_2_5_Goal5 : BaseGuideStep
                     BornPackage();*/
                 }
             }
+        }else
+        {
+            if (isSaleFail || isNoLikeFail)
+            {
+                isPackageFail = true;
+            }
         }
     }
 
@@ -157,6 +163,13 @@ public class FTE_2_5_Goal5 : BaseGuideStep
                 }
             }
         }
+        else
+        {
+            if (isPackageFail || isNoLikeFail)
+            {
+                isSaleFail = true;
+            }
+        }
     }
 
     void CheckNolike()
@@ -181,6 +194,12 @@ public class FTE_2_5_Goal5 : BaseGuideStep
                     missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;
                     BornNoLike();*/
                 }
+            }
+        }else
+        {
+            if (isPackageFail || isSaleFail)
+            {
+                isNoLikeFail = true;
             }
         }
     }

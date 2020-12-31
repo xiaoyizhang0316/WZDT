@@ -22,6 +22,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
+        NewCanvasUI.My.GamePause(false);
         seed.SetActive(true);
         merchant.SetActive(true);
         seed.transform.DOMoveY(0.32f, 0.5f).Play();

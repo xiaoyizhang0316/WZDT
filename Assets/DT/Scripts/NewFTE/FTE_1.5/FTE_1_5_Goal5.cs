@@ -14,6 +14,7 @@ public class FTE_1_5_Goal5 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         //fruitQT.SetActive(false);
+        NewCanvasUI.My.GamePause(false);
         PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
         //Destroy(place);
         currentIncome = StageGoal.My.totalIncome;

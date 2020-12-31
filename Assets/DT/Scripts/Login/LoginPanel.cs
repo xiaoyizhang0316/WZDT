@@ -141,7 +141,7 @@ public class LoginPanel : MonoBehaviour
                 }
                 else
                 {
-                    if(NetworkMgr.My.playerDatas.fteProgress == -2)
+                    /*if(NetworkMgr.My.playerDatas.fteProgress == -2)
                     {
                         NetworkMgr.My.SetPlayerStatus("FTE_0-1", "");
                         SceneManager.LoadScene("FTE_0-1");
@@ -156,6 +156,16 @@ public class LoginPanel : MonoBehaviour
                         //NetworkMgr.My.GetLevelProgress();
                         //NetworkMgr.My.GetPlayerEquips();
                         //NetworkMgr.My.GetAnswers();
+                        NetworkMgr.My.SetPlayerStatus("Map", "");
+                        SceneManager.LoadScene("Map");
+                    }*/
+
+                    if (NetworkMgr.My.playerDatas.fte.Equals("0"))
+                    {
+                        NetworkMgr.My.SetPlayerStatus("FTE_0.5", "");
+                        SceneManager.LoadScene("FTE_0.5");
+                    }else
+                    {
                         NetworkMgr.My.SetPlayerStatus("Map", "");
                         SceneManager.LoadScene("Map");
                     }

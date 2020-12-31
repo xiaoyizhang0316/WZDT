@@ -22,6 +22,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
         Reset();
         //emptyPlace.DOMoveY(-6, 0.5f).OnComplete(() =>
         //{
+        NewCanvasUI.My.GamePause(false);
         peasant.gameObject.SetActive(true);
             peasant.DOMoveY(0.32f, 1f).Play();
             peasant.GetComponent<QualityRole>().checkQuality = needQuality;
