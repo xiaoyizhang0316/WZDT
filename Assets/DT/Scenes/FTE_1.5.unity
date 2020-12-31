@@ -2753,7 +2753,42 @@ PrefabInstance:
     - target: {fileID: 6762698527656334721, guid: a20dc357a1a9b4848836cae18c0a36fe,
         type: 3}
       propertyPath: baseRoleData.bulletCapacity
-      value: 60
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762698527656334721, guid: a20dc357a1a9b4848836cae18c0a36fe,
+        type: 3}
+      propertyPath: baseRoleData.baseRoleData.roleName
+      value: "\u8D38\u6613\u5546"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762698527656334721, guid: a20dc357a1a9b4848836cae18c0a36fe,
+        type: 3}
+      propertyPath: baseRoleData.effect
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762698527656334721, guid: a20dc357a1a9b4848836cae18c0a36fe,
+        type: 3}
+      propertyPath: baseRoleData.efficiency
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762698527656334721, guid: a20dc357a1a9b4848836cae18c0a36fe,
+        type: 3}
+      propertyPath: baseRoleData.tradeCost
+      value: 1600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762698527656334721, guid: a20dc357a1a9b4848836cae18c0a36fe,
+        type: 3}
+      propertyPath: baseRoleData.riskResistance
+      value: 640
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762698527656334721, guid: a20dc357a1a9b4848836cae18c0a36fe,
+        type: 3}
+      propertyPath: baseRoleData.ID
+      value: 90002
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762698527656334721, guid: a20dc357a1a9b4848836cae18c0a36fe,
+        type: 3}
+      propertyPath: baseRoleData.baseRoleData.level
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a20dc357a1a9b4848836cae18c0a36fe, type: 3}
@@ -6174,6 +6209,56 @@ PrefabInstance:
       propertyPath: isCanSee
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
+        type: 3}
+      propertyPath: baseRoleData.tradeCost
+      value: 2200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
+        type: 3}
+      propertyPath: baseRoleData.cost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
+        type: 3}
+      propertyPath: baseRoleData.effect
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
+        type: 3}
+      propertyPath: baseRoleData.efficiency
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
+        type: 3}
+      propertyPath: baseRoleData.range
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
+        type: 3}
+      propertyPath: baseRoleData.baseRoleData.roleName
+      value: "\u79CD\u5B50\u5546"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
+        type: 3}
+      propertyPath: baseRoleData.riskResistance
+      value: 930
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
+        type: 3}
+      propertyPath: baseRoleData.bulletCapacity
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
+        type: 3}
+      propertyPath: baseRoleData.ID
+      value: 90001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
+        type: 3}
+      propertyPath: baseRoleData.baseRoleData.level
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5280d1d7889004cec8e9a5869ee70aa9, type: 3}
 --- !u!1 &555586068 stripped
@@ -6279,9 +6364,9 @@ MonoBehaviour:
   entryTime: 1
   missiondatas:
     data:
-    - content: "1\u5206\u949F\u5185\u83B7\u5F978000\u5229\u6DA6"
+    - content: "1\u5206\u949F\u5185\u83B7\u5F9760000\u5229\u6DA6"
       currentNum: 0
-      maxNum: 8000
+      maxNum: 60000
       isMainmission: 1
       isFinish: 0
       isFail: 0
@@ -13384,7 +13469,7 @@ PrefabInstance:
     - target: {fileID: 6762698527656334721, guid: a20dc357a1a9b4848836cae18c0a36fe,
         type: 3}
       propertyPath: baseRoleData.ID
-      value: 15000
+      value: 90003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a20dc357a1a9b4848836cae18c0a36fe, type: 3}
@@ -19194,7 +19279,7 @@ PrefabInstance:
     - target: {fileID: 6424857105117808839, guid: 2fdd460111ec89647b7932b5432b81de,
         type: 3}
       propertyPath: x
-      value: 4
+      value: 98
       objectReference: {fileID: 0}
     - target: {fileID: 6482640030789367528, guid: 2fdd460111ec89647b7932b5432b81de,
         type: 3}
@@ -20018,10 +20103,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6439505712384454597, guid: e2714ecf8aa06fb408bd2920abf0ce4b,
+        type: 3}
+      propertyPath: baseRoleData.ID
+      value: 90004
+      objectReference: {fileID: 0}
     - target: {fileID: 6439505712384454598, guid: e2714ecf8aa06fb408bd2920abf0ce4b,
         type: 3}
       propertyPath: m_Name
       value: QualityMerchant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439505712384454598, guid: e2714ecf8aa06fb408bd2920abf0ce4b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2714ecf8aa06fb408bd2920abf0ce4b, type: 3}
