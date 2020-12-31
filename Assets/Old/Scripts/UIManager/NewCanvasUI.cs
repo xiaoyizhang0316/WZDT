@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Fungus;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -249,6 +250,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 }
             }
         }
+
     }
 
     /// <summary>

@@ -1096,6 +1096,21 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 Lose();
             }
+            
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    //string sceneName = SceneManager.GetActiveScene().name;
+                    if (SceneManager.GetActiveScene().name.Contains("."))
+                    {
+                        Debug.LogWarning("skip jiaoxue ");
+                        NetworkMgr.My.UpdatePlayerFTE(SceneManager.GetActiveScene().name.Split('_')[1], () =>
+                        {
+                            SceneManager.LoadScene("Map");
+                        });
+                    }
+                }
+            
+            
         }
     }
 

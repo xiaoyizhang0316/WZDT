@@ -109,7 +109,7 @@ public class ThreeWordsPanel : MonoSingleton<ThreeWordsPanel>
         //thisPanel.SetActive(false);
         if (SceneManager.GetActiveScene().name != "Map")
         {
-            if (NetworkMgr.My.playerDatas.fteProgress == -2)
+            /*if (NetworkMgr.My.playerDatas.fteProgress == -2)
             {
                 NetworkMgr.My.SetPlayerStatus("FTE_0-1", "");
                 SceneManager.LoadScene("FTE_0-1");
@@ -121,6 +121,15 @@ public class ThreeWordsPanel : MonoSingleton<ThreeWordsPanel>
                 SceneManager.LoadScene("FTE_0-2");
             }
             else
+            {
+                NetworkMgr.My.SetPlayerStatus("Map", "");
+                SceneManager.LoadScene("Map");
+            }*/
+            if (NetworkMgr.My.playerDatas.fte.Equals("0"))
+            {
+                NetworkMgr.My.SetPlayerStatus("FTE_0.5", "");
+                SceneManager.LoadScene("FTE_0.5");
+            }else
             {
                 NetworkMgr.My.SetPlayerStatus("Map", "");
                 SceneManager.LoadScene("Map");
