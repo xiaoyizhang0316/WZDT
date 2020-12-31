@@ -22,17 +22,17 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
+        StartCoroutine( bornPoint.GetComponent<Building>().BornEnemy1(30));
         NewCanvasUI.My.GamePause(false);
         seed.SetActive(true);
         merchant.SetActive(true);
         seed.transform.DOMoveY(0.32f, 0.5f).Play();
         seedPlace.transform.DOMoveY(0, 0.5f).Play();
-        merchant.transform.DOMoveY(0.32f, 0.5f).Play();        
+        merchant.transform.DOMoveY(0.32f, 0.5f).Play();
         merchantPlace.transform.DOMoveY(0, 0.5f).Play();
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
-        StartCoroutine( bornPoint.GetComponent<Building>().BornEnemy1(30));
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
