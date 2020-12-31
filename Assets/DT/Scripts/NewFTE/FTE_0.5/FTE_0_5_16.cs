@@ -18,8 +18,14 @@ public class FTE_0_5_16 : BaseGuideStep
     }
 
     // Update is called once per frame
+    
     public override IEnumerator StepStart()
     {
+        var list = FindObjectsOfType<ConsumeSign>();
+        for (int i = 0; i <list.Length ; i++)
+        {
+            Destroy(list[i].gameObject);
+        }
         StageGoal.My.maxRoleLevel = 5;
         transform.DOScale(1, 1).OnComplete(() =>
         {
