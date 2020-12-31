@@ -18,6 +18,7 @@ public class ProductData
         damage = data.damage;
         loadingSpeed = data.loadingSpeed;
         buffList =new List<int>() ;
+        wasteBuffList = new List<int>();
         buffList.AddRange(data.buffList);
         buffMaxCount = data.buffMaxCount;
     }
@@ -27,6 +28,7 @@ public class ProductData
         damage = data.damage;
         loadingSpeed = data.loadingSpeed;
         buffList =new List<int>() ;
+        wasteBuffList = new List<int>();
         buffList.AddRange(data.buffList);
         buffMaxCount = data.buffMaxCount;
         RepeatBulletCount = data.count;
@@ -49,6 +51,11 @@ public class ProductData
     public List<int> buffList = new List<int>();
 
     /// <summary>
+    /// 浪费的buffList
+    /// </summary>
+    public List<int> wasteBuffList = new List<int>();
+
+    /// <summary>
     /// Buff上限
     /// </summary>
     public int buffMaxCount;
@@ -58,6 +65,7 @@ public class ProductData
     {
         if (buffList.Count >= buffMaxCount)
         {
+            wasteBuffList.Add(buffId);
             return;
         }
         else
@@ -78,7 +86,10 @@ public class ProductData
                 //}
                 buffList.Add(buffId);
             }
-
+            else
+            {
+                wasteBuffList.Add(buffId);
+            }
         }
     }
 
