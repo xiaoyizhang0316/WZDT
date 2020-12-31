@@ -18,6 +18,7 @@ public class FTE_1_5_OpenCG : MonoBehaviour
         {
             PlayerData.My.playerGears.Clear();
             PlayerData.My.playerWorkers.Clear();
+            PlayerData.My.Reset();
             NetworkMgr.My.UpdatePlayerFTE("1.5", () =>
             {
                 SceneManager.LoadScene("Map");

@@ -86,9 +86,10 @@ public class FTE_1_5_Goal6 : BaseGuideStep
         {
             PlayerData.My.MapRole[i].ClearWarehouse();
         }
+        currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
         InvokeRepeating("CheckGoal",0, 0.2f);
         FTE_1_5_Manager.My.isClearGoods=false;
         NewCanvasUI.My.GameNormal();

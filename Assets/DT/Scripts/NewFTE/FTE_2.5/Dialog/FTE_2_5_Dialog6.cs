@@ -28,6 +28,7 @@ public class FTE_2_5_Dialog6 : BaseGuideStep
         {
             PlayerData.My.playerGears.Clear();
             PlayerData.My.playerWorkers.Clear();
+            PlayerData.My.Reset();
             NetworkMgr.My.UpdatePlayerFTE("2.5", ()=>SceneManager.LoadScene("Map"));
         });
        
