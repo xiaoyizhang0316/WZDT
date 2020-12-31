@@ -1,20 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class FTE_2_5_NewGoal3 : BaseGuideStep
 {
+    public int needQuality;
+    public int costLimit;
     public int limitTime = 0;
     public GameObject costPanel;
     public GameObject qualityCenter;
+    public GameObject place;
     private int currentCost = 0;
     private int currentTimeCount;
     public override IEnumerator StepStart()
     {
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
+        NewCanvasUI.My.GamePause(false);
+        qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
+        qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
+        qualityCenter.GetComponent<QualityRole>().needCheck = true;
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
-        NewCanvasUI.My.GameNormal();
+        //NewCanvasUI.My.GameNormal();
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         yield return new WaitForSeconds(0.5f);
     }
@@ -22,10 +30,13 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        yield return new WaitForSeconds(1f);
+        qualityCenter.GetComponent<QualityRole>().needCheck = false;
         costPanel.GetComponent<CostPanel>().HideAllCost();
-        PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID);
+        //place.transform.DOMoveY(-8.32f, 0.5f);
+        qualityCenter.transform.DOMoveY(-8f, 0.5f).Play().OnComplete(()=>PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID));
+
         FTE_2_5_Manager.My.isClearGoods = true;
+        yield return new WaitForSeconds(1f);
         DoEnd();
     }
 
@@ -39,18 +50,30 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return missiondatas.data[0].isFinish && missiondatas.data[1].isFinish;
+        return missiondatas.data[0].isFinish ;
     }
 
     void CheckGoal()
     {
         if (StageGoal.My.timeCount - currentTimeCount >= limitTime)
         {
+            missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
-            missiondatas.data[1].isFinish = false;
+            HttpManager.My.ShowTip("已超出时间限制，任务重置！");
             Reset();
             return;
         }
+        
+        costPanel.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost - currentCost, limitTime);
+        if (StageGoal.My.totalCost - currentCost >= costLimit)
+        {
+            HttpManager.My.ShowTip("已超出成本限制，任务重置！");
+            missiondatas.data[0].isFail = true;
+            missiondatas.data[0].isFinish = false;
+            Reset();
+            return;
+        }
+        
         if (missiondatas.data[0].isFinish == false)
         {
             missiondatas.data[0].currentNum = qualityCenter.GetComponent<BaseMapRole>().warehouse.Count;
@@ -62,7 +85,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         }
 
         
-        missiondatas.data[1].currentNum = StageGoal.My.totalCost - currentCost;
+        /*missiondatas.data[1].currentNum = StageGoal.My.totalCost - currentCost;
         costPanel.GetComponent<CostPanel>().ShowAllCost(missiondatas.data[1].currentNum, limitTime);
         if (missiondatas.data[1].currentNum <= missiondatas.data[1].maxNum)
         {
@@ -73,7 +96,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
             missiondatas.data[0].isFinish = false;
             missiondatas.data[1].isFinish = false;
             Reset();
-        }
+        }*/
     }
     
     void Reset()
@@ -82,6 +105,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         NewCanvasUI.My.GamePause(false);
         //StageGoal.My.killNumber = 0;
         FTE_2_5_Manager.My.isClearGoods=true;
+        missiondatas.data[0].isFail = false;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].ClearWarehouse();

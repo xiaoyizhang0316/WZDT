@@ -46,7 +46,7 @@ public class FTE_2_5_Goal3 : BaseGuideStep
     {
         if (missiondatas.data[0].isFinish == false)
         {
-            missiondatas.data[0].currentNum = FTE_2_5_Manager.My.sweetKillNum;
+            //missiondatas.data[0].currentNum = FTE_2_5_Manager.My.sweetKillNum;
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
                 missiondatas.data[0].isFinish = true;
@@ -54,7 +54,7 @@ public class FTE_2_5_Goal3 : BaseGuideStep
         }
         if (missiondatas.data[1].isFinish == false)
         {
-            missiondatas.data[1].currentNum = FTE_2_5_Manager.My.crispKillNum;
+            //missiondatas.data[1].currentNum = FTE_2_5_Manager.My.crispKillNum;
             if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
             {
                 missiondatas.data[1].isFinish = true;
@@ -62,7 +62,7 @@ public class FTE_2_5_Goal3 : BaseGuideStep
         }
         if (missiondatas.data[2].isFinish == false)
         {
-            missiondatas.data[2].currentNum = FTE_2_5_Manager.My.softKillNum;
+            //missiondatas.data[2].currentNum = FTE_2_5_Manager.My.softKillNum;
             if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
             {
                 missiondatas.data[2].isFinish = true;

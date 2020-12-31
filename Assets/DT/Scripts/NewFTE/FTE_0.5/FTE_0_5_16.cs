@@ -20,32 +20,45 @@ public class FTE_0_5_16 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        InvokeRepeating("Addxiaofei",1,time);
-       
-        yield return new WaitForSeconds(1f);
-
-    }
-
-    public void Addxiaofei()
+        StageGoal.My.maxRoleLevel = 5;
+        transform.DOScale(1, 1).OnComplete(() =>
         {
             StartCoroutine(BuildingManager.My.buildings[0]
                 .BornSingleTypeConsumer(type, count));
             StageGoal.My.killNumber = 0;
+            Addxiaofei();
+        }).Play();
+
+        yield return new WaitForSeconds(1f);
+
+    }
+    private Tween t;
+
+    public void Addxiaofei()
+        {
+      
+      t=       transform.DOScale(1, time).OnComplete(() =>
+            {
+                StartCoroutine(BuildingManager.My.buildings[0]
+                    .BornSingleTypeConsumer(type, count));
+                StageGoal.My.killNumber = 0;
+                Addxiaofei();
+            }).Play();
         }
 
     public override IEnumerator StepEnd()
     {
-        CancelInvoke("Addxiaofei"); 
+        t.Kill();
         yield break;
     }
 
     public override bool ChenkEnd()
     {
         missiondatas.data[0].currentNum = StageGoal.My.killNumber;
-
+     
         if (StageGoal.My.killNumber > missiondatas.data[0].maxNum)
         {
-            missiondatas.data[1].isFinish = true;
+            missiondatas.data[0].isFinish = true;
             return true;
 
         }

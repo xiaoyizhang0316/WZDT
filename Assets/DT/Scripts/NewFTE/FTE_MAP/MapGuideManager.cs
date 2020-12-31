@@ -14,10 +14,10 @@ public class MapGuideManager : GuideManager
         }
         else
         {
-            foreach (var item in NewCanvasUI.My.highLight)
+            /*foreach (var item in NewCanvasUI.My.highLight)
             {
                 item.SetActive(false);
-            }
+            }*/
 
             //if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
             //{

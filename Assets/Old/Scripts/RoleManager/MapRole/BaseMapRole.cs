@@ -524,8 +524,8 @@ public class BaseMapRole : MonoBehaviour
     #endregion
 
     #region 获取物品
-
-    public void AddPruductToWareHouse(ProductData data)
+   public  Action<ProductData>  OnMoved = null;
+    public virtual void AddPruductToWareHouse(ProductData data)
     {
         if (warehouse.Count >= baseRoleData.bulletCapacity)
         {
@@ -535,6 +535,10 @@ public class BaseMapRole : MonoBehaviour
         else
         {
             warehouse.Add(data);
+            if (OnMoved != null)
+            {
+                OnMoved(data);
+            }
         }
     }
 

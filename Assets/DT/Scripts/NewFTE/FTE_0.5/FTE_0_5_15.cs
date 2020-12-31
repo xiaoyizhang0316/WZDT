@@ -23,7 +23,13 @@ public class FTE_0_5_15 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        InvokeRepeating("Addxiaofei",1,time);
+        StageGoal.My.killNumber = 0;
+         transform.DOScale(1, 1).OnComplete(() =>
+        {
+            StartCoroutine(BuildingManager.My.buildings[0]
+                .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel1, count));
+            Addxiaofei();
+        }).Play();
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
@@ -45,22 +51,28 @@ public class FTE_0_5_15 : BaseGuideStep
 
     }
 
+    private Tween t;
+   
     public void Addxiaofei()
+    {
+          t= transform.DOScale(1, time).OnComplete(() =>
         {
             StartCoroutine(BuildingManager.My.buildings[0]
-                .BornSingleTypeConsumer(GameEnum.ConsumerType.OldpaoNormal, count));
-        
+                .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel1, count));
+            Addxiaofei();
+        }).Play();
+          
         }
 
     public override IEnumerator StepEnd()
     {
-        CancelInvoke("Addxiaofei");
-        PlayerData.My.GetNewGear(22301);
-        PlayerData.My.GetNewGear(22302);
-        PlayerData.My.GetNewGear(22303);
-        PlayerData.My.GetNewGear(22304); 
+      
+        t.Kill();
+   
+        roleImage.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        roleImage.SetActive(false);
 
-        yield break;
     }
 
     public override bool ChenkEnd()
@@ -69,8 +81,8 @@ public class FTE_0_5_15 : BaseGuideStep
         {
             missiondatas.data[0].isFinish = true;
         }
-
-        if (StageGoal.My.killNumber > missiondatas.data[1].maxNum)
+        missiondatas.data[1].currentNum = StageGoal.My.killNumber;
+        if (StageGoal.My.killNumber >= missiondatas.data[1].maxNum)
         {
             missiondatas.data[1].isFinish = true;
         }

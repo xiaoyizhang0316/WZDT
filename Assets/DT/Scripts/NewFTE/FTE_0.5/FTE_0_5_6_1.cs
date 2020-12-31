@@ -13,7 +13,8 @@ public class FTE_0_5_6_1 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-     
+        FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.seerJC2);
+
         yield return new WaitForSeconds(1f);
       
     }

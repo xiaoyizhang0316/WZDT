@@ -18,9 +18,10 @@ public class NPC : BaseNpc
 
     private void OnMouseOver()
     {
-        List<string> sceneList = new List<string>() { "FTE_0,5", "FTE_1.5", "FTE_2.5"};
+        List<string> sceneList = new List<string>() { "FTE_0.5", "FTE_1.5", "FTE_2.5"};
         if (sceneList.Contains(SceneManager.GetActiveScene().name))
         {
+            RoleFloatWindow.My.Init(transform, currentRole.baseRoleData.roleName,currentRole.baseRoleData.roleSkillType,currentRole.baseRoleData.roleType);
             return;
         }
         if (!EventSystem.current.IsPointerOverGameObject())

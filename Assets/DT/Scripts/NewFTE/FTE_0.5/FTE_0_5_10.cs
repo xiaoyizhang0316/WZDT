@@ -32,7 +32,8 @@ public class FTE_0_5_10 : BaseGuideStep
         time = StageGoal.My.timeCount;
         role.warehouse.Clear();
         role2.warehouse.Clear();
-
+        role.OnMoved += ChangeColor;
+        role2.OnMoved += ChangeColor1;
         yield return null;
     }
 
@@ -40,11 +41,45 @@ public class FTE_0_5_10 : BaseGuideStep
     {
         yield break;
     }
+    public void ChangeColor(ProductData data)
+    {
+        if (data.damage >= targetdamege)
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC1_ran,FTE_0_5Manager.My.sg );
+        }
 
+        else
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC1_ran,FTE_0_5Manager.My.sr ); 
+        }
+    } 
+    public void ChangeColor1(ProductData data)
+    {
+        if (data.damage >= targetdamege2)
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.bg );
+        }
+
+        else
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.br ); 
+        }
+    }
 
     public override bool ChenkEnd()
     {
-       
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+
+        }
+        StageGoal.My.maxRoleLevel = 3;
+        
+        TradeManager.My.ShowAllIcon();
         for (int i = 0; i <  role.warehouse.Count; i++)
         {
             if (role.warehouse[i].damage < targetdamege)

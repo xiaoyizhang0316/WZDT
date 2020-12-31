@@ -233,7 +233,7 @@ public class Building : MonoBehaviour
         while (isBornForFTE_2_5)
         {
             yield return new WaitForSeconds(0.7f);
-            ct = (ConsumerType)(UnityEngine.Random.Range(0, 2)==1?1:8);
+            ct = (ConsumerType)26;
             string path = "Prefabs/Consumer/" + ct.ToString();
             GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
             go.GetComponent<ConsumeSign>().Init(consumerPathList);
@@ -255,9 +255,47 @@ public class Building : MonoBehaviour
             yield return twe.WaitForCompletion();
         }
     }
+    
+    public IEnumerator BornEnemyForFTE_2_5_1(int type, int count)
+    {
+        ConsumerType ct;
+        //isBornForFTE_2_5 = true;
+        yield return new WaitForSeconds(0.3f);
+        DrawPathLine();
+        protalGameObject.transform.DOScale(new Vector3(1, 1, 0.52f), 1);
+        yield return new WaitForSeconds(0.5f);
+        //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
+        //while (isBornForFTE_2_5)
+        //{
+            for (int i = 0; i < count; i++)
+            {
+                yield return new WaitForSeconds(0.7f);
+                ct = (ConsumerType)type;
+                string path = "Prefabs/Consumer/" + ct.ToString();
+                GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+                go.GetComponent<ConsumeSign>().Init(consumerPathList);
+                go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+                go.transform.position = transform.position;
+                go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+            
+                /*if (buffnum != -1)
+                {
+                    BuffData buff = GameDataMgr.My.GetBuffDataByID(buffnum);
+                    BaseBuff baseBuff = new BaseBuff();
+                    baseBuff.Init(buff);
+                    baseBuff.SetConsumerBuff(go.GetComponent<ConsumeSign>());
+                    go.GetComponent<ConsumeSign>().bornBuffList.Add(buffnum);
+                }*/
+            
+                float waitTime = 0.35f;
+                Tweener twe = transform.DOScale(1f, waitTime);
+                yield return twe.WaitForCompletion();
+            }
+        //}
+    }
 
     public bool isBorn = false;
-    public IEnumerator BornEnemy1()
+    public IEnumerator BornEnemy1(int type=-1)
     {
         ConsumerType ct;
         isBorn = true;
@@ -269,7 +307,14 @@ public class Building : MonoBehaviour
         while (isBorn)
         {
             yield return new WaitForSeconds(1f);
-            ct = (ConsumerType)(UnityEngine.Random.Range(0, 2) == 1 ? 1 : 8);
+            if (type == -1)
+            {
+                ct = (ConsumerType)(UnityEngine.Random.Range(0, 2) == 1 ? 1 : 8);
+            }
+            else
+            {
+                ct = (ConsumerType) type;
+            }
             string path = "Prefabs/Consumer/" + ct.ToString();
             GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
             go.GetComponent<ConsumeSign>().Init(consumerPathList);

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Fungus;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -83,6 +84,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     // Start is called before the first frame update
     void Start()
     {
+        StageGoal.My.maxRoleLevel = 5;
         if (SceneManager.GetActiveScene().name == "Map")
         {
             return;
@@ -248,6 +250,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 }
             }
         }
+
     }
 
     /// <summary>

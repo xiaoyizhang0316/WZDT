@@ -12,18 +12,32 @@ public class FTE_0_5_10_1 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
-      
+      TradeManager.My.ShowAllIcon();
         yield return null;
     }
 
     public override IEnumerator StepEnd()
     {
-        yield break;
+        FTE_0_5Manager.My.DownRole( FTE_0_5Manager.My.seerJC1);
+        FTE_0_5Manager.My.DownRole( FTE_0_5Manager.My.seerJC2);
+       
+        yield return new WaitForSeconds(1);
+        PlayerData.My.DeleteRole(FTE_0_5Manager.My.seerJC1.GetComponent<BaseMapRole>().baseRoleData.ID);
+        PlayerData.My.DeleteRole(FTE_0_5Manager.My.seerJC2.GetComponent<BaseMapRole>().baseRoleData.ID);
     }
 
 
     public override bool ChenkEnd()
     {
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+
+        }
         int count = 0;
 
         for (int i = 0; i <PlayerData.My.MapRole.Count; i++)

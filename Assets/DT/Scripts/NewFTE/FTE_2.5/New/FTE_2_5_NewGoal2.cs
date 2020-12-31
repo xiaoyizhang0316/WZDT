@@ -13,17 +13,22 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     public GameObject endStar;
     public GameObject slider;
     public GameObject encorageLevel;
-
+    public List<GameObject> npcEncorageLevel;
+    public Transform tradeMgr;
     public GameObject border1;
     public GameObject border2;
     public override IEnumerator StepStart()
     {
         firstButton.SetActive(true);
         lastButton.SetActive(true);
-        startStar.transform.DOScale(Vector3.one, 0.02f);
-        endStar.transform.DOScale(Vector3.one, 0.02f);
-        slider.transform.DOScale(Vector3.one, 0.02f);
+        startStar.transform.DOScale(Vector3.one, 0.02f).Play();
+        endStar.transform.DOScale(Vector3.one, 0.02f).Play();
+        slider.transform.DOScale(Vector3.one, 0.02f).Play();
         encorageLevel.SetActive(true);
+        for (int i = 0; i < npcEncorageLevel.Count; i++)
+        {
+            npcEncorageLevel[i].SetActive(true);
+        }
         FTE_2_5_Manager.My.isClearGoods = false;
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         yield return new WaitForSeconds(0.5f);
@@ -32,6 +37,10 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        foreach (Transform child in tradeMgr)
+        {
+            TradeManager.My.DeleteTrade(child.GetComponent<TradeSign>().tradeData.ID);
+        }
         yield return new WaitForSeconds(0.5f);
     }
 

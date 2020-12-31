@@ -29,7 +29,12 @@ public class FTE_0_5_13 : BaseGuideStep
     {
         time = StageGoal.My.timeCount;
         role.warehouse.Clear();
+        role1.warehouse.Clear();
+        role.baseRoleData.bulletCapacity = 20;
+        role1.baseRoleData.bulletCapacity = 70;
 
+        role.OnMoved += ChangeColor;
+        role1.OnMoved += ChangeColor1;
        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
                     {
                         if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
@@ -55,10 +60,41 @@ public class FTE_0_5_13 : BaseGuideStep
         yield break;
     }
 
+    public void ChangeColor(ProductData data)
+    {
+        if (data.damage >targetdamege)
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC1_ran,FTE_0_5Manager.My.sg );
+        }
 
+        else
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC1_ran,FTE_0_5Manager.My.sr ); 
+        }
+    }
+    public void ChangeColor1(ProductData data)
+    {
+        if (data.damage >targetdamege1)
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.bg );
+        }
+
+        else
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.br ); 
+        }
+    }
     public override bool ChenkEnd()
     {
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
 
+        }
         for (int i = 0; i < role.warehouse.Count; i++)
         {
             if (role.warehouse[i].damage <targetdamege)
@@ -83,7 +119,7 @@ public class FTE_0_5_13 : BaseGuideStep
             time = StageGoal.My.timeCount ;
         }
   
-        if ( role.warehouse.Count >roleTargetCount&& role1.warehouse.Count >role1TargetCount)
+        if ( role.warehouse.Count >=roleTargetCount&& role1.warehouse.Count >=role1TargetCount)
         {
             missiondatas.data[0].isFinish = true; 
       

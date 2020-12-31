@@ -7,8 +7,9 @@ using DG.Tweening;
 public class FTE_1_5_Goal3 : BaseGuideStep
 {
     //public Transform emptyPlace;
+    public int costLimit;
     public int limitTime = 0;
-    public Transform place;
+    public int needQuality = 0;
     public Transform peasant;
     public GameObject costPanel;
     //public GameObject statPanel;
@@ -21,9 +22,12 @@ public class FTE_1_5_Goal3 : BaseGuideStep
         Reset();
         //emptyPlace.DOMoveY(-6, 0.5f).OnComplete(() =>
         //{
+        NewCanvasUI.My.GamePause(false);
         peasant.gameObject.SetActive(true);
-            place.DOMoveY(0, 0.5f);
-            peasant.DOMoveY(0.3f, 0.5f);
+            peasant.DOMoveY(0.32f, 1f).Play();
+            peasant.GetComponent<QualityRole>().checkQuality = needQuality;
+            peasant.GetComponent<QualityRole>().checkBuff = -1;
+            peasant.GetComponent<QualityRole>().needCheck = true;
         //});
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
@@ -32,6 +36,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        peasant.GetComponent<QualityRole>().needCheck = false;
         yield return new WaitForSeconds(2f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
     }
@@ -39,27 +44,43 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     public override bool ChenkEnd()
     {
         
-        return missiondatas.data[0].isFinish &&missiondatas.data[1].isFinish;
+        return missiondatas.data[0].isFinish;
     }
 
     void CheckGoal()
     {
         if (StageGoal.My.timeCount - lastTimeCount >= limitTime)
         {
+            HttpManager.My.ShowTip("超出时间限制，任务重置！");
+            missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
-            missiondatas.data[1].isFinish = false;
             Reset();
             return;
         }
-        if (missiondatas.data[0].isFinish == false && CheckBullet())
-        {
-            missiondatas.data[0].isFinish = true;
-        }
-
         
         currentCost = StageGoal.My.totalCost-lastCost ;
         costPanel.GetComponent<CostPanel>().ShowAllCost(currentCost, limitTime);
-        missiondatas.data[1].currentNum = currentCost;
+        if (currentCost >= costLimit)
+        {
+            HttpManager.My.ShowTip("超出成本限制，任务重置！");
+            missiondatas.data[0].isFail = true;
+            missiondatas.data[0].isFinish = false;
+            Reset();
+            return;
+        }
+        
+        if (missiondatas.data[0].isFinish == false )
+        {
+            missiondatas.data[0].currentNum = peasant.GetComponent<BaseMapRole>().warehouse.Count;
+            if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
+            {
+                missiondatas.data[0].isFinish = true;
+            }
+        }
+
+        
+        
+        /*missiondatas.data[1].currentNum = currentCost;
 
         if (missiondatas.data[1].currentNum <= missiondatas.data[1].maxNum)
         {
@@ -70,7 +91,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
             missiondatas.data[0].isFinish = false;
             missiondatas.data[1].isFinish = false;
             Reset();
-        }
+        }*/
         
     }
 
@@ -79,6 +100,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
         CancelInvoke();
         NewCanvasUI.My.GamePause(false);
         FTE_1_5_Manager.My.isClearGoods=true;
+        missiondatas.data[0].isFail = false;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].ClearWarehouse();

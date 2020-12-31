@@ -14,6 +14,9 @@ public class FTE_0_5_9 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC1);
+        FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC2);
+
         nongminLock.SetActive(false);
         yield return null;
     }
@@ -26,6 +29,7 @@ public class FTE_0_5_9 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
+        TradeManager.My.HideAllIcon();
         int count = 0;
 
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
@@ -35,11 +39,11 @@ public class FTE_0_5_9 : BaseGuideStep
                 count++;
                    
             }
-
+            missiondatas.data[0].currentNum = count;
             if (count >= 2)
             {
                 missiondatas.data[0].isFinish = true;
-                missiondatas.data[0].currentNum = count;
+          
                 return true;
 
             }

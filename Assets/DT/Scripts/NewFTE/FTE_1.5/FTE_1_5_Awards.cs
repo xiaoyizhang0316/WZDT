@@ -8,10 +8,9 @@ public class FTE_1_5_Awards : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-        PlayerData.My.GetNewWorker(10001);
-        PlayerData.My.GetNewWorker(10002);
-        PlayerData.My.GetNewWorker(10003);
-        PlayerData.My.GetNewWorker(10021);
+        PlayerData.My.GetNewWorker(90001);
+        PlayerData.My.GetNewWorker(90002);
+        PlayerData.My.GetNewWorker(90003);
         awards.SetActive(true);
         yield return new WaitForSeconds(0.5f);
     }

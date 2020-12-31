@@ -14,14 +14,14 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     public Transform place1;
     public Transform place2;
     public Transform place3;
-    public GameObject oldPlace1;
-    public GameObject oldPlace2;
-    public GameObject oldPlace3;
+    public Transform tradeMgr;
     private int sweetCount = 0;
     private int crispCount = 0;
     private int softCount = 0;
     public override IEnumerator StepStart()
     {
+        NewCanvasUI.My.GameNormal();
+        FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitPeasantCount = 3;
         peasant1.gameObject.SetActive(true);
         peasant2.gameObject.SetActive(true);
         peasant3.gameObject.SetActive(true);
@@ -41,10 +41,16 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     void DoEnd()
     {
         FTE_2_5_Manager.My.isClearGoods = true;
+        foreach (Transform trade in tradeMgr)
+        {
+            TradeManager.My.DeleteTrade(trade.GetComponent<TradeSign>().tradeData.ID);
+        }
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
         }
+        FTE_2_5_Manager.My.isClearGoods = false;
+        NewCanvasUI.My.GameNormal();
     }
 
     public override bool ChenkEnd()
@@ -56,8 +62,8 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     {
         if (missiondatas.data[0].isFinish == false)
         {
-            CheckSeed(peasant1, 305);
-            missiondatas.data[0].currentNum = sweetCount;
+            //CheckSeed(peasant1, 305);
+            missiondatas.data[0].currentNum = peasant1.GetComponent<BaseMapRole>().warehouse.Count;
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
                 missiondatas.data[0].isFinish = true;
@@ -66,8 +72,8 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         
         if (missiondatas.data[1].isFinish == false)
         {
-            CheckSeed(peasant2, 304);
-            missiondatas.data[1].currentNum = sweetCount;
+            //CheckSeed(peasant2, 304);
+            missiondatas.data[1].currentNum = peasant2.GetComponent<BaseMapRole>().warehouse.Count;
             if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
             {
                 missiondatas.data[1].isFinish = true;
@@ -76,8 +82,8 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         
         if (missiondatas.data[2].isFinish == false)
         {
-            CheckSeed(peasant3, 303);
-            missiondatas.data[2].currentNum = sweetCount;
+            //CheckSeed(peasant3, 303);
+            missiondatas.data[2].currentNum = peasant3.GetComponent<BaseMapRole>().warehouse.Count;
             if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
             {
                 missiondatas.data[2].isFinish = true;
@@ -116,20 +122,26 @@ public class FTE_2_5_Goal2 : BaseGuideStep
 
     void SeedBuildRise()
     {
-        oldPlace1.transform.DOMoveY(-10, 0.5f).OnComplete(() =>
-        {
-            place1.DOMoveY(0, 0.5f);
-            peasant1.DOMoveY(0.35f, 0.5f);
-        });
-        oldPlace2.transform.DOMoveY(-10, 0.5f).OnComplete(() =>
-        {
-            place2.DOMoveY(0, 0.5f);
-            peasant2.DOMoveY(0.35f, 0.5f);
-        });
-        oldPlace3.transform.DOMoveY(-10, 0.5f).OnComplete(() =>
-        {
-            place3.DOMoveY(0, 0.5f);
-            peasant3.DOMoveY(0.35f, 0.5f);
-        });
+        
+            //place1.DOMoveY(0, 1f).Play();
+            peasant1.DOMoveY(0.32f, 1f).Play();
+            peasant1.GetComponent<QualityRole>().checkBuff = 305;
+            peasant1.GetComponent<QualityRole>().checkQuality = -1;
+            peasant1.GetComponent<QualityRole>().needCheck = true;
+        
+        
+            //place2.DOMoveY(0, 1f).Play();
+            peasant2.DOMoveY(0.32f, 1f).Play();
+            peasant2.GetComponent<QualityRole>().checkBuff = 304;
+            peasant2.GetComponent<QualityRole>().checkQuality = -1;
+            peasant2.GetComponent<QualityRole>().needCheck = true;
+        
+        
+            //place3.DOMoveY(0, 1f).Play();
+            peasant3.DOMoveY(0.32f, 1f).Play();
+            peasant3.GetComponent<QualityRole>().checkBuff = 303;
+            peasant3.GetComponent<QualityRole>().checkQuality = -1;
+            peasant3.GetComponent<QualityRole>().needCheck = true;
+        
     }
 }

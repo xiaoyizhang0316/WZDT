@@ -21,7 +21,7 @@ public class FTE_0_5_4 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-      
+        buildTip.SetActive(true);
         yield return new WaitForSeconds(1f);
      
     }
@@ -32,11 +32,19 @@ public class FTE_0_5_4 : BaseGuideStep
         roleinfoTip.SetActive(false);
         buildTip.SetActive(false);
 
-      yield break; 
+   
+        yield return new WaitForSeconds(1f);
     }
 
     public override bool ChenkEnd()
     {
+        TradeManager.My.HideAllIcon();
+
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        {
+            if(   PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
+            PlayerData.My.MapRole[i].ringEffect.SetActive(true);
+        }
         if (roleInfo.activeSelf)
         {
          //   roleinfoTip.SetActive(true);

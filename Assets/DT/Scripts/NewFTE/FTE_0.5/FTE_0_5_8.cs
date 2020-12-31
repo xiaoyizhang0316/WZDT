@@ -32,6 +32,9 @@ public class FTE_0_5_8 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        role1.OnMoved += ChangeColor;
+        role2.OnMoved += ChangeColor1;
+        StageGoal.My.maxRoleLevel = 2;
         time = StageGoal.My.timeCount;
         role1.warehouse.Clear();
         role2.warehouse.Clear();
@@ -59,10 +62,41 @@ public class FTE_0_5_8 : BaseGuideStep
     {
         yield break;
     }
+    public void ChangeColor(ProductData data)
+    {
+        if (data.damage > seed1targetdamege)
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.seerJC1_ran,FTE_0_5Manager.My.sg );
+        }
 
+        else
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.seerJC1_ran,FTE_0_5Manager.My.sr ); 
+        }
+    }
+    public void ChangeColor1(ProductData data)
+    {
+        if (data.damage > 0)
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.seerJC2_ran,FTE_0_5Manager.My.sg );
+        }
 
+        else
+        {
+            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.seerJC2_ran,FTE_0_5Manager.My.sr ); 
+        }
+    }
     public override bool ChenkEnd()
     {
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+
+        }
         if (role1.warehouse.Count == role1.baseRoleData.bulletCapacity)
         {
             role1.warehouse.Clear();
@@ -100,6 +134,12 @@ public class FTE_0_5_8 : BaseGuideStep
         {
             missiondatas.data[1].isFinish = true;
          
+        }
+
+        else
+        {
+            missiondatas.data[1].isFinish = false;
+
         }
 
         if (  missiondatas.data[1].isFinish &&  missiondatas.data[0].isFinish )

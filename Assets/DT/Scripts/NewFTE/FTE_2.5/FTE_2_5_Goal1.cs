@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class FTE_2_5_Goal1 : BaseGuideStep
 {
     public GameObject checkBorder;
+    public GameObject checkBorder1;
     public GameObject checkImage;
     public GameObject wave;
     public override IEnumerator StepStart()
@@ -40,6 +41,7 @@ public class FTE_2_5_Goal1 : BaseGuideStep
             if (checkImage.activeInHierarchy)
             {
                 checkBorder.SetActive(true);
+                checkBorder1.SetActive(false);
                 if (checkBorder.GetComponent<MouseOnThis>().isOn)
                 {
                     checkBorder.SetActive(false);
