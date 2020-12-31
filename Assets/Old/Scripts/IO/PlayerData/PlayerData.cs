@@ -146,16 +146,21 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         DataUploadManager.My.AddData(DataEnum.角色_删除角色);
         Role target = GetRoleById(roleId);
 
-        foreach (var v in target.EquipList)
+        if(!target.isNpc)
         {
-            SetGearStatus(v.Key, false);
+            foreach (var v in target.EquipList)
+            {
+                SetGearStatus(v.Key, false);
+            }
+
+            foreach (var v in target.peoPleList)
+            {
+                SetWorkerStatus(v.Key, false);
+            }
         }
-        foreach (var v in target.peoPleList)
-        {
-            SetWorkerStatus(v.Key, false);
-        }
-        TradeManager.My.DeleteRoleAllTrade(roleId);
+
         BaseMapRole mapRole = GetMapRoleById(roleId);
+        TradeManager.My.DeleteRoleAllTrade(roleId);
         if (StageGoal.My.timeCount - mapRole.putTime <= 5)
             StageGoal.My.GetTechPoint(target.baseRoleData.costTech);
         if (guanJianZiYuanNengLi[2])

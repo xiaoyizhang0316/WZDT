@@ -78,7 +78,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 return data;
             }
         }
-        print("------------查不到此角色模板!-----------");
+        print("------------查不到此角色模板!-----------" + roleType.ToString() + "||||" + level.ToString());
         return null;
     }
 
