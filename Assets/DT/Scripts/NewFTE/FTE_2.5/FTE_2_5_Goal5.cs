@@ -52,7 +52,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         BornNoLike();
         InvokeRepeating("CheckReset", 3, 0.5f);
         //InvokeRepeating("CheckGoal", 2f, 0.5f);
-        InvokeRepeating("CheckBuffOut", 3, 5);
+        InvokeRepeating("CheckBuffOut", 3, 20);
         yield return new WaitForSeconds(0.5f);
     }
 
@@ -271,11 +271,11 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         {
             if (dealers[i] != null)
             {
-                for (int j = 0; j < dealers[i].warehouse.Count; j++)
+                for (int j = dealers[i].warehouse.Count-1; j >=0; j--)
                 {
-                    if (dealers[i].warehouse[j].buffList.Count > 2)
+                    if (dealers[i].warehouse[j].wasteBuffList!=null&& dealers[i].warehouse[j].wasteBuffList.Count >0)
                     {
-                        HttpManager.My.ShowTip("有口味效果被顶掉！");
+                        HttpManager.My.ShowTip("有口味效果被浪费！请注意检查‘<color=green>"+dealers[i].baseRoleData.baseRoleData.roleName+"</color>’相关的生产链！");
                         break;
                     }
                 }
