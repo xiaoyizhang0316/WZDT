@@ -1036,6 +1036,15 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void MenuHide()
     {
+        List<string> sceneList = new List<string>() { "FTE_0.5","FTE_1.5","FTE_2.5"};
+        if (sceneList.Contains(SceneManager.GetActiveScene().name))
+        {
+            GetComponent<RectTransform>().DOAnchorPosX(18000.4f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
+                menuCloseButton.gameObject.SetActive(false);
+                menuOpenButton.gameObject.SetActive(true);
+            }).Play();
+            return;
+        }
         GetComponent<RectTransform>().DOAnchorPosX(180.4f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
