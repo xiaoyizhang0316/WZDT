@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FTE_0_5_1 : BaseGuideStep
@@ -44,8 +45,9 @@ public class FTE_0_5_1 : BaseGuideStep
 
         if (isUpLoad&&float.Parse(NetworkMgr.My.playerDatas.fte)<=0.5f)
         {
+         PlayerData.My.Reset();
             info.SetActive(true);
-
+           NetworkMgr.My.UpdatePlayerFTE(0.5.ToString(), () => { SceneManager.LoadScene("Map"); });
         }
         yield return new WaitForSeconds(1f);
 
