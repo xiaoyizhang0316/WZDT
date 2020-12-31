@@ -53,7 +53,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
 
     void CheckGoal()
     {
-        if (StageGoal.My.timeCount - currentCost >= limitTime)
+        if (StageGoal.My.timeCount - currentTimeCount >= limitTime)
         {
             HttpManager.My.ShowTip("超出时间限制，任务重置！");
             missiondatas.data[0].isFail = true;
