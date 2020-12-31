@@ -47,11 +47,13 @@ public class BaseAssembleUISign : MonoBehaviour, IDragHandler, IEndDragHandler, 
             if (tag.Equals("Worker"))
             {
                 WorkerListManager.My.UninstallWorker(int.Parse(transform.parent.name.Split('_')[1]));
-                lastPlot.GetComponent<PlotSign>().target = null;
+                if(lastPlot!=null)
+                    lastPlot.GetComponent<PlotSign>().target = null;
             }
             else if (tag.Equals("equip"))
             {
                 EquipListManager.My.UninstallEquip(int.Parse(transform.parent.name.Split('_')[1]));
+                if(lastPlot!=null)
                 lastPlot.GetComponent<PlotSign>().target = null;
 
             }

@@ -48,7 +48,7 @@ public class FTE_0_5_11 : BaseGuideStep
 
     public void ChangeColor(ProductData data)
     {
-        if (data.damage >targetdamege)
+        if (data.damage >=targetdamege)
         {
             FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC1_ran,FTE_0_5Manager.My.sg );
         }
@@ -60,7 +60,7 @@ public class FTE_0_5_11 : BaseGuideStep
     }
     public void ChangeColor1(ProductData data)
     {
-        if (data.damage >targetdamege1)
+        if (data.damage >=targetdamege1)
         {
             FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.bg );
         }
@@ -106,7 +106,7 @@ public class FTE_0_5_11 : BaseGuideStep
             time = StageGoal.My.timeCount;
         }
  
-        if ( role.warehouse.Count >roleTargetCount&& role1.warehouse.Count >role1TargetCount)
+        if ( role.warehouse.Count >roleTargetCount&& role1.warehouse.Count >=role1TargetCount)
         {
             missiondatas.data[0].isFinish = true;
             return true; 
