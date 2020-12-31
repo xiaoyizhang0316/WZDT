@@ -62,7 +62,7 @@ public class FTE_0_5_16 : BaseGuideStep
     {
         missiondatas.data[0].currentNum = StageGoal.My.killNumber;
      
-        if (StageGoal.My.killNumber > missiondatas.data[0].maxNum)
+        if (StageGoal.My.killNumber >= missiondatas.data[0].maxNum)
         {
             missiondatas.data[0].isFinish = true;
             return true;
