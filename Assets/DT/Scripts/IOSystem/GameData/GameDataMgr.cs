@@ -447,6 +447,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             {
                 temp.buffList.Add(int.Parse(s));
             }
+            temp.encourageAdd = 1;
             temp.Init();
             gearDatas.Add(temp);
         }

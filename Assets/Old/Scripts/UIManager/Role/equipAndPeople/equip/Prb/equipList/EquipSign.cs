@@ -132,6 +132,26 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             //Image_buff.sprite = Resources.Load<Sprite>("Sprite/Buff/" + gearData.buffList[0].ToString());
             GetComponentInChildren<WaveBuffSign>().Init(gearData.buffList[0]);
         }
+        else
+        {
+            switch (gearData.encourageAdd)
+            {
+                case 1:
+                    GetComponentInChildren<WaveBuffSign>().Init(9001);
+                    break;
+                case 2:
+                    GetComponentInChildren<WaveBuffSign>().Init(9002);
+                    break;
+                case -1:
+                    GetComponentInChildren<WaveBuffSign>().Init(9003);
+                    break;
+                case -2:
+                    GetComponentInChildren<WaveBuffSign>().Init(9004);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     /// <summary>

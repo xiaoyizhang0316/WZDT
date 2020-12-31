@@ -56,6 +56,11 @@ public class GearItem
     /// BUFF列表
     /// </summary>
     public string buffList;
+
+    /// <summary>
+    /// 装备增加的激励等级
+    /// </summary>
+    public string encourageAdd;
 }
 
 public class GearsData

@@ -54,6 +54,11 @@ public class GearData
     public List<int> buffList;
 
     /// <summary>
+    /// 装备增加的激励等级
+    /// </summary>
+    public int encourageAdd;
+
+    /// <summary>
     /// Icon路径地址
     /// </summary>
     public string SpritePath;

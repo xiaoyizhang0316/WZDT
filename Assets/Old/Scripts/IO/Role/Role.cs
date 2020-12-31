@@ -74,6 +74,11 @@ public class Role
     public int landCost;
 
     /// <summary>
+    /// 装备增加的激励等级
+    /// </summary>
+    public int gearEncourageAdd;
+
+    /// <summary>
     /// 是否在地图中
     /// </summary>
     public bool inMap;

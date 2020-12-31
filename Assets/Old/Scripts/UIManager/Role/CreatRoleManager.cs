@@ -136,6 +136,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     public int finalBulletCapacity;
     public int finalRiskResistance;
     public int finalTechAdd;
+    public int finalEncourageAdd;
 
     public GameObject seedInfo;
     public GameObject peasantInfo;
@@ -327,6 +328,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             finalCost += (int)(tempData.cost * costAdd);
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
+            finalEncourageAdd += tempData.encourageAdd;
             CurrentRole.equipCost += tempData.cost;
         }
         PDPCheck();
@@ -359,6 +361,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         finalBulletCapacity = CurrentRole.baseRoleData.bulletCapacity;
         finalRiskResistance = CurrentRole.baseRoleData.riskResistance;
         finalTechAdd = 0;
+        finalEncourageAdd = 0;
         CurrentRole.equipCost = 0;
         CurrentRole.workerCost = 0;
         //CurrentRole.cost = CurrentRole.baseRoleData.cost;
@@ -393,6 +396,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         CurrentRole.tradeCost = finalTradeCost;
         CurrentRole.bulletCapacity = finalBulletCapacity;
         CurrentRole.techAdd = finalTechAdd;
+        CurrentRole.gearEncourageAdd = finalEncourageAdd;
         List<int> keys = EquipList.Keys.ToList();
         CurrentRole.EquipList.Clear();
         CurrentRole.peoPleList.Clear();
@@ -474,6 +478,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                 DataUploadManager.My.AddData(DataEnum.装备_增加);
             }    
         }
+        PlayerData.My.GetMapRoleById(CurrentRole.ID).RecalculateEncourageLevel();
         PlayerData.My.GetMapRoleById(CurrentRole.ID).ReaddAllBuff();
         WorkerListManager.My.QuitAndSave();
         EquipListManager.My.QuitAndSave();
