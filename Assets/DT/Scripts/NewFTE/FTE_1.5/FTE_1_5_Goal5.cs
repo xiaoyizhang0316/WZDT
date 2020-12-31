@@ -14,14 +14,17 @@ public class FTE_1_5_Goal5 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         //fruitQT.SetActive(false);
+        StartCoroutine( bornPoint.GetComponent<Building>().BornEnemy1(30));
+        Debug.LogWarning(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
         PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
+        NewCanvasUI.My.GamePause(false);
         //Destroy(place);
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
         costImage.GetComponent<CostPanel>().InitCostPanel(currentCost, StageGoal.My.timeCount);
         //StageGoal.My.totalIncome = 0;
         //NewGuideManager.My.BornEnemy1(30);
-        bornPoint.GetComponent<Building>().BornEnemy1(30);
+        //NewGuideManager.My.BornEnemy1(30);
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
     }
@@ -29,6 +32,7 @@ public class FTE_1_5_Goal5 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        bornPoint.GetComponent<Building>().isBorn = false;
         yield return new WaitForSeconds(2f);
         costImage.GetComponent<CostPanel>().HideAllCost();
     }

@@ -25,10 +25,10 @@ public class FTE_1_5_Goal1 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         tabPanel.SetActive(true);
-        bornPoint.GetComponent<Building>().isBorn = false;
         CancelInvoke();
-        
+
         yield return new WaitForSeconds(2);
+        bornPoint.GetComponent<Building>().isBorn = false;
         costPanel.GetComponent<CostPanel>().HideAllCost();
     }
 

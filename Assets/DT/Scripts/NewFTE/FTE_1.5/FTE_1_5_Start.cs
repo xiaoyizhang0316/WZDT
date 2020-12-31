@@ -13,17 +13,18 @@ public class FTE_1_5_Start : BaseGuideStep
         RoleSet();
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
+        //StartCoroutine( bornPoint.GetComponent<Building>().BornEnemy1(25));
+        NewGuideManager.My.BornEnemy1(25);
         openCG.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         // 升级免费，更换角色模版
         // 生成消费者
         //NewGuideManager.My.BornEnemy1(25);
-        bornPoint.GetComponent<Building>().BornEnemy1(25);
     }
 
     public override IEnumerator StepEnd()
     {
-        yield break;
+        yield return new WaitForSeconds(0.5f);
     }
 
     public override bool ChenkEnd()

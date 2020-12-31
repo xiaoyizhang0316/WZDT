@@ -23,11 +23,13 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     //public GameObject endPanel;
 
     private List<BaseMapRole> dealers;
+    private int currentTimeCount = 0;
     public override IEnumerator StepStart()
     {
-        FactoryUp();
         FTE_2_5_Manager.My.isClearGoods = false;
-        NewCanvasUI.My.GameNormal();
+        NewCanvasUI.My.GamePause(false);
+        FactoryUp();
+        currentTimeCount = StageGoal.My.timeCount;
         FTE_2_5_Manager.My.packageKillNum = 0;
         FTE_2_5_Manager.My.saleKillNum = 0;
         FTE_2_5_Manager.My.nolikeKillNum = 0;
@@ -48,8 +50,9 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         BornPackage();
         BornSale();
         BornNoLike();
+        InvokeRepeating("CheckReset", 3, 0.5f);
         //InvokeRepeating("CheckGoal", 2f, 0.5f);
-        InvokeRepeating("CheckBuffOut", 3, 30);
+        InvokeRepeating("CheckBuffOut", 3, 5);
         yield return new WaitForSeconds(0.5f);
     }
 
@@ -99,6 +102,9 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         return missiondatas.data[0].isFinish&&missiondatas.data[1].isFinish&&missiondatas.data[2].isFinish;
     }
 
+    private bool isPackageFail = false;
+    private bool isSaleFail = false;
+    private bool isNoLikeFail = false;
     void CheckPackage()
     {
         if (missiondatas.data[0].isFinish == false)
@@ -110,14 +116,24 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             }
             else
             {
-                if (!CheckHasConsume(bornPoint1.transform))
+                if (!CheckHasConsume(bornPoint1.transform) && (StageGoal.My.timeCount-currentTimeCount>3))
                 {
-                    HttpManager.My.ShowTip("任务1完成条件已无法满足，该任务重置！");
+                    isPackageFail = true;
+                    missiondatas.data[0].isFail = true;
+
+                    CancelInvoke("CheckPackage");
+                    /*HttpManager.My.ShowTip("任务1完成条件已无法满足，该任务重置！");
                     CancelInvoke("CheckPackage");
                     FTE_2_5_Manager.My.packageKillNum = 0;
                     missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
-                    BornPackage();
+                    BornPackage();*/
                 }
+            }
+        }else
+        {
+            if (isSaleFail || isNoLikeFail)
+            {
+                isPackageFail = true;
             }
         }
     }
@@ -133,14 +149,25 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             }
             else
             {
-                if (!CheckHasConsume(bornPoint2.transform))
+                if (!CheckHasConsume(bornPoint2.transform)&& (StageGoal.My.timeCount-currentTimeCount>3))
                 {
-                    HttpManager.My.ShowTip("任务2完成条件已无法满足，该任务重置！");
+                    isSaleFail = true;
+                    missiondatas.data[1].isFail = true;
+
+                    CancelInvoke("CheckSale");
+                    /*HttpManager.My.ShowTip("任务2完成条件已无法满足，该任务重置！");
                     CancelInvoke("CheckSale");
                     FTE_2_5_Manager.My.saleKillNum = 0;
                     missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
-                    BornSale();
+                    BornSale();*/
                 }
+            }
+        }
+        else
+        {
+            if (isPackageFail || isNoLikeFail)
+            {
+                isSaleFail = true;
             }
         }
     }
@@ -156,15 +183,61 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             }
             else
             {
-                if (!CheckHasConsume(bornPoint3.transform))
+                if (!CheckHasConsume(bornPoint3.transform)&& (StageGoal.My.timeCount-currentTimeCount>3))
                 {
-                    HttpManager.My.ShowTip("任务3完成条件已无法满足，该任务重置！");
+                    isNoLikeFail = true;
+                    missiondatas.data[2].isFail = true;
+                    CancelInvoke("CheckNolike");
+                    /*HttpManager.My.ShowTip("任务3完成条件已无法满足，该任务重置！");
                     CancelInvoke("CheckNolike");
                     FTE_2_5_Manager.My.nolikeKillNum = 0;
                     missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;
-                    BornNoLike();
+                    BornNoLike();*/
                 }
             }
+        }else
+        {
+            if (isPackageFail || isSaleFail)
+            {
+                isNoLikeFail = true;
+            }
+        }
+    }
+
+    void CheckReset()
+    {
+        if (isPackageFail && isSaleFail && isNoLikeFail)
+        {
+            HttpManager.My.ShowTip("任务未达成，任务重置！");
+            CancelInvoke("CheckReset");
+            /*CancelInvoke("CheckNolike");
+            CancelInvoke("CheckSale");
+            CancelInvoke("CheckPackage");*/
+            isPackageFail = false;
+            isSaleFail = false;
+            isNoLikeFail = false;
+            FTE_2_5_Manager.My.nolikeKillNum = 0;
+            missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;
+            missiondatas.data[2].isFinish = false;
+            missiondatas.data[2].isFail = false;
+
+            FTE_2_5_Manager.My.saleKillNum = 0;
+            missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
+            missiondatas.data[1].isFinish = false;
+            missiondatas.data[1].isFail = false;
+
+            FTE_2_5_Manager.My.packageKillNum = 0;
+            missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
+            missiondatas.data[0].isFinish = false;
+            missiondatas.data[0].isFail = false;
+
+            StageGoal.My.playerSatisfy = 0;
+            StageGoal.My.playerSatisfyText.text = "0";
+            currentTimeCount = StageGoal.My.timeCount;
+            BornNoLike();
+            BornSale();
+            BornPackage();
+            InvokeRepeating("CheckReset", 3, 0.5f);
         }
     }
 
