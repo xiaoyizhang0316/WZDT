@@ -38,9 +38,7 @@ public class FTE_0_5_1 : BaseGuideStep
 
         if (!isUpLoad&&equipAdd.Count > 0)
         {
-            info.SetActive(true);
-
-       
+            info.SetActive(true); 
         }
 
         if (isUpLoad )
