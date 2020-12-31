@@ -38,12 +38,10 @@ public class FTE_0_5_1 : BaseGuideStep
 
         if (!isUpLoad&&equipAdd.Count > 0)
         {
-            info.SetActive(true);
-
-       
+            info.SetActive(true); 
         }
 
-        if (isUpLoad&&float.Parse(NetworkMgr.My.playerDatas.fte)<=0.5f)
+        if (isUpLoad )
         {
          PlayerData.My.Reset();
             info.SetActive(true);
