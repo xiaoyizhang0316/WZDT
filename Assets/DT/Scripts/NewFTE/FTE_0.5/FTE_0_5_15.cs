@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -65,10 +64,8 @@ public class FTE_0_5_15 : BaseGuideStep
         }
 
     public override IEnumerator StepEnd()
-    {
-      
-        t.Kill();
-   
+    { 
+        t.Kill(); 
         roleImage.SetActive(true);
         yield return new WaitForSeconds(1f);
         roleImage.SetActive(false);

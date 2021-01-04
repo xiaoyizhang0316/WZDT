@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -62,7 +61,7 @@ public class FTE_0_5_16 : BaseGuideStep
     {
         missiondatas.data[0].currentNum = StageGoal.My.killNumber;
      
-        if (StageGoal.My.killNumber > missiondatas.data[0].maxNum)
+        if (StageGoal.My.killNumber >= missiondatas.data[0].maxNum)
         {
             missiondatas.data[0].isFinish = true;
             return true;
