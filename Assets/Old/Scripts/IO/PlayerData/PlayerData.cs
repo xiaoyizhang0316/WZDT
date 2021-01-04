@@ -459,6 +459,11 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         cheatIndex1 = false;
         cheatIndex2 = false;
         cheatIndex3 = false;
+
+        seedCount = 0;
+        peasantCount = 0;
+        merchantCount = 0;
+        dealerCount = 0;
         //playerConsumables.Clear();
     }
 
