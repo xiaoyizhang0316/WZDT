@@ -37,7 +37,7 @@ public class ShootingRange : MonoBehaviour
     {
         if (mapRole.baseRoleData.inMap)
         {
-            float delta = mapRole.baseRoleData.range / 32f * 5f;
+            float delta = mapRole.baseRoleData.range / 28f * 5f;
             transform.parent.localScale = new Vector3(delta, 1f, delta);
         }
     }

@@ -313,56 +313,52 @@ public class TradeSign : MonoBehaviour
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         int result = (int)((startRole.baseRoleData.tradeCost * startPer + startRole.baseRoleData.riskResistance));
         result += (int)((endRole.baseRoleData.tradeCost * endPer + endRole.baseRoleData.riskResistance));
-        int result1, result2;
         bool isOutTrade = false;
         if (startRole.isNpc || endRole.isNpc)
         {
             isOutTrade = true;
-            result1 = (int)(result * 0.6f);
-            result2 = (int)(result * 0.3f);
-            if (PlayerData.My.xianJinLiu[4])
-            {
-                int count = 0;
-                for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-                {
-                    if (!PlayerData.My.MapRole[i].isNpc)
-                    {
-                        count++;
-                    }
-                }
-                if (count <= 3)
-                {
-                    result1 = result1 * 90 / 100;
-                    result2 = result2 * 90 / 100;
-                }
-            }
+            result = (int)(result * 0.3f);
+            //if (PlayerData.My.xianJinLiu[4])
+            //{
+            //    int count = 0;
+            //    for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+            //    {
+            //        if (!PlayerData.My.MapRole[i].isNpc)
+            //        {
+            //            count++;
+            //        }
+            //    }
+            //    if (count <= 3)
+            //    {
+            //        result1 = result1 * 90 / 100;
+            //        result2 = result2 * 90 / 100;
+            //    }
+            //}
         }
         else
         {
-            result1 = (int)(result * 0.5f);
-            result2 = (int)(result * 0.2f);
+            result = (int)(result * 0.2f);
         }
-        if (isTradeSettingBest())
+        if (!isTradeSettingBest())
         {
-            result = result2;
-            if (PlayerData.My.xianJinLiu[1])
-            {
-                result = result * 95 / 100;
-            }
+            int diff = Mathf.Abs(startRole.baseRoleData.riskResistance - endRole.baseRoleData.riskResistance) / 2;
+            int ave = (startRole.baseRoleData.riskResistance + endRole.baseRoleData.riskResistance) / 2;
+            float per = 2f * diff / ave + 1f;
+            result = (int)(result * per);
+            //if (PlayerData.My.xianJinLiu[1])
+            //{
+            //    result = result * 95 / 100;
+            //}
         }
-        else
-        {
-            result = result1;
-        }
-        if (PlayerData.My.xianJinLiu[0])
-        {
-            result = result * 95 / 100;
-        }
-        if (isOutTrade && PlayerData.My.qiYeJiaZhi[5])
-        {
-            StageGoal.My.GetSatisfy((int)(result * 0.2f));
-            StageGoal.My.ScoreGet(ScoreType.金钱得分, (int)(result * 0.2f));
-        }
+        //if (PlayerData.My.xianJinLiu[0])
+        //{
+        //    result = result * 95 / 100;
+        //}
+        //if (isOutTrade && PlayerData.My.qiYeJiaZhi[5])
+        //{
+        //    StageGoal.My.GetSatisfy((int)(result * 0.2f));
+        //    StageGoal.My.ScoreGet(ScoreType.金钱得分, (int)(result * 0.2f));
+        //}
         StageGoal.My.CostPlayerGold(result);
         StageGoal.My.Expend(result, ExpendType.TradeCosts);
         return result;
