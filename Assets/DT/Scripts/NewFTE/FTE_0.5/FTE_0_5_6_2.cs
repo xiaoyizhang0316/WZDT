@@ -29,7 +29,7 @@ public class FTE_0_5_6_2 : BaseGuideStep
         role.OnMoved += ChangeColor;
 
         time = StageGoal.My.timeCount;
-        time -=1 ;
+         
         role.warehouse.Clear();
         
         yield return null;
