@@ -416,6 +416,8 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// <param name="data"></param>
     public void InitPlayerEquip(List<PlayerEquip> data)
     {
+            playerGears.Clear();
+            playerWorkers.Clear();
         for (int i = 0; i < data.Count; i++)
         {
             if (data[i].equipType == 0)
