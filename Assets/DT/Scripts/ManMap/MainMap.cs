@@ -25,6 +25,7 @@ public class MainMap : MonoBehaviour
         {
             InitMap();
         }
+      
     }
 
     void InitMap()
@@ -36,7 +37,7 @@ public class MainMap : MonoBehaviour
         GetUserLevel();
         GetLevelProgress();
         GetRoleTemplateData();
-        
+        PlayerData.My.Reset();
         PlayerData.My.isAllReady = false;
         PlayerData.My.isLocalReady = false;
     }

@@ -25,6 +25,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public CloseGuide guideClose;
 
+    public Button nextButton;
 
     /// <summary>
     /// 查找当前教学文案
@@ -71,32 +72,32 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public void PlayCurrentIndexGuide()
     {
-        if(!ftegob.activeInHierarchy)
+        if (!ftegob.activeInHierarchy)
             ftegob.SetActive(true);
         for (int i = 0; i < baseGuideSteps.Count; i++)
         {
             baseGuideSteps[i].gameObject.SetActive(false);
-        //if (baseGuideSteps[i].isOpen)
-        //{
-        //    Text[] text = baseGuideSteps[i].transform.GetComponentsInChildren<Text>();
-        //    for (int j = 0; j < text.Length; j++)
-        //    {
-        //        if (text[j].gameObject.activeSelf && text[j].transform.parent == this.baseGuideSteps[i].transform)
-        //        {
-        //            if (!baseGuideSteps[i].contentText.Contains(text[j]))
-        //            {
-        //                baseGuideSteps[i].contentText.Add(text[j]);
+            //if (baseGuideSteps[i].isOpen)
+            //{
+            //    Text[] text = baseGuideSteps[i].transform.GetComponentsInChildren<Text>();
+            //    for (int j = 0; j < text.Length; j++)
+            //    {
+            //        if (text[j].gameObject.activeSelf && text[j].transform.parent == this.baseGuideSteps[i].transform)
+            //        {
+            //            if (!baseGuideSteps[i].contentText.Contains(text[j]))
+            //            {
+            //                baseGuideSteps[i].contentText.Add(text[j]);
 
-        //            }
+            //            }
 
-        //        }
-        //    }
+            //        }
+            //    }
 
-        //    for (int j = 0; j < baseGuideSteps[i].contentText.Count; j++)
-        //    {
-        //        baseGuideSteps[i].contentText[j].text = GetCurrentSetpText(i, j);
-        //    }
-        //    }
+            //    for (int j = 0; j < baseGuideSteps[i].contentText.Count; j++)
+            //    {
+            //        baseGuideSteps[i].contentText[j].text = GetCurrentSetpText(i, j);
+            //    }
+            //    }
         }
 
         for (int i = 0; i < darkEffect._items.Count; i++)
@@ -137,6 +138,11 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public virtual IEnumerator Init()
     {
+        if (nextButton != null)
+        {
+            nextButton.onClick.AddListener(() => { PlayNextIndexGuide(); });
+        }
+
         StartCoroutine(OriginalData.My.ReadFTETexts(SceneManager.GetActiveScene().name.Split('_')[1]));
         if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
         {
@@ -144,13 +150,14 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         }
         else
         {
-          //  foreach (var item in NewCanvasUI.My.highLight)
-          //  {
-          //      item.SetActive(false);
-          //  }
+            //  foreach (var item in NewCanvasUI.My.highLight)
+            //  {
+            //      item.SetActive(false);
+            //  }
 
-            if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2"|| SceneManager.GetActiveScene().name == "FTE_0.5"
-                || SceneManager.GetActiveScene().name == "FTE_1.5"|| SceneManager.GetActiveScene().name == "FTE_2.5")
+            if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2" ||
+                SceneManager.GetActiveScene().name == "FTE_0.5"
+                || SceneManager.GetActiveScene().name == "FTE_1.5" || SceneManager.GetActiveScene().name == "FTE_2.5")
             {
                 currentGuideIndex = 0;
                 PlayerPrefs.SetInt("isUseGuide", 1);
@@ -168,15 +175,15 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
                 guideClose.Init();
             }
 
-        //   while (true)
-        //   {
-        //       yield return null;
-        //       if (OriginalData.My.fteData.datas.Count > 0)
-        //       {
-        //           break;
-        //           
-        //       }
-        //   }
+            //   while (true)
+            //   {
+            //       yield return null;
+            //       if (OriginalData.My.fteData.datas.Count > 0)
+            //       {
+            //           break;
+            //           
+            //       }
+            //   }
 
             PlayCurrentIndexGuide();
             yield return null;
@@ -192,7 +199,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         //    return;
         //}
         if (temp == null)
-           StartCoroutine(Init()) ;
+            StartCoroutine(Init());
     }
 
 
@@ -232,8 +239,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             }
         }
 
-      
-      
+
         if (guideClose != null)
             guideClose.gameObject.SetActive(false);
     }
@@ -255,7 +261,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     {
     }
 
-    public void BornEnemy1(int type=-1)
+    public void BornEnemy1(int type = -1)
     {
         Debug.Log("born");
         StartCoroutine(GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().BornEnemy1(type));
