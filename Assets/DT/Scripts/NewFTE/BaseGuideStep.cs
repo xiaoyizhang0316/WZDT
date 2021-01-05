@@ -247,6 +247,7 @@ public abstract class BaseGuideStep : MonoBehaviour
             {
                 while (!ChenkEnd() && GuideManager.My.ftegob.activeSelf)
                 {
+                    timeCount += 1;
                     Debug.Log("当前步骤"+GuideManager.My.currentGuideIndex+"检测中");
                     yield return null;
                 }
@@ -262,6 +263,7 @@ public abstract class BaseGuideStep : MonoBehaviour
         }
     }
 
+    public int timeCount= 0 ;
     public abstract IEnumerator StepStart();
     public abstract IEnumerator StepEnd();
 

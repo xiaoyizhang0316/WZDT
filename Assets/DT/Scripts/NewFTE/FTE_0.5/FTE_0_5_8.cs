@@ -59,7 +59,7 @@ public class FTE_0_5_8 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        yield break;
+        yield return new WaitForSeconds(2);
     }
     public void ChangeColor(ProductData data)
     {
@@ -87,6 +87,8 @@ public class FTE_0_5_8 : BaseGuideStep
     }
     public override bool ChenkEnd()
     {
+        info.text = " ";
+
         if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
         {
             transform.GetChild(0).gameObject.SetActive(false);
@@ -119,15 +121,20 @@ public class FTE_0_5_8 : BaseGuideStep
             missiondatas.data[0].isFinish = true;
            
         }
-        info.text = "目标效率为："+targetRate+"/60s                  当前效率为："+currentRate+"/60s";
         if ((StageGoal.My.timeCount - time) % 60 == 0)
         {
             role2.warehouse.Clear();
             time = StageGoal.My.timeCount;
         }
 
-        missiondatas.data[1].currentNum = role2.warehouse.Count; 
-        currentRate =(int)( (float)(role2.warehouse.Count)/ (float)(StageGoal.My.timeCount - time)  * 60);
+        missiondatas.data[1].currentNum = role2.warehouse.Count;
+        if (role2.warehouse.Count <= 0)
+        {
+            return false;
+        }
+
+        currentRate =(int)( (float)(role2.warehouse.Count)/ (float)(StageGoal.My.timeCount - time));
+        info.text = "目标效率为："+targetRate+"个/s                  当前效率为："+currentRate+"个/s";
 
         if (currentRate >= targetRate&&role2.warehouse.Count > missiondatas.data[1].maxNum)
         {
