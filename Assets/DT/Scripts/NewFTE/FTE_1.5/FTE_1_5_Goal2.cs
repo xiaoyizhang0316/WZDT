@@ -14,6 +14,7 @@ public class FTE_1_5_Goal2 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         InvokeRepeating("CheckGoal",0, 0.2f);
+        SkipButton();
         yield return new WaitForSeconds(0.5f);
     }
 
@@ -27,6 +28,26 @@ public class FTE_1_5_Goal2 : BaseGuideStep
     {
         
         return missiondatas.data[0].isFinish &&missiondatas.data[1].isFinish&&missiondatas.data[2].isFinish;
+    }
+    
+    void SkipButton()
+    {
+        if (needCheck && FTE_1_5_Manager.My.needSkip)
+        {
+            if (endButton != null)
+            {
+                
+                endButton.onClick.AddListener(() =>
+                {
+                    for (int i = 0; i < missiondatas.data.Count; i++)
+                    {
+                        missiondatas.data[i].isFinish = true;
+                    }
+                });
+                endButton.interactable = true;
+                endButton.gameObject.SetActive(true);
+            }
+        }
     }
 
     void CheckGoal()
