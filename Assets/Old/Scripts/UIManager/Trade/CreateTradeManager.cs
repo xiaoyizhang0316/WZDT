@@ -162,24 +162,21 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole));
         int result = (int)((startRoleTradeCost * startPer + startRole.baseRoleData.riskResistance));
         result += (int)((endRoleTradeCost * endPer + endRole.baseRoleData.riskResistance) );
-        int result1, result2;
         if (startRole.isNpc || endRole.isNpc)
         {
-            result1 = (int)(result * 0.6f);
-            result2 = (int)(result * 0.3f);
+            result = (int)(result * 0.3f);
         }
         else
         {
-            result1 = (int)(result * 0.5f);
-            result2 = (int)(result * 0.2f);
+            result = (int)(result * 0.2f);
         }
-        if (currentTrade.isTradeSettingBest())
+        if (!currentTrade.isTradeSettingBest())
         {
-            result = result2;
-        }
-        else
-        {
-            result = result1;
+            int diff = Mathf.Abs(startRole.baseRoleData.riskResistance - endRole.baseRoleData.riskResistance) / 2;
+            int ave = (startRole.baseRoleData.riskResistance + endRole.baseRoleData.riskResistance) / 2;
+            float per = 2f * diff / ave + 1f;
+            Debug.Log(per);
+            result = (int)(result * per);
         }
         tradeCostText.text = result.ToString();
     }

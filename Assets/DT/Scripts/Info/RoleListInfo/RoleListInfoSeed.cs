@@ -34,7 +34,7 @@ public class RoleListInfoSeed : BaseRoleListInfo
         effect.text = role.effect.ToString();
         Damage.text = (role.effect * 10f).ToString();
         efficiency.text = role.efficiency.ToString();
-        productTime.text = (role.efficiency / 20f).ToString() + " /s";
+        productTime.text = (role.efficiency / 20f).ToString("F2");
         tradCost.text = role.tradeCost.ToString();
         risk.text = role.riskResistance.ToString();
         montyCost.text = role.cost.ToString();

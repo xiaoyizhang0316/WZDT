@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,10 +12,6 @@ public class FTE_0_5_3 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        PlayerData.My.seedCount = 0;
-        PlayerData.My.peasantCount = 0;
-        PlayerData.My.merchantCount = 0;
-        PlayerData.My.dealerCount = 0;
       NewCanvasUI.My.GameNormal();
       maprole.OnMoved += ChangeColor;
      FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.seerJC1);
