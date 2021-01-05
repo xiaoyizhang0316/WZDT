@@ -60,7 +60,7 @@ public class FTE_0_5_8 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        yield break;
+        yield return new WaitForSeconds(2);
     }
     public void ChangeColor(ProductData data)
     {
