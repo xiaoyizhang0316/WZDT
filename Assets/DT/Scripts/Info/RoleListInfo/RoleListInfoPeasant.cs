@@ -34,7 +34,7 @@ public class RoleListInfoPeasant : BaseRoleListInfo
         effect.text =role.effect.ToString();
         reload.text = role.effect  .ToString()+"%";
         efficiency.text = role.efficiency.ToString();
-        productTime.text = (role.efficiency / 20f).ToString()+" /s";
+        productTime.text = (role.efficiency / 20f).ToString("F2");
         tradCost.text  =  role.tradeCost.ToString();
         risk .text = role.riskResistance.ToString();
         montyCost.text =   role.cost.ToString();

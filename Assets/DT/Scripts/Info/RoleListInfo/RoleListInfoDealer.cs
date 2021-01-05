@@ -11,6 +11,8 @@ public class RoleListInfoDealer : BaseRoleListInfo
 
     public Text efficiency;
 
+    public Text roleRange;
+
     public Text Range;
 
     public Text tradCost;
@@ -19,7 +21,8 @@ public class RoleListInfoDealer : BaseRoleListInfo
 
     public Text technology;
 
-    public GameObject efficiencyBar; 
+    public GameObject efficiencyBar;
+    public GameObject rangeBar;
     public Transform productTF;
 
     public bool isShowProduct;
@@ -30,9 +33,10 @@ public class RoleListInfoDealer : BaseRoleListInfo
     public override void Init(Role role)
     {
       
-        fireTime.text = (role.efficiency * -0.01f + 1.5f  ).ToString("F2") +"s";
-        efficiency.text =role.efficiency.ToString();
-        Range.text = (role.range ).ToString() ;
+        fireTime.text = (1f / (role.efficiency * -0.01f + 1.5f  )).ToString("F2");
+        efficiency.text = role.efficiency.ToString();
+        roleRange.text = role.range.ToString();
+        Range.text = (role.range / 14.5f).ToString("F2");
         tradCost.text  =  role.tradeCost.ToString();
         risk .text =  role.riskResistance.ToString();
         montyCost.text =  role.cost.ToString();
@@ -48,7 +52,9 @@ public class RoleListInfoDealer : BaseRoleListInfo
         efficiencyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(role.efficiency/ 120f * 150f,
                 efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
-        
+        rangeBar.GetComponent<RectTransform>().DOSizeDelta(new Vector2(role.range / 120f * 150f,
+            rangeBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
+
     }
     
     public void ShowLastpruduct(Role role)
