@@ -13,16 +13,19 @@ public class FTE_0_5_8 : BaseGuideStep
 
     public int seed1targetdamege;
     public Text info;
+
     /// <summary>
     /// 目标速率
     /// </summary>
-    public int targetRate;
+    public float targetRate;
+
     int time;
 
     /// <summary>
     /// 当前速率
     /// </summary>
-    public int currentRate;
+    public float currentRate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,54 +40,61 @@ public class FTE_0_5_8 : BaseGuideStep
         time = StageGoal.My.timeCount;
         role1.warehouse.Clear();
         role2.warehouse.Clear();
-  yield return new WaitForSeconds(1f);
- //  for (int i = 0; i <land.Count; i++)
- //  {
- //      land[i].transform.DOLocalMoveY(-5, 1f).Play();
- //  }
- //  yield return new WaitForSeconds(1f);
- //  for (int i = 0; i <land.Count; i++)
- //  {
- //      land[i].transform.DOLocalMoveY(0, 1f).Play();
- // 
- //  }
+        info.text = "目标效率为：" + targetRate + "个/s                  当前效率为：" + 0 + "个/s";
 
- //  for (int i = 0; i < Seedtesting.Count; i++)
- //  {
- //      Seedtesting[i].SetActive(true);
- //      Seedtesting[i].transform.DOLocalMoveY(0.3f, 1f).Play();
+        yield return new WaitForSeconds(1f);
+        //  for (int i = 0; i <land.Count; i++)
+        //  {
+        //      land[i].transform.DOLocalMoveY(-5, 1f).Play();
+        //  }
+        //  yield return new WaitForSeconds(1f);
+        //  for (int i = 0; i <land.Count; i++)
+        //  {
+        //      land[i].transform.DOLocalMoveY(0, 1f).Play();
+        // 
+        //  }
 
- //  }
+        //  for (int i = 0; i < Seedtesting.Count; i++)
+        //  {
+        //      Seedtesting[i].SetActive(true);
+        //      Seedtesting[i].transform.DOLocalMoveY(0.3f, 1f).Play();
+
+        //  }
     }
 
     public override IEnumerator StepEnd()
     {
         yield return new WaitForSeconds(2);
     }
+
     public void ChangeColor(ProductData data)
     {
         if (data.damage > seed1targetdamege)
         {
-            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.seerJC1_ran,FTE_0_5Manager.My.sg );
+            FTE_0_5Manager.My.ChangeColor(FTE_0_5Manager.My.seerJC1_ran, FTE_0_5Manager.My.sg);
         }
 
         else
         {
-            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.seerJC1_ran,FTE_0_5Manager.My.sr ); 
+            FTE_0_5Manager.My.ChangeColor(FTE_0_5Manager.My.seerJC1_ran, FTE_0_5Manager.My.sr);
         }
     }
+
     public void ChangeColor1(ProductData data)
     {
         if (data.damage > 0)
         {
-            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.seerJC2_ran,FTE_0_5Manager.My.sg );
+            FTE_0_5Manager.My.ChangeColor(FTE_0_5Manager.My.seerJC2_ran, FTE_0_5Manager.My.sg);
         }
 
         else
         {
-            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.seerJC2_ran,FTE_0_5Manager.My.sr ); 
+            FTE_0_5Manager.My.ChangeColor(FTE_0_5Manager.My.seerJC2_ran, FTE_0_5Manager.My.sr);
         }
     }
+
+    public int daojishi = 0;
+
     public override bool ChenkEnd()
     {
         info.text = " ";
@@ -96,16 +106,18 @@ public class FTE_0_5_8 : BaseGuideStep
         else
         {
             transform.GetChild(0).gameObject.SetActive(true);
-
         }
+
         if (role1.warehouse.Count == role1.baseRoleData.bulletCapacity)
         {
             role1.warehouse.Clear();
         }
+
         if (role2.warehouse.Count == role2.baseRoleData.bulletCapacity)
         {
             role2.warehouse.Clear();
         }
+
         for (int j = 0; j < role1.warehouse.Count; j++)
         {
             if (role1.warehouse[j].damage < seed1targetdamege)
@@ -113,14 +125,14 @@ public class FTE_0_5_8 : BaseGuideStep
                 role1.warehouse.Remove(role1.warehouse[j]);
             }
         }
-       
+
         missiondatas.data[0].currentNum = role1.warehouse.Count;
-     
+
         if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
         {
             missiondatas.data[0].isFinish = true;
-           
         }
+
         if ((StageGoal.My.timeCount - time) % 60 == 0)
         {
             role2.warehouse.Clear();
@@ -133,22 +145,34 @@ public class FTE_0_5_8 : BaseGuideStep
             return false;
         }
 
-        currentRate =(int)( (float)(role2.warehouse.Count)/ (float)(StageGoal.My.timeCount - time));
-        info.text = "目标效率为："+targetRate+"个/s                  当前效率为："+currentRate+"个/s";
+        currentRate = (float) (role2.warehouse.Count) / (float) (StageGoal.My.timeCount - time);
+        info.text = "目标效率为：" + targetRate + "个/s                  当前效率为：" + currentRate.ToString("f2") + "个/s";
 
-        if (currentRate >= targetRate&&role2.warehouse.Count > missiondatas.data[1].maxNum)
+        if (currentRate >= targetRate && role2.warehouse.Count > missiondatas.data[1].maxNum)
         {
-            missiondatas.data[1].isFinish = true;
-         
+            if (daojishi == 0)
+            {
+                daojishi = timeCount;
+            }
+
+            if (daojishi != 0 && timeCount - daojishi >= 150)
+            {
+                missiondatas.data[1].isFinish = true;
+            }
+            else
+            {
+                missiondatas.data[1].isFinish = true;
+                return false;
+
+            }
         }
 
         else
         {
             missiondatas.data[1].isFinish = false;
-
         }
 
-        if (  missiondatas.data[1].isFinish &&  missiondatas.data[0].isFinish )
+        if (missiondatas.data[1].isFinish && missiondatas.data[0].isFinish)
         {
             return true;
         }
@@ -156,6 +180,5 @@ public class FTE_0_5_8 : BaseGuideStep
         {
             return false;
         }
-
     }
 }
