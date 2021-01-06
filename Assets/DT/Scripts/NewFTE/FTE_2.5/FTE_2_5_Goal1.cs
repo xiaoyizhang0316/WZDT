@@ -47,6 +47,7 @@ public class FTE_2_5_Goal1 : BaseGuideStep
         WaveCount.My.closeBtn.SetActive(false);
         WaveCount.My.closeBtn.GetComponent<Button>().interactable = true;
         WaveCount.My.waveBg.gameObject.SetActive(false);
+        FloatWindow.My.Hide();
         Destroy(wave);
     }
 
