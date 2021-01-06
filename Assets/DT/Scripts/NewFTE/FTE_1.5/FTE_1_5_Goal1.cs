@@ -19,6 +19,7 @@ public class FTE_1_5_Goal1 : BaseGuideStep
         currentTime = StageGoal.My.timeCount;
         NewCanvasUI.My.GamePause(false);
         costPanel.GetComponent<CostPanel>().InitCostPanel(0,currentTime);
+        SkipButton();
         yield return new WaitForSeconds(0.5f);
     }
 
@@ -30,6 +31,26 @@ public class FTE_1_5_Goal1 : BaseGuideStep
         yield return new WaitForSeconds(2);
         bornPoint.GetComponent<Building>().isBorn = false;
         costPanel.GetComponent<CostPanel>().HideAllCost();
+    }
+
+    void SkipButton()
+    {
+        if (needCheck && FTE_1_5_Manager.My.needSkip)
+        {
+            if (endButton != null)
+            {
+                
+                endButton.onClick.AddListener(() =>
+                {
+                    for (int i = 0; i < missiondatas.data.Count; i++)
+                    {
+                        missiondatas.data[i].isFail = true;
+                    }
+                });
+                endButton.interactable = true;
+                endButton.gameObject.SetActive(true);
+            }
+        }
     }
 
     public override bool ChenkEnd()

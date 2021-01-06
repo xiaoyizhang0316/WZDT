@@ -39,9 +39,30 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         //dealer3.transform.DOMoveY(0.32f, 1f).Play();
         //place3.transform.DOMoveY(0f, 1f).Play();
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
+        SkipButton();
         StartCoroutine( bornPoint.GetComponent<Building>().BornEnemyForFTE_2_5(-1));
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         yield return new WaitForSeconds(0.5f);
+    }
+    
+    void SkipButton()
+    {
+        if (needCheck && FTE_2_5_Manager.My.needSkip)
+        {
+            if (endButton != null)
+            {
+                
+                endButton.onClick.AddListener(() =>
+                {
+                    for (int i = 0; i < missiondatas.data.Count; i++)
+                    {
+                        missiondatas.data[i].isFinish = true;
+                    }
+                });
+                endButton.interactable = true;
+                endButton.gameObject.SetActive(true);
+            }
+        }
     }
 
     public override IEnumerator StepEnd()

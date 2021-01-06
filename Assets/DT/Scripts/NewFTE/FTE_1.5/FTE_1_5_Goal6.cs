@@ -34,8 +34,29 @@ public class FTE_1_5_Goal6 : BaseGuideStep
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
+        SkipButton();
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
+    }
+
+    void SkipButton()
+    {
+        if (needCheck && FTE_1_5_Manager.My.needSkip)
+        {
+            if (endButton != null)
+            {
+                
+                endButton.onClick.AddListener(() =>
+                {
+                    for (int i = 0; i < missiondatas.data.Count; i++)
+                    {
+                        missiondatas.data[i].isFinish = true;
+                    }
+                });
+                endButton.interactable = true;
+                endButton.gameObject.SetActive(true);
+            }
+        }
     }
 
     public override IEnumerator StepEnd()

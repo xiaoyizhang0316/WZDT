@@ -212,7 +212,7 @@ public class MainMap : MonoBehaviour
 
     private void GetEquips()
     {
-        if (PlayerData.My.playerGears.Count == 0)
+        //if (PlayerData.My.playerGears.Count == 0)
             NetworkMgr.My.GetPlayerEquips((data)=> {
                 PlayerData.My.InitPlayerEquip(data);
             });
