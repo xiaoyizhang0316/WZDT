@@ -50,10 +50,30 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         BornPackage();
         BornSale();
         BornNoLike();
+        SkipButton();
         InvokeRepeating("CheckReset", 3, 0.5f);
         //InvokeRepeating("CheckGoal", 2f, 0.5f);
         InvokeRepeating("CheckBuffOut", 3, 20);
         yield return new WaitForSeconds(0.5f);
+    }
+    void SkipButton()
+    {
+        if (needCheck && FTE_2_5_Manager.My.needSkip)
+        {
+            if (endButton != null)
+            {
+                
+                endButton.onClick.AddListener(() =>
+                {
+                    for (int i = 0; i < missiondatas.data.Count; i++)
+                    {
+                        missiondatas.data[i].isFinish = true;
+                    }
+                });
+                endButton.interactable = true;
+                endButton.gameObject.SetActive(true);
+            }
+        }
     }
 
     void FactoryUp()

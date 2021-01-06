@@ -26,8 +26,29 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         peasant2.gameObject.SetActive(true);
         peasant3.gameObject.SetActive(true);
         SeedBuildRise();
+        SkipButton();
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);
         yield return new WaitForSeconds(0.5f);
+    }
+    
+    void SkipButton()
+    {
+        if (needCheck && FTE_2_5_Manager.My.needSkip)
+        {
+            if (endButton != null)
+            {
+                
+                endButton.onClick.AddListener(() =>
+                {
+                    for (int i = 0; i < missiondatas.data.Count; i++)
+                    {
+                        missiondatas.data[i].isFinish = true;
+                    }
+                });
+                endButton.interactable = true;
+                endButton.gameObject.SetActive(true);
+            }
+        }
     }
 
     public override IEnumerator StepEnd()

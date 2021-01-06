@@ -17,7 +17,28 @@ public class FTE_2_5_Goal1 : BaseGuideStep
         wave.SetActive(true);
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = true;
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);
+        SkipButton();
         yield return new WaitForSeconds(0.5f);
+    }
+    
+    void SkipButton()
+    {
+        if (needCheck && FTE_2_5_Manager.My.needSkip)
+        {
+            if (endButton != null)
+            {
+                
+                endButton.onClick.AddListener(() =>
+                {
+                    for (int i = 0; i < missiondatas.data.Count; i++)
+                    {
+                        missiondatas.data[i].isFinish = true;
+                    }
+                });
+                endButton.interactable = true;
+                endButton.gameObject.SetActive(true);
+            }
+        }
     }
 
     public override IEnumerator StepEnd()
@@ -26,6 +47,7 @@ public class FTE_2_5_Goal1 : BaseGuideStep
         WaveCount.My.closeBtn.SetActive(false);
         WaveCount.My.closeBtn.GetComponent<Button>().interactable = true;
         WaveCount.My.waveBg.gameObject.SetActive(false);
+        FloatWindow.My.Hide();
         Destroy(wave);
     }
 
