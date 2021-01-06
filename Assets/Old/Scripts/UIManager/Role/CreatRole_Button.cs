@@ -67,6 +67,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             Destroy(role, 0f);
             role = null;
             RoleFloatWindow.My.Hide();
+            if(dragImg!=null)
             dragImg.raycastTarget = true;
         }
     }
@@ -155,7 +156,8 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         role.GetComponent<BaseMapRole>().baseRoleData = new Role();
         role.GetComponent<BaseMapRole>().baseRoleData = tempRole;
         role.GetComponent<BaseMapRole>().HideTradeButton(false);
-        dragImg.raycastTarget = false;
+        if(dragImg!=null)
+            dragImg.raycastTarget = false;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -202,7 +204,8 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                                 {
                                     role.transform.DOScale(1f, 0.15f).Play().OnComplete(()=> {
                                         role = null;
-                                        dragImg.raycastTarget = true;
+                                        if(dragImg!=null)
+                                            dragImg.raycastTarget = true;
                                     }).timeScale = 1f / DOTween.timeScale;
                                 }).Play().timeScale = 1f / DOTween.timeScale;
                         }).SetEase(Ease.Linear).Play().timeScale = 1f / DOTween.timeScale;
@@ -263,14 +266,16 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     print("false    ");
                     Destroy(role, 0.01f);
                     RoleFloatWindow.My.Hide();
-                    dragImg.raycastTarget = true;
+                    if(dragImg!=null)
+                        dragImg.raycastTarget = true;
                 }
                 break;
             }
         }
         if (!isSuccess)
         {
-            dragImg.raycastTarget = true;
+            if(dragImg!=null)
+                dragImg.raycastTarget = true;
             RoleFloatWindow.My.Hide();
             Destroy(role, 0.01f);
         }

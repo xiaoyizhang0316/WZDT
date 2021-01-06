@@ -27,7 +27,7 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
 
     public void Update()
     {
-        if (StageGoal.My.playerGold <= 100)
+        if (StageGoal.My.playerGold <= 10000)
         {
             StageGoal.My.playerGold = 1000000;
         }

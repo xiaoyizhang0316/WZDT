@@ -31,7 +31,25 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         costPanel.GetComponent<CostPanel>().InitCostPanel(0,currentTime);
         isEnd = false;
+        SkipButton();
         yield return new WaitForSeconds(0.5f);
+    }
+    
+    void SkipButton()
+    {
+        if (needCheck && FTE_2_5_Manager.My.needSkip)
+        {
+            if (endButton != null)
+            {
+                
+                endButton.onClick.AddListener(() =>
+                {
+                    isEnd = true;
+                });
+                endButton.interactable = true;
+                endButton.gameObject.SetActive(true);
+            }
+        }
     }
 
     public override IEnumerator StepEnd()

@@ -24,7 +24,27 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
         //NewCanvasUI.My.GameNormal();
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
+        SkipButton();
         yield return new WaitForSeconds(0.5f);
+    }
+    void SkipButton()
+    {
+        if (needCheck && FTE_2_5_Manager.My.needSkip)
+        {
+            if (endButton != null)
+            {
+                
+                endButton.onClick.AddListener(() =>
+                {
+                    for (int i = 0; i < missiondatas.data.Count; i++)
+                    {
+                        missiondatas.data[i].isFinish = true;
+                    }
+                });
+                endButton.interactable = true;
+                endButton.gameObject.SetActive(true);
+            }
+        }
     }
 
     public override IEnumerator StepEnd()

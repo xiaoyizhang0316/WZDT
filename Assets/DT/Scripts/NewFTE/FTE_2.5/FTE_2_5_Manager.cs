@@ -14,6 +14,8 @@ public class FTE_2_5_Manager : MonoSingleton<FTE_2_5_Manager>
 
     public bool isClearGoods = false;
 
+    public bool needSkip = false;
+
     public void CheckTasteKill(int index)
     {
         switch (index)
