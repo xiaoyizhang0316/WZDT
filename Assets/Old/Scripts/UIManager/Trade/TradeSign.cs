@@ -341,10 +341,15 @@ public class TradeSign : MonoBehaviour
         }
         if (!isTradeSettingBest())
         {
+            if (startRole.baseRoleData.riskResistance == 0 || endRole.baseRoleData.riskResistance == 0)
+            {
+                return 0;
+            }
+
             int diff = Mathf.Abs(startRole.baseRoleData.riskResistance - endRole.baseRoleData.riskResistance) / 2;
             int ave = (startRole.baseRoleData.riskResistance + endRole.baseRoleData.riskResistance) / 2;
             float per = 2f * diff / ave + 1f;
-            result = (int)(result * per);
+            result = (int)(result * per); 
             //if (PlayerData.My.xianJinLiu[1])
             //{
             //    result = result * 95 / 100;
