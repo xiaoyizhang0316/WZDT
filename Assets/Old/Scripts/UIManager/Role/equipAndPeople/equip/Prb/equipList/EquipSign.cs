@@ -249,7 +249,15 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (time < 0.3f)
+        StartCoroutine(EndDrag());
+        //isOccupation =    Equip.GetComponent<DragUI>().CheckAllRight(false);
+
+    }
+
+    public IEnumerator EndDrag()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (time < 0.3f&&!Equip.GetComponent<DragUI>().CheckAllRight(false))
         {
             Destroy(Equip);
         }
@@ -258,9 +266,6 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             SetOccupyStatus(Equip.GetComponent<DragUI>().CheckAllRight(false));
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PutEquip);
         }
-
-        //isOccupation =    Equip.GetComponent<DragUI>().CheckAllRight(false);
-     
     }
 
     private float time = 0; 
