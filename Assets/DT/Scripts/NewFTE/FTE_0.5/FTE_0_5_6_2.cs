@@ -56,8 +56,12 @@ public class FTE_0_5_6_2 : BaseGuideStep
 
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
-            if(   PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
-                PlayerData.My.MapRole[i].tradeButton.SetActive(true);
+            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
+            {
+                PlayerData.My.MapRole[i].tradeButton.SetActive(false);
+             break;
+            }
+
         }
         for (int i = 0; i < role.warehouse.Count; i++)
         {

@@ -46,6 +46,7 @@ public class FTE_0_5_1 : BaseGuideStep
             info.SetActive(true);
            NetworkMgr.My.UpdatePlayerFTE(0.5.ToString(), () => { SceneManager.LoadScene("Map"); });
         }
+        dailog.SetActive(false);
         yield return new WaitForSeconds(1f);
 
     }
