@@ -11,6 +11,8 @@ public class FTE_0_5_10_1 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
+        NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
+
       TradeManager.My.ShowAllIcon();
         yield return null;
     }

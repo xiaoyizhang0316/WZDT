@@ -45,8 +45,8 @@ public class FTE_0_5_2 : BaseGuideStep
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Dealer, 2, 0, 0, 35, 32, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Dealer, 3, 0, 0, 40, 36, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Dealer, 4, 0, 0, 45, 40, 0, 0, 0, 0); 
-        GameDataMgr.My.SetModuleData(GameEnum.RoleType.Dealer, 5, 0, 0, 50, 44, 0, 0, 0, 0); 
-
+        GameDataMgr.My.SetModuleData(GameEnum.RoleType.Dealer, 5, 0, 0, 50, 44, 0, 0, 0, 0);
+        NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = false;
         yield return new WaitForSeconds(1f);
       // for (int i = 0; i <land.Count; i++)
       // {
