@@ -29,6 +29,8 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GamePause(false);
         FactoryUp();
+        StageGoal.My.playerSatisfy = 0;
+        StageGoal.My.playerSatisfyText.text = "0";
         currentTimeCount = StageGoal.My.timeCount;
         FTE_2_5_Manager.My.packageKillNum = 0;
         FTE_2_5_Manager.My.saleKillNum = 0;
