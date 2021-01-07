@@ -44,7 +44,7 @@ public class RoleUISign : MonoBehaviour
                 cost.gameObject.SetActive(true);
                 cost.text = mapRole.baseRoleData.cost.ToString();
                 icon.transform.DOLocalMoveY(106, 0.3f).SetEase(Ease.OutCubic);
-                cost.transform.DOLocalMoveY(68, 0.3f).SetEase(Ease.OutCubic);
+                cost.transform.DOLocalMoveY(-3, 0.3f).SetEase(Ease.OutCubic);
                 
             }
             else
