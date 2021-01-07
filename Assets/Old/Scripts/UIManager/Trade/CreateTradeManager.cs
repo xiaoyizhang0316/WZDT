@@ -6,6 +6,7 @@ using static GameEnum;
 using UnityEngine.UI;
 using System;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 {
@@ -172,11 +173,19 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         }
         if (!currentTrade.isTradeSettingBest())
         {
-            int diff = Mathf.Abs(startRole.baseRoleData.riskResistance - endRole.baseRoleData.riskResistance) / 2;
-            int ave = (startRole.baseRoleData.riskResistance + endRole.baseRoleData.riskResistance) / 2;
-            float per = 2f * diff / ave + 1f;
-            Debug.Log(per);
-            result = (int)(result * per);
+            if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2"
+                                                           || SceneManager.GetActiveScene().name == "FTE_1.5"
+                                                           || SceneManager.GetActiveScene().name == "FTE_2.5")
+            {
+                result *= 2;
+            }
+            else
+            {
+                int diff = Mathf.Abs(startRole.baseRoleData.riskResistance - endRole.baseRoleData.riskResistance) / 2;
+                int ave = (startRole.baseRoleData.riskResistance + endRole.baseRoleData.riskResistance) / 2;
+                float per = 2f * diff / ave + 1f;
+                result = (int)(result * per);
+            }
         }
         tradeCostText.text = result.ToString();
     }

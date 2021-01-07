@@ -18,12 +18,12 @@ public class VideoSign : MonoBehaviour
         if ((!isup&& NewCanvasUI.My.Panel_Update.gameObject.activeSelf)||(!isup&& NewCanvasUI.My.Panel_AssemblyRole.gameObject.activeSelf ))
         {
             isup = true;
-            GetComponent<RectTransform>().DOAnchorPosY(667, 0.5f).SetEase(Ease.Linear).SetUpdate(true).Play();
+            GetComponent<RectTransform>().DOAnchorPosY(124, 0.5f).SetEase(Ease.Linear).SetUpdate(true).Play();
         }
         if ( isup&& !NewCanvasUI.My.Panel_Update.gameObject.activeSelf  && !NewCanvasUI.My.Panel_AssemblyRole.gameObject.activeSelf  )
         {
             isup = false;
-            GetComponent<RectTransform>().DOAnchorPosY(290f, 0.5f).SetEase(Ease.Linear).SetUpdate(true).Play();
+            GetComponent<RectTransform>().DOAnchorPosY(-249.3f, 0.5f).SetEase(Ease.Linear).SetUpdate(true).Play();
         }
     }
 }
