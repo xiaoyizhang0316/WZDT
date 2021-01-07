@@ -1267,6 +1267,8 @@ MonoBehaviour:
   materials: []
   buildingWaitTime: 0
   consumeSigns: []
+  isBornForFTE_2_5: 0
+  isBorn: 0
 --- !u!120 &131064105
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1441,6 +1443,8 @@ MonoBehaviour:
   materials: []
   buildingWaitTime: 0
   consumeSigns: []
+  isBornForFTE_2_5: 0
+  isBorn: 0
 --- !u!120 &133904844
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -2373,6 +2377,10 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
+  timeCount: 0
   seed: {fileID: 0}
 --- !u!1001 &173039173
 PrefabInstance:
@@ -3117,6 +3125,7 @@ MonoBehaviour:
     equipCost: 0
     workerCost: 0
     landCost: 0
+    gearEncourageAdd: 0
     inMap: 0
     isNpc: 0
   currentMapRole: {fileID: 0}
@@ -3165,6 +3174,7 @@ MonoBehaviour:
     equipCost: 0
     workerCost: 0
     landCost: 0
+    gearEncourageAdd: 0
     inMap: 0
     isNpc: 0
   endRole:
@@ -3197,6 +3207,7 @@ MonoBehaviour:
     equipCost: 0
     workerCost: 0
     landCost: 0
+    gearEncourageAdd: 0
     inMap: 0
     isNpc: 0
   CreateTradeLineGo: {fileID: 875157879}
@@ -3852,6 +3863,8 @@ MonoBehaviour:
   materials: []
   buildingWaitTime: 0
   consumeSigns: []
+  isBornForFTE_2_5: 0
+  isBorn: 0
 --- !u!1001 &251732645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4545,6 +4558,10 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 1
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
+  timeCount: 0
 --- !u!1001 &309286444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4870,6 +4887,10 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
+  timeCount: 0
 --- !u!1 &326453901
 GameObject:
   m_ObjectHideFlags: 0
@@ -8461,6 +8482,10 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
+  timeCount: 0
   vcr: {fileID: 251732647}
 --- !u!1 &574106310
 GameObject:
@@ -8601,6 +8626,10 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
+  timeCount: 0
 --- !u!1 &586228723
 GameObject:
   m_ObjectHideFlags: 0
@@ -9672,6 +9701,10 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
+  timeCount: 0
 --- !u!1001 &732365814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19724,6 +19757,7 @@ MonoBehaviour:
   currentGuideIndex: 0
   ftegob: {fileID: 2049730308}
   guideClose: {fileID: 0}
+  nextButton: {fileID: 0}
 --- !u!4 &1740943462
 Transform:
   m_ObjectHideFlags: 0
@@ -19786,6 +19820,7 @@ MonoBehaviour:
   winkey1: "-\u5207\u597D\u7684\u74DC\u5E94\u5BF9\u5C11\u91CF\u7CBE\u82F1\u6D88\u8D39\u8005\u6709\u5947\u6548"
   winkey2: "-\u5916\u90E8\u89D2\u8272\u62E5\u6709\u81EA\u8EAB\u6CA1\u6709\u7684\u67D0\u4E9B\u7279\u6B8A\u6548\u679C"
   winkey3: "-\u4F18\u5316\u4EA4\u6613\u7ED3\u6784\u53EF\u4EE5\u8282\u7EA6\u5927\u91CF\u6210\u672C"
+  tradeCostMoney: 0
 --- !u!4 &1747396752
 Transform:
   m_ObjectHideFlags: 0
@@ -21040,6 +21075,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: -17
       objectReference: {fileID: 0}
+    - target: {fileID: 5545987035304584758, guid: 151cf092dc7dc9547bd83b880dc69665,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 19.70996
+      objectReference: {fileID: 0}
+    - target: {fileID: 5545987035304584758, guid: 151cf092dc7dc9547bd83b880dc69665,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.290039
+      objectReference: {fileID: 0}
     - target: {fileID: 5675058135758307998, guid: 151cf092dc7dc9547bd83b880dc69665,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -21949,6 +21994,10 @@ MonoBehaviour:
   highLightCopyObj: []
   needCheck: 0
   entryTime: 1
+  missiondatas:
+    data: []
+  missionTitle: 
+  timeCount: 0
   vcr: {fileID: 903987867}
 --- !u!1 &1924800676
 GameObject:
