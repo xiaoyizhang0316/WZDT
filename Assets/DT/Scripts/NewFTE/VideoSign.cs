@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VideoSign : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class VideoSign : MonoBehaviour
     
     bool CheckPanel()
     {
+        if (SceneManager.GetActiveScene().name == "FTE_0.5") {
+            return false;
+        }
         if (NewCanvasUI.My.Panel_NPC.transform.Find("InfoList").gameObject.activeInHierarchy)
         {
             return true;
