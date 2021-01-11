@@ -74,6 +74,32 @@ public class FTE_0_5_15 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
+        if (maoyi == null)
+        {
+            for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+            {
+                if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
+                {
+                    maoyi = PlayerData.My.MapRole[i];
+                }
+            }
+
+        }
+
+        if (lingshou == null)
+        {
+            
+            for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+            {
+                if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer &&
+                    !PlayerData.My.MapRole[i].isNpc)
+                {
+                    lingshou = PlayerData.My.MapRole[i];
+                }
+
+            }
+        }
+
         if (TradeManager.My.CheckTwoRoleHasTrade(maoyi.baseRoleData, lingshou.baseRoleData))
         {
             missiondatas.data[0].isFinish = true;
