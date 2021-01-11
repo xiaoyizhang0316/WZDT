@@ -370,15 +370,22 @@ public class TradeManager : MonoSingleton<TradeManager>
         {
             item.Value.icon.HideIcon();
         }
-       // for (int i = 0; i < tradeList.Count; i++)
-       // {
-            //tradeList[i].icon.HideIcon();
-       // }
     }
 
     private void OnDestroy()
     {
         
+    }
+
+    /// <summary>
+    /// 重置所有交易（删除线上的物品，重置交易计数）
+    /// </summary>
+    public void ResetAllTrade()
+    {
+        foreach (var item in tradeList)
+        {
+            item.Value.ResetThisTrade();
+        }
     }
 
     // Start is called before the first frame update
