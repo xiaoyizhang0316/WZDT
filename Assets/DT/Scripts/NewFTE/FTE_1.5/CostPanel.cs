@@ -14,7 +14,7 @@ public class CostPanel : MonoBehaviour
     public Text timeCostText;
     private static string totalTextString = "总成本：";
     private static string tradeTextString = "交易的成本：";
-    private static string otherTextString = "其他成本：";
+    private static string otherTextString = "固定成本：";
     private static string timeTextString = "剩余时间：";
 
     private int startTotalCost;
@@ -22,6 +22,7 @@ public class CostPanel : MonoBehaviour
     private int startOtherCost;
     private int startTimeCount;
     private int currentPeriod;
+    private int costLimit;
 
     public GameObject incomeImage;
     public Text totalIncomeText;
@@ -32,7 +33,7 @@ public class CostPanel : MonoBehaviour
     public GameObject equipPanel;
     public GameObject missionPanel;
 
-    public void InitCostPanel(int cost, int timeCount)
+    public void InitCostPanel(int cost, int timeCount, int costLimit)
     {
         totalCostText.text = totalTextString;
         tradeCostText.text = tradeTextString;
@@ -40,8 +41,90 @@ public class CostPanel : MonoBehaviour
 
         startTotalCost = cost;
         startTradeCost = StageGoal.My.tradeCost;
-        startOtherCost = StageGoal.My.productCost + StageGoal.My.extraCosts;
+        startOtherCost = StageGoal.My.productCost;
         startTimeCount = timeCount;
+        this.costLimit = costLimit;
+    }
+
+    public void InitProductCost(int startProductCost, int startTime,int costLimit)
+    {
+        totalCostText.text = otherTextString;
+        tradeCostText.text = totalTextString;
+        otherCostText.text = tradeTextString;
+        startTotalCost = StageGoal.My.totalCost;
+        startTradeCost = StageGoal.My.tradeCost;
+        startOtherCost = startProductCost;
+        startTimeCount = startTime;
+        this.costLimit = costLimit;
+    }
+
+    public void InitTradeCost(int tradeCost, int startTime, int costLimit)
+    {
+        totalCostText.text = tradeTextString;
+        tradeCostText.text = totalTextString;
+        otherCostText.text = otherTextString;
+        startTotalCost = StageGoal.My.totalCost;
+        startTradeCost = tradeCost;
+        startOtherCost = StageGoal.My.productCost;
+        startTimeCount = startTime;
+        this.costLimit = costLimit;
+    }
+
+    public void ShowProductCostAsMain(int totalProductCost, int limitTime=-1)
+    {
+        currentPeriod = StageGoal.My.timeCount - startTimeCount;
+        
+        costImage.SetActive(true);
+        if (costLimit == 0)
+        {
+            totalCostText.text = otherTextString + totalProductCost;
+        }
+        else
+        {
+            totalCostText.text = otherTextString + totalProductCost+" /"+costLimit;
+        }
+
+        
+        tradeCostText.text = totalTextString +
+                             (StageGoal.My.totalCost - startTotalCost);
+        otherCostText.text = tradeTextString +
+                             (StageGoal.My.tradeCost - startTradeCost);
+        if (limitTime == -1)
+        {
+            timeCostText.text = timeTextString +"不限时";
+        }
+        else
+        {
+            timeCostText.text = timeTextString + (limitTime - currentPeriod) + " s";
+        }
+    }
+
+    public void ShowTradeCostAsMain(int totalTradeCost, int limitTime=-1)
+    {
+        currentPeriod = StageGoal.My.timeCount - startTimeCount;
+        
+        costImage.SetActive(true);
+
+        if (costLimit == 0)
+        {
+            totalCostText.text = tradeTextString + totalTradeCost;
+        }
+        else
+        {
+            totalCostText.text = tradeTextString + totalTradeCost+" /"+costLimit;
+        }
+        tradeCostText.text = totalTextString +
+                             (StageGoal.My.totalCost - startTotalCost);
+        otherCostText.text = otherTextString +
+                             (StageGoal.My.productCost - startOtherCost);
+        if (limitTime == -1)
+        {
+            timeCostText.text = timeTextString +"不限时";
+        }
+        else
+        {
+            timeCostText.text = timeTextString + (limitTime - currentPeriod) + " s";
+        }
     }
 
     public void ShowAllCost(int totalCost, int limitTime=-1)
@@ -50,7 +133,14 @@ public class CostPanel : MonoBehaviour
         
         costImage.SetActive(true);
 
-        totalCostText.text = totalTextString + totalCost;
+        if (costLimit == 0)
+        {
+            totalCostText.text = totalTextString + totalCost;
+        }
+        else
+        {
+            totalCostText.text = totalTextString + totalCost+" /"+costLimit;
+        }
         tradeCostText.text = tradeTextString +
             (StageGoal.My.tradeCost - startTradeCost);
         otherCostText.text = otherTextString +

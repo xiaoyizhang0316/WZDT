@@ -29,7 +29,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         qualityCenter.GetComponent<QualityRole>().needCheck = true;
         //place.transform.DOMoveY(0f, 1f);
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
-        costPanel.GetComponent<CostPanel>().InitCostPanel(0,currentTime);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(0,currentTime, 0);
         isEnd = false;
         SkipButton();
         yield return new WaitForSeconds(0.5f);

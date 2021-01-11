@@ -21,7 +21,7 @@ public class FTE_1_5_Goal5 : BaseGuideStep
         //Destroy(place);
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
-        costImage.GetComponent<CostPanel>().InitCostPanel(currentCost, StageGoal.My.timeCount);
+        costImage.GetComponent<CostPanel>().InitCostPanel(currentCost, StageGoal.My.timeCount, 0);
         //StageGoal.My.totalIncome = 0;
         //NewGuideManager.My.BornEnemy1(30);
         //NewGuideManager.My.BornEnemy1(30);
