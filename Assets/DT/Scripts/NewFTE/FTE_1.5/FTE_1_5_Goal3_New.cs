@@ -103,6 +103,7 @@ public class FTE_1_5_Goal3_New : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        costPanel.GetComponent<CostPanel>().HideAllCost();
         yield return new WaitForSeconds(1.5f);
     }
 }
