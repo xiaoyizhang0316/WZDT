@@ -12,6 +12,8 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
     public GameObject seerJC2;
     public GameObject dealerJC1;
     public GameObject dealerJC2;
+    public GameObject dealerJC3;
+    public GameObject dealerJC4;
 
     public Material sn;
     public Material sr;
@@ -23,8 +25,14 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
     public Renderer seerJC1_ran;
     public Renderer seerJC2_ran;
     public Renderer dealerJC1_ran;
-    public Renderer dealerJC2_ran;
+    public Renderer dealerJC2_ran;    
+    public Renderer dealerJC3_ran;
+    public Renderer dealerJC4_ran;
 
+    /// <summary>
+    /// 清空仓库
+    /// </summary>
+    public int clearWarehouse = 0;
     public void Update()
     {
         if (StageGoal.My.playerGold <= 10000)
@@ -50,9 +58,12 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
 
     public void DownRole(GameObject role)
     {
-        role.SetActive(false);
+       
 
-        role.transform.DOLocalMoveY(-5,1).Play();
+        role.transform.DOLocalMoveY(-5,1).Play().OnComplete(() =>
+        {
+            role.SetActive(false);
+        });
         
     }
 

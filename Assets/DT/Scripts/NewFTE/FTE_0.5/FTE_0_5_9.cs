@@ -10,18 +10,21 @@ public class FTE_0_5_9 : BaseGuideStep
 
     public GameObject nongminLock;
 
+    public GameObject red;
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
         FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC1);
-        FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC2);
-
+    //    FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC2);
+        red.SetActive(true);
         nongminLock.SetActive(false);
         yield return null;
     }
 
     public override IEnumerator StepEnd()
     {
+        red.SetActive(false);
+
         yield break;
     }
 
@@ -39,7 +42,7 @@ public class FTE_0_5_9 : BaseGuideStep
                    
             }
             missiondatas.data[0].currentNum = count;
-            if (count >= 2)
+            if (count >= missiondatas.data[0].maxNum)
             {
                 missiondatas.data[0].isFinish = true;
           

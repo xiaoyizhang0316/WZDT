@@ -31,9 +31,9 @@ public class FTE_0_5_10 : BaseGuideStep
     {
         time = StageGoal.My.timeCount;
         role.warehouse.Clear();
-        role2.warehouse.Clear();
+       // role2.warehouse.Clear();
         role.OnMoved += ChangeColor;
-        role2.OnMoved += ChangeColor1;
+       // role2.OnMoved += ChangeColor1;
         info.text = "目标效率为：" + targetRate + "个/s                  当前效率为：" + 0 + "个/s";
 
         yield return null;
@@ -95,61 +95,61 @@ public class FTE_0_5_10 : BaseGuideStep
         }
 
         missiondatas.data[0].currentNum = role.warehouse.Count;
-        if (role.warehouse.Count > missiondatas.data[0].maxNum)
+        if (role.warehouse.Count >= missiondatas.data[0].maxNum)
         {
             missiondatas.data[0].isFinish = true;
-        }
-
-
-        for (int i = 0; i < role2.warehouse.Count; i++)
-        {
-            if (role2.warehouse[i].damage < targetdamege2)
-            {
-                role2.warehouse.Remove(role2.warehouse[i]);
-            }
-        }
-
-        if ((StageGoal.My.timeCount - time) % 60 == 0)
-        {
-            role2.warehouse.Clear();
-            time = StageGoal.My.timeCount;
-        }
-
-        missiondatas.data[1].currentNum = role2.warehouse.Count;
-        if (role2.warehouse.Count <= 0)
-        {
-            return false;
-        }
-
-        currentRate = (float) (role2.warehouse.Count) / (float) (StageGoal.My.timeCount - time);
-        info.text = "目标效率为：" + targetRate + "个/s                  当前效率为：" + currentRate.ToString("f2") + "个/s";
-
-        if (currentRate >= targetRate && role2.warehouse.Count > missiondatas.data[1].maxNum)
-        {
-            if (daojishi == 0)
-            {
-                daojishi = timeCount;
-            }
-
-            if (daojishi != 0 && timeCount - daojishi >= 150)
-            {
-                missiondatas.data[1].isFinish = true; 
-            }
-            else
-            {
-                missiondatas.data[1].isFinish = true;
-                return false;
-            }
-        }
-
-
-        if (missiondatas.data[0].isFinish && missiondatas.data[1].isFinish)
-        {
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
+        //  for (int i = 0; i < role2.warehouse.Count; i++)
+        //  {
+        //      if (role2.warehouse[i].damage < targetdamege2)
+        //      {
+        //          role2.warehouse.Remove(role2.warehouse[i]);
+        //      }
+        //  }
+//
+        //  if ((StageGoal.My.timeCount - time) % 60 == 0)
+        //  {
+        //      role2.warehouse.Clear();
+        //      time = StageGoal.My.timeCount;
+        //  }
+//
+        //  missiondatas.data[1].currentNum = role2.warehouse.Count;
+        //  if (role2.warehouse.Count <= 0)
+        //  {
+        //      return false;
+        //  }
+//
+        //  currentRate = (float) (role2.warehouse.Count) / (float) (StageGoal.My.timeCount - time);
+        //  info.text = "目标效率为：" + targetRate + "个/s                  当前效率为：" + currentRate.ToString("f2") + "个/s";
+//
+        //  if (currentRate >= targetRate && role2.warehouse.Count > missiondatas.data[1].maxNum)
+        //  {
+        //      if (daojishi == 0)
+        //      {
+        //          daojishi = timeCount;
+        //      }
+//
+        //      if (daojishi != 0 && timeCount - daojishi >= 150)
+        //      {
+        //          missiondatas.data[1].isFinish = true; 
+        //      }
+        //      else
+        //      {
+        //          missiondatas.data[1].isFinish = true;
+        //          return false;
+        //      }
     }
-}
+
+
+     //   if (missiondatas.data[0].isFinish && missiondatas.data[1].isFinish)
+     //   {
+     //       return true;
+     //   }
+     //   else
+     //   {
+     //       return false;
+     //   }
+    }

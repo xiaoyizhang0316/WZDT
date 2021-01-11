@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class FTE_0_5_12 : BaseGuideStep
 {
 
+    public GameObject red;
     public GameObject roleImage;
     // Start is called before the first frame update
     void Start()
@@ -18,19 +19,21 @@ public class FTE_0_5_12 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-       
-        yield return new WaitForSeconds(1f);
+
+        red.SetActive(true);
         
          
-   
+        roleImage.gameObject.SetActive(false);
+
 
         yield return new WaitForSeconds(1f);
 
-        roleImage.gameObject.SetActive(false);
     }
 
     public override IEnumerator StepEnd()
     {
+        red.SetActive(false);
+
         missiondatas.data[0].currentNum = 1; 
         missiondatas.data[0].isFinish= true; 
         

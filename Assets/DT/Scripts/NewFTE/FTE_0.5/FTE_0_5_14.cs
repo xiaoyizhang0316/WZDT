@@ -9,6 +9,7 @@ public class FTE_0_5_14 : BaseGuideStep
 {
 
     public GameObject roleImage;
+    public GameObject red;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class FTE_0_5_14 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-       
+       red.SetActive(true);
         yield return new WaitForSeconds(1f);
         
          
@@ -31,6 +32,8 @@ public class FTE_0_5_14 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
+        red.SetActive(false);
+
         missiondatas.data[0].currentNum = 1; 
         missiondatas.data[0].isFinish= true; 
         
