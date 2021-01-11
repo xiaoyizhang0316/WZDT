@@ -7,6 +7,7 @@ public class FTE_1_5_Dialog5 : BaseGuideStep
 {
     public GameObject openCG;
     public Transform mega;
+    public List<GameObject> roleTechs;
     public override IEnumerator StepStart()
     {
         openCG.SetActive(true);
@@ -16,6 +17,10 @@ public class FTE_1_5_Dialog5 : BaseGuideStep
         {
             mega.DOScale(Vector3.one, 0.5f).Play();
         });
+        for (int i = 0; i < roleTechs.Count; i++)
+        {
+            roleTechs[i].SetActive(true);
+        }
         yield return new WaitForSeconds(0.5f);
     }
 

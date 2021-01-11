@@ -60,6 +60,7 @@ public class FTE_1_5_Goal3_New : BaseGuideStep
         currentTime = StageGoal.My.timeCount;
         costPanel.GetComponent<CostPanel>().InitProductCost(currentCost, currentTime, costLimit);
         missiondatas.data[0].isFail = false;
+        missiondatas.data[0].currentNum = 0;
         InvokeRepeating("CheckGoal",0, 0.2f);
     }
 

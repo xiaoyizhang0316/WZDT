@@ -28,7 +28,7 @@ public class FTE_1_5_Goal1 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        tabPanel.SetActive(true);
+        //tabPanel.SetActive(true);
         CancelInvoke();
 
         yield return new WaitForSeconds(2);
@@ -74,6 +74,8 @@ public class FTE_1_5_Goal1 : BaseGuideStep
     {
         CancelInvoke();
         missiondatas.data[0].isFail = false;
+        missiondatas.data[0].currentNum = 0;
+        StageGoal.My.killNumber = 0;
         currentTime = StageGoal.My.timeCount;
         currentCost = StageGoal.My.totalCost;
         TradeManager.My.ResetAllTrade();
