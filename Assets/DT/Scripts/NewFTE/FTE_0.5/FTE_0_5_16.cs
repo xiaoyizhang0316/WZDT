@@ -11,6 +11,9 @@ public class FTE_0_5_16 : BaseGuideStep
     public  GameEnum.ConsumerType type; 
     public int count;
     public int time;
+
+    public bool islast;
+    public GameObject red;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,7 @@ public class FTE_0_5_16 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
+      
         var list = FindObjectsOfType<ConsumeSign>();
         for (int i = 0; i <list.Length ; i++)
         {
@@ -59,6 +63,20 @@ public class FTE_0_5_16 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
+        if (islast)
+        {
+            if (PlayerData.My.dealerCount < 3)
+            {
+                red.SetActive(true);
+            }
+
+            else
+            {
+                red.SetActive(false);
+
+            }
+        }
+
         missiondatas.data[0].currentNum = StageGoal.My.killNumber;
      
         if (StageGoal.My.killNumber >= missiondatas.data[0].maxNum)

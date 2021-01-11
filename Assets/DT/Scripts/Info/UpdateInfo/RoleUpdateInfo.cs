@@ -115,6 +115,12 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                 {
                     string str1 = "ClearWarehouse|";
                     str1 += currentRole.ID.ToString();
+                    if (currentRole.baseRoleData.roleType == GameEnum.RoleType.Peasant &&
+                      FTE_0_5Manager.My.clearWarehouse ==1)
+                    {
+                        FTE_0_5Manager.My.clearWarehouse = 2;
+                    }
+
                     if (PlayerData.My.isServer)
                     {
                         PlayerData.My.server.SendToClientMsg(str1);

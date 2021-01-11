@@ -62,9 +62,17 @@ public class FTE_0_5_8 : BaseGuideStep
         //  }
     }
 
+    public GameObject peasant1;
+    public GameObject peasant2;
     public override IEnumerator StepEnd()
     {
-        yield return new WaitForSeconds(2);
+     FTE_0_5Manager.My.DownRole(peasant1);
+     FTE_0_5Manager.My.DownRole(peasant2);
+        yield return new WaitForSeconds(1.1f);
+        PlayerData.My.DeleteRole(90000);
+        PlayerData.My.DeleteRole(90001);
+        yield return new WaitForSeconds(0.8f);
+
     }
 
     public void ChangeColor(ProductData data)
@@ -91,6 +99,7 @@ public class FTE_0_5_8 : BaseGuideStep
         {
             FTE_0_5Manager.My.ChangeColor(FTE_0_5Manager.My.seerJC2_ran, FTE_0_5Manager.My.sr);
         }
+        
     }
 
     public int daojishi = 0;
