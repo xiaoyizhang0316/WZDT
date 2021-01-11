@@ -443,4 +443,25 @@ public class TradeSign : MonoBehaviour
             DataUploadManager.My.AddData(DataEnum.交易_五秒内查看交易的次数);
         }
     }
+
+    /// <summary>
+    /// 重置交易（删除线上物品，重置交易计数）
+    /// </summary>
+    public void ResetThisTrade()
+    {
+        countNumber = 0;
+        GoodsSign[] goodsSigns = GetComponentsInChildren<GoodsSign>();
+        if (goodsSigns.Length > 0)
+        {
+            for (int i = 0; i < goodsSigns.Length; i++)
+            {
+                Destroy(goodsSigns[i].gameObject, 0f);
+            }
+        }
+        BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        {
+            tweener.Restart();
+        }
+    }
 }

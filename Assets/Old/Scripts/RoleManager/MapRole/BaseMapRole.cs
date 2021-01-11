@@ -456,6 +456,9 @@ public class BaseMapRole : MonoBehaviour
 
     #endregion
 
+    Tweener costTwe;
+    List<string> fteList = new List<string>() {"FTE_0.5","FTE_1.5","FTE_2.5" };
+
     #region 钱，科技值相关
     /// <summary>
     /// 固定消耗成本
@@ -466,9 +469,15 @@ public class BaseMapRole : MonoBehaviour
         {
             return;
         }
-        transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
+        float time = 20f;
+        int costNum = baseRoleData.cost;
+        if (fteList.Contains(SceneManager.GetActiveScene().name))
         {
-            int costNum = baseRoleData.cost;
+            time = 1f;
+            costNum = costNum / 20;
+        }
+        transform.DORotate(transform.eulerAngles, time).OnComplete(() =>
+        {
             StageGoal.My.CostPlayerGold(costNum);
             StageGoal.My.Expend(costNum, ExpendType.ProductCosts, this);
             MonthlyCost();
