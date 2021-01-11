@@ -850,4 +850,12 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
                 break;
         }
     }
+
+    public void ClearAllRoleWarehouse()
+    {
+        for (int i = 0; i < MapRole.Count; i++)
+        {
+            MapRole[i].ClearWarehouse();
+        }
+    }
 }

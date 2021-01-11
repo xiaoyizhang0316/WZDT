@@ -38,7 +38,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         //place2.transform.DOMoveY(0f, 1f).Play();
         //dealer3.transform.DOMoveY(0.32f, 1f).Play();
         //place3.transform.DOMoveY(0f, 1f).Play();
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount, costLimit);
         SkipButton();
         StartCoroutine( bornPoint.GetComponent<Building>().BornEnemyForFTE_2_5(-1));
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
@@ -168,7 +168,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         }
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount, costLimit);
         InvokeRepeating("CheckGoal",0, 0.2f);
         FTE_2_5_Manager.My.isClearGoods=false;
         NewCanvasUI.My.GameNormal();

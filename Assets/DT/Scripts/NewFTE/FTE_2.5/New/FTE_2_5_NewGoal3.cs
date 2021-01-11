@@ -21,7 +21,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
         qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
         qualityCenter.GetComponent<QualityRole>().needCheck = true;
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount, costLimit);
         //NewCanvasUI.My.GameNormal();
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         SkipButton();
@@ -132,7 +132,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         }
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount,costLimit);
         InvokeRepeating("CheckGoal",0, 0.2f);
         FTE_2_5_Manager.My.isClearGoods=false;
         NewCanvasUI.My.GameNormal();

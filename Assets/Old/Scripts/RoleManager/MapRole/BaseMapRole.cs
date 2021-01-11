@@ -456,6 +456,9 @@ public class BaseMapRole : MonoBehaviour
 
     #endregion
 
+    Tweener costTwe;
+    List<string> fteList = new List<string>() {"FTE_0.5","FTE_1.5","FTE_2.5" };
+
     #region 钱，科技值相关
     /// <summary>
     /// 固定消耗成本
@@ -466,24 +469,45 @@ public class BaseMapRole : MonoBehaviour
         {
             return;
         }
-        transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
+        float time = 20f;
+        int costNum = baseRoleData.cost;
+        if (fteList.Contains(SceneManager.GetActiveScene().name))
         {
-            int costNum = baseRoleData.cost;
+            time = 1f;
+            costNum = costNum / 20;
+        }
+        transform.DORotate(transform.eulerAngles, time).OnComplete(() =>
+        {
             StageGoal.My.CostPlayerGold(costNum);
             StageGoal.My.Expend(costNum, ExpendType.ProductCosts, this);
             MonthlyCost();
         });
     }
 
+    private float tempTechAdd = 0f;
+
     /// <summary>
     /// 固定获得科技点数
     /// </summary>
     public void AddTechPoint()
     {
-        transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
+        float time = 20f;
+        float techNum = baseRoleData.techAdd / 3f * 2f;
+        if (fteList.Contains(SceneManager.GetActiveScene().name))
         {
-            StageGoal.My.GetTechPoint(baseRoleData.techAdd / 3 * 2);
-            StageGoal.My.IncomeTp(baseRoleData.techAdd / 3 * 2, IncomeTpType.Npc);
+            time = 1f;
+            techNum = techNum / 20f;
+            tempTechAdd += techNum;
+            if (tempTechAdd >= 1f)
+            {
+                techNum += tempTechAdd;
+                tempTechAdd = 0f;
+            }
+        }
+        transform.DORotate(transform.eulerAngles, time).OnComplete(() =>
+        {
+            StageGoal.My.GetTechPoint((int)techNum);
+            StageGoal.My.IncomeTp((int)techNum, IncomeTpType.Npc);
             AddTechPoint();
         });
     }
