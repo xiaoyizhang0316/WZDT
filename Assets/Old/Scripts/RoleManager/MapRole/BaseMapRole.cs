@@ -489,10 +489,17 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void AddTechPoint()
     {
-        transform.DORotate(transform.eulerAngles, 20f).OnComplete(() =>
+        float time = 20f;
+        int techNum = baseRoleData.techAdd / 3 * 2;
+        if (fteList.Contains(SceneManager.GetActiveScene().name))
         {
-            StageGoal.My.GetTechPoint(baseRoleData.techAdd / 3 * 2);
-            StageGoal.My.IncomeTp(baseRoleData.techAdd / 3 * 2, IncomeTpType.Npc);
+            time = 1f;
+            techNum = techNum / 20;
+        }
+        transform.DORotate(transform.eulerAngles, time).OnComplete(() =>
+        {
+            StageGoal.My.GetTechPoint(techNum);
+            StageGoal.My.IncomeTp(techNum, IncomeTpType.Npc);
             AddTechPoint();
         });
     }
