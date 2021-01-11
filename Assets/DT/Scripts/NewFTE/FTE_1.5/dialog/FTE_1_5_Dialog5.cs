@@ -12,7 +12,10 @@ public class FTE_1_5_Dialog5 : BaseGuideStep
         openCG.SetActive(true);
         StageGoal.My.playerTechPoint = 0;
         StageGoal.My.playerTechText.text = "0";
-        mega.DOScale(Vector3.one, 0.5f);
+        mega.DOScale(Vector3.one, 0.5f).Play().OnPause(() =>
+        {
+            mega.DOScale(Vector3.one, 0.5f).Play();
+        });
         yield return new WaitForSeconds(0.5f);
     }
 
