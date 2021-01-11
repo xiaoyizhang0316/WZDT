@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Fungus;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FTE_1_5_Goal6_1 : BaseGuideStep
 {
+    public Text workerTip;
     public override IEnumerator StepStart()
     {
         SkipButton();
@@ -40,6 +42,24 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
 
     void CheckGoal()
     {
+        if (PlayerData.My.GetAvailableWorkerNumber() == PlayerData.My.playerWorkers.Count)
+        {
+            workerTip.color = Color.red;
+            workerTip.text = "未装备工人，当前Mega值不会增长！请装备工人！";
+        }
+        else
+        {
+            if (DOTween.defaultAutoPlay == AutoPlay.None)
+            {
+                workerTip.color = Color.red;
+                workerTip.text = "游戏暂停，当前Mega值不会增长！请点击左侧开始“>”按钮运行游戏！";
+            }
+            else
+            {
+                workerTip.color = new Color(0.2f, 0.63f, 0);
+                workerTip.text = "Mega值增长中......";
+            }
+        }
         if (missiondatas.data[0].isFinish == false)
         {
             missiondatas.data[0].currentNum = StageGoal.My.playerTechPoint;

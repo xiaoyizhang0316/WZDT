@@ -27,7 +27,7 @@ public class FTE_1_5_Goal2 : BaseGuideStep
     public override bool ChenkEnd()
     {
         
-        return missiondatas.data[0].isFinish &&missiondatas.data[1].isFinish&&missiondatas.data[2].isFinish;
+        return missiondatas.data[0].isFinish ;
     }
     
     void SkipButton()
@@ -69,7 +69,7 @@ public class FTE_1_5_Goal2 : BaseGuideStep
             }
         }
 
-        if ( missiondatas.data[1].isFinish == false )
+        /*if ( missiondatas.data[1].isFinish == false )
         {
             if (tradePanel.activeInHierarchy)
             {
@@ -89,6 +89,6 @@ public class FTE_1_5_Goal2 : BaseGuideStep
         if (missiondatas.data[2].isFinish == false && tapPanel.gameObject.activeInHierarchy)
         {
             missiondatas.data[2].isFinish = true;
-        }
+        }*/
     }
 }
