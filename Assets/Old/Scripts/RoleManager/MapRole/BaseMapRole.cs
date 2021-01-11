@@ -484,22 +484,30 @@ public class BaseMapRole : MonoBehaviour
         });
     }
 
+    private float tempTechAdd = 0f;
+
     /// <summary>
     /// 固定获得科技点数
     /// </summary>
     public void AddTechPoint()
     {
         float time = 20f;
-        int techNum = baseRoleData.techAdd / 3 * 2;
+        float techNum = baseRoleData.techAdd / 3f * 2f;
         if (fteList.Contains(SceneManager.GetActiveScene().name))
         {
             time = 1f;
-            techNum = techNum / 20;
+            techNum = techNum / 20f;
+            tempTechAdd += techNum;
+            if (tempTechAdd >= 1f)
+            {
+                techNum += tempTechAdd;
+                tempTechAdd = 0f;
+            }
         }
         transform.DORotate(transform.eulerAngles, time).OnComplete(() =>
         {
-            StageGoal.My.GetTechPoint(techNum);
-            StageGoal.My.IncomeTp(techNum, IncomeTpType.Npc);
+            StageGoal.My.GetTechPoint((int)techNum);
+            StageGoal.My.IncomeTp((int)techNum, IncomeTpType.Npc);
             AddTechPoint();
         });
     }
