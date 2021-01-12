@@ -15,7 +15,7 @@ public class FTE_1_5_Goal5 : BaseGuideStep
     {
         //fruitQT.SetActive(false);
         StartCoroutine( bornPoint.GetComponent<Building>().BornEnemy1(30));
-        Debug.LogWarning(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
+        //Debug.LogWarning(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
         //PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
         NewCanvasUI.My.GamePause(false);
         //Destroy(place);

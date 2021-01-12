@@ -55,7 +55,8 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         //place.transform.DOMoveY(-8.32f, 0.5f);
         qualityCenter.transform.DOMoveY(-8f, 0.5f).Play().OnComplete(()=>PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID));
 
-        FTE_2_5_Manager.My.isClearGoods = true;
+        //FTE_2_5_Manager.My.isClearGoods = true;
+        TradeManager.My.ResetAllTrade();
         yield return new WaitForSeconds(1f);
         DoEnd();
     }
@@ -124,17 +125,15 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         CancelInvoke();
         NewCanvasUI.My.GamePause(false);
         //StageGoal.My.killNumber = 0;
-        FTE_2_5_Manager.My.isClearGoods=true;
+        //FTE_2_5_Manager.My.isClearGoods=true;
         missiondatas.data[0].isFail = false;
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            PlayerData.My.MapRole[i].ClearWarehouse();
-        }
+        PlayerData.My.ClearAllRoleWarehouse();
+        TradeManager.My.ResetAllTrade();
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount,costLimit);
         InvokeRepeating("CheckGoal",0, 0.2f);
-        FTE_2_5_Manager.My.isClearGoods=false;
+        //FTE_2_5_Manager.My.isClearGoods=false;
         NewCanvasUI.My.GameNormal();
     }
 }

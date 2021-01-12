@@ -15,6 +15,7 @@ public class FTE_1_5_Goal1 : BaseGuideStep
     private int currentCost = 0;
     private bool fail;
     public GameObject bornPoint;
+    public GameObject rectBoard;
     public override IEnumerator StepStart()
     {
         currentTime = StageGoal.My.timeCount;
@@ -31,7 +32,7 @@ public class FTE_1_5_Goal1 : BaseGuideStep
         //tabPanel.SetActive(true);
         CancelInvoke();
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
         bornPoint.GetComponent<Building>().isBorn = false;
         costPanel.GetComponent<CostPanel>().HideAllCost();
     }
@@ -111,6 +112,7 @@ public class FTE_1_5_Goal1 : BaseGuideStep
                 missionData.isMainmission = false;
                 missionData.isFail = true;
                 MissionManager.My.AddMission(missionData);
+                rectBoard.SetActive(true);
                 if (StageGoal.My.totalCost - currentCost > costLimit)
                 {
                     HttpManager.My.ShowTip("超出成本限制，本次任务失败！");

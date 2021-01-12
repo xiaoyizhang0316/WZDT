@@ -61,16 +61,14 @@ public class FTE_2_5_Goal2 : BaseGuideStep
 
     void DoEnd()
     {
-        FTE_2_5_Manager.My.isClearGoods = true;
-        foreach (Transform trade in tradeMgr)
+        //FTE_2_5_Manager.My.isClearGoods = true;
+        /*foreach (Transform trade in tradeMgr)
         {
             TradeManager.My.DeleteTrade(trade.GetComponent<TradeSign>().tradeData.ID);
-        }
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
-        }
-        FTE_2_5_Manager.My.isClearGoods = false;
+        }*/
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
+        //FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GameNormal();
     }
 

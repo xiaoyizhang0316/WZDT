@@ -26,7 +26,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     private int currentTimeCount = 0;
     public override IEnumerator StepStart()
     {
-        FTE_2_5_Manager.My.isClearGoods = false;
+        //FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GamePause(false);
         FactoryUp();
         StageGoal.My.playerSatisfy = 0;

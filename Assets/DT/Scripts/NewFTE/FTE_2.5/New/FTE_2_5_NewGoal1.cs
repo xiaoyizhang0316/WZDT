@@ -12,6 +12,8 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
     public GameObject place;
     public GameObject costPanel;
     public GameObject openCG;
+
+    public GameObject rectBorder;
     //public Transform tradeMgr;
     private int currentTime = 0;
     private int currentCost = 0;
@@ -59,19 +61,15 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         CancelInvoke();
         qualityCenter.GetComponent<QualityRole>().needCheck = false;
         costPanel.GetComponent<CostPanel>().HideAllCost();
-        FTE_2_5_Manager.My.isClearGoods = true;
-        yield return new WaitForSeconds(1f);
+        //FTE_2_5_Manager.My.isClearGoods = true;
+        TradeManager.My.ResetAllTrade();
+        yield return new WaitForSeconds(5f);
         DoEnd();
     }
 
     void DoEnd()
     {
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
-        }
-
-        
+        PlayerData.My.ClearAllRoleWarehouse();
     }
 
     public override bool ChenkEnd()
@@ -127,15 +125,16 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
             missiondatas.data[0].currentNum = qualityCenter.GetComponent<BaseMapRole>().warehouse.Count;
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
+                MissionData missionData = new MissionData();
+                missionData.content = "成本控制在" + costLimit + "以内";
+                missionData.currentNum = StageGoal.My.totalCost-currentCost;
+                missionData.maxNum = costLimit;
+                missionData.isFail = true;
+                MissionManager.My.AddMission(missionData);
+                rectBorder.SetActive(true);
                 if (StageGoal.My.totalCost > costLimit)
                 {
                     HttpManager.My.ShowTip("超出成本限制，任务失败！");
-                    MissionData missionData = new MissionData();
-                    missionData.content = "成本控制在" + costLimit + "以内";
-                    missionData.currentNum = StageGoal.My.totalCost-currentCost;
-                    missionData.maxNum = costLimit;
-                    missionData.isFail = true;
-                    MissionManager.My.AddMission(missionData);
                 }
                 missiondatas.data[0].isFinish = true;
                 openCG.SetActive(true);
