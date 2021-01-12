@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<MissionManager>
@@ -12,6 +13,9 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
 
     public GameObject missionPrb;
     public GameObject mainMissionPrb;
+
+    public Button in_btn;
+    public Button out_btn;
 
     public List<MissionSign> signs=new List<MissionSign>();
 
@@ -49,12 +53,51 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
     // Start is called before the first frame update
     void Start()
     {
-        
+        out_btn.onClick.AddListener(PanelShow);
+        in_btn.onClick.AddListener(PanelHide);
     }
 
+    void PanelHide()
+    {
+        isOut = false;
+        missions.GetComponent<RectTransform>().DOAnchorPosX(-411.3f, 0.5f).Play();
+        titles.GetComponent<RectTransform>().DOAnchorPosX(-421.95f, 0.5f).Play();
+        out_btn.gameObject.SetActive(true);
+        in_btn.gameObject.SetActive(false);
+    }
+
+    void PanelShow()
+    {
+        isOut = true;
+        missions.GetComponent<RectTransform>().DOAnchorPosX(-11.3f, 0.5f).Play();
+        titles.GetComponent<RectTransform>().DOAnchorPosX(-21.95f, 0.5f).Play();
+        out_btn.gameObject.SetActive(false);
+        in_btn.gameObject.SetActive(true);
+    }
+
+    private bool isOut = false;
+
+    public Transform missions;//-11.3
+    public Transform titles;//-21.95
     // Update is called once per frame
     void Update()
     {
-        
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeInHierarchy)
+        {
+            if (!isOut)
+            {
+                missions.GetComponent<RectTransform>().DOAnchorPosX(-411.3f, 0.5f).Play();
+                titles.GetComponent<RectTransform>().DOAnchorPosX(-421.95f, 0.5f).Play();
+                out_btn.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            isOut = false;
+            missions.GetComponent<RectTransform>().DOAnchorPosX(-11.3f, 0.5f).Play();
+            titles.GetComponent<RectTransform>().DOAnchorPosX(-21.95f, 0.5f).Play();
+            out_btn.gameObject.SetActive(false);
+            in_btn.gameObject.SetActive(false);
+        }
     }
 }

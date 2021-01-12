@@ -15,12 +15,13 @@ public class FTE_1_5_Goal1 : BaseGuideStep
     private int currentCost = 0;
     private bool fail;
     public GameObject bornPoint;
+    public GameObject rectBoard;
     public override IEnumerator StepStart()
     {
         currentTime = StageGoal.My.timeCount;
         currentCost = StageGoal.My.totalCost;
         NewCanvasUI.My.GamePause(false);
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTime);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTime, 0);
         InvokeRepeating("CheckGoal", 0, 0.5f);
         SkipButton();
         yield return new WaitForSeconds(0.5f);
@@ -28,10 +29,10 @@ public class FTE_1_5_Goal1 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        tabPanel.SetActive(true);
+        //tabPanel.SetActive(true);
         CancelInvoke();
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
         bornPoint.GetComponent<Building>().isBorn = false;
         costPanel.GetComponent<CostPanel>().HideAllCost();
     }
@@ -49,6 +50,9 @@ public class FTE_1_5_Goal1 : BaseGuideStep
                     {
                         missiondatas.data[i].isFail = true;
                     }
+
+                    isEnd = true;
+
                 });
                 endButton.interactable = true;
                 endButton.gameObject.SetActive(true);
@@ -71,9 +75,13 @@ public class FTE_1_5_Goal1 : BaseGuideStep
     {
         CancelInvoke();
         missiondatas.data[0].isFail = false;
+        missiondatas.data[0].currentNum = 0;
+        StageGoal.My.killNumber = 0;
         currentTime = StageGoal.My.timeCount;
         currentCost = StageGoal.My.totalCost;
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTime);
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTime, 0);
         InvokeRepeating("CheckGoal", 0, 0.5f);
     }
 
@@ -92,15 +100,23 @@ public class FTE_1_5_Goal1 : BaseGuideStep
         costPanel.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost-currentCost,limitTime);
         
         if (missiondatas.data[0].isFinish == false)
-        {
+        {                
             missiondatas.data[0].currentNum = StageGoal.My.killNumber;
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
+                missiondatas.data[0].isFinish = true;
+                MissionData missionData = new MissionData();
+                missionData.content = "成本不超过<color=#FF6D09>"+costLimit+"</color>";
+                missionData.currentNum = StageGoal.My.totalCost - currentCost;
+                missionData.maxNum = costLimit;
+                missionData.isMainmission = false;
+                missionData.isFail = true;
+                MissionManager.My.AddMission(missionData);
+                rectBoard.SetActive(true);
                 if (StageGoal.My.totalCost - currentCost > costLimit)
                 {
                     HttpManager.My.ShowTip("超出成本限制，本次任务失败！");
                 }
-                missiondatas.data[0].isFail = true;
                 isEnd = true;
             }
         }

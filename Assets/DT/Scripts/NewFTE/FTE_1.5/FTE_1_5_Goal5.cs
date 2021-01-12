@@ -15,13 +15,15 @@ public class FTE_1_5_Goal5 : BaseGuideStep
     {
         //fruitQT.SetActive(false);
         StartCoroutine( bornPoint.GetComponent<Building>().BornEnemy1(30));
-        Debug.LogWarning(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
-        PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
+        //Debug.LogWarning(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
+        //PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
         NewCanvasUI.My.GamePause(false);
         //Destroy(place);
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
-        costImage.GetComponent<CostPanel>().InitCostPanel(currentCost, StageGoal.My.timeCount);
+        costImage.GetComponent<CostPanel>().InitCostPanel(currentCost, StageGoal.My.timeCount, 0);
         //StageGoal.My.totalIncome = 0;
         //NewGuideManager.My.BornEnemy1(30);
         //NewGuideManager.My.BornEnemy1(30);
