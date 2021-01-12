@@ -12,6 +12,8 @@ public class FTE_1_5_AwardsAdd : BaseGuideStep
         PlayerData.My.GetNewGear(90008);
         PlayerData.My.GetNewGear(90009);
         PlayerData.My.GetNewGear(90010);
+        PlayerData.My.GetNewGear(90020);
+        PlayerData.My.GetNewGear(90021);
         awards.SetActive(true);
         yield return new WaitForSeconds(0.5f);
     }
