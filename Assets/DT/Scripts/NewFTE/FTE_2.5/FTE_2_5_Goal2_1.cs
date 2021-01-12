@@ -18,12 +18,10 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
     public Transform tradeMgr;
     public override IEnumerator StepStart()
     {
-        FTE_2_5_Manager.My.isClearGoods = true;
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            PlayerData.My.MapRole[i].ClearWarehouse();
-        }
-        FTE_2_5_Manager.My.isClearGoods = false; 
+        //FTE_2_5_Manager.My.isClearGoods = true;
+        PlayerData.My.ClearAllRoleWarehouse();
+        TradeManager.My.ResetAllTrade();
+       // FTE_2_5_Manager.My.isClearGoods = false; 
         NewCanvasUI.My.GameNormal();
         SkipButton();
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);

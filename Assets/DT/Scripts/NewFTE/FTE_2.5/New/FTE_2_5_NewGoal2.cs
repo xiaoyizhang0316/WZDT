@@ -29,7 +29,7 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
         {
             npcEncorageLevel[i].SetActive(true);
         }
-        FTE_2_5_Manager.My.isClearGoods = false;
+        //FTE_2_5_Manager.My.isClearGoods = false;
         SkipButton();
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         yield return new WaitForSeconds(0.5f);
@@ -62,6 +62,8 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
         {
             TradeManager.My.DeleteTrade(child.GetComponent<TradeSign>().tradeData.ID);
         }
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
         yield return new WaitForSeconds(0.5f);
     }
 

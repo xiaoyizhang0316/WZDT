@@ -22,7 +22,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
     private int currentTimeCount;
     public override IEnumerator StepStart()
     {
-        FTE_2_5_Manager.My.isClearGoods = false;
+        //FTE_2_5_Manager.My.isClearGoods = false;
         StageGoal.My.killNumber = 0;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
@@ -161,16 +161,14 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         NewCanvasUI.My.GamePause(false);
         StageGoal.My.killNumber = 0;
         missiondatas.data[0].isFail = false;
-        FTE_2_5_Manager.My.isClearGoods=true;
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            PlayerData.My.MapRole[i].ClearWarehouse();
-        }
+        //FTE_2_5_Manager.My.isClearGoods=true;
+        PlayerData.My.ClearAllRoleWarehouse();
+        TradeManager.My.ResetAllTrade();
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount, costLimit);
         InvokeRepeating("CheckGoal",0, 0.2f);
-        FTE_2_5_Manager.My.isClearGoods=false;
+        //FTE_2_5_Manager.My.isClearGoods=false;
         NewCanvasUI.My.GameNormal();
     }
 }
