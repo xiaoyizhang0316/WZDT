@@ -31,6 +31,10 @@ public class FTE_0_5_5 : BaseGuideStep
         PlayerData.My.GetNewGear(90001);
         PlayerData.My.GetNewGear(90002);
         PlayerData.My.GetNewGear(90003);
+        PlayerData.My.GetNewGear(90016);
+        PlayerData.My.GetNewGear(90017);
+        PlayerData.My.GetNewGear(90018);
+        PlayerData.My.GetNewGear(90019);
         yield return new WaitForSeconds(1f);
         
 
@@ -53,7 +57,7 @@ public class FTE_0_5_5 : BaseGuideStep
 
     }
 
-
+ 
     public IEnumerator PlayBox()
     {
         
