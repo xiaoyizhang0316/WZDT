@@ -19,6 +19,8 @@ public class FTE_1_5_Goal3_New : BaseGuideStep
     {
         currentCost = StageGoal.My.productCost;
         currentTime = StageGoal.My.timeCount;
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
         costPanel.GetComponent<CostPanel>().InitProductCost(currentCost, currentTime, costLimit);
         NewCanvasUI.My.GamePause(false);
         QM.gameObject.SetActive(true);

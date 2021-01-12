@@ -24,6 +24,8 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     {
         StartCoroutine( bornPoint.GetComponent<Building>().BornEnemy1(30));
         NewCanvasUI.My.GamePause(false);
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
         seed.SetActive(true);
         merchant.SetActive(true);
         seed.transform.DOMoveY(0.32f, 0.5f).Play();
