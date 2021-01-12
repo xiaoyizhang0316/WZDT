@@ -84,7 +84,7 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
         }
         else
         {
-            seed_sign.GetComponent<CreatRole_Button>().ReadCostTech();
+            seed_sign.GetComponent<CreatRole_Button>().ReadCostTech(10);
         }
     }
 
@@ -119,7 +119,7 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        seed_sign.GetComponent<CreatRole_Button>().ReadCostTech();
+        seed_sign.GetComponent<CreatRole_Button>().ReadCostTech(10);
         yield return new WaitForSeconds(1.5f);
     }
 }
