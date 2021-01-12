@@ -8,7 +8,7 @@ public class Level2Controller : BaseLevelController
 
     public override void CountKillNumber(ConsumeSign sign)
     {
-        List<ConsumerType> list = new List<ConsumerType>() { ConsumerType.BluecollarRare };
+        List<ConsumerType> list = new List<ConsumerType>() { ConsumerType.WhitecollarRare };
         if (list.Contains(sign.consumerType))
         {
             targetNumber++;
@@ -17,11 +17,11 @@ public class Level2Controller : BaseLevelController
 
     public override void CheckStarTwo()
     {
-        if (targetNumber >= 28)
+        if (targetNumber >= 20)
         {
             starTwoStatus = true;
         }
-        starTwoCondition = "满足中级蓝领数量:" + targetNumber.ToString() + "/28";
+        starTwoCondition = "满足中级白领数量:" + targetNumber.ToString() + "/20";
     }
 
     public override void CheckStarThree()
