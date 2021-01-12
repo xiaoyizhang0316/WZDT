@@ -14,6 +14,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
     public GameObject openCG;
     //public Transform tradeMgr;
     private int currentTime = 0;
+    private int currentCost = 0;
 
     public bool isEnd;
     public override IEnumerator StepStart()
@@ -22,6 +23,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         //RoleSet();
         NewCanvasUI.My.GamePause(false);
         currentTime = StageGoal.My.timeCount;
+        currentCost = StageGoal.My.totalCost;
         qualityCenter.SetActive(true);
         qualityCenter.transform.DOMoveY(0.32f, 1f).Play();
         qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
@@ -29,7 +31,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         qualityCenter.GetComponent<QualityRole>().needCheck = true;
         //place.transform.DOMoveY(0f, 1f);
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
-        costPanel.GetComponent<CostPanel>().InitCostPanel(0,currentTime, 0);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTime, 0);
         isEnd = false;
         SkipButton();
         yield return new WaitForSeconds(0.5f);
@@ -79,21 +81,36 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         return false;
     }
 
+    void Reset()
+    {
+        //CancelInvoke();
+        currentTime = StageGoal.My.timeCount;
+        currentCost = StageGoal.My.totalCost;
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTime, 0);
+        PlayerData.My.ClearAllRoleWarehouse();
+        TradeManager.My.ResetAllTrade();
+        missiondatas.data[0].isFail = false;
+        missiondatas.data[0].currentNum = 0;
+        
+        InvokeRepeating("CheckGoal", 0.02f, 0.2f);
+    }
+
     void CheckGoal()
     {
         if (StageGoal.My.timeCount -currentTime>= limitTime)
         {
-            NewCanvasUI.My.GamePause(false);
+            //NewCanvasUI.My.GamePause(false);
 
             missiondatas.data[0].isFail = true;
             missiondatas.data[0].isFinish = false;
-            openCG.SetActive(true);
-            isEnd = true;
+            //openCG.SetActive(true);
+            //isEnd = true;
             CancelInvoke();
+            Reset();
             return;
         }
-        costPanel.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost, limitTime);
-        if (StageGoal.My.totalCost >= costLimit)
+        costPanel.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost-currentCost, limitTime);
+        /*if (StageGoal.My.totalCost >= costLimit)
         {
             NewCanvasUI.My.GamePause(false);
             HttpManager.My.ShowTip("已超出成本限制，任务失败！");
@@ -104,13 +121,26 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
             CancelInvoke();
             isEnd = true;
             return;
-        }
+        }*/
         if (missiondatas.data[0].isFinish == false)
         {
             missiondatas.data[0].currentNum = qualityCenter.GetComponent<BaseMapRole>().warehouse.Count;
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
+                if (StageGoal.My.totalCost > costLimit)
+                {
+                    HttpManager.My.ShowTip("超出成本限制，任务失败！");
+                    MissionData missionData = new MissionData();
+                    missionData.content = "成本控制在" + costLimit + "以内";
+                    missionData.currentNum = StageGoal.My.totalCost-currentCost;
+                    missionData.maxNum = costLimit;
+                    missionData.isFail = true;
+                    MissionManager.My.AddMission(missionData);
+                }
                 missiondatas.data[0].isFinish = true;
+                openCG.SetActive(true);
+                isEnd = true;
+                CancelInvoke();
             }
         }
         
