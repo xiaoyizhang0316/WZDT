@@ -173,20 +173,20 @@ public class CostPanel : MonoBehaviour
     {
         if (equipPanel != null && equipPanel.activeInHierarchy)
         {
-            if (missionPanel != null && missionPanel.activeInHierarchy)
+            /*if (missionPanel != null && missionPanel.activeInHierarchy)
             {
                 missionPanel.transform.DOScale(Vector3.zero, 0.02f).Play();
-            }
+            }*/
 
             transform.DOScale(Vector3.zero, 0.02f).Play();
 
         }
         else
         {
-            if (missionPanel.transform.localScale == Vector3.zero)
+            /*if (missionPanel.transform.localScale == Vector3.zero)
             {
                 missionPanel.transform.DOScale(Vector3.one, 0.02f).Play();
-            }
+            }*/
 
             if (transform.localScale == Vector3.zero)
             {
