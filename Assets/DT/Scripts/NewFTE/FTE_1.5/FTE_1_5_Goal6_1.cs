@@ -10,6 +10,8 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
     public Text workerTip;
 
     public List<GameObject> borders;
+
+    public Transform seed_sign;
     public override IEnumerator StepStart()
     {
         SkipButton();
@@ -45,6 +47,7 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
     void CheckGoal()
     {
         BorderShowOrHide();
+        CheckSeed();
         if (PlayerData.My.GetAvailableWorkerNumber() == PlayerData.My.playerWorkers.Count)
         {
             workerTip.color = Color.red;
@@ -70,6 +73,18 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
             {
                 missiondatas.data[0].isFinish = true;
             }
+        }
+    }
+
+    void CheckSeed()
+    {
+        if (PlayerData.My.seedCount == 0)
+        {
+            seed_sign.GetComponent<CreatRole_Button>().ReadCostTech(0);
+        }
+        else
+        {
+            seed_sign.GetComponent<CreatRole_Button>().ReadCostTech();
         }
     }
 
@@ -104,6 +119,7 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        seed_sign.GetComponent<CreatRole_Button>().ReadCostTech();
         yield return new WaitForSeconds(1.5f);
     }
 }

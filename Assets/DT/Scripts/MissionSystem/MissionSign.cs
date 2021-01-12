@@ -31,7 +31,8 @@ public class MissionSign : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentNum.text = this.data.currentNum.ToString();
+        //currentNum.text = this.data.currentNum.ToString();
+        currentNum.GetComponent<TextOnChange>().ShowText(data.currentNum.ToString());
         if (data.isFail)
         {
             sign.color = Color.red;
