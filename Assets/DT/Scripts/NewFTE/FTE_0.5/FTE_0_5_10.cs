@@ -11,7 +11,7 @@ public class FTE_0_5_10 : BaseGuideStep
     public BaseMapRole role2;
     int time;
 
-    public Text info;
+    //public Text info;
 
     /// <summary>
     /// 目标速率
@@ -34,7 +34,7 @@ public class FTE_0_5_10 : BaseGuideStep
        // role2.warehouse.Clear();
         role.OnMoved += ChangeColor;
        // role2.OnMoved += ChangeColor1;
-        info.text = "目标效率为：" + targetRate + "个/s                  当前效率为：" + 0 + "个/s";
+      //  info.text = "目标效率为：" + targetRate + "个/s                  当前效率为：" + 0 + "个/s";
 
         yield return null;
     }

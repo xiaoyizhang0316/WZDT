@@ -12,7 +12,7 @@ public class FTE_0_5_15 : BaseGuideStep
 
     public GameObject roleImage;
 
-    public GameObject land;
+   
     public int count;
     public int time;
     // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class FTE_0_5_15 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        land.transform.DOLocalMoveY(0, 0.5f).SetEase(Ease.OutBack).Play();
+       
         StageGoal.My.killNumber = 0;
          transform.DOScale(1, 1).OnComplete(() =>
         {
