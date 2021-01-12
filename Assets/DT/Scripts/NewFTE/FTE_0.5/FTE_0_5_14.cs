@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class FTE_0_5_14 : BaseGuideStep
 {
-
+    public GameObject land;
     public GameObject roleImage;
     public GameObject red;
     // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class FTE_0_5_14 : BaseGuideStep
         yield return new WaitForSeconds(1f);
         
          
-   
+        land.transform.DOLocalMoveY(0, 0.5f).SetEase(Ease.OutBack).Play();
 
         yield return new WaitForSeconds(1f);
 

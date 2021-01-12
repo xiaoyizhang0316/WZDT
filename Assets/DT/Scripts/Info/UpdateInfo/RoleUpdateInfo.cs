@@ -115,11 +115,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                 {
                     string str1 = "ClearWarehouse|";
                     str1 += currentRole.ID.ToString();
-                    if (currentRole.baseRoleData.roleType == GameEnum.RoleType.Peasant &&
-                      FTE_0_5Manager.My.clearWarehouse ==1)
-                    {
-                        FTE_0_5Manager.My.clearWarehouse = 2;
-                    }
+           
 
                     if (PlayerData.My.isServer)
                     {
@@ -129,6 +125,11 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                     {
                         PlayerData.My.client.SendToServerMsg(str1);
                     }
+                }
+                if (currentRole.baseRoleData.roleType == GameEnum.RoleType.Peasant &&
+                    FTE_0_5Manager.My.clearWarehouse ==1)
+                {
+                    FTE_0_5Manager.My.clearWarehouse = 2;
                 }
                 PlayerData.My.GetMapRoleById(currentRole.ID).ClearWarehouse();
                 ReInit(currentRole);
