@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class FTE_1_5_Goal6_1 : BaseGuideStep
 {
     public Text workerTip;
+
+    public List<GameObject> borders;
     public override IEnumerator StepStart()
     {
         SkipButton();
@@ -42,6 +44,7 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
 
     void CheckGoal()
     {
+        BorderShowOrHide();
         if (PlayerData.My.GetAvailableWorkerNumber() == PlayerData.My.playerWorkers.Count)
         {
             workerTip.color = Color.red;
@@ -66,6 +69,34 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
                 missiondatas.data[0].isFinish = true;
+            }
+        }
+    }
+
+    private bool isShowBorder = true;
+    void BorderShowOrHide()
+    {
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeInHierarchy)
+        {
+            if (isShowBorder)
+            {
+                for (int i = 0; i < borders.Count; i++)
+                {
+                    borders[i].SetActive(false);
+                }
+                isShowBorder = false;
+            }
+        }
+        else
+        {
+            if (!isShowBorder)
+            {
+                for (int i = 0; i < borders.Count; i++)
+                {
+                    borders[i].SetActive(true);
+                }
+
+                isShowBorder = true;
             }
         }
     }
