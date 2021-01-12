@@ -62,6 +62,8 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
         {
             TradeManager.My.DeleteTrade(child.GetComponent<TradeSign>().tradeData.ID);
         }
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
         yield return new WaitForSeconds(0.5f);
     }
 

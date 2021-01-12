@@ -21,6 +21,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
         qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
         qualityCenter.GetComponent<QualityRole>().needCheck = true;
+        PlayerData.My.ClearAllRoleWarehouse();
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount, costLimit);
         //NewCanvasUI.My.GameNormal();
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
@@ -56,6 +57,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         qualityCenter.transform.DOMoveY(-8f, 0.5f).Play().OnComplete(()=>PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID));
 
         //FTE_2_5_Manager.My.isClearGoods = true;
+        PlayerData.My.ClearAllRoleWarehouse();
         TradeManager.My.ResetAllTrade();
         yield return new WaitForSeconds(1f);
         DoEnd();

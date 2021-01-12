@@ -63,7 +63,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         costPanel.GetComponent<CostPanel>().HideAllCost();
         //FTE_2_5_Manager.My.isClearGoods = true;
         TradeManager.My.ResetAllTrade();
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         DoEnd();
     }
 
