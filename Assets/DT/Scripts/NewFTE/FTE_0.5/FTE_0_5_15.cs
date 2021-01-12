@@ -69,8 +69,10 @@ public class FTE_0_5_15 : BaseGuideStep
     { 
         t.Kill(); 
         roleImage.SetActive(true);
-        yield return new WaitForSeconds(1f);
         roleImage.SetActive(false);
+
+        yield return new WaitForSeconds(2);
+
 
     }
 

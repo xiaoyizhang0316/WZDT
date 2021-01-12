@@ -37,7 +37,8 @@ public class FTE_0_5_6_2 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        yield break;
+        yield return new WaitForSeconds(2f);
+
     }
 
 

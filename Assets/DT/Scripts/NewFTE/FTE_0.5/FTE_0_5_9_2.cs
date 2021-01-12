@@ -40,7 +40,7 @@ public class FTE_0_5_9_2 : BaseGuideStep
     {
 
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
     }
 
     public void ChangeColor(ProductData data)

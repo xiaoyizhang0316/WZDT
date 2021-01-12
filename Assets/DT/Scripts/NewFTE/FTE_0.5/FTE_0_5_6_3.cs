@@ -25,7 +25,7 @@ public class FTE_0_5_6_3 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         redpoint.SetActive( false);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
     }
 
 

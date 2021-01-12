@@ -32,7 +32,7 @@ public class FTE_0_5_4 : BaseGuideStep
         buildTip.SetActive(false);
 
    
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
     }
 
     public override bool ChenkEnd()

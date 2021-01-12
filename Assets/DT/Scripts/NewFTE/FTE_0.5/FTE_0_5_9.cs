@@ -25,7 +25,8 @@ public class FTE_0_5_9 : BaseGuideStep
     {
         red.SetActive(false);
 
-        yield break;
+        yield return new WaitForSeconds(2f);
+
     }
 
 
