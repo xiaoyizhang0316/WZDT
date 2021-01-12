@@ -45,6 +45,18 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         dragImg = transform.Find("Image").GetComponent<Image>();
     }
 
+    public void ReadCostTech(int cost=-1)
+    {
+        if (cost == -1)
+        {
+            costTech = GameDataMgr.My.GetModelData(type, 1).costTech;
+        }
+        else
+        {
+            costTech = cost;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

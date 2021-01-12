@@ -851,6 +851,9 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         }
     }
 
+    /*
+     * 清空所有的仓库
+     */
     public void ClearAllRoleWarehouse()
     {
         for (int i = 0; i < MapRole.Count; i++)
