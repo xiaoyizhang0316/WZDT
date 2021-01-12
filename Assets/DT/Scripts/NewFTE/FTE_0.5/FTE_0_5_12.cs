@@ -36,8 +36,8 @@ public class FTE_0_5_12 : BaseGuideStep
 
         missiondatas.data[0].currentNum = 1; 
         missiondatas.data[0].isFinish= true; 
-        
-        yield break;
+        yield return new WaitForSeconds(2);
+
         ;
     }
 

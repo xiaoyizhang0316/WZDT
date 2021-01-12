@@ -170,7 +170,7 @@ public class FTE_0_5_8 : BaseGuideStep
             }
             else
             {
-                missiondatas.data[1].isFinish = true;
+                missiondatas.data[1].isFinish = false;
                 return false;
 
             }

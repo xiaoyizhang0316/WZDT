@@ -31,7 +31,8 @@ public class FTE_0_5_3 : BaseGuideStep
        
         missiondatas.data[0].isFinish= true; 
         
-      yield break; 
+        yield return new WaitForSeconds(2);
+
     }
 
     public override bool ChenkEnd()
