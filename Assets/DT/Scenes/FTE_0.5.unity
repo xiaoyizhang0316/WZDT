@@ -7682,10 +7682,9 @@ PrefabInstance:
     - target: {fileID: 2767942478710952537, guid: ee971e92e93a1aa45b2d4cc575ed405c,
         type: 3}
       propertyPath: conversationText.stringVal
-      value: "COO normal left: \u6B22\u8FCE\u6765\u5230WZ\u5E02\uFF0C\u8FD9\u91CC\u7684\u4EBA\u4EEC\u5BF9\u54C8\u5BC6\u74DC\u60C5\u6709\u72EC\u949F\uFF0C\u54C8\u5BC6\u74DC\u5E02\u573A\u5728\u8FD9\u91CC\u53EF\u662F\u6F5C\u85CF\u7740\u5DE8\u5927\u7684\u673A\u4F1A\u3002\nCOO
-        normal left: \u53EF\u4E0D\u8981\u5C0F\u770B\u54C8\u5BC6\u74DC\u7684\u751F\u610F\uFF0C\u91CC\u9762\u8574\u542B\u7740\u5927\u91CF\u7684\u5546\u4E1A\u77E5\u8BC6\u3002\nCOO
-        normal left: \u4F5C\u4E3A\u516C\u53F8\u7684\u7EE7\u4EFB\u8005\uFF0C\u4F60\u7684\u51B3\u7B56\u548C\u9009\u62E9\u5C06\u4F1A\u5F71\u54CD\u5230\u516C\u53F8\u7684\u53D1\u5C55\u3002\nCOO
-        normal left: \u90A3\u4E48\u4E0A\u5C97\u524D\u6211\u4EEC\u9700\u8981\u4E86\u89E3\u4E00\u4E0B\u884C\u4E1A\u7684\u57FA\u7840\u6784\u5EFA\uFF0C\u8FD9\u5BF9\u4F60\u6765\u8BF4\u662F\u975E\u5E38\u91CD\u8981\u7684\uFF01\n\nCOO
+      value: "COO normal left:\u5F88\u597D\uFF0C\u5DF2\u7ECF\u5EFA\u7ACB\u5B8C\u6210\uFF01\nCOO
+        normal left:\u4E0B\u9762\u6211\u6765\u8BB2\u4E00\u8BB2\u79CD\u5B50\u5546\u7684\u4F5C\u7528\uFF0C\u53EF\u8981\u4ED4\u7EC6\u542C\u597D\u4E86\u3002\nCOO
+        normal left: \u79CD\u5B50\u5546\u662F\u8D1F\u8D23\u7814\u53D1\u7684\u89D2\u8272\uFF0C\u5176\u4E2D\u54C1\u8D28\u5C5E\u6027\u51B3\u5B9A\u7740\u6700\u7EC8\u54C8\u5BC6\u74DC\u7684\u54C1\u8D28\uFF0C\u8FD9\u70B9\u5343\u4E07\u8981\u7262\u8BB0\uFF01\n\nCOO
         hide:"
       objectReference: {fileID: 0}
     - target: {fileID: 8856601228395425261, guid: ee971e92e93a1aa45b2d4cc575ed405c,
@@ -7700,6 +7699,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee971e92e93a1aa45b2d4cc575ed405c, type: 3}
+--- !u!114 &450749927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2767942478710952530, guid: ee971e92e93a1aa45b2d4cc575ed405c,
+    type: 3}
+  m_PrefabInstance: {fileID: 450749926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a334fe2ffb574b3583ff3b18b4792d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &457110357
 GameObject:
   m_ObjectHideFlags: 0
@@ -15116,7 +15127,7 @@ MonoBehaviour:
       isMainmission: 1
       isFinish: 0
       isFail: 0
-  missionTitle: "\u4EFB\u52A1\u4E00\uFF1A\u7814\u53D1\u6E90\u5934\u2014\u79CD\u5B50\u5546"
+  missionTitle: "\u4EFB\u52A1\u4E00\uFF1A\u7814\u53D1\u2014\u79CD\u5B50\u5546"
   timeCount: 0
   land:
   - {fileID: 0}
@@ -19763,18 +19774,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1234184767}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1242599031 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2767942478710952530, guid: ee971e92e93a1aa45b2d4cc575ed405c,
-    type: 3}
-  m_PrefabInstance: {fileID: 789320989}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a334fe2ffb574b3583ff3b18b4792d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1244653232
 GameObject:
   m_ObjectHideFlags: 0
@@ -28922,7 +28921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 1242599031}
+  selectedFlowchart: {fileID: 450749927}
 --- !u!4 &1792123844
 Transform:
   m_ObjectHideFlags: 1
