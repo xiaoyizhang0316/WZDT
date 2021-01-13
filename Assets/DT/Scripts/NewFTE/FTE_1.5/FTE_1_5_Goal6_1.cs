@@ -78,7 +78,7 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
 
     void CheckSeed()
     {
-        if (PlayerData.My.seedCount == 0)
+        if ( PlayerData.My.totalRoleCount == 0 && StageGoal.My.playerTechPoint<10)
         {
             seed_sign.GetComponent<CreatRole_Button>().ReadCostTech(0);
         }
