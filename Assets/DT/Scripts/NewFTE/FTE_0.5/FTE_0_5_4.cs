@@ -39,11 +39,7 @@ public class FTE_0_5_4 : BaseGuideStep
     {
         TradeManager.My.HideAllIcon();
 
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            if(   PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
-            PlayerData.My.MapRole[i].ringEffect.SetActive(true);
-        }
+       
         if (roleInfo.activeSelf)
         {
          //   roleinfoTip.SetActive(true);
