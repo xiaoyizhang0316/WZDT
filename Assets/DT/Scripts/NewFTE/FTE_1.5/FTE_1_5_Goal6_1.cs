@@ -10,9 +10,14 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
     public Text workerTip;
 
     public List<GameObject> borders;
+
+    public Transform seed_sign;
     public override IEnumerator StepStart()
     {
         SkipButton();
+        StageGoal.My.playerTechPoint = 0;
+        StageGoal.My.playerTechText.text = "0";
+        StageGoal.My.GetTechPoint(0);
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
     }
@@ -45,6 +50,7 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
     void CheckGoal()
     {
         BorderShowOrHide();
+        CheckSeed();
         if (PlayerData.My.GetAvailableWorkerNumber() == PlayerData.My.playerWorkers.Count)
         {
             workerTip.color = Color.red;
@@ -70,6 +76,18 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
             {
                 missiondatas.data[0].isFinish = true;
             }
+        }
+    }
+
+    void CheckSeed()
+    {
+        if ( PlayerData.My.totalRoleCount == 0 && StageGoal.My.playerTechPoint<10)
+        {
+            seed_sign.GetComponent<CreatRole_Button>().ReadCostTech(0);
+        }
+        else
+        {
+            seed_sign.GetComponent<CreatRole_Button>().ReadCostTech(10);
         }
     }
 
@@ -104,6 +122,7 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        yield return new WaitForSeconds(1.5f);
+        seed_sign.GetComponent<CreatRole_Button>().ReadCostTech(10);
+        yield return new WaitForSeconds(2f);
     }
 }

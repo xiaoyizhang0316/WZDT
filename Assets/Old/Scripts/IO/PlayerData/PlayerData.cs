@@ -831,6 +831,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     public int peasantCount;
     public int merchantCount;
     public int dealerCount;
+    public int totalRoleCount;
 
     public void RoleCountStatic(BaseMapRole role, int count)
     {
@@ -849,8 +850,13 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
                 dealerCount += count;
                 break;
         }
+
+        totalRoleCount += count;
     }
 
+    /*
+     * 清空所有的仓库
+     */
     public void ClearAllRoleWarehouse()
     {
         for (int i = 0; i < MapRole.Count; i++)

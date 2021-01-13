@@ -410,4 +410,27 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
         return false;
     }
+
+    /// <summary>
+    /// 显示角色相关的交易的图标（鼠标移动到角色上触发）
+    /// </summary>
+    /// <param name="roleID">相关角色的ID</param>
+    public void ShowAllRelateTradeIcon(string roleID)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<TradeSign>().ShowTradeIcon(roleID);
+        }
+    }
+
+    /// <summary>
+    /// 隐藏角色相关的交易的图标（鼠标从角色上移出）
+    /// </summary>
+    public void HideRelateTradeIcon()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<TradeSign>().HideTradeIcon();
+        }
+    }
 }

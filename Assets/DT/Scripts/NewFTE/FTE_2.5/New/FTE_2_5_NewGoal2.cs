@@ -58,13 +58,13 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        foreach (Transform child in tradeMgr)
+        /*foreach (Transform child in tradeMgr)
         {
             TradeManager.My.DeleteTrade(child.GetComponent<TradeSign>().tradeData.ID);
-        }
+        }*/
         TradeManager.My.ResetAllTrade();
         PlayerData.My.ClearAllRoleWarehouse();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
     }
 
     public override bool ChenkEnd()

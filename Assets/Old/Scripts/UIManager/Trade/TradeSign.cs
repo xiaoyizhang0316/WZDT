@@ -46,11 +46,16 @@ public class TradeSign : MonoBehaviour
 
     private bool isChecked = false;
 
+    public List<string> bothIDs=new List<string>();
+
     public void Init(string start, string end)
     {
         tradeData = new TradeData();
         tradeData.startRole = start;
         tradeData.endRole = end;
+        bothIDs.Clear();
+        bothIDs.Add(start);
+        bothIDs.Add(end);
         tradeData.isFree = false;
         tradeData.castRole = start;
         tradeData.targetRole = end;
@@ -463,5 +468,46 @@ public class TradeSign : MonoBehaviour
         {
             tweener.Restart();
         }
+    }
+
+    /// <summary>
+    /// 检查角色在交易中的位置（true:star, false:end）
+    /// </summary>
+    /// <param name="roleID"></param>
+    /// <returns></returns>
+    public bool CheckRolePositionInTrade(string roleID)
+    {
+        if (tradeData.startRole.Equals(roleID))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// 显示角色相关的交易图标（鼠标移动到角色上触发）
+    /// </summary>
+    /// <param name="roleID">相关角色ID</param>
+    public void ShowTradeIcon(string roleID)
+    {
+        if (bothIDs.Contains(roleID))
+        {
+            if (CheckRolePositionInTrade(roleID))
+            {
+                icon.ShowRelateIcon(true);
+            }
+            else
+            {
+                icon.ShowRelateIcon();
+            }
+        }
+    }
+    
+    /// <summary>
+    /// 隐藏角色相关的交易图标（鼠标从角色上移出触发）
+    /// </summary>
+    public void HideTradeIcon()
+    {
+        icon.HideRelateIcon();
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FloatInfoManager : MonoSingleton<FloatInfoManager>
@@ -12,12 +14,18 @@ public class FloatInfoManager : MonoSingleton<FloatInfoManager>
 
     public GameObject textPrb;
 
+    private static string[] sceneNameExcept = {"FTE_1.5", "FTE_2.5"};
+
     /// <summary>
     /// 金钱变化时浮动文字信息
     /// </summary>
     /// <param name="number"></param>
     public void MoneyChange(int number)
     {
+        if (sceneNameExcept.Contains(SceneManager.GetActiveScene().name))
+        {
+            return;
+        }
         if (number == 0)
             return;
         GameObject go = Instantiate(textPrb, transform);
