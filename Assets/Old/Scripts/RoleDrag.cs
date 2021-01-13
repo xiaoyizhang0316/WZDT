@@ -22,6 +22,8 @@ public class RoleDrag : MonoBehaviour
         {
             string desc = GameDataMgr.My.GetTranslateName(currentRole.baseRoleData.roleType.ToString());
             RoleFloatWindow.My.Init(transform, desc,currentRole.baseRoleData.roleSkillType,currentRole.baseRoleData.roleType);
+            if(!NewCanvasUI.My.isSetTrade)
+                TradeManager.My.ShowAllRelateTradeIcon(currentRole.ID.ToString());
         }
         //Cursor.SetCursor(cursorTexture,Vector2.zero,CursorMode.Auto);
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);
@@ -34,6 +36,8 @@ public class RoleDrag : MonoBehaviour
     private void OnMouseExit()
     {
         RoleFloatWindow.My.Hide();
+        if(!NewCanvasUI.My.isSetTrade)
+            TradeManager.My.HideRelateTradeIcon();
         //Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         // UIManager.My.Panel_POPInfo.gameObject.SetActive(false);
         //Debug.Log(UIManager.My.Panel_POPInfo.gameObject.activeSelf);

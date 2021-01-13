@@ -3,22 +3,52 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class TextOnChange : MonoBehaviour
 {
     private string currentText = "";
+    private MissionSign _missionSign;
 
     //private Color originColor;
     // Start is called before the first frame update
     void Start()
     {
         currentText = GetComponent<Text>().text;
+        _missionSign = transform.parent.parent.GetComponent<MissionSign>();
         //originColor = GetComponent<Text>().color;
     }
 
+    private bool isSetStyle = false;
     //private bool isOnScale = false;
-    public void ShowText(string newText)
+    public void ShowText(string newText, string content)
     {
+        if (!isSetStyle&&gameObject.activeInHierarchy)
+        {
+            if (content.Contains("质监站"))
+            {
+                GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+                GetComponent<Text>().fontSize = 30;
+                GetComponent<Text>().color = Color.green;
+                _missionSign.maxNum.fontSize = 25;
+                if (_missionSign.data.isMainmission)
+                {
+                    transform.GetComponent<RectTransform>().DOAnchorPosX(75, 0.01f).Play().OnPause(() =>
+                    {
+                        transform.GetComponent<RectTransform>().DOAnchorPosX(75, 0.01f).Play();
+                    });
+                }
+                else
+                {
+                    transform.GetComponent<RectTransform>().DOAnchorPosX(84, 0.01f).Play().OnPause(() =>
+                    {
+                        transform.GetComponent<RectTransform>().DOAnchorPosX(84, 0.01f).Play();
+                    });
+                }
+            }
+
+            isSetStyle = true;
+        }
         if (!newText.Equals(currentText)&& gameObject.activeInHierarchy)
         {
             /*if (isOnScale)
@@ -29,19 +59,21 @@ public class TextOnChange : MonoBehaviour
             }
             isOnScale = true;*/
             currentText = newText;
-            GetComponent<Text>().text = newText;
-            /*if (int.Parse(newText) > 0&& int.Parse(newText)>int.Parse(currentText.Equals("")?"0": currentText))
+            
+            
+            if (content.Contains("质监站"))
             {
-                GetComponent<Text>().color = Color.green;
+                GetComponent<Text>().text = newText;
+                transform.DOScale(2f, 0.5f).OnComplete(() =>
+                {
+                    transform.DOScale(1, 0.5f).Play();
+                }).Play();
             }
             else
             {
-                GetComponent<Text>().color = Color.red;
-            }*/
-            transform.DOScale(1.5f, 0.5f).SetId("TextScale").OnComplete(() =>
-            {
-                transform.DOScale(1, 0.5f).Play();
-            }).Play();
+                GetComponent<Text>().text = newText;
+            }
+            
         }
     }
 }

@@ -118,8 +118,11 @@ public class TradeIcon : MonoBehaviour
     public void OnMouseEnter()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
-        startRole.TradeLightOn();
-        endRole.TradeLightOn();
+        if (!NewCanvasUI.My.isSetTrade)
+        {
+            startRole.TradeLightOn();
+            endRole.TradeLightOn();
+        }
     }
 
     /// <summary>
@@ -128,8 +131,11 @@ public class TradeIcon : MonoBehaviour
     public void OnMouseExit()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
-        startRole.TradeLightOff();
-        endRole.TradeLightOff();
+        if (!NewCanvasUI.My.isSetTrade)
+        {
+            startRole.TradeLightOff();
+            endRole.TradeLightOff();
+        }
     }
 
     /// <summary>

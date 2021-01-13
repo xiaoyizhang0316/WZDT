@@ -25,6 +25,9 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
         TradeManager.My.ResetAllTrade();
        // FTE_2_5_Manager.My.isClearGoods = false; 
         NewCanvasUI.My.GameNormal();
+        peasant1.GetComponent<QualityRole>().QualityReset();
+        peasant2.GetComponent<QualityRole>().QualityReset();
+        peasant3.GetComponent<QualityRole>().QualityReset();
         SkipButton();
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);
         yield return new WaitForSeconds(0.5f);

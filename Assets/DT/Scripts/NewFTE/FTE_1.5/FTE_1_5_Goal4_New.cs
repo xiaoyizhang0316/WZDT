@@ -27,6 +27,7 @@ public class FTE_1_5_Goal4_New : BaseGuideStep
         QM.GetComponent<QualityRole>().checkQuality = needQuality;
         QM.GetComponent<QualityRole>().checkBuff = -1;
         QM.GetComponent<QualityRole>().needCheck = true;
+        QM.GetComponent<QualityRole>().QualityReset();
         SkipButton();
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
@@ -59,6 +60,7 @@ public class FTE_1_5_Goal4_New : BaseGuideStep
         PlayerData.My.ClearAllRoleWarehouse();
         currentCost = StageGoal.My.tradeCost;
         currentTime = StageGoal.My.timeCount;
+        QM.GetComponent<QualityRole>().QualityReset();
         costPanel.GetComponent<CostPanel>().InitTradeCost(currentCost, currentTime, costLimit);
         missiondatas.data[0].isFail = false;
         missiondatas.data[0].currentNum = 0;
