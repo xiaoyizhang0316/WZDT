@@ -14,6 +14,9 @@ public class TradeIcon : MonoBehaviour
 
     public int tradeId;
 
+    private BaseMapRole startRole;
+    private BaseMapRole endRole;
+
     public void SetTrasform(Transform s, Transform e)
     {
         start = s;
@@ -30,8 +33,8 @@ public class TradeIcon : MonoBehaviour
     public void Init(TradeData tradeData)
     {
         tradeId = tradeData.ID;
-        BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
-        BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+         startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+         endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         start = startRole.tradePoint;
         end = endRole.tradePoint;
         transform.position = (startRole.tradePoint.position + endRole.tradePoint.position) / 2f + new Vector3(0f, 0.3f, 0f);
@@ -115,6 +118,8 @@ public class TradeIcon : MonoBehaviour
     public void OnMouseEnter()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        startRole.TradeLightOn();
+        endRole.TradeLightOn();
     }
 
     /// <summary>
@@ -123,5 +128,33 @@ public class TradeIcon : MonoBehaviour
     public void OnMouseExit()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        startRole.TradeLightOff();
+        endRole.TradeLightOff();
+    }
+
+    /// <summary>
+    /// 显示相关交易图标（鼠标移动到角色上显示）
+    /// </summary>
+    /// <param name="isStart">是否是发起方</param>
+    public void ShowRelateIcon(bool isStart=false)
+    {
+        GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        /*if(isStart)
+        {*/
+            transform.GetChild(0).gameObject.layer = 9;
+        /*}
+        else
+        {
+            transform.GetChild(0).gameObject.layer = 10;
+        }*/
+    }
+
+    /// <summary>
+    /// 隐藏相关交易图标（鼠标从角色上移出）
+    /// </summary>
+    public void HideRelateIcon()
+    {
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        transform.GetChild(0).gameObject.layer = 0;
     }
 }
