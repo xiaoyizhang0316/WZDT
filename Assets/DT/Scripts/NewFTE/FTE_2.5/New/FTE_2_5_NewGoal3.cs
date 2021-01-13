@@ -21,6 +21,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
         qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
         qualityCenter.GetComponent<QualityRole>().needCheck = true;
+        qualityCenter.GetComponent<QualityRole>().QualityReset();
         TradeManager.My.ResetAllTrade();
         PlayerData.My.ClearAllRoleWarehouse();
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount, costLimit);
@@ -132,6 +133,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         missiondatas.data[0].isFail = false;
         PlayerData.My.ClearAllRoleWarehouse();
         TradeManager.My.ResetAllTrade();
+        qualityCenter.GetComponent<QualityRole>().QualityReset();
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount,costLimit);

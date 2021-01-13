@@ -37,7 +37,7 @@ public class QualityRole : BaseMapRole
                     {
                         // 红
                         signal.material = wrong;
-                        HttpManager.My.ShowTip("输送至"+baseRoleData.baseRoleData.roleName+"的产品未达标！");
+                        //HttpManager.My.ShowTip("输送至"+baseRoleData.baseRoleData.roleName+"的产品未达标！");
                     }
                 }
                 else
@@ -54,7 +54,7 @@ public class QualityRole : BaseMapRole
                         {
                             // 红
                             signal.material = wrong;
-                            HttpManager.My.ShowTip("输送至"+baseRoleData.baseRoleData.roleName+"的产品未达标！");
+                            //HttpManager.My.ShowTip("输送至"+baseRoleData.baseRoleData.roleName+"的产品未达标！");
                         }
                     }
                     else
@@ -69,7 +69,7 @@ public class QualityRole : BaseMapRole
                         {
                             // 红
                             signal.material = wrong;
-                            HttpManager.My.ShowTip("输送至"+baseRoleData.baseRoleData.roleName+"的产品未达标！");
+                            //HttpManager.My.ShowTip("输送至"+baseRoleData.baseRoleData.roleName+"的产品未达标！");
                         }
                     }
                 }
@@ -80,5 +80,11 @@ public class QualityRole : BaseMapRole
             warehouse.Add(data);
         }
         //signal.material = normal;
+    }
+
+    public void QualityReset()
+    {
+        ClearWarehouse();
+        signal.material = normal;
     }
 }

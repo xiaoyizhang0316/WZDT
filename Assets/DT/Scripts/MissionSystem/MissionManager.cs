@@ -16,7 +16,7 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
 
     public Button in_btn;
     public Button out_btn;
-    public Text tip;
+    //public Text tip;
 
     public List<MissionSign> signs=new List<MissionSign>();
 
@@ -39,8 +39,8 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
     public void ChangeTital(string content)
     {
         missionText.text = content;
-        tip.gameObject.SetActive(false);
-        isTipShow = false;
+        //tip.gameObject.SetActive(false);
+        //isTipShow = false;
     }
 
 
@@ -79,7 +79,7 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
     }
 
     private bool isOut = false;
-    private bool isTipShow = false;
+    //private bool isTipShow = false;
 
     public Transform missions;//-11.3
     public Transform titles;//-21.95
@@ -95,8 +95,8 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
                 out_btn.gameObject.SetActive(true);
             }
 
-            if(isTipShow)
-                tip.gameObject.SetActive(false);
+            //if(isTipShow)
+                //tip.gameObject.SetActive(false);
         }
         else
         {
@@ -105,23 +105,23 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
             titles.GetComponent<RectTransform>().DOAnchorPosX(-21.95f, 0.5f).Play();
             out_btn.gameObject.SetActive(false);
             in_btn.gameObject.SetActive(false);
-            if(isTipShow)
-                tip.gameObject.SetActive(true);
+            //if(isTipShow)
+                //tip.gameObject.SetActive(true);
         }
     }
 
     public void ShowTipText(string tipContent, Color showColor)
     {
-        tip.color = showColor;
-        tip.text = tipContent;
-        tip.gameObject.SetActive(true);
-        isTipShow = true;
+        //tip.color = showColor;
+        //tip.text = tipContent;
+        //tip.gameObject.SetActive(true);
+        //isTipShow = true;
     }
 
     public void HideTip()
     {
-        tip.gameObject.SetActive(false);
-        tip.text = "";
-        isTipShow = false;
+        //tip.gameObject.SetActive(false);
+        //tip.text = "";
+        //isTipShow = false;
     }
 }

@@ -150,6 +150,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
             peasant1.GetComponent<QualityRole>().checkBuff = 305;
             peasant1.GetComponent<QualityRole>().checkQuality = -1;
             peasant1.GetComponent<QualityRole>().needCheck = true;
+            peasant1.GetComponent<QualityRole>().QualityReset();
         
         
             //place2.DOMoveY(0, 1f).Play();
@@ -160,6 +161,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
             peasant2.GetComponent<QualityRole>().checkBuff = 304;
             peasant2.GetComponent<QualityRole>().checkQuality = -1;
             peasant2.GetComponent<QualityRole>().needCheck = true;
+            peasant2.GetComponent<QualityRole>().QualityReset();
         
         
             //place3.DOMoveY(0, 1f).Play();
@@ -170,6 +172,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
             peasant3.GetComponent<QualityRole>().checkBuff = 303;
             peasant3.GetComponent<QualityRole>().checkQuality = -1;
             peasant3.GetComponent<QualityRole>().needCheck = true;
+            peasant3.GetComponent<QualityRole>().QualityReset();
         
     }
 }
