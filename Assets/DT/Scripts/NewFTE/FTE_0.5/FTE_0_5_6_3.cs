@@ -17,7 +17,7 @@ public class FTE_0_5_6_3 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-       
+        StageGoal.My.maxRoleLevel = 2;
         
         yield return null;
     }
@@ -25,7 +25,7 @@ public class FTE_0_5_6_3 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         redpoint.SetActive( false);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
     }
 
 

@@ -144,7 +144,7 @@ public class FTE_0_5_10_2 : BaseGuideStep
             }
             else
             {
-                missiondatas.data[0].isFinish = true;
+                missiondatas.data[0].isFinish = false;
                 return false;
             }
         }

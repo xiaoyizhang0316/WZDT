@@ -30,7 +30,8 @@ public class FTE_0_5_6 : BaseGuideStep
                 PlayerData.My.MapRole[i].warehouse.Clear();
             }
         }
-       yield break; 
+        yield return new WaitForSeconds(2);
+
     }
 
 

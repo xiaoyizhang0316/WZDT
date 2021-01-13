@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,10 @@ public class MissionSign : MonoBehaviour
 
     public Image sign;
 
+    public GameObject success;
     private Color signColor;
+
+    private bool isover;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,14 +39,32 @@ public class MissionSign : MonoBehaviour
         }
         else
         {
-            if (data.isFinish)
+            if (data.isFinish )
             {
                 sign.color = Color.green;
+
+                effectOver();
             }else 
             {
                 sign.color = signColor;
             }
         }
+    }
+
+    public void effectOver()
+    {
+        if (!isover)
+        {
+            isover = true;
+            success.transform.DOScale(2, 0.4f).OnComplete(() =>
+            {
+                success.transform.DOShakePosition(0.9f ,8).OnComplete(() =>
+                {
+                    success.transform.DOScale(1, 0.2f).Play().SetEase(Ease.OutCirc);
+                }).Play();
+        
+            }).Play();
+        } 
     }
 
     public void Init(MissionData data)

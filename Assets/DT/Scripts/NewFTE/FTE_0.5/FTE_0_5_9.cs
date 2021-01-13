@@ -25,7 +25,8 @@ public class FTE_0_5_9 : BaseGuideStep
     {
         red.SetActive(false);
 
-        yield break;
+        yield return new WaitForSeconds(2f);
+
     }
 
 
@@ -34,14 +35,8 @@ public class FTE_0_5_9 : BaseGuideStep
         TradeManager.My.HideAllIcon();
         int count = 0;
 
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant&&!PlayerData.My.MapRole[i].isNpc)
-            {
-                count++;
-                   
-            }
-            missiondatas.data[0].currentNum = count;
+       
+   count = PlayerData.My.peasantCount;
             if (count >= missiondatas.data[0].maxNum)
             {
                 missiondatas.data[0].isFinish = true;
@@ -49,8 +44,8 @@ public class FTE_0_5_9 : BaseGuideStep
                 return true;
 
             }
-        }
+            
 
-        return false;
-    }
-}
+            return false;
+        }
+    } 

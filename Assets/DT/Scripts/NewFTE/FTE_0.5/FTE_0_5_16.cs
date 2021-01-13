@@ -58,7 +58,8 @@ public class FTE_0_5_16 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         t.Kill();
-        yield break;
+        yield return new WaitForSeconds(2f);
+
     }
 
     public override bool ChenkEnd()
