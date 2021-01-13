@@ -46,11 +46,16 @@ public class TradeSign : MonoBehaviour
 
     private bool isChecked = false;
 
+    public List<string> bothIDs=new List<string>();
+
     public void Init(string start, string end)
     {
         tradeData = new TradeData();
         tradeData.startRole = start;
         tradeData.endRole = end;
+        bothIDs.Clear();
+        bothIDs.Add(start);
+        bothIDs.Add(end);
         tradeData.isFree = false;
         tradeData.castRole = start;
         tradeData.targetRole = end;

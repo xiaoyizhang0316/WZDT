@@ -1139,4 +1139,59 @@ public class BaseMapRole : MonoBehaviour
             interval = 0f;
         }
     }
+    
+    public void TradeLightOn(){
+        foreach (var item in levelModels)
+        {
+            if (item.activeInHierarchy)
+            {
+                foreach (var t in item.GetComponentsInChildren<Transform>())
+                {
+
+                    t.gameObject.layer = 9;
+                }
+            }
+        }
+        BulletLaunch temp;
+        if (TryGetComponent(out temp))
+        {
+            foreach (var item in temp.paos)
+            {
+                item.transform.GetChild(0).gameObject.layer = 9;
+            }
+        }
+}
+
+    public void TradeLightOff()
+    {
+        foreach (var item in levelModels)
+        {
+            if (item.activeInHierarchy)
+            {
+                foreach (var t in item.GetComponentsInChildren<Transform>())
+                {
+                    if (t != null)
+                        t.gameObject.layer = 0;
+                }
+            }
+        }
+        BulletLaunch temp;
+        if (TryGetComponent(out temp))
+        {
+            foreach (var item in temp.paos)
+            {
+                item.transform.GetChild(0).gameObject.layer = 0;
+            }
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        TradeManager.My.ShowAllRelateTradeIcon(baseRoleData.ID.ToString());
+    }
+
+    private void OnMouseExit()
+    {
+        TradeManager.My.HideRelateTradeIcon();
+    }
 }

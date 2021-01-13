@@ -14,6 +14,9 @@ public class TradeIcon : MonoBehaviour
 
     public int tradeId;
 
+    private BaseMapRole startRole;
+    private BaseMapRole endRole;
+
     public void SetTrasform(Transform s, Transform e)
     {
         start = s;
@@ -30,8 +33,8 @@ public class TradeIcon : MonoBehaviour
     public void Init(TradeData tradeData)
     {
         tradeId = tradeData.ID;
-        BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
-        BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+         startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+         endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         start = startRole.tradePoint;
         end = endRole.tradePoint;
         transform.position = (startRole.tradePoint.position + endRole.tradePoint.position) / 2f + new Vector3(0f, 0.3f, 0f);
@@ -115,12 +118,26 @@ public class TradeIcon : MonoBehaviour
     public void OnMouseEnter()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        startRole.TradeLightOn();
+        endRole.TradeLightOn();
     }
 
     /// <summary>
     /// 鼠标移除淡出效果
     /// </summary>
     public void OnMouseExit()
+    {
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        startRole.TradeLightOff();
+        endRole.TradeLightOff();
+    }
+
+    public void ShowRelateIcon()
+    {
+        GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+    }
+
+    public void HideRelateIcon()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
     }

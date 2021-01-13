@@ -410,4 +410,23 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
         return false;
     }
+
+    public void ShowAllRelateTradeIcon(string roleID)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).GetComponent<TradeSign>().bothIDs.Contains(roleID))
+            {
+                transform.GetChild(i).GetComponent<TradeSign>().icon.ShowRelateIcon();
+            }
+        }
+    }
+
+    public void HideRelateTradeIcon()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<TradeSign>().icon.HideRelateIcon();
+        }
+    }
 }
