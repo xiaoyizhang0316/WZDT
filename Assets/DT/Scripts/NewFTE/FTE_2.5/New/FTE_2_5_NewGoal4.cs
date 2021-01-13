@@ -32,8 +32,14 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         dealer1.SetActive(true);
         //dealer2.SetActive(true);
         //dealer3.SetActive(true);
-        dealer1.transform.DOMoveY(0.32f, 1f).Play();
-        place1.transform.DOMoveY(0f, 1f).Play();
+        dealer1.transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            dealer1.transform.DOMoveY(0.32f, 1f).Play();
+        });
+        place1.transform.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            dealer1.transform.DOMoveY(0.32f, 1f).Play();
+        });
         //dealer2.transform.DOMoveY(0.32f, 1f).Play();
         //place2.transform.DOMoveY(0f, 1f).Play();
         //dealer3.transform.DOMoveY(0.32f, 1f).Play();

@@ -84,12 +84,18 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         for (int i = 0; i < factorys.Count; i++)
         {
             factorys[i].SetActive(true);
-            factorys[i].transform.DOMoveY(0.32f, 1f).Play();
+            factorys[i].transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            {
+                factorys[i].transform.DOMoveY(0.32f, 1f).Play();
+            });
         }
 
         for (int i = 0; i < places.Count; i++)
         {
-            places[i].transform.DOMoveY(0, 1).Play();
+            places[i].transform.DOMoveY(0, 1).Play().OnPause(() =>
+            {
+                places[i].transform.DOMoveY(0, 1).Play();
+            });
         }
     }
 

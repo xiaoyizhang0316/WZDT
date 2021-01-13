@@ -21,6 +21,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
         qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
         qualityCenter.GetComponent<QualityRole>().needCheck = true;
+        TradeManager.My.ResetAllTrade();
         PlayerData.My.ClearAllRoleWarehouse();
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount, costLimit);
         //NewCanvasUI.My.GameNormal();

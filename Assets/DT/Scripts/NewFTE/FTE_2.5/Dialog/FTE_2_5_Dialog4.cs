@@ -15,12 +15,18 @@ public class FTE_2_5_Dialog4 : BaseGuideStep
         for (int i = 0; i < npcs.Count; i++)
         {
             npcs[i].SetActive(true);
-            npcs[i].transform.DOMoveY(0.32f, 1f).Play();
+            npcs[i].transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            {
+                npcs[i].transform.DOMoveY(0.32f, 1f).Play();
+            });
         }
 
         for (int i = 0; i < npcPlace.Count; i++)
         {
-            npcPlace[i].transform.DOMoveY(0, 1f).Play();
+            npcPlace[i].transform.DOMoveY(0, 1f).Play().OnPause(() =>
+            {
+                npcPlace[i].transform.DOMoveY(0, 1f).Play();
+            });
         }
 
         StageGoal.My.maxRoleLevel = 5;
