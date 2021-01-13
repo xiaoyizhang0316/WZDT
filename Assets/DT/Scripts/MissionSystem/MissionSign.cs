@@ -32,7 +32,7 @@ public class MissionSign : MonoBehaviour
     void Update()
     {
         //currentNum.text = this.data.currentNum.ToString();
-        currentNum.GetComponent<TextOnChange>().ShowText(data.currentNum.ToString());
+        currentNum.GetComponent<TextOnChange>().ShowText(data.currentNum.ToString(), contentText.text);
         if (data.isFail)
         {
             sign.color = Color.red;
