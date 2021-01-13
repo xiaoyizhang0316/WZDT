@@ -37,7 +37,7 @@ public class FTE_0_5_9 : BaseGuideStep
 
        
    count = PlayerData.My.peasantCount;
-            if (count >= missiondatas.data[0].maxNum)
+            if (count >=GetComponent<UnlockRoleFTE>().peasant)
             {
                 missiondatas.data[0].isFinish = true;
           
