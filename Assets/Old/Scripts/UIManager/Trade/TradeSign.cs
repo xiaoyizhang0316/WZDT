@@ -490,10 +490,13 @@ public class TradeSign : MonoBehaviour
     /// <param name="roleID">相关角色ID</param>
     public void ShowTradeIcon(string roleID)
     {
+        Debug.LogWarning(roleID);
         if (bothIDs.Contains(roleID))
         {
+            Debug.LogWarning(tradeData.ID);
             if (CheckRolePositionInTrade(roleID))
             {
+                
                 icon.ShowRelateIcon(true);
             }
             else

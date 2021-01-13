@@ -17,7 +17,7 @@ public class TextOnChange : MonoBehaviour
     }
 
     //private bool isOnScale = false;
-    public void ShowText(string newText)
+    public void ShowText(string newText, string content)
     {
         if (!newText.Equals(currentText)&& gameObject.activeInHierarchy)
         {
@@ -38,6 +38,15 @@ public class TextOnChange : MonoBehaviour
             {
                 GetComponent<Text>().color = Color.red;
             }*/
+            if (content.Contains("质监站"))
+            {
+                MissionManager.My.ShowTipText("产品输送中....", Color.green);
+            }
+
+            if (int.Parse(newText) == 0)
+            {
+                MissionManager.My.HideTip();
+            }
             transform.DOScale(1.5f, 0.5f).SetId("TextScale").OnComplete(() =>
             {
                 transform.DOScale(1, 0.5f).Play();

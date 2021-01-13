@@ -1194,9 +1194,10 @@ public class BaseMapRole : MonoBehaviour
     /// <summary>
     /// 鼠标移动到角色上
     /// </summary>
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
-        TradeManager.My.ShowAllRelateTradeIcon(baseRoleData.ID.ToString());
+        if(!NewCanvasUI.My.isSetTrade)
+            TradeManager.My.ShowAllRelateTradeIcon(baseRoleData.ID.ToString());
     }
 
     /// <summary>
@@ -1204,6 +1205,7 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     private void OnMouseExit()
     {
-        TradeManager.My.HideRelateTradeIcon();
+        if(!NewCanvasUI.My.isSetTrade)
+            TradeManager.My.HideRelateTradeIcon();
     }
 }
