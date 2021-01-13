@@ -59,7 +59,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         //FTE_2_5_Manager.My.isClearGoods = true;
         PlayerData.My.ClearAllRoleWarehouse();
         TradeManager.My.ResetAllTrade();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         DoEnd();
     }
 

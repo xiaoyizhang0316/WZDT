@@ -15,6 +15,8 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
     private int crispCount = 0;
     private int softCount = 0;
 
+    public Transform roles;
+
     public Transform tradeMgr;
     public override IEnumerator StepStart()
     {
@@ -54,6 +56,14 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
         foreach (Transform child in tradeMgr)
         {
             TradeManager.My.DeleteTrade(child.GetComponent<TradeSign>().tradeData.ID);
+        }
+
+        foreach (Transform child in roles)
+        {
+            if (!child.GetComponent<BaseMapRole>().isNpc && child.gameObject.activeInHierarchy)
+            {
+                PlayerData.My.DeleteRole(child.GetComponent<BaseMapRole>().baseRoleData.ID);
+            }
         }
         peasant1.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
         {

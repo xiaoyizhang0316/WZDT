@@ -31,6 +31,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         FactoryUp();
         StageGoal.My.playerSatisfy = 0;
         StageGoal.My.playerSatisfyText.text = "0";
+        StageGoal.My.GetSatisfy(0);
         currentTimeCount = StageGoal.My.timeCount;
         FTE_2_5_Manager.My.packageKillNum = 0;
         FTE_2_5_Manager.My.saleKillNum = 0;
@@ -115,7 +116,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         {
             NetworkMgr.My.UpdatePlayerFTE("2.5", ()=>SceneManager.LoadScene("Map"));
         });*/
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         //endPanel.SetActive(true);
     }
 

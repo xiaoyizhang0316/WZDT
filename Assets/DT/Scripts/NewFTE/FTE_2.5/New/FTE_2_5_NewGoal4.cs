@@ -70,7 +70,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         CancelInvoke();
         bornPoint.GetComponent<Building>().isBornForFTE_2_5 = false;
         DoEnd();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
     }
 
@@ -79,22 +79,20 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         /*PlayerData.My.DeleteRole(dealer1.GetComponent<BaseMapRole>().baseRoleData.ID);
         PlayerData.My.DeleteRole(dealer2.GetComponent<BaseMapRole>().baseRoleData.ID);
         PlayerData.My.DeleteRole(dealer3.GetComponent<BaseMapRole>().baseRoleData.ID);*/
-        foreach (Transform trade in tradeMgr)
-        {
-            TradeManager.My.DeleteTrade(trade.GetComponent<TradeSign>().tradeData.ID);
-        }
-
         foreach (Transform role in roles)
         {
             if (!role.GetComponent<BaseMapRole>().isNpc && role.gameObject.activeInHierarchy)
             {
                 PlayerData.My.DeleteRole(role.GetComponent<BaseMapRole>().baseRoleData.ID);
             }
-            else
-            {
-                role.GetComponent<BaseMapRole>().ClearWarehouse();
-            }
         }
+
+        foreach (Transform trade in tradeMgr)
+        {
+            TradeManager.My.DeleteTrade(trade.GetComponent<TradeSign>().tradeData.ID);
+        }
+
+        PlayerData.My.ClearAllRoleWarehouse();
 
         foreach (Transform child in bornPoint.transform)
         {

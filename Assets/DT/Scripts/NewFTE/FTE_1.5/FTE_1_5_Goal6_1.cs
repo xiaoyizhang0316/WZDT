@@ -123,6 +123,6 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
     {
         CancelInvoke();
         seed_sign.GetComponent<CreatRole_Button>().ReadCostTech(10);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
     }
 }

@@ -21,7 +21,7 @@ public class FTE_1_5_Goal2_1 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
     }
 
     public override bool ChenkEnd()
