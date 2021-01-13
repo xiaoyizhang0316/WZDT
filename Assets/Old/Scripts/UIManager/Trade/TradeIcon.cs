@@ -132,13 +132,29 @@ public class TradeIcon : MonoBehaviour
         endRole.TradeLightOff();
     }
 
-    public void ShowRelateIcon()
+    /// <summary>
+    /// 显示相关交易图标（鼠标移动到角色上显示）
+    /// </summary>
+    /// <param name="isStart">是否是发起方</param>
+    public void ShowRelateIcon(bool isStart=false)
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        /*if(isStart)
+        {*/
+            transform.GetChild(0).gameObject.layer = 9;
+        /*}
+        else
+        {
+            transform.GetChild(0).gameObject.layer = 10;
+        }*/
     }
 
+    /// <summary>
+    /// 隐藏相关交易图标（鼠标从角色上移出）
+    /// </summary>
     public void HideRelateIcon()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        transform.GetChild(0).gameObject.layer = 0;
     }
 }

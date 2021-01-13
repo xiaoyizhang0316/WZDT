@@ -1140,6 +1140,9 @@ public class BaseMapRole : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// 交易双方亮起（鼠标移动到交易图标上触发）
+    /// </summary>
     public void TradeLightOn(){
         foreach (var item in levelModels)
         {
@@ -1162,6 +1165,9 @@ public class BaseMapRole : MonoBehaviour
         }
 }
 
+    /// <summary>
+    /// 交易双方恢复正常（鼠标从相关交易图标上移出时触发）
+    /// </summary>
     public void TradeLightOff()
     {
         foreach (var item in levelModels)
@@ -1185,11 +1191,17 @@ public class BaseMapRole : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 鼠标移动到角色上
+    /// </summary>
     private void OnMouseEnter()
     {
         TradeManager.My.ShowAllRelateTradeIcon(baseRoleData.ID.ToString());
     }
 
+    /// <summary>
+    /// 鼠标从角色上移出
+    /// </summary>
     private void OnMouseExit()
     {
         TradeManager.My.HideRelateTradeIcon();
