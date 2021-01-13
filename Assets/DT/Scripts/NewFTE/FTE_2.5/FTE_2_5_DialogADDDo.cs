@@ -54,11 +54,8 @@ public class FTE_2_5_DialogADDDo : FTE_DialogDoBase
             {
                 PlayerData.My.DeleteRole(role.GetComponent<BaseMapRole>().baseRoleData.ID);
             }
-            else
-            {
-                role.GetComponent<BaseMapRole>().ClearWarehouse();
-            }
         }
+        PlayerData.My.ClearAllRoleWarehouse();
     }
 
     public override void DoEnd()

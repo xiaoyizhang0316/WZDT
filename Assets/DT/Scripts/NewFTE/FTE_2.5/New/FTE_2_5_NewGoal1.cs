@@ -27,7 +27,10 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         currentTime = StageGoal.My.timeCount;
         currentCost = StageGoal.My.totalCost;
         qualityCenter.SetActive(true);
-        qualityCenter.transform.DOMoveY(0.32f, 1f).Play();
+        qualityCenter.transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            qualityCenter.transform.DOMoveY(0.32f, 1f).Play();
+        });
         qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
         qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
         qualityCenter.GetComponent<QualityRole>().needCheck = true;

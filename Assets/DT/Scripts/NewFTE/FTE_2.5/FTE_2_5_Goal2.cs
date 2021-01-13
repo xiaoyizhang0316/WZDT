@@ -56,7 +56,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         CancelInvoke();
         NewCanvasUI.My.GamePause(false);
         DoEnd();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
     }
 
     void DoEnd()
@@ -143,21 +143,30 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     {
         
             //place1.DOMoveY(0, 1f).Play();
-            peasant1.DOMoveY(0.32f, 1f).Play();
+            peasant1.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            {
+                peasant1.DOMoveY(0.32f, 1f).Play();
+            });
             peasant1.GetComponent<QualityRole>().checkBuff = 305;
             peasant1.GetComponent<QualityRole>().checkQuality = -1;
             peasant1.GetComponent<QualityRole>().needCheck = true;
         
         
             //place2.DOMoveY(0, 1f).Play();
-            peasant2.DOMoveY(0.32f, 1f).Play();
+            peasant2.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            {
+                peasant2.DOMoveY(0.32f, 1f).Play();
+            });
             peasant2.GetComponent<QualityRole>().checkBuff = 304;
             peasant2.GetComponent<QualityRole>().checkQuality = -1;
             peasant2.GetComponent<QualityRole>().needCheck = true;
         
         
             //place3.DOMoveY(0, 1f).Play();
-            peasant3.DOMoveY(0.32f, 1f).Play();
+            peasant3.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            {
+                peasant3.DOMoveY(0.32f, 1f).Play();
+            });
             peasant3.GetComponent<QualityRole>().checkBuff = 303;
             peasant3.GetComponent<QualityRole>().checkQuality = -1;
             peasant3.GetComponent<QualityRole>().needCheck = true;

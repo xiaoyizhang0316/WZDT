@@ -32,8 +32,14 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         dealer1.SetActive(true);
         //dealer2.SetActive(true);
         //dealer3.SetActive(true);
-        dealer1.transform.DOMoveY(0.32f, 1f).Play();
-        place1.transform.DOMoveY(0f, 1f).Play();
+        dealer1.transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            dealer1.transform.DOMoveY(0.32f, 1f).Play();
+        });
+        place1.transform.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            dealer1.transform.DOMoveY(0.32f, 1f).Play();
+        });
         //dealer2.transform.DOMoveY(0.32f, 1f).Play();
         //place2.transform.DOMoveY(0f, 1f).Play();
         //dealer3.transform.DOMoveY(0.32f, 1f).Play();
@@ -70,7 +76,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         CancelInvoke();
         bornPoint.GetComponent<Building>().isBornForFTE_2_5 = false;
         DoEnd();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
     }
 
@@ -79,22 +85,20 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         /*PlayerData.My.DeleteRole(dealer1.GetComponent<BaseMapRole>().baseRoleData.ID);
         PlayerData.My.DeleteRole(dealer2.GetComponent<BaseMapRole>().baseRoleData.ID);
         PlayerData.My.DeleteRole(dealer3.GetComponent<BaseMapRole>().baseRoleData.ID);*/
-        foreach (Transform trade in tradeMgr)
-        {
-            TradeManager.My.DeleteTrade(trade.GetComponent<TradeSign>().tradeData.ID);
-        }
-
         foreach (Transform role in roles)
         {
             if (!role.GetComponent<BaseMapRole>().isNpc && role.gameObject.activeInHierarchy)
             {
                 PlayerData.My.DeleteRole(role.GetComponent<BaseMapRole>().baseRoleData.ID);
             }
-            else
-            {
-                role.GetComponent<BaseMapRole>().ClearWarehouse();
-            }
         }
+
+        foreach (Transform trade in tradeMgr)
+        {
+            TradeManager.My.DeleteTrade(trade.GetComponent<TradeSign>().tradeData.ID);
+        }
+
+        PlayerData.My.ClearAllRoleWarehouse();
 
         foreach (Transform child in bornPoint.transform)
         {

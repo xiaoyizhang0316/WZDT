@@ -31,6 +31,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         FactoryUp();
         StageGoal.My.playerSatisfy = 0;
         StageGoal.My.playerSatisfyText.text = "0";
+        StageGoal.My.GetSatisfy(0);
         currentTimeCount = StageGoal.My.timeCount;
         FTE_2_5_Manager.My.packageKillNum = 0;
         FTE_2_5_Manager.My.saleKillNum = 0;
@@ -83,12 +84,18 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         for (int i = 0; i < factorys.Count; i++)
         {
             factorys[i].SetActive(true);
-            factorys[i].transform.DOMoveY(0.32f, 1f).Play();
+            factorys[i].transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            {
+                factorys[i].transform.DOMoveY(0.32f, 1f).Play();
+            });
         }
 
         for (int i = 0; i < places.Count; i++)
         {
-            places[i].transform.DOMoveY(0, 1).Play();
+            places[i].transform.DOMoveY(0, 1).Play().OnPause(() =>
+            {
+                places[i].transform.DOMoveY(0, 1).Play();
+            });
         }
     }
 
@@ -115,7 +122,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         {
             NetworkMgr.My.UpdatePlayerFTE("2.5", ()=>SceneManager.LoadScene("Map"));
         });*/
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         //endPanel.SetActive(true);
     }
 
