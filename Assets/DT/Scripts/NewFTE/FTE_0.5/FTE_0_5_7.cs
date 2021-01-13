@@ -19,8 +19,7 @@ public class FTE_0_5_7 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         role.warehouse.Clear();
-        role.OnMoved += ChangeColor;
-
+        role.OnMoved += ChangeColor; 
         yield return new WaitForSeconds(1f);
     }
 
@@ -36,6 +35,8 @@ public class FTE_0_5_7 : BaseGuideStep
     {
         if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf&&!isshow)
         {
+ 
+
             ShowEffect();
             isshow = true;
         }
