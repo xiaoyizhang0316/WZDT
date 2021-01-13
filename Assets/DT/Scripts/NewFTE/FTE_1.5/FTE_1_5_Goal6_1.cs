@@ -15,6 +15,9 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         SkipButton();
+        StageGoal.My.playerTechPoint = 0;
+        StageGoal.My.playerTechText.text = "0";
+        StageGoal.My.GetTechPoint(0);
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
     }
