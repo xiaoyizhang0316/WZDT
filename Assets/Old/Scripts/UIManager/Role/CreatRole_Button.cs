@@ -54,6 +54,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         else
         {
             costTech = cost;
+            GameDataMgr.My.GetModelDataFTE(type, 1).costTech = cost;
         }
     }
 

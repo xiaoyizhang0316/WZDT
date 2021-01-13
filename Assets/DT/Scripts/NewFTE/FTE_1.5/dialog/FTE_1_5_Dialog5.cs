@@ -41,6 +41,7 @@ public class FTE_1_5_Dialog5 : BaseGuideStep
         }
         StageGoal.My.playerTechPoint = 0;
         StageGoal.My.playerTechText.text = "0";
+        StageGoal.My.GetTechPoint(0);
         rectBorder.SetActive(true);
         mega.DOScale(Vector3.one, 0.5f).Play().OnPause(() =>
         {
