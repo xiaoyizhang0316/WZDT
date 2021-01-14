@@ -22,6 +22,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
     public void Init(int number, List<StageEnemyData> datas,int offset = 0)
     {
         waveNumber = number;
+        //Debug.LogWarning("----------------"+number);
         string str = datas[number].point1[0];
         if (str.Split('_').Length != 1)
         {
