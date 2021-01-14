@@ -65,7 +65,7 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     {
         CancelInvoke();
         bornPoint.GetComponent<Building>().isBorn = false;
-        FTE_1_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = false;
+        FTE_1_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = 0;
         yield return new WaitForSeconds(2f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
     }
