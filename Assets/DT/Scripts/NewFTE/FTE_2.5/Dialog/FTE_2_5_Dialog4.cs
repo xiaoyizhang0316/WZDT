@@ -6,13 +6,20 @@ using UnityEngine;
 public class FTE_2_5_Dialog4 : BaseGuideStep
 {
     public GameObject openCG;
-    public List<GameObject> npcs;
-    public List<GameObject> npcPlace;
+    /*public List<GameObject> npcs;
+    public List<GameObject> npcPlace;*/
+
+    public Transform soft;
+    public Transform crisp;
+    public Transform sweet;
+    public Transform softPlace;
+    public Transform crispPlace;
+    public Transform sweetPlace;
 
     public override IEnumerator StepStart()
     {
         openCG.SetActive(true);
-        for (int i = 0; i < npcs.Count; i++)
+        /*for (int i = 0; i < npcs.Count; i++)
         {
             npcs[i].SetActive(true);
             npcs[i].transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
@@ -27,7 +34,39 @@ public class FTE_2_5_Dialog4 : BaseGuideStep
             {
                 npcPlace[i].transform.DOMoveY(0, 1f).Play();
             });
-        }
+        }*/
+        sweet.gameObject.SetActive(true);
+
+        sweet.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            sweet.DOMoveY(0.32f, 1f).Play();
+        });
+        sweetPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            sweetPlace.DOMoveY(0f, 1f).Play();
+        });
+        crisp.gameObject.SetActive(true);
+
+        crisp.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            crisp.DOMoveY(0.32f, 1f).Play();
+        });
+        
+        crispPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            crispPlace.DOMoveY(0f, 1f).Play();
+        });
+        soft.gameObject.SetActive(true);
+
+        soft.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            soft.DOMoveY(0.32f, 1f).Play();
+        });
+        
+        softPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            softPlace.DOMoveY(0f, 1f).Play();
+        });
 
         StageGoal.My.maxRoleLevel = 5;
         yield return new WaitForSeconds(0.5f);

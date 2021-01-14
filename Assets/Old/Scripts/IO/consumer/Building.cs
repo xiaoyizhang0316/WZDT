@@ -251,7 +251,7 @@ public class Building : MonoBehaviour
                 }
             
             float waitTime = 0.35f;
-            Tweener twe = transform.DOScale(1f, waitTime);
+            Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]);
             yield return twe.WaitForCompletion();
         }
     }
@@ -288,7 +288,7 @@ public class Building : MonoBehaviour
                 }*/
             
                 float waitTime = 0.35f;
-                Tweener twe = transform.DOScale(1f, waitTime);
+                Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]);
                 yield return twe.WaitForCompletion();
             }
         //}
@@ -332,8 +332,8 @@ public class Building : MonoBehaviour
             //        go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
             //    }
             //}
-            float waitTime = 0.5f;
-            Tweener twe = transform.DOScale(1f, waitTime);
+            //float waitTime = 0.5f;
+            Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]);
             yield return twe.WaitForCompletion();
         }
     }

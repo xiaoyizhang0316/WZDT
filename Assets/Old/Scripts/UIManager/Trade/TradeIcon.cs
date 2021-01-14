@@ -84,6 +84,8 @@ public class TradeIcon : MonoBehaviour
             //{
             NewCanvasUI.My.Panel_TradeSetting.SetActive(true);
             CreateTradeManager.My.Open(TradeManager.My.tradeList[tradeId].gameObject);
+            startRole.TradeLightOff();
+            endRole.TradeLightOff();
             //}
             //else
             //{
@@ -115,13 +117,21 @@ public class TradeIcon : MonoBehaviour
     /// <summary>
     /// 鼠标进入显现
     /// </summary>
-    public void OnMouseEnter()
+    public void OnMouseOver()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
         if (!NewCanvasUI.My.isSetTrade)
         {
-            startRole.TradeLightOn();
-            endRole.TradeLightOn();
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                startRole.TradeLightOn();
+                endRole.TradeLightOn();
+            }
+            else
+            {
+                startRole.TradeLightOff();
+                endRole.TradeLightOff();
+            }
         }
     }
 
@@ -145,9 +155,13 @@ public class TradeIcon : MonoBehaviour
     public void ShowRelateIcon(bool isStart=false)
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        if (GetComponent<BoxCollider>().enabled)
+        {
+            transform.GetChild(1).gameObject.SetActive(true);
+        }
         /*if(isStart)
         {*/
-            transform.GetChild(0).gameObject.layer = 9;
+            //transform.GetChild(0).gameObject.layer = 9;
         /*}
         else
         {
@@ -161,6 +175,7 @@ public class TradeIcon : MonoBehaviour
     public void HideRelateIcon()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
-        transform.GetChild(0).gameObject.layer = 0;
+        //transform.GetChild(0).gameObject.layer = 0;
+        transform.GetChild(1).gameObject.SetActive(false);
     }
 }
