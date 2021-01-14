@@ -155,7 +155,10 @@ public class TradeIcon : MonoBehaviour
     public void ShowRelateIcon(bool isStart=false)
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
-        transform.GetChild(1).gameObject.SetActive(true);
+        if (GetComponent<BoxCollider>().enabled)
+        {
+            transform.GetChild(1).gameObject.SetActive(true);
+        }
         /*if(isStart)
         {*/
             //transform.GetChild(0).gameObject.layer = 9;
