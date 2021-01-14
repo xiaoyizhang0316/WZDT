@@ -17,6 +17,8 @@ public class FTE_1_5_Goal4 : BaseGuideStep
         InvokeRepeating("CheckGoal",0, 0.2f);
         SkipButton();
         tapPanel.SetActive(true);
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
         yield return new WaitForSeconds(0.5f);
     }
 

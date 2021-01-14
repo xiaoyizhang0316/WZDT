@@ -12,6 +12,7 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
     public List<GameObject> borders;
 
     public Transform seed_sign;
+    public GameObject red;
     public override IEnumerator StepStart()
     {
         SkipButton();
@@ -84,10 +85,12 @@ public class FTE_1_5_Goal6_1 : BaseGuideStep
         if ( PlayerData.My.totalRoleCount == 0 && StageGoal.My.playerTechPoint<10)
         {
             seed_sign.GetComponent<CreatRole_Button>().ReadCostTech(0);
+            red.SetActive(true);
         }
         else
         {
             seed_sign.GetComponent<CreatRole_Button>().ReadCostTech(10);
+            red.SetActive(false);
         }
     }
 

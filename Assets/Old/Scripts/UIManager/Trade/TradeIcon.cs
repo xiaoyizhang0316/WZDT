@@ -84,6 +84,8 @@ public class TradeIcon : MonoBehaviour
             //{
             NewCanvasUI.My.Panel_TradeSetting.SetActive(true);
             CreateTradeManager.My.Open(TradeManager.My.tradeList[tradeId].gameObject);
+            startRole.TradeLightOff();
+            endRole.TradeLightOff();
             //}
             //else
             //{
@@ -120,8 +122,16 @@ public class TradeIcon : MonoBehaviour
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
         if (!NewCanvasUI.My.isSetTrade)
         {
-            startRole.TradeLightOn();
-            endRole.TradeLightOn();
+            /*if (!EventSystem.current.IsPointerOverGameObject())
+            {*/
+                startRole.TradeLightOn();
+                endRole.TradeLightOn();
+            //}
+            /*else
+            {
+                startRole.TradeLightOff();
+                endRole.TradeLightOff();
+            }*/
         }
     }
 
