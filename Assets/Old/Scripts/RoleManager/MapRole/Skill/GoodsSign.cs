@@ -249,7 +249,7 @@ public class GoodsSign : MonoBehaviour
             }
         }
 
-        if (SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+        /*if (SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
         {
             if (FTE_2_5_Manager.My.isClearGoods)
             {
@@ -263,6 +263,6 @@ public class GoodsSign : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-        }
+        }*/
     }
 }

@@ -16,15 +16,21 @@ public class FTE_1_5_Goal7 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         NewCanvasUI.My.GamePause(false);
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
         StageGoal.My.killNumber = 0;
         //missiondatas.data[1].content += "<color=red>\n上次的周期成本是" + goal1.finalCost + "</color>";
         MissionData missionData = new MissionData();
         missionData.content="上次的周期成本是<color=red>" + FTE_1_5_Manager.My.goal1FinalCost + "</color>";
         missionData.isFail = true;
         MissionManager.My.AddMission(missionData);
+        currentCost = StageGoal.My.totalCost;
+        currentTimeCount = StageGoal.My.timeCount;
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount,costLimit);
+        InvokeRepeating("CheckGoal",0, 0.2f);
         //StartCoroutine( bornPoint.GetComponent<Building>().BornEnemy1(25));
         NewGuideManager.My.BornEnemy1(25);
-        Reset();
+        //Reset();
         SkipButton();
         //InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
@@ -54,9 +60,10 @@ public class FTE_1_5_Goal7 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        NewCanvasUI.My.GamePause(false);
         bornPoint.GetComponent<Building>().isBorn = false;
         yield return new WaitForSeconds(2f);
-        costPanel.GetComponent<CostPanel>().HideAllCost();
+        //costPanel.GetComponent<CostPanel>().HideAllCost();
         openCG.SetActive(true);
     }
 
@@ -116,16 +123,14 @@ public class FTE_1_5_Goal7 : BaseGuideStep
         NewCanvasUI.My.GamePause(false);
         StageGoal.My.killNumber = 0;
         missiondatas.data[0].isFail = false;
-        FTE_1_5_Manager.My.isClearGoods=true;
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            PlayerData.My.MapRole[i].ClearWarehouse();
-        }
+        TradeManager.My.ResetAllTrade();
+        //FTE_1_5_Manager.My.isClearGoods=true;
+        PlayerData.My.ClearAllRoleWarehouse();
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount,costLimit);
         InvokeRepeating("CheckGoal",0, 0.2f);
-        FTE_1_5_Manager.My.isClearGoods=false;
+        //FTE_1_5_Manager.My.isClearGoods=false;
         NewCanvasUI.My.GameNormal();
     }
 }

@@ -12,6 +12,7 @@ public class FTE_0_5_15 : BaseGuideStep
 
     public GameObject roleImage;
 
+   
     public int count;
     public int time;
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class FTE_0_5_15 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+       
         StageGoal.My.killNumber = 0;
          transform.DOScale(1, 1).OnComplete(() =>
         {
@@ -29,6 +31,7 @@ public class FTE_0_5_15 : BaseGuideStep
                 .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel1, count));
             Addxiaofei();
         }).Play();
+         NewCanvasUI.My.GamePause();
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
@@ -67,9 +70,9 @@ public class FTE_0_5_15 : BaseGuideStep
     { 
         t.Kill(); 
         roleImage.SetActive(true);
-        yield return new WaitForSeconds(1f);
         roleImage.SetActive(false);
 
+        yield return new WaitForSeconds(2);  
     }
 
     public override bool ChenkEnd()

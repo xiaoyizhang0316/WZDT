@@ -82,12 +82,11 @@ public class FTE_0_5_2 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        missiondatas.data[0].currentNum = 1; 
-        missiondatas.data[0].isFinish= true; 
-        red.SetActive(false);
+     
+        
 
-      yield break;
-      ;
+        yield return new WaitForSeconds(2); 
+        red.SetActive(false);
     }
 
     public override bool ChenkEnd()
@@ -97,6 +96,8 @@ public class FTE_0_5_2 : BaseGuideStep
             if (PlayerData.My.RoleData[i].baseRoleData.roleType == GameEnum.RoleType.Seed)
             {
                 PlayerData.My.MapRole[i].tradeButton.SetActive(false);
+                missiondatas.data[0].currentNum = 1; 
+                missiondatas.data[0].isFinish= true; 
                 return true;
             }
         }

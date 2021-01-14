@@ -127,7 +127,7 @@ public class FTE_1_5_Goal3 : BaseGuideStep
         }
         lastCost = StageGoal.My.totalCost;
         lastTimeCount = StageGoal.My.timeCount;
-        costPanel.GetComponent<CostPanel>().InitCostPanel(lastCost,lastTimeCount);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(lastCost,lastTimeCount, costLimit);
         InvokeRepeating("CheckGoal",0, 0.2f);
         FTE_1_5_Manager.My.isClearGoods=false;
         NewCanvasUI.My.GameNormal();

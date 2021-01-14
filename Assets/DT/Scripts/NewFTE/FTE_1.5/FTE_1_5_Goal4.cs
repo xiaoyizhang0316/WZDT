@@ -5,14 +5,20 @@ using UnityEngine;
 
 public class FTE_1_5_Goal4 : BaseGuideStep
 {
+    public GameObject fruitQT;
     public GameObject statPanel;
-
+    public GameObject tapPanel;
+    public GameObject tapPanelChild;
     public GameObject statBox;
     public GameObject box2;
     public override IEnumerator StepStart()
     {
+        PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
         InvokeRepeating("CheckGoal",0, 0.2f);
         SkipButton();
+        tapPanel.SetActive(true);
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
         yield return new WaitForSeconds(0.5f);
     }
 
@@ -44,7 +50,7 @@ public class FTE_1_5_Goal4 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        return missiondatas.data[0].isFinish;
+        return missiondatas.data[0].isFinish&&missiondatas.data[1].isFinish;
     }
 
     void CheckGoal()
@@ -65,6 +71,11 @@ public class FTE_1_5_Goal4 : BaseGuideStep
             {
                 statBox.SetActive(false);
             }
+        }
+        
+        if (missiondatas.data[1].isFinish == false && tapPanelChild.activeInHierarchy)
+        {
+            missiondatas.data[1].isFinish = true;
         }
     }
 }

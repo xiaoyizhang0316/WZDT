@@ -19,14 +19,14 @@ public class FTE_0_5_7 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         role.warehouse.Clear();
-        role.OnMoved += ChangeColor;
-
+        role.OnMoved += ChangeColor; 
         yield return new WaitForSeconds(1f);
     }
 
     public override IEnumerator StepEnd()
     {
-        yield break;
+        yield return new WaitForSeconds(2f);
+
     }
 
     private bool isshow ;
@@ -35,6 +35,8 @@ public class FTE_0_5_7 : BaseGuideStep
     {
         if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf&&!isshow)
         {
+ 
+
             ShowEffect();
             isshow = true;
         }
@@ -81,11 +83,32 @@ public class FTE_0_5_7 : BaseGuideStep
         {
             EquipListManager.My._signs[3].effect.DOFade(1, 0.6f).Play();
         }).SetLoops(10).Play();
+        EquipListManager.My._signs[4].effect.DOFade(0, 0.6f).OnComplete(() =>
+        {
+            EquipListManager.My._signs[4].effect.DOFade(1, 0.6f).Play();
+        }).SetLoops(10).Play();
+
+        EquipListManager.My._signs[5].effect.DOFade(0, 0.6f).OnComplete(() =>
+        {
+            EquipListManager.My._signs[5].effect.DOFade(1, 0.6f).Play();
+        }).SetLoops(10).Play();
+
+        EquipListManager.My._signs[6].effect.DOFade(0, 0.6f).OnComplete(() =>
+        {
+            EquipListManager.My._signs[6].effect.DOFade(1, 0.6f).Play();
+        }).SetLoops(10).Play();
+
+        EquipListManager.My._signs[7].effect.DOFade(0, 0.6f).OnComplete(() =>
+        {
+            EquipListManager.My._signs[7].effect.DOFade(1, 0.6f).Play();
+        }).SetLoops(10).Play();
 
         effect.transform.GetComponent<Text>().DOFade(0, 0.6f).OnComplete(() =>
         {
             effect.transform.GetComponent<Text>().DOFade(1, 0.6f).Play();
         }).SetLoops(10).Play();
+        
+        
     }
 
     public void ChangeColor(ProductData data)

@@ -36,13 +36,16 @@ public class FTE_0_5_11 : BaseGuideStep
                                     role1.OnMoved += ChangeColor1;
         time = StageGoal.My.timeCount;
         role.warehouse.Clear();
+        role1.warehouse.Clear();
+        role.baseRoleData.bulletCapacity = roleTargetCount;
+        role1.baseRoleData.bulletCapacity = role1TargetCount;
         
         yield return null;
     }
 
     public override IEnumerator StepEnd()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
     }
 
     public void ChangeColor(ProductData data)
@@ -105,7 +108,7 @@ public class FTE_0_5_11 : BaseGuideStep
             time = StageGoal.My.timeCount;
         }
  
-        if ( role.warehouse.Count >roleTargetCount&& role1.warehouse.Count >=role1TargetCount)
+        if ( role.warehouse.Count >=roleTargetCount&& role1.warehouse.Count >=role1TargetCount)
         {
             missiondatas.data[0].isFinish = true;
             return true; 

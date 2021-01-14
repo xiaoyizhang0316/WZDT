@@ -22,7 +22,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
     private int currentTimeCount;
     public override IEnumerator StepStart()
     {
-        FTE_2_5_Manager.My.isClearGoods = false;
+        //FTE_2_5_Manager.My.isClearGoods = false;
         StageGoal.My.killNumber = 0;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
@@ -32,13 +32,19 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         dealer1.SetActive(true);
         //dealer2.SetActive(true);
         //dealer3.SetActive(true);
-        dealer1.transform.DOMoveY(0.32f, 1f).Play();
-        place1.transform.DOMoveY(0f, 1f).Play();
+        dealer1.transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            dealer1.transform.DOMoveY(0.32f, 1f).Play();
+        });
+        place1.transform.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            dealer1.transform.DOMoveY(0.32f, 1f).Play();
+        });
         //dealer2.transform.DOMoveY(0.32f, 1f).Play();
         //place2.transform.DOMoveY(0f, 1f).Play();
         //dealer3.transform.DOMoveY(0.32f, 1f).Play();
         //place3.transform.DOMoveY(0f, 1f).Play();
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount, costLimit);
         SkipButton();
         StartCoroutine( bornPoint.GetComponent<Building>().BornEnemyForFTE_2_5(-1));
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
@@ -70,7 +76,7 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         CancelInvoke();
         bornPoint.GetComponent<Building>().isBornForFTE_2_5 = false;
         DoEnd();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         costPanel.GetComponent<CostPanel>().HideAllCost();
     }
 
@@ -79,22 +85,20 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         /*PlayerData.My.DeleteRole(dealer1.GetComponent<BaseMapRole>().baseRoleData.ID);
         PlayerData.My.DeleteRole(dealer2.GetComponent<BaseMapRole>().baseRoleData.ID);
         PlayerData.My.DeleteRole(dealer3.GetComponent<BaseMapRole>().baseRoleData.ID);*/
-        foreach (Transform trade in tradeMgr)
-        {
-            TradeManager.My.DeleteTrade(trade.GetComponent<TradeSign>().tradeData.ID);
-        }
-
         foreach (Transform role in roles)
         {
             if (!role.GetComponent<BaseMapRole>().isNpc && role.gameObject.activeInHierarchy)
             {
                 PlayerData.My.DeleteRole(role.GetComponent<BaseMapRole>().baseRoleData.ID);
             }
-            else
-            {
-                role.GetComponent<BaseMapRole>().ClearWarehouse();
-            }
         }
+
+        foreach (Transform trade in tradeMgr)
+        {
+            TradeManager.My.DeleteTrade(trade.GetComponent<TradeSign>().tradeData.ID);
+        }
+
+        PlayerData.My.ClearAllRoleWarehouse();
 
         foreach (Transform child in bornPoint.transform)
         {
@@ -161,16 +165,14 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         NewCanvasUI.My.GamePause(false);
         StageGoal.My.killNumber = 0;
         missiondatas.data[0].isFail = false;
-        FTE_2_5_Manager.My.isClearGoods=true;
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            PlayerData.My.MapRole[i].ClearWarehouse();
-        }
+        //FTE_2_5_Manager.My.isClearGoods=true;
+        PlayerData.My.ClearAllRoleWarehouse();
+        TradeManager.My.ResetAllTrade();
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount, costLimit);
         InvokeRepeating("CheckGoal",0, 0.2f);
-        FTE_2_5_Manager.My.isClearGoods=false;
+        //FTE_2_5_Manager.My.isClearGoods=false;
         NewCanvasUI.My.GameNormal();
     }
 }

@@ -62,9 +62,17 @@ public class FTE_0_5_8 : BaseGuideStep
         //  }
     }
 
+    public GameObject peasant1;
+    public GameObject peasant2;
     public override IEnumerator StepEnd()
     {
-        yield return new WaitForSeconds(2);
+     FTE_0_5Manager.My.DownRole(peasant1);
+     FTE_0_5Manager.My.DownRole(peasant2);
+        yield return new WaitForSeconds(1.1f);
+        PlayerData.My.DeleteRole(90000);
+        PlayerData.My.DeleteRole(90001);
+        yield return new WaitForSeconds(0.8f);
+
     }
 
     public void ChangeColor(ProductData data)
@@ -91,6 +99,7 @@ public class FTE_0_5_8 : BaseGuideStep
         {
             FTE_0_5Manager.My.ChangeColor(FTE_0_5Manager.My.seerJC2_ran, FTE_0_5Manager.My.sr);
         }
+        
     }
 
     public int daojishi = 0;
@@ -98,7 +107,7 @@ public class FTE_0_5_8 : BaseGuideStep
     public override bool ChenkEnd()
     {
         info.text = " ";
-
+        bool ismission2 = false;
         if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
         {
             transform.GetChild(0).gameObject.SetActive(false);
@@ -157,13 +166,13 @@ public class FTE_0_5_8 : BaseGuideStep
 
             if (daojishi != 0 && timeCount - daojishi >= 150)
             {
-                missiondatas.data[1].isFinish = true;
+            
+                ismission2 = true;
             }
             else
             {
-                missiondatas.data[1].isFinish = true;
-                return false;
-
+                missiondatas.data[1].isFinish = false;
+                ismission2 =  false;
             }
         }
 
@@ -172,8 +181,9 @@ public class FTE_0_5_8 : BaseGuideStep
             missiondatas.data[1].isFinish = false;
         }
 
-        if (missiondatas.data[1].isFinish && missiondatas.data[0].isFinish)
+        if (ismission2 && missiondatas.data[0].isFinish)
         {
+            missiondatas.data[1].isFinish = true;
             return true;
         }
         else

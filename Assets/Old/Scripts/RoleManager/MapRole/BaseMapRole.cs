@@ -1139,4 +1139,73 @@ public class BaseMapRole : MonoBehaviour
             interval = 0f;
         }
     }
+    
+    /// <summary>
+    /// 交易双方亮起（鼠标移动到交易图标上触发）
+    /// </summary>
+    public void TradeLightOn(){
+        foreach (var item in levelModels)
+        {
+            if (item.activeInHierarchy)
+            {
+                foreach (var t in item.GetComponentsInChildren<Transform>())
+                {
+
+                    t.gameObject.layer = 9;
+                }
+            }
+        }
+        BulletLaunch temp;
+        if (TryGetComponent(out temp))
+        {
+            foreach (var item in temp.paos)
+            {
+                item.transform.GetChild(0).gameObject.layer = 9;
+            }
+        }
+}
+
+    /// <summary>
+    /// 交易双方恢复正常（鼠标从相关交易图标上移出时触发）
+    /// </summary>
+    public void TradeLightOff()
+    {
+        foreach (var item in levelModels)
+        {
+            if (item.activeInHierarchy)
+            {
+                foreach (var t in item.GetComponentsInChildren<Transform>())
+                {
+                    if (t != null)
+                        t.gameObject.layer = 0;
+                }
+            }
+        }
+        BulletLaunch temp;
+        if (TryGetComponent(out temp))
+        {
+            foreach (var item in temp.paos)
+            {
+                item.transform.GetChild(0).gameObject.layer = 0;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 鼠标移动到角色上
+    /// </summary>
+    private void OnMouseOver()
+    {
+        if(!NewCanvasUI.My.isSetTrade)
+            TradeManager.My.ShowAllRelateTradeIcon(baseRoleData.ID.ToString());
+    }
+
+    /// <summary>
+    /// 鼠标从角色上移出
+    /// </summary>
+    private void OnMouseExit()
+    {
+        if(!NewCanvasUI.My.isSetTrade)
+            TradeManager.My.HideRelateTradeIcon();
+    }
 }

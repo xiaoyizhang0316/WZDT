@@ -7,8 +7,9 @@ using UnityEngine.UI;
 
 public class FTE_0_5_14 : BaseGuideStep
 {
-
+    public GameObject land;
     public GameObject roleImage;
+    public GameObject red;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +19,18 @@ public class FTE_0_5_14 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-       
+        FTE_0_5Manager.My.DownRole(FTE_0_5Manager.My.dealerJC1);
+        FTE_0_5Manager.My.DownRole(FTE_0_5Manager.My.dealerJC2);
+        FTE_0_5Manager.My.DownRole(FTE_0_5Manager.My.dealerJC3);
+        FTE_0_5Manager.My.DownRole(FTE_0_5Manager.My.dealerJC4);
+       red.SetActive(true);
         yield return new WaitForSeconds(1f);
-        
+        PlayerData.My.DeleteRole(90002);
+        PlayerData.My.DeleteRole(90003);
+        PlayerData.My.DeleteRole(90004);
+        PlayerData.My.DeleteRole(90005);
          
-   
+        land.transform.DOLocalMoveY(0, 0.5f).SetEase(Ease.OutBack).Play();
 
         yield return new WaitForSeconds(1f);
 
@@ -31,10 +39,13 @@ public class FTE_0_5_14 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
+        red.SetActive(false);
+
         missiondatas.data[0].currentNum = 1; 
         missiondatas.data[0].isFinish= true; 
         
-        yield break; 
+        yield return new WaitForSeconds(2);
+
     }
 
     public override bool ChenkEnd()

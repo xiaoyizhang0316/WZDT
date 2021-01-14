@@ -19,13 +19,10 @@ public class FTE_0_5_10_1 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        FTE_0_5Manager.My.DownRole( FTE_0_5Manager.My.seerJC1);
-        FTE_0_5Manager.My.DownRole( FTE_0_5Manager.My.seerJC2);
+        
        
         yield return new WaitForSeconds(1);
-        PlayerData.My.DeleteRole(FTE_0_5Manager.My.seerJC1.GetComponent<BaseMapRole>().baseRoleData.ID);
-        PlayerData.My.DeleteRole(FTE_0_5Manager.My.seerJC2.GetComponent<BaseMapRole>().baseRoleData.ID);
-    }
+         }
 
 
     public override bool ChenkEnd()

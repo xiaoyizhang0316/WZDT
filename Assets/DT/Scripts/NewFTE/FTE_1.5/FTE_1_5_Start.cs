@@ -7,6 +7,12 @@ public class FTE_1_5_Start : BaseGuideStep
     public bool isEnd = false;
     public GameObject openCG;
     public GameObject bornPoint;
+    
+    public GameObject seed_sign;
+    public GameObject peasant_sign;
+    public GameObject merchant_sign;
+    public GameObject dealer_sign;
+
     public override IEnumerator StepStart()
     {
         isEnd = false;
@@ -38,15 +44,16 @@ public class FTE_1_5_Start : BaseGuideStep
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 1).efficiency = 20;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 1).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 1).tradeCost = 800;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 1).riskResistance = 420;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 1).riskResistance = 120;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 1).cost = 200;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 1).upgradeCost = 0;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 1).costTech = 10;
         
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 2).effect = 20;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 2).efficiency = 25;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 2).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 2).tradeCost = 1000;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 2).riskResistance = 540;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 2).riskResistance = 200;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 2).cost = 400;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 2).upgradeCost = 0;
         
@@ -54,7 +61,7 @@ public class FTE_1_5_Start : BaseGuideStep
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 3).efficiency = 30;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 3).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 3).tradeCost = 1200;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 3).riskResistance = 660;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 3).riskResistance = 280;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 3).cost = 600;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 3).upgradeCost = 0;
         
@@ -62,7 +69,7 @@ public class FTE_1_5_Start : BaseGuideStep
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 4).efficiency = 35;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 4).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 4).tradeCost = 1400;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 4).riskResistance = 780;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 4).riskResistance = 360;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 4).cost = 800;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 4).upgradeCost = 0;
         
@@ -70,23 +77,25 @@ public class FTE_1_5_Start : BaseGuideStep
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 5).efficiency = 40;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 5).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 5).tradeCost = 1600;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 5).riskResistance = 900;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 5).riskResistance = 440;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 5).cost = 1000;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Seed, 5).upgradeCost = 0;
+        seed_sign.GetComponent<CreatRole_Button>().ReadCostTech();
         
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 1).effect = 20;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 1).efficiency = 10;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 1).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 1).tradeCost = 600;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 1).riskResistance = 410;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 1).riskResistance = 160;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 1).cost = 200;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 1).upgradeCost = 0;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 1).costTech = 10;
         
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 2).effect = 25;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 2).efficiency = 15;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 2).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 2).tradeCost = 800;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 2).riskResistance = 520;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 2).riskResistance = 240;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 2).cost = 400;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 2).upgradeCost = 0;
         
@@ -94,7 +103,7 @@ public class FTE_1_5_Start : BaseGuideStep
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 3).efficiency = 20;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 3).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 3).tradeCost = 1000;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 3).riskResistance = 630;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 3).riskResistance = 320;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 3).cost = 600;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 3).upgradeCost = 0;
         
@@ -102,7 +111,7 @@ public class FTE_1_5_Start : BaseGuideStep
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 4).efficiency = 25;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 4).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 4).tradeCost = 1200;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 4).riskResistance = 740;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 4).riskResistance = 400;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 4).cost = 800;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 4).upgradeCost = 0;
         
@@ -110,23 +119,25 @@ public class FTE_1_5_Start : BaseGuideStep
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 5).efficiency = 30;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 5).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 5).tradeCost = 1400;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 5).riskResistance = 850;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 5).riskResistance = 480;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 5).cost = 1000;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Peasant, 5).upgradeCost = 0;
+        peasant_sign.GetComponent<CreatRole_Button>().ReadCostTech();
         
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 1).effect = 60;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 1).efficiency = 20;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 1).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 1).tradeCost = 300;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 1).riskResistance = 400;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 1).riskResistance = 80;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 1).cost = 100;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 1).upgradeCost = 0;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 1).costTech = 10;
         
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 2).effect = 75;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 2).efficiency = 28;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 2).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 2).tradeCost = 500;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 2).riskResistance = 500;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 2).riskResistance = 160;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 2).cost = 200;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 2).upgradeCost = 0;
         
@@ -134,7 +145,7 @@ public class FTE_1_5_Start : BaseGuideStep
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 3).efficiency = 35;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 3).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 3).tradeCost = 700;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 3).riskResistance = 600;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 3).riskResistance = 240;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 3).cost = 300;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 3).upgradeCost =0;
         
@@ -142,7 +153,7 @@ public class FTE_1_5_Start : BaseGuideStep
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 4).efficiency = 42;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 4).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 4).tradeCost = 900;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 4).riskResistance = 700;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 4).riskResistance = 320;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 4).cost = 400;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 4).upgradeCost =0;
         
@@ -150,39 +161,41 @@ public class FTE_1_5_Start : BaseGuideStep
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 5).efficiency = 50;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 5).range = 0;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 5).tradeCost = 1100;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 5).riskResistance = 800;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 5).riskResistance = 400;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 5).cost = 500;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Merchant, 5).upgradeCost = 0;
+        merchant_sign.GetComponent<CreatRole_Button>().ReadCostTech();
         
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 1).effect = 0;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 1).efficiency = 30;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 1).efficiency = 10;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 1).range = 28;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 1).tradeCost = 1000;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 1).riskResistance = 450;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 1).riskResistance = 100;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 1).cost = 400;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 1).upgradeCost = 0;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 1).costTech = 10;
         
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 2).effect = 0;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 2).efficiency = 35;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 2).efficiency = 20;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 2).range = 32;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 2).tradeCost = 1200;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 2).riskResistance = 600;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 2).riskResistance = 180;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 2).cost = 600;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 2).upgradeCost = 0;
         
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 3).effect = 0;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 3).efficiency = 40;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 3).efficiency = 30;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 3).range = 36;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 3).tradeCost = 1400;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 3).riskResistance = 750;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 3).riskResistance = 260;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 3).cost = 800;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 3).upgradeCost = 0;
         
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 4).effect = 0;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 4).efficiency = 45;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 4).efficiency = 40;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 4).range = 40;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 4).tradeCost = 1600;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 4).riskResistance = 900;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 4).riskResistance = 340;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 4).cost = 1000;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 4).upgradeCost = 0;
         
@@ -190,8 +203,9 @@ public class FTE_1_5_Start : BaseGuideStep
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 5).efficiency = 50;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 5).range = 44;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 5).tradeCost = 1800;
-        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 5).riskResistance = 1050;
+        GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 5).riskResistance = 420;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 5).cost = 1200;
         GameDataMgr.My.GetModelDataFTE(GameEnum.RoleType.Dealer, 5).upgradeCost = 0;
+        dealer_sign.GetComponent<CreatRole_Button>().ReadCostTech();
     }
 }

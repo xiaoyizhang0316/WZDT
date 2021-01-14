@@ -19,8 +19,7 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     public GameObject border2;
     public override IEnumerator StepStart()
     {
-        firstButton.SetActive(true);
-        lastButton.SetActive(true);
+        
         /*startStar.transform.DOScale(Vector3.one, 0.02f).Play();
         endStar.transform.DOScale(Vector3.one, 0.02f).Play();
         slider.transform.DOScale(Vector3.one, 0.02f).Play();*/
@@ -29,7 +28,7 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
         {
             npcEncorageLevel[i].SetActive(true);
         }
-        FTE_2_5_Manager.My.isClearGoods = false;
+        //FTE_2_5_Manager.My.isClearGoods = false;
         SkipButton();
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         yield return new WaitForSeconds(0.5f);
@@ -58,11 +57,15 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        foreach (Transform child in tradeMgr)
+        /*foreach (Transform child in tradeMgr)
         {
             TradeManager.My.DeleteTrade(child.GetComponent<TradeSign>().tradeData.ID);
-        }
-        yield return new WaitForSeconds(0.5f);
+        }*/
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
+        yield return new WaitForSeconds(2f);
+        firstButton.SetActive(true);
+        lastButton.SetActive(true);
     }
 
     public override bool ChenkEnd()

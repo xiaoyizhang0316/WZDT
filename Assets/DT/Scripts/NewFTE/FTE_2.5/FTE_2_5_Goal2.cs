@@ -56,21 +56,19 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         CancelInvoke();
         NewCanvasUI.My.GamePause(false);
         DoEnd();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
     }
 
     void DoEnd()
     {
-        FTE_2_5_Manager.My.isClearGoods = true;
-        foreach (Transform trade in tradeMgr)
+        //FTE_2_5_Manager.My.isClearGoods = true;
+        /*foreach (Transform trade in tradeMgr)
         {
             TradeManager.My.DeleteTrade(trade.GetComponent<TradeSign>().tradeData.ID);
-        }
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
-        }
-        FTE_2_5_Manager.My.isClearGoods = false;
+        }*/
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
+        //FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GameNormal();
     }
 
@@ -145,24 +143,36 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     {
         
             //place1.DOMoveY(0, 1f).Play();
-            peasant1.DOMoveY(0.32f, 1f).Play();
+            peasant1.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            {
+                peasant1.DOMoveY(0.32f, 1f).Play();
+            });
             peasant1.GetComponent<QualityRole>().checkBuff = 305;
             peasant1.GetComponent<QualityRole>().checkQuality = -1;
             peasant1.GetComponent<QualityRole>().needCheck = true;
+            peasant1.GetComponent<QualityRole>().QualityReset();
         
         
             //place2.DOMoveY(0, 1f).Play();
-            peasant2.DOMoveY(0.32f, 1f).Play();
+            peasant2.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            {
+                peasant2.DOMoveY(0.32f, 1f).Play();
+            });
             peasant2.GetComponent<QualityRole>().checkBuff = 304;
             peasant2.GetComponent<QualityRole>().checkQuality = -1;
             peasant2.GetComponent<QualityRole>().needCheck = true;
+            peasant2.GetComponent<QualityRole>().QualityReset();
         
         
             //place3.DOMoveY(0, 1f).Play();
-            peasant3.DOMoveY(0.32f, 1f).Play();
+            peasant3.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            {
+                peasant3.DOMoveY(0.32f, 1f).Play();
+            });
             peasant3.GetComponent<QualityRole>().checkBuff = 303;
             peasant3.GetComponent<QualityRole>().checkQuality = -1;
             peasant3.GetComponent<QualityRole>().needCheck = true;
+            peasant3.GetComponent<QualityRole>().QualityReset();
         
     }
 }

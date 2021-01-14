@@ -21,7 +21,10 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
         qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
         qualityCenter.GetComponent<QualityRole>().needCheck = true;
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount);
+        qualityCenter.GetComponent<QualityRole>().QualityReset();
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount, costLimit);
         //NewCanvasUI.My.GameNormal();
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         SkipButton();
@@ -55,8 +58,10 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         //place.transform.DOMoveY(-8.32f, 0.5f);
         qualityCenter.transform.DOMoveY(-8f, 0.5f).Play().OnComplete(()=>PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID));
 
-        FTE_2_5_Manager.My.isClearGoods = true;
-        yield return new WaitForSeconds(1f);
+        //FTE_2_5_Manager.My.isClearGoods = true;
+        PlayerData.My.ClearAllRoleWarehouse();
+        TradeManager.My.ResetAllTrade();
+        yield return new WaitForSeconds(2f);
         DoEnd();
     }
 
@@ -124,17 +129,16 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         CancelInvoke();
         NewCanvasUI.My.GamePause(false);
         //StageGoal.My.killNumber = 0;
-        FTE_2_5_Manager.My.isClearGoods=true;
+        //FTE_2_5_Manager.My.isClearGoods=true;
         missiondatas.data[0].isFail = false;
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            PlayerData.My.MapRole[i].ClearWarehouse();
-        }
+        PlayerData.My.ClearAllRoleWarehouse();
+        TradeManager.My.ResetAllTrade();
+        qualityCenter.GetComponent<QualityRole>().QualityReset();
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
-        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount);
+        costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount,costLimit);
         InvokeRepeating("CheckGoal",0, 0.2f);
-        FTE_2_5_Manager.My.isClearGoods=false;
+        //FTE_2_5_Manager.My.isClearGoods=false;
         NewCanvasUI.My.GameNormal();
     }
 }

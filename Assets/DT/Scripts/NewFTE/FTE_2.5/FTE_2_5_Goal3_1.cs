@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,7 +33,7 @@ public class FTE_2_5_Goal3_1 : BaseGuideStep
         place2.transform.DOMoveY(0f, 1).Play();
         merchant.transform.DOMoveY(0.32f, 1).Play();
         place3.transform.DOMoveY(0f, 1).Play();
-        FTE_2_5_Manager.My.isClearGoods = false;
+        //FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GameNormal();
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);
         yield return new WaitForSeconds(0.5f);
@@ -51,15 +52,13 @@ public class FTE_2_5_Goal3_1 : BaseGuideStep
     
     void DoEnd()
     {
-        FTE_2_5_Manager.My.isClearGoods = true;
+        //FTE_2_5_Manager.My.isClearGoods = true;
         PlayerData.My.DeleteRole( peasant1.GetComponent<BaseMapRole>().baseRoleData.ID);
         PlayerData.My.DeleteRole( peasant2.GetComponent<BaseMapRole>().baseRoleData.ID);
         PlayerData.My.DeleteRole( peasant3.GetComponent<BaseMapRole>().baseRoleData.ID);
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            PlayerData.My.MapRole[i].GetComponent<BaseMapRole>().ClearWarehouse();
-        }
-        
+        PlayerData.My.ClearAllRoleWarehouse();
+        TradeManager.My.ResetAllTrade();
+
     }
 
     public override bool ChenkEnd()

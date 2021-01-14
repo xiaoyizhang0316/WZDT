@@ -17,8 +17,14 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     public GameObject place3;
     
 
-    public List<GameObject> factorys;
-    public List<GameObject> places;
+    /*public List<GameObject> factorys;
+    public List<GameObject> places;*/
+    public Transform soft;
+    public Transform crisp;
+    public Transform sweet;
+    public Transform softPlace;
+    public Transform crispPlace;
+    public Transform sweetPlace;
 
     //public GameObject endPanel;
 
@@ -26,11 +32,12 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     private int currentTimeCount = 0;
     public override IEnumerator StepStart()
     {
-        FTE_2_5_Manager.My.isClearGoods = false;
+        //FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GamePause(false);
         FactoryUp();
         StageGoal.My.playerSatisfy = 0;
         StageGoal.My.playerSatisfyText.text = "0";
+        StageGoal.My.GetSatisfy(0);
         currentTimeCount = StageGoal.My.timeCount;
         FTE_2_5_Manager.My.packageKillNum = 0;
         FTE_2_5_Manager.My.saleKillNum = 0;
@@ -80,16 +87,53 @@ public class FTE_2_5_Goal5 : BaseGuideStep
 
     void FactoryUp()
     {
-        for (int i = 0; i < factorys.Count; i++)
+        /*for (int i = 0; i < factorys.Count; i++)
         {
             factorys[i].SetActive(true);
-            factorys[i].transform.DOMoveY(0.32f, 1f).Play();
+            factorys[i].transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            {
+                factorys[i].transform.DOMoveY(0.32f, 1f).Play();
+            });
         }
 
         for (int i = 0; i < places.Count; i++)
         {
-            places[i].transform.DOMoveY(0, 1).Play();
-        }
+            places[i].transform.DOMoveY(0, 1).Play().OnPause(() =>
+            {
+                places[i].transform.DOMoveY(0, 1).Play();
+            });
+        }*/
+        sweet.gameObject.SetActive(true);
+        sweet.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            sweet.DOMoveY(0.32f, 1f).Play();
+        });
+        sweetPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            sweetPlace.DOMoveY(0f, 1f).Play();
+        });
+        crisp.gameObject.SetActive(true);
+
+        crisp.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            crisp.DOMoveY(0.32f, 1f).Play();
+        });
+        
+        crispPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            crispPlace.DOMoveY(0f, 1f).Play();
+        });
+        soft.gameObject.SetActive(true);
+
+        soft.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            soft.DOMoveY(0.32f, 1f).Play();
+        });
+        
+        softPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            softPlace.DOMoveY(0f, 1f).Play();
+        });
     }
 
     void BornPackage()
@@ -115,7 +159,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         {
             NetworkMgr.My.UpdatePlayerFTE("2.5", ()=>SceneManager.LoadScene("Map"));
         });*/
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         //endPanel.SetActive(true);
     }
 
