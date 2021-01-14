@@ -34,6 +34,11 @@ public class FTE_2_5_NewGoal2_5 : BaseGuideStep
                     red.SetActive(false);
                     red1.SetActive(true);
                 }
+                else
+                {
+                    red.SetActive(true);
+                    red1.SetActive(false);
+                }
             }
             else
             {
