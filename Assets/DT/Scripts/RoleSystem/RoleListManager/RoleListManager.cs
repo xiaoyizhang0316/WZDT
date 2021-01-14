@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RoleListManager : MonoSingleton<RoleListManager>
@@ -56,8 +57,9 @@ public class RoleListManager : MonoSingleton<RoleListManager>
         {
             transform.position = outPos.position;
             outButton.gameObject.SetActive(false);
-     //      inButton.gameObject.SetActive(true);
-     //      inButton.interactable = true;
+        
+            inButton.gameObject.SetActive(true);
+          inButton.interactable = true;
         }
         else
         {
@@ -66,7 +68,7 @@ public class RoleListManager : MonoSingleton<RoleListManager>
         transform.DOMove(outPos.position,0.3f).OnComplete(() =>
         {
             outButton.gameObject.SetActive(false);
-           // inButton.gameObject.SetActive(true);
+             inButton.gameObject.SetActive(true);
             inButton.interactable = true;
         }).Play().timeScale = 1f / DOTween.timeScale;
         }

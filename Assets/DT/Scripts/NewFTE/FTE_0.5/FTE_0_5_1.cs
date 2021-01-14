@@ -20,7 +20,9 @@ public class FTE_0_5_1 : BaseGuideStep
     {
         NewCanvasUI.My.Panel_Update.SetActive(false);
         dailog.SetActive(true);
- 
+        if(info!=null)
+        info.SetActive(false); 
+
         yield return new WaitForSeconds(1f);
       
     }
