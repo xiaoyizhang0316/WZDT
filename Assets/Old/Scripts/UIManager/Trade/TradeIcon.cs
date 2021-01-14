@@ -117,21 +117,21 @@ public class TradeIcon : MonoBehaviour
     /// <summary>
     /// 鼠标进入显现
     /// </summary>
-    public void OnMouseEnter()
+    public void OnMouseOver()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
         if (!NewCanvasUI.My.isSetTrade)
         {
-            /*if (!EventSystem.current.IsPointerOverGameObject())
-            {*/
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
                 startRole.TradeLightOn();
                 endRole.TradeLightOn();
-            //}
-            /*else
+            }
+            else
             {
                 startRole.TradeLightOff();
                 endRole.TradeLightOff();
-            }*/
+            }
         }
     }
 
