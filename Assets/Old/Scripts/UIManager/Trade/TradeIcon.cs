@@ -16,8 +16,6 @@ public class TradeIcon : MonoBehaviour
 
     private BaseMapRole startRole;
     private BaseMapRole endRole;
-    public SpriteRenderer icon;
-    public GameObject gq;
 
     public void SetTrasform(Transform s, Transform e)
     {
@@ -41,7 +39,7 @@ public class TradeIcon : MonoBehaviour
         end = endRole.tradePoint;
         transform.position = (startRole.tradePoint.position + endRole.tradePoint.position) / 2f + new Vector3(0f, 0.3f, 0f);
         CheckPos();
-        icon.DOFade(0.4f, 0.2f).Play().timeScale = 1f / DOTween.timeScale;
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.2f).Play().timeScale = 1f / DOTween.timeScale;
     }
 
     private int checkCount = 0;
@@ -101,8 +99,8 @@ public class TradeIcon : MonoBehaviour
     /// </summary>
     public void ShowIcon()
     {
-        icon.GetComponent<BoxCollider>().enabled = true;
-        icon.DOFade(0.4f, 0.2f).Play();
+        GetComponent<BoxCollider>().enabled = true;
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.2f).Play();
     }
 
     /// <summary>
@@ -110,8 +108,8 @@ public class TradeIcon : MonoBehaviour
     /// </summary>
     public void HideIcon()
     {
-        icon.GetComponent<BoxCollider>().enabled = false;
-        icon.DOFade(0f, 0f).Play();
+        GetComponent<BoxCollider>().enabled = false;
+        GetComponentInChildren<SpriteRenderer>().DOFade(0f, 0f).Play();
     }
 
     /// <summary>
@@ -119,7 +117,7 @@ public class TradeIcon : MonoBehaviour
     /// </summary>
     public void OnMouseEnter()
     {
-        icon.DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
         if (!NewCanvasUI.My.isSetTrade)
         {
             startRole.TradeLightOn();
@@ -132,7 +130,7 @@ public class TradeIcon : MonoBehaviour
     /// </summary>
     public void OnMouseExit()
     {
-        icon.DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
         if (!NewCanvasUI.My.isSetTrade)
         {
             startRole.TradeLightOff();
@@ -146,8 +144,8 @@ public class TradeIcon : MonoBehaviour
     /// <param name="isStart">是否是发起方</param>
     public void ShowRelateIcon(bool isStart=false)
     {
-        icon.DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
-        gq.SetActive(true);
+        GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        transform.GetChild(1).gameObject.SetActive(true);
         /*if(isStart)
         {*/
             //transform.GetChild(0).gameObject.layer = 9;
@@ -163,8 +161,8 @@ public class TradeIcon : MonoBehaviour
     /// </summary>
     public void HideRelateIcon()
     {
-        icon.DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
-        gq.SetActive(false);
+        GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
         //transform.GetChild(0).gameObject.layer = 0;
+        transform.GetChild(1).gameObject.SetActive(false);
     }
 }
