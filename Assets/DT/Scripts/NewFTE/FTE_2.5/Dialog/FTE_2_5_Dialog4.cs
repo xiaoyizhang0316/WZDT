@@ -9,6 +9,13 @@ public class FTE_2_5_Dialog4 : BaseGuideStep
     public List<GameObject> npcs;
     public List<GameObject> npcPlace;
 
+    public Transform soft;
+    public Transform crisp;
+    public Transform sweet;
+    public Transform softPlace;
+    public Transform crispPlace;
+    public Transform sweetPlace;
+
     public override IEnumerator StepStart()
     {
         openCG.SetActive(true);
