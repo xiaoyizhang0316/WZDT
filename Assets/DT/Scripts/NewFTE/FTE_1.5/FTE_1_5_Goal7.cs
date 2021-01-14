@@ -60,9 +60,10 @@ public class FTE_1_5_Goal7 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        NewCanvasUI.My.GamePause(false);
         bornPoint.GetComponent<Building>().isBorn = false;
         yield return new WaitForSeconds(2f);
-        costPanel.GetComponent<CostPanel>().HideAllCost();
+        //costPanel.GetComponent<CostPanel>().HideAllCost();
         openCG.SetActive(true);
     }
 
