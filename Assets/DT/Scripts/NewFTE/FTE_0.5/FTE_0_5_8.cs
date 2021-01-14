@@ -107,7 +107,7 @@ public class FTE_0_5_8 : BaseGuideStep
     public override bool ChenkEnd()
     {
         info.text = " ";
-
+        bool ismission2 = false;
         if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
         {
             transform.GetChild(0).gameObject.SetActive(false);
@@ -166,13 +166,13 @@ public class FTE_0_5_8 : BaseGuideStep
 
             if (daojishi != 0 && timeCount - daojishi >= 150)
             {
-                missiondatas.data[1].isFinish = true;
+            
+                ismission2 = true;
             }
             else
             {
                 missiondatas.data[1].isFinish = false;
-                return false;
-
+                ismission2 =  false;
             }
         }
 
@@ -181,8 +181,9 @@ public class FTE_0_5_8 : BaseGuideStep
             missiondatas.data[1].isFinish = false;
         }
 
-        if (missiondatas.data[1].isFinish && missiondatas.data[0].isFinish)
+        if (ismission2 && missiondatas.data[0].isFinish)
         {
+            missiondatas.data[1].isFinish = true;
             return true;
         }
         else
