@@ -158,7 +158,7 @@ public class FTE_0_5_11_3 : BaseGuideStep
             time = StageGoal.My.timeCount;
         }
  
-        if ( role.warehouse.Count >roleTargetCount&& role3.warehouse.Count >=role3TargetCount&& role1.warehouse.Count >=role1TargetCount&& role2.warehouse.Count >=role2TargetCount)
+        if ( role.warehouse.Count >=roleTargetCount&& role3.warehouse.Count >=role3TargetCount&& role1.warehouse.Count >=role1TargetCount&& role2.warehouse.Count >=role2TargetCount)
         {
             missiondatas.data[0].isFinish = true;
             return true; 
