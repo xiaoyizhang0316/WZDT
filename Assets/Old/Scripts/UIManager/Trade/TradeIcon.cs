@@ -117,21 +117,21 @@ public class TradeIcon : MonoBehaviour
     /// <summary>
     /// 鼠标进入显现
     /// </summary>
-    public void OnMouseEnter()
+    public void OnMouseOver()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
         if (!NewCanvasUI.My.isSetTrade)
         {
-            /*if (!EventSystem.current.IsPointerOverGameObject())
-            {*/
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
                 startRole.TradeLightOn();
                 endRole.TradeLightOn();
-            //}
-            /*else
+            }
+            else
             {
                 startRole.TradeLightOff();
                 endRole.TradeLightOff();
-            }*/
+            }
         }
     }
 
@@ -155,7 +155,10 @@ public class TradeIcon : MonoBehaviour
     public void ShowRelateIcon(bool isStart=false)
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
-        transform.GetChild(1).gameObject.SetActive(true);
+        if (GetComponent<BoxCollider>().enabled)
+        {
+            transform.GetChild(1).gameObject.SetActive(true);
+        }
         /*if(isStart)
         {*/
             //transform.GetChild(0).gameObject.layer = 9;

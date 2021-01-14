@@ -19,8 +19,7 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
     public GameObject border2;
     public override IEnumerator StepStart()
     {
-        firstButton.SetActive(true);
-        lastButton.SetActive(true);
+        
         /*startStar.transform.DOScale(Vector3.one, 0.02f).Play();
         endStar.transform.DOScale(Vector3.one, 0.02f).Play();
         slider.transform.DOScale(Vector3.one, 0.02f).Play();*/
@@ -65,6 +64,8 @@ public class FTE_2_5_NewGoal2 : BaseGuideStep
         TradeManager.My.ResetAllTrade();
         PlayerData.My.ClearAllRoleWarehouse();
         yield return new WaitForSeconds(2f);
+        firstButton.SetActive(true);
+        lastButton.SetActive(true);
     }
 
     public override bool ChenkEnd()
