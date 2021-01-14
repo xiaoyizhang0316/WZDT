@@ -30,11 +30,12 @@ public class FTE_0_5_16 : BaseGuideStep
             Destroy(list[i].gameObject);
         }
         StageGoal.My.maxRoleLevel = 5;
+        StageGoal.My.killNumber = 0;
         transform.DOScale(1, 1).OnComplete(() =>
         {
             StartCoroutine(BuildingManager.My.buildings[0]
                 .BornSingleTypeConsumer(type, count));
-            StageGoal.My.killNumber = 0;
+         
             Addxiaofei();
         }).Play();
         NewCanvasUI.My.GamePause();
