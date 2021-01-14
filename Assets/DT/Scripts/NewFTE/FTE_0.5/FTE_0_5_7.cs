@@ -83,11 +83,32 @@ public class FTE_0_5_7 : BaseGuideStep
         {
             EquipListManager.My._signs[3].effect.DOFade(1, 0.6f).Play();
         }).SetLoops(10).Play();
+        EquipListManager.My._signs[4].effect.DOFade(0, 0.6f).OnComplete(() =>
+        {
+            EquipListManager.My._signs[4].effect.DOFade(1, 0.6f).Play();
+        }).SetLoops(10).Play();
+
+        EquipListManager.My._signs[5].effect.DOFade(0, 0.6f).OnComplete(() =>
+        {
+            EquipListManager.My._signs[5].effect.DOFade(1, 0.6f).Play();
+        }).SetLoops(10).Play();
+
+        EquipListManager.My._signs[6].effect.DOFade(0, 0.6f).OnComplete(() =>
+        {
+            EquipListManager.My._signs[6].effect.DOFade(1, 0.6f).Play();
+        }).SetLoops(10).Play();
+
+        EquipListManager.My._signs[7].effect.DOFade(0, 0.6f).OnComplete(() =>
+        {
+            EquipListManager.My._signs[7].effect.DOFade(1, 0.6f).Play();
+        }).SetLoops(10).Play();
 
         effect.transform.GetComponent<Text>().DOFade(0, 0.6f).OnComplete(() =>
         {
             effect.transform.GetComponent<Text>().DOFade(1, 0.6f).Play();
         }).SetLoops(10).Play();
+        
+        
     }
 
     public void ChangeColor(ProductData data)

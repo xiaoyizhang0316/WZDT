@@ -36,7 +36,10 @@ public class FTE_0_5_11_3 : BaseGuideStep
     {
    FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC3);
    FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC4);
-
+   role.baseRoleData.bulletCapacity = roleTargetCount;
+   role1.baseRoleData.bulletCapacity = role1TargetCount;
+   role2.baseRoleData.bulletCapacity = role2TargetCount;
+   role3.baseRoleData.bulletCapacity = role3TargetCount;
                                     role.OnMoved += ChangeColor;
                                     role1.OnMoved += ChangeColor1;
                                     role2.OnMoved += ChangeColor2;

@@ -31,6 +31,7 @@ public class FTE_0_5_15 : BaseGuideStep
                 .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel1, count));
             Addxiaofei();
         }).Play();
+         NewCanvasUI.My.GamePause();
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
@@ -71,9 +72,7 @@ public class FTE_0_5_15 : BaseGuideStep
         roleImage.SetActive(true);
         roleImage.SetActive(false);
 
-        yield return new WaitForSeconds(2);
-
-
+        yield return new WaitForSeconds(2);  
     }
 
     public override bool ChenkEnd()
