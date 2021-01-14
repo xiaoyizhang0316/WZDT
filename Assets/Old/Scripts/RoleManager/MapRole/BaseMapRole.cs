@@ -730,16 +730,24 @@ public class BaseMapRole : MonoBehaviour
         {
             if (GetComponent<BaseNpc>().isCanSeeEquip)
             {
-                for (int i = 0; i < baseRoleData.EquipList.Keys.ToList().Count; i++)
+                for (int i = 0; i <GetComponent<BaseNpc>().NPCBuffList.Count; i++)
                 {
-                    GearData data = GameDataMgr.My.GetGearData(baseRoleData.EquipList.Keys.ToList()[i]);
-                    foreach (int item in data.buffList)
-                    {
-                        if (item != -1)
+                  
+                    
+                        if (GetComponent<BaseNpc>().NPCBuffList[i] != -1)
                         {
-                            bufflist.Add(item);
+                            bufflist.Add(GetComponent<BaseNpc>().NPCBuffList[i]);
                         }
-                    }
+                   
+                }
+            }
+
+            for (int i = 0; i <GetComponent<BaseSkill>().buffList.Count; i++)
+            {
+                     
+                if (GetComponent<BaseSkill>().buffList[i] != -1)
+                {
+                    bufflist.Add(GetComponent<BaseSkill>().buffList[i]);
                 }
             }
         }

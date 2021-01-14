@@ -19,7 +19,11 @@ public class RoleUISign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 
     public List<Image> buff;
 
- 
+
+    public GameObject effectSprite;
+    public GameObject rangeSprite;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,8 @@ public class RoleUISign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         image = transform.GetComponent<RectTransform>();
         ui_Canvas = NewCanvasUI.My.gameObject.GetComponent<Canvas>();
         transform.localScale = new Vector3(0.8f,0.8f);
+        effectSprite.SetActive( false);
+        rangeSprite.SetActive( false);
     }
 
 
@@ -46,13 +52,27 @@ public class RoleUISign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         else
         {
             UpdateNamePosition();
+            if (mapRole.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
+            {
+                effect.text = mapRole.baseRoleData.range.ToString();
+                rangeSprite.SetActive( true);
+
+            }
+            else
+            {             
+                effect.text = mapRole.baseRoleData.effect.ToString();
+                effectSprite.SetActive( true);
+          
+
+            }
+
+            efficiency.text = mapRole.baseRoleData.efficiency.ToString();                                                
             if (!mapRole.isNpc)
             {
                 icon.gameObject.SetActive(true);
                 cost.gameObject.SetActive(true);
                 cost.text = mapRole.baseRoleData.cost.ToString();
-                effect.text = mapRole.baseRoleData.effect.ToString();
-                efficiency.text = mapRole.baseRoleData.efficiency.ToString();
+              
 
                 for (int i = 0; i < mapRole.GetEquipBuffList().Count; i++)
                 {
@@ -75,6 +95,22 @@ public class RoleUISign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
             {
                 icon.gameObject.SetActive(false);
                 cost.gameObject.SetActive(false);
+                if (mapRole.GetComponent<NPC>().isCanSeeEquip)
+                {
+                    for (int i = 0; i < mapRole.GetEquipBuffList().Count; i++)
+                    {
+                        if (TabManager.My.buffsprite.ContainsKey(mapRole.GetEquipBuffList()[i]))
+                        {
+                            buff[i].sprite =TabManager.My. buffsprite[mapRole.GetEquipBuffList()[i]];
+                        }
+                        else
+                        {
+                            TabManager.My. buffsprite.Add(mapRole.GetEquipBuffList()[i],
+                                Resources.Load<Sprite>("Sprite/Buff/" + mapRole.GetEquipBuffList()[i]));
+                            buff[i].sprite =TabManager.My.buffsprite[mapRole.GetEquipBuffList()[i]];
+                        }
+                    }
+                }
             }
         }
     }
