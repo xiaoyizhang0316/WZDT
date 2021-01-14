@@ -36,6 +36,9 @@ public class FTE_0_5_11 : BaseGuideStep
                                     role1.OnMoved += ChangeColor1;
         time = StageGoal.My.timeCount;
         role.warehouse.Clear();
+        role1.warehouse.Clear();
+        role.baseRoleData.bulletCapacity = roleTargetCount;
+        role1.baseRoleData.bulletCapacity = role1TargetCount;
         
         yield return null;
     }
