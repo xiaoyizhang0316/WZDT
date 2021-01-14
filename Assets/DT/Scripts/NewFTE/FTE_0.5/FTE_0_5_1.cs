@@ -40,6 +40,8 @@ public class FTE_0_5_1 : BaseGuideStep
         if (!isUpLoad&&equipAdd.Count > 0)
         {
             info.SetActive(true); 
+            yield return new WaitForSeconds(2f);
+
         }
 
         if (isUpLoad )
@@ -49,7 +51,7 @@ public class FTE_0_5_1 : BaseGuideStep
            NetworkMgr.My.UpdatePlayerFTE(0.5.ToString(), () => { SceneManager.LoadScene("Map"); });
         }
         dailog.SetActive(false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
     }
 
