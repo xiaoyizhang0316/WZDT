@@ -145,9 +145,10 @@ public class TradeIcon : MonoBehaviour
     public void ShowRelateIcon(bool isStart=false)
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(1f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
+        transform.GetChild(1).gameObject.SetActive(true);
         /*if(isStart)
         {*/
-            transform.GetChild(0).gameObject.layer = 9;
+            //transform.GetChild(0).gameObject.layer = 9;
         /*}
         else
         {
@@ -161,6 +162,7 @@ public class TradeIcon : MonoBehaviour
     public void HideRelateIcon()
     {
         GetComponentInChildren<SpriteRenderer>().DOFade(0.4f, 0.8f).Play().timeScale = 1f / DOTween.timeScale;
-        transform.GetChild(0).gameObject.layer = 0;
+        //transform.GetChild(0).gameObject.layer = 0;
+        transform.GetChild(1).gameObject.SetActive(false);
     }
 }
