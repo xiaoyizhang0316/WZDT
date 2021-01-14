@@ -37,6 +37,7 @@ public class FTE_0_5_16 : BaseGuideStep
             StageGoal.My.killNumber = 0;
             Addxiaofei();
         }).Play();
+        NewCanvasUI.My.GamePause();
 
         yield return new WaitForSeconds(1f);
 

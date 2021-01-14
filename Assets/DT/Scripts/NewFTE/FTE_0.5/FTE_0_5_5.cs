@@ -6,14 +6,7 @@ using UnityEngine.UI;
 
 public class FTE_0_5_5 : BaseGuideStep
 {
-    public GameObject dailog;
-
-
- 
-    public GameObject boxobj;
-    public Image box;
-
-    public List<Sprite> boxsprite;
+  
    // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +18,7 @@ public class FTE_0_5_5 : BaseGuideStep
     {
         NewCanvasUI.My.Panel_Update.GetComponent<ProductDetalUI>().panel.SetActive(false);
         NewCanvasUI.My.Panel_Update.SetActive(false);
-        dailog.SetActive(true);
+       // dailog.SetActive(true);
 
         PlayerData.My.GetNewGear(90000);
         PlayerData.My.GetNewGear(90001);
@@ -42,7 +35,7 @@ public class FTE_0_5_5 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        boxobj.SetActive(true );
+      //  boxobj.SetActive(true );
 
         for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
         {
@@ -52,37 +45,12 @@ public class FTE_0_5_5 : BaseGuideStep
             }
         }
         yield return new WaitForSeconds(1f);
-        boxobj.SetActive(false );
+      //  boxobj.SetActive(false );
 
 
     }
 
  
-    public IEnumerator PlayBox()
-    {
-        
-        for (int i = 0; i <boxsprite.Count; i++)
-        {
-            box.sprite = boxsprite[i];
-            yield return null;
-            
-        }
-    }
-
-    public override bool ChenkEnd()
-    {
-
-        if (dailog.activeSelf)
-        {
-            return false;
-        }
-
-        else{
-            return true;
-
-        }
-
-    }
-
+  
  
 }
