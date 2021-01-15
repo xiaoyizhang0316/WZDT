@@ -320,7 +320,7 @@ public class TradeSign : MonoBehaviour
     /// <summary>
     /// 结算交易成本
     /// </summary>
-    public int CalculateTC()
+    public int CalculateTC(bool isShow = false)
     {
         if (SceneManager.GetActiveScene().name.Equals("FTE_1"))
         {
@@ -392,8 +392,11 @@ public class TradeSign : MonoBehaviour
         //    StageGoal.My.GetSatisfy((int)(result * 0.2f));
         //    StageGoal.My.ScoreGet(ScoreType.金钱得分, (int)(result * 0.2f));
         //}
-        StageGoal.My.CostPlayerGold(result);
-        StageGoal.My.Expend(result, ExpendType.TradeCosts);
+        if (!isShow)
+        {
+            StageGoal.My.CostPlayerGold(result);
+            StageGoal.My.Expend(result, ExpendType.TradeCosts);
+        }
         return result;
     }
 
