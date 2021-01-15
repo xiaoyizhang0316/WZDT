@@ -78,6 +78,7 @@ public class TradeSign : MonoBehaviour
         GenerateTradeLine();
         GenerateTradeIcon();
         AddTradeToRole();
+        InvokeRepeating("CheckEncourageSetting", 0f, 1f);
     }
 
     /// <summary>
@@ -114,6 +115,17 @@ public class TradeSign : MonoBehaviour
     }
 
     /// <summary>
+    /// 检测交易先后钱对激励等级的影响 
+    /// </summary>
+    public void CheckEncourageSetting()
+    {
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        start.RecalculateEncourageLevel();
+        end.RecalculateEncourageLevel();
+    }
+
+    /// <summary>
     /// 为施法方添加技能
     /// </summary>
     public void AddTradeToRole()
@@ -133,8 +145,6 @@ public class TradeSign : MonoBehaviour
                 cast.extraSkill.SkillOn(this);
             }
         }
-        start.RecalculateEncourageLevel();
-        end.RecalculateEncourageLevel();
     }
 
     /// <summary>
