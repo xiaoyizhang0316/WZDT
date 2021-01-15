@@ -135,7 +135,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
                 missionData.currentNum = StageGoal.My.totalCost-currentCost;
                 missionData.maxNum = costLimit;
                 missionData.isFail = true;
-                MissionManager.My.AddMission(missionData);
+                MissionManager.My.AddMission(missionData, missionTitle);
                 rectBorder.SetActive(true);
                 if (StageGoal.My.totalCost > costLimit)
                 {

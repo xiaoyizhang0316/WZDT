@@ -20,7 +20,7 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
 
     public List<MissionSign> signs=new List<MissionSign>();
 
-    public void AddMission(MissionData data)
+    public void AddMission(MissionData data, string title)
     {
         GameObject sign;
         if (data.isMainmission)
@@ -32,13 +32,26 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
             sign = Instantiate(missionPrb, contentTF);
         }
 
-        sign.GetComponent<MissionSign>().Init( data);
+        sign.GetComponent<MissionSign>().Init( data, title);
         
     }
 
-    public void ChangeTital(string content)
+    public void ChangeTital(string content, string title="")
     {
-        missionText.text = content;
+        
+        if (content.Equals(""))
+        {
+            if (missionText.transform.parent.gameObject.activeInHierarchy && title.Equals(missionText.text))
+            {
+                missionText.text = content;
+                missionText.transform.parent.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            missionText.text = content;
+            missionText.transform.parent.gameObject.SetActive(true);
+        }
         //tip.gameObject.SetActive(false);
         //isTipShow = false;
     }
@@ -90,8 +103,8 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
         {
             if (!isOut)
             {
-                missions.GetComponent<RectTransform>().DOAnchorPosX(-411.3f, 0.5f).Play();
-                titles.GetComponent<RectTransform>().DOAnchorPosX(-421.95f, 0.5f).Play();
+                missions.GetComponent<RectTransform>().DOAnchorPosX(-430f, 0.5f).Play();
+                titles.GetComponent<RectTransform>().DOAnchorPosX(-443f, 0.5f).Play();
                 out_btn.gameObject.SetActive(true);
             }
 
@@ -101,8 +114,8 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
         else
         {
             isOut = false;
-            missions.GetComponent<RectTransform>().DOAnchorPosX(-11.3f, 0.5f).Play();
-            titles.GetComponent<RectTransform>().DOAnchorPosX(-21.95f, 0.5f).Play();
+            missions.GetComponent<RectTransform>().DOAnchorPosX(10f, 0.5f).Play();
+            titles.GetComponent<RectTransform>().DOAnchorPosX(-3f, 0.5f).Play();
             out_btn.gameObject.SetActive(false);
             in_btn.gameObject.SetActive(false);
             //if(isTipShow)

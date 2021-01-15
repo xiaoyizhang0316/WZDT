@@ -409,7 +409,9 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
                 catch (Exception ex)
                 {
+                    Debug.Log(ex.Source);
                     Debug.Log(ex.Message);
+                    Debug.Log(ex.StackTrace);
                 }
             }
             SetMask();
