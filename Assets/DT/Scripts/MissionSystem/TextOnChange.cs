@@ -27,7 +27,7 @@ public class TextOnChange : MonoBehaviour
         {
             if (content.Contains("质监站"))
             {
-                //GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+                GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
                 GetComponent<Text>().color = Color.green;
                 /*if (_missionSign.data.isMainmission)
                 {
