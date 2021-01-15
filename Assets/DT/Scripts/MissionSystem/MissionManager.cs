@@ -41,7 +41,10 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
         missionText.text = content;
         if (content.Equals(""))
         {
-            missionText.transform.parent.gameObject.SetActive(false);
+            if (missionText.transform.parent.gameObject.activeInHierarchy)
+            {
+                missionText.transform.parent.gameObject.SetActive(false);
+            }
         }
         else
         {
