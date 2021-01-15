@@ -23,7 +23,7 @@ public class FTE_1_5_Goal7 : BaseGuideStep
         MissionData missionData = new MissionData();
         missionData.content="上次的周期成本是<color=red>" + FTE_1_5_Manager.My.goal1FinalCost + "</color>";
         missionData.isFail = true;
-        MissionManager.My.AddMission(missionData);
+        MissionManager.My.AddMission(missionData, missionTitle);
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount,costLimit);
