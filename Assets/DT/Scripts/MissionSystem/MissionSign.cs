@@ -79,8 +79,8 @@ public class MissionSign : MonoBehaviour
             {
                 currentNum.resizeTextForBestFit = false;
                 maxNum.resizeTextForBestFit = false;
-                currentNum.fontSize = 28;
-                maxNum.fontSize = 28;
+                currentNum.fontSize = 25;
+                maxNum.fontSize = 25;
             }
             currentNum.text = this.data.currentNum.ToString();
             maxNum.text = "/"+this.data.maxNum.ToString();
