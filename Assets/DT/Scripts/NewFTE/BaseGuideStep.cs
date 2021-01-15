@@ -185,7 +185,7 @@ public abstract class BaseGuideStep : MonoBehaviour
         {
             for (int i = 0; i < missiondatas.data.Count; i++)
             {
-                MissionManager.My.AddMission(missiondatas.data[i]);
+                MissionManager.My.AddMission(missiondatas.data[i], missionTitle);
             }
         }
     }

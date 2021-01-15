@@ -68,9 +68,10 @@ public class MissionSign : MonoBehaviour
         } 
     }
 
-    public void Init(MissionData data)
+    public void Init(MissionData data, string title)
     {
         this.data = data;
+        signTitle = title;
         contentText.text = this.data.content;
         if (data.maxNum > 0)
         {
@@ -93,9 +94,10 @@ public class MissionSign : MonoBehaviour
 
     }
 
+    private string signTitle;
     public void OnDestroy()
     {
         MissionManager.My.signs.Remove(this);
-        MissionManager.My.ChangeTital("");
+        MissionManager.My.ChangeTital("", signTitle);
     }
 }

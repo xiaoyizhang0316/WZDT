@@ -20,7 +20,7 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
 
     public List<MissionSign> signs=new List<MissionSign>();
 
-    public void AddMission(MissionData data)
+    public void AddMission(MissionData data, string title)
     {
         GameObject sign;
         if (data.isMainmission)
@@ -32,22 +32,24 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
             sign = Instantiate(missionPrb, contentTF);
         }
 
-        sign.GetComponent<MissionSign>().Init( data);
+        sign.GetComponent<MissionSign>().Init( data, title);
         
     }
 
-    public void ChangeTital(string content)
+    public void ChangeTital(string content, string title="")
     {
-        missionText.text = content;
+        
         if (content.Equals(""))
         {
-            if (missionText.transform.parent.gameObject.activeInHierarchy)
+            if (missionText.transform.parent.gameObject.activeInHierarchy && title.Equals(missionText.text))
             {
+                missionText.text = content;
                 missionText.transform.parent.gameObject.SetActive(false);
             }
         }
         else
         {
+            missionText.text = content;
             missionText.transform.parent.gameObject.SetActive(true);
         }
         //tip.gameObject.SetActive(false);
