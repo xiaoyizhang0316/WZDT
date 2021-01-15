@@ -51,7 +51,7 @@ public class FTE_0_5_6_1 : BaseGuideStep
         if (count >= 2)
         {
             missiondatas.data[0].isFinish = true;
-            missiondatas.data[0].currentNum =count;
+            missiondatas.data[0].currentNum =count - 1;
         }
         if (missiondatas.data[0].isFinish )
         {
