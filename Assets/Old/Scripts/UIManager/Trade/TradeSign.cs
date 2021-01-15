@@ -133,6 +133,8 @@ public class TradeSign : MonoBehaviour
                 cast.extraSkill.SkillOn(this);
             }
         }
+        start.RecalculateEncourageLevel();
+        end.RecalculateEncourageLevel();
     }
 
     /// <summary>
