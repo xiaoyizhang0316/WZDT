@@ -108,7 +108,7 @@ public class TabManager : MonoSingleton<TabManager>
                 lineobj = Instantiate(line,tf);
             }
 
-            lineobj.GetComponentInChildren<Text>().text = VARIABLE.Value.CalculateTC().ToString();
+            lineobj.GetComponentInChildren<Text>().text = VARIABLE.Value.CalculateTC(true).ToString();
             lineobj.GetComponent<WMG_Link>().id = VARIABLE.Key;
             lineobj.GetComponent<WMG_Link>().fromNode = GetRoleUI(VARIABLE.Value.tradeData.startRole);
             lineobj.GetComponent<WMG_Link>().toNode = GetRoleUI(VARIABLE.Value.tradeData.endRole);
