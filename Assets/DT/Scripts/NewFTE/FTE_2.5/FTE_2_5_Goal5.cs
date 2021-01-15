@@ -300,6 +300,10 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             StageGoal.My.playerSatisfy = 0;
             StageGoal.My.playerSatisfyText.text = "0";
             currentTimeCount = StageGoal.My.timeCount;
+            for (int i = 0; i < MissionManager.My.signs.Count; i++)
+            {
+                MissionManager.My.signs[i].ResetSuccess();
+            }
             BornNoLike();
             BornSale();
             BornPackage();

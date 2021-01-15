@@ -79,6 +79,38 @@ public class FTE_2_5_Dialog4 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
+        sweet.gameObject.SetActive(true);
+
+        sweet.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            sweet.DOMoveY(0.32f, 1f).Play();
+        });
+        sweetPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            sweetPlace.DOMoveY(0f, 1f).Play();
+        });
+        crisp.gameObject.SetActive(true);
+
+        crisp.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            crisp.DOMoveY(0.32f, 1f).Play();
+        });
+        
+        crispPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            crispPlace.DOMoveY(0f, 1f).Play();
+        });
+        soft.gameObject.SetActive(true);
+
+        soft.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            soft.DOMoveY(0.32f, 1f).Play();
+        });
+        
+        softPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            softPlace.DOMoveY(0f, 1f).Play();
+        });
         yield return new WaitForSeconds(0.5f);
     }
 }

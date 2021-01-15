@@ -100,4 +100,10 @@ public class MissionSign : MonoBehaviour
         MissionManager.My.signs.Remove(this);
         MissionManager.My.ChangeTital("", signTitle);
     }
+
+    public void ResetSuccess()
+    {
+        success.transform.DOScale(0, 0.02f).Play();
+        isover = false;
+    }
 }
