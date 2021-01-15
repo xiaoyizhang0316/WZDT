@@ -27,11 +27,9 @@ public class TextOnChange : MonoBehaviour
         {
             if (content.Contains("质监站"))
             {
-                GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-                GetComponent<Text>().fontSize = 30;
+                //GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
                 GetComponent<Text>().color = Color.green;
-                _missionSign.maxNum.fontSize = 25;
-                if (_missionSign.data.isMainmission)
+                /*if (_missionSign.data.isMainmission)
                 {
                     transform.GetComponent<RectTransform>().DOAnchorPosX(75, 0.01f).Play().OnPause(() =>
                     {
@@ -44,7 +42,7 @@ public class TextOnChange : MonoBehaviour
                     {
                         transform.GetComponent<RectTransform>().DOAnchorPosX(84, 0.01f).Play();
                     });
-                }
+                }*/
             }
 
             isSetStyle = true;

@@ -18,6 +18,7 @@ public class MissionSign : MonoBehaviour
     public Image sign;
 
     public GameObject success;
+    public GameObject numberBg;
     private Color signColor;
 
     private bool isover;
@@ -73,6 +74,13 @@ public class MissionSign : MonoBehaviour
         contentText.text = this.data.content;
         if (data.maxNum > 0)
         {
+            if (data.maxNum > 1000)
+            {
+                currentNum.resizeTextForBestFit = false;
+                maxNum.resizeTextForBestFit = false;
+                currentNum.fontSize = 28;
+                maxNum.fontSize = 28;
+            }
             currentNum.text = this.data.currentNum.ToString();
             maxNum.text = "/"+this.data.maxNum.ToString();
         }
@@ -80,6 +88,7 @@ public class MissionSign : MonoBehaviour
         {
             currentNum.gameObject.SetActive(false);
             maxNum.gameObject.SetActive(false);
+            numberBg.SetActive(false);
         }
 
     }
