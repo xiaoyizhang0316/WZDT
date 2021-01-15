@@ -121,8 +121,8 @@ public class TradeSign : MonoBehaviour
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
-        start.RecalculateEncourageLevel();
-        end.RecalculateEncourageLevel();
+        start.RecalculateEncourageLevel(true);
+        end.RecalculateEncourageLevel(true);
     }
 
     /// <summary>
