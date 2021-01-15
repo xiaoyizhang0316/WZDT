@@ -232,7 +232,7 @@ public class Building : MonoBehaviour
         //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
         while (isBornForFTE_2_5)
         {
-            yield return new WaitForSeconds(0.7f);
+            //yield return new WaitForSeconds(0.7f);
             ct = (ConsumerType)26;
             string path = "Prefabs/Consumer/" + ct.ToString();
             GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
@@ -251,7 +251,7 @@ public class Building : MonoBehaviour
                 }
             
             float waitTime = 0.35f;
-            Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]);
+            Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]+0.7f);
             yield return twe.WaitForCompletion();
         }
     }
@@ -269,7 +269,7 @@ public class Building : MonoBehaviour
         //{
             for (int i = 0; i < count; i++)
             {
-                yield return new WaitForSeconds(0.7f);
+                //yield return new WaitForSeconds(0.7f);
                 ct = (ConsumerType)type;
                 string path = "Prefabs/Consumer/" + ct.ToString();
                 GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
@@ -288,7 +288,7 @@ public class Building : MonoBehaviour
                 }*/
             
                 float waitTime = 0.35f;
-                Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]);
+                Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]+0.7f);
                 yield return twe.WaitForCompletion();
             }
         //}
@@ -306,7 +306,7 @@ public class Building : MonoBehaviour
         //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
         while (isBorn)
         {
-            yield return new WaitForSeconds(1f);
+            //yield return new WaitForSeconds(1f);
             if (type == -1)
             {
                 ct = (ConsumerType)(UnityEngine.Random.Range(0, 2) == 1 ? 1 : 8);
@@ -333,7 +333,7 @@ public class Building : MonoBehaviour
             //    }
             //}
             //float waitTime = 0.5f;
-            Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]);
+            Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]+1);
             yield return twe.WaitForCompletion();
         }
     }
