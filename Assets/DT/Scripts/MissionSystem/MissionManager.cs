@@ -39,6 +39,17 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
     public void ChangeTital(string content)
     {
         missionText.text = content;
+        if (content.Equals(""))
+        {
+            if (missionText.transform.parent.gameObject.activeInHierarchy)
+            {
+                missionText.transform.parent.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            missionText.transform.parent.gameObject.SetActive(true);
+        }
         //tip.gameObject.SetActive(false);
         //isTipShow = false;
     }
