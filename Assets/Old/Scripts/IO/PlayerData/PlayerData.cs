@@ -466,6 +466,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         peasantCount = 0;
         merchantCount = 0;
         dealerCount = 0;
+        totalRoleCount = 0;
         //playerConsumables.Clear();
     }
 

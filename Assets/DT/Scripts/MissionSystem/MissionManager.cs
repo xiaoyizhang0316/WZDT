@@ -90,8 +90,8 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
         {
             if (!isOut)
             {
-                missions.GetComponent<RectTransform>().DOAnchorPosX(-411.3f, 0.5f).Play();
-                titles.GetComponent<RectTransform>().DOAnchorPosX(-421.95f, 0.5f).Play();
+                missions.GetComponent<RectTransform>().DOAnchorPosX(-430f, 0.5f).Play();
+                titles.GetComponent<RectTransform>().DOAnchorPosX(-443f, 0.5f).Play();
                 out_btn.gameObject.SetActive(true);
             }
 
@@ -101,8 +101,8 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
         else
         {
             isOut = false;
-            missions.GetComponent<RectTransform>().DOAnchorPosX(-11.3f, 0.5f).Play();
-            titles.GetComponent<RectTransform>().DOAnchorPosX(-21.95f, 0.5f).Play();
+            missions.GetComponent<RectTransform>().DOAnchorPosX(10f, 0.5f).Play();
+            titles.GetComponent<RectTransform>().DOAnchorPosX(-3f, 0.5f).Play();
             out_btn.gameObject.SetActive(false);
             in_btn.gameObject.SetActive(false);
             //if(isTipShow)
