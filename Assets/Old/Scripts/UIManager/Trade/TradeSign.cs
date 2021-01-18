@@ -78,6 +78,7 @@ public class TradeSign : MonoBehaviour
         GenerateTradeLine();
         GenerateTradeIcon();
         AddTradeToRole();
+        InvokeRepeating("CheckEncourageSetting", 0f, 1f);
     }
 
     /// <summary>
@@ -111,6 +112,17 @@ public class TradeSign : MonoBehaviour
                 tradeData.targetRole = tradeData.endRole;
             }
         }
+    }
+
+    /// <summary>
+    /// 检测交易先后钱对激励等级的影响 
+    /// </summary>
+    public void CheckEncourageSetting()
+    {
+        BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
+        BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        start.RecalculateEncourageLevel(true);
+        end.RecalculateEncourageLevel(true);
     }
 
     /// <summary>
@@ -308,7 +320,7 @@ public class TradeSign : MonoBehaviour
     /// <summary>
     /// 结算交易成本
     /// </summary>
-    public int CalculateTC()
+    public int CalculateTC(bool isShow = false)
     {
         if (SceneManager.GetActiveScene().name.Equals("FTE_1"))
         {
@@ -380,8 +392,11 @@ public class TradeSign : MonoBehaviour
         //    StageGoal.My.GetSatisfy((int)(result * 0.2f));
         //    StageGoal.My.ScoreGet(ScoreType.金钱得分, (int)(result * 0.2f));
         //}
-        StageGoal.My.CostPlayerGold(result);
-        StageGoal.My.Expend(result, ExpendType.TradeCosts);
+        if (!isShow)
+        {
+            StageGoal.My.CostPlayerGold(result);
+            StageGoal.My.Expend(result, ExpendType.TradeCosts);
+        }
         return result;
     }
 

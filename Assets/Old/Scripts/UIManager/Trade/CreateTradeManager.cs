@@ -119,9 +119,17 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         endRoleTradeCost = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole)).baseRoleData.tradeCost;
         InitName();
         InitRoleInfo();
-        InitCashFlow();
-        InitDivide();
-        InitTradeCost();
+        List<string> sceneList = new List<string>() { "FTE_0.5","FTE_1"};
+        if (!sceneList.Contains(SceneManager.GetActiveScene().name))
+        {
+            InitCashFlow();
+            InitDivide();
+            InitTradeCost();
+        }
+        else
+        {
+            tradeCostText.text = "???";
+        }
     }
 
     /// <summary>
