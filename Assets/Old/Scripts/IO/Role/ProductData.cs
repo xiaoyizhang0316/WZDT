@@ -88,7 +88,7 @@ public class ProductData
             }
             else
             {
-                wasteBuffList.Add(buffId);
+                return;
             }
         }
     }
