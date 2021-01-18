@@ -41,6 +41,8 @@ public class LoginPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.SetInt("BackGroundVolume",-80);
+        PlayerPrefs.SetInt("SoundEffectVolume",-80);
         StartCoroutine(PeopleEffect());
         //PlayerPrefs.DeleteAll();
         login_Btn.onClick.AddListener(Login);
