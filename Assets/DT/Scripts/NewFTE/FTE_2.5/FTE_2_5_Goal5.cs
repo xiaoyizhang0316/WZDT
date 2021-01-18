@@ -344,7 +344,7 @@ public class FTE_2_5_Goal5 : BaseGuideStep
                 {
                     if (dealers[i].warehouse[j].wasteBuffList!=null&& dealers[i].warehouse[j].wasteBuffList.Count >0)
                     {
-                        HttpManager.My.ShowTip("有口味效果被浪费！请注意检查‘<color=green>"+dealers[i].baseRoleData.baseRoleData.roleName+"</color>’相关的生产链！");
+                        HttpManager.My.ShowTip("有口味效果被浪费！请注意检查‘<color=green>"+dealers[i].baseRoleData.baseRoleData.roleName+"</color>’相关的生产链！", null, 5);
                         break;
                     }
                 }
