@@ -350,7 +350,7 @@ public class HttpManager : MonoSingleton<HttpManager>
         ShowTip(tip);
     }
 
-    public void ShowTip(string tipStr, Action doEnd = null)
+    public void ShowTip(string tipStr, Action doEnd = null,float time=2f)
     {
         tip.text = tipStr;
         if (isTipShow)
@@ -361,10 +361,29 @@ public class HttpManager : MonoSingleton<HttpManager>
         }
         tip.gameObject.SetActive(true);
         isTipShow = true;
-        tip.DOFade(0, 2f).SetId("httpTip").Play().OnComplete(()=> {
+        tip.DOFade(0, time).SetId("httpTip").Play().OnComplete(()=> {
             tip.gameObject.SetActive(false);
             tip.DOFade(1, 0).Play();
             isTipShow = false;
+        }).SetEase(Ease.InExpo);
+    }
+    
+    public void ShowLongTip(string tipStr, Action doEnd = null)
+    {
+        tip.text = tipStr;
+        if (isTipShow)
+        {
+            DOTween.Kill("httpLongTip");
+            tip.DOFade(1, 0.02f).Play();
+        }
+        tip.gameObject.SetActive(true);
+        isTipShow = true;
+        tip.transform.DOScale(1, 5f).SetId("httpLongTip").Play().OnComplete(()=>{
+            tip.DOFade(0, 2f).Play().OnComplete(()=> {
+                tip.gameObject.SetActive(false);
+                tip.DOFade(1, 0).Play();
+                isTipShow = false;
+            });
         });
     }
 

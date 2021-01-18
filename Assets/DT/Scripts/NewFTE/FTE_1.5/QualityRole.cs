@@ -52,6 +52,10 @@ public class QualityRole : BaseMapRole
                         }
                         else
                         {
+                            if (data.wasteBuffList.Contains(checkBuff))
+                            {
+                                HttpManager.My.ShowTip("<color=green>'"+baseRoleData.baseRoleData.roleName+ "'</color>所需要的口味被顶掉（哈密瓜最多可以附加上两种口味效果）",null, 4);
+                            }
                             // 红
                             signal.material = wrong;
                             //HttpManager.My.ShowTip("输送至"+baseRoleData.baseRoleData.roleName+"的产品未达标！");
