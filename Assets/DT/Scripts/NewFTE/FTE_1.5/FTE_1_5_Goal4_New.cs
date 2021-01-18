@@ -10,7 +10,7 @@ public class FTE_1_5_Goal4_New : BaseGuideStep
     public int costLimit;
     public int timeLimit;
     public int needQuality;
-    public Transform QM;
+    //public Transform QM;
     public GameObject costPanel;
 
     private int currentCost;
@@ -23,11 +23,11 @@ public class FTE_1_5_Goal4_New : BaseGuideStep
         PlayerData.My.ClearAllRoleWarehouse();
         costPanel.GetComponent<CostPanel>().InitTradeCost(currentCost, currentTime,costLimit);
         NewCanvasUI.My.GamePause(false);
-        QM.GetComponent<QualityRole>().ClearWarehouse();
-        QM.GetComponent<QualityRole>().checkQuality = needQuality;
-        QM.GetComponent<QualityRole>().checkBuff = -1;
-        QM.GetComponent<QualityRole>().needCheck = true;
-        QM.GetComponent<QualityRole>().QualityReset();
+        FTE_1_5_Manager.My.qualityStation.GetComponent<QualityRole>().ClearWarehouse();
+        FTE_1_5_Manager.My.qualityStation.GetComponent<QualityRole>().checkQuality = needQuality;
+        FTE_1_5_Manager.My.qualityStation.GetComponent<QualityRole>().checkBuff = -1;
+        FTE_1_5_Manager.My.qualityStation.GetComponent<QualityRole>().needCheck = true;
+        FTE_1_5_Manager.My.qualityStation.GetComponent<QualityRole>().QualityReset();
         SkipButton();
         InvokeRepeating("CheckGoal",0, 0.2f);
         yield return new WaitForSeconds(0.5f);
@@ -60,7 +60,7 @@ public class FTE_1_5_Goal4_New : BaseGuideStep
         PlayerData.My.ClearAllRoleWarehouse();
         currentCost = StageGoal.My.tradeCost;
         currentTime = StageGoal.My.timeCount;
-        QM.GetComponent<QualityRole>().QualityReset();
+        FTE_1_5_Manager.My.qualityStation.GetComponent<QualityRole>().QualityReset();
         costPanel.GetComponent<CostPanel>().InitTradeCost(currentCost, currentTime, costLimit);
         missiondatas.data[0].isFail = false;
         missiondatas.data[0].currentNum = 0;
@@ -88,7 +88,7 @@ public class FTE_1_5_Goal4_New : BaseGuideStep
 
         if (missiondatas.data[0].isFinish == false)
         {
-            missiondatas.data[0].currentNum = QM.GetComponent<BaseMapRole>().warehouse.Count;
+            missiondatas.data[0].currentNum = FTE_1_5_Manager.My.qualityStation.GetComponent<BaseMapRole>().warehouse.Count;
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
                 NewCanvasUI.My.GamePause(false);

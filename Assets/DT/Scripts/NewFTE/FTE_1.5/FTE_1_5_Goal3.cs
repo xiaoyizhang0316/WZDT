@@ -119,7 +119,6 @@ public class FTE_1_5_Goal3 : BaseGuideStep
     {
         CancelInvoke();
         NewCanvasUI.My.GamePause(false);
-        FTE_1_5_Manager.My.isClearGoods=true;
         missiondatas.data[0].isFail = false;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
@@ -129,7 +128,6 @@ public class FTE_1_5_Goal3 : BaseGuideStep
         lastTimeCount = StageGoal.My.timeCount;
         costPanel.GetComponent<CostPanel>().InitCostPanel(lastCost,lastTimeCount, costLimit);
         InvokeRepeating("CheckGoal",0, 0.2f);
-        FTE_1_5_Manager.My.isClearGoods=false;
         NewCanvasUI.My.GameNormal();
     }
 

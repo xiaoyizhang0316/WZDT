@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FTE_1_5_Goal4 : BaseGuideStep
 {
-    public GameObject fruitQT;
+    //public GameObject fruitQT;
     public GameObject statPanel;
     public GameObject tapPanel;
     public GameObject tapPanelChild;
@@ -13,7 +13,7 @@ public class FTE_1_5_Goal4 : BaseGuideStep
     public GameObject box2;
     public override IEnumerator StepStart()
     {
-        PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
+        PlayerData.My.DeleteRole(FTE_1_5_Manager.My.qualityStation.GetComponent<BaseMapRole>().baseRoleData.ID);
         InvokeRepeating("CheckGoal",0, 0.2f);
         SkipButton();
         tapPanel.SetActive(true);

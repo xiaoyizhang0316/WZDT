@@ -10,12 +10,8 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
     public int limitTime;
     public GameObject costPanel;
     public GameObject bornPoint;
-    public GameObject dealer1;
+    //public GameObject dealer1;
     public GameObject place1;
-    public GameObject dealer2;
-    public GameObject place2;
-    public GameObject dealer3;
-    public GameObject place3;
     public Transform tradeMgr;
     public Transform roles;
     private int currentCost;
@@ -29,17 +25,14 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = true;
         NewCanvasUI.My.GamePause(false);
-        dealer1.SetActive(true);
+        FTE_2_5_Manager.My.dealer1.SetActive(true);
         //dealer2.SetActive(true);
         //dealer3.SetActive(true);
-        dealer1.transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        /*dealer1.transform.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
         {
-            dealer1.transform.DOMoveY(0.32f, 1f).Play();
-        });
-        place1.transform.DOMoveY(0f, 1f).Play().OnPause(() =>
-        {
-            dealer1.transform.DOMoveY(0.32f, 1f).Play();
-        });
+            dealer1.transform.DOLocalMoveY(0.32f, 1f).Play();
+        });*/
+        
         //dealer2.transform.DOMoveY(0.32f, 1f).Play();
         //place2.transform.DOMoveY(0f, 1f).Play();
         //dealer3.transform.DOMoveY(0.32f, 1f).Play();
@@ -48,7 +41,12 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         SkipButton();
         StartCoroutine( bornPoint.GetComponent<Building>().BornEnemyForFTE_2_5(-1));
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
-        yield return new WaitForSeconds(0.5f);
+        yield return null;
+        FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.dealer1, 0.32f);
+        place1.transform.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            place1.transform.DOLocalMoveY(0f, 1f).Play();
+        });
     }
     
     void SkipButton()

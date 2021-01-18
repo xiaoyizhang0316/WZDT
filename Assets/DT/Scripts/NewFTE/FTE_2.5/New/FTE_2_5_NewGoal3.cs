@@ -9,8 +9,8 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
     public int costLimit;
     public int limitTime = 0;
     public GameObject costPanel;
-    public GameObject qualityCenter;
-    public GameObject place;
+    //public GameObject qualityCenter;
+   // public GameObject place;
     private int currentCost = 0;
     private int currentTimeCount;
     public override IEnumerator StepStart()
@@ -18,10 +18,10 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
         NewCanvasUI.My.GamePause(false);
-        qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
-        qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
-        qualityCenter.GetComponent<QualityRole>().needCheck = true;
-        qualityCenter.GetComponent<QualityRole>().QualityReset();
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().checkQuality = needQuality;
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().checkBuff = -1;
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().needCheck = true;
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().QualityReset();
         TradeManager.My.ResetAllTrade();
         PlayerData.My.ClearAllRoleWarehouse();
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount, costLimit);
@@ -53,10 +53,10 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        qualityCenter.GetComponent<QualityRole>().needCheck = false;
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().needCheck = false;
         costPanel.GetComponent<CostPanel>().HideAllCost();
         //place.transform.DOMoveY(-8.32f, 0.5f);
-        qualityCenter.transform.DOMoveY(-8f, 0.5f).Play().OnComplete(()=>PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID));
+        FTE_2_5_Manager.My.DownRole(FTE_2_5_Manager.My.qualityStation,-8,()=>PlayerData.My.DeleteRole(FTE_2_5_Manager.My.qualityStation.GetComponent<BaseMapRole>().baseRoleData.ID));
 
         //FTE_2_5_Manager.My.isClearGoods = true;
         PlayerData.My.ClearAllRoleWarehouse();
@@ -101,7 +101,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         
         if (missiondatas.data[0].isFinish == false)
         {
-            missiondatas.data[0].currentNum = qualityCenter.GetComponent<BaseMapRole>().warehouse.Count;
+            missiondatas.data[0].currentNum = FTE_2_5_Manager.My.qualityStation.GetComponent<BaseMapRole>().warehouse.Count;
            
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
@@ -133,7 +133,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         missiondatas.data[0].isFail = false;
         PlayerData.My.ClearAllRoleWarehouse();
         TradeManager.My.ResetAllTrade();
-        qualityCenter.GetComponent<QualityRole>().QualityReset();
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().QualityReset();
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTimeCount,costLimit);

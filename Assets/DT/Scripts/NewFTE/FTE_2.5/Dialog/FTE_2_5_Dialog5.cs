@@ -6,16 +6,16 @@ using UnityEngine;
 public class FTE_2_5_Dialog5 : BaseGuideStep
 {
     public GameObject openCG;
-    public GameObject soft;
-    public GameObject crisp;
-    public GameObject sweet;
+    //public GameObject soft;
+    //public GameObject crisp;
+    //public GameObject sweet;
     public GameObject softPlace;
     public GameObject crispPlace;
     public GameObject sweetPlace;
 
-    public GameObject seed;
-    public GameObject peasant;
-    public GameObject merchant;
+    //public GameObject seed;
+    //public GameObject peasant;
+    //public GameObject merchant;
 
     public GameObject place1;
     public GameObject place2;
@@ -26,62 +26,52 @@ public class FTE_2_5_Dialog5 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         openCG.SetActive(true);
-        soft.GetComponent<BaseMapRole>().encourageLevel = -3;
-        soft.GetComponent<BaseMapRole>().startEncourageLevel = -3;
-        crisp.GetComponent<BaseMapRole>().encourageLevel = -3;
-        crisp.GetComponent<BaseMapRole>().startEncourageLevel = -3;
-        sweet.GetComponent<BaseMapRole>().encourageLevel = -3;
-        sweet.GetComponent<BaseMapRole>().startEncourageLevel = -3;
+        FTE_2_5_Manager.My.softFactory.GetComponent<BaseMapRole>().encourageLevel = -3;
+        FTE_2_5_Manager.My.softFactory.GetComponent<BaseMapRole>().startEncourageLevel = -3;
+        FTE_2_5_Manager.My.crispFactory.GetComponent<BaseMapRole>().encourageLevel = -3;
+        FTE_2_5_Manager.My.crispFactory.GetComponent<BaseMapRole>().startEncourageLevel = -3;
+        FTE_2_5_Manager.My.sweetFactory.GetComponent<BaseMapRole>().encourageLevel = -3;
+        FTE_2_5_Manager.My.sweetFactory.GetComponent<BaseMapRole>().startEncourageLevel = -3;
 
-        sweet.transform.DOMoveY(-8, 1f).Play().OnPause(() =>
+        /*sweet.transform.DOLocalMoveY(-8, 1f).Play().OnPause(() =>
         {
-            sweet.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+            sweet.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
             {
                 sweet.SetActive(false);
             });
         }).OnComplete(() =>
         {
             sweet.SetActive(false);
-        });
+        });*/
         
 
-        sweetPlace.transform.DOMoveY(-8.32f, 1f).Play().OnPause(() =>
-        {
-            sweetPlace.transform.DOMoveY(-8.32f, 1f).Play();
-        });
         
-        soft.transform.DOMoveY(-8, 1f).Play().OnPause(() =>
+        /*soft.transform.DOLocalMoveY(-8, 1f).Play().OnPause(() =>
         {
-            soft.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+            soft.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
             {
                 soft.SetActive(false);
             });
         }).OnComplete(() =>
         {
             soft.SetActive(false);
-        });
+        });*/
         
 
-        softPlace.transform.DOMoveY(-8.32f, 1f).Play().OnPause(() =>
-        {
-            softPlace.transform.DOMoveY(-8.32f, 1f).Play();
-        });
         
-        crisp.transform.DOMoveY(-8, 1f).Play().OnPause(() =>
+        
+        /*crisp.transform.DOLocalMoveY(-8, 1f).Play().OnPause(() =>
         {
-            crisp.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+            crisp.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
             {
                 crisp.SetActive(false);
             });
         }).OnComplete(() =>
         {
             crisp.SetActive(false);
-        });
+        });*/
 
-        crispPlace.transform.DOMoveY(-8.32f, 1f).Play().OnPause(() =>
-        {
-            crispPlace.transform.DOMoveY(-8.32f, 1f).Play();
-        });
+        
         
         foreach (Transform role in roles)
         {
@@ -91,7 +81,23 @@ public class FTE_2_5_Dialog5 : BaseGuideStep
             }
         }
         PlayerData.My.ClearAllRoleWarehouse();
-        yield return new WaitForSeconds(0.5f);
+        yield return null;
+        FTE_2_5_Manager.My.DownRole(FTE_2_5_Manager.My.softFactory, -8, ()=>FTE_2_5_Manager.My.softFactory.SetActive(false));
+        FTE_2_5_Manager.My.DownRole(FTE_2_5_Manager.My.crispFactory, -8, ()=>FTE_2_5_Manager.My.crispFactory.SetActive(false));
+        FTE_2_5_Manager.My.DownRole(FTE_2_5_Manager.My.sweetFactory, -8, ()=>FTE_2_5_Manager.My.sweetFactory.SetActive(false));
+        crispPlace.transform.DOLocalMoveY(-8.32f, 1f).Play().OnPause(() =>
+        {
+            crispPlace.transform.DOLocalMoveY(-8.32f, 1f).Play();
+        });
+        softPlace.transform.DOLocalMoveY(-8.32f, 1f).Play().OnPause(() =>
+        {
+            softPlace.transform.DOLocalMoveY(-8.32f, 1f).Play();
+        });
+        sweetPlace.transform.DOLocalMoveY(-8.32f, 1f).Play().OnPause(() =>
+        {
+            sweetPlace.transform.DOLocalMoveY(-8.32f, 1f).Play();
+        });
+
     }
 
     public override bool ChenkEnd()
@@ -101,34 +107,38 @@ public class FTE_2_5_Dialog5 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        seed.SetActive(true);
-        peasant.SetActive(true);
-        merchant.SetActive(true);
-
-        seed.transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
-        {
-            seed.transform.DOMoveY(0.32f, 1f).Play();
-        });
-        place1.transform.DOMoveY(0f, 1f).Play().OnPause(() =>
-        {
-            place1.transform.DOMoveY(0f, 1f).Play();
-        });
-        peasant.transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
-        {
-            peasant.transform.DOMoveY(0.32f, 1f).Play();
-        });
-        place2.transform.DOMoveY(0f, 1f).Play().OnPause(() =>
-        {
-            place2.transform.DOMoveY(0f, 1f).Play();
-        });
-        merchant.transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
-        {
-            merchant.transform.DOMoveY(0.32f, 1f).Play();
-        });
-        place3.transform.DOMoveY(0f, 1f).Play().OnPause(() =>
-        {
-            place3.transform.DOMoveY(0f, 1f).Play();
-        });
+        
         yield return new WaitForSeconds(0.5f);
+        FTE_2_5_Manager.My.npcSeed.SetActive(true);
+        FTE_2_5_Manager.My.npcPeasant.SetActive(true);
+        FTE_2_5_Manager.My.npcPeasant.SetActive(true);
+
+        /*seed.transform.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            seed.transform.DOLocalMoveY(0.32f, 1f).Play();
+        });*/
+        FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.npcSeed, 0.32f);
+        FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.npcPeasant, 0.32f);
+        FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.npcMerchant, 0.32f);
+        place1.transform.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            place1.transform.DOLocalMoveY(0f, 1f).Play();
+        });
+        /*peasant.transform.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            peasant.transform.DOLocalMoveY(0.32f, 1f).Play();
+        });*/
+        place2.transform.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            place2.transform.DOLocalMoveY(0f, 1f).Play();
+        });
+        /*merchant.transform.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
+        {
+            merchant.transform.DOLocalMoveY(0.32f, 1f).Play();
+        });*/
+        place3.transform.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
+        {
+            place3.transform.DOLocalMoveY(0f, 1f).Play();
+        });
     }
 }

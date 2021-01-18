@@ -8,13 +8,13 @@ using DG.Tweening;
 public class FTE_2_5_Goal2 : BaseGuideStep
 {
     // 0.32 
-    public Transform peasant1;
-    public Transform peasant2;
-    public Transform peasant3;
-    public Transform place1;
-    public Transform place2;
-    public Transform place3;
-    public Transform tradeMgr;
+    //public Transform peasant1;
+    //public Transform peasant2;
+    //public Transform peasant3;
+    //public Transform place1;
+    //public Transform place2;
+    //public Transform place3;
+    //public Transform tradeMgr;
     private int sweetCount = 0;
     private int crispCount = 0;
     private int softCount = 0;
@@ -22,13 +22,13 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     {
         NewCanvasUI.My.GameNormal();
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitPeasantCount = 3;
-        peasant1.gameObject.SetActive(true);
-        peasant2.gameObject.SetActive(true);
-        peasant3.gameObject.SetActive(true);
-        SeedBuildRise();
+        FTE_2_5_Manager.My.taste1.SetActive(true);
+        FTE_2_5_Manager.My.taste2.SetActive(true);
+        FTE_2_5_Manager.My.taste3.SetActive(true);
         SkipButton();
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);
         yield return new WaitForSeconds(0.5f);
+        SeedBuildRise();
     }
     
     void SkipButton()
@@ -82,7 +82,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         if (missiondatas.data[0].isFinish == false)
         {
             //CheckSeed(peasant1, 305);
-            missiondatas.data[0].currentNum = peasant1.GetComponent<BaseMapRole>().warehouse.Count;
+            missiondatas.data[0].currentNum = FTE_2_5_Manager.My.taste1.GetComponent<BaseMapRole>().warehouse.Count;
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
                 missiondatas.data[0].isFinish = true;
@@ -92,7 +92,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         if (missiondatas.data[1].isFinish == false)
         {
             //CheckSeed(peasant2, 304);
-            missiondatas.data[1].currentNum = peasant2.GetComponent<BaseMapRole>().warehouse.Count;
+            missiondatas.data[1].currentNum = FTE_2_5_Manager.My.taste2.GetComponent<BaseMapRole>().warehouse.Count;
             if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
             {
                 missiondatas.data[1].isFinish = true;
@@ -102,7 +102,7 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         if (missiondatas.data[2].isFinish == false)
         {
             //CheckSeed(peasant3, 303);
-            missiondatas.data[2].currentNum = peasant3.GetComponent<BaseMapRole>().warehouse.Count;
+            missiondatas.data[2].currentNum = FTE_2_5_Manager.My.taste3.GetComponent<BaseMapRole>().warehouse.Count;
             if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
             {
                 missiondatas.data[2].isFinish = true;
@@ -143,36 +143,39 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     {
         
             //place1.DOMoveY(0, 1f).Play();
-            peasant1.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            /*peasant1.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
             {
-                peasant1.DOMoveY(0.32f, 1f).Play();
-            });
-            peasant1.GetComponent<QualityRole>().checkBuff = 305;
-            peasant1.GetComponent<QualityRole>().checkQuality = -1;
-            peasant1.GetComponent<QualityRole>().needCheck = true;
-            peasant1.GetComponent<QualityRole>().QualityReset();
+                peasant1.DOLocalMoveY(0.32f, 1f).Play();
+            });*/
+            FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.taste1, 0.32f);
+            FTE_2_5_Manager.My.taste1.GetComponent<QualityRole>().checkBuff = 305;
+            FTE_2_5_Manager.My.taste1.GetComponent<QualityRole>().checkQuality = -1;
+            FTE_2_5_Manager.My.taste1.GetComponent<QualityRole>().needCheck = true;
+            FTE_2_5_Manager.My.taste1.GetComponent<QualityRole>().QualityReset();
         
         
             //place2.DOMoveY(0, 1f).Play();
-            peasant2.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            /*peasant2.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
             {
-                peasant2.DOMoveY(0.32f, 1f).Play();
-            });
-            peasant2.GetComponent<QualityRole>().checkBuff = 304;
-            peasant2.GetComponent<QualityRole>().checkQuality = -1;
-            peasant2.GetComponent<QualityRole>().needCheck = true;
-            peasant2.GetComponent<QualityRole>().QualityReset();
+                peasant2.DOLocalMoveY(0.32f, 1f).Play();
+            });*/
+            FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.taste2, 0.32f);
+            FTE_2_5_Manager.My.taste2.GetComponent<QualityRole>().checkBuff = 304;
+            FTE_2_5_Manager.My.taste2.GetComponent<QualityRole>().checkQuality = -1;
+            FTE_2_5_Manager.My.taste2.GetComponent<QualityRole>().needCheck = true;
+            FTE_2_5_Manager.My.taste2.GetComponent<QualityRole>().QualityReset();
         
         
             //place3.DOMoveY(0, 1f).Play();
-            peasant3.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            /*peasant3.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
             {
-                peasant3.DOMoveY(0.32f, 1f).Play();
-            });
-            peasant3.GetComponent<QualityRole>().checkBuff = 303;
-            peasant3.GetComponent<QualityRole>().checkQuality = -1;
-            peasant3.GetComponent<QualityRole>().needCheck = true;
-            peasant3.GetComponent<QualityRole>().QualityReset();
+                peasant3.DOLocalMoveY(0.32f, 1f).Play();
+            });*/
+            FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.taste3, 0.32f);
+            FTE_2_5_Manager.My.taste3.GetComponent<QualityRole>().checkBuff = 303;
+            FTE_2_5_Manager.My.taste3.GetComponent<QualityRole>().checkQuality = -1;
+            FTE_2_5_Manager.My.taste3.GetComponent<QualityRole>().needCheck = true;
+            FTE_2_5_Manager.My.taste3.GetComponent<QualityRole>().QualityReset();
         
     }
 }
