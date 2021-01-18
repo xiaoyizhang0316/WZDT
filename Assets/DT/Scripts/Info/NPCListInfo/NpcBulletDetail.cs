@@ -38,6 +38,11 @@ public class NpcBulletDetail : MonoBehaviour
             buffs[i].sprite = buffNull;
             buffs[i].GetComponent<BuffText>().buff = null;
         }
+        for (int i = 0; i < 4; i++)
+        {
+
+            buffs[i].transform.GetChild(0).gameObject.SetActive(false);
+        }
         for (int i = 0; i < data.buffList.Count; i++)
         {
             buffs[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + data.buffList[i]);
@@ -48,6 +53,17 @@ public class NpcBulletDetail : MonoBehaviour
         for (int i = data.buffList.Count; i < data.buffMaxCount; i++)
         {
             buffs[i].gameObject.SetActive(true);
+        }
+        for (int i = 0; i < data.wasteBuffList.Count; i++)
+        {
+            if (i + data.buffList.Count < 4)
+            {
+                buffs[i + data.buffList.Count].gameObject.SetActive(true);
+                buffs[i + data.buffList.Count].sprite = Resources.Load<Sprite>("Sprite/Buff/" + data.wasteBuffList[i]);
+                buffs[i + data.buffList.Count].GetComponent<BuffText>().buff = GameDataMgr.My.GetBuffDataByID(data.wasteBuffList[i]);
+                buffs[i + data.buffList.Count].transform.GetChild(0).gameObject.SetActive(true);
+            }
+
         }
     }
 }

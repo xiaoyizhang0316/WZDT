@@ -84,6 +84,10 @@ public class RoleListInfoDealer : BaseRoleListInfo
                     Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.tow;
                     break;
             }
+            if (Pruductgame.GetComponent<ProductSign>().currentProduct.wasteBuffList.Count > 0)
+            {
+                Pruductgame.GetComponent<Image>().color = new Color(1, 0.6f, 0.6f, 1);
+            }
             if (PlayerData.My.client != null)
             {
                 Pruductgame.GetComponentInChildren<Text>().text =  baseMapRole.warehouse[i].RepeatBulletCount.ToString() ;

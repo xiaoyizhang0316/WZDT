@@ -80,6 +80,10 @@ public class RoleListInfoSeed : BaseRoleListInfo
             Pruductgame.GetComponent<ProductSign>().currentProduct =
                 baseMapRole.GetComponent<ProductSeed>().productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i];
             Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.seedSpeed;
+            if (Pruductgame.GetComponent<ProductSign>().currentProduct.wasteBuffList.Count > 0)
+            {
+                Pruductgame.GetComponent<Image>().color = new Color(1,0.6f,0.6f,1);
+            }
             if (PlayerData.My.client != null)
             {
                 Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.GetComponent<ProductSeed>()
