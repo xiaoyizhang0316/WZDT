@@ -50,7 +50,7 @@ public class ProductDetalUI : MonoSingleton<ProductDetalUI>
           this.loadingSpeed.text = loadingSpeed.ToString();
 
     
-              for (int i = 0; i < data.buffMaxCount; i++)
+              for (int i = 0; i < data.buffMaxCount ; i++)
               {
                   buff[i].gameObject.SetActive(true);
               }
