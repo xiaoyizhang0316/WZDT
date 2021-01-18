@@ -143,9 +143,9 @@ public class FTE_2_5_Goal2 : BaseGuideStep
     {
         
             //place1.DOMoveY(0, 1f).Play();
-            peasant1.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            peasant1.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
             {
-                peasant1.DOMoveY(0.32f, 1f).Play();
+                peasant1.DOLocalMoveY(0.32f, 1f).Play();
             });
             peasant1.GetComponent<QualityRole>().checkBuff = 305;
             peasant1.GetComponent<QualityRole>().checkQuality = -1;
@@ -154,9 +154,9 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         
         
             //place2.DOMoveY(0, 1f).Play();
-            peasant2.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            peasant2.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
             {
-                peasant2.DOMoveY(0.32f, 1f).Play();
+                peasant2.DOLocalMoveY(0.32f, 1f).Play();
             });
             peasant2.GetComponent<QualityRole>().checkBuff = 304;
             peasant2.GetComponent<QualityRole>().checkQuality = -1;
@@ -165,9 +165,9 @@ public class FTE_2_5_Goal2 : BaseGuideStep
         
         
             //place3.DOMoveY(0, 1f).Play();
-            peasant3.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+            peasant3.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
             {
-                peasant3.DOMoveY(0.32f, 1f).Play();
+                peasant3.DOLocalMoveY(0.32f, 1f).Play();
             });
             peasant3.GetComponent<QualityRole>().checkBuff = 303;
             peasant3.GetComponent<QualityRole>().checkQuality = -1;

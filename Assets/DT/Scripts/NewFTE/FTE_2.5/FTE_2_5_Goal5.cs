@@ -49,10 +49,22 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
         dealer2.SetActive(true);
         dealer3.SetActive(true);
-        dealer2.transform.DOMoveY(0.32f, 1).Play();
-        place2.transform.DOMoveY(0, 1).Play();
-        dealer3.transform.DOMoveY(0.32f, 1).Play();
-        place3.transform.DOMoveY(0, 1).Play();
+        dealer2.transform.DOLocalMoveY(0.32f, 1).Play().OnPause(() =>
+        {
+            dealer2.transform.DOLocalMoveY(0.32f, 1).Play();
+        });
+        place2.transform.DOLocalMoveY(0, 1).Play().OnPause(() =>
+        {
+            place2.transform.DOLocalMoveY(0, 1).Play();
+        });
+        dealer3.transform.DOLocalMoveY(0.32f, 1).Play().OnPause(() =>
+        {
+            dealer3.transform.DOLocalMoveY(0.32f, 1).Play();
+        });
+        place3.transform.DOLocalMoveY(0, 1).Play().OnPause(() =>
+        {
+            place3.transform.DOLocalMoveY(0, 1).Play();
+        });
         /*bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5(302);
         bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5(301);
         bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5(-1);*/
@@ -104,35 +116,35 @@ public class FTE_2_5_Goal5 : BaseGuideStep
             });
         }*/
         sweet.gameObject.SetActive(true);
-        sweet.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        sweet.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
         {
-            sweet.DOMoveY(0.32f, 1f).Play();
+            sweet.DOLocalMoveY(0.32f, 1f).Play();
         });
-        sweetPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        sweetPlace.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
         {
-            sweetPlace.DOMoveY(0f, 1f).Play();
+            sweetPlace.DOLocalMoveY(0f, 1f).Play();
         });
         crisp.gameObject.SetActive(true);
 
-        crisp.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        crisp.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
         {
-            crisp.DOMoveY(0.32f, 1f).Play();
+            crisp.DOLocalMoveY(0.32f, 1f).Play();
         });
         
-        crispPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        crispPlace.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
         {
-            crispPlace.DOMoveY(0f, 1f).Play();
+            crispPlace.DOLocalMoveY(0f, 1f).Play();
         });
         soft.gameObject.SetActive(true);
 
-        soft.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        soft.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
         {
-            soft.DOMoveY(0.32f, 1f).Play();
+            soft.DOLocalMoveY(0.32f, 1f).Play();
         });
         
-        softPlace.DOMoveY(0f, 1f).Play().OnPause(() =>
+        softPlace.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
         {
-            softPlace.DOMoveY(0f, 1f).Play();
+            softPlace.DOLocalMoveY(0f, 1f).Play();
         });
     }
 

@@ -24,9 +24,9 @@ public class FTE_1_5_Goal3_New : BaseGuideStep
         costPanel.GetComponent<CostPanel>().InitProductCost(currentCost, currentTime, costLimit);
         NewCanvasUI.My.GamePause(false);
         QM.gameObject.SetActive(true);
-        QM.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        QM.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
         {
-            QM.DOMoveY(0.32f, 1f).Play();
+            QM.DOLocalMoveY(0.32f, 1f).Play();
         });
         QM.GetComponent<QualityRole>().checkQuality = needQuality;
         QM.GetComponent<QualityRole>().checkBuff = -1;

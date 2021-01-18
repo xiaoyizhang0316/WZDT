@@ -56,7 +56,7 @@ public class FTE_2_5_NewGoal3 : BaseGuideStep
         qualityCenter.GetComponent<QualityRole>().needCheck = false;
         costPanel.GetComponent<CostPanel>().HideAllCost();
         //place.transform.DOMoveY(-8.32f, 0.5f);
-        qualityCenter.transform.DOMoveY(-8f, 0.5f).Play().OnComplete(()=>PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID));
+        qualityCenter.transform.DOLocalMoveY(-8f, 0.5f).Play().OnComplete(()=>PlayerData.My.DeleteRole(qualityCenter.GetComponent<BaseMapRole>().baseRoleData.ID));
 
         //FTE_2_5_Manager.My.isClearGoods = true;
         PlayerData.My.ClearAllRoleWarehouse();

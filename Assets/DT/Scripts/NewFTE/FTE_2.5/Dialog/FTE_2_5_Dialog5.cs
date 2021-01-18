@@ -33,9 +33,9 @@ public class FTE_2_5_Dialog5 : BaseGuideStep
         sweet.GetComponent<BaseMapRole>().encourageLevel = -3;
         sweet.GetComponent<BaseMapRole>().startEncourageLevel = -3;
 
-        sweet.transform.DOMoveY(-8, 1f).Play().OnPause(() =>
+        sweet.transform.DOLocalMoveY(-8, 1f).Play().OnPause(() =>
         {
-            sweet.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+            sweet.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
             {
                 sweet.SetActive(false);
             });
@@ -45,14 +45,14 @@ public class FTE_2_5_Dialog5 : BaseGuideStep
         });
         
 
-        sweetPlace.transform.DOMoveY(-8.32f, 1f).Play().OnPause(() =>
+        sweetPlace.transform.DOLocalMoveY(-8.32f, 1f).Play().OnPause(() =>
         {
-            sweetPlace.transform.DOMoveY(-8.32f, 1f).Play();
+            sweetPlace.transform.DOLocalMoveY(-8.32f, 1f).Play();
         });
         
-        soft.transform.DOMoveY(-8, 1f).Play().OnPause(() =>
+        soft.transform.DOLocalMoveY(-8, 1f).Play().OnPause(() =>
         {
-            soft.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+            soft.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
             {
                 soft.SetActive(false);
             });
@@ -62,14 +62,14 @@ public class FTE_2_5_Dialog5 : BaseGuideStep
         });
         
 
-        softPlace.transform.DOMoveY(-8.32f, 1f).Play().OnPause(() =>
+        softPlace.transform.DOLocalMoveY(-8.32f, 1f).Play().OnPause(() =>
         {
-            softPlace.transform.DOMoveY(-8.32f, 1f).Play();
+            softPlace.transform.DOLocalMoveY(-8.32f, 1f).Play();
         });
         
-        crisp.transform.DOMoveY(-8, 1f).Play().OnPause(() =>
+        crisp.transform.DOLocalMoveY(-8, 1f).Play().OnPause(() =>
         {
-            crisp.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+            crisp.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
             {
                 crisp.SetActive(false);
             });
@@ -78,9 +78,9 @@ public class FTE_2_5_Dialog5 : BaseGuideStep
             crisp.SetActive(false);
         });
 
-        crispPlace.transform.DOMoveY(-8.32f, 1f).Play().OnPause(() =>
+        crispPlace.transform.DOLocalMoveY(-8.32f, 1f).Play().OnPause(() =>
         {
-            crispPlace.transform.DOMoveY(-8.32f, 1f).Play();
+            crispPlace.transform.DOLocalMoveY(-8.32f, 1f).Play();
         });
         
         foreach (Transform role in roles)
@@ -105,29 +105,29 @@ public class FTE_2_5_Dialog5 : BaseGuideStep
         peasant.SetActive(true);
         merchant.SetActive(true);
 
-        seed.transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        seed.transform.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
         {
-            seed.transform.DOMoveY(0.32f, 1f).Play();
+            seed.transform.DOLocalMoveY(0.32f, 1f).Play();
         });
-        place1.transform.DOMoveY(0f, 1f).Play().OnPause(() =>
+        place1.transform.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
         {
-            place1.transform.DOMoveY(0f, 1f).Play();
+            place1.transform.DOLocalMoveY(0f, 1f).Play();
         });
-        peasant.transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        peasant.transform.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
         {
-            peasant.transform.DOMoveY(0.32f, 1f).Play();
+            peasant.transform.DOLocalMoveY(0.32f, 1f).Play();
         });
-        place2.transform.DOMoveY(0f, 1f).Play().OnPause(() =>
+        place2.transform.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
         {
-            place2.transform.DOMoveY(0f, 1f).Play();
+            place2.transform.DOLocalMoveY(0f, 1f).Play();
         });
-        merchant.transform.DOMoveY(0.32f, 1f).Play().OnPause(() =>
+        merchant.transform.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
         {
-            merchant.transform.DOMoveY(0.32f, 1f).Play();
+            merchant.transform.DOLocalMoveY(0.32f, 1f).Play();
         });
-        place3.transform.DOMoveY(0f, 1f).Play().OnPause(() =>
+        place3.transform.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
         {
-            place3.transform.DOMoveY(0f, 1f).Play();
+            place3.transform.DOLocalMoveY(0f, 1f).Play();
         });
         yield return new WaitForSeconds(0.5f);
     }

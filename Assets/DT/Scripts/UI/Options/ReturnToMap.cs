@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,6 +9,8 @@ public class ReturnToMap : MonoBehaviour
 {
     public Button confirm;
     public Button cancel;
+
+    private static string[] sceneName = {"FTE_0.5", "FTE_1.5", "FTE_2.5"};
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +21,10 @@ public class ReturnToMap : MonoBehaviour
 
     void Confirm()
     {
-        StageGoal.My.CommitLose();
+        if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+        {
+            StageGoal.My.CommitLose();
+        }
         PlayerData.My.Reset();
         SceneManager.LoadScene("Map");
         if (!PlayerData.My.isSOLO)

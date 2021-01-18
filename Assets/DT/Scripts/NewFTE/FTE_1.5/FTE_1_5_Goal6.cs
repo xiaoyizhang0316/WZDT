@@ -28,10 +28,22 @@ public class FTE_1_5_Goal6 : BaseGuideStep
         PlayerData.My.ClearAllRoleWarehouse();
         seed.SetActive(true);
         merchant.SetActive(true);
-        seed.transform.DOMoveY(0.32f, 0.5f).Play();
-        seedPlace.transform.DOMoveY(0, 0.5f).Play();
-        merchant.transform.DOMoveY(0.32f, 0.5f).Play();
-        merchantPlace.transform.DOMoveY(0, 0.5f).Play();
+        seed.transform.DOLocalMoveY(0.32f, 0.5f).Play().OnPause(() =>
+        {
+            seed.transform.DOLocalMoveY(0.32f, 0.5f).Play();
+        });
+        seedPlace.transform.DOLocalMoveY(0, 0.5f).Play().OnPause(() =>
+        {
+            seedPlace.transform.DOLocalMoveY(0, 0.5f).Play();
+        });
+        merchant.transform.DOLocalMoveY(0.32f, 0.5f).Play().OnPause(() =>
+        {
+            merchant.transform.DOLocalMoveY(0.32f, 0.5f).Play();
+        });
+        merchantPlace.transform.DOLocalMoveY(0, 0.5f).Play().OnPause(() =>
+        {
+            merchantPlace.transform.DOLocalMoveY(0, 0.5f).Play();
+        });
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;

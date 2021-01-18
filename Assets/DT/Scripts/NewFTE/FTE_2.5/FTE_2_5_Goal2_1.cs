@@ -68,15 +68,15 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
                 PlayerData.My.DeleteRole(child.GetComponent<BaseMapRole>().baseRoleData.ID);
             }
         }
-        peasant1.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+        peasant1.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
         {
             PlayerData.My.DeleteRole(peasant1.GetComponent<BaseMapRole>().baseRoleData.ID);
         });
-        peasant2.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+        peasant2.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
         {
             PlayerData.My.DeleteRole(peasant2.GetComponent<BaseMapRole>().baseRoleData.ID);
         });
-        peasant3.transform.DOMoveY(-8, 1f).Play().OnComplete(() =>
+        peasant3.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
         {
             PlayerData.My.DeleteRole(peasant3.GetComponent<BaseMapRole>().baseRoleData.ID);
         });
