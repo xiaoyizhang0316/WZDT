@@ -50,9 +50,10 @@ public class ProductDetalUI : MonoSingleton<ProductDetalUI>
           this.loadingSpeed.text = loadingSpeed.ToString();
 
     
-              for (int i = 0; i < data.buffMaxCount; i++)
+              for (int i = 0; i < 4; i++)
               {
                   buff[i].gameObject.SetActive(true);
+                  buff[i].transform.GetChild(0).gameObject.SetActive(false);
               }
       
 
@@ -64,8 +65,22 @@ public class ProductDetalUI : MonoSingleton<ProductDetalUI>
           }
           for (int i = 0; i <data.buffList.Count; i++)
           {
+
               buff[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" +data.buffList[i]); 
               buff[i].GetComponent<ShowBuffText>().currentbuffData =     GameDataMgr.My.GetBuffDataByID(data.buffList[i]);
+          }
+
+          for (int i = 0; i <this.data.wasteBuffList.Count; i++)
+          {
+              if (i + this.data.buffList.Count > 4)
+              {
+                  buff[i+this.data.buffList.Count].sprite =  Resources.Load<Sprite>("Sprite/Buff/" +data.wasteBuffList[i]); 
+                  buff[i].GetComponent<ShowBuffText>().currentbuffData =   GameDataMgr.My.GetBuffDataByID(data.wasteBuffList[i]);
+                  buff[i].transform.GetChild(0).gameObject.SetActive(true);
+
+
+              }
+
           }
     }
 }

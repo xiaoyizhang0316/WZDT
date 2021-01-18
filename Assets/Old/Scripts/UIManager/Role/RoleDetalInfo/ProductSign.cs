@@ -41,6 +41,6 @@ public class ProductSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
     {
       ProductDetalUI.My.panel.SetActive(true);
       ProductDetalUI.My.InitUI( currentProduct,  transform.GetComponent<Image>().sprite ,currentProduct.damage,currentProduct.loadingSpeed);
-       ProductDetalUI.My.panel.transform.position = gameObject.transform.position;
+     //  ProductDetalUI.My.panel.transform.position = gameObject.transform.position;
     }
 }
