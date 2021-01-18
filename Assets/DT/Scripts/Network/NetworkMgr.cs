@@ -354,7 +354,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("playerID", playerID);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.ReConnUrl, (www) => {
+        StartCoroutine(HttpManager.My.HttpSend(Url.NewReConnUrl, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
             {
