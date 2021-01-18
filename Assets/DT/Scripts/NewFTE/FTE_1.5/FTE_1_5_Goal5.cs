@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class FTE_1_5_Goal5 : BaseGuideStep
 {
-    public GameObject fruitQT;
-    public GameObject place;
+    //public GameObject fruitQT;
+    //public GameObject place;
     private int currentIncome = 0;
     private int currentCost = 0;
     public GameObject costImage;

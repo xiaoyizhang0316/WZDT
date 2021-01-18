@@ -12,9 +12,9 @@ public class FTE_1_5_Goal6 : BaseGuideStep
     private int profit = 0;
     private int income=0;
 
-    public GameObject seed;
+   // public GameObject seed;
     public GameObject seedPlace;
-    public GameObject merchant;
+   // public GameObject merchant;
     public GameObject merchantPlace;
     public int limitTime;
     public GameObject costPanel;
@@ -26,9 +26,10 @@ public class FTE_1_5_Goal6 : BaseGuideStep
         NewCanvasUI.My.GamePause(false);
         TradeManager.My.ResetAllTrade();
         PlayerData.My.ClearAllRoleWarehouse();
-        seed.SetActive(true);
-        merchant.SetActive(true);
-        seed.transform.DOLocalMoveY(0.32f, 0.5f).Play().OnPause(() =>
+        FTE_1_5_Manager.My.npcSeed.SetActive(true);
+        FTE_1_5_Manager.My.npcPeasant.SetActive(true);
+        
+        /*seed.transform.DOLocalMoveY(0.32f, 0.5f).Play().OnPause(() =>
         {
             seed.transform.DOLocalMoveY(0.32f, 0.5f).Play();
         });
@@ -43,14 +44,18 @@ public class FTE_1_5_Goal6 : BaseGuideStep
         merchantPlace.transform.DOLocalMoveY(0, 0.5f).Play().OnPause(() =>
         {
             merchantPlace.transform.DOLocalMoveY(0, 0.5f).Play();
-        });
+        });*/
         currentIncome = StageGoal.My.totalIncome;
         currentCost = StageGoal.My.totalCost;
         currentTimeCount = StageGoal.My.timeCount;
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount, 0);
         SkipButton();
         InvokeRepeating("CheckGoal",0, 0.2f);
-        yield return new WaitForSeconds(0.5f);
+        yield return null;
+        FTE_1_5_Manager.My.UpRole(FTE_1_5_Manager.My.npcSeed, 0.32f);
+        FTE_1_5_Manager.My.UpRole(FTE_1_5_Manager.My.npcPeasant, 0.32f);
+        FTE_1_5_Manager.My.UpRole(seedPlace);
+        FTE_1_5_Manager.My.UpRole(merchantPlace);
     }
 
     void SkipButton()
@@ -116,7 +121,6 @@ public class FTE_1_5_Goal6 : BaseGuideStep
         CancelInvoke();
         NewCanvasUI.My.GamePause(false);
         //StageGoal.My.killNumber = 0;
-        FTE_1_5_Manager.My.isClearGoods=true;
         missiondatas.data[0].isFail = false;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
@@ -127,7 +131,6 @@ public class FTE_1_5_Goal6 : BaseGuideStep
         currentTimeCount = StageGoal.My.timeCount;
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost, currentTimeCount ,0);
         InvokeRepeating("CheckGoal",0, 0.2f);
-        FTE_1_5_Manager.My.isClearGoods=false;
         NewCanvasUI.My.GameNormal();
     }
 }

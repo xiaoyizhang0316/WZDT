@@ -8,8 +8,8 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
     public int needQuality;
     public int costLimit;
     public int limitTime = 40;
-    public GameObject qualityCenter;
-    public GameObject place;
+    //public GameObject qualityCenter;
+    //public GameObject place;
     public GameObject costPanel;
     public GameObject openCG;
 
@@ -26,21 +26,22 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         NewCanvasUI.My.GamePause(false);
         currentTime = StageGoal.My.timeCount;
         currentCost = StageGoal.My.totalCost;
-        qualityCenter.SetActive(true);
-        qualityCenter.transform.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
+        FTE_2_5_Manager.My.qualityStation.SetActive(true);
+        /*qualityCenter.transform.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
         {
             qualityCenter.transform.DOLocalMoveY(0.32f, 1f).Play();
-        });
-        qualityCenter.GetComponent<QualityRole>().checkQuality = needQuality;
-        qualityCenter.GetComponent<QualityRole>().checkBuff = -1;
-        qualityCenter.GetComponent<QualityRole>().needCheck = true;
-        qualityCenter.GetComponent<QualityRole>().QualityReset();
+        });*/
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().checkQuality = needQuality;
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().checkBuff = -1;
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().needCheck = true;
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().QualityReset();
         //place.transform.DOMoveY(0f, 1f);
         InvokeRepeating("CheckGoal", 0.02f, 0.2f);
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTime, 0);
         isEnd = false;
         SkipButton();
         yield return new WaitForSeconds(0.5f);
+        FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.qualityStation, 0.32f);
     }
     
     void SkipButton()
@@ -63,7 +64,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        qualityCenter.GetComponent<QualityRole>().needCheck = false;
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().needCheck = false;
         costPanel.GetComponent<CostPanel>().HideAllCost();
         //FTE_2_5_Manager.My.isClearGoods = true;
         TradeManager.My.ResetAllTrade();
@@ -91,7 +92,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         costPanel.GetComponent<CostPanel>().InitCostPanel(currentCost,currentTime, 0);
         PlayerData.My.ClearAllRoleWarehouse();
         TradeManager.My.ResetAllTrade();
-        qualityCenter.GetComponent<QualityRole>().QualityReset();
+        FTE_2_5_Manager.My.qualityStation.GetComponent<QualityRole>().QualityReset();
         missiondatas.data[0].isFail = false;
         missiondatas.data[0].currentNum = 0;
         
@@ -127,7 +128,7 @@ public class FTE_2_5_NewGoal1 : BaseGuideStep
         }*/
         if (missiondatas.data[0].isFinish == false)
         {
-            missiondatas.data[0].currentNum = qualityCenter.GetComponent<BaseMapRole>().warehouse.Count;
+            missiondatas.data[0].currentNum = FTE_2_5_Manager.My.qualityStation.GetComponent<BaseMapRole>().warehouse.Count;
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
                 MissionData missionData = new MissionData();

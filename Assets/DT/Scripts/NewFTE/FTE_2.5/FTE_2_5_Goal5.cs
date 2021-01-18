@@ -11,17 +11,17 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     public GameObject bornPoint2;
     public GameObject bornPoint3;
 
-    public GameObject dealer2;
-    public GameObject dealer3;
+    //public GameObject dealer2;
+    //public GameObject dealer3;
     public GameObject place2;
     public GameObject place3;
     
 
     /*public List<GameObject> factorys;
     public List<GameObject> places;*/
-    public Transform soft;
-    public Transform crisp;
-    public Transform sweet;
+    //public Transform soft;
+    //public Transform crisp;
+    //public Transform sweet;
     public Transform softPlace;
     public Transform crispPlace;
     public Transform sweetPlace;
@@ -34,7 +34,6 @@ public class FTE_2_5_Goal5 : BaseGuideStep
     {
         //FTE_2_5_Manager.My.isClearGoods = false;
         NewCanvasUI.My.GamePause(false);
-        FactoryUp();
         StageGoal.My.playerSatisfy = 0;
         StageGoal.My.playerSatisfyText.text = "0";
         StageGoal.My.GetSatisfy(0);
@@ -47,24 +46,9 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitPeasantCount = 2;
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitMerchantCount = 2;
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
-        dealer2.SetActive(true);
-        dealer3.SetActive(true);
-        dealer2.transform.DOLocalMoveY(0.32f, 1).Play().OnPause(() =>
-        {
-            dealer2.transform.DOLocalMoveY(0.32f, 1).Play();
-        });
-        place2.transform.DOLocalMoveY(0, 1).Play().OnPause(() =>
-        {
-            place2.transform.DOLocalMoveY(0, 1).Play();
-        });
-        dealer3.transform.DOLocalMoveY(0.32f, 1).Play().OnPause(() =>
-        {
-            dealer3.transform.DOLocalMoveY(0.32f, 1).Play();
-        });
-        place3.transform.DOLocalMoveY(0, 1).Play().OnPause(() =>
-        {
-            place3.transform.DOLocalMoveY(0, 1).Play();
-        });
+        FTE_2_5_Manager.My.dealer2.SetActive(true);
+        FTE_2_5_Manager.My.dealer2.SetActive(true);
+        
         /*bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5(302);
         bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5(301);
         bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5(-1);*/
@@ -72,10 +56,22 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         BornSale();
         BornNoLike();
         SkipButton();
-        InvokeRepeating("CheckReset", 3, 0.5f);
         //InvokeRepeating("CheckGoal", 2f, 0.5f);
+        yield return null;
+        FactoryUp();
+        InvokeRepeating("CheckReset", 3, 0.5f);
         InvokeRepeating("CheckBuffOut", 3, 20);
-        yield return new WaitForSeconds(0.5f);
+        FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.dealer2, 0.32f);
+        place2.transform.DOLocalMoveY(0, 1).Play().OnPause(() =>
+        {
+            place2.transform.DOLocalMoveY(0, 1).Play();
+        });
+        FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.dealer3, 0.32f);
+
+        place3.transform.DOLocalMoveY(0, 1).Play().OnPause(() =>
+        {
+            place3.transform.DOLocalMoveY(0, 1).Play();
+        });
     }
     void SkipButton()
     {
@@ -115,32 +111,23 @@ public class FTE_2_5_Goal5 : BaseGuideStep
                 places[i].transform.DOMoveY(0, 1).Play();
             });
         }*/
-        sweet.gameObject.SetActive(true);
-        sweet.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
-        {
-            sweet.DOLocalMoveY(0.32f, 1f).Play();
-        });
+        FTE_2_5_Manager.My.sweetFactory.SetActive(true);
+        FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.sweetFactory, 0.32f);
         sweetPlace.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
         {
             sweetPlace.DOLocalMoveY(0f, 1f).Play();
         });
-        crisp.gameObject.SetActive(true);
+        FTE_2_5_Manager.My.crispFactory.SetActive(true);
 
-        crisp.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
-        {
-            crisp.DOLocalMoveY(0.32f, 1f).Play();
-        });
+        FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.crispFactory, 0.32f);
         
         crispPlace.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
         {
             crispPlace.DOLocalMoveY(0f, 1f).Play();
         });
-        soft.gameObject.SetActive(true);
+        FTE_2_5_Manager.My.softFactory.SetActive(true);
 
-        soft.DOLocalMoveY(0.32f, 1f).Play().OnPause(() =>
-        {
-            soft.DOLocalMoveY(0.32f, 1f).Play();
-        });
+        FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.softFactory, 0.32f);
         
         softPlace.DOLocalMoveY(0f, 1f).Play().OnPause(() =>
         {

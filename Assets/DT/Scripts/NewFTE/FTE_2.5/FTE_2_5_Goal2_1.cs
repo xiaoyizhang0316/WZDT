@@ -8,9 +8,9 @@ using DG.Tweening;
 public class FTE_2_5_Goal2_1 : BaseGuideStep
 {
     // 0.32 
-    public Transform peasant1;
-    public Transform peasant2;
-    public Transform peasant3;
+    //public Transform peasant1;
+    //public Transform peasant2;
+    //public Transform peasant3;
     private int sweetCount = 0;
     private int crispCount = 0;
     private int softCount = 0;
@@ -25,12 +25,12 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
         TradeManager.My.ResetAllTrade();
        // FTE_2_5_Manager.My.isClearGoods = false; 
         NewCanvasUI.My.GameNormal();
-        peasant1.GetComponent<QualityRole>().QualityReset();
-        peasant2.GetComponent<QualityRole>().QualityReset();
-        peasant3.GetComponent<QualityRole>().QualityReset();
+        FTE_2_5_Manager.My.taste1.GetComponent<QualityRole>().QualityReset();
+        FTE_2_5_Manager.My.taste2.GetComponent<QualityRole>().QualityReset();
+        FTE_2_5_Manager.My.taste3.GetComponent<QualityRole>().QualityReset();
         SkipButton();
         InvokeRepeating("CheckGoal", 0.01f, 0.1f);
-        yield return new WaitForSeconds(0.5f);
+        yield return null;
     }
     
     void SkipButton()
@@ -68,19 +68,20 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
                 PlayerData.My.DeleteRole(child.GetComponent<BaseMapRole>().baseRoleData.ID);
             }
         }
-        peasant1.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
-        {
-            PlayerData.My.DeleteRole(peasant1.GetComponent<BaseMapRole>().baseRoleData.ID);
-        });
-        peasant2.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
-        {
-            PlayerData.My.DeleteRole(peasant2.GetComponent<BaseMapRole>().baseRoleData.ID);
-        });
-        peasant3.transform.DOLocalMoveY(-8, 1f).Play().OnComplete(() =>
-        {
-            PlayerData.My.DeleteRole(peasant3.GetComponent<BaseMapRole>().baseRoleData.ID);
-        });
+        
         yield return new WaitForSeconds(2f);
+        FTE_2_5_Manager.My.DownRole(FTE_2_5_Manager.My.taste1, -8, () =>
+        {
+            PlayerData.My.DeleteRole(FTE_2_5_Manager.My.taste1.GetComponent<BaseMapRole>().baseRoleData.ID);
+        });
+        FTE_2_5_Manager.My.DownRole(FTE_2_5_Manager.My.taste2, -8, () =>
+        {
+            PlayerData.My.DeleteRole(FTE_2_5_Manager.My.taste2.GetComponent<BaseMapRole>().baseRoleData.ID);
+        });
+        FTE_2_5_Manager.My.DownRole(FTE_2_5_Manager.My.taste3, -8, () =>
+        {
+            PlayerData.My.DeleteRole(FTE_2_5_Manager.My.taste3.GetComponent<BaseMapRole>().baseRoleData.ID);
+        });
     }
 
     public override bool ChenkEnd()
@@ -92,7 +93,7 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
     {
         if (missiondatas.data[0].isFinish == false)
         {
-            CheckSeed(peasant1, 305);
+            CheckSeed(FTE_2_5_Manager.My.taste1.transform, 305);
             missiondatas.data[0].currentNum = sweetCount;
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
@@ -102,7 +103,7 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
         
         if (missiondatas.data[1].isFinish == false)
         {
-            CheckSeed(peasant2, 304);
+            CheckSeed(FTE_2_5_Manager.My.taste2.transform, 304);
             missiondatas.data[1].currentNum = crispCount;
             if (missiondatas.data[1].currentNum >= missiondatas.data[1].maxNum)
             {
@@ -112,7 +113,7 @@ public class FTE_2_5_Goal2_1 : BaseGuideStep
         
         if (missiondatas.data[2].isFinish == false)
         {
-            CheckSeed(peasant3, 303);
+            CheckSeed(FTE_2_5_Manager.My.taste3.transform, 303);
             missiondatas.data[2].currentNum = softCount;
             if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
             {
