@@ -30,9 +30,9 @@ public class OptionsPanel : MonoSingleton<OptionsPanel>
         soundSlider.onValueChanged.AddListener((float value) => OnSliderValueChanged(value, MusicType.Sound));
 
         returnToMap.onClick.AddListener(ShowReturn);
-        audioMixer.SetFloat("BackGroundVolume", PlayerPrefs.GetInt("BackGroundVolume"));
+        audioMixer.SetFloat("BackGroundVolume", -80);
         musicSlider.value = PlayerPrefs.GetInt("BackGroundVolume");
-        audioMixer.SetFloat("SoundEffectVolume", PlayerPrefs.GetInt("SoundEffectVolume"));
+        audioMixer.SetFloat("SoundEffectVolume", -80);
         soundSlider.value = PlayerPrefs.GetInt("SoundEffectVolume");
         close.onClick.AddListener(Close);
     }
