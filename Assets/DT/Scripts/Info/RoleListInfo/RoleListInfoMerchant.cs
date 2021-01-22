@@ -87,6 +87,10 @@ public class RoleListInfoMerchant : BaseRoleListInfo
                     break;
 
             }
+            if (Pruductgame.GetComponent<ProductSign>().currentProduct.wasteBuffList.Count > 0)
+            {
+                Pruductgame.GetComponent<Image>().color = new Color(1, 0.6f, 0.6f, 1);
+            }
         
             if (PlayerData.My.client != null)
             {

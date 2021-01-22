@@ -72,7 +72,16 @@ public class VideoSign : MonoBehaviour
     bool CheckPanel()
     {
         if (SceneManager.GetActiveScene().name == "FTE_0.5") {
-            return false;
+            if (OptionsPanel.My.transform.GetChild(0).gameObject.activeInHierarchy)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+
+            }
+
         }
         if (NewCanvasUI.My.Panel_NPC.transform.Find("InfoList").gameObject.activeInHierarchy)
         {

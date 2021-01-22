@@ -20,6 +20,7 @@ public class ProductData
         buffList =new List<int>() ;
         wasteBuffList = new List<int>();
         buffList.AddRange(data.buffList);
+        wasteBuffList.AddRange(data.wasteBuffList);
         buffMaxCount = data.buffMaxCount;
     }
     public ProductData( SendProductData data)
@@ -63,32 +64,16 @@ public class ProductData
     public int RepeatBulletCount;
     public void AddBuff(int buffId)
     {
-        if (buffList.Count >= buffMaxCount)
+        if (!buffList.Contains(buffId))
         {
-            wasteBuffList.Add(buffId);
-            return;
-        }
-        else
-        {
-            if(!buffList.Contains(buffId))
+            if (buffList.Count >= buffMaxCount)
             {
-                //BuffData data = GameDataMgr.My.GetBuffDataByID(buffId);
-                //if(data.bulletBuffType == BulletBuffType.Element)
-                //{
-                //    for (int i = 0; i < buffList.Count; i++)
-                //    {
-                //        BuffData bData = GameDataMgr.My.GetBuffDataByID(buffList[i]);
-                //        if (bData.bulletBuffType == BulletBuffType.Element)
-                //        {
-                //            buffList.RemoveAt(i);
-                //        }
-                //    }
-                //}
-                buffList.Add(buffId);
+                wasteBuffList.Add(buffId);
+                return;
             }
             else
             {
-                wasteBuffList.Add(buffId);
+                buffList.Add(buffId);
             }
         }
     }

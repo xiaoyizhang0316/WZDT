@@ -13,6 +13,8 @@ public class RoleInfoDealer : BaseRoleInfoAdd
 
     public Text efficiency;
 
+    public Text text_Range;
+
     public Text Range;
 
     public Text tradCost;
@@ -22,6 +24,8 @@ public class RoleInfoDealer : BaseRoleInfoAdd
     public Text technology;
 
     public GameObject efficiencyBar;
+
+    public GameObject rangeBar;
 
     public Transform buffTf;
     // Start is called before the first frame update
@@ -36,12 +40,12 @@ public class RoleInfoDealer : BaseRoleInfoAdd
     {
         fireTime.text = (CreatRoleManager.My.finalEfficiency * -0.01f + 1.5f  ).ToString("F2") +"s";
         efficiency.text = CreatRoleManager.My.finalEfficiency.ToString();
-        Range.text = (CreatRoleManager.My.finalRange ).ToString() ;
+        Range.text = (CreatRoleManager.My.finalRange / 14.5f).ToString("F2") ;
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();
         risk .text =  CreatRoleManager.My.finalRiskResistance.ToString();
         montyCost.text =  CreatRoleManager.My.finalCost.ToString();
         technology.text = CreatRoleManager.My.finalTechAdd.ToString();
-
+        text_Range.text = (CreatRoleManager.My.finalRange).ToString();
     }
 
     public override void UpdateBar()
@@ -49,6 +53,9 @@ public class RoleInfoDealer : BaseRoleInfoAdd
         efficiencyBar.GetComponent<RectTransform>().DOSizeDelta(
             new Vector2(CreatRoleManager.My.finalEfficiency / 120f * 150f,
                 efficiencyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
+        rangeBar.GetComponent<RectTransform>().DOSizeDelta(
+           new Vector2(CreatRoleManager.My.finalRange / 120f * 150f,
+               rangeBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
     }
 
     public override void UpdateBuff()
