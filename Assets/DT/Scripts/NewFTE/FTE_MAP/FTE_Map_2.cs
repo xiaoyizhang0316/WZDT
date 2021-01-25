@@ -15,7 +15,7 @@ public class FTE_Map_2 : BaseGuideStep
         yield return new WaitForSeconds(0.5f);
         hand.SetActive(true);
         ShowInfos();
-        NetworkMgr.My.UpdateUnlockStatus("1_1_0_0_0_0_0_0_0");
+        //NetworkMgr.My.UpdateUnlockStatus("1_1_0_0_0_0_0_0_0");
     }
 
     public override bool ChenkEnd()

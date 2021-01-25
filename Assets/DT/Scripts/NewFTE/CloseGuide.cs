@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 public class CloseGuide : MonoBehaviour
 {
     // Start is called before the first frame update
+    private  string[] scenes = {"FTE_0.5", "FTE_1.5", "FTE_2.5"};
     void Awake()
     {
         GuideManager.My.guideClose = this;
@@ -22,7 +24,7 @@ public class CloseGuide : MonoBehaviour
             
         });
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName != "FTE_0-1" && sceneName != "FTE_0-2")
+        if (!scenes.Contains(sceneName))
         {
 
             if (PlayerPrefs.GetInt("isUseGuide") == 0)
@@ -31,7 +33,15 @@ public class CloseGuide : MonoBehaviour
             }
             else 
             {
-                gameObject.SetActive(true);
+                if (float.Parse(sceneName.Split('_')[1]) <=
+                    float.Parse(NetworkMgr.My.playerDatas.fte))
+                {
+                    gameObject.SetActive(true);
+                }
+                else
+                {
+                    gameObject.SetActive(false);
+                }
                 //gameObject.SetActive(NetworkMgr.My.levelProgressList.Count >= int.Parse(sceneName.Split('_')[1]));
                 //if (int.Parse(sceneName.Split('_')[1]) <= 4)
                 //{
