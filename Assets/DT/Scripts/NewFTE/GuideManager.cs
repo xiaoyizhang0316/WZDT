@@ -115,7 +115,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         if (currentGuideIndex >= baseGuideSteps.Count)
         {
             CloseFTE();
-            if (!SceneManager.GetActiveScene().name.Contains("."))
+            if (SceneManager.GetActiveScene().name.Contains("_")&& !SceneManager.GetActiveScene().name.Contains("."))
             {
                 NetworkMgr.My.UpdatePlayerFTE(SceneManager.GetActiveScene().name.Split('_')[1]);
             }
