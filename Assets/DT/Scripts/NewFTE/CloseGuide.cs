@@ -31,11 +31,12 @@ public class CloseGuide : MonoBehaviour
             }
             else 
             {
-                gameObject.SetActive(NetworkMgr.My.levelProgressList.Count >= int.Parse(sceneName.Split('_')[1]));
-                if (int.Parse(sceneName.Split('_')[1]) <= 4)
-                {
-                    gameObject.SetActive(AnsweringPanel.My.isComplete);
-                }
+                gameObject.SetActive(true);
+                //gameObject.SetActive(NetworkMgr.My.levelProgressList.Count >= int.Parse(sceneName.Split('_')[1]));
+                //if (int.Parse(sceneName.Split('_')[1]) <= 4)
+                //{
+                //    gameObject.SetActive(AnsweringPanel.My.isComplete);
+                //}
             }
         }
 
