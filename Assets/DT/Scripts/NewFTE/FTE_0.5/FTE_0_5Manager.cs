@@ -35,6 +35,7 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
     public int clearWarehouse = 0;
     public void Update()
     {
+        
         if (StageGoal.My.playerGold <= 10000)
         {
             StageGoal.My.playerGold = 1000000;
@@ -60,8 +61,6 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
 
     public void DownRole(GameObject role)
     {
-       
-
         role.transform.DOLocalMoveY(-5,1).Play().OnComplete(() =>
         {
             role.SetActive(false);

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
-{ 
+{
     public GameObject seed;
     public GameObject peasant;
     public GameObject merchant;
@@ -58,22 +58,20 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     public EncourageLevel encourageLevel;
 
     public GameObject emptyEquip;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         SetDependency();
-        close.onClick.AddListener(() =>
-        {
-            gameObject.SetActive(false);
-        });
+        close.onClick.AddListener(() => { gameObject.SetActive(false); });
         delete.onClick.AddListener(() =>
         {
             gameObject.SetActive(false);
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要删除" + currentRole.baseRoleData.roleName + "吗？";
-          
-            DeleteUIManager.My.Init(str, () => {
+
+            DeleteUIManager.My.Init(str, () =>
+            {
                 PlayerData.My.DeleteRole(currentRole.ID);
                 if (!PlayerData.My.isSOLO)
                 {
@@ -110,12 +108,13 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                 str = "确定要将仓库中的产品低价处理吗?";
             }
 
-            DeleteUIManager.My.Init(str, () => {
+            DeleteUIManager.My.Init(str, () =>
+            {
                 if (!PlayerData.My.isSOLO)
                 {
                     string str1 = "ClearWarehouse|";
                     str1 += currentRole.ID.ToString();
-           
+
 
                     if (PlayerData.My.isServer)
                     {
@@ -126,21 +125,28 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                         PlayerData.My.client.SendToServerMsg(str1);
                     }
                 }
-                if (currentRole.baseRoleData.roleType == GameEnum.RoleType.Peasant &&
-                    FTE_0_5Manager.My.clearWarehouse ==1)
+
+                if (SceneManager.GetActiveScene().name.Equals("FTE_0.5"))
                 {
-                    FTE_0_5Manager.My.clearWarehouse = 2;
+                    if (currentRole.baseRoleData.roleType == GameEnum.RoleType.Peasant &&
+                        FTE_0_5Manager.My.clearWarehouse == 1)
+                    {
+                        FTE_0_5Manager.My.clearWarehouse = 2;
+                    }
                 }
+
                 PlayerData.My.GetMapRoleById(currentRole.ID).ClearWarehouse();
                 ReInit(currentRole);
             });
         });
-        sellRole.onClick.AddListener(() => {
+        sellRole.onClick.AddListener(() =>
+        {
             gameObject.SetActive(false);
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要出售" + currentRole.baseRoleData.roleName + "吗？";
 
-            DeleteUIManager.My.Init(str, () => {
+            DeleteUIManager.My.Init(str, () =>
+            {
                 PlayerData.My.SellRole(currentRole.ID);
                 if (!PlayerData.My.isSOLO)
                 {
@@ -160,7 +166,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         buffcontent.SetActive(false);
     }
 
-    List<string> sceneName = new List<string> { "FTE_1", "FTE_0-1", "FTE_0-2" };
+    List<string> sceneName = new List<string> {"FTE_1", "FTE_0-1", "FTE_0-2"};
 
     private float interval = 1f;
 
@@ -186,6 +192,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             {
                 emptyEquip.SetActive(false);
             }
+
             interval = 0f;
         }
     }
@@ -195,36 +202,40 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         delete = transform.Find("Delete").GetComponent<Button>();
     }
 
-    public void Init(Role role )
-    {     
+    public void Init(Role role)
+    {
         name.text = role.baseRoleData.roleName;
         roleName = role.baseRoleData.roleName;
-        roleImg.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + role.baseRoleData.roleType.ToString()+role.baseRoleData.level.ToString());
+        roleImg.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + role.baseRoleData.roleType.ToString() +
+                                                role.baseRoleData.level.ToString());
         roleImg.SetNativeSize();
         skillDesc.text = PlayerData.My.GetMapRoleById(role.ID).transform.GetComponent<BaseSkill>().skillDesc;
         encourageLevel.Init(PlayerData.My.GetMapRoleById(role.ID));
-        currentRole = role; 
+        currentRole = role;
         seed.SetActive(false);
         peasant.SetActive(false);
         merchant.SetActive(false);
         dealer.SetActive(false);
-        nextLevel = role.baseRoleData.level+1;
+        nextLevel = role.baseRoleData.level + 1;
         currentLevel = role.baseRoleData.level;
         if (GetComponentInChildren<UpdateRole>())
         {
             GetComponentInChildren<UpdateRole>().Init();
-
         }
+
         sellRole.gameObject.SetActive(false);
         if (PlayerData.My.yeWuXiTong[5] && role.baseRoleData.level >= 3)
         {
             sellRole.gameObject.SetActive(true);
         }
+
         if (PlayerData.My.guanJianZiYuanNengLi[5])
         {
-            clearWarehouse.GetComponentInChildren<Text>().text = "清仓(" + PlayerData.My.GetMapRoleById(role.ID).CountWarehouseIncome() + ")";
+            clearWarehouse.GetComponentInChildren<Text>().text =
+                "清仓(" + PlayerData.My.GetMapRoleById(role.ID).CountWarehouseIncome() + ")";
             clearWarehouse.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Talent/Warehouse");
         }
+
         ReInit(role);
         if (currentLevel >= StageGoal.My.maxRoleLevel)
         {
@@ -236,6 +247,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             update.interactable = true;
             hammer.interactable = true;
         }
+
         InitBuff();
         DataUploadManager.My.AddData(DataEnum.角色_查看自己属性);
         switch (role.baseRoleData.roleType)
@@ -259,35 +271,38 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public void InitBuff()
     {
-        BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(currentRole.ID);
-        
-        for (int i = 0; i <roleBuff.Count; i++)
+        BaseMapRole baseMapRole = PlayerData.My.GetMapRoleById(currentRole.ID);
+
+        for (int i = 0; i < roleBuff.Count; i++)
         {
             roleBuff[i].sprite = buffNull;
             roleBuff[i].GetComponent<ShowBuffText>().currentbuffData = null;
         }
-        for (int i = 0; i <baseMapRole.GetEquipBuffList().Count; i++)
+
+        for (int i = 0; i < baseMapRole.GetEquipBuffList().Count; i++)
         {
             roleBuff[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.GetEquipBuffList()[i]);
             roleBuff[i].GetComponent<ShowBuffText>().currentbuffData =
                 GameDataMgr.My.GetBuffDataByID(baseMapRole.GetEquipBuffList()[i]);
         }
 
-        for (int i = 0; i <buffTF.childCount; i++)
+        for (int i = 0; i < buffTF.childCount; i++)
         {
             Destroy(buffTF.GetChild(i).gameObject);
         }
-        for (int i = 0; i <baseMapRole.buffList.Count; i++)
+
+        for (int i = 0; i < baseMapRole.buffList.Count; i++)
         {
-           GameObject game= Instantiate(buffPrb, buffTF);
-           game.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.buffList[i].buffId.ToString());
-           game.GetComponent<ShowBuffText>().currentbuffData =
-               baseMapRole.buffList[i].buffData;
+            GameObject game = Instantiate(buffPrb, buffTF);
+            game.GetComponent<Image>().sprite =
+                Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.buffList[i].buffId.ToString());
+            game.GetComponent<ShowBuffText>().currentbuffData =
+                baseMapRole.buffList[i].buffData;
             game.GetComponent<ShowBuffText>().role = baseMapRole.buffList[i].castRole;
         }
     }
 
-    public void ReInit(Role role )
+    public void ReInit(Role role)
     {
         level.text = role.baseRoleData.level.ToString();
         if (role.baseRoleData.level >= 5)
@@ -298,27 +313,30 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         {
             level.color = Color.white;
         }
+
         if (role.baseRoleData.roleType == GameEnum.RoleType.Seed)
         {
             seed.SetActive(true);
             seed.GetComponent<BaseRoleListInfo>().Init(role);
         }
+
         if (role.baseRoleData.roleType == GameEnum.RoleType.Peasant)
         {
             peasant.SetActive(true);
             peasant.GetComponent<BaseRoleListInfo>().Init(role);
         }
+
         if (role.baseRoleData.roleType == GameEnum.RoleType.Merchant)
         {
             merchant.SetActive(true);
             merchant.GetComponent<BaseRoleListInfo>().Init(role);
         }
+
         if (role.baseRoleData.roleType == GameEnum.RoleType.Dealer)
         {
             dealer.SetActive(true);
             dealer.GetComponent<BaseRoleListInfo>().Init(role);
         }
-        
     }
 
     public void ShowBuffText(string text)
