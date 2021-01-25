@@ -491,12 +491,12 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void AddTechPoint()
     {
-        float time = 20f;
-        float techNum = baseRoleData.techAdd / 3f * 2f;
+        float time = 5f;
+        float techNum = baseRoleData.techAdd / 6f;
         if (fteList.Contains(SceneManager.GetActiveScene().name))
         {
             time = 1f;
-            techNum = techNum / 20f;
+            techNum = techNum / 5f;
             tempTechAdd += techNum;
             if (tempTechAdd >= 1f)
             {
