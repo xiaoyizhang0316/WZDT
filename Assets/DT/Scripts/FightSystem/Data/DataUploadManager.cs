@@ -17,22 +17,9 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void AddData(DataEnum activity)
     {
-        //if (dataDic.ContainsKey(activity.ToString()))
-        //{
-            dataDic[activity.ToString()]+= 1;
-        //}
-        //else
-        //{
-        //    dataDic.Add(activity.ToString(), 1);
-        //}
+        dataDic[activity.ToString()]+= 1;
     }
 
     public void GetStatisticData(DataUpload data)
@@ -46,7 +33,29 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
                 count++;
             }
         }
+        int usedEquip = 0;
+        for (int i = 0; i < PlayerData.My.playerGears.Count; i++)
+        {
+            if(PlayerData.My.playerGears[i].isEquiped)
+            {
+                usedEquip++;
+            }
+        }
+        int usedWorker = 0;
+        for (int i = 0; i < PlayerData.My.playerWorkers.Count; i++)
+        {
+            if (PlayerData.My.playerWorkers[i].isEquiped)
+            {
+                usedWorker++;
+            }
+        }
         data.trad_optimize = count / (float)TradeManager.My.tradeList.Count;
+        data.rightTrade = count;
+        data.totalTrade = TradeManager.My.tradeList.Count;
+        data.totalEquipNum = PlayerData.My.playerGears.Count;
+        data.totalWorkerNum = PlayerData.My.playerWorkers.Count;
+        data.usedEquipNum = usedEquip;
+        data.usedWorkerNum = usedWorker;
         data.time_PauseTime = StageGoal.My.totalPauseTime;
         data.percentageTime = StageGoal.My.totalMinusGoldTime;
     }
