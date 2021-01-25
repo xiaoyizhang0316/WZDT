@@ -21,7 +21,7 @@ public class FTE_Map_1 : BaseGuideStep
     {
         if (GuideManager.My.GetComponent<MapObject>().levelInfo.activeInHierarchy)
         {
-            if (LevelInfoManager.My.currentSceneName.Equals("FTE_2"))
+            if (LevelInfoManager.My.currentSceneName.Equals("FTE_1"))
             {
                 //LevelInfoManager.My.close.interactable = false;
                 return true;
