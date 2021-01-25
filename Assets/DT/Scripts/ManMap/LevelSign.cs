@@ -360,12 +360,14 @@ public class LevelSign : MonoBehaviour
     {
         while (lastStar.Length < 3)
         {
-            lastStar = "0"+ lastStar;
+            lastStar = "0" + lastStar;
         }
+
         while (currentStar.Length < 3)
         {
             currentStar = "0" + currentStar;
         }
+
         stars = currentStar;
 
         if (NetworkMgr.My.levelProgressList.Count >= 4 && NetworkMgr.My.playerDatas.threeWordsProgress == 1)
@@ -373,10 +375,17 @@ public class LevelSign : MonoBehaviour
             ThreeWordsPanel.My.OpenAnswerInputField();
             return;
         }
+
         if (NetworkMgr.My.levelProgressList.Count >= 8 && NetworkMgr.My.playerDatas.threeWordsProgress == 2)
         {
             ThreeWordsPanel.My.OpenAnswerInputField();
             return;
+        }
+
+        if (fte.Equals("0.5")&& NetworkMgr.My.levelProgressList.Count==0 && levelID==1)
+        {
+            MapGuideManager.My.currentGuideIndex = 0;
+            MapGuideManager.My.PlayCurrentIndexGuide();
         }
 
         if ((lastStar.Equals("000")&& levelID!=1)||CheckLockLevel(fte)|| ! CheckUserLevel()||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
@@ -408,17 +417,17 @@ public class LevelSign : MonoBehaviour
 
     bool CheckLockLevel(string fte)
     {
-        if (levelID == 1 && float.Parse( fte)<0.5f)
+        if (levelID == 1 && float.Parse( fte)<1f)
         {
             return true;
         }
 
-        if (levelID == 2 && float.Parse( fte)<1.5f)
+        if (levelID == 2 && float.Parse( fte)<2f)
         {
             return true;
         }
 
-        if (levelID == 3 && float.Parse( fte)<2.5f)
+        if (levelID == 3 && float.Parse( fte)<3f)
         {
             return true;
         }

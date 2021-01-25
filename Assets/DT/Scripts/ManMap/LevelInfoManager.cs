@@ -188,7 +188,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
             else
             {
                 PlayerPrefs.SetInt("isUseGuide", 1);
-                isUseGuide.interactable = false;
+                isUseGuide.interactable = true;
             }
         }
         isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;

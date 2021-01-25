@@ -58,6 +58,36 @@ public class DataUpload
     public string equip_workerDetail;
 
     /// <summary>
+    /// 总装备数
+    /// </summary>
+    public int totalEquipNum;
+
+    /// <summary>
+    /// 使用的装备数
+    /// </summary>
+    public int usedEquipNum;
+
+    /// <summary>
+    /// 总工人数
+    /// </summary>
+    public int totalWorkerNum;
+
+    /// <summary>
+    /// 使用的工人数
+    /// </summary>
+    public int usedWorkerNum;
+
+    /// <summary>
+    /// 优化的交易
+    /// </summary>
+    public int rightTrade;
+
+    /// <summary>
+    /// 总交易
+    /// </summary>
+    public int totalTrade;
+
+    /// <summary>
     /// 使用透视镜
     /// </summary>
     public int use_tsj;
