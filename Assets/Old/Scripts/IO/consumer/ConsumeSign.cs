@@ -377,7 +377,12 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void LivePunish()
     {
-        StageGoal.My.LostHealth(consumeData.liveSatisfy);
+        int number = consumeData.liveSatisfy;
+        if (StageGoal.My.playerGold < 0)
+        {
+            number *= 2;
+        }
+        StageGoal.My.LostHealth(number);
         StageGoal.My.GetSatisfy((consumeData.killSatisfy * currentHealth / consumeData.maxHealth));
         StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy * currentHealth / consumeData.maxHealth);
         StageGoal.My.ConsumerAliveTip();

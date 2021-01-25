@@ -4754,6 +4754,7 @@ MonoBehaviour:
     equipCost: 0
     workerCost: 0
     landCost: 0
+    gearEncourageAdd: 0
     inMap: 0
     isNpc: 0
   warehouse: []
@@ -4785,8 +4786,15 @@ MonoBehaviour:
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  startTradeList: []
+  endTradeList: []
+  tasteBuffList: 
+  totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
+  stopWorkSprite: {fileID: 0}
+  isSell: 0
+  ringEffect: {fileID: 0}
 --- !u!114 &7925462026539193959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4835,8 +4843,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7798696, y: 5.624765, z: 1.7770753}
-  m_Center: {x: -0.05655694, y: -1.2770832, z: -0.002806902}
+  m_Size: {x: 1.8432175, y: 5.735622, z: 1.7770753}
+  m_Center: {x: -0.024882972, y: -1.2216547, z: -0.002806902}
 --- !u!114 &6047026649453153880
 MonoBehaviour:
   m_ObjectHideFlags: 0
