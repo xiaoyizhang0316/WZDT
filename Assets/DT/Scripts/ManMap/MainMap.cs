@@ -259,7 +259,7 @@ public class MainMap : MonoBehaviour
     string GetFTEProgress()
     {
         string fte = "";
-        switch (NetworkMgr.My.levelProgressList.Count)
+        /*switch (NetworkMgr.My.levelProgressList.Count)
         {
             case 0:
                 fte= "0";
@@ -276,7 +276,9 @@ public class MainMap : MonoBehaviour
             default:
                 fte = "2.5";
                 break;
-        }
+        }*/
+
+        fte = NetworkMgr.My.levelProgressList.Count.ToString();
 
         if (float.Parse(NetworkMgr.My.playerDatas.fte.Equals("")?"0":NetworkMgr.My.playerDatas.fte) < float.Parse(fte))
         {
@@ -301,29 +303,31 @@ public class MainMap : MonoBehaviour
                SetTeachLevelStatus(teachLevels[1], true);
                SetTeachLevelStatus(teachLevels[2], true);
                break;
-           case "0.5":
-               if (NetworkMgr.My.levelProgressList.Count == 1)
+           case "1":
+               /*if (NetworkMgr.My.levelProgressList.Count == 1)
                {
                    SetTeachLevelStatus(teachLevels[1], false);
                }
                else
                {
                    SetTeachLevelStatus(teachLevels[1], true);
-               }
+               }*/
+               SetTeachLevelStatus(teachLevels[1], false);
                SetTeachLevelStatus(teachLevels[2], true);
                break;
-           case "1.5":
+           case "2":
                SetTeachLevelStatus(teachLevels[1], false);
-               if (NetworkMgr.My.levelProgressList.Count == 2)
+               /*if (NetworkMgr.My.levelProgressList.Count == 2)
                {
                    SetTeachLevelStatus(teachLevels[2], false);
                }
                else
                {
                    SetTeachLevelStatus(teachLevels[2], true);
-               }
+               }*/
+               SetTeachLevelStatus(teachLevels[2], false);
                break;
-           case "2.5":
+           case "3":
                SetTeachLevelStatus(teachLevels[1], false);
                SetTeachLevelStatus(teachLevels[2], false);
                break;
