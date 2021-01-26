@@ -115,6 +115,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         if (currentGuideIndex >= baseGuideSteps.Count)
         {
             CloseFTE();
+            if (SceneManager.GetActiveScene().name.Contains("_")&& !SceneManager.GetActiveScene().name.Contains("."))
+            {
+                NetworkMgr.My.UpdatePlayerFTE(SceneManager.GetActiveScene().name.Split('_')[1]);
+            }
             return;
         }
 
@@ -205,6 +209,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public virtual void CloseFTE()
     {
+        MissionManager.My.transform.localPosition = new Vector3(10000,0,0);
         ftegob.SetActive(false);
         currentGuideIndex = -1;
         foreach (var item in NewCanvasUI.My.highLight)

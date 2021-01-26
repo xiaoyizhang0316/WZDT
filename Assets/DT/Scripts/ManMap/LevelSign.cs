@@ -360,12 +360,14 @@ public class LevelSign : MonoBehaviour
     {
         while (lastStar.Length < 3)
         {
-            lastStar = "0"+ lastStar;
+            lastStar = "0" + lastStar;
         }
+
         while (currentStar.Length < 3)
         {
             currentStar = "0" + currentStar;
         }
+
         stars = currentStar;
 
         if (NetworkMgr.My.levelProgressList.Count >= 4 && NetworkMgr.My.playerDatas.threeWordsProgress == 1)
@@ -373,10 +375,17 @@ public class LevelSign : MonoBehaviour
             ThreeWordsPanel.My.OpenAnswerInputField();
             return;
         }
+
         if (NetworkMgr.My.levelProgressList.Count >= 8 && NetworkMgr.My.playerDatas.threeWordsProgress == 2)
         {
             ThreeWordsPanel.My.OpenAnswerInputField();
             return;
+        }
+
+        if (fte.Equals("0.5")&& NetworkMgr.My.levelProgressList.Count==0 && levelID==1)
+        {
+            MapGuideManager.My.currentGuideIndex = 0;
+            MapGuideManager.My.PlayCurrentIndexGuide();
         }
 
         if ((lastStar.Equals("000")&& levelID!=1)||CheckLockLevel(fte)|| ! CheckUserLevel()||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))

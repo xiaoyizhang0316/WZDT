@@ -61,7 +61,7 @@ public class MissionSign : MonoBehaviour
             {
                 success.transform.DOShakePosition(0.9f ,8).OnComplete(() =>
                 {
-                    success.transform.DOScale(1, 0.2f).Play().SetEase(Ease.OutCirc);
+                    success.transform.DOScale(1.5f, 0.2f).Play().SetEase(Ease.OutCirc);
                 }).Play();
         
             }).Play();

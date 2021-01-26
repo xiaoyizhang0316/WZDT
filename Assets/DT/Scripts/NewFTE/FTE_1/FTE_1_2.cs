@@ -1,43 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class FTE_1_2 : BaseGuideStep
 {
-    public GameObject land;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
- 
-    
     public override IEnumerator StepStart()
-    {RoleListManager.My.OutButton();
-        land.GetComponent<MapSign>().isCanPlace = true;
+    {
+
+        for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
+        {
+            MapManager.My._mapSigns[i].isCanPlace = false;
+        }
+
+        MapManager.My.GetMapSignByXY(8, 24).isCanPlace = true;
         
-        yield return new WaitForSeconds(0.2f); 
+        yield return new WaitForSeconds(0.5f); 
     }
 
     public override IEnumerator StepEnd()
     {
-
-        
-        yield break;
+        yield return new WaitForSeconds(2f);
     }
 
     public override bool ChenkEnd()
     {
-        if (land.GetComponent<MapSign>().baseMapRole != null&&land.GetComponent<MapSign>().baseMapRole.baseRoleData.inMap)
+        if (PlayerData.My.dealerCount >= 1)
         {
+            missiondatas.data[0].currentNum = PlayerData.My.dealerCount;
+            missiondatas.data[0].isFinish = true;
             return true;
         }
+
         else
         {
             return false;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<MissionManager>
@@ -99,27 +100,30 @@ public class MissionManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<M
     // Update is called once per frame
     void Update()
     {
-        if (NewCanvasUI.My.Panel_AssemblyRole.activeInHierarchy)
+        if (SceneManager.GetActiveScene().name.StartsWith("FTE"))
         {
-            if (!isOut)
+            if (NewCanvasUI.My.Panel_AssemblyRole.activeInHierarchy)
             {
-                missions.GetComponent<RectTransform>().DOAnchorPosX(-430f, 0.5f).Play();
-                titles.GetComponent<RectTransform>().DOAnchorPosX(-443f, 0.5f).Play();
-                out_btn.gameObject.SetActive(true);
-            }
+                if (!isOut)
+                {
+                    missions.GetComponent<RectTransform>().DOAnchorPosX(-430f, 0.5f).Play();
+                    titles.GetComponent<RectTransform>().DOAnchorPosX(-443f, 0.5f).Play();
+                    out_btn.gameObject.SetActive(true);
+                }
 
-            //if(isTipShow)
+                //if(isTipShow)
                 //tip.gameObject.SetActive(false);
-        }
-        else
-        {
-            isOut = false;
-            missions.GetComponent<RectTransform>().DOAnchorPosX(10f, 0.5f).Play();
-            titles.GetComponent<RectTransform>().DOAnchorPosX(-3f, 0.5f).Play();
-            out_btn.gameObject.SetActive(false);
-            in_btn.gameObject.SetActive(false);
-            //if(isTipShow)
+            }
+            else
+            {
+                isOut = false;
+                missions.GetComponent<RectTransform>().DOAnchorPosX(10f, 0.5f).Play();
+                titles.GetComponent<RectTransform>().DOAnchorPosX(-3f, 0.5f).Play();
+                out_btn.gameObject.SetActive(false);
+                in_btn.gameObject.SetActive(false);
+                //if(isTipShow)
                 //tip.gameObject.SetActive(true);
+            }
         }
     }
 
