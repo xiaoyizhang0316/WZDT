@@ -20,7 +20,7 @@ public class FTE_1_0 : BaseGuideStep
         NewCanvasUI.My.GamePause();
         //RoleListManager.My.OutButton();
 
-        FTE_1Manager.My.blood.transform.DOLocalMoveY(FTE_1Manager.My.blood.transform.localPosition.y + 100, 0.02f)
+        FTE_1Manager.My.blood.transform.DOLocalMoveY(FTE_1Manager.My.blood.transform.localPosition.y + 200, 0.02f)
             .Play();
         //NewCanvasUI.My.Panel_Update.SetActive(true);
         //RoleUpdateInfo.My.changeRoleButton.gameObject.SetActive(false);
