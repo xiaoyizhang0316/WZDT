@@ -15,13 +15,13 @@ public class FTE_1_1 : BaseGuideStep
         PlayerData.My.peasantCount = 0;
         PlayerData.My.merchantCount = 0;
         PlayerData.My.dealerCount = 0;
-        
+        RoleListManager.My.OutButton();
         yield return new WaitForSeconds(0.5f); 
     }
 
     public override IEnumerator StepEnd()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
     }
 
     public override bool ChenkEnd()

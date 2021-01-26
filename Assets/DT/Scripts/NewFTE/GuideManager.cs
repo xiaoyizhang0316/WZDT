@@ -209,6 +209,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public virtual void CloseFTE()
     {
+        MissionManager.My.transform.localPosition = new Vector3(10000,0,0);
         ftegob.SetActive(false);
         currentGuideIndex = -1;
         foreach (var item in NewCanvasUI.My.highLight)
