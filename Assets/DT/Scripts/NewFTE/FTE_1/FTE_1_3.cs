@@ -20,8 +20,8 @@ public class FTE_1_3 : BaseGuideStep
     {
         yield return new WaitForSeconds(1f);
         MissionManager.My.gameObject.SetActive(false);
-        FTE_1Manager.My.blood.transform.DOLocalMoveY(FTE_1Manager.My.blood.transform.localPosition.y -200, 1f)
-            .Play();
+     //   FTE_1Manager.My.blood.transform.DOLocalMoveY(FTE_1Manager.My.blood.transform.localPosition.y -200, 1f)
+     //       .Play();
     }
     BaseMapRole seed;
     BaseMapRole Peasant;
