@@ -417,17 +417,17 @@ public class LevelSign : MonoBehaviour
 
     bool CheckLockLevel(string fte)
     {
-        if (levelID == 1 && float.Parse( fte)<1f)
+        if (levelID == 1 && float.Parse( fte)<0.5f)
         {
             return true;
         }
 
-        if (levelID == 2 && float.Parse( fte)<2f)
+        if (levelID == 2 && float.Parse( fte)<1.5f)
         {
             return true;
         }
 
-        if (levelID == 3 && float.Parse( fte)<3f)
+        if (levelID == 3 && float.Parse( fte)<2.5f)
         {
             return true;
         }

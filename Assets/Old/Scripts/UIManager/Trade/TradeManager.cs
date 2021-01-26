@@ -214,22 +214,23 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// <returns></returns>
     public bool CheckMoneyCondition()
     {
-        BaseMapRole start = PlayerData.My.GetMapRoleById(NewCanvasUI.My.startRole.baseRoleData.ID);
-        BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
-        if (start.baseRoleData.baseRoleData.roleType == RoleType.Bank || end.baseRoleData.baseRoleData.roleType == RoleType.Bank)
-            return true;
-        if (StageGoal.My.playerGold >= 0)
-            return true;
-        else
-        {
-            if (PlayerData.My.yeWuXiTong[4])
-            {
-                if (!start.isNpc && !end.isNpc)
-                    return true;
-            }
-            HttpManager.My.ShowTip("玩家金钱已达负数！无法发起新交易！");
-            return false;
-        }
+        //BaseMapRole start = PlayerData.My.GetMapRoleById(NewCanvasUI.My.startRole.baseRoleData.ID);
+        //BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
+        //if (start.baseRoleData.baseRoleData.roleType == RoleType.Bank || end.baseRoleData.baseRoleData.roleType == RoleType.Bank)
+        //    return true;
+        //if (StageGoal.My.playerGold >= 0)
+        //    return true;
+        //else
+        //{
+        //    if (PlayerData.My.yeWuXiTong[4])
+        //    {
+        //        if (!start.isNpc && !end.isNpc)
+        //            return true;
+        //    }
+        //    HttpManager.My.ShowTip("玩家金钱已达负数！无法发起新交易！");
+        //    return false;
+        //}
+        return true;
     }
 
     /// <summary>

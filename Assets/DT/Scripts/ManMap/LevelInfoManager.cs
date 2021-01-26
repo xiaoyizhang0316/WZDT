@@ -173,7 +173,7 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         //    isUseGuide.gameObject.SetActive(false);
         isUseGuide.gameObject.SetActive(true);
         currentSceneName = sceneName;
-        if (star[0] == '1')
+        /*if (star[0] == '1')
         {
             PlayerPrefs.SetInt("isUseGuide", 0);
             isUseGuide.interactable = true;
@@ -190,6 +190,17 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
                 PlayerPrefs.SetInt("isUseGuide", 1);
                 isUseGuide.interactable = true;
             }
+        }*/
+
+        if (float.Parse(sceneName.Split('_')[1]) <= float.Parse(NetworkMgr.My.playerDatas.fte))
+        {
+            PlayerPrefs.SetInt("isUseGuide", 0);
+            isUseGuide.interactable = true;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("isUseGuide", 1);
+            isUseGuide.interactable = false;
         }
         isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
         if (int.Parse(sceneName.Split('_')[1]) == 1 || int.Parse(sceneName.Split('_')[1]) == 9)

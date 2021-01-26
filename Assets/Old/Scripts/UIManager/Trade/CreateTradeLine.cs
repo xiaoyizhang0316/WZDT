@@ -41,8 +41,9 @@ public class CreateTradeLine : MonoBehaviour
             if (!target.isNpc || (target.isNpc && target.npcScript.isCanSee))
             {
                 string str = "利率: " + NewCanvasUI.My.startRole.GetComponent<BankLoan>().CalculateInterest(target) * 100f + "%";
-                FloatWindow.My.Init(str, target.gameObject.transform);
-                RoleFloatWindow.My.Hide();
+                //FloatWindow.My.Init(str, target.gameObject.transform);
+                RoleFloatWindow.My.Init(target.gameObject.transform, str, RoleSkillType.Service, RoleType.Bank);
+                //RoleFloatWindow.My.Hide();
             }
         }
         else if (target.baseRoleData.baseRoleData.roleType == RoleType.Bank)
@@ -50,8 +51,9 @@ public class CreateTradeLine : MonoBehaviour
             if (target.npcScript.isCanSee)
             {
                 string str = "利率: " + target.GetComponent<BankLoan>().CalculateInterest(NewCanvasUI.My.startRole) * 100f + "%";
-                FloatWindow.My.Init(str, NewCanvasUI.My.startRole.gameObject.transform);
-                RoleFloatWindow.My.Hide();
+                //FloatWindow.My.Init(str, NewCanvasUI.My.startRole.gameObject.transform);
+                RoleFloatWindow.My.Init(NewCanvasUI.My.startRole.gameObject.transform, str, RoleSkillType.Service, RoleType.Bank);
+                //RoleFloatWindow.My.Hide();
             }
         }
     }

@@ -300,10 +300,14 @@ public class MainMap : MonoBehaviour
         switch (fte)
         {
            case "0":
+               
+           case "0.5":
                SetTeachLevelStatus(teachLevels[1], true);
                SetTeachLevelStatus(teachLevels[2], true);
                break;
            case "1":
+           case "1.5":
+
                /*if (NetworkMgr.My.levelProgressList.Count == 1)
                {
                    SetTeachLevelStatus(teachLevels[1], false);
@@ -316,6 +320,8 @@ public class MainMap : MonoBehaviour
                SetTeachLevelStatus(teachLevels[2], true);
                break;
            case "2":
+           case "2.5":
+
                SetTeachLevelStatus(teachLevels[1], false);
                /*if (NetworkMgr.My.levelProgressList.Count == 2)
                {
@@ -327,7 +333,7 @@ public class MainMap : MonoBehaviour
                }*/
                SetTeachLevelStatus(teachLevels[2], false);
                break;
-           case "3":
+           default:
                SetTeachLevelStatus(teachLevels[1], false);
                SetTeachLevelStatus(teachLevels[2], false);
                break;
