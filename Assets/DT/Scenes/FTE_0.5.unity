@@ -2873,7 +2873,7 @@ PrefabInstance:
     - target: {fileID: 2767942478710952537, guid: ee971e92e93a1aa45b2d4cc575ed405c,
         type: 3}
       propertyPath: conversationText.stringVal
-      value: "COO normal left:\u519C\u6C11\u662F\u8D1F\u8D23\u5C06{color=yellow}\u79CD\u5B50\u79CD\u690D\u6210\u54C8\u5BC6\u74DC{/color}\u7684\u89D2\u8272\u3002\r\nCOO
+      value: "COO normal left:\u519C\u6C11\u662F\u8D1F\u8D23\u5C06{color=yellow}\u79CD\u5B50\u57F9\u80B2\u6210\u54C8\u5BC6\u74DC{/color}\u7684\u89D2\u8272\u3002\r\nCOO
         normal left:\u8981\u60F3\u987A\u5229\u4EA7\u51FA\u54C8\u5BC6\u74DC\uFF0C\u9700\u8981\u8BA9\u79CD\u5B50\u5546\u7ED9\u519C\u6C11\u8F93\u9001\u79CD\u5B50\u3002\r\nCOO
         normal left:\u5F53\u7136\u79CD\u51FA\u7684\u54C8\u5BC6\u74DC\u5982\u4F55\u8FD8\u662F\u8981\u53D6\u51B3\u4E0E{color=yellow}\u79CD\u5B50\u7684\u54C1\u8D28{/color}\u7684\u3002 
         \n\nCOO hide:"
@@ -12118,18 +12118,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 789320989}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &789320992 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2767942478710952530, guid: ee971e92e93a1aa45b2d4cc575ed405c,
-    type: 3}
-  m_PrefabInstance: {fileID: 789320989}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a334fe2ffb574b3583ff3b18b4792d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &801413485
 Transform:
   m_ObjectHideFlags: 0
@@ -15846,6 +15834,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1127364342}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1127364345 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2767942478710952530, guid: ee971e92e93a1aa45b2d4cc575ed405c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1127364342}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a334fe2ffb574b3583ff3b18b4792d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1134233859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16730,6 +16730,11 @@ PrefabInstance:
         type: 3}
       propertyPath: blockViewHeight
       value: 570
+      objectReference: {fileID: 0}
+    - target: {fileID: 2767942478710952535, guid: ee971e92e93a1aa45b2d4cc575ed405c,
+        type: 3}
+      propertyPath: nodeRect.x
+      value: 236.2258
       objectReference: {fileID: 0}
     - target: {fileID: 2767942478710952537, guid: ee971e92e93a1aa45b2d4cc575ed405c,
         type: 3}
@@ -27209,7 +27214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 789320992}
+  selectedFlowchart: {fileID: 1127364345}
 --- !u!4 &1792123844
 Transform:
   m_ObjectHideFlags: 1
@@ -38116,7 +38121,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -51.000122, y: -27}
+  m_AnchoredPosition: {x: -51, y: -27}
   m_SizeDelta: {x: -399, y: -0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1337872524165397585
