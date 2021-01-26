@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4796882053484404057
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4796882054198484183}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4796882054198484183}
   - component: {fileID: 4796882054198484176}
   - component: {fileID: 4796882054198484177}
-  - component: {fileID: 4796882054198484182}
+  - component: {fileID: 9189574922335612336}
   m_Layer: 8
   m_Name: step_4_1
   m_TagString: Untagged
@@ -108,9 +108,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4796882054221967474}
+  - {fileID: 4796882053484404057}
   - {fileID: 2322699226774100156}
   - {fileID: 2322699224864723585}
-  - {fileID: 4796882053484404057}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4796882054198484182
+--- !u!114 &9189574922335612336
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4796882054198484180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05d089c4102bc244bb4662484bb54065, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e6014322f9e84c41a1c3a0af7120542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentStepIndex: 0
@@ -178,19 +178,19 @@ MonoBehaviour:
   entryTime: 1
   missiondatas:
     data:
-    - content: "1\uFF0C\u70B9\u51FB\u5165\u53E3"
+    - content: "\u70B9\u51FB\u5165\u53E3"
       currentNum: 0
       maxNum: 0
       isMainmission: 0
       isFinish: 0
       isFail: 0
-    - content: "2\uFF0C\u70B9\u51FB\u51FA\u53E3"
+    - content: "\u70B9\u51FB\u51FA\u53E3"
       currentNum: 0
       maxNum: 0
       isMainmission: 0
       isFinish: 0
       isFail: 0
-  missionTitle: "\u56DB\uFF0C\u6D88\u8D39\u70ED\u533A"
+  missionTitle: "\u6D88\u8D39\u70ED\u533A"
   timeCount: 0
   inBorder: {fileID: 5642801000618634868}
   outBorder: {fileID: 5642800998767748169}
@@ -476,7 +476,7 @@ PrefabInstance:
     - target: {fileID: 7109513051506989288, guid: bd7e630b692854ea2b3824e2b6549a32,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7109513051506989288, guid: bd7e630b692854ea2b3824e2b6549a32,
         type: 3}
@@ -624,7 +624,7 @@ PrefabInstance:
     - target: {fileID: 7109513051506989288, guid: bd7e630b692854ea2b3824e2b6549a32,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7109513051506989288, guid: bd7e630b692854ea2b3824e2b6549a32,
         type: 3}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FTE_1_4_1 : BaseGuideStep
+public class FTE_1_4_2 : BaseGuideStep
 {
     public GameObject inBorder;
     public GameObject outBorder;
