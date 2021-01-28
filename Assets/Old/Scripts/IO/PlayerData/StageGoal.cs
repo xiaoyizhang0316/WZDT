@@ -202,7 +202,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
             playerGold -= num;
         }
-        FloatInfoManager.My.MoneyChange(0 - num);
+        //if(isShow)
+            FloatInfoManager.My.MoneyChange(0 - num);
         if(playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
