@@ -74,6 +74,12 @@ public class FTE_1_5_Goal7 : BaseGuideStep
 
     void CheckGoal()
     {
+        if ( PlayerData.My.totalRoleCount == 0 && StageGoal.My.playerTechPoint<10)
+        {
+            StageGoal.My.playerTechPoint = 10;
+            StageGoal.My.GetTechPoint(0);
+        }
+        
         if (StageGoal.My.timeCount - currentTimeCount >= limitTime)
         {
             HttpManager.My.ShowTip("超出时间限制，任务重置！");
