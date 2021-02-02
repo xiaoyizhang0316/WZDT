@@ -134,7 +134,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         }
     }
 
-    void HideAll()
+    public void HideAll()
     {
         specialInfo.SetActive(false);
         commonProductInfo.SetActive(false);

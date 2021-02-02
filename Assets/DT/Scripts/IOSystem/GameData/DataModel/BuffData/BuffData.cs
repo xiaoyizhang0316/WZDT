@@ -72,6 +72,11 @@ public class BuffData
     public int interval;
 
     /// <summary>
+    /// buff价值
+    /// </summary>
+    public int buffValue;
+
+    /// <summary>
     /// 时间点其他骚操作
     /// </summary>
     public Dictionary<int, List<string>> otherFunctions;

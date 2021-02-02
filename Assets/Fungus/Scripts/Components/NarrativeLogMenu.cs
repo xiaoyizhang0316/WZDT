@@ -70,7 +70,8 @@ namespace Fungus
         {
             if (!narrativeLogActive)
             {
-                narrativeLogMenuGroup.alpha = 0f;
+                //narrativeLogMenuGroup.alpha = 0f;
+                narrativeLogMenuGroup.gameObject.SetActive(false);
             }
 
             //Clear up the lorem ipsum
@@ -161,26 +162,31 @@ namespace Fungus
             if (narrativeLogActive)
             {
                 // Switch menu off
-                LeanTween.value(narrativeLogMenuGroup.gameObject, narrativeLogMenuGroup.alpha, 0f, .2f)
-                    .setEase(LeanTweenType.easeOutQuint)
-                    .setOnUpdate((t) => {
-                    narrativeLogMenuGroup.alpha = t;
-                }).setOnComplete(() => {
-                    narrativeLogMenuGroup.alpha = 0f;
-                });
-                
+                //LeanTween.value(narrativeLogMenuGroup.gameObject, narrativeLogMenuGroup.alpha, 0f, .2f)
+                //    .setEase(LeanTweenType.easeOutQuint)
+                //    .setOnUpdate((t) =>
+                //    {
+                //        narrativeLogMenuGroup.alpha = t;
+                //    }).setOnComplete(() =>
+                //    {
+                //        narrativeLogMenuGroup.alpha = 0f;
+                //    });
+                narrativeLogMenuGroup.gameObject.SetActive(false);
+
+
             }
             else
             {
                 // Switch menu on
-                LeanTween.value(narrativeLogMenuGroup.gameObject, narrativeLogMenuGroup.alpha, 1f, .2f)
-                    .setEase(LeanTweenType.easeOutQuint)
-                    .setOnUpdate((t) => {
-                    narrativeLogMenuGroup.alpha = t;
-                }).setOnComplete(() => {
-                    narrativeLogMenuGroup.alpha = 1f;
-                });
-                
+                //LeanTween.value(narrativeLogMenuGroup.gameObject, narrativeLogMenuGroup.alpha, 1f, .2f)
+                //    .setEase(LeanTweenType.easeOutQuint)
+                //    .setOnUpdate((t) => {
+                //    narrativeLogMenuGroup.alpha = t;
+                //}).setOnComplete(() => {
+                //    narrativeLogMenuGroup.alpha = 1f;
+                //});
+                narrativeLogMenuGroup.gameObject.SetActive(true);
+
             }
 
             narrativeLogActive = !narrativeLogActive;

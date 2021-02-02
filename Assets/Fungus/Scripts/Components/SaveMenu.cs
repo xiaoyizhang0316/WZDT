@@ -314,7 +314,7 @@ namespace Fungus
                 SaveManager.Delete(saveDataKey);
             }
             SaveManagerSignals.DoSaveReset();
-            SceneManager.LoadScene(saveManager.StartScene);
+            //SceneManager.LoadScene(saveManager.StartScene);
         }
 
         #endregion
