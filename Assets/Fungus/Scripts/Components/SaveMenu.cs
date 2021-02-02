@@ -56,7 +56,7 @@ namespace Fungus
 
         protected LTDescr fadeTween;
 
-        protected static SaveMenu instance;
+        public static SaveMenu instance;
 
         protected static bool hasLoadedOnStart = false;
 
@@ -322,6 +322,7 @@ namespace Fungus
         public void Hide()
         {
             menuButton.SetActive(false);
+            NarrativeLogMenu.instance.narrativeLogMenuGroup.gameObject.SetActive(false);
         }
 
         public void Show()

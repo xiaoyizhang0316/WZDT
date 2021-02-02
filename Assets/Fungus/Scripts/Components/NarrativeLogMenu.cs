@@ -29,7 +29,7 @@ namespace Fungus
         protected TextAdapter narLogViewtextAdapter = new TextAdapter();
         
         [Tooltip("The CanvasGroup containing the save menu buttons")]
-        [SerializeField] protected CanvasGroup narrativeLogMenuGroup;
+        [SerializeField] public CanvasGroup narrativeLogMenuGroup;
 
         protected static bool narrativeLogActive = false;
         
@@ -37,7 +37,7 @@ namespace Fungus
 
         protected LTDescr fadeTween;
 
-        protected static NarrativeLogMenu instance;
+        public static NarrativeLogMenu instance;
 
         protected virtual void Awake()
         {
