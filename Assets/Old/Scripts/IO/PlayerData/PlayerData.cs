@@ -865,4 +865,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             MapRole[i].ClearWarehouse();
         }
     }
+
+    public GameObject useErrorTip;
 }
