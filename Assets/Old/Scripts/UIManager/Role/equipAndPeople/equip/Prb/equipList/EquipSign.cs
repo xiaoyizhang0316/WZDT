@@ -207,15 +207,15 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private GameObject Equip;
     public void CreatEquipOBJ()
     {
-        if (!isOccupation)
-        {
+     //   if (!isOccupation)
+      //  {
             Equip = Instantiate(Resources.Load<GameObject>(GameDataMgr.My.GetGearData(ID).GearSpacePath), EquipListManager.My.equipPos);
             Vector3 V = Input.mousePosition;
             Vector3 V2 = new Vector3(V.x - Screen.width / 2, V.y - Screen.height / 2);
             Equip.transform.localPosition = V2;
             Equip.name = "EquipOBJ_" + ID;
             Equip.GetComponent<DragUI>().dragType = DragUI.DragType.equip;
-        }
+     //   }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -223,7 +223,7 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if (Input.GetMouseButton(1))
             return;
         time += Time.deltaTime;
-        if (Equip == null || isOccupation)
+        if (Equip == null )
         {
             return;
         }
@@ -248,21 +248,81 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        StartCoroutine(EndDrag());
+        EndDrag() ;
         //isOccupation =    Equip.GetComponent<DragUI>().CheckAllRight(false);
 
     }
 
-    public IEnumerator EndDrag()
+    public void  EndDrag()
     {
-        yield return new WaitForSeconds(0.1f);
-        if (time < 0.3f&&!Equip.GetComponent<DragUI>().CheckAllRight(false))
+      
+        if (time < 0.3f )
         {
             Destroy(Equip);
         }
         else
         {
-            SetOccupyStatus(Equip.GetComponent<DragUI>().CheckAllRight(false));
+            if (Equip == null)
+            { 
+                return;
+            }
+             bool iso = Equip.GetComponent<DragUI>().CheckAllRight(false);
+
+            if (isOccupation)
+            {
+                if (iso)
+                {
+                    if (CreatRoleManager.My.EquipList.ContainsKey(ID))
+                    {
+                        return;
+                    }
+
+                    NewCanvasUI.My.Panel_Delete.SetActive(true);
+                    string str = "";
+                    for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                    {
+                        if (PlayerData.My.MapRole[i].baseRoleData.EquipList.ContainsKey(ID) && !PlayerData.My
+                                .MapRole[i].baseRoleData.baseRoleData.roleName
+                                .Equals(CreatRoleManager.My.CurrentRole.baseRoleData.roleName))
+                        {
+                            str = "该设备已在 " + PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleName + "中使用!";
+
+                            break;
+                        }
+                    }
+
+                    Debug.Log(str);
+                    DeleteUIManager.My.Init(str + " 是否要卸载它?",
+                        () =>
+                        {
+                            for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                            {
+                                if (PlayerData.My.MapRole[i].baseRoleData.EquipList.ContainsKey(ID) && !PlayerData.My
+                                        .MapRole[i].baseRoleData.baseRoleData.roleName
+                                        .Equals(CreatRoleManager.My.CurrentRole.baseRoleData.roleName))
+                                {
+                                    PlayerData.My.MapRole[i].baseRoleData.EquipList.Remove(ID);
+                                }
+                            }
+ 
+                            SetOccupyStatus(iso);
+                        }, () =>
+                        {
+                            Destroy(Equip);
+                            CreatRoleManager.My.EquipList.Remove(ID);
+                        }, "卸下");
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            else
+            {
+                SetOccupyStatus(iso);
+            }
+
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PutEquip);
         }
     }
@@ -273,9 +333,12 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if (Input.GetMouseButton(1))
             return;
         time = 0;
-       
-        if (!isOccupation)
+        if (isOccupation && CreatRoleManager.My.EquipList.ContainsKey(ID))
         {
+            return;
+        }
+      //  if (!isOccupation)
+    //    {
             CreatEquipOBJ();
             CreatRoleManager.My.CurrentTemplateManager.OpenMidTemplate(0.3f);
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.GrabEquip);
@@ -298,7 +361,7 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             //    offset = Equip.GetComponent<RectTransform>().anchoredPosition - mouseUguiPos;
             //}
             //            cam.GetComponent<CameraMove>().enabled = false;
-        }
+        //}
     }
 
     public void OnPointerEnter(PointerEventData eventData)
