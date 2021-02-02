@@ -56,7 +56,7 @@ namespace Fungus
 
         protected LTDescr fadeTween;
 
-        protected static SaveMenu instance;
+        public static SaveMenu instance;
 
         protected static bool hasLoadedOnStart = false;
 
