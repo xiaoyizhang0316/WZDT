@@ -300,11 +300,11 @@ namespace Fungus
         public virtual void Restart()
         {
             var saveManager = FungusManager.Instance.SaveManager;
-            if (string.IsNullOrEmpty(saveManager.StartScene))
-            {
-                Debug.LogError("No start scene specified");
-                return;
-            }
+            //if (string.IsNullOrEmpty(saveManager.StartScene))
+            //{
+            //    Debug.LogError("No start scene specified");
+            //    return;
+            //}
 
             PlayClickSound();
 
