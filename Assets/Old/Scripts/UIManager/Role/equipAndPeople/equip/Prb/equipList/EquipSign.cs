@@ -305,11 +305,14 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
                                 }
                             }
  
+                            PlayerData.My.SetGearStatus(ID,false);
                             SetOccupyStatus(iso);
                         }, () =>
                         {
-                            Destroy(Equip);
                             CreatRoleManager.My.EquipList.Remove(ID);
+                            Equip.GetComponent<DragUI>().Remove();
+                            Destroy(Equip);
+
                         }, "卸下");
                 }
                 else

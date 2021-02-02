@@ -267,13 +267,16 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
                                     PlayerData.My.MapRole[i].baseRoleData.peoPleList.Remove(ID);
                                 }
                             }
+                            PlayerData.My.SetWorkerStatus(ID,false);
 
                             discharge.gameObject.SetActive(false);
                             SetOccupyStatus(iso);
                         }, () =>
                         {
-                            Destroy(worker);
+                            
                             CreatRoleManager.My.peoPleList.Remove(ID);
+                            worker.GetComponent<DragUI>().Remove();
+                            Destroy(worker);
                         }, "卸下");
                 }
                 else
