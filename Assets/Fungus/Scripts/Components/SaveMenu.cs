@@ -60,6 +60,8 @@ namespace Fungus
 
         protected static bool hasLoadedOnStart = false;
 
+        public GameObject menuButton;
+
         protected virtual void Awake()
         {
             // Only one instance of SaveMenu may exist
@@ -315,6 +317,17 @@ namespace Fungus
             }
             SaveManagerSignals.DoSaveReset();
             //SceneManager.LoadScene(saveManager.StartScene);
+        }
+
+        public void Hide()
+        {
+            menuButton.SetActive(false);
+        }
+
+        public void Show()
+        {
+            menuButton.SetActive(true);
+            Restart();
         }
 
         #endregion
