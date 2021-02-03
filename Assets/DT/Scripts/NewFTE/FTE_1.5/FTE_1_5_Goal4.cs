@@ -14,6 +14,7 @@ public class FTE_1_5_Goal4 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         PlayerData.My.DeleteRole(FTE_1_5_Manager.My.qualityStation.GetComponent<BaseMapRole>().baseRoleData.ID);
+        StageGoal.My.ResetAllCostAndIncome();
         InvokeRepeating("CheckGoal",0, 0.2f);
         SkipButton();
         //tapPanel.SetActive(true);
