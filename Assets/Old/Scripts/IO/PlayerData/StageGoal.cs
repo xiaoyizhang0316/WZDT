@@ -1389,6 +1389,21 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public void ResetAllCostAndIncome()
     {
+        totalCost = 0;
+        tradeCost = 0;
+        productCost = 0;
+        extraCosts = 0;
+        totalIncome = 0;
+        consumeIncome = 0;
+        npcIncome = 0;
+        otherIncome = 0;
         
+        otherIncomes.Clear();
+        npcIncomes.Clear();
+        npcIncomesEx.Clear();
+        buildingCosts.Clear();
+        extraCost.Clear();
+        DataStatPanel.My.RefreshIncome(totalIncome, consumeIncome, npcIncomesEx, npcIncomes, otherIncomes, timeCount);
+        DataStatPanel.My.RefreshExpend(totalCost, tradeCost, buildingCosts, extraCost, timeCount);
     }
 }
