@@ -1386,4 +1386,9 @@ public class StageGoal : MonoSingleton<StageGoal>
             });
         }
     }
+
+    public void ResetAllCostAndIncome()
+    {
+        
+    }
 }

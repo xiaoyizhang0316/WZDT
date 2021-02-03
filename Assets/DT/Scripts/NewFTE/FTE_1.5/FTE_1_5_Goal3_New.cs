@@ -82,6 +82,7 @@ public class FTE_1_5_Goal3_New : BaseGuideStep
     void CheckGoal1()
     {
         currentProductCost = 0;
+        currentQuality = 0;
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             if (!PlayerData.My.MapRole[i].baseRoleData.isNpc)
