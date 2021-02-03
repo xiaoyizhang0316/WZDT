@@ -126,11 +126,27 @@ public class NPC : BaseNpc
         Init();
     }
 
+    private bool isInited = false;
+    
     public void Init()
     {
 
         currentRole = GetComponentInParent<BaseMapRole>().baseRoleData;
         Invoke("AutoSetTrade", 0.2f);
+        if (!isCanSeeEquip && !isInited)
+        {
+            float add = 1.77f;
+            if (currentRole.baseRoleData.roleSkillType != RoleSkillType.Product)
+            {
+                add *= 2;
+            }
+            for (int i = 0; i < NPCBuffList.Count; i++)
+            {
+                isInited = true;
+                BuffData tempData = GameDataMgr.My.GetBuffDataByID(NPCBuffList[i]);
+                currentRole.tradeCost -= (int)(tempData.buffValue * add);
+            }
+        }
     }
 
     public void AutoSetTrade()

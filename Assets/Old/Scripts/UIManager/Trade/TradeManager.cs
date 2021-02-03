@@ -413,6 +413,43 @@ public class TradeManager : MonoSingleton<TradeManager>
     }
 
     /// <summary>
+    /// 判断角色的使用是否正确
+    /// </summary>
+    /// <param name="npcID"></param>
+    /// <returns></returns>
+    public bool CheckProductNpcTradeWrong(string npcID)
+    {
+        bool isWrong = false;
+        if (tradeList.Count <= 0)
+        {
+            return false;
+        }
+
+        foreach(var sign in tradeList.Values)
+        {
+            if(sign.tradeData.startRole==npcID)
+            {
+                if (PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole)).baseRoleData.baseRoleData
+                    .roleSkillType == RoleSkillType.Product)
+                {
+                    isWrong = true;
+                }
+            }
+            if (sign.tradeData.endRole == npcID)
+            {
+                if (PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole)).baseRoleData.baseRoleData
+                    .roleSkillType == RoleSkillType.Product)
+                {
+                    isWrong = false;
+                    break;
+                }
+            }
+        }
+
+        return isWrong;
+    }
+
+    /// <summary>
     /// 显示角色相关的交易的图标（鼠标移动到角色上触发）
     /// </summary>
     /// <param name="roleID">相关角色的ID</param>

@@ -53,6 +53,8 @@ public class BuffItem
     public string Duration;
 
     public string Interval;
+
+    public string buffValue;
 }
 
 [Serializable]

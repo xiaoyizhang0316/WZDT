@@ -35,6 +35,26 @@ public class ProductMelon_Lightning : BaseSkill
             //anim.SetBool("isPlay", false);
             anim.speed = 0;
         }
+        
+        if (TradeManager.My.CheckProductNpcTradeWrong(GetComponent<BaseMapRole>().baseRoleData.ID.ToString()))
+        {
+            //Debug.LogWarning("该角色存在使用错误的情况");
+            if (tip == null)
+            {
+                tip = Instantiate(PlayerData.My.useErrorTip,
+                    GetComponentInChildren<RoleTradeButton>().transform.parent);
+                tip.transform.localScale = new Vector3(0.01f, 0.01f);
+                tip.transform.position =GetComponentInChildren<RoleTradeButton>().transform.parent.position+ new Vector3(0, 2, 0);
+                tip.GetComponent<UseErrorTip>().SetTip("加工型角色须有产品输入");
+            }
+        }
+        else
+        {
+            if (tip)
+            {
+                Destroy(tip);
+            }
+        }
     }
 
     public override void Skill()
@@ -116,5 +136,7 @@ public class ProductMelon_Lightning : BaseSkill
 
     }
 
+    private GameObject tip;
+    
 
 }

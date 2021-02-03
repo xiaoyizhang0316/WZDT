@@ -8,6 +8,7 @@ public class CheckUnlockRole : BaseGuideStep, ICanvasRaycastFilter
 
     public override IEnumerator StepEnd()
     {
+        NPCListInfo.My.HideAll();
         yield break;
     }
 

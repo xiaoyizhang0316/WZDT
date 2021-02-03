@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Fungus;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class FTE_1_5_OpenCG : MonoBehaviour
     public void PrologueOn()
     {
         //CameraPlay.WidescreenH_ON(Color.black, 1);
+        SaveMenu.instance.Show();
     }
 
     public void PrologueOff()
@@ -26,5 +28,6 @@ public class FTE_1_5_OpenCG : MonoBehaviour
         });
         endPanel.SetActive(true);
         gameObject.SetActive(false);
+        SaveMenu.instance.Hide();
     }
 }

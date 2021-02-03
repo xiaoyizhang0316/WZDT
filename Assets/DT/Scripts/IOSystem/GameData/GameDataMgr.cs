@@ -185,6 +185,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 temp.buffParam.AddRange(b.buffParam);
                 temp.duration = b.duration;
                 temp.interval = b.interval;
+                temp.buffValue = b.buffValue;
                 return temp;
             }
         }
@@ -285,6 +286,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.OnTick = b.OnTick.Split(',').ToList();
             temp.duration = int.Parse(b.Duration);
             temp.interval = int.Parse(b.Interval);
+            temp.buffValue = 50;
             string[] str = b.BuffParam.Split(',');
             for (int i = 0; i < str.Length; i++)
             {
