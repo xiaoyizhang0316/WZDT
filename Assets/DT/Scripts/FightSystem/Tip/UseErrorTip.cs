@@ -9,6 +9,7 @@ public class UseErrorTip : MonoBehaviour
 {
     public GameObject tip;
     public Text tip_text;
+    private string tips = "";
 
     public void SetTip(string tips)
     {
@@ -16,17 +17,21 @@ public class UseErrorTip : MonoBehaviour
         {
             tip_text.text = tips;
         }
+
+        this.tips = "<color=red>"+tips+"</color>";
     }
 
     public void OnMouseOver()
     {
         //if (!EventSystem.current.IsPointerOverGameObject())
-            tip.SetActive(true);
+            //tip.SetActive(true);
+            FloatWindow.My.Init(tips);
     }
 
     public void OnMouseExit()
     {
-        tip.SetActive(false);
+        //tip.SetActive(false);
+        FloatWindow.My.Hide();
     }
     
     Camera referenceCamera;
