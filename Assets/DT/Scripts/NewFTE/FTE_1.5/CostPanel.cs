@@ -33,6 +33,13 @@ public class CostPanel : MonoBehaviour
     public GameObject equipPanel;
     public GameObject missionPanel;
 
+
+    private Color costColor;
+    private void Start()
+    {
+        costColor = costImage.GetComponent<Image>().color;
+    }
+
     public void InitCostPanel(int cost, int timeCount, int costLimit)
     {
         totalCostText.text = totalTextString;
@@ -70,10 +77,26 @@ public class CostPanel : MonoBehaviour
         this.costLimit = costLimit;
     }
 
+    void HideCost()
+    {
+        costImage.GetComponent<Image>().color = new Color(0,0,0,0);
+        totalCostText.gameObject.SetActive(false);
+            tradeCostText.gameObject.SetActive(false);
+        otherCostText.gameObject.SetActive(false);
+    }
+
+    void Show()
+    {
+        costImage.GetComponent<Image>().color = costColor;
+        totalCostText.gameObject.SetActive(true);
+        tradeCostText.gameObject.SetActive(true);
+        otherCostText.gameObject.SetActive(true);
+    }
+
     public void ShowProductCostAsMain(int totalProductCost, int limitTime=-1)
     {
         currentPeriod = StageGoal.My.timeCount - startTimeCount;
-        
+        HideCost();
         costImage.SetActive(true);
         if (costLimit == 0)
         {
@@ -102,7 +125,7 @@ public class CostPanel : MonoBehaviour
     public void ShowTradeCostAsMain(int totalTradeCost, int limitTime=-1)
     {
         currentPeriod = StageGoal.My.timeCount - startTimeCount;
-        
+        HideCost();
         costImage.SetActive(true);
 
         if (costLimit == 0)
@@ -130,7 +153,7 @@ public class CostPanel : MonoBehaviour
     public void ShowAllCost(int totalCost, int limitTime=-1)
     {
         currentPeriod = StageGoal.My.timeCount - startTimeCount;
-        
+        Show();
         costImage.SetActive(true);
 
         if (costLimit == 0)
@@ -166,6 +189,7 @@ public class CostPanel : MonoBehaviour
     {
         costImage.SetActive(false);
         incomeImage.SetActive(false);
+        Show();
     }
 
     private bool needShow = false;

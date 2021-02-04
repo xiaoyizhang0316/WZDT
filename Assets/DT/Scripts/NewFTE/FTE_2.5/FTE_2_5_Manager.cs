@@ -58,11 +58,13 @@ public class FTE_2_5_Manager : MonoSingleton<FTE_2_5_Manager>
         role.transform.DOLocalMoveY(endPos, 1f).Play().OnComplete(() =>
         {
             doEnd?.Invoke();
+            role.transform.DOLocalMoveY(endPos, 0.02f).Play();
         }).OnPause(()=>
         {
             role.transform.DOLocalMoveY(endPos, 1f).Play().OnComplete(() =>
             {
                 doEnd?.Invoke();
+                role.transform.DOLocalMoveY(endPos, 0.02f).Play();
             });
         });
     }
@@ -72,11 +74,13 @@ public class FTE_2_5_Manager : MonoSingleton<FTE_2_5_Manager>
         role.transform.DOLocalMoveY(endPos, 1f).Play().OnComplete(() =>
         {
             doEnd?.Invoke();
+            role.transform.DOLocalMoveY(endPos, 0.02f).Play();
         }).OnPause(()=>
         {
             role.transform.DOLocalMoveY(endPos, 1f).Play().OnComplete(() =>
             {
                 doEnd?.Invoke();
+                role.transform.DOLocalMoveY(endPos, 0.02f).Play();
             });
         });
     }
