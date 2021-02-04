@@ -19,6 +19,7 @@ public class FTE_1_5_Goal5 : BaseGuideStep
         //PlayerData.My.DeleteRole(fruitQT.GetComponent<BaseMapRole>().baseRoleData.ID);
         NewCanvasUI.My.GamePause(false);
         FTE_1_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = 1;
+        FTE_1_5_Manager.My.GetComponent<RoleCreateLimit>().limitMerchantCount = -1;
         FTE_1_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = true;
         //Destroy(place);
         TradeManager.My.ResetAllTrade();
@@ -61,6 +62,7 @@ public class FTE_1_5_Goal5 : BaseGuideStep
         bornPoint.GetComponent<Building>().isBorn = false;
         yield return new WaitForSeconds(2f);
         costImage.GetComponent<CostPanel>().HideAllCost();
+        FTE_1_5_Manager.My.GetComponent<RoleCreateLimit>().limitMerchantCount = 0;
     }
 
     public override bool ChenkEnd()
