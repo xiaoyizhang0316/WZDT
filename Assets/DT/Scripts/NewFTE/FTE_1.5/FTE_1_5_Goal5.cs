@@ -68,11 +68,29 @@ public class FTE_1_5_Goal5 : BaseGuideStep
         return missiondatas.data[0].isFinish;
     }
 
+    void Reset()
+    {
+        NewCanvasUI.My.GamePause(false);
+        TradeManager.My.ResetAllTrade();
+        PlayerData.My.ClearAllRoleWarehouse();
+        currentIncome = StageGoal.My.totalIncome;
+        currentCost = StageGoal.My.totalCost;
+        costImage.GetComponent<CostPanel>().InitCostPanel(currentCost, StageGoal.My.timeCount, 0);
+        InvokeRepeating("CheckGoal",0, 0.2f);
+        NewCanvasUI.My.GameNormal();
+    }
+
     void CheckGoal()
     {
         if (missiondatas.data[0].isFinish == false)
         {
             missiondatas.data[0].currentNum = StageGoal.My.totalIncome-currentIncome-StageGoal.My.totalCost+currentCost;
+            if (missiondatas.data[0].currentNum <= -20000)
+            {
+                CancelInvoke();
+                Reset();
+                return;
+            }
             costImage.GetComponent<CostPanel>().ShowAllCost(StageGoal.My.totalCost-currentCost);
             costImage.GetComponent<CostPanel>().ShowAllIncome(StageGoal.My.totalIncome-currentIncome, StageGoal.My.totalCost-currentCost);
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)

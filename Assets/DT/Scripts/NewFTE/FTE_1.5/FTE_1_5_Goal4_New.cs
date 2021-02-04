@@ -80,6 +80,7 @@ public class FTE_1_5_Goal4_New : BaseGuideStep
     void CheckGoal1()
     {
         costStat = 0;
+        checkQuality = 0;
         foreach (TradeSign sign in TradeManager.My.tradeList.Values)
         {
             costStat += sign.CalculateTC(true);

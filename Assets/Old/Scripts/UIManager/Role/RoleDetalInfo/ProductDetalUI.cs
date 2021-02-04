@@ -65,9 +65,12 @@ public class ProductDetalUI : MonoSingleton<ProductDetalUI>
           }
           for (int i = 0; i <data.buffList.Count; i++)
           {
-              buff[i].gameObject.SetActive(true);
-              buff[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" +data.buffList[i]); 
-              buff[i].GetComponent<ShowBuffText>().currentbuffData =     GameDataMgr.My.GetBuffDataByID(data.buffList[i]);
+                if (i < 4)
+                {
+                    buff[i].gameObject.SetActive(true);
+                    buff[i].sprite = Resources.Load<Sprite>("Sprite/Buff/" + data.buffList[i]);
+                    buff[i].GetComponent<ShowBuffText>().currentbuffData = GameDataMgr.My.GetBuffDataByID(data.buffList[i]);
+                }
           }
 
           for (int i = 0; i <this.data.wasteBuffList.Count; i++)

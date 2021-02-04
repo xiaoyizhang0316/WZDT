@@ -40,7 +40,7 @@ public class FTE_0_5_4 : BaseGuideStep
         TradeManager.My.HideAllIcon();
 
        
-        if (roleInfo.activeSelf)
+        if (roleInfo.activeInHierarchy)
         {
          //   roleinfoTip.SetActive(true);
             buildTip.SetActive(true);
@@ -48,7 +48,7 @@ public class FTE_0_5_4 : BaseGuideStep
             missiondatas.data[0].isFinish= true;
         }
 
-        if (bulletInfo.activeSelf)
+        if (bulletInfo.activeInHierarchy)
         {
             missiondatas.data[1].currentNum= 1;
             missiondatas.data[1].isFinish= true;
