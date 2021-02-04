@@ -65,6 +65,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     private bool wudi = false;
 
+    public int produceTime;
+
     /// <summary>
     /// 玩家操作时间戳列表
     /// </summary>
@@ -515,6 +517,33 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
     }
 
+    /// <summary>
+    /// 检测本波是否结束
+    /// </summary>
+    public void CheckEndTurn()
+    {
+        if (currentType != StageType.Normal)
+            return;
+        ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
+        bool isComplete = true;
+        foreach (Building b in BuildingManager.My.buildings)
+        {
+            if (!b.isFinishSpawn)
+            {
+                isComplete = false;
+                break;
+            }
+        }
+        if (list.Length == 0 && isComplete)
+        {
+            if (playerHealth > 0)
+            {
+                print("回合结束");
+                EndTurn();
+            }
+        }
+    }
+
     public void CheckAfterReconnect()
     {
         CheckDead();
@@ -627,15 +656,16 @@ public class StageGoal : MonoSingleton<StageGoal>
             totalMinusGoldTime++;
         }
         stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+        CheckEndTurn();
         if (currentWave <= maxWaveNumber)
         {
-            if (timeCount >= waitTimeList[currentWave - 1])
-            {
-                BuildingManager.My.WaveSpawnConsumer(currentWave);
-                currentWave++;
-                stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
-                stageWaveText.transform.DOPunchScale(new Vector3(1.3f,1.3f,1.3f), 1f,1).Play();
-            }
+            //if (timeCount >= waitTimeList[currentWave - 1])
+            //{
+            //    BuildingManager.My.WaveSpawnConsumer(currentWave);
+            //    currentWave++;
+            //    stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+            //    stageWaveText.transform.DOPunchScale(new Vector3(1.3f,1.3f,1.3f), 1f,1).Play();
+            //}
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 timeCount++;
@@ -733,6 +763,36 @@ public class StageGoal : MonoSingleton<StageGoal>
                 WaveCount();
             });
         }
+    }
+
+    /// <summary>
+    /// 下一回合
+    /// </summary>
+    public void NextTurn()
+    {
+        Stat();
+        //TODO 锁定准备阶段的操作
+        //TODO GameNormal
+        //TODO 更新金币消耗UI信息
+        //TODO 检查错误操作（果汁厂没输入）
+        transform.DOScale(1f, produceTime).SetEase(Ease.Linear).OnComplete(() => {
+            BuildingManager.My.WaveSpawnConsumer(currentWave);
+            stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+            stageWaveText.transform.DOPunchScale(new Vector3(1.3f, 1.3f, 1.3f), 1f, 1).Play();
+            currentWave++;
+        });
+    }
+
+    public void EndTurn()
+    {
+        Stat();
+        //TODO 暂停
+        //TODO 回收所有仓库产品
+        //TODO 扣除交易/固定成本
+        //TODO 解锁准备阶段的操作
+        //TODO 更新敌人波数信息
+        //TODO 结算buff/角色周期性效果
+
     }
 
     /// <summary>

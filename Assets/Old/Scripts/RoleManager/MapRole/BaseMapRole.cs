@@ -484,6 +484,22 @@ public class BaseMapRole : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// 按回合扣除固定成本
+    /// </summary>
+    public void TurnCost()
+    {
+
+    }
+
+    /// <summary>
+    /// 按回合增加科技点数
+    /// </summary>
+    public void TurnAddTechPoint()
+    {
+
+    }
+
     private float tempTechAdd = 0f;
 
     /// <summary>
