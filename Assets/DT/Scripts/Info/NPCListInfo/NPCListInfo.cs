@@ -274,4 +274,11 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     {
         buffTextContent.SetActive(false);
     }
+
+    public void SetTradeButton(bool isUnlock)
+    {
+        specialTrade.interactable = isUnlock;
+        productTrade.interactable = isUnlock;
+        serviceTrade.interactable = isUnlock;
+    }
 }

@@ -771,6 +771,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.GameNormal();
         waveCountItem.Move();
         //TODO 锁定准备阶段的操作
+        LockOperation();
         //TODO 更新金币消耗UI信息
         //TODO 检查错误操作（果汁厂没输入）
         transform.DOScale(1f, produceTime).SetEase(Ease.Linear).OnComplete(() => {
@@ -791,6 +792,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         //TODO 回收所有仓库产品
         //TODO 扣除交易/固定成本
         //TODO 解锁准备阶段的操作
+        UnlockOperation();
         //TODO 更新敌人波数信息
         //TODO 结算buff/角色周期性效果
 
@@ -1458,4 +1460,76 @@ public class StageGoal : MonoSingleton<StageGoal>
         DataStatPanel.My.RefreshIncome(totalIncome, consumeIncome, npcIncomesEx, npcIncomes, otherIncomes, timeCount);
         DataStatPanel.My.RefreshExpend(totalCost, tradeCost, buildingCosts, extraCost, timeCount);
     }
+
+    #region 回合制
+
+    private int turnTotalIncome = 0;
+    private int turnTotalCost = 0;
+    public GameObject turnIncomeAndCostPanel;
+    public Text turnTotalIncome_txt;
+    public Text turnTotalCost_txt;
+
+    /// <summary>
+    /// 展示本回合总收支
+    /// </summary>
+    void ShowThisTurnIncomeAndCost()
+    {
+        
+    }
+
+    /// <summary>
+    /// 统计本回合的收入
+    /// </summary>
+    /// <param name="income"></param>
+    void UpdateTurnIncome(int income)
+    {
+        turnTotalIncome += income;
+        turnTotalIncome_txt.text = turnTotalIncome.ToString();
+    }
+
+    /// <summary>
+    /// 统计本回合的支出
+    /// </summary>
+    /// <param name="cost"></param>
+    void UpdateTurnCost(int cost)
+    {
+        turnTotalCost -= cost;
+        turnTotalCost_txt.text = turnTotalCost.ToString();
+    }
+    
+    /// <summary>
+    /// 锁定操作
+    /// </summary>
+    void LockOperation()
+    {
+        // 锁三镜
+        NewCanvasUI.My.transform.Find("ThreeMirror").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
+        // 锁交易
+        NewCanvasUI.My.hidePanel.gameObject.SetActive(false);
+        NewCanvasUI.My.HideAllTradeButton();
+        NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = false;
+        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(false);
+        TradeManager.My.HideAllIcon();
+        // 锁删除
+        NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = false;
+    }
+    
+    /// <summary>
+    /// 解锁操作
+    /// </summary>
+    void UnlockOperation()
+    {
+        // 解三镜
+        NewCanvasUI.My.transform.Find("ThreeMirror").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
+        // 解交易
+        NewCanvasUI.My.hidePanel.gameObject.SetActive(true);
+        NewCanvasUI.My.ShowAllTradeButton();
+        NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = true;
+        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(true);
+        TradeManager.My.ShowAllIcon();
+        // 解删除
+        NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
+    }
+
+    #endregion
 }
