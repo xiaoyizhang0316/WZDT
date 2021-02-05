@@ -495,7 +495,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void CheckWin()
     {
-        if (currentType != StageType.Normal)
+        if (currentType == StageType.Boss)
             return;
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
         bool isComplete = true;
@@ -602,7 +602,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Lose()
     {
-        if (currentType == StageType.Normal)
+        if (currentType == StageType.Normal || currentType == StageType.Turn)
         {
             NewCanvasUI.My.GamePause(false);
             NewCanvasUI.My.lose.SetActive(true);
@@ -624,7 +624,6 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 NewCanvasUI.My.GamePause(false);
                 NewCanvasUI.My.lose.SetActive(true);
-                
                 //NewCanvasUI.My.Panel_Lose.SetActive(true);
                 if (NetworkMgr.My.isUsingHttp)
                 {
@@ -656,9 +655,9 @@ public class StageGoal : MonoSingleton<StageGoal>
             totalMinusGoldTime++;
         }
         stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
-        CheckEndTurn();
         if (currentWave <= maxWaveNumber)
         {
+            CheckEndTurn();
             //if (timeCount >= waitTimeList[currentWave - 1])
             //{
             //    BuildingManager.My.WaveSpawnConsumer(currentWave);
@@ -788,10 +787,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.GamePause();
         skipToFirstWave.gameObject.SetActive(true);
         waveCountItem.Init(enemyDatas, currentWave - 1);
-        //TODO 回收所有仓库产品
-        //TODO 扣除交易/固定成本
+        PlayerData.My.RoleTurnEnd();
         //TODO 解锁准备阶段的操作
-        //TODO 更新敌人波数信息
         //TODO 结算buff/角色周期性效果
 
     }

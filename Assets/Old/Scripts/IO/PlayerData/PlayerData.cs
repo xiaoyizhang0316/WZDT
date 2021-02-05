@@ -138,6 +138,49 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     }
 
     /// <summary>
+    /// 所有角色回合结束时相关操作
+    /// </summary>
+    public void RoleTurnEnd()
+    {
+        RecycleProduct();
+        RoleTurnCost();
+        RoleTurnTechPoint();
+    }
+
+    /// <summary>
+    /// 所有角色清算自己仓库
+    /// </summary>
+    public void RecycleProduct()
+    {
+        for (int i = 0; i < MapRole.Count; i++)
+        {
+            MapRole[i].RecycleWarehouse();
+        }
+    }
+
+    /// <summary>
+    /// 所有角色按回合扣除固定成本
+    /// </summary>
+    public void RoleTurnCost()
+    {
+        for (int i = 0; i < MapRole.Count; i++)
+        {
+            MapRole[i].TurnCost();
+        }
+    }
+
+    /// <summary>
+    /// 所有角色按回合增加科技值
+    /// </summary>
+    public void RoleTurnTechPoint()
+    {
+        for (int i = 0; i < MapRole.Count; i++)
+        {
+            MapRole[i].TurnAddTechPoint();
+        }
+    }
+
+    /// <summary>
     /// 将建立的角色删除
     /// </summary>
     /// <param name="roleId"></param>
