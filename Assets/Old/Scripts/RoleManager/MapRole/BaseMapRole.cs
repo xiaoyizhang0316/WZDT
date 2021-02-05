@@ -469,6 +469,10 @@ public class BaseMapRole : MonoBehaviour
         {
             return;
         }
+        if (StageGoal.My.currentType == StageType.Normal)
+        {
+            return;
+        }
         float time = 20f;
         int costNum = baseRoleData.cost;
         if (fteList.Contains(SceneManager.GetActiveScene().name))

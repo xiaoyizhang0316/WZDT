@@ -347,6 +347,14 @@ public class TradeManager : MonoSingleton<TradeManager>
         return false;
     }
 
+    public void TurnTradeCost()
+    {
+        foreach (var item in tradeList)
+        {
+            item.Value.TurnTradeCost();
+        }
+    }
+
     /// <summary>
     /// 显示所有交易图标
     /// </summary>
