@@ -617,7 +617,9 @@ public class GameEnum
         /// <summary>
         /// Boss模式
         /// </summary>
-        Boss
+        Boss,
+
+        Turn
     }
 
     public enum CursorType

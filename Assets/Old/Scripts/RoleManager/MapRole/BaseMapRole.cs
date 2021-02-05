@@ -489,7 +489,9 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void TurnCost()
     {
-
+        int costNum = baseRoleData.cost * 2;
+        StageGoal.My.CostPlayerGold(costNum);
+        StageGoal.My.Expend(costNum, ExpendType.ProductCosts, this);
     }
 
     /// <summary>
@@ -497,7 +499,9 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void TurnAddTechPoint()
     {
-
+        float techNum = baseRoleData.techAdd / 6f * 8f;
+        StageGoal.My.GetTechPoint((int)techNum);
+        StageGoal.My.IncomeTp((int)techNum, IncomeTpType.Npc);
     }
 
     private float tempTechAdd = 0f;
@@ -638,6 +642,21 @@ public class BaseMapRole : MonoBehaviour
         warehouse.Clear();
     }
 
+    /// <summary>
+    /// 将仓库中所有产品回收
+    /// </summary>
+    public void RecycleWarehouse()
+    {
+        int totalGold = CountWarehouseIncome();
+        StageGoal.My.GetPlayerGold(totalGold);
+        StageGoal.My.Income(totalGold, IncomeType.Other, null, "回收仓库");
+        warehouse.Clear();
+    }
+
+    /// <summary>
+    /// 统计仓库中产品价值
+    /// </summary>
+    /// <returns></returns>
     public int CountWarehouseIncome()
     {
         float result = 0;
