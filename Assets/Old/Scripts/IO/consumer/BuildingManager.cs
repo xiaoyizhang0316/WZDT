@@ -48,6 +48,14 @@ public class BuildingManager : MonoSingleton<BuildingManager>
         return null;
     }
 
+    public void RestartAllBuilding()
+    {
+        for (int i = 0; i < buildings.Count; i++)
+        {
+            buildings[i].isFinishSpawn = false;
+        }
+    }
+
     /// <summary>
     /// 隐藏所有建筑路线
     /// </summary>

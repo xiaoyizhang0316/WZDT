@@ -769,7 +769,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.ToggleSpeedButton(true);
         NewCanvasUI.My.GameNormal();
         waveCountItem.Move();
-        //TODO 锁定准备阶段的操作
+        BuildingManager.My.RestartAllBuilding();
         LockOperation();
         //TODO 更新金币消耗UI信息
         //TODO 检查错误操作（果汁厂没输入）
@@ -1504,7 +1504,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.transform.Find("ThreeMirror").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
         // 锁交易
         NewCanvasUI.My.hidePanel.gameObject.SetActive(false);
-        NewCanvasUI.My.HideAllTradeButton();
+        NewCanvasUI.My.TurnToggleTradeButton(false);
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = false;
         NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(false);
         TradeManager.My.HideAllIcon();
@@ -1521,7 +1521,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.transform.Find("ThreeMirror").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
         // 解交易
         NewCanvasUI.My.hidePanel.gameObject.SetActive(true);
-        NewCanvasUI.My.ShowAllTradeButton();
+        NewCanvasUI.My.TurnToggleTradeButton(true);
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = true;
         NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(true);
         TradeManager.My.ShowAllIcon();

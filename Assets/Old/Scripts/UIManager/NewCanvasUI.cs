@@ -540,6 +540,22 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         }
     }
 
+
+    public void TurnToggleTradeButton(bool isActive)
+    {
+        foreach (BaseMapRole role in PlayerData.My.MapRole)
+        {
+            if (role.isNpc)
+            {
+                if (!role.npcScript.isCanSee)
+                {
+                    continue;
+                }
+            }
+            role.HideTradeButton(isActive);
+        }
+    }
+
     /// <summary>
     /// 隐藏所有物流线
     /// </summary>
