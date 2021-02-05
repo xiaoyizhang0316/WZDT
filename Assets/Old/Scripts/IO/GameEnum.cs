@@ -507,24 +507,6 @@ public class GameEnum
         Sweet
     }
 
-    public enum ConsumableType
-    {
-        /// <summary>
-        /// 影响角色
-        /// </summary>
-        AffectRole,
-
-        /// <summary>
-        /// 影响消费者
-        /// </summary>
-        AffectConsumer,
-
-        /// <summary>
-        /// 生成物品
-        /// </summary>
-        SpawnItem
-    }
-
     public enum AudioClipType
     {
         /// <summary>
