@@ -321,7 +321,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
         CancelInvoke("CountPauseTime");
-        Debug.Log("Pause");
+        Debug.Log("Normal");
         if (!PlayerData.My.isSOLO)
         {
             string str = "ChangeTimeScale|";
@@ -363,6 +363,14 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 PlayerData.My.client.SendToServerMsg(str);
             }
         }
+    }
+
+
+    public void ToggleSpeedButton(bool isShow)
+    {
+        Button_Pause.gameObject.SetActive(isShow);
+        Button_Normal.gameObject.SetActive(isShow);
+        Button_Accelerate.gameObject.SetActive(isShow);
     }
 
     /// <summary>

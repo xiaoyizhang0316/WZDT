@@ -710,10 +710,6 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
                 WaveCount();
             });
-            if (timeCount >= waitTimeList[0] - 5)
-            {
-                skipToFirstWave.gameObject.SetActive(false);
-            }
         }
         else
         {
@@ -771,8 +767,10 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void NextTurn()
     {
         Stat();
+        NewCanvasUI.My.ToggleSpeedButton(true);
+        NewCanvasUI.My.GameNormal();
+        waveCountItem.Move();
         //TODO 锁定准备阶段的操作
-        //TODO GameNormal
         //TODO 更新金币消耗UI信息
         //TODO 检查错误操作（果汁厂没输入）
         transform.DOScale(1f, produceTime).SetEase(Ease.Linear).OnComplete(() => {
@@ -786,22 +784,16 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void EndTurn()
     {
         Stat();
-        //TODO 暂停
+        NewCanvasUI.My.ToggleSpeedButton(false);
+        NewCanvasUI.My.GamePause();
+        skipToFirstWave.gameObject.SetActive(true);
+        waveCountItem.Init(enemyDatas, currentWave - 1);
         //TODO 回收所有仓库产品
         //TODO 扣除交易/固定成本
         //TODO 解锁准备阶段的操作
         //TODO 更新敌人波数信息
         //TODO 结算buff/角色周期性效果
 
-    }
-
-    /// <summary>
-    /// 快进到第一波怪生成前5秒的时间
-    /// </summary>
-    public void SkipFirst()
-    {
-        timeCount = waitTimeList[0] - 5;
-        waveCountItem.Reset(enemyDatas,timeCount);
     }
 
     /// <summary>
@@ -928,7 +920,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         skipToFirstWave = transform.parent.Find("TimeScale/SkipFirst").GetComponent<Button>();
         skipToFirstWave.onClick.AddListener(() =>
         {
-            SkipFirst();
+            NextTurn();
             skipToFirstWave.gameObject.SetActive(false);
         });
         foreach (PlayerGear p in PlayerData.My.playerGears)
@@ -986,7 +978,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
 
         playerSatisfy = 0;
-
+        produceTime = 20;
         maxMinusGold = -8000;
         if (PlayerData.My.xianJinLiu[2])
         {
@@ -1090,7 +1082,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             enemyDatas.Add(stageEnemyData);
         }
         BuildingManager.My.InitAllBuilding(enemyDatas);
-        waveCountItem.Init(enemyDatas);
+        waveCountItem.Init(enemyDatas,0);
     }
 
     /// <summary>

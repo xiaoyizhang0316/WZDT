@@ -21,27 +21,24 @@ public class WaveCount : MonoSingleton<WaveCount>
     /// 初始化
     /// </summary>
     /// <param name="datas"></param>
-    public void Init(List<StageEnemyData> datas)
+    public void Init(List<StageEnemyData> datas,int waveNumber)
     {
-        for (int i = 0; i < StageGoal.My.maxWaveNumber; i++)
-        {
-            GameObject go = Instantiate(singleWavePrb, transform.Find("Panel"));
-            go.GetComponent<WaveSwim>().Init(i,datas);
-        }
+        GameObject go = Instantiate(singleWavePrb, transform.Find("Panel"));
+        go.GetComponent<WaveSwim>().Init(waveNumber, datas);
     }
 
-    public void Reset(List<StageEnemyData> datas,int newStartTime)
+    public void Move()
     {
-        for (int i = 0; i < StageGoal.My.maxWaveNumber; i++)
-        {
-            Destroy(transform.Find("Panel").GetChild(3 + i).gameObject,0f);
-        }
-        for (int i = 0; i < StageGoal.My.maxWaveNumber; i++)
-        {
-            GameObject go = Instantiate(singleWavePrb, transform.Find("Panel"));
-            go.GetComponent<WaveSwim>().Init(i, datas, newStartTime);
-        }
-
+        GetComponentInChildren<WaveSwim>().Move();
+        //for (int i = 0; i < StageGoal.My.maxWaveNumber; i++)
+        //{
+        //    Destroy(transform.Find("Panel").GetChild(3 + i).gameObject,0f);
+        //}
+        //for (int i = 0; i < StageGoal.My.maxWaveNumber; i++)
+        //{
+        //    GameObject go = Instantiate(singleWavePrb, transform.Find("Panel"));
+        //    go.GetComponent<WaveSwim>().Init(i, datas, newStartTime);
+        //}
     }
 
     /// <summary>

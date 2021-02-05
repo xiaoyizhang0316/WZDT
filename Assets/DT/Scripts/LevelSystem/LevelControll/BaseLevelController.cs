@@ -190,6 +190,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         Debug.LogWarning("base level controller start");
         DOTween.PauseAll();
         DOTween.defaultAutoPlay = AutoPlay.None;
+        NewCanvasUI.My.ToggleSpeedButton(false);
         InvokeRepeating("CheckStarTwo", 0f, 1f);
         InvokeRepeating("CheckStarThree", 0f, 1f);
         InvokeRepeating("CheckStarOne", 0f, 1f);
@@ -205,10 +206,10 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
             PlayerData.My.isLocalReady = true;
             PlayerData.My.CheckGameStart();
         }
-        else if (PlayerPrefs.GetInt("isUseGuide") == 0)
-        {
-            NewCanvasUI.My.GameNormal();
-        }
+        //else if (PlayerPrefs.GetInt("isUseGuide") == 0)
+        //{
+        //    NewCanvasUI.My.GameNormal();
+        //}
     }
 
     public void CheckCheat()
