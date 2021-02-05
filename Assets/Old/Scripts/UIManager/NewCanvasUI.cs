@@ -552,7 +552,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                     continue;
                 }
             }
-            role.HideTradeButton(isActive);
+            role.DisableTradeButton(isActive);
         }
     }
 

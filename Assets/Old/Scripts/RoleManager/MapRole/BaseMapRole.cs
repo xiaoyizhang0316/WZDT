@@ -1050,6 +1050,22 @@ public class BaseMapRole : MonoBehaviour
         tradeButton.SetActive(active);
     }
 
+    public void DisableTradeButton(bool active)
+    {
+        if (PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+            return;
+
+        if (tradeButton == null)
+            tradeButton = GetComponentInChildren<RoleTradeButton>().transform.parent.gameObject;
+
+        GetComponentInChildren<RoleTradeButton>().enabled = active;
+        tradeButton.transform.Find("TradeButton/BG").gameObject.SetActive(active);
+        if (!(isNpc && GetComponent<NPC>().isLock))
+        {
+            tradeButton.transform.Find("TradeButton/BG").gameObject.SetActive(active);
+        }
+    }
+
     public void CheckTalentBuff()
     {
         if (!isNpc)
