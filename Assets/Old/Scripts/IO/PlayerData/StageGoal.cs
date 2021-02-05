@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Linq;
 using System;
+using System.Net.Configuration;
 using static GameEnum;
 using UnityEngine.EventSystems;
 
@@ -203,6 +204,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
 
             playerGold -= num;
+            UpdateTurnCost(num);
         }
         //if(isShow)
             FloatInfoManager.My.MoneyChange(0 - num);
@@ -310,6 +312,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             else
             {
                 playerGold += num;
+                UpdateTurnIncome(num);
             }
         }
         else
@@ -770,6 +773,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.GameNormal();
         waveCountItem.Move();
         BuildingManager.My.RestartAllBuilding();
+        // 重置回合收支
+        ResetTurnIncomeAndCost();
         LockOperation();
         //TODO 更新金币消耗UI信息
         //TODO 检查错误操作（果汁厂没输入）
@@ -790,6 +795,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         waveCountItem.Init(enemyDatas, currentWave - 1);
         PlayerData.My.RoleTurnEnd();
         TradeManager.My.TurnTradeCost();
+        //TODO 解锁准备阶段的操作
+        // 显示收支
+        isEndTurn = true;
+        ShowTurnIncomeAndCost();
         UnlockOperation();
         //TODO 结算buff/角色周期性效果
     }
@@ -1464,13 +1473,40 @@ public class StageGoal : MonoSingleton<StageGoal>
     public GameObject turnIncomeAndCostPanel;
     public Text turnTotalIncome_txt;
     public Text turnTotalCost_txt;
+    public Text turnTitle_txt;
+    public Button showTurn_btn;
+    public Button hideTurn_btn;
+    private bool isEndTurn = false;
 
+    /// <summary>
+    /// 重置回合收支（点击回合开始时）
+    /// </summary>
+    void ResetTurnIncomeAndCost()
+    {
+        if (isEndTurn)
+        {
+            turnTotalCost = 0;
+            turnTotalIncome = 0;
+        }
+        turnTitle_txt.text = "本回合收支";
+    }
     /// <summary>
     /// 展示本回合总收支
     /// </summary>
-    void ShowThisTurnIncomeAndCost()
+    public void ShowTurnIncomeAndCost()
     {
-        
+        if (isEndTurn)
+        {
+            turnTitle_txt.text = "上回合收支";
+        }
+        showTurn_btn.gameObject.SetActive(false);
+        hideTurn_btn.gameObject.SetActive(true);
+        turnIncomeAndCostPanel.GetComponent<RectTransform>().DOAnchorPosX(-214, 0.57f).Play();
+    }
+
+    public void HideTurnIncomeAndCost()
+    {
+        turnIncomeAndCostPanel.GetComponent<RectTransform>().DOAnchorPosX(180, 0.57f).Play();
     }
 
     /// <summary>
@@ -1479,6 +1515,13 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="income"></param>
     void UpdateTurnIncome(int income)
     {
+        if (isEndTurn)
+        {
+            isEndTurn = false;
+            turnTitle_txt.text = "本回合收支";
+            turnTotalCost = 0;
+            turnTotalIncome = 0;
+        }
         turnTotalIncome += income;
         turnTotalIncome_txt.text = turnTotalIncome.ToString();
     }
@@ -1489,8 +1532,15 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="cost"></param>
     void UpdateTurnCost(int cost)
     {
+        if (isEndTurn)
+        {
+            isEndTurn = false;
+            turnTitle_txt.text = "本回合收支";
+            turnTotalCost = 0;
+            turnTotalIncome = 0;
+        }
         turnTotalCost -= cost;
-        turnTotalCost_txt.text = turnTotalCost.ToString();
+        turnTotalCost_txt.text = (-turnTotalCost).ToString();
     }
     
     /// <summary>
@@ -1499,7 +1549,12 @@ public class StageGoal : MonoSingleton<StageGoal>
     void LockOperation()
     {
         // 锁三镜
-        NewCanvasUI.My.transform.Find("ThreeMirror").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
+        if (NewCanvasUI.My.transform.Find("ThreeMirror/GJJ"))
+        {
+            NewCanvasUI.My.transform.Find("ThreeMirror/GJJ").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
+            NewCanvasUI.My.transform.Find("ThreeMirror/DLJ").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
+            NewCanvasUI.My.transform.Find("ThreeMirror/TSJ").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
+        }
         // 锁交易
         NewCanvasUI.My.hidePanel.gameObject.SetActive(false);
         NewCanvasUI.My.TurnToggleTradeButton(false);
@@ -1516,7 +1571,12 @@ public class StageGoal : MonoSingleton<StageGoal>
     void UnlockOperation()
     {
         // 解三镜
-        NewCanvasUI.My.transform.Find("ThreeMirror").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
+        if (NewCanvasUI.My.transform.Find("ThreeMirror/GJJ"))
+        {
+            NewCanvasUI.My.transform.Find("ThreeMirror/GJJ").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
+            NewCanvasUI.My.transform.Find("ThreeMirror/DLJ").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
+            NewCanvasUI.My.transform.Find("ThreeMirror/TSJ").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
+        }
         // 解交易
         NewCanvasUI.My.hidePanel.gameObject.SetActive(true);
         NewCanvasUI.My.TurnToggleTradeButton(true);
