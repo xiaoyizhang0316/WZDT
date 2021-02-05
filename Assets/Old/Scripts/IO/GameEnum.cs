@@ -467,6 +467,18 @@ public class GameEnum
         Debuff
     }
 
+    /// <summary>
+    /// 消耗品类别
+    /// </summary>
+    public enum ConsumableType
+    {
+        Role,
+
+        AOE,
+
+        LastingAOE
+    }
+
     public enum ProductElementType
     {
         /// <summary>

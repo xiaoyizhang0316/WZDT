@@ -14,6 +14,10 @@ public class ConsumableItem
     public string consumableDesc;
 
     public string targetBuffList;
+
+    public string consumableType;
+
+    public string range;
 }
 
 
