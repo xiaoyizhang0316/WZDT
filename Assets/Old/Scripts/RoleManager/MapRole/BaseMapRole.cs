@@ -6,6 +6,7 @@ using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static GameEnum;
 
 [Serializable]
@@ -1075,6 +1076,7 @@ public class BaseMapRole : MonoBehaviour
             tradeButton = GetComponentInChildren<RoleTradeButton>().transform.parent.gameObject;
 
         GetComponentInChildren<RoleTradeButton>().enabled = active;
+        //GetComponentInChildren<RoleTradeButton>().GetComponent<Button>().interactable = active;
         tradeButton.transform.Find("TradeButton/BG").gameObject.SetActive(active);
         if (!(isNpc && GetComponent<NPC>().isLock))
         {

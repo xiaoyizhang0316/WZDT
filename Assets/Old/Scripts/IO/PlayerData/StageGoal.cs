@@ -1522,6 +1522,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             turnTitle_txt.text = "本回合收支";
             turnTotalCost = 0;
             turnTotalIncome = 0;
+            UpdateTurnCost(0);
         }
         turnTotalIncome += income;
         turnTotalIncome_txt.text = turnTotalIncome.ToString();
@@ -1539,6 +1540,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             turnTitle_txt.text = "本回合收支";
             turnTotalCost = 0;
             turnTotalIncome = 0;
+            UpdateTurnIncome(0);
         }
         turnTotalCost -= cost;
         turnTotalCost_txt.text = (-turnTotalCost).ToString();
