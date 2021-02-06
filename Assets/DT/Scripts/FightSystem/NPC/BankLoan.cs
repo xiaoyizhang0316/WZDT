@@ -11,16 +11,18 @@ public class BankLoan : BaseExtraSkill
 
     public int eachReturn;
 
-    public override void SkillOn(TradeSign sign)
+    public TradeSign sign;
+
+    public override void SkillOn(TradeSign _sign)
     {
-        base.SkillOn(sign);
-        sign.icon.gameObject.SetActive(false);
-        StartCoroutine(StartLoan(sign));
+        base.SkillOn(_sign);
+        _sign.icon.gameObject.SetActive(false);
+        StartLoan(_sign);
+        sign = _sign;
     }
 
-    public IEnumerator StartLoan(TradeSign sign)
+    public void StartLoan(TradeSign sign)
     {
-        int count = 0;
         int actualLoan = loanNumber;
         if (PlayerData.My.yingLiMoShi[2])
         {
@@ -29,15 +31,37 @@ public class BankLoan : BaseExtraSkill
         StageGoal.My.GetPlayerGold(actualLoan);
         StageGoal.My.Income(actualLoan, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
         eachReturn = (int)(actualLoan * (1 + CalculateInterest(PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)))) / timeCount);
+        if (StageGoal.My.currentType != GameEnum.StageType.Normal)
+        {
+            StartCoroutine(KeepLoan(sign));
+        }
+
+    }
+
+    private int count = 0;
+    public IEnumerator KeepLoan(TradeSign sign)
+    {
         while (count < timeCount)
         {
             Tweener twe = transform.DOScale(1f, 20f);
             yield return twe.WaitForCompletion();
             StageGoal.My.CostPlayerGold(eachReturn);
-            StageGoal.My.Expend(eachReturn, ExpendType.AdditionalCosts,null,"还贷");
+            StageGoal.My.Expend(eachReturn, ExpendType.AdditionalCosts, null, "还贷");
             count++;
         }
         TradeManager.My.DeleteTrade(sign.tradeData.ID);
+    }
+
+    public override void OnEndTurn()
+    {
+        StageGoal.My.CostPlayerGold(eachReturn);
+        StageGoal.My.Expend(eachReturn, ExpendType.AdditionalCosts, null, "还贷");
+        count++;
+        if (count == timeCount)
+        {
+            TradeManager.My.DeleteTrade(sign.tradeData.ID);
+        }
+        base.OnEndTurn();
     }
 
     public float CalculateInterest(BaseMapRole role)

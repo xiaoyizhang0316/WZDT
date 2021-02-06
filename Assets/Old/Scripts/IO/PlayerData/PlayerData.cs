@@ -145,6 +145,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         RecycleProduct();
         RoleTurnCost();
         RoleTurnTechPoint();
+        RoleTurnCheckBuff();
     }
 
     /// <summary>
@@ -177,6 +178,17 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         for (int i = 0; i < MapRole.Count; i++)
         {
             MapRole[i].TurnAddTechPoint();
+        }
+    }
+
+    /// <summary>
+    /// 所有角色按回合结算buff
+    /// </summary>
+    public void RoleTurnCheckBuff()
+    {
+        for (int i = 0; i < MapRole.Count; i++)
+        {
+            MapRole[i].OnTurnBuff();
         }
     }
 

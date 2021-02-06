@@ -312,12 +312,13 @@ public class StageGoal : MonoSingleton<StageGoal>
             else
             {
                 playerGold += num;
-                UpdateTurnIncome(num);
+
             }
         }
         else
         {
             playerGold += num;
+            UpdateTurnIncome(num);
         }
         FloatInfoManager.My.MoneyChange(num);
         if (playerGold < maxMinusGold)
