@@ -1488,6 +1488,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             turnTotalCost = 0;
             turnTotalIncome = 0;
+            UpdateTurnCost(0);
+            UpdateTurnIncome(0);
         }
         turnTitle_txt.text = "本回合收支";
     }
