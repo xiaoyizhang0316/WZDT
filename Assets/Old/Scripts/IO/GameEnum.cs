@@ -510,7 +510,13 @@ public class GameEnum
         /// <summary>
         /// 生成物品
         /// </summary>
-        SpawnItem
+        SpawnItem,
+
+        Role,
+
+        AOE,
+
+        LastingAOE
     }
 
     public enum AudioClipType

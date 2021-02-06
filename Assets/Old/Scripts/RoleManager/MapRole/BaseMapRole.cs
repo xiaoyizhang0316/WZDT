@@ -424,6 +424,14 @@ public class BaseMapRole : MonoBehaviour
         });
     }
 
+    public void OnTurnBuff()
+    {
+        foreach (BaseBuff item in buffList)
+        {
+            item.OnRoleTurn();
+        }
+    }
+
     /// <summary>
     /// 重新计算角色属性
     /// </summary>
@@ -469,6 +477,10 @@ public class BaseMapRole : MonoBehaviour
         {
             return;
         }
+        if (StageGoal.My.currentType == StageType.Normal)
+        {
+            return;
+        }
         float time = 20f;
         int costNum = baseRoleData.cost;
         if (fteList.Contains(SceneManager.GetActiveScene().name))
@@ -489,6 +501,10 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void TurnCost()
     {
+        if (isNpc && startTradeList.Count == 0 && endTradeList.Count == 0)
+        {
+            return;
+        }
         int costNum = baseRoleData.cost * 2;
         StageGoal.My.CostPlayerGold(costNum);
         StageGoal.My.Expend(costNum, ExpendType.ProductCosts, this);

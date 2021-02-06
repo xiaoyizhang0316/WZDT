@@ -312,12 +312,13 @@ public class StageGoal : MonoSingleton<StageGoal>
             else
             {
                 playerGold += num;
-                UpdateTurnIncome(num);
+
             }
         }
         else
         {
             playerGold += num;
+            UpdateTurnIncome(num);
         }
         FloatInfoManager.My.MoneyChange(num);
         if (playerGold < maxMinusGold)
@@ -794,14 +795,13 @@ public class StageGoal : MonoSingleton<StageGoal>
         skipToFirstWave.gameObject.SetActive(true);
         waveCountItem.Init(enemyDatas, currentWave - 1);
         PlayerData.My.RoleTurnEnd();
+        TradeManager.My.TurnTradeCost();
         //TODO 解锁准备阶段的操作
         // 显示收支
         isEndTurn = true;
         ShowTurnIncomeAndCost();
         UnlockOperation();
-        //TODO 更新敌人波数信息
         //TODO 结算buff/角色周期性效果
-
     }
 
     /// <summary>

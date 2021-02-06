@@ -152,6 +152,10 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public void CheckBuffLineTradeCost()
     {
+        if (StageGoal.My.currentType == StageType.Normal)
+        {
+            return;
+        }
         tweener = transform.DOScale(1f, 10f).OnComplete(() =>
         {
             BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
@@ -159,6 +163,17 @@ public class TradeSign : MonoBehaviour
             CalculateTC();
             CheckBuffLineTradeCost();
         });
+    }
+
+    /// <summary>
+    /// 根据回合结算交易成本
+    /// </summary>
+    public void TurnTradeCost()
+    {
+        int costNum = CalculateTC(true) * 2;
+        StageGoal.My.CostPlayerGold(costNum);
+        StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
+
     }
 
     /// <summary>
@@ -244,7 +259,7 @@ public class TradeSign : MonoBehaviour
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         posList.Add(end.transform.position);
         countNumber++;
-        if (countNumber == 10)
+        if (countNumber == 10 && StageGoal.My.currentType != StageType.Normal)
         {
             if (PlayerData.My.yeWuXiTong[2])
             {
@@ -335,22 +350,6 @@ public class TradeSign : MonoBehaviour
         {
             isOutTrade = true;
             result = (int)(result * 0.3f);
-            //if (PlayerData.My.xianJinLiu[4])
-            //{
-            //    int count = 0;
-            //    for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-            //    {
-            //        if (!PlayerData.My.MapRole[i].isNpc)
-            //        {
-            //            count++;
-            //        }
-            //    }
-            //    if (count <= 3)
-            //    {
-            //        result1 = result1 * 90 / 100;
-            //        result2 = result2 * 90 / 100;
-            //    }
-            //}
         }
         else
         {
@@ -378,20 +377,7 @@ public class TradeSign : MonoBehaviour
                     result = (int)(result * per);
                 }
             }
-            //if (PlayerData.My.xianJinLiu[1])
-            //{
-            //    result = result * 95 / 100;
-            //}
         }
-        //if (PlayerData.My.xianJinLiu[0])
-        //{
-        //    result = result * 95 / 100;
-        //}
-        //if (isOutTrade && PlayerData.My.qiYeJiaZhi[5])
-        //{
-        //    StageGoal.My.GetSatisfy((int)(result * 0.2f));
-        //    StageGoal.My.ScoreGet(ScoreType.金钱得分, (int)(result * 0.2f));
-        //}
         if (!isShow)
         {
             StageGoal.My.CostPlayerGold(result);

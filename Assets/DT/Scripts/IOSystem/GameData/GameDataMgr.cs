@@ -313,6 +313,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.consumableId = int.Parse(b.consumableId);
             temp.consumableName = b.consumableName;
             temp.consumableDesc = b.consumableDesc;
+            //temp.range = int.Parse(b.range);
+            //temp.consumableType = (ConsumableType)Enum.Parse(typeof(ConsumableType) ,b.consumableType);
             string[] strList = b.targetBuffList.Split(',');
             temp.targetBuffList = new List<int>();
             foreach (string str in strList)
