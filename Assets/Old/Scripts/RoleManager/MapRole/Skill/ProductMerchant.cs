@@ -86,7 +86,6 @@ public class ProductMerchant : BaseSkill
                     game.GetComponent<GoodsSign>().speed = 1f * (1 - role.baseRoleData.efficiency > 80 ? 80f : role.baseRoleData.efficiency / 100f);
                     productDatas.Add(data);
                 }
-
                 game.transform.position = transform.position;
                 game.GetComponent<GoodsSign>().Move();
             }
@@ -99,7 +98,6 @@ public class ProductMerchant : BaseSkill
             {
                 currentCount = 0;
             }
-
         }
     }
 }

@@ -62,6 +62,11 @@ public class BuffData
     public List<string> OnProduct;
 
     /// <summary>
+    /// 回合结束相关
+    /// </summary>
+    public List<string> OnEndTurn;
+
+    /// <summary>
     /// 持续时间
     /// </summary>
     public int duration;
@@ -70,6 +75,11 @@ public class BuffData
     /// 生效间隔
     /// </summary>
     public int interval;
+
+    /// <summary>
+    /// buff价值
+    /// </summary>
+    public int buffValue;
 
     /// <summary>
     /// 时间点其他骚操作

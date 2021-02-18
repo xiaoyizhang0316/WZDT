@@ -17,12 +17,17 @@ public class BaseExtraSkill : MonoBehaviour
 
     public virtual void SkillOff(TradeSign sign)
     {
-        
+
     }
 
     public virtual bool CheckSkillCondition()
     {
-        return StageGoal.My.playerGold >= 0;
+        return true;
+    }
+
+    public virtual void OnEndTurn()
+    {
+
     }
 
     // Start is called before the first frame update

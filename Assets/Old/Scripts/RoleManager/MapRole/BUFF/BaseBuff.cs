@@ -123,6 +123,17 @@ public class BaseBuff
     }
 
     /// <summary>
+    /// 回合结束调用
+    /// </summary>
+    public void OnRoleTurn()
+    {
+        foreach (string str in buffData.OnEndTurn)
+        {
+            CheckStaticNumber(str);
+        }
+    }
+
+    /// <summary>
     /// 周期性活动（消费者）时
     /// </summary>
     public void OnConsumerTick()

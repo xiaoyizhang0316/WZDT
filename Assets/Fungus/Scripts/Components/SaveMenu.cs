@@ -56,9 +56,11 @@ namespace Fungus
 
         protected LTDescr fadeTween;
 
-        protected static SaveMenu instance;
+        public static SaveMenu instance;
 
         protected static bool hasLoadedOnStart = false;
+
+        public GameObject menuButton;
 
         protected virtual void Awake()
         {
@@ -298,11 +300,11 @@ namespace Fungus
         public virtual void Restart()
         {
             var saveManager = FungusManager.Instance.SaveManager;
-            if (string.IsNullOrEmpty(saveManager.StartScene))
-            {
-                Debug.LogError("No start scene specified");
-                return;
-            }
+            //if (string.IsNullOrEmpty(saveManager.StartScene))
+            //{
+            //    Debug.LogError("No start scene specified");
+            //    return;
+            //}
 
             PlayClickSound();
 
@@ -314,7 +316,19 @@ namespace Fungus
                 SaveManager.Delete(saveDataKey);
             }
             SaveManagerSignals.DoSaveReset();
-            SceneManager.LoadScene(saveManager.StartScene);
+            //SceneManager.LoadScene(saveManager.StartScene);
+        }
+
+        public void Hide()
+        {
+            menuButton.SetActive(false);
+            NarrativeLogMenu.instance.narrativeLogMenuGroup.gameObject.SetActive(false);
+        }
+
+        public void Show()
+        {
+            menuButton.SetActive(true);
+            Restart();
         }
 
         #endregion

@@ -95,14 +95,14 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
                 client_Wave.buildingNumber = 5;
             }
         }
-        int waitNumber = StageGoal.My.waitTimeList[number];
+        int waitNumber = 30;
         if (waitNumber - offset <= 30)
         {
             transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) * 40f / 3f, transform.localPosition.z);
-            twe = transform.DOLocalMoveY(0f, waitNumber - offset).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                Destroy(gameObject);
-            });
+            //twe = transform.DOLocalMoveY(0f, waitNumber - offset).SetEase(Ease.Linear).OnComplete(() =>
+            //{
+            //    Destroy(gameObject);
+            //});
         }
         else
         {
@@ -114,16 +114,16 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
             {
                 transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) * 3f - 310f, transform.localPosition.z);
             } 
-            twe = transform.DOLocalMoveY(-400f, waitNumber - 30f - offset).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                //print("Timecount before 30: " + StageGoal.My.timeCount);
-                twe = transform.DOLocalMoveY(0f, 30f).SetEase(Ease.Linear).OnComplete(() =>
-                {
-                    StageGoal.My.timeCount = waitNumber;
-                    //print("Timecount: " + StageGoal.My.timeCount);
-                    Destroy(gameObject);
-                });
-            });
+            //twe = transform.DOLocalMoveY(-400f, waitNumber - 30f - offset).SetEase(Ease.Linear).OnComplete(() =>
+            //{
+            //    //print("Timecount before 30: " + StageGoal.My.timeCount);
+            //    twe = transform.DOLocalMoveY(0f, 30f).SetEase(Ease.Linear).OnComplete(() =>
+            //    {
+            //        StageGoal.My.timeCount = waitNumber;
+            //        //print("Timecount: " + StageGoal.My.timeCount);
+            //        Destroy(gameObject);
+            //    });
+            //});
         }
         //else
         //{
@@ -142,6 +142,14 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
         //        });
         //    });
         //}
+    }
+
+    public void Move()
+    {
+        twe = transform.DOLocalMoveY(0f, 20f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            Destroy(gameObject);
+        });
     }
 
     public void OnPointerClick(PointerEventData eventData)

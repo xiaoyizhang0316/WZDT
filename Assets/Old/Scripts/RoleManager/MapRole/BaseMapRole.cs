@@ -425,6 +425,21 @@ public class BaseMapRole : MonoBehaviour
     }
 
     /// <summary>
+    /// 回合结束结算buff
+    /// </summary>
+    public void OnTurnBuff()
+    {
+        foreach (BaseBuff item in buffList)
+        {
+            item.OnRoleTurn();
+        }
+        if(extraSkill != null && tradeList.Count > 0)
+        {
+            extraSkill.OnEndTurn();
+        }
+    }
+
+    /// <summary>
     /// 重新计算角色属性
     /// </summary>
     public void ResetAllBuff()
@@ -469,6 +484,10 @@ public class BaseMapRole : MonoBehaviour
         {
             return;
         }
+        if (StageGoal.My.currentType == StageType.Normal)
+        {
+            return;
+        }
         float time = 20f;
         int costNum = baseRoleData.cost;
         if (fteList.Contains(SceneManager.GetActiveScene().name))
@@ -482,6 +501,30 @@ public class BaseMapRole : MonoBehaviour
             StageGoal.My.Expend(costNum, ExpendType.ProductCosts, this);
             MonthlyCost();
         });
+    }
+
+    /// <summary>
+    /// 按回合扣除固定成本
+    /// </summary>
+    public void TurnCost()
+    {
+        if (isNpc && startTradeList.Count == 0 && endTradeList.Count == 0)
+        {
+            return;
+        }
+        int costNum = baseRoleData.cost * 2;
+        StageGoal.My.CostPlayerGold(costNum);
+        StageGoal.My.Expend(costNum, ExpendType.ProductCosts, this);
+    }
+
+    /// <summary>
+    /// 按回合增加科技点数
+    /// </summary>
+    public void TurnAddTechPoint()
+    {
+        float techNum = baseRoleData.techAdd / 6f * 8f;
+        StageGoal.My.GetTechPoint((int)techNum);
+        StageGoal.My.IncomeTp((int)techNum, IncomeTpType.Npc);
     }
 
     private float tempTechAdd = 0f;
@@ -622,6 +665,21 @@ public class BaseMapRole : MonoBehaviour
         warehouse.Clear();
     }
 
+    /// <summary>
+    /// 将仓库中所有产品回收
+    /// </summary>
+    public void RecycleWarehouse()
+    {
+        int totalGold = CountWarehouseIncome();
+        StageGoal.My.GetPlayerGold(totalGold);
+        StageGoal.My.Income(totalGold, IncomeType.Other, null, "回收仓库");
+        warehouse.Clear();
+    }
+
+    /// <summary>
+    /// 统计仓库中产品价值
+    /// </summary>
+    /// <returns></returns>
     public int CountWarehouseIncome()
     {
         float result = 0;

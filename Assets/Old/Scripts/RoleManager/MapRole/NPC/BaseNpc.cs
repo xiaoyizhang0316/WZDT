@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static GameEnum;
 
 public abstract class BaseNpc : MonoBehaviour
 {
@@ -59,6 +60,23 @@ public abstract class BaseNpc : MonoBehaviour
         hideModel.SetActive(false);
         trueModel.SetActive(true);
         GetComponent<BaseMapRole>().CheckLevel();
+    }
+
+    /// <summary>
+    /// 使用多棱镜
+    /// </summary>
+    public void UseDLJ()
+    {
+        float add = 1.77f;
+        if (GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleSkillType != RoleSkillType.Product)
+        {
+            add *= 2;
+        }
+        for (int i = 0; i < NPCBuffList.Count; i++)
+        {
+            BuffData tempData = GameDataMgr.My.GetBuffDataByID(NPCBuffList[i]);
+            GetComponent<BaseMapRole>().baseRoleData.tradeCost += (int)(tempData.buffValue * add);
+        }
     }
 
     //public float h;

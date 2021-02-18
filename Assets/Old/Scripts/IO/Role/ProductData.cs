@@ -10,6 +10,7 @@ public class ProductData
 {
     public ProductData()
     {
+
     }
 
     public ProductData( ProductData data)
@@ -23,6 +24,7 @@ public class ProductData
         wasteBuffList.AddRange(data.wasteBuffList);
         buffMaxCount = data.buffMaxCount;
     }
+
     public ProductData( SendProductData data)
     {
         bulletType = data.bulletType;
@@ -34,6 +36,7 @@ public class ProductData
         buffMaxCount = data.buffMaxCount;
         RepeatBulletCount = data.count;
     }
+
     public BulletType bulletType;
 
     /// <summary>
@@ -62,19 +65,12 @@ public class ProductData
     public int buffMaxCount;
 
     public int RepeatBulletCount;
+
     public void AddBuff(int buffId)
     {
         if (!buffList.Contains(buffId))
         {
-            if (buffList.Count >= buffMaxCount)
-            {
-                wasteBuffList.Add(buffId);
-                return;
-            }
-            else
-            {
-                buffList.Add(buffId);
-            }
+            buffList.Add(buffId);
         }
     }
 
@@ -90,8 +86,7 @@ public class ProductData
         }
         else
         {
-                 return false;
-
+            return false;
         }
     }
 

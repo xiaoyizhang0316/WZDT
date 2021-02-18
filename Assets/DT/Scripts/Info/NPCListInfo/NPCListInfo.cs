@@ -134,7 +134,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         }
     }
 
-    void HideAll()
+    public void HideAll()
     {
         specialInfo.SetActive(false);
         commonProductInfo.SetActive(false);
@@ -273,5 +273,12 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public void HideBuffInfo()
     {
         buffTextContent.SetActive(false);
+    }
+
+    public void SetTradeButton(bool isUnlock)
+    {
+        specialTrade.interactable = isUnlock;
+        productTrade.interactable = isUnlock;
+        serviceTrade.interactable = isUnlock;
     }
 }

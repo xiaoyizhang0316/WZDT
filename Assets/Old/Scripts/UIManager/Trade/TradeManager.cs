@@ -209,7 +209,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     }
 
     /// <summary>
-    /// 检测玩家金钱是否
+    /// 检测玩家金钱是否满足条件
     /// </summary>
     /// <returns></returns>
     public bool CheckMoneyCondition()
@@ -348,6 +348,17 @@ public class TradeManager : MonoSingleton<TradeManager>
     }
 
     /// <summary>
+    /// 回合结束时结算所有交易的交易成本
+    /// </summary>
+    public void TurnTradeCost()
+    {
+        foreach (var item in tradeList)
+        {
+            item.Value.TurnTradeCost();
+        }
+    }
+
+    /// <summary>
     /// 显示所有交易图标
     /// </summary>
     public void ShowAllIcon()
@@ -410,6 +421,43 @@ public class TradeManager : MonoSingleton<TradeManager>
             }
         }
         return false;
+    }
+
+    /// <summary>
+    /// 判断角色的使用是否正确
+    /// </summary>
+    /// <param name="npcID"></param>
+    /// <returns></returns>
+    public bool CheckProductNpcTradeWrong(string npcID)
+    {
+        bool isWrong = false;
+        if (tradeList.Count <= 0)
+        {
+            return false;
+        }
+
+        foreach(var sign in tradeList.Values)
+        {
+            if(sign.tradeData.startRole==npcID)
+            {
+                if (PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole)).baseRoleData.baseRoleData
+                    .roleSkillType == RoleSkillType.Product)
+                {
+                    isWrong = true;
+                }
+            }
+            if (sign.tradeData.endRole == npcID)
+            {
+                if (PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole)).baseRoleData.baseRoleData
+                    .roleSkillType == RoleSkillType.Product)
+                {
+                    isWrong = false;
+                    break;
+                }
+            }
+        }
+
+        return isWrong;
     }
 
     /// <summary>

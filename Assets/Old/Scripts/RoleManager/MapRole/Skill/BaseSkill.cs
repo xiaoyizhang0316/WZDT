@@ -106,6 +106,10 @@ public abstract class BaseSkill : MonoBehaviour
             }
         }
         float d = 1f / (role.baseRoleData.efficiency * 0.05f) * add;
+        if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
+        {
+            d /= 2f;
+        }
         transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
         {
             Skill();

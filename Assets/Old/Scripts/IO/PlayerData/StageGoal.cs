@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Linq;
 using System;
+using System.Net.Configuration;
 using static GameEnum;
 using UnityEngine.EventSystems;
 
@@ -64,6 +65,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public Tweener waveTween;
 
     private bool wudi = false;
+
+    public int produceTime;
 
     /// <summary>
     /// 玩家操作时间戳列表
@@ -201,8 +204,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
 
             playerGold -= num;
+            UpdateTurnCost(num);
         }
-        FloatInfoManager.My.MoneyChange(0 - num);
+        //if(isShow)
+            FloatInfoManager.My.MoneyChange(0 - num);
         if(playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -307,11 +312,13 @@ public class StageGoal : MonoSingleton<StageGoal>
             else
             {
                 playerGold += num;
+
             }
         }
         else
         {
             playerGold += num;
+            UpdateTurnIncome(num);
         }
         FloatInfoManager.My.MoneyChange(num);
         if (playerGold < maxMinusGold)
@@ -492,7 +499,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void CheckWin()
     {
-        if (currentType != StageType.Normal)
+        if (currentType == StageType.Boss)
             return;
         ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
         bool isComplete = true;
@@ -510,6 +517,33 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 print("胜利");
                 Win();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 检测本波是否结束
+    /// </summary>
+    public void CheckEndTurn()
+    {
+        if (currentType != StageType.Normal)
+            return;
+        ConsumeSign[] list = FindObjectsOfType<ConsumeSign>();
+        bool isComplete = true;
+        foreach (Building b in BuildingManager.My.buildings)
+        {
+            if (!b.isFinishSpawn)
+            {
+                isComplete = false;
+                break;
+            }
+        }
+        if (list.Length == 0 && isComplete)
+        {
+            if (playerHealth > 0)
+            {
+                print("回合结束");
+                EndTurn();
             }
         }
     }
@@ -572,7 +606,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void Lose()
     {
-        if (currentType == StageType.Normal)
+        if (currentType == StageType.Normal || currentType == StageType.Turn)
         {
             NewCanvasUI.My.GamePause(false);
             NewCanvasUI.My.lose.SetActive(true);
@@ -594,7 +628,6 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 NewCanvasUI.My.GamePause(false);
                 NewCanvasUI.My.lose.SetActive(true);
-                
                 //NewCanvasUI.My.Panel_Lose.SetActive(true);
                 if (NetworkMgr.My.isUsingHttp)
                 {
@@ -628,13 +661,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
         if (currentWave <= maxWaveNumber)
         {
-            if (timeCount >= waitTimeList[currentWave - 1])
-            {
-                BuildingManager.My.WaveSpawnConsumer(currentWave);
-                currentWave++;
-                stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
-                stageWaveText.transform.DOPunchScale(new Vector3(1.3f,1.3f,1.3f), 1f,1).Play();
-            }
+            CheckEndTurn();
+            //if (timeCount >= waitTimeList[currentWave - 1])
+            //{
+            //    BuildingManager.My.WaveSpawnConsumer(currentWave);
+            //    currentWave++;
+            //    stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+            //    stageWaveText.transform.DOPunchScale(new Vector3(1.3f,1.3f,1.3f), 1f,1).Play();
+            //}
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 timeCount++;
@@ -679,10 +713,6 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
                 WaveCount();
             });
-            if (timeCount >= waitTimeList[0] - 5)
-            {
-                skipToFirstWave.gameObject.SetActive(false);
-            }
         }
         else
         {
@@ -735,12 +765,46 @@ public class StageGoal : MonoSingleton<StageGoal>
     }
 
     /// <summary>
-    /// 快进到第一波怪生成前5秒的时间
+    /// 回合开始
     /// </summary>
-    public void SkipFirst()
+    public void NextTurn()
     {
-        timeCount = waitTimeList[0] - 5;
-        waveCountItem.Reset(enemyDatas,timeCount);
+        Stat();
+        NewCanvasUI.My.ToggleSpeedButton(true);
+        NewCanvasUI.My.GameNormal();
+        waveCountItem.Move();
+        BuildingManager.My.RestartAllBuilding();
+        // 重置回合收支
+        ResetTurnIncomeAndCost();
+        LockOperation();
+        //TODO 更新金币消耗UI信息
+        //TODO 检查错误操作（果汁厂没输入）
+        transform.DOScale(1f, produceTime).SetEase(Ease.Linear).OnComplete(() => {
+            BuildingManager.My.WaveSpawnConsumer(currentWave);
+            stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+            stageWaveText.transform.DOPunchScale(new Vector3(1.3f, 1.3f, 1.3f), 1f, 1).Play();
+            currentWave++;
+        });
+    }
+
+    /// <summary>
+    /// 回合结束时调用
+    /// </summary>
+    public void EndTurn()
+    {
+        Stat();
+        NewCanvasUI.My.ToggleSpeedButton(false);
+        NewCanvasUI.My.GamePause();
+        skipToFirstWave.gameObject.SetActive(true);
+        waveCountItem.Init(enemyDatas, currentWave - 1);
+        PlayerData.My.RoleTurnEnd();
+        TradeManager.My.TurnTradeCost();
+        //TODO 解锁准备阶段的操作
+        // 显示收支
+        isEndTurn = true;
+        ShowTurnIncomeAndCost();
+        UnlockOperation();
+        //TODO 结算buff/角色周期性效果
     }
 
     /// <summary>
@@ -867,7 +931,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         skipToFirstWave = transform.parent.Find("TimeScale/SkipFirst").GetComponent<Button>();
         skipToFirstWave.onClick.AddListener(() =>
         {
-            SkipFirst();
+            NextTurn();
             skipToFirstWave.gameObject.SetActive(false);
         });
         foreach (PlayerGear p in PlayerData.My.playerGears)
@@ -925,7 +989,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
 
         playerSatisfy = 0;
-
+        produceTime = 20;
         maxMinusGold = -8000;
         if (PlayerData.My.xianJinLiu[2])
         {
@@ -1029,7 +1093,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             enemyDatas.Add(stageEnemyData);
         }
         BuildingManager.My.InitAllBuilding(enemyDatas);
-        waveCountItem.Init(enemyDatas);
+        waveCountItem.Init(enemyDatas,0);
     }
 
     /// <summary>
@@ -1385,4 +1449,147 @@ public class StageGoal : MonoSingleton<StageGoal>
             });
         }
     }
+
+    public void ResetAllCostAndIncome()
+    {
+        totalCost = 0;
+        tradeCost = 0;
+        productCost = 0;
+        extraCosts = 0;
+        totalIncome = 0;
+        consumeIncome = 0;
+        npcIncome = 0;
+        otherIncome = 0;
+        
+        otherIncomes.Clear();
+        npcIncomes.Clear();
+        npcIncomesEx.Clear();
+        buildingCosts.Clear();
+        extraCost.Clear();
+        DataStatPanel.My.RefreshIncome(totalIncome, consumeIncome, npcIncomesEx, npcIncomes, otherIncomes, timeCount);
+        DataStatPanel.My.RefreshExpend(totalCost, tradeCost, buildingCosts, extraCost, timeCount);
+    }
+
+    #region 回合制
+
+    private int turnTotalIncome = 0;
+    private int turnTotalCost = 0;
+    public GameObject turnIncomeAndCostPanel;
+    public Text turnTotalIncome_txt;
+    public Text turnTotalCost_txt;
+    public Text turnTitle_txt;
+    public Button showTurn_btn;
+    public Button hideTurn_btn;
+    private bool isEndTurn = false;
+
+    /// <summary>
+    /// 重置回合收支（点击回合开始时）
+    /// </summary>
+    void ResetTurnIncomeAndCost()
+    {
+        if (isEndTurn)
+        {
+            turnTotalCost = 0;
+            turnTotalIncome = 0;
+        }
+        turnTitle_txt.text = "本回合收支";
+    }
+    /// <summary>
+    /// 展示本回合总收支
+    /// </summary>
+    public void ShowTurnIncomeAndCost()
+    {
+        if (isEndTurn)
+        {
+            turnTitle_txt.text = "上回合收支";
+        }
+        showTurn_btn.gameObject.SetActive(false);
+        hideTurn_btn.gameObject.SetActive(true);
+        turnIncomeAndCostPanel.GetComponent<RectTransform>().DOAnchorPosX(-214, 0.57f).Play();
+    }
+
+    public void HideTurnIncomeAndCost()
+    {
+        turnIncomeAndCostPanel.GetComponent<RectTransform>().DOAnchorPosX(180, 0.57f).Play();
+    }
+
+    /// <summary>
+    /// 统计本回合的收入
+    /// </summary>
+    /// <param name="income"></param>
+    void UpdateTurnIncome(int income)
+    {
+        if (isEndTurn)
+        {
+            isEndTurn = false;
+            turnTitle_txt.text = "本回合收支";
+            turnTotalCost = 0;
+            turnTotalIncome = 0;
+        }
+        turnTotalIncome += income;
+        turnTotalIncome_txt.text = turnTotalIncome.ToString();
+    }
+
+    /// <summary>
+    /// 统计本回合的支出
+    /// </summary>
+    /// <param name="cost"></param>
+    void UpdateTurnCost(int cost)
+    {
+        if (isEndTurn)
+        {
+            isEndTurn = false;
+            turnTitle_txt.text = "本回合收支";
+            turnTotalCost = 0;
+            turnTotalIncome = 0;
+        }
+        turnTotalCost -= cost;
+        turnTotalCost_txt.text = (-turnTotalCost).ToString();
+    }
+    
+    /// <summary>
+    /// 锁定操作
+    /// </summary>
+    void LockOperation()
+    {
+        // 锁三镜
+        if (NewCanvasUI.My.transform.Find("ThreeMirror/GJJ"))
+        {
+            NewCanvasUI.My.transform.Find("ThreeMirror/GJJ").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
+            NewCanvasUI.My.transform.Find("ThreeMirror/DLJ").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
+            NewCanvasUI.My.transform.Find("ThreeMirror/TSJ").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
+        }
+        // 锁交易
+        NewCanvasUI.My.hidePanel.gameObject.SetActive(false);
+        NewCanvasUI.My.TurnToggleTradeButton(false);
+        NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = false;
+        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(false);
+        TradeManager.My.HideAllIcon();
+        // 锁删除
+        NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = false;
+    }
+    
+    /// <summary>
+    /// 解锁操作
+    /// </summary>
+    void UnlockOperation()
+    {
+        // 解三镜
+        if (NewCanvasUI.My.transform.Find("ThreeMirror/GJJ"))
+        {
+            NewCanvasUI.My.transform.Find("ThreeMirror/GJJ").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
+            NewCanvasUI.My.transform.Find("ThreeMirror/DLJ").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
+            NewCanvasUI.My.transform.Find("ThreeMirror/TSJ").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
+        }
+        // 解交易
+        NewCanvasUI.My.hidePanel.gameObject.SetActive(true);
+        NewCanvasUI.My.TurnToggleTradeButton(true);
+        NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = true;
+        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(true);
+        TradeManager.My.ShowAllIcon();
+        // 解删除
+        NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
+    }
+
+    #endregion
 }

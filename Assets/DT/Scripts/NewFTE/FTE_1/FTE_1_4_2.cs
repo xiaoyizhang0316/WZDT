@@ -37,6 +37,7 @@ public class FTE_1_4_2 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
+        CancelInvoke();
         yield return new WaitForSeconds(2);
     }
 }

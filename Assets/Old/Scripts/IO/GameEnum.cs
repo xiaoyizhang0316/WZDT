@@ -138,6 +138,14 @@ public class GameEnum
         /// </summary>
         DataCenter,
         /// <summary>
+        /// 消费者消耗品厂
+        /// </summary>
+        ConsumerItemFactory,
+        /// <summary>
+        /// 角色消耗品厂
+        /// </summary>
+        RoleItemFactory,
+        /// <summary>
         /// 任意
         /// </summary>
         All
@@ -510,7 +518,13 @@ public class GameEnum
         /// <summary>
         /// 生成物品
         /// </summary>
-        SpawnItem
+        SpawnItem,
+
+        Role,
+
+        AOE,
+
+        LastingAOE
     }
 
     public enum AudioClipType
@@ -617,7 +631,9 @@ public class GameEnum
         /// <summary>
         /// Boss模式
         /// </summary>
-        Boss
+        Boss,
+
+        Turn
     }
 
     public enum CursorType

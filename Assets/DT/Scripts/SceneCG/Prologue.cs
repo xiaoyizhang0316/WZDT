@@ -19,7 +19,7 @@ public class Prologue : MonoBehaviour
         CameraPlay.WidescreenH_OFF();
         transform.DOScale(transform.localScale, 1).OnComplete(() =>
         {
-            NewCanvasUI.My.GameNormal();
+            //NewCanvasUI.My.GameNormal();
             GuideManager.My.guideClose.gameObject.SetActive(true);
            StartCoroutine( GuideManager.My.Init());
         }).Play();

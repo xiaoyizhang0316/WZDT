@@ -185,6 +185,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 temp.buffParam.AddRange(b.buffParam);
                 temp.duration = b.duration;
                 temp.interval = b.interval;
+                temp.buffValue = b.buffValue;
                 return temp;
             }
         }
@@ -283,8 +284,10 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.OnBeforeDead = b.OnBeforeDead.Split(',').ToList();
             temp.OnProduct = b.OnProduct.Split(',').ToList();
             temp.OnTick = b.OnTick.Split(',').ToList();
+            //temp.OnEndTurn = b.OnEndTurn.Split(',').ToList();
             temp.duration = int.Parse(b.Duration);
             temp.interval = int.Parse(b.Interval);
+            temp.buffValue = int.Parse(b.buffValue);
             string[] str = b.BuffParam.Split(',');
             for (int i = 0; i < str.Length; i++)
             {
@@ -311,6 +314,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.consumableId = int.Parse(b.consumableId);
             temp.consumableName = b.consumableName;
             temp.consumableDesc = b.consumableDesc;
+            //temp.range = int.Parse(b.range);
+            //temp.consumableType = (ConsumableType)Enum.Parse(typeof(ConsumableType) ,b.consumableType);
             string[] strList = b.targetBuffList.Split(',');
             temp.targetBuffList = new List<int>();
             foreach (string str in strList)

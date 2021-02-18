@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static GameEnum;
 
 [Serializable]
 public class ConsumableData
@@ -20,6 +21,16 @@ public class ConsumableData
     /// 消耗品描述
     /// </summary>
     public string consumableDesc;
+
+    /// <summary>
+    /// 消耗品类别
+    /// </summary>
+    public ConsumableType consumableType;
+
+    /// <summary>
+    /// 范围
+    /// </summary>
+    public int range;
 
     /// <summary>
     /// 消耗品作用

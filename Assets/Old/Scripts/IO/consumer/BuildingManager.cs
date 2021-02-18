@@ -49,6 +49,17 @@ public class BuildingManager : MonoSingleton<BuildingManager>
     }
 
     /// <summary>
+    /// 重置所有建筑的spawn状态
+    /// </summary>
+    public void RestartAllBuilding()
+    {
+        for (int i = 0; i < buildings.Count; i++)
+        {
+            buildings[i].isFinishSpawn = false;
+        }
+    }
+
+    /// <summary>
     /// 隐藏所有建筑路线
     /// </summary>
     public void HideAllPath()
