@@ -56,7 +56,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         consumableNum = p.number;
         string path = "Sprite/Consumable/" + consumableId.ToString();
         GetComponent<Image>().sprite = Resources.Load<Sprite>(path);
-        UpdateInfo();
+        UpdateInfo(); 
     }
 
     /// <summary>
@@ -110,6 +110,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             RaycastHit[] hit = Physics.RaycastAll(ray);
             for (int i = 0; i < hit.Length; i++)
             {
+                //
                 if (hit[i].transform.tag.Equals("MapLand"))
                 {
                     print(hit[i].point);
@@ -123,6 +124,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
                     CheckDelete();
                     break;
                 }
+              //  if(//怼人)
             }
             Destroy(go);
         }

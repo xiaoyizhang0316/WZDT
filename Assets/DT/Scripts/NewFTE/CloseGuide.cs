@@ -42,11 +42,7 @@ public class CloseGuide : MonoBehaviour
                 {
                     gameObject.SetActive(false);
                 }
-                //gameObject.SetActive(NetworkMgr.My.levelProgressList.Count >= int.Parse(sceneName.Split('_')[1]));
-                //if (int.Parse(sceneName.Split('_')[1]) <= 4)
-                //{
-                //    gameObject.SetActive(AnsweringPanel.My.isComplete);
-                //}
+         
             }
         }
 
