@@ -17,7 +17,7 @@ public class BaseExtraSkill : MonoBehaviour
 
     public virtual void SkillOff(TradeSign sign)
     {
-        
+
     }
 
     public virtual bool CheckSkillCondition()

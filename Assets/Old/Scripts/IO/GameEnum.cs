@@ -138,6 +138,14 @@ public class GameEnum
         /// </summary>
         DataCenter,
         /// <summary>
+        /// 消费者消耗品厂
+        /// </summary>
+        ConsumerItemFactory,
+        /// <summary>
+        /// 角色消耗品厂
+        /// </summary>
+        RoleItemFactory,
+        /// <summary>
         /// 任意
         /// </summary>
         All

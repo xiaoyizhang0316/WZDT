@@ -50,6 +50,8 @@ public class BuffItem
     /// </summary>
     public string OnTick;
 
+    public string OnEndTurn;
+
     public string Duration;
 
     public string Interval;

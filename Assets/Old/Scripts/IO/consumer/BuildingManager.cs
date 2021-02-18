@@ -48,6 +48,9 @@ public class BuildingManager : MonoSingleton<BuildingManager>
         return null;
     }
 
+    /// <summary>
+    /// 重置所有建筑的spawn状态
+    /// </summary>
     public void RestartAllBuilding()
     {
         for (int i = 0; i < buildings.Count; i++)
