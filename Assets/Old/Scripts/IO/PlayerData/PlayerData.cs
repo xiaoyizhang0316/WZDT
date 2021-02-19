@@ -454,6 +454,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             if (playerConsumables[i].consumableId == id)
             {
                 playerConsumables[i].number--;
+                
                 if (playerConsumables[i].number == 0)
                 {
                     //print("移除 " + playerConsumables[i].consumableId.ToString());
@@ -922,9 +923,4 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     }
 
     public GameObject useErrorTip;
-
-    /// <summary>
-    /// 是否预测
-    /// </summary>
-    public bool isPrediction = false;
 }
