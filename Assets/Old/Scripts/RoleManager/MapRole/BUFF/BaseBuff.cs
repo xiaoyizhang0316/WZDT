@@ -115,7 +115,10 @@ public class BaseBuff
         {
             foreach (string str in buffData.OnTick)
             {
-                CheckStaticNumber(str);
+                if (StageGoal.My.currentType != StageType.Normal)
+                {
+                    CheckStaticNumber(str);
+                }
                 CheckRoleNumber(str);
             }
             count = 0;
@@ -329,6 +332,20 @@ public class BaseBuff
                 {
                     CalculateNumber(str, ref buffConfig.roleBulletCapacityChange, targetRole.baseRoleData.bulletCapacity);
                     targetRole.baseRoleData.bulletCapacity += buffConfig.roleBulletCapacityChange;
+                    break;
+                }
+            case 18:
+                {
+                    if (attri.Length == 2)
+                    {
+                        buffConfig.roleEncourageLevelChange = int.Parse(attri[1]);
+                    }
+                    else
+                    {
+                        buffConfig.roleEncourageLevelChange = 0 - buffConfig.roleEncourageLevelChange;
+                    }
+                    targetRole.startEncourageLevel += buffConfig.roleEncourageLevelChange;
+                    targetRole.RecalculateEncourageLevel(true);
                     break;
                 }
             default:

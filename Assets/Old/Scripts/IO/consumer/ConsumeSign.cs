@@ -498,6 +498,21 @@ public class ConsumeSign : MonoBehaviour
         CheckBuffDuration();
     }
 
+    public bool isBlocked = false;
+
+    /// <summary>
+    /// 被阻挡
+    /// </summary>
+    public void Block()
+    {
+        tweener.Pause();
+        isBlocked = true;
+        transform.DOMove(transform.position, 1f).OnComplete(() => {
+            tweener.Play();
+            isBlocked = false;
+        });
+    }
+
     /// <summary>
     /// 停止
     /// </summary>
