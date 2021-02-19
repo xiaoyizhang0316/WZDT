@@ -7,9 +7,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Linq;
 using System;
-using System.Net.Configuration;
 using static GameEnum;
-using UnityEngine.EventSystems;
 
 public class StageGoal : MonoSingleton<StageGoal>
 {
@@ -1740,6 +1738,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public int predictKillNum = 0;
     // 预测的血条
     public int predictHealth = 0;
+    public Texture2D busy;
+    public Texture2D normal;
     /// <summary>
     /// 预测回合
     /// </summary>
@@ -1749,6 +1749,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         //NewCanvasUI.My.ToggleSpeedButton(true);
         ResetPredictResult();
         PlayerData.My.isPrediction = true;
+        PlayerData.My.SaveAllWarehourse();
+        Cursor.SetCursor(busy, Vector2.zero, CursorMode.Auto);
         predict_btn.gameObject.SetActive(false);
         skipToFirstWave.gameObject.SetActive(false);
         NewCanvasUI.My.GameNormal();
@@ -1776,12 +1778,13 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.ToggleSpeedButton(false);
         NewCanvasUI.My.GameNormal();
         NewCanvasUI.My.GamePause();
-        
+        Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
         predict_btn.gameObject.SetActive(true);
         skipToFirstWave.gameObject.SetActive(true);
         //waveCountItem.Init(enemyDatas, currentWave - 1);
         PlayerData.My.RoleTurnEnd();
-        PlayerData.My.ClearAllRoleWarehouse();
+        //PlayerData.My.ClearAllRoleWarehouse();
+        PlayerData.My.RestoreAllWarehourse();
         TradeManager.My.TurnTradeCost();
         TradeManager.My.ClearAllGoods();
         PlayerData.My.isPrediction = false;
@@ -1800,7 +1803,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         predictCost = 0;
         predictTPcost = 0;
         predictTPadd = 0;
-        predictScore = 0;
+        predictScore = playerSatisfy;
         predictKillNum = 0;
         predictHealth = playerHealth;
     }

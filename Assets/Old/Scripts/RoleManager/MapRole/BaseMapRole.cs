@@ -1312,7 +1312,12 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void CloneWarehourse()
     {
-        cloneWarehourse = CommonFunc.Clone<ProductData>(warehouse);
+        cloneWarehourse.Clear();
+        for (int i = 0; i < warehouse.Count; i++)
+        {
+            cloneWarehourse.Add(new ProductData(warehouse[i]));
+        }
+        //cloneWarehourse = CommonFunc.Clone<ProductData>(warehouse);
     }
 
     /// <summary>
@@ -1320,6 +1325,11 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void RestoreWarehourse()
     {
-        warehouse = CommonFunc.Clone<ProductData>(cloneWarehourse);
+        warehouse.Clear();
+        for (int i = 0; i < cloneWarehourse.Count; i++)
+        {
+            warehouse.Add(new ProductData(cloneWarehourse[i]));
+        }
+        //warehouse = CommonFunc.Clone<ProductData>(cloneWarehourse);
     }
 }
