@@ -4,52 +4,30 @@ using UnityEngine;
 
 public class FTE_1_7 : BaseGuideStep
 {
-    public MapSign a;
-    public MapSign b;
-    public bool addFT = false;
-    public TradeConstraint.TradeConstraintItem item;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
- 
+  
+    
     
     public override IEnumerator StepStart()
     {
-        if (addFT)
+        for (int i = 0; i < MapManager.My._mapSigns.Count; i++)
         {
-            TradeConstraint.My.forbiddenTrade.Add(item);
+            if (MapManager.My._mapSigns[i].mapType == GameEnum.MapType.Grass)
+            {
+                MapManager.My._mapSigns[i].isCanPlace = true;
+            }
         }
-        NewCanvasUI.My.ShowAllTradeButton();
-        yield return new WaitForSeconds(0.2f); 
+        yield return  new WaitForSeconds(1);
     }
 
     public override IEnumerator StepEnd()
     {
-        if (addFT)
-        {
-            TradeConstraint.My.forbiddenTrade.Remove(item);
-        }
-        
-        yield break;
+        yield return  new WaitForSeconds(1);
+
     }
 
     public override bool ChenkEnd()
     {
-        if (TradeManager.My.CheckTwoRoleHasTrade(a.baseMapRole.baseRoleData,b.baseMapRole.baseRoleData ))
-        {
-            return true;
-        }
-        else
-        {    
-            return false;
-        }
+        Debug.Log(StageGoal.My.isEndTurn);
+        return StageGoal.My.isEndTurn;
     }
 }

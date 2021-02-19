@@ -26,4 +26,7 @@ public class FTE_1_4 : BaseGuideStep
     {
         yield return new WaitForSeconds(0.5f);
     }
+    
+    
+    
 }

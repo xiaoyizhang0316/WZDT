@@ -139,12 +139,13 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     /// <summary>
     /// 所有角色回合结束时相关操作
-    /// </summary>
+    /// </summary> 
+ 
     public void RoleTurnEnd()
     {
         //RecycleProduct();
         RoleTurnCost();
-        RoleTurnTechPoint();
+        RoleTurnTechPoint(); 
         RoleTurnCheckBuff();
     }
 
@@ -454,6 +455,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             if (playerConsumables[i].consumableId == id)
             {
                 playerConsumables[i].number--;
+                UseConsumableRecord(id);
                 if (playerConsumables[i].number == 0)
                 {
                     //print("移除 " + playerConsumables[i].consumableId.ToString());
@@ -908,6 +910,16 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         }
 
         totalRoleCount += count;
+    }
+
+    public void UseConsumableRecord(int id)
+    {
+   
+            List<string> param = new List<string>();
+            param.Add(id .ToString());
+           
+            StageGoal.My.RecordOperation(OperationType.UseConsumable, param);
+       
     }
 
     /*

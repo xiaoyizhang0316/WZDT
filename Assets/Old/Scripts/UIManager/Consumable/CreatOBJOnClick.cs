@@ -6,8 +6,7 @@ using UnityEngine.EventSystems;
 public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
 {
 
-    public GameObject roadblock;
-    public GameObject bomb;
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +47,22 @@ public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
                     }
                 }
 
-
+                if (GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign. consumableId).consumableType ==
+                    GameEnum.ConsumableType.AOE)
+                {
+                    print(hit[i].point);
+                    GameObject go1 = Instantiate(Resources.Load<GameObject>("Consumable/"+ConsumableListManager.My.currentSign. consumableId));
+                    go1.transform.position = hit[i].point;
+                    //BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
+                    //print("使用消耗品:" + consumableId.ToString());
+                    //InitBuff();
+                    //CastBuff(role);
+                    PlayerData.My.UseConsumable(ConsumableListManager.My.currentSign. consumableId);
+                    ConsumableListManager.My.currentSign.CheckDelete();
+                    Destroy(gameObject);
+                    break;
+                }
+                
                 if (hit[i].transform.tag.Equals("MapLand"))
                 {
                     Debug.Log("Mapland");
@@ -60,7 +74,7 @@ public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
                             Debug.Log("SpawnItem");
 
                             print(hit[i].point);
-                            GameObject go1 = Instantiate(roadblock);
+                            GameObject go1 = Instantiate (Resources.Load<GameObject>("Consumable/"+ConsumableListManager.My.currentSign. consumableId) );
                             go1.transform.position = hit[i].transform.position;
                             //BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
                             //print("使用消耗品:" + consumableId.ToString());
@@ -71,25 +85,9 @@ public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
                             Destroy(gameObject);
                             break;
                         }
-                    }
-
-                    if (GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign. consumableId).consumableType ==
-                        GameEnum.ConsumableType.AOE)
-                    {
-                        print(hit[i].point);
-                        GameObject go1 = Instantiate(bomb);
-                        go1.transform.position = hit[i].point;
-                        //BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
-                        //print("使用消耗品:" + consumableId.ToString());
-                        //InitBuff();
-                        //CastBuff(role);
-                        PlayerData.My.UseConsumable(ConsumableListManager.My.currentSign. consumableId);
-                        ConsumableListManager.My.currentSign.CheckDelete();
-                        Destroy(gameObject);
-                        break;
-                    }
+                    }  
                 }
-
+                Destroy(gameObject);
                 //  if(//怼人)
             }
         }
