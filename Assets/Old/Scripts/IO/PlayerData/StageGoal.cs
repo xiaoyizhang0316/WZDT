@@ -186,6 +186,12 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void CostPlayerGold(int num)
     {
+        if (PlayerData.My.isPrediction)
+        {
+            predictCost -= num;
+            predictGold -= num;
+            return;
+        }
         if (SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2"
                                                            || SceneManager.GetActiveScene().name == "FTE_1.5"
                                                            || SceneManager.GetActiveScene().name == "FTE_0.5"
@@ -255,8 +261,16 @@ public class StageGoal : MonoSingleton<StageGoal>
             HttpManager.My.ShowTip("Mega值不足！");
             return false;
         }
-        FloatInfoManager.My.TechChange(0 - num);
-        playerTechPoint -= num;
+
+        if (PlayerData.My.isPrediction)
+        {
+            predictTPcost -= num;
+        }
+        else
+        {
+            FloatInfoManager.My.TechChange(0 - num);
+            playerTechPoint -= num;
+        }
         SetInfo();
         return true;
     }
@@ -267,6 +281,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void GetTechPoint(int num)
     {
+        if (PlayerData.My.isPrediction)
+        {
+            predictTPadd += num;
+            return;
+        }
         FloatInfoManager.My.TechChange(num);
         playerTechPoint += num;
         SetInfo();
@@ -282,7 +301,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             return;
         }
-        CameraPlay.OneHit(new Color(1f, 0.3896085f, 0.07075471f, 0f),0.5f);
+        if(!PlayerData.My.isPrediction)
+            CameraPlay.OneHit(new Color(1f, 0.3896085f, 0.07075471f, 0f),0.5f);
         //CameraPlay.Hit(tipColor, 0.5f);
     }
 
@@ -303,6 +323,12 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void GetPlayerGold(int num)
     {
+        if (PlayerData.My.isPrediction)
+        {
+            predictIncome += num;
+            predictGold += num;
+            return;
+        }
         if(SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2")
         {
             if(playerGold+num >= 10000000)
@@ -361,6 +387,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void GetSatisfy(int num)
     {
+        if (PlayerData.My.isPrediction)
+        {
+            predictScore += num;
+            return;
+        }
         if(int.MaxValue - playerSatisfy < num)
         {
             playerSatisfy = int.MaxValue;
@@ -378,8 +409,15 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="num"></param>
     public void LostHealth(int num)
     {
-        playerHealth += num;
-        SetInfo();
+        if (PlayerData.My.isPrediction)
+        {
+            predictHealth += num;
+        }
+        else
+        {
+            playerHealth += num;
+            SetInfo();
+        }
         CheckDead();
     }
 
@@ -479,6 +517,14 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void CheckDead()
     {
+        if (PlayerData.My.isPrediction)
+        {
+            if (predictHealth <= 0)
+            {
+                EndPredictionTurn();
+            }
+            return;
+        }
         if (playerHealth <= 0)
         {
             //for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
@@ -543,7 +589,14 @@ public class StageGoal : MonoSingleton<StageGoal>
             if (playerHealth > 0)
             {
                 print("回合结束");
-                EndTurn();
+                if (PlayerData.My.isPrediction)
+                {
+                    EndPredictionTurn();
+                }
+                else
+                {
+                    EndTurn();
+                }
             }
         }
     }
@@ -654,11 +707,15 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void WaveCount()
     {
-        if (playerGold < 0)
+        if (!PlayerData.My.isPrediction)
         {
-            totalMinusGoldTime++;
+            if (playerGold < 0)
+            {
+                totalMinusGoldTime++;
+            }
+            stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
         }
-        stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+        
         if (currentWave <= maxWaveNumber)
         {
             CheckEndTurn();
@@ -672,42 +729,81 @@ public class StageGoal : MonoSingleton<StageGoal>
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 timeCount++;
-                
-                if (timeCount % 5 == 0)
+                if (PlayerData.My.isPrediction)
                 {
-                    Stat();
-                }
-                if (timeCount % 20 == 0)
-                {
-                    if (playerGold > 0)
+                    if (timeCount % 20 == 0)
                     {
-                        float add = 0.05f;
-                        if (PlayerData.My.qiYeJiaZhi[3])
+                        if (predictGold > 0)
                         {
-                            add = 0.1f;
-                        }
-                        if(!SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
-                            GetSatisfy((int)(playerGold * add));
-                        ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
-                        if (PlayerData.My.xianJinLiu[5])
-                        {
-                            GetPlayerGold(playerGold * 5 / 100);
-                            Income(playerGold * 5 / 100,IncomeType.Other,null,"利息");
-                        }
-                    }
-                    if (PlayerData.My.yeWuXiTong[3])
-                    {
-                        int count = 0;
-                        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-                        {
-                            if (!PlayerData.My.MapRole[i].isNpc)
+                            float add = 0.05f;
+                            if (PlayerData.My.qiYeJiaZhi[3])
                             {
-                                count++;
+                                add = 0.1f;
+                            }
+                            if(!SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+                                GetSatisfy((int)(predictGold * add));
+                            //ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
+                            if (PlayerData.My.xianJinLiu[5])
+                            {
+                                GetPlayerGold(predictGold * 5 / 100);
+                                //Income(playerGold * 5 / 100,IncomeType.Other,null,"利息");
                             }
                         }
-                        if (count <= 2)
+                        if (PlayerData.My.yeWuXiTong[3])
                         {
-                            GetTechPoint(20);
+                            int count = 0;
+                            for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                            {
+                                if (!PlayerData.My.MapRole[i].isNpc)
+                                {
+                                    count++;
+                                }
+                            }
+                            if (count <= 2)
+                            {
+                                GetTechPoint(20);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (timeCount % 5 == 0)
+                    {
+                        Stat();
+                    }
+                    if (timeCount % 20 == 0)
+                    {
+                        if (playerGold > 0)
+                        {
+                            float add = 0.05f;
+                            if (PlayerData.My.qiYeJiaZhi[3])
+                            {
+                                add = 0.1f;
+                            }
+                            if(!SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+                                GetSatisfy((int)(playerGold * add));
+                            ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
+                            if (PlayerData.My.xianJinLiu[5])
+                            {
+                                GetPlayerGold(playerGold * 5 / 100);
+                                Income(playerGold * 5 / 100,IncomeType.Other,null,"利息");
+                            }
+                        }
+                        if (PlayerData.My.yeWuXiTong[3])
+                        {
+                            int count = 0;
+                            for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                            {
+                                if (!PlayerData.My.MapRole[i].isNpc)
+                                {
+                                    count++;
+                                }
+                            }
+                            if (count <= 2)
+                            {
+                                GetTechPoint(20);
+                            }
                         }
                     }
                 }
@@ -1138,6 +1234,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         Stat();
         startTime = TimeStamp.GetCurrentTimeStamp();
         menuOpenButton.onClick.AddListener(MenuShow);
+        predict_btn.onClick.AddListener(PredictionNextTurn);
         // 在第九关实时上传分数
         InitRtScore();
     }
@@ -1189,6 +1286,11 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public void Income(int num, IncomeType incomeType, BaseMapRole npc =null, string otherName="")
     {
+        if (PlayerData.My.isPrediction)
+        {
+            //predictIncome += num;
+            return;
+        }
         totalIncome += num;
         switch (incomeType)
         {
@@ -1242,6 +1344,11 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public void Expend(int num, ExpendType expendType, BaseMapRole build = null, string extraName = "")
     {
+        if (PlayerData.My.isPrediction)
+        {
+            //predictCost += num;
+            return;
+        }
         totalCost += num;
         switch (expendType)
         {
@@ -1310,6 +1417,10 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public void ScoreGet(ScoreType type,int num)
     {
+        if (PlayerData.My.isPrediction)
+        {
+            return;
+        }
         if (scoreStats.ContainsKey(type))
         {
             scoreStats[type] += num;
@@ -1323,6 +1434,10 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     private void Stat()
     {
+        if (PlayerData.My.isPrediction)
+        {
+            return;
+        }
         if(dataStats == null)
         {
             dataStats = new List<DataStat>();
@@ -1490,6 +1605,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             turnTotalCost = 0;
             turnTotalIncome = 0;
+            UpdateTurnCost(0);
+            UpdateTurnIncome(0);
         }
         turnTitle_txt.text = "本回合收支";
     }
@@ -1524,6 +1641,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             turnTitle_txt.text = "本回合收支";
             turnTotalCost = 0;
             turnTotalIncome = 0;
+            UpdateTurnCost(0);
         }
         turnTotalIncome += income;
         turnTotalIncome_txt.text = turnTotalIncome.ToString();
@@ -1541,6 +1659,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             turnTitle_txt.text = "本回合收支";
             turnTotalCost = 0;
             turnTotalIncome = 0;
+            UpdateTurnIncome(0);
         }
         turnTotalCost -= cost;
         turnTotalCost_txt.text = (-turnTotalCost).ToString();
@@ -1563,9 +1682,12 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.TurnToggleTradeButton(false);
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = false;
         NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(false);
+        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable=false;
         TradeManager.My.HideAllIcon();
         // 锁删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = false;
+        // 禁止键角色
+        RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(-300, 1f).Play();
     }
     
     /// <summary>
@@ -1576,18 +1698,103 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 解三镜
         if (NewCanvasUI.My.transform.Find("ThreeMirror/GJJ"))
         {
-            NewCanvasUI.My.transform.Find("ThreeMirror/GJJ").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
-            NewCanvasUI.My.transform.Find("ThreeMirror/DLJ").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
-            NewCanvasUI.My.transform.Find("ThreeMirror/TSJ").GetComponent<RectTransform>().DOAnchorPosY(0, 1f).Play();
+            NewCanvasUI.My.transform.Find("ThreeMirror/GJJ").GetComponent<RectTransform>().DOAnchorPosY(-47, 1f).Play();
+            NewCanvasUI.My.transform.Find("ThreeMirror/DLJ").GetComponent<RectTransform>().DOAnchorPosY(-47, 1f).Play();
+            NewCanvasUI.My.transform.Find("ThreeMirror/TSJ").GetComponent<RectTransform>().DOAnchorPosY(-47, 1f).Play();
         }
         // 解交易
         NewCanvasUI.My.hidePanel.gameObject.SetActive(true);
         NewCanvasUI.My.TurnToggleTradeButton(true);
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = true;
         NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(true);
+        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable=true;
         TradeManager.My.ShowAllIcon();
         // 解删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
+        // 可以见角色
+        RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(67, 1f).Play();
+    }
+
+    #endregion
+
+    #region Prediction
+
+    public Button predict_btn;
+    // 预测的金钱
+    public int predictGold = 0;
+    // 预测的收入
+    public int predictIncome = 0;
+    // 预测的支出
+    public int predictCost = 0;
+    // 预测的科技点支出
+    public int predictTPcost = 0;
+    // 预测的科技点收入
+    public int predictTPadd = 0;
+    // 预测的得分
+    public int predictScore = 0;
+    // 预测的满足消费者数量
+    public int predictKillNum = 0;
+    // 预测的血条
+    public int predictHealth = 0;
+    /// <summary>
+    /// 预测回合
+    /// </summary>
+    public void PredictionNextTurn()
+    {
+        //Stat();
+        //NewCanvasUI.My.ToggleSpeedButton(true);
+        ResetPredictResult();
+        PlayerData.My.isPrediction = true;
+        predict_btn.gameObject.SetActive(false);
+        NewCanvasUI.My.GameNormal();
+        NewCanvasUI.My.GameAccelerate(10f);
+        //waveCountItem.Move();
+        BuildingManager.My.RestartAllBuilding();
+        // 重置回合收支
+        HideTurnIncomeAndCost();
+        LockOperation();
+        //TODO 更新金币消耗UI信息
+        //TODO 检查错误操作（果汁厂没输入）
+        transform.DOScale(1f, produceTime).SetEase(Ease.Linear).OnComplete(() => {
+            BuildingManager.My.WaveSpawnConsumer(currentWave);
+            /*stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+            stageWaveText.transform.DOPunchScale(new Vector3(1.3f, 1.3f, 1.3f), 1f, 1).Play();
+            currentWave++;*/
+        });
+    }
+
+    /// <summary>
+    /// 回合预测结束
+    /// </summary>
+    public void EndPredictionTurn()
+    {
+        NewCanvasUI.My.ToggleSpeedButton(false);
+        NewCanvasUI.My.GamePause();
+        PlayerData.My.isPrediction = false;
+        predict_btn.gameObject.SetActive(true);
+        skipToFirstWave.gameObject.SetActive(true);
+        //waveCountItem.Init(enemyDatas, currentWave - 1);
+        PlayerData.My.RoleTurnEnd();
+        PlayerData.My.ClearAllRoleWarehouse();
+        //TradeManager.My.TurnTradeCost();
+        TradeManager.My.ClearAllGoods();
+        //TODO 解锁准备阶段的操作
+        // 显示收支
+        ShowTurnIncomeAndCost();
+        UnlockOperation();
+        //TODO 结算buff/角色周期性效果
+    }
+
+    private void ResetPredictResult()
+    {
+        predictGold = playerGold;
+        predictIncome = 0;
+        predictCost = 0;
+        predictTPcost = 0;
+        predictTPadd = 0;
+        predictScore = 0;
+        predictKillNum = 0;
+        predictHealth = playerHealth;
     }
 
     #endregion

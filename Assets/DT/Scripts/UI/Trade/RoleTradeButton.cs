@@ -156,7 +156,7 @@ public class RoleTradeButton : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
             transform.parent.LookAt(Camera.main.transform.position);
-            GetComponent<Image>().fillAmount = currentRole.warehouse.Count / (float)currentRole.baseRoleData.bulletCapacity;
+            //GetComponent<Image>().fillAmount = currentRole.warehouse.Count / (float)currentRole.baseRoleData.bulletCapacity;
             if (currentRole.isNpc)
             {
                 if (currentRole.npcScript.isLock)

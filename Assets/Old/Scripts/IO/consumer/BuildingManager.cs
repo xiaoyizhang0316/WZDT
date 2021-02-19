@@ -49,6 +49,21 @@ public class BuildingManager : MonoSingleton<BuildingManager>
     }
 
     /// <summary>
+    /// 计算本波所有消费者总数
+    /// </summary>
+    /// <param name="waveNumber"></param>
+    /// <returns></returns>
+    public int CalculateConsumerNumber(int waveNumber)
+    {
+        int result = 0;
+        for (int i = 0; i < buildings.Count; i++)
+        {
+            result += buildings[i].CalculateConsumerNumber(waveNumber);
+        }
+        return result;
+    }
+
+    /// <summary>
     /// 重置所有建筑的spawn状态
     /// </summary>
     public void RestartAllBuilding()

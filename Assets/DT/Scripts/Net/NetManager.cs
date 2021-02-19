@@ -460,7 +460,14 @@ public class NetManager : MonoSingleton<NetManager>
         StageGoal.My.GetSatisfy(score);
         StageGoal.My.GetPlayerGold(gold);
         StageGoal.My.Income(gold, IncomeType.Consume);
-        StageGoal.My.killNumber++;
+        if (PlayerData.My.isPrediction)
+        {
+            StageGoal.My.predictKillNum++;
+        }
+        else
+        {
+            StageGoal.My.killNumber++;
+        }
     }
 
     /// <summary>
