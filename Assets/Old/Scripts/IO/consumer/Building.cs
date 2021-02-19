@@ -142,8 +142,11 @@ public class Building : MonoBehaviour
         }
         if (waveConfigs[waveNumber][0].num > 0)
         {
-            DrawPathLine();
-            protalGameObject.transform.DOScale(new Vector3(1,1,0.52f), 1);
+            if (!PlayerData.My.isPrediction)
+            {
+                DrawPathLine();
+                protalGameObject.transform.DOScale(new Vector3(1,1,0.52f), 1);
+            }
         }
         List<WaveConfig> result = new List<WaveConfig>();
         consumeSigns.Clear();
@@ -414,6 +417,21 @@ public class Building : MonoBehaviour
             //GetComponent<LineRenderer>().material.mainTextureOffset = new Vector2(0.85f, 0f);
             isPathLineShow = false;
         }
+    }
+
+    /// <summary>
+    /// 计算当前波总消费者人数
+    /// </summary>
+    /// <param name="waveNumber"></param>
+    /// <returns></returns>
+    public int CalculateConsumerNumber(int waveNumber)
+    {
+        int result = 0;
+        for (int i = 0; i < waveConfigs[waveNumber].Count; i++)
+        {
+            result += waveConfigs[waveNumber][i].num;
+        }
+        return result;
     }
 
     public void OnMouseEnter()

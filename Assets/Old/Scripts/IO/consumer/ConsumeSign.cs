@@ -106,6 +106,12 @@ public class ConsumeSign : MonoBehaviour
         if (PlayerData.My.cheatIndex2)
             consumeData.maxHealth = (int)(consumeData.maxHealth * 0.5f);
         GameObject go = Instantiate(hudPrb, transform);
+        if (PlayerData.My.isPrediction)
+        {
+            foreach(Transform tran in GetComponentsInChildren<Transform>()){//遍历当前物体及其所有子物体
+                tran.gameObject.layer = 11;//更改物体的Layer层
+            }
+        }
         hud = go.GetComponent<Hud>();
         hud.Init(this);
         hud.healthImg.fillAmount = 0f;
@@ -141,15 +147,21 @@ public class ConsumeSign : MonoBehaviour
             {
                 if (debuffEffectList[i].name.Equals(buffID.ToString()))
                 {
-                    debuffEffectList[i].SetActive(true);
-                    debuffEffectList[i].GetComponent<ParticleSystem>().Play();
+                    if (!PlayerData.My.isPrediction)
+                    {
+                        debuffEffectList[i].SetActive(true);
+                        debuffEffectList[i].GetComponent<ParticleSystem>().Play();
+                    }
                 }
             }
         }
         else
         {
-            GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Effect/BuffEffect/" + buffID.ToString()), transform);
-            go.transform.localPosition = Vector3.zero;
+            if (!PlayerData.My.isPrediction)
+            {
+                GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Effect/BuffEffect/" + buffID.ToString()), transform);
+                go.transform.localPosition = Vector3.zero;
+            }
         }
     }
 
@@ -163,8 +175,11 @@ public class ConsumeSign : MonoBehaviour
         {
             if (debuffEffectList[i].name.Equals(buffID.ToString()))
             {
-                debuffEffectList[i].GetComponent<ParticleSystem>().Stop();
-                debuffEffectList[i].SetActive(false);
+                if (!PlayerData.My.isPrediction)
+                {
+                    debuffEffectList[i].GetComponent<ParticleSystem>().Stop();
+                    debuffEffectList[i].SetActive(false);
+                }
             }
         }
     }
@@ -259,7 +274,8 @@ public class ConsumeSign : MonoBehaviour
         DeathAward();
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
-        ComboManager.My.AddComboNum();
+        if(!PlayerData.My.isPrediction)
+            ComboManager.My.AddComboNum();
         if (!PlayerData.My.isSOLO)
         {
             string str = "ConsumerDead|";
@@ -369,7 +385,15 @@ public class ConsumeSign : MonoBehaviour
             StageGoal.My.GetPlayerGold(baseGold);
             StageGoal.My.Income(baseGold, IncomeType.Consume);
         }
-        StageGoal.My.killNumber++;
+
+        if (PlayerData.My.isPrediction)
+        {
+            StageGoal.My.predictKillNum++;
+        }
+        else
+        {
+            StageGoal.My.killNumber++;
+        }
     }
 
     /// <summary>
@@ -583,6 +607,10 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void OnMouseDown()
     {
+        if (PlayerData.My.isPrediction)
+        {
+            return;
+        }
         if (EventSystem.current.IsPointerOverGameObject())
             return;
         NewCanvasUI.My.consumerInfoFloatWindow.SetActive(true);
