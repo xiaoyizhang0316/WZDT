@@ -170,9 +170,13 @@ public class TradeSign : MonoBehaviour
     /// </summary>
     public void TurnTradeCost()
     {
-        int costNum = CalculateTC(true) * 2;
-        StageGoal.My.CostPlayerGold(costNum);
-        StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
+        BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        {
+            int costNum = CalculateTC(true) * 2;
+            StageGoal.My.CostPlayerGold(costNum);
+            StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
+        }
     }
 
     /// <summary>

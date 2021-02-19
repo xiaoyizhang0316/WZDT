@@ -142,7 +142,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// </summary>
     public void RoleTurnEnd()
     {
-        RecycleProduct();
+        //RecycleProduct();
         RoleTurnCost();
         RoleTurnTechPoint();
         RoleTurnCheckBuff();

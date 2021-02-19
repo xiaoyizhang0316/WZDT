@@ -508,7 +508,7 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void TurnCost()
     {
-        if (isNpc && startTradeList.Count == 0 && endTradeList.Count == 0)
+        if (isNpc)
         {
             return;
         }
