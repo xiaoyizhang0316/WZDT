@@ -95,6 +95,7 @@ public class BuffData
         OnProduct = new List<string>();
         otherFunctions = new Dictionary<int, List<string>>();
         buffParam = new List<int>();
+        OnEndTurn = new List<string>();
     }
 
     public string GenerateBuffDesc(BaseMapRole role)

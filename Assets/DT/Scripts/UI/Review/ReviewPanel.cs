@@ -39,6 +39,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
 
     public Transform talentPanel;
 
+    public GameObject consumableIconPrb;
+
     /// <summary>
     /// 正常速度播放
     /// </summary>
@@ -129,9 +131,10 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         mydataStats = datas;
         AutoPlay();
         Pause();
-        GenerateMapStates(playerOperations);
+        ClearConsumableUse();
         playSlider.maxValue = timeCount;
         playSlider.value = 0;
+        GenerateMapStates(playerOperations);
         ReviewManager.My.content.GetComponent<RectTransform>().localPosition = Vector3.zero; 
         InitMoneyLine(datas, timeCount);
         Show();
@@ -146,12 +149,22 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
     {
         AutoPlay();
         Pause();
-        GenerateMapStates(playerOperations);
+        ClearConsumableUse();
         playSlider.maxValue = StageGoal.My.timeCount;
         playSlider.value = 0;
+        GenerateMapStates(playerOperations);
         //line = playSlider.transform.GetChild(0).GetComponent<VectorObject2D>();
         InitMoneyLine(StageGoal.My.dataStats, StageGoal.My.timeCount);
         InitTalentPanel(PlayerData.My.GeneratePlayerTalentReview());
+    }
+
+    public void ClearConsumableUse()
+    {
+        Transform tf = playSlider.transform.Find("ConsumableList");
+        for (int i = 0; i < tf.childCount; i++)
+        {
+            Destroy(tf.GetChild(0).gameObject, 0f);
+        }
     }
 
     public void InitTalentPanel(string talentStr)
@@ -390,8 +403,18 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
                     }
                     break;
                 }
+            case OperationType.UseConsumable:
+                {
+                    Vector2 pos = new Vector2(1326f * p.operateTime / playSlider.maxValue, -57f);
+                    GameObject go = Instantiate(consumableIconPrb, playSlider.transform.Find("ConsumableList"));
+                    go.transform.localPosition = pos;
+                    go.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Consumable/" + p.operationParam[0]);
+                    break;
+                }
             default:
-                break;
+                {
+                    break;
+                }
         }
         return result;
     }

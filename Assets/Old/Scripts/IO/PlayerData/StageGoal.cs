@@ -1184,8 +1184,6 @@ public class StageGoal : MonoSingleton<StageGoal>
                         });
                     }
                 }
-            
-            
         }
     }
 

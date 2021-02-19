@@ -469,6 +469,17 @@ public class BaseMapRole : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 使用多棱镜时添加隐藏buff
+    /// </summary>
+    public void RecheckDLJBuff()
+    {
+        for (int i = 0; i < tradeList.Count; i++)
+        {
+            GetComponent<BaseSkill>().AddRoleBuff(tradeList[i].tradeData);
+        }
+    }
+
     #endregion
 
     Tweener costTwe;
