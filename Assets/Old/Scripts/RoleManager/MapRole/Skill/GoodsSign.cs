@@ -31,6 +31,7 @@ public class GoodsSign : MonoBehaviour
     void Start()
     {
         needUpdate = false;
+        
 
         // InvokeRepeating(" DeleteEffect()",0.1f,0.1f);
     }
@@ -46,6 +47,12 @@ public class GoodsSign : MonoBehaviour
     private int count = 0;
     public void Move()
     {
+        if (PlayerData.My.isPrediction)
+        {
+            foreach(Transform tran in GetComponentsInChildren<Transform>()){//遍历当前物体及其所有子物体
+                tran.gameObject.layer = 11;//更改物体的Layer层
+            }
+        }
         CheckColor();
         if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
         {
@@ -138,7 +145,8 @@ public class GoodsSign : MonoBehaviour
                             go.transform.SetParent(target.transform);
 
                             Debug.Log("初始化拖尾" + go.name);
-                            go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().tile);
+                            if(!PlayerData.My.isPrediction)
+                                go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().tile);
                             float flyTime2 = Vector3.Distance(consumeSigns[targetIndex].transform.position, go.transform.position) / 24f;
                             //            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
                             if (consumeSigns[targetIndex] == null)
@@ -152,7 +160,11 @@ public class GoodsSign : MonoBehaviour
                                     if (go.GetComponent<GoodsSign>().target != null)
                                     {
                                         Debug.Log("初始化爆炸" + go.name);
-                                        go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().explosions);
+                                        if (!PlayerData.My.isPrediction)
+                                        {
+                                            go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().explosions);
+                                        }
+                                        
                                         //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                                         go.GetComponent<GoodsSign>().target.OnHit(ref productData);
                                         BulletObjectPool.My.RecoveryBullet(go, 0.3f);

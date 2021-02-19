@@ -50,6 +50,11 @@ public class RoleDrag : MonoBehaviour
         {
             return;
         }
+
+        if (PlayerData.My.isPrediction)
+        {
+            return;
+        }
         if (NewCanvasUI.My.isSetTrade && !EventSystem.current.IsPointerOverGameObject())
         {
             NewCanvasUI.My.endRole = GetComponentInParent<BaseMapRole>();

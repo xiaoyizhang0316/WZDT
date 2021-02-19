@@ -922,4 +922,9 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     }
 
     public GameObject useErrorTip;
+
+    /// <summary>
+    /// 是否预测
+    /// </summary>
+    public bool isPrediction = false;
 }

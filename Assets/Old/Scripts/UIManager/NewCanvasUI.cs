@@ -340,10 +340,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// <summary>
     /// 游戏加速
     /// </summary>
-    public void GameAccelerate()
+    public void GameAccelerate(float times=2f)
     {
         DOTween.PlayAll();
-        DOTween.timeScale = 2f;
+        DOTween.timeScale = times;
         DOTween.defaultAutoPlay = AutoPlay.All;
         //MessageManager.my.RpcGameAccerlarate();
         Button_Pause.interactable = true;

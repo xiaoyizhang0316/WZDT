@@ -142,8 +142,11 @@ public class Building : MonoBehaviour
         }
         if (waveConfigs[waveNumber][0].num > 0)
         {
-            DrawPathLine();
-            protalGameObject.transform.DOScale(new Vector3(1,1,0.52f), 1);
+            if (!PlayerData.My.isPrediction)
+            {
+                DrawPathLine();
+                protalGameObject.transform.DOScale(new Vector3(1,1,0.52f), 1);
+            }
         }
         List<WaveConfig> result = new List<WaveConfig>();
         consumeSigns.Clear();

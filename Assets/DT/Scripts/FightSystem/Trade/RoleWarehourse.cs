@@ -17,7 +17,8 @@ public class RoleWarehourse : MonoBehaviour
     {
         if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
-            GetComponent<Image>().fillAmount = currentRole.warehouse.Count / (float)currentRole.baseRoleData.bulletCapacity;
+            if(!PlayerData.My.isPrediction)
+                GetComponent<Image>().fillAmount = currentRole.warehouse.Count / (float)currentRole.baseRoleData.bulletCapacity;
         }
     }
 }
