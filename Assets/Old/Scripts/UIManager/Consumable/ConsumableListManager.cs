@@ -22,6 +22,9 @@ public class ConsumableListManager : MonoSingleton<ConsumableListManager>
     /// </summary>
     public Transform dragPos;
 
+    public ConsumableSign currentSign;
+
+    public bool isClick = false;
     /// <summary>
     /// 初始化
     /// </summary>
@@ -33,7 +36,6 @@ public class ConsumableListManager : MonoSingleton<ConsumableListManager>
         }
         foreach (PlayerConsumable p in PlayerData.My.playerConsumables)
         {
-          
             GameObject go = Instantiate(consumablePrb, scrollViewContent.position, scrollViewContent.rotation, scrollViewContent);
             go.GetComponent<ConsumableSign>().Init(p);
         }
@@ -60,4 +62,5 @@ public class ConsumableListManager : MonoSingleton<ConsumableListManager>
     {
         Init();
     }
+    
 }

@@ -315,7 +315,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.consumableName = b.consumableName;
             temp.consumableDesc = b.consumableDesc;
             //temp.range = int.Parse(b.range);
-            //temp.consumableType = (ConsumableType)Enum.Parse(typeof(ConsumableType) ,b.consumableType);
+            temp.consumableType = (ConsumableType)Enum.Parse(typeof(ConsumableType) ,b.consumableType);
             string[] strList = b.targetBuffList.Split(',');
             temp.targetBuffList = new List<int>();
             foreach (string str in strList)
@@ -326,7 +326,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         }
         foreach (ConsumableData c in consumableDatas)
         {
-            PlayerData.My.playerConsumables.Add(new PlayerConsumable(c.consumableId, 3));
+            
+            PlayerData.My.playerConsumables.Add(new PlayerConsumable(c.consumableId , 3));
         }
         //ConsumableListManager.My.Init();
     }

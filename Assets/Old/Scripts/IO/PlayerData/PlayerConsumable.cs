@@ -10,9 +10,11 @@ public class PlayerConsumable
 
     public int number;
 
-    public PlayerConsumable(int id,int _number = 1)
+ 
+    public PlayerConsumable(int id ,int _number = 1)
     {
         consumableId = id;
         number = _number;
+        
     }
 }
