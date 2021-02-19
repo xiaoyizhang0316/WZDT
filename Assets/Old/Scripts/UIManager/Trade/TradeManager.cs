@@ -209,7 +209,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     }
 
     /// <summary>
-    /// 检测玩家金钱是否
+    /// 检测玩家金钱是否满足条件
     /// </summary>
     /// <returns></returns>
     public bool CheckMoneyCondition()
@@ -347,6 +347,9 @@ public class TradeManager : MonoSingleton<TradeManager>
         return false;
     }
 
+    /// <summary>
+    /// 回合结束时结算所有交易的交易成本
+    /// </summary>
     public void TurnTradeCost()
     {
         foreach (var item in tradeList)

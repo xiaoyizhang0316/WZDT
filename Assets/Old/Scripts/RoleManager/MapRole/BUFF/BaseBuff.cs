@@ -127,7 +127,10 @@ public class BaseBuff
     /// </summary>
     public void OnRoleTurn()
     {
-
+        foreach (string str in buffData.OnEndTurn)
+        {
+            CheckStaticNumber(str);
+        }
     }
 
     /// <summary>

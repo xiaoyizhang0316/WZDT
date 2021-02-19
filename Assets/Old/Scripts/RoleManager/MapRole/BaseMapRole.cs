@@ -425,11 +425,18 @@ public class BaseMapRole : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// 回合结束结算buff
+    /// </summary>
     public void OnTurnBuff()
     {
         foreach (BaseBuff item in buffList)
         {
             item.OnRoleTurn();
+        }
+        if(extraSkill != null && tradeList.Count > 0)
+        {
+            extraSkill.OnEndTurn();
         }
     }
 

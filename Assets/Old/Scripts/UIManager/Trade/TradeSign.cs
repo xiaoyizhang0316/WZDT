@@ -173,7 +173,6 @@ public class TradeSign : MonoBehaviour
         int costNum = CalculateTC(true) * 2;
         StageGoal.My.CostPlayerGold(costNum);
         StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
-
     }
 
     /// <summary>
@@ -259,7 +258,7 @@ public class TradeSign : MonoBehaviour
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         posList.Add(end.transform.position);
         countNumber++;
-        if (countNumber == 10 && StageGoal.My.currentType != StageType.Normal)
+        if (countNumber == 10)
         {
             if (PlayerData.My.yeWuXiTong[2])
             {

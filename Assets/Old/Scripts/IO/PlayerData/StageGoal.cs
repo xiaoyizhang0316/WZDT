@@ -765,7 +765,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     }
 
     /// <summary>
-    /// 下一回合
+    /// 回合开始
     /// </summary>
     public void NextTurn()
     {
@@ -787,6 +787,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         });
     }
 
+    /// <summary>
+    /// 回合结束时调用
+    /// </summary>
     public void EndTurn()
     {
         Stat();
