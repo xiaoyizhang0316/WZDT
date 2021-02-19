@@ -8,7 +8,7 @@ public class Boom_Consumable : MonoBehaviour
     public float range;
 
     public List<ConsumeSign> list;
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Consumer") && other.GetComponentInParent<ConsumeSign>().isCanSelect)
         {

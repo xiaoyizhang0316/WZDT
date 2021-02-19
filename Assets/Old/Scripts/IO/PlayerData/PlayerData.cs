@@ -455,7 +455,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             if (playerConsumables[i].consumableId == id)
             {
                 playerConsumables[i].number--;
-                
+                UseConsumableRecord(id);
                 if (playerConsumables[i].number == 0)
                 {
                     //print("移除 " + playerConsumables[i].consumableId.ToString());
@@ -918,7 +918,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             List<string> param = new List<string>();
             param.Add(id .ToString());
            
-            StageGoal.My.RecordOperation(OperationType.PutRole, param);
+            StageGoal.My.RecordOperation(OperationType.UseConsumable, param);
        
     }
 
