@@ -8,9 +8,9 @@ public class RangeAddKillMoney : BaseSpawnItem
 
     public int buffId;
 
-    public override void Init()
+    public override void Init(int id)
     {
-        base.Init();
+        base.Init(id);
     }
 
     private void OnTriggerStay(Collider other)

@@ -9,9 +9,9 @@ public class RangeDecreaseSpeed : BaseSpawnItem
 
     public int time;
 
-    public override void Init()
+    public override void Init(int id)
     {
-        base.Init();
+        base.Init(id);
         transform.DOScale(1f, time).OnComplete(() => {
             Destroy(gameObject, 0f);
         });

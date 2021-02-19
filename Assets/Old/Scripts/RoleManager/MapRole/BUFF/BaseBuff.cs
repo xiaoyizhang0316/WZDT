@@ -268,7 +268,7 @@ public class BaseBuff
                 StageGoal.My.IncomeTp(buffConfig.playerTechPointChange, IncomeTpType.Buff);
                 break;
             case 5:
-                List<string> consumableList = attri[1].Split(',').ToList();
+                List<string> consumableList = attri[1].Split('|').ToList();
                 int number = int.Parse(attri[2]);
                 for (int i = 0; i < number; i++)
                 {

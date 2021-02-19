@@ -26,8 +26,8 @@ public class RoadPortal : BaseSpawnItem
         }
     }
 
-    public override void Init()
+    public override void Init(int id)
     {
-        base.Init();
+        base.Init(id);
     }
 }
