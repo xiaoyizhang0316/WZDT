@@ -21,7 +21,7 @@ public class FTE_1_23 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
-     
+      
         PlayAnim();
         yield return new WaitForSeconds(0.2f); 
     }
