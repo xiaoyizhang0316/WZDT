@@ -142,7 +142,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// </summary>
     public void RoleTurnEnd()
     {
-        RecycleProduct();
+        //RecycleProduct();
         RoleTurnCost();
         RoleTurnTechPoint();
         RoleTurnCheckBuff();
@@ -422,7 +422,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
                 return;
             }
         }
-        PlayerConsumable temp = new PlayerConsumable(id ,_number);
+        PlayerConsumable temp = new PlayerConsumable(id, _number);
         playerConsumables.Add(temp);
         //print("新建  " + id.ToString());
         ConsumableListManager.My.Init();

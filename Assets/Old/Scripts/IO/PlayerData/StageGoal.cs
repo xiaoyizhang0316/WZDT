@@ -797,6 +797,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.GamePause();
         skipToFirstWave.gameObject.SetActive(true);
         waveCountItem.Init(enemyDatas, currentWave - 1);
+        waveCountItem.Clear();
         PlayerData.My.RoleTurnEnd();
         TradeManager.My.TurnTradeCost();
         //TODO 解锁准备阶段的操作

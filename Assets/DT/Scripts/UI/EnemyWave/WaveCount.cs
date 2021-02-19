@@ -27,6 +27,14 @@ public class WaveCount : MonoSingleton<WaveCount>
         go.GetComponent<WaveSwim>().Init(waveNumber, datas);
     }
 
+    /// <summary>
+    /// 清空当前波消费者信息
+    /// </summary>
+    public void Clear()
+    {
+        Destroy(GetComponentInChildren<WaveSwim>().gameObject, 0f);
+    }
+
     public void Move()
     {
         GetComponentInChildren<WaveSwim>().Move();

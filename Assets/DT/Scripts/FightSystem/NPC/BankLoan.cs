@@ -64,6 +64,11 @@ public class BankLoan : BaseExtraSkill
         base.OnEndTurn();
     }
 
+    /// <summary>
+    /// 计算利率
+    /// </summary>
+    /// <param name="role"></param>
+    /// <returns></returns>
     public float CalculateInterest(BaseMapRole role)
     {
         int risk = role.baseRoleData.riskResistance;
