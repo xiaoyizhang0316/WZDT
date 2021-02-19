@@ -57,6 +57,11 @@ public class NPC : BaseNpc
         {
             return;
         }
+
+        if (PlayerData.My.isPrediction)
+        {
+            return;
+        }
         if (NewCanvasUI.My.isSetTrade && !EventSystem.current.IsPointerOverGameObject())
         {
             NewCanvasUI.My.endRole = GetComponentInParent<BaseMapRole>();

@@ -42,13 +42,14 @@ public class BulletLaunch : MonoBehaviour
 
         // gameObject.transform.localPosition = new Vector3(0, 1, 0);
 
-        launchShooter.DOLookAt(pointList[pointList.Count / 2], 0.1f).OnComplete(() =>
+        launchShooter.DOLookAt(PlayerData.My.isPrediction? launchShooter.position:pointList[pointList.Count / 2], 0.1f).OnComplete(() =>
           {
               gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
               //gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
               gameObject.transform.DOPath(pointList.ToArray(), 0.5f).SetEase(sase).OnComplete(() =>
               {
-                  gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
+                  if(!PlayerData.My.isPrediction)
+                        gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
                   //                  gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                   gameObject.GetComponent<BoomTrigger>().GetConsumerList();
 
@@ -73,10 +74,11 @@ public class BulletLaunch : MonoBehaviour
 
         gameObject.transform.localPosition = new Vector3(0, 0.5f, 0);
         gameObject.transform.SetParent(launchShooter.parent);
-        launchShooter.DOLookAt(target.transform.position, 0.1f).OnComplete(() =>
+        launchShooter.DOLookAt(PlayerData.My.isPrediction? launchShooter.position: target.transform.position, 0.1f).OnComplete(() =>
         {
             Debug.Log("初始化拖尾" + gameObject.name);
-            gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
+            if(!PlayerData.My.isPrediction)
+                gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
             float flyTime = Vector3.Distance(target.transform.position, gameObject.transform.position) / 24f;
             //            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
             if (target == null)
@@ -91,7 +93,8 @@ public class BulletLaunch : MonoBehaviour
                     if (gameObject.GetComponent<GoodsSign>().target != null)
                     {
                         Debug.Log("初始化爆炸" + gameObject.name);
-                        gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
+                        if(!PlayerData.My.isPrediction)
+                            gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
                         //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                         gameObject.GetComponent<GoodsSign>().target.OnHit(ref data);
 
@@ -128,7 +131,8 @@ public class BulletLaunch : MonoBehaviour
                                     go.transform.SetParent(target.transform);
 
                                     Debug.Log("初始化拖尾" + go.name);
-                                    go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().tile);
+                                    if(!PlayerData.My.isPrediction)
+                                        go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().tile);
                                     float flyTime2 = Vector3.Distance(consumeSigns[targetIndex].transform.position, go.transform.position) / 24f;
                                     //            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
                                     if (consumeSigns[targetIndex] == null)
@@ -143,7 +147,8 @@ public class BulletLaunch : MonoBehaviour
                                             if (go.GetComponent<GoodsSign>().target != null)
                                             {
                                                 Debug.Log("初始化爆炸" + go.name);
-                                                go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().explosions);
+                                                if(!PlayerData.My.isPrediction)
+                                                    go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().explosions);
                                                 //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                                                 go.GetComponent<GoodsSign>().target.OnHit(ref data);
                                                 BulletObjectPool.My.RecoveryBullet(go, 0.3f);
@@ -176,7 +181,8 @@ public class BulletLaunch : MonoBehaviour
         {
             float flyTime = 1;
             //   gameObject .GetComponent <ETFXProjectileScript>().Init(); 
-            gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
+            if(!PlayerData.My.isPrediction)
+                gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
             lanchNormalTWE = gameObject.transform.DOMove(target, time)
                .SetEase(Ease.Linear).OnComplete(() =>
                {
@@ -199,9 +205,10 @@ public class BulletLaunch : MonoBehaviour
         gameObject.transform.SetParent(launchShooter);
         gameObject.transform.localPosition = new Vector3(0, 0f, 0);
         gameObject.GetComponent<BulletEffect>().InitBufflist(gameObject.GetComponent<GoodsSign>().productData.buffList);
-        launchShooter.DOLookAt(gameObject.GetComponent<GoodsSign>().target.transform.position, 0.1f).OnComplete(() =>
+        launchShooter.DOLookAt(PlayerData.My.isPrediction? launchShooter.position:gameObject.GetComponent<GoodsSign>().target.transform.position, 0.1f).OnComplete(() =>
         {
-            gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
+            if(!PlayerData.My.isPrediction)
+                gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
             float flyTime = Vector3.Distance(gameObject.GetComponent<GoodsSign>().target.transform.position, gameObject.transform.position) / 10f;
             lanchNormalTWE = gameObject.transform.DOMove(gameObject.GetComponent<GoodsSign>().target.transform.position, 0.5f)
                 .SetEase(sase).OnComplete(() =>
@@ -240,7 +247,8 @@ public class BulletLaunch : MonoBehaviour
                                     go.transform.SetParent(launchShooter);
                                     go.transform.position = go.GetComponent<GoodsSign>().target.transform.position;
                                     go.GetComponent<BulletEffect>().InitBufflist(go.GetComponent<GoodsSign>().productData.buffList);
-                                    go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().tile);
+                                    if(!PlayerData.My.isPrediction)
+                                        go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().tile);
                                     float flyTime2 = Vector3.Distance(go.GetComponent<GoodsSign>().target.transform.position, go.transform.position) / 10f;
                                     go.transform.DOMove(go.GetComponent<GoodsSign>().target.transform.position, 0.5f).SetEase(sase).OnComplete(() =>
                                     {
@@ -297,12 +305,14 @@ public class BulletLaunch : MonoBehaviour
 
         tow.transform.localPosition = new Vector3(0, 0.4f, 0);
         tow.transform.SetParent(transform);
-        launchShooter.DOLookAt(tow.GetComponent<AutoFireTow>().target.transform.position, 0.1f).OnComplete(() =>
+        launchShooter.DOLookAt(PlayerData.My.isPrediction? launchShooter.position:tow.GetComponent<AutoFireTow>().target.transform.position, 0.1f).OnComplete(() =>
           {
-              tow.GetComponent<BulletEffect>().InitBuff(tow.GetComponent<BulletEffect>().tile);
+              if(!PlayerData.My.isPrediction)
+                tow.GetComponent<BulletEffect>().InitBuff(tow.GetComponent<BulletEffect>().tile);
               tow.transform.DOMove(tow.GetComponent<AutoFireTow>().target.transform.position, 0.5f).SetEase(sase).OnComplete(() =>
               {
-                  tow.GetComponent<BulletEffect>().InitBuff(tow.GetComponent<BulletEffect>().explosions);
+                  if(!PlayerData.My.isPrediction)
+                    tow.GetComponent<BulletEffect>().InitBuff(tow.GetComponent<BulletEffect>().explosions);
                   tow.GetComponent<BulletEffect>().explosions.SetActive(false);
                   tow.GetComponent<BulletEffect>().tile.SetActive(false);
                   tow.transform.GetChild(3).gameObject.SetActive(true);
@@ -342,10 +352,12 @@ public class BulletLaunch : MonoBehaviour
                               tow2.GetComponent<AutoFireTow>().shootTime = 1f / (GetComponent<BaseMapRole>().baseRoleData.efficiency * 0.04f) * data.loadingSpeed;
                               tow2.GetComponent<BulletEffect>().InitBufflist(data.buffList);
                               tow2.transform.SetParent(transform);
-                              tow2.GetComponent<BulletEffect>().InitBuff(tow2.GetComponent<BulletEffect>().tile);
+                              if(!PlayerData.My.isPrediction)
+                                tow2.GetComponent<BulletEffect>().InitBuff(tow2.GetComponent<BulletEffect>().tile);
                               tow2.transform.DOMove(tow2.GetComponent<AutoFireTow>().target.transform.position, 0.5f).SetEase(sase).OnComplete(() =>
                               {
-                                  tow2.GetComponent<BulletEffect>().InitBuff(tow2.GetComponent<BulletEffect>().explosions);
+                                  if(!PlayerData.My.isPrediction)
+                                    tow2.GetComponent<BulletEffect>().InitBuff(tow2.GetComponent<BulletEffect>().explosions);
                                   tow2.GetComponent<BulletEffect>().explosions.SetActive(false);
                                   tow2.GetComponent<BulletEffect>().tile.SetActive(false);
                                   tow2.transform.GetChild(3).gameObject.SetActive(true);

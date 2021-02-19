@@ -6,6 +6,7 @@ using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static GameEnum;
 
 [Serializable]
@@ -466,6 +467,17 @@ public class BaseMapRole : MonoBehaviour
         foreach (BaseBuff b in buffList)
         {
             b.OnPlayerBeforeDead();
+        }
+    }
+
+    /// <summary>
+    /// 使用多棱镜时添加隐藏buff
+    /// </summary>
+    public void RecheckDLJBuff()
+    {
+        for (int i = 0; i < tradeList.Count; i++)
+        {
+            GetComponent<BaseSkill>().AddRoleBuff(tradeList[i].tradeData);
         }
     }
 
@@ -1071,6 +1083,23 @@ public class BaseMapRole : MonoBehaviour
         if (tradeButton == null)
             tradeButton = GetComponentInChildren<RoleTradeButton>().transform.parent.gameObject;
         tradeButton.SetActive(active);
+    }
+
+    public void DisableTradeButton(bool active)
+    {
+        if (PlayerData.My.creatRole != PlayerData.My.playerDutyID)
+            return;
+
+        if (tradeButton == null)
+            tradeButton = GetComponentInChildren<RoleTradeButton>().transform.parent.gameObject;
+
+        GetComponentInChildren<RoleTradeButton>().enabled = active;
+        //GetComponentInChildren<RoleTradeButton>().GetComponent<Button>().interactable = active;
+        tradeButton.transform.Find("TradeButton/BG").gameObject.SetActive(active);
+        if (!(isNpc && GetComponent<NPC>().isLock))
+        {
+            tradeButton.transform.Find("TradeButton/BG").gameObject.SetActive(active);
+        }
     }
 
     public void CheckTalentBuff()

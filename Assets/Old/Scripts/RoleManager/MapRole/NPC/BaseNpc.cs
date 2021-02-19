@@ -77,6 +77,7 @@ public abstract class BaseNpc : MonoBehaviour
             BuffData tempData = GameDataMgr.My.GetBuffDataByID(NPCBuffList[i]);
             GetComponent<BaseMapRole>().baseRoleData.tradeCost += (int)(tempData.buffValue * add);
         }
+        GetComponent<BaseMapRole>().RecheckDLJBuff();
     }
 
     //public float h;

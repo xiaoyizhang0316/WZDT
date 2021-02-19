@@ -139,12 +139,13 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     /// <summary>
     /// 所有角色回合结束时相关操作
-    /// </summary>
+    /// </summary> 
+ 
     public void RoleTurnEnd()
     {
         //RecycleProduct();
         RoleTurnCost();
-        RoleTurnTechPoint();
+        RoleTurnTechPoint(); 
         RoleTurnCheckBuff();
     }
 
@@ -933,4 +934,9 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     }
 
     public GameObject useErrorTip;
+
+    /// <summary>
+    /// 是否预测
+    /// </summary>
+    public bool isPrediction = false;
 }

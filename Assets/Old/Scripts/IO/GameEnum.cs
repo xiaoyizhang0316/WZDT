@@ -620,6 +620,10 @@ public class GameEnum
         /// 出售角色
         /// </summary>
         SellRole,
+        /// <summary>
+        /// 使用消耗品
+        /// </summary>
+        UseConsumable
     }
 
     public enum StageType

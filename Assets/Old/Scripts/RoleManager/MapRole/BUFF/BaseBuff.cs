@@ -264,6 +264,15 @@ public class BaseBuff
                 StageGoal.My.GetTechPoint(buffConfig.playerTechPointChange);;
                 StageGoal.My.IncomeTp(buffConfig.playerTechPointChange, IncomeTpType.Buff);
                 break;
+            case 5:
+                List<string> consumableList = attri[1].Split(',').ToList();
+                int number = int.Parse(attri[2]);
+                for (int i = 0; i < number; i++)
+                {
+                    int index = UnityEngine.Random.Range(0, consumableList.Count);
+                    PlayerData.My.GetNewConsumalbe(int.Parse(consumableList[index]));
+                }
+                break;
             default:
                 break;
         }

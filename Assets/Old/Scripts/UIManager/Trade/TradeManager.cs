@@ -482,4 +482,18 @@ public class TradeManager : MonoSingleton<TradeManager>
             transform.GetChild(i).GetComponent<TradeSign>().HideTradeIcon();
         }
     }
+
+    public void ClearAllGoods()
+    {
+        foreach (var item in tradeList)
+        {
+            foreach (Transform child in item.Value.transform)
+            {
+                if (child.GetComponent<GoodsSign>())
+                {
+                    Destroy(child);
+                }
+            }
+        }
+    }
 }
