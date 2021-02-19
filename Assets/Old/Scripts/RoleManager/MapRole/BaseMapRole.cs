@@ -247,27 +247,22 @@ public class BaseMapRole : MonoBehaviour
         }
         if (isInit)
             baseRoleData.tradeCost -= encourageLevel * 5;
-        //for (int i = 0; i < tradeList.Count; i++)
-        //{
-        //    if (tradeList[i].tradeData.startRole.Equals(baseRoleData.ID.ToString()))
-        //    {
-        //        result += tradeList[i].tradeData.dividePercent;
-        //    }
-        //    else
-        //    {
-        //        result += 4 - tradeList[i].tradeData.dividePercent;
-        //    }
-            
-        //}
         for (int i = 0; i < startTradeList.Count; i++)
         {
             result += startTradeList[i].tradeData.dividePercent;
-            PlayerData.My.GetMapRoleById(double.Parse(startTradeList[i].tradeData.targetRole)).ResetAllBuff();
+            //PlayerData.My.GetMapRoleById(double.Parse(startTradeList[i].tradeData.targetRole)).ResetAllBuff();
         }
         for (int i = 0; i < endTradeList.Count; i++)
         {
             result += 0 - endTradeList[i].tradeData.dividePercent;
-            PlayerData.My.GetMapRoleById(double.Parse(endTradeList[i].tradeData.targetRole)).ResetAllBuff();
+            //PlayerData.My.GetMapRoleById(double.Parse(endTradeList[i].tradeData.targetRole)).ResetAllBuff();
+        }
+        if (baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        {
+            for (int i = 0; i < tradeList.Count; i++)
+            {
+                PlayerData.My.GetMapRoleById(double.Parse(tradeList[i].tradeData.targetRole)).ResetAllBuff();
+            }
         }
         result = Mathf.Min(10, result);
         result = Mathf.Max(result, -5);
