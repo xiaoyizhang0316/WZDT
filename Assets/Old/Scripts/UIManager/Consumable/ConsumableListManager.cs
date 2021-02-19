@@ -22,6 +22,9 @@ public class ConsumableListManager : MonoSingleton<ConsumableListManager>
     /// </summary>
     public Transform dragPos;
 
+    public ConsumableSign currentSign;
+
+    public bool isClick = false;
     /// <summary>
     /// 初始化
     /// </summary>

@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler,IPointerEnterHandler,IPointerExitHandler
+public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler,
+    IPointerExitHandler, IPointerClickHandler
 {
     /// <summary>
     /// 道具ID
@@ -26,6 +27,8 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     /// </summary>
     public GameObject go;
 
+
+    public GameObject goprb;
     /// <summary>
     /// buff列表
     /// </summary>
@@ -56,7 +59,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         consumableNum = p.number;
         string path = "Sprite/Consumable/" + consumableId.ToString();
         GetComponent<Image>().sprite = Resources.Load<Sprite>(path);
-        UpdateInfo(); 
+        UpdateInfo();
     }
 
     /// <summary>
@@ -65,7 +68,25 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public void UpdateInfo()
     {
         consumableNum = PlayerData.My.GetPlayerConsumableById(consumableId).number;
+        Debug.Log("consumableNum" + consumableNum);
         consumableNumber.text = consumableNum.ToString();
+    }
+
+    public void Update()
+    {
+        if ( ConsumableListManager.My.isClick&&   ConsumableListManager.My.currentSign ==this)
+        {
+            Vector3 pos = new Vector3();
+            if (go == null)
+            {
+                return;
+            }
+
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(go.GetComponent<RectTransform>(),
+                Input.mousePosition,
+                Camera.main, out pos);
+            go.transform.position = pos;
+        }
     }
 
     /// <summary>
@@ -74,17 +95,6 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!isCopy)
-        {
-            go = Instantiate(gameObject, transform.position, transform.rotation);
-            go.GetComponentInChildren<Text>().gameObject.SetActive(false);
-            go.GetComponent<ConsumableSign>().isCopy = true;
-            go.transform.SetParent(ConsumableListManager.My.dragPos);
-            Vector3 V = Input.mousePosition;
-            Vector3 V2 = new Vector3(V.x, V.y - Screen.height / 2 + 20f);
-            go.transform.localPosition = V2;
-            go.transform.localScale = new Vector3(1f, 1f, 1f);
-        }
     }
 
     /// <summary>
@@ -93,39 +103,72 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     /// <param name="eventData"></param>
     public void OnDrag(PointerEventData eventData)
     {
-        if (!isCopy)
-        {
-            Vector3 pos = new Vector3();
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(go.GetComponent<RectTransform>(), eventData.position,
-            Camera.main, out pos);
-            go.transform.position = pos;
-        }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnEndDrag1(PointerEventData eventData)
     {
+        ConsumableListManager.My.isClick = false;
         if (!isCopy)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hit = Physics.RaycastAll(ray);
+
             for (int i = 0; i < hit.Length; i++)
             {
-                //
+                if (hit[i].transform.tag.Equals("MapRole"))
+                {
+                    if (GameDataMgr.My.GetConsumableDataByID(consumableId).consumableType ==
+                        GameEnum.ConsumableType.Role)
+                    {
+                        BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
+                        print("使用消耗品:" + consumableId.ToString());
+                        InitBuff();
+                        CastBuff(role);
+                        break;
+                    }
+                }
+
+
                 if (hit[i].transform.tag.Equals("MapLand"))
                 {
-                    print(hit[i].point);
-                    GameObject go1 = Instantiate(Resources.Load<GameObject>("Consumable/Consumable"));
-                    go1.transform.position = hit[i].point;
-                    //BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
-                    //print("使用消耗品:" + consumableId.ToString());
-                    //InitBuff();
-                    //CastBuff(role);
-                    PlayerData.My.UseConsumable(consumableId);
-                    CheckDelete();
-                    break;
+                    if (hit[i].transform.GetComponent<MapSign>().mapType == GameEnum.MapType.Road)
+                    {
+                        if (GameDataMgr.My.GetConsumableDataByID(consumableId).consumableType ==
+                            GameEnum.ConsumableType.SpawnItem)
+                        {
+                            print(hit[i].point);
+                            GameObject go1 = Instantiate(Resources.Load<GameObject>("Consumable/Consumable"));
+                            go1.transform.position = hit[i].transform.position;
+                            //BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
+                            //print("使用消耗品:" + consumableId.ToString());
+                            //InitBuff();
+                            //CastBuff(role);
+                            PlayerData.My.UseConsumable(consumableId);
+                            CheckDelete();
+                            break;
+                        }
+                    }
+
+                    if (GameDataMgr.My.GetConsumableDataByID(consumableId).consumableType ==
+                        GameEnum.ConsumableType.AOE)
+                    {
+                        print(hit[i].point);
+                        GameObject go1 = Instantiate(Resources.Load<GameObject>("Consumable/Consumable"));
+                        go1.transform.position = hit[i].point;
+                        //BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
+                        //print("使用消耗品:" + consumableId.ToString());
+                        //InitBuff();
+                        //CastBuff(role);
+                        PlayerData.My.UseConsumable(consumableId);
+                        CheckDelete();
+                        break;
+                    }
                 }
-              //  if(//怼人)
+
+
+                //  if(//怼人)
             }
+
             Destroy(go);
         }
     }
@@ -144,6 +187,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
                 return;
             }
         }
+
         Destroy(gameObject);
     }
 
@@ -181,7 +225,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     {
         if (!isCopy)
         {
-            ConsumableInfo.My.Init(consumableId,consumableNum, Input.mousePosition.y - (540f * Screen.height / 1080f));
+            //     ConsumableInfo.My.Init(consumableId,consumableNum, Input.mousePosition.y - (540f * Screen.height / 1080f));
         }
     }
 
@@ -191,5 +235,32 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         {
             ConsumableInfo.My.MenuHide();
         }
+    }
+
+    private bool isClick = false;
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!ConsumableListManager.My.isClick)
+        {
+            go = Instantiate(goprb, transform.position, transform.rotation);
+            
+            go.GetComponent<Image>().sprite = GetComponent<Image>().sprite;
+            go.transform.SetParent(ConsumableListManager.My.dragPos);
+            Vector3 V = Input.mousePosition;
+            Vector3 V2 = new Vector3(V.x, V.y - Screen.height / 2 + 20f);
+            go.transform.localPosition = V2;
+            go.transform.localScale = new Vector3(1f, 1f, 1f);
+            ConsumableListManager.My.isClick = true;
+            ConsumableListManager.My.currentSign = this;
+            return;
+        }
+
+     
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
     }
 }
