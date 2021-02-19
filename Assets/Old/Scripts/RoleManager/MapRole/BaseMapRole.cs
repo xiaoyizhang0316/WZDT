@@ -1303,4 +1303,23 @@ public class BaseMapRole : MonoBehaviour
         if(!NewCanvasUI.My.isSetTrade)
             TradeManager.My.HideRelateTradeIcon();
     }
+
+    // 克隆仓库
+    public List<ProductData> cloneWarehourse = new List<ProductData>();
+
+    /// <summary>
+    ///  保存现有仓库状态
+    /// </summary>
+    public void CloneWarehourse()
+    {
+        cloneWarehourse = CommonFunc.Clone<ProductData>(warehouse);
+    }
+
+    /// <summary>
+    /// 还原仓库 
+    /// </summary>
+    public void RestoreWarehourse()
+    {
+        warehouse = CommonFunc.Clone<ProductData>(cloneWarehourse);
+    }
 }

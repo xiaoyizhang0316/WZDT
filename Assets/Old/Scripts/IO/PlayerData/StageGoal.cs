@@ -866,6 +866,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void NextTurn()
     {
         Stat();
+        predict_btn.gameObject.SetActive(false);
         NewCanvasUI.My.ToggleSpeedButton(true);
         NewCanvasUI.My.GameNormal();
         waveCountItem.Move();
@@ -889,6 +890,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void EndTurn()
     {
         Stat();
+        predict_btn.gameObject.SetActive(true);
         NewCanvasUI.My.ToggleSpeedButton(false);
         NewCanvasUI.My.GamePause();
         skipToFirstWave.gameObject.SetActive(true);
@@ -1626,6 +1628,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public void HideTurnIncomeAndCost()
     {
+        showTurn_btn.gameObject.SetActive(true);
+        hideTurn_btn.gameObject.SetActive(false);
         turnIncomeAndCostPanel.GetComponent<RectTransform>().DOAnchorPosX(180, 0.57f).Play();
     }
 
@@ -1746,8 +1750,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         ResetPredictResult();
         PlayerData.My.isPrediction = true;
         predict_btn.gameObject.SetActive(false);
+        skipToFirstWave.gameObject.SetActive(false);
         NewCanvasUI.My.GameNormal();
-        NewCanvasUI.My.GameAccelerate(10f);
+        NewCanvasUI.My.GameAccelerate(40f);
         //waveCountItem.Move();
         BuildingManager.My.RestartAllBuilding();
         // 重置回合收支
@@ -1769,18 +1774,21 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void EndPredictionTurn()
     {
         NewCanvasUI.My.ToggleSpeedButton(false);
+        NewCanvasUI.My.GameNormal();
         NewCanvasUI.My.GamePause();
-        PlayerData.My.isPrediction = false;
+        
         predict_btn.gameObject.SetActive(true);
         skipToFirstWave.gameObject.SetActive(true);
         //waveCountItem.Init(enemyDatas, currentWave - 1);
         PlayerData.My.RoleTurnEnd();
         PlayerData.My.ClearAllRoleWarehouse();
-        //TradeManager.My.TurnTradeCost();
+        TradeManager.My.TurnTradeCost();
         TradeManager.My.ClearAllGoods();
+        PlayerData.My.isPrediction = false;
         //TODO 解锁准备阶段的操作
         // 显示收支
-        ShowTurnIncomeAndCost();
+        //ShowTurnIncomeAndCost();
+        PredictionPanel.My.ShowPrediction();
         UnlockOperation();
         //TODO 结算buff/角色周期性效果
     }

@@ -491,7 +491,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             {
                 if (child.GetComponent<GoodsSign>())
                 {
-                    Destroy(child);
+                    Destroy(child.gameObject);
                 }
             }
         }
