@@ -24,7 +24,7 @@ public class GoodsSign : MonoBehaviour
     public Tweener moveTween;
     public BaseMapRole role;
     private float speedAdd = 1f;
-    public float speed = 1;
+    public float speed = 0.7f;
 
     public Dictionary<double, int> speedBuffList = new Dictionary<double, int>();
     // Start is called before the first frame update
@@ -56,7 +56,7 @@ public class GoodsSign : MonoBehaviour
         CheckColor();
         if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
         {
-            speed = 1f * (1 - (role.baseRoleData.efficiency > 80 ? 80f : role.baseRoleData.efficiency) / 100f);
+            speed = 0.5f * (1 - (role.baseRoleData.efficiency > 80 ? 80f : role.baseRoleData.efficiency) / 100f);
         }
 
         // print("bullet start move" + path[count]);

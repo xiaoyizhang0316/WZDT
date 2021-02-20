@@ -23,4 +23,12 @@ public class RangeAddKillMoney : BaseSpawnItem
             baseBuff.SetConsumerBuff(other.GetComponent<ConsumeSign>());
         }
     }
+
+    private void Update()
+    {
+        if (StageGoal.My.timeCount - startTime >= time)
+        {
+            Destroy(gameObject, 0f);
+        }
+    }
 }

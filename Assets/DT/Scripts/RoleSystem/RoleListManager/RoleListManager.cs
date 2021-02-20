@@ -104,8 +104,7 @@ public class RoleListManager : MonoSingleton<RoleListManager>
                 changeObj.Add(changeObj[0]);
                 changeObj.RemoveAt(0);
                 change.interactable = true;
-                if(playEnd!=null)
-                playEnd();
+                playEnd?.Invoke();
             }).Play();
             
         }).Play();
@@ -145,4 +144,22 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     //        }
     //    }
     //}
+
+    public void LockRoleCreate()
+    {
+        if (changeObj[0].name.Equals("Image_BG"))
+        {
+            Change(()=>change.interactable = false);
+        }
+        change.interactable = false;
+    }
+
+    public void UnlockRoleCreate()
+    {
+        if (!changeObj[0].name.Equals("Image_BG"))
+        {
+            Change(()=>change.interactable = true);
+        }
+        change.interactable = true;
+    }
 }
