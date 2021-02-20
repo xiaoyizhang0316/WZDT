@@ -12,12 +12,8 @@ public class FTE_1_2 : BaseGuideStep
     public override IEnumerator StepStart()
     {
 
-        for (int i = 0; i <   MapManager.My._mapSigns.Count; i++)
-        {
-            MapManager.My._mapSigns[i].isCanPlace = false;
-        }
-
-        MapManager.My.GetMapSignByXY(8, 24).isCanPlace = true;
+        
+       
         
         yield return new WaitForSeconds(0.5f); 
     }
