@@ -83,7 +83,7 @@ public class ProductMerchant : BaseSkill
                 game.GetComponent<GoodsSign>().role = PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
                 if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
                 {
-                    game.GetComponent<GoodsSign>().speed = 1f * (1 - role.baseRoleData.efficiency > 80 ? 80f : role.baseRoleData.efficiency / 100f);
+                    game.GetComponent<GoodsSign>().speed = 0.5f * (1 - role.baseRoleData.efficiency > 80 ? 80f : role.baseRoleData.efficiency / 100f);
                     productDatas.Add(data);
                 }
                 game.transform.position = transform.position;

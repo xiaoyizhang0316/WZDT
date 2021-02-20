@@ -499,7 +499,7 @@ public class BaseMapRole : MonoBehaviour
         {
             return;
         }
-        if (StageGoal.My.currentType == StageType.Normal)
+        if (StageGoal.My.currentType == StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name))
         {
             return;
         }
