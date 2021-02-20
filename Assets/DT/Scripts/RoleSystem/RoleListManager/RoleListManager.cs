@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
@@ -91,7 +92,7 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     }
 
 
-    public void Change()
+    public void Change(Action playEnd=null)
     {
         change.interactable = false;
         changeObj[0].transform.DOLocalMoveY(changeObj[0].transform.localPosition.y + 100, 0.2f).OnComplete(() =>
@@ -103,6 +104,8 @@ public class RoleListManager : MonoSingleton<RoleListManager>
                 changeObj.Add(changeObj[0]);
                 changeObj.RemoveAt(0);
                 change.interactable = true;
+                if(playEnd!=null)
+                playEnd();
             }).Play();
             
         }).Play();
