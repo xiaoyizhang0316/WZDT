@@ -1278,6 +1278,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         Stat();
         startTime = TimeStamp.GetCurrentTimeStamp();
         menuOpenButton.onClick.AddListener(MenuShow);
+        if (predict_btn !=null)
         predict_btn.onClick.AddListener(PredictionNextTurn);
         // 在第九关实时上传分数
         InitRtScore();
