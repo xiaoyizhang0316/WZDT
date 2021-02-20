@@ -16,6 +16,8 @@ public class BaseBuff
 
     public int duration;
 
+    public int turnDuration;
+
     public int interval;
 
     public bool canHeap;
@@ -130,10 +132,11 @@ public class BaseBuff
     /// </summary>
     public void OnRoleTurn()
     {
-        //foreach (string str in buffData.OnEndTurn)
-        //{
-        //    CheckStaticNumber(str);
-        //}
+        foreach (string str in buffData.OnEndTurn)
+        {
+            CheckStaticNumber(str);
+        }
+
     }
 
     /// <summary>
@@ -217,6 +220,7 @@ public class BaseBuff
         buffData = buff;
         buffId = buff.BuffID;
         duration = buff.duration;
+        turnDuration = buff.turnDuration;
         buffName = buff.BuffName;
     }
 

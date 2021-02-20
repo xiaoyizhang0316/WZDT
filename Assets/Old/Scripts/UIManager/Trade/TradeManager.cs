@@ -491,7 +491,22 @@ public class TradeManager : MonoSingleton<TradeManager>
             {
                 if (child.GetComponent<GoodsSign>())
                 {
-                    Destroy(child);
+                    Destroy(child.gameObject);
+                }
+            }
+        }
+    }
+
+    public void RecycleAllGoods()
+    {
+        foreach (var item in tradeList)
+        {
+            foreach (Transform child in item.Value.transform)
+            {
+                if (child.GetComponent<GoodsSign>())
+                {
+                    child.GetComponent<GoodsSign>().role.AddPruductToWareHouse(child.GetComponent<GoodsSign>().productData);
+                    Destroy(child.gameObject);
                 }
             }
         }

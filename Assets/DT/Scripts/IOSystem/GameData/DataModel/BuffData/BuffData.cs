@@ -71,6 +71,8 @@ public class BuffData
     /// </summary>
     public int duration;
 
+    public int turnDuration;
+
     /// <summary>
     /// 生效间隔
     /// </summary>

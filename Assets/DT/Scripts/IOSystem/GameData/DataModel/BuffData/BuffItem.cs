@@ -54,6 +54,8 @@ public class BuffItem
 
     public string Duration;
 
+    public string TurnDuration;
+
     public string Interval;
 
     public string buffValue;

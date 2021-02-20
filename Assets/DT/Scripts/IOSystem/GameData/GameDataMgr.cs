@@ -284,8 +284,9 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.OnBeforeDead = b.OnBeforeDead.Split(',').ToList();
             temp.OnProduct = b.OnProduct.Split(',').ToList();
             temp.OnTick = b.OnTick.Split(',').ToList();
-            //temp.OnEndTurn = b.OnEndTurn.Split(',').ToList();
+            temp.OnEndTurn = b.OnEndTurn.Split(',').ToList();
             temp.duration = int.Parse(b.Duration);
+            temp.turnDuration = int.Parse(b.TurnDuration);
             temp.interval = int.Parse(b.Interval);
             temp.buffValue = int.Parse(b.buffValue);
             string[] str = b.BuffParam.Split(',');

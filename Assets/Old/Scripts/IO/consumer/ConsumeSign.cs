@@ -313,7 +313,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void HealthCheck()
     {
-        float per = currentHealth / (float)consumeData.maxHealth;
+        float per = Mathf.Min(1f, currentHealth / (float)consumeData.maxHealth);
         hud.UpdateInfo(per);
         if (currentHealth >= consumeData.maxHealth)
         {
