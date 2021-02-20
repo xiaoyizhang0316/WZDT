@@ -35,11 +35,15 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     // Start is called before the first frame update
     void Start()
     {
-        change.onClick.AddListener(() => { Change(); });
-        if (!SceneManager.GetActiveScene().name.Equals("FTE_9"))
+        if (change != null)
         {
-            change.gameObject.SetActive(false);
+            change.onClick.AddListener(() => { Change(); });
+            if (!SceneManager.GetActiveScene().name.Equals("FTE_9"))
+            {
+                change.gameObject.SetActive(false);
+            }
         }
+        
 
         outButton.onClick.AddListener(() => { OutButton(); });
         inButton.onClick.AddListener(() =>
