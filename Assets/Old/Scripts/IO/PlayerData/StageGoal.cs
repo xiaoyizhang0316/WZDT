@@ -1729,7 +1729,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 锁删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = false;
         // 禁止键角色
-        RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(-300, 1f).Play();
+        RoleListManager.My.LockRoleCreate();
     }
 
     /// <summary>
@@ -1754,7 +1754,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 解删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
         // 可以见角色
-        RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(67, 1f).Play();
+        RoleListManager.My.UnlockRoleCreate();
     }
 
     #endregion
@@ -1807,6 +1807,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         BuildingManager.My.RestartAllBuilding();
         // 重置回合收支
         HideTurnIncomeAndCost();
+        RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(-300, 1f).Play();
         LockOperation();
         //TODO 更新金币消耗UI信息
         //TODO 检查错误操作（果汁厂没输入）
@@ -1841,6 +1842,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 显示收支
         //ShowTurnIncomeAndCost();
         PredictionPanel.My.ShowPrediction(predict_btn.transform.GetComponentInChildren<Toggle>().isOn);
+        RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(67, 1f).Play();
         UnlockOperation();
         //TODO 结算buff/角色周期性效果
     }

@@ -2,16 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class RTPanel : MonoBehaviour
 {
     public Transform content;
     public GameObject rtPrefab;
+    public Button rank_btn;
+    public Button close_btn;
     bool isOnUpdate = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rank_btn.onClick.AddListener(() =>
+        {
+            LevelInfoManager.My.Close();
+            rank_btn.gameObject.SetActive(false);
+            transform.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 0.02f);
+            InvokeRepeating("UpdateGroupPlayerScore", 0.5f, 5);
+        });
+        close_btn.onClick.AddListener(Close);
     }
 
     public void InitRTPanel()
@@ -26,8 +36,13 @@ public class RTPanel : MonoBehaviour
                     if (NetworkMgr.My.playerGroupInfo.isOpenMatch)
                     {
                         isOnUpdate = true;
-                        transform.GetComponent<RectTransform>().DOAnchorPos(new Vector2(604, 38), 0.02f);
-                        InvokeRepeating("UpdateGroupPlayerScore", 0.5f, 5);
+                        rank_btn.gameObject.SetActive(true);
+                        /*transform.GetComponent<RectTransform>().DOAnchorPos(new Vector2(604, 38), 0.02f);
+                        InvokeRepeating("UpdateGroupPlayerScore", 0.5f, 5);*/
+                    }
+                    else
+                    {
+                        rank_btn.gameObject.SetActive(false);
                     }
                 }
             }
@@ -78,10 +93,11 @@ public class RTPanel : MonoBehaviour
     {
         if (isOnUpdate)
         {
-            transform.GetComponent<RectTransform>().DOAnchorPos(new Vector2(604, 2000), 0.02f);
+            transform.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 4000), 0.02f);
             CancelInvoke();
             ClearContent();
             isOnUpdate = false;
         }
+        rank_btn.gameObject.SetActive(false);
     }
 }

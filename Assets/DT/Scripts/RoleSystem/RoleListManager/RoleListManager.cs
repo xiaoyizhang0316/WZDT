@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
@@ -21,22 +22,21 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     public Button inButton;
     public Button outButton;
 
-  
+   
     /// <summary>
-    /// 创建角色按钮
+    /// 切换角色和道具
     /// </summary>
-    public Button CreatRoleButton;
+    public Button change;
     
     public GameObject Panel_ChoseRole;
 
+
+    public List<GameObject> changeObj;
     // Start is called before the first frame update
     void Start()
     {
-        CreatRoleButton.onClick.AddListener(() =>
-        {
-            Panel_ChoseRole.SetActive(true);
-        });
-        
+        change.onClick.AddListener(() => { Change(); });
+
         outButton.onClick.AddListener(() => { OutButton(); });
         inButton.onClick.AddListener(() =>
         {
@@ -53,6 +53,7 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     public void OutButton(bool isImmediately = false)
     {
         outButton.interactable = false;
+        
         if (isImmediately)
         {
             transform.position = outPos.position;
@@ -90,6 +91,26 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     {
     }
 
+
+    public void Change(Action playEnd=null)
+    {
+        change.interactable = false;
+        changeObj[0].transform.DOLocalMoveY(changeObj[0].transform.localPosition.y + 100, 0.2f).OnComplete(() =>
+        {
+            changeObj[0].transform.SetSiblingIndex( changeObj[0].transform.GetSiblingIndex()-1);
+         
+            changeObj[0].transform.DOLocalMoveY(changeObj[0].transform.localPosition.y-100, 0.2f).OnComplete(() =>
+            { 
+                changeObj.Add(changeObj[0]);
+                changeObj.RemoveAt(0);
+                change.interactable = true;
+                playEnd?.Invoke();
+            }).Play();
+            
+        }).Play();
+        
+    }
+
     /// <summary>
     /// 创建玩家角色列表  刷新玩家角色列表
     /// </summary>
@@ -123,4 +144,22 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     //        }
     //    }
     //}
+
+    public void LockRoleCreate()
+    {
+        if (changeObj[0].name.Equals("Image_BG"))
+        {
+            Change(()=>change.interactable = false);
+        }
+        change.interactable = false;
+    }
+
+    public void UnlockRoleCreate()
+    {
+        if (!changeObj[0].name.Equals("Image_BG"))
+        {
+            Change(()=>change.interactable = true);
+        }
+        change.interactable = true;
+    }
 }

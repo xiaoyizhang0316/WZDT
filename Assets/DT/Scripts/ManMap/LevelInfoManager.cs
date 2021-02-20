@@ -68,7 +68,8 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
             panel.SetActive(false);
             listScript.gameObject.SetActive(false);
             rankPanel.SetActive(false);
-            rtPanel.GetComponent<RTPanel>().Close();
+            rtPanel.GetComponent<RTPanel>().rank_btn.gameObject.SetActive(false);
+            //rtPanel.GetComponent<RTPanel>().Close();
         });
         play.onClick.AddListener(() =>
         {
@@ -145,6 +146,14 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
         this.loadScene = loadScene;
         InitBox(name);
 
+    }
+
+    public void Close()
+    {
+        panel.SetActive(false);
+        listScript.gameObject.SetActive(false);
+        rankPanel.SetActive(false);
+        rtPanel.GetComponent<RTPanel>().rank_btn.gameObject.SetActive(false);
     }
 
     void InitBox(string level)
