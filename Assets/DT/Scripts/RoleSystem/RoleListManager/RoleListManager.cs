@@ -155,6 +155,12 @@ public class RoleListManager : MonoSingleton<RoleListManager>
 
     public void LockRoleCreate()
     {
+        if (SceneManager.GetActiveScene().name.Equals("FTE_1") ||
+            SceneManager.GetActiveScene().name.Equals("FTE_2"))
+        {
+            return;
+        }
+
         if (changeObj[0].name.Equals("Image_BG"))
         {
             Change();

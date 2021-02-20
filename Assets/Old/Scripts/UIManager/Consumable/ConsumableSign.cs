@@ -242,7 +242,14 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         if (!ConsumableListManager.My.isClick)
         {
             go = Instantiate(goprb, transform.position, transform.rotation);
-            
+            if (GameDataMgr.My.GetConsumableDataByID(consumableId).consumableType == GameEnum.ConsumableType.Role)
+            {
+                for (int j = 0; j <PlayerData.My.MapRole.Count; j++)
+                {
+                    PlayerData.My.MapRole[j].TradeLightOn(); 
+                }
+            }
+
             go.GetComponent<Image>().sprite = GetComponent<Image>().sprite;
             go.transform.SetParent(ConsumableListManager.My.dragPos);
             Vector3 V = Input.mousePosition;
