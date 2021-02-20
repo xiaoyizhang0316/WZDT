@@ -51,8 +51,8 @@ public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
                         go.transform.position = role.transform.position;
                         //     go.GetComponent<BaseSpawnItem>().Init(ConsumableListManager.My.currentSign. consumableId);
 
-                     //   ConsumableListManager.My.currentSign. InitBuff();
-                     //   ConsumableListManager.My.currentSign.CastBuff(role);
+                       ConsumableListManager.My.currentSign. InitBuff();
+                       ConsumableListManager.My.currentSign.CastBuff(role);
                         Destroy(gameObject);
                         break;
                     }

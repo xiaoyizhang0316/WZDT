@@ -224,7 +224,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public void OnPointerEnter(PointerEventData eventData)
     {
       
-        ConsumableInfo.My.Init(consumableId,consumableNum, Input.mousePosition.y - (540f * Screen.height / 1080f));
+        ConsumableInfo.My.Init(consumableId,consumableNum, transform.position);
       
     }
 

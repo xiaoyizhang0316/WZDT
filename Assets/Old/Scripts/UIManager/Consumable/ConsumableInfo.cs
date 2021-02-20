@@ -19,6 +19,7 @@ public class ConsumableInfo : MonoSingleton<ConsumableInfo>
     public Text consumableNum;
 
     public Tweener tweener;
+    public Tweener tweener1;
 
     /// <summary>
     /// 消耗品初始化
@@ -26,7 +27,7 @@ public class ConsumableInfo : MonoSingleton<ConsumableInfo>
     /// <param name="consumableId"></param>
     /// <param name="num"></param>
     /// <param name="y"></param>
-    public void Init(int consumableId, int num,float y)
+    public void Init(int consumableId, int num,Vector3 y)
     {
         ConsumableData data = GameDataMgr.My.GetConsumableDataByID(consumableId);
          Debug.Log(consumableId);
@@ -41,11 +42,14 @@ public class ConsumableInfo : MonoSingleton<ConsumableInfo>
     /// 菜单显示
     /// </summary>
     /// <param name="y"></param>
-    public void MenuShow(float y)
+    public void MenuShow(Vector3 pos)
     {
-        Stop(y);
-        //transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
-        tweener = transform.DOLocalMoveX(-703f, 0f).SetUpdate(true);
+        Stop(pos.y);
+         transform.position = pos;
+        tweener = transform.DOLocalMoveY(transform.localPosition.y+30, 0.3f).SetUpdate(true).Play();
+        tweener1 = transform.DOScale(1, 0.3f).SetUpdate(true).Play();
+        
+        
     }
 
     /// <summary>
@@ -54,13 +58,17 @@ public class ConsumableInfo : MonoSingleton<ConsumableInfo>
     public void MenuHide()
     {
         tweener.Kill();
-        tweener = transform.DOLocalMoveX(-1132f, 0f).SetUpdate(true);
+        tweener1.Kill();
+        tweener = transform.DOLocalMoveY(transform.localPosition.y-30, 0.3f).SetUpdate(true).Play();
+        tweener1 = transform.DOScale(0, 0.3f).SetUpdate(true).Play();
+
     }
 
     public void Stop(float y)
     {
         tweener.Kill();
-        transform.localPosition = new Vector3(-1132f, y, 0f);
+        tweener1.Kill();
+        transform.localPosition = new Vector3(-1132f, -3999, 0f);
     }
 
     // Start is called before the first frame update
