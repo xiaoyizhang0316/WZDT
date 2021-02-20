@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Boom_Consumable : MonoBehaviour
+public class Boom_Consumable : BaseSpawnItem
 {
     public float range;
 

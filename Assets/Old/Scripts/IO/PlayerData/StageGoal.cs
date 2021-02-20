@@ -315,6 +315,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         }).timeScale = 1f / DOTween.timeScale;
     }
 
+    private List<string> fteList = new List<string>() {"FTE_0.5","FTE_1.5","FTE_2.5" };
+
     /// <summary>
     /// 玩家获得金币
     /// </summary>
@@ -341,8 +343,11 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
+            if (currentType == StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name))
+            {
+                UpdateTurnIncome(num);
+            }
             playerGold += num;
-            UpdateTurnIncome(num);
         }
         FloatInfoManager.My.MoneyChange(num);
         if (playerGold < maxMinusGold)

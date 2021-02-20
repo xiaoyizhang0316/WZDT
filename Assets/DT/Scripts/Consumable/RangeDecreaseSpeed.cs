@@ -12,9 +12,6 @@ public class RangeDecreaseSpeed : BaseSpawnItem
     public override void Init(int id)
     {
         base.Init(id);
-        transform.DOScale(1f, time).OnComplete(() => {
-            Destroy(gameObject, 0f);
-        });
     }
 
     public void OnTriggerStay(Collider other)
@@ -28,4 +25,11 @@ public class RangeDecreaseSpeed : BaseSpawnItem
         }
     }
 
+    private void Update()
+    {
+        if (StageGoal.My.timeCount - startTime >= time)
+        {
+            Destroy(gameObject, 0f);
+        }
+    }
 }

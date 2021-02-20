@@ -5,15 +5,20 @@ using UnityEngine;
 
 public class AddRoleBuff : BaseSpawnItem
 {
-  
+
+    public int duration;
 
     public override void Init(int id)
     {
         base.Init(id);
-        transform.DOScale(1f, GameDataMgr.My.GetBuffDataByID(id).duration).OnComplete(() => {
-            Destroy(gameObject, 0f);
-        });
+        duration = GameDataMgr.My.GetBuffDataByID(id).duration;
     }
- 
 
+    private void Update()
+    {
+        if (duration > 0 && StageGoal.My.timeCount - startTime >= duration)
+        {
+            Destroy(gameObject, 0f);
+        }
+    }
 }
