@@ -178,6 +178,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public Color tipColor;
 
     public int maxRoleLevel = 5;
+
+    public GameObject lankuang;
     /// <summary>
     /// 玩家消耗金币
     /// </summary>
@@ -911,6 +913,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.ToggleSpeedButton(false);
         NewCanvasUI.My.GamePause();
         skipToFirstWave.gameObject.SetActive(true);
+        lankuang.SetActive(true);
+
         waveCountItem.Init(enemyDatas, currentWave - 1);
         waveCountItem.Clear();
         PlayerData.My.RoleTurnEnd();
@@ -1045,9 +1049,11 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerTechText = transform.parent.Find("UserInfo/Image_money/PlayerTech").GetComponent<Text>();
         stageWaveText = transform.parent.Find("UserInfo/Image_level/StageLevel").GetComponent<Text>();
         skipToFirstWave = transform.parent.Find("TimeScale/SkipFirst").GetComponent<Button>();
+        lankuang = transform.parent.Find("Image_ReadyTime").gameObject;
         skipToFirstWave.onClick.AddListener(() =>
         {
             NextTurn();
+            lankuang.SetActive(false);
             skipToFirstWave.gameObject.SetActive(false);
         });
         foreach (PlayerGear p in PlayerData.My.playerGears)
@@ -1272,6 +1278,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         Stat();
         startTime = TimeStamp.GetCurrentTimeStamp();
         menuOpenButton.onClick.AddListener(MenuShow);
+        if (predict_btn !=null)
         predict_btn.onClick.AddListener(PredictionNextTurn);
         // 在第九关实时上传分数
         InitRtScore();
@@ -1808,7 +1815,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         BuildingManager.My.RestartAllBuilding();
         // 重置回合收支
         HideTurnIncomeAndCost();
-        BaikePanel.My.gameObject.SetActive(false);
+        if(!SceneManager.GetActiveScene().name.Equals("FTE_1"))
+            BaikePanel.My.gameObject.SetActive(false);
         RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(-300, 1f).Play();
         LockOperation();
         //TODO 更新金币消耗UI信息
@@ -1844,7 +1852,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 显示收支
         //ShowTurnIncomeAndCost();
         PredictionPanel.My.ShowPrediction(predict_btn.transform.GetComponentInChildren<Toggle>().isOn);
-        BaikePanel.My.gameObject.SetActive(true);
+        if(!SceneManager.GetActiveScene().name.Equals("FTE_1"))
+            BaikePanel.My.gameObject.SetActive(true);
         UnlockOperation();
         RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(67, 1f).Play();
         //TODO 结算buff/角色周期性效果

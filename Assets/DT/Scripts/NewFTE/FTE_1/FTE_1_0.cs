@@ -18,6 +18,9 @@ public class FTE_1_0 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         NewCanvasUI.My.GamePause();
+        FTE_1Manager.My.startButton.interactable = false;
+        FTE_1Manager.My.yuce.interactable = false;
+        
         //RoleListManager.My.OutButton();
 
       //  FTE_1Manager.My.blood.transform.DOLocalMoveY(FTE_1Manager.My.blood.transform.localPosition.y + 200, 0.02f)

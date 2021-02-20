@@ -51,6 +51,10 @@ public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
                         go.transform.position = role.transform.position;
                          go.GetComponent<BaseSpawnItem>().Init(GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign. consumableId).targetBuffList[0]);
 
+                         for (int j = 0; j <PlayerData.My.MapRole.Count; j++)
+                         {
+                             PlayerData.My.MapRole[j].TradeLightOff(); 
+                         }
                        ConsumableListManager.My.currentSign. InitBuff();
                        ConsumableListManager.My.currentSign.CastBuff(role);
                         Destroy(gameObject);
