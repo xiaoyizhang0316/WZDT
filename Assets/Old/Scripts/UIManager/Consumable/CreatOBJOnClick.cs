@@ -49,7 +49,7 @@ public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
                         BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
                         GameObject go  = Instantiate(Resources.Load<GameObject>("Prefabs/Consumable/"+ConsumableListManager.My.currentSign. consumableId));
                         go.transform.position = role.transform.position;
-                        //     go.GetComponent<BaseSpawnItem>().Init(ConsumableListManager.My.currentSign. consumableId);
+                         go.GetComponent<BaseSpawnItem>().Init(GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign. consumableId).targetBuffList[0]);
 
                        ConsumableListManager.My.currentSign. InitBuff();
                        ConsumableListManager.My.currentSign.CastBuff(role);

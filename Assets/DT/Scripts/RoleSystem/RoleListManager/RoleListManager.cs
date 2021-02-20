@@ -35,7 +35,15 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     // Start is called before the first frame update
     void Start()
     {
-        change.onClick.AddListener(() => { Change(); });
+        if (change != null)
+        {
+            change.onClick.AddListener(() => { Change(); });
+            if (!SceneManager.GetActiveScene().name.Equals("FTE_9"))
+            {
+                change.gameObject.SetActive(false);
+            }
+        }
+        
 
         outButton.onClick.AddListener(() => { OutButton(); });
         inButton.onClick.AddListener(() =>
@@ -149,17 +157,19 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     {
         if (changeObj[0].name.Equals("Image_BG"))
         {
-            Change(()=>change.interactable = false);
+            Change();
         }
-        change.interactable = false;
+        //change.interactable = false;
+        change.gameObject.SetActive(false);
     }
 
     public void UnlockRoleCreate()
     {
         if (!changeObj[0].name.Equals("Image_BG"))
         {
-            Change(()=>change.interactable = true);
+            Change();
         }
-        change.interactable = true;
+        //change.interactable = true;
+        change.gameObject.SetActive(false);
     }
 }

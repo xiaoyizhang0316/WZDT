@@ -413,6 +413,11 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// <param name="_number"></param>
     public void GetNewConsumalbe(int id, int _number = 1)
     {
+        if (isPrediction)
+        {
+            return;
+        }
+
         for (int i = 0; i < playerConsumables.Count; i++)
         {
             if (playerConsumables[i].consumableId == id)
