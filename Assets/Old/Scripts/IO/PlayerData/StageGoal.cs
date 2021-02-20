@@ -1732,7 +1732,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.TurnToggleTradeButton(false);
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = false;
         NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(false);*/
-        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable = false;
+        //NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable = false;
         //TradeManager.My.HideAllIcon();
         // 锁删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = false;
@@ -1764,7 +1764,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.TurnToggleTradeButton(true);
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = true;
         NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(true);*/
-        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable = true;
+        //NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable = true;
         //TradeManager.My.ShowAllIcon();
         // 解删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
