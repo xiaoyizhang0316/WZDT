@@ -1837,8 +1837,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 显示收支
         //ShowTurnIncomeAndCost();
         PredictionPanel.My.ShowPrediction(predict_btn.transform.GetComponentInChildren<Toggle>().isOn);
-        RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(67, 1f).Play();
         UnlockOperation();
+        RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(67, 1f).Play();
         //TODO 结算buff/角色周期性效果
     }
 
