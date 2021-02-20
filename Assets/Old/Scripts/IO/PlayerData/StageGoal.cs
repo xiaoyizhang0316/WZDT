@@ -1814,6 +1814,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         BuildingManager.My.RestartAllBuilding();
         // 重置回合收支
         HideTurnIncomeAndCost();
+        BaikePanel.My.gameObject.SetActive(false);
         RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(-300, 1f).Play();
         LockOperation();
         //TODO 更新金币消耗UI信息
@@ -1849,8 +1850,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 显示收支
         //ShowTurnIncomeAndCost();
         PredictionPanel.My.ShowPrediction(predict_btn.transform.GetComponentInChildren<Toggle>().isOn);
-        RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(67, 1f).Play();
+        BaikePanel.My.gameObject.SetActive(true);
         UnlockOperation();
+        RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(67, 1f).Play();
         //TODO 结算buff/角色周期性效果
     }
 

@@ -37,7 +37,7 @@ public class PredictionPanel : MonoSingleton<PredictionPanel>
             startBlood.text = StageGoal.My.playerHealth.ToString();
             if (StageGoal.My.predictHealth <= 0)
             {
-                endBlood.text = "可能失败";
+                endBlood.text = "<color=red>可能失败</color>";
             }
             else
             {
