@@ -9,6 +9,8 @@ public class FTE_1_7 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
+        FTE_1Manager.My.startButton.interactable = true;
+        FTE_1Manager.My.yuce.interactable = true;
         for (int i = 0; i < MapManager.My._mapSigns.Count; i++)
         {
             if (MapManager.My._mapSigns[i].mapType == GameEnum.MapType.Grass)
