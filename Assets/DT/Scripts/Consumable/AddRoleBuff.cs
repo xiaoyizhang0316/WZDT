@@ -12,7 +12,7 @@ public class AddRoleBuff : BaseSpawnItem
         base.Init(id);
         transform.DOScale(1f, GameDataMgr.My.GetBuffDataByID(id).duration).OnComplete(() => {
             Destroy(gameObject, 0f);
-        });
+        }).Play();
     }
  
 
