@@ -223,18 +223,16 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!isCopy)
-        {
-            //     ConsumableInfo.My.Init(consumableId,consumableNum, Input.mousePosition.y - (540f * Screen.height / 1080f));
-        }
+      
+        ConsumableInfo.My.Init(consumableId,consumableNum, transform.position);
+      
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!isCopy)
-        {
+        
             ConsumableInfo.My.MenuHide();
-        }
+    
     }
 
     private bool isClick = false;
@@ -261,6 +259,6 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

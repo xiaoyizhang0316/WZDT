@@ -21,22 +21,21 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     public Button inButton;
     public Button outButton;
 
-  
+   
     /// <summary>
-    /// 创建角色按钮
+    /// 切换角色和道具
     /// </summary>
-    public Button CreatRoleButton;
+    public Button change;
     
     public GameObject Panel_ChoseRole;
 
+
+    public List<GameObject> changeObj;
     // Start is called before the first frame update
     void Start()
     {
-        CreatRoleButton.onClick.AddListener(() =>
-        {
-            Panel_ChoseRole.SetActive(true);
-        });
-        
+        change.onClick.AddListener(() => { Change(); });
+
         outButton.onClick.AddListener(() => { OutButton(); });
         inButton.onClick.AddListener(() =>
         {
@@ -53,6 +52,7 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     public void OutButton(bool isImmediately = false)
     {
         outButton.interactable = false;
+        
         if (isImmediately)
         {
             transform.position = outPos.position;
@@ -88,6 +88,25 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     // Update is called once per frame
     void Update()
     {
+    }
+
+
+    public void Change()
+    {
+        change.interactable = false;
+        changeObj[0].transform.DOLocalMoveY(changeObj[0].transform.localPosition.y + 100, 0.2f).OnComplete(() =>
+        {
+            changeObj[0].transform.SetSiblingIndex( changeObj[0].transform.GetSiblingIndex()-1);
+         
+            changeObj[0].transform.DOLocalMoveY(changeObj[0].transform.localPosition.y-100, 0.2f).OnComplete(() =>
+            { 
+                changeObj.Add(changeObj[0]);
+                changeObj.RemoveAt(0);
+                change.interactable = true;
+            }).Play();
+            
+        }).Play();
+        
     }
 
     /// <summary>
