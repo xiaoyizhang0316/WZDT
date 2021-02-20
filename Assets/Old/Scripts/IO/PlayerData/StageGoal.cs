@@ -260,7 +260,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             return false;
         }
 
-        if (PlayerData.My.isPrediction)
+        if (PlayerData.My.isPrediction )
         {
             predictTPcost -= num;
         }
@@ -1745,10 +1745,18 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void PredictionNextTurn()
     {
+        if (predict_btn.transform.GetComponentInChildren<Toggle>().isOn)
+        {
+            if (!CostTechPoint(10))
+            {
+                return;
+            }
+        }
         //Stat();
         //NewCanvasUI.My.ToggleSpeedButton(true);
         ResetPredictResult();
         PlayerData.My.isPrediction = true;
+        TradeManager.My.RecycleAllGoods();
         PlayerData.My.SaveAllWarehourse();
         Cursor.SetCursor(busy, Vector2.zero, CursorMode.Auto);
         predict_btn.gameObject.SetActive(false);
@@ -1791,7 +1799,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         //TODO 解锁准备阶段的操作
         // 显示收支
         //ShowTurnIncomeAndCost();
-        PredictionPanel.My.ShowPrediction();
+        PredictionPanel.My.ShowPrediction(predict_btn.transform.GetComponentInChildren<Toggle>().isOn);
         UnlockOperation();
         //TODO 结算buff/角色周期性效果
     }

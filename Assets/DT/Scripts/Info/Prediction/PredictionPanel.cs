@@ -26,16 +26,30 @@ public class PredictionPanel : MonoSingleton<PredictionPanel>
         });
     }
 
-    public void ShowPrediction()
+    public void ShowPrediction(bool isPay = false)
     {
-        startGold.text = StageGoal.My.playerGold.ToString();
-        endGold.text = StageGoal.My.predictGold.ToString();
-        income.text = StageGoal.My.predictIncome.ToString();
-        cost.text = StageGoal.My.predictCost.ToString();
-        startBlood.text = StageGoal.My.playerHealth.ToString();
-        endBlood.text = StageGoal.My.predictHealth.ToString();
-        killNum.text = StageGoal.My.predictKillNum + "/"+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave);
-        score.text = StageGoal.My.predictScore.ToString();
+        if (isPay)
+        {
+            startGold.text = StageGoal.My.playerGold.ToString();
+            endGold.text = StageGoal.My.predictGold.ToString();
+            income.text = StageGoal.My.predictIncome.ToString();
+            cost.text = StageGoal.My.predictCost.ToString();
+            startBlood.text = StageGoal.My.playerHealth.ToString();
+            endBlood.text = StageGoal.My.predictHealth.ToString();
+            killNum.text = StageGoal.My.predictKillNum + "/"+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave);
+            score.text = StageGoal.My.predictScore.ToString();
+        }
+        else
+        {
+            startGold.text = StageGoal.My.playerGold.ToString();
+            endGold.text = StageGoal.My.predictGold.ToString();
+            income.text = StageGoal.My.predictIncome.ToString();
+            cost.text = StageGoal.My.predictCost.ToString();
+            startBlood.text = "????";
+            endBlood.text = "????";
+            killNum.text = "????";
+            score.text = "????";
+        }
         transform.DOScale(1, 0.5f).Play();
     }
 }
