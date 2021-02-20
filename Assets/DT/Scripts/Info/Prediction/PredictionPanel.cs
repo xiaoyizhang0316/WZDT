@@ -35,7 +35,14 @@ public class PredictionPanel : MonoSingleton<PredictionPanel>
             income.text = StageGoal.My.predictIncome.ToString();
             cost.text = StageGoal.My.predictCost.ToString();
             startBlood.text = StageGoal.My.playerHealth.ToString();
-            endBlood.text = StageGoal.My.predictHealth.ToString();
+            if (StageGoal.My.predictHealth <= 0)
+            {
+                endBlood.text = "可能失败";
+            }
+            else
+            {
+                endBlood.text = StageGoal.My.predictHealth.ToString();
+            }
             killNum.text = StageGoal.My.predictKillNum + "/"+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave);
             score.text = StageGoal.My.predictScore.ToString();
         }
