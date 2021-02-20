@@ -36,7 +36,7 @@ public class PredictionPanel : MonoSingleton<PredictionPanel>
             startGold.text = StageGoal.My.playerGold.ToString();
             endGold.text = StageGoal.My.predictGold.ToString();
             income.text = StageGoal.My.predictIncome.ToString();
-            cost.text = StageGoal.My.predictCost.ToString();
+            cost.text = (-StageGoal.My.predictCost).ToString();
             startBlood.text = StageGoal.My.playerHealth.ToString();
             if (StageGoal.My.predictHealth <= 0)
             {
