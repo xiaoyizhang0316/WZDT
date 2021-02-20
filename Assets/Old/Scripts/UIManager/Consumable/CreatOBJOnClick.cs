@@ -55,7 +55,9 @@ public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
                          {
                              PlayerData.My.MapRole[j].TradeLightOff(); 
                          }
-                       ConsumableListManager.My.currentSign. InitBuff();
+                        PlayerData.My.UseConsumable(ConsumableListManager.My.currentSign.consumableId);
+                        ConsumableListManager.My.currentSign.CheckDelete();
+                        ConsumableListManager.My.currentSign. InitBuff();
                        ConsumableListManager.My.currentSign.CastBuff(role);
                         Destroy(gameObject);
                         break;
