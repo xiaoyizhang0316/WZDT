@@ -1721,19 +1721,19 @@ public class StageGoal : MonoSingleton<StageGoal>
     void LockOperation()
     {
         // 锁三镜
-        if (NewCanvasUI.My.transform.Find("ThreeMirror/GJJ"))
+        /*if (NewCanvasUI.My.transform.Find("ThreeMirror/GJJ"))
         {
             NewCanvasUI.My.transform.Find("ThreeMirror/GJJ").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
             NewCanvasUI.My.transform.Find("ThreeMirror/DLJ").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
             NewCanvasUI.My.transform.Find("ThreeMirror/TSJ").GetComponent<RectTransform>().DOAnchorPosY(-200, 1f).Play();
-        }
+        }*/
         // 锁交易
-        NewCanvasUI.My.hidePanel.gameObject.SetActive(false);
+        /*NewCanvasUI.My.hidePanel.gameObject.SetActive(false);
         NewCanvasUI.My.TurnToggleTradeButton(false);
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = false;
-        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(false);
+        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(false);*/
         NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable = false;
-        TradeManager.My.HideAllIcon();
+        //TradeManager.My.HideAllIcon();
         // 锁删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = false;
         // 禁止键角色
@@ -1753,19 +1753,19 @@ public class StageGoal : MonoSingleton<StageGoal>
     void UnlockOperation()
     {
         // 解三镜
-        if (NewCanvasUI.My.transform.Find("ThreeMirror/GJJ"))
+        /*if (NewCanvasUI.My.transform.Find("ThreeMirror/GJJ"))
         {
             NewCanvasUI.My.transform.Find("ThreeMirror/GJJ").GetComponent<RectTransform>().DOAnchorPosY(-47, 1f).Play();
             NewCanvasUI.My.transform.Find("ThreeMirror/DLJ").GetComponent<RectTransform>().DOAnchorPosY(-47, 1f).Play();
             NewCanvasUI.My.transform.Find("ThreeMirror/TSJ").GetComponent<RectTransform>().DOAnchorPosY(-47, 1f).Play();
-        }
+        }*/
         // 解交易
-        NewCanvasUI.My.hidePanel.gameObject.SetActive(true);
+        /*NewCanvasUI.My.hidePanel.gameObject.SetActive(true);
         NewCanvasUI.My.TurnToggleTradeButton(true);
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = true;
-        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(true);
+        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(true);*/
         NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable = true;
-        TradeManager.My.ShowAllIcon();
+        //TradeManager.My.ShowAllIcon();
         // 解删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
         // 可以见角色
