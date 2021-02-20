@@ -70,7 +70,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 玩家操作时间戳列表
     /// </summary>
     public List<PlayerOperation> playerOperations = new List<PlayerOperation>();
-    public StatItemDatasList statItemDatasList=new StatItemDatasList();
+    public StatItemDatasList statItemDatasList = new StatItemDatasList();
 
     #region UI
 
@@ -190,14 +190,14 @@ public class StageGoal : MonoSingleton<StageGoal>
             predictGold -= num;
             return;
         }
-        if (SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2"
+        if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2"
                                                            || SceneManager.GetActiveScene().name == "FTE_1.5"
                                                            || SceneManager.GetActiveScene().name == "FTE_0.5"
                                                            || SceneManager.GetActiveScene().name == "FTE_2.5")
         {
             if (playerGold - num <= 10000)
             {
-                playerGold =10000000;
+                playerGold = 10000000;
             }
             else
             {
@@ -211,8 +211,8 @@ public class StageGoal : MonoSingleton<StageGoal>
             UpdateTurnCost(num);
         }
         //if(isShow)
-            FloatInfoManager.My.MoneyChange(0 - num);
-        if(playerGold < maxMinusGold)
+        FloatInfoManager.My.MoneyChange(0 - num);
+        if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
             {
@@ -294,13 +294,13 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void ConsumerAliveTip()
     {
-        if (SceneManager.GetActiveScene().name.Equals("FTE_0-1")|| GuideManager.My.ftegob.activeInHierarchy || SceneManager.GetActiveScene().name.Equals("FTE_0-2")
-            || SceneManager.GetActiveScene().name.Equals("FTE_1.5")|| SceneManager.GetActiveScene().name == "FTE_2.5")
+        if (SceneManager.GetActiveScene().name.Equals("FTE_0-1") || GuideManager.My.ftegob.activeInHierarchy || SceneManager.GetActiveScene().name.Equals("FTE_0-2")
+            || SceneManager.GetActiveScene().name.Equals("FTE_1.5") || SceneManager.GetActiveScene().name == "FTE_2.5")
         {
             return;
         }
-        if(!PlayerData.My.isPrediction)
-            CameraPlay.OneHit(new Color(1f, 0.3896085f, 0.07075471f, 0f),0.5f);
+        if (!PlayerData.My.isPrediction)
+            CameraPlay.OneHit(new Color(1f, 0.3896085f, 0.07075471f, 0f), 0.5f);
         //CameraPlay.Hit(tipColor, 0.5f);
     }
 
@@ -312,7 +312,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerSatisfyText.transform.parent.transform.DOScale(new Vector3(1.3f, 1.3f, 1f), 0.3f).Play().SetEase(Ease.Linear).OnComplete(() =>
         {
             playerSatisfyText.transform.parent.transform.DOScale(Vector3.one, 0.2f).Play().SetEase(Ease.Linear).timeScale = 1f / DOTween.timeScale;
-        }).timeScale = 1f /DOTween.timeScale;
+        }).timeScale = 1f / DOTween.timeScale;
     }
 
     /// <summary>
@@ -327,9 +327,9 @@ public class StageGoal : MonoSingleton<StageGoal>
             predictGold += num;
             return;
         }
-        if(SceneManager.GetActiveScene().name == "FTE_0-1"|| SceneManager.GetActiveScene().name == "FTE_0-2")
+        if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2")
         {
-            if(playerGold+num >= 10000000)
+            if (playerGold + num >= 10000000)
             {
                 playerGold = 10000000;
             }
@@ -390,7 +390,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             predictScore += num;
             return;
         }
-        if(int.MaxValue - playerSatisfy < num)
+        if (int.MaxValue - playerSatisfy < num)
         {
             playerSatisfy = int.MaxValue;
         }
@@ -424,7 +424,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void SetInfo(float time = 0.2f)
     {
-//        print("time:" + time);
+        //        print("time:" + time);
         float per = playerHealth / (float)playerMaxHealth;
         if (per > 1f)
         {
@@ -435,18 +435,18 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerGoldText.DOText(playerGold.ToString(), time, true, ScrambleMode.None).Play();
 
         if (playerGold > 0)
-            playerGoldText.DOColor( Color.white, time) .Play() ;
+            playerGoldText.DOColor(Color.white, time).Play();
         else if (playerGold >= maxMinusGold)
-            playerGoldText.DOColor(  Color.yellow, time) .Play() ;
+            playerGoldText.DOColor(Color.yellow, time).Play();
         else
-            playerGoldText.DOColor(  Color.red, time) .Play() ;
+            playerGoldText.DOColor(Color.red, time).Play();
 
         playerSatisfyText.DOText(playerSatisfy.ToString(), time, true, ScrambleMode.None).Play();
 
         if (PlayerData.My.cheatIndex1 || PlayerData.My.cheatIndex2 || PlayerData.My.cheatIndex3)
-            playerSatisfyText.DOColor( Color.gray, time).Play() ;
+            playerSatisfyText.DOColor(Color.gray, time).Play();
         else
-            playerSatisfyText.DOColor( Color.white, time).Play() ;
+            playerSatisfyText.DOColor(Color.white, time).Play();
         playerHealthText.text = (playerHealth / (float)playerMaxHealth).ToString("P");
         if (playerHealth / (float)playerMaxHealth > 0.5f)
         {
@@ -718,17 +718,24 @@ public class StageGoal : MonoSingleton<StageGoal>
             }
             stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
         }
-        
+
         if (currentWave <= maxWaveNumber)
         {
-            CheckEndTurn();
-            //if (timeCount >= waitTimeList[currentWave - 1])
-            //{
-            //    BuildingManager.My.WaveSpawnConsumer(currentWave);
-            //    currentWave++;
-            //    stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
-            //    stageWaveText.transform.DOPunchScale(new Vector3(1.3f,1.3f,1.3f), 1f,1).Play();
-            //}
+
+            if (currentType != StageType.Normal)
+            {
+                if (timeCount >= waitTimeList[currentWave - 1])
+                {
+                    BuildingManager.My.WaveSpawnConsumer(currentWave);
+                    currentWave++;
+                    stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
+                    stageWaveText.transform.DOPunchScale(new Vector3(1.3f, 1.3f, 1.3f), 1f, 1).Play();
+                }
+            }
+            else
+            {
+                CheckEndTurn();
+            }
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 timeCount++;
@@ -743,7 +750,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                             {
                                 add = 0.1f;
                             }
-                            if(!SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+                            if (!SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
                                 GetSatisfy((int)(predictGold * add));
                             //ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
                             if (PlayerData.My.xianJinLiu[5])
@@ -784,13 +791,13 @@ public class StageGoal : MonoSingleton<StageGoal>
                             {
                                 add = 0.1f;
                             }
-                            if(!SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+                            if (!SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
                                 GetSatisfy((int)(playerGold * add));
                             ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
                             if (PlayerData.My.xianJinLiu[5])
                             {
                                 GetPlayerGold(playerGold * 5 / 100);
-                                Income(playerGold * 5 / 100,IncomeType.Other,null,"利息");
+                                Income(playerGold * 5 / 100, IncomeType.Other, null, "利息");
                             }
                         }
                         if (PlayerData.My.yeWuXiTong[3])
@@ -833,7 +840,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                         {
                             add = 0.1f;
                         }
-                        if(!SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+                        if (!SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
                             GetSatisfy((int)(playerGold * add));
                         ScoreGet(ScoreType.金钱得分, (int)(playerGold * add));
                         if (PlayerData.My.xianJinLiu[5])
@@ -879,7 +886,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         LockOperation();
         //TODO 更新金币消耗UI信息
         //TODO 检查错误操作（果汁厂没输入）
-        transform.DOScale(1f, produceTime).SetEase(Ease.Linear).OnComplete(() => {
+        transform.DOScale(1f, produceTime).SetEase(Ease.Linear).OnComplete(() =>
+        {
             BuildingManager.My.WaveSpawnConsumer(currentWave);
             stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
             stageWaveText.transform.DOPunchScale(new Vector3(1.3f, 1.3f, 1.3f), 1f, 1).Play();
@@ -933,7 +941,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         string sceneName = SceneManager.GetActiveScene().name;
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
         List<int> gearList = new List<int>();
-        switch(starNumber)
+        switch (starNumber)
         {
             case 1:
                 gearList = data.starOneEquip;
@@ -1055,8 +1063,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if(sceneName == "FTE_Record"||sceneName == "FTE_0-1"||sceneName=="FTE_0-2"||sceneName=="FTE_0.5"
-           ||sceneName=="FTE_1.5"|| sceneName == "FTE_2.5")
+        if (sceneName == "FTE_Record" || sceneName == "FTE_0-1" || sceneName == "FTE_0-2" || sceneName == "FTE_0.5"
+           || sceneName == "FTE_1.5" || sceneName == "FTE_2.5")
         {
             playerHealth = 1000;
             playerMaxHealth = 1000;
@@ -1067,8 +1075,8 @@ public class StageGoal : MonoSingleton<StageGoal>
             return;
         }
         //StartCoroutine(ReadStageEnemyData(sceneName));
-        
-        if(sceneName != "FTE_0")
+
+        if (sceneName != "FTE_0")
         {
             if (NetworkMgr.My.isUsingHttp)
             {
@@ -1079,7 +1087,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             }
         }
         StageData data = GameDataMgr.My.GetStageDataByName(sceneName);
-        playerGold =  data.startPlayerGold;
+        playerGold = data.startPlayerGold;
         if (PlayerData.My.cheatIndex1)
         {
             playerGold += 10000;
@@ -1097,12 +1105,12 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             maxMinusGold = -12000;
         }
-        playerHealth =  data.startPlayerHealth;
+        playerHealth = data.startPlayerHealth;
         if (PlayerData.My.cheatIndex3)
             playerHealth = (int)(playerHealth * 1.5f);
         playerMaxHealth = playerHealth;
         maxWaveNumber = data.maxWaveNumber;
-        playerTechPoint =  data.startTech;
+        playerTechPoint = data.startTech;
         currentType = data.stageType;
         SetInfoImmidiate();
         foreach (int i in data.waveWaitTime)
@@ -1110,6 +1118,14 @@ public class StageGoal : MonoSingleton<StageGoal>
             waitTimeList.Add(i);
         }
         ReadStageEnemyData(sceneName);
+        if (currentType == StageType.Normal)
+        {
+
+        }
+        else
+        {
+            skipToFirstWave.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -1168,7 +1184,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 string json = www.text.ToString();
                 //string json = OriginalData.My.jsonDatas.GetLevelData(sceneName);
-        //Debug.Log("-------" + json);
+                //Debug.Log("-------" + json);
                 StageEnemysData stageEnemyData = JsonUtility.FromJson<StageEnemysData>(json);
                 ParseStageEnemyData(stageEnemyData);
             }
@@ -1182,7 +1198,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void ParseStageEnemyData(StageEnemysData data)
     {
         enemyDatas = new List<StageEnemyData>();
-        foreach(StageEnemyItem s in data.stageEnemyItems)
+        foreach (StageEnemyItem s in data.stageEnemyItems)
         {
             StageEnemyData stageEnemyData = new StageEnemyData();
             stageEnemyData.waveNumber = int.Parse(s.waveNumber);
@@ -1195,7 +1211,15 @@ public class StageGoal : MonoSingleton<StageGoal>
             enemyDatas.Add(stageEnemyData);
         }
         BuildingManager.My.InitAllBuilding(enemyDatas);
-        waveCountItem.Init(enemyDatas,0);
+        if (currentType == StageType.Normal)
+        {
+            waveCountItem.Init(enemyDatas, 0);
+        }
+        else
+        {
+            waveCountItem.Init(enemyDatas);
+        }
+
     }
 
     /// <summary>
@@ -1203,16 +1227,18 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void MenuHide()
     {
-        List<string> sceneList = new List<string>() { "FTE_0.5","FTE_1.5","FTE_2.5"};
+        List<string> sceneList = new List<string>() { "FTE_0.5", "FTE_1.5", "FTE_2.5" };
         if (sceneList.Contains(SceneManager.GetActiveScene().name))
         {
-            GetComponent<RectTransform>().DOAnchorPosX(18000.4f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
+            GetComponent<RectTransform>().DOAnchorPosX(18000.4f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+            {
                 menuCloseButton.gameObject.SetActive(false);
                 menuOpenButton.gameObject.SetActive(true);
             }).Play();
             return;
         }
-        GetComponent<RectTransform>().DOAnchorPosX(180.4f,0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() => {
+        GetComponent<RectTransform>().DOAnchorPosX(180.4f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
         }).Play();
@@ -1223,7 +1249,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void MenuShow()
     {
-        GetComponent<RectTransform>().DOAnchorPosX(-210f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(()=> {
+        GetComponent<RectTransform>().DOAnchorPosX(-210f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        {
             menuCloseButton.gameObject.SetActive(true);
             menuOpenButton.gameObject.SetActive(false);
         }).Play();
@@ -1261,7 +1288,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                 if (Input.GetKeyDown(KeyCode.Y))
                 {
                     Win();
-                }    
+                }
             }
             //if (Input.GetKeyDown(KeyCode.M))
             //{
@@ -1273,23 +1300,23 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 Lose();
             }
-            
-                if (Input.GetKeyDown(KeyCode.F))
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                //string sceneName = SceneManager.GetActiveScene().name;
+                if (SceneManager.GetActiveScene().name.Contains("."))
                 {
-                    //string sceneName = SceneManager.GetActiveScene().name;
-                    if (SceneManager.GetActiveScene().name.Contains("."))
+                    Debug.LogWarning("skip jiaoxue ");
+                    NetworkMgr.My.UpdatePlayerFTE(SceneManager.GetActiveScene().name.Split('_')[1], () =>
                     {
-                        Debug.LogWarning("skip jiaoxue ");
-                        NetworkMgr.My.UpdatePlayerFTE(SceneManager.GetActiveScene().name.Split('_')[1], () =>
-                        {
-                            SceneManager.LoadScene("Map");
-                        });
-                    }
+                        SceneManager.LoadScene("Map");
+                    });
                 }
+            }
         }
     }
 
-    public void Income(int num, IncomeType incomeType, BaseMapRole npc =null, string otherName="")
+    public void Income(int num, IncomeType incomeType, BaseMapRole npc = null, string otherName = "")
     {
         if (PlayerData.My.isPrediction)
         {
@@ -1307,7 +1334,8 @@ public class StageGoal : MonoSingleton<StageGoal>
                 if (npc == null)
                 {
                     print(otherName);
-                    if(npcIncomesEx.ContainsKey(otherName)){
+                    if (npcIncomesEx.ContainsKey(otherName))
+                    {
                         npcIncomesEx[otherName] += num;
                     }
                     else
@@ -1336,7 +1364,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                 }
                 else
                 {
-                    otherIncomes.Add(otherName,num);
+                    otherIncomes.Add(otherName, num);
                 }
                 break;
         }
@@ -1420,7 +1448,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
     }
 
-    public void ScoreGet(ScoreType type,int num)
+    public void ScoreGet(ScoreType type, int num)
     {
         if (PlayerData.My.isPrediction)
         {
@@ -1443,7 +1471,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             return;
         }
-        if(dataStats == null)
+        if (dataStats == null)
         {
             dataStats = new List<DataStat>();
         }
@@ -1454,7 +1482,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public string ShowStat()
     {
         string list = "";
-        foreach(var ds in dataStats)
+        foreach (var ds in dataStats)
         {
             //list += string.Format($"{ds.blood}\t{ds.score}\t{ds.cost}\t{ds.tradeCost}\t{ds.totalGold}\n");
         }
@@ -1464,32 +1492,32 @@ public class StageGoal : MonoSingleton<StageGoal>
     private void AddStatItem()
     {
         List<StatItemData> statItems = new List<StatItemData>();
-        statItems.Add(new StatItemData("ti", totalIncome * 60 / (timeCount==0?1:timeCount), totalIncome, StatItemType.TotalIncome));
+        statItems.Add(new StatItemData("ti", totalIncome * 60 / (timeCount == 0 ? 1 : timeCount), totalIncome, StatItemType.TotalIncome));
         statItems.Add(new StatItemData("ci", consumeIncome * 60 / (timeCount == 0 ? 1 : timeCount), consumeIncome, StatItemType.ConsumeIncome));
         statItems.Add(new StatItemData("toc", totalCost * 60 / (timeCount == 0 ? 1 : timeCount), totalCost, StatItemType.TotalCost));
         statItems.Add(new StatItemData("trc", tradeCost * 60 / (timeCount == 0 ? 1 : timeCount), tradeCost, StatItemType.TradeCost));
 
-        foreach(var key in npcIncomes.Keys)
+        foreach (var key in npcIncomes.Keys)
         {
-            statItems.Add(new StatItemData(key.baseRoleData.baseRoleData.roleName, npcIncomes[key]*60/timeCount, npcIncomes[key], StatItemType.NpcIncome));
+            statItems.Add(new StatItemData(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key], StatItemType.NpcIncome));
         }
 
-        foreach(var key in npcIncomesEx.Keys)
+        foreach (var key in npcIncomesEx.Keys)
         {
             statItems.Add(new StatItemData(key, npcIncomesEx[key] * 60 / timeCount, npcIncomesEx[key], StatItemType.NpcIncome));
         }
 
-        foreach(var key in otherIncomes.Keys)
+        foreach (var key in otherIncomes.Keys)
         {
-            statItems.Add(new StatItemData(key, otherIncomes[key]*60/timeCount, otherIncomes[key], StatItemType.OtherIncome));
+            statItems.Add(new StatItemData(key, otherIncomes[key] * 60 / timeCount, otherIncomes[key], StatItemType.OtherIncome));
         }
 
-        foreach(var key in buildingCosts.Keys)
+        foreach (var key in buildingCosts.Keys)
         {
             statItems.Add(new StatItemData(key.baseRoleData.baseRoleData.roleName, buildingCosts[key] * 60 / timeCount, buildingCosts[key], StatItemType.BuildCost));
         }
 
-        foreach(var key in extraCost.Keys)
+        foreach (var key in extraCost.Keys)
         {
             statItems.Add(new StatItemData(key, 0, extraCost[key], StatItemType.ExtraCost));
         }
@@ -1503,7 +1531,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         Debug.Log(JsonUtility.ToJson(statItemDatasList).ToString());
     }
 
-   
+
     /// <summary>
     /// 玩家操作结构
     /// </summary>
@@ -1535,7 +1563,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (SceneManager.GetActiveScene().name.Equals("FTE_9"))
         {
-            if(/*NetworkMgr.My.playerDatas.levelID<12 &&*/ NetworkMgr.My.playerGroupInfo.isOpenMatch)
+            if (/*NetworkMgr.My.playerDatas.levelID<12 &&*/ NetworkMgr.My.playerGroupInfo.isOpenMatch)
             {
                 InvokeRepeating("UpdateRTScore", 0.5f, 5);
             }
@@ -1548,7 +1576,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         if (playerSatisfy > lastScore)
         {
             lastScore = playerSatisfy;
-            NetworkMgr.My.AddScore(lastScore, GameObject.FindObjectOfType<BossConsumer>() == null ? 0 : GameObject.FindObjectOfType<BossConsumer>().killCount, false, () => {
+            NetworkMgr.My.AddScore(lastScore, GameObject.FindObjectOfType<BossConsumer>() == null ? 0 : GameObject.FindObjectOfType<BossConsumer>().killCount, false, () =>
+            {
                 if (NetworkMgr.My.stopMatch)
                 {
                     CancelInvoke("UpdateRTScore");
@@ -1560,11 +1589,12 @@ public class StageGoal : MonoSingleton<StageGoal>
     // 在第九关，结束时上传最终分数
     public void UpdatePlayerScoreEnd()
     {
-        if(SceneManager.GetActiveScene().name.Equals("FTE_9")&& /*NetworkMgr.My.playerDatas.levelID < 12 &&*/ NetworkMgr.My.playerGroupInfo.isOpenMatch&&!NetworkMgr.My.stopMatch)
+        if (SceneManager.GetActiveScene().name.Equals("FTE_9") && /*NetworkMgr.My.playerDatas.levelID < 12 &&*/ NetworkMgr.My.playerGroupInfo.isOpenMatch && !NetworkMgr.My.stopMatch)
         {
             CancelInvoke("UpdateRTScore");
-            NetworkMgr.My.AddScore(playerSatisfy, GameObject.FindObjectOfType<BossConsumer>() == null ? 0 : GameObject.FindObjectOfType<BossConsumer>().killCount, true, () => {
-                
+            NetworkMgr.My.AddScore(playerSatisfy, GameObject.FindObjectOfType<BossConsumer>() == null ? 0 : GameObject.FindObjectOfType<BossConsumer>().killCount, true, () =>
+            {
+
             });
         }
     }
@@ -1579,7 +1609,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         consumeIncome = 0;
         npcIncome = 0;
         otherIncome = 0;
-        
+
         otherIncomes.Clear();
         npcIncomes.Clear();
         npcIncomesEx.Clear();
@@ -1671,7 +1701,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         turnTotalCost -= cost;
         turnTotalCost_txt.text = (-turnTotalCost).ToString();
     }
-    
+
     /// <summary>
     /// 锁定操作
     /// </summary>
@@ -1689,14 +1719,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.TurnToggleTradeButton(false);
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = false;
         NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(false);
-        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable=false;
+        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable = false;
         TradeManager.My.HideAllIcon();
         // 锁删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = false;
         // 禁止键角色
         RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(-300, 1f).Play();
     }
-    
+
     /// <summary>
     /// 解锁操作
     /// </summary>
@@ -1714,7 +1744,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.TurnToggleTradeButton(true);
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().createTradeButton.interactable = true;
         NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().SetTradeButton(true);
-        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable=true;
+        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().unlockBtn.interactable = true;
         TradeManager.My.ShowAllIcon();
         // 解删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
@@ -1775,7 +1805,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         LockOperation();
         //TODO 更新金币消耗UI信息
         //TODO 检查错误操作（果汁厂没输入）
-        transform.DOScale(1f, produceTime).SetEase(Ease.Linear).OnComplete(() => {
+        transform.DOScale(1f, produceTime).SetEase(Ease.Linear).OnComplete(() =>
+        {
             BuildingManager.My.WaveSpawnConsumer(currentWave);
             /*stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
             stageWaveText.transform.DOPunchScale(new Vector3(1.3f, 1.3f, 1.3f), 1f, 1).Play();

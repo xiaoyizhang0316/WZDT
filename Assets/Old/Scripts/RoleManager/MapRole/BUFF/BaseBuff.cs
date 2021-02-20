@@ -16,6 +16,8 @@ public class BaseBuff
 
     public int duration;
 
+    public int turnDuration;
+
     public int interval;
 
     public bool canHeap;
@@ -115,7 +117,10 @@ public class BaseBuff
         {
             foreach (string str in buffData.OnTick)
             {
-                CheckStaticNumber(str);
+                if (StageGoal.My.currentType != StageType.Normal)
+                {
+                    CheckStaticNumber(str);
+                }
                 CheckRoleNumber(str);
             }
             count = 0;
@@ -127,10 +132,11 @@ public class BaseBuff
     /// </summary>
     public void OnRoleTurn()
     {
-        //foreach (string str in buffData.OnEndTurn)
-        //{
-        //    CheckStaticNumber(str);
-        //}
+        foreach (string str in buffData.OnEndTurn)
+        {
+            CheckStaticNumber(str);
+        }
+
     }
 
     /// <summary>
@@ -214,6 +220,7 @@ public class BaseBuff
         buffData = buff;
         buffId = buff.BuffID;
         duration = buff.duration;
+        turnDuration = buff.turnDuration;
         buffName = buff.BuffName;
     }
 
@@ -265,7 +272,7 @@ public class BaseBuff
                 StageGoal.My.IncomeTp(buffConfig.playerTechPointChange, IncomeTpType.Buff);
                 break;
             case 5:
-                List<string> consumableList = attri[1].Split(',').ToList();
+                List<string> consumableList = attri[1].Split('|').ToList();
                 int number = int.Parse(attri[2]);
                 for (int i = 0; i < number; i++)
                 {
@@ -329,6 +336,20 @@ public class BaseBuff
                 {
                     CalculateNumber(str, ref buffConfig.roleBulletCapacityChange, targetRole.baseRoleData.bulletCapacity);
                     targetRole.baseRoleData.bulletCapacity += buffConfig.roleBulletCapacityChange;
+                    break;
+                }
+            case 18:
+                {
+                    if (attri.Length == 2)
+                    {
+                        buffConfig.roleEncourageLevelChange = int.Parse(attri[1]);
+                    }
+                    else
+                    {
+                        buffConfig.roleEncourageLevelChange = 0 - buffConfig.roleEncourageLevelChange;
+                    }
+                    targetRole.startEncourageLevel += buffConfig.roleEncourageLevelChange;
+                    targetRole.RecalculateEncourageLevel(true);
                     break;
                 }
             default:

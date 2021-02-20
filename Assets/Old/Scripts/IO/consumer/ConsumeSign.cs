@@ -313,7 +313,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void HealthCheck()
     {
-        float per = currentHealth / (float)consumeData.maxHealth;
+        float per = Mathf.Min(1f, currentHealth / (float)consumeData.maxHealth);
         hud.UpdateInfo(per);
         if (currentHealth >= consumeData.maxHealth)
         {
@@ -496,6 +496,21 @@ public class ConsumeSign : MonoBehaviour
         float time = CalculateTime();
         tweener = transform.DOPath(pathList.ToArray(), time,PathType.CatmullRom, PathMode.Full3D).OnComplete(OnAlive).SetEase(Ease.Linear).SetOptions(AxisConstraint.None,AxisConstraint.Z|AxisConstraint.X).SetLookAt(0f);
         CheckBuffDuration();
+    }
+
+    public bool isBlocked = false;
+
+    /// <summary>
+    /// 被阻挡
+    /// </summary>
+    public void Block()
+    {
+        tweener.Pause();
+        isBlocked = true;
+        transform.DOMove(transform.position, 1f).OnComplete(() => {
+            tweener.Play();
+            isBlocked = false;
+        });
     }
 
     /// <summary>

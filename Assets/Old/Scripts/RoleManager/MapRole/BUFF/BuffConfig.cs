@@ -28,6 +28,8 @@ public class BuffConfig
 
     public int roleBulletCapacityChange;
 
+    public int roleEncourageLevelChange;
+
     public int consumerHealthChange;
 
     public int consumerMaxHealthChange;

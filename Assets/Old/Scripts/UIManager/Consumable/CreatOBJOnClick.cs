@@ -5,28 +5,36 @@ using UnityEngine.EventSystems;
 
 public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
 {
-
+    private GameObject currentgo;
  
     // Start is called before the first frame update
     void Start()
     {
+        currentgo = Instantiate(Resources.Load<GameObject>("Consumable/Prefabs"+ConsumableListManager.My.currentSign. consumableId));
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentgo != null)
+        {
+            currentgo.transform.position = transform.position;
+
+        }
+
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Destroy(currentgo,0.01f);
     Debug.Log("ConsumableListManager.My.isClick"+ConsumableListManager.My.isClick);
         if (ConsumableListManager.My.isClick)
         {
             Debug.Log("释放" + GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign. consumableId).consumableType);
             ConsumableListManager.My.isClick = false;
 
+            GameObject go  = Instantiate(Resources.Load<GameObject>("Consumable/Prefabs"+ConsumableListManager.My.currentSign. consumableId));
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hit = Physics.RaycastAll(ray);
@@ -51,7 +59,7 @@ public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
                     GameEnum.ConsumableType.AOE)
                 {
                     print(hit[i].point);
-                    GameObject go1 = Instantiate(Resources.Load<GameObject>("Consumable/"+ConsumableListManager.My.currentSign. consumableId));
+                    GameObject go1 = Instantiate(Resources.Load<GameObject>("Consumable/Prefabs"+ConsumableListManager.My.currentSign. consumableId));
                     go1.transform.position = hit[i].point;
                     //BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
                     //print("使用消耗品:" + consumableId.ToString());
@@ -74,7 +82,7 @@ public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
                             Debug.Log("SpawnItem");
 
                             print(hit[i].point);
-                            GameObject go1 = Instantiate (Resources.Load<GameObject>("Consumable/"+ConsumableListManager.My.currentSign. consumableId) );
+                            GameObject go1 = Instantiate (Resources.Load<GameObject>("Consumable/Prefabs"+ConsumableListManager.My.currentSign. consumableId) );
                             go1.transform.position = hit[i].transform.position;
                             //BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
                             //print("使用消耗品:" + consumableId.ToString());
