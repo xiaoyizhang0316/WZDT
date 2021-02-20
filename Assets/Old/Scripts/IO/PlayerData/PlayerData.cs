@@ -939,4 +939,20 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// 是否预测
     /// </summary>
     public bool isPrediction = false;
+
+    public void SaveAllWarehourse()
+    {
+        for (int i = 0; i < MapRole.Count; i++)
+        {
+            MapRole[i].CloneWarehourse();
+        }
+    }
+    
+    public void RestoreAllWarehourse()
+    {
+        for (int i = 0; i < MapRole.Count; i++)
+        {
+            MapRole[i].RestoreWarehourse();
+        }
+    }
 }

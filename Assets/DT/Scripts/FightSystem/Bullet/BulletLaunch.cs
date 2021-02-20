@@ -44,7 +44,8 @@ public class BulletLaunch : MonoBehaviour
 
         launchShooter.DOLookAt(PlayerData.My.isPrediction? launchShooter.position:pointList[pointList.Count / 2], 0.1f).OnComplete(() =>
           {
-              gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
+              if(!PlayerData.My.isPrediction)
+                    gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
               //gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
               gameObject.transform.DOPath(pointList.ToArray(), 0.5f).SetEase(sase).OnComplete(() =>
               {

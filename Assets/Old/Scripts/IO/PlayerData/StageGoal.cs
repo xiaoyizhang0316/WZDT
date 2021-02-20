@@ -7,9 +7,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Linq;
 using System;
-using System.Net.Configuration;
 using static GameEnum;
-using UnityEngine.EventSystems;
 
 public class StageGoal : MonoSingleton<StageGoal>
 {
@@ -262,7 +260,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             return false;
         }
 
-        if (PlayerData.My.isPrediction)
+        if (PlayerData.My.isPrediction )
         {
             predictTPcost -= num;
         }
@@ -873,6 +871,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void NextTurn()
     {
         Stat();
+        predict_btn.gameObject.SetActive(false);
         NewCanvasUI.My.ToggleSpeedButton(true);
         NewCanvasUI.My.GameNormal();
         waveCountItem.Move();
@@ -897,6 +896,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void EndTurn()
     {
         Stat();
+        predict_btn.gameObject.SetActive(true);
         NewCanvasUI.My.ToggleSpeedButton(false);
         NewCanvasUI.My.GamePause();
         skipToFirstWave.gameObject.SetActive(true);
@@ -1656,6 +1656,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public void HideTurnIncomeAndCost()
     {
+        showTurn_btn.gameObject.SetActive(true);
+        hideTurn_btn.gameObject.SetActive(false);
         turnIncomeAndCostPanel.GetComponent<RectTransform>().DOAnchorPosX(180, 0.57f).Play();
     }
 
@@ -1766,18 +1768,31 @@ public class StageGoal : MonoSingleton<StageGoal>
     public int predictKillNum = 0;
     // 预测的血条
     public int predictHealth = 0;
+    public Texture2D busy;
+    public Texture2D normal;
     /// <summary>
     /// 预测回合
     /// </summary>
     public void PredictionNextTurn()
     {
+        if (predict_btn.transform.GetComponentInChildren<Toggle>().isOn)
+        {
+            if (!CostTechPoint(10))
+            {
+                return;
+            }
+        }
         //Stat();
         //NewCanvasUI.My.ToggleSpeedButton(true);
         ResetPredictResult();
         PlayerData.My.isPrediction = true;
+        TradeManager.My.RecycleAllGoods();
+        PlayerData.My.SaveAllWarehourse();
+        Cursor.SetCursor(busy, Vector2.zero, CursorMode.Auto);
         predict_btn.gameObject.SetActive(false);
+        skipToFirstWave.gameObject.SetActive(false);
         NewCanvasUI.My.GameNormal();
-        NewCanvasUI.My.GameAccelerate(10f);
+        NewCanvasUI.My.GameAccelerate(40f);
         //waveCountItem.Move();
         BuildingManager.My.RestartAllBuilding();
         // 重置回合收支
@@ -1800,18 +1815,22 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void EndPredictionTurn()
     {
         NewCanvasUI.My.ToggleSpeedButton(false);
+        NewCanvasUI.My.GameNormal();
         NewCanvasUI.My.GamePause();
-        PlayerData.My.isPrediction = false;
+        Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
         predict_btn.gameObject.SetActive(true);
         skipToFirstWave.gameObject.SetActive(true);
         //waveCountItem.Init(enemyDatas, currentWave - 1);
         PlayerData.My.RoleTurnEnd();
-        PlayerData.My.ClearAllRoleWarehouse();
-        //TradeManager.My.TurnTradeCost();
+        //PlayerData.My.ClearAllRoleWarehouse();
+        PlayerData.My.RestoreAllWarehourse();
+        TradeManager.My.TurnTradeCost();
         TradeManager.My.ClearAllGoods();
+        PlayerData.My.isPrediction = false;
         //TODO 解锁准备阶段的操作
         // 显示收支
-        ShowTurnIncomeAndCost();
+        //ShowTurnIncomeAndCost();
+        PredictionPanel.My.ShowPrediction(predict_btn.transform.GetComponentInChildren<Toggle>().isOn);
         UnlockOperation();
         //TODO 结算buff/角色周期性效果
     }
@@ -1823,7 +1842,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         predictCost = 0;
         predictTPcost = 0;
         predictTPadd = 0;
-        predictScore = 0;
+        predictScore = playerSatisfy;
         predictKillNum = 0;
         predictHealth = playerHealth;
     }
