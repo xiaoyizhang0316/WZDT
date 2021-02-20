@@ -40,7 +40,14 @@ public class RoleInfoMerchant : BaseRoleInfoAdd
         TradDown.text = (CreatRoleManager.My.finalEffect *0.3f + 24f).ToString()+"%";
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();
         risk .text =  CreatRoleManager.My.finalRiskResistance.ToString();
-        montyCost.text =  CreatRoleManager.My.finalCost.ToString();
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal)
+        {
+            montyCost.text = (CreatRoleManager.My.finalCost * 2).ToString();
+        }
+        else
+        {
+            montyCost.text = (CreatRoleManager.My.finalCost).ToString();
+        }
         technology.text = CreatRoleManager.My.finalTechAdd.ToString();
 
     }

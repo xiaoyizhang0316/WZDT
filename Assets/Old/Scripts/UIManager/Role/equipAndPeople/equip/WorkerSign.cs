@@ -88,7 +88,6 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         {
             levelUI.SetActive(true);
         }
-
         SetOccupyStatus(Occupation);
         workerData = GameDataMgr.My.GetWorkerData(id);
         effect.text = workerData.effect.ToString();
@@ -96,7 +95,14 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         range.text = workerData.range.ToString();
         riskResistance.text = workerData.riskResistance.ToString();
         tradeCost.text = workerData.tradeCost.ToString();
-        cost.text = workerData.cost.ToString();
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal)
+        {
+            cost.text = (workerData.cost * 2).ToString();
+        }
+        else
+        {
+            cost.text = workerData.cost.ToString();
+        }
         bulletCapacity.text = workerData.bulletCapacity.ToString();
         //S name.text = workerData.name;
         //print(workerData.SpritePath);

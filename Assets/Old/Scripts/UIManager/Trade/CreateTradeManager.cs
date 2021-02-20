@@ -202,7 +202,16 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
                 }
             }
         }
-        tradeCostText.text = result.ToString();
+        BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.castRole));
+        if (StageGoal.My.currentType == StageType.Normal && cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        {
+            tradeCostText.text = (result * 4).ToString();
+        }
+        else
+        {
+            tradeCostText.text = result.ToString();
+        }
+
     }
 
     /// <summary>

@@ -1837,8 +1837,11 @@ MonoBehaviour:
     OnBeforeDead: []
     OnTick: []
     OnProduct: []
+    OnEndTurn: []
     duration: 0
+    turnDuration: 0
     interval: 0
+    buffValue: 0
   role: {fileID: 0}
 --- !u!1 &907064021424238253
 GameObject:
@@ -5814,8 +5817,11 @@ MonoBehaviour:
     OnBeforeDead: []
     OnTick: []
     OnProduct: []
+    OnEndTurn: []
     duration: 0
+    turnDuration: 0
     interval: 0
+    buffValue: 0
   role: {fileID: 0}
 --- !u!1 &2859806454304670314
 GameObject:
@@ -6578,8 +6584,11 @@ MonoBehaviour:
     OnBeforeDead: []
     OnTick: []
     OnProduct: []
+    OnEndTurn: []
     duration: 0
+    turnDuration: 0
     interval: 0
+    buffValue: 0
   role: {fileID: 0}
 --- !u!1 &3619191751881874424
 GameObject:
@@ -11110,8 +11119,11 @@ MonoBehaviour:
     OnBeforeDead: []
     OnTick: []
     OnProduct: []
+    OnEndTurn: []
     duration: 0
+    turnDuration: 0
     interval: 0
+    buffValue: 0
   role: {fileID: 0}
 --- !u!1 &5675629342087383138
 GameObject:
@@ -11687,8 +11699,11 @@ MonoBehaviour:
     OnBeforeDead: []
     OnTick: []
     OnProduct: []
+    OnEndTurn: []
     duration: 0
+    turnDuration: 0
     interval: 0
+    buffValue: 0
   role: {fileID: 0}
 --- !u!1 &5888529228905148976
 GameObject:
@@ -16622,7 +16637,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -11.479996, y: 5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3968407270447071222
 MonoBehaviour:
@@ -16889,7 +16904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7127242878925329642
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17200,8 +17215,11 @@ MonoBehaviour:
     OnBeforeDead: []
     OnTick: []
     OnProduct: []
+    OnEndTurn: []
     duration: 0
+    turnDuration: 0
     interval: 0
+    buffValue: 0
   role: {fileID: 0}
 --- !u!1 &8084658276333710982
 GameObject:
@@ -18773,8 +18791,11 @@ MonoBehaviour:
     OnBeforeDead: []
     OnTick: []
     OnProduct: []
+    OnEndTurn: []
     duration: 0
+    turnDuration: 0
     interval: 0
+    buffValue: 0
   role: {fileID: 0}
 --- !u!1 &8590847992434086448
 GameObject:
@@ -19647,8 +19668,11 @@ MonoBehaviour:
     OnBeforeDead: []
     OnTick: []
     OnProduct: []
+    OnEndTurn: []
     duration: 0
+    turnDuration: 0
     interval: 0
+    buffValue: 0
   role: {fileID: 0}
 --- !u!1 &9208319151786161602
 GameObject:
@@ -20129,12 +20153,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88596a6b740454ed389e7cb4d02b81f2, type: 3}
---- !u!224 &493680749054721563 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5550602008359207610, guid: 88596a6b740454ed389e7cb4d02b81f2,
-    type: 3}
-  m_PrefabInstance: {fileID: 5466907159701290145}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5085605656938648280 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 958677926575042169, guid: 88596a6b740454ed389e7cb4d02b81f2,
@@ -20147,6 +20165,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e18e927d4d9a4fa48a7e0682d351607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &493680749054721563 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5550602008359207610, guid: 88596a6b740454ed389e7cb4d02b81f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5466907159701290145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5888740938933611597
 PrefabInstance:
   m_ObjectHideFlags: 0

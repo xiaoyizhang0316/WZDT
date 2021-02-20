@@ -36,7 +36,14 @@ public class RoleListInfoMerchant : BaseRoleListInfo
         TradDown.text = (role.effect * 0.3f + 24f).ToString() + "%";
         tradCost.text  =   role.tradeCost.ToString();
         risk .text =  role.riskResistance.ToString();
-        montyCost.text =   role.cost.ToString();
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal)
+        {
+            montyCost.text = (role.cost * 2).ToString();
+        }
+        else
+        {
+            montyCost.text = role.cost.ToString();
+        }
         technology.text =  role.techAdd.ToString();
         UpdateBar(role);
         if (isShowProduct)

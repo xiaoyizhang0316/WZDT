@@ -1111,7 +1111,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
 
         playerSatisfy = 0;
-        produceTime = 20;
+        produceTime = 10;
         maxMinusGold = -8000;
         if (PlayerData.My.xianJinLiu[2])
         {
@@ -1622,7 +1622,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         consumeIncome = 0;
         npcIncome = 0;
         otherIncome = 0;
-
         otherIncomes.Clear();
         npcIncomes.Clear();
         npcIncomesEx.Clear();
