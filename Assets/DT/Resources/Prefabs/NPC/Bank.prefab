@@ -14282,6 +14282,7 @@ MonoBehaviour:
     equipCost: 0
     workerCost: 0
     landCost: 0
+    gearEncourageAdd: 0
     inMap: 0
     isNpc: 0
   warehouse: []
@@ -14314,8 +14315,16 @@ MonoBehaviour:
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  startTradeList: []
+  endTradeList: []
+  tasteBuffList: 
+  totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
+  stopWorkSprite: {fileID: 0}
+  isSell: 0
+  ringEffect: {fileID: 0}
+  cloneWarehourse: []
 --- !u!114 &8899486489098488673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14407,8 +14416,9 @@ MonoBehaviour:
   extraSkillDesc: 
   maxTradeLimit: 1
   loanNumber: 20000
-  timeCount: 6
+  timeCount: 4
   eachReturn: 3800
+  sign: {fileID: 0}
 --- !u!1001 &1072662421135550785
 PrefabInstance:
   m_ObjectHideFlags: 0
