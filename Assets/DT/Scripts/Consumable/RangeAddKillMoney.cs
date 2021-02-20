@@ -15,7 +15,7 @@ public class RangeAddKillMoney : BaseSpawnItem
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Consumer"))
+        if (other.CompareTag("Consumer") && other.GetComponent<ConsumeSign>().isCanSelect)
         {
             BuffData data = GameDataMgr.My.GetBuffDataByID(buffId);
             BaseBuff baseBuff = new BaseBuff();

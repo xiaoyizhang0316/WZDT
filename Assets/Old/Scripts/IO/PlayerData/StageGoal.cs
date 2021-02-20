@@ -1624,7 +1624,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public Text turnTitle_txt;
     public Button showTurn_btn;
     public Button hideTurn_btn;
-    private bool isEndTurn = false;
+    public bool isEndTurn = false;
 
     /// <summary>
     /// 重置回合收支（点击回合开始时）
