@@ -279,6 +279,7 @@ public class BaseBuff
                     int index = UnityEngine.Random.Range(0, consumableList.Count);
                     PlayerData.My.GetNewConsumalbe(int.Parse(consumableList[index]));
                 }
+                Debug.Log("numdasdsa" + number);
                 break;
             default:
                 break;

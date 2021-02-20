@@ -183,7 +183,9 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
                 temp.OnTick.AddRange(b.OnTick);
                 temp.OnProduct.AddRange(b.OnProduct);
                 temp.buffParam.AddRange(b.buffParam);
+                temp.OnEndTurn.AddRange(b.OnEndTurn);
                 temp.duration = b.duration;
+                temp.turnDuration = b.turnDuration;
                 temp.interval = b.interval;
                 temp.buffValue = b.buffValue;
                 return temp;
@@ -286,7 +288,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.OnTick = b.OnTick.Split(',').ToList();
             temp.OnEndTurn = b.OnEndTurn.Split(',').ToList();
             temp.duration = int.Parse(b.Duration);
-            //temp.turnDuration = int.Parse(b.TurnDuration);
+            temp.turnDuration = int.Parse(b.TurnDuration);
             temp.interval = int.Parse(b.Interval);
             temp.buffValue = int.Parse(b.buffValue);
             string[] str = b.BuffParam.Split(',');

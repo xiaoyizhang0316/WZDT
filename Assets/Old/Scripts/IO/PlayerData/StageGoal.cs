@@ -888,6 +888,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.GameNormal();
         waveCountItem.Move();
         BuildingManager.My.RestartAllBuilding();
+        PlayerData.My.RoleTurnCheckBuff();
         // 重置回合收支
         ResetTurnIncomeAndCost();
         LockOperation();
