@@ -455,6 +455,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         //Panel_CreateTrade.SetActive(true);
         //CreateTradeManager.My.Open(go);
         isSetTrade = false;
+        if (StageGoal.My.isTurnStart)
+        {
+            StageGoal.My.isInTurnCreateTrade = true;
+        }
         DataUploadManager.My.AddData(DataEnum.交易_建交易);
         //CreateTradeLineGo.SetActive(false);
     }
