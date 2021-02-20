@@ -23,15 +23,15 @@ public class Level6Controller : BaseLevelController
 
     public override void CheckStarThree()
     {
-        if (StageGoal.My.totalPauseTime <= 180)
+        if (StageGoal.My.isInTurnCreateTrade)
         {
-            starThreeStatus = true;
+            starThreeStatus = false ;
         }
         else
         {
-            starThreeStatus = false;
+            starThreeStatus = true;
         }
-        starThreeCondition = "累计暂停时间不超过180秒，当前：" + StageGoal.My.totalPauseTime.ToString();
+        starThreeCondition = "开始阶段时不配置交易";
         CheckCheat();
     }
 

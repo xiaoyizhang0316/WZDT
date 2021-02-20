@@ -275,7 +275,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
 
     public void Move()
     {
-        twe = transform.DOLocalMoveY(-30f, 20f).SetEase(Ease.Linear).OnComplete(() =>
+        twe = transform.DOLocalMoveY(-30f, 10f).SetEase(Ease.Linear).OnComplete(() =>
         {
             ParticleSystem[] list = GetComponentsInChildren<ParticleSystem>();
             for (int i = 0; i < list.Length; i++)

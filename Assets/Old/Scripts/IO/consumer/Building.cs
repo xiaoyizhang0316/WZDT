@@ -125,6 +125,10 @@ public class Building : MonoBehaviour
         {
             StartCoroutine(SpawnWaveConsumer(waveNumber));
         }
+        else
+        {
+            isFinishSpawn = true;
+        }
     }
 
     /// <summary>
