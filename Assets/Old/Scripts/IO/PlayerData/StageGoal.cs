@@ -1313,6 +1313,11 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 Lose();
             }
+            
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                SceneManager.LoadScene("Map");
+            }
 
             if (Input.GetKeyDown(KeyCode.F))
             {
