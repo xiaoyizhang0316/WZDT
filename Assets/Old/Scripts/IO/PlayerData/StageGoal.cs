@@ -1737,7 +1737,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 锁删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = false;
         // 禁止键角色
-        RoleListManager.My.LockRoleCreate();
+        if (SceneManager.GetActiveScene().name.Equals("FTE_1") || SceneManager.GetActiveScene().name.Equals("FTE_2"))
+        {
+            RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(-300, 1f).Play();
+        }
+        else
+        {
+            RoleListManager.My.LockRoleCreate();
+        }
     }
 
     /// <summary>
@@ -1762,7 +1769,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 解删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
         // 可以见角色
-        RoleListManager.My.UnlockRoleCreate();
+        if (SceneManager.GetActiveScene().name.Equals("FTE_1") || SceneManager.GetActiveScene().name.Equals("FTE_2"))
+        {
+            RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(67, 1f).Play();
+        }
+        else
+        {
+            RoleListManager.My.UnlockRoleCreate();
+        }
     }
 
     #endregion
@@ -1793,13 +1807,13 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void PredictionNextTurn()
     {
-        if (predict_btn.transform.GetComponentInChildren<Toggle>().isOn)
+        /*if (predict_btn.transform.GetComponentInChildren<Toggle>().isOn)
         {
             if (!CostTechPoint(10))
             {
                 return;
             }
-        }
+        }*/
         //Stat();
         //NewCanvasUI.My.ToggleSpeedButton(true);
         ResetPredictResult();
@@ -1851,7 +1865,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         //TODO 解锁准备阶段的操作
         // 显示收支
         //ShowTurnIncomeAndCost();
-        PredictionPanel.My.ShowPrediction(predict_btn.transform.GetComponentInChildren<Toggle>().isOn);
+        PredictionPanel.My.ShowPrediction(/*predict_btn.transform.GetComponentInChildren<Toggle>().isOn*/);
         if(!SceneManager.GetActiveScene().name.Equals("FTE_1"))
             BaikePanel.My.gameObject.SetActive(true);
         UnlockOperation();

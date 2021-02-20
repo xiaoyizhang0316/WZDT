@@ -16,6 +16,8 @@ public class PredictionPanel : MonoSingleton<PredictionPanel>
     public Text killNum;
     public Text score;
 
+    private int currentWave = -1;
+
     public Button close_btn;
     private void Start()
     {
@@ -28,6 +30,7 @@ public class PredictionPanel : MonoSingleton<PredictionPanel>
 
     public void ShowPrediction(bool isPay = false)
     {
+        currentWave = StageGoal.My.currentWave;
         if (isPay)
         {
             startGold.text = StageGoal.My.playerGold.ToString();
@@ -57,6 +60,15 @@ public class PredictionPanel : MonoSingleton<PredictionPanel>
             killNum.text = "????";
             score.text = "????";
         }
-        transform.DOScale(1, 0.5f).Play();
+        //transform.DOScale(1, 0.5f).Play();
+    }
+
+    public void RefreshPredict()
+    {
+        if (StageGoal.My.currentWave != currentWave)
+        {
+            income.text = "?????";
+            cost.text = "?????";
+        }
     }
 }
