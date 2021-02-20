@@ -519,6 +519,11 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             if (predictHealth <= 0)
             {
+                var list = FindObjectsOfType<ConsumeSign>();
+                for (int i = 0; i <list.Length ; i++)
+                {
+                    Destroy(list[i].gameObject);
+                }
                 EndPredictionTurn();
             }
             return;
