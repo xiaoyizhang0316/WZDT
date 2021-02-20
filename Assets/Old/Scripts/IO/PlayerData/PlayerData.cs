@@ -146,7 +146,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         //RecycleProduct();
         RoleTurnCost();
         RoleTurnTechPoint(); 
-        RoleTurnCheckBuff();
     }
 
     /// <summary>
