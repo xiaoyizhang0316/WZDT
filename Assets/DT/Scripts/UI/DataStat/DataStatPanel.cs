@@ -48,6 +48,8 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     public GameObject income;
     public GameObject expend;
 
+    public GameObject predictPanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +69,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
             StageGoal.My.tradeCost, StageGoal.My.npcIncomesEx,
             StageGoal.My.npcIncomes, StageGoal.My.otherIncomes,
             StageGoal.My.buildingCosts, StageGoal.My.extraCost, StageGoal.My.timeCount);
+        predictPanel.GetComponent<PredictionPanel>().RefreshPredict();
     }
 
     public void RefreshIncome(int totalIncome, int totalConsumeIncome, Dictionary<string, int> npcIncomesEx, Dictionary<BaseMapRole, int> npcIncomes,
@@ -98,13 +101,13 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         mask.SetActive(true);
         statPanel.SetActive(true);
         gameObject.SetActive(true);
-        totalIncomePerMin.text = (totalIncome * 60 / timeCount).ToString();
+        totalIncomePerMin.text = (totalIncome * 60 / (timeCount==0?1:timeCount)).ToString();
         this.totalIncome.text = totalIncome.ToString();
-        consumeIncomePerMin.text = (totalConsumeIncome * 60 / timeCount).ToString();
+        consumeIncomePerMin.text = (totalConsumeIncome * 60 / (timeCount==0?1:timeCount)).ToString();
         consumeIncome.text = totalConsumeIncome.ToString();
-        totalCostPerMin.text = (totalCost * 60 / timeCount).ToString();
+        totalCostPerMin.text = (totalCost * 60 / (timeCount==0?1:timeCount)).ToString();
         this.totalCost.text = totalCost.ToString();
-        tradeCostPerMin.text = (tradeCost * 60 / timeCount).ToString();
+        tradeCostPerMin.text = (tradeCost * 60 / (timeCount==0?1:timeCount)).ToString();
         this.tradeCost.text = tradeCost.ToString();
         int count = 0;
         if (npcIncomesEx.Count > 0)
@@ -116,9 +119,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
                 {
                     GameObject newNpc = Instantiate(statItem, npcContent);
                     StatItem stat = newNpc.GetComponent<StatItem>();
-                    stat.Setup(key, npcIncomesEx[key] * 60 / timeCount, npcIncomesEx[key]);
+                    stat.Setup(key, npcIncomesEx[key] * 60 / (timeCount==0?1:timeCount), npcIncomesEx[key]);
                 }
-                npcContent.GetChild(i).GetComponent<StatItem>().Setup(key, npcIncomesEx[key] * 60 / timeCount, npcIncomesEx[key]);
+                npcContent.GetChild(i).GetComponent<StatItem>().Setup(key, npcIncomesEx[key] * 60 / (timeCount==0?1:timeCount), npcIncomesEx[key]);
                 i++;
             }
             if (i < npcContent.childCount)
@@ -140,9 +143,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
                 {
                     GameObject newNpc = Instantiate(statItem, npcContent);
                     StatItem stat = newNpc.GetComponent<StatItem>();
-                    stat.Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key]);
+                    stat.Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / (timeCount==0?1:timeCount), npcIncomes[key]);
                 }
-                npcContent.GetChild(i + count).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key]);
+                npcContent.GetChild(i + count).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / (timeCount==0?1:timeCount), npcIncomes[key]);
                 i++;
             }
             if (i < npcContent.childCount - count)
@@ -164,9 +167,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
                 {
                     GameObject newNpc = Instantiate(statItem, otherContent);
                     StatItem stat = newNpc.GetComponent<StatItem>();
-                    stat.Setup(key, otherIncomes[key] * 60 / timeCount, otherIncomes[key]);
+                    stat.Setup(key, otherIncomes[key] * 60 / (timeCount==0?1:timeCount), otherIncomes[key]);
                 }
-                otherContent.GetChild(i).GetComponent<StatItem>().Setup(key, otherIncomes[key] * 60 / timeCount, otherIncomes[key]);
+                otherContent.GetChild(i).GetComponent<StatItem>().Setup(key, otherIncomes[key] * 60 /(timeCount==0?1:timeCount), otherIncomes[key]);
                 i++;
             }
             if (i < otherContent.childCount)
@@ -186,9 +189,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
                 {
                     GameObject newNpc = Instantiate(statItem, buildContent);
                     StatItem stat = newNpc.GetComponent<StatItem>();
-                    stat.Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 / timeCount, buildCost[key]);
+                    stat.Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 / (timeCount==0?1:timeCount), buildCost[key]);
                 }
-                buildContent.GetChild(i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 / timeCount, buildCost[key]);
+                buildContent.GetChild(i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 / (timeCount==0?1:timeCount), buildCost[key]);
                 i++;
             }
             if (i < buildContent.childCount)
@@ -230,9 +233,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         Dictionary<string, int> otherIncomes, int timeCount)
     {
 
-        totalIncomePerMin.text = (totalIncome * 60 / timeCount).ToString();
+        totalIncomePerMin.text = (totalIncome * 60 / (timeCount==0?1:timeCount)).ToString();
         this.totalIncome.text = totalIncome.ToString();
-        consumeIncomePerMin.text = (totalConsumeIncome * 60 / timeCount).ToString();
+        consumeIncomePerMin.text = (totalConsumeIncome * 60 / (timeCount==0?1:timeCount)).ToString();
         consumeIncome.text = totalConsumeIncome.ToString();
         int count = 0;
         if (npcIncomesEx.Count > 0)
@@ -244,9 +247,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
                 {
                     GameObject newNpc = Instantiate(statItem, npcContent);
                     StatItem stat = newNpc.GetComponent<StatItem>();
-                    stat.Setup(key, npcIncomesEx[key] * 60 / timeCount, npcIncomesEx[key]);
+                    stat.Setup(key, npcIncomesEx[key] * 60 / (timeCount==0?1:timeCount), npcIncomesEx[key]);
                 }
-                npcContent.GetChild(i).GetComponent<StatItem>().Setup(key, npcIncomesEx[key] * 60 / timeCount, npcIncomesEx[key]);
+                npcContent.GetChild(i).GetComponent<StatItem>().Setup(key, npcIncomesEx[key] * 60 / (timeCount==0?1:timeCount), npcIncomesEx[key]);
                 i++;
             }
             if (i < npcContent.childCount)
@@ -267,9 +270,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
                 {
                     GameObject newNpc = Instantiate(statItem, npcContent);
                     StatItem stat = newNpc.GetComponent<StatItem>();
-                    stat.Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key]);
+                    stat.Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / (timeCount==0?1:timeCount), npcIncomes[key]);
                 }
-                npcContent.GetChild(count + i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / timeCount, npcIncomes[key]);
+                npcContent.GetChild(count + i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, npcIncomes[key] * 60 / (timeCount==0?1:timeCount), npcIncomes[key]);
                 i++;
             }
             if (i < npcContent.childCount - count)
@@ -291,9 +294,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
                 {
                     GameObject newNpc = Instantiate(statItem, otherContent);
                     StatItem stat = newNpc.GetComponent<StatItem>();
-                    stat.Setup(key, otherIncomes[key] * 60 / timeCount, otherIncomes[key]);
+                    stat.Setup(key, otherIncomes[key] * 60 / (timeCount==0?1:timeCount), otherIncomes[key]);
                 }
-                otherContent.GetChild(i).GetComponent<StatItem>().Setup(key, otherIncomes[key] * 60 / timeCount, otherIncomes[key]);
+                otherContent.GetChild(i).GetComponent<StatItem>().Setup(key, otherIncomes[key] * 60 / (timeCount==0?1:timeCount), otherIncomes[key]);
                 i++;
             }
             if (i < otherContent.childCount)
@@ -310,9 +313,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     private void ShowExpendNew(int totalCost, int tradeCost, Dictionary<BaseMapRole, int> buildCost,
         Dictionary<string, int> extraCost, int timeCount)
     {
-        totalCostPerMin.text = (totalCost * 60 / timeCount).ToString();
+        totalCostPerMin.text = (totalCost * 60 / (timeCount==0?1:timeCount)).ToString();
         this.totalCost.text = totalCost.ToString();
-        tradeCostPerMin.text = (tradeCost * 60 / timeCount).ToString();
+        tradeCostPerMin.text = (tradeCost * 60 / (timeCount==0?1:timeCount)).ToString();
         this.tradeCost.text = tradeCost.ToString();
         if (buildCost.Count > 0)
         {
@@ -323,9 +326,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
                 {
                     GameObject newNpc = Instantiate(statItem, buildContent);
                     StatItem stat = newNpc.GetComponent<StatItem>();
-                    stat.Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 / timeCount, buildCost[key]);
+                    stat.Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 / (timeCount==0?1:timeCount), buildCost[key]);
                 }
-                buildContent.GetChild(i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 / timeCount, buildCost[key]);
+                buildContent.GetChild(i).GetComponent<StatItem>().Setup(key.baseRoleData.baseRoleData.roleName, buildCost[key] * 60 /(timeCount==0?1:timeCount), buildCost[key]);
                 i++;
             }
             if (i < buildContent.childCount)
