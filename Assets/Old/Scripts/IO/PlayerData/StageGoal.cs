@@ -178,6 +178,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     public Color tipColor;
 
     public int maxRoleLevel = 5;
+
+    public GameObject lankuang;
     /// <summary>
     /// 玩家消耗金币
     /// </summary>
@@ -910,6 +912,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.ToggleSpeedButton(false);
         NewCanvasUI.My.GamePause();
         skipToFirstWave.gameObject.SetActive(true);
+        lankuang.SetActive(true);
+
         waveCountItem.Init(enemyDatas, currentWave - 1);
         waveCountItem.Clear();
         PlayerData.My.RoleTurnEnd();
@@ -1044,9 +1048,11 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerTechText = transform.parent.Find("UserInfo/Image_money/PlayerTech").GetComponent<Text>();
         stageWaveText = transform.parent.Find("UserInfo/Image_level/StageLevel").GetComponent<Text>();
         skipToFirstWave = transform.parent.Find("TimeScale/SkipFirst").GetComponent<Button>();
+        lankuang = transform.parent.Find("Image_ReadyTime").gameObject;
         skipToFirstWave.onClick.AddListener(() =>
         {
             NextTurn();
+            lankuang.SetActive(false);
             skipToFirstWave.gameObject.SetActive(false);
         });
         foreach (PlayerGear p in PlayerData.My.playerGears)
