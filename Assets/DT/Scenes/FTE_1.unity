@@ -4804,17 +4804,17 @@ PrefabInstance:
     - target: {fileID: 860733406281142355, guid: 172fa9b7ca521b64a8d6a77c095f3111,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 860733406281142355, guid: 172fa9b7ca521b64a8d6a77c095f3111,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -213.8003
+      value: 2464
       objectReference: {fileID: 0}
     - target: {fileID: 860733406281142355, guid: 172fa9b7ca521b64a8d6a77c095f3111,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -33.1
+      value: -535
       objectReference: {fileID: 0}
     - target: {fileID: 860733406281142355, guid: 172fa9b7ca521b64a8d6a77c095f3111,
         type: 3}
@@ -13890,12 +13890,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc16179146358bd48aa41c415a8b584f, type: 3}
---- !u!4 &975628699 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6743774241994318885, guid: fc16179146358bd48aa41c415a8b584f,
-    type: 3}
-  m_PrefabInstance: {fileID: 975628698}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &977974600
 GameObject:
   m_ObjectHideFlags: 0
@@ -22365,7 +22359,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7B2C\u4E00\u6CE2\u7684\u5F00\u59CB\u9636\u6BB5\u5DF2\u7ECF\u7ED3\u675F\uFF0C\u6765\u770B\u770B\u4F60\u7684\u6536\u652F\u60C5\u51B5\u5427\uFF01\n\n\u6BCF\u4E00\u6CE2\u6D88\u8D39\u8005\u64A4\u79BB\u4E4B\u540E\uFF0C\u90FD\u4F1A\u8FDB\u5165\u51C6\u5907\u9636\u6BB5\uFF0C\u73B0\u5728\u4F60\u53EF\u4EE5\u8FDB\u884C\u89D2\u8272\u90E8\u7F72\u3001\u5347\u7EA7\u53CA\u88C5\u5907\u7684\u8C03\u6574\u3002\n\n\u5F53\u518D\u6B21\u51C6\u5907\u597D\u4E4B\u540E\uFF0C\u53EF\u4EE5\u7EE7\u7EED\u70B9\u51FB\u5F00\u59CB\u9636\u6BB5"
+  m_Text: "\u7B2C\u4E00\u6CE2\u7684\u5F00\u59CB\u9636\u6BB5\u5DF2\u7ECF\u7ED3\u675F\n\n\u6BCF\u4E00\u6CE2\u6D88\u8D39\u8005\u64A4\u79BB\u4E4B\u540E\uFF0C\u90FD\u4F1A\u8FDB\u5165\u51C6\u5907\u9636\u6BB5\uFF0C\u73B0\u5728\u4F60\u53EF\u4EE5\u8FDB\u884C\u89D2\u8272\u90E8\u7F72\u3001\u5347\u7EA7\u53CA\u88C5\u5907\u7684\u8C03\u6574\u3002\n\n\u5F53\u518D\u6B21\u51C6\u5907\u597D\u4E4B\u540E\uFF0C\u53EF\u4EE5\u7EE7\u7EED\u70B9\u51FB\u5F00\u59CB\u9636\u6BB5"
 --- !u!222 &1743288727
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25572,14 +25566,8 @@ MonoBehaviour:
   isOpen: 1
   contentText: []
   endButton: {fileID: 0}
-  Camera3DTarget:
-  - target: {fileID: 975628699}
-    radius: 0
-    EndRandius: 80
-    waitTime: 0
-    speed: 60
-  highLight2DObjList:
-  - {fileID: 5578415291692612269}
+  Camera3DTarget: []
+  highLight2DObjList: []
   highLightCopyObj: []
   needCheck: 1
   entryTime: 1
@@ -40389,12 +40377,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5578415291197435948}
         m_MethodName: GameAccelerate
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 2
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
