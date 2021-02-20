@@ -16,6 +16,8 @@ public class PredictionPanel : MonoSingleton<PredictionPanel>
     public Text killNum;
     public Text score;
 
+    public Text gCost;
+
     private int currentWave = -1;
 
     public Button close_btn;
@@ -65,10 +67,22 @@ public class PredictionPanel : MonoSingleton<PredictionPanel>
 
     public void RefreshPredict()
     {
+        
         if (StageGoal.My.currentWave != currentWave)
         {
             income.text = "?????";
             cost.text = "?????";
         }
+        
+        int guding = 0;
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        {
+            if (!PlayerData.My.MapRole[i].baseRoleData.isNpc)
+            {
+                guding += PlayerData.My.MapRole[i].baseRoleData.cost;
+            }
+        }
+
+        gCost.text = "下回合的固定成本：" + guding;
     }
 }

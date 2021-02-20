@@ -1824,7 +1824,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         predict_btn.gameObject.SetActive(false);
         skipToFirstWave.gameObject.SetActive(false);
         NewCanvasUI.My.GameNormal();
-        NewCanvasUI.My.GameAccelerate(40f);
+        NewCanvasUI.My.GameAccelerate(20f);
         //waveCountItem.Move();
         BuildingManager.My.RestartAllBuilding();
         // 重置回合收支
