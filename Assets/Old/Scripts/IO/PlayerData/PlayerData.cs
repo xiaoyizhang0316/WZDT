@@ -141,12 +141,16 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// <summary>
     /// 所有角色回合结束时相关操作
     /// </summary> 
- 
     public void RoleTurnEnd()
     {
         //RecycleProduct();
         RoleTurnCost();
-        RoleTurnTechPoint(); 
+        RoleTurnTechPoint();
+        BaseSpawnItem[] baseSpawnItems = FindObjectsOfType<BaseSpawnItem>();
+        for (int i = 0; i < baseSpawnItems.Length; i++)
+        {
+            Destroy(baseSpawnItems[i].gameObject);
+        }
     }
 
     /// <summary>

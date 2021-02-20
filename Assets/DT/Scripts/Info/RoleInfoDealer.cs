@@ -43,7 +43,14 @@ public class RoleInfoDealer : BaseRoleInfoAdd
         Range.text = (CreatRoleManager.My.finalRange / 14.5f).ToString("F2") ;
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();
         risk .text =  CreatRoleManager.My.finalRiskResistance.ToString();
-        montyCost.text =  CreatRoleManager.My.finalCost.ToString();
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal)
+        {
+            montyCost.text = (CreatRoleManager.My.finalCost * 2).ToString();
+        }
+        else
+        {
+            montyCost.text = (CreatRoleManager.My.finalCost).ToString();
+        }
         technology.text = CreatRoleManager.My.finalTechAdd.ToString();
         text_Range.text = (CreatRoleManager.My.finalRange).ToString();
     }

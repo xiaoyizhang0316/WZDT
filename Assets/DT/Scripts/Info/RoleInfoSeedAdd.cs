@@ -49,7 +49,14 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
         productTime.text = (CreatRoleManager.My.finalEfficiency / 20f).ToString()+" /s";
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();
         risk .text =  CreatRoleManager.My.finalRiskResistance.ToString();
-        montyCost.text =  CreatRoleManager.My.finalCost.ToString();
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal)
+        {
+            montyCost.text = (CreatRoleManager.My.finalCost * 2).ToString();
+        }
+        else
+        {
+            montyCost.text = (CreatRoleManager.My.finalCost).ToString();
+        }
         technology.text = CreatRoleManager.My.finalTechAdd.ToString();
      //   if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) >3)
      //   {

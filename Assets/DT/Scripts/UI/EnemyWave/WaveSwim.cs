@@ -95,7 +95,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
                 client_Wave.buildingNumber = 5;
             }
         }
-        int waitNumber = 20;
+        int waitNumber = 10;
         if (waitNumber - offset <= 30)
         {
             transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) * 40f / 3f, transform.localPosition.z);

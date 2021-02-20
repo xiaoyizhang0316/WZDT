@@ -7,8 +7,6 @@ using UnityEngine.EventSystems;
 
 public class ProductDealer : BaseSkill
 {
-
-
     // Start is called before the first frame update
 
     public override void Skill()

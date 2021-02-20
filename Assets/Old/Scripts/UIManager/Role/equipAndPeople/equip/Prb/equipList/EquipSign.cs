@@ -110,7 +110,14 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         range.text = gearData.range.ToString();
         riskResistance.text = gearData.riskResistance.ToString();
         tradeCost.text = gearData.tradeCost.ToString();
-        cost.text = gearData.cost.ToString();
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal)
+        {
+            cost.text = (gearData.cost * 2).ToString();
+        }
+        else
+        {
+            cost.text = gearData.cost.ToString();
+        }
         //bulletCapacity.text = gearData.bulletCapacity.ToString(); 
         //print(gearData.SpritePath);
         if (gearData.ProductOrder == 1)

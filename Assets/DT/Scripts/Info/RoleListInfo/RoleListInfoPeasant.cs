@@ -37,7 +37,14 @@ public class RoleListInfoPeasant : BaseRoleListInfo
         productTime.text = (role.efficiency / 20f).ToString("F2");
         tradCost.text  =  role.tradeCost.ToString();
         risk .text = role.riskResistance.ToString();
-        montyCost.text =   role.cost.ToString();
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal)
+        {
+            montyCost.text = (role.cost * 2).ToString();
+        }
+        else
+        {
+            montyCost.text = role.cost.ToString();
+        }
         technology.text =  role.techAdd.ToString();
         UpdateBar(role);
         if (isShowProduct)
