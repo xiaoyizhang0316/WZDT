@@ -588,7 +588,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         bool isComplete = true;
         foreach (Building b in BuildingManager.My.buildings)
         {
-            if (!b.isFinishSpawn)
+            if (!b.isFinishSpawn && b.gameObject.activeInHierarchy)
             {
                 isComplete = false;
                 break;
@@ -877,6 +877,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
     }
 
+    public bool isInTurnCreateTrade = false;
+
+
+    public bool isTurnStart = false;
     /// <summary>
     /// 回合开始
     /// </summary>
@@ -887,6 +891,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.ToggleSpeedButton(true);
         NewCanvasUI.My.GameNormal();
         waveCountItem.Move();
+        isTurnStart = true;
         BuildingManager.My.RestartAllBuilding();
         PlayerData.My.RoleTurnCheckBuff();
         // 重置回合收支
@@ -914,7 +919,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.GamePause();
         skipToFirstWave.gameObject.SetActive(true);
         lankuang.SetActive(true);
-
+        isTurnStart = false;
         waveCountItem.Init(enemyDatas, currentWave - 1);
         waveCountItem.Clear();
         PlayerData.My.RoleTurnEnd();
@@ -1065,7 +1070,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             p.isEquiped = false;
         }
         InitStageData();
-
+        PlayerData.My.playerConsumables.Clear();
         WaveCount();
     }
 
