@@ -18,13 +18,26 @@ public class WaveCount : MonoSingleton<WaveCount>
     public bool showDetail = false;
 
     /// <summary>
-    /// 初始化
+    /// 初始化(回合)
     /// </summary>
     /// <param name="datas"></param>
     public void Init(List<StageEnemyData> datas,int waveNumber)
     {
         GameObject go = Instantiate(singleWavePrb, transform.Find("Panel"));
         go.GetComponent<WaveSwim>().Init(waveNumber, datas);
+    }
+
+    /// <summary>
+    /// 初始化（即时）
+    /// </summary>
+    /// <param name="datas"></param>
+    public void Init(List<StageEnemyData> datas)
+    {
+        for (int i = 0; i < StageGoal.My.maxWaveNumber; i++)
+        {
+            GameObject go = Instantiate(singleWavePrb, transform.Find("Panel"));
+            go.GetComponent<WaveSwim>().SlgInit(i, datas);
+        }
     }
 
     /// <summary>

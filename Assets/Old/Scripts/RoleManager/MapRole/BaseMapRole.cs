@@ -425,9 +425,17 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void OnTurnBuff()
     {
-        foreach (BaseBuff item in buffList)
+        for (int i = 0; i < buffList.Count; i++)
         {
-            item.OnRoleTurn();
+            buffList[i].OnRoleTurn();
+            if (buffList[i].turnDuration != -1)
+            {
+                buffList[i].turnDuration--;
+                if (buffList[i].turnDuration == 0)
+                {
+                    RemoveBuff(buffList[i]);
+                }
+            }
         }
         if(extraSkill != null && tradeList.Count > 0)
         {
