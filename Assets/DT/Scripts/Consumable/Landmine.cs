@@ -9,12 +9,17 @@ public class Landmine : BaseSpawnItem
         base.Init(id);
     }
 
+    public GameObject boom;
+
+    public bool isopen;
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Consumer") && other.GetComponent<ConsumeSign>().isCanSelect)
+        if (other.CompareTag("Consumer") && other.GetComponent<ConsumeSign>().isCanSelect&&!isopen)
         {
             other.GetComponent<ConsumeSign>().ChangeHealth(999999);
-            Destroy(gameObject, 0f);
+            isopen = true;
+            boom.SetActive(true);
+            Destroy(gameObject, 1f);
         }
     }
 }
