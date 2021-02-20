@@ -1070,7 +1070,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             p.isEquiped = false;
         }
         InitStageData();
-
+        PlayerData.My.playerConsumables.Clear();
         WaveCount();
     }
 
