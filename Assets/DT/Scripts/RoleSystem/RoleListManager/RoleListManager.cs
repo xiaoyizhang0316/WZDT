@@ -142,4 +142,22 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     //        }
     //    }
     //}
+
+    public void LockRoleCreate()
+    {
+        if (changeObj[0].name.Equals("Image_BG"))
+        {
+            Change();
+        }
+        change.interactable = false;
+    }
+
+    public void UnlockRoleCreate()
+    {
+        if (!changeObj[0].name.Equals("Image_BG"))
+        {
+            Change();
+        }
+        change.interactable = true;
+    }
 }
