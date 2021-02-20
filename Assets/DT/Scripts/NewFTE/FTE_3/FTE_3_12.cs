@@ -20,9 +20,10 @@ public class FTE_3_12 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
+        NewCanvasUI.My.GamePause(); 
+        NewCanvasUI.My.Panel_NPC.SetActive(true);
+        NPCListInfo .My.ShowNpcInfo(role.transform);
         yield return new WaitForSeconds(1);
-        NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().ShowNpcInfo(role.transform);
-         
     }
 
     public override IEnumerator StepEnd()

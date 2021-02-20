@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FTE_3_11 : BaseGuideStep
+public class FTE_3_13: BaseGuideStep
 {
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class FTE_3_11 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-        NewCanvasUI.My.GamePause(); 
+        NewCanvasUI.My.Panel_NPC.SetActive(false);
 
         yield return new WaitForSeconds(1);
          
@@ -28,11 +28,11 @@ public class FTE_3_11 : BaseGuideStep
     {
         yield return new WaitForSeconds(1);
 
-        PlayerData.My.GetNewConsumalbe(20001);
+        
     }
 
     public override bool ChenkEnd()
     {
-        return PlayerData.My.playerConsumables.Count >= 1;
+        return ConsumableListManager.My.currentSign != null;
     }
 }
