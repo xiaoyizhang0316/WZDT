@@ -12,6 +12,8 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
     public GameObject bornPoint;
     //public GameObject dealer1;
     public GameObject place1;
+
+    public GameObject roads;
     public Transform tradeMgr;
     public Transform roles;
     private int currentCost;
@@ -25,6 +27,8 @@ public class FTE_2_5_NewGoal4 : BaseGuideStep
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().needLimit = true;
         NewCanvasUI.My.GamePause(false);
+        roads.transform.DOMoveY(0, 0.5f).Play();
+
         FTE_2_5_Manager.My.dealer1.SetActive(true);
         //dealer2.SetActive(true);
         //dealer3.SetActive(true);

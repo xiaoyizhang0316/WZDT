@@ -210,8 +210,8 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         float perf = (timeCount / datas.Count / 5f);
         for (int i = 0; i < datas.Count; i++)
         {
-            line.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i * perf, datas[i].restMoney / (float)maxAmount * 100f));
-            healthLine.vectorLine.points2.Add(new Vector2(1326f / (float)timeCount * 5f * i * perf, datas[i].blood / (float)maxHealth * 100f));
+            line.vectorLine.points2.Add(new Vector2(1326f / datas.Count* i , datas[i].restMoney / (float)maxAmount * 100f));
+            healthLine.vectorLine.points2.Add(new Vector2(1326f / datas.Count * i , datas[i].blood / (float)maxHealth * 100f));
             //if (datas[i].restMoney > 0)
             //    score += datas[i].restMoney * 0.05f;
             //if(i==datas.Count-1)

@@ -24,7 +24,8 @@ public class IncreaseProduct : MonoBehaviour
             BuffData data = GameDataMgr.My.GetBuffDataByID(1000);
             float result;
             result = 0 - (GetComponentInParent<BaseMapRole>().baseRoleData.effect * 0.3f + 24f) / 100f;
-            data.OnBuffAdd.Add("14_" + result.ToString());
+            int number = Mathf.Min(400, (int)(result * targetRole.baseRoleData.tradeCost));
+            data.OnBuffAdd.Add("14_" + number.ToString());
             buff.Init(data);
             buff.SetRoleBuff(null, targetRole, targetRole);
         }
