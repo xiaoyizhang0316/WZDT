@@ -219,20 +219,20 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     // Update is called once per frame
     void Update()
     {
-        if (!SceneManager.GetActiveScene().name.Equals("FTE_0-1") && !SceneManager.GetActiveScene().name.Equals("FTE_0-2"))
-        {
-            if(GuideManager.My.currentGuideIndex != -1)
+        if (!PlayerData.My.isPrediction){
+            if (GuideManager.My.currentGuideIndex != -1)
             {
                 return;
             }
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (DOTween.defaultAutoPlay != AutoPlay.None)
                 {
-                    if(!PlayerData.My.isPrediction)
-                        GamePause();
+                    GamePause();
                 }
             }
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 bool isOpenSetting = true;
@@ -244,6 +244,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                         isOpenSetting = false;
                     }
                 }
+
                 if (isOpenSetting)
                 {
                     Panel_Option.SetActive(true);
@@ -251,7 +252,6 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
                 }
             }
         }
-
     }
 
     /// <summary>
