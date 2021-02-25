@@ -1114,7 +1114,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             playerGold = playerGold * 110 / 100;
         }
-
+        timeCount = 1;
         playerSatisfy = 0;
         produceTime = 10;
         maxMinusGold = -8000;
