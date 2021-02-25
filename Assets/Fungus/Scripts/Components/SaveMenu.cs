@@ -321,14 +321,20 @@ namespace Fungus
 
         public void Hide()
         {
-            menuButton.SetActive(false);
-            NarrativeLogMenu.instance.narrativeLogMenuGroup.gameObject.SetActive(false);
+            //menuButton.SetActive(false);
+            //NarrativeLogMenu.instance.narrativeLogMenuGroup.gameObject.SetActive(false);
         }
 
         public void Show()
         {
             menuButton.SetActive(true);
-            Restart();
+            //Restart();
+        }
+        
+        public void HideInMainMap()
+        {
+            menuButton.SetActive(false);
+            NarrativeLogMenu.instance.narrativeLogMenuGroup.gameObject.SetActive(false);
         }
 
         #endregion

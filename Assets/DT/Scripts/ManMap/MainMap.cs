@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Fungus;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,7 +26,11 @@ public class MainMap : MonoBehaviour
         {
             InitMap();
         }
-      
+
+        if (SaveMenu.instance)
+        {
+            SaveMenu.instance.HideInMainMap();
+        }
     }
 
     void InitMap()
