@@ -311,6 +311,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post, HttpId.UpdatePlayerUnlockStatus));
     }
 
+    public bool needReLogin = false;
     public void ReConnect(Action doSuccess=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -338,6 +339,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 if (SceneManager.GetActiveScene().name.StartsWith("FTE")&& SceneManager.GetActiveScene().name!="FTE_0")
                 {
                     StageGoal.My.CheckAfterReconnect();
+                    needReLogin = true;
                 }
                 if(SceneManager.GetActiveScene().name == "Map")
                 {

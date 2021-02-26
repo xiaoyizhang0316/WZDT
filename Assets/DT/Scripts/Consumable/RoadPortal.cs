@@ -7,7 +7,7 @@ public class RoadPortal : BaseSpawnItem
 {
     public int count = 5;
 
-    public int health = 20;
+    public int health = 30;
 
     public void OnTriggerStay(Collider other)
     {
@@ -29,5 +29,6 @@ public class RoadPortal : BaseSpawnItem
     public override void Init(int id)
     {
         base.Init(id);
+        health = 30;
     }
 }

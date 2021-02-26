@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using IOIntensiveFramework.MonoSingleton;
+using UnityEngine.SceneManagement;
 
 public class DataStatPanel : MonoSingleton<DataStatPanel>
 {
@@ -33,6 +35,9 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
     public Text extraNames;
     public Text extraCost;
 
+    public Text turnIncomeTitle;
+    public Text turnCostTitle;
+
     private string npcNamesStr;
     private string npcIncomeStr;
     private string otherNamesStr;
@@ -50,10 +55,35 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
 
     public GameObject predictPanel;
 
+    private string[] fteName = {"FTE_0.5","FTE_1.5","FTE_2.5", "FTE_9" };
+    public bool isTurnLevel = false;
+
     // Start is called before the first frame update
     void Start()
     {
         closeBtn.onClick.AddListener(Close);
+        if (IsTurnLevel())
+        {
+            turnCostTitle.text = "  来源        上阶段支出       全部";
+            turnIncomeTitle.text = "  来源        上阶段收入       全部";
+        }
+        else
+        {
+            turnCostTitle.text = "  来源         平均60s          全部";
+            turnIncomeTitle.text = "  来源         平均60s          全部";
+        }
+    }
+
+    private bool IsTurnLevel()
+    {
+        if (fteName.Contains(SceneManager.GetActiveScene().name))
+        {
+            isTurnLevel = false;
+            return false;
+        }
+
+        isTurnLevel = true;
+        return true;
     }
 
     public void Close()
@@ -109,6 +139,13 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         this.totalCost.text = totalCost.ToString();
         tradeCostPerMin.text = (tradeCost * 60 / (timeCount==0?1:timeCount)).ToString();
         this.tradeCost.text = tradeCost.ToString();
+        if (isTurnLevel)
+        {
+            totalIncomePerMin.text = StageGoal.My.lastTurnTotalIncome.ToString();
+            consumeIncomePerMin.text = StageGoal.My.lastTurnConsumerIncome.ToString();
+            totalCostPerMin.text = StageGoal.My.lastTurnTotalCost.ToString();
+            tradeCostPerMin.text = StageGoal.My.lastTurnTradeCost.ToString();
+        }
         int count = 0;
         if (npcIncomesEx.Count > 0)
         {

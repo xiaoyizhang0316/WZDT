@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Net;
+using System.Net.Mime;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 using UnityEngine.UI;
@@ -462,11 +463,26 @@ public class HttpManager : MonoSingleton<HttpManager>
             SceneManager.LoadScene("Login");
         });
 
-        reConnConfirm.onClick.RemoveAllListeners();
-        reConnConfirm.onClick.AddListener(()=> {
-            reConnTip.gameObject.SetActive(false);
-            NetworkMgr.My.ReConnect();
-        });
+        if (SceneManager.GetActiveScene().name.Equals("Map"))
+        {
+            reConnConfirm.transform.GetChild(0).GetComponent<Text>().text = "重新登录";
+            reConnConfirm.onClick.RemoveAllListeners();
+            reConnConfirm.onClick.AddListener(()=> {
+                reConnTip.gameObject.SetActive(false);
+                SceneManager.LoadScene("Login");
+            });
+            
+        }
+        else
+        {
+            reConnConfirm.transform.GetChild(0).GetComponent<Text>().text = "重新连接";
+            reConnConfirm.onClick.RemoveAllListeners();
+            reConnConfirm.onClick.AddListener(()=> {
+                reConnTip.gameObject.SetActive(false);
+                NetworkMgr.My.ReConnect();
+            });
+        }
+        
         reConnTip.gameObject.SetActive(true);
     }
 

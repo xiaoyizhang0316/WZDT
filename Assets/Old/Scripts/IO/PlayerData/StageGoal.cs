@@ -184,7 +184,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 玩家消耗金币
     /// </summary>
     /// <param name="num"></param>
-    public void CostPlayerGold(int num)
+    public void CostPlayerGold(int num, bool isNotTurn =false)
     {
         if (PlayerData.My.isPrediction)
         {
@@ -210,7 +210,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
 
             playerGold -= num;
-            UpdateTurnCost(num);
+            if(!isNotTurn)
+                UpdateTurnCost(num);
         }
         //if(isShow)
         FloatInfoManager.My.MoneyChange(0 - num);
@@ -323,7 +324,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 玩家获得金币
     /// </summary>
     /// <param name="num"></param>
-    public void GetPlayerGold(int num)
+    public void GetPlayerGold(int num , bool isNotTurn=false)
     {
         if (PlayerData.My.isPrediction)
         {
@@ -345,7 +346,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
-            if (currentType == StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name))
+            if (currentType == StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name) && !isNotTurn)
             {
                 UpdateTurnIncome(num);
             }
@@ -1351,6 +1352,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             case IncomeType.Consume:
                 consumeIncome += num;
+                turnConsumerIncome += num;
                 break;
             case IncomeType.Npc:
                 npcIncome += num;
@@ -1410,6 +1412,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             case ExpendType.TradeCosts:
                 tradeCost += num;
+                turnTradeCost += num;
                 break;
             case ExpendType.ProductCosts:
                 productCost += num;
@@ -1645,6 +1648,12 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     private int turnTotalIncome = 0;
     private int turnTotalCost = 0;
+    public int lastTurnTotalCost = 0;
+    public int lastTurnTotalIncome = 0;
+    public int lastTurnConsumerIncome = 0;
+    public int turnConsumerIncome = 0;
+    public int lastTurnTradeCost = 0;
+    public int turnTradeCost = 0;
     public GameObject turnIncomeAndCostPanel;
     public Text turnTotalIncome_txt;
     public Text turnTotalCost_txt;
@@ -1660,8 +1669,14 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (isEndTurn)
         {
+            lastTurnTotalCost = turnTotalCost;
             turnTotalCost = 0;
+            lastTurnTotalIncome = turnTotalIncome;
             turnTotalIncome = 0;
+            lastTurnConsumerIncome = turnConsumerIncome;
+            turnConsumerIncome = 0;
+            lastTurnTradeCost = turnTradeCost;
+            turnTradeCost = 0;
             UpdateTurnCost(0);
             UpdateTurnIncome(0);
         }

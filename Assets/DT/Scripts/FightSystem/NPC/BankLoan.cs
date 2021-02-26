@@ -17,6 +17,7 @@ public class BankLoan : BaseExtraSkill
     {
         base.SkillOn(_sign);
         _sign.icon.gameObject.SetActive(false);
+        Debug.Log("开始借钱" + _sign.tradeData.ID);
         StartLoan(_sign);
         sign = _sign;
     }
@@ -24,21 +25,22 @@ public class BankLoan : BaseExtraSkill
     public void StartLoan(TradeSign sign)
     {
         int actualLoan = loanNumber;
+        count = 0;
         if (PlayerData.My.yingLiMoShi[2])
         {
             actualLoan = actualLoan * 120 / 100;
         }
-        StageGoal.My.GetPlayerGold(actualLoan);
+        StageGoal.My.GetPlayerGold(actualLoan, true);
         StageGoal.My.Income(actualLoan, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
         eachReturn = (int)(actualLoan * (1 + CalculateInterest(PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)))) / timeCount);
         if (StageGoal.My.currentType != GameEnum.StageType.Normal)
         {
             StartCoroutine(KeepLoan(sign));
         }
-
     }
 
     private int count = 0;
+
     public IEnumerator KeepLoan(TradeSign sign)
     {
         while (count < timeCount)

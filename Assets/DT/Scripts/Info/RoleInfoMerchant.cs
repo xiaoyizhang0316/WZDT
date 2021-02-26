@@ -35,8 +35,23 @@ public class RoleInfoMerchant : BaseRoleInfoAdd
     private List<string> fteList = new List<string>() { "FTE_0.5", "FTE_1.5", "FTE_2.5" };
     public override void Init()
     {
+        float efficiencyNum = (CreatRoleManager.My.finalEfficiency);
+        float add = 1f;
+        float encourage = PlayerData.My.GetMapRoleById(CreatRoleManager.My.CurrentRole.ID).encourageLevel + CreatRoleManager.My.finalEncourageAdd;
+        MoveSpeed.color = Color.white;
+        if (encourage > 0)
+        {
+            add -= encourage * 0.05f;
+            MoveSpeed.color = Color.green;
+        }
+        else if (encourage < 0)
+        {
+            add += encourage * 0.1f;
+            MoveSpeed.color = Color.red;
+        }
+        efficiencyNum *= add;
         effect.text = CreatRoleManager.My.finalEffect.ToString();
-        MoveSpeed.text =  CreatRoleManager.My.finalEfficiency.ToString()+"%";
+        MoveSpeed.text = efficiencyNum.ToString("F2")+"%";
         efficiency.text = CreatRoleManager.My.finalEfficiency.ToString();
         TradDown.text = (CreatRoleManager.My.finalEffect *0.3f + 24f).ToString()+"%";
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();

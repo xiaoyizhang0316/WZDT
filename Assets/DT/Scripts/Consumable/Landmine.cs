@@ -14,7 +14,7 @@ public class Landmine : BaseSpawnItem
     public bool isopen;
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Consumer") && other.GetComponent<ConsumeSign>().isCanSelect&&!isopen)
+        if (other.CompareTag("Consumer") && other.GetComponent<ConsumeSign>().isCanSelect &&! isopen && other.GetComponent<ConsumeSign>().consumerType != GameEnum.ConsumerType.Boss)
         {
             other.GetComponent<ConsumeSign>().ChangeHealth(999999);
             isopen = true;
