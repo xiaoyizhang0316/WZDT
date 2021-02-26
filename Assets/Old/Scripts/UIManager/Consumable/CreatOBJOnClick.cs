@@ -22,12 +22,21 @@ public class CreatOBJOnClick : MonoBehaviour,IPointerClickHandler
         {
             currentgo.transform.position = transform.position;
 
+            if (Input.GetMouseButtonDown(1))
+            {
+                ConsumableListManager.My.currentSign = null;
+                ConsumableListManager.My.isClick = false;
+                Destroy(currentgo,0f);
+                Destroy(gameObject,0.01f);
+                 
+            }
         }
-
+     
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+      
         Destroy(currentgo,0f);
     Debug.Log("ConsumableListManager.My.isClick"+ConsumableListManager.My.isClick);
         if (ConsumableListManager.My.isClick)

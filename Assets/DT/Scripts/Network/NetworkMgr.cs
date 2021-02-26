@@ -1612,11 +1612,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 playerEquipsList.Clear();
                 playerEquipsList.Add(playerEquip);
                 PlayerData.My.InitPlayerEquip(playerEquipsList);
-                Debug.Log("获得装备 " + pe.equipID);
+                Debug.LogWarning("获得装备 " + pe.equipID);
                 doSuccess?.Invoke();
             }
             else
             {
+                Debug.LogError("get equip fail");
                 doFail?.Invoke();
             }
             SetMask();

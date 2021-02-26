@@ -105,7 +105,7 @@ public abstract class BaseSkill : MonoBehaviour
                 add += role.encourageLevel * -0.1f;
             }
         }
-        float d = 1f / (role.baseRoleData.efficiency * 0.05f) * add;
+        float d = Mathf.Min( 4f,1f / (role.baseRoleData.efficiency * 0.05f) * add);
         if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
         {
             d /= 2f;

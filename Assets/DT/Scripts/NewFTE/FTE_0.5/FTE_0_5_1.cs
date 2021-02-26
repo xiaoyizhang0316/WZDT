@@ -31,8 +31,8 @@ public class FTE_0_5_1 : BaseGuideStep
         for (int i = 0; i < equipAdd.Count; i++)
         {
               PlayerData.My.GetNewGear(equipAdd[i]);
-              if (isUpLoad&& float.Parse(NetworkMgr.My.playerDatas.fte)<=0.5f )
-              {
+              if (isUpLoad )
+             {
                   NetworkMgr.My.AddEquip(equipAdd[i],0,1);
               }
         }

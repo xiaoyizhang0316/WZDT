@@ -17,6 +17,8 @@ public class WaveCount : MonoSingleton<WaveCount>
 
     public bool showDetail = false;
 
+    public int totalGold = 0;
+
     /// <summary>
     /// 初始化(回合)
     /// </summary>
@@ -72,6 +74,7 @@ public class WaveCount : MonoSingleton<WaveCount>
         closeBtn.SetActive(true);
         ClearWaveBg();
         StageEnemyData data = StageGoal.My.enemyDatas[waveNumber];
+        totalGold = 0;
         string str = data.point1[0];
         if (str.Split('_').Length != 1)
         {
@@ -108,6 +111,7 @@ public class WaveCount : MonoSingleton<WaveCount>
             GameObject go = Instantiate(spotEnemyPrb, waveBg);
             go.GetComponent<WaveEnemySign>().Init(5, data.point6);
         }
+        waveBg.GetChild(0).GetComponent<Text>().text = "总：$" + totalGold.ToString();
     }
 /// <summary>
 /// for FTE_2.5
@@ -178,7 +182,7 @@ public class WaveCount : MonoSingleton<WaveCount>
 
     public void ClearWaveBg()
     {
-        for (int i = 0; i < waveBg.childCount; i++)
+        for (int i = 1; i < waveBg.childCount; i++)
         {
             Destroy(waveBg.GetChild(i).gameObject);
         }

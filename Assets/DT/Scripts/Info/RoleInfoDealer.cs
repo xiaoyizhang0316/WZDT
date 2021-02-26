@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RoleInfoDealer : BaseRoleInfoAdd
@@ -34,7 +35,8 @@ public class RoleInfoDealer : BaseRoleInfoAdd
     
         //InvokeRepeating("UpdateBar",0.1f,0.2f);
     }
- 
+
+    private List<string> fteList = new List<string>() {"FTE_0.5","FTE_1.5","FTE_2.5" };
 
     public override void Init()
     {
@@ -43,7 +45,7 @@ public class RoleInfoDealer : BaseRoleInfoAdd
         Range.text = (CreatRoleManager.My.finalRange / 14.5f).ToString("F2") ;
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();
         risk .text =  CreatRoleManager.My.finalRiskResistance.ToString();
-        if (StageGoal.My.currentType == GameEnum.StageType.Normal)
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name))
         {
             montyCost.text = (CreatRoleManager.My.finalCost * 2).ToString();
         }

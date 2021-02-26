@@ -80,6 +80,7 @@ MonoBehaviour:
     equipCost: 0
     workerCost: 0
     landCost: 0
+    gearEncourageAdd: 0
     inMap: 0
     isNpc: 0
   warehouse: []
@@ -111,8 +112,16 @@ MonoBehaviour:
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  startTradeList: []
+  endTradeList: []
+  tasteBuffList: 
+  totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
+  stopWorkSprite: {fileID: 0}
+  isSell: 0
+  ringEffect: {fileID: 0}
+  cloneWarehourse: []
 --- !u!114 &7925462026539193959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +193,7 @@ MonoBehaviour:
   goodBaseBuffs: []
   badSpecialBuffList: 
   badBaseBuffs: []
-  skillDesc: "\u4F7F\u89D2\u8272\u7684\u6548\u7387\u503C\u63D0\u9AD8"
+  skillDesc: "\u4F7F\u89D2\u8272\u7684\u6548\u679C\u503C\u63D0\u9AD8"
   buffList: f7010000
   animationPart: []
   productDatas: []

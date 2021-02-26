@@ -17,6 +17,8 @@ public class SingleWaveEnemyInfo : MonoBehaviour
 
     public Transform buffListTF;
 
+    public Text totalGold;
+
     public Text consumerName;
 
     public Text consumerGold;
@@ -38,6 +40,8 @@ public class SingleWaveEnemyInfo : MonoBehaviour
         List<int> buffList = new List<int>();
         ConsumerTypeData data = GameDataMgr.My.GetConsumerTypeDataByType(consumeType);
         buffList.AddRange(data.bornBuff);
+        totalGold.text = "$" + (data.killMoney * int.Parse(list[1])).ToString();
+        WaveCount.My.totalGold += data.killMoney * int.Parse(list[1]);
         string[] strList = list[2].Split('|');
         for (int i = 0; i < strList.Length; i++)
         {

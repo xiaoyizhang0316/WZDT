@@ -91,6 +91,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 
     public Text endDivideStatus;
 
+    private string showNumberText;
+
     /// <summary>
     /// 打开并初始化
     /// </summary>
@@ -128,15 +130,38 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         }
         else
         {
-            tradeCostText.text = "???";
+            tradeCostText.text = "???" + showNumberText;
         }
     }
+
+    private List<string> fteList = new List<string>() { "FTE_0.5","FTE_1.5","FTE_2.5"};
 
     /// <summary>
     /// 初始化发起者和承受者名字
     /// </summary>
     public void InitName()
     {
+        BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.castRole));
+        if (!fteList.Contains(SceneManager.GetActiveScene().name))
+        {
+            if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+            {
+                if (StageGoal.My.currentType == StageType.Normal)
+                {
+                    showNumberText = "/回合";
+                }
+                else
+                {
+                    showNumberText = "/10秒";
+                }
+            }
+            else if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+            {
+                {
+                    showNumberText = "/10个";
+                }
+            }
+        }
         //startName.text = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole)).baseRoleData.baseRoleData.roleName;
         //endName.text = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole)).baseRoleData.baseRoleData.roleName;
         //string startType = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole)).baseRoleData.baseRoleData.roleType.ToString();
@@ -211,7 +236,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         {
             tradeCostText.text = result.ToString();
         }
-
+        tradeCostText.text += showNumberText;
     }
 
     /// <summary>
@@ -281,7 +306,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         }
         else
         {
-            tradeCostText.text = "???";
+            tradeCostText.text = "???" + showNumberText; ;
         }
     }
 
@@ -340,7 +365,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         }
         else
         {
-            tradeCostText.text = "???";
+            tradeCostText.text = "???" + showNumberText;
         }
     }
 

@@ -28,6 +28,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
         {
             GameObject go =Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[0];
+            go.GetComponent<WaveNumber>().Init(0);
             Client_WaveNumber client_Wave;
             if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
             {
@@ -40,6 +41,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
         {
             GameObject go = Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[1];
+            go.GetComponent<WaveNumber>().Init(1);
             Client_WaveNumber client_Wave;
             if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
             {
@@ -52,6 +54,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
         {
             GameObject go = Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[2];
+            go.GetComponent<WaveNumber>().Init(2);
             Client_WaveNumber client_Wave;
             if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
             {
@@ -64,6 +67,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
         {
             GameObject go = Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[3];
+            go.GetComponent<WaveNumber>().Init(3);
             Client_WaveNumber client_Wave;
             if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
             {
@@ -76,6 +80,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
         {
             GameObject go = Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[4];
+            go.GetComponent<WaveNumber>().Init(4);
             Client_WaveNumber client_Wave;
             if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
             {
@@ -88,6 +93,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
         {
             GameObject go = Instantiate(waveNumberPrb, transform);
             go.GetComponent<Image>().sprite = waveSprites[5];
+            go.GetComponent<WaveNumber>().Init(5);
             Client_WaveNumber client_Wave;
             if (go.TryGetComponent<Client_WaveNumber>(out client_Wave))
             {
