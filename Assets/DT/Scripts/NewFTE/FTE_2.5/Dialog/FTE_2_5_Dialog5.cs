@@ -85,6 +85,10 @@ public class FTE_2_5_Dialog5 : BaseGuideStep
         FTE_2_5_Manager.My.DownRole(FTE_2_5_Manager.My.softFactory, -8, ()=>FTE_2_5_Manager.My.softFactory.SetActive(false));
         FTE_2_5_Manager.My.DownRole(FTE_2_5_Manager.My.crispFactory, -8, ()=>FTE_2_5_Manager.My.crispFactory.SetActive(false));
         FTE_2_5_Manager.My.DownRole(FTE_2_5_Manager.My.sweetFactory, -8, ()=>FTE_2_5_Manager.My.sweetFactory.SetActive(false));
+        
+        TradeManager.My.DeleteRoleAllTrade(FTE_2_5_Manager.My.softFactory.GetComponent<BaseMapRole>().baseRoleData.ID);
+        TradeManager.My.DeleteRoleAllTrade(FTE_2_5_Manager.My.crispFactory.GetComponent<BaseMapRole>().baseRoleData.ID);
+        TradeManager.My.DeleteRoleAllTrade(FTE_2_5_Manager.My.sweetFactory.GetComponent<BaseMapRole>().baseRoleData.ID);
         crispPlace.transform.DOLocalMoveY(-8.32f, 1f).Play().OnPause(() =>
         {
             crispPlace.transform.DOLocalMoveY(-8.32f, 1f).Play();

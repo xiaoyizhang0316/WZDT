@@ -37,11 +37,17 @@ public class MainMap : MonoBehaviour
     {
         //NetworkMgr.My.GetAnswers(()=>title.text = NetworkMgr.My.currentAnswer);
         //GetChaseLevel();
+        if (NetworkMgr.My.needReLogin)
+        {
+            NetworkMgr.My.needReLogin = false;
+            SceneManager.LoadScene("Login");
+            return;
+        }
         GetAnswers();
-        GetEquips();
         GetUserLevel();
         GetLevelProgress();
         GetRoleTemplateData();
+        GetEquips();
         PlayerData.My.Reset();
         PlayerData.My.isAllReady = false;
         PlayerData.My.isLocalReady = false;

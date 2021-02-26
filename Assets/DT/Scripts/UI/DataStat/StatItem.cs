@@ -18,7 +18,7 @@ public class StatItem : MonoBehaviour
         {
             permin = perMin.ToString();
         }
-        itemPerMin.text = permin;
+        //itemPerMin.text = permin;
         itemTotal.text = total.ToString();
         //itemTotal.text = total.ToString();
 

@@ -160,7 +160,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             }
             GetComponent<Button>().interactable = false;
 
-            StageGoal.My.CostPlayerGold(costNumber);
+            StageGoal.My.CostPlayerGold(costNumber, true);
             StageGoal.My.Expend(costNumber, ExpendType.AdditionalCosts,
                 null, "升级");
             UpgradeRoleRecord(RoleUpdateInfo.My.currentRole);

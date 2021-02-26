@@ -28,7 +28,7 @@ public class BankLoan : BaseExtraSkill
         {
             actualLoan = actualLoan * 120 / 100;
         }
-        StageGoal.My.GetPlayerGold(actualLoan);
+        StageGoal.My.GetPlayerGold(actualLoan, true);
         StageGoal.My.Income(actualLoan, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
         eachReturn = (int)(actualLoan * (1 + CalculateInterest(PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)))) / timeCount);
         if (StageGoal.My.currentType != GameEnum.StageType.Normal)
