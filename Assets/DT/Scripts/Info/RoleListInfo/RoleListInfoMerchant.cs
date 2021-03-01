@@ -30,8 +30,23 @@ public class RoleListInfoMerchant : BaseRoleListInfo
     public GameObject tradText;
     public override void Init(Role role)
     {
+        float efficiencyNum = (role.efficiency);
+        float add = 1f;
+        float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel;
+        MoveSpeed.color = Color.white;
+        if (encourage > 0)
+        {
+            add += encourage * 0.05f;
+            MoveSpeed.color = Color.green;
+        }
+        else if (encourage < 0)
+        {
+            add += encourage * 0.1f;
+            MoveSpeed.color = Color.red;
+        }
+        efficiencyNum *= add;
         effect.text = role.effect.ToString();
-        MoveSpeed.text =  role.efficiency  .ToString()+"%";
+        MoveSpeed.text = efficiencyNum.ToString()+"%";
         efficiency.text = role.efficiency.ToString();
         TradDown.text = (role.effect * 0.3f + 24f).ToString() + "%";
         tradCost.text  =   role.tradeCost.ToString();

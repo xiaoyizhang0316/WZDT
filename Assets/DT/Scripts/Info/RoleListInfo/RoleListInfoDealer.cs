@@ -32,8 +32,22 @@ public class RoleListInfoDealer : BaseRoleListInfo
     public GameObject tradText;
     public override void Init(Role role)
     {
-      
-        fireTime.text = (1f / (role.efficiency * -0.01f + 1.5f  )).ToString("F2");
+        float efficiencyNum = 1f / (role.efficiency * -0.01f + 1.5f);
+        float add = 1f;
+        float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel;
+        fireTime.color = Color.white;
+        if (encourage > 0)
+        {
+            add += encourage * 0.05f;
+            fireTime.color = Color.green;
+        }
+        else if (encourage < 0)
+        {
+            add += encourage * 0.1f;
+            fireTime.color = Color.red;
+        }
+        efficiencyNum *= add;
+        fireTime.text = (efficiencyNum).ToString("F2");
         efficiency.text = role.efficiency.ToString();
         roleRange.text = role.range.ToString();
         Range.text = (role.range / 14.5f).ToString("F2");

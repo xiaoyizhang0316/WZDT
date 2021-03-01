@@ -31,10 +31,25 @@ public class RoleListInfoPeasant : BaseRoleListInfo
 
     public override void Init(Role role)
     {
+        float efficiencyNum = (role.efficiency / 20f);
+        float add = 1f;
+        float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel;
+        productTime.color = Color.white;
+        if (encourage > 0)
+        {
+            add += encourage * 0.05f;
+            productTime.color = Color.green;
+        }
+        else if (encourage < 0)
+        {
+            add += encourage * 0.1f;
+            productTime.color = Color.red;
+        }
+        efficiencyNum *= add;
         effect.text =role.effect.ToString();
         reload.text = role.effect  .ToString()+"%";
         efficiency.text = role.efficiency.ToString();
-        productTime.text = (role.efficiency / 20f).ToString("F2");
+        productTime.text = (efficiencyNum).ToString("F2");
         tradCost.text  =  role.tradeCost.ToString();
         risk .text = role.riskResistance.ToString();
         if (StageGoal.My.currentType == GameEnum.StageType.Normal)

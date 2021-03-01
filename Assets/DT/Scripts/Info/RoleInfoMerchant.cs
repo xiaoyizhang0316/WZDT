@@ -41,7 +41,7 @@ public class RoleInfoMerchant : BaseRoleInfoAdd
         MoveSpeed.color = Color.white;
         if (encourage > 0)
         {
-            add -= encourage * 0.05f;
+            add += encourage * 0.05f;
             MoveSpeed.color = Color.green;
         }
         else if (encourage < 0)

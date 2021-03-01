@@ -40,7 +40,22 @@ public class RoleInfoDealer : BaseRoleInfoAdd
 
     public override void Init()
     {
-        fireTime.text = (CreatRoleManager.My.finalEfficiency * -0.01f + 1.5f  ).ToString("F2") +"s";
+        float efficiencyNum =1f / (CreatRoleManager.My.finalEfficiency * -0.01f + 1.5f);
+        float add = 1f;
+        float encourage = PlayerData.My.GetMapRoleById(CreatRoleManager.My.CurrentRole.ID).encourageLevel + CreatRoleManager.My.finalEncourageAdd;
+        fireTime.color = Color.white;
+        if (encourage > 0)
+        {
+            add += encourage * 0.05f;
+            fireTime.color = Color.green;
+        }
+        else if (encourage < 0)
+        {
+            add += encourage * 0.1f;
+            fireTime.color = Color.red;
+        }
+        efficiencyNum *= add;
+        fireTime.text = efficiencyNum.ToString("F2") + "/s";
         efficiency.text = CreatRoleManager.My.finalEfficiency.ToString();
         Range.text = (CreatRoleManager.My.finalRange / 14.5f).ToString("F2") ;
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();
