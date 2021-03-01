@@ -88,7 +88,7 @@ public class FTE_2_5_Goal1_1 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        NewCanvasUI.My.GamePause(false);
         yield return new WaitForSeconds(2f);
+        NewCanvasUI.My.GamePause(false);
     }
 }

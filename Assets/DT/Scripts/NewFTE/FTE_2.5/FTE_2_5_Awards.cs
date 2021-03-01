@@ -9,7 +9,7 @@ public class FTE_2_5_Awards : BaseGuideStep
     public override IEnumerator StepStart()
     {
         PlayerData.My.GetNewGear(90011);
-        PlayerData.My.GetNewGear(90012);
+        //PlayerData.My.GetNewGear(90012);
         awards.SetActive(true);
         //Debug.LogWarning("add eq start");
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;

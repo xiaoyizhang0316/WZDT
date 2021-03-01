@@ -48,6 +48,8 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         FTE_2_5_Manager.My.GetComponent<RoleCreateLimit>().limitDealerCount = -1;
         FTE_2_5_Manager.My.dealer2.SetActive(true);
         FTE_2_5_Manager.My.dealer2.SetActive(true);
+        FTE_2_5_Manager.My.npcMerchant.GetComponent<ProductMerchant>().buffList.Clear();
+        FTE_2_5_Manager.My.npcMerchant.GetComponent<ProductMerchant>().buffList.Add(301);
         
         /*bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5(302);
         bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5(301);
@@ -59,7 +61,8 @@ public class FTE_2_5_Goal5 : BaseGuideStep
         //InvokeRepeating("CheckGoal", 2f, 0.5f);
         yield return null;
         FactoryUp();
-        InvokeRepeating("CheckReset", 3, 0.5f);
+        //InvokeRepeating("CheckReset", 3, 0.5f);
+        InvokeRepeating("CheckGoal", 1, 0.5f);
         InvokeRepeating("CheckBuffOut", 3, 20);
         FTE_2_5_Manager.My.UpRole(FTE_2_5_Manager.My.dealer2, 0.32f);
         place2.transform.DOLocalMoveY(0, 1).Play().OnPause(() =>
@@ -89,6 +92,39 @@ public class FTE_2_5_Goal5 : BaseGuideStep
                 });
                 endButton.interactable = true;
                 endButton.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    void CheckGoal()
+    {
+        if (missiondatas.data[0].isFinish == false)
+        {
+            missiondatas.data[0].currentNum = FTE_2_5_Manager.My.packageKillNum;
+            if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
+            {
+                missiondatas.data[0].isFinish = true;
+                StopCoroutine(bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5_1(27,0));
+            }
+        }
+        
+        if (missiondatas.data[1].isFinish == false)
+        {
+            missiondatas.data[1].currentNum = FTE_2_5_Manager.My.saleKillNum;
+            if (missiondatas.data[1].currentNum >= missiondatas.data[0].maxNum)
+            {
+                missiondatas.data[1].isFinish = true;
+                StopCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5_1(28, 0));
+            }
+        }
+        
+        if (missiondatas.data[2].isFinish == false)
+        {
+            missiondatas.data[2].currentNum = FTE_2_5_Manager.My.nolikeKillNum;
+            if (missiondatas.data[2].currentNum >= missiondatas.data[0].maxNum)
+            {
+                missiondatas.data[2].isFinish = true;
+                StopCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5_1(29, 0));
             }
         }
     }
@@ -137,23 +173,24 @@ public class FTE_2_5_Goal5 : BaseGuideStep
 
     void BornPackage()
     {
-        StartCoroutine(bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5_1(27, 12));
-        InvokeRepeating("CheckPackage", 2f, 0.5f);
+        StartCoroutine(bornPoint1.GetComponent<Building>().BornEnemyForFTE_2_5_1(27, 0));
+        //InvokeRepeating("CheckPackage", 2f, 0.5f);
     }
     void BornSale()
     {
-        StartCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5_1(28, 12));
-        InvokeRepeating("CheckSale", 2f, 0.5f);
+        StartCoroutine(bornPoint2.GetComponent<Building>().BornEnemyForFTE_2_5_1(28, 0));
+        //InvokeRepeating("CheckSale", 2f, 0.5f);
     }
     void BornNoLike()
     {
-        StartCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5_1(29, 12));
-        InvokeRepeating("CheckNolike", 2f, 0.5f);
+        StartCoroutine(bornPoint3.GetComponent<Building>().BornEnemyForFTE_2_5_1(29, 0));
+        //InvokeRepeating("CheckNolike", 2f, 0.5f);
     }
 
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        FTE_2_5_Manager.My.bornEnemy = false;
         /*endPanel.GetComponent<Button>().onClick.AddListener(() =>
         {
             NetworkMgr.My.UpdatePlayerFTE("2.5", ()=>SceneManager.LoadScene("Map"));
