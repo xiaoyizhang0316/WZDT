@@ -113,6 +113,8 @@ public class BaseMapRole : MonoBehaviour
 
     public List<int> tasteBuffList = new List<int>();
 
+    public List<int> consumableList = new List<int>();
+
     public int totalUpgradeCost;
 
     public RoleSprite roleSprite;
@@ -418,6 +420,40 @@ public class BaseMapRole : MonoBehaviour
         {
             CheckBuffDuration();
         });
+    }
+
+    /// <summary>
+    /// 检测装备上是否有新家的道具buff
+    /// </summary>
+    public void CheckGearConsumable()
+    {
+        List<int> equipList = baseRoleData.EquipList.Keys.ToList();
+        List<int> consumableBuffList = new List<int>();
+        for (int i = 0; i < equipList.Count; i++)
+        {
+            GearData equip = GameDataMgr.My.GetGearData(equipList[i]);
+            if (equip.buffList[0] != -1)
+            {
+                BuffData data = GameDataMgr.My.GetBuffDataByID(equip.buffList[0]);
+                if (data.bulletBuffType == BulletBuffType.ConsumableGive)
+                {
+                    consumableBuffList.Add(equip.buffList[0]);
+                    BaseBuff baseb = new BaseBuff();
+                    baseb.Init(data);
+                    baseb.SetRoleBuff(this,this,this);
+                }
+            }
+        }
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            if (buffList[i].buffData.bulletBuffType == BulletBuffType.ConsumableGive)
+            {
+                if (!consumableBuffList.Contains(buffList[i].buffId))
+                {
+                    RemoveBuffById(buffList[i].buffId);
+                }
+            }
+        }
     }
 
     /// <summary>

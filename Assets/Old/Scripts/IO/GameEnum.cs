@@ -472,7 +472,12 @@ public class GameEnum
         /// <summary>
         /// debuff类
         /// </summary>
-        Debuff
+        Debuff,
+
+        /// <summary>
+        /// 给予消耗品类
+        /// </summary>
+        ConsumableGive
     }
 
     public enum ProductElementType

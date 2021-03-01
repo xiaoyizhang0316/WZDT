@@ -480,6 +480,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         }
         PlayerData.My.GetMapRoleById(CurrentRole.ID).RecalculateEncourageLevel();
         PlayerData.My.GetMapRoleById(CurrentRole.ID).ReaddAllBuff();
+        PlayerData.My.GetMapRoleById(CurrentRole.ID).CheckGearConsumable();
         WorkerListManager.My.QuitAndSave();
         EquipListManager.My.QuitAndSave();
         ChangeRoleRecord(CurrentRole);
