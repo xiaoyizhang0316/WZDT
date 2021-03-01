@@ -869,6 +869,11 @@ public class BaseMapRole : MonoBehaviour
                 {
                     if (item != -1)
                     {
+                        BuffData buffData = GameDataMgr.My.GetBuffDataByID(item);
+                        if (buffData.bulletBuffType == BulletBuffType.ConsumableGive)
+                        {
+                            continue;
+                        }
                         bufflist.Add(item);
                     }
                 }
