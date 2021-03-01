@@ -610,6 +610,7 @@ public class BaseMapRole : MonoBehaviour
    public  Action<ProductData>  OnMoved = null;
     public virtual void AddPruductToWareHouse(ProductData data)
     {
+        
         if (warehouse.Count >= baseRoleData.bulletCapacity)
         {
             //DataUploadManager.My.AddData(DataEnum.浪费的瓜);
@@ -617,6 +618,8 @@ public class BaseMapRole : MonoBehaviour
         }
         else
         {
+          
+
             warehouse.Add(data);
             if (OnMoved != null)
             {

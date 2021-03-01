@@ -106,6 +106,7 @@ public class FTE_0_5_11 : BaseGuideStep
             role.warehouse.Clear();
             role1.warehouse.Clear();
             time = StageGoal.My.timeCount;
+            missiondatas.data[0].isFinish = false;
         }
  
         if ( role.warehouse.Count >=roleTargetCount&& role1.warehouse.Count >=role1TargetCount)

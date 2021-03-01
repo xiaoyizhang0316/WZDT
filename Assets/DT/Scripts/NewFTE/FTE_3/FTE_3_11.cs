@@ -20,6 +20,7 @@ public class FTE_3_11 : BaseGuideStep
     {
         NewCanvasUI.My.GamePause(); 
 
+      RoleListManager.My.OutButton( true);        
         yield return new WaitForSeconds(1);
          
     }

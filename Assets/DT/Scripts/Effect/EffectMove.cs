@@ -32,19 +32,22 @@ public class EffectMove : MonoBehaviour
       
     }
 
-    public IEnumerator  Move()
+    public void  Move()
     {
         gameObject.transform.position = startPos.position;
-        yield return new WaitForSeconds(startTime);
-      
-        gameObject.transform.DOMove(EndPos.position,moveTime).SetEase(moveease).Play();
+        transform.DOScale(1, startTime).OnComplete(() =>
+        {
+            gameObject.transform.DOMove(EndPos.position, moveTime).SetEase(moveease).Play();
+        }).Play();
+
     }
 
-    public IEnumerator Back()
+    public void  Back()
     {
         gameObject.transform.position = EndPos.position;
-        yield return new WaitForSeconds(backTime);
+     
       
         gameObject.transform.DOMove(startPos.position,moveTime).SetEase(Baskease).Play();
+ 
     }
 }

@@ -88,15 +88,15 @@ public class RoleListInfoPeasant : BaseRoleListInfo
             {
                 Pruductgame.GetComponent<Image>().color = new Color(1, 0.6f, 0.6f, 1);
             }
-            if (PlayerData.My.client != null)
-            {
-                Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.GetComponent<ProductSeed>()
-                    .productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
-            }
-            else
-            {
-                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
-            }
+         //  if (PlayerData.My.client != null)
+         //  {
+         //      Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.GetComponent<ProductSeed>()
+         //          .productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+         //  }
+         //  else
+         //  {
+         //      Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+         //  }
         }
     }
 }

@@ -62,6 +62,19 @@ public class GoodsSign : MonoBehaviour
         // print("bullet start move" + path[count]);
         moveTween = transform.DOMove(path[count], speed).OnComplete(() =>
         {
+          ///  if ((SceneManager.GetActiveScene().name.Equals("FTE_0.5") ||
+          ///       SceneManager.GetActiveScene().name.Equals("FTE_1.5") ||
+          ///       SceneManager.GetActiveScene().name.Equals("FTE_2.5"))&& 
+          ///      !role.isNpc)
+          ///  {
+          ///      for (int i = 0; i < role.warehouse.Count; i++)
+          ///      {
+          ///          if (!role.warehouse[i].CheckSame(productData))
+          ///          {
+          ///              role. warehouse.Remove(role.warehouse[i]);
+          ///          }
+          ///      }
+          ///  }
             // print("bullet move");
             count++;
             if (count < path.Count)
@@ -72,6 +85,7 @@ public class GoodsSign : MonoBehaviour
             {
                 if (role.warehouse.Count >= role.baseRoleData.bulletCapacity)
                 {
+                  
                     DataUploadManager.My.AddData(DataEnum.浪费的瓜);
                     Vector3 pos = path[path.Count - 1] + new Vector3(UnityEngine.Random.Range(-3f, 3f), 0, UnityEngine.Random.Range(-3f, 3f));
                     transform.DOMove(pos, speed).OnComplete(()=> {

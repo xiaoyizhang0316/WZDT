@@ -53,6 +53,8 @@ public class FTE_0_5_16 : BaseGuideStep
                 StartCoroutine(BuildingManager.My.buildings[0]
                     .BornSingleTypeConsumer(type, count));
                 StageGoal.My.killNumber = 0;
+                missiondatas.data[0].isFinish = false;
+
                 Addxiaofei();
             }).Play();
         }
