@@ -146,6 +146,7 @@ public class FTE_0_5_8 : BaseGuideStep
         {
             role2.warehouse.Clear();
             time = StageGoal.My.timeCount;
+            
         }
 
         missiondatas.data[1].currentNum = role2.warehouse.Count;

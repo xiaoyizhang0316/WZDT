@@ -11,6 +11,7 @@ public class AddRoleBuff : BaseSpawnItem
     public override void Init(int id)
     {
         base.Init(id);
+        
         duration = GameDataMgr.My.GetBuffDataByID(id).duration;
     }
 

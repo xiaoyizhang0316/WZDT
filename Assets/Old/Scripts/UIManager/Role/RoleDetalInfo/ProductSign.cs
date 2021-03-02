@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems; 
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using static GameEnum;
 using Image = UnityEngine.UI.Image;
 
@@ -13,7 +14,10 @@ public class ProductSign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
     public bool canSell;
 
 
+    
+    public Text conut;
 
+    public Image Image;
     /// <summary>
     /// GameObject销毁时
     /// </summary>

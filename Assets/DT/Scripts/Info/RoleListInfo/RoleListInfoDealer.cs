@@ -77,7 +77,8 @@ public class RoleListInfoDealer : BaseRoleListInfo
             rangeBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
 
     }
-    
+
+   // private List<ProductData> _datas  = new List<ProductData>();
     public void ShowLastpruduct(Role role)
     {
         BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(role.ID);
@@ -86,10 +87,15 @@ public class RoleListInfoDealer : BaseRoleListInfo
             Destroy(productTF.GetChild(i).gameObject);
         }
         for (int i = 0; i <  baseMapRole.warehouse.Count; i++)
-        { 
+        {
+          //  if (_datas.Contains(baseMapRole.warehouse[i]))
+          //  {
+          //      continue;
+          //  }
             GameObject Pruductgame =  Instantiate(productPrb, productTF);
             Pruductgame.GetComponent<ProductSign>().currentProduct =
                 baseMapRole.warehouse[i];
+             
             switch (baseMapRole.warehouse[i].bulletType )
             {
                 case BulletType.Bomb:

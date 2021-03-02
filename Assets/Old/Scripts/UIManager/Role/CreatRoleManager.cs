@@ -22,10 +22,12 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// 当前创建装备的位置坐标
     /// </summary>
     public Transform equipPos;
+
     /// <summary>
     /// 当前创建装备的位置坐标
     /// </summary>
     public Transform workerPos;
+
     /// <summary>
     /// 装备列表预制体
     /// </summary>
@@ -52,10 +54,12 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     public Transform roleTemplate;
 
     public TemplateManager CurrentTemplateManager;
+
     /// <summary>
     /// 模板创建位置
     /// </summary>
     public Transform template_BottomPos;
+
     public Transform template_MidPos;
     public Transform template_TopPos;
 
@@ -101,9 +105,11 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// <summary>
     /// 工人加起来的4项属性值（用于UI显示）
     /// </summary>
+
     #region workerAttribute
 
     public int workerCapacity;
+
     public int workerEfficiency;
     public int workerQuality;
     public int workerBrand;
@@ -113,9 +119,11 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// <summary>
     /// 装备加起来的4项属性值（用于UI显示）
     /// </summary>
+
     #region gearAttribute
 
     public int gearCapacity;
+
     public int gearEfficiency;
     public int gearQuality;
     public int gearBrand;
@@ -125,10 +133,11 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// <summary>
     /// 最终的4项属性值（用于UI显示和最终结算）
     /// </summary>
+
     #region finalAttribute
 
-
     public int finalEffect;
+
     public int finalEfficiency;
     public int finalRange;
     public int finalTradeCost;
@@ -152,6 +161,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     public Text fengxian;
 
     public Canvas currentCanvas;
+
     #endregion
 
 
@@ -163,6 +173,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         //jiaodu.text = data.range.ToString();
         ////fengxian.text = data.riskAdd.ToString();
     }
+
     public void ShowWorkListPOPDatal(int ID)
     {
         // var data = GameDataMgr.My.GetWorkerData(ID);
@@ -187,8 +198,9 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         NewCanvasUI.My.GamePause(false);
         for (int i = 0; i < effects.Count; i++)
         {
-            StartCoroutine(effects[i].Move());
+            effects[i].Move();
         }
+
         NewCanvasUI.My.Panel_ChoseRole.SetActive(false);
         CurrentRole = tempRole;
         //print(tempRole.baseRoleData.roleType);
@@ -202,6 +214,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             originalEquip.Add(v.Key);
             EquipList.Add(v.Key, v.Value);
         }
+
         foreach (var v in tempRole.peoPleList)
         {
             originalWorker.Add(v.Key);
@@ -212,8 +225,13 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             Destroy(template_BottomPos.GetChild(0).gameObject);
         }
-        roleBg.sprite = Resources.Load<Sprite>("Sprite/RoleBg/" + tempRole.baseRoleData.roleType.ToString() + tempRole.baseRoleData.level.ToString());
-        templateOBJ = Instantiate(Resources.Load<GameObject>(GameDataMgr.My.GetModelData(CurrentRole.baseRoleData.roleType, 1).RoleSpacePath), template_BottomPos);
+
+        roleBg.sprite = Resources.Load<Sprite>("Sprite/RoleBg/" + tempRole.baseRoleData.roleType.ToString() +
+                                               tempRole.baseRoleData.level.ToString());
+        templateOBJ =
+            Instantiate(
+                Resources.Load<GameObject>(GameDataMgr.My.GetModelData(CurrentRole.baseRoleData.roleType, 1)
+                    .RoleSpacePath), template_BottomPos);
         CurrentTemplateManager = templateOBJ.GetComponent<TemplateManager>();
         SetCreateRoleTitle();
         EquipListManager.My.Init();
@@ -258,6 +276,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     }
 
     private GameObject tempGo;
+
     /// <summary>
     /// 将组装好的角色的装备复位
     /// </summary>
@@ -265,7 +284,8 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     {
         foreach (var v in EquipList)
         {
-            tempGo = Instantiate(Resources.Load<GameObject>(GameDataMgr.My.GetGearData(v.Key).GearSpacePath), EquipListManager.My.equipPos);
+            tempGo = Instantiate(Resources.Load<GameObject>(GameDataMgr.My.GetGearData(v.Key).GearSpacePath),
+                EquipListManager.My.equipPos);
 
             Vector3 V2 = new Vector3(v.Value.x - Screen.width / 2, v.Value.y - Screen.height / 2);
 
@@ -282,7 +302,8 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     {
         foreach (var v in peoPleList)
         {
-            tempGo = Instantiate(Resources.Load<GameObject>(GameDataMgr.My.GetWorkerData(v.Key).WorkerSpacePath), WorkerListManager.My.workerPos);
+            tempGo = Instantiate(Resources.Load<GameObject>(GameDataMgr.My.GetWorkerData(v.Key).WorkerSpacePath),
+                WorkerListManager.My.workerPos);
 
             Vector3 V2 = new Vector3(v.Value.x - Screen.width / 2, v.Value.y - Screen.height / 2);
             tempGo.transform.localPosition = v.Value;
@@ -313,38 +334,42 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             costAdd = 0.8f;
         }
+
         if (PlayerData.My.guanJianZiYuanNengLi[3])
         {
             effectAdd = 1.2f;
         }
+
         InitRoleValue();
         foreach (var i in EquipList)
         {
             GearData tempData = GameDataMgr.My.GetGearData(i.Key);
-            finalEffect += (int)(tempData.effect * effectAdd);
-            finalEfficiency += (int)(tempData.efficiency * effectAdd);
-            finalRange += (int)(tempData.range * effectAdd);
+            finalEffect += (int) (tempData.effect * effectAdd);
+            finalEfficiency += (int) (tempData.efficiency * effectAdd);
+            finalRange += (int) (tempData.range * effectAdd);
             finalTradeCost += tempData.tradeCost;
-            finalCost += (int)(tempData.cost * costAdd);
+            finalCost += (int) (tempData.cost * costAdd);
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             finalEncourageAdd += tempData.encourageAdd;
             CurrentRole.equipCost += tempData.cost;
         }
+
         PDPCheck();
         foreach (var i in peoPleList)
         {
             WorkerData tempData = GameDataMgr.My.GetWorkerData(i.Key);
-            finalEffect += (int)(tempData.effect * effectAdd);
-            finalEfficiency += (int)(tempData.efficiency * effectAdd);
-            finalRange += (int)(tempData.range * effectAdd);
+            finalEffect += (int) (tempData.effect * effectAdd);
+            finalEfficiency += (int) (tempData.efficiency * effectAdd);
+            finalRange += (int) (tempData.range * effectAdd);
             finalTradeCost += tempData.tradeCost;
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             finalTechAdd += tempData.techAdd;
-            finalCost +=(int)(tempData.cost * costAdd);
+            finalCost += (int) (tempData.cost * costAdd);
             CurrentRole.workerCost += tempData.cost;
         }
+
         FinalCheck();
     }
 
@@ -372,7 +397,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void PDPCheck()
     {
-
     }
 
     /// <summary>
@@ -380,7 +404,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void FinalCheck()
     {
-
     }
 
     /// <summary>
@@ -403,15 +426,15 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         string str1 = "UpdateRoleEquipAndWorker|";
         str1 += RoleUpdateInfo.My.currentRole.ID.ToString();
         str1 += ",";
-      
+
         for (int i = 0; i < keys.Count; i++)
         {
             CurrentRole.EquipList.Add(keys[i], EquipList[keys[i]]);
             str1 += keys[i].ToString();
             if (keys.Count - 1 > i)
             {
-                str1 += "_"; 
-            } 
+                str1 += "_";
+            }
         }
 
         str1 += "&";
@@ -422,9 +445,10 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             str1 += keys2[i].ToString();
             if (keys2.Count - 1 > i)
             {
-                str1 += "_"; 
+                str1 += "_";
             }
         }
+
         if (!PlayerData.My.isSOLO)
         {
             if (PlayerData.My.isServer)
@@ -436,6 +460,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                 PlayerData.My.client.SendToServerMsg(str1);
             }
         }
+
         for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
         {
             if (System.Math.Abs(CurrentRole.ID - PlayerData.My.RoleData[i].ID) < 0.1f)
@@ -446,6 +471,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                 }
             }
         }
+
         if (originalEquip.Count == 0 && originalWorker.Count == 0)
         {
             if (CurrentRole.EquipList.Count != 0 || CurrentRole.peoPleList.Count != 0)
@@ -464,6 +490,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                     break;
                 }
             }
+
             for (int i = 0; i < originalWorker.Count; i++)
             {
                 if (!CurrentRole.peoPleList.ContainsKey(originalWorker[i]))
@@ -471,13 +498,14 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                     isChange = true;
                     break;
                 }
-
             }
+
             if (isChange)
             {
                 DataUploadManager.My.AddData(DataEnum.装备_增加);
-            }    
+            }
         }
+
         PlayerData.My.GetMapRoleById(CurrentRole.ID).RecalculateEncourageLevel();
         PlayerData.My.GetMapRoleById(CurrentRole.ID).ReaddAllBuff();
         PlayerData.My.GetMapRoleById(CurrentRole.ID).CheckGearConsumable();
@@ -485,7 +513,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         EquipListManager.My.QuitAndSave();
         ChangeRoleRecord(CurrentRole);
         DeleteTemplate();
-
     }
 
     /// <summary>
@@ -503,6 +530,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             param.Add(buffList[i].ToString());
         }
+
         StageGoal.My.RecordOperation(OperationType.ChangeRole, param);
     }
 
@@ -535,6 +563,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             Destroy(equipPos.GetChild(i).gameObject, 0.1f);
         }
+
         for (int i = 0; i < WorkerListManager.My.transform.Find("Viewport/Content").childCount; i++)
         {
             Destroy(WorkerListManager.My.transform.Find("Viewport/Content").GetChild(i).gameObject, 0.1f);
@@ -544,6 +573,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             Destroy(EquipListManager.My.transform.Find("Viewport/Content").GetChild(i).gameObject, 0.1f);
         }
+
         WorkerListManager.My._signs.Clear();
         EquipListManager.My._signs.Clear();
         CloseMenu();
@@ -559,27 +589,33 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             Destroy(workerPos.GetChild(i).gameObject, 0f);
         }
+
         for (int i = 0; i < equipPos.childCount; i++)
         {
             Destroy(equipPos.GetChild(i).gameObject, 0f);
         }
+
         for (int i = 0; i < gearPlot.Length; i++)
         {
             gearPlot[i].isOccupied = false;
         }
+
         for (int i = 0; i < workerPlot.Length; i++)
         {
             workerPlot[i].isOccupied = false;
         }
+
         foreach (var v in peoPleList)
         {
             WorkerListManager.My.UninstallWorker(v.Key);
         }
+
         peoPleList.Clear();
         foreach (var v in EquipList)
         {
             EquipListManager.My.UninstallEquip(v.Key);
         }
+
         EquipList.Clear();
         CheckAllConditions();
     }
@@ -591,26 +627,37 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     {
         for (int i = 0; i < effects.Count; i++)
         {
-            StartCoroutine(effects[i].Back());
+            effects[i].Back();
         }
-        if (!isPause)
+   
+     
+           
+              
+          
+               
+         
+
+        transform.DOScale(1, 0.5f).OnComplete(() =>
         {
-            if (DOTween.timeScale > 1f)
+            if (!isPause)
             {
-                NewCanvasUI.My.GameAccelerate();
+                if (DOTween.timeScale > 1f)
+                {
+                    NewCanvasUI.My.GameAccelerate();
+                }
+                else
+                {
+                    NewCanvasUI.My.GameNormal();
+                }
+            
             }
             else
             {
-                NewCanvasUI.My.GameNormal();
+                NewCanvasUI.My.GamePause();
             }
-        }
-        else
-        {
-            NewCanvasUI.My.GamePause();
-        }
-        
-       
-        transform.DOScale(1, 0.5f).OnComplete(() => { gameObject.SetActive(false); }).Play();
+
+            gameObject.SetActive(false);
+        })  .Play();
     }
 
     // Start is called before the first frame update
@@ -632,13 +679,12 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void CreatEquipList()
     {
-
     }
+
     /// <summary>
     /// 创建工人列表
     /// </summary>
     public void CreatWorkerList()
     {
-
     }
 }

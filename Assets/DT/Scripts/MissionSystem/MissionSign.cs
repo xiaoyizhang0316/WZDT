@@ -45,8 +45,10 @@ public class MissionSign : MonoBehaviour
                 sign.color = Color.green;
 
                 effectOver();
-            }else 
+            }else
             {
+                isover = false; 
+                success.transform.localScale = Vector3.zero;
                 sign.color = signColor;
             }
         }

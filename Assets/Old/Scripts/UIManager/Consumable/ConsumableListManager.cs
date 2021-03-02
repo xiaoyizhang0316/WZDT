@@ -41,6 +41,8 @@ public class ConsumableListManager : MonoSingleton<ConsumableListManager>
         }
     }
 
+     
+
     /// <summary>
     /// 获得消耗品信息
     /// </summary>

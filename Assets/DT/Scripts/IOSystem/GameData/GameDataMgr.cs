@@ -327,12 +327,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             }
             consumableDatas.Add(temp);
         }
-        foreach (ConsumableData c in consumableDatas)
-        {
-            
-        //    PlayerData.My.playerConsumables.Add(new PlayerConsumable(c.consumableId , 3));
-        }
-        //ConsumableListManager.My.Init();
+    
+       //  ConsumableListManager.My.Init();
     }
 
     /// <summary>

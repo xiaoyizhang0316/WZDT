@@ -75,6 +75,10 @@ public class RoleListInfoMerchant : BaseRoleListInfo
             new Vector2( role.effect / 120f * 150f,
                 effectyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
     }
+    
+    private List<ProductData> _datas  = new List<ProductData>();
+
+  
     public void ShowLastpruduct(Role role)
     {
         BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(role.ID);
@@ -82,15 +86,37 @@ public class RoleListInfoMerchant : BaseRoleListInfo
         {
             Destroy(productTF.GetChild(i).gameObject);
         }
-
+        _datas.Clear();
       
 
         for (int i = 0; i <  baseMapRole.warehouse.Count; i++)
-        { 
-      
+        {
+            int  isSameCount = 0;
+            for (int j = 0; j <_datas.Count; j++)
+            {
+            
+                if (_datas[j].CheckSame(baseMapRole.warehouse[i]))
+                {
+                    isSameCount++;
+                }
+            }
+
+            if (isSameCount>0)
+            {
+  
+                continue;
+            }
+
+         //   baseMapRole.warehouse[i].RepeatBulletCount = isSameCount;
             GameObject Pruductgame =  Instantiate(productPrb, productTF);
             Pruductgame.GetComponent<ProductSign>().currentProduct =
                 baseMapRole.warehouse[i];
+      
+
+      
+            _datas.Add(baseMapRole.warehouse[i]);
+          
+        
             switch (baseMapRole.warehouse[i].bulletType )
             {
                 case BulletType.Bomb:
@@ -114,14 +140,14 @@ public class RoleListInfoMerchant : BaseRoleListInfo
                 Pruductgame.GetComponent<Image>().color = new Color(1, 0.6f, 0.6f, 1);
             }
         
-            if (PlayerData.My.client != null)
-            {
-                Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.warehouse[i].RepeatBulletCount.ToString();
-            }
-            else
-            {
-                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
-            }
+         //  if (PlayerData.My.client != null)
+         //  {
+         //      Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.warehouse[i].RepeatBulletCount.ToString();
+         //  }
+         //  else
+         //  {
+         //      Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+         //  }
         }
     }
 }

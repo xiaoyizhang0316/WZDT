@@ -229,10 +229,13 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             {
                 if (DOTween.defaultAutoPlay != AutoPlay.None)
                 {
-                    GamePause();
+
+                    if (!PlayerData.My.isPrediction&& Panel_AssemblyRole.activeSelf == false)
+                    {
+                        GamePause(); 
+                    }
                 }
             }
-
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 bool isOpenSetting = true;

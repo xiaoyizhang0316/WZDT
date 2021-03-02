@@ -231,6 +231,11 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             }
         }
 
+        if (SceneManager.GetActiveScene().name.Equals("FTE_1"))
+        {
+            FTE_1Manager.My.startButton.interactable = true;
+        }
+
         if (!PlayerData.My.isSOLO)
         {
             string str1 = "OpenGuide|false";

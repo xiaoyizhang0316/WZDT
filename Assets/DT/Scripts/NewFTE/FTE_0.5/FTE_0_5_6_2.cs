@@ -72,16 +72,15 @@ public class FTE_0_5_6_2 : BaseGuideStep
             }
         }
      
-        info.text = "剩余时间 : "+(shengyuTime- (StageGoal.My.timeCount-time))   
-                
-            ;
+       // info.text = "剩余时间 : "+(shengyuTime- (StageGoal.My.timeCount-time))   ;
 
         missiondatas.data[0].currentNum = role.warehouse.Count;
-        if ((StageGoal.My.timeCount - time) % shengyuTime == 0)
-        {
-            role.warehouse.Clear();
-            time = StageGoal.My.timeCount;
-        }
+      // if ((StageGoal.My.timeCount - time) % shengyuTime == 0)
+      // {
+      //     role.warehouse.Clear();
+      //     time = StageGoal.My.timeCount;
+      //     missiondatas.data[0].isFinish = false; 
+      // }
   
         if ( role.warehouse.Count >= missiondatas.data[0].maxNum )
         {
