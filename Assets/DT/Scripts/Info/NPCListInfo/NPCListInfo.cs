@@ -267,6 +267,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public void ShowBuffInfo(string info)
     {
         buffText.text = info;
+        buffTextContent.transform.position = Camera.main.ScreenToWorldPoint( Input.mousePosition) + new Vector3(2, -6, 0);
         buffTextContent.SetActive(true);
     }
 

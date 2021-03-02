@@ -26,7 +26,8 @@ public class FTE_2_5_Manager : MonoSingleton<FTE_2_5_Manager>
     public GameObject taste1;
     public GameObject taste2;
     public GameObject taste3;
-    
+
+    public bool bornEnemy = false;
 
     //public bool isClearGoods = false;
 

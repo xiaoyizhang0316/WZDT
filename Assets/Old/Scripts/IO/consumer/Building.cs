@@ -273,7 +273,35 @@ public class Building : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         //GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().SpawnConsumer(1);
         //while (isBornForFTE_2_5)
+        if (count == 0)
+        {
+            FTE_2_5_Manager.My.bornEnemy = true;
+            while (FTE_2_5_Manager.My.bornEnemy)
+            {
+                ct = (ConsumerType)type;
+                string path = "Prefabs/Consumer/" + ct.ToString();
+                GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+                go.GetComponent<ConsumeSign>().Init(consumerPathList);
+                go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+                go.transform.position = transform.position;
+                go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+            
+                /*if (buffnum != -1)
+                {
+                    BuffData buff = GameDataMgr.My.GetBuffDataByID(buffnum);
+                    BaseBuff baseBuff = new BaseBuff();
+                    baseBuff.Init(buff);
+                    baseBuff.SetConsumerBuff(go.GetComponent<ConsumeSign>());
+                    go.GetComponent<ConsumeSign>().bornBuffList.Add(buffnum);
+                }*/
+            
+                float waitTime = 0.35f;
+                Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]+0.7f);
+                yield return twe.WaitForCompletion();
+            }
+        }
         //{
+        else{
             for (int i = 0; i < count; i++)
             {
                 //yield return new WaitForSeconds(0.7f);
@@ -298,6 +326,8 @@ public class Building : MonoBehaviour
                 Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]+0.7f);
                 yield return twe.WaitForCompletion();
             }
+            
+        }
         //}
     }
 
