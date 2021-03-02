@@ -70,7 +70,11 @@ public class ProductData
     {
         if (!buffList.Contains(buffId))
         {
-            buffList.Add(buffId);
+            BuffData data = GameDataMgr.My.GetBuffDataByID(buffId);
+            if (data.bulletBuffType != BulletBuffType.ConsumableGive)
+            {
+                buffList.Add(buffId);
+            }
         }
     }
 
