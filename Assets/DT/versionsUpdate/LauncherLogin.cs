@@ -4,12 +4,15 @@ using MHLab.Patch.Launcher.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using DG.Tweening;
+using Google.Protobuf.WellKnownTypes;
 using UnityEditor;
+using Debug = UnityEngine.Debug;
 
 public class LauncherLogin : MonoBehaviour
 {
@@ -82,25 +85,42 @@ public class LauncherLogin : MonoBehaviour
             return;
         }
 
+        GetVersion((w) => { });
 
         Login(username, password, () =>
         {
+            GetVersion((w)=>{
+            });
+            //Debug.Log(TimeStamp.GetCurrentTimeStamp());
             GetVersion((str) =>
             {
                 
-                StartCoroutine(LoadVersionsIndex((index) =>
+                /*StartCoroutine(LoadVersionsIndex((index) =>
                 {
                     if (int.Parse(str.Split('.')[0]) > int.Parse(index))
                     {
                         Delete();
                     }
-                }));
+                    UpdateGame();
+                }));*/
+                VerifyVersion(str);
+                SaveAccount(username, password);
 
-
-                UpdateGame();
-            }); // TODO 判断版本号
-            SaveAccount(username, password);
+            }); 
         });
+    }
+
+    private void VerifyVersion(string str)
+    {
+        StartCoroutine(LoadVersionsIndex((index) =>
+        {
+            if (int.Parse(str.Split('.')[0]) > int.Parse(index))
+            {
+                Delete();
+            }
+            UpdateGame();
+        }));
+        //SaveAccount(username, password);
     }
 
 
@@ -168,7 +188,6 @@ public class LauncherLogin : MonoBehaviour
         StartCoroutine(HttpManager.My.HttpSend(Url.GetVersion, (www) =>
         {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
-
             Debug.Log(response.data);
             try
             {
@@ -180,14 +199,12 @@ public class LauncherLogin : MonoBehaviour
                     version = response.data;
                     doEnd?.Invoke(version);
           
-
-          
             }
             catch (Exception ex)
             {
                 Debug.Log(ex.Message);
             }
-        }, keyValues, HttpType.Post, 10002));
+        }, keyValues, HttpType.Get, 10002));
     }
 
 
