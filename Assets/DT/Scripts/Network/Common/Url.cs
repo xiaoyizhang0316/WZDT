@@ -92,6 +92,12 @@ public static class Url
     private static string testGet = "testGet";
     #endregion
 
+    #region version update
+    
+    private static string getVersion = "getLatestVersion";
+
+    #endregion
+
     public static string PingIp { get => ip+pingIp; }
     public static string LoginUrl { get => ip + loginUrl;  }
     public static string ReConnUrl { get => ip + reConnUrl;  }
@@ -140,6 +146,9 @@ public static class Url
     public static string NewReConnUrl { get => ip+newReConnUrl; }
     public static string GetGroupScoreStatus { get => ip+getGroupScoreStatus; }
     public static string UpdatePlayerFTE { get => ip+updatePlayerFTE; }
+    public static string GetVersion { get => ip+getVersion; }
+    
+    
 
     public static void SetIp(string newIp)
     {

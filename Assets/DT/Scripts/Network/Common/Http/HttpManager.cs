@@ -504,5 +504,16 @@ public class HttpManager : MonoSingleton<HttpManager>
     {
         SceneManager.LoadScene("Login");
     }
+    
+    
+    
+}
+
+[Serializable]
+public class HttpResponse
+{
+    public int status;
+    public string data;
+    public string errMsg;
 }
 
