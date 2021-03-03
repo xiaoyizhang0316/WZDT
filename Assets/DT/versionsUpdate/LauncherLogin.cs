@@ -22,41 +22,50 @@ public class LauncherLogin : MonoBehaviour
     public GameObject logo;
 
     public List<GameObject> fadeManager;
+
     public List<GameObject> fadeManagerText;
+
     // Start is called before the first frame update
     void Start()
     {
         login.onClick.AddListener(() => { Login(); });
-      LoadAccount();
-      ShowLogo();
+        StartCoroutine(LoadAccount(() =>
+        {
+            Login();
 
-    }
+        }, () =>
+        {
+    
+            ShowLogo();
+        })); 
+       
+    
+     }
 
     public void ShowLogo()
     {
         logo.transform.localScale = Vector3.zero;
-        logo.transform.DOScale(1, 2).SetEase(Ease.InCirc).OnComplete(() =>
+        logo.transform.DOScale(1, 1).SetEase(Ease.InCirc).OnComplete(() =>
         {
             logo.transform.DOLocalMoveX(-180, 0.8f);
-            for (int i = 0; i <  fadeManager.Count; i++)
+            for (int i = 0; i < fadeManager.Count; i++)
             {
                 fadeManager[i].GetComponent<Image>().DOFade(1, 0.8f);
             }
-            for (int i = 2; i <  fadeManagerText.Count; i++)
+
+            for (int i = 2; i < fadeManagerText.Count; i++)
             {
                 fadeManagerText[i].GetComponent<Text>().DOFade(1, 0.8f);
             }
-            for (int i = 0; i <  2; i++)
+
+            for (int i = 0; i < 2; i++)
             {
                 fadeManagerText[i].GetComponent<Text>().DOFade(0.4f, 0.8f);
             }
-
-
         });
-        
     }
 
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -82,16 +91,28 @@ public class LauncherLogin : MonoBehaviour
             HttpManager.My.ShowTip("用户名或密码不能为空!");
             return;
         }
-        
+
+      
         Login(username, password, () =>
         {
-            
-            GetVersion(null);// TODO 判断版本号
+            GetVersion((str) =>
+            {
+                StartCoroutine(LoadVersionsIndex((index) =>
+                {
+                    if (int.Parse(str.Split('.')[0]) > int.Parse(index))
+                    {
+                        Delete();
+                    }
+                }));
+          
+
+                UpdateGame();
+            }); // TODO 判断版本号
             SaveAccount(username, password);
         });
     }
-    
-    
+
+
     /// <summary>
     /// 登陆
     /// </summary>
@@ -99,25 +120,26 @@ public class LauncherLogin : MonoBehaviour
     /// <param name="password"></param>
     /// <param name="doSuccess"></param>
     /// <param name="doFail"></param>
-    private void Login(string userName, string password, Action doSuccess = null, Action<bool,string> doFail= null)
+    private void Login(string userName, string password, Action doSuccess = null, Action<bool, string> doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("username", userName);
         keyValues.Add("password", password);
         keyValues.Add("DeviceId", Application.identifier);
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.NewLoginUrl, (www)=> {
+        StartCoroutine(HttpManager.My.HttpSend(Url.NewLoginUrl, (www) =>
+        {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == 0)
             {
                 HttpManager.My.ShowTip("账号或密码错误，登陆失败！");
-                if(response.data.Contains("密码"))
+                if (response.data.Contains("密码"))
                 {
-                    doFail?.Invoke(true,response.data);
+                    doFail?.Invoke(true, response.data);
                 }
                 else
                 {
-                    doFail?.Invoke(false,response.data);
+                    doFail?.Invoke(false, response.data);
                 }
             }
             else
@@ -131,6 +153,7 @@ public class LauncherLogin : MonoBehaviour
                         HttpManager.My.ShowTip("账号已失效");
                         return;
                     }
+
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -142,47 +165,57 @@ public class LauncherLogin : MonoBehaviour
     }
 
     private string version = "";
+
     /// <summary>
     /// 获取版本号
     /// </summary>
     /// <param name="doEnd"></param>
-    void GetVersion(Action doEnd)
+    void GetVersion(Action<string> doEnd)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.NewLoginUrl, (www)=> {
+        StartCoroutine(HttpManager.My.HttpSend(Url.NewLoginUrl, (www) =>
+        {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
-            
-                Debug.Log(response.data);
-                try
-                {
-                    version = response.data;
-                    doEnd?.Invoke();
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log(ex.Message);
-                }
-            
+
+            Debug.Log(response.data);
+            try
+            {
+                version = response.data;
+                doEnd?.Invoke(version);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message);
+            }
         }, keyValues, HttpType.Post, 10002));
     }
 
 
-    public void LoadAccount()
+    public IEnumerator LoadAccount(Action canLogin,Action cantLogin)
     {
-        try
+        StreamReader streamReader = new StreamReader(Application.dataPath + "Account.json");
+        if (streamReader != null)
         {
-            StreamReader streamReader = new StreamReader(Application.dataPath+"Account.json");
             string str = streamReader.ReadToEnd();
-            string decode =   Decrypt(str);
-            AccountJosn  json =  JsonUtility.FromJson<AccountJosn>(decode);
-            InitInput(json);
+            while (string.IsNullOrEmpty(str))
+            {
+                yield return null;
+            }
+
+            string decode = Decrypt(str);
+            AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
+            if (!string.IsNullOrEmpty(json.name))
+            {
+                InitInput(json);
+                canLogin();
+            }
+            else
+            {
+                cantLogin();
+            }
+
         }
-        catch (Exception e)
-        {
-            return;
-        }
-     
     }
 
     public void Delete()
@@ -191,26 +224,24 @@ public class LauncherLogin : MonoBehaviour
         FileUtil.DeleteFileOrDirectory(fullPath);
     }
 
-    public void LoadVersionsIndex()
+    public IEnumerator LoadVersionsIndex(Action<string>doEnd)
     {
-        try
-        {
-            StreamReader streamReader = new StreamReader(Application.dataPath+"Build.json");
+       
+            StreamReader streamReader = new StreamReader(Application.dataPath + "Build.json");
             string str = streamReader.ReadToEnd();
-           
-            BuildJson  json =  JsonUtility.FromJson<BuildJson>(str); 
-        }
-        catch (Exception e)
-        {
-            return;
-        }
+            while (string.IsNullOrEmpty(str))
+            {
+                yield return null;
+            }
+            BuildJson json = JsonUtility.FromJson<BuildJson>(str);
+            doEnd(json.versionsIndex);
 
     }
 
     /// <summary>
     /// 初始化用户名
     /// </summary>
-    public void InitInput(AccountJosn  json )
+    public void InitInput(AccountJosn json)
     {
         if (json != null)
         {
@@ -234,16 +265,16 @@ public class LauncherLogin : MonoBehaviour
             name = name,
             password = password
         };
-       string accoutjson =  JsonUtility.ToJson(account);
-   string encode =   Encrypt(accoutjson);
-       FileStream file = new FileStream(Application.dataPath+"Account.json", FileMode.Create);  
-       byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);  
-       file.Write(bts,0,bts.Length);  
-       if(file != null)
-       {
-           file.Close();   
-       }  
-      
+        string accoutjson = JsonUtility.ToJson(account);
+        string encode = Encrypt(accoutjson);
+        FileStream file = new FileStream(Application.dataPath + "Account.json", FileMode.Create);
+        byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
+        file.Write(bts, 0, bts.Length);
+        if (file != null)
+        {
+            file.Close();
+        }
+
         ///保存账号密码
     }
 
@@ -254,7 +285,7 @@ public class LauncherLogin : MonoBehaviour
     {
         launcher.Init();
     }
-   
+
     /// <summary>
     /// 加密  返回加密后的结果
     /// </summary>
@@ -274,7 +305,7 @@ public class LauncherLogin : MonoBehaviour
 
         return Convert.ToBase64String(resultArray, 0, resultArray.Length);
     }
- 
+
     /// <summary>
     /// 解密  返回解密后的结果
     /// </summary>
@@ -294,5 +325,5 @@ public class LauncherLogin : MonoBehaviour
         byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
 
         return UTF8Encoding.UTF8.GetString(resultArray);
-    } 
+    }
 }
