@@ -57,10 +57,25 @@ public class LauncherLogin : MonoBehaviour
         {
             return;
         }
-    
-    
-
      
+    }
+
+
+    public void LoadVersionsIndex()
+    {
+        try
+        {
+            StreamReader streamReader = new StreamReader(Application.dataPath+"Build.json");
+            string str = streamReader.ReadToEnd();
+           
+            AccountJosn  json =  JsonUtility.FromJson<AccountJosn>(str);
+            
+        }
+        catch (Exception e)
+        {
+            return;
+        }
+
     }
 
     /// <summary>
@@ -110,12 +125,7 @@ public class LauncherLogin : MonoBehaviour
     {
         launcher.Init();
     }
-     [Serializable]
-    public class AccountJosn
-    {
-        public string name;
-        public string password;
-    }
+   
     /// <summary>
     /// 加密  返回加密后的结果
     /// </summary>
