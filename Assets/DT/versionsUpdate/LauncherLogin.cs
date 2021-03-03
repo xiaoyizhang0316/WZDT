@@ -29,18 +29,8 @@ public class LauncherLogin : MonoBehaviour
     void Start()
     {
         login.onClick.AddListener(() => { Login(); });
-        StartCoroutine(LoadAccount(() =>
-        {
-            Login();
-
-        }, () =>
-        {
-    
-            ShowLogo();
-        })); 
-       
-    
-     }
+        StartCoroutine(LoadAccount(() => { Login(); }, () => { ShowLogo(); }));
+    }
 
     public void ShowLogo()
     {
@@ -92,7 +82,7 @@ public class LauncherLogin : MonoBehaviour
             return;
         }
 
-      
+
         Login(username, password, () =>
         {
             GetVersion((str) =>
@@ -104,7 +94,7 @@ public class LauncherLogin : MonoBehaviour
                         Delete();
                     }
                 }));
-          
+
 
                 UpdateGame();
             }); // TODO 判断版本号
@@ -192,33 +182,39 @@ public class LauncherLogin : MonoBehaviour
     }
 
 
-    public IEnumerator LoadAccount(Action canLogin,Action cantLogin)
+    public IEnumerator LoadAccount(Action canLogin, Action cantLogin)
     {
-        StreamReader streamReader = new StreamReader(Application.dataPath + "Account.json");
-        if (streamReader != null)
+        if (!File.Exists(Application.dataPath + "Account.json"))
         {
-            string str = streamReader.ReadToEnd();
-            while (string.IsNullOrEmpty(str))
+            cantLogin();
+        }
+        else
+        {
+            StreamReader streamReader = new StreamReader(Application.dataPath + "Account.json");
+            if (streamReader != null)
             {
-                yield return null;
-            }
+                string str = streamReader.ReadToEnd();
+                while (string.IsNullOrEmpty(str))
+                {
+                    yield return null;
+                }
 
-            string decode = Decrypt(str);
-            AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
-            if (!string.IsNullOrEmpty(json.name))
-            {
-                InitInput(json);
-                canLogin();
+                string decode = Decrypt(str);
+                AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
+                if (!string.IsNullOrEmpty(json.name))
+                {
+                    InitInput(json);
+                    canLogin();
+                }
+                else
+                {
+                    cantLogin();
+                }
             }
             else
             {
                 cantLogin();
             }
-
-        }
-        else
-        {
-            cantLogin();
         }
     }
 
@@ -228,14 +224,18 @@ public class LauncherLogin : MonoBehaviour
         FileUtil.DeleteFileOrDirectory(fullPath);
     }
 
-    public IEnumerator LoadVersionsIndex(Action<string>doEnd)
+    public IEnumerator LoadVersionsIndex(Action<string> doEnd)
     {
-       
+        if (!File.Exists(Application.dataPath + "Build.json"))
+        {
+            doEnd("0");
+        }
+        else
+        {
             StreamReader streamReader = new StreamReader(Application.dataPath + "Build.json");
             if (streamReader == null)
             {
                 doEnd("0");
-
             }
             else
             {
@@ -244,12 +244,11 @@ public class LauncherLogin : MonoBehaviour
                 {
                     yield return null;
                 }
+
                 BuildJson json = JsonUtility.FromJson<BuildJson>(str);
                 doEnd(json.versionsIndex);
-
             }
-
-        
+        }
     }
 
     /// <summary>
