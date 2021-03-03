@@ -1726,10 +1726,3 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     }
 }
 
-[Serializable]
-public class HttpResponse
-{
-    public int status;
-    public string data;
-    public string errMsg;
-}

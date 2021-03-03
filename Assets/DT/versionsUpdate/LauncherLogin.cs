@@ -37,9 +37,101 @@ public class LauncherLogin : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 点击登陆
+    /// </summary>
     public void Login()
     {
-        //wj
+        string username = username_Input.text.Replace(" ", "");
+        string password = password_Input.text.Replace(" ", "");
+        if (username.Equals("") || password.Equals(""))
+        {
+            HttpManager.My.ShowTip("用户名或密码不能为空!");
+            return;
+        }
+        
+        Login(username, password, () =>
+        {
+            
+            GetVersion(null);// TODO 判断版本号
+            SaveAccount(username, password);
+        });
+    }
+    
+    
+    /// <summary>
+    /// 登陆
+    /// </summary>
+    /// <param name="userName"></param>
+    /// <param name="password"></param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
+    private void Login(string userName, string password, Action doSuccess = null, Action<bool,string> doFail= null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("username", userName);
+        keyValues.Add("password", password);
+        keyValues.Add("DeviceId", Application.identifier);
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.NewLoginUrl, (www)=> {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == 0)
+            {
+                HttpManager.My.ShowTip("账号或密码错误，登陆失败！");
+                if(response.data.Contains("密码"))
+                {
+                    doFail?.Invoke(true,response.data);
+                }
+                else
+                {
+                    doFail?.Invoke(false,response.data);
+                }
+            }
+            else
+            {
+                Debug.Log(response.data);
+                try
+                {
+                    PlayerDatas playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
+                    if (playerDatas.isOutDate)
+                    {
+                        HttpManager.My.ShowTip("账号已失效");
+                        return;
+                    }
+                    doSuccess?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+            }
+        }, keyValues, HttpType.Post, 10001));
+    }
+
+    private string version = "";
+    /// <summary>
+    /// 获取版本号
+    /// </summary>
+    /// <param name="doEnd"></param>
+    void GetVersion(Action doEnd)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+
+        StartCoroutine(HttpManager.My.HttpSend(Url.NewLoginUrl, (www)=> {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            
+                Debug.Log(response.data);
+                try
+                {
+                    version = response.data;
+                    doEnd?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+            
+        }, keyValues, HttpType.Post, 10002));
     }
 
 
@@ -69,7 +161,7 @@ public class LauncherLogin : MonoBehaviour
             string str = streamReader.ReadToEnd();
            
             BuildJson  json =  JsonUtility.FromJson<BuildJson>(str);
-            json.versionsIndex-
+            
         }
         catch (Exception e)
         {
