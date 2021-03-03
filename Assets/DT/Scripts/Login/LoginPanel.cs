@@ -41,6 +41,38 @@ public class LoginPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*PlayerPrefs.SetInt("BackGroundVolume",-80);
+        PlayerPrefs.SetInt("SoundEffectVolume",-80);
+        StartCoroutine(PeopleEffect());
+        //PlayerPrefs.DeleteAll();
+        login_Btn.onClick.AddListener(Login);
+        transform.localPosition = new Vector3(0, 500, 0);
+        transform.DOLocalMoveY(-35f, 0.8f).Play();
+        username = PlayerPrefs.GetString("username", "0");
+        password = PlayerPrefs.GetString("password", "0");
+        serverIP = PlayerPrefs.GetString("server_IP", "0");
+        UserServerOrNot();
+        if (username != "0")
+        {
+            username_Input.text = username;
+        }
+
+        if(password != "0")
+        {
+            password_Input.text = password;
+        }
+        if (PlayerPrefs.GetInt("savePassword", 0) == 1)
+        {
+            savePassword_Toggle.isOn = true;
+        }*/
+
+        //username_Input.ActivateInputField();
+        //username_Input.MoveTextEnd(true);
+        //Test();
+    }
+
+    void NewInit()
+    {
         PlayerPrefs.SetInt("BackGroundVolume",-80);
         PlayerPrefs.SetInt("SoundEffectVolume",-80);
         StartCoroutine(PeopleEffect());
@@ -65,10 +97,35 @@ public class LoginPanel : MonoBehaviour
         {
             savePassword_Toggle.isOn = true;
         }
+    }
+    
 
-        //username_Input.ActivateInputField();
-        //username_Input.MoveTextEnd(true);
-        Test();
+    void OldInit()
+    {
+        PlayerPrefs.SetInt("BackGroundVolume",-80);
+        PlayerPrefs.SetInt("SoundEffectVolume",-80);
+        StartCoroutine(PeopleEffect());
+        //PlayerPrefs.DeleteAll();
+        login_Btn.onClick.AddListener(Login);
+        transform.localPosition = new Vector3(0, 500, 0);
+        transform.DOLocalMoveY(-35f, 0.8f).Play();
+        username = PlayerPrefs.GetString("username", "0");
+        password = PlayerPrefs.GetString("password", "0");
+        serverIP = PlayerPrefs.GetString("server_IP", "0");
+        UserServerOrNot();
+        if (username != "0")
+        {
+            username_Input.text = username;
+        }
+
+        if(password != "0")
+        {
+            password_Input.text = password;
+        }
+        if (PlayerPrefs.GetInt("savePassword", 0) == 1)
+        {
+            savePassword_Toggle.isOn = true;
+        }
     }
 
     private void UserServerOrNot()
@@ -242,7 +299,7 @@ public class LoginPanel : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Return) && !isLogin)
+            /*if (Input.GetKeyDown(KeyCode.Return) && !isLogin)
             {
                 if (setServerPanel.activeInHierarchy)
                 {
@@ -255,7 +312,7 @@ public class LoginPanel : MonoBehaviour
                 {
                     Login();
                 }
-            }
+            }*/
         //}
     }
 
