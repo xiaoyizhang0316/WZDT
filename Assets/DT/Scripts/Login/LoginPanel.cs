@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -69,6 +71,8 @@ public class LoginPanel : MonoBehaviour
         //username_Input.ActivateInputField();
         //username_Input.MoveTextEnd(true);
         //Test();
+        NewInit();
+        //Debug.Log(Directory.GetParent(Application.dataPath) + "\\Account.json");
     }
 
     void NewInit()
@@ -80,25 +84,74 @@ public class LoginPanel : MonoBehaviour
         login_Btn.onClick.AddListener(Login);
         transform.localPosition = new Vector3(0, 500, 0);
         transform.DOLocalMoveY(-35f, 0.8f).Play();
-        username = PlayerPrefs.GetString("username", "0");
-        password = PlayerPrefs.GetString("password", "0");
-        serverIP = PlayerPrefs.GetString("server_IP", "0");
-        UserServerOrNot();
-        if (username != "0")
+        StartCoroutine(LoadAccount(() =>
         {
-            username_Input.text = username;
-        }
+            login_Btn.interactable = false;
+            Login();
+        }, () =>
+        {
+            login_Btn.interactable = true;
+        }));
+    }
+    
+    public IEnumerator LoadAccount(Action canLogin,Action cantLogin)
+    {
+        StreamReader streamReader = new StreamReader( Directory.GetParent(Application.dataPath) + "\\Account.json");
+        if (streamReader != null)
+        {
+            string str = streamReader.ReadToEnd();
+            while (string.IsNullOrEmpty(str))
+            {
+                yield return null;
+            }
 
-        if(password != "0")
-        {
-            password_Input.text = password;
-        }
-        if (PlayerPrefs.GetInt("savePassword", 0) == 1)
-        {
-            savePassword_Toggle.isOn = true;
+            string decode = CompressUtils.Decrypt(str);
+            AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
+            if (!string.IsNullOrEmpty(json.name))
+            {
+                InitInput(json);
+                canLogin();
+            }
+            else
+            {
+                cantLogin();
+            }
+
         }
     }
     
+    public void InitInput(AccountJosn json)
+    {
+        if (json != null)
+        {
+            username_Input.text = json.name;
+            password_Input.text = json.password;
+        }
+        else
+        {
+            username_Input.text = "";
+            password_Input.text = "";
+        }
+    }
+    public void SaveAccount(string name, string password)
+    {
+        AccountJosn account = new AccountJosn()
+        {
+            name = name,
+            password = passwordU
+        };
+        string accoutjson = JsonUtility.ToJson(account);
+        string encode = CompressUtils.Encrypt(accoutjson);
+        FileStream file = new FileStream(Directory.GetParent(Application.dataPath) + "\\Account.json", FileMode.Create);
+        byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
+        file.Write(bts, 0, bts.Length);
+        if (file != null)
+        {
+            file.Close();
+        }
+
+        ///保存账号密码
+    }
 
     void OldInit()
     {
@@ -174,8 +227,9 @@ public class LoginPanel : MonoBehaviour
 
     private void LoginSuccess()
     {
-        SavePasswordOrNot();
-        UseServerOrNot();
+        // for new version login
+        /*SavePasswordOrNot();
+        UseServerOrNot();*/
         NetworkMgr.My.GetJsonDatas((data) => {
             OriginalData.My.InitDatas(data);
             
@@ -238,6 +292,8 @@ public class LoginPanel : MonoBehaviour
                         SceneManager.LoadScene("Map");
                     }
                 }
+                
+                SaveAccount(username, password);
             }
         });
         isLogin = false;
