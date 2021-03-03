@@ -68,8 +68,8 @@ public class LauncherLogin : MonoBehaviour
             StreamReader streamReader = new StreamReader(Application.dataPath+"Build.json");
             string str = streamReader.ReadToEnd();
            
-            AccountJosn  json =  JsonUtility.FromJson<AccountJosn>(str);
-            
+            BuildJson  json =  JsonUtility.FromJson<BuildJson>(str);
+            json.versionsIndex-
         }
         catch (Exception e)
         {
