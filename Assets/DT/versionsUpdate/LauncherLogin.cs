@@ -216,6 +216,10 @@ public class LauncherLogin : MonoBehaviour
             }
 
         }
+        else
+        {
+            cantLogin();
+        }
     }
 
     public void Delete()
@@ -228,14 +232,24 @@ public class LauncherLogin : MonoBehaviour
     {
        
             StreamReader streamReader = new StreamReader(Application.dataPath + "Build.json");
-            string str = streamReader.ReadToEnd();
-            while (string.IsNullOrEmpty(str))
+            if (streamReader == null)
             {
-                yield return null;
-            }
-            BuildJson json = JsonUtility.FromJson<BuildJson>(str);
-            doEnd(json.versionsIndex);
+                doEnd("0");
 
+            }
+            else
+            {
+                string str = streamReader.ReadToEnd();
+                while (string.IsNullOrEmpty(str))
+                {
+                    yield return null;
+                }
+                BuildJson json = JsonUtility.FromJson<BuildJson>(str);
+                doEnd(json.versionsIndex);
+
+            }
+
+        
     }
 
     /// <summary>
