@@ -138,7 +138,7 @@ public class LoginPanel : MonoBehaviour
         AccountJosn account = new AccountJosn()
         {
             name = name,
-            password = passwordU
+            password = password
         };
         string accoutjson = JsonUtility.ToJson(account);
         string encode = CompressUtils.Encrypt(accoutjson);
