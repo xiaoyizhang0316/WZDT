@@ -72,17 +72,21 @@ namespace MHLab.Patch.Launcher.Scripts
         
         private void Awake()
         {
-            Initialize(CreateSettings());
+            //Initialize(CreateSettings());
 
             Data.ResetComponents();
         }
 
-        private void Start()
+        /// <summary>
+        /// 进行游戏客户端更新
+        /// </summary>
+        public void Init()
         {
+            Initialize(CreateSettings());
             try
             {
-                _context.Logger.Info("===> Updating process STARTED! <===");
-                
+                _context.Logger.Info("===> Launcher updating process STARTED! <===");
+
                 if (!NetworkChecker.IsNetworkAvailable())
                 {
                     Data.Log(_context.LocalizedMessages.NotAvailableNetwork);
@@ -104,8 +108,39 @@ namespace MHLab.Patch.Launcher.Scripts
             catch (Exception ex)
             {
                 Data.Log(_context.LocalizedMessages.UpdateProcessFailed);
-                _context.Logger.Error(ex, "===> Updating process FAILED! <===");
+                _context.Logger.Error(ex, "===> Launcher updating process FAILED! <===");
             }
+        }
+
+        private void Start()
+        {
+            //try
+            //{
+            //    _context.Logger.Info("===> Updating process STARTED! <===");
+                
+            //    if (!NetworkChecker.IsNetworkAvailable())
+            //    {
+            //        Data.Log(_context.LocalizedMessages.NotAvailableNetwork);
+            //        _context.Logger.Error(null, "Updating process FAILED! Network is not available or connectivity is low/weak... Check your connection!");
+            //        return;
+            //    }
+
+            //    if (!NetworkChecker.IsRemoteServiceAvailable(_context.Settings.GetRemoteBuildsIndexUrl()))
+            //    {
+            //        Data.Log(_context.LocalizedMessages.NotAvailableServers);
+            //        _context.Logger.Error(null, "Updating process FAILED! Our servers are not responding... Wait some minutes and retry!");
+            //        return;
+            //    }
+
+            //    _context.Initialize();
+
+            //    Task.Run(CheckForUpdates);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Data.Log(_context.LocalizedMessages.UpdateProcessFailed);
+            //    _context.Logger.Error(ex, "===> Updating process FAILED! <===");
+            //}
         }
         
         private void CheckForUpdates()
