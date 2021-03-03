@@ -87,6 +87,7 @@ public class LauncherLogin : MonoBehaviour
         {
             GetVersion((str) =>
             {
+                
                 StartCoroutine(LoadVersionsIndex((index) =>
                 {
                     if (int.Parse(str.Split('.')[0]) > int.Parse(index))
@@ -164,15 +165,23 @@ public class LauncherLogin : MonoBehaviour
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.NewLoginUrl, (www) =>
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetVersion, (www) =>
         {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
 
             Debug.Log(response.data);
             try
             {
-                version = response.data;
-                doEnd?.Invoke(version);
+                if (String.IsNullOrEmpty(response.data))
+                {
+                    HttpManager.My.ShowTip("获取不到服务器");
+                    return;
+                } 
+                    version = response.data;
+                    doEnd?.Invoke(version);
+          
+
+          
             }
             catch (Exception ex)
             {
@@ -203,6 +212,7 @@ public class LauncherLogin : MonoBehaviour
                 AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
                 if (!string.IsNullOrEmpty(json.name))
                 {
+                    Debug.Log(json.name+"名字"+json.password+"密码");
                     InitInput(json);
                     canLogin();
                 }
@@ -226,6 +236,7 @@ public class LauncherLogin : MonoBehaviour
 
     public IEnumerator LoadVersionsIndex(Action<string> doEnd)
     {
+        Debug.Log("获取本地");
         if (!File.Exists(Application.dataPath + "Build.json"))
         {
             doEnd("0");
