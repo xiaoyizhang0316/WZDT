@@ -29,18 +29,8 @@ public class LauncherLogin : MonoBehaviour
     void Start()
     {
         login.onClick.AddListener(() => { Login(); });
-        StartCoroutine(LoadAccount(() =>
-        {
-            Login();
-
-        }, () =>
-        {
-    
-            ShowLogo();
-        })); 
-       
-    
-     }
+        StartCoroutine(LoadAccount(() => { Login(); }, () => { ShowLogo(); }));
+    }
 
     public void ShowLogo()
     {
@@ -92,11 +82,12 @@ public class LauncherLogin : MonoBehaviour
             return;
         }
 
-      
+
         Login(username, password, () =>
         {
             GetVersion((str) =>
             {
+                
                 StartCoroutine(LoadVersionsIndex((index) =>
                 {
                     if (int.Parse(str.Split('.')[0]) > int.Parse(index))
@@ -104,7 +95,7 @@ public class LauncherLogin : MonoBehaviour
                         Delete();
                     }
                 }));
-          
+
 
                 UpdateGame();
             }); // TODO 判断版本号
@@ -174,15 +165,23 @@ public class LauncherLogin : MonoBehaviour
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
 
-        StartCoroutine(HttpManager.My.HttpSend(Url.NewLoginUrl, (www) =>
+        StartCoroutine(HttpManager.My.HttpSend(Url.GetVersion, (www) =>
         {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
 
             Debug.Log(response.data);
             try
             {
-                version = response.data;
-                doEnd?.Invoke(version);
+                if (String.IsNullOrEmpty(response.data))
+                {
+                    HttpManager.My.ShowTip("获取不到服务器");
+                    return;
+                } 
+                    version = response.data;
+                    doEnd?.Invoke(version);
+          
+
+          
             }
             catch (Exception ex)
             {
@@ -192,29 +191,40 @@ public class LauncherLogin : MonoBehaviour
     }
 
 
-    public IEnumerator LoadAccount(Action canLogin,Action cantLogin)
+    public IEnumerator LoadAccount(Action canLogin, Action cantLogin)
     {
-        StreamReader streamReader = new StreamReader(Application.dataPath + "Account.json");
-        if (streamReader != null)
+        if (!File.Exists(Application.dataPath + "Account.json"))
         {
-            string str = streamReader.ReadToEnd();
-            while (string.IsNullOrEmpty(str))
+            cantLogin();
+        }
+        else
+        {
+            StreamReader streamReader = new StreamReader(Application.dataPath + "Account.json");
+            if (streamReader != null)
             {
-                yield return null;
-            }
+                string str = streamReader.ReadToEnd();
+                while (string.IsNullOrEmpty(str))
+                {
+                    yield return null;
+                }
 
-            string decode = Decrypt(str);
-            AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
-            if (!string.IsNullOrEmpty(json.name))
-            {
-                InitInput(json);
-                canLogin();
+                string decode = Decrypt(str);
+                AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
+                if (!string.IsNullOrEmpty(json.name))
+                {
+                    Debug.Log(json.name+"名字"+json.password+"密码");
+                    InitInput(json);
+                    canLogin();
+                }
+                else
+                {
+                    cantLogin();
+                }
             }
             else
             {
                 cantLogin();
             }
-
         }
     }
 
@@ -224,18 +234,32 @@ public class LauncherLogin : MonoBehaviour
         FileUtil.DeleteFileOrDirectory(fullPath);
     }
 
-    public IEnumerator LoadVersionsIndex(Action<string>doEnd)
+    public IEnumerator LoadVersionsIndex(Action<string> doEnd)
     {
-       
+        Debug.Log("获取本地");
+        if (!File.Exists(Application.dataPath + "Build.json"))
+        {
+            doEnd("0");
+        }
+        else
+        {
             StreamReader streamReader = new StreamReader(Application.dataPath + "Build.json");
-            string str = streamReader.ReadToEnd();
-            while (string.IsNullOrEmpty(str))
+            if (streamReader == null)
             {
-                yield return null;
+                doEnd("0");
             }
-            BuildJson json = JsonUtility.FromJson<BuildJson>(str);
-            doEnd(json.versionsIndex);
+            else
+            {
+                string str = streamReader.ReadToEnd();
+                while (string.IsNullOrEmpty(str))
+                {
+                    yield return null;
+                }
 
+                BuildJson json = JsonUtility.FromJson<BuildJson>(str);
+                doEnd(json.versionsIndex);
+            }
+        }
     }
 
     /// <summary>
