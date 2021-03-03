@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Buffers.Text;
+using System.Collections;
 using System.Collections.Generic;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
@@ -32,6 +33,7 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         //           return;
         //       }
         //   }
+        
         Debug.Log(SystemInfo.deviceUniqueIdentifier);
         mainThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
         foreach (string str in "sdasdsads*".Split('*'))
