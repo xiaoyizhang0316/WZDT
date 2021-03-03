@@ -4,15 +4,12 @@ using MHLab.Patch.Launcher.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using DG.Tweening;
-using Google.Protobuf.WellKnownTypes;
 using UnityEditor;
-using Debug = UnityEngine.Debug;
 
 public class LauncherLogin : MonoBehaviour
 {
@@ -27,6 +24,14 @@ public class LauncherLogin : MonoBehaviour
     public List<GameObject> fadeManager;
 
     public List<GameObject> fadeManagerText;
+    public string localInidex;
+    public string remoteIndex;
+
+    void Awake()
+    {
+        StartCoroutine(LoadVersionsIndex((index) => { localInidex = index; }));
+        GetVersion((str) => { remoteIndex = str; });
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -85,44 +90,36 @@ public class LauncherLogin : MonoBehaviour
             return;
         }
 
-        GetVersion((w) => { });
-
+          isend = false;
         Login(username, password, () =>
         {
-            GetVersion((w)=>{
-            });
-            //Debug.Log(TimeStamp.GetCurrentTimeStamp());
-            GetVersion((str) =>
-            {
-                
-                /*StartCoroutine(LoadVersionsIndex((index) =>
-                {
-                    if (int.Parse(str.Split('.')[0]) > int.Parse(index))
-                    {
-                        Delete();
-                    }
-                    UpdateGame();
-                }));*/
-                VerifyVersion(str);
-                SaveAccount(username, password);
+            isend = true;
 
-            }); 
+            // TODO 判断版本号
         });
+
+        StartCoroutine(CheckIsAllRight(username, password ));
     }
 
-    private void VerifyVersion(string str)
+    public bool isend;
+    public IEnumerator CheckIsAllRight(string username, string password )
     {
-        StartCoroutine(LoadVersionsIndex((index) =>
-        {
-            if (int.Parse(str.Split('.')[0]) > int.Parse(index))
-            {
-                Delete();
-            }
-            UpdateGame();
-        }));
-        //SaveAccount(username, password);
-    }
+        while (string.IsNullOrEmpty(remoteIndex) ||
+               string.IsNullOrEmpty(localInidex) || !isend)
 
+        {
+            Debug.Log("等待1"+string.IsNullOrEmpty(remoteIndex));
+            Debug.Log("等待2"+string.IsNullOrEmpty(localInidex));
+            Debug.Log("等待3"+!isend);
+            yield return null;
+        }
+        SaveAccount(username, password);
+
+        if (int.Parse(remoteIndex.Split('.')[0]) > int.Parse(localInidex))
+        {
+            StartCoroutine(Delete(() => { UpdateGame(); }));
+        }
+    }
 
     /// <summary>
     /// 登陆
@@ -188,6 +185,7 @@ public class LauncherLogin : MonoBehaviour
         StartCoroutine(HttpManager.My.HttpSend(Url.GetVersion, (www) =>
         {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
             Debug.Log(response.data);
             try
             {
@@ -195,16 +193,16 @@ public class LauncherLogin : MonoBehaviour
                 {
                     HttpManager.My.ShowTip("获取不到服务器");
                     return;
-                } 
-                    version = response.data;
-                    doEnd?.Invoke(version);
-          
+                }
+
+                version = response.data;
+                doEnd?.Invoke(version);
             }
             catch (Exception ex)
             {
                 Debug.Log(ex.Message);
             }
-        }, keyValues, HttpType.Get, 10002));
+        }, keyValues, HttpType.Post, 10002));
     }
 
 
@@ -225,11 +223,13 @@ public class LauncherLogin : MonoBehaviour
                     yield return null;
                 }
 
+                streamReader.Close();
                 string decode = Decrypt(str);
                 AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
+
                 if (!string.IsNullOrEmpty(json.name))
                 {
-                    Debug.Log(json.name+"名字"+json.password+"密码");
+                    Debug.Log(json.name + "名字" + json.password + "密码");
                     InitInput(json);
                     canLogin();
                 }
@@ -245,10 +245,16 @@ public class LauncherLogin : MonoBehaviour
         }
     }
 
-    public void Delete()
+    public IEnumerator Delete(Action doend)
     {
         string fullPath = Application.dataPath + "/Game";
-        FileUtil.DeleteFileOrDirectory(fullPath);
+        bool isend = FileUtil.DeleteFileOrDirectory(fullPath);
+        while (System.IO.Directory.Exists(Application.dataPath + "/Game"))
+        {
+            yield return null;
+        }
+
+        doend();
     }
 
     public IEnumerator LoadVersionsIndex(Action<string> doEnd)
@@ -301,6 +307,7 @@ public class LauncherLogin : MonoBehaviour
     /// </summary>
     public void SaveAccount(string name, string password)
     {
+        Debug.Log("保存");
         AccountJosn account = new AccountJosn()
         {
             name = name,
