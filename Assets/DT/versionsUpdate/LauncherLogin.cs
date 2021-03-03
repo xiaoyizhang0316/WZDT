@@ -5,8 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using DG.Tweening;
+using UnityEditor;
 
 public class LauncherLogin : MonoBehaviour
 {
@@ -16,14 +19,44 @@ public class LauncherLogin : MonoBehaviour
     public Launcher launcher;
     public Button login;
 
+    public GameObject logo;
+
+    public List<GameObject> fadeManager;
+    public List<GameObject> fadeManagerText;
     // Start is called before the first frame update
     void Start()
     {
         login.onClick.AddListener(() => { Login(); });
       LoadAccount();
+      ShowLogo();
 
     }
 
+    public void ShowLogo()
+    {
+        logo.transform.localScale = Vector3.zero;
+        logo.transform.DOScale(1, 2).SetEase(Ease.InCirc).OnComplete(() =>
+        {
+            logo.transform.DOLocalMoveX(-180, 0.8f);
+            for (int i = 0; i <  fadeManager.Count; i++)
+            {
+                fadeManager[i].GetComponent<Image>().DOFade(1, 0.8f);
+            }
+            for (int i = 2; i <  fadeManagerText.Count; i++)
+            {
+                fadeManagerText[i].GetComponent<Text>().DOFade(1, 0.8f);
+            }
+            for (int i = 0; i <  2; i++)
+            {
+                fadeManagerText[i].GetComponent<Text>().DOFade(0.4f, 0.8f);
+            }
+
+
+        });
+        
+    }
+
+    
     // Update is called once per frame
     void Update()
     {
@@ -60,6 +93,11 @@ public class LauncherLogin : MonoBehaviour
      
     }
 
+    public void Delete()
+    {
+        string fullPath = Application.dataPath + "/Game";
+        FileUtil.DeleteFileOrDirectory(fullPath);
+    }
 
     public void LoadVersionsIndex()
     {
@@ -69,7 +107,7 @@ public class LauncherLogin : MonoBehaviour
             string str = streamReader.ReadToEnd();
            
             BuildJson  json =  JsonUtility.FromJson<BuildJson>(str);
-            json.versionsIndex-
+           
         }
         catch (Exception e)
         {
