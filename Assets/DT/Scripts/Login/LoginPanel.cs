@@ -96,7 +96,7 @@ public class LoginPanel : MonoBehaviour
     
     public IEnumerator LoadAccount(Action canLogin,Action cantLogin)
     {
-        StreamReader streamReader = new StreamReader( Directory.GetParent(Application.dataPath) + "\\Account.json");
+        StreamReader streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\AssetsAccount.json");
         if (streamReader != null)
         {
             string str = streamReader.ReadToEnd();
@@ -104,6 +104,7 @@ public class LoginPanel : MonoBehaviour
             {
                 yield return null;
             }
+            streamReader.Close();
 
             string decode = CompressUtils.Decrypt(str);
             AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
@@ -142,7 +143,7 @@ public class LoginPanel : MonoBehaviour
         };
         string accoutjson = JsonUtility.ToJson(account);
         string encode = CompressUtils.Encrypt(accoutjson);
-        FileStream file = new FileStream(Directory.GetParent(Application.dataPath) + "\\Account.json", FileMode.Create);
+        FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\AssetsAccount.json", FileMode.Create);
         byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
         file.Write(bts, 0, bts.Length);
         if (file != null)
