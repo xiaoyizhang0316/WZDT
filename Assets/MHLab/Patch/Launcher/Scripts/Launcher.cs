@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.IO;
 using System.Threading.Tasks;
 using MHLab.Patch.Core.Client;
@@ -7,6 +8,7 @@ using MHLab.Patch.Core.IO;
 using MHLab.Patch.Launcher.Scripts.Localization;
 using MHLab.Patch.Launcher.Scripts.Utilities;
 using MHLab.Patch.Utilities;
+using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -69,12 +71,35 @@ namespace MHLab.Patch.Launcher.Scripts
 
             return settings;
         }
-        
+
         private void Awake()
         {
-            //Initialize(CreateSettings());
-
+            //string result = Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName + "/questions.json";
+            //Debug.Log(result);
+            //StartCoroutine(ReadJson(result));
             Data.ResetComponents();
+            //string fullPath = Application.streamingAssetsPath + "/Test";
+            //isFinish = FileUtil.DeleteFileOrDirectory(fullPath);
+            //Debug.Log(fullPath);
+        }
+
+        IEnumerator ReadJson(string path)
+        {
+            WWW www = new WWW(@"file://" + path);
+            yield return www;
+            if (www.isDone)
+            {
+                if (www.error != null)
+                {
+                    Debug.Log(www.error);
+                    yield return null;
+                }
+                else
+                {
+                    string json = www.text.ToString();
+                    Debug.Log(json);
+                }
+            }
         }
 
         /// <summary>
@@ -102,7 +127,6 @@ namespace MHLab.Patch.Launcher.Scripts
                 }
 
                 _context.Initialize();
-
                 Task.Run(CheckForUpdates);
             }
             catch (Exception ex)
@@ -222,6 +246,11 @@ namespace MHLab.Patch.Launcher.Scripts
             var filePath = PathsManager.Combine(_context.Settings.GetGamePath(), Data.GameExecutableName);
             ApplicationStarter.StartApplication(filePath, $"{_context.Settings.LaunchArgumentParameter}={_context.Settings.LaunchArgumentValue}");
             Application.Quit();
+        }
+
+        private void Update()
+        {
+
         }
     }
 }
