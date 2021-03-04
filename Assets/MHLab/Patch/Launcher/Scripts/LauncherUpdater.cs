@@ -67,7 +67,7 @@ namespace MHLab.Patch.Launcher.Scripts
         
         private void Awake()
         {
-            //Initialize(CreateSettings());
+             Initialize(CreateSettings());
 
             Data.ResetComponents();
         }
@@ -109,33 +109,33 @@ namespace MHLab.Patch.Launcher.Scripts
 
         private void Start()
         {
-            //try
-            //{
-            //    _context.Logger.Info("===> Launcher updating process STARTED! <===");
-                
-            //    if (!NetworkChecker.IsNetworkAvailable())
-            //    {
-            //        Data.Log(_context.LocalizedMessages.NotAvailableNetwork);
-            //        _context.Logger.Error(null, "Updating process FAILED! Network is not available or connectivity is low/weak... Check your connection!");
-            //        return;
-            //    }
+             try
+             {
+                 _context.Logger.Info("===> Launcher updating process STARTED! <===");
+               
+                 if (!NetworkChecker.IsNetworkAvailable())
+                 {
+                     Data.Log(_context.LocalizedMessages.NotAvailableNetwork);
+                     _context.Logger.Error(null, "Updating process FAILED! Network is not available or connectivity is low/weak... Check your connection!");
+                     return;
+                 }
 
-            //    if (!NetworkChecker.IsRemoteServiceAvailable(_context.Settings.GetRemoteBuildsIndexUrl()))
-            //    {
-            //        Data.Log(_context.LocalizedMessages.NotAvailableServers);
-            //        _context.Logger.Error(null, "Updating process FAILED! Our servers are not responding... Wait some minutes and retry!");
-            //        return;
-            //    }
+                 if (!NetworkChecker.IsRemoteServiceAvailable(_context.Settings.GetRemoteBuildsIndexUrl()))
+                 {
+                     Data.Log(_context.LocalizedMessages.NotAvailableServers);
+                     _context.Logger.Error(null, "Updating process FAILED! Our servers are not responding... Wait some minutes and retry!");
+                     return;
+                 }
 
-            //    _context.Initialize();
+                 _context.Initialize();
 
-            //    Task.Run(CheckForUpdates);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Data.Log(_context.LocalizedMessages.UpdateProcessFailed);
-            //    _context.Logger.Error(ex, "===> Launcher updating process FAILED! <===");
-            //}
+                 Task.Run(CheckForUpdates);
+             }
+             catch (Exception ex)
+             {
+                 Data.Log(_context.LocalizedMessages.UpdateProcessFailed);
+                 _context.Logger.Error(ex, "===> Launcher updating process FAILED! <===");
+             }
         }
         
         private void CheckForUpdates()
