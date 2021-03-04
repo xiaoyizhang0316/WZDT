@@ -67,7 +67,7 @@ namespace MHLab.Patch.Launcher.Scripts
         
         private void Awake()
         {
-             Initialize(CreateSettings());
+            Initialize(CreateSettings());
 
             Data.ResetComponents();
         }

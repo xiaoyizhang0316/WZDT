@@ -85,6 +85,8 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         cam = Camera.main.gameObject;//找到摄像机
     }
 
+    private List<string> fteList = new List<string>() { "FTE_0.5", "FTE_1.5", "FTE_2.5" };
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -110,7 +112,7 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         range.text = gearData.range.ToString();
         riskResistance.text = gearData.riskResistance.ToString();
         tradeCost.text = gearData.tradeCost.ToString();
-        if (StageGoal.My.currentType == GameEnum.StageType.Normal)
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name))
         {
             cost.text = (gearData.cost * 2).ToString();
         }

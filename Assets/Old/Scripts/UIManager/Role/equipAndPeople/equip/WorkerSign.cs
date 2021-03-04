@@ -73,6 +73,8 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         WorkerListManager.My._signs.Add(this);
     }
 
+    private List<string> fteList = new List<string>() { "FTE_0.5", "FTE_1.5", "FTE_2.5" };
+
     /// <summary>
     /// UI单个图标初始化
     /// </summary>
@@ -95,7 +97,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         range.text = workerData.range.ToString();
         riskResistance.text = workerData.riskResistance.ToString();
         tradeCost.text = workerData.tradeCost.ToString();
-        if (StageGoal.My.currentType == GameEnum.StageType.Normal)
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name))
         {
             cost.text = (workerData.cost * 2).ToString();
         }

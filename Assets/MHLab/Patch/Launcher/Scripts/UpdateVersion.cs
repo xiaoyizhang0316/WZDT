@@ -15,8 +15,13 @@ public class UpdateVersion : MonoBehaviour
         string accoutjson = JsonUtility.ToJson(buildJson);
          
         string encode =accoutjson;
-        FileStream file = new FileStream( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") 
-                                         + "\\Build.json", FileMode.Create);
+#if UNITY_STANDALONE_WIN
+            FileStream file = new FileStream( Directory.GetParent(Directory.GetParent(Application.dataPath)+"")
+                         + "\\Build.json", FileMode.Create);
+#elif UNITY_STANDALONE_OSX
+            FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Application.dataPath) + "")
+                                         + "/Build.json", FileMode.Create);
+#endif
         byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
         file.Write(bts, 0, bts.Length);
         if (file != null)
