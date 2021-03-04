@@ -133,9 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e0c81bd484498eaa6f04bb77af227d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RemoteUrl: http://localhost/patch
-  LauncherExecutableName: MHLab.Patch.exe
-  GameExecutableName: YourGame.exe
+  RemoteUrl: http://192.168.1.92:8003/patch
+  LauncherExecutableName: StartGame.exe
+  GameExecutableName: Bu.M.exe
   Dispatcher: {fileID: 1744635116}
   ProgressBar: {fileID: 2071246689}
   DownloadSpeed: {fileID: 2071246688}
@@ -159,7 +159,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &445368267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -461,7 +461,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1361441804
 RectTransform:
   m_ObjectHideFlags: 0
@@ -678,6 +678,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1883558647}
   - component: {fileID: 1883558648}
+  - component: {fileID: 1883558649}
   m_Layer: 0
   m_Name: LauncherUpdater
   m_TagString: Untagged
@@ -713,6 +714,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 245386805}
   SceneToLoad: 1
+--- !u!114 &1883558649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883558646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b825daffd2d18458cc0f5a56826891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1961734160
 GameObject:
   m_ObjectHideFlags: 0

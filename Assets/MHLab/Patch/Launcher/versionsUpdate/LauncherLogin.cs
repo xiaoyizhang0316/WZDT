@@ -9,7 +9,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using DG.Tweening;
-//using UnityEditor;
 
 public class LauncherLogin : MonoBehaviour
 {
@@ -27,6 +26,7 @@ public class LauncherLogin : MonoBehaviour
     public string localInidex;
     public string remoteIndex;
 
+    public bool isManualOperation;
     void Awake()
     {
         StartCoroutine(LoadVersionsIndex((index) => { localInidex = index; }));
@@ -36,7 +36,11 @@ public class LauncherLogin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        login.onClick.AddListener(() => { Login(); });
+        login.onClick.AddListener(() =>
+        {
+            Login();
+            isManualOperation = true;
+        });
         StartCoroutine(LoadAccount(() => { Login(); }, () => { ShowLogo(); }));
     }
 
@@ -77,11 +81,13 @@ public class LauncherLogin : MonoBehaviour
         }
     }
 
+    public bool isLoginFail;
     /// <summary>
     /// 点击登陆
     /// </summary>
     public void Login()
     {
+        isLoginFail = false;
         string username = username_Input.text.Replace(" ", "");
         string password = password_Input.text.Replace(" ", "");
         if (username.Equals("") || password.Equals(""))
@@ -96,6 +102,11 @@ public class LauncherLogin : MonoBehaviour
             isend = true;
 
             // TODO 判断版本号
+        }, (istrue,str) =>
+        {
+            if(!isManualOperation)
+            ShowLogo();
+            isLoginFail = true;
         });
 
         StartCoroutine(CheckIsAllRight(username, password ));
@@ -111,14 +122,49 @@ public class LauncherLogin : MonoBehaviour
             Debug.Log("等待1"+string.IsNullOrEmpty(remoteIndex));
             Debug.Log("等待2"+string.IsNullOrEmpty(localInidex));
             Debug.Log("等待3"+!isend);
+
+            if (isLoginFail)
+            {
+                isLoginFail = false;
+                yield break;
+            }
+
             yield return null;
+            
         }
         SaveAccount(username, password);
 
-        if (int.Parse(remoteIndex.Split('.')[0]) > int.Parse(localInidex))
+        if (isManualOperation)
         {
-            StartCoroutine(Delete(() => { UpdateGame(); }));
+            LoginSuccessEffect();
         }
+
+         if (int.Parse(remoteIndex.Split('.')[0]) > int.Parse(localInidex))
+         {
+             StartCoroutine(Delete(() => { UpdateGame(); }));
+         }
+    }
+
+
+    public void LoginSuccessEffect()
+    {
+    
+            logo.transform.DOLocalMoveX(0, 0.8f);
+            for (int i = 0; i < fadeManager.Count; i++)
+            {
+                fadeManager[i].GetComponent<Image>().DOFade(0, 0.8f);
+            }
+
+            for (int i = 2; i < fadeManagerText.Count; i++)
+            {
+                fadeManagerText[i].GetComponent<Text>().DOFade(0, 0.8f);
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                fadeManagerText[i].GetComponent<Text>().DOFade(0f, 0.8f);
+            }
+         
     }
 
     /// <summary>
@@ -224,7 +270,8 @@ public class LauncherLogin : MonoBehaviour
                 }
 
                 streamReader.Close();
-                string decode = Decrypt(str);
+            //    string decode = Decrypt(str);
+            string decode = str ;
                 AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
 
                 if (!string.IsNullOrEmpty(json.name))
@@ -247,8 +294,29 @@ public class LauncherLogin : MonoBehaviour
 
     public IEnumerator Delete(Action doend)
     {
-        string fullPath = Application.dataPath + "/Game";
-        //bool isend = FileUtil.DeleteFileOrDirectory(fullPath);
+        string path =Directory.GetParent(Application.dataPath) + "\\Game";
+        if (Directory.Exists(path))
+        {
+            Debug.LogError("   存在 删除文件夹 ");
+    
+            // System.IO.Directory.Delete(@updateAssets.list[0].LocalUrl);
+            try
+            {
+                var dir = new System.IO.DirectoryInfo(path);
+                dir.Attributes = dir.Attributes & ~FileAttributes.ReadOnly;
+                dir.Delete(true);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(" 文件夹存在 删除文件夹时 出现错误 " + ex.Message);
+            }
+        }
+        else
+        {
+            doend();
+            yield break;
+        }
+
         while (System.IO.Directory.Exists(Application.dataPath + "/Game"))
         {
             yield return null;
@@ -307,6 +375,8 @@ public class LauncherLogin : MonoBehaviour
     /// </summary>
     public void SaveAccount(string name, string password)
     {
+        Debug.Log( name + "名字" +  password + "密码");
+
         Debug.Log("保存");
         AccountJosn account = new AccountJosn()
         {
@@ -314,7 +384,8 @@ public class LauncherLogin : MonoBehaviour
             password = password
         };
         string accoutjson = JsonUtility.ToJson(account);
-        string encode = Encrypt(accoutjson);
+        //string encode = Encrypt(accoutjson);
+        string encode =accoutjson;
         FileStream file = new FileStream(Application.dataPath + "Account.json", FileMode.Create);
         byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
         file.Write(bts, 0, bts.Length);
