@@ -16,7 +16,7 @@ public class UpdateVersion : MonoBehaviour
          
         string encode =accoutjson;
         FileStream file = new FileStream( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") 
-                                         + "\\Build.json", FileMode.Create);
+                                         + "/Build.json", FileMode.Create);
         byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
         file.Write(bts, 0, bts.Length);
         if (file != null)
