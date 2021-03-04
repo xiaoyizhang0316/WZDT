@@ -106,7 +106,7 @@ public class LoginPanel : MonoBehaviour
             }
             streamReader.Close();
 
-            string decode = CompressUtils.Decrypt(str);
+            string decode = str; //CompressUtils.Decrypt(str);
             AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
             if (!string.IsNullOrEmpty(json.name))
             {
@@ -142,9 +142,9 @@ public class LoginPanel : MonoBehaviour
             password = password
         };
         string accoutjson = JsonUtility.ToJson(account);
-        string encode = CompressUtils.Encrypt(accoutjson);
+        //string encode = CompressUtils.Encrypt(accoutjson);
         FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_DataAccount.json", FileMode.Create);
-        byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
+        byte[] bts = System.Text.Encoding.UTF8.GetBytes(accoutjson);
         file.Write(bts, 0, bts.Length);
         if (file != null)
         {
