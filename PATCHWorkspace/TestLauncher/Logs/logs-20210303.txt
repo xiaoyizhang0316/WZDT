@@ -1,0 +1,33 @@
+2021-03-03 18:44:45.252 +08:00 [INF] Update context initializing...
+2021-03-03 18:44:45.295 +08:00 [INF] Update context points to http://localhost/patch
+2021-03-03 18:44:45.297 +08:00 [WRN] No current version found. A full repair may be required.
+2021-03-03 18:44:45.298 +08:00 [INF] Workspace cleaned. Removed 0 files
+2021-03-03 18:44:45.473 +08:00 [WRN] No patches index found.
+2021-03-03 18:44:45.482 +08:00 [WRN] No updater definition found. Problem: System.Net.WebException: The URL http://localhost/patch/Updater/updater_index.json generated an exception. ---> System.Net.WebException: Error: ConnectFailure (Connection refused) ---> System.Net.Sockets.SocketException: Connection refused
+  at System.Net.Sockets.Socket.Connect (System.Net.EndPoint remoteEP) [0x000b6] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
+  at System.Net.WebConnection.Connect (System.Net.HttpWebRequest request) [0x0016d] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
+   --- End of inner exception stack trace ---
+  at System.Net.WebClient.DownloadDataInternal (System.Uri address, System.Net.WebRequest& request) [0x00072] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
+  at System.Net.WebClient.DownloadData (System.Uri address) [0x00020] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
+  at System.Net.WebClient.DownloadData (System.String address) [0x00016] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
+  at (wrapper remoting-invoke-with-check) System.Net.WebClient.DownloadData(string)
+  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadString (System.String url) [0x0001c] in <cd81bc4744f84919a2094763251aeb70>:0 
+   --- End of inner exception stack trace ---
+  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadString (System.String url) [0x00042] in <cd81bc4744f84919a2094763251aeb70>:0 
+  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadJson[T] (System.String url) [0x00000] in <cd81bc4744f84919a2094763251aeb70>:0 
+  at MHLab.Patch.Core.Client.UpdatingContext.<GetUpdaterDefinition>b__58_0 () [0x0000c] in <cd81bc4744f84919a2094763251aeb70>:0 
+2021-03-03 18:44:45.482 +08:00 [WRN] No builds index found. Problem: System.Net.WebException: The URL http://localhost/patch/Builds/builds_index.json generated an exception. ---> System.Net.WebException: Error: ConnectFailure (Connection refused) ---> System.Net.Sockets.SocketException: Connection refused
+  at System.Net.Sockets.Socket.Connect (System.Net.EndPoint remoteEP) [0x000b6] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
+  at System.Net.WebConnection.Connect (System.Net.HttpWebRequest request) [0x0016d] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
+   --- End of inner exception stack trace ---
+  at System.Net.WebClient.DownloadDataInternal (System.Uri address, System.Net.WebRequest& request) [0x00072] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
+  at System.Net.WebClient.DownloadData (System.Uri address) [0x00020] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
+  at System.Net.WebClient.DownloadData (System.String address) [0x00016] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
+  at (wrapper remoting-invoke-with-check) System.Net.WebClient.DownloadData(string)
+  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadString (System.String url) [0x0001c] in <cd81bc4744f84919a2094763251aeb70>:0 
+   --- End of inner exception stack trace ---
+  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadString (System.String url) [0x00042] in <cd81bc4744f84919a2094763251aeb70>:0 
+  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadJson[T] (System.String url) [0x00000] in <cd81bc4744f84919a2094763251aeb70>:0 
+  at MHLab.Patch.Core.Client.UpdatingContext.<GetBuildsIndex>b__59_0 () [0x0000c] in <cd81bc4744f84919a2094763251aeb70>:0 
+2021-03-03 18:44:45.484 +08:00 [ERR] Cannot retrieve any new version...
+2021-03-03 18:44:45.485 +08:00 [INF] Collected 1 local files.
