@@ -9,7 +9,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using DG.Tweening;
-using UnityEditor;
+//using UnityEditor;
 
 public class LauncherLogin : MonoBehaviour
 {
@@ -248,7 +248,7 @@ public class LauncherLogin : MonoBehaviour
     public IEnumerator Delete(Action doend)
     {
         string fullPath = Application.dataPath + "/Game";
-        bool isend = FileUtil.DeleteFileOrDirectory(fullPath);
+        //bool isend = FileUtil.DeleteFileOrDirectory(fullPath);
         while (System.IO.Directory.Exists(Application.dataPath + "/Game"))
         {
             yield return null;
