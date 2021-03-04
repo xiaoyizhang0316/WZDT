@@ -235,6 +235,7 @@ namespace MHLab.Patch.Launcher.Scripts
                 PrivilegesSetter.EnsureExecutePrivileges(filePath);
             }
             catch (Exception ex)
+            
             {
                 _context.Logger.Error(ex, "Unable to set executing privileges on {FilePath}.", filePath);
             }

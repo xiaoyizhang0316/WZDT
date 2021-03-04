@@ -1,33 +1,67 @@
-2021-03-03 18:44:45.252 +08:00 [INF] Update context initializing...
-2021-03-03 18:44:45.295 +08:00 [INF] Update context points to http://localhost/patch
-2021-03-03 18:44:45.297 +08:00 [WRN] No current version found. A full repair may be required.
-2021-03-03 18:44:45.298 +08:00 [INF] Workspace cleaned. Removed 0 files
-2021-03-03 18:44:45.473 +08:00 [WRN] No patches index found.
-2021-03-03 18:44:45.482 +08:00 [WRN] No updater definition found. Problem: System.Net.WebException: The URL http://localhost/patch/Updater/updater_index.json generated an exception. ---> System.Net.WebException: Error: ConnectFailure (Connection refused) ---> System.Net.Sockets.SocketException: Connection refused
-  at System.Net.Sockets.Socket.Connect (System.Net.EndPoint remoteEP) [0x000b6] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
-  at System.Net.WebConnection.Connect (System.Net.HttpWebRequest request) [0x0016d] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
-   --- End of inner exception stack trace ---
-  at System.Net.WebClient.DownloadDataInternal (System.Uri address, System.Net.WebRequest& request) [0x00072] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
-  at System.Net.WebClient.DownloadData (System.Uri address) [0x00020] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
-  at System.Net.WebClient.DownloadData (System.String address) [0x00016] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
-  at (wrapper remoting-invoke-with-check) System.Net.WebClient.DownloadData(string)
-  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadString (System.String url) [0x0001c] in <cd81bc4744f84919a2094763251aeb70>:0 
-   --- End of inner exception stack trace ---
-  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadString (System.String url) [0x00042] in <cd81bc4744f84919a2094763251aeb70>:0 
-  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadJson[T] (System.String url) [0x00000] in <cd81bc4744f84919a2094763251aeb70>:0 
-  at MHLab.Patch.Core.Client.UpdatingContext.<GetUpdaterDefinition>b__58_0 () [0x0000c] in <cd81bc4744f84919a2094763251aeb70>:0 
-2021-03-03 18:44:45.482 +08:00 [WRN] No builds index found. Problem: System.Net.WebException: The URL http://localhost/patch/Builds/builds_index.json generated an exception. ---> System.Net.WebException: Error: ConnectFailure (Connection refused) ---> System.Net.Sockets.SocketException: Connection refused
-  at System.Net.Sockets.Socket.Connect (System.Net.EndPoint remoteEP) [0x000b6] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
-  at System.Net.WebConnection.Connect (System.Net.HttpWebRequest request) [0x0016d] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
-   --- End of inner exception stack trace ---
-  at System.Net.WebClient.DownloadDataInternal (System.Uri address, System.Net.WebRequest& request) [0x00072] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
-  at System.Net.WebClient.DownloadData (System.Uri address) [0x00020] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
-  at System.Net.WebClient.DownloadData (System.String address) [0x00016] in <ae22a4e8f83c41d69684ae7f557133d9>:0 
-  at (wrapper remoting-invoke-with-check) System.Net.WebClient.DownloadData(string)
-  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadString (System.String url) [0x0001c] in <cd81bc4744f84919a2094763251aeb70>:0 
-   --- End of inner exception stack trace ---
-  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadString (System.String url) [0x00042] in <cd81bc4744f84919a2094763251aeb70>:0 
-  at MHLab.Patch.Core.Client.IO.DownloadsManager.DownloadJson[T] (System.String url) [0x00000] in <cd81bc4744f84919a2094763251aeb70>:0 
-  at MHLab.Patch.Core.Client.UpdatingContext.<GetBuildsIndex>b__59_0 () [0x0000c] in <cd81bc4744f84919a2094763251aeb70>:0 
-2021-03-03 18:44:45.484 +08:00 [ERR] Cannot retrieve any new version...
-2021-03-03 18:44:45.485 +08:00 [INF] Collected 1 local files.
+2021-03-03 17:15:15.144 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:15:19.394 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:22:16.293 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:22:20.470 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:24:23.942 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:24:28.140 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:34:26.795 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:34:30.961 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:34:44.693 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:34:48.855 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:34:54.476 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:34:58.640 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:35:08.045 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:35:12.207 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:37:37.275 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:37:41.446 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+<<<<<<< HEAD
+2021-03-03 17:45:05.903 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:45:10.164 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:45:46.896 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:45:51.112 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:46:28.460 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:46:32.659 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:48:29.714 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:48:33.884 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:49:32.154 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:49:36.332 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:50:19.416 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:50:23.587 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:52:48.739 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:52:52.899 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:54:09.808 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:54:13.983 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 17:55:32.701 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:55:36.927 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 18:00:08.313 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 18:00:12.490 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 18:02:40.247 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 18:02:44.443 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 18:08:30.022 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 18:08:34.203 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 18:12:36.448 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 18:12:40.609 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+=======
+2021-03-03 17:41:24.341 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 17:41:28.531 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 18:33:55.297 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 18:33:59.459 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 18:38:26.758 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 18:38:30.938 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 18:48:06.975 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 18:48:11.160 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 18:50:00.453 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 18:50:04.621 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 18:55:57.416 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 18:56:01.592 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 18:56:08.482 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 18:56:12.648 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+>>>>>>> 79a75704bbc0f341c9b1cd6706e2d87d2642a939
+2021-03-03 19:01:46.859 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 19:01:51.044 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 19:02:00.117 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 19:02:04.285 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 19:05:42.034 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 19:05:46.237 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!
+2021-03-03 19:06:14.263 +08:00 [INF] ===> Launcher updating process STARTED! <===
+2021-03-03 19:06:18.503 +08:00 [ERR] Updating process FAILED! Our servers are not responding... Wait some minutes and retry!

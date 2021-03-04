@@ -5,8 +5,8 @@ using UnityEngine;
 public static class Url
 {
     //private static string remote = "39.106.226.52";
-    private static string local = "127.0.0.1";
-    private static string ipAddr = "39.106.226.52";
+    private static string local = "192.168.1.92";
+    private static string ipAddr = "192.168.1.92";
     //private static string ipAddr = "127.0.0.1";
     private static string port = "8080";
     //private static string ip = "http://39.106.226.52:8080/";
@@ -92,6 +92,12 @@ public static class Url
     private static string testGet = "testGet";
     #endregion
 
+    #region version update
+    
+    private static string getVersion = "getLatestVersion";
+
+    #endregion
+
     public static string PingIp { get => ip+pingIp; }
     public static string LoginUrl { get => ip + loginUrl;  }
     public static string ReConnUrl { get => ip + reConnUrl;  }
@@ -140,6 +146,9 @@ public static class Url
     public static string NewReConnUrl { get => ip+newReConnUrl; }
     public static string GetGroupScoreStatus { get => ip+getGroupScoreStatus; }
     public static string UpdatePlayerFTE { get => ip+updatePlayerFTE; }
+    public static string GetVersion { get => ip+getVersion; }
+    
+    
 
     public static void SetIp(string newIp)
     {
