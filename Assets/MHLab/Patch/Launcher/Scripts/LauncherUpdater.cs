@@ -128,7 +128,7 @@ namespace MHLab.Patch.Launcher.Scripts
 
                     Data.ResetComponents();
 
-                    ApplicationStarter.StartApplication(Path.Combine(_context.Settings.RootPath, Data.LauncherExecutableName), "");
+                    //ApplicationStarter.StartApplication(Path.Combine(_context.Settings.RootPath, Data.LauncherExecutableName), "");
 
                     Data.Dispatcher.Invoke(Application.Quit);
                 }

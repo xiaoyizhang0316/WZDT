@@ -27,7 +27,11 @@ public class ToScene : MonoBehaviour
 
     public IEnumerator Delete(Action doend)
     {
+#if UNITY_STANDALONE_OSX
         string path = Directory.GetParent( Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json";
+#elif UNITY_STANDALONE_WIN
+        string path = Directory.GetParent( Directory.GetParent(Application.dataPath).FullName) + "\\Account.json";
+#endif
         if (File.Exists(path))
         {
             Debug.LogError("   存在 删除文件 ");
