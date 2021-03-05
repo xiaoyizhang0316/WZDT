@@ -81,15 +81,16 @@ public class LoginPanel : MonoBehaviour
         PlayerPrefs.SetInt("SoundEffectVolume",-80);
         StartCoroutine(PeopleEffect());
         //PlayerPrefs.DeleteAll();
-        login_Btn.onClick.AddListener(Login);
-        transform.localPosition = new Vector3(0, 500, 0);
-        transform.DOLocalMoveY(-35f, 0.8f).Play();
+        
         StartCoroutine(LoadAccount(() =>
         {
             login_Btn.interactable = false;
             Login();
         }, () =>
         {
+            login_Btn.onClick.AddListener(Login);
+            transform.localPosition = new Vector3(0, 500, 0);
+            transform.DOLocalMoveY(-35f, 0.8f).Play();
             login_Btn.interactable = true;
         }));
         HideGame();
