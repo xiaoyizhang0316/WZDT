@@ -93,7 +93,7 @@ public class LoginPanel : MonoBehaviour
             transform.DOLocalMoveY(-35f, 0.8f).Play();
             login_Btn.interactable = true;
         }));
-        HideGame();
+        //HideGame();
     }
     
     public IEnumerator LoadAccount(Action canLogin,Action cantLogin)
@@ -165,8 +165,8 @@ public class LoginPanel : MonoBehaviour
 
         byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
         file.Write(bts, 0, bts.Length);
-        FileAttributes attributes = File.GetAttributes(path);
-        File.SetAttributes(path,attributes| FileAttributes.Hidden);
+        /*FileAttributes attributes = File.GetAttributes(path);
+        File.SetAttributes(path,attributes| FileAttributes.Hidden);*/
         if (file != null)
         {
             file.Close();
