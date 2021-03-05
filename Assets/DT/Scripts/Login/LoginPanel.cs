@@ -81,15 +81,14 @@ public class LoginPanel : MonoBehaviour
         PlayerPrefs.SetInt("SoundEffectVolume",-80);
         StartCoroutine(PeopleEffect());
         //PlayerPrefs.DeleteAll();
-        
+        login_Btn.onClick.AddListener(Login);
+        transform.localPosition = new Vector3(0, 900, 0);
         StartCoroutine(LoadAccount(() =>
         {
             login_Btn.interactable = false;
             Login();
         }, () =>
         {
-            login_Btn.onClick.AddListener(Login);
-            transform.localPosition = new Vector3(0, 500, 0);
             transform.DOLocalMoveY(-35f, 0.8f).Play();
             login_Btn.interactable = true;
         }));
@@ -98,11 +97,23 @@ public class LoginPanel : MonoBehaviour
     
     public IEnumerator LoadAccount(Action canLogin,Action cantLogin)
     {
+        StreamReader streamReader = null;
+        try
+        {
 #if UNITY_STANDALONE_WIN
-            StreamReader streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json");
+            streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json");
 #elif UNITY_STANDALONE_OSX
-        StreamReader streamReader = new StreamReader(Directory.GetParent( Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json");
+            streamReader = new StreamReader(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json");
 #endif
+
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message);
+            cantLogin();
+            yield break;
+        }
+
         //StreamReader streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json");
         if (streamReader != null)
         {
