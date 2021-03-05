@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using MHLab.Patch.Core.Client;
@@ -40,8 +41,20 @@ namespace MHLab.Patch.Launcher.Scripts
             };
         }
 
+        private string remoteURL;
+
         private LauncherSettings CreateSettings()
         {
+            //Data.RemoteUrl = ;
+#if UNITY_STANDALONE_OSX
+            Data.GameExecutableName = "Bu.M.app";
+            Data.LauncherExecutableName = "StartGame.app";
+            Data.RemoteUrl = remoteURL + "macpatch";
+#elif UNITY_STANDALONE_WIN
+            Data.GameExecutableName = "Bu.M.exe";
+            Data.LauncherExecutableName = "StartGame.exe";
+            Data.RemoteUrl = remoteURL + "patch";
+#endif
             var settings = new LauncherSettings();
             settings.RemoteUrl = Data.RemoteUrl;
             settings.PatchDownloadAttempts = 3;
@@ -67,9 +80,55 @@ namespace MHLab.Patch.Launcher.Scripts
         
         private void Awake()
         {
-            Initialize(CreateSettings());
+            GetVersion((url)=> {
+                if (!url.Equals(""))
+                {
+                    remoteURL = url;
 
-            Data.ResetComponents();
+                    Initialize(CreateSettings());
+
+                    Data.ResetComponents();
+                }
+                else
+                {
+                    ApplicationStarter.StartApplication(Path.Combine(_context.Settings.RootPath, Data.LauncherExecutableName), "");
+
+                    Data.Dispatcher.Invoke(Application.Quit);
+                }
+            });
+
+
+        }
+
+        /// <summary>
+        /// 获取版本号
+        /// </summary>
+        /// <param name="doEnd"></param>
+        void GetVersion(Action<string> doEnd)
+        {
+            SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+
+            StartCoroutine(HttpManager.My.HttpSend(Url.GetVersion, (www) =>
+            {
+                HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+
+                Debug.Log(response.data);
+                try
+                {
+                    if (String.IsNullOrEmpty(response.data))
+                    {
+                        HttpManager.My.ShowTip("获取不到服务器");
+                        return;
+                    }
+
+                    string url = response.data;
+                    doEnd?.Invoke(url.Split(',')[1]);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex.Message);
+                }
+            }, keyValues, HttpType.Post, 10002));
         }
 
         /// <summary>
