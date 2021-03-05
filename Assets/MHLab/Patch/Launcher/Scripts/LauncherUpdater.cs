@@ -274,12 +274,11 @@ namespace MHLab.Patch.Launcher.Scripts
         {
             Data.Log(_context.LocalizedMessages.UpdateRestartNeeded);
             _context.Logger.Info("===> Launcher updating process INCOMPLETE: restart is needed! <===");
-            
             EnsureExecutePrivileges(PathsManager.Combine(_context.Settings.RootPath, Data.LauncherExecutableName));
             
             ApplicationStarter.StartApplication(Path.Combine(_context.Settings.RootPath, Data.LauncherExecutableName), "");
             
-            //Data.Dispatcher.Invoke(Application.Quit);
+            Data.Dispatcher.Invoke(Application.Quit);
         }
         
         private void EnsureExecutePrivileges(string filePath)
