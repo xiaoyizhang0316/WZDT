@@ -81,17 +81,19 @@ public class LoginPanel : MonoBehaviour
         PlayerPrefs.SetInt("SoundEffectVolume",-80);
         StartCoroutine(PeopleEffect());
         //PlayerPrefs.DeleteAll();
-        login_Btn.onClick.AddListener(Login);
-        transform.localPosition = new Vector3(0, 500, 0);
-        transform.DOLocalMoveY(-35f, 0.8f).Play();
+        
         StartCoroutine(LoadAccount(() =>
         {
             login_Btn.interactable = false;
             Login();
         }, () =>
         {
+            login_Btn.onClick.AddListener(Login);
+            transform.localPosition = new Vector3(0, 500, 0);
+            transform.DOLocalMoveY(-35f, 0.8f).Play();
             login_Btn.interactable = true;
         }));
+        HideGame();
     }
     
     public IEnumerator LoadAccount(Action canLogin,Action cantLogin)
@@ -111,7 +113,7 @@ public class LoginPanel : MonoBehaviour
             }
             streamReader.Close();
 
-            string decode = str; //CompressUtils.Decrypt(str);
+            string decode = CompressUtils.Decrypt(str);
             AccountJosn json = JsonUtility.FromJson<AccountJosn>(decode);
             if (!string.IsNullOrEmpty(json.name))
             {
@@ -147,22 +149,45 @@ public class LoginPanel : MonoBehaviour
             password = password
         };
         string accoutjson = JsonUtility.ToJson(account);
-        //string encode = CompressUtils.Encrypt(accoutjson);
+        string encode = CompressUtils.Encrypt(accoutjson);
+        string path = "";
 #if UNITY_STANDALONE_WIN
+        path = Directory.GetParent(Directory.GetParent(Application.dataPath).FullName) + "\\StartGame_Data\\Account.json";
+#elif UNITY_STANDALONE_OSX
+        path = Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json";
+#endif
+/*#if UNITY_STANDALONE_WIN
         FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json", FileMode.Create);
 #elif UNITY_STANDALONE_OSX
         FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json", FileMode.Create);
-#endif
-        //FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json", FileMode.Create);
+#endif*/
+        FileStream file = new FileStream(path, FileMode.Create);
 
-        byte[] bts = System.Text.Encoding.UTF8.GetBytes(accoutjson);
+        byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
         file.Write(bts, 0, bts.Length);
+        FileAttributes attributes = File.GetAttributes(path);
+        File.SetAttributes(path,attributes| FileAttributes.Hidden);
         if (file != null)
         {
             file.Close();
         }
 
         ///保存账号密码
+    }
+
+    void HideGame()
+    {
+        #if UNITY_STANDALONE_WIN
+        string path = Directory.GetParent(Directory.GetParent(Application.dataPath).FullName) + "\\Game";
+        #elif UNITY_STANDALONE_OSX
+        string path = Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Game";
+#endif
+        if (Directory.Exists(path))
+        {
+            Debug.Log("Hide Game Folder");
+            FileAttributes attributes = File.GetAttributes(path);
+            File.SetAttributes(path, attributes | FileAttributes.Hidden);
+        }
     }
 
     void OldInit()
