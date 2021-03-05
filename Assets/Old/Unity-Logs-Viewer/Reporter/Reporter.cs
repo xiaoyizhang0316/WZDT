@@ -1616,7 +1616,7 @@ public class Reporter : MonoBehaviour
 				gestureCount = 0;
 			}
 			else {
-				if (Input.GetMouseButton(0)) {
+				if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.UpArrow)) {
 					Vector2 p = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 					if (gestureDetector.Count == 0 || (p - gestureDetector[gestureDetector.Count - 1]).magnitude > 10)
 						gestureDetector.Add(p);
