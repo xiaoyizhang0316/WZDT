@@ -30,7 +30,7 @@ public class ToScene : MonoBehaviour
 #if UNITY_STANDALONE_OSX
         string path = Directory.GetParent( Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json";
 #elif UNITY_STANDALONE_WIN
-        string path = Directory.GetParent( Directory.GetParent(Application.dataPath).FullName) + "\\Account.json";
+        string path = Directory.GetParent( Directory.GetParent(Application.dataPath).FullName) + "\\StartGame_Data\\Account.json";
 #endif
         if (File.Exists(path))
         {
