@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using System.IO;
-using System.IO.Compression;
+//using System.IO.Compression;
+using Unity.IO.Compression;
 using System;
 using System.Security.Cryptography;
 
@@ -65,6 +66,7 @@ public static class CompressUtils
         {
             byte[] strByte = Convert.FromBase64String(str);
             return Encoding.UTF8.GetString(Uncompress(strByte));
+            //return Encoding.GetEncoding("GB2312").GetString();
         }
     }
 

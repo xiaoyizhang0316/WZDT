@@ -96,7 +96,12 @@ public class LoginPanel : MonoBehaviour
     
     public IEnumerator LoadAccount(Action canLogin,Action cantLogin)
     {
-        StreamReader streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json");
+#if UNITY_STANDALONE_WIN
+            StreamReader streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json");
+#elif UNITY_STANDALONE_OSX
+        StreamReader streamReader = new StreamReader(Directory.GetParent( Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json");
+#endif
+        //StreamReader streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json");
         if (streamReader != null)
         {
             string str = streamReader.ReadToEnd();
@@ -143,7 +148,13 @@ public class LoginPanel : MonoBehaviour
         };
         string accoutjson = JsonUtility.ToJson(account);
         //string encode = CompressUtils.Encrypt(accoutjson);
+#if UNITY_STANDALONE_WIN
         FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json", FileMode.Create);
+#elif UNITY_STANDALONE_OSX
+        FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json", FileMode.Create);
+#endif
+        //FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json", FileMode.Create);
+
         byte[] bts = System.Text.Encoding.UTF8.GetBytes(accoutjson);
         file.Write(bts, 0, bts.Length);
         if (file != null)
