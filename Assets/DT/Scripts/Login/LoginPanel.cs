@@ -99,7 +99,7 @@ public class LoginPanel : MonoBehaviour
 #if UNITY_STANDALONE_WIN
             StreamReader streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json");
 #elif UNITY_STANDALONE_OSX
-        StreamReader streamReader = new StreamReader(Directory.GetParent(Directory.GetParent(Application.dataPath) + "") + "/StartGame_Data/Account.json");
+        StreamReader streamReader = new StreamReader(Directory.GetParent( Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json");
 #endif
         //StreamReader streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json");
         if (streamReader != null)
@@ -151,7 +151,7 @@ public class LoginPanel : MonoBehaviour
 #if UNITY_STANDALONE_WIN
         FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json", FileMode.Create);
 #elif UNITY_STANDALONE_OSX
-        FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "/StartGame_Data/Account.json", FileMode.Create);
+        FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json", FileMode.Create);
 #endif
         //FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json", FileMode.Create);
 
