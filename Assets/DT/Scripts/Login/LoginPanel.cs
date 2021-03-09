@@ -101,7 +101,7 @@ public class LoginPanel : MonoBehaviour
         try
         {
 #if UNITY_STANDALONE_WIN
-            streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json");
+            streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\Bu.M_Data\\Account.json");
 #elif UNITY_STANDALONE_OSX
             streamReader = new StreamReader(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json");
 #endif
@@ -163,7 +163,7 @@ public class LoginPanel : MonoBehaviour
         string encode = CompressUtils.Encrypt(accoutjson);
         string path = "";
 #if UNITY_STANDALONE_WIN
-        path = Directory.GetParent(Directory.GetParent(Application.dataPath).FullName) + "\\StartGame_Data\\Account.json";
+        path = Directory.GetParent(Directory.GetParent(Application.dataPath).FullName) + "\\Bu.M_Data\\Account.json";
 #elif UNITY_STANDALONE_OSX
         path = Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Account.json";
 #endif
