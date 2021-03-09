@@ -10,11 +10,13 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
     public bool useNetWork = false;
     public string sceneName = "FTE_1";
     public bool showFPS = false;
-    public bool useLocalIp = false;
+    //public bool useLocalIp = false;
 
     public bool useLocalJson = false;
 
     public static int mainThreadId;
+
+    //public string localIP = "";
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -34,12 +36,12 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         //       }
         //   }
         
-        Debug.Log(SystemInfo.deviceUniqueIdentifier);
+        //Debug.Log(SystemInfo.deviceUniqueIdentifier);
         mainThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
-        foreach (string str in "sdasdsads*".Split('*'))
+        /*foreach (string str in "sdasdsads*".Split('*'))
         {
             Debug.Log("字符: " +str);
-        }
+        }*/
         if (useNetWork)
         {
             NetworkMgr.My.isUsingHttp = true;
@@ -61,10 +63,10 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
             NetworkMgr.My.isShowFPS = true;
         }
 
-        if (useLocalIp)
+        /*if (useLocalIp)
         {
             Url.SetIp(useLocalIp);
-        }
+        }*/
 
         if (useLocalJson)
         {

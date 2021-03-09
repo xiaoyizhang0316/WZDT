@@ -77,12 +77,21 @@ namespace MHLab.Patch.Launcher.Scripts
 
             return settings;
         }
-        
+
+        public bool useTestIp = false;
+        public string testIp = "192.168.92";
         private void Awake()
         {
             //Initialize(CreateSettings());
 
             //Data.ResetComponents();
+            if (useTestIp)
+            {
+                if (!String.IsNullOrEmpty(testIp))
+                {
+                    Url.SetIp(testIp);
+                }
+            }
 
 
             GetVersion((url)=> {
