@@ -47,12 +47,12 @@ namespace MHLab.Patch.Launcher.Scripts
         {
             //Data.RemoteUrl = ;
 #if UNITY_STANDALONE_OSX
-            Data.GameExecutableName = "Bu.M.app";
-            Data.LauncherExecutableName = "StartGame.app";
+            Data.GameExecutableName = "BuM.app";
+            Data.LauncherExecutableName = "Bu.M.app";
             Data.RemoteUrl = remoteURL + "macpatch";
 #elif UNITY_STANDALONE_WIN
-            Data.GameExecutableName = "Bu.M.exe";
-            Data.LauncherExecutableName = "StartGame.exe";
+            Data.GameExecutableName = "BuM.exe";
+            Data.LauncherExecutableName = "Bu.M.exe";
             Data.RemoteUrl = remoteURL + "patch";
 #endif
             var settings = new LauncherSettings();
@@ -274,12 +274,12 @@ namespace MHLab.Patch.Launcher.Scripts
         {
             Data.Log(_context.LocalizedMessages.UpdateRestartNeeded);
             _context.Logger.Info("===> Launcher updating process INCOMPLETE: restart is needed! <===");
-            
             EnsureExecutePrivileges(PathsManager.Combine(_context.Settings.RootPath, Data.LauncherExecutableName));
             
             ApplicationStarter.StartApplication(Path.Combine(_context.Settings.RootPath, Data.LauncherExecutableName), "");
-            
-           Data.Dispatcher.Invoke(Application.Quit);
+
+            Data.Dispatcher.Invoke(Application.Quit);
+
         }
         
         private void EnsureExecutePrivileges(string filePath)
