@@ -56,7 +56,6 @@ public class OutlineSystem : MonoBehaviour
             mainCamera = Camera.main;
         }
         UpdateRenderTextureSizes();
-        NewCanvasUI.My.highLight.Add(gameObject);
     }
     
 
