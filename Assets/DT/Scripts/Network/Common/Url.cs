@@ -6,10 +6,10 @@ public static class Url
 {
     //private static string remote = "39.106.226.52";
     private static string local = "192.168.1.92";
-    private static string ipAddr = "192.168.1.92";
+    private static string ipAddr = "39.106.226.52";
     //private static string ipAddr = "127.0.0.1";
     private static string port = "8080";
-    //private static string ip = "http://39.106.226.52:8080/";
+    //private static string ip = "39.106.226.52";
     private static string ip = "http://"+ipAddr+":"+port+"/";
 
     #region ping
