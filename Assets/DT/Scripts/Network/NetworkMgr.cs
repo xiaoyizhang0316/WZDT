@@ -1345,6 +1345,39 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }
         return null;
     }
+
+    public void AddTeachLevel(int useTime, string levelName, int isPass, Action doSuccess=null, Action doFail=null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("playerName", playerDatas.playerName);
+        keyValues.Add("levelName", levelName);
+        keyValues.Add("useTime", useTime.ToString());
+        keyValues.Add("isPass", isPass.ToString());
+        keyValues.Add("groupID", groupID.ToString());
+        
+        StartCoroutine(HttpManager.My.HttpSend(Url.AddTeachLevel, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 1)
+            {
+                Debug.Log("上传完成");
+                doSuccess?.Invoke();
+            }
+            else
+            {
+                Debug.Log("上传失败");
+                doFail?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.AddTeachLevel));
+    
+    }
     #endregion
 
     #region match

@@ -10,13 +10,13 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
     public bool useNetWork = false;
     public string sceneName = "FTE_1";
     public bool showFPS = false;
-    //public bool useLocalIp = false;
+    public bool useLocalIp = false;
 
     public bool useLocalJson = false;
 
     public static int mainThreadId;
 
-    //public string localIP = "";
+    public string localIP = "";
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -63,10 +63,10 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
             NetworkMgr.My.isShowFPS = true;
         }
 
-        /*if (useLocalIp)
+        if (useLocalIp)
         {
             Url.SetIp(useLocalIp);
-        }*/
+        }
 
         if (useLocalJson)
         {

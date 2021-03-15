@@ -67,4 +67,5 @@ public static class HttpId
     public const int GetGroupPlayerScore        = 1032;
     public const int GetGroupScoreStatus        = 1033;
     public const int UpdatePlayerFTE            = 1034;
+    public const int AddTeachLevel              = 1035;
 }

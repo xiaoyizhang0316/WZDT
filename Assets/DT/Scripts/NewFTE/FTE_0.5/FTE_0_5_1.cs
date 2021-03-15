@@ -49,6 +49,7 @@ public class FTE_0_5_1 : BaseGuideStep
          PlayerData.My.Reset();
             info.SetActive(true);
             yield return new WaitForSeconds(2f);
+            NetworkMgr.My.AddTeachLevel(TimeStamp.GetCurrentTimeStamp()-StageGoal.My.startTime, SceneManager.GetActiveScene().name, 1);
 
            NetworkMgr.My.UpdatePlayerFTE(0.5.ToString(), () => { SceneManager.LoadScene("Map"); });
         }

@@ -59,6 +59,7 @@ public static class Url
     private static string getPlayerGroupRanking = "getPlayerGroupRanking";
     private static string getPlayerGlobalRanking = "getPlayerGlobalRanking";
     private static string getBehaviorDatas = "getBehaviorDatas";
+    private static string addTeachLevel = "addTeachLevel";
     #endregion
 
     #region equip
@@ -147,6 +148,7 @@ public static class Url
     public static string GetGroupScoreStatus { get => ip+getGroupScoreStatus; }
     public static string UpdatePlayerFTE { get => ip+updatePlayerFTE; }
     public static string GetVersion { get => ip+getVersion; }
+    public static string AddTeachLevel { get => ip+addTeachLevel; }
     
     
 
