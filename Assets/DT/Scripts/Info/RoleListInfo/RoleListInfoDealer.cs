@@ -125,7 +125,7 @@ public class RoleListInfoDealer : BaseRoleListInfo
             }
             else
             {
-                Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+                Pruductgame.GetComponentInChildren<Image>().gameObject.SetActive(false);
             }
         }
     
