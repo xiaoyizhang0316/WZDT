@@ -5,7 +5,7 @@ using System.IO;
 
 public class SaveLoadMenu : MonoBehaviour {
 
-	const int mapFileVersion = 3;
+	const int mapFileVersion = 5;
 
 	public Text menuLabel, actionButtonLabel;
 
@@ -74,7 +74,7 @@ public class SaveLoadMenu : MonoBehaviour {
 			Destroy(listContent.GetChild(i).gameObject);
 		}
 		string[] paths =
-			Directory.GetFiles(Application.persistentDataPath, "*.map");
+			Directory.GetFiles(Application.streamingAssetsPath, "*.map");
 		Array.Sort(paths);
 		for (int i = 0; i < paths.Length; i++) {
 			SaveLoadItem item = Instantiate(itemPrefab);
@@ -89,7 +89,7 @@ public class SaveLoadMenu : MonoBehaviour {
 		if (mapName.Length == 0) {
 			return null;
 		}
-		return Path.Combine(Application.persistentDataPath, mapName + ".map");
+		return Path.Combine(Application.streamingAssetsPath, mapName + ".map");
 	}
 
 	void Save (string path) {
@@ -102,7 +102,7 @@ public class SaveLoadMenu : MonoBehaviour {
 		}
 	}
 
-	void Load (string path) {
+	public void Load (string path) {
 		if (!File.Exists(path)) {
 			Debug.LogError("File does not exist " + path);
 			return;

@@ -19,7 +19,7 @@ public class MapManager : MonoSingleton<MapManager>
     private Vector3 high = new Vector3(0f, 0.6f, 0f);
 
     public bool generatePath;
-
+    public SaveLoadMenu SaveLoadMenu;
     public GameObject skillOneEffect;
     public GameObject skillTwoEffect;
     public GameObject skillThreeEffect;
@@ -30,7 +30,11 @@ public class MapManager : MonoSingleton<MapManager>
         //Invoke("CheckDuplicateID", 1f);
         //Invoke("CheckGrassAvailable", 1f);
         //Invoke("TestMethod", 1f);
+        Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
+        SaveLoadMenu.Load(Application.streamingAssetsPath+"/FTE_1.map");
+        
         InitStageNPCData();
+      
     }
 
 

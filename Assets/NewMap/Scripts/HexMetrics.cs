@@ -5,9 +5,11 @@ public static class HexMetrics {
 	public const float outerToInner = 0.866025404f;
 	public const float innerToOuter = 1f / outerToInner;
 
-	public const float outerRadius = 10f;
+	public const float outerRadius = 10/8f;
 
 	public const float innerRadius = outerRadius * outerToInner;
+
+	public const float innerDiameter = innerRadius * 2f;
 
 	public const float solidFactor = 0.8f;
 
@@ -17,7 +19,7 @@ public static class HexMetrics {
 
 	public const float waterBlendFactor = 1f - waterFactor;
 
-	public const float elevationStep = 3f;
+	public const float elevationStep = 0.5f;
 
 	public const int terracesPerSlope = 2;
 
@@ -27,9 +29,9 @@ public static class HexMetrics {
 
 	public const float verticalTerraceStepSize = 1f / (terracesPerSlope + 1);
 
-	public const float cellPerturbStrength = 4f;
+	public const float cellPerturbStrength = 1f;
 
-	public const float elevationPerturbStrength = 1.5f;
+	public const float elevationPerturbStrength = 0f;
 
 	public const float streamBedElevationOffset = -1.75f;
 
@@ -76,10 +78,30 @@ public static class HexMetrics {
 	public static Texture2D noiseSource;
 
 	public static Vector4 SampleNoise (Vector3 position) {
-		return noiseSource.GetPixelBilinear(
+		Vector4 sample = noiseSource.GetPixelBilinear(
 			position.x * noiseScale,
 			position.z * noiseScale
 		);
+
+		if (Wrapping && position.x < innerDiameter * 1.5f) {
+			Vector4 sample2 = noiseSource.GetPixelBilinear(
+				(position.x + wrapSize * innerDiameter) * noiseScale,
+				position.z * noiseScale
+			);
+			sample = Vector4.Lerp(
+				sample2, sample, position.x * (1f / innerDiameter) - 0.5f
+			);
+		}
+
+		return sample;
+	}
+
+	public static int wrapSize;
+
+	public static bool Wrapping {
+		get {
+			return wrapSize > 0;
+		}
 	}
 
 	public static void InitializeHashGrid (int seed) {

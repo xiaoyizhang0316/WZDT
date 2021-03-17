@@ -30,7 +30,8 @@ public class HexMapEditor : MonoBehaviour {
 
 	bool isDrag;
 	HexDirection dragDirection;
-	HexCell previousCell;
+ 
+	public HexCell previousCell;
 
 	public void SetTerrainTypeIndex (int index) {
 		activeTerrainTypeIndex = index;
@@ -114,7 +115,7 @@ public class HexMapEditor : MonoBehaviour {
 	}
 
 	void Awake () {
-		terrainMaterial.DisableKeyword("GRID_ON");
+		terrainMaterial.EnableKeyword("GRID_ON");
 		Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
 		SetEditMode(true);
 	}
@@ -175,7 +176,23 @@ public class HexMapEditor : MonoBehaviour {
 			previousCell = null;
 		}
 	}
-
+	public void HandleInput (GameObject gameObject) {
+		HexCell currentCell = GetCellUnderCursor();
+		if (currentCell) {
+			if (previousCell && previousCell != currentCell) {
+				ValidateDrag(currentCell);
+			}
+			else {
+				isDrag = false;
+			}
+			EditCells(currentCell);
+			previousCell = currentCell;
+			gameObject.transform.position = currentCell.Position;
+		}
+		else {
+			previousCell = null;
+		}
+	}
 	void ValidateDrag (HexCell currentCell) {
 		for (
 			dragDirection = HexDirection.NE;

@@ -25,7 +25,8 @@ public class HexCellShaderData : MonoBehaviour {
 				x, z, TextureFormat.RGBA32, false, true
 			);
 			cellTexture.filterMode = FilterMode.Point;
-			cellTexture.wrapMode = TextureWrapMode.Clamp;
+			cellTexture.wrapModeU = TextureWrapMode.Repeat;
+			cellTexture.wrapModeV = TextureWrapMode.Clamp;
 			Shader.SetGlobalTexture("_HexCellData", cellTexture);
 		}
 		Shader.SetGlobalVector(
@@ -61,6 +62,12 @@ public class HexCellShaderData : MonoBehaviour {
 			cellTextureData[index].b = 255;
 			transitioningCells.Add(cell);
 		}
+		enabled = true;
+	}
+
+	public void SetMapData (HexCell cell, float data) {
+		cellTextureData[cell.Index].b =
+			data < 0f ? (byte)0 : (data < 1f ? (byte)(data * 254f) : (byte)254);
 		enabled = true;
 	}
 
