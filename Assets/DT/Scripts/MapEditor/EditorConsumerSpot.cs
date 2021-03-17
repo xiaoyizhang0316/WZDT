@@ -2,19 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static GameEnum;
-
+using System;
 public class EditorConsumerSpot : EditorLandItem
 {
     public int index;
 
     public List<PathItem> paths;
 
-    public void AddPath(MapSign sign)
+    public void AddPath( int x, int y)
     {
         PathItem item = new PathItem();
-        item.x = sign.x;
-        item.y = sign.y;
+        item.x = x;
+        item.y = y;
         paths.Add(item);
+    }
+
+    public void RemovePath(int x, int y )
+    {
+        for (int i = 0; i < paths.Count; i++)
+        {
+            if (paths[i].x ==  x && paths[i].y ==  y)
+            {
+                paths.RemoveAt( i);
+            }
+        }
+    }
+
+    public void GetPath(int x,int y)
+    {
+        
     }
 
     public void DeletePath(MapSign sign)
@@ -45,7 +61,7 @@ public class EditorConsumerSpot : EditorLandItem
     }
 }
 
-[SerializeField]
+[Serializable]
 public struct PathItem
 {
     public int x;

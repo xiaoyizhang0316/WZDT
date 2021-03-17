@@ -23,7 +23,8 @@ public class CreatRole_ButtonTest : MonoBehaviour, IDragHandler, IPointerClickHa
     public HexGrid hexGrid;
 
     public HexMapEditor MapEditor;
-    
+
+    public bool isPlaystart;
     /// <summary>
     /// 窗口开关控制
     /// </summary>
@@ -56,7 +57,7 @@ public class CreatRole_ButtonTest : MonoBehaviour, IDragHandler, IPointerClickHa
 
 
      MapEditor.HandleInput(role);
-     
+   
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -67,8 +68,12 @@ public class CreatRole_ButtonTest : MonoBehaviour, IDragHandler, IPointerClickHa
      
       
         role = Instantiate(RolePrb   );
-        
-    
+        if (isPlaystart)
+        {
+            Camera.main.GetComponent<EditorMapManager>().CreatPrb(role);
+
+        }
+
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -77,7 +82,8 @@ public class CreatRole_ButtonTest : MonoBehaviour, IDragHandler, IPointerClickHa
 
     public void OnEndDrag(PointerEventData eventData)
     {
-     
+        role.GetComponent<EditorLandItem>().x = MapEditor.previousCell.coordinates.X;
+        role.GetComponent<EditorLandItem>().y = MapEditor.previousCell.coordinates.Z;
     }
 
 

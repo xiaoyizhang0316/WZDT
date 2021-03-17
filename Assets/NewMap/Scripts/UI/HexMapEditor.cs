@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using System.IO;
+using UnityEngine.UI;
 
 public class HexMapEditor : MonoBehaviour {
 
@@ -22,6 +23,9 @@ public class HexMapEditor : MonoBehaviour {
 
 	bool applyUrbanLevel, applyFarmLevel, applyPlantLevel, applySpecialIndex;
 
+	private bool isUnder;
+	private bool setPort;
+	public InputField input;
 	enum OptionalToggle {
 		Ignore, Yes, No
 	}
@@ -103,6 +107,15 @@ public class HexMapEditor : MonoBehaviour {
 
 	public void SetEditMode (bool toggle) {
 		enabled = toggle;
+	}
+
+	public void SetIsUnder(bool toggle)
+	{
+		isUnder = toggle;
+	}
+	public void SetPort(bool toggle)
+	{
+		setPort = toggle;
 	}
 
 	public void ShowGrid (bool visible) {
@@ -252,7 +265,59 @@ public class HexMapEditor : MonoBehaviour {
 			if (roadMode == OptionalToggle.No) {
 				cell.RemoveRoads();
 			}
-			if (walledMode != OptionalToggle.Ignore) {
+
+			if (setPort )
+			{
+				if (Camera.main.GetComponent<EditorMapManager>().currentPort != null)
+				{
+					Camera.main.GetComponent<EditorMapManager>().currentPort.GetComponent<EditorConsumerSpot>()
+						.AddPath(cell.coordinates.X, cell.coordinates.Z);
+					cell.SetLabel((Camera.main.GetComponent<EditorMapManager>().currentPort
+						               .GetComponent<EditorConsumerSpot>().paths.Count - 1).ToString());
+					cell.EnableHighlight(Color.gray);
+				}
+			}
+			else
+			{
+				if (Camera.main.GetComponent<EditorMapManager>().currentPort!=null )
+				{
+					Camera.main.GetComponent<EditorMapManager>().currentPort.GetComponent<EditorConsumerSpot>().RemovePath(cell.coordinates.X,cell.coordinates.Z);
+					cell.SetLabel( "" );
+					cell.DisableHighlight();
+				}
+			}
+
+			if (isUnder)
+			  {
+				  if (cell.gameObject.GetComponent<EditorLandItem>())
+				  {
+					  var editorLandItem = 	cell.gameObject.GetComponent<EditorLandItem>();
+					  editorLandItem.isUnder = isUnder;
+					  editorLandItem.underTime =int.Parse(input.text);
+					  editorLandItem.x = cell.coordinates.X;
+					  editorLandItem.y = cell.coordinates.Z;
+				  }
+				  else
+				  {
+					  var editorLandItem = 	cell.gameObject.AddComponent<EditorLandItem>();
+					  editorLandItem.isUnder = isUnder;
+					  editorLandItem.underTime =int.Parse(input.text);
+					  editorLandItem.x = cell.coordinates.X;
+					  editorLandItem.y = cell.coordinates.Z;
+				  }
+
+				 
+			  }
+			  else
+			  {
+				  if (cell.gameObject.GetComponent<EditorLandItem>())
+				  {
+					  cell.gameObject.GetComponent<EditorLandItem>().isUnder = false;
+					  Destroy( cell.gameObject.GetComponent<EditorLandItem>());
+				  }
+			  }
+
+			  if (walledMode != OptionalToggle.Ignore) {
 				cell.Walled = walledMode == OptionalToggle.Yes;
 			}
 			if (isDrag) {

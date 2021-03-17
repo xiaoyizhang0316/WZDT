@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 
@@ -229,12 +230,14 @@ public class HexCell : MonoBehaviour {
 		}
 	}
 
+	 
 	public int TerrainTypeIndex {
 		get {
 			return terrainTypeIndex;
 		}
 		set {
 			if (terrainTypeIndex != value) {
+				 
 				terrainTypeIndex = value;
 				ShaderData.RefreshTerrain(this);
 			}
@@ -498,8 +501,10 @@ public class HexCell : MonoBehaviour {
 		}
 	}
 
-	void RefreshSelfOnly () {
+public 	void RefreshSelfOnly () {
 		chunk.Refresh();
+		DisableHighlight();
+		SetLabel("");
 		if (Unit) {
 			Unit.ValidateLocation();
 		}

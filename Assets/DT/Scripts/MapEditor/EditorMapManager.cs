@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static GameEnum;
 
 public class EditorMapManager : MapManager
@@ -9,130 +10,26 @@ public class EditorMapManager : MapManager
 
     private int consumerSpotCount = 0;
 
+    public Transform PlayerStartPointTF;
+    public GameObject PlayerStartPointUIPrb;
+
+    public GameObject currentPort;
+
+    public int count=0;
+    public void CreatPrb(GameObject game)
+    {
+        count++;
+       GameObject gameobj=  Instantiate(PlayerStartPointUIPrb, PlayerStartPointTF);
+       gameobj.GetComponent<PlayStartSign>().port = game;
+       gameobj.GetComponentInChildren<Text>().text = count.ToString();
+    }
+
     private void Update()
     {
         interval += Time.deltaTime;
         if (interval >= 0.1f)
         {
-            //平草地
-            //if (Input.GetKey(KeyCode.Alpha1))
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        //print(hit[i].transform);
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            GameObject go = Instantiate(mapTypeList[0], transform);
-            //            go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-            //            int tempX = hit[i].transform.GetComponent<MapSign>().x;
-            //            int tempY = hit[i].transform.GetComponent<MapSign>().y;
-            //            go.GetComponent<MapSign>().x = tempX;
-            //            go.GetComponent<MapSign>().y = tempY;
-            //            go.AddComponent<EditorLandItem>();
-            //            go.GetComponent<EditorLandItem>().Init(hit[i].transform.GetComponent<MapSign>());
-            //            Destroy(hit[i].transform.gameObject);
-            //            break;
-            //        }
-            //    }
-            //    interval = 0f;
-            //}
-            ////高草地
-            //else if (Input.GetKey(KeyCode.Alpha2))
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        //print(hit[i].transform);
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            GameObject go = Instantiate(mapTypeList[1], transform);
-            //            go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-            //            int tempX = hit[i].transform.GetComponent<MapSign>().x;
-            //            int tempY = hit[i].transform.GetComponent<MapSign>().y;
-            //            go.GetComponent<MapSign>().x = tempX;
-            //            go.GetComponent<MapSign>().y = tempY;
-            //            go.AddComponent<EditorLandItem>();
-            //            go.GetComponent<EditorLandItem>().Init(hit[i].transform.GetComponent<MapSign>());
-            //            Destroy(hit[i].transform.gameObject);
-            //            break;
-            //        }
-            //    }
-            //    interval = 0f;
-            //}
-            ////土地
-            //else if (Input.GetKey(KeyCode.Alpha3))
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        //print(hit[i].transform);
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            GameObject go = Instantiate(mapTypeList[2], transform);
-            //            go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-            //            int tempX = hit[i].transform.GetComponent<MapSign>().x;
-            //            int tempY = hit[i].transform.GetComponent<MapSign>().y;
-            //            go.GetComponent<MapSign>().x = tempX;
-            //            go.GetComponent<MapSign>().y = tempY;
-            //            Destroy(hit[i].transform.gameObject);
-            //            break;
-            //        }
-            //    }
-            //    interval = 0f;
-            //}
-            ////路
-            //else if (Input.GetKey(KeyCode.Alpha4))
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        //print(hit[i].transform);
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            GameObject go = Instantiate(mapTypeList[3], transform);
-            //            go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-            //            int tempX = hit[i].transform.GetComponent<MapSign>().x;
-            //            int tempY = hit[i].transform.GetComponent<MapSign>().y;
-            //            go.GetComponent<MapSign>().x = tempX;
-            //            go.GetComponent<MapSign>().y = tempY;
-            //            go.AddComponent<EditorLandItem>();
-            //            go.GetComponent<EditorLandItem>().Init(hit[i].transform.GetComponent<MapSign>());
-            //            Destroy(hit[i].transform.gameObject);
-            //            break;
-            //        }
-            //    }
-            //    interval = 0f;
-            //}
-            ////海
-            //else if (Input.GetKey(KeyCode.Alpha5))
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        //print(hit[i].transform);
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            GameObject go = Instantiate(mapTypeList[4], transform);
-            //            go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-            //            int tempX = hit[i].transform.GetComponent<MapSign>().x;
-            //            int tempY = hit[i].transform.GetComponent<MapSign>().y;
-            //            go.GetComponent<MapSign>().x = tempX;
-            //            go.GetComponent<MapSign>().y = tempY;
-            //            go.AddComponent<EditorLandItem>();
-            //            go.GetComponent<EditorLandItem>().Init(hit[i].transform.GetComponent<MapSign>());
-            //            Destroy(hit[i].transform.gameObject);
-            //            break;
-            //        }
-            //    }
-            //    interval = 0f;
-            //}
-            //消费者出生点
+             
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -171,4 +68,5 @@ public class EditorMapManager : MapManager
             }
         }
     }
+    
 }
