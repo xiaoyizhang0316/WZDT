@@ -33,7 +33,7 @@ public class MapSign : MonoBehaviour, IDragHandler
     private void Awake()
     {
         MapManager.My._mapSigns.Add(this);
-        isCanPlace = GetComponent<MeshRenderer>().enabled && isCanPlace;
+      //  isCanPlace = GetComponent<MeshRenderer>().enabled && isCanPlace;
     }
 
     /// <summary>
@@ -96,14 +96,14 @@ public class MapSign : MonoBehaviour, IDragHandler
             go.transform.SetParent(transform.parent.parent);
             //go.GetComponent<MeshCollider>().enabled = false;
         }
-        if (!GetComponent<MeshRenderer>().enabled)
-        {
-            mapType = MapType.Land;
-        }
-        if (mapType != MapType.Grass)
-        {
-            isCanPlace = false;
-        }
+    //   if (!GetComponent<MeshRenderer>().enabled)
+    //   {
+    //       mapType = MapType.Land;
+    //   }
+    //   if (mapType != MapType.Grass)
+    //   {
+    //       isCanPlace = false;
+    //   }
     }
 
     /// <summary>
@@ -128,7 +128,7 @@ public class MapSign : MonoBehaviour, IDragHandler
     // Update is called once per frame
     void Update()
     {
-        GetRoleByLand();
+     //   GetRoleByLand();
         if (lostEffect)
         {
             if (lostEffect && baseMapRole != null)
@@ -156,14 +156,6 @@ public class MapSign : MonoBehaviour, IDragHandler
                 baseb.Init(buff);
                 baseb.SetRoleBuff(baseMapRole, baseMapRole, baseMapRole);
             }
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (MapManager.My._mapSigns.Contains(this))
-        {
-            MapManager.My._mapSigns.Remove(this);
         }
     }
 }

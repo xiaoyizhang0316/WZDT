@@ -238,8 +238,7 @@ public abstract class BaseGuideStep : MonoBehaviour
             }
             InitHighlightUI();
             yield return OpenHighLight();
-            ShowAllHighlightUI();
-            Debug.Log("start start");
+            ShowAllHighlightUI(); 
             yield return StepStart();
             yield return new WaitForSeconds(entryTime);
             
@@ -248,10 +247,10 @@ public abstract class BaseGuideStep : MonoBehaviour
                 while (!ChenkEnd() && GuideManager.My.ftegob.activeSelf)
                 {
                     timeCount += 1;
-                    Debug.Log("当前步骤"+GuideManager.My.currentGuideIndex+"检测中");
+   
                     yield return null;
                 }
-                Debug.Log("当前步骤"+GuideManager.My.currentGuideIndex+"检测成功");
+          
 
               StartCoroutine(PlayEnd());
             }
@@ -286,8 +285,7 @@ public abstract class BaseGuideStep : MonoBehaviour
     }
 
     public virtual IEnumerator PlayEnd()
-    {
-    Debug.Log("结束当前步骤"+GuideManager.My.currentGuideIndex);
+    { 
         yield return StepEnd();
         for (int i = 0; i < highLightCopyObj.Count; i++)
         {
