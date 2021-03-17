@@ -348,6 +348,19 @@ public class TradeManager : MonoSingleton<TradeManager>
     }
 
     /// <summary>
+    /// 预测回合交易成本扣除
+    /// </summary>
+    public int PredictTurnTradeCost()
+    {
+        int result = 0;
+        foreach (TradeSign item in tradeList.Values)
+        {
+            result += item.PredictTurnTradeCost();
+        }
+        return result;
+    }
+
+    /// <summary>
     /// 回合结束时结算所有交易的交易成本
     /// </summary>
     public void TurnTradeCost()

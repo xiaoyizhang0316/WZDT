@@ -157,6 +157,11 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
             }
             else if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
             {
+                if (StageGoal.My.currentType == StageType.Normal)
+                {
+                    showNumberText = "/回合";
+                }
+                else
                 {
                     showNumberText = "/10个";
                 }
@@ -228,9 +233,17 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
             }
         }
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.castRole));
-        if (StageGoal.My.currentType == StageType.Normal && cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        if (StageGoal.My.currentType == StageType.Normal)
         {
-            tradeCostText.text = (result * 4).ToString();
+            if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+            {
+                tradeCostText.text = (result * 4).ToString();
+            }
+            else if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+            {
+                int tradeCount = cast.tradeList.Count;
+                tradeCostText.text = (result * 4 / tradeCount).ToString();
+            }
         }
         else
         {

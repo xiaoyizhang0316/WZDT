@@ -552,7 +552,7 @@ public class BossConsumer : ConsumeSign
         List<MapSign> signs = new List<MapSign>();
         for (int i = 0; i < MapManager.My._mapSigns.Count; i++)
         {
-            if (MapManager.My._mapSigns[i].mapType == MapType.Grass)
+            if (MapManager.My._mapSigns[i].mapType == MapType.Grass || MapManager.My._mapSigns[i].mapType == MapType.HighGrass)
             {
                 signs.Add(MapManager.My._mapSigns[i]);
                 count += MapManager.My._mapSigns[i].weighting;
@@ -564,6 +564,7 @@ public class BossConsumer : ConsumeSign
         MapSign sign = GetWeightingForMapSign(weighting);
 
         return sign;
+
     }
 
 
@@ -573,7 +574,7 @@ public class BossConsumer : ConsumeSign
         List<MapSign> signs = new List<MapSign>();
         for (int i = 0; i < MapManager.My._mapSigns.Count; i++)
         {
-            if (MapManager.My._mapSigns[i].mapType == MapType.Grass)
+            if (MapManager.My._mapSigns[i].mapType == MapType.Grass || MapManager.My._mapSigns[i].mapType == MapType.HighGrass)
             {
                 signs.Add(MapManager.My._mapSigns[i]);
                 count += MapManager.My._mapSigns[i].weighting;

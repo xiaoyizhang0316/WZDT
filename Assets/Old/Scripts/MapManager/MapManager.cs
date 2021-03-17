@@ -218,7 +218,7 @@ public class MapManager : MonoSingleton<MapManager>
         {
             return;
         }
-        if (int.Parse(sceneName.Split('_')[1]) >4 )
+        if (int.Parse(sceneName.Split('_')[1]) > 4)
         {
             ReadStageNPCData(sceneName);
         }
@@ -326,100 +326,124 @@ public class MapManager : MonoSingleton<MapManager>
         if (interval >= 0.1f)
         {
             //平草地
-            //if (Input.GetKey(KeyCode.Alpha1))
-            //{
-            //    print("press 1");
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        print(hit[i].transform);
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            GameObject go = Instantiate(mapTypeList[0], transform);
-            //            go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-            //            int tempX = hit[i].transform.GetComponent<MapSign>().x;
-            //            int tempY = hit[i].transform.GetComponent<MapSign>().y;
-            //            go.GetComponent<MapSign>().x = tempX;
-            //            go.GetComponent<MapSign>().y = tempY;
-            //            Destroy(hit[i].transform.gameObject);
-            //            break;
-            //        }
-            //    }
-            //    interval = 0f;
-            //}
-            ////高草地
-            //if (Input.GetKey(KeyCode.Alpha2))
-            //{
-            //    print("press 2");
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        print(hit[i].transform);
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            GameObject go = Instantiate(mapTypeList[1], transform);
-            //            go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-            //            int tempX = hit[i].transform.GetComponent<MapSign>().x;
-            //            int tempY = hit[i].transform.GetComponent<MapSign>().y;
-            //            go.GetComponent<MapSign>().x = tempX;
-            //            go.GetComponent<MapSign>().y = tempY;
-            //            Destroy(hit[i].transform.gameObject);
-            //            break;
-            //        }
-            //    }
-            //    interval = 0f;
-            //}
-            //if (Input.GetKey(KeyCode.Alpha3))
-            //{
-            //    print("press 3");
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        print(hit[i].transform);
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            GameObject go = Instantiate(mapTypeList[2], transform);
-            //            go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-            //            int tempX = hit[i].transform.GetComponent<MapSign>().x;
-            //            int tempY = hit[i].transform.GetComponent<MapSign>().y;
-            //            go.GetComponent<MapSign>().x = tempX;
-            //            go.GetComponent<MapSign>().y = tempY;
-            //            Destroy(hit[i].transform.gameObject);
-            //            break;
-            //        }
-            //    }
-            //    interval = 0f;
-            //}
-            //if (Input.GetKey(KeyCode.Alpha4))
-            //{
-            //    print("press 3");
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        print(hit[i].transform);
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            GameObject go = Instantiate(mapTypeList[3], transform);
-            //            go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-            //            int tempX = hit[i].transform.GetComponent<MapSign>().x;
-            //            int tempY = hit[i].transform.GetComponent<MapSign>().y;
-            //            go.GetComponent<MapSign>().x = tempX;
-            //            go.GetComponent<MapSign>().y = tempY;
-            //            Destroy(hit[i].transform.gameObject);
-            //            break;
-            //        }
-            //    }
-            //    interval = 0f;
-            //}
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                //print("press 1");
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    //print(hit[i].transform);
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        GameObject go = Instantiate(mapTypeList[0], transform);
+                        go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
+                        int tempX = hit[i].transform.GetComponent<MapSign>().x;
+                        int tempY = hit[i].transform.GetComponent<MapSign>().y;
+                        go.GetComponent<MapSign>().x = tempX;
+                        go.GetComponent<MapSign>().y = tempY;
+                        go.AddComponent<EditorLandItem>();
+                        go.GetComponent<EditorLandItem>().Init(hit[i].transform.GetComponent<MapSign>());
+                        Destroy(hit[i].transform.gameObject);
+                        break;
+                    }
+                }
+                interval = 0f;
+            }
+            //高草地
+            else if (Input.GetKey(KeyCode.Alpha2))
+            {
+                //print("press 2");
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    //print(hit[i].transform);
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        GameObject go = Instantiate(mapTypeList[1], transform);
+                        go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
+                        int tempX = hit[i].transform.GetComponent<MapSign>().x;
+                        int tempY = hit[i].transform.GetComponent<MapSign>().y;
+                        go.GetComponent<MapSign>().x = tempX;
+                        go.GetComponent<MapSign>().y = tempY;
+                        Destroy(hit[i].transform.gameObject);
+                        break;
+                    }
+                }
+                interval = 0f;
+            }
+            else if (Input.GetKey(KeyCode.Alpha3))
+            {
+                //print("press 3");
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    //print(hit[i].transform);
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        GameObject go = Instantiate(mapTypeList[2], transform);
+                        go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
+                        int tempX = hit[i].transform.GetComponent<MapSign>().x;
+                        int tempY = hit[i].transform.GetComponent<MapSign>().y;
+                        go.GetComponent<MapSign>().x = tempX;
+                        go.GetComponent<MapSign>().y = tempY;
+                        Destroy(hit[i].transform.gameObject);
+                        break;
+                    }
+                }
+                interval = 0f;
+            }
+            else if (Input.GetKey(KeyCode.Alpha4))
+            {
+                //print("press 3");
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    //print(hit[i].transform);
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        GameObject go = Instantiate(mapTypeList[3], transform);
+                        go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
+                        int tempX = hit[i].transform.GetComponent<MapSign>().x;
+                        int tempY = hit[i].transform.GetComponent<MapSign>().y;
+                        go.GetComponent<MapSign>().x = tempX;
+                        go.GetComponent<MapSign>().y = tempY;
+                        Destroy(hit[i].transform.gameObject);
+                        break;
+                    }
+                }
+                interval = 0f;
+            }
+            else if (Input.GetKey(KeyCode.Alpha5))
+            {
+                //print("press 5");
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    //print(hit[i].transform);
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        GameObject go = Instantiate(mapTypeList[4], transform);
+                        go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
+                        int tempX = hit[i].transform.GetComponent<MapSign>().x;
+                        int tempY = hit[i].transform.GetComponent<MapSign>().y;
+                        go.GetComponent<MapSign>().x = tempX;
+                        go.GetComponent<MapSign>().y = tempY;
+                        Destroy(hit[i].transform.gameObject);
+                        break;
+                    }
+                }
+                interval = 0f;
+            }
 
-            ////地块升高
+            //地块升高
             //if (Input.GetKeyDown(KeyCode.UpArrow))
             //{
-            //    print("press up");
+            //    //print("press up");
             //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             //    RaycastHit[] hit = Physics.RaycastAll(ray);
             //    for (int i = 0; i < hit.Length; i++)
@@ -450,35 +474,35 @@ public class MapManager : MonoSingleton<MapManager>
             //    interval = 0f;
             //}
 
-            //if (Input.GetKeyDown(KeyCode.Q))
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            hit[i].transform.GetComponent<MeshRenderer>().enabled = true;
-            //        }
-            //        break;
-            //    }
-            //    interval = 0f;
-            //}
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        hit[i].transform.GetComponent<MeshRenderer>().enabled = true;
+                    }
+                    break;
+                }
+                interval = 0f;
+            }
 
-            //if (Input.GetKeyDown(KeyCode.E))
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            hit[i].transform.GetComponent<MeshRenderer>().enabled = false;
-            //        }
-            //        break;
-            //    }
-            //    interval = 0f;
-            //}
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hit = Physics.RaycastAll(ray);
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    if (hit[i].transform.tag.Equals("MapLand"))
+                    {
+                        hit[i].transform.GetComponent<MeshRenderer>().enabled = false;
+                    }
+                    break;
+                }
+                interval = 0f;
+            }
         }
     }
 
