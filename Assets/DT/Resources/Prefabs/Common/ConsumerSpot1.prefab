@@ -18797,8 +18797,6 @@ MonoBehaviour:
   - {fileID: 0}
   pathIndicator: {fileID: 736384662113046618, guid: bbbbb1b370e95cd499ed1a4d13585c8d,
     type: 3}
-  intervalNumber: -1
-  intervalLength: 1
   isFinishSpawn: 0
   protalGameObject: {fileID: 596202626103974035}
   isUseTSJ: 0
@@ -18807,6 +18805,10 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: e49a5417853994f40a54e8bea2d4c869, type: 2}
   - {fileID: 2100000, guid: e8384d0ab06054be09e77d286e3d7e1a, type: 2}
+  buildingWaitTime: 0
+  consumeSigns: []
+  isBornForFTE_2_5: 0
+  isBorn: 0
 --- !u!120 &4090009400148041202
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -33054,6 +33056,16 @@ PrefabInstance:
     - target: {fileID: 7207535962164455165, guid: a95f6c3e92d6c48c7921d1e307701652,
         type: 3}
       propertyPath: m_Name
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8110792042190502141, guid: a95f6c3e92d6c48c7921d1e307701652,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8849371206545295064, guid: a95f6c3e92d6c48c7921d1e307701652,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

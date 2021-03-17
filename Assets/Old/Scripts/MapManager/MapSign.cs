@@ -158,4 +158,12 @@ public class MapSign : MonoBehaviour, IDragHandler
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        if (MapManager.My._mapSigns.Contains(this))
+        {
+            MapManager.My._mapSigns.Remove(this);
+        }
+    }
 }

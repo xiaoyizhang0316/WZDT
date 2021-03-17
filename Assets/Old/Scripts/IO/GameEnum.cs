@@ -279,6 +279,10 @@ public class GameEnum
         /// </summary>
         Grass,
         /// <summary>
+        /// 高草地
+        /// </summary>
+        HighGrass,
+        /// <summary>
         /// 土地
         /// </summary>
         Land,
@@ -294,6 +298,26 @@ public class GameEnum
         /// 野外
         /// </summary>
         OtherLandType2,
+        /// <summary>
+        /// 海
+        /// </summary>
+        Sea
+    }
+
+    public enum LandOptionType
+    {
+        /// <summary>
+        /// 游戏开始时隐藏/下沉的地块
+        /// </summary>
+        MoveDown,
+        /// <summary>
+        /// 消费者出生地
+        /// </summary>
+        ConsumerSpot,
+        /// <summary>
+        /// 消费者终点
+        /// </summary>
+        End
     }
 
     public enum BuildingType
