@@ -11462,8 +11462,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world: {x: 0, y: 0, z: 0}
-  RolePrb: {fileID: -927199367670048503, guid: a8da6eb24470f4e3795cf1472c02caba, type: 3}
-  role: {fileID: 0}
+  RolePrb: {fileID: 2064885540632964611, guid: 2535bdfae0ba05b4485c326084eaa15d, type: 3}
+  role: {fileID: 2064885540632964611, guid: 2535bdfae0ba05b4485c326084eaa15d, type: 3}
   hexGrid: {fileID: 1571186511}
   MapEditor: {fileID: 2142000451}
 --- !u!114 &1592067348
@@ -15902,6 +15902,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2102140319}
   - component: {fileID: 2102140320}
+  - component: {fileID: 2102140321}
   m_Layer: 0
   m_Name: Hex Map Camera
   m_TagString: Untagged
@@ -15944,6 +15945,25 @@ MonoBehaviour:
   moveSpeedMaxZoom: 100
   rotationSpeed: 180
   grid: {fileID: 1571186511}
+--- !u!114 &2102140321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102140318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd34306f9fd52401d938d5f4d833ec19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mapSigns: []
+  mapTypeList: []
+  generatePath: 0
+  SaveLoadMenu: {fileID: 0}
+  skillOneEffect: {fileID: 0}
+  skillTwoEffect: {fileID: 0}
+  skillThreeEffect: {fileID: 0}
 --- !u!1 &2104049595
 GameObject:
   m_ObjectHideFlags: 0
