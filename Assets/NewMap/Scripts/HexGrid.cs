@@ -27,7 +27,7 @@ public class HexGrid : MonoSingleton<HexGrid> {
 
 	Transform[] columns;
 	HexGridChunk[] chunks;
-	HexCell[] cells;
+	public  HexCell[] cells;
 
 	int chunkCountX, chunkCountZ;
 

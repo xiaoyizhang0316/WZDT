@@ -503,21 +503,26 @@ public class Building : MonoBehaviour
 
     public void InitConsumerPath()
     {
-        for (int i = 0; i < consumerPathList.Count; i++)
+        //for (int i = 0; i < consumerPathList.Count; i++)
+        //{
+        //    RaycastHit[] hit;
+        //    hit = Physics.RaycastAll(consumerPathList[i].position + new Vector3(0f, 5f, 0f), Vector3.down);
+        //    for (int j = 0; j < hit.Length; j++)
+        //    {
+        //        if (hit[j].transform.tag.Equals("MapLand"))
+        //        {
+        //            //print(hit[j].transform);
+        //            PathItem item = new PathItem();
+        //            item.x = hit[j].transform.GetComponent<MapSign>().x;
+        //            item.y = hit[j].transform.GetComponent<MapSign>().y;
+        //            pathItems.Add(item);
+        //        }
+        //    }
+        //}
+        for (int i = 0; i < pathItems.Count; i++)
         {
-            RaycastHit[] hit;
-            hit = Physics.RaycastAll(consumerPathList[i].position + new Vector3(0f, 5f, 0f), Vector3.down);
-            for (int j = 0; j < hit.Length; j++)
-            {
-                if (hit[j].transform.tag.Equals("MapLand"))
-                {
-                    //print(hit[j].transform);
-                    PathItem item = new PathItem();
-                    item.x = hit[j].transform.GetComponent<MapSign>().x;
-                    item.y = hit[j].transform.GetComponent<MapSign>().y;
-                    pathItems.Add(item);
-                }
-            }
+            HexCell cell = HexGrid.My.GetCell(pathItems[i].x, pathItems[i].y);
+            consumerPathList.Add(cell.transform);
         }
     }
 

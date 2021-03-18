@@ -1,37 +1,39 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static GameEnum;
-
+using System;
 public class EditorConsumerSpot : EditorLandItem
 {
     public int index;
 
-    public List<PathItem> paths = new List<PathItem>();
+    public List<PathItem> paths;
 
-    public void AddPath(MapSign sign)
+    public void AddPath( int x, int y)
     {
-        if (!HasDuplicatePath(sign))
+        if (!IsDuplicatePath(x,y))
         {
             PathItem item = new PathItem();
-            item.x = sign.x;
-            item.y = sign.y;
+            item.x = x;
+            item.y = y;
             paths.Add(item);
         }
-
     }
 
-    public bool HasDuplicatePath(MapSign sign)
+    public void RemovePath(int x, int y )
     {
         for (int i = 0; i < paths.Count; i++)
         {
-            if (paths[i].x == sign.x && paths[i].y == sign.y)
+            if (paths[i].x ==  x && paths[i].y ==  y)
             {
-                return true;
+                paths.RemoveAt( i);
             }
         }
-        return false;
+    }
+
+    public void GetPath(int x,int y)
+    {
+        
     }
 
     public void DeletePath(MapSign sign)
@@ -43,6 +45,19 @@ public class EditorConsumerSpot : EditorLandItem
                 paths.RemoveRange(i, paths.Count - i);
             }
         }
+    }
+
+    public bool IsDuplicatePath(int x,int y)
+    {
+
+        for (int i = 0; i < paths.Count; i++)
+        {
+            if (paths[i].x == x && paths[i].y == y)
+            {
+                return true;
+            }    
+        }
+        return false;
     }
 
     public override string GenerateSpecialOptionString()
