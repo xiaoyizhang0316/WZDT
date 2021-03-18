@@ -41,21 +41,21 @@ public class HexMapCamera : MonoBehaviour {
 	}
 
 	void Update () {
-		float zoomDelta = Input.GetAxis("Mouse ScrollWheel");
-		if (zoomDelta != 0f) {
-			AdjustZoom(zoomDelta);
-		}
+	//	float zoomDelta = Input.GetAxis("Mouse ScrollWheel");
+	//	if (zoomDelta != 0f) {
+	//		AdjustZoom(zoomDelta);
+	//	}
 
 		float rotationDelta = Input.GetAxis("Rotation");
 		if (rotationDelta != 0f) {
 			AdjustRotation(rotationDelta);
 		}
 
-		float xDelta = Input.GetAxis("Horizontal");
-		float zDelta = Input.GetAxis("Vertical");
-		if (xDelta != 0f || zDelta != 0f) {
-			AdjustPosition(xDelta, zDelta);
-		}
+	//	float xDelta = Input.GetAxis("Horizontal");
+	//	float zDelta = Input.GetAxis("Vertical");
+	//	if (xDelta != 0f || zDelta != 0f) {
+	//		AdjustPosition(xDelta, zDelta);
+	//	}
 	}
 
 	void AdjustZoom (float delta) {

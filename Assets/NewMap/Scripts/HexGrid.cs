@@ -50,7 +50,7 @@ public class HexGrid : MonoSingleton<HexGrid> {
 		HexUnit.unitPrefab = unitPrefab;
 		cellShaderData = gameObject.AddComponent<HexCellShaderData>();
 		cellShaderData.Grid = this;
-		CreateMap(cellCountX, cellCountZ, wrapping);
+		//CreateMap(cellCountX, cellCountZ, wrapping);
 	}
 
 	public void AddUnit (HexUnit unit, HexCell location, float orientation) {

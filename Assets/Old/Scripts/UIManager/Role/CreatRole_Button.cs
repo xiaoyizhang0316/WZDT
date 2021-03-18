@@ -109,9 +109,9 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         RaycastHit hit;
         if (Physics.Raycast(inputRay, out hit))
         {
-            Debug.Log(hit.point);
+         
             HexCell currentCell = HexGrid.My.GetCell(hit.point);
-            role.transform.position =currentCell.Position+ new Vector3(0, 3, 0);
+            role.transform.position =currentCell.Position+ new Vector3(0, 0.3f, 0);
         }
     }
 
@@ -283,7 +283,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 }
                 else
                 {
-                    print("false    ");
+                    print("false ");
                     Destroy(role, 0.01f);
                     RoleFloatWindow.My.Hide();
                     if (dragImg != null)
