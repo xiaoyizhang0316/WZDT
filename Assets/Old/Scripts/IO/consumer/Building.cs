@@ -16,6 +16,8 @@ public class Building : MonoBehaviour
 
     public List<Transform> consumerPathList = new List<Transform>();
 
+    public List<PathItem> pathItems = new List<PathItem>();
+
     public GameObject pathIndicator;
 
     public bool isFinishSpawn;
@@ -481,6 +483,48 @@ public class Building : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //List<Vector3> list = new List<Vector3>();
+        //for (int i = 0; i < consumerPathList.Count; i++)
+        //{
+        //    list.Add(consumerPathList[i].position + new Vector3(0f, 0.1f, 0f));
+        //}
+        //GameObject go = Instantiate(pathIndicator, transform);
+        //go.transform.position = transform.position;
+        //Tweener twe = go.transform.DOPath(list.ToArray(), 0.1f, PathType.CatmullRom, PathMode.Full3D).OnComplete(() =>
+        //{
+        //    Destroy(go);
+        //}).SetEase(Ease.Linear).SetLookAt(0.01f);
+        //twe.ForceInit();
+        //GetComponent<LineRenderer>().textureMode = LineTextureMode.Stretch;
+        //GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
+        //GetComponent<LineRenderer>().SetPositions(twe.PathGetDrawPoints());
+        Invoke( "InitConsumerPath",5);
+    }
+
+    public void InitConsumerPath()
+    {
+        //for (int i = 0; i < consumerPathList.Count; i++)
+        //{
+        //    RaycastHit[] hit;
+        //    hit = Physics.RaycastAll(consumerPathList[i].position + new Vector3(0f, 5f, 0f), Vector3.down);
+        //    for (int j = 0; j < hit.Length; j++)
+        //    {
+        //        if (hit[j].transform.tag.Equals("MapLand"))
+        //        {
+        //            //print(hit[j].transform);
+        //            PathItem item = new PathItem();
+        //            item.x = hit[j].transform.GetComponent<MapSign>().x;
+        //            item.y = hit[j].transform.GetComponent<MapSign>().y;
+        //            pathItems.Add(item);
+        //        }
+        //    }
+        //}
+        consumerPathList.Clear();
+        for (int i = 0; i < pathItems.Count; i++)
+        {
+            MapSign sign = MapManager.My.GetMapSignByXY(pathItems[i].x, pathItems[i].y);
+            consumerPathList.Add(sign.transform);
+        }
         List<Vector3> list = new List<Vector3>();
         for (int i = 0; i < consumerPathList.Count; i++)
         {

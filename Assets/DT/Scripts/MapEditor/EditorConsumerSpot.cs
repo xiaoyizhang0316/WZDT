@@ -11,10 +11,13 @@ public class EditorConsumerSpot : EditorLandItem
 
     public void AddPath( int x, int y)
     {
-        PathItem item = new PathItem();
-        item.x = x;
-        item.y = y;
-        paths.Add(item);
+        if (!IsDuplicatePath(x,y))
+        {
+            PathItem item = new PathItem();
+            item.x = x;
+            item.y = y;
+            paths.Add(item);
+        }
     }
 
     public void RemovePath(int x, int y )
@@ -42,6 +45,19 @@ public class EditorConsumerSpot : EditorLandItem
                 paths.RemoveRange(i, paths.Count - i);
             }
         }
+    }
+
+    public bool IsDuplicatePath(int x,int y)
+    {
+
+        for (int i = 0; i < paths.Count; i++)
+        {
+            if (paths[i].x == x && paths[i].y == y)
+            {
+                return true;
+            }    
+        }
+        return false;
     }
 
     public override string GenerateSpecialOptionString()
