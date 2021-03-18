@@ -65,7 +65,15 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
 
         if (useLocalIp)
         {
-            Url.SetIp(useLocalIp);
+            if (localIP == null || localIP.Replace(" ", "" ).Equals(""))
+            {
+                Url.SetIp(useLocalIp);
+            }
+            else
+            {
+                Url.SetIp(localIP);
+            }
+            
         }
 
         if (useLocalJson)

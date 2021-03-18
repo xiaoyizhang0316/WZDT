@@ -875,6 +875,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     public void UpdateLevelProgress(int levelID, int stars, string levelStar, string rewardStatus, int score, Action doSuccess=null, Action doFail=null)
     {
         LevelProgress lp = new LevelProgress(playerID, levelID, stars, levelStar, rewardStatus, score);
+        lp.useTime = StageGoal.My.endTime - StageGoal.My.startTime;
 
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("levelProgress", JsonUtility.ToJson(lp));

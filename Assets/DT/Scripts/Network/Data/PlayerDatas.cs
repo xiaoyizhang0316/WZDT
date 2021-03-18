@@ -65,6 +65,7 @@ public class LevelProgress
     public string levelStar;
     public string rewardStatus;
     public int score;
+    public int useTime;
 
     public LevelProgress(string playerID, int levelID, int stars, string levelStar, string rewardStatus, int score)
     {
