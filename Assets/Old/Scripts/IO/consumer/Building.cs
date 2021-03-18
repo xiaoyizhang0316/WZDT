@@ -483,22 +483,22 @@ public class Building : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        List<Vector3> list = new List<Vector3>();
-        for (int i = 0; i < consumerPathList.Count; i++)
-        {
-            list.Add(consumerPathList[i].position + new Vector3(0f, 0.1f, 0f));
-        }
-        GameObject go = Instantiate(pathIndicator, transform);
-        go.transform.position = transform.position;
-        Tweener twe = go.transform.DOPath(list.ToArray(), 0.1f, PathType.CatmullRom, PathMode.Full3D).OnComplete(() =>
-        {
-            Destroy(go);
-        }).SetEase(Ease.Linear).SetLookAt(0.01f);
-        twe.ForceInit();
-        GetComponent<LineRenderer>().textureMode = LineTextureMode.Stretch;
-        GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
-        GetComponent<LineRenderer>().SetPositions(twe.PathGetDrawPoints());
-        InitConsumerPath();
+        //List<Vector3> list = new List<Vector3>();
+        //for (int i = 0; i < consumerPathList.Count; i++)
+        //{
+        //    list.Add(consumerPathList[i].position + new Vector3(0f, 0.1f, 0f));
+        //}
+        //GameObject go = Instantiate(pathIndicator, transform);
+        //go.transform.position = transform.position;
+        //Tweener twe = go.transform.DOPath(list.ToArray(), 0.1f, PathType.CatmullRom, PathMode.Full3D).OnComplete(() =>
+        //{
+        //    Destroy(go);
+        //}).SetEase(Ease.Linear).SetLookAt(0.01f);
+        //twe.ForceInit();
+        //GetComponent<LineRenderer>().textureMode = LineTextureMode.Stretch;
+        //GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
+        //GetComponent<LineRenderer>().SetPositions(twe.PathGetDrawPoints());
+        Invoke( "InitConsumerPath",5);
     }
 
     public void InitConsumerPath()
@@ -519,11 +519,27 @@ public class Building : MonoBehaviour
         //        }
         //    }
         //}
+        consumerPathList.Clear();
         for (int i = 0; i < pathItems.Count; i++)
         {
-            HexCell cell = HexGrid.My.GetCell(pathItems[i].x, pathItems[i].y);
-            consumerPathList.Add(cell.transform);
+            MapSign sign = MapManager.My.GetMapSignByXY(pathItems[i].x, pathItems[i].y);
+            consumerPathList.Add(sign.transform);
         }
+        List<Vector3> list = new List<Vector3>();
+        for (int i = 0; i < consumerPathList.Count; i++)
+        {
+            list.Add(consumerPathList[i].position + new Vector3(0f, 0.1f, 0f));
+        }
+        GameObject go = Instantiate(pathIndicator, transform);
+        go.transform.position = transform.position;
+        Tweener twe = go.transform.DOPath(list.ToArray(), 0.1f, PathType.CatmullRom, PathMode.Full3D).OnComplete(() =>
+        {
+            Destroy(go);
+        }).SetEase(Ease.Linear).SetLookAt(0.01f);
+        twe.ForceInit();
+        GetComponent<LineRenderer>().textureMode = LineTextureMode.Stretch;
+        GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
+        GetComponent<LineRenderer>().SetPositions(twe.PathGetDrawPoints());
     }
 
     // Update is called once per frame

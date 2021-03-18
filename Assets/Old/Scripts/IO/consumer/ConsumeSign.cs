@@ -206,7 +206,7 @@ public class ConsumeSign : MonoBehaviour
         {
             float x = UnityEngine.Random.Range(-0.3f, 0.3f);
             float z = UnityEngine.Random.Range(-0.3f, 0.3f);
-            pathList.Add(t.position + new Vector3(x,0.3f,z));
+            pathList.Add(t.position + new Vector3(x,0.1f,z));
         }
     }
 

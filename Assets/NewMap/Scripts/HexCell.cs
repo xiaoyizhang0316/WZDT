@@ -14,9 +14,18 @@ public class HexCell : MonoBehaviour {
 
 	public void Start()
 	{
-//	MapSign sign = 	gameObject.AddComponent<MapSign>();
-//	sign.x = coordinates.X;
-//	sign.y = coordinates.Z;
+MapSign sign = 	gameObject.AddComponent<MapSign>();
+sign.x = coordinates.X;
+sign.y = coordinates.Z;
+if (TerrainTypeIndex == 1)
+{
+	sign.isCanPlace = true;
+}
+else
+{
+	sign.isCanPlace = false;
+	
+}
 	}
 
 	public int Index { get; set; }
