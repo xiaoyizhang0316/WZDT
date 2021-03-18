@@ -5,12 +5,14 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     public GameObject map;
+
+    public Transform landTF;
     
     // Start is called before the first frame update
     void Start()
     {
         int offset = 0;
-        for (int j = 0; j< 40; j++)
+        for (int j = 0; j< 30; j++)
         {
             Vector3 ad;
             if (j % 2==0)
@@ -24,9 +26,9 @@ public class Map : MonoBehaviour
                 offset = -1;
             }
 
-            for (int i = 0; i < 40; i++)
+            for (int i = 0; i < 30; i++)
             {
-                GameObject game= Instantiate(map);
+                GameObject game= Instantiate(map,landTF);
                 game.transform.position += new Vector3(i*1.7f,0,j* Mathf.Sin(1f / 3f * Mathf.PI) * 1.7f) +ad;
                 game.GetComponent<MapSign>().x = i + offset - j / 2;
                 game.GetComponent<MapSign>().y = j;

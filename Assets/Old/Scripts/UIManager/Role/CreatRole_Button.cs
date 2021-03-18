@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using static GameEnum;
 
 public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandler, IPointerExitHandler,
-    IBeginDragHandler, IEndDragHandler,IPointerEnterHandler
+    IBeginDragHandler, IEndDragHandler, IPointerEnterHandler
 {
     public Vector3 world;
 
@@ -37,7 +37,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     /// </summary>
     private bool secondMenuStatus = false;
 
-     
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +45,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         dragImg = transform.Find("Image").GetComponent<Image>();
     }
 
-    public void ReadCostTech(int cost=-1)
+    public void ReadCostTech(int cost = -1)
     {
         if (cost == -1)
         {
@@ -75,60 +75,56 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 techCost.color = Color.white;
             }
         }
+
         if (Input.GetMouseButton(1))
         {
             Destroy(role, 0f);
             role = null;
             RoleFloatWindow.My.Hide();
-            if(dragImg!=null)
-            dragImg.raycastTarget = true;
+            if (dragImg != null)
+                dragImg.raycastTarget = true;
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-
         if (role == null)
             return;
-        for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].transform.localScale = Vector3.one;
         }
+
         if (SceneManager.GetActiveScene().name == "FTE_1")
         {
-            
             if (!transform.GetChild(0).GetComponent<Button>().interactable)
             {
                 return;
             }
         }
+
         if (NewCanvasUI.My.isSetTrade)
             return;
-        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
-        RaycastHit[] hit = Physics.RaycastAll(ray);
+        Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(inputRay, out hit))
         {
-            for (int i = 0; i < hit.Length; i++)
-            {
-                if (hit[i].transform.tag.Equals("MapLand"))
-                {
-                    role.transform.position = hit[i].transform.position + new Vector3(0f, 0.3f, 0f);
-                    break;
-                }
-            }
+         
+            HexCell currentCell = HexGrid.My.GetCell(hit.point);
+            role.transform.position =currentCell.Position+ new Vector3(0, 0.3f, 0);
         }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        
         if (SceneManager.GetActiveScene().name == "FTE_1")
         {
-            
             if (!transform.GetChild(0).GetComponent<Button>().interactable)
             {
                 return;
             }
         }
+
         if (Input.GetMouseButton(1))
             return;
         if (NewCanvasUI.My.isSetTrade)
@@ -169,7 +165,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         role.GetComponent<BaseMapRole>().baseRoleData = new Role();
         role.GetComponent<BaseMapRole>().baseRoleData = tempRole;
         role.GetComponent<BaseMapRole>().HideTradeButton(false);
-        if(dragImg!=null)
+        if (dragImg != null)
             dragImg.raycastTarget = false;
     }
 
@@ -181,26 +177,29 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     {
         if (SceneManager.GetActiveScene().name == "FTE_1")
         {
-            
             if (!transform.GetChild(0).GetComponent<Button>().interactable)
             {
                 return;
             }
         }
+
         if (Input.GetMouseButton(1))
             return;
-        if (role==null)
+        if (role == null)
             return;
         //UIManager.My.LandCube.transform.DOMoveY(0, 0.5f).SetUpdate(true);
-        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
-        RaycastHit[] hit = Physics.RaycastAll(ray);
         bool isSuccess = false;
-        for (int j = 0; j < hit.Length; j++)
+
+        Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(inputRay, out hit))
         {
-            if (hit[j].transform.tag.Equals("MapLand"))
+            HexCell currentCell = HexGrid.My.GetCell(hit.point);
+           
+            if (currentCell!=null)
             {
-                int x = hit[j].transform.GetComponent<MapSign>().x;
-                int y = hit[j].transform.GetComponent<MapSign>().y;
+                int x =currentCell.GetComponent<MapSign>().x;
+                int y = currentCell.GetComponent<MapSign>().y;
                 if (MapManager.My.CheckLandAvailable(x, y) &&
                     StageGoal.My.CostTechPoint(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech))
                 {
@@ -208,18 +207,19 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().putTime = StageGoal.My.timeCount;
                     StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech,
                         CostTpType.Build);
-                    role.transform.position = hit[j].transform.position + new Vector3(0f, 2f, 0f);
-                    role.transform.DOMove(hit[j].transform.position + new Vector3(0f, 0.3f, 0f), 0.2f).OnComplete(() =>
+                    role.transform.position =currentCell.Position + new Vector3(0f, 2f, 0f);
+                    role.transform.DOMove(currentCell.Position + new Vector3(0f, 0.3f, 0f), 0.2f).OnComplete(() =>
                         {
                             GameObject go = Instantiate(dustPrb, role.transform);
                             Destroy(go, 1f);
                             role.transform.DOScale(new Vector3(1.3f, 0.8f, 1.3f), 0.2f).OnComplete(() =>
                                 {
-                                    role.transform.DOScale(1f, 0.15f).Play().OnComplete(()=> {
-                                        role = null;
-                                        if(dragImg!=null)
-                                            dragImg.raycastTarget = true;
-                                    }).timeScale = 1f / DOTween.timeScale;
+                                    role.transform.DOScale(1f, 0.15f).Play().OnComplete(() =>
+                                        {
+                                            role = null;
+                                            if (dragImg != null)
+                                                dragImg.raycastTarget = true;
+                                        }).timeScale = 1f / DOTween.timeScale;
                                 }).Play().timeScale = 1f / DOTween.timeScale;
                         }).SetEase(Ease.Linear).Play().timeScale = 1f / DOTween.timeScale;
 
@@ -227,7 +227,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
                     isSuccess = true;
-                    MapManager.My.SetLand(x, y,   role.GetComponent<BaseMapRole>());
+                    MapManager.My.SetLand(x, y, role.GetComponent<BaseMapRole>());
                     role.GetComponent<BaseMapRole>().posX = x;
                     role.GetComponent<BaseMapRole>().posY = y;
                     role.GetComponent<BaseMapRole>().MonthlyCost();
@@ -238,9 +238,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                         role.GetComponent<BaseMapRole>().startEncourageLevel += 2;
                         role.GetComponent<BaseMapRole>().encourageLevel += 2;
                     }
+
                     if (PlayerData.My.dingWei[1])
                     {
-                        if (hit[j].transform.GetComponent<MapSign>().isNearWater)
+                        if (currentCell.GetComponent<MapSign>().isNearWater)
                         {
                             var buff = GameDataMgr.My.GetBuffDataByID(10012);
                             BaseBuff baseb = new BaseBuff();
@@ -248,14 +249,20 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                             baseb.SetRoleBuff(null, role.GetComponent<BaseMapRole>(), role.GetComponent<BaseMapRole>());
                         }
                     }
-                    if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name != "FTE_0-1"
-                                                                        && SceneManager.GetActiveScene().name != "FTE_0.5"&& SceneManager.GetActiveScene().name != "FTE_1.5"
-                                                                        && SceneManager.GetActiveScene().name != "FTE_2.5"
-                        )
+
+                    if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name !=
+                                                                        "FTE_0-1"
+                                                                        && SceneManager.GetActiveScene().name !=
+                                                                        "FTE_0.5" &&
+                                                                        SceneManager.GetActiveScene().name != "FTE_1.5"
+                                                                        && SceneManager.GetActiveScene().name !=
+                                                                        "FTE_2.5"
+                    )
                     {
                         BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
                     }
-                    PlayerData.My.RoleCountStatic(role.GetComponent<BaseMapRole>(),1);
+
+                    PlayerData.My.RoleCountStatic(role.GetComponent<BaseMapRole>(), 1);
                     CreateRoleOperationRecord(role.GetComponent<BaseMapRole>());
                     if (!PlayerData.My.isSOLO)
                     {
@@ -276,18 +283,21 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 }
                 else
                 {
-                    print("false    ");
+                    print("false ");
                     Destroy(role, 0.01f);
                     RoleFloatWindow.My.Hide();
-                    if(dragImg!=null)
+                    if (dragImg != null)
                         dragImg.raycastTarget = true;
                 }
-                break;
+
+            
             }
         }
+
+
         if (!isSuccess)
         {
-            if(dragImg!=null)
+            if (dragImg != null)
                 dragImg.raycastTarget = true;
             RoleFloatWindow.My.Hide();
             Destroy(role, 0.01f);
@@ -312,13 +322,11 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     public void OnPointerEnter(PointerEventData eventData)
     {
         string desc = GameDataMgr.My.GetTranslateName(type.ToString());
-        RoleFloatWindow.My.Init(transform, desc,RoleSkillType.Product,type);
+        RoleFloatWindow.My.Init(transform, desc, RoleSkillType.Product, type);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         RoleFloatWindow.My.Hide();
     }
-
-    
 }

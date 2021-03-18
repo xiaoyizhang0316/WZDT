@@ -530,6 +530,10 @@
                     <e p="GearData.cs" t="Include" />
                     <e p="GearItem.cs" t="Include" />
                   </e>
+                  <e p="LandData" t="Include">
+                    <e p="LandData.cs" t="Include" />
+                    <e p="LandItem.cs" t="Include" />
+                  </e>
                   <e p="RoleTemplateData" t="Include">
                     <e p="RoleTemplateModelData.cs" t="Include" />
                     <e p="RoleTemplateModelItem.cs" t="Include" />
@@ -603,6 +607,12 @@
               </e>
               <e p="ToMap.cs" t="Include" />
               <e p="ToScene.cs" t="Include" />
+            </e>
+            <e p="MapEditor" t="Include">
+              <e p="EditorConsumerEnd.cs" t="Include" />
+              <e p="EditorConsumerSpot.cs" t="Include" />
+              <e p="EditorLandItem.cs" t="Include" />
+              <e p="EditorMapManager.cs" t="Include" />
             </e>
             <e p="MissionSystem" t="Include">
               <e p="MissionData.cs" t="Include" />
@@ -2174,6 +2184,61 @@
           </e>
         </e>
         <e p="NewBehaviourScript.cs" t="Include" />
+        <e p="NewMap" t="Include">
+          <e p="Editor" t="Include">
+            <e p="HexCoordinatesDrawer.cs" t="Include" />
+            <e p="TextureArrayWizard.cs" t="Include" />
+          </e>
+          <e p="Materials" t="Include">
+            <e p="Estuary.shader" t="Include" />
+            <e p="Features" t="Include">
+              <e p="Feature.shader" t="Include" />
+            </e>
+            <e p="HexCellData.cginc" t="Include" />
+            <e p="HexMetrics.cginc" t="Include" />
+            <e p="Highlight" t="Include">
+              <e p="Highlight.shader" t="Include" />
+            </e>
+            <e p="River.shader" t="Include" />
+            <e p="Road.shader" t="Include" />
+            <e p="Terrain" t="Include">
+              <e p="Terrain.shader" t="Include" />
+            </e>
+            <e p="Water Shore.shader" t="Include" />
+            <e p="Water.cginc" t="Include" />
+            <e p="Water.shader" t="Include" />
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="Bezier.cs" t="Include" />
+            <e p="CreatRole_ButtonTest.cs" t="Include" />
+            <e p="EdgeVertices.cs" t="Include" />
+            <e p="HexCell.cs" t="Include" />
+            <e p="HexCellPriorityQueue.cs" t="Include" />
+            <e p="HexCellShaderData.cs" t="Include" />
+            <e p="HexCoordinates.cs" t="Include" />
+            <e p="HexDirection.cs" t="Include" />
+            <e p="HexEdgeType.cs" t="Include" />
+            <e p="HexFeatureCollection.cs" t="Include" />
+            <e p="HexFeatureManager.cs" t="Include" />
+            <e p="HexGrid.cs" t="Include" />
+            <e p="HexGridChunk.cs" t="Include" />
+            <e p="HexHash.cs" t="Include" />
+            <e p="HexMapCamera.cs" t="Include" />
+            <e p="HexMapGenerator.cs" t="Include" />
+            <e p="HexMesh.cs" t="Include" />
+            <e p="HexMetrics.cs" t="Include" />
+            <e p="HexUnit.cs" t="Include" />
+            <e p="ListPool.cs" t="Include" />
+            <e p="UI" t="Include">
+              <e p="HexGameUI.cs" t="Include" />
+              <e p="HexMapEditor.cs" t="Include" />
+              <e p="NewMapMenu.cs" t="Include" />
+              <e p="PlayStartSign.cs" t="Include" />
+              <e p="SaveLoadItem.cs" t="Include" />
+              <e p="SaveLoadMenu.cs" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Old" t="Include">
           <e p="a" t="Include">
             <e p="UISkewImage.cs" t="Include" />
@@ -2191,8 +2256,12 @@
                 <e p="ActivityData.cs" t="Include" />
                 <e p="ActivityItem.cs" t="Include" />
               </e>
+              <e p="DealConfigData.cs" t="Include" />
               <e p="RoleTemplateData" t="Include">
                 <e p="TestScript.cs" t="Include" />
+              </e>
+              <e p="SkillData" t="Include">
+                <e p="SkillData.cs" t="Include" />
               </e>
             </e>
             <e p="Prefabs" t="Include">
@@ -2572,36 +2641,16 @@
             <e p="PrefsManager.cs" t="Include" />
           </e>
         </e>
-        <e p="Scripts" t="Include">
-          <e p="Bezier.cs" t="Include" />
-          <e p="EdgeVertices.cs" t="Include" />
+        <e p="ReferenceExplorer" t="Include">
+          <e p="Documentation.txt" t="Include" />
           <e p="Editor" t="Include">
-            <e p="HexCoordinatesDrawer.cs" t="Include" />
-            <e p="TextureArrayWizard.cs" t="Include" />
-          </e>
-          <e p="HexCell.cs" t="Include" />
-          <e p="HexCellPriorityQueue.cs" t="Include" />
-          <e p="HexCellShaderData.cs" t="Include" />
-          <e p="HexCoordinates.cs" t="Include" />
-          <e p="HexDirection.cs" t="Include" />
-          <e p="HexEdgeType.cs" t="Include" />
-          <e p="HexFeatureCollection.cs" t="Include" />
-          <e p="HexFeatureManager.cs" t="Include" />
-          <e p="HexGrid.cs" t="Include" />
-          <e p="HexGridChunk.cs" t="Include" />
-          <e p="HexHash.cs" t="Include" />
-          <e p="HexMapCamera.cs" t="Include" />
-          <e p="HexMapGenerator.cs" t="Include" />
-          <e p="HexMesh.cs" t="Include" />
-          <e p="HexMetrics.cs" t="Include" />
-          <e p="HexUnit.cs" t="Include" />
-          <e p="ListPool.cs" t="Include" />
-          <e p="UI" t="Include">
-            <e p="HexGameUI.cs" t="Include" />
-            <e p="HexMapEditor.cs" t="Include" />
-            <e p="NewMapMenu.cs" t="Include" />
-            <e p="SaveLoadItem.cs" t="Include" />
-            <e p="SaveLoadMenu.cs" t="Include" />
+            <e p="ReferenceExplorerSkin" t="Include">
+              <e p="Font" t="Include">
+                <e p="roboto" t="Include">
+                  <e p="Apache License.txt" t="Include" />
+                </e>
+              </e>
+            </e>
           </e>
         </e>
         <e p="Standard Assets" t="Include">

@@ -181,6 +181,10 @@ public class TradeSign : MonoBehaviour
         {
             BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole));
             GoodsSign[] goodsSigns = GetComponentsInChildren<GoodsSign>();
+            int tradeCount = cast.tradeList.Count;
+            int costNum = CalculateTC(true) * 4 / tradeCount;
+            StageGoal.My.CostPlayerGold(costNum);
+            StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
             for (int i = 0; i < goodsSigns.Length; i++)
             {
                 target.AddPruductToWareHouse(goodsSigns[i].productData);
@@ -272,7 +276,7 @@ public class TradeSign : MonoBehaviour
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         posList.Add(end.transform.position);
         countNumber++;
-        if (countNumber == 10)
+        if (countNumber == 10 && StageGoal.My.currentType != StageType.Normal)
         {
             if (PlayerData.My.yeWuXiTong[2])
             {
@@ -395,6 +399,26 @@ public class TradeSign : MonoBehaviour
         {
             StageGoal.My.CostPlayerGold(result);
             StageGoal.My.Expend(result, ExpendType.TradeCosts);
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// 预测回合交易成本扣除
+    /// </summary>
+    /// <returns></returns>
+    public int PredictTurnTradeCost()
+    {
+        int result = CalculateTC(true);
+        BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        {
+            result *= 4;
+        }
+        else if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+        {
+            int tradeCount = cast.tradeList.Count;
+            result = result * 4 / tradeCount;
         }
         return result;
     }
