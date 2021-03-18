@@ -16,6 +16,8 @@ public class Building : MonoBehaviour
 
     public List<Transform> consumerPathList = new List<Transform>();
 
+    public List<PathItem> pathItems = new List<PathItem>();
+
     public GameObject pathIndicator;
 
     public bool isFinishSpawn;
@@ -496,6 +498,27 @@ public class Building : MonoBehaviour
         GetComponent<LineRenderer>().textureMode = LineTextureMode.Stretch;
         GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
         GetComponent<LineRenderer>().SetPositions(twe.PathGetDrawPoints());
+        InitConsumerPath();
+    }
+
+    public void InitConsumerPath()
+    {
+        for (int i = 0; i < consumerPathList.Count; i++)
+        {
+            RaycastHit[] hit;
+            hit = Physics.RaycastAll(consumerPathList[i].position + new Vector3(0f, 5f, 0f), Vector3.down);
+            for (int j = 0; j < hit.Length; j++)
+            {
+                if (hit[j].transform.tag.Equals("MapLand"))
+                {
+                    //print(hit[j].transform);
+                    PathItem item = new PathItem();
+                    item.x = hit[j].transform.GetComponent<MapSign>().x;
+                    item.y = hit[j].transform.GetComponent<MapSign>().y;
+                    pathItems.Add(item);
+                }
+            }
+        }
     }
 
     // Update is called once per frame

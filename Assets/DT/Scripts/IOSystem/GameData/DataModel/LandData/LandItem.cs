@@ -15,3 +15,9 @@ public class LandsData
 {
     public List<LandItem> landItems = new List<LandItem>();
 }
+
+public class LandsDatas
+{
+    public List<string> landItems = new List<string>();
+}
+

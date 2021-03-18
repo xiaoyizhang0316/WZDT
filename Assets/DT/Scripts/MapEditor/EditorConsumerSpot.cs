@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static GameEnum;
@@ -7,14 +8,30 @@ public class EditorConsumerSpot : EditorLandItem
 {
     public int index;
 
-    public List<PathItem> paths;
+    public List<PathItem> paths = new List<PathItem>();
 
     public void AddPath(MapSign sign)
     {
-        PathItem item = new PathItem();
-        item.x = sign.x;
-        item.y = sign.y;
-        paths.Add(item);
+        if (!HasDuplicatePath(sign))
+        {
+            PathItem item = new PathItem();
+            item.x = sign.x;
+            item.y = sign.y;
+            paths.Add(item);
+        }
+
+    }
+
+    public bool HasDuplicatePath(MapSign sign)
+    {
+        for (int i = 0; i < paths.Count; i++)
+        {
+            if (paths[i].x == sign.x && paths[i].y == sign.y)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void DeletePath(MapSign sign)
@@ -45,7 +62,7 @@ public class EditorConsumerSpot : EditorLandItem
     }
 }
 
-[SerializeField]
+[Serializable]
 public struct PathItem
 {
     public int x;

@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using static GameEnum;
 
@@ -8,6 +10,80 @@ public class EditorMapManager : MapManager
     private float interval;
 
     private int consumerSpotCount = 0;
+
+    public string fteName;
+
+    public void SaveJSON()
+    {
+        EditorLandItem[] total = FindObjectsOfType<EditorLandItem>();
+        Debug.Log(total.Length);
+        LandsDatas data = new LandsDatas();
+        for (int i = 0; i < total.Length; i++)
+        {
+            LandItem item = new LandItem();
+            item.x = total[i].x.ToString();
+            item.y = total[i].y.ToString();
+            item.specialOption = total[i].GenerateSpecialOptionString();
+
+            string str = JsonUtility.ToJson(item);
+            Debug.Log(str);
+            data.landItems.Add(str);
+        }
+        string result = JsonUtility.ToJson(data,false);
+        Debug.Log(result);
+        string encode = result;
+#if UNITY_STANDALONE_WIN
+                    FileStream file = new FileStream( Directory.GetParent(Directory.GetParent(Application.dataPath)+"")
+                                 + "\\Build.json", FileMode.Create);
+#elif UNITY_STANDALONE_OSX
+        FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName)
+                                     + "/Temp.json", FileMode.Create);
+#endif
+        byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
+        file.Write(bts, 0, bts.Length);
+        if (file != null)
+        {
+            file.Close();
+        }
+    }
+
+    private void Start()
+    {
+        //JsonUtility.FromJson<LandsData>()
+        StreamReader streamReader = null;
+        try
+        {
+#if UNITY_STANDALONE_WIN
+            streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\Bu.M_Data\\Account.json");
+#elif UNITY_STANDALONE_OSX
+            streamReader = new StreamReader(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Temp.json");
+#endif
+
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+
+        //StreamReader streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json");
+        if (streamReader != null)
+        {
+            string str = streamReader.ReadToEnd();
+            while (string.IsNullOrEmpty(str))
+            {
+
+            }
+            streamReader.Close();
+            Debug.Log(str);
+            //string decode = CompressUtils.Decrypt(str);
+            LandsDatas json = JsonUtility.FromJson<LandsDatas>(str);
+            for (int i = 0; i < json.landItems.Count; i++)
+            {
+                LandItem item = JsonUtility.FromJson<LandItem>(json.landItems[i]);
+                Debug.Log(item.specialOption);
+            }
+        }
+    }
 
     private void Update()
     {
@@ -146,6 +222,7 @@ public class EditorMapManager : MapManager
                         Vector3 pos = hit[i].transform.position + new Vector3(0f, 0.3f, 0f);
                         GameObject go = Instantiate(Resources.Load<GameObject>(path));
                         go.transform.position = pos;
+                        go.AddComponent<EditorConsumerSpot>();
                     }
                     break;
                 }
@@ -164,6 +241,7 @@ public class EditorMapManager : MapManager
                         Vector3 pos = hit[i].transform.position + new Vector3(0f, 0.3f, 0f);
                         GameObject go = Instantiate(Resources.Load<GameObject>(path));
                         go.transform.position = pos;
+                        go.AddComponent<EditorConsumerEnd>();
                     }
                     break;
                 }

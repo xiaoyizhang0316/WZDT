@@ -31,7 +31,7 @@ public class MapManager : MonoSingleton<MapManager>
         //Invoke("CheckGrassAvailable", 1f);
         //Invoke("TestMethod", 1f);
         Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
-        SaveLoadMenu.Load(Application.streamingAssetsPath+"/FTE_1.map");
+        //SaveLoadMenu.Load(Application.streamingAssetsPath+"/FTE_1.map");
         
         InitStageNPCData();
       
