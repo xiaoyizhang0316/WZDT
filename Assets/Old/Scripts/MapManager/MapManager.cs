@@ -232,6 +232,10 @@ public class MapManager : MonoSingleton<MapManager>
         }
     }
 
+    /// <summary>
+    /// 读取关卡NPC配置表
+    /// </summary>
+    /// <param name="sceneName"></param>
     public void ReadStageNPCData(string sceneName)
     {
         //TODO
@@ -258,7 +262,10 @@ public class MapManager : MonoSingleton<MapManager>
         ParseStageNPCData(stageNPCsData);
     }
 
-
+    /// <summary>
+    /// 根据配置表生成实际NPC
+    /// </summary>
+    /// <param name="rawData"></param>
     public void ParseStageNPCData(StageNPCsData rawData)
     {
         //npc随机位置
@@ -301,7 +308,9 @@ public class MapManager : MonoSingleton<MapManager>
         }
     }
 
-
+    /// <summary>
+    /// 将特殊操作JSON文件导入到实际游戏场景中
+    /// </summary>
     public virtual void LoadJSON()
     {
         StreamReader streamReader = null;
@@ -340,6 +349,10 @@ public class MapManager : MonoSingleton<MapManager>
         }
     }
 
+    /// <summary>
+    /// 将每一个特殊操作导入到实际游戏场景中
+    /// </summary>
+    /// <param name="item"></param>
     public virtual void InitJSONItem(LandItem item)
     {
         List<string> options = item.specialOption.Split(',').ToList();

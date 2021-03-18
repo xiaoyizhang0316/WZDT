@@ -487,7 +487,10 @@ public class Building : MonoBehaviour
         
     }
 
-
+    /// <summary>
+    /// Parse JSON文件中的路径点
+    /// </summary>
+    /// <param name="str"></param>
     public void ParsePathList(string str)
     {
         List<string> paths = str.Split('.').ToList();
@@ -506,6 +509,9 @@ public class Building : MonoBehaviour
         InitConsumerPath();
     }
 
+    /// <summary>
+    /// 将坐标路径点转化为实际地块
+    /// </summary>
     public void InitConsumerPath()
     {
         consumerPathList.Clear();

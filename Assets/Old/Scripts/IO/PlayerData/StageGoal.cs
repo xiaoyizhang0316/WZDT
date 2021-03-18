@@ -150,8 +150,6 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public Dictionary<ScoreType, int> scoreStats = new Dictionary<ScoreType, int>();
 
-    public Dictionary<int, List<GameObject>> diveList = new Dictionary<int, List<GameObject>>();
-
     int starNum = 1;
     string[] stars = new string[] { "1", "0", "0" };
     PlayerReplay tempReplay;

@@ -19,6 +19,9 @@ public class EditorMapManager : MapManager
 
     public GameObject consumerEnd;
 
+    /// <summary>
+    /// 从编辑器场景导出保存一个特殊操作的JSON文件
+    /// </summary>
     public void SaveJSON()
     {
         EditorLandItem[] total = FindObjectsOfType<EditorLandItem>();
@@ -59,7 +62,9 @@ public class EditorMapManager : MapManager
 
     }
 
-
+    /// <summary>
+    /// 将JSON文件导入到场景编辑器中
+    /// </summary>
     public override void LoadJSON()
     {
         StreamReader streamReader = null;
@@ -98,6 +103,10 @@ public class EditorMapManager : MapManager
         }
     }
 
+    /// <summary>
+    /// 将每一个特殊操作导入到编辑器场景中
+    /// </summary>
+    /// <param name="item"></param>
     public override void InitJSONItem(LandItem item)
     {
         List<string> options = item.specialOption.Split(',').ToList();

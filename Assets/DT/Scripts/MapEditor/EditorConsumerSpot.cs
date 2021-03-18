@@ -11,6 +11,7 @@ public class EditorConsumerSpot : EditorLandItem
 
     public List<PathItem> paths;
 
+
     public void ParsePathItem(string str)
     {
         List<string> pathPoint = str.Split('.').ToList();
