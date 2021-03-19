@@ -187,6 +187,7 @@ public class EditorMapManager : MapManager
 
     public void CreatPrb(GameObject game)
     {
+        game.GetComponent<EditorConsumerSpot>().index = count;
         count++;
         GameObject gameobj = Instantiate(PlayerStartPointUIPrb, PlayerStartPointTF);
         gameobj.GetComponent<PlayStartSign>().port = game;
