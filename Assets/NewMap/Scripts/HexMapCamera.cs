@@ -37,7 +37,7 @@ public class HexMapCamera : MonoBehaviour {
 
 	void OnEnable () {
 		instance = this;
-		ValidatePosition();
+		//ValidatePosition();
 	}
 
 	void Update () {
