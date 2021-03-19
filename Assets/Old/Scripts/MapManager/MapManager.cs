@@ -39,13 +39,17 @@ public class MapManager : MonoSingleton<MapManager>
         //Invoke("CheckGrassAvailable", 1f);
         //Invoke("TestMethod", 1f);
         Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
-        //SaveLoadMenu.Load(Application.streamingAssetsPath+"/FTE_1.map");
+        SaveLoadMenu.LoadActualScene(Application.streamingAssetsPath+"/"+SceneManager.GetActiveScene().name  + ".map");
         //buildTF = transform.root
         Debug.Log(transform.root);
         InitStageNPCData();
         //Invoke("LoadJSON",3);
     }
 
+    public virtual void SaveJSON(string name)
+    {
+
+    }
 
     /// <summary>
     /// 检测地块是否能放置建筑
@@ -312,17 +316,17 @@ public class MapManager : MonoSingleton<MapManager>
     /// <summary>
     /// 将特殊操作JSON文件导入到实际游戏场景中
     /// </summary>
-    public virtual void LoadJSON()
+    public virtual void LoadJSON(string fteName)
     {
+        string name = SceneManager.GetActiveScene().name;
         StreamReader streamReader = null;
         try
         {
 #if UNITY_STANDALONE_WIN
-            streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\Bu.M_Data\\Account.json");
-#elif UNITY_STANDALONE_OSX
             streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
+#elif UNITY_STANDALONE_OSX
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + name + ".json");
 #endif
-
         }
         catch (Exception ex)
         {
