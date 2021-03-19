@@ -5,6 +5,7 @@ using static GameEnum;
 using System;
 using DG.Tweening;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Building : MonoBehaviour
 {
@@ -483,42 +484,36 @@ public class Building : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //List<Vector3> list = new List<Vector3>();
-        //for (int i = 0; i < consumerPathList.Count; i++)
-        //{
-        //    list.Add(consumerPathList[i].position + new Vector3(0f, 0.1f, 0f));
-        //}
-        //GameObject go = Instantiate(pathIndicator, transform);
-        //go.transform.position = transform.position;
-        //Tweener twe = go.transform.DOPath(list.ToArray(), 0.1f, PathType.CatmullRom, PathMode.Full3D).OnComplete(() =>
-        //{
-        //    Destroy(go);
-        //}).SetEase(Ease.Linear).SetLookAt(0.01f);
-        //twe.ForceInit();
-        //GetComponent<LineRenderer>().textureMode = LineTextureMode.Stretch;
-        //GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
-        //GetComponent<LineRenderer>().SetPositions(twe.PathGetDrawPoints());
-        Invoke( "InitConsumerPath",5);
+        
     }
 
+    /// <summary>
+    /// Parse JSON文件中的路径点
+    /// </summary>
+    /// <param name="str"></param>
+    public void ParsePathList(string str)
+    {
+        List<string> paths = str.Split('.').ToList();
+        for (int i = 0; i < paths.Count; i++)
+        {
+            if (paths[i].Length > 0)
+            {
+                int x = int.Parse(paths[i].Split('|')[0]);
+                int y = int.Parse(paths[i].Split('|')[1]);
+                PathItem item = new PathItem();
+                item.x = x;
+                item.y = y;
+                pathItems.Add(item);
+            }
+        }
+        InitConsumerPath();
+    }
+
+    /// <summary>
+    /// 将坐标路径点转化为实际地块
+    /// </summary>
     public void InitConsumerPath()
     {
-        //for (int i = 0; i < consumerPathList.Count; i++)
-        //{
-        //    RaycastHit[] hit;
-        //    hit = Physics.RaycastAll(consumerPathList[i].position + new Vector3(0f, 5f, 0f), Vector3.down);
-        //    for (int j = 0; j < hit.Length; j++)
-        //    {
-        //        if (hit[j].transform.tag.Equals("MapLand"))
-        //        {
-        //            //print(hit[j].transform);
-        //            PathItem item = new PathItem();
-        //            item.x = hit[j].transform.GetComponent<MapSign>().x;
-        //            item.y = hit[j].transform.GetComponent<MapSign>().y;
-        //            pathItems.Add(item);
-        //        }
-        //    }
-        //}
         consumerPathList.Clear();
         for (int i = 0; i < pathItems.Count; i++)
         {

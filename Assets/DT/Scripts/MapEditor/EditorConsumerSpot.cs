@@ -3,11 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using static GameEnum;
 using System;
+using System.Linq;
+
 public class EditorConsumerSpot : EditorLandItem
 {
     public int index;
 
     public List<PathItem> paths;
+
+
+    public void ParsePathItem(string str)
+    {
+        List<string> pathPoint = str.Split('.').ToList();
+        for (int i = 0; i < pathPoint.Count; i++)
+        {
+            if (pathPoint[i].Length > 0)
+            {
+                int x = int.Parse(pathPoint[i].Split('|')[0]);
+                int y = int.Parse(pathPoint[i].Split('|')[1]);
+                PathItem item = new PathItem();
+                item.x = x;
+                item.y = y;
+                paths.Add(item);
+            }
+        }
+    }
 
     public void AddPath( int x, int y)
     {
