@@ -19,10 +19,12 @@ public class EditorMapManager : MapManager
 
     public GameObject consumerEnd;
 
+    public string sceneName;
+
     /// <summary>
     /// 从编辑器场景导出保存一个特殊操作的JSON文件
     /// </summary>
-    public void SaveJSON()
+    public new void SaveJSON(string fteName)
     {
         EditorLandItem[] total = FindObjectsOfType<EditorLandItem>();
         Debug.Log(total.Length);
@@ -46,7 +48,7 @@ public class EditorMapManager : MapManager
                                  + "\\Build.json", FileMode.Create);
 #elif UNITY_STANDALONE_OSX
         FileStream file = new FileStream(Application.streamingAssetsPath
-                                     + "/FTEConfig/Temp.json", FileMode.Create);
+                                     + "/FTEConfig/" + fteName + ".json", FileMode.Create);
 #endif
         byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
         file.Write(bts, 0, bts.Length);
@@ -65,7 +67,7 @@ public class EditorMapManager : MapManager
     /// <summary>
     /// 将JSON文件导入到场景编辑器中
     /// </summary>
-    public override void LoadJSON()
+    public override void LoadJSON(string fteName)
     {
         StreamReader streamReader = null;
         try
@@ -73,7 +75,7 @@ public class EditorMapManager : MapManager
 #if UNITY_STANDALONE_WIN
             streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
 #elif UNITY_STANDALONE_OSX
-            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + fteName + ".json");
 #endif
 
         }

@@ -39,12 +39,17 @@ public class MapManager : MonoSingleton<MapManager>
         //Invoke("CheckGrassAvailable", 1f);
         //Invoke("TestMethod", 1f);
         Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
-        SaveLoadMenu.Load(Application.streamingAssetsPath+"/FTE_1.map");
-        
+        SaveLoadMenu.LoadActualScene(Application.streamingAssetsPath+"/"+SceneManager.GetActiveScene().name  + ".map");
+        //buildTF = transform.root
+        Debug.Log(transform.root);
         InitStageNPCData();
-        Invoke("LoadJSON",3);
+        //Invoke("LoadJSON",3);
     }
 
+    public virtual void SaveJSON(string name)
+    {
+
+    }
 
     /// <summary>
     /// 检测地块是否能放置建筑
@@ -311,17 +316,17 @@ public class MapManager : MonoSingleton<MapManager>
     /// <summary>
     /// 将特殊操作JSON文件导入到实际游戏场景中
     /// </summary>
-    public virtual void LoadJSON()
+    public virtual void LoadJSON(string fteName)
     {
+        string name = SceneManager.GetActiveScene().name;
         StreamReader streamReader = null;
         try
         {
 #if UNITY_STANDALONE_WIN
             streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
 #elif UNITY_STANDALONE_OSX
-            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + name + ".json");
 #endif
-
         }
         catch (Exception ex)
         {
@@ -580,40 +585,6 @@ public class MapManager : MonoSingleton<MapManager>
                 }
                 interval = 0f;
             }
-
-            //地块升高
-            //if (Input.GetKeyDown(KeyCode.UpArrow))
-            //{
-            //    //print("press up");
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            hit[i].transform.localPosition += new Vector3(0f, 0.3f, 0f);
-            //            hit[i].transform.GetComponent<MapSign>().height += 1;
-            //        }
-            //        break;
-            //    }
-            //    interval = 0f;
-            //}
-            ////地块降低
-            //if (Input.GetKeyDown(KeyCode.DownArrow))
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            hit[i].transform.localPosition += new Vector3(0f, -0.3f, 0f);
-            //            hit[i].transform.GetComponent<MapSign>().height -= 1;
-            //        }
-            //        break;
-            //    }
-            //    interval = 0f;
-            //}
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
