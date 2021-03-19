@@ -15,8 +15,13 @@ public class EditorMapManager : MapManager
 
     public string fteName;
 
-    public Transform buildTF;
+    public GameObject consumerSpotPrb;
 
+    public GameObject consumerEnd;
+
+    /// <summary>
+    /// 从编辑器场景导出保存一个特殊操作的JSON文件
+    /// </summary>
     public void SaveJSON()
     {
         EditorLandItem[] total = FindObjectsOfType<EditorLandItem>();
@@ -40,8 +45,8 @@ public class EditorMapManager : MapManager
                     FileStream file = new FileStream( Directory.GetParent(Directory.GetParent(Application.dataPath)+"")
                                  + "\\Build.json", FileMode.Create);
 #elif UNITY_STANDALONE_OSX
-        FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName)
-                                     + "/Temp.json", FileMode.Create);
+        FileStream file = new FileStream(Application.streamingAssetsPath
+                                     + "/FTEConfig/Temp.json", FileMode.Create);
 #endif
         byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
         file.Write(bts, 0, bts.Length);
@@ -57,8 +62,10 @@ public class EditorMapManager : MapManager
 
     }
 
-
-    public void LoadJSON()
+    /// <summary>
+    /// 将JSON文件导入到场景编辑器中
+    /// </summary>
+    public override void LoadJSON()
     {
         StreamReader streamReader = null;
         try
@@ -66,7 +73,7 @@ public class EditorMapManager : MapManager
 #if UNITY_STANDALONE_WIN
             streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\Bu.M_Data\\Account.json");
 #elif UNITY_STANDALONE_OSX
-            streamReader = new StreamReader(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
 #endif
 
         }
@@ -90,12 +97,17 @@ public class EditorMapManager : MapManager
             for (int i = 0; i < json.landItems.Count; i++)
             {
                 LandItem item = JsonUtility.FromJson<LandItem>(json.landItems[i]);
-                Debug.Log(item.specialOption);
+                InitJSONItem(item);
+                //Debug.Log(item.specialOption);
             }
         }
     }
 
-    public void InitJSONItem(LandItem item)
+    /// <summary>
+    /// 将每一个特殊操作导入到编辑器场景中
+    /// </summary>
+    /// <param name="item"></param>
+    public override void InitJSONItem(LandItem item)
     {
         List<string> options = item.specialOption.Split(',').ToList();
         int x = int.Parse(item.x);
@@ -112,29 +124,50 @@ public class EditorMapManager : MapManager
                         //地块下沉
                         if(options.Count <= 1)
                         {
-                            //TODO 地块下沉处理
-                            HexGrid.My.GetCell(x, y);
+                            MapSign cell = GetMapSignByXY(x, y);
+                            int time = int.Parse(options[i].Split('_')[1]);
+                            cell.gameObject.AddComponent<EditorLandItem>();
+                            cell.gameObject.GetComponent<EditorLandItem>().x = x;
+                            cell.gameObject.GetComponent<EditorLandItem>().y = y;
+                            cell.gameObject.GetComponent<EditorLandItem>().isUnder = true;
+                            cell.gameObject.GetComponent<EditorLandItem>().underTime =moveTime;
                         }
-                        //出生点&终点下沉
                         else
                         {
                             isItemMoveDown = true;
                             moveTime = int.Parse(options[i].Split('_')[1]);
-                            //TODO 出生点&终点 下沉处理
                         }
                         break;
                     }
                 case LandOptionType.ConsumerSpot:
                     {
                         int index = int.Parse(options[i].Split('_')[1]);
-                        HexCell cell = HexGrid.My.GetCell(x, y);
-
+                        MapSign cell = GetMapSignByXY(x,y);
+                        GameObject go = Instantiate(consumerSpotPrb);
+                        go.transform.position = cell.transform.position;
+                        go.GetComponent<EditorConsumerSpot>().x = x;
+                        go.GetComponent<EditorConsumerSpot>().y = y;
+                        go.GetComponent<EditorConsumerSpot>().ParsePathItem(options[i].Split('_')[2]);
+                        if (isItemMoveDown)
+                        {
+                            go.GetComponent<EditorConsumerSpot>().isUnder = true;
+                            go.GetComponent<EditorConsumerSpot>().underTime = moveTime;
+                        }
+                        CreatePrb(go, index);
                         break;
                     }
                 case LandOptionType.End:
                     {
-                        HexCell cell = HexGrid.My.GetCell(x, y);
-
+                        MapSign cell = GetMapSignByXY(x, y);
+                        GameObject go = Instantiate(consumerEnd);
+                        go.transform.position = cell.transform.position;
+                        go.GetComponent<EditorConsumerEnd>().x = x;
+                        go.GetComponent<EditorConsumerEnd>().y = y;
+                        if (isItemMoveDown)
+                        {
+                            go.GetComponent<EditorConsumerEnd>().isUnder = true;
+                            go.GetComponent<EditorConsumerEnd>().underTime = moveTime;
+                        }
                         break;
                     }
                 default:
@@ -156,6 +189,13 @@ public class EditorMapManager : MapManager
         GameObject gameobj = Instantiate(PlayerStartPointUIPrb, PlayerStartPointTF);
         gameobj.GetComponent<PlayStartSign>().port = game;
         gameobj.GetComponentInChildren<Text>().text = count.ToString();
+    }
+
+    public void CreatePrb(GameObject game,int index)
+    {
+        GameObject gameobj = Instantiate(PlayerStartPointUIPrb, PlayerStartPointTF);
+        gameobj.GetComponent<PlayStartSign>().port = game;
+        gameobj.GetComponentInChildren<Text>().text = index.ToString();
     }
     
 }

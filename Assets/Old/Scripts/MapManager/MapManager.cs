@@ -5,6 +5,9 @@ using IOIntensiveFramework.MonoSingleton;
 using static GameEnum;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System;
+using System.Linq;
 
 public class MapManager : MonoSingleton<MapManager>
 {
@@ -23,6 +26,11 @@ public class MapManager : MonoSingleton<MapManager>
     public GameObject skillOneEffect;
     public GameObject skillTwoEffect;
     public GameObject skillThreeEffect;
+
+    public Transform buildTF;
+
+    public Dictionary<int, List<GameObject>> diveList = new Dictionary<int, List<GameObject>>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +42,7 @@ public class MapManager : MonoSingleton<MapManager>
         SaveLoadMenu.Load(Application.streamingAssetsPath+"/FTE_1.map");
         
         InitStageNPCData();
-      
+        Invoke("LoadJSON",3);
     }
 
 
@@ -224,6 +232,10 @@ public class MapManager : MonoSingleton<MapManager>
         }
     }
 
+    /// <summary>
+    /// 读取关卡NPC配置表
+    /// </summary>
+    /// <param name="sceneName"></param>
     public void ReadStageNPCData(string sceneName)
     {
         //TODO
@@ -250,7 +262,10 @@ public class MapManager : MonoSingleton<MapManager>
         ParseStageNPCData(stageNPCsData);
     }
 
-
+    /// <summary>
+    /// 根据配置表生成实际NPC
+    /// </summary>
+    /// <param name="rawData"></param>
     public void ParseStageNPCData(StageNPCsData rawData)
     {
         //npc随机位置
@@ -274,7 +289,7 @@ public class MapManager : MonoSingleton<MapManager>
             }
             for (int i = 0; i < npcs.Count; i++)
             {
-                int index = Random.Range(0, pos.Count);
+                int index = UnityEngine.Random.Range(0, pos.Count);
                 int x = int.Parse(pos[index].Split(',')[0]);
                 int y = int.Parse(pos[index].Split(',')[1]);
                 pos.RemoveAt(index);
@@ -291,7 +306,133 @@ public class MapManager : MonoSingleton<MapManager>
                 PutNPC(npc);
             }
         }
+    }
 
+    /// <summary>
+    /// 将特殊操作JSON文件导入到实际游戏场景中
+    /// </summary>
+    public virtual void LoadJSON()
+    {
+        StreamReader streamReader = null;
+        try
+        {
+#if UNITY_STANDALONE_WIN
+            streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\Bu.M_Data\\Account.json");
+#elif UNITY_STANDALONE_OSX
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
+#endif
+
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex.Message);
+        }
+
+        //StreamReader streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\StartGame_Data\\Account.json");
+        if (streamReader != null)
+        {
+            string str = streamReader.ReadToEnd();
+            while (string.IsNullOrEmpty(str))
+            {
+
+            }
+            streamReader.Close();
+            Debug.Log(str);
+            //string decode = CompressUtils.Decrypt(str);
+            LandsDatas json = JsonUtility.FromJson<LandsDatas>(str);
+            for (int i = 0; i < json.landItems.Count; i++)
+            {
+                LandItem item = JsonUtility.FromJson<LandItem>(json.landItems[i]);
+                InitJSONItem(item);
+                Debug.Log(item.specialOption);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 将每一个特殊操作导入到实际游戏场景中
+    /// </summary>
+    /// <param name="item"></param>
+    public virtual void InitJSONItem(LandItem item)
+    {
+        List<string> options = item.specialOption.Split(',').ToList();
+        int x = int.Parse(item.x);
+        int y = int.Parse(item.y);
+        bool isItemMoveDown = false;
+        int moveTime = 0;
+        for (int i = 0; i < options.Count; i++)
+        {
+            LandOptionType type = (LandOptionType)Enum.Parse(typeof(LandOptionType), options[i].Split('_')[0]);
+            switch (type)
+            {
+                case LandOptionType.MoveDown:
+                    {
+                        //地块下沉
+                        if (options.Count <= 1)
+                        {
+                            //TODO 地块下沉处理
+                            MapSign cell = GetMapSignByXY(x, y);
+                        }
+                        //出生点&终点下沉
+                        else
+                        {
+                            isItemMoveDown = true;
+                            moveTime = int.Parse(options[i].Split('_')[1]);
+
+                        }
+                        break;
+                    }
+                case LandOptionType.ConsumerSpot:
+                    {
+                        int index = int.Parse(options[i].Split('_')[1]);
+                        MapSign cell = GetMapSignByXY(x, y);
+                        string path = "Prefabs/Common/ConsumerSpot" + (index + 1).ToString();
+                        Vector3 pos = cell.transform.position + new Vector3(0f, 0.1f, 0f);
+                        GameObject go = Instantiate(Resources.Load<GameObject>(path),buildTF);
+                        go.transform.position = pos;
+                        go.GetComponent<Building>().ParsePathList(options[i].Split('_')[2]);
+                        if (isItemMoveDown)
+                        {
+                            //TODO 出生点下沉处理
+                        }
+                        break;
+                    }
+                case LandOptionType.End:
+                    {
+                        MapSign cell = GetMapSignByXY(x, y);
+                        string path = "Prefabs/Common/EndPoint";
+                        Vector3 pos = cell.transform.position + new Vector3(0f, 0.1f, 0f);
+                        GameObject go = Instantiate(Resources.Load<GameObject>(path), buildTF);
+                        go.transform.position = pos;
+                        if (isItemMoveDown)
+                        {
+                            //TODO 终点下沉处理
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 将下沉物体注册进下沉监测字典中
+    /// </summary>
+    /// <param name="time"></param>
+    /// <param name="go"></param>
+    public void AddDive(int time,GameObject go)
+    {
+        if (diveList.ContainsKey(time))
+        {
+            diveList[time].Add(go);
+        }
+        else
+        {
+            List<GameObject> list = new List<GameObject>();
+            list.Add(go);
+            diveList.Add(time, list);
+        }
     }
 
     /// <summary>

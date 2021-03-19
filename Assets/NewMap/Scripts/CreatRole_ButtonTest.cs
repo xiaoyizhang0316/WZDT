@@ -67,7 +67,7 @@ public class CreatRole_ButtonTest : MonoBehaviour, IDragHandler, IPointerClickHa
        
      
       
-        role = Instantiate(RolePrb   );
+        role = Instantiate(RolePrb);
         if (isPlaystart)
         {
             Camera.main.GetComponent<EditorMapManager>().CreatPrb(role);
