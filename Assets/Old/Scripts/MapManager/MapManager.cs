@@ -39,10 +39,11 @@ public class MapManager : MonoSingleton<MapManager>
         //Invoke("CheckGrassAvailable", 1f);
         //Invoke("TestMethod", 1f);
         Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
-        SaveLoadMenu.Load(Application.streamingAssetsPath+"/FTE_1.map");
-        
+        //SaveLoadMenu.Load(Application.streamingAssetsPath+"/FTE_1.map");
+        //buildTF = transform.root
+        Debug.Log(transform.root);
         InitStageNPCData();
-        Invoke("LoadJSON",3);
+        //Invoke("LoadJSON",3);
     }
 
 
@@ -580,40 +581,6 @@ public class MapManager : MonoSingleton<MapManager>
                 }
                 interval = 0f;
             }
-
-            //地块升高
-            //if (Input.GetKeyDown(KeyCode.UpArrow))
-            //{
-            //    //print("press up");
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            hit[i].transform.localPosition += new Vector3(0f, 0.3f, 0f);
-            //            hit[i].transform.GetComponent<MapSign>().height += 1;
-            //        }
-            //        break;
-            //    }
-            //    interval = 0f;
-            //}
-            ////地块降低
-            //if (Input.GetKeyDown(KeyCode.DownArrow))
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            hit[i].transform.localPosition += new Vector3(0f, -0.3f, 0f);
-            //            hit[i].transform.GetComponent<MapSign>().height -= 1;
-            //        }
-            //        break;
-            //    }
-            //    interval = 0f;
-            //}
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
