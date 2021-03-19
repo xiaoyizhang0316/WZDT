@@ -44,8 +44,8 @@ public class EditorMapManager : MapManager
         Debug.Log(result);
         string encode = result;
 #if UNITY_STANDALONE_WIN
-                    FileStream file = new FileStream( Directory.GetParent(Directory.GetParent(Application.dataPath)+"")
-                                 + "\\Build.json", FileMode.Create);
+                    FileStream file =new FileStream(Application.streamingAssetsPath
+                                                    + "/FTEConfig/" + fteName + ".json", FileMode.Create);
 #elif UNITY_STANDALONE_OSX
         FileStream file = new FileStream(Application.streamingAssetsPath
                                      + "/FTEConfig/" + fteName + ".json", FileMode.Create);
