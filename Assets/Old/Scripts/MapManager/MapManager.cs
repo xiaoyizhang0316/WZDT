@@ -319,7 +319,7 @@ public class MapManager : MonoSingleton<MapManager>
 #if UNITY_STANDALONE_WIN
             streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\Bu.M_Data\\Account.json");
 #elif UNITY_STANDALONE_OSX
-            streamReader = new StreamReader(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
 #endif
 
         }

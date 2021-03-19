@@ -45,8 +45,8 @@ public class EditorMapManager : MapManager
                     FileStream file = new FileStream( Directory.GetParent(Directory.GetParent(Application.dataPath)+"")
                                  + "\\Build.json", FileMode.Create);
 #elif UNITY_STANDALONE_OSX
-        FileStream file = new FileStream(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName)
-                                     + "/Temp.json", FileMode.Create);
+        FileStream file = new FileStream(Application.streamingAssetsPath
+                                     + "/FTEConfig/Temp.json", FileMode.Create);
 #endif
         byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
         file.Write(bts, 0, bts.Length);
@@ -73,7 +73,7 @@ public class EditorMapManager : MapManager
 #if UNITY_STANDALONE_WIN
             streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\Bu.M_Data\\Account.json");
 #elif UNITY_STANDALONE_OSX
-            streamReader = new StreamReader(Directory.GetParent(Directory.GetParent(Directory.GetParent(Application.dataPath).FullName).FullName) + "/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
 #endif
 
         }
