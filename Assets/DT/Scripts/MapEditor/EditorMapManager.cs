@@ -24,7 +24,7 @@ public class EditorMapManager : MapManager
     /// <summary>
     /// 从编辑器场景导出保存一个特殊操作的JSON文件
     /// </summary>
-    public new void SaveJSON(string fteName)
+    public override void SaveJSON(string fteName)
     {
         EditorLandItem[] total = FindObjectsOfType<EditorLandItem>();
         Debug.Log(total.Length);
