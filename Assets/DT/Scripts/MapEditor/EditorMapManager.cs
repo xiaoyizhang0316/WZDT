@@ -71,7 +71,7 @@ public class EditorMapManager : MapManager
         try
         {
 #if UNITY_STANDALONE_WIN
-            streamReader = new StreamReader( Directory.GetParent(Directory.GetParent(Application.dataPath)+"") + "\\Bu.M_Data\\Account.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
 #elif UNITY_STANDALONE_OSX
             streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
 #endif
