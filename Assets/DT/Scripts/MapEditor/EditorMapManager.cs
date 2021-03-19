@@ -73,7 +73,7 @@ public class EditorMapManager : MapManager
         try
         {
 #if UNITY_STANDALONE_WIN
-            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + fteName + ".json");
 #elif UNITY_STANDALONE_OSX
             streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + fteName + ".json");
 #endif
