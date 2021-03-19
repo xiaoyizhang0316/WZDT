@@ -232,7 +232,7 @@ namespace Fungus
             }
             else
             {
-                Debug.LogError("Collection cannot get variable " + variable.Key + ". Is not matching type:" + typeof(T).Name);
+                //Debug.LogError("Collection cannot get variable " + variable.Key + ". Is not matching type:" + typeof(T).Name);
             }
         }
 
@@ -434,7 +434,7 @@ namespace Fungus
                 return (T)oAs.Value;
             }
 
-            Debug.LogError("Collection cannot promote " + o.GetType().Name + " to " + typeof(T).Name);
+            //Debug.LogError("Collection cannot promote " + o.GetType().Name + " to " + typeof(T).Name);
             return default(T);
         }
 
@@ -445,7 +445,7 @@ namespace Fungus
                 return (GenericCollection<T>)col;
             }
 
-            Debug.LogError("Collection cannot promote " + col.GetType().Name + " to " + this.GetType().Name);
+            //Debug.LogError("Collection cannot promote " + col.GetType().Name + " to " + this.GetType().Name);
             return null;
         }
     }

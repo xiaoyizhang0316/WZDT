@@ -112,7 +112,7 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     {
         foreach (var VARIABLE in dataDic)
         {
-            Debug.Log(VARIABLE.Key + "Key" + VARIABLE.Value + "Value");
+            //Debug.Log(VARIABLE.Key + "Key" + VARIABLE.Value + "Value");
         }
     }
 

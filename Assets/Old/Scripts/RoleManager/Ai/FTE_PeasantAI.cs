@@ -16,7 +16,7 @@ public class FTE_PeasantAI : MonoBehaviour
     {
         if (GetComponent<BaseMapRole>().baseRoleData.inMap && GetComponent<BaseMapRole>().AI && !aiStart)
         {
-            Debug.Log(aiStart);
+            //Debug.Log(aiStart);
             double selfId = GetComponent<BaseMapRole>().baseRoleData.ID;
             aiStart = true;
         }

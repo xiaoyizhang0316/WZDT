@@ -60,7 +60,7 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             effect.transform.localPosition = Vector3.zero;
                             TradeManager.My.ChangeNPCRoleRecord(hit.transform.GetComponentInParent<BaseMapRole>());
                             Destroy(effect, 1f);
-                            Debug.Log("使用多棱镜成功");
+                            //Debug.Log("使用多棱镜成功");
                             DataUploadManager.My.AddData(DataEnum.使用多棱镜);
                             if (!PlayerData.My.isSOLO)
                             {

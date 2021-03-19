@@ -29,7 +29,7 @@ public class BoomTrigger : MonoBehaviour
             if (signs[i].isCanSelect &&
                 radius >= Vector3.Distance(gameObject.transform.position, signs[i].transform.position))
             {
-                Debug.Log("打到"+signs[i].name);
+                //Debug.Log("打到"+signs[i].name);
                 signs[i].OnHit(ref gameObject.GetComponent<GoodsSign>().productData);
                 if (PlayerData.My.dingWei[4] && isCanRestart)
                 {

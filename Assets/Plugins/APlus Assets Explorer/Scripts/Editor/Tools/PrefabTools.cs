@@ -312,7 +312,7 @@ namespace APlus
             string path = GetGeneratedPath(go);
             var prefab = PrefabUtility.CreateEmptyPrefab(path);
             PrefabUtility.ReplacePrefab(go, prefab, option);
-            Debug.Log(string.Format("New Prefab: {0}", path));
+            //Debug.Log(string.Format("New Prefab: {0}", path));
         }
 
         private static string GetGeneratedPath(GameObject go)

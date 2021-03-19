@@ -147,7 +147,7 @@ public class GoodsSign : MonoBehaviour
                         if(targetIndex != -1)
                         {
                             GameObject go = BulletObjectPool.My.GetBullet(BulletType.NormalPP);
-                            Debug.Log("初始化子弹" + go.name);
+                            //Debug.Log("初始化子弹" + go.name);
                             go.GetComponent<GoodsSign>().productData = productData;
                             go.GetComponent<GoodsSign>().lunch = lunch;
                             go.GetComponent<GoodsSign>().isCopy = true;
@@ -158,7 +158,7 @@ public class GoodsSign : MonoBehaviour
                             go.transform.localPosition = new Vector3(0, 0.5f, 0);
                             go.transform.SetParent(target.transform);
 
-                            Debug.Log("初始化拖尾" + go.name);
+                            //Debug.Log("初始化拖尾" + go.name);
                             if(!PlayerData.My.isPrediction)
                                 go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().tile);
                             float flyTime2 = Vector3.Distance(consumeSigns[targetIndex].transform.position, go.transform.position) / 24f;
@@ -173,7 +173,7 @@ public class GoodsSign : MonoBehaviour
                                 {
                                     if (go.GetComponent<GoodsSign>().target != null)
                                     {
-                                        Debug.Log("初始化爆炸" + go.name);
+                                        //Debug.Log("初始化爆炸" + go.name);
                                         if (!PlayerData.My.isPrediction)
                                         {
                                             go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().explosions);

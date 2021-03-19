@@ -18,13 +18,13 @@ public class FTE_0_Step_3 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        Debug.Log("结束教学 " + currentStepIndex);
+        //Debug.Log("结束教学 " + currentStepIndex);
         yield break;
     }
 
     public override IEnumerator StepStart()
     {
-        Debug.Log("开始教学 " + currentStepIndex);
+        //Debug.Log("开始教学 " + currentStepIndex);
         afterEntry = HandMove;
         
         yield return new WaitForSeconds(0.2f);

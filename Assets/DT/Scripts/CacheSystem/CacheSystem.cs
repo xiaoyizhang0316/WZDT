@@ -26,7 +26,7 @@ public class CacheSystem : MonoSingleton<CacheSystem>
             cachelist1.Add(cacheData);
             datas1.CacheData = cachelist1;
             PrefsManager.SetValue("cache", datas1);
-            Debug.Log("创建成功");
+            //Debug.Log("创建成功");
         }
         else
         {
@@ -39,7 +39,7 @@ public class CacheSystem : MonoSingleton<CacheSystem>
             CacheDatas datas = new CacheDatas();
             datas.CacheData = cachelist;
             PrefsManager.SetValue("cache", datas);
-            Debug.Log("储存成功");
+            //Debug.Log("储存成功");
 
         }
     }
@@ -85,13 +85,13 @@ public class CacheSystem : MonoSingleton<CacheSystem>
            var data =  Pop();
            if (data == null)
            {
-               Debug.Log("所有的已经弹出");
+               //Debug.Log("所有的已经弹出");
                return;
            }
 
-           Debug.Log(data.json);
-            Debug.Log(data.path);
-            Debug.Log(data.Par);
+           //Debug.Log(data.json);
+            //Debug.Log(data.path);
+            //Debug.Log(data.Par);
            
         }
         

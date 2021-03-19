@@ -30,7 +30,7 @@ public class FTE_2_Step_5 : BaseStep
        
          MaskManager.My.Open(4,90);
          MaskManager.My.Open(5,180);
-        Debug.Log("名字"+  mid.transform.GetChild(0) .name);
+        //Debug.Log("名字"+  mid.transform.GetChild(0) .name);
          mid.transform.GetChild(0) .GetComponent<Image>().DOFade(0.1f, 0.5f).OnComplete(() =>
          {
              mid.transform.GetChild(0) .GetComponent<Image>().DOFade(1f, 0.5f).OnComplete(() =>
@@ -82,10 +82,10 @@ public class FTE_2_Step_5 : BaseStep
 
     public void PlayNext()
     {
-        Debug.Log("检测");
+        //Debug.Log("检测");
         if (CreatRoleManager.My.EquipList.Count>0)
         {
-            Debug.Log("检测成功");
+            //Debug.Log("检测成功");
 
             StopCurrentStep();
         }
@@ -93,7 +93,7 @@ public class FTE_2_Step_5 : BaseStep
         {
             gameObject.transform.DOScale(1, 0.1f).OnComplete(() =>
             {
-                Debug.Log("检测失败");
+                //Debug.Log("检测失败");
 
                 PlayNext();
             }).Play();

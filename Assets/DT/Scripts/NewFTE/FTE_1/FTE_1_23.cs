@@ -36,7 +36,7 @@ public class FTE_1_23 : BaseGuideStep
     {
         if (panel.activeSelf)
         {
-            Debug.Log("当前");
+            //Debug.Log("当前");
             return true;
         }
 

@@ -74,7 +74,7 @@ public class ProductMelon_Lightning : BaseSkill
         }
         if (role.warehouse.Count > numberNeed && role.warehouse[0].bulletType == BulletType.NormalPP)
         {
-            print("产闪电链");
+            //print("产闪电链");
             ProductData data = role.warehouse[0];
             for (int i = 0; i < numberNeed; i++)
             {

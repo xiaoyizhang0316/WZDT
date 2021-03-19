@@ -463,6 +463,8 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// <param name="id"></param>
     public void UseConsumable(int id)
     {
+        // 使用道具次数+1
+        DataUploadManager.My.AddData(DataEnum.使用道具次数);
         for (int i = 0; i < playerConsumables.Count; i++)
         {
             if (playerConsumables[i].consumableId == id)
@@ -834,7 +836,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public void CheckGameStart()
     {
-        Debug.Log("检测ready");
+        //Debug.Log("检测ready");
         if (PlayerPrefs.GetInt("isUseGuide") == 1)
         {
             return;
@@ -849,7 +851,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         { 
             if (isServer)
             {
-                Debug.Log("server ready");
+                //Debug.Log("server ready");
                 NewCanvasUI.My.GameNormal();
             }
             else

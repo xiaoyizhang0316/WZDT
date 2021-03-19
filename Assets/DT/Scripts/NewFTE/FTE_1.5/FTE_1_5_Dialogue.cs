@@ -59,7 +59,7 @@ public class FTE_1_5_Dialogue : BaseGuideStep
         if (dialogTexts.GetChild(currentDialog).GetComponent<FTE_TypeWord>().isTyping)
         {
             dialogTexts.GetChild(currentDialog).GetComponent<FTE_TypeWord>().StopType();
-            Debug.Log("typing");
+           // Debug.Log("typing");
             endButton.interactable = true;
             yield break;
         }
@@ -70,14 +70,14 @@ public class FTE_1_5_Dialogue : BaseGuideStep
             {
                 dialogTexts.GetChild(currentDialog-1).gameObject.SetActive(false);
                 dialogTexts.GetChild(currentDialog).gameObject.SetActive(true);
-                Debug.Log("next");
+                //Debug.Log("next");
                 endButton.interactable = true;
                 yield break;
             }
         }
         //CameraPlay.WidescreenH_OFF();
         Restore();
-        Debug.Log("结束当前步骤"+GuideManager.My.currentGuideIndex);
+        //Debug.Log("结束当前步骤"+GuideManager.My.currentGuideIndex);
         yield return StepEnd();
         for (int i = 0; i < highLightCopyObj.Count; i++)
         {

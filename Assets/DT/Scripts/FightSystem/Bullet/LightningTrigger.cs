@@ -19,10 +19,10 @@ public class LightningTrigger : MonoBehaviour
         {
             gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);
         });
-        Debug.Log("闪电链" + gameObject.name + 1);
+        //Debug.Log("闪电链" + gameObject.name + 1);
         if (gameObject.GetComponent<GoodsSign>().target != null)
         {
-            Debug.Log("target"+gameObject.GetComponent<GoodsSign>().target );
+            //Debug.Log("target"+gameObject.GetComponent<GoodsSign>().target );
             Asign.OnHit(ref data);
         }
         else
@@ -39,7 +39,7 @@ public class LightningTrigger : MonoBehaviour
                 {
                     gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);
                 });
-                Debug.Log("闪电链" + gameObject.name + 2);
+                //Debug.Log("闪电链" + gameObject.name + 2);
                 if (gameObject.GetComponent<GoodsSign>().target != null)
                 {
                     Asign.OnHit(ref data);
@@ -57,7 +57,7 @@ public class LightningTrigger : MonoBehaviour
                         {
                             gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);
                         });
-                        Debug.Log("闪电链" + gameObject.name + 3);
+                        //Debug.Log("闪电链" + gameObject.name + 3);
                         if (gameObject.GetComponent<GoodsSign>().target != null)
                         {
                             Asign.OnHit(ref data);
@@ -73,7 +73,7 @@ public class LightningTrigger : MonoBehaviour
                                 gameObject .GetComponent <BulletEffect>().InitBuff(  gameObject .GetComponent <BulletEffect>().explosions);
                                 gameObject.transform.DOScale(1, 0.1f).OnComplete(() =>
                                 {
-                                    Debug.Log("闪电链" + gameObject.name + 4);
+                                    //Debug.Log("闪电链" + gameObject.name + 4);
                                     gameObject.GetComponent<BulletEffect>().explosions.SetActive(false);
                                     BulletObjectPool.My.RecoveryBullet(gameObject);
                                 });

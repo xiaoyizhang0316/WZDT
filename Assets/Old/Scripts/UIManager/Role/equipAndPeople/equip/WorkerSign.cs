@@ -190,7 +190,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             return;
         }
 
-        Debug.Log("创建");
+        //Debug.Log("创建");
         CreatWorkerOBJ();
         CreatRoleManager.My.CurrentTemplateManager.OpenTopTemplate(0.3f);
         //    }
@@ -233,7 +233,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         {
             if (worker == null)
             {
-                Debug.Log("工人销毁");
+                //Debug.Log("工人销毁");
                 return;
             }
 
@@ -262,7 +262,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
                         }
                     }
 
-                    Debug.Log(str);
+                    //Debug.Log(str);
                     DeleteUIManager.My.Init(str + " 是否要卸载它?",
                         () =>
                         {
@@ -362,7 +362,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
                     }
                 }
 
-                Debug.Log(str);
+                //Debug.Log(str);
                 DeleteUIManager.My.Init(str + " 是否要卸载它?",
                     () =>
                     {

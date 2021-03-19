@@ -52,14 +52,14 @@ public class MessageManager : NetworkBehaviour
     [ClientRpc]
     public void RpcLoadTargetScene(string loadScene)
     {
-        Debug.Log("sadasdasdsad");
+        //Debug.Log("sadasdasdsad");
         SceneManager.LoadScene(loadScene);
     }
 
     [ClientRpc]
     public void RpcTest()
     {
-        Debug.Log("dasds213124eadfadfdsf34321e2");
+        //Debug.Log("dasds213124eadfadfdsf34321e2");
         
     }
 }

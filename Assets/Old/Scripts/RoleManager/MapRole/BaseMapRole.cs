@@ -1218,7 +1218,7 @@ public class BaseMapRole : MonoBehaviour
         }
         SendProductDataList list = new SendProductDataList();
         list.datas = sendProductddata;
-        Debug.Log(JsonUtility.ToJson(list) );
+        //Debug.Log(JsonUtility.ToJson(list) );
         return JsonUtility.ToJson(list);
     }
 

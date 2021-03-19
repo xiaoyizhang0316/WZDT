@@ -18,7 +18,7 @@ public class FTE_0_Step_2 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        Debug.Log("结束教学 " + currentStepIndex);
+        //Debug.Log("结束教学 " + currentStepIndex);
         if (hand1 != null)
         {
             hand1.SetActive(false);
@@ -28,7 +28,7 @@ public class FTE_0_Step_2 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-        Debug.Log("开始教学 " + currentStepIndex);
+        //Debug.Log("开始教学 " + currentStepIndex);
         afterEntry = HandMove;
         if (hand1 != null)
         {

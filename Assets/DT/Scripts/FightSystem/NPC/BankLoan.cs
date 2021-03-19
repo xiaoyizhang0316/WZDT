@@ -17,7 +17,7 @@ public class BankLoan : BaseExtraSkill
     {
         base.SkillOn(_sign);
         _sign.icon.gameObject.SetActive(false);
-        Debug.Log("开始借钱" + _sign.tradeData.ID);
+        //Debug.Log("开始借钱" + _sign.tradeData.ID);
         StartLoan(_sign);
         sign = _sign;
     }

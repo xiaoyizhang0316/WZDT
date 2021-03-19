@@ -39,7 +39,7 @@ public class FTE_1_Step_28 : BaseStep
         {
             panels[i].gameObject.SetActive(false);
         }
-        Debug.Log("打开升级");
+        //Debug.Log("打开升级");
         LockButton[0].interactable = true;
         NewCanvasUI.My.GamePause();
         nextButton.gameObject.SetActive(true);
@@ -54,7 +54,7 @@ public class FTE_1_Step_28 : BaseStep
 
     public override void StopCurrentStep()
     {
-        Debug.Log("点击升级");
+        //Debug.Log("点击升级");
         nextButton.interactable = false;
         button.UpdateRole1();
         StageGoal.My.CostPlayerGold(RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost);
@@ -74,11 +74,11 @@ public class FTE_1_Step_28 : BaseStep
 
     public void CheckStart()
     {
-        Debug.Log("当前时间"+StageGoal.My.timeCount );
+        //Debug.Log("当前时间"+StageGoal.My.timeCount );
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
         if (StageGoal.My.timeCount > 135 &&StageGoal.My.playerGold>3000)
         {
-            Debug.Log("检查打开");
+            //Debug.Log("检查打开");
             StartCuttentStep();
             CancelInvoke("CheckStart");
         }

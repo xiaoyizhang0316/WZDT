@@ -52,10 +52,10 @@ public class FTE_1_Step_25 : BaseStep
     }
     public void PlayNext()
     {
-        Debug.Log("检测");
+        //Debug.Log("检测");
         if (WaveCount.My.waveBg.childCount>0)
         {
-            Debug.Log("检测成功");
+            //Debug.Log("检测成功");
 
             StopCurrentStep();
         }
@@ -63,7 +63,7 @@ public class FTE_1_Step_25 : BaseStep
         {
             gameObject.transform.DOScale(1, 0.1f).OnComplete(() =>
             {
-                Debug.Log("检测失败");
+                //Debug.Log("检测失败");
 
                 PlayNext();
             }).Play();

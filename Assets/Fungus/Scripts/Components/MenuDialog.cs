@@ -291,7 +291,7 @@ namespace Fungus
         {
             if (nextOptionIndex >= CachedButtons.Length)
             {
-                Debug.LogWarning("Unable to add menu item, not enough buttons: " + text);
+                //Debug.LogWarning("Unable to add menu item, not enough buttons: " + text);
                 return false;
             }
             //if first option notify that a menu has started
@@ -344,7 +344,7 @@ namespace Fungus
             }
             else
             {
-                Debug.LogWarning("Unable to show timer, no slider set");
+                //Debug.LogWarning("Unable to show timer, no slider set");
             }
         }
 

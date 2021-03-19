@@ -190,7 +190,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     // Start is called before the first frame update
     public virtual void Start()
     {
-        Debug.LogWarning("base level controller start");
+        //Debug.LogWarning("base level controller start");
         DOTween.PauseAll();
         DOTween.defaultAutoPlay = AutoPlay.None;
         if (StageGoal.My.currentType == GameEnum.StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name))

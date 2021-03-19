@@ -47,7 +47,7 @@ public class Client : MonoBehaviour
             IPEndPoint point = new IPEndPoint(ip, portNum);
 
             socketSend.Connect(point);
-            Debug.Log("连接成功 , " + " ip = " + ip + " port = " + portNum);
+            //Debug.Log("连接成功 , " + " ip = " + ip + " port = " + portNum);
             staInfo = ip + ":" + portNum + "  连接成功";
             Thread r_thread = new Thread(Received);             //开启新的线程，不停的接收服务器发来的消息
             r_thread.IsBackground = true;
@@ -121,11 +121,11 @@ public class Client : MonoBehaviour
                         orderMsg += msg.Pop();
                     }
                 }
-                Debug.Log("客户端接收到的数据 ： " + recMes);
+                //Debug.Log("客户端接收到的数据 ： " + recMes);
                 
                 recTimes ++;
                 staInfo = "接收到一次数据，接收次数为 ：" + recTimes;
-                Debug.Log("接收次数为：" + recTimes);
+                //Debug.Log("接收次数为：" + recTimes);
             }
             catch { }
         }
@@ -159,7 +159,7 @@ public class Client : MonoBehaviour
                     byte[] buffer = new byte[1024 * 6];
                     buffer = Encoding.UTF8.GetBytes("(" + msg + ")");
                     socketSend.Send(buffer);
-                    Debug.Log("发送的数据为：" + msg);
+                    //Debug.Log("发送的数据为：" + msg);
                 }
             }
         }
@@ -169,7 +169,7 @@ public class Client : MonoBehaviour
 
     private void OnDisable()
     {
-        Debug.Log("begin OnDisable()");
+        //Debug.Log("begin OnDisable()");
 
         string str = "GroupDismiss|1";
         SendToServerMsg(str);
@@ -188,7 +188,7 @@ public class Client : MonoBehaviour
                 print(e.Message);
             }
         }
-        Debug.Log("end OnDisable()");
+        //Debug.Log("end OnDisable()");
     }
 
     public void Disconect()

@@ -164,7 +164,7 @@ public class KeyCodeManager : MonoBehaviour
 
     private void ClearContent(Transform content)
     {
-        Debug.Log("clear");
+        //Debug.Log("clear");
         foreach(Transform child in content)
         {
             Destroy(child.gameObject);

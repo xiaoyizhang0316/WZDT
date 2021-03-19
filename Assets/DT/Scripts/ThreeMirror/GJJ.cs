@@ -61,7 +61,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             hit.transform.GetComponentInParent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
                             SoftFTE.My.CheckUnlockNewRole(hit.transform.GetComponentInParent<BaseMapRole>().baseRoleData.baseRoleData.roleType);
                             Destroy(effect, 1f);
-                            Debug.Log("使用广角镜成功");
+                            //Debug.Log("使用广角镜成功");
                             DataUploadManager.My.AddData(DataEnum.使用广角镜);
                             if (!PlayerData.My.isSOLO)
                             {
@@ -112,7 +112,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                 roleList[index].transform.GetComponentInParent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
                 SoftFTE.My.CheckUnlockNewRole(roleList[index].transform.GetComponentInParent<BaseMapRole>().baseRoleData.baseRoleData.roleType);
                 Destroy(effect, 1f);
-                Debug.Log("使用广角镜成功");
+                //Debug.Log("使用广角镜成功");
                 DataUploadManager.My.AddData(DataEnum.使用广角镜);
                 if (!PlayerData.My.isSOLO)
                 {

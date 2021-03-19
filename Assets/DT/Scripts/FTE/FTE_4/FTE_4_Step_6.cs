@@ -29,7 +29,7 @@ public class FTE_4_Step_6 : BaseStep
          MaskManager.My.Open(1,94);
          MaskManager.My.Open(3,130); 
          FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = false;
-         Debug.Log("第六步执行");
+         //Debug.Log("第六步执行");
          nextButton.interactable = true; 
       
          PlayNext();

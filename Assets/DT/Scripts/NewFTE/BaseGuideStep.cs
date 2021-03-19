@@ -203,7 +203,7 @@ public abstract class BaseGuideStep : MonoBehaviour
             MissionManager.My.ChangeTital(missionTitle);
         }
 
-        Debug.Log("开始当前步骤"+GuideManager.My.currentGuideIndex);
+        //Debug.Log("开始当前步骤"+GuideManager.My.currentGuideIndex);
         BaseTween[] temp = GetComponentsInChildren<BaseTween>();
         foreach (var VARIABLE in temp)
         {

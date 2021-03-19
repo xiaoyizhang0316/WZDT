@@ -35,8 +35,8 @@ public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
         int index = 0;
         for (int i = 0; i < transform.childCount; i++)
         {
-            Debug.Log(transform.GetChild(i).GetComponent<BaseAssembleUISign>().lastPlot );
-            Debug.Log( transform.GetChild(i).GetComponent<BaseAssembleUISign>().isRelease);
+            //Debug.Log(transform.GetChild(i).GetComponent<BaseAssembleUISign>().lastPlot );
+            //Debug.Log( transform.GetChild(i).GetComponent<BaseAssembleUISign>().isRelease);
             if (transform.GetChild(i).GetComponent<BaseAssembleUISign>().lastPlot != null &&
                 transform.GetChild(i).GetComponent<BaseAssembleUISign>().isRelease)
             {
@@ -97,7 +97,7 @@ public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
             }
             else
             {
-                Debug.Log("放下销毁"+gameObject.name);
+                //Debug.Log("放下销毁"+gameObject.name);
                 Remove();
                 Destroy(this.gameObject, 0f);
                 // CreatRoleManager.My.CheckAllConditions();
@@ -123,12 +123,12 @@ public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
         {
             if (CreatRoleManager.My.EquipList.ContainsKey(int.Parse(name.Split('_')[1])))
             {
-                Debug.Log(transform.position + "装备" + name.Split('_')[1]);
+                //Debug.Log(transform.position + "装备" + name.Split('_')[1]);
                 CreatRoleManager.My.EquipList[int.Parse(name.Split('_')[1])] = transform.localPosition;
             }
             else
             {
-                Debug.Log(transform.position + "装备" + name.Split('_')[1]);
+                //Debug.Log(transform.position + "装备" + name.Split('_')[1]);
 
                 CreatRoleManager.My.EquipList.Add(int.Parse(name.Split('_')[1]), transform.localPosition);
             }
@@ -138,12 +138,12 @@ public class DragUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
         {
             if (CreatRoleManager.My.peoPleList.ContainsKey(int.Parse(name.Split('_')[1])))
             {
-                Debug.Log(transform.position + "人" + name.Split('_')[1]);
+                //Debug.Log(transform.position + "人" + name.Split('_')[1]);
                 CreatRoleManager.My.peoPleList[int.Parse(name.Split('_')[1])] = transform.localPosition;
             }
             else
             {
-                Debug.Log(transform.position + "人" + name.Split('_')[1]);
+                //Debug.Log(transform.position + "人" + name.Split('_')[1]);
                 CreatRoleManager.My.peoPleList.Add(int.Parse(name.Split('_')[1]), transform.localPosition);
             }
         }

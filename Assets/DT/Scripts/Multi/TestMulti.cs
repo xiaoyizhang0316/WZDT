@@ -9,7 +9,7 @@ public class TestMulti : NetworkBehaviour
     [ClientRpc]
     public void RpcTest()
     {
-        Debug.Log("dasds213124eadfadfdsf34321e2");
+        //Debug.Log("dasds213124eadfadfdsf34321e2");
         GetComponent<Image>().color = Color.red;
         transform.position += Vector3.one;
     }

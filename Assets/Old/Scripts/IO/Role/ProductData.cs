@@ -85,7 +85,7 @@ public class ProductData
             buffMaxCount == data.buffMaxCount  
         )
         {
-            Debug.Log("1");
+            //Debug.Log("1");
             return true;
         }
         else

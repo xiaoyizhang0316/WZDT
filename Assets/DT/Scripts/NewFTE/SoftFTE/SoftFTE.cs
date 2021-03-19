@@ -98,7 +98,7 @@ public class SoftFTE : MonoSingleton<SoftFTE>
         }
         if (NetworkMgr.My.roleFoundDic.ContainsKey(type))
         {
-            print("find type: " + type);
+            //print("find type: " + type);
             if (NetworkMgr.My.roleFoundDic[type] == 0)
             {
                 Init(type);

@@ -13,14 +13,14 @@ public class FTE_01_Step15 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        Debug.Log("结束教学 " + currentStepIndex);
+        //Debug.Log("结束教学 " + currentStepIndex);
         
         yield break;
     }
 
     public override IEnumerator StepStart()
     {
-        Debug.Log("开始教学 " + currentStepIndex);
+        //Debug.Log("开始教学 " + currentStepIndex);
         //afterEntry = HandMove;
         HandMove();
         //currentSlider.interactable = true;

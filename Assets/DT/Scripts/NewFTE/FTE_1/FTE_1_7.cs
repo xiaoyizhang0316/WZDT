@@ -29,7 +29,7 @@ public class FTE_1_7 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        Debug.Log(StageGoal.My.isEndTurn);
+        //Debug.Log(StageGoal.My.isEndTurn);
         return StageGoal.My.isEndTurn;
     }
 }

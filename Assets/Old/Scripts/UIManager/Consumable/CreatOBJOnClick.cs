@@ -10,8 +10,8 @@ public class CreatOBJOnClick : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("ConsumableListManager.My.currentSign. consumableId" +
-                  ConsumableListManager.My.currentSign.consumableId);
+        //Debug.Log("ConsumableListManager.My.currentSign. consumableId" +
+         //         ConsumableListManager.My.currentSign.consumableId);
         currentgo = Instantiate(
             Resources.Load<GameObject>("Prefabs/Consumable/" + ConsumableListManager.My.currentSign.consumableId));
     }
@@ -41,11 +41,11 @@ public class CreatOBJOnClick : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Destroy(currentgo, 0f);
-        Debug.Log("ConsumableListManager.My.isClick" + ConsumableListManager.My.isClick);
+        //Debug.Log("ConsumableListManager.My.isClick" + ConsumableListManager.My.isClick);
         if (ConsumableListManager.My.isClick)
         {
-            Debug.Log("释放" + GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign.consumableId)
-                          .consumableType);
+            //Debug.Log("释放" + GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign.consumableId)
+            //              .consumableType);
             ConsumableListManager.My.isClick = false;
 
 
@@ -102,16 +102,16 @@ public class CreatOBJOnClick : MonoBehaviour, IPointerClickHandler
 
                 if (hit[i].transform.tag.Equals("MapLand"))
                 {
-                    Debug.Log("Mapland");
+                    //Debug.Log("Mapland");
                     if (hit[i].transform.GetComponent<MapSign>().mapType == GameEnum.MapType.Road)
                     {
                         if (GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign.consumableId)
                                 .consumableType ==
                             GameEnum.ConsumableType.SpawnItem)
                         {
-                            Debug.Log("SpawnItem");
+                            //Debug.Log("SpawnItem");
 
-                            print(hit[i].point);
+                            //print(hit[i].point);
                             GameObject go1 = Instantiate(Resources.Load<GameObject>(
                                 "Prefabs/Consumable/" + ConsumableListManager.My.currentSign.consumableId));
                             go1.transform.position = hit[i].transform.position + new Vector3(0, 0.2f, 0);

@@ -66,7 +66,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             }
         }
 
-        Debug.Log("Setp" + step + "index" + index);
+        //Debug.Log("Setp" + step + "index" + index);
         return "";
     }
 
@@ -273,13 +273,13 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public void BornEnemy1(int type = -1)
     {
-        Debug.Log("born");
+        //Debug.Log("born");
         StartCoroutine(GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().BornEnemy1(type));
     }
 
     public void BornEnemy()
     {
-        Debug.Log("born");
+        //Debug.Log("born");
         StartCoroutine(GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().BornEnemy());
     }
 }

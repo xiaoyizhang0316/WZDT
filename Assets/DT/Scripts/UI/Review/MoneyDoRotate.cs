@@ -23,7 +23,7 @@ public class MoneyDoRotate : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("进入");
+        //Debug.Log("进入");
   //      GetComponent<Image>().DOFade(1, 0.3f).Play();
   //     transform.GetChild(0). GetComponent<Text>().DOFade(1, 0.3f).Play();
     }

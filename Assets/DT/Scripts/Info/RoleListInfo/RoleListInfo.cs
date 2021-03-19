@@ -111,7 +111,7 @@ public class RoleListInfo : MonoSingleton<RoleListInfo>
         }
         if (role.baseRoleData.roleType == GameEnum.RoleType.Dealer)
         {
-            Debug.Log("初始化");
+            //Debug.Log("初始化");
             dealer.SetActive(true);
             dealer.GetComponent<RoleListInfoDealer>().Init(role);
         }

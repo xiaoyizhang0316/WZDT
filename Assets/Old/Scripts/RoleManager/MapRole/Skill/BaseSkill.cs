@@ -181,7 +181,7 @@ public abstract class BaseSkill : MonoBehaviour
     public void ReUnleashSkills()
     {
         IsOpen = true;
-        Debug.Log("重启技能" + role.baseRoleData.ID);
+        //Debug.Log("重启技能" + role.baseRoleData.ID);
         if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
         {
             if (!isPlay)
