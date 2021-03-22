@@ -150,6 +150,7 @@ public class EditorMapManager : MapManager
                         go.GetComponent<EditorConsumerSpot>().x = x;
                         go.GetComponent<EditorConsumerSpot>().y = y;
                         go.GetComponent<EditorConsumerSpot>().ParsePathItem(options[i].Split('_')[2]);
+                        go.GetComponent<EditorConsumerSpot>().index = index;
                         if (isItemMoveDown)
                         {
                             go.GetComponent<EditorConsumerSpot>().isUnder = true;

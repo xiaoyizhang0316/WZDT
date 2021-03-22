@@ -43,7 +43,6 @@ public class MapManager : MonoSingleton<MapManager>
         //buildTF = transform.root
         Debug.Log(transform.root);
         InitStageNPCData();
-        //Invoke("LoadJSON",3);
     }
 
     public virtual void SaveJSON(string name)
@@ -351,6 +350,7 @@ public class MapManager : MonoSingleton<MapManager>
                 InitJSONItem(item);
                 Debug.Log(item.specialOption);
             }
+            BuildingManager.My.InitAllBuilding(StageGoal.My.enemyDatas);
         }
     }
 
@@ -396,6 +396,7 @@ public class MapManager : MonoSingleton<MapManager>
                         GameObject go = Instantiate(Resources.Load<GameObject>(path),buildTF);
                         go.transform.position = pos;
                         go.GetComponent<Building>().ParsePathList(options[i].Split('_')[2]);
+                        go.GetComponent<Building>().buildingId = index;
                         if (isItemMoveDown)
                         {
                             //TODO 出生点下沉处理
@@ -406,7 +407,7 @@ public class MapManager : MonoSingleton<MapManager>
                     {
                         MapSign cell = GetMapSignByXY(x, y);
                         string path = "Prefabs/Common/EndPoint";
-                        Vector3 pos = cell.transform.position + new Vector3(0f, 0.1f, 0f);
+                        Vector3 pos = cell.transform.position + new Vector3(0f, -0.3f, 0f);
                         GameObject go = Instantiate(Resources.Load<GameObject>(path), buildTF);
                         go.transform.position = pos;
                         if (isItemMoveDown)
@@ -437,6 +438,21 @@ public class MapManager : MonoSingleton<MapManager>
             List<GameObject> list = new List<GameObject>();
             list.Add(go);
             diveList.Add(time, list);
+        }
+        go.transform.position += new Vector3(0f, -2f, 0f);
+        go.SetActive(false);
+    }
+
+
+    public void CheckDive(int time)
+    {
+        if (diveList.ContainsKey(time))
+        {
+            for (int i = 0; i < diveList[time].Count; i++)
+            {
+                diveList[time][i].SetActive(true);
+            }
+            diveList.Remove(time);
         }
     }
 

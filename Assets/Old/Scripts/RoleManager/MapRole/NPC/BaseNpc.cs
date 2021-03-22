@@ -150,7 +150,7 @@ public abstract class BaseNpc : MonoBehaviour
             if (hit[j].transform.tag.Equals("MapLand"))
             {
                 //print(hit[j].transform);
-                transform.position = hit[j].transform.position + new Vector3(0f, 0.3f, 0f);
+                transform.position = hit[j].transform.position + new Vector3(0f, 0f, 0f);
             }
         }
     }

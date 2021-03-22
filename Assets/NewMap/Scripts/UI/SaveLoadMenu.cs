@@ -136,8 +136,9 @@ public class SaveLoadMenu : MonoBehaviour {
 			if (header <= mapFileVersion)
 			{
 				hexGrid.Load(reader, header);
+
 				//HexMapCamera.ValidatePosition();
-				Invoke("LoadJSON", 2f);
+				Invoke("LoadJSON", 0.5f);
 			}
 			else
 			{
