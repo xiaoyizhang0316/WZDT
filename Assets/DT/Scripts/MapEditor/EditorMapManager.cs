@@ -44,8 +44,8 @@ public class EditorMapManager : MapManager
         Debug.Log(result);
         string encode = result;
 #if UNITY_STANDALONE_WIN
-                    FileStream file = new FileStream( Directory.GetParent(Directory.GetParent(Application.dataPath)+"")
-                                 + "\\Build.json", FileMode.Create);
+                    FileStream file =new FileStream(Application.streamingAssetsPath
+                                                    + "/FTEConfig/" + fteName + ".json", FileMode.Create);
 #elif UNITY_STANDALONE_OSX
         FileStream file = new FileStream(Application.streamingAssetsPath
                                      + "/FTEConfig/" + fteName + ".json", FileMode.Create);
@@ -73,7 +73,7 @@ public class EditorMapManager : MapManager
         try
         {
 #if UNITY_STANDALONE_WIN
-            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + fteName + ".json");
 #elif UNITY_STANDALONE_OSX
             streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + fteName + ".json");
 #endif
@@ -188,6 +188,7 @@ public class EditorMapManager : MapManager
 
     public void CreatPrb(GameObject game)
     {
+        game.GetComponent<EditorConsumerSpot>().index = count;
         count++;
         GameObject gameobj = Instantiate(PlayerStartPointUIPrb, PlayerStartPointTF);
         gameobj.GetComponent<PlayStartSign>().port = game;

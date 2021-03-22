@@ -322,7 +322,7 @@ public class MapManager : MonoSingleton<MapManager>
         try
         {
 #if UNITY_STANDALONE_WIN
-            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + name + ".json");
 #elif UNITY_STANDALONE_OSX
             streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + name + ".json");
 #endif
