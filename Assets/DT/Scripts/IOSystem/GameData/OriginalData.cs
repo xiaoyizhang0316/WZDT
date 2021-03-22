@@ -48,7 +48,7 @@ public class OriginalData : MonoSingleton<OriginalData>
     public void InitDatas(string data)
     {
         jsonDatas = JsonUtility.FromJson<JsonDatas>(data);
-        Debug.Log("---------" + jsonDatas.BuffData);
+        //Debug.Log("---------" + jsonDatas.BuffData);
         
 
         ReadConsumableJson();

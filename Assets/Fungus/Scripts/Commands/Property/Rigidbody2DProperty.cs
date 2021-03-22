@@ -116,7 +116,7 @@ namespace Fungus
                             ioi.Value = target.attachedColliderCount;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 
@@ -170,7 +170,7 @@ namespace Fungus
                             target.simulated = iob.Value;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 

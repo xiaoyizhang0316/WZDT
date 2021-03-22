@@ -86,7 +86,7 @@ namespace Fungus
                             iof.Value = target.bounciness;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 
@@ -110,7 +110,7 @@ namespace Fungus
                             target.offset = iov2.Value;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 

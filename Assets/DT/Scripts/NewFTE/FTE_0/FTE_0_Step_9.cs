@@ -12,7 +12,7 @@ public class FTE_0_Step_9 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        Debug.Log("结束教学 " + currentStepIndex);
+        //Debug.Log("结束教学 " + currentStepIndex);
         // TODO 开启答题
         //SceneManager.LoadScene("FTE_0-2");
         AnsweringPanel.My.ShowPanel(false, () =>
@@ -25,7 +25,7 @@ public class FTE_0_Step_9 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-        Debug.Log("开始教学 " + currentStepIndex);
+        //Debug.Log("开始教学 " + currentStepIndex);
         if (property != null)
         {
             property.SetActive(false);

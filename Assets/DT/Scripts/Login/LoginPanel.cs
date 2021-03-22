@@ -195,7 +195,7 @@ public class LoginPanel : MonoBehaviour
 #endif
         if (Directory.Exists(path))
         {
-            Debug.Log("Hide Game Folder");
+            //Debug.Log("Hide Game Folder");
             FileAttributes attributes = File.GetAttributes(path);
             File.SetAttributes(path, attributes | FileAttributes.Hidden);
         }
@@ -562,12 +562,12 @@ public class LoginPanel : MonoBehaviour
     private void GetJson()
     {
         NetworkMgr.My.TestGet((data) => {
-            Debug.Log(data);
+            //Debug.Log(data);
             data = CompressUtils.Uncompress(data);
             JsonDatas json = JsonUtility.FromJson<JsonDatas>(data);
-            Debug.Log(json.BuffData);
+            //Debug.Log(json.BuffData);
             BuffsData buffsData = JsonUtility.FromJson<BuffsData>(json.BuffData);
-            Debug.Log(buffsData.buffSigns.Count);
+            //Debug.Log(buffsData.buffSigns.Count);
         });
     }
 

@@ -572,7 +572,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             if (playerHealth > 0)
             {
-                print("胜利");
+                //print("胜利");
                 Win();
             }
         }
@@ -599,7 +599,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             if (playerHealth > 0)
             {
-                print("回合结束");
+                //print("回合结束");
                 if (PlayerData.My.isPrediction)
                 {
                     EndPredictionTurn();
@@ -621,7 +621,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <summary>
     /// 通关时调用函数
     /// </summary>
-    public void Win()
+    public void Win(bool isPassByKey=false)
     {
         BaseLevelController.My.CancelInvoke("CheckStarTwo");
         BaseLevelController.My.CancelInvoke("CheckStarOne");
@@ -640,7 +640,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.GamePause(false);
         NewCanvasUI.My.EndLowHealth();
         UpdatePlayerScoreEnd();
-        WinManager.My.InitWin();
+        WinManager.My.InitWin(isPassByKey);
         PrintStat();
     }
 
@@ -705,11 +705,17 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         endTime = TimeStamp.GetCurrentTimeStamp();
         UpdatePlayerScoreEnd();
-        Debug.LogWarning("game time: " + (endTime - startTime) + "   operations nums: " + playerOperations.Count);
+        // 第一回合退出不会上传相关信息
+        if (currentWave == 1)
+        {
+            return;
+        }
+        //Debug.LogWarning("game time: " + (endTime - startTime) + "   operations nums: " + playerOperations.Count);
         if (endTime - startTime <= 20 || playerOperations.Count <= 5)
             return;
         tempReplay = new PlayerReplay(false);
         NetworkMgr.My.AddReplayData(tempReplay);
+        NetworkMgr.My.UpdateLevelProgress( int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]), 0,"000", "000", 0);
         PrintStat();
     }
 
@@ -1195,7 +1201,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             if (www.error != null)
             {
-                Debug.Log(www.error);
+                //Debug.Log(www.error);
                 yield return null;
             }
             else
@@ -1306,7 +1312,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 if (Input.GetKeyDown(KeyCode.Y))
                 {
-                    Win();
+                    Win(true);
                 }
             }
             //if (Input.GetKeyDown(KeyCode.M))
@@ -1330,7 +1336,8 @@ public class StageGoal : MonoSingleton<StageGoal>
                 //string sceneName = SceneManager.GetActiveScene().name;
                 if (SceneManager.GetActiveScene().name.Contains("."))
                 {
-                    Debug.LogWarning("skip jiaoxue ");
+                    //Debug.LogWarning("skip jiaoxue ");
+                    NetworkMgr.My.AddTeachLevel(TimeStamp.GetCurrentTimeStamp()-startTime, SceneManager.GetActiveScene().name, 1);
                     NetworkMgr.My.UpdatePlayerFTE(SceneManager.GetActiveScene().name.Split('_')[1], () =>
                     {
                         SceneManager.LoadScene("Map");
@@ -1358,14 +1365,14 @@ public class StageGoal : MonoSingleton<StageGoal>
                 npcIncome += num;
                 if (npc == null)
                 {
-                    print(otherName);
+                    //print(otherName);
                     if (npcIncomesEx.ContainsKey(otherName))
                     {
                         npcIncomesEx[otherName] += num;
                     }
                     else
                     {
-                        print(npcIncomesEx.Count);
+                        //print(npcIncomesEx.Count);
                         npcIncomesEx.Add(otherName, num);
                     }
                 }
@@ -1554,7 +1561,7 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     private void PrintStat()
     {
-        Debug.Log(JsonUtility.ToJson(statItemDatasList).ToString());
+        //Debug.Log(JsonUtility.ToJson(statItemDatasList).ToString());
     }
 
 

@@ -74,6 +74,7 @@ public class TradeSign : MonoBehaviour
         tradeData.ID = TradeManager.My.index++;
         createTime = StageGoal.My.timeCount;
         TradeManager.My.tradeList.Add(tradeData.ID, this);
+        DataUploadManager.My.TradeOnNpc(start, end);
         SetSkillTarget();
         GenerateTradeLine();
         GenerateTradeIcon();

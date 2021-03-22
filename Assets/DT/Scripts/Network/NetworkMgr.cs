@@ -128,7 +128,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             else
             {
-                Debug.Log(response.data);
+                //Debug.Log(response.data);
                 try
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
@@ -251,12 +251,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             if (response.status == 0)
             {
                 HttpManager.My.ShowTip(response.errMsg);
-                Debug.Log(response.errMsg);
+                //Debug.Log(response.errMsg);
                 doFail?.Invoke();
             }
             else
             {
-                Debug.Log(response.data);
+                //Debug.Log(response.data);
                 try
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
@@ -289,12 +289,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             if (response.status == 0)
             {
                 HttpManager.My.ShowTip(response.errMsg);
-                Debug.Log(response.errMsg);
+                //Debug.Log(response.errMsg);
                 doFail?.Invoke();
             }
             else
             {
-                Debug.Log(response.data);
+                //Debug.Log(response.data);
                 try
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
@@ -412,7 +412,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
                 catch (Exception ex)
                 {
-                    Debug.Log(ex.Source + "ex.Source ");
+                    //Debug.Log(ex.Source + "ex.Source ");
                     Debug.Log(ex.Message + "ex.Message");
                     Debug.Log(ex.StackTrace + "ex.StackTrace");
                 }
@@ -513,12 +513,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             if (response.status == 0)
             {
                 HttpManager.My.ShowTip(response.errMsg);
-                Debug.Log(response.errMsg);
+                //Debug.Log(response.errMsg);
                 doFail?.Invoke();
             }
             else
             {
-                Debug.Log(response.data);
+                //Debug.Log(response.data);
                 try
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
@@ -542,7 +542,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     /// <param name="doFail"></param>
     public void UpdatePlayerDatas(int fteProgress, int threeWordsProgress, string roleFound,Action doSuccess = null, Action doFail = null)
     {
-        Debug.Log("更新fte"+fteProgress);
+        //Debug.Log("更新fte"+fteProgress);
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("fteProgress", fteProgress.ToString());
         keyValues.Add("threeWordsProgress", threeWordsProgress.ToString());
@@ -559,12 +559,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             if (response.status == 0)
             {
                 HttpManager.My.ShowTip(response.errMsg);
-                Debug.Log(response.errMsg);
+                //Debug.Log(response.errMsg);
                 doFail?.Invoke();
             }
             else
             {
-                Debug.Log(response.data);
+                //Debug.Log(response.data);
                 try
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
@@ -583,7 +583,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 
     public void UpdatePlayerFTE(string fte, Action doSuccess = null, Action doFail = null)
     {
-        Debug.Log("更新fte" + fte);
+        //Debug.Log("更新fte" + fte);
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("fte", fte);
         keyValues.Add("playerID", playerID);
@@ -598,12 +598,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             if (response.status == 0)
             {
                 HttpManager.My.ShowTip(response.errMsg);
-                Debug.Log(response.errMsg);
+                //Debug.Log(response.errMsg);
                 doFail?.Invoke();
             }
             else
             {
-                Debug.Log(response.data);
+                //Debug.Log(response.data);
                 try
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
@@ -760,7 +760,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             else
             {
-                Debug.LogWarning(response.data);
+                //Debug.LogWarning(response.data);
                 playerGroupInfo = JsonUtility.FromJson<PlayerGroupInfo>(response.data);
                 doSuccess();
             }
@@ -875,11 +875,16 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     public void UpdateLevelProgress(int levelID, int stars, string levelStar, string rewardStatus, int score, Action doSuccess=null, Action doFail=null)
     {
         LevelProgress lp = new LevelProgress(playerID, levelID, stars, levelStar, rewardStatus, score);
+        lp.useTime = StageGoal.My.endTime - StageGoal.My.startTime;
 
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("levelProgress", JsonUtility.ToJson(lp));
         keyValues.Add("token", token);
         keyValues.Add("playerID", playerID);
+        keyValues.Add("playerName", playerDatas.playerName);
+        keyValues.Add("sceneName", "FTE_"+levelID);
+        keyValues.Add("groupID", groupID.ToString());
+        keyValues.Add("useStatus", CompressUtils.Compress( DataUploadManager.My.GetNpcUseStatus()));
         StartCoroutine(HttpManager.My.HttpSend(Url.UpdateLevelProgress, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)
@@ -907,7 +912,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                         }
                     }
                     levelProgressList.Add(levelProgress);
-                    Debug.Log("上传关卡"+ levelID.ToString() + "进度完成" );
+                    //Debug.Log("上传关卡"+ levelID.ToString() + "进度完成" );
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -944,11 +949,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             else
             {
-                Debug.Log(response.data);
+                //Debug.Log(response.data);
                 try
                 {
                     levelProgresses = JsonUtility.FromJson<LevelProgresses>(response.data);
-                    Debug.LogWarning(levelProgresses.levelProgresses.Count+"-------------------");
+                   // Debug.LogWarning(levelProgresses.levelProgresses.Count+"-------------------");
                     levelProgressList.Clear();
                     foreach (var lp in levelProgresses.levelProgresses)
                     {
@@ -959,7 +964,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
                 catch (Exception ex)
                 {
-                    Debug.Log(ex.TargetSite);
+                    //Debug.Log(ex.TargetSite);
                     Debug.Log(ex.StackTrace);
                     Debug.Log(ex.Message);
                 }
@@ -981,7 +986,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if(response.status == 0)
             {
-                Debug.LogWarning(response.errMsg);
+                //Debug.LogWarning(response.errMsg);
             }
             SetMask();
         }, keyValues, HttpType.Post));
@@ -1027,12 +1032,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
                 if (response.status == 1)
                 {
-                    Debug.Log("上传完成");
+                    //Debug.Log("上传完成");
                     doSuccess?.Invoke();
                 }
                 else
                 {
-                    Debug.Log("上传失败");
+                    //Debug.Log("上传失败");
                     doFail?.Invoke();
                 }
                 SetMask();
@@ -1070,9 +1075,9 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             {
                 string json = CompressUtils.Uncompress(response.data);
                 ReplayDatas datas = JsonUtility.FromJson<ReplayDatas>(json);
-                Debug.Log(datas.recordID);
-                Debug.Log(datas.operations);
-                Debug.Log(datas.dataStats);
+                //Debug.Log(datas.recordID);
+                //Debug.Log(datas.operations);
+                //Debug.Log(datas.dataStats);
                 doSuccess?.Invoke(datas);
             }
             else
@@ -1345,6 +1350,39 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }
         return null;
     }
+
+    public void AddTeachLevel(int useTime, string levelName, int isPass, Action doSuccess=null, Action doFail=null)
+    {
+        SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
+        keyValues.Add("token", token);
+        keyValues.Add("playerID", playerID);
+        keyValues.Add("playerName", playerDatas.playerName);
+        keyValues.Add("levelName", levelName);
+        keyValues.Add("useTime", useTime.ToString());
+        keyValues.Add("isPass", isPass.ToString());
+        keyValues.Add("groupID", groupID.ToString());
+        
+        StartCoroutine(HttpManager.My.HttpSend(Url.AddTeachLevel, (www) => {
+            HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
+            if (response.status == -1)
+            {
+                ShowReconn();
+                return;
+            }
+            if (response.status == 1)
+            {
+                //Debug.Log("上传完成");
+                doSuccess?.Invoke();
+            }
+            else
+            {
+                //Debug.Log("上传失败");
+                doFail?.Invoke();
+            }
+            SetMask();
+        }, keyValues, HttpType.Post, HttpId.AddTeachLevel));
+    
+    }
     #endregion
 
     #region match
@@ -1375,7 +1413,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             
             if (response.status == 0)
             {
-                Debug.LogWarning(response.errMsg);
+                //Debug.LogWarning(response.errMsg);
                 doFail?.Invoke();
             }
             else
@@ -1383,11 +1421,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 if (response.status == 2)
                 {
                     stopMatch = true;
-                    Debug.LogWarning("停止计分！");
+                    //Debug.LogWarning("停止计分！");
                 }
                 else
                 {
-                    Debug.LogWarning(response.data);
+                    //Debug.LogWarning(response.data);
                 }
                 doSuccess?.Invoke();
             }
@@ -1401,7 +1439,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         
         keyValues.Add("groupID", groupID.ToString());
-        Debug.LogWarning("groupID "+groupID);
+        //Debug.LogWarning("groupID "+groupID);
         StartCoroutine(HttpManager.My.HttpSend(Url.GetGroupPlayerScore, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
 
@@ -1413,7 +1451,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 
             if (response.status == 0)
             {
-                Debug.LogWarning(response.errMsg);
+                //Debug.LogWarning(response.errMsg);
                 doFail?.Invoke();
             }
             else
@@ -1421,8 +1459,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 if (response.status == 2)
                 {
                     stopMatch = true;
-                    Debug.LogWarning("停止计分！");
-                    Debug.LogWarning(response.data);
+                    //Debug.LogWarning("停止计分！");
+                    //Debug.LogWarning(response.data);
                     PlayerRTScoreList prts = JsonUtility.FromJson<PlayerRTScoreList>(response.data);
                     playerRTScores.Clear();
                     for (int i = 0; i < prts.prts.Count; i++)
@@ -1442,7 +1480,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 }
                 else
                 {
-                    Debug.LogWarning(response.data);
+                    //Debug.LogWarning(response.data);
                     PlayerRTScoreList prts = JsonUtility.FromJson<PlayerRTScoreList>(response.data);
                     playerRTScores.Clear();
                     for(int i=0; i< prts.prts.Count; i++)
@@ -1477,19 +1515,19 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 
             if (response.status == 0)
             {
-                Debug.LogWarning(response.errMsg);
+                //Debug.LogWarning(response.errMsg);
                 doFail?.Invoke();
             }
             else
             {
                 if (response.status == 1)
                 {
-                    Debug.LogWarning("计分中...");
+                    //Debug.LogWarning("计分中...");
                     stopMatch = false;
                 }
                 else
                 {
-                    Debug.LogWarning("计分停止...");
+                    //Debug.LogWarning("计分停止...");
                     stopMatch = true;
                 }
                 doSuccess?.Invoke();
@@ -1526,7 +1564,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     playerEquipsList.Add(pe);
                 }
-                Debug.LogWarning(playerEquipsList.Count + "=========playerequip");
+                //Debug.LogWarning(playerEquipsList.Count + "=========playerequip");
                 doSuccess?.Invoke(playerEquipsList);
             }
             else
@@ -1564,7 +1602,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     playerEquipsList.Add(pe);
                 }
-                Debug.LogWarning(playerEquipsList.Count + "=========playerequip");
+                //Debug.LogWarning(playerEquipsList.Count + "=========playerequip");
                 doSuccess?.Invoke(playerEquipsList);
             }
             else
@@ -1614,12 +1652,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 playerEquipsList.Clear();
                 playerEquipsList.Add(playerEquip);
                 PlayerData.My.InitPlayerEquip(playerEquipsList);
-                Debug.LogWarning("获得装备 " + pe.equipID);
+                //Debug.LogWarning("获得装备 " + pe.equipID);
                 doSuccess?.Invoke();
             }
             else
             {
-                Debug.LogError("get equip fail");
+                //Debug.LogError("get equip fail");
                 doFail?.Invoke();
             }
             SetMask();
@@ -1631,16 +1669,16 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         PlayerEquips equips = new PlayerEquips();
         equips.playerEquips = playerEquips;
         string json = JsonUtility.ToJson(equips);
-        Debug.Log(json);
+        //Debug.Log(json);
         //{"playerEquips":[{"playerID":"999999","equipType":0,"equipID":22202,"count":1},{"playerID":"999999","equipType":1,"equipID":10001,"count":1},{"playerID":"999999","equipType":0,"equipID":22202,"count":1},{"playerID":"999999","equipType":1,"equipID":10001,"count":1}]}
 
-        Debug.Log(JsonUtility.FromJson<ParseEquips>(json).playerEquips);
+        //Debug.Log(JsonUtility.FromJson<ParseEquips>(json).playerEquips);
         return;
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("token", token);
         keyValues.Add("playerID", playerID);
         keyValues.Add("playerEquips", JsonUtility.ToJson(playerEquips));
-        Debug.Log(JsonUtility.ToJson(playerEquips));
+        //Debug.Log(JsonUtility.ToJson(playerEquips));
 
         StartCoroutine(HttpManager.My.HttpSend(Url.AddEquips, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
@@ -1656,7 +1694,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 PlayerData.My.InitPlayerEquip(pes.playerEquips);
                 foreach(var pe in playerEquips)
                 {
-                    Debug.Log("获得装备" + pe.equipID);
+                    //Debug.Log("获得装备" + pe.equipID);
                 }
                 doSuccess?.Invoke();
             }
@@ -1702,7 +1740,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 
         StartCoroutine(HttpManager.My.HttpSend(Url.TestPost, (www)=> {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
-            Debug.Log(response.data);
+            //Debug.Log(response.data);
         }, keyValues, HttpType.Post));
     }
 
@@ -1713,7 +1751,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 
         StartCoroutine(HttpManager.My.HttpSend(Url.TestGet, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
-            Debug.Log(response.data);
+            //Debug.Log(response.data);
             action(response.data);
         }, keyValues, HttpType.Get));
     }

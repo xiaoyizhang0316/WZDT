@@ -30,7 +30,7 @@ public class FTE_1_Step_2 : BaseStep
            
             contenText.DOFade(1, 1.5f).OnComplete(() =>
             {
-                Debug.Log("123123123");
+                //Debug.Log("123123123");
                 nextButton.interactable = true; 
              
             }).Play(); 
@@ -40,7 +40,7 @@ public class FTE_1_Step_2 : BaseStep
     
     public override void StopCurrentStep()
     { 
-        Debug.Log("结束第二部");
+        //Debug.Log("结束第二部");
         FTESceneManager.My.UIFTE.GetComponent<Image>().raycastTarget = true;
 
         nextButton.interactable = false; 

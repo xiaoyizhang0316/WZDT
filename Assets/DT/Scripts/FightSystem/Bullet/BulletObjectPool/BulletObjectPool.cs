@@ -34,7 +34,7 @@ namespace DT.Fight.Bullet
 
                 if (bulletPrb != null)
                 {
-                    Debug.Log("bulletPrb"+bulletPrb.name);
+                    //Debug.Log("bulletPrb"+bulletPrb.name);
                     BulletPrb.Add(bulletPrb);
 
                     List<GameObject> bulletOBJs= new List<GameObject>();

@@ -286,7 +286,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public void GamePause(bool isCount = true)
     {
-        Debug.Log("game pause");
+        //Debug.Log("game pause");
         DOTween.PauseAll();
         DOTween.defaultAutoPlay = AutoPlay.None;
         Button_Pause.interactable = false;
@@ -325,7 +325,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
         CancelInvoke("CountPauseTime");
-        Debug.Log("Normal");
+        //Debug.Log("Normal");
         if (!PlayerData.My.isSOLO)
         {
             string str = "ChangeTimeScale|";

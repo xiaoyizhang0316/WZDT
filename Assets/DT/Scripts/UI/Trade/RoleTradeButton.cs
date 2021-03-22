@@ -20,7 +20,7 @@ public class RoleTradeButton : MonoBehaviour, IDragHandler, IBeginDragHandler, I
                 return;
         }
         NewCanvasUI.My.CreateTrade(currentRole);
-        Debug.Log("开始拖拽");
+        //Debug.Log("开始拖拽");
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -30,7 +30,7 @@ public class RoleTradeButton : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        print("结束拖拽");
+        //print("结束拖拽");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit hit);
         if (hit.transform != null)
@@ -57,7 +57,7 @@ public class RoleTradeButton : MonoBehaviour, IDragHandler, IBeginDragHandler, I
                     {
                         if (TradeManager.My.CheckTradeCondition())
                         {
-                            print("配置交易成功");
+                            //print("配置交易成功");
                             NewCanvasUI.My.InitCreateTradePanel();
                             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.EndTrade);
                         }

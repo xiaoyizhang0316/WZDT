@@ -69,7 +69,7 @@ namespace Fungus
                             iof.Value = target.sqrMagnitude;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 
@@ -87,7 +87,7 @@ namespace Fungus
                             target.z = iof.Value;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 

@@ -114,7 +114,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (RoleUpdateInfo.My.currentRole.baseRoleData.level == StageGoal.My.maxRoleLevel || (tew != null && tew.IsPlaying()) ||
             !GetComponent<Button>().interactable)
         {
-            Debug.Log(hammer.transform.eulerAngles);
+            //Debug.Log(hammer.transform.eulerAngles);
             return;
         }
 
@@ -195,7 +195,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
                     if (eventData != null)
                     {
-                        Debug.Log("初始化下一级");
+                        //Debug.Log("初始化下一级");
                         OnPointerEnter(eventData);
 
                     }

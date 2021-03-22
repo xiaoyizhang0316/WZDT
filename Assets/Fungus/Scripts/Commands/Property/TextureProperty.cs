@@ -77,7 +77,7 @@ namespace Fungus
                             iov2.Value = target.texelSize;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 
@@ -98,7 +98,7 @@ namespace Fungus
                             target.mipMapBias = iof.Value;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 

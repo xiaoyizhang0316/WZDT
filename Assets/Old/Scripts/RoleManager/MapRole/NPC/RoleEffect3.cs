@@ -12,7 +12,7 @@ public class RoleEffect3 : MonoBehaviour
     void Start()
     {
         skill = GetComponentInParent<BaseSkill>();
-        Debug.Log(rotateOBJ.transform.position.y);
+        //Debug.Log(rotateOBJ.transform.position.y);
     }
 
     private bool tweFinish = true;

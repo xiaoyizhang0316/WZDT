@@ -23,7 +23,7 @@ public class TextBling : MonoBehaviour
         {
             startColor = GetComponent<Text>().color;
         }
-        Debug.Log(gameObject.name+"+"+startColor + "," + endColor);
+        //Debug.Log(gameObject.name+"+"+startColor + "," + endColor);
         if (this.startColor == endColor)
         {
             return;

@@ -587,7 +587,7 @@ public class NetManager : MonoSingleton<NetManager>
         string methodName = str.Split('|')[0];
         if (listeners.ContainsKey(methodName))
         {
-            Debug.Log(methodName);
+            //Debug.Log(methodName);
             string args = str.Split('|')[1];
             //actionActions.Add(listeners[methodName]);
             listNoDelayActions.Add(new NoDelayedQueueItem {action = listeners[methodName], param = args});
@@ -722,7 +722,7 @@ public class NetManager : MonoSingleton<NetManager>
 
     public void Init()
     {
-        Debug.Log("construct");
+        //Debug.Log("construct");
         listeners = new Dictionary<string, Action<string>>();
         listeners.Add("LoadScene", OnLoadScene);
         listeners.Add("CreateRole", OnCreateRole);

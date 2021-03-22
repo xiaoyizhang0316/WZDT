@@ -148,14 +148,14 @@ public class AnsweringPanel : MonoSingleton<AnsweringPanel>
         transform.GetComponent<Image>().raycastTarget = true;
         ansPanel.SetActive(true);
         currentAnswerStage = OriginalData.My.answerStages[currentStage];
-        print(currentStage);
+        //print(currentStage);
         if (currentAnswerStage.questionCount == -1)
         {
             gameObject.SetActive(false);
             return;
         }
         toDoQuestionsCount = currentAnswerStage.questionCount;
-        print(toDoQuestionsCount);
+        //print(toDoQuestionsCount);
         errorCount = currentAnswerStage.errorCount;
         error_text.text = errorCount.ToString();
         questionIndex = 0;

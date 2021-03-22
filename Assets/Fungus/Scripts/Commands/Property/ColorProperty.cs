@@ -77,7 +77,7 @@ namespace Fungus
                             iof.Value = target.maxColorComponent;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 
@@ -98,7 +98,7 @@ namespace Fungus
                             target.a = iof.Value;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 

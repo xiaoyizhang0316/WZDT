@@ -119,9 +119,9 @@ public class LauncherLogin : MonoBehaviour
                string.IsNullOrEmpty(localInidex) || !isend)
 
         {
-            Debug.Log("等待1"+string.IsNullOrEmpty(remoteIndex));
-            Debug.Log("等待2"+string.IsNullOrEmpty(localInidex));
-            Debug.Log("等待3"+!isend);
+            //Debug.Log("等待1"+string.IsNullOrEmpty(remoteIndex));
+            //Debug.Log("等待2"+string.IsNullOrEmpty(localInidex));
+            //Debug.Log("等待3"+!isend);
 
             if (isLoginFail)
             {
@@ -198,7 +198,7 @@ public class LauncherLogin : MonoBehaviour
             }
             else
             {
-                Debug.Log(response.data);
+                //Debug.Log(response.data);
                 try
                 {
                     PlayerDatas playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
@@ -232,7 +232,7 @@ public class LauncherLogin : MonoBehaviour
         {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
 
-            Debug.Log(response.data);
+            //Debug.Log(response.data);
             try
             {
                 if (String.IsNullOrEmpty(response.data))
@@ -276,7 +276,7 @@ public class LauncherLogin : MonoBehaviour
 
                 if (!string.IsNullOrEmpty(json.name))
                 {
-                    Debug.Log(json.name + "名字" + json.password + "密码");
+                    //Debug.Log(json.name + "名字" + json.password + "密码");
                     InitInput(json);
                     canLogin();
                 }
@@ -327,7 +327,7 @@ public class LauncherLogin : MonoBehaviour
 
     public IEnumerator LoadVersionsIndex(Action<string> doEnd)
     {
-        Debug.Log("获取本地");
+        //Debug.Log("获取本地");
         if (!File.Exists(Application.dataPath + "Build.json"))
         {
             doEnd("0");
@@ -375,9 +375,9 @@ public class LauncherLogin : MonoBehaviour
     /// </summary>
     public void SaveAccount(string name, string password)
     {
-        Debug.Log( name + "名字" +  password + "密码");
+        //Debug.Log( name + "名字" +  password + "密码");
 
-        Debug.Log("保存");
+        //Debug.Log("保存");
         AccountJosn account = new AccountJosn()
         {
             name = name,

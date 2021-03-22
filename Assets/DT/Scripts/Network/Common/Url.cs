@@ -5,7 +5,7 @@ using UnityEngine;
 public static class Url
 {
     //private static string remote = "39.106.226.52";
-    private static string local = "192.168.1.92";
+    private static string local = "192.168.1.77";
     private static string ipAddr = "39.106.226.52";
     //private static string ipAddr = "127.0.0.1";
     private static string port = "8080";
@@ -59,6 +59,8 @@ public static class Url
     private static string getPlayerGroupRanking = "getPlayerGroupRanking";
     private static string getPlayerGlobalRanking = "getPlayerGlobalRanking";
     private static string getBehaviorDatas = "getBehaviorDatas";
+    private static string addTeachLevel = "addTeachLevel";
+    private static string addNpcUseStatus = "addNpcUseStatus";
     #endregion
 
     #region equip
@@ -147,6 +149,8 @@ public static class Url
     public static string GetGroupScoreStatus { get => ip+getGroupScoreStatus; }
     public static string UpdatePlayerFTE { get => ip+updatePlayerFTE; }
     public static string GetVersion { get => ip+getVersion; }
+    public static string AddTeachLevel { get => ip+addTeachLevel; }
+    public static string AddNpcUseStatus { get => ip+addNpcUseStatus; }
     
     
 

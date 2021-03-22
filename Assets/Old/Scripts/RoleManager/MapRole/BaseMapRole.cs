@@ -167,6 +167,10 @@ public class BaseMapRole : MonoBehaviour
                 {
                     PlayerData.My.RoleCountStatic(GetComponent<BaseMapRole>(), 1);
                 }*/
+                if (isNpc)
+                {
+                    DataUploadManager.My.AddNpcRoleType(this);
+                }
             }
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
@@ -1218,7 +1222,7 @@ public class BaseMapRole : MonoBehaviour
         }
         SendProductDataList list = new SendProductDataList();
         list.datas = sendProductddata;
-        Debug.Log(JsonUtility.ToJson(list) );
+        //Debug.Log(JsonUtility.ToJson(list) );
         return JsonUtility.ToJson(list);
     }
 

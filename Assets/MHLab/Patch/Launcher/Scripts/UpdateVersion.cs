@@ -10,7 +10,7 @@ public class UpdateVersion : MonoBehaviour
     void Start()
     {
         
-        Debug.Log("保存");
+        //Debug.Log("保存");
         BuildJson buildJson = new BuildJson();
         buildJson.versionsIndex = Application.version;
         string accoutjson = JsonUtility.ToJson(buildJson);

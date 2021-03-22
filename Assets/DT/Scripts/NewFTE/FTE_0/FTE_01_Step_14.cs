@@ -13,7 +13,7 @@ public class FTE_01_Step_14 : BaseGuideStep
 
     public override IEnumerator StepStart()
     {
-        Debug.Log("开始教学 " + currentStepIndex);
+        //Debug.Log("开始教学 " + currentStepIndex);
         RoleEditor.My.isDragEnd = true;
         RoleEditor.My.SetAllSlider(true);
         RoleEditor.My.transform.SetParent(editorParent);

@@ -12,7 +12,7 @@ public class FTE_4_Step_8 : BaseStep
         nextButton.onClick.AddListener(() => { StopCurrentStep(); });
         contenText.color = new Color(1,1,1,0);
  
-        Debug.Log(1);
+        //Debug.Log(1);
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class FTE_4_Step_8 : BaseStep
  
  
          MaskManager.My.Open(2,94);
-         Debug.Log(2);
+         //Debug.Log(2);
 
          contenText.DOFade(0, 0).OnComplete(() => { 
              contenText.DOFade(1, 1.5f).OnComplete(() =>

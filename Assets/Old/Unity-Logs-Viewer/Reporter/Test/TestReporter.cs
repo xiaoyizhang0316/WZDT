@@ -45,7 +45,7 @@ public class TestReporter : MonoBehaviour
 		Application.runInBackground = true;
 
 		reporter = FindObjectOfType(typeof(Reporter)) as Reporter;
-		Debug.Log("test long text sdf asdfg asdfg sdfgsdfg sdfg sfg" +
+		/*Debug.Log("test long text sdf asdfg asdfg sdfgsdfg sdfg sfg" +
 				  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg " +
 				  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg " +
 				  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg " +
@@ -56,6 +56,7 @@ public class TestReporter : MonoBehaviour
 				  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf" +
 				  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf" +
 				  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf");
+				  */
 
 		style = new GUIStyle();
 		style.alignment = TextAnchor.MiddleCenter;
@@ -63,15 +64,15 @@ public class TestReporter : MonoBehaviour
 		style.wordWrap = true;
 
 		for (int i = 0; i < 10; i++) {
-			Debug.Log("Test Collapsed log");
-			Debug.LogWarning("Test Collapsed Warning");
-			Debug.LogError("Test Collapsed Error");
+			//Debug.Log("Test Collapsed log");
+			//Debug.LogWarning("Test Collapsed Warning");
+			//Debug.LogError("Test Collapsed Error");
 		}
 
 		for (int i = 0; i < 10; i++) {
-			Debug.Log("Test Collapsed log");
-			Debug.LogWarning("Test Collapsed Warning");
-			Debug.LogError("Test Collapsed Error");
+			//Debug.Log("Test Collapsed log");
+			//Debug.LogWarning("Test Collapsed Warning");
+			//Debug.LogError("Test Collapsed Error");
 		}
 
 		rect1 = new Rect(Screen.width / 2 - 120, Screen.height / 2 - 225, 240, 50);

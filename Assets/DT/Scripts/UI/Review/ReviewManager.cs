@@ -93,7 +93,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             }
         }
 
-        Debug.Log(ID);
+        //Debug.Log(ID);
         return new ReviewRoleSign();
     }
 
@@ -210,7 +210,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             //生成生产性角色
              if (panel.mapStates[index].mapRoles[j].roleId == 90018)
              {
-                 Debug.Log(panel.mapStates[index].mapRoles[j].roleType + "index"+index+"j:"+j);
+                 //Debug.Log(panel.mapStates[index].mapRoles[j].roleType + "index"+index+"j:"+j);
 
              }
 
@@ -246,7 +246,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
             var endrole = GetRoleByMapRoles(panel.mapStates[index].mapTrades[j].endRole);
             if (!CheckRole(starrole.roleId))
             {
-                Debug.Log("RoleType"+endrole.roleType);
+                //Debug.Log("RoleType"+endrole.roleType);
                 GetRoleSign(endrole.roleType)
                     .InitRole(starrole, true);
             }
@@ -266,7 +266,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
             if (panel.mapStates[index].mapTrades[j].cashFlowType == GameEnum.CashFlowType.先钱)
             {
-                 Debug.Log("当前" + index + "j" + j);
+                 //Debug.Log("当前" + index + "j" + j);
            
                  DrawLine(GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].startRole).gameObject,
                     GetRoleByMapRoleSigns(panel.mapStates[index].mapTrades[j].endRole).gameObject
@@ -404,7 +404,7 @@ public class ReviewManager : MonoSingleton<ReviewManager>
 
     void DrawLine(GameObject posA, GameObject posB, int index, string money)
     {
-        Debug.Log("A"+posA.name+"B"+posB.name);
+        //Debug.Log("A"+posA.name+"B"+posB.name);
         GameObject line = Instantiate(linePrb, lineTF);
         lines.Add(line);
         line.GetComponent<WMG_Link>().id = panel.mapStates[this.index].mapTrades[index].tradeId;

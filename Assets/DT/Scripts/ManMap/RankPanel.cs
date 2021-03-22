@@ -87,7 +87,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         SetButton(false);
         if (isOn)
         {
-            Debug.Log("record");
+            //Debug.Log("record");
             SetToggleStatus(record_toggle.transform);
             if (!getRecord)
             {
@@ -116,7 +116,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         
         if (isOn)
         {
-            Debug.Log("group");
+            //Debug.Log("group");
             SetToggleStatus(group_toggle.transform);
             if (getGroup)
             {
@@ -163,7 +163,7 @@ public class RankPanel : MonoSingleton<RankPanel>
         currentShowIndex = 2;
         if (isOn)
         {
-            Debug.Log("global");
+            //Debug.Log("global");
             SetToggleStatus(global_toggle.transform);
             if (getGlobal)
             {
@@ -277,7 +277,7 @@ public class RankPanel : MonoSingleton<RankPanel>
             title.text = "全球排名";
             currentShowIndex = 2;
 
-            Debug.Log("global");
+            //Debug.Log("global");
             SetToggleStatus(global_toggle.transform);
             NetworkMgr.My.currentGlobalPage = 0;
             NetworkMgr.My.currentGroupPage = 0;
@@ -335,7 +335,7 @@ public class RankPanel : MonoSingleton<RankPanel>
 
     void NextPage()
     {
-        Debug.Log("next");
+        //Debug.Log("next");
         if (currentShowIndex == 1)
         {
             NetworkMgr.My.currentGroupPage += 1;
@@ -348,7 +348,7 @@ public class RankPanel : MonoSingleton<RankPanel>
             {
                 NetworkMgr.My.GetGroupRankingList(currentSceneName, NetworkMgr.My.currentGroupPage, (gList) =>
                 {
-                    Debug.Log("next from net count:" + gList.Count);
+                    //Debug.Log("next from net count:" + gList.Count);
                     foreach (var g in gList)
                     {
                         groupList.Add(g);

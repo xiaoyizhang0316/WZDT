@@ -498,7 +498,7 @@ public class BossConsumer : ConsumeSign
         {
             GameObject go = Instantiate(littlePrb, transform.parent);
             go.transform.position = bossPathList[0].position;
-            print(tweener.fullPosition);
+            //print(tweener.fullPosition);
             float ran = Random.Range(-2f, 2f);
             go.GetComponent<BossSummonConsumer>().Init(bossPathList, tweener.fullPosition + ran, consumeData.moveSpeed);
             go.GetComponent<BossSummonConsumer>().consumeData.maxHealth = 350 * killCount + 1000;

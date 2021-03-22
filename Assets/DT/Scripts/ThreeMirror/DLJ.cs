@@ -53,6 +53,7 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         if (StageGoal.My.CostTechPoint(costTechNumber))
                         {
                             StageGoal.My.CostTp(costTechNumber, CostTpType.Mirror);
+                            DataUploadManager.My.OpenNpcBuffs(hit.transform.GetComponentInParent<BaseMapRole>());
                             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
                             hit.transform.GetComponentInParent<BaseMapRole>().npcScript.isCanSeeEquip = true;
                             hit.transform.GetComponentInParent<BaseMapRole>().npcScript.UseDLJ();
@@ -60,7 +61,7 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                             effect.transform.localPosition = Vector3.zero;
                             TradeManager.My.ChangeNPCRoleRecord(hit.transform.GetComponentInParent<BaseMapRole>());
                             Destroy(effect, 1f);
-                            Debug.Log("使用多棱镜成功");
+                            //Debug.Log("使用多棱镜成功");
                             DataUploadManager.My.AddData(DataEnum.使用多棱镜);
                             if (!PlayerData.My.isSOLO)
                             {

@@ -13,7 +13,7 @@ public class FTE_4_Step_10 : BaseStep
         nextButton.onClick.AddListener(() => { StopCurrentStep(); });
         contenText.color = new Color(1,1,1,0);
  
-        Debug.Log(1);
+        //Debug.Log(1);
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class FTE_4_Step_10 : BaseStep
     {
      
          MaskManager.My.Open(5,50); 
-         Debug.Log(2);
+         //Debug.Log(2);
 
          contenText.DOFade(0, 0).OnComplete(() => { 
              contenText.DOFade(1, 1.5f).OnComplete(() =>
@@ -41,10 +41,10 @@ public class FTE_4_Step_10 : BaseStep
     }
     public void PlayNext()
     {
-        Debug.Log("检测");
+        //Debug.Log("检测");
         if (WaveCount.My.waveBg.childCount>0)
         {
-            Debug.Log("检测成功");
+            //Debug.Log("检测成功");
 
             StopCurrentStep();
         }
@@ -52,7 +52,7 @@ public class FTE_4_Step_10 : BaseStep
         {
             gameObject.transform.DOScale(1, 0.1f).OnComplete(() =>
             {
-                Debug.Log("检测失败");
+                //Debug.Log("检测失败");
 
                 PlayNext();
             }).Play();

@@ -15,7 +15,7 @@ public class ConsumerBuffReward : BaseExtraSkill
         if (other.CompareTag("Consumer") && isOpen)
         {
             int count = targetBuffRewardList.Count;
-            print("广告成功");
+            //print("广告成功");
             foreach (BaseBuff b in other.transform.GetComponent<ConsumeSign>().buffList)
             {
                 if (targetBuffRewardList.Contains(b.buffId))
