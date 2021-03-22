@@ -167,6 +167,10 @@ public class BaseMapRole : MonoBehaviour
                 {
                     PlayerData.My.RoleCountStatic(GetComponent<BaseMapRole>(), 1);
                 }*/
+                if (isNpc)
+                {
+                    DataUploadManager.My.AddNpcRoleType(this);
+                }
             }
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;

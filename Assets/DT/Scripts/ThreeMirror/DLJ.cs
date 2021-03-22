@@ -53,6 +53,7 @@ public class DLJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         if (StageGoal.My.CostTechPoint(costTechNumber))
                         {
                             StageGoal.My.CostTp(costTechNumber, CostTpType.Mirror);
+                            DataUploadManager.My.OpenNpcBuffs(hit.transform.GetComponentInParent<BaseMapRole>());
                             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
                             hit.transform.GetComponentInParent<BaseMapRole>().npcScript.isCanSeeEquip = true;
                             hit.transform.GetComponentInParent<BaseMapRole>().npcScript.UseDLJ();

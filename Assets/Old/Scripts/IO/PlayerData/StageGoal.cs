@@ -621,7 +621,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <summary>
     /// 通关时调用函数
     /// </summary>
-    public void Win()
+    public void Win(bool isPassByKey=false)
     {
         BaseLevelController.My.CancelInvoke("CheckStarTwo");
         BaseLevelController.My.CancelInvoke("CheckStarOne");
@@ -640,7 +640,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         NewCanvasUI.My.GamePause(false);
         NewCanvasUI.My.EndLowHealth();
         UpdatePlayerScoreEnd();
-        WinManager.My.InitWin();
+        WinManager.My.InitWin(isPassByKey);
         PrintStat();
     }
 
@@ -715,6 +715,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             return;
         tempReplay = new PlayerReplay(false);
         NetworkMgr.My.AddReplayData(tempReplay);
+        NetworkMgr.My.UpdateLevelProgress( int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]), 0,"000", "000", 0);
         PrintStat();
     }
 
@@ -1311,7 +1312,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 if (Input.GetKeyDown(KeyCode.Y))
                 {
-                    Win();
+                    Win(true);
                 }
             }
             //if (Input.GetKeyDown(KeyCode.M))

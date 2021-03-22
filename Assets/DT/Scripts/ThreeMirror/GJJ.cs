@@ -54,6 +54,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         if (StageGoal.My.CostTechPoint(costTechNumber))
                         {
                             StageGoal.My.CostTp(costTechNumber, CostTpType.Mirror);
+                            DataUploadManager.My.OpenNPC(hit.transform.GetComponentInParent<BaseMapRole>());
                             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
                             hit.transform.GetComponentInParent<BaseMapRole>().npcScript.DetectNPCRole();
                             GameObject effect = Instantiate(effectPrb, hit.transform);

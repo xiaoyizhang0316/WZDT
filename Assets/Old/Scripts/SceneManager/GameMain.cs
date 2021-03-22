@@ -82,6 +82,8 @@ public class GameMain : MonoSingletonDontDestroy<GameMain>
         }
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(sceneName);
+        
+        //Debug.Log(CompressUtils.Uncompress("H4sIAAAAAAAEAOy9B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3mkuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZkAWz2zkrayZ4hgKrIHz9+fB8/Iv7Lv/KP/8//+j/pP//T/4hf+HCHnke7v3B3hP/v4P+//3/+R/x5/8Xf9CfzV7uPdn7hzsj+//f/r/62v+u/+LP+VPPi3iN+Qf+/2/n2Xufd//rP/Tv+8z/tbzDf7nfeDb+976HUf/fTAGHq90/6y//rP+0P+s//8L/uP/8T/y5u8KDz+n/+x/3h/9Vf+of/53/CH4Jvd3c6iP2Xf9qf95//vX/Pf/nX85B3u0P+L/6mv+2/+Av+vP/87/zLzet73QZ/wZ/3X/zNf/B//sf8RV6b/U6b/+wf/PP/6z/7r3YY7t7vNPjP/5S/6r/6G/8SbwgHYYP/JwAA//9avHRxsgEAAA=="));
     }
 
     public void LoadScene(string name)
