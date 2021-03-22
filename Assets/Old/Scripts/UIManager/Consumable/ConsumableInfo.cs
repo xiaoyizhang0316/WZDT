@@ -30,7 +30,7 @@ public class ConsumableInfo : MonoSingleton<ConsumableInfo>
     public void Init(int consumableId, int num,Vector3 y)
     {
         ConsumableData data = GameDataMgr.My.GetConsumableDataByID(consumableId);
-         Debug.Log(consumableId);
+         //Debug.Log(consumableId);
         consumableSprite.sprite = Resources.Load<Sprite>("Sprite/Consumable/" + consumableId.ToString());
         consumableName.text = data.consumableName;
         consumableDesc.text = data.consumableDesc;

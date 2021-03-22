@@ -300,7 +300,7 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
                         }
                     }
 
-                    Debug.Log(str);
+                    //Debug.Log(str);
                     DeleteUIManager.My.Init(str + " 是否要卸载它?",
                         () =>
                         {

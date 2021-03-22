@@ -83,7 +83,7 @@ namespace Fungus
                             ioi.Value = target.passCount;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 
@@ -113,7 +113,7 @@ namespace Fungus
                             target.enableInstancing = iob.Value;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 

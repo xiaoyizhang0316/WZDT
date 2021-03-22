@@ -75,7 +75,7 @@ namespace Fungus
                             iov.Value = target.impulse;
                             break;
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 
@@ -84,7 +84,7 @@ namespace Fungus
                     switch (property)
                     {
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 

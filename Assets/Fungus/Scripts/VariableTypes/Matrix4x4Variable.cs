@@ -27,11 +27,11 @@ namespace Fungus
             switch (setOperator)
             {
                 case SetOperator.Add:
-                    Debug.LogWarning("Matrix4x4 Add not supported");
+                    //Debug.LogWarning("Matrix4x4 Add not supported");
                     break;
 
                 case SetOperator.Subtract:
-                    Debug.LogWarning("Matrix4x4 Subtract not supported");
+                    //Debug.LogWarning("Matrix4x4 Subtract not supported");
                     break;
 
                 case SetOperator.Multiply:
@@ -39,7 +39,7 @@ namespace Fungus
                     break;
 
                 case SetOperator.Divide:
-                    Debug.LogWarning("Matrix4x4 Divide not supported");
+                    //Debug.LogWarning("Matrix4x4 Divide not supported");
                     break;
 
                 default:

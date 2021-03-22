@@ -38,14 +38,14 @@ public class FTE_1_19 : BaseGuideStep
     {
         if (StageGoal.My.extraCost.ContainsKey("升级") && StageGoal.My.extraCost["升级"] >= 10)
         {
-            Debug.Log("正确返回");
+            //Debug.Log("正确返回");
             NewCanvasUI.My.Panel_Update.SetActive(false);
             return true;
         }
         else
         {
            // Debug.Log("失败返回"+StageGoal.My.extraCost.ContainsKey("升级")+":"+(StageGoal.My.extraCost["升级"] >= 2400));
-           Debug.Log("失败"); 
+           //Debug.Log("失败"); 
            return false;
         }
     }

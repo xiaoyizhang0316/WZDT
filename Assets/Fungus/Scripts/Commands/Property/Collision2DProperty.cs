@@ -95,7 +95,7 @@ namespace Fungus
                             break;
 #endif
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 
@@ -104,7 +104,7 @@ namespace Fungus
                     switch (property)
                     {
                         default:
-                            Debug.Log("Unsupported get or set attempted");
+                            //Debug.Log("Unsupported get or set attempted");
                             break;
                     }
 

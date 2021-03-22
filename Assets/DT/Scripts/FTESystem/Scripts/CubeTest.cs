@@ -32,6 +32,6 @@ public class CubeTest : MonoBehaviour
                 return;
             }
         }
-        Debug.Log("click");
+        //Debug.Log("click");
     }
 }

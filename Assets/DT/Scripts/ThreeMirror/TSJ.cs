@@ -56,7 +56,7 @@ public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         hit[i].transform.GetComponent<Building>().UseTSJ();
                         GameObject effect = Instantiate(effectPrb, hit[i].transform);
                         effect.transform.localPosition = Vector3.zero;
-                        Debug.Log("使用透视镜成功");
+                        //Debug.Log("使用透视镜成功");
                         DataUploadManager.My.AddData(DataEnum.使用透视镜);
                         if (!PlayerData.My.isSOLO)
                         {

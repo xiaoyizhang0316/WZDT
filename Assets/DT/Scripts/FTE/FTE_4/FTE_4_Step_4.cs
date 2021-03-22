@@ -38,17 +38,17 @@ public class FTE_4_Step_4 : BaseStep
     }
     public void PlayNext()
     {
-        Debug.Log("检测");
+        //Debug.Log("检测");
         if (UI.activeSelf && UI2.activeSelf)
         {
-            Debug.Log("检测成功"); 
+            //Debug.Log("检测成功"); 
             StopCurrentStep();
         }
         else
         {
             gameObject.transform.DOScale(1, 1f).OnComplete(() =>
             {
-                Debug.Log("检测失败");
+                //Debug.Log("检测失败");
                 PlayNext();
             }).Play();
         }

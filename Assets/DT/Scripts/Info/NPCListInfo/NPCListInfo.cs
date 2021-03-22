@@ -242,6 +242,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         {
             lockedInfo.SetActive(false);
             ShowNpcInfo(npc);
+            DataUploadManager.My.UnlockNpc(npc.GetComponent<BaseMapRole>());
             if (!PlayerData.My.isSOLO)
             {
                 string str = "UnlockRole|";

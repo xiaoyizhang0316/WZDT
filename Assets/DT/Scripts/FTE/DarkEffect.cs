@@ -17,8 +17,7 @@ public class DarkEffect : MonoBehaviour
 
         public Vector3 GetScreenPosition(Camera cam)
         {
-             
-                return cam.WorldToScreenPoint(target.position);
+            return cam.WorldToScreenPoint(target.position);
         }
     }
 

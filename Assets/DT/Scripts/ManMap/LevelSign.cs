@@ -37,7 +37,7 @@ public class LevelSign : MonoBehaviour
         //starNeed = transform.Find("StarNeed").GetComponent<Text>();
         LevelButton.onClick.AddListener(() =>
         {
-            Debug.Log("1231231231");
+            //Debug.Log("1231231231");
             Init();
         });
         if(!NetworkMgr.My.isUsingHttp)
@@ -69,7 +69,7 @@ public class LevelSign : MonoBehaviour
                         //SceneManager.LoadScene(loadScene);
                         NetworkMgr.My.GetPoorPlayerEquips((data) =>
                         {
-                            Debug.Log("装备回调");
+                            //Debug.Log("装备回调");
                             if (data.Count != 0)
                             {
                                 PlayerData.My.InitPlayerEquip(data);
@@ -165,7 +165,7 @@ public class LevelSign : MonoBehaviour
         {
             currentStar = "0" + currentStar;
         }
-        Debug.Log(currentStar);
+        //Debug.Log(currentStar);
         stars = currentStar;
 
         if (NetworkMgr.My.levelProgressList.Count >= 4 && NetworkMgr.My.playerDatas.threeWordsProgress == 1)
@@ -202,7 +202,7 @@ public class LevelSign : MonoBehaviour
                     {
                         newStatus += "_"+arr[i];
                     }
-                    Debug.Log(newStatus);
+                    //Debug.Log(newStatus);
                     // 解锁动画
                     // fade
                     //transform.GetChild(0).GetComponent<Image>().DOFade(0, 0.75f).OnComplete(()=> {

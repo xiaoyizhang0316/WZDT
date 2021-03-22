@@ -68,7 +68,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public void UpdateInfo()
     {
         consumableNum = PlayerData.My.GetPlayerConsumableById(consumableId).number;
-        Debug.Log("consumableNum" + consumableNum);
+       // Debug.Log("consumableNum" + consumableNum);
         consumableNumber.text = consumableNum.ToString();
     }
 
@@ -121,7 +121,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
                         GameEnum.ConsumableType.Role)
                     {
                         BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
-                        print("使用消耗品:" + consumableId.ToString());
+                        //print("使用消耗品:" + consumableId.ToString());
                         InitBuff();
                         CastBuff(role);
                         break;
@@ -136,7 +136,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
                         if (GameDataMgr.My.GetConsumableDataByID(consumableId).consumableType ==
                             GameEnum.ConsumableType.SpawnItem)
                         {
-                            print(hit[i].point);
+                            //print(hit[i].point);
                             GameObject go1 = Instantiate(Resources.Load<GameObject>("Consumable/Consumable"));
                             go1.transform.position = hit[i].transform.position;
                             //BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();
@@ -152,7 +152,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
                     if (GameDataMgr.My.GetConsumableDataByID(consumableId).consumableType ==
                         GameEnum.ConsumableType.AOE)
                     {
-                        print(hit[i].point);
+                        //print(hit[i].point);
                         GameObject go1 = Instantiate(Resources.Load<GameObject>("Consumable/Consumable"));
                         go1.transform.position = hit[i].point;
                         //BaseMapRole role = hit[i].transform.GetComponentInParent<BaseMapRole>();

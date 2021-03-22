@@ -45,6 +45,7 @@ public enum DataEnum
     时间_暂停时长,
     统计付钱时间占比,
     赤字次数,
+    使用道具次数
 }
 [SerializeField]
 public class DataUpload
@@ -227,5 +228,10 @@ public class DataUpload
     /// 赤字次数
     /// </summary>
     public int deficitNumber;
+
+    /// <summary>
+    /// 使用道具次数
+    /// </summary>
+    public int useItemNum;
 
 }

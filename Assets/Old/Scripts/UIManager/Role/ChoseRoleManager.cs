@@ -50,7 +50,7 @@ public class ChoseRoleManager : MonoBehaviour
         seed.onClick.AddListener(() =>
         {
             Role role = new Role();
-            print(StaticRoleName.SeedName[0]);
+            //print(StaticRoleName.SeedName[0]);
             role.ID = CommonData.My.GetTimestamp(DateTime.Now);
             ///Debug.Log( CommonData.My.GetTimestamp(DateTime.Now) +"IDS");
             role.baseRoleData = GameDataMgr.My.GetModelData(GameEnum.RoleType.Seed, 1);

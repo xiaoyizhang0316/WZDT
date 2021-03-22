@@ -66,7 +66,7 @@ public class FTEManager : MonoSingleton<FTEManager>
         {
             fteSteps[i] = mask.GetChild(currentFTEPanel).GetChild(i).GetComponent<FTEStep>();
         }
-        Debug.LogError(fteSteps.Length);
+        //Debug.LogError(fteSteps.Length);
         // 从 currentStep 开始教学
         StartCoroutine(ExcuteStep(0.5f));
     }

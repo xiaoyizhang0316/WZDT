@@ -66,7 +66,7 @@ public class BulletLaunch : MonoBehaviour
     public void LanchNormal(ProductData data, ConsumeSign target)
     {
         GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.NormalPP);
-        Debug.Log("初始化子弹" + gameObject.name);
+        //Debug.Log("初始化子弹" + gameObject.name);
         gameObject.GetComponent<GoodsSign>().productData = data;
         gameObject.GetComponent<GoodsSign>().lunch = this;
         gameObject.GetComponent<GoodsSign>().target = target;
@@ -77,7 +77,7 @@ public class BulletLaunch : MonoBehaviour
         gameObject.transform.SetParent(launchShooter.parent);
         launchShooter.DOLookAt(PlayerData.My.isPrediction? launchShooter.position: target.transform.position, 0.1f).OnComplete(() =>
         {
-            Debug.Log("初始化拖尾" + gameObject.name);
+            //Debug.Log("初始化拖尾" + gameObject.name);
             if(!PlayerData.My.isPrediction)
                 gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
             float flyTime = Vector3.Distance(target.transform.position, gameObject.transform.position) / 24f;
@@ -93,7 +93,7 @@ public class BulletLaunch : MonoBehaviour
                     isplay = false;
                     if (gameObject.GetComponent<GoodsSign>().target != null)
                     {
-                        Debug.Log("初始化爆炸" + gameObject.name);
+                        //Debug.Log("初始化爆炸" + gameObject.name);
                         if(!PlayerData.My.isPrediction)
                             gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
                         //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
@@ -121,7 +121,7 @@ public class BulletLaunch : MonoBehaviour
                                 if (targetIndex != -1)
                                 {
                                     GameObject go = BulletObjectPool.My.GetBullet(BulletType.NormalPP);
-                                    Debug.Log("初始化子弹" + go.name);
+                                    //Debug.Log("初始化子弹" + go.name);
                                     go.GetComponent<GoodsSign>().productData = data;
                                     go.GetComponent<GoodsSign>().lunch = this;
                                     go.GetComponent<GoodsSign>().target = consumeSigns[targetIndex];
@@ -131,7 +131,7 @@ public class BulletLaunch : MonoBehaviour
                                     go.transform.localPosition = new Vector3(0, 0.5f, 0);
                                     go.transform.SetParent(target.transform);
 
-                                    Debug.Log("初始化拖尾" + go.name);
+                                    //Debug.Log("初始化拖尾" + go.name);
                                     if(!PlayerData.My.isPrediction)
                                         go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().tile);
                                     float flyTime2 = Vector3.Distance(consumeSigns[targetIndex].transform.position, go.transform.position) / 24f;
@@ -147,7 +147,7 @@ public class BulletLaunch : MonoBehaviour
                                             isplay = false;
                                             if (go.GetComponent<GoodsSign>().target != null)
                                             {
-                                                Debug.Log("初始化爆炸" + go.name);
+                                                //Debug.Log("初始化爆炸" + go.name);
                                                 if(!PlayerData.My.isPrediction)
                                                     go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().explosions);
                                                 //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();

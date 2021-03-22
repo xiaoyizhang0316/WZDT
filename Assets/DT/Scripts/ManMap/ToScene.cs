@@ -34,7 +34,7 @@ public class ToScene : MonoBehaviour
 #endif
         if (File.Exists(path))
         {
-            Debug.LogError("   存在 删除文件 ");
+            //Debug.LogError("   存在 删除文件 ");
 
             // System.IO.Directory.Delete(@updateAssets.list[0].LocalUrl);
             try

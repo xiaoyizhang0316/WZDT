@@ -26,7 +26,7 @@ namespace Fungus
             if (renderer)
             {
                 renderer.sortingLayerName = layerName;
-                Debug.Log(target.name);
+                //Debug.Log(target.name);
             }
 
             var targetTransform = target.transform;

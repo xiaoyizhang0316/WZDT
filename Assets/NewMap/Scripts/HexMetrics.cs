@@ -21,7 +21,7 @@ public static class HexMetrics {
 
 	public const float elevationStep = 0.5f;
 
-	public const int terracesPerSlope =0;
+	public const int terracesPerSlope = 0;
 
 	public const int terraceSteps = terracesPerSlope * 2 + 1;
 

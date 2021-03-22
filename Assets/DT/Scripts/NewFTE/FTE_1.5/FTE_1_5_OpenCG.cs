@@ -21,6 +21,7 @@ public class FTE_1_5_OpenCG : MonoBehaviour
             PlayerData.My.playerGears.Clear();
             PlayerData.My.playerWorkers.Clear();
             PlayerData.My.Reset();
+            NetworkMgr.My.AddTeachLevel(TimeStamp.GetCurrentTimeStamp()-StageGoal.My.startTime, SceneManager.GetActiveScene().name, 1);
             NetworkMgr.My.UpdatePlayerFTE("1.5", () =>
             {
                 SceneManager.LoadScene("Map");

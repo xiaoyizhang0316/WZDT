@@ -13,7 +13,7 @@ public class FTE_SeedNpcAI : MonoBehaviour
     {
         if (GetComponent<BaseMapRole>().baseRoleData.inMap && GetComponent<BaseMapRole>().AI && !aiStart)
         {
-            Debug.Log(aiStart);
+            //Debug.Log(aiStart);
             double selfId = GetComponent<BaseMapRole>().baseRoleData.ID;
             aiStart = true;
         }

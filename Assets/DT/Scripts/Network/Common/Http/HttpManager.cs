@@ -184,7 +184,7 @@ public class HttpManager : MonoSingleton<HttpManager>
             SetNeedRetryById(retryID, true);
             if (!string.IsNullOrEmpty(uwr.error) || uwr.isNetworkError || uwr.isHttpError)
             {
-                Debug.Log(uwr.error+uwr.responseCode);
+                //Debug.Log(uwr.error+uwr.responseCode);
                 //ShowNetworkStatus(uwr.responseCode);
                 //SetNeedRetryById(retryID, false);
                 
@@ -279,7 +279,7 @@ public class HttpManager : MonoSingleton<HttpManager>
 
             yield return null;
         }
-        Debug.Log(uwr.responseCode);
+        //Debug.Log(uwr.responseCode);
         if (isNetworkSlow)
         {
             Debug.Log("network broken!");
@@ -293,7 +293,7 @@ public class HttpManager : MonoSingleton<HttpManager>
             }
             else
             {
-                Debug.Log(uwr.responseCode);
+                //Debug.Log(uwr.responseCode);
                 action(uwr);
                 //wait.transform.localEulerAngles = Vector3.zero;
             }

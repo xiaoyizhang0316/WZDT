@@ -27,11 +27,11 @@ namespace Fungus
             switch (setOperator)
             {
                 case SetOperator.Add:
-                    Debug.LogWarning("Quarternion Add not supported");
+                    //Debug.LogWarning("Quarternion Add not supported");
                     break;
 
                 case SetOperator.Subtract:
-                    Debug.LogWarning("Quarternion Subtract not supported");
+                    //Debug.LogWarning("Quarternion Subtract not supported");
                     break;
 
                 case SetOperator.Multiply:
@@ -39,7 +39,7 @@ namespace Fungus
                     break;
 
                 case SetOperator.Divide:
-                    Debug.LogWarning("Quarternion Divide not supported");
+                    //Debug.LogWarning("Quarternion Divide not supported");
                     break;
 
                 default:

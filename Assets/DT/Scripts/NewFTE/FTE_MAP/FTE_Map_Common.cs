@@ -11,13 +11,13 @@ public class FTE_Map_Common : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        Debug.Log("结束教学 " + currentStepIndex);
+        //Debug.Log("结束教学 " + currentStepIndex);
         yield break;
     }
 
     public override IEnumerator StepStart()
     {
-        Debug.Log("开始教学 " + currentStepIndex);
+        //Debug.Log("开始教学 " + currentStepIndex);
         afterEntry = HandMove;
         yield return new WaitForSeconds(1);
         ShowInfos();

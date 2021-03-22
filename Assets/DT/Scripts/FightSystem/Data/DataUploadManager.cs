@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
 public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<DataUploadManager>
 {
 
+    //public int test = 100;
     Dictionary<string, int> dataDic = new Dictionary<string, int>();
+    
+    Dictionary<string, string> npcRole = new Dictionary<string, string>();
+
+    
+
+    //public List<NpcStatus> npcStatus = new List<NpcStatus>();
     // Start is called before the first frame update
     void Start()
     {
@@ -112,8 +120,159 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     {
         foreach (var VARIABLE in dataDic)
         {
-            Debug.Log(VARIABLE.Key + "Key" + VARIABLE.Value + "Value");
+            //Debug.Log(VARIABLE.Key + "Key" + VARIABLE.Value + "Value");
         }
+    }
+
+    /// <summary>
+    /// 添加NPC状态
+    /// </summary>
+    /// <param name="mapRole"></param>
+    public void AddNpcRoleType(BaseMapRole mapRole)
+    {
+        if (!npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID))
+        {
+            npcRole.Add(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID, GetNpcStatus(mapRole));
+            
+            //npcStatus.Add(new NpcStatus(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID,GetNpcStatus(mapRole)));
+        }
+    }
+
+    /*private void UpdateNpc()
+    {
+        npcStatus.Clear();
+        foreach (string key in npcRole.Keys)
+        {
+            npcStatus.Add(new NpcStatus(key, npcRole[key]));
+        }
+    }*/
+
+    /// <summary>
+    /// 获取NPC初始状态
+    /// </summary>
+    /// <param name="mapRole"></param>
+    private string GetNpcStatus(BaseMapRole mapRole)
+    {
+        string result = "";
+        if (mapRole.npcScript.isCanSee)
+        {
+            result += "1&1";
+        }
+        else
+        {
+            result += "0&0";
+        }
+        if (mapRole.npcScript.isLock)
+        {
+            result += ",0&0";
+        }
+        else
+        {
+            result += ",1&1";
+        }
+
+        if (mapRole.npcScript.isCanSeeEquip)
+        {
+            result += ",1&1";
+        }
+        else
+        {
+            result += ",0&0";
+        }
+
+        result += ",0";
+        return result;
+    }
+
+    /// <summary>
+    /// 设置NPC的状态，0：使用广角镜，1：解锁，2:使用多棱镜，3：交易
+    /// </summary>
+    /// <param name="mapRole"></param>
+    private void SetNpcRoleStatus(BaseMapRole mapRole, int status)
+    {
+        if (npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName + "&" + mapRole.baseRoleData.ID))
+        {
+            if (status == 3)
+            {
+                string[] statusArr = npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID].Split(',');
+                statusArr[statusArr.Length - 1] = "1";
+                npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID] =
+                    statusArr[0] + "," + statusArr[1] + "," + statusArr[2]+","+statusArr[3];
+            }
+            else
+            {
+                string[] statusArr = npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID].Split(',');
+                string[] arr = statusArr[status].Split('&');
+                statusArr[status] = arr[0] + "&1";
+                npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID] =
+                    statusArr[0] + "," + statusArr[1] + "," + statusArr[2]+","+statusArr[3];
+                
+            }
+            //UpdateNpc();
+        }
+    }
+
+    /// <summary>
+    /// 交易时，判断是否是NPC并设置NPC的使用状态
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    public void TradeOnNpc(string start, string end)
+    {
+        BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(start));
+        BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(end));
+
+        if (startRole.isNpc)
+        {
+            SetNpcRoleStatus(startRole, 3);
+        }
+
+        if (endRole.isNpc)
+        {
+            SetNpcRoleStatus(endRole,3);
+        }
+    }
+
+    /// <summary>
+    /// 广角镜
+    /// </summary>
+    /// <param name="mapRole"></param>
+    public void OpenNPC(BaseMapRole mapRole)
+    {
+        SetNpcRoleStatus(mapRole, 0);
+    }
+
+    /// <summary>
+    /// 解锁
+    /// </summary>
+    /// <param name="mapRole"></param>
+    public void UnlockNpc(BaseMapRole mapRole)
+    {
+        SetNpcRoleStatus(mapRole,1);
+    }
+
+    /// <summary>
+    /// 多棱镜
+    /// </summary>
+    /// <param name="mapRole"></param>
+    public void OpenNpcBuffs(BaseMapRole mapRole)
+    {
+        SetNpcRoleStatus(mapRole, 2);
+    }
+
+    /// <summary>
+    /// 获得本场NPC的使用状态
+    /// </summary>
+    /// <returns></returns>
+    public string GetNpcUseStatus()
+    {
+        string result = "";
+        foreach (string key in npcRole.Keys)
+        {
+            result += "_" + key + ":" + npcRole[key];
+        }
+
+        return result.Substring(1);
     }
 
     public void OnGUI()
@@ -122,5 +281,18 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
         //{
         //    showdic();
         //}
+    }
+}
+
+[Serializable]
+public class NpcStatus
+{
+    public string npcName;
+    public string useStatus;
+
+    public NpcStatus(string npcName, string useStatus)
+    {
+        this.npcName = npcName;
+        this.useStatus = useStatus;
     }
 }

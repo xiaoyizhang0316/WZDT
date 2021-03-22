@@ -158,7 +158,7 @@ namespace MHLab.Patch.Launcher.Scripts
             {
                 HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
 
-                Debug.Log(response.data);
+                //Debug.Log(response.data);
                 try
                 {
                     if (String.IsNullOrEmpty(response.data))

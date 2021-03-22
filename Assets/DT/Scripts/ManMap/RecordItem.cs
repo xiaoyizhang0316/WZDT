@@ -88,7 +88,7 @@ public class RecordItem : MonoBehaviour
             PlayerOperations operations = JsonUtility.FromJson<PlayerOperations>(str);
             string str1 = "{ \"dataStats\":" + datas.dataStats + "}";
             PlayerStatus status = JsonUtility.FromJson<PlayerStatus>(str1);
-            Debug.Log("获取录像成功");
+            //Debug.Log("获取录像成功");
             ReviewPanel.My.MapInit(operations.playerOperations, status.dataStats, (status.dataStats.Count - 1) * 5,talent);
         });
     }

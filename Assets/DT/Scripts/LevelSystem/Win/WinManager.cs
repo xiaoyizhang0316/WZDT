@@ -121,7 +121,7 @@ public class WinManager : MonoSingleton<WinManager>
         }
     }
 
-    public void InitWin()
+    public void InitWin(bool isPassByKey =false)
     {
         effect_1.SetActive(false);
         effect_2.SetActive(false);
@@ -385,7 +385,7 @@ public class WinManager : MonoSingleton<WinManager>
             //NetworkMgr.My.AddReplayData(tempReplay);
             UploadReplayData();
             UploadGetEquip();
-            CommitProgress();
+            CommitProgress(isPassByKey);
             
         }
         CheckNext();
@@ -606,10 +606,14 @@ public class WinManager : MonoSingleton<WinManager>
         ReviewPanel.My.Init(StageGoal.My.playerOperations);
     }
 
-    private void CommitProgress()
+    private void CommitProgress(bool isPassByKey=false)
     {
+        if (PlayerData.My.cheatIndex1 || PlayerData.My.cheatIndex2 || PlayerData.My.cheatIndex3)
+        {
+            isPassByKey = true;
+        }
         NetworkMgr.My.UpdateLevelProgress(NetworkMgr.My.currentLevel, stars, starArr[0] + starArr[1] + starArr[2],
-                    starArr[0] + starArr[1] + starArr[2], StageGoal.My.playerSatisfy, () =>
+                    starArr[0] + starArr[1] + starArr[2],  isPassByKey?-1:StageGoal.My.playerSatisfy, () =>
                     {
                         //PlayerData.My.Reset();
                         //SceneManager.LoadScene("Map");
