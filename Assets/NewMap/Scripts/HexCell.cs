@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using Fungus;
 
 public class HexCell : MonoBehaviour {
 
@@ -32,7 +34,7 @@ else
 
 	public int ColumnIndex { get; set; }
 
-	public int Elevation {
+	public float Elevation {
 		get {
 			return elevation;
 		}
@@ -78,7 +80,7 @@ else
 
 	public int ViewElevation {
 		get {
-			return elevation >= waterLevel ? elevation : waterLevel;
+			return elevation >= waterLevel ? (int)elevation : waterLevel;
 		}
 	}
 
@@ -299,7 +301,7 @@ else
 
 	int terrainTypeIndex;
 
-	int elevation = int.MinValue;
+	float elevation = int.MinValue;
 	int waterLevel;
 
 	int urbanLevel, farmLevel, plantLevel;
@@ -356,13 +358,13 @@ else
 
 	public HexEdgeType GetEdgeType (HexDirection direction) {
 		return HexMetrics.GetEdgeType(
-			elevation, neighbors[(int)direction].elevation
+			(int)elevation, (int)neighbors[(int)direction].elevation
 		);
 	}
 
 	public HexEdgeType GetEdgeType (HexCell otherCell) {
 		return HexMetrics.GetEdgeType(
-			elevation, otherCell.elevation
+			(int)elevation, (int)otherCell.elevation
 		);
 	}
 
@@ -450,7 +452,7 @@ else
 	}
 
 	public int GetElevationDifference (HexDirection direction) {
-		int difference = elevation - GetNeighbor(direction).elevation;
+		int difference = (int)elevation - (int)GetNeighbor(direction).elevation;
 		return difference >= 0 ? difference : -difference;
 	}
 
@@ -610,6 +612,29 @@ public 	void RefreshSelfOnly () {
 		highlight.color = color;
 		highlight.enabled = true;
 	}
+
+	public IEnumerator ChangeElevationLerpUp ( float endvalue,float step,Action onEnd)
+	{
+		while (elevation < endvalue )
+		{
+			Elevation += step;
+			yield return null;
+		}
+
+		onEnd(); 
+	}
+
+	public IEnumerator ChangeElevationLerpDown ( float endvalue,float step,Action onEnd)
+	{
+		while (elevation > endvalue )
+		{
+			Elevation -= step;
+			yield return null;
+		}
+
+		onEnd(); 
+	}
+
 
 	public void SetMapData (float data) {
 		ShaderData.SetMapData(this, data);
