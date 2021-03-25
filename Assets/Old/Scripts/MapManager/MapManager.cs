@@ -138,7 +138,7 @@ public class MapManager : MonoSingleton<MapManager>
     /// 根据配置表生成NPC并放置到地图上
     /// </summary>
     /// <param name="npc"></param>
-    public void PutNPC(StageNPCData npc)
+    public void PutNPC(StageNPCData npc, string npcTag="")
     {
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/NPC/" + npc.roleType));
         go.transform.SetParent(GameObject.Find("Role").transform);
@@ -149,6 +149,7 @@ public class MapManager : MonoSingleton<MapManager>
         go.name = npc.npcName;
         go.GetComponent<NPC>().BaseInit();
         go.GetComponent<NPC>().Init();
+        go.GetComponent<NPC>().npcTag = npcTag;
     }
 
     /// <summary>
@@ -157,7 +158,7 @@ public class MapManager : MonoSingleton<MapManager>
     /// <param name="npc"></param>
     /// <param name="x"></param>
     /// <param name="y"></param>
-    public void PutNPCRandom(StageNPCData npc,int x,int y)
+    public void PutNPCRandom(StageNPCData npc,int x,int y, string npcTag="")
     {
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/NPC/" + npc.roleType));
         go.transform.SetParent(GameObject.Find("Role").transform);
@@ -166,6 +167,7 @@ public class MapManager : MonoSingleton<MapManager>
         go.name = npc.npcName;
         go.GetComponent<NPC>().BaseInit();
         go.GetComponent<NPC>().Init();
+        go.GetComponent<NPC>().npcTag = npcTag;
     }
 
     /// <summary>
@@ -280,18 +282,20 @@ public class MapManager : MonoSingleton<MapManager>
         {
             List<StageNPCData> npcs = new List<StageNPCData>();
             List<string> pos = new List<string>();
+            List<string> tags = new List<string>();
             foreach (StageNPCItem s in rawData.stageNPCItems)
             {
                 StageNPCData npc = new StageNPCData(s);
                 if (npc.roleType.Equals("Dealer"))
                 {
-                    PutNPC(npc);
+                    PutNPC(npc, s.npcTag);
                 }
                 else
                 {
                     string tempPos = s.posX.ToString() + "," + s.posY.ToString();
                     pos.Add(tempPos);
                     npcs.Add(npc);
+                    tags.Add(s.npcTag);
                 }
             }
             for (int i = 0; i < npcs.Count; i++)
@@ -300,7 +304,7 @@ public class MapManager : MonoSingleton<MapManager>
                 int x = int.Parse(pos[index].Split(',')[0]);
                 int y = int.Parse(pos[index].Split(',')[1]);
                 pos.RemoveAt(index);
-                PutNPCRandom(npcs[i], x, y);
+                PutNPCRandom(npcs[i], x, y, tags[i]);
             }
 
         }
@@ -310,7 +314,7 @@ public class MapManager : MonoSingleton<MapManager>
             foreach (StageNPCItem s in rawData.stageNPCItems)
             {
                 StageNPCData npc = new StageNPCData(s);
-                PutNPC(npc);
+                PutNPC(npc, s.npcTag);
             }
         }
     }
