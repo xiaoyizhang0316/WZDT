@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     public CloseGuide guideClose;
 
     public Button nextButton;
+
+    public List<string> taskTimeList = new List<string>();
+    public int currentTaskStartTime = 0;
+    public int currentTaskEndTime = 0;
 
     /// <summary>
     /// 查找当前教学文案
@@ -281,5 +286,21 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     {
         //Debug.Log("born");
         StartCoroutine(GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().BornEnemy());
+    }
+
+    public void AddTaskTime(string taskName)
+    {
+        int useTime= currentTaskEndTime - currentTaskStartTime;
+        taskTimeList.Add(taskName+":"+useTime);
+    }
+
+    public string GetTaskTimes()
+    {
+        String times = "";
+        for (int i = 0; i < taskTimeList.Count; i++)
+        {
+            times += "_" + taskTimeList[i];
+        }
+        return times.Substring(1);
     }
 }

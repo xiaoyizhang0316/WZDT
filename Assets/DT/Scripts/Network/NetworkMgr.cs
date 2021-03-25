@@ -1361,6 +1361,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("useTime", useTime.ToString());
         keyValues.Add("isPass", isPass.ToString());
         keyValues.Add("groupID", groupID.ToString());
+        keyValues.Add("timeInTasks", GuideManager.My.GetTaskTimes());
         
         StartCoroutine(HttpManager.My.HttpSend(Url.AddTeachLevel, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
