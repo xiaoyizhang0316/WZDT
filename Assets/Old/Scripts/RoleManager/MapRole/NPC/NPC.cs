@@ -104,7 +104,6 @@ public class NPC : BaseNpc
         //{
         //    return;
         //}
-
     }
 
 
@@ -135,7 +134,6 @@ public class NPC : BaseNpc
     
     public void Init()
     {
-
         currentRole = GetComponentInParent<BaseMapRole>().baseRoleData;
         Invoke("AutoSetTrade", 0.2f);
         if (!isCanSeeEquip && !isInited)

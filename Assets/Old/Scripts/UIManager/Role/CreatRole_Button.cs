@@ -208,7 +208,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech,
                         CostTpType.Build);
                     role.transform.position =currentCell.Position + new Vector3(0f, 2f, 0f);
-                    role.transform.DOMove(currentCell.Position + new Vector3(0f, 0.3f, 0f), 0.2f).OnComplete(() =>
+                    role.transform.DOMove(currentCell.Position + new Vector3(0f, 0f, 0f), 0.2f).OnComplete(() =>
                         {
                             GameObject go = Instantiate(dustPrb, role.transform);
                             Destroy(go, 1f);

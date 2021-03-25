@@ -93,13 +93,16 @@ public class SaveLoadMenu : MonoBehaviour {
 	}
 
 	void Save (string path) {
+
 		using (
 			BinaryWriter writer =
 			new BinaryWriter(File.Open(path, FileMode.Create))
 		) {
 			writer.Write(mapFileVersion);
 			hexGrid.Save(writer);
+			EditorMapManager.My.SaveJSON(nameInput.text);
 		}
+
 	}
 
 	public void Load (string path) {
@@ -112,10 +115,45 @@ public class SaveLoadMenu : MonoBehaviour {
 			if (header <= mapFileVersion) {
 				hexGrid.Load(reader, header);
 				HexMapCamera.ValidatePosition();
+				Invoke("LoadJSONEditor", 2f);
 			}
 			else {
 				Debug.LogWarning("Unknown map format " + header);
 			}
 		}
+	}
+
+	public void LoadActualScene(string path)
+    {
+		if (!File.Exists(path))
+		{
+			Debug.LogError("File does not exist " + path);
+			return;
+		}
+		using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+		{
+			int header = reader.ReadInt32();
+			if (header <= mapFileVersion)
+			{
+				hexGrid.Load(reader, header);
+
+				//HexMapCamera.ValidatePosition();
+				Invoke("LoadJSON", 0.5f);
+			}
+			else
+			{
+				Debug.LogWarning("Unknown map format " + header);
+			}
+		}
+	}
+
+	public void LoadJSONEditor()
+    {
+		EditorMapManager.My.LoadJSON(nameInput.text);
+	}
+
+	public void LoadJSON()
+    {
+		MapManager.My.LoadJSON("");
 	}
 }

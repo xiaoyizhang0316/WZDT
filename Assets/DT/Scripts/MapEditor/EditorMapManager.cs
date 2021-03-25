@@ -19,10 +19,12 @@ public class EditorMapManager : MapManager
 
     public GameObject consumerEnd;
 
+    public string sceneName;
+
     /// <summary>
     /// 从编辑器场景导出保存一个特殊操作的JSON文件
     /// </summary>
-    public void SaveJSON()
+    public override void SaveJSON(string fteName)
     {
         EditorLandItem[] total = FindObjectsOfType<EditorLandItem>();
         Debug.Log(total.Length);
@@ -42,11 +44,11 @@ public class EditorMapManager : MapManager
         Debug.Log(result);
         string encode = result;
 #if UNITY_STANDALONE_WIN
-                    FileStream file = new FileStream( Directory.GetParent(Directory.GetParent(Application.dataPath)+"")
-                                 + "\\Build.json", FileMode.Create);
+                    FileStream file =new FileStream(Application.streamingAssetsPath
+                                                    + "/FTEConfig/" + fteName + ".json", FileMode.Create);
 #elif UNITY_STANDALONE_OSX
         FileStream file = new FileStream(Application.streamingAssetsPath
-                                     + "/FTEConfig/Temp.json", FileMode.Create);
+                                     + "/FTEConfig/" + fteName + ".json", FileMode.Create);
 #endif
         byte[] bts = System.Text.Encoding.UTF8.GetBytes(encode);
         file.Write(bts, 0, bts.Length);
@@ -65,15 +67,15 @@ public class EditorMapManager : MapManager
     /// <summary>
     /// 将JSON文件导入到场景编辑器中
     /// </summary>
-    public override void LoadJSON()
+    public override void LoadJSON(string fteName)
     {
         StreamReader streamReader = null;
         try
         {
 #if UNITY_STANDALONE_WIN
-            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + fteName + ".json");
 #elif UNITY_STANDALONE_OSX
-            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + fteName + ".json");
 #endif
 
         }
@@ -148,6 +150,7 @@ public class EditorMapManager : MapManager
                         go.GetComponent<EditorConsumerSpot>().x = x;
                         go.GetComponent<EditorConsumerSpot>().y = y;
                         go.GetComponent<EditorConsumerSpot>().ParsePathItem(options[i].Split('_')[2]);
+                        go.GetComponent<EditorConsumerSpot>().index = index;
                         if (isItemMoveDown)
                         {
                             go.GetComponent<EditorConsumerSpot>().isUnder = true;
@@ -185,6 +188,7 @@ public class EditorMapManager : MapManager
 
     public void CreatPrb(GameObject game)
     {
+        game.GetComponent<EditorConsumerSpot>().index = count;
         count++;
         GameObject gameobj = Instantiate(PlayerStartPointUIPrb, PlayerStartPointTF);
         gameobj.GetComponent<PlayStartSign>().port = game;

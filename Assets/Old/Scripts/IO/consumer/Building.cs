@@ -111,7 +111,10 @@ public class Building : MonoBehaviour
             }
             tempList.Add(config);
         }
-        waveConfigs.Add(waveNum, tempList);
+        if (!waveConfigs.ContainsKey(waveNum))
+        {
+            waveConfigs.Add(waveNum, tempList);
+        }
     }
 
     /// <summary>

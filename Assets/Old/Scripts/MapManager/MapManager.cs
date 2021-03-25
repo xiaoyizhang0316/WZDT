@@ -39,12 +39,17 @@ public class MapManager : MonoSingleton<MapManager>
         //Invoke("CheckGrassAvailable", 1f);
         //Invoke("TestMethod", 1f);
         Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
-        //SaveLoadMenu.Load(Application.streamingAssetsPath+"/FTE_1.map");
-        
-        InitStageNPCData();
-        Invoke("LoadJSON",3);
+        SaveLoadMenu.LoadActualScene(Application.streamingAssetsPath+"/"+SceneManager.GetActiveScene().name  + ".map");
+        //buildTF = transform.root
+        Debug.Log(transform.root);
+        Invoke("InitStageNPCData",0.6f);
+        //InitStageNPCData();
     }
 
+    public virtual void SaveJSON(string name)
+    {
+
+    }
 
     /// <summary>
     /// 检测地块是否能放置建筑
@@ -137,7 +142,9 @@ public class MapManager : MonoSingleton<MapManager>
     {
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/NPC/" + npc.roleType));
         go.transform.SetParent(GameObject.Find("Role").transform);
-        go.transform.position = GetMapSignByXY(npc.posX, npc.posY).transform.position + new Vector3(0f, 0.3f, 0f);
+        go.transform.position = GetMapSignByXY(npc.posX, npc.posY).transform.position + new Vector3(0f, 0f, 0f);
+        go.GetComponent<BaseMapRole>().posX = npc.posX;
+        go.GetComponent<BaseMapRole>().posY = npc.posY;
         SetNPCAttribute(go,npc);
         go.name = npc.npcName;
         go.GetComponent<NPC>().BaseInit();
@@ -311,17 +318,17 @@ public class MapManager : MonoSingleton<MapManager>
     /// <summary>
     /// 将特殊操作JSON文件导入到实际游戏场景中
     /// </summary>
-    public virtual void LoadJSON()
+    public virtual void LoadJSON(string fteName)
     {
+        string name = SceneManager.GetActiveScene().name;
         StreamReader streamReader = null;
         try
         {
 #if UNITY_STANDALONE_WIN
-            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + name + ".json");
 #elif UNITY_STANDALONE_OSX
-            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/Temp.json");
+            streamReader = new StreamReader(Application.streamingAssetsPath + "/FTEConfig/" + name + ".json");
 #endif
-
         }
         catch (Exception ex)
         {
@@ -346,6 +353,7 @@ public class MapManager : MonoSingleton<MapManager>
                 InitJSONItem(item);
                 Debug.Log(item.specialOption);
             }
+            BuildingManager.My.InitAllBuilding(StageGoal.My.enemyDatas);
         }
     }
 
@@ -391,6 +399,7 @@ public class MapManager : MonoSingleton<MapManager>
                         GameObject go = Instantiate(Resources.Load<GameObject>(path),buildTF);
                         go.transform.position = pos;
                         go.GetComponent<Building>().ParsePathList(options[i].Split('_')[2]);
+                        go.GetComponent<Building>().buildingId = index;
                         if (isItemMoveDown)
                         {
                             //TODO 出生点下沉处理
@@ -401,7 +410,7 @@ public class MapManager : MonoSingleton<MapManager>
                     {
                         MapSign cell = GetMapSignByXY(x, y);
                         string path = "Prefabs/Common/EndPoint";
-                        Vector3 pos = cell.transform.position + new Vector3(0f, 0.1f, 0f);
+                        Vector3 pos = cell.transform.position + new Vector3(0f, -0.3f, 0f);
                         GameObject go = Instantiate(Resources.Load<GameObject>(path), buildTF);
                         go.transform.position = pos;
                         if (isItemMoveDown)
@@ -432,6 +441,21 @@ public class MapManager : MonoSingleton<MapManager>
             List<GameObject> list = new List<GameObject>();
             list.Add(go);
             diveList.Add(time, list);
+        }
+        go.transform.position += new Vector3(0f, -2f, 0f);
+        go.SetActive(false);
+    }
+
+
+    public void CheckDive(int time)
+    {
+        if (diveList.ContainsKey(time))
+        {
+            for (int i = 0; i < diveList[time].Count; i++)
+            {
+                diveList[time][i].SetActive(true);
+            }
+            diveList.Remove(time);
         }
     }
 
@@ -470,177 +494,16 @@ public class MapManager : MonoSingleton<MapManager>
             if (Input.GetKey(KeyCode.Alpha1))
             {
                 //print("press 1");
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit[] hit = Physics.RaycastAll(ray);
-                for (int i = 0; i < hit.Length; i++)
+                Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(inputRay, out hit))
                 {
-                    //print(hit[i].transform);
-                    if (hit[i].transform.tag.Equals("MapLand"))
-                    {
-                        GameObject go = Instantiate(mapTypeList[0], transform);
-                        go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-                        int tempX = hit[i].transform.GetComponent<MapSign>().x;
-                        int tempY = hit[i].transform.GetComponent<MapSign>().y;
-                        go.GetComponent<MapSign>().x = tempX;
-                        go.GetComponent<MapSign>().y = tempY;
-                        go.AddComponent<EditorLandItem>();
-                        go.GetComponent<EditorLandItem>().Init(hit[i].transform.GetComponent<MapSign>());
-                        Destroy(hit[i].transform.gameObject);
-                        break;
-                    }
-                }
-                interval = 0f;
-            }
-            //高草地
-            else if (Input.GetKey(KeyCode.Alpha2))
-            {
-                //print("press 2");
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit[] hit = Physics.RaycastAll(ray);
-                for (int i = 0; i < hit.Length; i++)
-                {
-                    //print(hit[i].transform);
-                    if (hit[i].transform.tag.Equals("MapLand"))
-                    {
-                        GameObject go = Instantiate(mapTypeList[1], transform);
-                        go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-                        int tempX = hit[i].transform.GetComponent<MapSign>().x;
-                        int tempY = hit[i].transform.GetComponent<MapSign>().y;
-                        go.GetComponent<MapSign>().x = tempX;
-                        go.GetComponent<MapSign>().y = tempY;
-                        Destroy(hit[i].transform.gameObject);
-                        break;
-                    }
-                }
-                interval = 0f;
-            }
-            else if (Input.GetKey(KeyCode.Alpha3))
-            {
-                //print("press 3");
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit[] hit = Physics.RaycastAll(ray);
-                for (int i = 0; i < hit.Length; i++)
-                {
-                    //print(hit[i].transform);
-                    if (hit[i].transform.tag.Equals("MapLand"))
-                    {
-                        GameObject go = Instantiate(mapTypeList[2], transform);
-                        go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-                        int tempX = hit[i].transform.GetComponent<MapSign>().x;
-                        int tempY = hit[i].transform.GetComponent<MapSign>().y;
-                        go.GetComponent<MapSign>().x = tempX;
-                        go.GetComponent<MapSign>().y = tempY;
-                        Destroy(hit[i].transform.gameObject);
-                        break;
-                    }
-                }
-                interval = 0f;
-            }
-            else if (Input.GetKey(KeyCode.Alpha4))
-            {
-                //print("press 3");
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit[] hit = Physics.RaycastAll(ray);
-                for (int i = 0; i < hit.Length; i++)
-                {
-                    //print(hit[i].transform);
-                    if (hit[i].transform.tag.Equals("MapLand"))
-                    {
-                        GameObject go = Instantiate(mapTypeList[3], transform);
-                        go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-                        int tempX = hit[i].transform.GetComponent<MapSign>().x;
-                        int tempY = hit[i].transform.GetComponent<MapSign>().y;
-                        go.GetComponent<MapSign>().x = tempX;
-                        go.GetComponent<MapSign>().y = tempY;
-                        Destroy(hit[i].transform.gameObject);
-                        break;
-                    }
-                }
-                interval = 0f;
-            }
-            else if (Input.GetKey(KeyCode.Alpha5))
-            {
-                //print("press 5");
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit[] hit = Physics.RaycastAll(ray);
-                for (int i = 0; i < hit.Length; i++)
-                {
-                    //print(hit[i].transform);
-                    if (hit[i].transform.tag.Equals("MapLand"))
-                    {
-                        GameObject go = Instantiate(mapTypeList[4], transform);
-                        go.transform.position = new Vector3(hit[i].transform.position.x, go.transform.position.y, hit[i].transform.position.z);
-                        int tempX = hit[i].transform.GetComponent<MapSign>().x;
-                        int tempY = hit[i].transform.GetComponent<MapSign>().y;
-                        go.GetComponent<MapSign>().x = tempX;
-                        go.GetComponent<MapSign>().y = tempY;
-                        Destroy(hit[i].transform.gameObject);
-                        break;
-                    }
-                }
-                interval = 0f;
-            }
+                    HexCell currentCell = HexGrid.My.GetCell(hit.point);
 
-            //地块升高
-            //if (Input.GetKeyDown(KeyCode.UpArrow))
-            //{
-            //    //print("press up");
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            hit[i].transform.localPosition += new Vector3(0f, 0.3f, 0f);
-            //            hit[i].transform.GetComponent<MapSign>().height += 1;
-            //        }
-            //        break;
-            //    }
-            //    interval = 0f;
-            //}
-            ////地块降低
-            //if (Input.GetKeyDown(KeyCode.DownArrow))
-            //{
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //    RaycastHit[] hit = Physics.RaycastAll(ray);
-            //    for (int i = 0; i < hit.Length; i++)
-            //    {
-            //        if (hit[i].transform.tag.Equals("MapLand"))
-            //        {
-            //            hit[i].transform.localPosition += new Vector3(0f, -0.3f, 0f);
-            //            hit[i].transform.GetComponent<MapSign>().height -= 1;
-            //        }
-            //        break;
-            //    }
-            //    interval = 0f;
-            //}
-
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit[] hit = Physics.RaycastAll(ray);
-                for (int i = 0; i < hit.Length; i++)
-                {
-                    if (hit[i].transform.tag.Equals("MapLand"))
+                    if (currentCell != null)
                     {
-                        hit[i].transform.GetComponent<MeshRenderer>().enabled = true;
+                        Debug.Log("X:" + currentCell.coordinates.X.ToString() + "-----Y:" + currentCell.coordinates.Z.ToString());
                     }
-                    break;
-                }
-                interval = 0f;
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit[] hit = Physics.RaycastAll(ray);
-                for (int i = 0; i < hit.Length; i++)
-                {
-                    if (hit[i].transform.tag.Equals("MapLand"))
-                    {
-                        hit[i].transform.GetComponent<MeshRenderer>().enabled = false;
-                    }
-                    break;
                 }
                 interval = 0f;
             }
