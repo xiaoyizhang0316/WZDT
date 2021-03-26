@@ -836,6 +836,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
+            if (!SceneManager.GetActiveScene().name.Equals("FTE_0.5"))
             CheckWin();
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {

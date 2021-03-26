@@ -44,12 +44,7 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
 
     public void Start()
     {
-        seerJC1.SetActive(false);
-        seerJC2.SetActive(false);
-        dealerJC1.SetActive(false);
-        dealerJC2.SetActive(false);
-        dealerJC3.SetActive(false);
-        dealerJC4.SetActive(false);
+     
     }
 
     public void UpRole(GameObject role)

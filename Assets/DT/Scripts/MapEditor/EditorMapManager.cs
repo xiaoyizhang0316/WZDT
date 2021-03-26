@@ -186,6 +186,43 @@ public class EditorMapManager : MapManager
 
     public int count = 0;
 
+    /// <summary>
+    /// 测试六边形快下降
+    /// </summary>
+    /// <param name="hexCell"></param>
+    /// <param name="targetLevel"></param>
+    /// <param name="time"></param>
+    /// <param name="end"></param>
+    public void TestHexDown(HexCell hexCell  )
+    {
+        hexCell.Elevation -= 0.2f;
+
+    }  
+    public void TestHexUp(HexCell hexCell  )
+    {
+        hexCell.Elevation += 0.2f;
+
+    }
+
+    public void OnGUI()
+    {
+        if (GUILayout.Button("1") )
+        {
+            StartCoroutine(HexGrid.My.GetCell(0).ChangeElevationLerpUp(5,0.1f, () =>
+            {
+                Debug.Log("wancheng");
+                StartCoroutine(HexGrid.My.GetCell(0).ChangeElevationLerpDown(0,0.1f, () =>
+                {
+                    Debug.Log("wancheng");
+                })) ;
+            })) ;
+        }
+        if (GUILayout.RepeatButton("2"))
+        {
+           HexGrid.My.GetCell(0) ;
+        }
+    }
+
     public void CreatPrb(GameObject game)
     {
         game.GetComponent<EditorConsumerSpot>().index = count;

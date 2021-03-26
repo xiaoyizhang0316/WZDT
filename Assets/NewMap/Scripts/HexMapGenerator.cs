@@ -282,7 +282,7 @@ public class HexMapGenerator : MonoBehaviour {
 		int size = 0;
 		while (size < chunkSize && searchFrontier.Count > 0) {
 			HexCell current = searchFrontier.Dequeue();
-			int originalElevation = current.Elevation;
+			int originalElevation = (int)current.Elevation;
 			int newElevation = originalElevation + rise;
 			if (newElevation > elevationMaximum) {
 				continue;
@@ -324,8 +324,8 @@ public class HexMapGenerator : MonoBehaviour {
 		int size = 0;
 		while (size < chunkSize && searchFrontier.Count > 0) {
 			HexCell current = searchFrontier.Dequeue();
-			int originalElevation = current.Elevation;
-			int newElevation = current.Elevation - sink;
+			int originalElevation = (int)current.Elevation;
+			int newElevation =(int) current.Elevation - sink;
 			if (newElevation < elevationMinimum) {
 				continue;
 			}
@@ -408,7 +408,7 @@ public class HexMapGenerator : MonoBehaviour {
 	}
 
 	bool IsErodible (HexCell cell) {
-		int erodibleElevation = cell.Elevation - 2;
+		int erodibleElevation = (int)cell.Elevation - 2;
 		for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++) {
 			HexCell neighbor = cell.GetNeighbor(d);
 			if (neighbor && neighbor.Elevation <= erodibleElevation) {
@@ -420,7 +420,7 @@ public class HexMapGenerator : MonoBehaviour {
 
 	HexCell GetErosionTarget (HexCell cell) {
 		List<HexCell> candidates = ListPool<HexCell>.Get();
-		int erodibleElevation = cell.Elevation - 2;
+		int erodibleElevation = (int)cell.Elevation - 2;
 		for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++) {
 			HexCell neighbor = cell.GetNeighbor(d);
 			if (neighbor && neighbor.Elevation <= erodibleElevation) {
@@ -583,14 +583,14 @@ public class HexMapGenerator : MonoBehaviour {
 				}
 
 				if (neighbor.Elevation < minNeighborElevation) {
-					minNeighborElevation = neighbor.Elevation;
+					minNeighborElevation = (int)neighbor.Elevation;
 				}
 
 				if (neighbor == origin || neighbor.HasIncomingRiver) {
 					continue;
 				}
 
-				int delta = neighbor.Elevation - cell.Elevation;
+				int delta = (int)neighbor.Elevation -(int) cell.Elevation;
 				if (delta > 0) {
 					continue;
 				}
@@ -636,7 +636,7 @@ public class HexMapGenerator : MonoBehaviour {
 				minNeighborElevation >= cell.Elevation &&
 				Random.value < extraLakeProbability
 			) {
-				cell.WaterLevel = cell.Elevation;
+				cell.WaterLevel =(int) cell.Elevation;
 				cell.Elevation -= 1;
 			}
 
@@ -699,7 +699,7 @@ public class HexMapGenerator : MonoBehaviour {
 						if (!neighbor) {
 							continue;
 						}
-						int delta = neighbor.Elevation - cell.WaterLevel;
+						int delta =(int) neighbor.Elevation - cell.WaterLevel;
 						if (delta == 0) {
 							slopes += 1;
 						}
