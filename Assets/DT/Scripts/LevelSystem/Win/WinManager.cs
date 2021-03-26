@@ -432,6 +432,31 @@ public class WinManager : MonoSingleton<WinManager>
         //}
     }
 
+    public void InitWinEquipAndWorker(int boxid)
+    {
+        List<GearData> gearDatas = StageGoal.My.GetStarGearData(boxid);
+        List<WorkerData> workDatas = StageGoal.My.GetStarWorkerData(boxid);
+        for (int i = 0; i < pos_equip.transform.childCount; i++)
+        {
+            Destroy(pos_equip.transform.GetChild(0).gameObject);
+        }
+        for (int i = 0; i < gearDatas.Count; i++)
+        {
+            GameObject equip = Instantiate(equipPrb, pos_equip);
+            equip.GetComponent<WinEquipSign>().Init(gearDatas[i].ID );  
+           
+        }
+        for (int i = 0; i < pos_worker.transform.childCount; i++)
+        {
+            Destroy(pos_worker.transform.GetChild(0).gameObject);
+        }
+        for (int i = 0; i < workDatas.Count; i++)
+        {
+            GameObject worker = Instantiate(workerPrb, pos_worker);
+            worker.GetComponent<WinWorkerSign>().Init(workDatas[i].ID );    
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -446,38 +471,9 @@ public class WinManager : MonoSingleton<WinManager>
             if (isPlay)
                 return;
             box_0Button.interactable = false;
-            List<GearData> gearDatas = StageGoal.My.GetStarGearData(1);
-            List<WorkerData> workDatas = StageGoal.My.GetStarWorkerData(1);
-            for (int i = 0; i < pos_equip.transform.childCount; i++)
-            {
-                Destroy(pos_equip.transform.GetChild(0).gameObject);
-            }
-            for (int i = 0; i < gearDatas.Count; i++)
-            {
-                GameObject equip = Instantiate(equipPrb, pos_equip);
-                equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
-                equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-                //}
-            }
-            for (int i = 0; i < pos_worker.transform.childCount; i++)
-            {
-                Destroy(pos_worker.transform.GetChild(0).gameObject);
-            }
-            for (int i = 0; i < workDatas.Count; i++)
-            {
-                GameObject worker = Instantiate(workerPrb, pos_worker);
-                worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
-                worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-                //}
-            }
+            InitWinEquipAndWorker(1);
 
-            //CheckNext();
+    
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.BoxOpen);
             StartCoroutine(playerEffect(box_0, mulist));
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "|" + 1, 1);
@@ -487,38 +483,7 @@ public class WinManager : MonoSingleton<WinManager>
             if (isPlay)
                 return;
             box_1Button.interactable = false;
-            List<GearData> gearDatas = StageGoal.My.GetStarGearData(2);
-            List<WorkerData> workDatas = StageGoal.My.GetStarWorkerData(2);
-            for (int i = 0; i < pos_equip.transform.childCount; i++)
-            {
-                Destroy(pos_equip.transform.GetChild(0).gameObject);
-            }
-            for (int i = 0; i < gearDatas.Count; i++)
-            {
-                GameObject equip = Instantiate(equipPrb, pos_equip);
-                equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
-                equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-                //}
-            }
-            for (int i = 0; i < pos_worker.transform.childCount; i++)
-            {
-                Destroy(pos_worker.transform.GetChild(0).gameObject);
-            }
-            for (int i = 0; i < workDatas.Count; i++)
-            {
-                GameObject worker = Instantiate(workerPrb, pos_worker);
-                worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
-                worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-                //}
-            }
-            //boxs.SetActive(true);
-            //CheckNext();
+            InitWinEquipAndWorker(2);
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.BoxOpen);
             StartCoroutine(playerEffect(box_1, tielist));
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "|" + 2, 1);
@@ -528,38 +493,7 @@ public class WinManager : MonoSingleton<WinManager>
             if (isPlay)
                 return;
             box_2Button.interactable = false;
-            List<GearData> gearDatas = StageGoal.My.GetStarGearData(3);
-            List<WorkerData> workDatas = StageGoal.My.GetStarWorkerData(3);
-            for (int i = 0; i < pos_equip.transform.childCount; i++)
-            {
-                Destroy(pos_equip.transform.GetChild(0).gameObject);
-            }
-            for (int i = 0; i < gearDatas.Count; i++)
-            {
-                GameObject equip = Instantiate(equipPrb, pos_equip);
-                equip.GetComponent<Image>().sprite = Resources.Load<Sprite>(gearDatas[i].SpritePath);
-                equip.transform.GetChild(0).GetComponent<Text>().text = gearDatas[i].equipName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(gearDatas[i].ID, 0, 1);
-                //}
-            }
-            for (int i = 0; i < pos_worker.transform.childCount; i++)
-            {
-                Destroy(pos_worker.transform.GetChild(0).gameObject);
-            }
-            for (int i = 0; i < workDatas.Count; i++)
-            {
-                GameObject worker = Instantiate(workerPrb, pos_worker);
-                worker.GetComponent<Image>().sprite = Resources.Load<Sprite>(workDatas[i].SpritePath);
-                worker.transform.GetChild(0).GetComponent<Text>().text = workDatas[i].workerName;
-                //if (NetworkMgr.My.isUsingHttp)
-                //{
-                //    NetworkMgr.My.AddEquip(workDatas[i].ID, 1, 1);
-                //}
-            }
-            //boxs.SetActive(true);
-
+            InitWinEquipAndWorker(3);
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.BoxOpen);
             StartCoroutine(playerEffect(box_2, jinlist));
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "|" + 3, 1);
