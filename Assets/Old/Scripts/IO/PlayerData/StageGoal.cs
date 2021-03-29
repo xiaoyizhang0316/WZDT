@@ -836,8 +836,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
-            if (!SceneManager.GetActiveScene().name.Equals("FTE_0.5"))
-            CheckWin();
+            if (!sceneList.Contains(SceneManager.GetActiveScene().name))
+                CheckWin();
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 timeCount++;
@@ -1088,8 +1088,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName == "FTE_Record" || sceneName == "FTE_0-1" || sceneName == "FTE_0-2" || sceneName == "FTE_0.5"
-           || sceneName == "FTE_1.5" || sceneName == "FTE_2.5")
+        if (sceneList.Contains(sceneName))
         {
             playerHealth = 1000;
             playerMaxHealth = 1000;
@@ -1246,13 +1245,13 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
 
     }
-
+    List<string> sceneList = new List<string>() { "FTE_0.5", "FTE_0.6", "FTE_0.7", "FTE_1.5", "FTE_1.6", "FTE_2.5", "FTE_3.5", "FTE_4.5" };
     /// <summary>
     /// 右侧星数菜单隐藏
     /// </summary>
     public void MenuHide()
     {
-        List<string> sceneList = new List<string>() { "FTE_0.5", "FTE_1.5", "FTE_2.5" };
+        
         if (sceneList.Contains(SceneManager.GetActiveScene().name))
         {
             GetComponent<RectTransform>().DOAnchorPosX(18000.4f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
