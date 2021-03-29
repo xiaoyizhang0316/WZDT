@@ -3878,9 +3878,9 @@ MonoBehaviour:
       isFail: 0
   missionTitle: "\u4EFB\u52A1\u5341\u4E5D\uFF1A\u5E02\u573A\u2014\u96F6\u552E\u5546"
   timeCount: 0
-  land: {fileID: 0}
   roleImage: {fileID: 1905929399}
   red: {fileID: 431074387}
+  Peasant: {fileID: 0}
 --- !u!114 &142362486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9560,8 +9560,6 @@ MonoBehaviour:
       isFail: 0
   missionTitle: "\u4EFB\u52A1\u4E8C\u5341\uFF1A\u54C8\u5BC6\u74DC\u4E0E\u6D88\u8D39\u8005"
   timeCount: 0
-  maoyi: {fileID: 0}
-  lingshou: {fileID: 0}
   roleImage: {fileID: 1905929399}
   count: 24
   time: 48
@@ -45869,6 +45867,8 @@ MonoBehaviour:
   skillOneEffect: {fileID: 0}
   skillTwoEffect: {fileID: 0}
   skillThreeEffect: {fileID: 0}
+  consumerSpot: {fileID: 0}
+  endPoint: {fileID: 0}
   buildTF: {fileID: 0}
 --- !u!4 &1923308916 stripped
 Transform:
@@ -50218,8 +50218,7 @@ MonoBehaviour:
       isFail: 0
   missionTitle: "\u4EFB\u52A1\u5341\u4E09\uFF1A\u5220\u9664\u4EA4\u6613 "
   timeCount: 0
-  dealer1: {fileID: 0}
-  dealer2: {fileID: 0}
+  seed: {fileID: 0}
 --- !u!114 &2075712511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51035,7 +51034,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2119209621}
-  - component: {fileID: 2119209622}
   m_Layer: 0
   m_Name: Role
   m_TagString: RoleTF
@@ -51059,37 +51057,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2119209622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119209620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70d882372527526469d0616b0fa2198f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seerJC1: {fileID: 0}
-  seerJC2: {fileID: 745394882544125958}
-  dealerJC1: {fileID: 0}
-  dealerJC2: {fileID: 0}
-  dealerJC3: {fileID: 0}
-  dealerJC4: {fileID: 0}
-  sn: {fileID: 2100000, guid: 9258741a19a0c1e4b85f5a7ac30ec351, type: 2}
-  sr: {fileID: 2100000, guid: bea6ccad58e3fc94fb31c14d9b982aa4, type: 2}
-  sg: {fileID: 2100000, guid: 43593a4741dd3584d96803e6292df43d, type: 2}
-  bn: {fileID: 2100000, guid: 93e12116214d57942989bb365e5aeeb4, type: 2}
-  br: {fileID: 2100000, guid: 5f471003228faac4c87630f2a39434bc, type: 2}
-  bg: {fileID: 2100000, guid: 36560172590b3684088d997900cfd7a3, type: 2}
-  seerJC1_ran: {fileID: 0}
-  seerJC2_ran: {fileID: 1725458946}
-  dealerJC1_ran: {fileID: 0}
-  dealerJC2_ran: {fileID: 0}
-  dealerJC3_ran: {fileID: 0}
-  dealerJC4_ran: {fileID: 0}
-  clearWarehouse: 0
 --- !u!1001 &2121292328
 PrefabInstance:
   m_ObjectHideFlags: 0
