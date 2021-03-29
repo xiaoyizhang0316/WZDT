@@ -92,12 +92,12 @@ public class FTE_0_5_8 : BaseGuideStep
     {
         if (data.damage > 0)
         {
-            FTE_0_5Manager.My.ChangeColor(FTE_0_5Manager.My.seerJC2_ran, FTE_0_5Manager.My.sg);
+//            FTE_0_5Manager.My.ChangeColor(FTE_0_5Manager.My.seerJC2_ran, FTE_0_5Manager.My.sg);
         }
 
         else
         {
-            FTE_0_5Manager.My.ChangeColor(FTE_0_5Manager.My.seerJC2_ran, FTE_0_5Manager.My.sr);
+          //  FTE_0_5Manager.My.ChangeColor(FTE_0_5Manager.My.seerJC2_ran, FTE_0_5Manager.My.sr);
         }
         
     }

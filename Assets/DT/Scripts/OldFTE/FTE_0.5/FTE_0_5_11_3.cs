@@ -34,8 +34,8 @@ public class FTE_0_5_11_3 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-   FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC3);
-   FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC4);
+  //FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC3);
+  //FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC4);
    role.baseRoleData.bulletCapacity = roleTargetCount;
    role1.baseRoleData.bulletCapacity = role1TargetCount;
    role2.baseRoleData.bulletCapacity = role2TargetCount;
@@ -74,24 +74,24 @@ public class FTE_0_5_11_3 : BaseGuideStep
     {
         if (data.damage >=targetdamege1)
         {
-            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.bg );
+//            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.bg );
         }
 
         else
         {
-            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.br ); 
+         //   FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC2_ran,FTE_0_5Manager.My.br ); 
         }
     }
     public void ChangeColor2(ProductData data)
     {
         if (data.damage >=targetdamege2)
         {
-            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC3_ran,FTE_0_5Manager.My.bg );
+        //    FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC3_ran,FTE_0_5Manager.My.bg );
         }
 
         else
         {
-            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC3_ran,FTE_0_5Manager.My.br ); 
+        //    FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC3_ran,FTE_0_5Manager.My.br ); 
         }
     }
     
@@ -99,12 +99,12 @@ public class FTE_0_5_11_3 : BaseGuideStep
     {
         if (data.damage >=targetdamege3)
         {
-            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC4_ran,FTE_0_5Manager.My.bg );
+           // FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC4_ran,FTE_0_5Manager.My.bg );
         }
 
         else
         {
-            FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC4_ran,FTE_0_5Manager.My.br ); 
+          //  FTE_0_5Manager.My.ChangeColor( FTE_0_5Manager.My.dealerJC4_ran,FTE_0_5Manager.My.br ); 
         }
     }
     public override bool ChenkEnd()
