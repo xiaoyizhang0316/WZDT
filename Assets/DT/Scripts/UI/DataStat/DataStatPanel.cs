@@ -55,7 +55,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
 
     public GameObject predictPanel;
 
-    private string[] fteName = {"FTE_0.5","FTE_1.5","FTE_2.5", "FTE_9" };
+
     public bool isTurnLevel = false;
 
     // Start is called before the first frame update
@@ -76,7 +76,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
 
     private bool IsTurnLevel()
     {
-        if (fteName.Contains(SceneManager.GetActiveScene().name))
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             isTurnLevel = false;
             return false;

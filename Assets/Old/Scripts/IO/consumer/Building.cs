@@ -38,7 +38,6 @@ public class Building : MonoBehaviour
 
     public List<ConsumeSign> consumeSigns = new List<ConsumeSign>();
 
-    private List<string> fteList = new List<string>() { "FTE_0.5", "FTE_0.6", "FTE_0.7", "FTE_1.5", "FTE_1.6", "FTE_2.5", "FTE_3.5", "FTE_4.5" };
 
     /// <summary>
     /// 使用透视镜
@@ -509,7 +508,7 @@ public class Building : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (fteList.Contains(SceneManager.GetActiveScene().name))
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             FTEInit();
         }

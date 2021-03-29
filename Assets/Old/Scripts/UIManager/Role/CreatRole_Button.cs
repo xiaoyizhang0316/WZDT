@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -250,13 +251,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                         }
                     }
 
-                    if (SceneManager.GetActiveScene().name != "FTE_0-2" && SceneManager.GetActiveScene().name !=
-                                                                        "FTE_0-1"
-                                                                        && SceneManager.GetActiveScene().name !=
-                                                                        "FTE_0.5" &&
-                                                                        SceneManager.GetActiveScene().name != "FTE_1.5"
-                                                                        && SceneManager.GetActiveScene().name !=
-                                                                        "FTE_2.5"
+                    if (!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name)
                     )
                     {
                         BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);

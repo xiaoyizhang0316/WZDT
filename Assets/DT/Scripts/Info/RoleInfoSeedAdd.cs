@@ -41,7 +41,6 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
         //UpdateBar();
     }
 
-    private List<string> fteList = new List<string>() { "FTE_0.5", "FTE_1.5", "FTE_2.5" };
 
     public override void Init()
     {
@@ -66,7 +65,7 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
         productTime.text = (efficiencyNum).ToString("F2")+" /s";
         tradCost.text  =  CreatRoleManager.My.finalTradeCost.ToString();
         risk .text =  CreatRoleManager.My.finalRiskResistance.ToString();
-        if (StageGoal.My.currentType == GameEnum.StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name))
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             montyCost.text = (CreatRoleManager.My.finalCost * 2).ToString();
         }

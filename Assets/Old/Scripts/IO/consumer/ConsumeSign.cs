@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using static GameEnum;
@@ -252,11 +253,7 @@ public class ConsumeSign : MonoBehaviour
         {
             return;
         }
-        if (SceneManager.GetActiveScene().name != "FTE_0-2" 
-            && SceneManager.GetActiveScene().name != "FTE_0-1"
-            && SceneManager.GetActiveScene().name != "FTE_0.5"
-            && SceneManager.GetActiveScene().name != "FTE_1.5"
-            && SceneManager.GetActiveScene().name != "FTE_2.5")
+        if (!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             BaseLevelController.My.CountKillNumber(this);
         }
