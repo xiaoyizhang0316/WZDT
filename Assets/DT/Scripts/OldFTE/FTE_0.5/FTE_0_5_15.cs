@@ -7,8 +7,7 @@ using UnityEngine.UI;
 
 public class FTE_0_5_15 : BaseGuideStep
 {
-    public BaseMapRole maoyi;
-    public BaseMapRole lingshou;
+
 
     public GameObject roleImage;
 
@@ -32,23 +31,7 @@ public class FTE_0_5_15 : BaseGuideStep
             Addxiaofei();
         }).Play();
          NewCanvasUI.My.GamePause();
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
-            {
-                maoyi = PlayerData.My.MapRole[i];
-            }
-        }
-
-        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-        {
-            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer &&
-                !PlayerData.My.MapRole[i].isNpc)
-            {
-                lingshou = PlayerData.My.MapRole[i];
-            }
-
-        }
+     
         yield return new WaitForSeconds(1f);
 
     }
@@ -77,36 +60,7 @@ public class FTE_0_5_15 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        if (maoyi == null)
-        {
-            for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-            {
-                if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
-                {
-                    maoyi = PlayerData.My.MapRole[i];
-                }
-            }
-
-        }
-
-        if (lingshou == null)
-        {
-            
-            for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-            {
-                if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer &&
-                    !PlayerData.My.MapRole[i].isNpc)
-                {
-                    lingshou = PlayerData.My.MapRole[i];
-                }
-
-            }
-        }
-
-        if (TradeManager.My.CheckTwoRoleHasTrade(maoyi.baseRoleData, lingshou.baseRoleData))
-        {
-            missiondatas.data[0].isFinish = true;
-        }
+       
         missiondatas.data[1].currentNum = StageGoal.My.killNumber;
         if (StageGoal.My.killNumber >= missiondatas.data[1].maxNum)
         {

@@ -12,7 +12,7 @@ public class FTE_0_5_6_1 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.seerJC2);
+     //   FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.seerJC2);
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)

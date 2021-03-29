@@ -5,14 +5,14 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 
-public class FTE_0_5_10_1 : BaseGuideStep
+public class T0_5_9 : BaseGuideStep
 {
 
     
     public override IEnumerator StepStart()
     {
-        NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
-
+       FTE_0_5Manager.My.SetDeleteButton(true);
+       FTE_0_5Manager.My.SetRoleInfoDown();
       TradeManager.My.ShowAllIcon();
         yield return null;
     }
@@ -40,33 +40,10 @@ public class FTE_0_5_10_1 : BaseGuideStep
 
         if (count <= 1)
         {
-            missiondatas.data[1].isFinish = true;
-        }
-
-
-        int count1 = 0;
-
-        for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
-        {
-            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
-            {
-                count1++;
-            }
-            
-        }
-
-        if (count1 <= 1)
-        {
             missiondatas.data[0].isFinish = true;
-        }
-
-
-        if (missiondatas.data[0].isFinish && missiondatas.data[1].isFinish )
-        {
             return true;
-            
         }
-        else
+     else
         {
             return false;
         }

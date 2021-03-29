@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class FTE_0_5_3 : BaseGuideStep
+public class T0_5_4 : BaseGuideStep
 {
 
     public BaseMapRole maprole;
@@ -38,7 +38,7 @@ public class FTE_0_5_3 : BaseGuideStep
     {
      
         TradeManager.My.HideAllIcon();
-        if (maprole.warehouse.Count > 10)
+        if (maprole.warehouse.Count >= 10)
         {
             return true;
         }

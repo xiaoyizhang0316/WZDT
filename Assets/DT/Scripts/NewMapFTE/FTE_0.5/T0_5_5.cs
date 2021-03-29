@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 
-public class FTE_0_5_9 : BaseGuideStep
+public class T0_5_5 : BaseGuideStep
 {
 
     public GameObject nongminLock;
@@ -13,9 +13,7 @@ public class FTE_0_5_9 : BaseGuideStep
     public GameObject red;
     // Update is called once per frame
     public override IEnumerator StepStart()
-    {
-        FTE_0_5Manager.My.UpRole(FTE_0_5Manager.My.dealerJC1);
-        //    FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.dealerJC2);
+    { 
         red.SetActive(true);
         nongminLock.SetActive(false);
         yield return null;
