@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 
-public class FTE_0_5_15 : BaseGuideStep
+public class T0_5_11 : BaseGuideStep
 {
 
 
@@ -22,7 +22,8 @@ public class FTE_0_5_15 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-       
+       FTE_0_5Manager.My.consumerSpot.SetActive(true);
+       FTE_0_5Manager.My.endPoint.SetActive(true);
         StageGoal.My.killNumber = 0;
          transform.DOScale(1, 1).OnComplete(() =>
         {

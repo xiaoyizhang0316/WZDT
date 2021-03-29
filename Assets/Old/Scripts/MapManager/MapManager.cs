@@ -26,8 +26,6 @@ public class MapManager : MonoSingleton<MapManager>
     public GameObject skillOneEffect;
     public GameObject skillTwoEffect;
     public GameObject skillThreeEffect;
-    public GameObject consumerSpot;
-    public GameObject endPoint;
     public Transform buildTF;
 
     public Dictionary<int, List<GameObject>> diveList = new Dictionary<int, List<GameObject>>();
@@ -40,9 +38,7 @@ public class MapManager : MonoSingleton<MapManager>
         //Invoke("CheckDuplicate", 1f);
         //Invoke("CheckDuplicateID", 1f);
         //Invoke("CheckGrassAvailable", 1f);
-        //Invoke("TestMethod", 1f);
-        consumerSpot.SetActive(false);
-        endPoint.SetActive(false);
+        //Invoke("TestMethod", 1f); 
         Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
         Debug.Log(Application.streamingAssetsPath+"/"+SceneManager.GetActiveScene().name  + ".map");
         SaveLoadMenu.LoadActualScene(Application.streamingAssetsPath+"/"+SceneManager.GetActiveScene().name  + ".map");
