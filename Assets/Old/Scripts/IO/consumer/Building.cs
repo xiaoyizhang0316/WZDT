@@ -6,6 +6,7 @@ using System;
 using DG.Tweening;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Building : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class Building : MonoBehaviour
     public float buildingWaitTime;
 
     public List<ConsumeSign> consumeSigns = new List<ConsumeSign>();
+
+    private List<string> fteList = new List<string>() { "FTE_0.5", "FTE_0.6", "FTE_0.7", "FTE_1.5", "FTE_1.6", "FTE_2.5", "FTE_3.5", "FTE_4.5" };
 
     /// <summary>
     /// 使用透视镜
@@ -484,10 +487,32 @@ public class Building : MonoBehaviour
         StopShowPathLine();
     }
 
+    public void FTEInit()
+    {
+        List<Vector3> list = new List<Vector3>();
+        for (int i = 0; i < consumerPathList.Count; i++)
+        {
+            list.Add(consumerPathList[i].position + new Vector3(0f, 0.1f, 0f));
+        }
+        GameObject go = Instantiate(pathIndicator, transform);
+        go.transform.position = transform.position;
+        Tweener twe = go.transform.DOPath(list.ToArray(), 0.1f, PathType.CatmullRom, PathMode.Full3D).OnComplete(() =>
+        {
+            Destroy(go);
+        }).SetEase(Ease.Linear).SetLookAt(0.01f);
+        twe.ForceInit();
+        GetComponent<LineRenderer>().textureMode = LineTextureMode.Stretch;
+        GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
+        GetComponent<LineRenderer>().SetPositions(twe.PathGetDrawPoints());
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (fteList.Contains(SceneManager.GetActiveScene().name))
+        {
+            FTEInit();
+        }
     }
 
     /// <summary>
