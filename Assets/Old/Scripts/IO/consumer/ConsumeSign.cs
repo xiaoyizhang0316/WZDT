@@ -203,12 +203,23 @@ public class ConsumeSign : MonoBehaviour
     public virtual void InitPath(List<Transform> paths)
     {
         pathList = new List<Vector3>();
-        foreach (Transform t in paths)
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
-            float x = UnityEngine.Random.Range(-0.3f, 0.3f);
-            float z = UnityEngine.Random.Range(-0.3f, 0.3f);
-            pathList.Add(t.position + new Vector3(x,0.1f,z));
+            foreach (Transform t in paths)
+            {
+                pathList.Add(t.position + new Vector3(0,0.1f,0));
+            }
         }
+        else
+        {
+            foreach (Transform t in paths)
+            {
+                float x = UnityEngine.Random.Range(-0.3f, 0.3f);
+                float z = UnityEngine.Random.Range(-0.3f, 0.3f);
+                pathList.Add(t.position + new Vector3(x,0.1f,z));
+            }
+        }
+        
     }
 
     /// <summary>
@@ -491,7 +502,7 @@ public class ConsumeSign : MonoBehaviour
         isStart = true;
         isCanSelect = true;
         float time = CalculateTime();
-        tweener = transform.DOPath(pathList.ToArray(), time,PathType.CatmullRom, PathMode.Full3D).OnComplete(OnAlive).SetEase(Ease.Linear).SetOptions(AxisConstraint.None,AxisConstraint.Z|AxisConstraint.X).SetLookAt(0f);
+        tweener = transform.DOPath(pathList.ToArray(), time,PathType.Linear, PathMode.Full3D).OnComplete(OnAlive).SetEase(Ease.Linear).SetOptions(AxisConstraint.None,AxisConstraint.Z|AxisConstraint.X).SetLookAt(0f);
         CheckBuffDuration();
     }
 
