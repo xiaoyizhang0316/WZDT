@@ -31,6 +31,8 @@ public class MapManager : MonoSingleton<MapManager>
 
     public Dictionary<int, List<GameObject>> diveList = new Dictionary<int, List<GameObject>>();
 
+    private List<string> fteList = new List<string>() { "FTE_0.5", "FTE_0.6", "FTE_0.7", "FTE_1.5", "FTE_1.6", "FTE_2.5", "FTE_3.5", "FTE_4.5" };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -228,8 +230,7 @@ public class MapManager : MonoSingleton<MapManager>
     public void InitStageNPCData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName.Equals("FTE_0-1") || sceneName.Equals("FTE_0-2")|| sceneName.Equals("FTE_0.5")
-            || sceneName.Equals("FTE_1.5")|| sceneName.Equals("FTE_2.5"))
+        if (fteList.Contains(sceneName))
         {
             return;
         }
