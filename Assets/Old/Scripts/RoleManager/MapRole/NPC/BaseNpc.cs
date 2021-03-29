@@ -36,6 +36,8 @@ public abstract class BaseNpc : MonoBehaviour
 
     public GameObject trueModel;
 
+    public string npcTag = "";
+
     /// <summary>
     /// 激活npc
     /// </summary>

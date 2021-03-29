@@ -49,6 +49,8 @@ public class StageNPCItem
     public string goodBaseBuffList;
 
     public string badBaseBuffList;
+
+    public string npcTag;
 }
 
 [Serializable]

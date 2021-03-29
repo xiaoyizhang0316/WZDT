@@ -238,10 +238,14 @@ public abstract class BaseGuideStep : MonoBehaviour
             }
             InitHighlightUI();
             yield return OpenHighLight();
-            ShowAllHighlightUI(); 
+            ShowAllHighlightUI();
+            
             yield return StepStart();
             yield return new WaitForSeconds(entryTime);
-            
+            if (!String.IsNullOrEmpty(missionTitle))
+            {
+                GuideManager.My.currentTaskStartTime = TimeStamp.GetCurrentTimeStamp();
+            }
             if (needCheck)
             {
                 while (!ChenkEnd() && GuideManager.My.ftegob.activeSelf)
@@ -294,6 +298,8 @@ public abstract class BaseGuideStep : MonoBehaviour
         }
         CloseHighLight();
 
+        GuideManager.My.currentTaskEndTime = TimeStamp.GetCurrentTimeStamp();
+        GuideManager.My.AddTaskTime(missionTitle);
         GuideManager.My.PlayNextIndexGuide();
     }
 

@@ -1338,7 +1338,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                 if (SceneManager.GetActiveScene().name.Contains("."))
                 {
                     //Debug.LogWarning("skip jiaoxue ");
-                    NetworkMgr.My.AddTeachLevel(TimeStamp.GetCurrentTimeStamp()-startTime, SceneManager.GetActiveScene().name, 1);
+                    //NetworkMgr.My.AddTeachLevel(TimeStamp.GetCurrentTimeStamp()-startTime, SceneManager.GetActiveScene().name, 1);
                     NetworkMgr.My.UpdatePlayerFTE(SceneManager.GetActiveScene().name.Split('_')[1], () =>
                     {
                         SceneManager.LoadScene("Map");

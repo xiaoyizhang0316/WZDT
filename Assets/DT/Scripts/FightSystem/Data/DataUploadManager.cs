@@ -130,9 +130,9 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     /// <param name="mapRole"></param>
     public void AddNpcRoleType(BaseMapRole mapRole)
     {
-        if (!npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID))
+        if (!npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag))
         {
-            npcRole.Add(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID, GetNpcStatus(mapRole));
+            npcRole.Add(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag, GetNpcStatus(mapRole));
             
             //npcStatus.Add(new NpcStatus(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID,GetNpcStatus(mapRole)));
         }
@@ -190,21 +190,21 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     /// <param name="mapRole"></param>
     private void SetNpcRoleStatus(BaseMapRole mapRole, int status)
     {
-        if (npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName + "&" + mapRole.baseRoleData.ID))
+        if (npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName + "&" + mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag))
         {
             if (status == 3)
             {
-                string[] statusArr = npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID].Split(',');
+                string[] statusArr = npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag].Split(',');
                 statusArr[statusArr.Length - 1] = "1";
-                npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID] =
+                npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag] =
                     statusArr[0] + "," + statusArr[1] + "," + statusArr[2]+","+statusArr[3];
             }
             else
             {
-                string[] statusArr = npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID].Split(',');
+                string[] statusArr = npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag].Split(',');
                 string[] arr = statusArr[status].Split('&');
                 statusArr[status] = arr[0] + "&1";
-                npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID] =
+                npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag] =
                     statusArr[0] + "," + statusArr[1] + "," + statusArr[2]+","+statusArr[3];
                 
             }
