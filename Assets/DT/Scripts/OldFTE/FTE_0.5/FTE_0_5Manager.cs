@@ -18,6 +18,8 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
     public Material br;
     public Material bg;
     
+    public GameObject consumerSpot;
+    public GameObject endPoint;
     public Renderer seerJC1_ran; 
     public Renderer dealerJC1_ran; 
 
@@ -36,6 +38,8 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
 
     public void Start()
     {
+        consumerSpot.SetActive(false);
+        endPoint.SetActive(false);
         SetRoleMageZero();
         InitRoleStartActive(false);
         PlayerData.My.playerGears.Clear();
