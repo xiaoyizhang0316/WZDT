@@ -21,6 +21,7 @@ public class JsonDatas
     public string FTE_2;
     public string FTE_3;
     public string FTE_4;
+    public string FTE_4_5;
     public string FTE_5;
     public string FTE_6;
     public string FTE_7;
@@ -73,6 +74,9 @@ public class JsonDatas
                 if (isNPC)
                     return NPC_4;
                 return FTE_4;
+            case "FTE_4.5":
+                
+                return FTE_4_5;
             case "FTE_5":
                 if (isNPC)
                     return NPC_5;
