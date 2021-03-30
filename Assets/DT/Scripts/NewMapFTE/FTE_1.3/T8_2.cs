@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class T8_1 : BaseGuideStep
+public class T8_2 : BaseGuideStep
 {
-    public GameObject waveBG;
     // Start is called before the first frame update
   
 
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-         yield return new WaitForSeconds(1);
+        T8Manager.My.dlg.SetActive(true);
+        yield return new WaitForSeconds(1);
     }
 
     public override IEnumerator StepEnd()
@@ -21,7 +21,8 @@ public class T8_1 : BaseGuideStep
                   
     public override bool ChenkEnd()
     {
-        return waveBG.activeSelf;
+        
+        return T8Manager.My.npcnong.GetComponent<NPC>().isCanSeeEquip;
     }
  
 }

@@ -37,7 +37,7 @@ public class T0_5_5 : BaseGuideStep
         if (count >= GetComponent<UnlockRoleFTE>().peasant)
         {
             missiondatas.data[0].isFinish = true;
-            missiondatas.data[0].currentNum = count;
+            missiondatas.data[0].currentNum = 1;
             return true;
 
         }

@@ -42,6 +42,7 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
         endPoint.SetActive(false);
         SetRoleMageZero();
         InitRoleStartActive(false);
+        SetRoleInfoUp();
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
         SetDeleteButton(false);
@@ -83,6 +84,7 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
 
     public void SetRoleInfoDown()
     {
+        NewCanvasUI.My.Panel_Update.SetActive(false);
         NewCanvasUI.My.Panel_Update.transform.localPosition -= new Vector3(0,5000,0);
         
     }
@@ -106,25 +108,25 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
 
     public void SetRoleMageZero()
     {
-        GameDataMgr.My.SetModuleData(GameEnum.RoleType.Seed, 1, 0, 15, 20, 0, 0, 0, 0, 0); 
+        GameDataMgr.My.SetModuleData(GameEnum.RoleType.Seed, 1, 0, 25, 15, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Seed, 2, 0, 20, 25, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Seed, 3, 0, 25, 30, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Seed, 4, 0, 30, 35, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Seed, 5, 0, 35, 40, 0, 0, 0, 0, 0); 
             
-        GameDataMgr.My.SetModuleData(GameEnum.RoleType.Peasant, 1, 0, 20, 10, 0, 0, 0, 0, 0); 
+        GameDataMgr.My.SetModuleData(GameEnum.RoleType.Peasant, 1, 0, 24, 10, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Peasant, 2, 0, 25, 15, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Peasant, 3, 0, 30, 20, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Peasant, 4, 0, 40, 25, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Peasant, 5, 0, 50, 30, 0, 0, 0, 0, 0); 
 
-        GameDataMgr.My.SetModuleData(GameEnum.RoleType.Merchant, 1, 0, 20, 20, 0, 0, 0, 0, 0); 
+        GameDataMgr.My.SetModuleData(GameEnum.RoleType.Merchant, 1, 0, 25, 26, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Merchant, 2, 0, 25, 28, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Merchant, 3, 0, 30, 35, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Merchant, 4, 0, 35, 42, 0, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Merchant, 5, 0, 40, 50, 0, 0, 0, 0, 0); 
 
-        GameDataMgr.My.SetModuleData(GameEnum.RoleType.Dealer, 1, 0, 0, 30, 28, 0, 0, 0, 0); 
+        GameDataMgr.My.SetModuleData(GameEnum.RoleType.Dealer, 1, 0, 0, 42, 32, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Dealer, 2, 0, 0, 35, 32, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Dealer, 3, 0, 0, 40, 36, 0, 0, 0, 0); 
         GameDataMgr.My.SetModuleData(GameEnum.RoleType.Dealer, 4, 0, 0, 45, 40, 0, 0, 0, 0); 

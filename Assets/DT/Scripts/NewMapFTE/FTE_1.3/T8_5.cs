@@ -4,9 +4,9 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class T6_5 : BaseGuideStep
+public class T8_5 : BaseGuideStep
 {
- 
+  
     public  GameEnum.ConsumerType type; 
     public int count;
     public int time;
@@ -23,6 +23,11 @@ public class T6_5 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
+        T8Manager.My.consumerPort1.SetActive(true);
+        
+        T8Manager.My.endPointPort1.SetActive(true);
+    
+        
         StageGoal.My.totalIncome = 0;
         StageGoal.My.totalCost = 0;
         var list = FindObjectsOfType<ConsumeSign>();
@@ -36,7 +41,7 @@ public class T6_5 : BaseGuideStep
         {
             StartCoroutine(BuildingManager.My.buildings[0]
                 .BornSingleTypeConsumer(type, count));
-            StartCoroutine(BuildingManager.My.buildings[ 1]
+            StartCoroutine(BuildingManager.My.buildings[1]
                 .BornSingleTypeConsumer(type, count));
             Addxiaofei();
         }).Play();
@@ -54,14 +59,11 @@ public class T6_5 : BaseGuideStep
         {
             StartCoroutine(BuildingManager.My.buildings[0]
                 .BornSingleTypeConsumer(type, count));
-            StageGoal.My.killNumber = 0;
-            StartCoroutine(BuildingManager.My.buildings[ 1]
-                .BornSingleTypeConsumer(type, count));
-      
+            StartCoroutine(BuildingManager.My.buildings[1]
+                .BornSingleTypeConsumer(type, count)); 
 
             Addxiaofei();
         }).Play();
-   
     }
 
     public override IEnumerator StepEnd()
@@ -73,25 +75,44 @@ public class T6_5 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        if (StageGoal.My.totalIncome - StageGoal.My.totalCost < -12000)
+        Info.text = "当前利润"+(StageGoal.My.totalIncome - StageGoal.My.totalCost)+"---目标利润"+14000 ;
+        missiondatas.data[0].currentNum = T8Manager.My.packageKillNum;
+        missiondatas.data[0].currentNum =  T8Manager.My.saleKillNum;
+
+        if (missiondatas.data[0].currentNum>=missiondatas.data[0].maxNum  )
         {
+            missiondatas.data[0].isFinish = true;
+         
+        }
+         
+        if (missiondatas.data[1].currentNum>=missiondatas.data[1].maxNum  )
+        {
+            missiondatas.data[1].isFinish = true;
+         
+        }
+
+        if (StageGoal.My.totalIncome - StageGoal.My.totalCost < -10000)
+        {
+            missiondatas.data[0].isFinish = false;
+            missiondatas.data[1].isFinish = false;
+            missiondatas.data[0].currentNum = 0;
+            missiondatas.data[1].currentNum = 0;
             StageGoal.My.totalIncome = 0;
             StageGoal.My.totalCost = 0;
         }
 
-        Info.text = "当前利润： "+(StageGoal.My.totalIncome - StageGoal.My.totalCost).ToString()+"   目标利润："+12000 ;
-        if (StageGoal.My.totalIncome - StageGoal.My.totalCost > 12000)
+        if (StageGoal.My.totalIncome - StageGoal.My.totalCost > 14000&&  missiondatas.data[0].isFinish&&  missiondatas.data[1].isFinish)
         {
-            missiondatas.data[0].isFinish = true;
             return true;
         }
         else
         {
             return false;
-            
+
         }
 
-      
+       
 
     }
+ 
 }

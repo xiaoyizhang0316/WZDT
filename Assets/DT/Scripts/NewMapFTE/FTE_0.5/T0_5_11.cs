@@ -22,6 +22,7 @@ public class T0_5_11 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        
        FTE_0_5Manager.My.consumerSpot.SetActive(true);
        FTE_0_5Manager.My.endPoint.SetActive(true);
         StageGoal.My.killNumber = 0;
@@ -54,19 +55,25 @@ public class T0_5_11 : BaseGuideStep
         t.Kill(); 
         roleImage.SetActive(true);
         roleImage.SetActive(false);
-
+      
+            PlayerData.My.DeleteRole(PlayerData.My.RoleData[0].ID);
+            PlayerData.My.DeleteRole(PlayerData.My.RoleData[0].ID);
+            PlayerData.My.DeleteRole(PlayerData.My.RoleData[0].ID);
+            PlayerData.My.DeleteRole(PlayerData.My.RoleData[0].ID);
+    
         yield return new WaitForSeconds(2);  
+        
     }
 
     public override bool ChenkEnd()
     {
        
-        missiondatas.data[1].currentNum = StageGoal.My.killNumber;
-        if (StageGoal.My.killNumber >= missiondatas.data[1].maxNum)
+        missiondatas.data[0].currentNum = StageGoal.My.killNumber;
+        if (StageGoal.My.killNumber >= missiondatas.data[0].maxNum)
         {
-            missiondatas.data[1].isFinish = true;
+            missiondatas.data[0].isFinish = true;
         }
-        if (  missiondatas.data[1].isFinish)
+        if (  missiondatas.data[0].isFinish)
         {
             return true;
         }
