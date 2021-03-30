@@ -1090,6 +1090,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerGold = 100000;
             playerTechPoint = 20000;
             wudi = true;
+            ReadStageEnemyData(sceneName);
             SetInfoImmidiate();
             return;
         }
