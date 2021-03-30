@@ -478,7 +478,11 @@ public class GameEnum
         /// <summary>
         /// 假人10
         /// </summary>
-        ConsumerModel10
+        ConsumerModel10,
+        /// <summary>
+        /// 假人10
+        /// </summary>
+        ConsumerModel11
     }
 
     public enum BulletBuffType
