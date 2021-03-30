@@ -291,7 +291,7 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
             return;
         }
 
-        if (SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+        if (SceneManager.GetActiveScene().name.Equals("FTE_1.6"))
         {
             WaveCount.My.InitWave();
             return;

@@ -7,11 +7,21 @@ public class HideRect : MonoBehaviour
 {
     private void Start()
     {
-        Invoke("Hide", 2);
+        //Invoke("Hide", 2);
     }
 
     void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        Invoke("Hide", 2);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
     }
 }

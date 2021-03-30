@@ -66,9 +66,7 @@ public class T4_Task3 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
-        T4_Manager.My.QualityMerchant.GetComponent<QualityRole>().needCheck = false;
-        T4_Manager.My.QualityMerchant.GetComponent<QualityRole>().donotAdd = false;
-        T4_Manager.My.QualityMerchant.GetComponent<QualityRole>().QualityReset();
+        T4_Manager.My.QualityMerchant.GetComponent<QualityRole>().CheckEnd();
         yield return new WaitForSeconds(3);
     }
 }

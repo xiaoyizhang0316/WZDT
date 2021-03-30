@@ -227,6 +227,10 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         TradeManager.My.DeleteRoleAllTrade(roleId);
         if (StageGoal.My.timeCount - mapRole.putTime <= 5)
             StageGoal.My.GetTechPoint(target.baseRoleData.costTech);
+        if (SceneManager.GetActiveScene().name.Equals("FTE_3.5"))
+        {
+            StageGoal.My.GetTechPoint(target.baseRoleData.costTech);
+        }
         if (guanJianZiYuanNengLi[2])
         {
             if (StageGoal.My.timeCount - mapRole.putTime > 5)

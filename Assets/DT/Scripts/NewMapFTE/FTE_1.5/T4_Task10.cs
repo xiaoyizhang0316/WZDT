@@ -7,12 +7,14 @@ public class T4_Task10 : BaseGuideStep
 {
     private int startCost = 0;
     private int startIncome = 0;
+
+    public BornType bornType;
     
     public override IEnumerator StepStart()
     {
         startCost = StageGoal.My.totalCost;
         startIncome = StageGoal.My.totalIncome;
-        T4_Manager.My.BornConsumer(0);
+        T4_Manager.My.BornConsumer((int) bornType.type, bornType.count);
         Check();
         yield return null;
     }
