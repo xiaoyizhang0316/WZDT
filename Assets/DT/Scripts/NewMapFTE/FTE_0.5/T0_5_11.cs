@@ -30,8 +30,7 @@ public class T0_5_11 : BaseGuideStep
             StartCoroutine(BuildingManager.My.buildings[0]
                 .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel1, count));
             Addxiaofei();
-        }).Play();
-         NewCanvasUI.My.GamePause();
+        }).Play(); 
      
         yield return new WaitForSeconds(1f);
 
@@ -67,7 +66,7 @@ public class T0_5_11 : BaseGuideStep
         {
             missiondatas.data[1].isFinish = true;
         }
-        if (missiondatas.data[0].isFinish && missiondatas.data[1].isFinish)
+        if (  missiondatas.data[1].isFinish)
         {
             return true;
         }
