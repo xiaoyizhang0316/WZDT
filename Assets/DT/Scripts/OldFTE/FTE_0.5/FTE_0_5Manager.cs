@@ -51,7 +51,7 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
     public void UpRole(GameObject role)
     {
         role.SetActive(true);
-        role.transform.DOLocalMoveY(1,1).Play();
+        role.transform.DOLocalMoveY(3,1).Play();
         
     }
 

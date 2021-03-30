@@ -12,7 +12,8 @@ public class T0_5_2 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         StageGoal.My.maxRoleLevel = 1;
-           
+        HexCell cell =    HexGrid.My.GetCell(new HexCoordinates(4,17));
+        cell.TerrainTypeIndex = 0;
         RoleListManager.My.OutButton();
 
         yield return new WaitForSeconds(1f);
