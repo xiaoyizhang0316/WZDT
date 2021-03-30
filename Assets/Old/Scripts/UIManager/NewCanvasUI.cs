@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using Fungus;
 using IOIntensiveFramework.MonoSingleton;
@@ -122,12 +123,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public void Init1_4UI()
     {
-        if (SceneManager.GetActiveScene().name == "Map" || SceneManager.GetActiveScene().name == "FTE_0-1" ||
-            SceneManager.GetActiveScene().name == "FTE_0-2"||
-            SceneManager.GetActiveScene().name == "FTE_0.5"||
-            SceneManager.GetActiveScene().name == "FTE_1.5"
-            ||
-            SceneManager.GetActiveScene().name == "FTE_2.5")
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             return;
         }
@@ -675,8 +671,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public void StartLowHealth()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName == "FTE_Record" || sceneName == "FTE_0-1" || sceneName == "FTE_0-2" || sceneName == "FTE_1.5"
-            || sceneName == "FTE_2.5")
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             return;
         }

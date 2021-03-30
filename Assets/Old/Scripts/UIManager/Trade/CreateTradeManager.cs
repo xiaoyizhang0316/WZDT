@@ -5,6 +5,7 @@ using IOIntensiveFramework.MonoSingleton;
 using static GameEnum;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
@@ -134,7 +135,6 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         }
     }
 
-    private List<string> fteList = new List<string>() { "FTE_0.5","FTE_1.5","FTE_2.5"};
 
     /// <summary>
     /// 初始化发起者和承受者名字
@@ -142,7 +142,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     public void InitName()
     {
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.castRole));
-        if (!fteList.Contains(SceneManager.GetActiveScene().name))
+        if (!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
             {
@@ -211,9 +211,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         }
         if (!currentTrade.isTradeSettingBest())
         {
-            if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2"
-                                                           || SceneManager.GetActiveScene().name == "FTE_1.5"
-                                                           || SceneManager.GetActiveScene().name == "FTE_2.5")
+            if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
             {
                 result *= 2;
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -164,9 +165,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             //      item.SetActive(false);
             //  }
 
-            if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2" ||
-                SceneManager.GetActiveScene().name == "FTE_0.5"
-                || SceneManager.GetActiveScene().name == "FTE_1.5" || SceneManager.GetActiveScene().name == "FTE_2.5")
+            if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
             {
                 currentGuideIndex = 0;
                 PlayerPrefs.SetInt("isUseGuide", 1);

@@ -192,10 +192,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             predictGold -= num;
             return;
         }
-        if (SceneManager.GetActiveScene().name == "FTE_0-1" || SceneManager.GetActiveScene().name == "FTE_0-2"
-                                                           || SceneManager.GetActiveScene().name == "FTE_1.5"
-                                                           || SceneManager.GetActiveScene().name == "FTE_0.5"
-                                                           || SceneManager.GetActiveScene().name == "FTE_2.5")
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             if (playerGold - num <= 10000)
             {
@@ -297,8 +294,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void ConsumerAliveTip()
     {
-        if (SceneManager.GetActiveScene().name.Equals("FTE_0-1") || GuideManager.My.ftegob.activeInHierarchy || SceneManager.GetActiveScene().name.Equals("FTE_0-2")
-            || SceneManager.GetActiveScene().name.Equals("FTE_1.5") || SceneManager.GetActiveScene().name == "FTE_2.5")
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             return;
         }
@@ -318,7 +314,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         }).timeScale = 1f / DOTween.timeScale;
     }
 
-    private List<string> fteList = new List<string>() {"FTE_0.5","FTE_1.5","FTE_2.5" };
 
     /// <summary>
     /// 玩家获得金币
@@ -346,7 +341,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
-            if (currentType == StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name) && !isNotTurn)
+            if (currentType == StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name) && !isNotTurn)
             {
                 UpdateTurnIncome(num);
             }
@@ -836,7 +831,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
-            if (!sceneList.Contains(SceneManager.GetActiveScene().name))
+            if (!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
                 CheckWin();
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
@@ -1088,7 +1083,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void InitStageData()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneList.Contains(sceneName))
+        if (CommonParams.fteList.Contains(sceneName))
         {
             playerHealth = 1000;
             playerMaxHealth = 1000;
@@ -1245,14 +1240,15 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
 
     }
-    List<string> sceneList = new List<string>() { "FTE_0.5", "FTE_0.6", "FTE_0.7", "FTE_1.5", "FTE_1.6", "FTE_2.5", "FTE_3.5", "FTE_4.5" };
+
+
     /// <summary>
     /// 右侧星数菜单隐藏
     /// </summary>
     public void MenuHide()
     {
         
-        if (sceneList.Contains(SceneManager.GetActiveScene().name))
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             GetComponent<RectTransform>().DOAnchorPosX(18000.4f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
             {

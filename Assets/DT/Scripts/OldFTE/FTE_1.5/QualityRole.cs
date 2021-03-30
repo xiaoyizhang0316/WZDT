@@ -5,8 +5,9 @@ using UnityEngine;
 public class QualityRole : BaseMapRole
 {
     public int checkQuality;
-    public int checkBuff;
+    public int checkBuff=-1;
     public bool needCheck;
+    public bool donotAdd = false;
 
     public Renderer signal;
     public Material normal;
@@ -15,6 +16,11 @@ public class QualityRole : BaseMapRole
 
     public override void AddPruductToWareHouse(ProductData data)
     {
+        if (donotAdd)
+        {
+            return;
+        }
+        
         if (needCheck)
         {
             if (checkBuff == -1 && checkQuality ==-1)

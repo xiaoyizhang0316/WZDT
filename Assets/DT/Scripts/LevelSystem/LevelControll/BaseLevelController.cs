@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
@@ -185,7 +186,6 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         Destroy(go, 1f);
     }
 
-    private List<string> fteList = new List<string>() {"FTE_0.5","FTE_1.5","FTE_2.5" };
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -193,7 +193,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         //Debug.LogWarning("base level controller start");
         DOTween.PauseAll();
         DOTween.defaultAutoPlay = AutoPlay.None;
-        if (StageGoal.My.currentType == GameEnum.StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name))
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             NewCanvasUI.My.ToggleSpeedButton(false);
         }

@@ -38,7 +38,6 @@ public class Building : MonoBehaviour
 
     public List<ConsumeSign> consumeSigns = new List<ConsumeSign>();
 
-    private List<string> fteList = new List<string>() { "FTE_0.5", "FTE_0.6", "FTE_0.7", "FTE_1.5", "FTE_1.6", "FTE_2.5", "FTE_3.5", "FTE_4.5" };
 
     /// <summary>
     /// 使用透视镜
@@ -509,7 +508,7 @@ public class Building : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (fteList.Contains(SceneManager.GetActiveScene().name))
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             FTEInit();
         }
@@ -600,6 +599,55 @@ public class Building : MonoBehaviour
                 MapManager.My.SetLand(hit[j].transform.GetComponent<MapSign>().x, hit[j].transform.GetComponent<MapSign>().y);
             }
         }
+    }
+
+    public bool bornFTE = false;
+    public IEnumerator BornEnemyForFTE(int type, int count)
+    {
+        ConsumerType ct;
+        yield return new WaitForSeconds(0.3f);
+        DrawPathLine();
+        protalGameObject.transform.DOScale(new Vector3(1, 1, 0.52f), 1);
+        yield return new WaitForSeconds(0.5f);
+        
+        if (count == 0)
+        {
+            bornFTE = true;
+            while (bornFTE)
+            {
+                ct = (ConsumerType)type;
+                string path = "Prefabs/Consumer/" + ct.ToString();
+                GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+                go.GetComponent<ConsumeSign>().Init(consumerPathList);
+                go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+                go.transform.position = transform.position;
+                go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+            
+                float waitTime = 0.35f;
+                Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]+0.7f);
+                yield return twe.WaitForCompletion();
+            }
+        }
+        //{
+        else{
+            for (int i = 0; i < count; i++)
+            {
+                //yield return new WaitForSeconds(0.7f);
+                ct = (ConsumerType)type;
+                string path = "Prefabs/Consumer/" + ct.ToString();
+                GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+                go.GetComponent<ConsumeSign>().Init(consumerPathList);
+                go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+                go.transform.position = transform.position;
+                go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+            
+                float waitTime = 0.35f;
+                Tweener twe = transform.DOScale(1f, GameDataMgr.My.consumerWaitTime[ct]+0.7f);
+                yield return twe.WaitForCompletion();
+            }
+            
+        }
+        //}
     }
 
     [Serializable]

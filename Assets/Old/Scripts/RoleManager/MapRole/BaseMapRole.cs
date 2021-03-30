@@ -527,7 +527,7 @@ public class BaseMapRole : MonoBehaviour
     #endregion
 
     Tweener costTwe;
-    List<string> fteList = new List<string>() {"FTE_0.5","FTE_1.5","FTE_2.5" };
+
 
     #region 钱，科技值相关
     /// <summary>
@@ -539,13 +539,13 @@ public class BaseMapRole : MonoBehaviour
         {
             return;
         }
-        if (StageGoal.My.currentType == StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name))
+        if (StageGoal.My.currentType == StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             return;
         }
         float time = 20f;
         int costNum = baseRoleData.cost;
-        if (fteList.Contains(SceneManager.GetActiveScene().name))
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             time = 1f;
             costNum = costNum / 20;
@@ -591,7 +591,7 @@ public class BaseMapRole : MonoBehaviour
     {
         float time = 5f;
         float techNum = baseRoleData.techAdd / 6f;
-        if (fteList.Contains(SceneManager.GetActiveScene().name))
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             time = 1f;
             techNum = techNum / 5f;
