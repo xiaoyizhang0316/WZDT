@@ -10,7 +10,7 @@ public class ReturnToMap : MonoBehaviour
     public Button confirm;
     public Button cancel;
 
-    private static string[] sceneName = {"FTE_0.5", "FTE_1.5", "FTE_2.5"};
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +21,7 @@ public class ReturnToMap : MonoBehaviour
 
     void Confirm()
     {
-        if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+        if (!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             StageGoal.My.CommitLose();
         }

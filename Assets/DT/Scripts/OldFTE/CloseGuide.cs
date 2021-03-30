@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class CloseGuide : MonoBehaviour
 {
     // Start is called before the first frame update
-    private  string[] scenes = {"FTE_0.5", "FTE_1.5", "FTE_2.5"};
+
     void Awake()
     {
         GuideManager.My.guideClose = this;
@@ -24,7 +24,7 @@ public class CloseGuide : MonoBehaviour
             
         });
         string sceneName = SceneManager.GetActiveScene().name;
-        if (!scenes.Contains(sceneName))
+        if (!CommonParams.fteList.Contains(sceneName))
         {
 
             if (PlayerPrefs.GetInt("isUseGuide") == 0)

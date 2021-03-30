@@ -12,7 +12,7 @@ public class ProductSeed : BaseSkill
     public List<ProductData> productDatas = new List<ProductData>();
     // Start is called before the first frame update
     private int currentCount = 0;
-    private string[] sceneName = {"FTE_0.5", "FTE_1.5", "FTE_2.5"};
+
     public override void Skill()
     {
         if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
@@ -83,7 +83,7 @@ public class ProductSeed : BaseSkill
         }
 
         // 在教学关，种子商效果改变的时候，重置相关角色的仓库
-        if(sceneName.Contains( SceneManager.GetActiveScene().name))
+        if(CommonParams.fteList.Contains( SceneManager.GetActiveScene().name))
         {
             if (lastEffect == 0)
             {

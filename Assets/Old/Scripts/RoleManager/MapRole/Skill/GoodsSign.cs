@@ -265,30 +265,5 @@ public class GoodsSign : MonoBehaviour
         moveTween.timeScale = speedAdd;
     }
 
-    private void Update()
-    {
-        if (SceneManager.GetActiveScene().name == "FTE_0-2")
-        {
-            if (RoleEditor.My.destroyBullets)
-            {
-                Destroy(gameObject);
-            }
-        }
-
-        /*if (SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
-        {
-            if (FTE_2_5_Manager.My.isClearGoods)
-            {
-                Destroy(gameObject);
-            }
-        }
-        
-        if (SceneManager.GetActiveScene().name.Equals("FTE_1.5"))
-        {
-            if (FTE_1_5_Manager.My.isClearGoods)
-            {
-                Destroy(gameObject);
-            }
-        }*/
-    }
+    
 }

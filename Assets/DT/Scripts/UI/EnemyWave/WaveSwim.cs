@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static GameEnum;
 using static DataEnum;
+using System.Linq;
 
 public class WaveSwim : MonoBehaviour,IPointerClickHandler
 {
@@ -232,51 +233,43 @@ public class WaveSwim : MonoBehaviour,IPointerClickHandler
                 client_Wave.buildingNumber = 5;
             }
         }
+
         int waitNumber = StageGoal.My.waitTimeList[number];
-        if (waitNumber - offset <= 30)
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
+            waitNumber = 30;
             transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) * 40f / 3f, transform.localPosition.z);
-            twe = transform.DOLocalMoveY(0f, waitNumber - offset).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                Destroy(gameObject);
-            });
         }
         else
         {
-            if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
+            if (waitNumber - offset <= 30)
             {
-                transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) * 2f - 340f, transform.localPosition.z);
+                transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) * 40f / 3f, transform.localPosition.z);
+                twe = transform.DOLocalMoveY(0f, waitNumber - offset).SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    Destroy(gameObject);
+                });
             }
             else
             {
-                transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) * 3f - 310f, transform.localPosition.z);
-            }
-            twe = transform.DOLocalMoveY(-400f, waitNumber - 30f - offset).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                twe = transform.DOLocalMoveY(0f, 30f).SetEase(Ease.Linear).OnComplete(() =>
+                if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
                 {
-                    StageGoal.My.timeCount = waitNumber;
-                    Destroy(gameObject);
+                    transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) * 2f - 340f, transform.localPosition.z);
+                }
+                else
+                {
+                    transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) * 3f - 310f, transform.localPosition.z);
+                }
+                twe = transform.DOLocalMoveY(-400f, waitNumber - 30f - offset).SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    twe = transform.DOLocalMoveY(0f, 30f).SetEase(Ease.Linear).OnComplete(() =>
+                    {
+                        StageGoal.My.timeCount = waitNumber;
+                        Destroy(gameObject);
+                    });
                 });
-            });
-        }
-        //else
-        //{
-        //    transform.localPosition = new Vector3(transform.localPosition.x, -(waitNumber - offset) - 520f, transform.localPosition.z);
-        //    twe = transform.DOLocalMoveY(-700f, waitNumber - 180f - offset).SetEase(Ease.Linear).OnComplete(() =>
-        //    {
-        //        twe = transform.DOLocalMoveY(-400f, 150f).SetEase(Ease.Linear).OnComplete(() =>
-        //        {
-        //            //print("Timecount before 30: " + StageGoal.My.timeCount);
-        //            twe = transform.DOLocalMoveY(0f, 30f).SetEase(Ease.Linear).OnComplete(() =>
-        //            {
-        //                StageGoal.My.timeCount = waitNumber;
-        //                //print("Timecount: " + StageGoal.My.timeCount);
-        //                Destroy(gameObject);
-        //            });
-        //        });
-        //    });
-        //}
+            }
+        }     
     }
 
     public void Move()

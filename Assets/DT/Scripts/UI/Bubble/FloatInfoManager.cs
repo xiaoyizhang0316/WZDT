@@ -14,7 +14,7 @@ public class FloatInfoManager : MonoSingleton<FloatInfoManager>
 
     public GameObject textPrb;
 
-    private static string[] sceneNameExcept = {"FTE_1.5", "FTE_2.5"};
+
 
     /// <summary>
     /// 金钱变化时浮动文字信息
@@ -22,7 +22,7 @@ public class FloatInfoManager : MonoSingleton<FloatInfoManager>
     /// <param name="number"></param>
     public void MoneyChange(int number)
     {
-        if (sceneNameExcept.Contains(SceneManager.GetActiveScene().name))
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             return;
         }

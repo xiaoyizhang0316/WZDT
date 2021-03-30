@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
@@ -32,7 +33,7 @@ public class RoleListInfoDealer : BaseRoleListInfo
 
     public GameObject tradText;
 
-    private List<string> fteList = new List<string>() { "FTE_0.5", "FTE_1.5", "FTE_2.5" };
+
 
     public override void Init(Role role)
     {
@@ -57,7 +58,7 @@ public class RoleListInfoDealer : BaseRoleListInfo
         Range.text = (role.range / 14.5f).ToString("F2");
         tradCost.text  =  role.tradeCost.ToString();
         risk .text =  role.riskResistance.ToString();
-        if (StageGoal.My.currentType == GameEnum.StageType.Normal && !fteList.Contains(SceneManager.GetActiveScene().name))
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             montyCost.text = (role.cost * 2).ToString();
         }
