@@ -40,7 +40,7 @@ public class T3_6: BaseGuideStep
 
         for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
         {
-            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed &&
+            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant &&
                 !PlayerData.My.MapRole[i].isNpc)
             {
                 nong =   PlayerData.My.MapRole[i];

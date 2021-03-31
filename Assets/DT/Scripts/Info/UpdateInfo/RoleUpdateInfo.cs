@@ -126,7 +126,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                     }
                 }
 
-                if (SceneManager.GetActiveScene().name.Equals("FTE_0.6"))
+                if (SceneManager.GetActiveScene().name.Equals("FTE_0.7"))
                 {
                     if (currentRole.baseRoleData.roleType == GameEnum.RoleType.Peasant &&
                         FTE_0_6Manager.My.clearWarehouse == 1)

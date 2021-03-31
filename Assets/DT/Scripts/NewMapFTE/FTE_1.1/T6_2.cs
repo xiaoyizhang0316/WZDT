@@ -10,12 +10,13 @@ public class T6_2: BaseGuideStep
     {
         yield return new WaitForSeconds(1); 
 
-     
+      NewCanvasUI.My.GameAccelerate();
      
     }
 
     public override IEnumerator StepEnd()
     { 
+        NewCanvasUI.My.GameNormal();
         
         yield return new WaitForSeconds(2); 
       

@@ -56,7 +56,7 @@ public class T6_5 : BaseGuideStep
                 .BornSingleTypeConsumer(type, count));
             StageGoal.My.killNumber = 0;
             StartCoroutine(BuildingManager.My.buildings[ 1]
-                .BornSingleTypeConsumer(type, count));
+                .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel9, count));
       
 
             Addxiaofei();

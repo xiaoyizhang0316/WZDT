@@ -11,6 +11,8 @@ public class T6_1 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        StageGoal.My.playerTechPoint = 38;
+        StageGoal.My.playerTechText.text = 38.ToString();
         StageGoal.My.maxRoleLevel = 1;
      
         RoleListManager.My.OutButton();
@@ -34,7 +36,7 @@ public class T6_1 : BaseGuideStep
         {
             if (PlayerData.My.RoleData[i].baseRoleData.roleType == GameEnum.RoleType.Seed)
             {
-                PlayerData.My.MapRole[i].tradeButton.SetActive(false);
+               
                 missiondatas.data[0].currentNum = 1; 
                 missiondatas.data[0].isFinish= true; 
                 return true;
