@@ -7,12 +7,15 @@ public class T4_Task10 : BaseGuideStep
 {
     private int startCost = 0;
     private int startIncome = 0;
+
+    public BornType bornType;
     
     public override IEnumerator StepStart()
     {
         startCost = StageGoal.My.totalCost;
         startIncome = StageGoal.My.totalIncome;
-        T4_Manager.My.BornConsumer(0);
+        T4_Manager.My.BornConsumer((int) bornType.type, bornType.count);
+        InvokeRepeating("CheckConsumer", 4, 0.5f);
         Check();
         yield return null;
     }
@@ -20,6 +23,16 @@ public class T4_Task10 : BaseGuideStep
     void Check()
     {
         InvokeRepeating("CheckGoal", 0.5f, 0.3f);
+    }
+
+    private bool isNoConsumer = false;
+    void CheckConsumer()
+    {
+        if (!T4_Manager.My.CheckHasConsume(T4_Manager.My.bornPoint.transform))
+        {
+            isNoConsumer = true;
+            CancelInvoke("CheckConsumer");
+        }
     }
 
     void CheckGoal()
@@ -34,11 +47,13 @@ public class T4_Task10 : BaseGuideStep
                 missiondatas.data[0].isFinish = true;
             }
 
-            if (!T4_Manager.My.CheckHasConsume(T4_Manager.My.bornPoint.transform))
+            if (isNoConsumer)
             {
+                isNoConsumer = false;
                 startCost = StageGoal.My.totalCost;
                 startIncome = StageGoal.My.totalIncome;
-                T4_Manager.My.BornConsumer(0);
+                T4_Manager.My.BornConsumer((int) bornType.type, bornType.count);
+                InvokeRepeating("CheckConsumer", 4, 0.5f);
             }
         }
     }

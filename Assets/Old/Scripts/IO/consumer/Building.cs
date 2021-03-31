@@ -612,6 +612,7 @@ public class Building : MonoBehaviour
         
         if (count == 0)
         {
+            //Debug.Log("born infinity");
             bornFTE = true;
             while (bornFTE)
             {
@@ -630,6 +631,7 @@ public class Building : MonoBehaviour
         }
         //{
         else{
+            //Debug.Log("born "+count);
             for (int i = 0; i < count; i++)
             {
                 //yield return new WaitForSeconds(0.7f);

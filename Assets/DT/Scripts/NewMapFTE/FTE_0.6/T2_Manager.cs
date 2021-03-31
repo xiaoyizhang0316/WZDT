@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -171,7 +172,8 @@ public class T2_Manager : MonoSingleton<T2_Manager>
     /// </summary>
     public void DeleteAllTrade()
     {
-        foreach (var trade in TradeManager.My.tradeList.Keys)
+        List<int> tradeList = TradeManager.My.tradeList.Keys.ToList();
+        foreach (var trade in tradeList)
         {
             TradeManager.My.DeleteTrade(trade);
         }
@@ -207,14 +209,15 @@ public class T2_Manager : MonoSingleton<T2_Manager>
 
     public int time_remain = 0;
     private int startTime = 0;
+    private int limitTime = 0;
     /// <summary>
     /// 开始或充值倒计时
     /// </summary>
     /// <param name="time_remain"></param>
-    public void ResetTimeCountDown(int time_remain)
+    public void ResetTimeCountDown(int limitTime)
     {
         CancelInvoke("TimeCountDown");
-        this.time_remain = time_remain;
+        this.limitTime = limitTime;
         startTime = StageGoal.My.timeCount;
         InvokeRepeating("TimeCountDown", 0, 0.5f);
     }
@@ -230,7 +233,7 @@ public class T2_Manager : MonoSingleton<T2_Manager>
     
     private void TimeCountDown()
     {
-        time_remain -= (StageGoal.My.timeCount - startTime);
+        time_remain = limitTime+startTime-StageGoal.My.timeCount;
         ShowCountDown();
     }
     

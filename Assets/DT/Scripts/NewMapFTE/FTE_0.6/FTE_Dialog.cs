@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public  class FTE_Dialog : BaseGuideStep
 {
+    public bool uploadProgress = false;
     public GameObject dialog_obj;
     public override IEnumerator StepStart()
     {
@@ -29,6 +31,7 @@ public  class FTE_Dialog : BaseGuideStep
 
     public virtual void AfterDialog()
     {
-        
+        if(uploadProgress)
+            NetworkMgr.My.UpdatePlayerFTE(SceneManager.GetActiveScene().name);
     }
 }

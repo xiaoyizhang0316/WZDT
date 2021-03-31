@@ -44,8 +44,9 @@ public class T2_Task5 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        T2_Manager.My.StopTimeCountDown();
         CancelInvoke();
+        T2_Manager.My.StopTimeCountDown();
+        T2_Manager.My.QualitySeed.GetComponent<QualityRole>().CheckEnd();
         yield return new WaitForSeconds(3);
     }
 }

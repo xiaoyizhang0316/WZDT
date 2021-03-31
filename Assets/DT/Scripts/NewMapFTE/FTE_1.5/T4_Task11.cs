@@ -8,6 +8,8 @@ public class T4_Task11 : BaseGuideStep
     private int startCost = 0;
     private int startIncome = 0;
     public int timeInterval = 0;
+
+    public List<BornType> bornTypes;
     
     public override IEnumerator StepStart()
     {
@@ -48,11 +50,11 @@ public class T4_Task11 : BaseGuideStep
     IEnumerator BornConsumer()
     {
         bornEnd = false;
-        T4_Manager.My.BornConsumer(0,12);
+        T4_Manager.My.BornConsumer((int) bornTypes[0].type,bornTypes[0].count);
         yield return new WaitForSeconds(timeInterval);
-        T4_Manager.My.BornConsumer(0,12);
+        T4_Manager.My.BornConsumer((int) bornTypes[1].type,bornTypes[1].count);
         yield return new WaitForSeconds(timeInterval);
-        T4_Manager.My.BornConsumer(0,12);
+        T4_Manager.My.BornConsumer((int) bornTypes[2].type,bornTypes[2].count);
         yield return new WaitForSeconds(2);
         bornEnd = true;
     }
