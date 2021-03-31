@@ -22,20 +22,27 @@ public class T5_Task4 : BaseGuideStep
     {
         if (!missiondatas.data[0].isFinish)
         {
-            if (NewCanvasUI.My.Panel_NPC.activeInHierarchy)
+            if (NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().specialInfo.activeInHierarchy)
             {
-                rect.SetActive(true);
-                showRect = true;
+                if (!showRect)
+                {
+                    rect.SetActive(true);
+                    showRect = true;
+                }
+                
             }
             else
             {
-                rect.SetActive(false);
-                showRect = false;
+                if (showRect)
+                {
+                    rect.SetActive(false);
+                    showRect = false;
+                }
             }
 
             if (showRect)
             {
-                if (!rect.activeInHierarchy)
+                if (!rect.activeInHierarchy && NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().specialInfo.activeInHierarchy)
                 {
                     missiondatas.data[0].isFinish = true;
                 }

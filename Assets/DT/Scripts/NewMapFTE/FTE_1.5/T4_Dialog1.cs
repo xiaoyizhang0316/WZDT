@@ -8,6 +8,8 @@ public class T4_Dialog1 : FTE_Dialog
     public override void BeforeDialog()
     {
         RoleSet();
+        PlayerData.My.playerWorkers.Clear();
+        PlayerData.My.playerGears.Clear();
         T4_Manager.My.SetRoleCost(0);
         T4_Manager.My.SetRoleMaxLevel(3);
         T4_Manager.My.BornConsumer((int) bornType.type, bornType.count);

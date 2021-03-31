@@ -64,11 +64,11 @@ public class T7_Task3 : BaseGuideStep
     bool CheckTrade(TradeSign tradeSign)
     {
         bool castIsSeed =
-            PlayerData.My.GetMapRoleById(float.Parse(tradeSign.tradeData.castRole)).baseRoleData.baseRoleData
+            PlayerData.My.GetMapRoleById(double.Parse(tradeSign.tradeData.castRole)).baseRoleData.baseRoleData
                 .roleType == GameEnum.RoleType.Seed;
         
         bool targetIsPeasant =
-            PlayerData.My.GetMapRoleById(float.Parse(tradeSign.tradeData.targetRole)).baseRoleData.baseRoleData
+            PlayerData.My.GetMapRoleById(double.Parse(tradeSign.tradeData.targetRole)).baseRoleData.baseRoleData
                 .roleType == GameEnum.RoleType.Peasant;
 
         return castIsSeed && targetIsPeasant;

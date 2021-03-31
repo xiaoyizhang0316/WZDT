@@ -7,6 +7,8 @@ public class T5_Dialog1 : FTE_Dialog
     public override void BeforeDialog()
     {
         RoleSet();
+        PlayerData.My.playerGears.Clear();
+        PlayerData.My.playerWorkers.Clear();
         T5_Manager.My.SetRoleCost(0);
         T5_Manager.My.SetRoleMaxLevel(3);
     }

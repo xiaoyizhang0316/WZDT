@@ -39,19 +39,27 @@ public class T7_Task2 : BaseGuideStep
         {
             if (NewCanvasUI.My.Panel_Update.activeInHierarchy)
             {
-                rect.SetActive(true);
-                showRect = true;
+                if (!showRect)
+                {
+                    rect.SetActive(true);
+                    showRect = true;
+                }
+                
             }
             else
             {
-                rect.SetActive(false);
-                showRect = false;
+                if (showRect)
+                {
+                    rect.SetActive(false);
+                    showRect = false;
+                }
+                
             }
         }
 
         if (showRect)
         {
-            if (!rect.activeInHierarchy)
+            if (!rect.activeInHierarchy && NewCanvasUI.My.Panel_Update.activeInHierarchy)
             {
                 missiondatas.data[1].isFinish = true;
             }

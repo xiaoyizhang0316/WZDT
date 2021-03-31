@@ -29,20 +29,26 @@ public class T5_Task1 : BaseGuideStep
         {
             if (checkImage.activeInHierarchy)
             {
-                checkBorder.SetActive(false);
-                checkBorder1.SetActive(true);
-                showRect = true;
+                if (!showRect)
+                {
+                    checkBorder.SetActive(false);
+                    checkBorder1.SetActive(true);
+                    showRect = true;
+                }
             }
             else
             {
-                checkBorder.SetActive(true);
-                checkBorder1.SetActive(false);
-                showRect = false;
+                if (showRect)
+                {
+                    checkBorder.SetActive(true);
+                    checkBorder1.SetActive(false);
+                    showRect = false;
+                }
             }
 
             if (showRect)
             {
-                if (!checkBorder1.activeInHierarchy)
+                if (!checkBorder1.activeInHierarchy && checkImage.activeInHierarchy)
                 {
                     missiondatas.data[0].isFinish = true;
                 }
@@ -59,6 +65,7 @@ public class T5_Task1 : BaseGuideStep
     {
         CancelInvoke();
         yield return new WaitForSeconds(3);
+        Destroy(wave);
         FloatWindow.My.Hide();
     }
 }

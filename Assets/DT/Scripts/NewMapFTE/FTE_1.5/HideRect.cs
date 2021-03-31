@@ -17,6 +17,7 @@ public class HideRect : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("enable exe");
         Invoke("Hide", 2);
     }
 

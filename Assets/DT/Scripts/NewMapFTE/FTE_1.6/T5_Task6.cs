@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class T5_Task6 : BaseGuideStep
 {
+    private int startCost = 0;
+    private int startIncome = 0;
     public override IEnumerator StepStart()
     {
         T5_Manager.My.leftKillNum = 0;
         T5_Manager.My.rightKillNum = 0;
+        startCost = StageGoal.My.totalCost;
+        startIncome = StageGoal.My.totalIncome;
         Check();
         yield return null;
     }
@@ -38,11 +42,21 @@ public class T5_Task6 : BaseGuideStep
                 missiondatas.data[1].isFinish = true;
             }
         }
+
+        if (!missiondatas.data[2].isFinish)
+        {
+            missiondatas.data[2].currentNum =
+                StageGoal.My.totalIncome - startIncome - StageGoal.My.totalCost + startCost;
+            if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
+            {
+                missiondatas.data[2].isFinish = true;
+            }
+        }
     }
 
     public override bool ChenkEnd()
     {
-        return missiondatas.data[0].isFinish&& missiondatas.data[1].isFinish;
+        return missiondatas.data[0].isFinish&& missiondatas.data[1].isFinish && missiondatas.data[2].isFinish;
     }
 
     public override IEnumerator StepEnd()

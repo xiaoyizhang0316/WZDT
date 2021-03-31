@@ -96,6 +96,7 @@ public class T4_Manager : MonoSingleton<T4_Manager>
     /// <param name="type"></param>
     public void BornConsumer(int type, int count=0)
     {
+        Debug.Log(type+" born "+count);
         StartCoroutine( bornPoint.GetComponent<Building>().BornEnemyForFTE(type, count));
     }
 
@@ -211,6 +212,7 @@ public class T4_Manager : MonoSingleton<T4_Manager>
     /// <returns></returns>
     public bool CheckHasConsume(Transform point)
     {
+        
         if (point.childCount > 4)
         {
             return true;

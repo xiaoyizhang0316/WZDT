@@ -286,7 +286,7 @@ public class TradeSign : MonoBehaviour
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         posList.Add(end.transform.position);
         countNumber++;
-        if (countNumber == 10 && StageGoal.My.currentType != StageType.Normal)
+        if (countNumber == 10 && (StageGoal.My.currentType != StageType.Normal || CommonParams.fteList.Contains(SceneManager.GetActiveScene().name)))
         {
             if (PlayerData.My.yeWuXiTong[2])
             {

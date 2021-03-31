@@ -7,6 +7,8 @@ public class T7_Dialog1 : FTE_Dialog
     public int startMega = 0;
     public override void BeforeDialog()
     {
+        PlayerData.My.playerGears.Clear();
+        PlayerData.My.playerWorkers.Clear();
         T7_Manager.My.SetRoleMaxLevel(5);
         RoleSet();
     }
