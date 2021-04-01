@@ -884,7 +884,14 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("playerName", playerDatas.playerName);
         keyValues.Add("sceneName", "FTE_"+levelID);
         keyValues.Add("groupID", groupID.ToString());
-        keyValues.Add("useStatus", CompressUtils.Compress( DataUploadManager.My.GetNpcUseStatus()));
+        if (levelID != 1)
+        {
+            keyValues.Add("useStatus", CompressUtils.Compress( DataUploadManager.My.GetNpcUseStatus()));
+        }
+        else
+        {
+            keyValues.Add("useStatus", "");
+        }
         StartCoroutine(HttpManager.My.HttpSend(Url.UpdateLevelProgress, (www) => {
             HttpResponse response = JsonUtility.FromJson<HttpResponse>(www.downloadHandler.text);
             if (response.status == -1)

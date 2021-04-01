@@ -290,11 +290,12 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     public void AddTaskTime(string taskName)
     {
         int useTime= currentTaskEndTime - currentTaskStartTime;
-        taskTimeList.Add(taskName+":"+useTime);
+        taskTimeList.Add(taskName+"&"+useTime);
     }
 
     public string GetTaskTimes()
     {
+        //任务1：消费者口味&8_任务2：新角色-口味工厂&8_任务3：口味加工厂&54_任务4：查看角色口味能力&8_任务5：角色口味能力&39_任务6：满足消费者口味&80
         String times = "";
         for (int i = 0; i < taskTimeList.Count; i++)
         {

@@ -297,9 +297,12 @@ public abstract class BaseGuideStep : MonoBehaviour
             highLightCopyObj[i].SetActive(false);
         }
         CloseHighLight();
-
-        GuideManager.My.currentTaskEndTime = TimeStamp.GetCurrentTimeStamp();
-        GuideManager.My.AddTaskTime(missionTitle);
+        if (!string.IsNullOrEmpty(missionTitle))
+        {
+            GuideManager.My.currentTaskEndTime = TimeStamp.GetCurrentTimeStamp();
+            GuideManager.My.AddTaskTime(missionTitle);
+        }
+        
         GuideManager.My.PlayNextIndexGuide();
     }
 
