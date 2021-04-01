@@ -83,7 +83,7 @@ public class T0_5_7 : BaseGuideStep
         if (TradeManager.My.CheckTwoRoleHasTrade(seedRole.baseRoleData, nong1Role.baseRoleData)&&TradeManager.My.CheckTwoRoleHasTrade(seedRole.baseRoleData, nong2Role.baseRoleData))
         {
             missiondatas.data[1].isFinish = true;
-             
+            red.SetActive(false);
         }
         else
         {
@@ -91,14 +91,14 @@ public class T0_5_7 : BaseGuideStep
 
         }
         
-        TradeManager.My.HideAllIcon();
+        TradeManager.My.ShowAllIcon(); 
         int count = 0;
         count = PlayerData.My.peasantCount;
         missiondatas.data[0].currentNum = count;
         if (count >= GetComponent<UnlockRoleFTE>().peasant)
         {
             missiondatas.data[0].isFinish = true;
-            missiondatas.data[0].currentNum = count;
+            missiondatas.data[0].currentNum = 1;
            
 
         }

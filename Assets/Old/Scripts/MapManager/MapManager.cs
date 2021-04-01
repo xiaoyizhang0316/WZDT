@@ -481,6 +481,7 @@ public class MapManager : MonoSingleton<MapManager>
                 diveList[time][i].SetActive(true);
             }
             diveList.Remove(time);
+            Debug.Log("shangfu");
         }
         if (diveLandList.ContainsKey(time))
         {
@@ -489,6 +490,7 @@ public class MapManager : MonoSingleton<MapManager>
                 diveLandList[time][i].ChangeElevationLerpUp(5, 0.2f,()=> { });
             }
             diveLandList.Remove(time);
+            Debug.Log("shangfu");
         }
     }
 

@@ -38,13 +38,14 @@ public class T0_5_4 : BaseGuideStep
     {
      
         TradeManager.My.HideAllIcon();
+        missiondatas.data[0].currentNum = maprole.warehouse.Count; 
         if (maprole.warehouse.Count >= 10)
         {
             return true;
         }
         else
         {
-            missiondatas.data[0].currentNum = maprole.warehouse.Count; 
+           
             return false;
 
         }

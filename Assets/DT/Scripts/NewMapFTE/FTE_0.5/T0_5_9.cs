@@ -12,6 +12,7 @@ public class T0_5_9 : BaseGuideStep
     public override IEnumerator StepStart()
     {
        FTE_0_5Manager.My.SetDeleteButton(true);
+       
        FTE_0_5Manager.My.SetRoleInfoDown();
       TradeManager.My.ShowAllIcon();
         yield return null;

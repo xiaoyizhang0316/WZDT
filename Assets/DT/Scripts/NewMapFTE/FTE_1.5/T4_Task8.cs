@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class T4_Task8 : BaseGuideStep
 {
+    public GameObject stat_btn;
     public GameObject statPanel;
     public GameObject rect;
     public override IEnumerator StepStart()
     {
-        
+        stat_btn.SetActive(true);
         Check();
         yield return null;
     }

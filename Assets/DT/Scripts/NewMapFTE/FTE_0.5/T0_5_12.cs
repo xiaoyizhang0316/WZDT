@@ -22,11 +22,8 @@ public class T0_5_12 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        StageGoal.My.killNumber = 0;
 
-        for (int i = 0; i <PlayerData.My.RoleData.Count; i++)
-        {
-            PlayerData.My.DeleteRole(PlayerData.My.RoleData[i].ID);
-        }
 
    HexCell cell =    HexGrid.My.GetCell(new HexCoordinates(4,17));
    cell.TerrainTypeIndex = 1;
@@ -69,12 +66,12 @@ public class T0_5_12 : BaseGuideStep
     public override bool ChenkEnd()
     {
        
-        missiondatas.data[1].currentNum = StageGoal.My.killNumber;
-        if (StageGoal.My.killNumber >= missiondatas.data[1].maxNum)
+        missiondatas.data[0].currentNum = StageGoal.My.killNumber;
+        if (StageGoal.My.killNumber >= missiondatas.data[0].maxNum)
         {
-            missiondatas.data[1].isFinish = true;
+            missiondatas.data[0].isFinish = true;
         }
-        if (  missiondatas.data[1].isFinish)
+        if (  missiondatas.data[0].isFinish)
         {
             return true;
         }

@@ -23,6 +23,11 @@ public class T6_5 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
+        T6Manager.My.sumSpor.SetActive(true);
+        T6Manager.My.sumSpor2.SetActive(true);
+        T6Manager.My.endPoint.SetActive(true);
+        T6Manager.My.endPoint2.SetActive(true);
+        NewCanvasUI.My.GameNormal();
         StageGoal.My.totalIncome = 0;
         StageGoal.My.totalCost = 0;
         var list = FindObjectsOfType<ConsumeSign>();
@@ -36,10 +41,11 @@ public class T6_5 : BaseGuideStep
         {
             StartCoroutine(BuildingManager.My.buildings[0]
                 .BornSingleTypeConsumer(type, count));
-         
+            StartCoroutine(BuildingManager.My.buildings[ 1]
+                .BornSingleTypeConsumer(type, count));
             Addxiaofei();
         }).Play();
-        NewCanvasUI.My.GamePause();
+        
 
         yield return new WaitForSeconds(1f);
 
@@ -54,19 +60,13 @@ public class T6_5 : BaseGuideStep
             StartCoroutine(BuildingManager.My.buildings[0]
                 .BornSingleTypeConsumer(type, count));
             StageGoal.My.killNumber = 0;
-            missiondatas.data[0].isFinish = false;
-
-            Addxiaofei();
-        }).Play();
-        t=       transform.DOScale(1, time).OnComplete(() =>
-        {
             StartCoroutine(BuildingManager.My.buildings[ 1]
-                .BornSingleTypeConsumer(type, count));
-            StageGoal.My.killNumber = 0;
-            missiondatas.data[0].isFinish = false;
+                .BornSingleTypeConsumer(GameEnum.ConsumerType.ConsumerModel9, count));
+      
 
             Addxiaofei();
         }).Play();
+   
     }
 
     public override IEnumerator StepEnd()

@@ -11,7 +11,9 @@ public class T3_5: BaseGuideStep
     public BaseMapRole role2;
     public BaseMapRole role3;  
     public Text info; 
+    int time;
 
+    public int shengyuTime;
     public int roleTargetCount;
     public int role1TargetCount;
     public int role2TargetCount;
@@ -44,8 +46,17 @@ public class T3_5: BaseGuideStep
     
     public override bool ChenkEnd()
     {
-        
-        info.text = "  质监站1剩余："+(roleTargetCount-role.warehouse.Count)
+        if ((StageGoal.My.timeCount - time) % shengyuTime == 0)
+        {
+            role.warehouse.Clear();
+            role1.warehouse.Clear();
+            role2.warehouse.Clear();
+            role3.warehouse.Clear();
+            time = StageGoal.My.timeCount;
+            missiondatas.data[0].isFinish = false;
+
+        }
+        info.text = "剩余时间 : "+(shengyuTime- (StageGoal.My.timeCount-time)) +"  质监站1剩余："+(roleTargetCount-role.warehouse.Count)
                     +"           质监站2剩余："+(role1TargetCount-role1.warehouse.Count) +"           质监站3剩余："+(role2TargetCount-role2.warehouse.Count)
                     +"           质监站4剩余："+(role3TargetCount-role3.warehouse.Count)   ;
        

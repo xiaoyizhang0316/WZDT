@@ -91,17 +91,23 @@ public class RoleListInfoMerchant : BaseRoleListInfo
             Destroy(productTF.GetChild(i).gameObject);
         }
         _datas.Clear();
-      
+        for (int i = 0; i <baseMapRole.warehouse.Count; i++)
+        {
+            baseMapRole.warehouse[i].RepeatBulletCount = 0;
+        }
 
         for (int i = 0; i <  baseMapRole.warehouse.Count; i++)
         {
             int  isSameCount = 0;
+            int count = 0;
             for (int j = 0; j <_datas.Count; j++)
             {
             
                 if (_datas[j].CheckSame(baseMapRole.warehouse[i]))
                 {
                     isSameCount++;
+                    _datas[j].RepeatBulletCount++;
+                    count++;
                 }
             }
 
@@ -110,15 +116,22 @@ public class RoleListInfoMerchant : BaseRoleListInfo
   
                 continue;
             }
+            _datas.Add(baseMapRole.warehouse[i]);
+            
+        }
+
+        for (int i = 0; i < _datas.Count; i++)
+        {
+            
 
          //   baseMapRole.warehouse[i].RepeatBulletCount = isSameCount;
             GameObject Pruductgame =  Instantiate(productPrb, productTF);
             Pruductgame.GetComponent<ProductSign>().currentProduct =
-                baseMapRole.warehouse[i];
-      
+                _datas[i];
 
+            Pruductgame.GetComponent<ProductSign>().conut.text =_datas[i].RepeatBulletCount.ToString();
       
-            _datas.Add(baseMapRole.warehouse[i]);
+       
           
         
             switch (baseMapRole.warehouse[i].bulletType )

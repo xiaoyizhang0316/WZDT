@@ -72,6 +72,14 @@ public class TradeSign : MonoBehaviour
                 tradeData.selectCashFlow = CashFlowType.后钱;
             }
         }
+
+        if (SceneManager.GetActiveScene().name.Equals("FTE_1.5"))
+        {
+            if (!isTradeSettingBest())
+            {
+                tradeData.selectCashFlow = CashFlowType.后钱;
+            }
+        }
         tradeData.ID = TradeManager.My.index++;
         createTime = StageGoal.My.timeCount;
         TradeManager.My.tradeList.Add(tradeData.ID, this);
@@ -278,7 +286,7 @@ public class TradeSign : MonoBehaviour
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
         posList.Add(end.transform.position);
         countNumber++;
-        if (countNumber == 10 && StageGoal.My.currentType != StageType.Normal)
+        if (countNumber == 10 && (StageGoal.My.currentType != StageType.Normal || CommonParams.fteList.Contains(SceneManager.GetActiveScene().name)))
         {
             if (PlayerData.My.yeWuXiTong[2])
             {

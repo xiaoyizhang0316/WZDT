@@ -100,6 +100,8 @@ public class RoleListInfoPeasant : BaseRoleListInfo
         { 
             //Debug.Log(i+"||"+ baseMapRole.GetComponent<ProductMelon>().productDatas.Count);
             GameObject Pruductgame =  Instantiate(productPrb, productTF);
+            Pruductgame.GetComponent<ProductSign>().Image.gameObject.SetActive(false);
+
             Pruductgame.GetComponent<ProductSign>().currentProduct =
                 baseMapRole.GetComponent<ProductMelon>().productDatas[    baseMapRole.GetComponent<ProductMelon>().productDatas.Count-i];
             Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.normallpp;

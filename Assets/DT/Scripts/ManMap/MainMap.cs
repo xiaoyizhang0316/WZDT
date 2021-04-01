@@ -300,7 +300,8 @@ public class MainMap : MonoBehaviour
             fte = NetworkMgr.My.playerDatas.fte;
         }
 
-        InitFTELevel(fte);
+        //InitFTELevel(fte);
+        InitNewFTELevel(fte);
 
         return fte;
     }
@@ -348,6 +349,81 @@ public class MainMap : MonoBehaviour
                SetTeachLevelStatus(teachLevels[1], false);
                SetTeachLevelStatus(teachLevels[2], false);
                break;
+        }
+    }
+
+    public List<GameObject> newTeachLevel = new List<GameObject>();
+    void InitNewFTELevel(string fte)
+    {
+        for (int i = 0; i < newTeachLevel.Count; i++)
+        {
+            SetTeachLevelStatus(teachLevels[1], true);
+        }
+        switch (fte)
+        {
+            case "0":
+                SetTeachLevelStatus(teachLevels[0], false);
+                break;
+            case "0.5":
+                SetTeachLevelStatus(teachLevels[0], false);
+                SetTeachLevelStatus(teachLevels[1], false);
+                break;
+            case "0.6":
+            case "0.7":    
+                SetTeachLevelStatus(teachLevels[0], false);
+                SetTeachLevelStatus(teachLevels[1], false);
+                SetTeachLevelStatus(teachLevels[2], false);
+                break;
+            case "1":
+                SetTeachLevelStatus(teachLevels[0], false);
+                SetTeachLevelStatus(teachLevels[1], false);
+                SetTeachLevelStatus(teachLevels[2], false);
+                SetTeachLevelStatus(teachLevels[3], false);
+                break;
+            case "1.5": 
+            case "1.6":
+                SetTeachLevelStatus(teachLevels[0], false);
+                SetTeachLevelStatus(teachLevels[1], false);
+                SetTeachLevelStatus(teachLevels[2], false);
+                SetTeachLevelStatus(teachLevels[3], false);
+                SetTeachLevelStatus(teachLevels[4], false);
+                break;
+            case "2":
+            case "2.5":
+                SetTeachLevelStatus(teachLevels[0], false);
+                SetTeachLevelStatus(teachLevels[1], false);
+                SetTeachLevelStatus(teachLevels[2], false);
+                SetTeachLevelStatus(teachLevels[3], false);
+                SetTeachLevelStatus(teachLevels[4], false);
+                SetTeachLevelStatus(teachLevels[5], false);
+                break;
+            case "3":
+            case "3.5":
+                SetTeachLevelStatus(teachLevels[0], false);
+                SetTeachLevelStatus(teachLevels[1], false);
+                SetTeachLevelStatus(teachLevels[2], false);
+                SetTeachLevelStatus(teachLevels[3], false);
+                SetTeachLevelStatus(teachLevels[4], false);
+                SetTeachLevelStatus(teachLevels[5], false);
+                SetTeachLevelStatus(teachLevels[6], false);
+                break;
+            case "4":
+            case "4.5":
+                SetTeachLevelStatus(teachLevels[0], false);
+                SetTeachLevelStatus(teachLevels[1], false);
+                SetTeachLevelStatus(teachLevels[2], false);
+                SetTeachLevelStatus(teachLevels[3], false);
+                SetTeachLevelStatus(teachLevels[4], false);
+                SetTeachLevelStatus(teachLevels[5], false);
+                SetTeachLevelStatus(teachLevels[6], false);
+                SetTeachLevelStatus(teachLevels[7], false);
+                break;
+            default:
+                for (int i = 0; i < newTeachLevel.Count; i++)
+                {
+                    SetTeachLevelStatus(teachLevels[1], false);
+                }
+                break;
         }
     }
 

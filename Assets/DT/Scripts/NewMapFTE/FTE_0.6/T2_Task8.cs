@@ -8,10 +8,10 @@ public class T2_Task8 : BaseGuideStep
     public int taskTime = 0;
     public override IEnumerator StepStart()
     {
-        T2_Manager.My.QualitySeed.GetComponent<QualityRole>().QualityReset();
-        T2_Manager.My.QualitySeed.GetComponent<QualityRole>().checkBuff = -1;
-        T2_Manager.My.QualitySeed.GetComponent<QualityRole>().checkQuality = needQuality;
-        T2_Manager.My.QualitySeed.GetComponent<QualityRole>().needCheck = true;
+        T2_Manager.My.QualityMerchant.GetComponent<QualityRole>().QualityReset();
+        T2_Manager.My.QualityMerchant.GetComponent<QualityRole>().checkBuff = -1;
+        T2_Manager.My.QualityMerchant.GetComponent<QualityRole>().checkQuality = needQuality;
+        T2_Manager.My.QualityMerchant.GetComponent<QualityRole>().needCheck = true;
         T2_Manager.My.ResetTimeCountDown(taskTime);
         Check();
         yield return null;
@@ -26,7 +26,7 @@ public class T2_Task8 : BaseGuideStep
     {
         if (!missiondatas.data[0].isFinish)
         {
-            missiondatas.data[0].currentNum = T2_Manager.My.QualitySeed.GetComponent<BaseMapRole>().warehouse.Count;
+            missiondatas.data[0].currentNum = T2_Manager.My.QualityMerchant.GetComponent<BaseMapRole>().warehouse.Count;
             if (missiondatas.data[0].currentNum >= missiondatas.data[0].maxNum)
             {
                 missiondatas.data[0].isFinish = true;
@@ -36,7 +36,7 @@ public class T2_Task8 : BaseGuideStep
         if (T2_Manager.My.time_remain <= 0)
         {
             T2_Manager.My.ResetTimeCountDown(taskTime);
-            T2_Manager.My.QualitySeed.GetComponent<QualityRole>().QualityReset();
+            T2_Manager.My.QualityMerchant.GetComponent<QualityRole>().QualityReset();
         }
     }
 
@@ -48,10 +48,9 @@ public class T2_Task8 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        T2_Manager.My.QualitySeed.GetComponent<QualityRole>().needCheck = false;
-        T2_Manager.My.QualitySeed.GetComponent<QualityRole>().QualityReset();
-        T2_Manager.My.StopTimeCountDown();
         CancelInvoke();
+        T2_Manager.My.QualityMerchant.GetComponent<QualityRole>().CheckEnd();
+        T2_Manager.My.StopTimeCountDown();
         yield return new WaitForSeconds(3);
     }
 }

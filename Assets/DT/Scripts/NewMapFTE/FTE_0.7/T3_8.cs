@@ -13,6 +13,8 @@ public class T3_8: BaseGuideStep
 
     public bool islast;
     public GameObject red;
+
+    public BaseMapRole maoyi;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,21 @@ public class T3_8: BaseGuideStep
     {
       FTE_0_6Manager.My.consumerSpot.SetActive(true);
       FTE_0_6Manager.My.endPoint.SetActive(true);
+      
+      for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
+      {
+          if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant &&
+              !PlayerData.My.MapRole[i].isNpc)
+          {
+              maoyi   =   PlayerData.My.MapRole[i];
+          }
+      }
+
+      if (!islast)
+      {
+          TradeManager.My.DeleteRoleAllTrade(maoyi.baseRoleData.ID);
+      }
+
       FTE_0_6Manager.My.DownRole( FTE_0_6Manager.My.dealerJC1); 
       FTE_0_6Manager.My.DownRole( FTE_0_6Manager.My.dealerJC2);
       FTE_0_6Manager.My.DownRole( FTE_0_6Manager.My.dealerJC3);
@@ -42,7 +59,7 @@ public class T3_8: BaseGuideStep
          
             Addxiaofei();
         }).Play();
-        NewCanvasUI.My.GamePause();
+         
 
         yield return new WaitForSeconds(1f);
 

@@ -40,9 +40,9 @@ public class T2_Task3 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        T2_Manager.My.QualitySeed.GetComponent<QualityRole>().needCheck = false;
-        T2_Manager.My.QualitySeed.GetComponent<QualityRole>().QualityReset();
+        
         CancelInvoke();
+        T2_Manager.My.QualitySeed.GetComponent<QualityRole>().CheckEnd();
         yield return new WaitForSeconds(3);
     }
 }

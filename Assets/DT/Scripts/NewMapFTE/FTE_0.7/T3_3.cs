@@ -12,7 +12,9 @@ public class T3_3 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         FTE_0_6Manager.My.UpRole( FTE_0_6Manager.My.dealerJC1);
-
+        FTE_0_6Manager.My.SetRoleInfoAddEquip(true);
+        RoleListManager.My.OutButton();
+        NewCanvasUI.My.GameNormal();
         role.warehouse.Clear();
         role.OnMoved += ChangeColor;
 

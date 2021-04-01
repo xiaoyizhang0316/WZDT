@@ -29,7 +29,14 @@ public class T3_2 : BaseGuideStep
         {
             GameObject equip = Instantiate(equipPrb, pos_equip);
             equip.GetComponent<WinEquipSign>().Init(tempEquipList[i] );  
+            
            
+        }
+        
+        for (int i = 0; i <tempWorkerList.Count; i++)
+        {
+            PlayerData.My.GetNewWorker(tempWorkerList[i]);
+   
         }
         for (int i = 0; i < pos_worker.transform.childCount; i++)
         {

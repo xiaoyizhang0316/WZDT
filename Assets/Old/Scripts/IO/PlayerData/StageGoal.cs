@@ -1091,6 +1091,8 @@ public class StageGoal : MonoSingleton<StageGoal>
             wudi = true;
             ReadStageEnemyData(sceneName);
             SetInfoImmidiate();
+            if(SceneManager.GetActiveScene().name.Equals("FTE_4.5"))
+                ReadStageEnemyData(sceneName);
             return;
         }
         //StartCoroutine(ReadStageEnemyData(sceneName));

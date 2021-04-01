@@ -75,14 +75,17 @@ public class FTE_0_6Manager : MonoSingleton<FTE_0_6Manager>
     {
         seerJC1.GetComponent<BaseMapRole>().tradeButton.SetActive(false);
         dealerJC1.GetComponent<BaseMapRole>().tradeButton.SetActive(false);
+        dealerJC3.GetComponent<BaseMapRole>().tradeButton.SetActive(false);
+        dealerJC2.GetComponent<BaseMapRole>().tradeButton.SetActive(false);
+        dealerJC4.GetComponent<BaseMapRole>().tradeButton.SetActive(false);
     }
 
     public void InitRoleStartActive(bool isActive)
     {
         seerJC1.SetActive(isActive);
-        dealerJC1.SetActive(isActive);
         dealerJC2.SetActive(isActive);
         dealerJC3.SetActive(isActive);
+        dealerJC4.SetActive(isActive);
     }
 
     public void SetRoleInfoAddEquip(bool setActive)

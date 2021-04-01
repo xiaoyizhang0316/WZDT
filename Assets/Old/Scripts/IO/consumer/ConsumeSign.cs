@@ -268,15 +268,24 @@ public class ConsumeSign : MonoBehaviour
         {
             BaseLevelController.My.CountKillNumber(this);
         }
-        if(SceneManager.GetActiveScene().name == "FTE_0-1")
+        /*if(SceneManager.GetActiveScene().name == "FTE_0-1")
         {
             FTE_0_OtherOp.My.InstantiateFlyMoney(transform.position);
+        }*/
+
+        if (SceneManager.GetActiveScene().name.Equals("FTE_1.6"))
+        {
+            T5_Manager.My.AddKillNum(buildingIndex);
+        }
+        if (SceneManager.GetActiveScene().name.Equals("FTE_3.5"))
+        {
+            T7_Manager.My.AddKillNum(buildingIndex);
         }
 
-        if (SceneManager.GetActiveScene().name.Equals("FTE_2.5"))
+        if (SceneManager.GetActiveScene().name.Equals("FTE_4.5") )
         {
             
-                FTE_2_5_Manager.My.CheckTasteKill(buildingIndex);
+                T8Manager.My.CheckTasteKill(buildingIndex);
             
         }
         DeathAward();

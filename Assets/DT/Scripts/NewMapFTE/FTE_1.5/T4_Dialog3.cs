@@ -6,11 +6,11 @@ public class T4_Dialog3 : FTE_Dialog
 {
     public override void BeforeDialog()
     {
-        foreach (BaseMapRole role in PlayerData.My.MapRole)
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
-            if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
+            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
             {
-                Destroy(role.gameObject);
+                PlayerData.My.DeleteRole(PlayerData.My.MapRole[i].baseRoleData.ID);
             }
         }
     }

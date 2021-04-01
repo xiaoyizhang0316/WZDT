@@ -2,17 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class T8_1 : MonoBehaviour
+public class T8_1 : BaseGuideStep
 {
+    public GameObject waveBG;
+
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  
 
     // Update is called once per frame
-    void Update()
+    public override IEnumerator StepStart()
     {
-        
+         yield return new WaitForSeconds(1);
     }
+
+    public override IEnumerator StepEnd()
+    {  
+        yield return new WaitForSeconds(1); 
+    }
+                  
+    public override bool ChenkEnd()
+    {
+        return waveBG.activeSelf;
+    }
+ 
 }
