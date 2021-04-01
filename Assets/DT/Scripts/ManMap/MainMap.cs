@@ -300,7 +300,8 @@ public class MainMap : MonoBehaviour
             fte = NetworkMgr.My.playerDatas.fte;
         }
 
-        InitFTELevel(fte);
+        //InitFTELevel(fte);
+        InitNewFTELevel(fte);
 
         return fte;
     }
