@@ -18,12 +18,14 @@ public class T6_2: BaseGuideStep
     { 
         NewCanvasUI.My.GameNormal();
         
+        missiondatas.data[0].isFinish= true; 
         yield return new WaitForSeconds(2); 
       
     }
 
     public override bool ChenkEnd()
     {
+        NewCanvasUI.My.GameAccelerate();
         return StageGoal.My.playerTechPoint > 40;
     }
 

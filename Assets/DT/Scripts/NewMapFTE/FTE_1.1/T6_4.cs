@@ -25,7 +25,7 @@ public class T6_4: BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        if (!  T6Manager.My.npcDealer.GetComponent<NPC>().isCanSee)
+        if ( T6Manager.My.npcDealer.GetComponent<NPC>().isCanSee)
         {
             missiondatas.data[0].isFinish= true; 
 
