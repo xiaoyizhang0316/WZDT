@@ -9,6 +9,8 @@ public class T8_5 : BaseGuideStep
   
     public  GameEnum.ConsumerType type; 
     public int count;
+    public BornType bornType1;
+    public BornType bornType2;
     public int time;
 
     public Text Info;
@@ -40,12 +42,12 @@ public class T8_5 : BaseGuideStep
         transform.DOScale(1, 1).OnComplete(() =>
         {
             StartCoroutine(BuildingManager.My.buildings[0]
-                .BornSingleTypeConsumer(type, count));
+                .BornSingleTypeConsumer(bornType1.type, bornType1.count));
             StartCoroutine(BuildingManager.My.buildings[1]
-                .BornSingleTypeConsumer(type, count));
+                .BornSingleTypeConsumer(bornType2.type, bornType2.count));
             Addxiaofei();
         }).Play();
-        NewCanvasUI.My.GamePause();
+        NewCanvasUI.My.GameNormal();
 
         yield return new WaitForSeconds(1f);
 
@@ -58,9 +60,9 @@ public class T8_5 : BaseGuideStep
         t=       transform.DOScale(1, time).OnComplete(() =>
         {
             StartCoroutine(BuildingManager.My.buildings[0]
-                .BornSingleTypeConsumer(type, count));
+                .BornSingleTypeConsumer(bornType1.type, bornType1.count));
             StartCoroutine(BuildingManager.My.buildings[1]
-                .BornSingleTypeConsumer(type, count)); 
+                .BornSingleTypeConsumer(bornType2.type, bornType2.count));
 
             Addxiaofei();
         }).Play();

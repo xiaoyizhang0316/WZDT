@@ -130,9 +130,9 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     /// <param name="mapRole"></param>
     public void AddNpcRoleType(BaseMapRole mapRole)
     {
-        if (!npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag))
+        if (!npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID))
         {
-            npcRole.Add(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag, GetNpcStatus(mapRole));
+            npcRole.Add(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&", GetNpcStatus(mapRole));
             
             //npcStatus.Add(new NpcStatus(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID,GetNpcStatus(mapRole)));
         }
@@ -181,7 +181,23 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
         }
 
         result += ",0";
+        result += ","+GetNpcBuffsDesc(mapRole);
         return result;
+    }
+
+    string GetNpcBuffsDesc(BaseMapRole mapRole)
+    {
+        BaseSkill bs = mapRole.GetComponent<BaseSkill>();
+        NPC npc = mapRole.GetComponent<NPC>();
+        List<int> buffs = new List<int>();
+        buffs.AddRange(bs.buffList);
+        buffs.AddRange(npc.NPCBuffList);
+        string buffDesc = "";
+        for (int i = 0; i < buffs.Count; i++)
+        {
+            buffDesc += GameDataMgr.My.GetBuffDataByID(buffs[i]).BuffName;
+        }
+        return string.IsNullOrEmpty( buffDesc)?"null": buffDesc;
     }
 
     /// <summary>
@@ -190,22 +206,22 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     /// <param name="mapRole"></param>
     private void SetNpcRoleStatus(BaseMapRole mapRole, int status)
     {
-        if (npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName + "&" + mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag))
+        if (npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName + "&" + mapRole.baseRoleData.ID))
         {
             if (status == 3)
             {
-                string[] statusArr = npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag].Split(',');
+                string[] statusArr = npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID].Split(',');
                 statusArr[statusArr.Length - 1] = "1";
-                npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag] =
-                    statusArr[0] + "," + statusArr[1] + "," + statusArr[2]+","+statusArr[3];
+                npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID] =
+                    statusArr[0] + "," + statusArr[1] + "," + statusArr[2]+","+statusArr[3]+","+statusArr[4];
             }
             else
             {
-                string[] statusArr = npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag].Split(',');
+                string[] statusArr = npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID].Split(',');
                 string[] arr = statusArr[status].Split('&');
                 statusArr[status] = arr[0] + "&1";
-                npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&"+mapRole.npcScript.npcTag] =
-                    statusArr[0] + "," + statusArr[1] + "," + statusArr[2]+","+statusArr[3];
+                npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID] =
+                    statusArr[0] + "," + statusArr[1] + "," + statusArr[2]+","+statusArr[3]+","+statusArr[4];
                 
             }
             //UpdateNpc();
