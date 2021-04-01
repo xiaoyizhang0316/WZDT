@@ -481,14 +481,16 @@ public class MapManager : MonoSingleton<MapManager>
                 diveList[time][i].SetActive(true);
             }
             diveList.Remove(time);
+            Debug.Log("shangfu");
         }
         if (diveLandList.ContainsKey(time))
         {
             for (int i = 0; i < diveLandList[time].Count; i++)
             {
-                diveLandList[time][i].ChangeElevationLerpUp(5, 0.2f,()=> { });
+                StartCoroutine(diveLandList[time][i].ChangeElevationLerpUp(5, 0.2f,()=> { }));
             }
             diveLandList.Remove(time);
+            Debug.Log("shangfu");
         }
     }
 
