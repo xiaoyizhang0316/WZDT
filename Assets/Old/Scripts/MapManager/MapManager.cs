@@ -487,7 +487,7 @@ public class MapManager : MonoSingleton<MapManager>
         {
             for (int i = 0; i < diveLandList[time].Count; i++)
             {
-                diveLandList[time][i].ChangeElevationLerpUp(5, 0.2f,()=> { });
+                StartCoroutine(diveLandList[time][i].ChangeElevationLerpUp(5, 0.2f,()=> { }));
             }
             diveLandList.Remove(time);
             Debug.Log("shangfu");
