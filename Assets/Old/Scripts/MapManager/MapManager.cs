@@ -30,6 +30,8 @@ public class MapManager : MonoSingleton<MapManager>
 
     public Dictionary<int, List<GameObject>> diveList = new Dictionary<int, List<GameObject>>();
 
+    public Dictionary<int, List<HexCell>> diveLandList = new Dictionary<int, List<HexCell>>();
+
 
 
     // Start is called before the first frame update
@@ -383,8 +385,10 @@ public class MapManager : MonoSingleton<MapManager>
                         //地块下沉
                         if (options.Count <= 1)
                         {
-                            //TODO 地块下沉处理
                             MapSign cell = GetMapSignByXY(x, y);
+                            int time = int.Parse(options[i].Split('_')[1]);
+                            ADDLandDive(time, cell.GetComponent<HexCell>());
+
                         }
                         //出生点&终点下沉
                         else
@@ -407,7 +411,7 @@ public class MapManager : MonoSingleton<MapManager>
                         go.GetComponent<Building>().buildingId = index;
                         if (isItemMoveDown)
                         {
-                            //TODO 出生点下沉处理
+                            AddDive(moveTime, go);
                         }
                         break;
                     }
@@ -420,7 +424,7 @@ public class MapManager : MonoSingleton<MapManager>
                         go.transform.position = pos;
                         if (isItemMoveDown)
                         {
-                            //TODO 终点下沉处理
+                            AddDive( moveTime,go);
                         }
                         break;
                     }
@@ -451,6 +455,21 @@ public class MapManager : MonoSingleton<MapManager>
         go.SetActive(false);
     }
 
+    public void ADDLandDive(int time, HexCell cell)
+    {
+        if (diveLandList.ContainsKey(time))
+        {
+            diveLandList[time].Add(cell);
+        }
+        else
+        {
+            List<HexCell> list = new List<HexCell>();
+            list.Add(cell);
+            diveLandList.Add(time, list);
+        }
+        cell.Elevation = 0f;
+    }
+
 
     public void CheckDive(int time)
     {
@@ -458,9 +477,18 @@ public class MapManager : MonoSingleton<MapManager>
         {
             for (int i = 0; i < diveList[time].Count; i++)
             {
+                diveList[time][i].transform.position += new Vector3(0f, -2f, 0f);
                 diveList[time][i].SetActive(true);
             }
             diveList.Remove(time);
+        }
+        if (diveLandList.ContainsKey(time))
+        {
+            for (int i = 0; i < diveLandList[time].Count; i++)
+            {
+                diveLandList[time][i].ChangeElevationLerpUp(5, 0.2f,()=> { });
+            }
+            diveLandList.Remove(time);
         }
     }
 
