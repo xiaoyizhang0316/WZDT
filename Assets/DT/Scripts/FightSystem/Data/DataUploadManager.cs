@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<DataUploadManager>
 {
@@ -124,12 +125,22 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
         }
     }
 
+    private string sceneName = "";
     /// <summary>
     /// 添加NPC状态
     /// </summary>
     /// <param name="mapRole"></param>
     public void AddNpcRoleType(BaseMapRole mapRole)
     {
+        if (sceneName.Equals(""))
+        {
+            sceneName = SceneManager.GetActiveScene().name;
+        }
+
+        if (CommonParams.fteList.Contains(sceneName) || sceneName.Equals("FTE_1"))
+        {
+            return;
+        }
         if (!npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID))
         {
             npcRole.Add(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&", GetNpcStatus(mapRole));
@@ -206,6 +217,15 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     /// <param name="mapRole"></param>
     private void SetNpcRoleStatus(BaseMapRole mapRole, int status)
     {
+        if (sceneName.Equals(""))
+        {
+            sceneName = SceneManager.GetActiveScene().name;
+        }
+
+        if (CommonParams.fteList.Contains(sceneName) || sceneName.Equals("FTE_1"))
+        {
+            return;
+        }
         if (npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName + "&" + mapRole.baseRoleData.ID))
         {
             if (status == 3)
@@ -235,6 +255,15 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     /// <param name="end"></param>
     public void TradeOnNpc(string start, string end)
     {
+        if (sceneName.Equals(""))
+        {
+            sceneName = SceneManager.GetActiveScene().name;
+        }
+
+        if (CommonParams.fteList.Contains(sceneName) || sceneName.Equals("FTE_1"))
+        {
+            return;
+        }
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(start));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(end));
 
@@ -255,6 +284,15 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     /// <param name="mapRole"></param>
     public void OpenNPC(BaseMapRole mapRole)
     {
+        if (sceneName.Equals(""))
+        {
+            sceneName = SceneManager.GetActiveScene().name;
+        }
+
+        if (CommonParams.fteList.Contains(sceneName) || sceneName.Equals("FTE_1"))
+        {
+            return;
+        }
         SetNpcRoleStatus(mapRole, 0);
     }
 
@@ -264,6 +302,15 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     /// <param name="mapRole"></param>
     public void UnlockNpc(BaseMapRole mapRole)
     {
+        if (sceneName.Equals(""))
+        {
+            sceneName = SceneManager.GetActiveScene().name;
+        }
+
+        if (CommonParams.fteList.Contains(sceneName) || sceneName.Equals("FTE_1"))
+        {
+            return;
+        }
         SetNpcRoleStatus(mapRole,1);
     }
 
@@ -273,6 +320,15 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
     /// <param name="mapRole"></param>
     public void OpenNpcBuffs(BaseMapRole mapRole)
     {
+        if (sceneName.Equals(""))
+        {
+            sceneName = SceneManager.GetActiveScene().name;
+        }
+
+        if (CommonParams.fteList.Contains(sceneName) || sceneName.Equals("FTE_1"))
+        {
+            return;
+        }
         SetNpcRoleStatus(mapRole, 2);
     }
 

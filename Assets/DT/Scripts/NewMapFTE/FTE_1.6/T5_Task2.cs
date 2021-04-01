@@ -19,7 +19,8 @@ public class T5_Task2 : BaseGuideStep
     {
         if (!missiondatas.data[0].isFinish)
         {
-            if (NewCanvasUI.My.Panel_NPC.activeInHierarchy && NPCListInfo.My.currentNpc.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.SoftFactory)
+            if (NewCanvasUI.My.Panel_NPC.GetComponent<NPCListInfo>().commonServiceInfo.activeInHierarchy 
+                && NPCListInfo.My.currentNpc.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.SoftFactory)
             {
                 missiondatas.data[0].isFinish = true;
             }
