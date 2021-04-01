@@ -5,6 +5,7 @@ using UnityEngine;
 public class T8_1 : BaseGuideStep
 {
     public GameObject waveBG;
+
     // Start is called before the first frame update
   
 
