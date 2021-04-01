@@ -132,7 +132,7 @@ public class EditorMapManager : MapManager
                             cell.gameObject.GetComponent<EditorLandItem>().x = x;
                             cell.gameObject.GetComponent<EditorLandItem>().y = y;
                             cell.gameObject.GetComponent<EditorLandItem>().isUnder = true;
-                            cell.gameObject.GetComponent<EditorLandItem>().underTime =moveTime;
+                            cell.gameObject.GetComponent<EditorLandItem>().underTime = time;
                         }
                         else
                         {

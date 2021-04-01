@@ -727,10 +727,9 @@ public class StageGoal : MonoSingleton<StageGoal>
             }
             stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
         }
-
+        MapManager.My.CheckDive(timeCount);
         if (currentWave <= maxWaveNumber)
         {
-
             if (currentType != StageType.Normal)
             {
                 if (timeCount >= waitTimeList[currentWave - 1])
