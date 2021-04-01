@@ -727,10 +727,9 @@ public class StageGoal : MonoSingleton<StageGoal>
             }
             stageWaveText.text = (currentWave - 1).ToString() + "/" + maxWaveNumber.ToString();
         }
-
+        MapManager.My.CheckDive(timeCount);
         if (currentWave <= maxWaveNumber)
         {
-
             if (currentType != StageType.Normal)
             {
                 if (timeCount >= waitTimeList[currentWave - 1])
@@ -1090,6 +1089,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerGold = 100000;
             playerTechPoint = 20000;
             wudi = true;
+            ReadStageEnemyData(sceneName);
             SetInfoImmidiate();
             if(SceneManager.GetActiveScene().name.Equals("FTE_4.5"))
                 ReadStageEnemyData(sceneName);

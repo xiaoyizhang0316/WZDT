@@ -13,7 +13,7 @@ public class T6_1 : BaseGuideStep
     {
         StageGoal.My.playerTechPoint = 38;
         StageGoal.My.playerTechText.text = 38.ToString();
-        StageGoal.My.maxRoleLevel = 1;
+        StageGoal.My.maxRoleLevel = 3;
      
         RoleListManager.My.OutButton();
 

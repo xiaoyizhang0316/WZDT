@@ -479,6 +479,9 @@ public class GameEnum
         /// 假人10
         /// </summary>
         ConsumerModel10,
+        /// <summary>
+        /// 假人10
+        /// </summary>
         ConsumerModel11
     }
 

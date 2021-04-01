@@ -23,6 +23,11 @@ public class T6_5 : BaseGuideStep
     
     public override IEnumerator StepStart()
     {
+        T6Manager.My.sumSpor.SetActive(true);
+        T6Manager.My.sumSpor2.SetActive(true);
+        T6Manager.My.endPoint.SetActive(true);
+        T6Manager.My.endPoint2.SetActive(true);
+        NewCanvasUI.My.GameNormal();
         StageGoal.My.totalIncome = 0;
         StageGoal.My.totalCost = 0;
         var list = FindObjectsOfType<ConsumeSign>();
@@ -40,7 +45,7 @@ public class T6_5 : BaseGuideStep
                 .BornSingleTypeConsumer(type, count));
             Addxiaofei();
         }).Play();
-        NewCanvasUI.My.GamePause();
+        
 
         yield return new WaitForSeconds(1f);
 
