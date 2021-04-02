@@ -186,7 +186,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         Destroy(go, 1f);
     }
 
-
+    
     // Start is called before the first frame update
     public virtual void Start()
     {
