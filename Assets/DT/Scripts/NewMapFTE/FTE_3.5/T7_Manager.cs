@@ -273,7 +273,14 @@ public class T7_Manager : MonoSingleton<T7_Manager>
     private void ShowCountDown()
     {
         time_text.text = "剩余时间："+ time_remain;
-        time_panel.SetActive(true);
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeInHierarchy)
+        {
+            time_panel.SetActive(false);
+        }
+        else
+        {
+            time_panel.SetActive(true);
+        }
     }
 
     #endregion
