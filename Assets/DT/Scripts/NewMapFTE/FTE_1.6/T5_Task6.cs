@@ -47,6 +47,13 @@ public class T5_Task6 : BaseGuideStep
         {
             missiondatas.data[2].currentNum =
                 StageGoal.My.totalIncome - startIncome - StageGoal.My.totalCost + startCost;
+            if (missiondatas.data[2].currentNum <= -12000)
+            {
+                startCost = StageGoal.My.totalCost;
+                startIncome = StageGoal.My.totalIncome;
+                missiondatas.data[2].currentNum =
+                    StageGoal.My.totalIncome - startIncome - StageGoal.My.totalCost + startCost;
+            }
             if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
             {
                 missiondatas.data[2].isFinish = true;
