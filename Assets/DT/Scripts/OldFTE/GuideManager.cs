@@ -150,7 +150,11 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     {
         if (nextButton != null)
         {
-            nextButton.onClick.AddListener(() => { PlayNextIndexGuide(); });
+            nextButton.onClick.AddListener(() =>
+            {
+                Debug.Log("下一步");
+                PlayNextIndexGuide();
+            });
         }
 
         StartCoroutine(OriginalData.My.ReadFTETexts(SceneManager.GetActiveScene().name.Split('_')[1]));
@@ -213,6 +217,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
 
     public virtual void CloseFTE()
     {
+        Debug.Log("关闭教学");
         MissionManager.My.transform.localPosition = new Vector3(10000,0,0);
         ftegob.SetActive(false);
         currentGuideIndex = -1;
