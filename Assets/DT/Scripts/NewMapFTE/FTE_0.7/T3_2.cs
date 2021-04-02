@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Fungus;
 using UnityEngine;
 
 public class T3_2 : BaseGuideStep
@@ -53,8 +54,11 @@ public class T3_2 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        Panel.SetActive(false);
         yield return new WaitForSeconds(1);
+
+        Panel.SetActive(false);
+        Debug.Log("1"); 
+    
     }
  
 }
