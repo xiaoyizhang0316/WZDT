@@ -127,9 +127,14 @@ public class T2_Manager : MonoSingleton<T2_Manager>
     /// </summary>
     public void DeleteAllRole()
     {
+        List<double> roleID = new List<double>();
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
-            PlayerData.My.DeleteRole(PlayerData.My.MapRole[i].baseRoleData.ID);
+            roleID.Add(PlayerData.My.MapRole[i].baseRoleData.ID);
+        }
+        for (int i = 0; i < roleID.Count; i++)
+        {
+            PlayerData.My.DeleteRole(roleID[i]);
         }
     }
 
