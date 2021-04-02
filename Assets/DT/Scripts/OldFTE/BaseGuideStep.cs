@@ -203,7 +203,7 @@ public abstract class BaseGuideStep : MonoBehaviour
             MissionManager.My.ChangeTital(missionTitle);
         }
 
-        //Debug.Log("开始当前步骤"+GuideManager.My.currentGuideIndex);
+        Debug.Log("开始当前步骤"+GuideManager.My.currentGuideIndex);
         BaseTween[] temp = GetComponentsInChildren<BaseTween>();
         foreach (var VARIABLE in temp)
         {
@@ -257,6 +257,7 @@ public abstract class BaseGuideStep : MonoBehaviour
           
 
               StartCoroutine(PlayEnd());
+            
             }
             else if (GetComponentInChildren<VCR>() == null)
             {
@@ -290,7 +291,14 @@ public abstract class BaseGuideStep : MonoBehaviour
 
     public virtual IEnumerator PlayEnd()
     { 
+        Debug.Log("jinrushang");
+
         yield return StepEnd();
+        Debug.Log("jinru");
+        try
+        {
+
+      
         for (int i = 0; i < highLightCopyObj.Count; i++)
         {
             //Destroy(highLightCopyObj[i], 0f);
@@ -302,8 +310,14 @@ public abstract class BaseGuideStep : MonoBehaviour
             GuideManager.My.currentTaskEndTime = TimeStamp.GetCurrentTimeStamp();
             GuideManager.My.AddTaskTime(missionTitle);
         }
-        
+        Debug.Log("进入");
         GuideManager.My.PlayNextIndexGuide();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     public Action afterEntry;
