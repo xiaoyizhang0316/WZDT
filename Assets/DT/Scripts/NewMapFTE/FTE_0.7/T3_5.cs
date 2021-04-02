@@ -22,7 +22,7 @@ public class T3_5: BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        
+        time = StageGoal.My.timeCount;
          FTE_0_6Manager.My.UpRole( FTE_0_6Manager.My.dealerJC2);
         FTE_0_6Manager.My.UpRole( FTE_0_6Manager.My.dealerJC3);
         FTE_0_6Manager.My.UpRole( FTE_0_6Manager.My.dealerJC4);
