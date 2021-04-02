@@ -10,6 +10,7 @@ public  class FTE_Dialog : BaseGuideStep
     public override IEnumerator StepStart()
     {
         BeforeDialog();
+        NewCanvasUI.My.GamePause();
         dialog_obj.SetActive(true);
         yield return null;
     }
@@ -22,6 +23,7 @@ public  class FTE_Dialog : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         AfterDialog();
+        NewCanvasUI.My.GameNormal();
         yield return null;
     }
 
