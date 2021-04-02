@@ -71,6 +71,7 @@ public class T6_5 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
+        
         t.Kill();
         yield return new WaitForSeconds(2f);
 
@@ -78,6 +79,17 @@ public class T6_5 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+            
+        }
+
         if (StageGoal.My.totalIncome - StageGoal.My.totalCost < -12000)
         {
             StageGoal.My.totalIncome = 0;
