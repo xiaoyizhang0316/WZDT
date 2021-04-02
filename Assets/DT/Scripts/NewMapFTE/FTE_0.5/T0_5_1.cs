@@ -15,6 +15,7 @@ public class T0_5_1 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        NewCanvasUI.My.GamePause();
         dailog.SetActive(true);
         yield break;
         
@@ -22,6 +23,8 @@ public class T0_5_1 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
+        NewCanvasUI.My.GameNormal();
+
         dailog.SetActive(false);
         yield break;
 

@@ -52,7 +52,17 @@ public class T3_7: BaseGuideStep
   
     public override bool ChenkEnd()
     {
-         
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+            
+        }
+
       
         info.text = "剩余时间 : "+(shengyuTime- (StageGoal.My.timeCount-time)) +"  质监站1剩余："+(roleTargetCount-role.warehouse.Count)
                     +"           质监站2剩余："+(role1TargetCount-role1.warehouse.Count) +"           质监站3剩余："+(role2TargetCount-role2.warehouse.Count)

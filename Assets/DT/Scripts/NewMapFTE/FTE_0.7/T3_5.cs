@@ -22,7 +22,7 @@ public class T3_5: BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        
+        time = StageGoal.My.timeCount;
          FTE_0_6Manager.My.UpRole( FTE_0_6Manager.My.dealerJC2);
         FTE_0_6Manager.My.UpRole( FTE_0_6Manager.My.dealerJC3);
         FTE_0_6Manager.My.UpRole( FTE_0_6Manager.My.dealerJC4);
@@ -46,6 +46,18 @@ public class T3_5: BaseGuideStep
     
     public override bool ChenkEnd()
     {
+        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+            
+        }
+        
+
         if ((StageGoal.My.timeCount - time) % shengyuTime == 0)
         {
             role.warehouse.Clear();
