@@ -9,6 +9,7 @@ public class EditorLandItem : MonoBehaviour
 
     public int underTime;
 
+    public int startPos;
     public int x;
 
     public int y;
@@ -19,6 +20,12 @@ public class EditorLandItem : MonoBehaviour
     {
         x = sign.x;
         y = sign.y;
+    }
+
+    public void Update()
+    {
+        if(   GetComponent<HexCell>())
+      GetComponent<HexCell>().Elevation =   startPos ;
     }
 
     public virtual string GenerateSpecialOptionString()

@@ -74,15 +74,15 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     /// </summary>
     public void UnlockLand1()
     {
-        isLockFinish1 = true;
-        foreach (GameObject go in unlockLandList1)
-        {
-            go.SetActive(true);
-            float tempY = go.transform.position.y + 2f;
-            go.transform.DOMoveY(tempY, 1f).Play();
+   //  isLockFinish1 = true;
+   //  foreach (GameObject go in unlockLandList1)
+   //  {
+   //      go.SetActive(true);
+   //      float tempY = go.transform.position.y + 2f;
+   //      go.transform.DOMoveY(tempY, 1f).Play();
 
-        }
-        CameraPlay.EarthQuakeShake(2f, 10f, 1f);
+   //  }
+   //  CameraPlay.EarthQuakeShake(2f, 10f, 1f);
     }
 
     /// <summary>
@@ -90,15 +90,15 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     /// </summary>
     public void UnlockLand2()
     {
-        isLockFinish2 = true;
-        foreach (GameObject go in unlockLandList2)
-        {
-            go.SetActive(true);
-            float tempY = go.transform.position.y + 2f;
-            go.transform.DOMoveY(tempY, 1f).Play();
+     //  isLockFinish2 = true;
+     //  foreach (GameObject go in unlockLandList2)
+     //  {
+     //      go.SetActive(true);
+     //      float tempY = go.transform.position.y + 2f;
+     //      go.transform.DOMoveY(tempY, 1f).Play();
 
-        }
-        CameraPlay.EarthQuakeShake(2f, 10f, 1f);
+     //  }
+     //  CameraPlay.EarthQuakeShake(2f, 10f, 1f);
     }
 
     /// <summary>
@@ -106,16 +106,16 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     /// </summary>
     public void HideLande()
     {
-        foreach (GameObject go in unlockLandList1)
-        {
-            go.transform.position += new Vector3(0f, -2f, 0f);
-            go.SetActive(false);
-        }
-        foreach (GameObject go in unlockLandList2)
-        {
-            go.transform.position += new Vector3(0f, -2f, 0f);
-            go.SetActive(false);
-        }
+     //  foreach (GameObject go in unlockLandList1)
+     //  {
+     //      go.transform.position += new Vector3(0f, -2f, 0f);
+     //      go.SetActive(false);
+     //  }
+     //  foreach (GameObject go in unlockLandList2)
+     //  {
+     //      go.transform.position += new Vector3(0f, -2f, 0f);
+     //      go.SetActive(false);
+     //  }
     }
 
     /// <summary>
@@ -186,7 +186,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         Destroy(go, 1f);
     }
 
-
+    
     // Start is called before the first frame update
     public virtual void Start()
     {

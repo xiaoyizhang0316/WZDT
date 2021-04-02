@@ -14,6 +14,7 @@ public class HexCell : MonoBehaviour {
 	public HexGridChunk chunk;
 
 
+	
 	public void Start()
 	{
 MapSign sign = 	gameObject.AddComponent<MapSign>();
@@ -301,7 +302,7 @@ else
 
 	int terrainTypeIndex;
 
-	float elevation = int.MinValue;
+   public 	float elevation = int.MinValue;
 	int waterLevel;
 
 	int urbanLevel, farmLevel, plantLevel;
