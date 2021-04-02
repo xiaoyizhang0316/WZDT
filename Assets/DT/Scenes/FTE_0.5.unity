@@ -38,13 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1928102093}
-  m_IndirectSpecularColor: {r: 0.44918185, g: 0.49925268, b: 0.5757147, a: 1}
+  m_IndirectSpecularColor: {r: 0.44359484, g: 0.49290764, b: 0.5724811, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -3454,6 +3454,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 220762959}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &220762962 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2767942478710952530, guid: ee971e92e93a1aa45b2d4cc575ed405c,
+    type: 3}
+  m_PrefabInstance: {fileID: 220762959}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a334fe2ffb574b3583ff3b18b4792d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &225086939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13948,18 +13960,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1127364342}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1127364345 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2767942478710952530, guid: ee971e92e93a1aa45b2d4cc575ed405c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1127364342}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a334fe2ffb574b3583ff3b18b4792d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1129559889
 GameObject:
   m_ObjectHideFlags: 0
@@ -19083,7 +19083,7 @@ PrefabInstance:
     - target: {fileID: 1516250251314749416, guid: b007cb4251862914ab5ae61880611569,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1516250251314749416, guid: b007cb4251862914ab5ae61880611569,
         type: 3}
@@ -24305,7 +24305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 1127364345}
+  selectedFlowchart: {fileID: 220762962}
 --- !u!4 &1792123844
 Transform:
   m_ObjectHideFlags: 1
