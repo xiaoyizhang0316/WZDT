@@ -1089,7 +1089,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerGold = 100000;
             playerTechPoint = 20000;
             wudi = true;
-            ReadStageEnemyData(sceneName);
+            //ReadStageEnemyData(sceneName);
             SetInfoImmidiate();
             if(SceneManager.GetActiveScene().name.Equals("FTE_4.5"))
                 ReadStageEnemyData(sceneName);
