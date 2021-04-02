@@ -53,6 +53,7 @@ public class FTE_0_6Manager : MonoSingleton<FTE_0_6Manager>
         SetDeleteButton(false);
         InitRoleTradeButton();
         SetRoleInfoAddEquip(false);
+        RoleListManager.My.OutButton();
     }
 
     public void UpRole(GameObject role)
