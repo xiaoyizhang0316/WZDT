@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class T6_1 : BaseGuideStep
 {
-    
+    public int startTech;
     public GameObject roleImage;
 
     public GameObject red; 
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        StageGoal.My.playerTechPoint = 38;
-        StageGoal.My.playerTechText.text = 38.ToString();
+        /*StageGoal.My.playerTechPoint = startTech;
+        StageGoal.My.playerTechText.text = 38.ToString();*/
+        
+        StageGoal.My.GetTechPoint(startTech);
         StageGoal.My.maxRoleLevel = 3;
+        
      
         RoleListManager.My.OutButton();
 
