@@ -979,7 +979,7 @@ MonoBehaviour:
   indentLevel: 0
   conversationText:
     stringRef: {fileID: 0}
-    stringVal: "COO normal left: \u4E4B\u524D\u7684\u5185\u5BB9\u638C\u63E1\u5F97\u5F88\u597D\uFF01\nCOO
+    stringVal: "COO normal left: \u4E4B\u524D\u7684\u5185\u5BB9\u638C\u63E1\u5F97\u5F88\u597D\uFF0C\u4F46\u4F60\u4E5F\u6CE8\u610F\u5230\u4E86\uFF0C\u8FD9\u6B21\u7684\u6D88\u8D39\u8005\u6CA1\u4E4B\u524D\u90A3\u4E48\u5BB9\u6613\u88AB\u6EE1\u8DB3\u4E86\uFF01\u8FD9\u6B21\u7684\u57F9\u8BAD\u4F60\u5C31\u4F1A\u5B66\u5230\u5982\u4F55\u5E94\u5BF9\u8981\u6C42\u66F4\u9AD8\u7684\u6D88\u8D39\u8005\nCOO
       normal left: \u4E0B\u9762\u6211\u4EEC\u6B63\u5F0F\u5F00\u59CB\u672C\u6B21\u57F9\u8BAD\u3002\nCOO
       normal left: \u5BF9\u4E8E\u89D2\u8272\u548C\u4EA7\u54C1\u800C\u8A00\uFF0C\u662F\u6709\u597D\u574F\u7684\u533A\u522B\u7684\u3002\u89D2\u8272\u548C\u4EA7\u54C1\u7684\u597D\u574F\u4F53\u73B0\u5728\u76F8\u5173\u7684{color=yellow}\u5C5E\u6027{/color}\u4E0A\u3002\nCOO
       normal left: \u6211\u4EEC\u5148\u770B\u4E86\u89E3\u4E00\u4E0B\u5982\u4F55\u67E5\u770B\u89D2\u8272\u548C\u4EA7\u54C1\u7684{color=yellow}\u5C5E\u6027{/color}\u3002\n\nCOO
@@ -6850,6 +6850,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 63026580}
     m_Modifications:
+    - target: {fileID: 1415952970447466741, guid: b007cb4251862914ab5ae61880611569,
+        type: 3}
+      propertyPath: showTime
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1516250251314749416, guid: b007cb4251862914ab5ae61880611569,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25978,7 +25983,7 @@ MonoBehaviour:
   entryTime: 1
   missiondatas:
     data:
-    - content: "1.\u5411\u79CD\u5B50\u8D28\u76D1\u7AD9\u8FD0\u8F9310\u4E2A\u54C1\u8D28\u9AD8\u4E8E250\u7684\u79CD\u5B50"
+    - content: "1.\u5411\u79CD\u5B50\u8D28\u76D1\u7AD9\u8FD0\u8F9310\u4E2A\u54C1\u8D28\u9AD8\u4E8E350\u7684\u79CD\u5B50"
       currentNum: 0
       maxNum: 10
       isMainmission: 1
@@ -25986,7 +25991,7 @@ MonoBehaviour:
       isFail: 0
   missionTitle: "\u4EFB\u52A13\uFF1A\u4F18\u8D28\u7684\u79CD\u5B50"
   timeCount: 0
-  needQuality: 250
+  needQuality: 350
 --- !u!114 &1527468592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30587,7 +30592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 924990427}
+  selectedFlowchart: {fileID: 36126270}
 --- !u!4 &1792123844
 Transform:
   m_ObjectHideFlags: 1
@@ -89430,7 +89435,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.0000070778933, y: 0}
-  m_SizeDelta: {x: -151, y: 0}
+  m_SizeDelta: {x: -200, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &4070619681127560559
 GameObject:
@@ -89594,7 +89599,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.0000070778933, y: 0}
-  m_SizeDelta: {x: -151, y: 0}
+  m_SizeDelta: {x: -200, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &4070619681331476634
 GameObject:

@@ -1087,7 +1087,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerHealth = 1000;
             playerMaxHealth = 1000;
             playerGold = 100000;
-            playerTechPoint = 20000;
+            playerTechPoint = 0;
             wudi = true;
      
             SetInfoImmidiate();

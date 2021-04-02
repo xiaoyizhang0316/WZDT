@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class T8_1 : BaseGuideStep
 {
+    public int startTech;
     public GameObject waveBG;
 
     // Start is called before the first frame update
@@ -12,6 +13,7 @@ public class T8_1 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
+        StageGoal.My.GetTechPoint(startTech);
          yield return new WaitForSeconds(1);
     }
 
