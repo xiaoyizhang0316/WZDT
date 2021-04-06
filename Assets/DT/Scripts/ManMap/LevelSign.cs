@@ -352,7 +352,15 @@ public class LevelSign : MonoBehaviour
             
         }
         LevelButton.onClick.RemoveAllListeners();
-        LevelButton.onClick.AddListener(Init);
+        //LevelButton.onClick.AddListener(Init);
+        if (GetComponent<AnswerBeforeGame>())
+        {
+            LevelButton.onClick.AddListener(()=>GetComponent<AnswerBeforeGame>().OpenAnswerPanel(this));
+        }
+        else
+        {
+            LevelButton.onClick.AddListener(Init);
+        }
         //InitStarNeedText();
     }
 
@@ -370,7 +378,7 @@ public class LevelSign : MonoBehaviour
 
         stars = currentStar;
 
-        if (NetworkMgr.My.levelProgressList.Count >= 4 && NetworkMgr.My.playerDatas.threeWordsProgress == 1)
+        /*if (NetworkMgr.My.levelProgressList.Count >= 4 && NetworkMgr.My.playerDatas.threeWordsProgress == 1)
         {
             ThreeWordsPanel.My.OpenAnswerInputField();
             return;
@@ -380,7 +388,7 @@ public class LevelSign : MonoBehaviour
         {
             ThreeWordsPanel.My.OpenAnswerInputField();
             return;
-        }
+        }*/
 
         /*if (fte.Equals("0.5")&& NetworkMgr.My.levelProgressList.Count==0 && levelID==1)
         {
@@ -388,31 +396,108 @@ public class LevelSign : MonoBehaviour
             MapGuideManager.My.PlayCurrentIndexGuide();
         }*/
 
-        if ((lastStar.Equals("000")&& levelID!=1)||CheckLockLevel(fte)|| ! CheckUserLevel()||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
+        if (NetworkMgr.My.playerGroupInfo.isOpenLimitLevel)
         {
-            HideAllStars();
-            transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
-            transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
+            if (levelID <= NetworkMgr.My.playerGroupInfo.openLevel)
+            {
+                transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                if (currentStar[0] == '0')
+                {
+                    transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                }
+                if (currentStar[1] == '0')
+                {
+                    transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                }
+                if (currentStar[2] == '0')
+                {
+                    transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                }
+            }
+            else if (levelID <= NetworkMgr.My.playerGroupInfo.levelLimit)
+            {
+                if ((lastStar.Equals("000")&& levelID!=1)||CheckLockLevel(fte)|| ! CheckUserLevel()||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
+                {
+                    HideAllStars();
+                    transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
+                    transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
+                }
+                else
+                {
+                    transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                    if (currentStar[0] == '0')
+                    {
+                        transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (currentStar[1] == '0')
+                    {
+                        transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (currentStar[2] == '0')
+                    {
+                        transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                    }
+                }
+
+                if (levelID == NetworkMgr.My.playerGroupInfo.openLevel + 1)
+                {
+                    transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                    if (currentStar[0] == '0')
+                    {
+                        transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (currentStar[1] == '0')
+                    {
+                        transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                    }
+                    if (currentStar[2] == '0')
+                    {
+                        transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                    }
+                }
+            }
+            else
+            {
+                HideAllStars();
+                transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
+                transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
+            }
         }
         else
         {
-            transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
-            if (currentStar[0] == '0')
+            if ((lastStar.Equals("000")&& levelID!=1)||CheckLockLevel(fte)|| ! CheckUserLevel()||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
             {
-                transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                HideAllStars();
+                transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
+                transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
             }
-            if (currentStar[1] == '0')
+            else
             {
-                transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
-            }
-            if (currentStar[2] == '0')
-            {
-                transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                if (currentStar[0] == '0')
+                {
+                    transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                }
+                if (currentStar[1] == '0')
+                {
+                    transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                }
+                if (currentStar[2] == '0')
+                {
+                    transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                }
             }
         }
-        
         LevelButton.onClick.RemoveAllListeners();
-        LevelButton.onClick.AddListener(Init);
+        //LevelButton.onClick.AddListener(Init);
+        if (GetComponent<AnswerBeforeGame>())
+        {
+            LevelButton.onClick.AddListener(()=>GetComponent<AnswerBeforeGame>().OpenAnswerPanel(this));
+        }
+        else
+        {
+            LevelButton.onClick.AddListener(Init);
+        }
     }
 
     bool CheckLockLevel(string fte)

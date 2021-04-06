@@ -635,6 +635,10 @@ public class Building : MonoBehaviour
             for (int i = 0; i < count; i++)
             {
                 //yield return new WaitForSeconds(0.7f);
+                if (!bornFTE)
+                {
+                    yield  break;
+                }
                 ct = (ConsumerType)type;
                 string path = "Prefabs/Consumer/" + ct.ToString();
                 GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);

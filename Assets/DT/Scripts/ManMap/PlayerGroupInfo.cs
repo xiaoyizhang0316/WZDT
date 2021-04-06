@@ -16,4 +16,6 @@ public class PlayerGroupInfo
     public int levelLimit;
     public int outdateTime;
     public bool isOpenMatch;
+    public int openLevel;
+    public bool isOpenLimitLevel;
 }

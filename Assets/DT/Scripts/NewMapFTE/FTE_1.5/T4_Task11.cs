@@ -15,9 +15,10 @@ public class T4_Task11 : BaseGuideStep
     {
         startCost = StageGoal.My.totalCost;
         startIncome = StageGoal.My.totalIncome;
-        StartCoroutine(BornConsumer());
+        
         Check();
-        yield return null;
+        yield return new WaitForSeconds(1);
+        StartCoroutine(BornConsumer());
     }
 
     void Check()
