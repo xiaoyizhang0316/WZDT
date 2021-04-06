@@ -22,7 +22,7 @@ public class HideRect : MonoBehaviour, IPointerEnterHandler
 
     private void OnEnable()
     {
-        Debug.Log("enable exe");
+        //Debug.Log("enable exe");
         if (needMouseOn)
         {
             mouseOn = true;
@@ -32,10 +32,13 @@ public class HideRect : MonoBehaviour, IPointerEnterHandler
         InvokeRepeating("Check", 0, 0.5f);
     }
 
+    private int i = 0;
     void Check()
     {
+        //Debug.Log("check"+(i++));
         if (!mouseOn)
         {
+            //Debug.Log("hide"+(i++));
             Invoke("Hide", 2);
             CancelInvoke("Check");
         }
