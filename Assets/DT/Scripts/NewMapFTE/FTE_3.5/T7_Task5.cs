@@ -8,6 +8,8 @@ public class T7_Task5 : BaseGuideStep
     private int startIncome = 0;
     public override IEnumerator StepStart()
     {
+        startCost = StageGoal.My.totalCost;
+        startIncome = StageGoal.My.totalIncome;
         T7_Manager.My.leftKillNum = 0;
         T7_Manager.My.rightKillNum = 0;
         Check();
@@ -42,6 +44,12 @@ public class T7_Task5 : BaseGuideStep
         if (missiondatas.data[2].isFinish == false)
         {
             missiondatas.data[2].currentNum = GetCurrentIncome();
+            if (missiondatas.data[2].currentNum <= -12000)
+            {
+                startCost = StageGoal.My.totalCost;
+                startIncome = StageGoal.My.totalIncome;
+                missiondatas.data[2].currentNum = GetCurrentIncome();
+            }
             if (missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum)
             {
                 missiondatas.data[2].isFinish = true;
