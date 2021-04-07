@@ -22,8 +22,13 @@ public class NPC : BaseNpc
 
         if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
-            RoleFloatWindow.My.Init(transform, currentRole.baseRoleData.roleName,currentRole.baseRoleData.roleSkillType,currentRole.baseRoleData.roleType);
-            return;
+            if (currentRole.baseRoleData.roleName.Contains("质监站"))
+            {
+                RoleFloatWindow.My.Init(transform, currentRole.baseRoleData.roleName,currentRole.baseRoleData.roleSkillType,currentRole.baseRoleData.roleType);
+                return;
+            }
+            //RoleFloatWindow.My.Init(transform, currentRole.baseRoleData.roleName,currentRole.baseRoleData.roleSkillType,currentRole.baseRoleData.roleType);
+            //return;
         }
         if (!EventSystem.current.IsPointerOverGameObject())
         {
