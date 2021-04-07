@@ -97,7 +97,7 @@ public class NPC : BaseNpc
                     NPCListInfo.My.ShowNpcInfo(transform);
                 }
             }
-            else if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 3)
+            else if (float.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 2f)
             {
                 NPCListInfo.My.ShowHideTipPop("使用广角镜发现角色");
             }
