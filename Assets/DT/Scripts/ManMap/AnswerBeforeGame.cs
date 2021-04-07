@@ -54,7 +54,7 @@ public class AnswerBeforeGame : MonoBehaviour
                 }
                 else
                 {
-                    SceneManager.LoadScene(teachSceneName);
+                    levelSign?.Init();
                 }
             }
         }
