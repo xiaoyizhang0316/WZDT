@@ -11,7 +11,7 @@ public class T2_Dialog1 : FTE_Dialog
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
         T2_Manager.My.SetRoleMaxLevel();
-        T2_Manager.My.SetDeleteButton(false);
+        T2_Manager.My.SetDeleteButton(true);
         T2_Manager.My.SetClearWHButton(false);
         T2_Manager.My.SetUpdateButton(false);
         T2_Manager.My.SetEquipButton(false);
