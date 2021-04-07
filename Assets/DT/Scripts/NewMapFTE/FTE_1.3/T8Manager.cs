@@ -29,6 +29,8 @@ public class T8Manager : MonoSingleton<T8Manager>
         consumerPort2.SetActive(false);
         endPointPort1.SetActive(false);
         endPointPort2.SetActive(false);
+        PlayerData.My.playerGears.Clear();
+        PlayerData.My.playerWorkers.Clear();
     }
     public void CheckTasteKill(int index)
     {
