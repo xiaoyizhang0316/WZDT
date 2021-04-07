@@ -66,6 +66,8 @@ public class T4_Task10 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         CancelInvoke();
+        T4_Manager.My.StopBornConsumer();
+        T4_Manager.My.DeleteAllConsumer();
         yield return new WaitForSeconds(3);
     }
 }

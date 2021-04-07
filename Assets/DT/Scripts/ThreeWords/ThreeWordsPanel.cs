@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -44,8 +45,10 @@ public class ThreeWordsPanel : MonoSingleton<ThreeWordsPanel>
         //}
     }
 
-    public void OpenAnswerInputField()
+    private Action doEnd;
+    public void OpenAnswerInputField(Action submitEnd=null)
     {
+        doEnd = submitEnd;
         thisPanel.SetActive(true);
         SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
     }
@@ -141,10 +144,11 @@ public class ThreeWordsPanel : MonoSingleton<ThreeWordsPanel>
             NetworkMgr.My.SetPlayerStatus("Map", "");
             SceneManager.LoadScene("Map");
         }
+        doEnd?.Invoke();
     }
 
     private void SubmitFail()
     {
-
+        
     }
 }
