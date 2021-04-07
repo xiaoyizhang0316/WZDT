@@ -77,7 +77,7 @@ public class T8_5 : BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        Info.text = "当前利润"+(StageGoal.My.totalIncome - StageGoal.My.totalCost)+"---目标利润"+14000 ;
+     
         missiondatas.data[0].currentNum = T8Manager.My.packageKillNum;
         missiondatas.data[0].currentNum =  T8Manager.My.saleKillNum;
 
@@ -103,7 +103,8 @@ public class T8_5 : BaseGuideStep
             StageGoal.My.totalCost = 0;
         }
 
-        if (StageGoal.My.totalIncome - StageGoal.My.totalCost > 14000&&  missiondatas.data[0].isFinish&&  missiondatas.data[1].isFinish)
+        missiondatas.data[2].currentNum = StageGoal.My.totalIncome - StageGoal.My.totalCost;
+        if (  missiondatas.data[2].currentNum >= missiondatas.data[2].maxNum&&  missiondatas.data[0].isFinish&&  missiondatas.data[1].isFinish)
         {
             return true;
         }

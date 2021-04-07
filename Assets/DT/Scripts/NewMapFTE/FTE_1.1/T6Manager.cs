@@ -15,12 +15,15 @@ public class T6Manager : MonoSingleton<T6Manager>
     // Start is called before the first frame update
     void Start()
     {
-        npcnong.gameObject.SetActive(true);
+        npcnong.gameObject.SetActive(false);
         npcDealer.gameObject.SetActive(false);
         sumSpor.gameObject.SetActive(false);
         sumSpor2.gameObject.SetActive(false);
         endPoint.gameObject.SetActive(false);
         endPoint2.gameObject.SetActive(false);
+        PlayerData.My.playerGears.Clear();
+        PlayerData.My.playerWorkers.Clear();
+        
     }
 
     // Update is called once per frame
