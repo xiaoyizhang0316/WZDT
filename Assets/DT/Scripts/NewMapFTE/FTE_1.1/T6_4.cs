@@ -25,16 +25,7 @@ public class T6_4: BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        if (NewCanvasUI.My.Panel_AssemblyRole.activeSelf)
-        {
-            transform.GetChild(0).gameObject.SetActive(false);
-        }
-
-        else
-        {
-            transform.GetChild(0).gameObject.SetActive(true);
-            
-        }
+        
 
         if ( T6Manager.My.npcDealer.GetComponent<NPC>().isCanSee)
         {
