@@ -20,11 +20,11 @@ public class NPC : BaseNpc
     private void OnMouseOver()
     {
 
-        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
-        {
-            RoleFloatWindow.My.Init(transform, currentRole.baseRoleData.roleName,currentRole.baseRoleData.roleSkillType,currentRole.baseRoleData.roleType);
-            return;
-        }
+        //if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
+        //{
+        //    RoleFloatWindow.My.Init(transform, currentRole.baseRoleData.roleName,currentRole.baseRoleData.roleSkillType,currentRole.baseRoleData.roleType);
+        //    return;
+        //}
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (isCanSee)
