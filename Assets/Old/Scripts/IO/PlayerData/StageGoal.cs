@@ -1310,7 +1310,8 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 if (Input.GetKeyDown(KeyCode.Y))
                 {
-                    Win(true);
+                    if(!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
+                        Win(true);
                 }
             }
             //if (Input.GetKeyDown(KeyCode.M))
