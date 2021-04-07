@@ -293,7 +293,7 @@ public class LoginPanel : MonoBehaviour
                 //{
                 //    //TODO 创建个人信息
                 //}else 
-                if (NetworkMgr.My.playerDatas.threeWordsProgress == 0)
+                /*if (NetworkMgr.My.playerDatas.threeWordsProgress == 0)
                 {
                     // 第一个问题
                     threeWordsPanel.GetComponent<ThreeWordsPanel>().SetQuesion(Questions.questions[NetworkMgr.My.playerDatas.threeWordsProgress]);
@@ -301,7 +301,7 @@ public class LoginPanel : MonoBehaviour
                     gameObject.SetActive(false);
                 }
                 else
-                {
+                {*/
                     /*if(NetworkMgr.My.playerDatas.fteProgress == -2)
                     {
                         NetworkMgr.My.SetPlayerStatus("FTE_0-1", "");
@@ -321,7 +321,7 @@ public class LoginPanel : MonoBehaviour
                         SceneManager.LoadScene("Map");
                     }*/
 
-                    if (NetworkMgr.My.playerDatas.fte.Equals("0"))
+                    /*if (NetworkMgr.My.playerDatas.fte.Equals("0"))
                     {
                         if (NetworkMgr.My.playerDatas.fteProgress > 0)
                         {
@@ -335,11 +335,11 @@ public class LoginPanel : MonoBehaviour
                         }
                         
                     }else
-                    {
+                    {*/
                         NetworkMgr.My.SetPlayerStatus("Map", "");
                         SceneManager.LoadScene("Map");
-                    }
-                }
+                    /*}*/
+                /*}*/
                 
                 SaveAccount(username, password);
             }

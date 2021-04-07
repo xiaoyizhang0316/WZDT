@@ -687,7 +687,9 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             }
             if (response.status == 0)
             {
-                HttpManager.My.ShowTip(response.errMsg);
+                //HttpManager.My.ShowTip(response.errMsg);
+                Debug.Log("no answer");
+                currentAnswer = "";
                 doFail?.Invoke();
             }
             else

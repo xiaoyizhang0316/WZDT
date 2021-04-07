@@ -58,7 +58,7 @@ public class MainMap : MonoBehaviour
         OriginalData.My.ReadRoleTemplateJson();
     }
 
-    private void GetGroupInfos()
+    private void GetGroupInfos(Action doEnd=null)
     {
         NetworkMgr.My.GetPlayerGroupInfo(() => {
             if (NetworkMgr.My.playerGroupInfo.outdateTime < TimeStamp.GetCurrentTimeStamp() && NetworkMgr.My.playerGroupInfo.outdateTime != 0)
@@ -92,6 +92,7 @@ public class MainMap : MonoBehaviour
             {
                 lastLevel.InitLevel(false, "");
             }
+            doEnd?.Invoke();
         });
     }
 
@@ -238,10 +239,18 @@ public class MainMap : MonoBehaviour
             if (level == 1)
             {
                 ls.InitLevel(GetStar(level), "");
+                if (ls.GetComponent<AnswerBeforeGame>())
+                {
+                    ls.GetComponent<Button>().onClick.AddListener(()=>ls.GetComponent<AnswerBeforeGame>().OpenAnswerPanel());
+                }
             }
             else
             {
                 ls.InitLevel(GetStar(level), GetStar(level - 1));
+                if (ls.GetComponent<AnswerBeforeGame>())
+                {
+                    ls.GetComponent<Button>().onClick.AddListener(()=>ls.GetComponent<AnswerBeforeGame>().OpenAnswerPanel());
+                }
             }
         }
         GetGroupInfos();
@@ -250,21 +259,24 @@ public class MainMap : MonoBehaviour
 
     void InitNewLevel()
     {
-        string fte = GetFTEProgress();
-        foreach(var ls in levelSigns)
+        
+        GetGroupInfos(() =>
         {
-            //int level = int.Parse( ls.loadScene.Split('_')[1]);
-            int level = ls.levelID;
-            if (level == 1)
+            string fte = GetFTEProgress();
+            foreach(var ls in levelSigns)
             {
-                ls.InitNewLevel(GetStar(level), "", fte);
+                //int level = int.Parse( ls.loadScene.Split('_')[1]);
+                int level = ls.levelID;
+                if (level == 1)
+                {
+                    ls.InitNewLevel(GetStar(level), "", fte);
+                }
+                else
+                {
+                    ls.InitNewLevel(GetStar(level), GetStar(level - 1),fte);
+                }
             }
-            else
-            {
-                ls.InitNewLevel(GetStar(level), GetStar(level - 1),fte);
-            }
-        }
-        GetGroupInfos();
+        });
     }
 
     string GetFTEProgress()
@@ -289,16 +301,36 @@ public class MainMap : MonoBehaviour
                 break;
         }*/
 
-        fte = NetworkMgr.My.levelProgressList.Count.ToString();
-
-        if (float.Parse(NetworkMgr.My.playerDatas.fte.Equals("")?"0":NetworkMgr.My.playerDatas.fte) < float.Parse(fte))
+        if (NetworkMgr.My.playerGroupInfo.isOpenLimitLevel)
         {
-            NetworkMgr.My.UpdatePlayerFTE(fte);
+            fte = NetworkMgr.My.levelProgressList.Count.ToString();
+            if (float.Parse(NetworkMgr.My.playerDatas.fte) < 4.5f)
+            {
+                fte = NetworkMgr.My.playerDatas.fte;
+            }
+            else
+            {
+                if (float.Parse(fte) < float.Parse(NetworkMgr.My.playerDatas.fte))
+                {
+                    fte = NetworkMgr.My.playerDatas.fte;
+                }
+            }
         }
         else
         {
-            fte = NetworkMgr.My.playerDatas.fte;
+            fte = NetworkMgr.My.levelProgressList.Count.ToString();
+
+            if (float.Parse(NetworkMgr.My.playerDatas.fte.Equals("")?"0":NetworkMgr.My.playerDatas.fte) < float.Parse(fte))
+            {
+                NetworkMgr.My.UpdatePlayerFTE(fte);
+            }
+            else
+            {
+                fte = NetworkMgr.My.playerDatas.fte;
+            }
         }
+
+        
 
         //InitFTELevel(fte);
         InitNewFTELevel(fte);
@@ -434,13 +466,15 @@ public class MainMap : MonoBehaviour
         if (isLock)
         {
             level.GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
-            level.GetComponent<ToScene>().enabled = false;
+            if(level.GetComponent<ToScene>())
+                level.GetComponent<ToScene>().enabled = false;
             level.GetComponent<Button>().enabled = false;
         }
         else
         {
             level.GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
-            level.GetComponent<ToScene>().enabled = true;
+            if(level.GetComponent<ToScene>())
+                level.GetComponent<ToScene>().enabled = true;
             level.GetComponent<Button>().enabled = true;
         }
     }
