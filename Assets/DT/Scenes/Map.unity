@@ -7576,6 +7576,7 @@ GameObject:
   - component: {fileID: 486089218}
   - component: {fileID: 486089217}
   - component: {fileID: 486089216}
+  - component: {fileID: 486089220}
   m_Layer: 5
   m_Name: Teach1
   m_TagString: Untagged
@@ -7610,7 +7611,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486089214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7734e9ad89394eb8a26ce7fbd62ea72, type: 3}
   m_Name: 
@@ -7695,6 +7696,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486089214}
   m_CullTransparentMesh: 0
+--- !u!114 &486089220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486089214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0619a4ffc81eb4e8188ba01efe70d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  answerID: 1
+  isOpenBeforeTeachLevel: 1
+  teachSceneName: FTE_0.5
 --- !u!1 &487697619
 GameObject:
   m_ObjectHideFlags: 0
