@@ -147,6 +147,7 @@ public class MapManager : MonoSingleton<MapManager>
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/NPC/" + npc.roleType));
         go.transform.SetParent(GameObject.Find("Role").transform);
         go.transform.position = GetMapSignByXY(npc.posX, npc.posY).transform.position + new Vector3(0f, 0f, 0f);
+        SetLand(npc.posX, npc.posY, go.GetComponent<BaseMapRole>());
         go.GetComponent<BaseMapRole>().posX = npc.posX;
         go.GetComponent<BaseMapRole>().posY = npc.posY;
         SetNPCAttribute(go,npc);
