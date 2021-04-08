@@ -4,29 +4,6 @@ using UnityEngine;
 
 public class GameEnum
 {
-    public enum ProductType
-    {
-        /// <summary>
-        /// 种子
-        /// </summary>
-        Seed,
-
-        /// <summary>
-        /// 瓜
-        /// </summary>
-        Melon,
-
-        /// <summary>
-        /// 腐烂的瓜
-        /// </summary>
-        DecayMelon,
-
-        /// <summary>
-        /// 无
-        /// </summary>
-        None,
-    }
-
     public enum RoleType
     {
         /// <summary>
@@ -201,50 +178,6 @@ public class GameEnum
         Solution
     }
 
-    public enum SkillLastingType
-    {
-        /// <summary>
-        /// 按次的
-        /// </summary>
-        Once,
-
-        /// <summary>
-        /// 持续性的
-        /// </summary>
-        Lasting
-    }
-
-    public enum TradeDestinationType
-    {
-        /// <summary>
-        /// 仓库
-        /// </summary>
-        Warehouse,
-
-        /// <summary>
-        /// 输入口
-        /// </summary>
-        Import
-    }
-
-    public enum SZFSType
-    {
-        /// <summary>
-        /// 固定
-        /// </summary>
-        固定,
-
-        /// <summary>
-        /// 剩余
-        /// </summary>
-        剩余,
-
-        /// <summary>
-        /// 分成
-        /// </summary>
-        分成
-    }
-
     public enum CashFlowType
     {
         /// <summary>
@@ -256,20 +189,6 @@ public class GameEnum
         /// 后钱
         /// </summary>
         后钱
-    }
-
-    public enum ConfirmOrderType
-    {
-        /// <summary>
-        /// 删除角色
-        /// </summary>
-        DeleteRole,
-
-        /// <summary>
-        /// 删除交易
-        /// </summary>
-        DeleteTrade
-
     }
 
     public enum MapType
@@ -318,39 +237,6 @@ public class GameEnum
         /// 消费者终点
         /// </summary>
         End
-    }
-
-    public enum BuildingType
-    {
-        /// <summary>
-        /// 住宅
-        /// </summary>
-        Residential,
-
-        /// <summary>
-        /// 平房
-        /// </summary>
-        Bungalow,
-
-        /// <summary>
-        /// 写字楼
-        /// </summary>
-        Office,
-
-        /// <summary>
-        /// 别墅
-        /// </summary>
-        Villa,
-
-        /// <summary>
-        /// 占位符1
-        /// </summary>
-        BuildingType1,
-
-        /// <summary>
-        /// 占位符2
-        /// </summary>
-        BuildingType2
     }
 
     public enum ConsumerType
@@ -671,6 +557,22 @@ public class GameEnum
         Boss,
 
         Turn
+    }
+
+    public enum StageSpecialType
+    {
+        /// <summary>
+        /// 交易自动设置正确
+        /// </summary>
+        TradeAlwaysRight,
+        /// <summary>
+        /// 放角色不耗Mega值
+        /// </summary>
+        RoleNoMega,
+        /// <summary>
+        /// 删除角色永远返还Mega值
+        /// </summary>
+        DeleteAlwaysReturnMega
     }
 
     public enum CursorType

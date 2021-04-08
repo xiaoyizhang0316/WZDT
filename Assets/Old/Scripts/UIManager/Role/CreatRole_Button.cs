@@ -23,8 +23,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public RoleType type;
 
-    public GameObject portalPrb;
-
     public GameObject dustPrb;
 
     public Text techCost;
@@ -42,8 +40,17 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
     // Start is called before the first frame update
     void Start()
     {
-        costTech = GameDataMgr.My.GetModelData(type, 1).costTech;
-        dragImg = transform.Find("Image").GetComponent<Image>();
+        if (BaseLevelController.My.stageSpecialTypes.Contains(StageSpecialType.RoleNoMega))
+        {
+            costTech = 0;
+            techCost.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            costTech = GameDataMgr.My.GetModelData(type, 1).costTech;
+            dragImg = transform.Find("Image").GetComponent<Image>();
+        }
+
     }
 
     public void ReadCostTech(int cost = -1)
@@ -177,7 +184,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
                 break;
         }
-
         role = Instantiate(RolePrb, NewCanvasUI.My.RoleTF.transform);
         role.name = tempRole.ID.ToString();
         role.GetComponent<BaseMapRole>().baseRoleData = new Role();
@@ -200,7 +206,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 return;
             }
         }
-
         if (Input.GetMouseButton(1))
             return;
         if (role == null)
@@ -220,11 +225,11 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                 int x =currentCell.GetComponent<MapSign>().x;
                 int y = currentCell.GetComponent<MapSign>().y;
                 if (MapManager.My.CheckLandAvailable(x, y) &&
-                    StageGoal.My.CostTechPoint(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech))
+                    StageGoal.My.CostTechPoint(costTech))
                 {
                     print("true ");
                     role.GetComponent<BaseMapRole>().putTime = StageGoal.My.timeCount;
-                    StageGoal.My.CostTp(role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.costTech,
+                    StageGoal.My.CostTp(costTech,
                         CostTpType.Build);
                     role.transform.position =currentCell.Position + new Vector3(0f, 2f, 0f);
                     role.transform.DOMove(currentCell.Position + new Vector3(0f, 0f, 0f), 0.2f).OnComplete(() =>
@@ -241,7 +246,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                                         }).timeScale = 1f / DOTween.timeScale;
                                 }).Play().timeScale = 1f / DOTween.timeScale;
                         }).SetEase(Ease.Linear).Play().timeScale = 1f / DOTween.timeScale;
-
+                    role.GetComponent<BaseMapRole>().costTechPoint = costTech;
                     role.GetComponent<BaseMapRole>().baseRoleData.inMap = true;
                     PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
@@ -257,24 +262,11 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                         role.GetComponent<BaseMapRole>().startEncourageLevel += 2;
                         role.GetComponent<BaseMapRole>().encourageLevel += 2;
                     }
-
-                    if (PlayerData.My.dingWei[1])
-                    {
-                        if (currentCell.GetComponent<MapSign>().isNearWater)
-                        {
-                            var buff = GameDataMgr.My.GetBuffDataByID(10012);
-                            BaseBuff baseb = new BaseBuff();
-                            baseb.Init(buff);
-                            baseb.SetRoleBuff(null, role.GetComponent<BaseMapRole>(), role.GetComponent<BaseMapRole>());
-                        }
-                    }
-
                     if (!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name)
                     )
                     {
                         BaseLevelController.My.CountPutRole(role.GetComponent<BaseMapRole>().baseRoleData);
                     }
-
                     PlayerData.My.RoleCountStatic(role.GetComponent<BaseMapRole>(), 1);
                     CreateRoleOperationRecord(role.GetComponent<BaseMapRole>());
                     if (!PlayerData.My.isSOLO)

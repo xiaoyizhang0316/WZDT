@@ -232,13 +232,13 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         }
 
         darkEffect._darkColor = new Color(1, 1, 1, 0);
-        foreach (var VARIABLE in MapManager.My._mapSigns)
-        {
-            if (VARIABLE.mapType == GameEnum.MapType.Grass && VARIABLE.baseMapRole == null)
-            {
-                VARIABLE.isCanPlace = true;
-            }
-        }
+        // foreach (var VARIABLE in MapManager.My._mapSigns)
+        // {
+        //     if (VARIABLE.GetComponent<HexCell>().TerrainTypeIndex == 1)
+        //     {
+        //         VARIABLE.isCanPlace = true;
+        //     }
+        // }
 
         if (SceneManager.GetActiveScene().name.Equals("FTE_1"))
         {
