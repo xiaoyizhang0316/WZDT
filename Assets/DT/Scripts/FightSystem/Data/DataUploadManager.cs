@@ -234,7 +234,7 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
             if (status == 3)
             {
                 string[] statusArr = npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID].Split(',');
-                statusArr[statusArr.Length - 1] = "1";
+                statusArr[3] = "1";
                 npcRole[mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID] =
                     statusArr[0] + "," + statusArr[1] + "," + statusArr[2]+","+statusArr[3]+","+statusArr[4];
             }
