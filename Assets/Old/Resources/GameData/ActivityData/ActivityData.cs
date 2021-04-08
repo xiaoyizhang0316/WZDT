@@ -18,16 +18,6 @@ public class ActivityData : ScriptableObject
     public string activityName;
 
     /// <summary>
-    /// 输入产品种类
-    /// </summary>
-    public ProductType inputProduct;
-
-    /// <summary>
-    /// 输出产品种类
-    /// </summary>
-    public ProductType outputProduct;
-
-    /// <summary>
     /// 产能加成
     /// </summary>
     public float capacityAdd;

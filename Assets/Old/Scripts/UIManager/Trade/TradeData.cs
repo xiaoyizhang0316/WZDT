@@ -28,11 +28,6 @@ public class TradeData
     public string targetRole;
 
     /// <summary>
-    /// 选择的收支方式
-    /// </summary>
-    public SZFSType selectSZFS;
-
-    /// <summary>
     /// 选择的现金流结构
     /// </summary>
     public CashFlowType selectCashFlow;

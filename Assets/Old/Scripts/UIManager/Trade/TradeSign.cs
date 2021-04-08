@@ -60,7 +60,6 @@ public class TradeSign : MonoBehaviour
         tradeData.isFree = false;
         tradeData.castRole = start;
         tradeData.targetRole = end;
-        tradeData.selectSZFS = SZFSType.固定;
         tradeData.selectCashFlow = CashFlowType.先钱;
         tradeData.dividePercent = 0;
         startPer = 1f;
@@ -72,8 +71,7 @@ public class TradeSign : MonoBehaviour
                 tradeData.selectCashFlow = CashFlowType.后钱;
             }
         }
-
-        if (SceneManager.GetActiveScene().name.Equals("FTE_1.5"))
+        if (BaseLevelController.My.stageSpecialTypes.Contains(StageSpecialType.TradeAlwaysRight))
         {
             if (!isTradeSettingBest())
             {

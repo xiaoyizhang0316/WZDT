@@ -17,7 +17,6 @@ public class BaseMapRole : MonoBehaviour
     /// <summary>
     /// 仓库
     /// </summary>
-    
     public List<ProductData> warehouse;
 
     public List<ProductData> trash = new List<ProductData>();
@@ -69,31 +68,7 @@ public class BaseMapRole : MonoBehaviour
 
     public int putTime;
 
-    #region UI显示信息
-
-    public float totalProfit;
-
-    public float monthlyProfit;
-
-    public float totalSatisfy;
-
-    public float monthlySatisfy;
-
-    public float totalCost;
-
-    public float rentCost;
-
-    public float operationCost;
-
-    public float activityCost;
-
-    public float tradeCost;
-
-    #endregion
-    /// <summary>
-    /// 商店   最多不能多于  baseroleData.counter
-    /// </summary>
-    public List<ProductData> shop;
+    public int costTechPoint;
 
     public GameObject tradeButton;
 
@@ -342,6 +317,7 @@ public class BaseMapRole : MonoBehaviour
         float maxDis = 0f;
         for (int i = 0; i < shootTargetList.Count; i++)
         {
+            
             if (shootTargetList[i] == null)
             {
                 shootTargetList.RemoveAt(i);
@@ -628,25 +604,6 @@ public class BaseMapRole : MonoBehaviour
 
         warehouse.Add(productData);
         //Input.Remove(productData);
-    }
-
-    /// <summary>
-    /// 将仓库产品输入到商店
-    /// </summary>
-    /// <param name="productData"></param>
-    public void ShiftProductWarehouseToShop(ProductData productData)
-    {
-        shop.Add(productData);
-        //        Debug.Log(warehouse.Count);
-        // Debug.Log(warehouse.Contains(productData));
-        if (baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
-        {
-            //todo
-            //  productData.Quality += (int)(baseRoleData.quality * 0.2f);
-            //   productData.Brand += (int)(baseRoleData.brand * 0.2f);
-        }
-        warehouse.Remove(productData);
-        //Debug.Log(warehouse.Count);
     }
 
     #endregion

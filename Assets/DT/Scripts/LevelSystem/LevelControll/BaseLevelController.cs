@@ -5,6 +5,7 @@ using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static GameEnum;
 
 public class BaseLevelController : MonoSingleton<BaseLevelController>
 {
@@ -42,18 +43,6 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     public int putRoleNumber = 0;
 
-    public List<GameObject> unlockLandList1 = new List<GameObject>();
-
-    public List<GameObject> unlockLandList2 = new List<GameObject>();
-
-    public int unlockTime1;
-
-    public int unlockTime2;
-
-    private bool isLockFinish1 = false;
-
-    private bool isLockFinish2 = false;
-
     public Vector3 newCameraPos;
 
     public Vector3 newCameraRot;
@@ -69,54 +58,8 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     public string winkey3;
 
     public bool tradeCostMoney;
-    /// <summary>
-    /// 改变地形
-    /// </summary>
-    public void UnlockLand1()
-    {
-   //  isLockFinish1 = true;
-   //  foreach (GameObject go in unlockLandList1)
-   //  {
-   //      go.SetActive(true);
-   //      float tempY = go.transform.position.y + 2f;
-   //      go.transform.DOMoveY(tempY, 1f).Play();
 
-   //  }
-   //  CameraPlay.EarthQuakeShake(2f, 10f, 1f);
-    }
-
-    /// <summary>
-    /// 改变地形
-    /// </summary>
-    public void UnlockLand2()
-    {
-     //  isLockFinish2 = true;
-     //  foreach (GameObject go in unlockLandList2)
-     //  {
-     //      go.SetActive(true);
-     //      float tempY = go.transform.position.y + 2f;
-     //      go.transform.DOMoveY(tempY, 1f).Play();
-
-     //  }
-     //  CameraPlay.EarthQuakeShake(2f, 10f, 1f);
-    }
-
-    /// <summary>
-    /// 开始隐藏地形
-    /// </summary>
-    public void HideLande()
-    {
-     //  foreach (GameObject go in unlockLandList1)
-     //  {
-     //      go.transform.position += new Vector3(0f, -2f, 0f);
-     //      go.SetActive(false);
-     //  }
-     //  foreach (GameObject go in unlockLandList2)
-     //  {
-     //      go.transform.position += new Vector3(0f, -2f, 0f);
-     //      go.SetActive(false);
-     //  }
-    }
+    public List<StageSpecialType> stageSpecialTypes = new List<StageSpecialType>();
 
     /// <summary>
     /// 统计击杀数量
@@ -201,7 +144,6 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         InvokeRepeating("CheckStarThree", 0f, 1f);
         InvokeRepeating("CheckStarOne", 0f, 1f);
         InvokeRepeating("UpdateInfo", 0.1f, 1f);
-        HideLande();
         if (!PlayerData.My.isSOLO && !PlayerData.My.isServer)
         {
             string str = "OnGameReady|1";
@@ -236,14 +178,6 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     private void Update()
     {
-        if (!isLockFinish1 && unlockTime1 <= StageGoal.My.timeCount && unlockTime1 > 0)
-        {
-            UnlockLand1();
-        }
-        if (!isLockFinish2 && unlockTime2 <= StageGoal.My.timeCount && unlockTime2 > 0 )
-        {
-            UnlockLand2();
-        }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             if (Input.GetMouseButtonDown(0))
