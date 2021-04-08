@@ -226,12 +226,18 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         BaseMapRole mapRole = GetMapRoleById(roleId);
         TradeManager.My.DeleteRoleAllTrade(roleId);
         List<string> sceneList = new List<string>() { "FTE_3.5" ,"FTE_2.5", "FTE_4.5" };
-        if (StageGoal.My.timeCount - mapRole.putTime <= 5)
-            StageGoal.My.GetTechPoint(target.baseRoleData.costTech);
-        else if (sceneList.Contains(SceneManager.GetActiveScene().name))
+        if (BaseLevelController.My.stageSpecialTypes.Contains(StageSpecialType.DeleteAlwaysReturnMega))
         {
-            StageGoal.My.GetTechPoint(target.baseRoleData.costTech);
+            StageGoal.My.GetTechPoint(mapRole.costTechPoint);
         }
+        else if (StageGoal.My.timeCount - mapRole.putTime <= 5)
+        {
+            StageGoal.My.GetTechPoint(mapRole.costTechPoint);
+        }
+        // else if (sceneList.Contains(SceneManager.GetActiveScene().name))
+        // {
+        //     StageGoal.My.GetTechPoint(target.baseRoleData.costTech);
+        // }
         if (guanJianZiYuanNengLi[2])
         {
             if (StageGoal.My.timeCount - mapRole.putTime > 5)

@@ -73,7 +73,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public StatItemDatasList statItemDatasList = new StatItemDatasList();
 
     #region UI
-
+    
     public Text playerGoldText;
 
     public Text playerSatisfyText;
@@ -175,8 +175,6 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public WaveCount waveCountItem;
 
-    public Color tipColor;
-
     public int maxRoleLevel = 5;
 
     public GameObject lankuang;
@@ -205,19 +203,17 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
-
             playerGold -= num;
             if(!isNotTurn)
                 UpdateTurnCost(num);
         }
-        //if(isShow)
         FloatInfoManager.My.MoneyChange(0 - num);
         if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
             {
                 isOverMaxMinus = true;
-                AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
+                AudioManager.My.PlaySelectType(AudioClipType.MinusMoney);
                 DataUploadManager.My.AddData(DataEnum.赤字次数);
             }
             foreach (BaseMapRole role in PlayerData.My.MapRole)
@@ -353,12 +349,12 @@ public class StageGoal : MonoSingleton<StageGoal>
             if (!isOverMaxMinus)
             {
                 isOverMaxMinus = true;
-                AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MinusMoney);
+                AudioManager.My.PlaySelectType(AudioClipType.MinusMoney);
                 DataUploadManager.My.AddData(DataEnum.赤字次数);
             }
             foreach (BaseMapRole role in PlayerData.My.MapRole)
             {
-                if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
+                if (role.baseRoleData.baseRoleData.roleType == RoleType.Seed)
                 {
                     role.GetComponent<BaseSkill>().CancelSkill();
                 }
@@ -369,10 +365,10 @@ public class StageGoal : MonoSingleton<StageGoal>
             if (isOverMaxMinus)
             {
                 isOverMaxMinus = false;
-                AudioManager.My.PlaySelectType(GameEnum.AudioClipType.PosivityMoney);
+                AudioManager.My.PlaySelectType(AudioClipType.PosivityMoney);
                 foreach (BaseMapRole role in PlayerData.My.MapRole)
                 {
-                    if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Seed)
+                    if (role.baseRoleData.baseRoleData.roleType == RoleType.Seed)
                     {
                         role.GetComponent<BaseSkill>().ReUnleashSkills();
                     }

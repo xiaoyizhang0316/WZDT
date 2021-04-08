@@ -166,15 +166,7 @@ public class RoleDetalInfoManager : MonoBehaviour
     {
         if (currentMapRole != null)
         {
-            totalIncome.text = currentMapRole.totalProfit.ToString();
-            monthlyIncome.text = currentMapRole.monthlyProfit.ToString();
-            totalSatisfaction.text = currentMapRole.totalSatisfy.ToString();
-            monthlySatisfaction.text = currentMapRole.monthlySatisfy.ToString();
-            totalCost.text = currentMapRole.totalCost.ToString();
-            rentCost.text = currentMapRole.rentCost.ToString();
-            operatingCosts.text = currentMapRole.operationCost.ToString();
-            businessCost.text = currentMapRole.activityCost.ToString();
-            transactionCost.text = currentMapRole.tradeCost.ToString();
+
         }
 
     }
@@ -320,16 +312,9 @@ public class RoleDetalInfoManager : MonoBehaviour
      //      AddProductToWarehouse(currentMapRole.Input[currentInputCount], 1);
      //      DetectionInput();
      //  }
-
         if (currentWareHouseCount < currentMapRole.warehouse.Count)
         {
             AddProductToWarehouse(currentMapRole.warehouse[currentWareHouseCount], 0);
-            DetectionInput();
-        }
-
-        if (currentShopCount < currentMapRole.shop.Count)
-        {
-            AddProductToWarehouse(currentMapRole.shop[currentShopCount], 3);
             DetectionInput();
         }
     }
@@ -341,10 +326,8 @@ public class RoleDetalInfoManager : MonoBehaviour
     public void MoveToShop(ProductSign productSign)
     {
         //Debug.Log(productSign.currentProduct.ID);
-        currentMapRole.ShiftProductWarehouseToShop(productSign.currentProduct);
         //Debug.Log("当前商店" + currentMapRole.shop.Count);
         //Debug.Log("当前仓库" + currentMapRole.warehouse.Count);
-        currentWareHouseCount--;
     }
  
  
