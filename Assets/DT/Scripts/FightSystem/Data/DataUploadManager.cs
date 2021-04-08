@@ -143,7 +143,7 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
         }
         if (!npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID))
         {
-            npcRole.Add(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID+"&", GetNpcStatus(mapRole));
+            npcRole.Add(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID, GetNpcStatus(mapRole));
             
             //npcStatus.Add(new NpcStatus(mapRole.baseRoleData.baseRoleData.roleName+"&"+mapRole.baseRoleData.ID,GetNpcStatus(mapRole)));
         }
@@ -224,8 +224,11 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
 
         if (CommonParams.fteList.Contains(sceneName) || sceneName.Equals("FTE_1"))
         {
+            //Debug.Log("fte contains "+sceneName);
             return;
         }
+        
+        //Debug.Log("set "+status+" "+mapRole.baseRoleData.baseRoleData.roleName);
         if (npcRole.ContainsKey(mapRole.baseRoleData.baseRoleData.roleName + "&" + mapRole.baseRoleData.ID))
         {
             if (status == 3)
