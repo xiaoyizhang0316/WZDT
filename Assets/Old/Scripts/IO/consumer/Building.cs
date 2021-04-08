@@ -632,6 +632,7 @@ public class Building : MonoBehaviour
         //{
         else{
             //Debug.Log("born "+count);
+            bornFTE = true;
             for (int i = 0; i < count; i++)
             {
                 //yield return new WaitForSeconds(0.7f);

@@ -79,7 +79,7 @@ public class T8_5 : BaseGuideStep
     {
      
         missiondatas.data[0].currentNum = T8Manager.My.packageKillNum;
-        missiondatas.data[0].currentNum =  T8Manager.My.saleKillNum;
+        missiondatas.data[1].currentNum =  T8Manager.My.saleKillNum;
 
         if (missiondatas.data[0].currentNum>=missiondatas.data[0].maxNum  )
         {
