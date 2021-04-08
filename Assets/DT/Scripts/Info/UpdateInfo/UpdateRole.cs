@@ -30,12 +30,26 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         tempBaseRoleData = new Role();
 
         upgradeNumber.gameObject.SetActive(true);
-        int costNumber = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost;
-        if (PlayerData.My.guanJianZiYuanNengLi[1])
+        int costNumber = 0;
+        if (RoleUpdateInfo.My.currentRole.freeUpdate)
         {
-            costNumber = costNumber * 90 / 100;
+              costNumber = 0;
         }
+        else
+        {
+            costNumber = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost;
+            if (PlayerData.My.guanJianZiYuanNengLi[1])
+            {
+                costNumber = costNumber * 90 / 100;
+            }
+
+        }
+       
         upgradeNumber.text = costNumber.ToString();
+        if (costNumber == 0)
+        {
+            upgradeNumber.gameObject.SetActive(false);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -118,11 +132,25 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             return;
         }
 
-        int costNumber = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost;
-        if (PlayerData.My.guanJianZiYuanNengLi[1])
+        int costNumber = 0;
+        if (RoleUpdateInfo.My.currentRole.freeUpdate)
         {
-            costNumber = costNumber * 90 / 100;
+            costNumber = 0;
         }
+        else
+        {
+            costNumber = RoleUpdateInfo.My.currentRole.baseRoleData.upgradeCost;
+            if (PlayerData.My.guanJianZiYuanNengLi[1])
+            {
+                costNumber = costNumber * 90 / 100;
+            }
+
+        }
+        if (costNumber == 0)
+        {
+            upgradeNumber.gameObject.SetActive(false);
+        }
+    
         if (costNumber <= StageGoal.My.playerGold)
         {
             if (!PlayerData.My.isSOLO)
@@ -192,7 +220,10 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 else
                 {
                     upgradeNumber.gameObject.SetActive(true);
-
+                    if (costNumber == 0)
+                    {
+                        upgradeNumber.gameObject.SetActive(false);
+                    }
                     if (eventData != null)
                     {
                         //Debug.Log("初始化下一级");

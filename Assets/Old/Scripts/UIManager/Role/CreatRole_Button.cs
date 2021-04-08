@@ -94,6 +94,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         }
     }
 
+    private HexCell currentCell;
     public void OnDrag(PointerEventData eventData)
     {
         if (role == null)
@@ -117,8 +118,24 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         RaycastHit hit;
         if (Physics.Raycast(inputRay, out hit))
         {
-         
-            HexCell currentCell = HexGrid.My.GetCell(hit.point);
+
+            if (currentCell != null)
+            {
+                currentCell.DisableHighlight();
+            }
+
+              currentCell = HexGrid.My.GetCell(hit.point);
+            if (currentCell.TerrainTypeIndex == 1)
+            {
+                currentCell.EnableHighlight(Color.green);
+
+             }
+            else
+            {
+                currentCell.EnableHighlight(Color.red);
+                
+            }
+
             role.transform.position =currentCell.Position+ new Vector3(0, 0.3f, 0);
         }
     }
@@ -204,6 +221,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
            
             if (currentCell!=null)
             {
+                currentCell.DisableHighlight();
                 int x =currentCell.GetComponent<MapSign>().x;
                 int y = currentCell.GetComponent<MapSign>().y;
                 if (MapManager.My.CheckLandAvailable(x, y) &&

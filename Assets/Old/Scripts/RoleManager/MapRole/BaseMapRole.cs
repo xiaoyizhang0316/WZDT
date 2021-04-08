@@ -119,6 +119,11 @@ public class BaseMapRole : MonoBehaviour
         baseRoleData.range = baseRoleData.baseRoleData.range;
         baseRoleData.cost = baseRoleData.baseRoleData.cost;
         baseRoleData.bulletCapacity = baseRoleData.baseRoleData.bulletCapacity;
+
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
+        {
+            baseRoleData.freeUpdate = true;
+        }
     }
 
     // Start is called before the first frame update

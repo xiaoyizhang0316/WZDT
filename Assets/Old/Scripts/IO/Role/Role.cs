@@ -17,6 +17,7 @@ public class Role
     /// 效果值
     /// </summary>
     public int effect;
+    public bool freeUpdate;
 
     /// <summary>
     /// 效率值
