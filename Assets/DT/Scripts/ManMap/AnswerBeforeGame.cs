@@ -50,7 +50,8 @@ public class AnswerBeforeGame : MonoBehaviour
             {
                 if (answer_id > NetworkMgr.My.playerDatas.threeWordsProgress)
                 {
-                    ThreeWordsPanel.My.OpenAnswerInputField(() => { levelSign?.Init();});
+                    NetworkMgr.My.currentClickLevelID = levelSign.levelID;
+                    ThreeWordsPanel.My.OpenAnswerInputField(() => { });
                 }
                 else
                 {
