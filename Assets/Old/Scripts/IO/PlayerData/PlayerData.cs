@@ -222,7 +222,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
                 SetWorkerStatus(v.Key, false);
             }
         }
-
         BaseMapRole mapRole = GetMapRoleById(roleId);
         TradeManager.My.DeleteRoleAllTrade(roleId);
         List<string> sceneList = new List<string>() { "FTE_3.5" ,"FTE_2.5", "FTE_4.5" };
@@ -269,7 +268,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         BaseMapRole mapRole = GetMapRoleById(roleId);
         MapManager.My.ReleaseLand(mapRole.posX, mapRole.posY);
         SetSellNPC(mapRole);
-
         RoleData.Remove(target);
         MapRole.Remove(mapRole);
         SellRoleOperationRecord(mapRole);
@@ -600,46 +598,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             {
                 isOneFinish[i] = false;
             }
-       // }
-        //else
-        //{
-        //    Debug.Log(str);
-        //    char[] temp = talentList[0].ToCharArray();
-        //    for (int i = 0; i < 6; i++)
-        //    {
-        //        dingWei[i] = temp[i].Equals('1');
-        //    }
-        //    temp = talentList[1].ToCharArray();
-        //    for (int i = 0; i < 6; i++)
-        //    {
-        //        guanJianZiYuanNengLi[i] = temp[i].Equals('1');
-        //    }
-        //    temp = talentList[2].ToCharArray();
-        //    for (int i = 0; i < 6; i++)
-        //    {
-        //        yeWuXiTong[i] = temp[i].Equals('1');
-        //    }
-        //    temp = talentList[3].ToCharArray();
-        //    for (int i = 0; i < 6; i++)
-        //    {
-        //        xianJinLiu[i] = temp[i].Equals('1');
-        //    }
-        //    temp = talentList[4].ToCharArray();
-        //    for (int i = 0; i < 6; i++)
-        //    {
-        //        yingLiMoShi[i] = temp[i].Equals('1');
-        //    }
-        //    temp = talentList[5].ToCharArray();
-        //    for (int i = 0; i < 6; i++)
-        //    {
-        //        qiYeJiaZhi[i] = temp[i].Equals('1');
-        //    }
-        //    temp = talentList[6].ToCharArray();
-        //    for (int i = 0; i < 6; i++)
-        //    {
-        //        isOneFinish[i] = temp[i].Equals('1');
-        //    }
-        //}    
     }
 
     /// <summary>
@@ -753,8 +711,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     private void Start()
     {
         NetManager.My.Init();
-        //Application.targetFrameRate = 60;
-        //Time.maximumDeltaTime = 0.02f;
     }
     
     #region 玩家权限

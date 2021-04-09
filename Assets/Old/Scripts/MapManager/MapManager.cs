@@ -17,11 +17,6 @@ public class MapManager : MonoSingleton<MapManager>
 
     private float interval;
 
-    private Vector3 medium = Vector3.zero;
-
-    private Vector3 high = new Vector3(0f, 0.6f, 0f);
-
-    public bool generatePath;
     public SaveLoadMenu SaveLoadMenu;
     public GameObject skillOneEffect;
     public GameObject skillTwoEffect;
