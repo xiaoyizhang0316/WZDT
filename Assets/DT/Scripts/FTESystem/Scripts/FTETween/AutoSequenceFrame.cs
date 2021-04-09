@@ -13,6 +13,8 @@ public class AutoSequenceFrame : MonoBehaviour
 
     private int currentIndex = 0;
 
+    public float interval = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +24,12 @@ public class AutoSequenceFrame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
         timeCount += Time.deltaTime;
-        if (timeCount > 0.4f)
+        if (timeCount > interval)
         {
             timeCount = 0;
             if (currentIndex == sprites.Count - 1)
