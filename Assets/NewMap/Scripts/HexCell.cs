@@ -320,8 +320,8 @@ else
 	bool hasIncomingRiver, hasOutgoingRiver;
 	HexDirection incomingRiver, outgoingRiver;
 
-	[SerializeField]
-	HexCell[] neighbors;
+	 
+	public  HexCell[] neighbors;
 
 	[SerializeField]
 	bool[] roads;

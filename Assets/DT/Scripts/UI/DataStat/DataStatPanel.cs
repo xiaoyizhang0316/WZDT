@@ -64,8 +64,8 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
         closeBtn.onClick.AddListener(Close);
         if (IsTurnLevel())
         {
-            turnCostTitle.text = "  来源        上阶段支出       全部";
-            turnIncomeTitle.text = "  来源        上阶段收入       全部";
+            turnCostTitle.text = "  来源      上阶段支出     全部";
+            turnIncomeTitle.text = "  来源      上阶段收入     全部";
         }
         else
         {
@@ -76,7 +76,7 @@ public class DataStatPanel : MonoSingleton<DataStatPanel>
 
     private bool IsTurnLevel()
     {
-        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name)|| SceneManager.GetActiveScene().name.Equals("FTE_9"))
         {
             isTurnLevel = false;
             return false;
