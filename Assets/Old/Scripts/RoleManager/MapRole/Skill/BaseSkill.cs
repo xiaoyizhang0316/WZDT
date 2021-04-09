@@ -196,7 +196,6 @@ public abstract class BaseSkill : MonoBehaviour
     /// </summary>
     public void CancelSkill()
     {
-       
         IsOpen = false;
     }
 }

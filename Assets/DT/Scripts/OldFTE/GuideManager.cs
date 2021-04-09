@@ -257,8 +257,6 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
                 PlayerData.My.client.SendToServerMsg(str1);
             }
         }
-
-
         if (guideClose != null)
             guideClose.gameObject.SetActive(false);
     }

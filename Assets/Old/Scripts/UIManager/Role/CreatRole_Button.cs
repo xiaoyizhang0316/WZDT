@@ -222,6 +222,10 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             if (currentCell!=null)
             {
                 currentCell.DisableHighlight();
+                for (int i = 0; i < currentCell.neighbors.Length; i++)
+                {
+                    currentCell.neighbors[i].DisableHighlight();
+                }
                 int x =currentCell.GetComponent<MapSign>().x;
                 int y = currentCell.GetComponent<MapSign>().y;
                 if (MapManager.My.CheckLandAvailable(x, y) &&
