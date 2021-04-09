@@ -62,7 +62,7 @@ public class TradeSign : MonoBehaviour
         tradeData.targetRole = end;
         tradeData.selectCashFlow = CashFlowType.先钱;
         tradeData.dividePercent = 0;
-        startPer = 1f;
+        startPer = 1f; 
         endPer = 1f;
         if (PlayerData.My.xianJinLiu[3])
         {
