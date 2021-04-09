@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using IOIntensiveFramework.MonoSingleton;
@@ -444,32 +445,38 @@ public class TradeManager : MonoSingleton<TradeManager>
     public bool CheckProductNpcTradeWrong(string npcID)
     {
         bool isWrong = false;
-        if (tradeList.Count <= 0)
+        try
         {
+            if (tradeList.Count <= 0)
+            {
+                return false;
+            }
+            foreach(var sign in tradeList.Values)
+            {
+                if(sign.tradeData.startRole==npcID)
+                {
+                    if (PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole)).baseRoleData.baseRoleData
+                        .roleSkillType == RoleSkillType.Product)
+                    {
+                        isWrong = true;
+                    }
+                }
+                if (sign.tradeData.endRole == npcID)
+                {
+                    if (PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole)).baseRoleData.baseRoleData
+                        .roleSkillType == RoleSkillType.Product)
+                    {
+                        isWrong = false;
+                        break;
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
             return false;
         }
-
-        foreach(var sign in tradeList.Values)
-        {
-            if(sign.tradeData.startRole==npcID)
-            {
-                if (PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole)).baseRoleData.baseRoleData
-                    .roleSkillType == RoleSkillType.Product)
-                {
-                    isWrong = true;
-                }
-            }
-            if (sign.tradeData.endRole == npcID)
-            {
-                if (PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole)).baseRoleData.baseRoleData
-                    .roleSkillType == RoleSkillType.Product)
-                {
-                    isWrong = false;
-                    break;
-                }
-            }
-        }
-
         return isWrong;
     }
 
