@@ -1671,7 +1671,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         if (isEndTurn)
         {
-            lastTurnTotalCost = turnTotalCost;
+            lastTurnTotalCost = -turnTotalCost;
             turnTotalCost = 0;
             lastTurnTotalIncome = turnTotalIncome;
             turnTotalIncome = 0;
