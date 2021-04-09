@@ -47,24 +47,6 @@ public class ProductMelon_Summon : BaseSkill
             {
                 data.AddBuff(role.GetEquipBuffList()[i]);
             }
-            //if (role.isNpc)
-            //{
-            //    if (role.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
-            //    {
-            //        for (int i = 0; i < role.GetComponentInChildren<BaseNpc>().NPCBuffList.Count; i++)
-            //        {
-            //            data.AddBuff(role.GetComponentInChildren<BaseNpc>().NPCBuffList[i]);
-            //        }
-            //        for (int i = 0; i < goodBaseBuffs.Count; i++)
-            //        {
-            //            goodBaseBuffs[i].OnProduct(ref data);
-            //        }
-            //    }
-            //}
-            //for (int i = 0; i < buffList.Count; i++)
-            //{
-            //    data.AddBuff(buffList[i]);
-            //}
             for (int i = 0; i < badBaseBuffs.Count; i++)
             {
                 badBaseBuffs[i].OnProduct(ref data);
@@ -81,16 +63,14 @@ public class ProductMelon_Summon : BaseSkill
                 game.GetComponent<GoodsSign>().productData = data;
                 game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();
                 game.GetComponent<GoodsSign>().role = PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
-
                 game.transform.position = transform.position;
                 game.GetComponent<GoodsSign>().Move();
-
                 currentCount++;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                Console.WriteLine(e.Message);
+                currentCount = 0;
             }
             if (currentCount >= role.tradeList.Count)
             {
