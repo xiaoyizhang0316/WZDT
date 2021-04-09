@@ -2340,6 +2340,7 @@ MonoBehaviour:
       PrePath: 
       RoleSpacePath: 
     effect: 0
+    freeUpdate: 0
     efficiency: 0
     range: 0
     tradeCost: 0
@@ -2389,6 +2390,7 @@ MonoBehaviour:
       PrePath: 
       RoleSpacePath: 
     effect: 0
+    freeUpdate: 0
     efficiency: 0
     range: 0
     tradeCost: 0
@@ -2422,6 +2424,7 @@ MonoBehaviour:
       PrePath: 
       RoleSpacePath: 
     effect: 0
+    freeUpdate: 0
     efficiency: 0
     range: 0
     tradeCost: 0
@@ -24467,6 +24470,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.049804688
       objectReference: {fileID: 0}
+    - target: {fileID: 2768663767859155833, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768663767859155833, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3474157426287768486, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3667461334560441637, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: m_IsActive
@@ -24525,12 +24543,12 @@ PrefabInstance:
     - target: {fileID: 4410177538542085752, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4410177538542085752, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4854763597447130766, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
@@ -24651,7 +24669,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2071786960}
     - target: {fileID: 5578415290082428334, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: m_Name
@@ -24660,7 +24678,7 @@ PrefabInstance:
     - target: {fileID: 5578415290082428334, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5578415290433524892, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
@@ -24690,7 +24708,7 @@ PrefabInstance:
     - target: {fileID: 5578415291669459325, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -21.619995
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5578415291669459325, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
@@ -24705,17 +24723,17 @@ PrefabInstance:
     - target: {fileID: 5626121609793179274, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5626121609793179274, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5626121609793179274, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5681227711936144039, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
@@ -28622,10 +28640,6 @@ MonoBehaviour:
   starThreeStatus: 0
   targetNumber: 0
   putRoleNumber: 0
-  unlockLandList1: []
-  unlockLandList2: []
-  unlockTime1: 0
-  unlockTime2: 0
   newCameraPos: {x: 41, y: 39.6, z: 66}
   newCameraRot: {x: 90, y: 0, z: -56}
   orthoSize: 0
@@ -28634,6 +28648,7 @@ MonoBehaviour:
   winkey2: "-\u5B9E\u5728\u5E94\u5BF9\u4E0D\u4E86\u7684\u6D88\u8D39\u8005\u53EF\u4EE5\u8BA9\u522B\u7684\u89D2\u8272\u53BB\u5E94\u5BF9"
   winkey3: "-\u6CA1\u94B1\u4E0D\u8981\u7D27\uFF0C\u6D3B\u7740\u5C31\u8D62\u4E86"
   tradeCostMoney: 0
+  stageSpecialTypes: 
 --- !u!4 &1747396752
 Transform:
   m_ObjectHideFlags: 0
@@ -32467,6 +32482,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eeeccc79b8d14843bdbf7b24660b21c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &2071786960 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5637462676245257426, guid: b3637f2adb4e5b7439a9b298c2407784,
+    type: 3}
+  m_PrefabInstance: {fileID: 2071786957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2088025577
 GameObject:
   m_ObjectHideFlags: 0
