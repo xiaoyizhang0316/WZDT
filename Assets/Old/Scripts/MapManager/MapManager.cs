@@ -473,7 +473,7 @@ public class MapManager : MonoSingleton<MapManager>
         {
             for (int i = 0; i < diveList[time].Count; i++)
             {
-                diveList[time][i].transform.position += new Vector3(0f, -2f, 0f);
+                diveList[time][i].transform.position += new Vector3(0f, 2f, 0f);
                 diveList[time][i].SetActive(true);
             }
             diveList.Remove(time);

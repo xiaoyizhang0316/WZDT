@@ -17,6 +17,8 @@ public class MainMap : MonoBehaviour
     public Text userLevelText;
 
     public List<GameObject> teachLevels;
+
+    public List<Button> normalLevels;
     
 
     // Start is called before the first frame update
