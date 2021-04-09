@@ -52,8 +52,9 @@ public class ProductMelon : BaseSkill
             {
                 badBaseBuffs[i].OnProduct(ref data);
             }
-            
-            GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
+            try
+            {
+                GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
                 game.GetComponent<GoodsSign>().productData = data;
                 game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();
                 game.GetComponent<GoodsSign>().role = PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
@@ -61,7 +62,12 @@ public class ProductMelon : BaseSkill
                 game.GetComponent<GoodsSign>().Move();
                 productDatas.Add(new ProductData(data));
                 currentCount++;
-      
+            }
+            catch (Exception ex)
+            {
+                Debug.Log("exception" +  ex.Message);
+                currentCount = 0;
+            }
             if (currentCount >= role.tradeList.Count)
             {
                 currentCount = 0;
