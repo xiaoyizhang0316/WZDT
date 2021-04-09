@@ -84,24 +84,6 @@ public class ProductMelon_Lightning : BaseSkill
             {
                 data.AddBuff(role.GetEquipBuffList()[i]);
             }
-            //if (role.isNpc)
-            //{
-            //    if (role.GetComponentInChildren<BaseNpc>().isCanSeeEquip)
-            //    {
-            //        for (int i = 0; i < role.GetComponentInChildren<BaseNpc>().NPCBuffList.Count; i++)
-            //        {
-            //            data.AddBuff(role.GetComponentInChildren<BaseNpc>().NPCBuffList[i]);
-            //        }
-            //        for (int i = 0; i < goodBaseBuffs.Count; i++)
-            //        {
-            //            goodBaseBuffs[i].OnProduct(ref data);
-            //        }
-            //    }
-            //}
-            //for (int i = 0; i < buffList.Count; i++)
-            //{
-            //    data.AddBuff(buffList[i]);
-            //}
             for (int i = 0; i < badBaseBuffs.Count; i++)
             {
                 badBaseBuffs[i].OnProduct(ref data);
@@ -125,7 +107,8 @@ public class ProductMelon_Lightning : BaseSkill
             }
             catch (Exception e)
             {
-
+                Debug.Log("exception : " + e.Message);
+                currentCount = 0;
             }
             if (currentCount >= role.tradeList.Count)
             {
