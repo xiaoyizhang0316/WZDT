@@ -492,7 +492,16 @@ public class LevelSign : MonoBehaviour
         //LevelButton.onClick.AddListener(Init);
         if (GetComponent<AnswerBeforeGame>())
         {
-            LevelButton.onClick.AddListener(()=>GetComponent<AnswerBeforeGame>().OpenAnswerPanel(this));
+            LevelButton.onClick.AddListener(()=>
+            {
+                GetComponent<AnswerBeforeGame>().OpenAnswerPanel(this);
+                
+            });
+            if (NetworkMgr.My.currentClickLevelID != 0 && levelID == NetworkMgr.My.currentClickLevelID)
+            {
+                Init();
+                NetworkMgr.My.currentClickLevelID = 0;
+            }
         }
         else
         {

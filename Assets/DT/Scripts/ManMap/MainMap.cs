@@ -17,6 +17,8 @@ public class MainMap : MonoBehaviour
     public Text userLevelText;
 
     public List<GameObject> teachLevels;
+
+    public List<Button> normalLevels;
     
 
     // Start is called before the first frame update
@@ -387,7 +389,7 @@ public class MainMap : MonoBehaviour
     public List<GameObject> newTeachLevel = new List<GameObject>();
     void InitNewFTELevel(string fte)
     {
-        Debug.Log(fte);
+        //Debug.Log(fte);
         for (int i = 0; i < newTeachLevel.Count; i++)
         {
             SetTeachLevelStatus(newTeachLevel[i], true);

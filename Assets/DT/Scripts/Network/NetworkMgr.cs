@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static GameEnum;
 
 public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
@@ -46,6 +47,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     public Dictionary<RoleType, int> roleFoundDic = new Dictionary<RoleType, int>();
     #endregion
 
+    public int currentClickLevelID=0;
     private void Start()
     {
         deviceID = SystemInfo.deviceUniqueIdentifier;
