@@ -63,10 +63,10 @@ public class ProductMelon : BaseSkill
                 productDatas.Add(new ProductData(data));
                 currentCount++;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-
+                Debug.Log("exception" +  ex.Message);
+                currentCount = 0;
             }
             if (currentCount >= role.tradeList.Count)
             {
