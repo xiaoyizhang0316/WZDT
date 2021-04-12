@@ -343,7 +343,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         foreach (TradeSign t in tradeList.Values)
         {
             if (t.tradeData.startRole.Equals(start.ID.ToString()) && t.tradeData.endRole.Equals(end.ID.ToString()))
-            return true;    
+                return true;    
         }
         return false;
     }

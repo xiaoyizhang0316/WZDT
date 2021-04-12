@@ -389,7 +389,7 @@ public class MainMap : MonoBehaviour
     public List<GameObject> newTeachLevel = new List<GameObject>();
     void InitNewFTELevel(string fte)
     {
-        Debug.Log(fte);
+        //Debug.Log(fte);
         for (int i = 0; i < newTeachLevel.Count; i++)
         {
             SetTeachLevelStatus(newTeachLevel[i], true);
