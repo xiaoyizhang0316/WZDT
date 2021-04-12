@@ -37,7 +37,7 @@ public class DataUploadManager : IOIntensiveFramework.MonoSingleton.MonoSingleto
         List<int> keys = TradeManager.My.tradeList.Keys.ToList();
         for (int i = 0; i < keys.Count; i++)
         {
-            if (TradeManager.My.tradeList[keys[i]].isTradeSettingBest())
+            if (TradeManager.My.tradeList[keys[i]].IsTradeSettingBest())
             {
                 count++;
             }

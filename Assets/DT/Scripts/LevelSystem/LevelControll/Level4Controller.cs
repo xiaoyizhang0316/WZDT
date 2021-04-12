@@ -10,7 +10,7 @@ public class Level4Controller : BaseLevelController
         starTwoStatus = true;
         foreach (TradeSign sign in TradeManager.My.tradeList.Values)
         {
-            if (!sign.isTradeSettingBest())
+            if (!sign.IsTradeSettingBest())
             {
                 starTwoStatus = false;
                 break;

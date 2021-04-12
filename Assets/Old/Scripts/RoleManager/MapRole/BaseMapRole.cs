@@ -264,14 +264,14 @@ public class BaseMapRole : MonoBehaviour
         }
         for (int i = 0; i < startTradeList.Count; i++)
         {
-            if (!startTradeList[i].isTradeSettingBest())
+            if (!startTradeList[i].IsTradeSettingBest())
             {
                 return false;
             }
         }
         for (int i = 0; i < endTradeList.Count; i++)
         {
-            if (!endTradeList[i].isTradeSettingBest())
+            if (!endTradeList[i].IsTradeSettingBest())
             {
                 return false;
             }
@@ -516,10 +516,6 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void MonthlyCost()
     {
-        if (SceneManager.GetActiveScene().name.Equals("FTE_1"))
-        {
-            return;
-        }
         if (StageGoal.My.currentType == StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             return;
