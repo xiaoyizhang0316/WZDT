@@ -69,6 +69,7 @@ public class MapSign : MonoBehaviour, IDragHandler
     {
         addCost = true;
         GameObject eff = null;
+        
         transform.DOScale(100f, 3).OnComplete(() =>
         {
             eff = Instantiate(MapManager.My.skillTwoEffect, this.transform);
