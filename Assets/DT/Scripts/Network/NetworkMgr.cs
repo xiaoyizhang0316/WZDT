@@ -585,7 +585,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 
     public void UpdatePlayerFTE(string fte, Action doSuccess = null, Action doFail = null)
     {
-        //Debug.Log("更新fte" + fte);
+        Debug.Log("更新fte" + fte);
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
         keyValues.Add("fte", fte);
         keyValues.Add("playerID", playerID);

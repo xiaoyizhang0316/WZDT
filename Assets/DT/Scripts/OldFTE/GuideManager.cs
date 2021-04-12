@@ -123,7 +123,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             CloseFTE();
             if (SceneManager.GetActiveScene().name.Contains("_")&& !SceneManager.GetActiveScene().name.Contains("."))
             {
-                NetworkMgr.My.UpdatePlayerFTE(SceneManager.GetActiveScene().name.Split('_')[1]);
+                //NetworkMgr.My.UpdatePlayerFTE(SceneManager.GetActiveScene().name.Split('_')[1]);
             }
             return;
         }
