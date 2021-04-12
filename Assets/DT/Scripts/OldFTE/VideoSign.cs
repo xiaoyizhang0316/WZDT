@@ -30,9 +30,9 @@ public class VideoSign : MonoBehaviour
             isup = true;
             //if (!isManualOut)
             //{
-                GetComponent<RectTransform>().DOAnchorPosY(124, 0.5f).SetEase(Ease.Linear).Play().OnPause(() =>
+                GetComponent<RectTransform>().DOAnchorPosY(460.4f, 0.5f).SetEase(Ease.Linear).Play().OnPause(() =>
                 {
-                    GetComponent<RectTransform>().DOAnchorPosY(124, 0.5f).SetEase(Ease.Linear).Play();
+                    GetComponent<RectTransform>().DOAnchorPosY(460.4f, 0.5f).SetEase(Ease.Linear).Play();
                 });
                 out_btn.gameObject.SetActive(true);
                 in_btn.gameObject.SetActive(false);
@@ -42,9 +42,9 @@ public class VideoSign : MonoBehaviour
         {
             isup = false;
             //isManualOut = false;
-            GetComponent<RectTransform>().DOAnchorPosY(-249.3f, 0.5f).SetEase(Ease.Linear).Play().OnPause(() =>
+            GetComponent<RectTransform>().DOAnchorPosY(79f, 0.5f).SetEase(Ease.Linear).Play().OnPause(() =>
                 {
-                    GetComponent<RectTransform>().DOAnchorPosY(-249.3f, 0.5f).SetEase(Ease.Linear).Play();
+                    GetComponent<RectTransform>().DOAnchorPosY(79f, 0.5f).SetEase(Ease.Linear).Play();
                 });
             in_btn.gameObject.SetActive(true);
             out_btn.gameObject.SetActive(false);
@@ -55,7 +55,7 @@ public class VideoSign : MonoBehaviour
     {
         //isManualOut = true;
         isup = true;
-        GetComponent<RectTransform>().DOAnchorPosY(-249.3f, 0.5f).SetEase(Ease.Linear).Play();
+        GetComponent<RectTransform>().DOAnchorPosY(79f, 0.5f).SetEase(Ease.Linear).Play();
         out_btn.gameObject.SetActive(false);
         in_btn.gameObject.SetActive(true);
     }
@@ -64,7 +64,7 @@ public class VideoSign : MonoBehaviour
     {
         //isManualOut = false;
         isup = false;
-        GetComponent<RectTransform>().DOAnchorPosY(124, 0.5f).SetEase(Ease.Linear).Play();
+        GetComponent<RectTransform>().DOAnchorPosY(460.4f, 0.5f).SetEase(Ease.Linear).Play();
         out_btn.gameObject.SetActive(true);
         in_btn.gameObject.SetActive(false);
     }

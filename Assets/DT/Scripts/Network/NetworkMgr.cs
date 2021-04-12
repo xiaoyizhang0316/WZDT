@@ -914,15 +914,18 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 try
                 {
                     levelProgress = JsonUtility.FromJson<LevelProgress>(response.data);
-                    for (int i=0; i<levelProgressList.Count; i++)
+                    if (levelProgress.starNum > 0)
                     {
-                        if (levelProgress.levelID == levelProgressList[i].levelID)
+                        for (int i=0; i<levelProgressList.Count; i++)
                         {
-                            levelProgressList.RemoveAt(i);
-                            break;
+                            if (levelProgress.levelID == levelProgressList[i].levelID)
+                            {
+                                levelProgressList.RemoveAt(i);
+                                break;
+                            }
                         }
+                        levelProgressList.Add(levelProgress);
                     }
-                    levelProgressList.Add(levelProgress);
                     //Debug.Log("上传关卡"+ levelID.ToString() + "进度完成" );
                     doSuccess?.Invoke();
                 }
