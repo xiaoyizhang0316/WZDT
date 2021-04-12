@@ -445,7 +445,7 @@ public class MainMap : MonoBehaviour
                 SetTeachLevelStatus(newTeachLevel[0], false);
                 break;
             case "0.5":
-                Debug.Log("case "+fte);
+                //Debug.Log("case "+fte);
                 SetTeachLevelStatus(newTeachLevel[0], false);
                 SetTeachLevelStatus(newTeachLevel[1], false);
                 break;
