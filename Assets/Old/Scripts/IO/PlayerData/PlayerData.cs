@@ -169,10 +169,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// </summary>
     public void RoleTurnCost()
     {
-        if (SceneManager.GetActiveScene().name.Equals("FTE_1"))
-        {
-            return;
-        }
         for (int i = 0; i < MapRole.Count; i++)
         {
             MapRole[i].TurnCost();
