@@ -7,6 +7,7 @@ public  class FTE_Dialog : BaseGuideStep
 {
     public bool uploadProgress = false;
     public GameObject dialog_obj;
+    public List<int> equipAward=new List<int>();
     public override IEnumerator StepStart()
     {
         BeforeDialog();
@@ -40,6 +41,13 @@ public  class FTE_Dialog : BaseGuideStep
                 SceneManager.LoadScene("Map");
             });
             NetworkMgr.My.AddTeachLevel(TimeStamp.GetCurrentTimeStamp()-StageGoal.My.startTime, SceneManager.GetActiveScene().name, 1);
+            if (equipAward.Count > 0)
+            {
+                for (int i = 0; i < equipAward.Count; i++)
+                {
+                    NetworkMgr.My.AddEquip(equipAward[i], equipAward[i].ToString().StartsWith("1")?0:1, 1);
+                }
+            }
         }
     }
 }
