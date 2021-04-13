@@ -203,12 +203,12 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         {
             if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
             {
-                tradeCostText.text = (result * 4).ToString();
+                tradeCostText.text = (result/3 /** 4*/).ToString();
             }
             else if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
             {
                 int tradeCount = cast.tradeList.Count;
-                tradeCostText.text = (result * 4 / tradeCount).ToString();
+                tradeCostText.text = (result/3 /** 4*/ / tradeCount).ToString();
             }
         }
         else

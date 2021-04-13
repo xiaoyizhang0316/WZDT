@@ -145,7 +145,7 @@ public class T2_Manager : MonoSingleton<T2_Manager>
     /// </summary>
     /// <param name="role"></param>
     /// <param name="endPosY"></param>
-    public void DoMoveRoleUp(GameObject role, float endPosY=2.6f)
+    public void DoMoveRoleUp(GameObject role, float endPosY=3f)
     {
         role.SetActive(true);
         role.GetComponent<Transform>().DOMoveY(endPosY, 0.5f).Play();
@@ -156,7 +156,7 @@ public class T2_Manager : MonoSingleton<T2_Manager>
     /// </summary>
     /// <param name="role"></param>
     /// <param name="endPosY"></param>
-    public void DoMoveRoleDown(GameObject role, float endPosY = -0.6f)
+    public void DoMoveRoleDown(GameObject role, float endPosY = -2f)
     {
         DeleteRoleTrade(role.GetComponent<BaseMapRole>());
         role.GetComponent<Transform>().DOMoveY(endPosY, 0.5f).Play().OnComplete(() =>
