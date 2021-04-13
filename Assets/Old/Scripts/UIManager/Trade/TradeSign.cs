@@ -174,7 +174,7 @@ public class TradeSign : MonoBehaviour
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
-            int costNum = CalculateTC(true) * 4;
+            int costNum = CalculateTC(true)/3 /** 4*/;
             StageGoal.My.CostPlayerGold(costNum);
             StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
         }
@@ -183,7 +183,7 @@ public class TradeSign : MonoBehaviour
             BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole));
             GoodsSign[] goodsSigns = GetComponentsInChildren<GoodsSign>();
             int tradeCount = cast.tradeList.Count;
-            int costNum = CalculateTC(true) * 4 / tradeCount;
+            int costNum = CalculateTC(true)/3 /** 4*/ / tradeCount;
             StageGoal.My.CostPlayerGold(costNum);
             StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
             for (int i = 0; i < goodsSigns.Length; i++)
