@@ -9,12 +9,7 @@ using UnityEngine.UI;
 
 public class RoleListManager : MonoSingleton<RoleListManager>
 {
-    /// <summary>
-    /// 角色列表物体创建预制体
-    /// </summary>
-    public GameObject roleListSignOBJ;
-
-    public Transform roleListCreatPos;
+   
 
     public Transform inPos;
     public Transform outPos;
@@ -27,9 +22,7 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     /// 切换角色和道具
     /// </summary>
     public Button change;
-    
-    public GameObject Panel_ChoseRole;
-
+     
 
     public List<GameObject> changeObj;
     // Start is called before the first frame update

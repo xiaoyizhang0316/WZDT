@@ -200,8 +200,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             effects[i].Move();
         }
-
-        NewCanvasUI.My.Panel_ChoseRole.SetActive(false);
+ 
         CurrentRole = tempRole;
         //print(tempRole.baseRoleData.roleType);
         //print(CurrentRole.baseRoleData.roleType);

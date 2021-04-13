@@ -104,13 +104,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             PlayerData.My.MapRole[i].transform.localScale = Vector3.one;
         }
 
-        if (SceneManager.GetActiveScene().name == "FTE_1")
-        {
-            if (!transform.GetChild(0).GetComponent<Button>().interactable)
-            {
-                return;
-            }
-        }
+   
 
         if (NewCanvasUI.My.isSetTrade)
             return;
@@ -142,13 +136,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (SceneManager.GetActiveScene().name == "FTE_1")
-        {
-            if (!transform.GetChild(0).GetComponent<Button>().interactable)
-            {
-                return;
-            }
-        }
+  
 
         if (Input.GetMouseButton(1))
             return;
@@ -199,13 +187,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (SceneManager.GetActiveScene().name == "FTE_1")
-        {
-            if (!transform.GetChild(0).GetComponent<Button>().interactable)
-            {
-                return;
-            }
-        }
+    
         if (Input.GetMouseButton(1))
             return;
         if (role == null)

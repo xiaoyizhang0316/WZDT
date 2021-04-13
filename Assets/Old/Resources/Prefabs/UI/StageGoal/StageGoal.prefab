@@ -177,6 +177,7 @@ MonoBehaviour:
   maxWaveNumber: 0
   waitTimeList: 
   timeCount: 0
+  produceTime: 0
   playerOperations: []
   statItemDatasList:
     statItemDatasList: []
@@ -198,7 +199,7 @@ MonoBehaviour:
   starOneText: {fileID: 1015907329688904925}
   starTwoText: {fileID: 5870850828434914235}
   starThreeText: {fileID: 8262911598818418197}
-  consumerLivePrb: {fileID: 158680, guid: f3a078e53333c434e93d5282b3c524c6, type: 3}
+  skipToFirstWave: {fileID: 0}
   killNumber: 0
   totalCost: 0
   tradeCost: 0
@@ -216,11 +217,40 @@ MonoBehaviour:
   unlockTpCost: 0
   dataStats: []
   totalPauseTime: 0
+  totalMinusGoldTime: 0
   startTime: 0
   endTime: 0
   currentType: 0
   enemyDatas: []
   waveCountItem: {fileID: 0}
+  maxRoleLevel: 5
+  lankuang: {fileID: 0}
+  isInTurnCreateTrade: 0
+  isTurnStart: 0
+  lastTurnTotalCost: 0
+  lastTurnTotalIncome: 0
+  lastTurnConsumerIncome: 0
+  turnConsumerIncome: 0
+  lastTurnTradeCost: 0
+  turnTradeCost: 0
+  turnIncomeAndCostPanel: {fileID: 0}
+  turnTotalIncome_txt: {fileID: 0}
+  turnTotalCost_txt: {fileID: 0}
+  turnTitle_txt: {fileID: 0}
+  showTurn_btn: {fileID: 0}
+  hideTurn_btn: {fileID: 0}
+  isEndTurn: 0
+  predict_btn: {fileID: 0}
+  predictGold: 0
+  predictIncome: 0
+  predictCost: 0
+  predictTPcost: 0
+  predictTPadd: 0
+  predictScore: 0
+  predictKillNum: 0
+  predictHealth: 0
+  busy: {fileID: 2800000, guid: e4fac5245b727db42ba0ca0258851b83, type: 3}
+  normal: {fileID: 2800000, guid: 2e71a8202d3b4a3448ec85ced5a40265, type: 3}
 --- !u!1 &2961711449006555410
 GameObject:
   m_ObjectHideFlags: 0

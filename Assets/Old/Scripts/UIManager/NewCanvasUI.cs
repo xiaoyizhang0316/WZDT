@@ -13,16 +13,12 @@ using static UnityEngine.UIElements.VisualElement;
 
 public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 {
-
-    public GameObject Panel_ChoseRole;
-    public Role CurrentClickRole;
-    public BaseMapRole currentMapRole;
+  
     public GameObject Panel_AssemblyRole;
     public GameObject Panel_TradeSetting;
     public Transform RoleTF;
     public GameObject lose;
-    
-    
+     
     /// <summary>
     /// 需要遮挡的UI
     /// </summary>
@@ -49,9 +45,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public GameObject Panel_Delete;
 
     public GameObject Panel_Update;
-
-    public GameObject Panel_RoleInfo;
-
+ 
     public GameObject Panel_Review;
 
     public GameObject consumerInfoFloatWindow;
@@ -72,6 +66,16 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     public Button OptionsBtn;
     public Button showHideTradeButton;
 
+    public GameObject playerScore;
+    public GameObject level;
+    public GameObject money;
+    public GameObject mega;
+    public bool isTradeButtonActive = true;
+
+    public bool isProductLineActive = true;
+
+    public bool isInfoLineActive = true;
+
     #endregion
 
     public Transform hidePanel;
@@ -82,6 +86,11 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public GameObject watchGuidePanel;
 
+    public GameObject HelpButton;
+
+    public GameObject iscanSeeButton;
+
+    public GameObject blood;
     // Start is called before the first frame update
     void Start()
     {
@@ -94,10 +103,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         CreateTradeLineGo = FindObjectOfType<CreateTradeLine>().gameObject;
         CreateTradeLineGo.SetActive(false);
         RoleTF = GameObject.FindGameObjectWithTag("RoleTF").transform;
-        GetComponent<Canvas>().worldCamera = Camera.main;
-        //Button_Pause = transform.Find("TimeScale/GamePause").GetComponent<Button>();
-        //Button_Normal = transform.Find("TimeScale/GameNormal").GetComponent<Button>();
-        //Button_Accelerate = transform.Find("TimeScale/GameAccelerate").GetComponent<Button>();
+        GetComponent<Canvas>().worldCamera = Camera.main; 
         statBtn.onClick.AddListener(() => {
             Panel_Stat.SetActive(true);
             DataStatPanel.My.ShowStat();
@@ -112,8 +118,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         lose.SetActive(false);
         isTradeButtonActive = true;
         isProductLineActive = true;
-        isInfoLineActive = true;
-       // Init1_4UI();
+        isInfoLineActive = true;  
     }
 
 
@@ -121,97 +126,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// <summary>
     /// 将1-4关未开启的UI关闭、开启
     /// </summary>
-    public void Init1_4UI()
-    {
-        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
-        {
-            return;
-        }
-
-        switch (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]))
-        //switch (1  )
-        {
-            case 0:
-           break;
-            case 1: 
-                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(false);
-                 
-                    Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled= false;
-                    Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled = false;
-                    Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
-                    Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
-              
-                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().tradText.gameObject.SetActive(false);
-                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(false);
-                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().tradText.gameObject.SetActive(false);
-                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().tradText.gameObject.SetActive(false);
-                CreateTradeManager.My.startRolePanel.gameObject.SetActive(false);
-                CreateTradeManager.My.endRolePanel.gameObject.SetActive(false);
-                CreateTradeManager.My.divideSlider.gameObject.SetActive(false);
-             
-           break;     
-            case 2:
-            case 3:
-                //装备
-                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
-                //先后前
-                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled= false;
-                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled = false;
-                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "???";
-                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "???";
-                CreateTradeManager.My.startRolePanel.gameObject.SetActive(false);
-                CreateTradeManager.My.endRolePanel.gameObject.SetActive(false);
-                CreateTradeManager.My.divideSlider.gameObject.SetActive(false);
-               // 风险交易成本
-                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().tradText.gameObject.SetActive(false);
-                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(false);
-                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().tradText.gameObject.SetActive(false);
-                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().tradText.gameObject.SetActive(false);
-                break;     
-          
-            case 4:
-            case 5:
-                //装备
-                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
-                //先后前
-                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled = true;
-                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled= true;
-                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "先结算";
-                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "后结算";
-                CreateTradeManager.My.startRolePanel.gameObject.SetActive(true);
-                CreateTradeManager.My.endRolePanel.gameObject.SetActive(true);
-                CreateTradeManager.My.divideSlider.gameObject.SetActive(false);
-                // 风险交易成本
-                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().tradText.gameObject.SetActive(true);
-                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(true);
-                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().tradText.gameObject.SetActive(true);
-                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().tradText.gameObject.SetActive(true);
-                break;    
      
-            default:
-                //装备
-                Panel_Update.GetComponent<RoleUpdateInfo>().changeRoleButton.gameObject.SetActive(true);
-                //先后前
-                Panel_TradeSetting.transform.Find("MoneyFirst").GetComponent<Button>(). enabled = true;
-                Panel_TradeSetting.transform.Find("MoneyLast").GetComponent<Button>(). enabled= true;
-                Panel_TradeSetting.transform.Find("MoneyFirst").GetChild(0).GetComponent<Text>().text = "先结算";
-                Panel_TradeSetting.transform.Find("MoneyLast").GetChild(0).GetComponent<Text>().text = "后结算";
-                CreateTradeManager.My.startRolePanel.gameObject.SetActive(true);
-                CreateTradeManager.My.endRolePanel.gameObject.SetActive(true);
-                CreateTradeManager.My.divideSlider.gameObject.SetActive(true);
-                // 风险交易成本
-                Panel_Update.GetComponent<RoleUpdateInfo>().seed.GetComponent<RoleListInfoSeed>().tradText.gameObject.SetActive(true);
-                Panel_Update.GetComponent<RoleUpdateInfo>().peasant.GetComponent<RoleListInfoPeasant>().tradText.gameObject.SetActive(true);
-                Panel_Update.GetComponent<RoleUpdateInfo>().merchant.GetComponent<RoleListInfoMerchant>().tradText.gameObject.SetActive(true);
-                Panel_Update.GetComponent<RoleUpdateInfo>().dealer.GetComponent<RoleListInfoDealer >().tradText.gameObject.SetActive(true);
-                break;    
-
-                
-        }
-          
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -260,21 +175,15 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         Button_Pause.onClick.AddListener(()=>{
             AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
-            DataUploadManager.My.AddData(DataEnum.时间_暂停次数);
-            //GamePause();
+            DataUploadManager.My.AddData(DataEnum.时间_暂停次数); 
         });
         Button_Normal.onClick.AddListener(()=> {
-            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
-            //GameNormal();
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange); 
         });
         Button_Accelerate.onClick.AddListener(()=> {
-            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange);
-            //GameAccelerate();
+            AudioManager.My.PlaySelectType(GameEnum.AudioClipType.TimeScaleChange); 
         });
-        Button_Normal.interactable = false;
-        //if (!PlayerData.My.isSOLO && PlayerData.My.creatRole != PlayerData.My.playerDutyID)
-        //    return;
-        //GameNormal();
+        Button_Normal.interactable = false; 
     }
 
     /// <summary>
@@ -315,8 +224,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         DOTween.PlayAll();
         DOTween.timeScale = 1f;
-        DOTween.defaultAutoPlay = AutoPlay.All;
-        //MessageManager.my.RpcGameNormal();
+        DOTween.defaultAutoPlay = AutoPlay.All; 
         Button_Pause.interactable = true;
         Button_Normal.interactable = false;
         Button_Accelerate.interactable = true;
@@ -344,8 +252,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     {
         DOTween.PlayAll();
         DOTween.timeScale = times;
-        DOTween.defaultAutoPlay = AutoPlay.All;
-        //MessageManager.my.RpcGameAccerlarate();
+        DOTween.defaultAutoPlay = AutoPlay.All; 
         Button_Pause.interactable = true;
         Button_Normal.interactable = true;
         Button_Accelerate.interactable = false;
@@ -394,7 +301,7 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
         {
             if (needReycastTargetPanel[i].activeSelf)
             {
-                //print(needReycastTargetPanel[i].name);
+         
                 return true;
             }
         }
@@ -450,16 +357,13 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             {
                 PlayerData.My.client.SendToServerMsg(str1);
             }
-        }
-        //Panel_CreateTrade.SetActive(true);
-        //CreateTradeManager.My.Open(go);
+        } 
         isSetTrade = false;
         if (StageGoal.My.isTurnStart)
         {
             StageGoal.My.isInTurnCreateTrade = true;
         }
-        DataUploadManager.My.AddData(DataEnum.交易_建交易);
-        //CreateTradeLineGo.SetActive(false);
+        DataUploadManager.My.AddData(DataEnum.交易_建交易); 
     }
 
     public void OpenDeletePanel()
@@ -485,12 +389,6 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
             }
         }
     }
-
-    public bool isTradeButtonActive = true;
-
-    public bool isProductLineActive = true;
-
-    public bool isInfoLineActive = true;
 
     /// <summary>
     /// 隐藏所有角色头上的创建交易按钮

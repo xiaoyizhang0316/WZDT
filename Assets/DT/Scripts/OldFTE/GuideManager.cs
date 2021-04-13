@@ -238,12 +238,7 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         //     {
         //         VARIABLE.isCanPlace = true;
         //     }
-        // }
-
-        if (SceneManager.GetActiveScene().name.Equals("FTE_1"))
-        {
-            FTE_1Manager.My.startButton.interactable = true;
-        }
+        // } 
 
         if (!PlayerData.My.isSOLO)
         {
