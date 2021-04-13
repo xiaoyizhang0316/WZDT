@@ -416,30 +416,31 @@ public class LevelSign : MonoBehaviour
             }
             else if (levelID <= NetworkMgr.My.playerGroupInfo.levelLimit)
             {
-                if ((lastStar.Equals("000")&& levelID!=1)||CheckLockLevel(fte)|| ! CheckUserLevel()||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
+                if ((lastStar.Equals("000")&& levelID!=1)/*||CheckLockLevel(fte)*/|| ! CheckUserLevel()||(!PlayerData.My.isSOLO && !PlayerData.My.isServer))
                 {
                     HideAllStars();
                     transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
                     transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelLockImage;
+                    
+                    if (levelID == NetworkMgr.My.playerGroupInfo.openLevel + 1)
+                    {
+                        transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
+                        transform.GetChild(0).GetComponent<Image>().raycastTarget = true;
+                        if (currentStar[0] == '0')
+                        {
+                            transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
+                        }
+                        if (currentStar[1] == '0')
+                        {
+                            transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
+                        }
+                        if (currentStar[2] == '0')
+                        {
+                            transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
+                        }
+                    }
                 }
                 else
-                {
-                    transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
-                    if (currentStar[0] == '0')
-                    {
-                        transform.Find("Star_0").GetChild(0).gameObject.SetActive(false);
-                    }
-                    if (currentStar[1] == '0')
-                    {
-                        transform.Find("Star_1").GetChild(0).gameObject.SetActive(false);
-                    }
-                    if (currentStar[2] == '0')
-                    {
-                        transform.Find("Star_2").GetChild(0).gameObject.SetActive(false);
-                    }
-                }
-
-                if (levelID == NetworkMgr.My.playerGroupInfo.openLevel + 1)
                 {
                     transform.GetChild(0).GetComponent<Image>().sprite = LevelInfoManager.My.levelUnlockImage;
                     if (currentStar[0] == '0')

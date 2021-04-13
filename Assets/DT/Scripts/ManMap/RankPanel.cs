@@ -94,12 +94,32 @@ public class RankPanel : MonoSingleton<RankPanel>
                 NetworkMgr.My.GetReplayLists(currentSceneName, () =>
                 {
                     ShowRecordList();
+                    if (NetworkMgr.My.replayLists.Count > 0)
+                    {
+                        LevelInfoManager.My.isUseGuide.isOn = false;
+                        LevelInfoManager.My.isUseGuide.interactable = true;
+                    }
+                    else
+                    {
+                        LevelInfoManager.My.isUseGuide.isOn = true;
+                        LevelInfoManager.My.isUseGuide.interactable = false;
+                    }
                 });
                 getRecord = true;
             }
             else
             {
                 ShowRecordList();
+                /*if (NetworkMgr.My.replayLists.Count > 0)
+                {
+                    LevelInfoManager.My.isUseGuide.isOn = PlayerPrefs.GetInt("isUseGuide") == 1;
+                    LevelInfoManager.My.isUseGuide.interactable = true;
+                }
+                else
+                {
+                    LevelInfoManager.My.isUseGuide.isOn = true;
+                    LevelInfoManager.My.isUseGuide.interactable = false;
+                }*/
             }
         }
     }

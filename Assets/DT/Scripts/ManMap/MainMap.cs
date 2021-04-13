@@ -283,7 +283,7 @@ public class MainMap : MonoBehaviour
 
     string GetFTEProgress()
     {
-        string fte = "";
+        string fte = CompareFTE();
         /*switch (NetworkMgr.My.levelProgressList.Count)
         {
             case 0:
@@ -303,7 +303,7 @@ public class MainMap : MonoBehaviour
                 break;
         }*/
 
-        if (NetworkMgr.My.playerGroupInfo.isOpenLimitLevel)
+        /*if (NetworkMgr.My.playerGroupInfo.isOpenLimitLevel)
         {
             fte = NetworkMgr.My.levelProgressList.Count.ToString();
             if (float.Parse(NetworkMgr.My.playerDatas.fte) < 4.5f)
@@ -321,21 +321,66 @@ public class MainMap : MonoBehaviour
         else
         {
             fte = NetworkMgr.My.levelProgressList.Count.ToString();
+            //Debug.Log("fte "+fte);
+            //Debug.Log("fte "+NetworkMgr.My.playerDatas.fte);
 
             if (float.Parse(NetworkMgr.My.playerDatas.fte.Equals("")?"0":NetworkMgr.My.playerDatas.fte) < float.Parse(fte))
             {
+                //Debug.Log("fte "+NetworkMgr.My.playerDatas.fte);
                 NetworkMgr.My.UpdatePlayerFTE(fte);
             }
             else
             {
                 fte = NetworkMgr.My.playerDatas.fte;
+                //Debug.Log("fte "+fte);
             }
-        }
+        }*/
 
         
 
         //InitFTELevel(fte);
         InitNewFTELevel(fte);
+
+        return fte;
+    }
+
+    string CompareFTE()
+    {
+        string fte = NetworkMgr.My.playerDatas.fte;
+        LevelProgress lp;
+        switch (fte)
+        {
+            case "0.7":
+                lp = NetworkMgr.My.GetLevelProgressByIndex(1);
+                if (lp != null && lp.starNum > 0)
+                {
+                    fte = "1";
+                }
+                break;
+            case "1.6":
+                lp = NetworkMgr.My.GetLevelProgressByIndex(2);
+                if (lp != null && lp.starNum > 0)
+                {
+                    fte = "2";
+                }
+                break;
+            case "2.5":
+                lp = NetworkMgr.My.GetLevelProgressByIndex(3);
+                if (lp != null && lp.starNum > 0)
+                {
+                    fte = "3";
+                }
+                break;
+            case "3.5":
+                lp = NetworkMgr.My.GetLevelProgressByIndex(4);
+                if (lp != null && lp.starNum > 0)
+                {
+                    fte = "4";
+                }
+                break;
+            default:
+                break;
+        }
 
         return fte;
     }
@@ -400,7 +445,7 @@ public class MainMap : MonoBehaviour
                 SetTeachLevelStatus(newTeachLevel[0], false);
                 break;
             case "0.5":
-                Debug.Log("case "+fte);
+                //Debug.Log("case "+fte);
                 SetTeachLevelStatus(newTeachLevel[0], false);
                 SetTeachLevelStatus(newTeachLevel[1], false);
                 break;

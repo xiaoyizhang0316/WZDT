@@ -704,6 +704,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         //Debug.LogWarning("game time: " + (endTime - startTime) + "   operations nums: " + playerOperations.Count);
         if (endTime - startTime <= 20 || playerOperations.Count <= 5)
             return;
+        Debug.Log("commit");
         tempReplay = new PlayerReplay(false);
         NetworkMgr.My.AddReplayData(tempReplay);
         NetworkMgr.My.UpdateLevelProgress( int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]), 0,"000", "000", 0);

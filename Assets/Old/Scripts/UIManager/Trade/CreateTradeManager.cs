@@ -122,7 +122,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         endRoleTradeCost = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole)).baseRoleData.tradeCost;
         InitName();
         InitRoleInfo();
-        List<string> sceneList = new List<string>() { "FTE_0.5","FTE_1"};
+        List<string> sceneList = new List<string>() { "FTE_0.5"};
         if (!sceneList.Contains(SceneManager.GetActiveScene().name))
         {
             InitCashFlow();
@@ -197,50 +197,18 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
     /// </summary>
     public void InitTradeCost()
     {
-        BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole));
-        BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole));
-        int result = (int)((startRoleTradeCost * startPer + startRole.baseRoleData.riskResistance));
-        result += (int)((endRoleTradeCost * endPer + endRole.baseRoleData.riskResistance) );
-        if (startRole.isNpc || endRole.isNpc)
-        {
-            result = (int)(result * 0.3f);
-        }
-        else
-        {
-            result = (int)(result * 0.2f);
-        }
-        if (!currentTrade.isTradeSettingBest())
-        {
-            if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
-            {
-                result *= 2;
-            }
-            else
-            {
-                if (startRole.baseRoleData.riskResistance == 0 && endRole.baseRoleData.riskResistance == 0)
-                {
-                    result *= 2;
-                }
-                else
-                {
-                    int diff = Mathf.Abs(startRole.baseRoleData.riskResistance - endRole.baseRoleData.riskResistance) / 2;
-                    int ave = (startRole.baseRoleData.riskResistance + endRole.baseRoleData.riskResistance) / 2;
-                    float per = 2f * diff / ave + 1f;
-                    result = (int)(result * per);
-                }
-            }
-        }
+        int result = currentTrade.CalculateTC(true);
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.castRole));
-        if (StageGoal.My.currentType == StageType.Normal)
+        if (StageGoal.My.currentType == StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
             {
-                tradeCostText.text = (result * 4).ToString();
+                tradeCostText.text = (result/3 /** 4*/).ToString();
             }
             else if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
             {
                 int tradeCount = cast.tradeList.Count;
-                tradeCostText.text = (result * 4 / tradeCount).ToString();
+                tradeCostText.text = (result/3 /** 4*/ / tradeCount).ToString();
             }
         }
         else

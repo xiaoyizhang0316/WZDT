@@ -64,16 +64,9 @@ public class TradeSign : MonoBehaviour
         tradeData.dividePercent = 0;
         startPer = 1f; 
         endPer = 1f;
-        if (PlayerData.My.xianJinLiu[3])
-        {
-            if (!isTradeSettingBest())
-            {
-                tradeData.selectCashFlow = CashFlowType.后钱;
-            }
-        }
         if (BaseLevelController.My.stageSpecialTypes.Contains(StageSpecialType.TradeAlwaysRight))
         {
-            if (!isTradeSettingBest())
+            if (!IsTradeSettingBest())
             {
                 tradeData.selectCashFlow = CashFlowType.后钱;
             }
@@ -181,7 +174,7 @@ public class TradeSign : MonoBehaviour
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
-            int costNum = CalculateTC(true) * 4;
+            int costNum = CalculateTC(true)/3 /** 4*/;
             StageGoal.My.CostPlayerGold(costNum);
             StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
         }
@@ -190,7 +183,7 @@ public class TradeSign : MonoBehaviour
             BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole));
             GoodsSign[] goodsSigns = GetComponentsInChildren<GoodsSign>();
             int tradeCount = cast.tradeList.Count;
-            int costNum = CalculateTC(true) * 4 / tradeCount;
+            int costNum = CalculateTC(true)/3 /** 4*/ / tradeCount;
             StageGoal.My.CostPlayerGold(costNum);
             StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
             for (int i = 0; i < goodsSigns.Length; i++)
@@ -364,19 +357,24 @@ public class TradeSign : MonoBehaviour
     {
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
-        int result = (int)((startRole.baseRoleData.tradeCost * startPer + startRole.baseRoleData.riskResistance));
-        result += (int)((endRole.baseRoleData.tradeCost * endPer + endRole.baseRoleData.riskResistance));
-        bool isOutTrade = false;
-        if (startRole.isNpc || endRole.isNpc)
-        {
-            isOutTrade = true;
-            result = (int)(result * 0.3f);
-        }
-        else
-        {
-            result = (int)(result * 0.2f);
-        }
-        if (!isTradeSettingBest())
+        int result = (int)(startRole.baseRoleData.tradeCost * startPer);
+        result += (int)(endRole.baseRoleData.tradeCost * endPer );
+        float distance = Vector3.Distance(startRole.transform.position, endRole.transform.position);
+        float searchAdd = CommonParams.searchBase * (distance - 0.2f * CommonParams.maxMapDistance) / CommonParams.maxMapDistance;
+        float maxRiskBase = Mathf.Sqrt(CommonParams.maxMapRisk * CommonParams.maxMapRisk * 2f);
+        float riskBase = Mathf.Sqrt(Mathf.Pow(startRole.baseRoleData.riskResistance, 2) + Mathf.Pow(endRole.baseRoleData.riskResistance, 2));
+        float bargainAdd = CommonParams.bargainBase * (Mathf.Exp(riskBase / maxRiskBase - 1f) - Mathf.Exp(-1)) /
+                           (1 - Mathf.Exp(-1));
+        float encourageAdd = Mathf.Pow(startRole.encourageLevel >= 0 ? 0 : 0 - startRole.encourageLevel, 2) +
+                             Mathf.Pow(endRole.encourageLevel >= 0 ? 0 : 0 - endRole.encourageLevel, 2);
+        float deliveryAdd = encourageAdd / CommonParams.bargainBase;
+        result = (int)(result * (1f + searchAdd + bargainAdd + deliveryAdd));
+        // Debug.Log(("distance:"  + distance));
+        // Debug.Log(("搜寻:"  + searchAdd));
+        // Debug.Log(("议价:"  + bargainAdd));
+        // Debug.Log(("交付:"  + deliveryAdd));
+        // Debug.Log("总:" + result);
+        if (!IsTradeSettingBest())
         {
             if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
             {
@@ -401,6 +399,7 @@ public class TradeSign : MonoBehaviour
         {
             StageGoal.My.CostPlayerGold(result);
             StageGoal.My.Expend(result, ExpendType.TradeCosts);
+            //Debug.Log("发生交易，交易费用：" + result);
         }
         return result;
     }
@@ -429,7 +428,7 @@ public class TradeSign : MonoBehaviour
     /// 判断交易成本是不是最优
     /// </summary>
     /// <returns></returns>
-    public bool isTradeSettingBest()
+    public bool IsTradeSettingBest()
     {
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));

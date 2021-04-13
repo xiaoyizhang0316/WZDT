@@ -90,14 +90,15 @@ public class T4_Manager : MonoSingleton<T4_Manager>
         dealer_sign.GetComponent<CreatRole_Button>().ReadCostTech(cost);
     }
 
+    private Coroutine c;
     /// <summary>
     /// 生成消费者
     /// </summary>
     /// <param name="type"></param>
     public void BornConsumer(int type, int count=0)
     {
-        Debug.Log(type+" born "+count);
-        StartCoroutine( bornPoint.GetComponent<Building>().BornEnemyForFTE(type, count));
+        //Debug.Log(type+" born "+count);
+         c= StartCoroutine( bornPoint.GetComponent<Building>().BornEnemyForFTE(type, count));
     }
 
     /// <summary>
@@ -105,7 +106,8 @@ public class T4_Manager : MonoSingleton<T4_Manager>
     /// </summary>
     public void StopBornConsumer()
     {
-        bornPoint.GetComponent<Building>().bornFTE = false;
+        //bornPoint.GetComponent<Building>().bornFTE = false;
+        StopCoroutine(c);
     }
 
     /// <summary>
