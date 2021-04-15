@@ -4,6 +4,7 @@
 		_MainTex ("Terrain Texture Array", 2DArray) = "white" {}
 		_GridTex ("Grid Texture", 2D) = "white" {}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
+       _BumpMap("法线贴图",2D)=""{}
 		_Specular ("Specular", Color) = (0.2, 0.2, 0.2)
 		_BackgroundColor ("Background Color", Color) = (0,0,0)
 		[Toggle(SHOW_MAP_DATA)]_ShowMapData ("Show Map Data", Float) = 0
@@ -27,8 +28,9 @@
 		UNITY_DECLARE_TEX2DARRAY(_MainTex);
 
 		sampler2D _GridTex;
+    
 
-		half _Glossiness;
+       half _Glossiness;
 		fixed3 _Specular;
 		fixed4 _Color;
 		half3 _BackgroundColor;
@@ -38,12 +40,13 @@
 			float3 worldPos;
 			float3 terrain;
 			float4 visibility;
-
+				float2 uv_BumpMap;
+				
 			#if defined(SHOW_MAP_DATA)
 				float mapData;
 			#endif
 		};
-
+sampler2D _BumpMap;
 		void vert (inout appdata_full v, out Input data) {
 			UNITY_INITIALIZE_OUTPUT(Input, data);
 
@@ -93,6 +96,7 @@
 
 			float explored = IN.visibility.w;
 			o.Albedo = c.rgb * grid * _Color * explored;
+			o.Normal=UnpackNormal(tex2D(_BumpMap,IN.uv_BumpMap));
 			#if defined(SHOW_MAP_DATA)
 				o.Albedo = IN.mapData * grid;
 			#endif
