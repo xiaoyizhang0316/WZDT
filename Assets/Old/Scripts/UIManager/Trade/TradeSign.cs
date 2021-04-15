@@ -373,11 +373,11 @@ public class TradeSign : MonoBehaviour
                              Mathf.Pow(endRole.encourageLevel >= 0 ? 0 : 0 - endRole.encourageLevel, 2);
         float deliveryAdd = encourageAdd / CommonParams.bargainBase;
         result = (int)(result * (1f + searchAdd + bargainAdd + deliveryAdd));
-        // Debug.Log(("distance:"  + distance));
-        // Debug.Log(("搜寻:"  + searchAdd));
-        // Debug.Log(("议价:"  + bargainAdd));
-        // Debug.Log(("交付:"  + deliveryAdd));
-        // Debug.Log("总:" + result);
+        Debug.Log(("distance:"  + distance));
+        Debug.Log(("搜寻:"  + searchAdd));
+        Debug.Log(("议价:"  + bargainAdd));
+        Debug.Log(("交付:"  + deliveryAdd));
+        Debug.Log("总:" + result);
         if (!IsTradeSettingBest())
         {
             if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))

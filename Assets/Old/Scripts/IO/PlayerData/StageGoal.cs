@@ -480,10 +480,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     void SetHealthBar(int beforeAdd, int add)
     {
         int afterAdd = beforeAdd + add;
+        playerHealth = afterAdd;
         float per;
-        if (beforeAdd + add < stageDan[currentDan])
+        if (playerHealth < stageDan[currentDan])
         {
-            per = afterAdd / stageDan[currentDan];
+            per = playerHealth / stageDan[currentDan];
             if (currentDan == 0)
             {
                 healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue);
@@ -492,7 +493,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
         {
             currentDan++;
-            per = (afterAdd - stageDan[currentDan - 1]) / (stageDan[currentDan] - stageDan[currentDan - 1]);
+            per = (playerHealth - stageDan[currentDan - 1]) / (stageDan[currentDan] - stageDan[currentDan - 1]);
             if (currentDan == 1)
             {
                 healthBar1.DOFillAmount(1, 0.2f).Play().OnComplete(() =>
@@ -662,41 +663,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         if (list.Length == 0 && isComplete)
         {
-            if (playerHealth > 0)
+            if (playerHealth >= stageTarget)
             {
                 //print("胜利");
                 Win();
             }
-        }
-    }
-
-    /// <summary>
-    /// 检测是否胜利
-    /// </summary>
-    public void CheckWinNew()
-    {
-        if (currentType == StageType.Boss)
-            return;
-        if (playerHealth >= stageTarget)
-        {
-            Win();
-        }
-    }
-
-    /// <summary>
-    /// 检测是否失败
-    /// </summary>
-    public void CheckLossNew()
-    {
-        if (currentWave > maxWaveNumber)
-        {
-            if (playerHealth < stageTarget)
-            {
-                Lose();
-            }
             else
             {
-                CheckWinNew();
+                Lose();
             }
         }
     }
@@ -961,8 +935,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             if (!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
             {
-                //CheckWin();
-                CheckLossNew();
+                CheckWin();
             }
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
@@ -1258,14 +1231,15 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             maxMinusGold = -12000;
         }
-        playerHealth = data.startPlayerHealth;
-        if (PlayerData.My.cheatIndex3)
-            playerHealth = (int)(playerHealth * 1.5f);
-        playerMaxHealth = playerHealth;
+        //playerMaxHealth = data.startPlayerHealth;
+        playerHealth = 0;
+        // if (PlayerData.My.cheatIndex3)
+        //     playerHealth = (int)(playerHealth * 1.5f);
+        playerMaxHealth = data.stageDan[2];
         maxWaveNumber = data.maxWaveNumber;
         playerTechPoint = data.startTech;
         currentType = data.stageType;
-        stageTarget = data.stageTarget;
+        stageTarget = data.stageDan[0];
         stageDan =new List<int>(); 
         stageDan.AddRange( data.stageDan);
         SetInfoImmidiate();

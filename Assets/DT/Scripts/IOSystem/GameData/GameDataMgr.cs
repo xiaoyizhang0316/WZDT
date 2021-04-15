@@ -344,7 +344,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.sceneName = s.sceneName;
             temp.maxWaveNumber = int.Parse(s.maxWaveNumber);
             temp.startPlayerHealth = int.Parse(s.startPlayerHealth);
-            temp.stageTarget = int.Parse(s.stageTarget);
+            
             temp.startPlayerGold = int.Parse(s.startPlayerGold);
             temp.startTech = int.Parse(s.startTech);
             temp.stageType = (StageType)Enum.Parse(typeof(StageType), s.stageType);
