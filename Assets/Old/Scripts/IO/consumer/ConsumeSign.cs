@@ -284,9 +284,7 @@ public class ConsumeSign : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name.Equals("FTE_4.5") )
         {
-            
-                T8Manager.My.CheckTasteKill(buildingIndex);
-            
+            T8Manager.My.CheckTasteKill(buildingIndex);
         }
         DeathAward();
         Stop();
@@ -334,6 +332,10 @@ public class ConsumeSign : MonoBehaviour
         hud.UpdateInfo(per);
         if (currentHealth >= consumeData.maxHealth)
         {
+            if (currentHealth >= consumeData.maxHealth * 1.3)
+            {
+                consumeData.killMoney = (int) (consumeData.killMoney* 1.2f);
+            }
             OnDeath();
         }
     }
@@ -360,7 +362,9 @@ public class ConsumeSign : MonoBehaviour
             }
             currentHealth += num;
             if (currentHealth <= 0)
+            {
                 currentHealth = 0;
+            }
             HealthCheck();
         }
     }
@@ -371,38 +375,18 @@ public class ConsumeSign : MonoBehaviour
     public virtual void DeathAward()
     {
         int baseScore = consumeData.killSatisfy;
-        if (PlayerData.My.qiYeJiaZhi[0])
-        {
-            baseScore = baseScore * 110 / 100;
-        }
-
         StageGoal.My.GetSatisfy(baseScore);
+        StageGoal.My.GetHealth(consumeData.liveSatisfy);
         StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy);
         if (scorePer > 1f)
         {
-            if (PlayerData.My.qiYeJiaZhi[1])
-            {
-                scorePer *= 1.2f;
-            }
-            if (PlayerData.My.qiYeJiaZhi[2])
-            {
-                StageGoal.My.LostHealth(2);
-            }
             StageGoal.My.ConsumerExtraPerTip();
             DataUploadManager.My.AddData(消费者_口味击杀);
             StageGoal.My.ScoreGet(ScoreType.口味额外得分, (int)(baseScore * (scorePer - 1f)));
         }
         int baseGold = consumeData.killMoney;
-        if (PlayerData.My.yingLiMoShi[0])
-        {
-            baseGold = baseGold * 110 / 100;
-        }
-        if (!PlayerData.My.yingLiMoShi[5])
-        {
-            StageGoal.My.GetPlayerGold(baseGold);
-            StageGoal.My.Income(baseGold, IncomeType.Consume);
-        }
-
+        StageGoal.My.GetPlayerGold(baseGold); 
+        StageGoal.My.Income(baseGold, IncomeType.Consume);
         if (PlayerData.My.isPrediction)
         {
             StageGoal.My.predictKillNum++;
@@ -418,14 +402,11 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void LivePunish()
     {
-        int number = consumeData.liveSatisfy;
-        if (StageGoal.My.playerGold < 0)
-        {
-            number *= 2;
-        }
-        StageGoal.My.LostHealth(number);
-        StageGoal.My.GetSatisfy((consumeData.killSatisfy * currentHealth / consumeData.maxHealth));
-        StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy * currentHealth / consumeData.maxHealth);
+        int baseGold = consumeData.killMoney * (currentHealth / consumeData.maxHealth) / 2;
+        StageGoal.My.GetPlayerGold(baseGold);
+        StageGoal.My.Income(baseGold, IncomeType.Consume);
+        // StageGoal.My.GetSatisfy((consumeData.killSatisfy * currentHealth / consumeData.maxHealth));
+        // StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy * currentHealth / consumeData.maxHealth);
         StageGoal.My.ConsumerAliveTip();
     }
 

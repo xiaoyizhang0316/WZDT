@@ -174,7 +174,7 @@ public class TradeSign : MonoBehaviour
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
-            int costNum = CalculateTC(true)/3 /** 4*/;
+            int costNum = CalculateTC(true)/** 4*/;
             StageGoal.My.CostPlayerGold(costNum);
             StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
         }
@@ -183,7 +183,7 @@ public class TradeSign : MonoBehaviour
             BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole));
             GoodsSign[] goodsSigns = GetComponentsInChildren<GoodsSign>();
             int tradeCount = cast.tradeList.Count;
-            int costNum = CalculateTC(true)/3 /** 4*/ / tradeCount;
+            int costNum = CalculateTC(true) /** 4*/ / tradeCount;
             StageGoal.My.CostPlayerGold(costNum);
             StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
             for (int i = 0; i < goodsSigns.Length; i++)
@@ -210,6 +210,8 @@ public class TradeSign : MonoBehaviour
         }
     }
 
+    // 交易初始 child count
+    private int startChildCount = 0;
     /// <summary>
     /// 生成交易物流线
     /// </summary>
@@ -232,6 +234,8 @@ public class TradeSign : MonoBehaviour
             go.transform.localScale = new Vector3(LThickness, HalfLength, LThickness);
             tempStart = go.transform.position;
         }
+        //Debug.Log("sign count "+ transform.childCount);
+        startChildCount = transform.childCount + 1;
         gameObject.SetActive(NewCanvasUI.My.isProductLineActive);
     }
 
@@ -548,5 +552,14 @@ public class TradeSign : MonoBehaviour
     public void HideTradeIcon()
     {
         icon.HideRelateIcon();
+    }
+
+    /// <summary>
+    /// 获取当前交易线上的产品数量
+    /// </summary>
+    /// <returns></returns>
+    public int GetGoodsCountOnTradeLine()
+    {
+        return transform.childCount - startChildCount;
     }
 }

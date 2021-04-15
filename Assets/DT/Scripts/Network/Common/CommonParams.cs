@@ -22,4 +22,11 @@ public static class CommonParams
     
     #endregion
 
+    #region 特效
+
+    public static string overkillEffect = "Overkill";
+
+    public static string peasantCritEffect = "PeasantCrit";
+
+    #endregion
 }

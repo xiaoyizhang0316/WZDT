@@ -23,7 +23,7 @@ public class StageData
     public List<int> waveWaitTime;
 
     /// <summary>
-    /// 玩家初始血量
+    /// 血条满对应的血量
     /// </summary>
     public int startPlayerHealth;
 
@@ -41,6 +41,11 @@ public class StageData
     /// 关卡类型    
     /// </summary>
     public StageType stageType;
+    
+    /// <summary>
+    /// 段位（血条）
+    /// </summary>
+    public List<int> stageDan;
 
     /// <summary>
     /// 最低赤字值

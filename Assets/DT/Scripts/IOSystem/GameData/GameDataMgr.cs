@@ -344,6 +344,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.sceneName = s.sceneName;
             temp.maxWaveNumber = int.Parse(s.maxWaveNumber);
             temp.startPlayerHealth = int.Parse(s.startPlayerHealth);
+            
             temp.startPlayerGold = int.Parse(s.startPlayerGold);
             temp.startTech = int.Parse(s.startTech);
             temp.stageType = (StageType)Enum.Parse(typeof(StageType), s.stageType);
@@ -394,6 +395,16 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             {
                 if (int.Parse(str) != -1)
                     temp.starThreeWorker.Add(int.Parse(str));
+            }
+
+            temp.stageDan = new List<int>();
+            strList = s.stageDan.Split(',');
+            for (int i = 0; i < strList.Length; i++)
+            {
+                if (int.Parse(strList[i]) != -1)
+                {
+                    temp.stageDan.Add(int.Parse(strList[i]));
+                }
             }
             stageDatas.Add(temp);
         }

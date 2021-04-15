@@ -20,6 +20,8 @@ public class StageItem
 
     public string stageType;
 
+    public string stageDan;
+
     //public string maxMinusGold;
 
     /// <summary>

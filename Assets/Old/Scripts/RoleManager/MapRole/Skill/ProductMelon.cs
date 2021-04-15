@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DT.Fight.Bullet;
 using UnityEngine;
+using Random = System.Random;
 
 public class ProductMelon : BaseSkill
 {
@@ -34,8 +35,8 @@ public class ProductMelon : BaseSkill
             {
                 badBaseBuffs[i].OnProduct(ref data);
             }
-            try
-            {
+           try
+          {
                 GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
                 game.GetComponent<GoodsSign>().productData = data;
                 game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();
@@ -43,13 +44,25 @@ public class ProductMelon : BaseSkill
                 game.transform.position = transform.position;
                 game.GetComponent<GoodsSign>().Move();
                 productDatas.Add(new ProductData(data));
+              
+                Debug.Log("UnityEngine.Random.Range(0, 100)"+UnityEngine.Random.Range(0, 100));
+                if (UnityEngine.Random.Range(0, 100) < role.baseRoleData.effect)
+                {
+                      game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
+                    game.GetComponent<GoodsSign>().productData = data;
+                    game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();
+                    game.GetComponent<GoodsSign>().role = PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
+                    game.transform.position = transform.position;
+                    game.GetComponent<GoodsSign>().Move();
+                    productDatas.Add(new ProductData(data)); 
+                }
                 currentCount++;
-            }
-            catch (Exception ex)
-            {
-                Debug.Log("exception" +  ex.Message);
-                currentCount = 0;
-            }
+          }
+          catch (Exception ex)
+          {
+              Debug.Log("exception" +  ex.Message);
+              currentCount = 0;
+          }
             if (currentCount >= role.tradeList.Count)
             {
                 currentCount = 0;

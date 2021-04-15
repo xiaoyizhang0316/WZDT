@@ -35,6 +35,16 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 最大赤字
     /// </summary>
     public int maxMinusGold;
+    
+    /// <summary>
+    /// 胜利目标
+    /// </summary>
+    public int stageTarget;
+
+    /// <summary>
+    /// 段位
+    /// </summary>
+    public List<int> stageDan;
 
     /// <summary>
     /// 是否处于赤字状态
@@ -164,6 +174,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public int endTime;
 
     public StageType currentType;
+
 
     /// <summary>
     /// 当前关卡敌人波数数据
@@ -419,6 +430,97 @@ public class StageGoal : MonoSingleton<StageGoal>
     }
 
     /// <summary>
+    /// 加血
+    /// </summary>
+    /// <param name="healthAdd"></param>
+    public void GetHealth(int healthAdd)
+    {
+        //SetHealthBar(playerHealth, healthAdd);
+        //playerHealth += healthAdd;
+        add_queue.Enqueue(healthAdd);
+        if (!isRunInQueue)
+        {
+            ExeQueue();
+        }
+        SetInfo();
+        //CheckWinNew();
+    }
+
+    // 加血队列
+    private Queue<int> add_queue = new Queue<int>();
+    // 队列是否正在执行
+    private bool isRunInQueue = false;
+    // 当前段位
+    private int currentDan = 0;
+    // 血条示意图
+    public Image healthBar1;
+    public Image healthBar2;
+    // 段位图
+    public List<Sprite> danSprite;
+
+    /// <summary>
+    /// 执行加血效果队列
+    /// </summary>
+    void ExeQueue()
+    {
+        isRunInQueue = true;
+        if (add_queue.Count > 0)
+        {
+            SetHealthBar(playerHealth, add_queue.Dequeue());
+        }
+        else
+        {
+            isRunInQueue = false;
+        }
+    }
+    
+    /// <summary>
+    /// 刷新显示血条
+    /// </summary>
+    void SetHealthBar(int beforeAdd, int add)
+    {
+        int afterAdd = beforeAdd + add;
+        playerHealth = afterAdd;
+        float per;
+        if (playerHealth < stageDan[currentDan])
+        {
+            per = playerHealth / stageDan[currentDan];
+            if (currentDan == 0)
+            {
+                healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue);
+            }
+        }
+        else
+        {
+            currentDan++;
+            per = (playerHealth - stageDan[currentDan - 1]) / (stageDan[currentDan] - stageDan[currentDan - 1]);
+            if (currentDan == 1)
+            {
+                healthBar1.DOFillAmount(1, 0.2f).Play().OnComplete(() =>
+                {
+                    healthBar2.sprite = danSprite[currentDan];
+                    healthBar2.DOFillAmount(per, 0.3f).Play().OnComplete(ExeQueue);
+                });
+            }
+            else
+            {
+                healthBar2.DOFillAmount(1, 0.2f).Play().OnComplete(() =>
+                {
+                    healthBar1.sprite = danSprite[currentDan - 1];
+                    healthBar2.fillAmount = 0;
+                    healthBar2.sprite = danSprite[currentDan];
+                    healthBar2.DOFillAmount(per, 0.3f).Play().OnComplete(ExeQueue);
+                });
+                //healthBar2.fillAmount = 1;
+                //healthBar1.sprite = danSprite[currentDan - 1];
+                //healthBar2.fillAmount = 0;
+                //healthBar2.sprite = danSprite[currentDan];
+                //healthBar2.fillAmount = per;
+            }
+        }
+    }
+
+    /// <summary>
     /// 设置两个条的长度    
     /// </summary>
     public void SetInfo(float time = 0.2f)
@@ -430,7 +532,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             per = 1f;
             playerHealth = playerMaxHealth;
         }
-        playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
+        //playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
         playerGoldText.DOText(playerGold.ToString(), time, true, ScrambleMode.None).Play();
 
         if (playerGold > 0)
@@ -476,7 +578,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             per = 1f;
             playerHealth = playerMaxHealth;
         }
-        playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
+        //playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
         playerGoldText.text = playerGold.ToString();
         if (playerGold > 0)
             playerGoldText.DOColor(Color.white, 0.02f).Play();
@@ -561,10 +663,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         if (list.Length == 0 && isComplete)
         {
-            if (playerHealth > 0)
+            if (playerHealth >= stageTarget)
             {
                 //print("胜利");
                 Win();
+            }
+            else
+            {
+                Lose();
             }
         }
     }
@@ -828,7 +934,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
         {
             if (!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
+            {
                 CheckWin();
+            }
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 timeCount++;
@@ -1123,13 +1231,17 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             maxMinusGold = -12000;
         }
-        playerHealth = data.startPlayerHealth;
-        if (PlayerData.My.cheatIndex3)
-            playerHealth = (int)(playerHealth * 1.5f);
-        playerMaxHealth = playerHealth;
+        //playerMaxHealth = data.startPlayerHealth;
+        playerHealth = 0;
+        // if (PlayerData.My.cheatIndex3)
+        //     playerHealth = (int)(playerHealth * 1.5f);
+        playerMaxHealth = data.stageDan[2];
         maxWaveNumber = data.maxWaveNumber;
         playerTechPoint = data.startTech;
         currentType = data.stageType;
+        stageTarget = data.stageDan[0];
+        stageDan =new List<int>(); 
+        stageDan.AddRange( data.stageDan);
         SetInfoImmidiate();
         foreach (int i in data.waveWaitTime)
         {

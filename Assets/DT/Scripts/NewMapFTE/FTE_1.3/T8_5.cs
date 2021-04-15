@@ -78,8 +78,8 @@ public class T8_5 : BaseGuideStep
     public override bool ChenkEnd()
     {
      
-        missiondatas.data[0].currentNum = T8Manager.My.packageKillNum;
-        missiondatas.data[1].currentNum =  T8Manager.My.saleKillNum;
+        missiondatas.data[0].currentNum = T8Manager.My.saleKillNum;
+        missiondatas.data[1].currentNum =  T8Manager.My.packageKillNum;
 
         if (missiondatas.data[0].currentNum>=missiondatas.data[0].maxNum  )
         {
