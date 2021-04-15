@@ -334,6 +334,10 @@ public class ConsumeSign : MonoBehaviour
         hud.UpdateInfo(per);
         if (currentHealth >= consumeData.maxHealth)
         {
+            if (currentHealth >= consumeData.maxHealth * 1.3)
+            {
+                consumeData.killMoney = (int) (consumeData.killMoney* 1.2f);
+            }
             OnDeath();
         }
     }
@@ -360,7 +364,9 @@ public class ConsumeSign : MonoBehaviour
             }
             currentHealth += num;
             if (currentHealth <= 0)
+            {
                 currentHealth = 0;
+            }
             HealthCheck();
         }
     }
@@ -377,6 +383,7 @@ public class ConsumeSign : MonoBehaviour
         }
 
         StageGoal.My.GetSatisfy(baseScore);
+        StageGoal.My.GetHealth(consumeData.liveSatisfy);
         StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy);
         if (scorePer > 1f)
         {
@@ -423,7 +430,10 @@ public class ConsumeSign : MonoBehaviour
         {
             number *= 2;
         }
-        StageGoal.My.LostHealth(number);
+        //StageGoal.My.LostHealth(number);
+        int baseGold = consumeData.killMoney * (currentHealth / consumeData.maxHealth);
+        StageGoal.My.GetPlayerGold(baseGold);
+        StageGoal.My.Income(baseGold, IncomeType.Consume);
         StageGoal.My.GetSatisfy((consumeData.killSatisfy * currentHealth / consumeData.maxHealth));
         StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy * currentHealth / consumeData.maxHealth);
         StageGoal.My.ConsumerAliveTip();
