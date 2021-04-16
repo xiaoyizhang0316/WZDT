@@ -131,7 +131,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
                 if (hit[i].transform.tag.Equals("MapLand"))
                 {
-                    if (hit[i].transform.GetComponent<MapSign>().mapType == GameEnum.MapType.Road)
+                    if (hit[i].transform.GetComponent<HexCell>().TerrainTypeIndex == 3 )
                     {
                         if (GameDataMgr.My.GetConsumableDataByID(consumableId).consumableType ==
                             GameEnum.ConsumableType.SpawnItem)
@@ -183,12 +183,18 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             //print(p.consumableId);
             if (p.consumableId == consumableId)
             {
-                UpdateInfo();
-                return;
+                if (p.number > 0)
+                {
+                    UpdateInfo();
+                    return;
+                }
+                else
+                {
+                    Destroy(gameObject);
+                    return;
+                }
             }
         }
-
-        Destroy(gameObject);
     }
 
     /// <summary>

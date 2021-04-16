@@ -28,9 +28,9 @@ public class ConsumableData
     public ConsumableType consumableType;
 
     /// <summary>
-    /// 范围
+    /// 消耗的Mega值（0则不消耗）
     /// </summary>
-    public int range;
+    public int costTech;
 
     /// <summary>
     /// 消耗品作用

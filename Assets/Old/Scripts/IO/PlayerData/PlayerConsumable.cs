@@ -10,11 +10,14 @@ public class PlayerConsumable
 
     public int number;
 
+    public int useCount;
+
  
     public PlayerConsumable(int id ,int _number = 1)
     {
         consumableId = id;
         number = _number;
+        useCount = 0;
         
     }
 }
