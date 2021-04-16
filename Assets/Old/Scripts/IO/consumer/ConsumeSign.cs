@@ -402,7 +402,7 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void LivePunish()
     {
-        int baseGold = consumeData.killMoney * (currentHealth / consumeData.maxHealth) / 2;
+        int baseGold = consumeData.killMoney * currentHealth / consumeData.maxHealth / 2;
         StageGoal.My.GetPlayerGold(baseGold);
         StageGoal.My.Income(baseGold, IncomeType.Consume);
         // StageGoal.My.GetSatisfy((consumeData.killSatisfy * currentHealth / consumeData.maxHealth));

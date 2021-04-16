@@ -290,7 +290,7 @@ public class BaseBuff
     /// 计算角色相关的buff
     /// </summary>
     /// <param name="str"></param>
-    public void CheckRoleNumber(string str)
+    public void CheckRoleNumber(string str,bool isReAdd = false)
     {
         string[] attri = str.Split('_');
         switch (int.Parse(attri[0]))
@@ -341,6 +341,10 @@ public class BaseBuff
                 }
             case 18:
                 {
+                    if (isReAdd)
+                    {
+                        break;
+                    }
                     if (attri.Length == 2)
                     {
                         buffConfig.roleEncourageLevelChange = int.Parse(attri[1]);
@@ -541,7 +545,7 @@ public class BaseBuff
     {
         foreach (string str in buffData.OnBuffAdd)
         {
-            CheckRoleNumber(str);
+            CheckRoleNumber(str,true);
         }
     }
 
@@ -562,51 +566,11 @@ public class BaseBuff
         }
         else if (Mathf.Abs(float.Parse(attri[1])) > 1f)
         {
-            if (castRole != null)
-            {
-                float add;
-                if (PlayerData.My.yingLiMoShi[3])
-                {
-                    add = 1f + castRole.encourageLevel * 0.15f;
-                }
-                else
-                {
-                    add = 1f + castRole.encourageLevel * 0.1f;
-                }
-                num = (int)(int.Parse(attri[1]) * add);
-                if (PlayerData.My.yeWuXiTong[1])
-                {
-                    num = num * 110 / 100;
-                }
-            }
-            else
-            {
-                num = int.Parse(attri[1]);
-            }
+            num = int.Parse(attri[1]);
         }
         else
         {
-            if (castRole != null)
-            {
-                float add;
-                if (PlayerData.My.yingLiMoShi[3])
-                {
-                    add = 1f + castRole.encourageLevel * 0.15f;
-                }
-                else
-                {
-                    add = 1f + castRole.encourageLevel * 0.1f;
-                }
-                num = (int)(sourceNum * float.Parse(attri[1]) * add);
-                if (PlayerData.My.yeWuXiTong[1])
-                {
-                    num = num * 110 / 100;
-                }
-            }
-            else
-            {
-                num = (int)(sourceNum * float.Parse(attri[1]));
-            }
+            num = (int)(sourceNum * float.Parse(attri[1]));
         }
     }
 

@@ -47,6 +47,8 @@ public class TradeSign : MonoBehaviour
 
     private bool isChecked = false;
 
+    public int tradeStartTime;
+
     public List<string> bothIDs=new List<string>();
 
     public void Init(string start, string end)
@@ -62,6 +64,7 @@ public class TradeSign : MonoBehaviour
         tradeData.targetRole = end;
         tradeData.selectCashFlow = CashFlowType.先钱;
         tradeData.dividePercent = 0;
+        tradeStartTime = StageGoal.My.timeCount;
         startPer = 1f; 
         endPer = 1f;
         if (BaseLevelController.My.stageSpecialTypes.Contains(StageSpecialType.TradeAlwaysRight))
@@ -172,26 +175,31 @@ public class TradeSign : MonoBehaviour
     public void TurnTradeCost()
     {
         BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
+        int costNum = 0;
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
-            int costNum = CalculateTC(true)/** 4*/;
-            StageGoal.My.CostPlayerGold(costNum);
-            StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
+            costNum= CalculateTC(true) * 4;
         }
         else if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
         {
             BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole));
             GoodsSign[] goodsSigns = GetComponentsInChildren<GoodsSign>();
             int tradeCount = cast.tradeList.Count;
-            int costNum = CalculateTC(true) /** 4*/ / tradeCount;
-            StageGoal.My.CostPlayerGold(costNum);
-            StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
+            costNum = CalculateTC(true) * 4 / tradeCount;
             for (int i = 0; i < goodsSigns.Length; i++)
             {
                 target.AddPruductToWareHouse(goodsSigns[i].productData);
                 Destroy(goodsSigns[i].gameObject, 0f);
             }
         }
+
+        if (tradeStartTime > StageGoal.My.turnStartTime)
+        {
+            costNum = costNum * (StageGoal.My.timeCount - tradeStartTime) /
+                      (StageGoal.My.timeCount - StageGoal.My.turnStartTime);
+        }
+        StageGoal.My.CostPlayerGold(costNum);
+        StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
     }
 
     /// <summary>

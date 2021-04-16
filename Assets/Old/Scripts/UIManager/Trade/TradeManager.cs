@@ -12,7 +12,9 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// <summary>
     /// 所有交易的列表
     /// </summary>
-    public Dictionary<int, TradeSign> tradeList=new Dictionary<int, TradeSign>();
+    public Dictionary<int, TradeSign> tradeList = new Dictionary<int, TradeSign>();
+    
+    public Dictionary<int,int> deleteTradeList = new Dictionary<int, int>();   
 
     /// <summary>
     /// 删除指定ID的交易
@@ -23,6 +25,10 @@ public class TradeManager : MonoSingleton<TradeManager>
         if (tradeList.ContainsKey(ID))
         {
             TradeSign temp = tradeList[ID];
+            if (StageGoal.My.isTurnStart)
+            {
+                deleteTradeList.Add(StageGoal.My.timeCount,temp.CalculateTC(true));
+            }
             tradeList.Remove(ID);
             temp.ClearAllLine();
             DeleteTradeRecord(ID, temp);
@@ -370,6 +376,14 @@ public class TradeManager : MonoSingleton<TradeManager>
         {
             item.Value.TurnTradeCost();
         }
+
+        foreach (var item in deleteTradeList)
+        {
+            int costNum = item.Value * (StageGoal.My.timeCount - item.Key) / (StageGoal.My.timeCount - StageGoal.My.turnStartTime) * 4;
+            StageGoal.My.CostPlayerGold(costNum);
+            StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
+        }
+        deleteTradeList.Clear();
     }
 
     /// <summary>
