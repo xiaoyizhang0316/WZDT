@@ -5,12 +5,14 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class T_N1_Manager : MonoSingleton<T_N1_Manager>
+public class T_N0_Manager : MonoSingleton<T_N0_Manager>
 {
     public GameObject seed_sign;
     public GameObject peasant_sign;
     public GameObject merchant_sign;
     public GameObject dealer_sign;
+
+    public bool isTasteKill = false;
     
     /// <summary>
     /// 角色信息界面上移

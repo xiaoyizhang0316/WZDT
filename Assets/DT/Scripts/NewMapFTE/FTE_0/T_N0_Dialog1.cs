@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class T_N1_Dialog1 : FTE_Dialog
+public class T_N0_Dialog1 : FTE_Dialog
 {
     public BornType bornType;
     public override void BeforeDialog()
@@ -10,12 +10,11 @@ public class T_N1_Dialog1 : FTE_Dialog
         RoleSet();
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
-        T_N1_Manager.My.SetRoleMaxLevel(3);
-        T_N1_Manager.My.SetDeleteButton(false);
-        T_N1_Manager.My.SetTradeDeleteButton(false);
-        T_N1_Manager.My.SetClearWHButton(false);
-        T_N1_Manager.My.SetEquipButton(false);
-        T_N1_Manager.My.SetRoleCost(0);
+        T_N0_Manager.My.SetRoleMaxLevel(3);
+        T_N0_Manager.My.SetDeleteButton(false);
+        T_N0_Manager.My.SetTradeDeleteButton(false);
+        T_N0_Manager.My.SetClearWHButton(false);
+        T_N0_Manager.My.SetRoleCost(0);
     }
     
     void RoleSet()

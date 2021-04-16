@@ -286,6 +286,11 @@ public class ConsumeSign : MonoBehaviour
         {
             T8Manager.My.CheckTasteKill(buildingIndex);
         }
+
+        if (SceneManager.GetActiveScene().name.Equals("FTE_0"))
+        {
+            T_N0_Manager.My.isTasteKill = true;
+        }
         DeathAward();
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
