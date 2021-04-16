@@ -195,6 +195,7 @@ public class ConsumableSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
                 }
             }
         }
+        Destroy(gameObject);
     }
 
     /// <summary>

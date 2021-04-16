@@ -18,6 +18,5 @@ public class PlayerConsumable
         consumableId = id;
         number = _number;
         useCount = 0;
-        
     }
 }
