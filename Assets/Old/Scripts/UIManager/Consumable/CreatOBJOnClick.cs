@@ -40,6 +40,13 @@ public class CreatOBJOnClick : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.pointerId == -2)
+        {
+            Destroy(gameObject);
+            ConsumableListManager.My.isClick = false;
+            ConsumableListManager.My.currentSign = null;
+            return;
+        }
         Destroy(currentgo, 0f);
         //Debug.Log("ConsumableListManager.My.isClick" + ConsumableListManager.My.isClick);
         if (ConsumableListManager.My.isClick)
