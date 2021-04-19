@@ -6,7 +6,8 @@ public class T2_Dialog8 : FTE_Dialog
 {
     public override void BeforeDialog()
     {
-        T2_Manager.My.DoMoveRoleDown(T2_Manager.My.QualitySeed);
+        // delete 20210419
+        /*T2_Manager.My.DoMoveRoleDown(T2_Manager.My.QualitySeed);
         T2_Manager.My.DoMoveRoleUp(T2_Manager.My.QualityMerchant);
         
         
@@ -16,6 +17,8 @@ public class T2_Dialog8 : FTE_Dialog
             {
                 PlayerData.My.MapRole[i].ClearWarehouse();
             }
-        }
+        }*/
+        
+        T2_Manager.My.SetDeleteButton(true);
     }
 }

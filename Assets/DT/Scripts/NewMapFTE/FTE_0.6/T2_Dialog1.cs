@@ -10,13 +10,14 @@ public class T2_Dialog1 : FTE_Dialog
         RoleSet();
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
-        T2_Manager.My.SetRoleMaxLevel();
-        T2_Manager.My.SetDeleteButton(true);
+        T2_Manager.My.SetRoleMaxLevel(3);
+        T2_Manager.My.SetDeleteButton(false);
         T2_Manager.My.SetClearWHButton(false);
         T2_Manager.My.SetUpdateButton(false);
         T2_Manager.My.SetEquipButton(false);
         T2_Manager.My.SetRoleCost(0);
-        T2_Manager.My.BornConsumer((int) bornType.type, bornType.count);
+        // TODO 交易按钮隐藏
+        //T2_Manager.My.BornConsumer((int) bornType.type, bornType.count);
     }
     
     void RoleSet()
