@@ -23,6 +23,9 @@ public class T0_5_5 : BaseGuideStep
     {
         red.SetActive(false);
 
+        FTE_0_5Manager.My.InitRoleStartActive(true);
+        FTE_0_5Manager.My.UpRole(FTE_0_5Manager.My.seed);
+        FTE_0_5Manager.My.UpRole(FTE_0_5Manager.My.dealerJC1);
         yield return new WaitForSeconds(2f);
 
     }

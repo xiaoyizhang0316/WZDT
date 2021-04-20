@@ -12,9 +12,6 @@ public class T3_8: BaseGuideStep
     public int time;
 
     public bool islast;
-    public GameObject red;
-
-    public BaseMapRole maoyi;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,20 +23,11 @@ public class T3_8: BaseGuideStep
     {
       FTE_0_6Manager.My.consumerSpot.SetActive(true);
       FTE_0_6Manager.My.endPoint.SetActive(true);
-      
-      for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
-      {
-          if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant &&
-              !PlayerData.My.MapRole[i].isNpc)
-          {
-              maoyi   =   PlayerData.My.MapRole[i];
-          }
-      }
-
-      if (!islast)
-      {
-          TradeManager.My.DeleteRoleAllTrade(maoyi.baseRoleData.ID);
-      }
+      FTE_0_6Manager.My.dealer.SetActive(true);
+      FTE_0_6Manager.My.dealer2.SetActive(true);
+      FTE_0_6Manager.My.UpRole(FTE_0_6Manager.My.dealer);
+      FTE_0_6Manager.My.UpRole(FTE_0_6Manager.My.dealer2);
+  
 
       FTE_0_6Manager.My.DownRole( FTE_0_6Manager.My.dealerJC1); 
       FTE_0_6Manager.My.DownRole( FTE_0_6Manager.My.dealerJC2);
@@ -89,20 +77,7 @@ public class T3_8: BaseGuideStep
 
     public override bool ChenkEnd()
     {
-        if (islast)
-        {
-            if (PlayerData.My.dealerCount <2)
-            {
-                red.SetActive(true);
-            }
-
-            else
-            {
-                red.SetActive(false);
-
-            }
-        }
-
+       
         missiondatas.data[0].currentNum = StageGoal.My.killNumber;
      
         if (StageGoal.My.killNumber >= missiondatas.data[0].maxNum)
