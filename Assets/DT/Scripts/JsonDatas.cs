@@ -21,7 +21,7 @@ public class JsonDatas
     public string FTE_2;
     public string FTE_3;
     public string FTE_4;
-    public string FTE_4_5;
+    
     public string FTE_5;
     public string FTE_6;
     public string FTE_7;
@@ -36,6 +36,10 @@ public class JsonDatas
     public string NPC_7;
     public string NPC_8;
     public string NPC_9;
+    public string FTE_4_5;
+    public string FTE_F2;
+    public string FTE_F1;
+
     public string questions;
     //public List<Level> level;
 
@@ -54,6 +58,18 @@ public class JsonDatas
     {
         switch (sceneName)
         {
+            case "FTE_-2":
+                if (isNPC)
+                {
+                    return null;
+                }
+                return FTE_F2;
+            case "FTE_-1":
+                if (isNPC)
+                {
+                    return null;
+                }
+                return FTE_F1;
             case "FTE_0":
                 if (isNPC)
                     return null;
