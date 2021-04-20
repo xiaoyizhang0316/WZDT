@@ -7,6 +7,14 @@
        _BumpMap("法线贴图",2D)=""{}
 		_Specular ("Specular", Color) = (0.2, 0.2, 0.2)
 		_BackgroundColor ("Background Color", Color) = (0,0,0)
+
+_MetallicTex("Metallic(R),Smoothness(A)",2D) = "white"{}
+_Metallic ("Metallic", Range(0, 1)) = 1.0
+
+_AO("AO",Range(0,1)) = 1.0
+[Normal]_Normal("NormalMap",2D) = "bump"{}
+
+_OcclussionTex("Occlusion",2D) = "white"{}
 		[Toggle(SHOW_MAP_DATA)]_ShowMapData ("Show Map Data", Float) = 0
 	}
 	SubShader {

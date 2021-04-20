@@ -16,7 +16,7 @@ public class T0_5_6 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         dealer1 = FTE_0_5Manager.My.dealerJC1.GetComponent<BaseMapRole>();
-        FTE_0_5Manager.My.DownRole(FTE_0_5Manager.My.seerJC1);
+ 
         
         FTE_0_5Manager.My.UpRole(FTE_0_5Manager.My.dealerJC1);
         dealer1.warehouse.Clear();

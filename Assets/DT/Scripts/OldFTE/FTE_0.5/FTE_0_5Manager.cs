@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
 {
 
-
-    public GameObject seerJC1; 
+  
     public GameObject dealerJC1; 
+    public GameObject seed; 
+    public GameObject dealer; 
 
     public Material sn;
     public Material sr;
@@ -43,10 +44,12 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
         SetRoleMageZero();
         InitRoleStartActive(false);
         SetRoleInfoUp();
+        dealer.SetActive(false);
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
         SetDeleteButton(false);
         InitRoleTradeButton();
+        StageGoal.My.maxRoleLevel = 3;
     }
 
     public void UpRole(GameObject role)
@@ -67,13 +70,13 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
 
     public void InitRoleTradeButton()
     {
-        seerJC1.GetComponent<BaseMapRole>().tradeButton.SetActive(false);
+        seed.GetComponent<BaseMapRole>().tradeButton.SetActive(false);
         dealerJC1.GetComponent<BaseMapRole>().tradeButton.SetActive(false);
     }
 
     public void InitRoleStartActive(bool isActive)
     {
-        seerJC1.SetActive(isActive);
+        seed.SetActive(isActive);
         dealerJC1.SetActive(isActive);
     }
 
