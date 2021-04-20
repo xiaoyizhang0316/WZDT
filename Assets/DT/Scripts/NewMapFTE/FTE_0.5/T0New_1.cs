@@ -56,7 +56,7 @@ public class T0New_1 : BaseGuideStep
         }
         info.text = "剩余时间 : "+(shengyuTime- (StageGoal.My.timeCount-time)) +"  质监站剩余："+(roleTargetCount-role.warehouse.Count)
                      ;
-       
+        missiondatas.data[0].currentNum = role.warehouse.Count;
         if ( role.warehouse.Count >=roleTargetCount  )
         {
             missiondatas.data[0].isFinish = true;

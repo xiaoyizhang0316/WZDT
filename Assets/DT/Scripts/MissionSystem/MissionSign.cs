@@ -22,18 +22,21 @@ public class MissionSign : MonoBehaviour
     private Color signColor;
 
     private bool isover;
+
+    private TextOnChange TextOnChange;
     // Start is called before the first frame update
     void Start()
     {
         MissionManager.My.signs.Add(this);
         signColor = sign.color;
+        TextOnChange = currentNum.GetComponent<TextOnChange>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //currentNum.text = this.data.currentNum.ToString();
-        currentNum.GetComponent<TextOnChange>().ShowText(data.currentNum.ToString(), contentText.text);
+        TextOnChange.ShowText(data.currentNum.ToString(), contentText.text);
         if (data.isFail)
         {
             sign.color = Color.red;
@@ -96,7 +99,7 @@ public class MissionSign : MonoBehaviour
 
     }
 
-    private string signTitle;
+    private string signTitle= "";
     public void OnDestroy()
     {
         MissionManager.My.signs.Remove(this);
