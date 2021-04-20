@@ -38,7 +38,7 @@ public class T_N1_Step3 : BaseGuideStep
             mouseDown, UI_Camera, out mouseUGUIPos);
         if (isRect)
         {
-            hand.GetComponent<RectTransform>().anchoredPosition = mouseUGUIPos;
+            hand.GetComponent<RectTransform>().anchoredPosition = mouseUGUIPos+new Vector2(2,-1);
             hand.SetActive(true);
         }
     }

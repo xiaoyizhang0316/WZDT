@@ -8,6 +8,7 @@ public class T_N1_Step2 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         isStepEnd = false;
+        StageGoal.My.skipToFirstWave.interactable = false;
         if (CheckDealer())
         {
             isStepEnd = true;

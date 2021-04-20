@@ -14,7 +14,7 @@ public class T_N1_Step1 : BaseGuideStep
     private bool isStepEnd = false;
     void Check()
     {
-        if (StageGoal.My.currentWave > 1)
+        if (StageGoal.My.currentWave > 1 && !StageGoal.My.isTurnStart)
         {
             isStepEnd = true;
         }

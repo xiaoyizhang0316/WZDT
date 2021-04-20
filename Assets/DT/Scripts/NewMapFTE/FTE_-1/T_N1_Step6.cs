@@ -16,7 +16,7 @@ public class T_N1_Step6 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        
+        StageGoal.My.skipToFirstWave.interactable = true;
         yield return null;
     }
 }

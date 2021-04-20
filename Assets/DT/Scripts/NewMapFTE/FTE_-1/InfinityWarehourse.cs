@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DT.Fight.Bullet;
 using UnityEngine;
 
-public class ProductMerchant : BaseSkill
+public class InfinityWarehourse : ProductMerchant
 {
-    public List<ProductData> productDatas = new List<ProductData>();
+    public int goodsQuality;
+    public List<int> goodsBuffs=new List<int>();
+    public BulletType bulletType;
 
-    protected int currentCount = 0;
-
-    protected int maxCount = 0;
-
-    public new void Start()
-    {
-        base.Start();
-    }
+    private ProductData pd;
 
     public override void Skill()
     {
@@ -25,6 +21,30 @@ public class ProductMerchant : BaseSkill
         if (role.encourageLevel <= -3)
         {
             return;
+        }
+        if (role.warehouse.Count == 0)
+        {
+            pd = new ProductData();
+            pd.damage = goodsQuality;
+            pd.buffList.AddRange(goodsBuffs);
+            pd.bulletType = bulletType;
+            switch (bulletType) 
+            {
+                case BulletType.NormalPP:
+                    pd.loadingSpeed = 0.5f;
+                    break;
+                case BulletType.Lightning:
+                case BulletType.Bomb:
+                    pd.loadingSpeed = 2f;
+                    break;
+                case BulletType.summon:
+                    pd.loadingSpeed = 4f;
+                    break;
+                default:
+                    pd.loadingSpeed = 0.5f;
+                    break;
+            }
+            role.warehouse.Add(pd);
         }
         if (role.warehouse.Count > 0)
         {
@@ -48,9 +68,11 @@ public class ProductMerchant : BaseSkill
                     Skill();
                     return;
                 }
+
+                
                 ProductData data = role.warehouse[0];
                 maxCount = 0;
-                role.warehouse.RemoveAt(0);
+                //role.warehouse.RemoveAt(0);
                 for (int i = 0; i < role.GetEquipBuffList().Count; i++)
                 {
                     data.AddBuff(role.GetEquipBuffList()[i]);
