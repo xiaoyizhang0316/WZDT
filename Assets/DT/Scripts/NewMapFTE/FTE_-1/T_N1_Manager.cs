@@ -7,17 +7,10 @@ using UnityEngine.UI;
 
 public class T_N1_Manager : MonoSingleton<T_N1_Manager>
 {
-    public GameObject bornPoint;
-    public GameObject QualitySeed;
-    public GameObject QualityMerchant;
-    
     public GameObject seed_sign;
     public GameObject peasant_sign;
     public GameObject merchant_sign;
     public GameObject dealer_sign;
-
-    public GameObject time_panel;
-    public Text time_text;
     
     /// <summary>
     /// 角色信息界面上移
@@ -96,39 +89,6 @@ public class T_N1_Manager : MonoSingleton<T_N1_Manager>
         peasant_sign.GetComponent<CreatRole_Button>().ReadCostTech(cost);
         merchant_sign.GetComponent<CreatRole_Button>().ReadCostTech(cost);
         dealer_sign.GetComponent<CreatRole_Button>().ReadCostTech(cost);
-    }
-
-    private Coroutine ie;
-    /// <summary>
-    /// 生成消费者
-    /// </summary>
-    /// <param name="type"></param>
-    public void BornConsumer(int type, int count=0)
-    {
-        ie = StartCoroutine( bornPoint.GetComponent<Building>().BornEnemyForFTE(type, count));
-    }
-
-    /// <summary>
-    /// 停止生成消费者
-    /// </summary>
-    public void StopBornConsumer()
-    {
-        //bornPoint.GetComponent<Building>().bornFTE = false;
-        StopCoroutine(ie);
-    }
-
-    /// <summary>
-    /// 删除所有的消费者
-    /// </summary>
-    public void DeleteAllConsumer()
-    {
-        foreach (Transform consumer in bornPoint.transform)
-        {
-            if (consumer.GetComponent<ConsumeSign>())
-            {
-                Destroy(consumer.gameObject);
-            }
-        }
     }
 
     /// <summary>
@@ -219,52 +179,4 @@ public class T_N1_Manager : MonoSingleton<T_N1_Manager>
         mapRole.tradeButton.transform.DOScale(1, 0.5f).Play();
     }
 
-    #region Time count down
-
-    public int time_remain = 0;
-    private int startTime = 0;
-    private int limitTime = 0;
-    /// <summary>
-    /// 开始或充值倒计时
-    /// </summary>
-    /// <param name="time_remain"></param>
-    public void ResetTimeCountDown(int limitTime)
-    {
-        CancelInvoke("TimeCountDown");
-        this.limitTime = limitTime;
-        startTime = StageGoal.My.timeCount;
-        InvokeRepeating("TimeCountDown", 0, 0.5f);
-    }
-
-    /// <summary>
-    /// 停止计时
-    /// </summary>
-    public void StopTimeCountDown()
-    {
-        time_panel.SetActive(false);
-        CancelInvoke("TimeCountDown");
-    }
-    
-    private void TimeCountDown()
-    {
-        time_remain = limitTime+startTime-StageGoal.My.timeCount;
-        ShowCountDown();
-    }
-    
-    private void ShowCountDown()
-    {
-        time_text.text = "剩余时间："+ time_remain;
-        if (NewCanvasUI.My.Panel_AssemblyRole.activeInHierarchy)
-        {
-            time_panel.SetActive(false);
-        }
-        else
-        {
-            time_panel.SetActive(true);
-        }
-        
-    }
-
-    #endregion
-    
 }

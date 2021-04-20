@@ -76,6 +76,8 @@ public class StageGoal : MonoSingleton<StageGoal>
 
     public int produceTime;
 
+    public int turnStartTime;
+
     /// <summary>
     /// 玩家操作时间戳列表
     /// </summary>
@@ -480,42 +482,22 @@ public class StageGoal : MonoSingleton<StageGoal>
     void SetHealthBar(int beforeAdd, int add)
     {
         int afterAdd = beforeAdd + add;
+        playerHealth = afterAdd;
         float per;
-        if (beforeAdd + add < stageDan[currentDan])
+        if (playerHealth < stageDan[2])
         {
-            per = afterAdd / stageDan[currentDan];
-            if (currentDan == 0)
-            {
-                healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue);
-            }
+            per = playerHealth / (float)stageDan[2];
+            healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue);
         }
         else
         {
             currentDan++;
-            per = (afterAdd - stageDan[currentDan - 1]) / (stageDan[currentDan] - stageDan[currentDan - 1]);
-            if (currentDan == 1)
+            per = (playerHealth - stageDan[2]) / (float)(stageDan[2]);
+            healthBar1.DOFillAmount(1, 0.2f).Play().OnComplete(() =>
             {
-                healthBar1.DOFillAmount(1, 0.2f).Play().OnComplete(() =>
-                {
-                    healthBar2.sprite = danSprite[currentDan];
-                    healthBar2.DOFillAmount(per, 0.3f).Play().OnComplete(ExeQueue);
-                });
-            }
-            else
-            {
-                healthBar2.DOFillAmount(1, 0.2f).Play().OnComplete(() =>
-                {
-                    healthBar1.sprite = danSprite[currentDan - 1];
-                    healthBar2.fillAmount = 0;
-                    healthBar2.sprite = danSprite[currentDan];
-                    healthBar2.DOFillAmount(per, 0.3f).Play().OnComplete(ExeQueue);
-                });
-                //healthBar2.fillAmount = 1;
-                //healthBar1.sprite = danSprite[currentDan - 1];
-                //healthBar2.fillAmount = 0;
-                //healthBar2.sprite = danSprite[currentDan];
-                //healthBar2.fillAmount = per;
-            }
+                healthBar2.sprite = danSprite[currentDan];
+                healthBar2.DOFillAmount(per, 0.3f).Play().OnComplete(ExeQueue);
+            });
         }
     }
 
@@ -550,17 +532,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerHealthText.text = (playerHealth / (float)playerMaxHealth).ToString("P");
         if (playerHealth / (float)playerMaxHealth > 0.5f)
         {
-            NewCanvasUI.My.EndLowHealth();
             playerHealthText.color = Color.white;
         }
         else if (playerHealth / (float)playerMaxHealth > 0.2f)
         {
-            NewCanvasUI.My.EndLowHealth();
             playerHealthText.color = Color.yellow;
         }
         else
         {
-            NewCanvasUI.My.StartLowHealth();
             playerHealthText.color = Color.red;
         }
         playerTechText.DOText(playerTechPoint.ToString(), time, true, ScrambleMode.None).Play();
@@ -594,17 +573,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerHealthText.text = (playerHealth / (float)playerMaxHealth).ToString("P");
         if (playerHealth / (float)playerMaxHealth > 0.5f)
         {
-            NewCanvasUI.My.EndLowHealth();
             playerHealthText.color = Color.white;
         }
         else if (playerHealth / (float)playerMaxHealth > 0.2f)
         {
-            NewCanvasUI.My.EndLowHealth();
             playerHealthText.color = Color.yellow;
         }
         else
         {
-            NewCanvasUI.My.StartLowHealth();
             playerHealthText.color = Color.red;
         }
         playerTechText.text = playerTechPoint.ToString();
@@ -630,10 +606,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         if (playerHealth <= 0)
         {
-            //for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-            //{
-            //    PlayerData.My.MapRole[i].OnBeforeDead();
-            //}
             if (wudi)
             {
                 playerHealth = 100;
@@ -662,41 +634,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         if (list.Length == 0 && isComplete)
         {
-            if (playerHealth > 0)
+            if (playerHealth >= stageTarget)
             {
                 //print("胜利");
                 Win();
             }
-        }
-    }
-
-    /// <summary>
-    /// 检测是否胜利
-    /// </summary>
-    public void CheckWinNew()
-    {
-        if (currentType == StageType.Boss)
-            return;
-        if (playerHealth >= stageTarget)
-        {
-            Win();
-        }
-    }
-
-    /// <summary>
-    /// 检测是否失败
-    /// </summary>
-    public void CheckLossNew()
-    {
-        if (currentWave > maxWaveNumber)
-        {
-            if (playerHealth < stageTarget)
-            {
-                Lose();
-            }
             else
             {
-                CheckWinNew();
+                Lose();
             }
         }
     }
@@ -720,17 +665,13 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         if (list.Length == 0 && isComplete)
         {
-            if (playerHealth > 0)
+            if (PlayerData.My.isPrediction)
             {
-                //print("回合结束");
-                if (PlayerData.My.isPrediction)
-                {
-                    EndPredictionTurn();
-                }
-                else
-                {
-                    EndTurn();
-                }
+                EndPredictionTurn();
+            }
+            else
+            {
+                EndTurn();
             }
         }
     }
@@ -961,8 +902,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             if (!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
             {
-                //CheckWin();
-                CheckLossNew();
+                CheckWin();
             }
             transform.DOScale(1f, 0.985f).SetEase(Ease.Linear).OnComplete(() =>
             {
@@ -1021,6 +961,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     public void NextTurn()
     {
         Stat();
+        turnStartTime = timeCount;
         predict_btn.gameObject.SetActive(false);
         NewCanvasUI.My.ToggleSpeedButton(true);
         NewCanvasUI.My.GameNormal();
@@ -1258,14 +1199,15 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             maxMinusGold = -12000;
         }
-        playerHealth = data.startPlayerHealth;
-        if (PlayerData.My.cheatIndex3)
-            playerHealth = (int)(playerHealth * 1.5f);
-        playerMaxHealth = playerHealth;
+        //playerMaxHealth = data.startPlayerHealth;
+        playerHealth = 0;
+        // if (PlayerData.My.cheatIndex3)
+        //     playerHealth = (int)(playerHealth * 1.5f);
+        playerMaxHealth = data.stageDan[2];
         maxWaveNumber = data.maxWaveNumber;
         playerTechPoint = data.startTech;
         currentType = data.stageType;
-        stageTarget = data.stageTarget;
+        stageTarget = data.stageDan[0];
         stageDan =new List<int>(); 
         stageDan.AddRange( data.stageDan);
         SetInfoImmidiate();

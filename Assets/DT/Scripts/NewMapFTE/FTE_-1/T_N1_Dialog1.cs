@@ -14,7 +14,6 @@ public class T_N1_Dialog1 : FTE_Dialog
         T_N1_Manager.My.SetDeleteButton(false);
         T_N1_Manager.My.SetTradeDeleteButton(false);
         T_N1_Manager.My.SetClearWHButton(false);
-        T_N1_Manager.My.SetUpdateButton(false);
         T_N1_Manager.My.SetEquipButton(false);
         T_N1_Manager.My.SetRoleCost(0);
     }

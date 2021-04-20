@@ -317,7 +317,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.consumableId = int.Parse(b.consumableId);
             temp.consumableName = b.consumableName;
             temp.consumableDesc = b.consumableDesc;
-            //temp.range = int.Parse(b.range);
+            temp.costTech = int.Parse(b.costTech);
             temp.consumableType = (ConsumableType)Enum.Parse(typeof(ConsumableType) ,b.consumableType);
             string[] strList = b.targetBuffList.Split(',');
             temp.targetBuffList = new List<int>();
@@ -327,8 +327,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             }
             consumableDatas.Add(temp);
         }
-    
-       //  ConsumableListManager.My.Init();
+        //  ConsumableListManager.My.Init();
     }
 
     /// <summary>
@@ -344,7 +343,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.sceneName = s.sceneName;
             temp.maxWaveNumber = int.Parse(s.maxWaveNumber);
             temp.startPlayerHealth = int.Parse(s.startPlayerHealth);
-            temp.stageTarget = int.Parse(s.stageTarget);
+            
             temp.startPlayerGold = int.Parse(s.startPlayerGold);
             temp.startTech = int.Parse(s.startTech);
             temp.stageType = (StageType)Enum.Parse(typeof(StageType), s.stageType);

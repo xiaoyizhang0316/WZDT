@@ -18,7 +18,7 @@ public class RoadPortal : BaseSpawnItem
                 return;
             }
             other.GetComponentInParent<ConsumeSign>().Block();
-            health += other.GetComponentInParent<ConsumeSign>().consumeData.liveSatisfy;
+            health -= other.GetComponentInParent<ConsumeSign>().consumeData.liveSatisfy;
             if (health < 0)
             {
                 Destroy(transform.parent.gameObject);

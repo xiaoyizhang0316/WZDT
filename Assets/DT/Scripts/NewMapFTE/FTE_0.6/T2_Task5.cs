@@ -4,7 +4,41 @@ using UnityEngine;
 
 public class T2_Task5 : BaseGuideStep
 {
-    public int taskTime = 0;
+    public override IEnumerator StepStart()
+    {
+        yield return null;
+        Check();
+    }
+    
+    void Check()
+    {
+        InvokeRepeating("CheckGoal", 0.5f, 0.5f);
+    }
+
+    void CheckGoal()
+    {
+        if (!missiondatas.data[0].isFinish)
+        {
+            if (PlayerData.My.seedCount>=2)
+            {
+                missiondatas.data[0].isFinish = true;
+            }
+        }
+    }
+
+    public override bool ChenkEnd()
+    {
+        return missiondatas.CheckEnd();
+    }
+
+    public override IEnumerator StepEnd()
+    {
+        yield return new WaitForSeconds(2);
+    }
+    
+    #region delete 20210419
+
+    /*public int taskTime = 0;
     public override IEnumerator StepStart()
     {
         T2_Manager.My.QualitySeed.GetComponent<QualityRole>().QualityReset();
@@ -48,5 +82,9 @@ public class T2_Task5 : BaseGuideStep
         T2_Manager.My.StopTimeCountDown();
         T2_Manager.My.QualitySeed.GetComponent<QualityRole>().CheckEnd();
         yield return new WaitForSeconds(3);
-    }
+    }*/
+
+    #endregion
+
+    
 }

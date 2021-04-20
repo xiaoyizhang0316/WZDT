@@ -40,6 +40,13 @@ public class CreatOBJOnClick : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.pointerId == -2)
+        {
+            Destroy(gameObject);
+            ConsumableListManager.My.isClick = false;
+            ConsumableListManager.My.currentSign = null;
+            return;
+        }
         Destroy(currentgo, 0f);
         //Debug.Log("ConsumableListManager.My.isClick" + ConsumableListManager.My.isClick);
         if (ConsumableListManager.My.isClick)
@@ -47,13 +54,12 @@ public class CreatOBJOnClick : MonoBehaviour, IPointerClickHandler
             //Debug.Log("释放" + GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign.consumableId)
             //              .consumableType);
             ConsumableListManager.My.isClick = false;
-
-
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hit = Physics.RaycastAll(ray);
-            Debug.Log(hit.Length);
+            //Debug.Log(hit.Length);
             for (int i = 0; i < hit.Length; i++)
             {
+                HexCell currentCell = HexGrid.My.GetCell(hit[i].point);
                 if (hit[i].transform.tag.Equals("MapRole"))
                 {
                     if (GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign.consumableId)
@@ -85,7 +91,7 @@ public class CreatOBJOnClick : MonoBehaviour, IPointerClickHandler
 
                 if (GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign.consumableId)
                         .consumableType ==
-                    GameEnum.ConsumableType.AOE && !hit[i].transform.name.Equals(name))
+                    GameEnum.ConsumableType.AOE && !hit[i].transform.name.Equals(name) && currentCell != null)
                 {
                     Debug.Log(hit[i].transform.name);
                     GameObject go1 =
@@ -99,11 +105,10 @@ public class CreatOBJOnClick : MonoBehaviour, IPointerClickHandler
                     Destroy(gameObject);
                     break;
                 }
-
-                if (hit[i].transform.tag.Equals("MapLand"))
+                if (currentCell != null)
                 {
-                    //Debug.Log("Mapland");
-                    if (hit[i].transform.GetComponent<MapSign>().mapType == GameEnum.MapType.Road)
+                    //Debug.Log("Maplandtype:" + currentCell.TerrainTypeIndex);
+                    if (currentCell.TerrainTypeIndex == 3)
                     {
                         if (GameDataMgr.My.GetConsumableDataByID(ConsumableListManager.My.currentSign.consumableId)
                                 .consumableType ==
@@ -114,7 +119,7 @@ public class CreatOBJOnClick : MonoBehaviour, IPointerClickHandler
                             //print(hit[i].point);
                             GameObject go1 = Instantiate(Resources.Load<GameObject>(
                                 "Prefabs/Consumable/" + ConsumableListManager.My.currentSign.consumableId));
-                            go1.transform.position = hit[i].transform.position + new Vector3(0, 0.2f, 0);
+                            go1.transform.position = currentCell.transform.position + new Vector3(0, 0f, 0);
                             go1.GetComponentInChildren<BaseSpawnItem>()
                                 .Init(ConsumableListManager.My.currentSign.consumableId);
 

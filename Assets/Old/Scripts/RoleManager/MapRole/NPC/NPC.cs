@@ -144,20 +144,18 @@ public class NPC : BaseNpc
         Invoke("AutoSetTrade", 0.2f);
         if (!isCanSeeEquip && !isInited)
         {
-            float add = 1.77f;
-            if (currentRole.baseRoleData.roleSkillType != RoleSkillType.Product)
-            {
-                add *= 2;
-            }
             for (int i = 0; i < NPCBuffList.Count; i++)
             {
                 isInited = true;
                 BuffData tempData = GameDataMgr.My.GetBuffDataByID(NPCBuffList[i]);
-                currentRole.tradeCost -= (int)(tempData.buffValue * add);
+                currentRole.tradeCost -= (int)(tempData.buffValue);
             }
         }
     }
 
+    /// <summary>
+    /// 初始自动交易列表
+    /// </summary>
     public void AutoSetTrade()
     {
         if (autoTradeList.Count > 0)

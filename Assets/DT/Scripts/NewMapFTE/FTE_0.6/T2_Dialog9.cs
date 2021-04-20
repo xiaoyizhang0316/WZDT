@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class T2_Dialog9 : FTE_Dialog
 {
-    public BornType bornType;
+    //public BornType bornType;
     public override void BeforeDialog()
     {
-        T2_Manager.My.DoMoveRoleDown(T2_Manager.My.QualityMerchant);
+        // delete 20210419
+        /*T2_Manager.My.DoMoveRoleDown(T2_Manager.My.QualityMerchant);
         // TODO
         T2_Manager.My.BornConsumer((int)bornType.type, bornType.count);
         
@@ -18,6 +19,9 @@ public class T2_Dialog9 : FTE_Dialog
             {
                 PlayerData.My.MapRole[i].ClearWarehouse();
             }
-        }
+        }*/
+        
+        T2_Manager.My.DoMoveRoleDown(T2_Manager.My.QualitySeed);
+        T2_Manager.My.DoMoveRoleUp(T2_Manager.My.QualityMerchant);
     }
 }
