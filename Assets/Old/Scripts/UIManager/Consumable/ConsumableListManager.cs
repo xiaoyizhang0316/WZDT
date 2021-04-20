@@ -36,8 +36,11 @@ public class ConsumableListManager : MonoSingleton<ConsumableListManager>
         }
         foreach (PlayerConsumable p in PlayerData.My.playerConsumables)
         {
-            GameObject go = Instantiate(consumablePrb, scrollViewContent.position, scrollViewContent.rotation, scrollViewContent);
-            go.GetComponent<ConsumableSign>().Init(p);
+            if (p.number > 0)
+            {
+                GameObject go = Instantiate(consumablePrb, scrollViewContent.position, scrollViewContent.rotation, scrollViewContent);
+                go.GetComponent<ConsumableSign>().Init(p);
+            }
         }
     }
 

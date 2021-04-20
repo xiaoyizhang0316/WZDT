@@ -475,12 +475,13 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             if (playerConsumables[i].consumableId == id)
             {
                 playerConsumables[i].number--;
+                playerConsumables[i].useCount++;
                 UseConsumableRecord(id);
                 if (playerConsumables[i].number == 0)
                 {
                     //print("移除 " + playerConsumables[i].consumableId.ToString());
                     //PlayerConsumable temp = playerConsumables[i];
-                    playerConsumables.RemoveAt(i);
+                    //playerConsumables.RemoveAt(i);
                     return;
                 }
             }

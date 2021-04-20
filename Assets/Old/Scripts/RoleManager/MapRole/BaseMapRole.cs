@@ -236,19 +236,10 @@ public class BaseMapRole : MonoBehaviour
         for (int i = 0; i < startTradeList.Count; i++)
         {
             result += startTradeList[i].tradeData.dividePercent;
-            //PlayerData.My.GetMapRoleById(double.Parse(startTradeList[i].tradeData.targetRole)).ResetAllBuff();
         }
         for (int i = 0; i < endTradeList.Count; i++)
         {
             result += 0 - endTradeList[i].tradeData.dividePercent;
-            //PlayerData.My.GetMapRoleById(double.Parse(endTradeList[i].tradeData.targetRole)).ResetAllBuff();
-        }
-        if (baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
-        {
-            for (int i = 0; i < tradeList.Count; i++)
-            {
-                PlayerData.My.GetMapRoleById(double.Parse(tradeList[i].tradeData.targetRole)).ResetAllBuff();
-            }
         }
         result = Mathf.Min(10, result);
         result = Mathf.Max(result, -5);
@@ -256,6 +247,10 @@ public class BaseMapRole : MonoBehaviour
         baseRoleData.tradeCost += encourageLevel * 5;
     }
 
+    /// <summary>
+    /// 检测所有涉及的交易是否为最优设置
+    /// </summary>
+    /// <returns></returns>
     public bool CheckAllTradeBest()
     {
         if (startTradeList.Count == 0 && endTradeList.Count == 0)
@@ -806,19 +801,14 @@ public class BaseMapRole : MonoBehaviour
             {
                 for (int i = 0; i <GetComponent<BaseNpc>().NPCBuffList.Count; i++)
                 {
-                  
-                    
-                        if (GetComponent<BaseNpc>().NPCBuffList[i] != -1)
-                        {
-                            bufflist.Add(GetComponent<BaseNpc>().NPCBuffList[i]);
-                        }
-                   
+                    if (GetComponent<BaseNpc>().NPCBuffList[i] != -1)
+                    {
+                        bufflist.Add(GetComponent<BaseNpc>().NPCBuffList[i]);
+                    }
                 }
             }
-
             for (int i = 0; i <GetComponent<BaseSkill>().buffList.Count; i++)
             {
-                     
                 if (GetComponent<BaseSkill>().buffList[i] != -1)
                 {
                     bufflist.Add(GetComponent<BaseSkill>().buffList[i]);
@@ -904,7 +894,6 @@ public class BaseMapRole : MonoBehaviour
                     {
                         foreach (var t in item.GetComponentsInChildren<Transform>())
                         {
-
                             t.gameObject.layer = 9;
                         }
                     }

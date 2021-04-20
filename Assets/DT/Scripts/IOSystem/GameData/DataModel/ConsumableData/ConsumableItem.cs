@@ -17,7 +17,7 @@ public class ConsumableItem
 
     public string consumableType;
 
-    public string range;
+    public string costTech;
 }
 
 
