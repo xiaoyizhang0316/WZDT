@@ -9,7 +9,7 @@ public class T3_6: BaseGuideStep
     public GameObject red;
     public GameObject roleImage;
 
-    private BaseMapRole nong;
+    public  BaseMapRole nong;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,15 +38,7 @@ public class T3_6: BaseGuideStep
         missiondatas.data[0].isFinish= true; 
         yield return new WaitForSeconds(2);
 
-        for (int i = 0; i <PlayerData.My.MapRole.Count; i++)
-        {
-            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant &&
-                !PlayerData.My.MapRole[i].isNpc)
-            {
-                nong =   PlayerData.My.MapRole[i];
-            }
-        }
-
+         
       
             TradeManager.My.DeleteRoleAllTrade(nong.baseRoleData.ID);
     

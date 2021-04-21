@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DT.Fight.Bullet;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NpcSpecialInfo : MonoBehaviour
@@ -71,6 +72,14 @@ public class NpcSpecialInfo : MonoBehaviour
                     else
                     {
                         PlayerData.My.client.SendToServerMsg(str1);
+                    }
+                }
+                if (SceneManager.GetActiveScene().name.Equals("FTE_0.7"))
+                {
+                    if (npc.baseRoleData.baseRoleData .roleType == GameEnum.RoleType.Peasant &&
+                        FTE_0_6Manager.My.clearWarehouse == 1)
+                    {
+                        FTE_0_6Manager.My.clearWarehouse = 2;
                     }
                 }
                 //PlayerData.My.GetMapRoleById(npc.baseRoleData.ID).ClearWarehouse();
