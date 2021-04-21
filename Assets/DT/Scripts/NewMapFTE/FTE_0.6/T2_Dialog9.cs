@@ -22,6 +22,6 @@ public class T2_Dialog9 : FTE_Dialog
         }*/
         
         T2_Manager.My.DoMoveRoleDown(T2_Manager.My.QualitySeed);
-        T2_Manager.My.DoMoveRoleUp(T2_Manager.My.QualityMerchant);
+        T2_Manager.My.DoMoveRoleUp(T2_Manager.My.QualityMerchant, 2.4f);
     }
 }

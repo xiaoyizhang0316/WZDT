@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,10 +9,13 @@ public  class FTE_Dialog : BaseGuideStep
     public bool uploadProgress = false;
     public GameObject dialog_obj;
     public List<int> equipAward=new List<int>();
+    private bool isPause;
     public override IEnumerator StepStart()
     {
+        isPause = DOTween.defaultAutoPlay == AutoPlay.None;
         BeforeDialog();
-        NewCanvasUI.My.GamePause();
+        if(!isPause)
+            NewCanvasUI.My.GamePause(false);
         dialog_obj.SetActive(true);
         yield return null;
     }
@@ -24,7 +28,8 @@ public  class FTE_Dialog : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         AfterDialog();
-        NewCanvasUI.My.GameNormal();
+        if(!isPause)
+            NewCanvasUI.My.GameNormal();
         yield return null;
     }
 

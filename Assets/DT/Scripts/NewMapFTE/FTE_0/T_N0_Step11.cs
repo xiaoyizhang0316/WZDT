@@ -6,11 +6,13 @@ public class T_N0_Step11 : BaseGuideStep
 {
     public override IEnumerator StepStart()
     {
+        NewCanvasUI.My.GamePause(false);
         yield return null;
     }
 
     public override IEnumerator StepEnd()
     {
-        yield return null;
+        NewCanvasUI.My.GameNormal();
+        yield return new WaitForSeconds(0.5f);
     }
 }

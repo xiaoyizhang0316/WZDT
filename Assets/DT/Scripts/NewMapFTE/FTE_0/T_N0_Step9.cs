@@ -17,6 +17,6 @@ public class T_N0_Step9 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         T_N0_Manager.My.isTasteKill = false;
-        yield return null;
+        yield return new WaitForSeconds(0.5f);
     }
 }

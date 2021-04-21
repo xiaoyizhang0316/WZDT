@@ -6,6 +6,7 @@ using UnityEngine;
 public class T_N1_Step3 : BaseGuideStep
 {
     public GameObject hand;
+    public Transform mask;
     private Canvas ui_Canvas;
     private Camera UI_Camera;
     public override IEnumerator StepStart()
@@ -38,7 +39,9 @@ public class T_N1_Step3 : BaseGuideStep
             mouseDown, UI_Camera, out mouseUGUIPos);
         if (isRect)
         {
-            hand.GetComponent<RectTransform>().anchoredPosition = mouseUGUIPos;
+            hand.GetComponent<RectTransform>().anchoredPosition = mouseUGUIPos+new Vector2(8,-5);
+            mask.GetComponent<RectTransform>().anchoredPosition =
+                hand.GetComponent<RectTransform>().anchoredPosition + new Vector2(-25, 25);
             hand.SetActive(true);
         }
     }
@@ -51,6 +54,6 @@ public class T_N1_Step3 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         
-        yield return null;
+        yield return new WaitForSeconds(0.5f);
     }
 }

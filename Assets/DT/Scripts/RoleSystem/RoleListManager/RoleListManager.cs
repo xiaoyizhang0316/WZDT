@@ -152,11 +152,10 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     //        }
     //    }
     //}
-
+    private List<string> sceneNames = new List<string>() {"FTE_-2", "FTE_-1", "FTE_0", "FTE_1", "FTE_2" };
     public void LockRoleCreate()
     {
-        if (SceneManager.GetActiveScene().name.Equals("FTE_1") ||
-            SceneManager.GetActiveScene().name.Equals("FTE_2"))
+        if (sceneNames.Contains(SceneManager.GetActiveScene().name))
         {
             return;
         }
@@ -171,6 +170,10 @@ public class RoleListManager : MonoSingleton<RoleListManager>
 
     public void UnlockRoleCreate()
     {
+        if (sceneNames.Contains(SceneManager.GetActiveScene().name))
+        {
+            return;
+        }
         if (!changeObj[0].name.Equals("Image_BG"))
         {
             Change();

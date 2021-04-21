@@ -14,7 +14,7 @@ public class T_N1_Step1 : BaseGuideStep
     private bool isStepEnd = false;
     void Check()
     {
-        if (StageGoal.My.currentWave > 1)
+        if (StageGoal.My.currentWave > 1 && !StageGoal.My.isTurnStart)
         {
             isStepEnd = true;
         }
@@ -28,6 +28,6 @@ public class T_N1_Step1 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         T_N1_Manager.My.SetEquipButton(true);
-        yield return null;
+        yield return new WaitForSeconds(0.5f);
     }
 }

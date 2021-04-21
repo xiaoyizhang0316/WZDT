@@ -16,6 +16,6 @@ public class T_N0_Step5 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        yield return null;
+        yield return new WaitForSeconds(0.5f);
     }
 }

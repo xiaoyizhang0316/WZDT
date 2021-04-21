@@ -26,12 +26,12 @@ public class T2_Task6 : BaseGuideStep
         if (T2_Manager.My.time_remain <= 0)
         {
             T2_Manager.My.ResetTimeCountDown(taskTime);
-            T2_Manager.My.QualityMerchant.GetComponent<QualityRole>().QualityReset();
+            T2_Manager.My.QualitySeed.GetComponent<QualityRole>().QualityReset();
         }
         
         if (!missiondatas.data[0].isFinish)
         {
-            missiondatas.data[0].currentNum = T2_Manager.My.QualityMerchant.GetComponent<QualityRole>().warehouse.Count;
+            missiondatas.data[0].currentNum = T2_Manager.My.QualitySeed.GetComponent<QualityRole>().warehouse.Count;
             if (missiondatas.data[0].CheckNumFinish())
             {
                 missiondatas.data[0].isFinish = true;
@@ -46,7 +46,10 @@ public class T2_Task6 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
+        T2_Manager.My.QualitySeed.GetComponent<QualityRole>().CheckEnd();
+        T2_Manager.My.StopTimeCountDown();
         yield return new WaitForSeconds(2);
+        //T2_Manager.My.ShowTradeButton();
     }
     
     #region delete 20210419
