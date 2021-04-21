@@ -386,10 +386,6 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public bool NeedRayCastPanel()
     {
-        if (SceneManager.GetActiveScene().name == "FTE_0" && GuideMgr.My.isOnGuide)
-        {
-            return true;
-        }
         for (int i = 0; i <needReycastTargetPanel.Count; i++)
         {
             if (needReycastTargetPanel[i].activeSelf)

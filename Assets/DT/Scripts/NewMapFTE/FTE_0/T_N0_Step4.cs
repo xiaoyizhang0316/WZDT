@@ -7,6 +7,8 @@ public class T_N0_Step4 : BaseGuideStep
     public GameObject hand;
     private Canvas ui_Canvas;
     private Camera UI_Camera;
+
+    public Transform mask;
     public override IEnumerator StepStart()
     {
         GameObject dealer = GetDealer();
@@ -38,6 +40,8 @@ public class T_N0_Step4 : BaseGuideStep
         if (isRect)
         {
             hand.GetComponent<RectTransform>().anchoredPosition = mouseUGUIPos;
+            mask.GetComponent<RectTransform>().anchoredPosition =
+                hand.GetComponent<RectTransform>().anchoredPosition + new Vector2(-25, 25);
             hand.SetActive(true);
         }
     }
@@ -50,6 +54,6 @@ public class T_N0_Step4 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         
-        yield return null;
+        yield return new WaitForSeconds(0.5f);
     }
 }

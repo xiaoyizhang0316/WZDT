@@ -10,9 +10,10 @@ public class T2_Dialog7 : FTE_Dialog
         /*T2_Manager.My.ShowTradeButton(GetSeed());*/
         
         // TODO 交易按钮显示
+        T2_Manager.My.ShowTradeButton(GetSeed());
     }
     
-    /*BaseMapRole GetSeed()
+    BaseMapRole GetSeed()
     {
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
@@ -23,5 +24,5 @@ public class T2_Dialog7 : FTE_Dialog
         }
 
         return null;
-    }*/
+    }
 }

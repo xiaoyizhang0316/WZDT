@@ -5,6 +5,7 @@ using UnityEngine;
 public class T_N0_Step3 : BaseGuideStep
 {
     public GameObject hand;
+    public GameObject mask;
     public override IEnumerator StepStart()
     {
         isStepEnd = false;
@@ -15,7 +16,9 @@ public class T_N0_Step3 : BaseGuideStep
         else
         {
             RoleListManager.My.outButton.onClick.Invoke();
+            yield return new WaitForSeconds(1);
             hand.SetActive(true);
+            mask.SetActive(true);
             InvokeRepeating("Check", 0.5f, 0.5f);
         }
         yield return null;
@@ -52,6 +55,6 @@ public class T_N0_Step3 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         
-        yield return null;
+        yield return new WaitForSeconds(0.5f);
     }
 }

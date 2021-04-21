@@ -5,17 +5,32 @@ using UnityEngine;
 public class T_N1_Step2 : BaseGuideStep
 {
     public GameObject hand;
+    //public BaseGuideStep setStep;
+    private DarkEffect.Item item;
+    private BaseMapRole dealer;
+    public GameObject mask;
     public override IEnumerator StepStart()
     {
-        isStepEnd = false;
         StageGoal.My.skipToFirstWave.interactable = false;
-        if (CheckDealer())
+        isStepEnd = false;
+        item = new DarkEffect.Item();
+        StageGoal.My.skipToFirstWave.interactable = false;
+        dealer = CheckDealer();
+        if (dealer)
         {
+            /*item.target = dealer.transform;
+            item.radius = 0;
+            item.EndRandius = 100;
+            item.waitTime = 1;
+            item.speed = 5;
+            setStep.Camera3DTarget.Add(item);*/
             isStepEnd = true;
         }
         else
         {
             RoleListManager.My.outButton.onClick.Invoke();
+            yield return new WaitForSeconds(1);
+            mask.SetActive(true);
             hand.SetActive(true);
             InvokeRepeating("Check", 0.5f, 0.5f);
         }
@@ -26,23 +41,30 @@ public class T_N1_Step2 : BaseGuideStep
 
     void Check()
     {
-        if (CheckDealer())
+        dealer = CheckDealer();
+        if (dealer)
         {
+            /*item.target = dealer.transform;
+            item.radius = 0;
+            item.EndRandius = 100;
+            item.waitTime = 1;
+            item.speed = 5;
+            setStep.Camera3DTarget.Add(item);*/
             isStepEnd = true;
         }
     }
 
-    bool CheckDealer()
+    BaseMapRole CheckDealer()
     {
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
             {
-                return true;
+                return PlayerData.My.MapRole[i];
             }
         }
 
-        return false;
+        return null;
     }
     
     public override bool ChenkEnd()
@@ -53,6 +75,7 @@ public class T_N1_Step2 : BaseGuideStep
     public override IEnumerator StepEnd()
     {
         T_N1_Manager.My.SetEquipButton(true);
-        yield return null;
+        StageGoal.My.skipToFirstWave.interactable = true;
+        yield return new WaitForSeconds(0.5f);
     }
 }

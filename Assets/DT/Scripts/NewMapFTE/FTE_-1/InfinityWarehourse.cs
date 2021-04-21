@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DT.Fight.Bullet;
+using RenderHeads.Media.AVProVideo;
 using UnityEngine;
 
 public class InfinityWarehourse : ProductMerchant
@@ -11,6 +12,11 @@ public class InfinityWarehourse : ProductMerchant
     public BulletType bulletType;
 
     private ProductData pd;
+
+    public new void Start()
+    {
+        base.Start();
+    }
 
     public override void Skill()
     {
