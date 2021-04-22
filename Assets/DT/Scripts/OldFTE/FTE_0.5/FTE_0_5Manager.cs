@@ -44,12 +44,15 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
         SetRoleMageZero();
         InitRoleStartActive(false);
         SetRoleInfoUp();
+        seed.SetActive(true);
+        UpRole(seed);
         dealer.SetActive(false);
         PlayerData.My.playerGears.Clear();
         PlayerData.My.playerWorkers.Clear();
         SetDeleteButton(false);
         InitRoleTradeButton();
         StageGoal.My.maxRoleLevel = 3;
+        RoleListManager.My.OutButton();
     }
 
     public void UpRole(GameObject role)
@@ -76,7 +79,7 @@ public class FTE_0_5Manager : MonoSingleton<FTE_0_5Manager>
 
     public void InitRoleStartActive(bool isActive)
     {
-        seed.SetActive(isActive);
+   
         dealerJC1.SetActive(isActive);
     }
 

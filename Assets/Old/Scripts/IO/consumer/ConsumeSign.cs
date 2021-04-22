@@ -381,6 +381,7 @@ public class ConsumeSign : MonoBehaviour
     {
         int baseScore = consumeData.killSatisfy;
         StageGoal.My.GetSatisfy(baseScore);
+        
         StageGoal.My.GetHealth(consumeData.liveSatisfy);
         StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy);
         if (scorePer > 1f)

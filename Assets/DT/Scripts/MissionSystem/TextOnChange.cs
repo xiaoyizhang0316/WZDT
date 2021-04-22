@@ -23,6 +23,12 @@ public class TextOnChange : MonoBehaviour
     //private bool isOnScale = false;
     public void ShowText(string newText, string content)
     {
+        if (string.IsNullOrEmpty(newText) || string.IsNullOrEmpty(content))
+        {
+            Debug.Log(newText+","+content);
+            return;
+        }
+
         if (!isSetStyle&&gameObject.activeInHierarchy)
         {
             if (content.Contains("质监站"))

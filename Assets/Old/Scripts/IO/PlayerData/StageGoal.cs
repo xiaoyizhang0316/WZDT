@@ -437,6 +437,11 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// <param name="healthAdd"></param>
     public void GetHealth(int healthAdd)
     {
+        if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
+        {
+            return;
+        }
+
         //SetHealthBar(playerHealth, healthAdd);
         //playerHealth += healthAdd;
         add_queue.Enqueue(healthAdd);

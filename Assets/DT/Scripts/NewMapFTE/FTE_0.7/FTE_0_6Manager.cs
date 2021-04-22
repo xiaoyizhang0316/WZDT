@@ -63,8 +63,7 @@ public class FTE_0_6Manager : MonoSingleton<FTE_0_6Manager>
         SetClearWHButton(false);
         SetDeleteButton(true);
         
-        UpRole(seed);
-        UpRole(peasant);
+       
         UpRole(dealerJC1);
         StageGoal.My.maxRoleLevel = 3;
     }
@@ -73,6 +72,12 @@ public class FTE_0_6Manager : MonoSingleton<FTE_0_6Manager>
     {
         role.SetActive(true);
         role.transform.DOLocalMoveY(3,1).Play();
+        
+    }
+    public void UpRole(GameObject role,int value)
+    {
+        role.SetActive(true);
+        role.transform.DOLocalMoveY(value,1).Play();
         
     }
 

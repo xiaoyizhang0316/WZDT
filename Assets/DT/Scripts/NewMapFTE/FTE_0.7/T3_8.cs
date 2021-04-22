@@ -11,6 +11,7 @@ public class T3_8: BaseGuideStep
     public int count;
     public int time;
 
+    
     public bool islast;
     // Start is called before the first frame update
     void Start()
@@ -25,14 +26,19 @@ public class T3_8: BaseGuideStep
       FTE_0_6Manager.My.endPoint.SetActive(true);
       FTE_0_6Manager.My.dealer.SetActive(true);
       FTE_0_6Manager.My.dealer2.SetActive(true);
-      FTE_0_6Manager.My.UpRole(FTE_0_6Manager.My.dealer);
-      FTE_0_6Manager.My.UpRole(FTE_0_6Manager.My.dealer2);
+      FTE_0_6Manager.My.UpRole(FTE_0_6Manager.My.dealer,2);
+      FTE_0_6Manager.My.UpRole(FTE_0_6Manager.My.dealer2,2);
   
 
       FTE_0_6Manager.My.DownRole( FTE_0_6Manager.My.dealerJC1); 
       FTE_0_6Manager.My.DownRole( FTE_0_6Manager.My.dealerJC2);
       FTE_0_6Manager.My.DownRole( FTE_0_6Manager.My.dealerJC3);
       FTE_0_6Manager.My.DownRole( FTE_0_6Manager.My.dealerJC4);
+      for (int i = 0; i < PlayerData.My.RoleData.Count; i++)
+      {
+          TradeManager.My.DeleteRoleAllTrade(PlayerData.My.RoleData[i].ID);
+      }
+   
         var list = FindObjectsOfType<ConsumeSign>();
         for (int i = 0; i <list.Length ; i++)
         {
