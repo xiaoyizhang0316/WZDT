@@ -38,10 +38,6 @@ public class ProductSeed : BaseSkill
         {
             data.AddBuff(role.GetEquipBuffList()[i]);
         }
-        for (int i = 0; i < badBaseBuffs.Count; i++)
-        {
-            badBaseBuffs[i].OnProduct(ref data);
-        }
         try
         {
             GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);

@@ -10,7 +10,7 @@ using DT.Fight.Bullet;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class ConsumeSign : MonoBehaviour
+public class ConsumeSign : MonoBehaviour,ICloneable
 {
     /// <summary>
     /// 消费者数据
@@ -314,15 +314,6 @@ public class ConsumeSign : MonoBehaviour
     /// </summary>
     public virtual void OnAlive()
     {
-        if (PlayerData.My.qiYeJiaZhi[4])
-        {
-            int number = UnityEngine.Random.Range(0, 101);
-            if (number <= 30)
-            {
-                tweener.Restart();
-                return;
-            }
-        }
         LivePunish();
         Stop();
         Destroy(gameObject);
@@ -355,16 +346,6 @@ public class ConsumeSign : MonoBehaviour
         {
             List<ConsumerType> lists = new List<ConsumerType> { ConsumerType.OldpaoLegendary,ConsumerType.GoldencollarLegendary,ConsumerType.EliteLegendary,
                 ConsumerType.BluecollarLegendary,ConsumerType.WhitecollarLegendary};
-            if (lists.Contains(consumerType) && PlayerData.My.dingWei[3])
-            {
-                num = num * 120 / 100;
-            }
-            if (PlayerData.My.yingLiMoShi[5])
-            {
-                int gold = (int)(num * 0.45f);
-                StageGoal.My.GetPlayerGold(gold);
-                StageGoal.My.Income(gold, IncomeType.Consume);
-            }
             currentHealth += num;
             if (currentHealth <= 0)
             {
@@ -411,8 +392,6 @@ public class ConsumeSign : MonoBehaviour
         int baseGold = consumeData.killMoney * currentHealth / consumeData.maxHealth / 2;
         StageGoal.My.GetPlayerGold(baseGold);
         StageGoal.My.Income(baseGold, IncomeType.Consume);
-        // StageGoal.My.GetSatisfy((consumeData.killSatisfy * currentHealth / consumeData.maxHealth));
-        // StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy * currentHealth / consumeData.maxHealth);
         StageGoal.My.ConsumerAliveTip();
     }
 
@@ -437,10 +416,6 @@ public class ConsumeSign : MonoBehaviour
         if (isNormal)
         {
             per += elementResistance[ProductElementType.Normal] / 100f - 1f;
-        }
-        if (per < 1f && PlayerData.My.dingWei[2])
-        {
-            per = Mathf.Min(0.9f, per + 0.1f);
         }
         scorePer = Mathf.Max(1f,per);
         damage = (int)(damage * per);
@@ -682,5 +657,10 @@ public class ConsumeSign : MonoBehaviour
     private void Start()
     {
 
+    }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
     }
 }

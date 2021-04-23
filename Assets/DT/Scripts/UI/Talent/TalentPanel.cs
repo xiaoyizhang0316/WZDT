@@ -33,54 +33,6 @@ public class TalentPanel : MonoSingleton<TalentPanel>
     {
         usedPoint = 0;
         talentDesc.Close();
-        for (int i = 0; i < dingWei.Count; i++)
-        {
-            dingWei[i].isSelect = PlayerData.My.dingWei[i];
-            if (dingWei[i].isSelect)
-            {
-                usedPoint++;
-            }
-        }
-        for (int i = 0; i < yeWuXiTong.Count; i++)
-        {
-            yeWuXiTong[i].isSelect = PlayerData.My.yeWuXiTong[i];
-            if (yeWuXiTong[i].isSelect)
-            {
-                usedPoint++;
-            }
-        }
-        for (int i = 0; i < guanJianZiYuanNengLi.Count; i++)
-        {
-            guanJianZiYuanNengLi[i].isSelect = PlayerData.My.guanJianZiYuanNengLi[i];
-            if (guanJianZiYuanNengLi[i].isSelect)
-            {
-                usedPoint++;
-            }
-        }
-        for (int i = 0; i < yingLiMoShi.Count; i++)
-        {
-            yingLiMoShi[i].isSelect = PlayerData.My.yingLiMoShi[i];
-            if (yingLiMoShi[i].isSelect)
-            {
-                usedPoint++;
-            }
-        }
-        for (int i = 0; i < xianJinLiu.Count; i++)
-        {
-            xianJinLiu[i].isSelect = PlayerData.My.xianJinLiu[i];
-            if (xianJinLiu[i].isSelect)
-            {
-                usedPoint++;
-            }
-        }
-        for (int i = 0; i < qiYeJiaZhi.Count; i++)
-        {
-            qiYeJiaZhi[i].isSelect = PlayerData.My.qiYeJiaZhi[i];
-            if (qiYeJiaZhi[i].isSelect)
-            {
-                usedPoint++;
-            }
-        }
         if (NetworkMgr.My.levelProgressList.Count >= 4)
         {
             UnlockTalent(1);
@@ -240,55 +192,36 @@ public class TalentPanel : MonoSingleton<TalentPanel>
         {
             case 1:
                 {
-                    if (PlayerData.My.isOneFinish[0])
-                    {
-                        str = "定位";
-                    }
                     dingWei[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
                     break;
                 }
             case 2:
                 {
-                    if (PlayerData.My.isOneFinish[1])
-                    {
-                        str = "关键资源能力";
-                    }
+                    
                     guanJianZiYuanNengLi[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
                     break;
                 }
             case 3:
                 {
-                    if (PlayerData.My.isOneFinish[2])
-                    {
-                        str = "业务系统";
-                    }
+                    
                     yeWuXiTong[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
                     break;
                 }
             case 4:
                 {
-                    if (PlayerData.My.isOneFinish[3])
-                    {
-                        str = "现金流结构";
-                    }
+                    
                     xianJinLiu[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
                     break;
                 }
             case 5:
                 {
-                    if (PlayerData.My.isOneFinish[4])
-                    {
-                        str = "盈利模式";
-                    }
+                    
                     yingLiMoShi[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
                     break;
                 }
             case 6:
                 {
-                    if (PlayerData.My.isOneFinish[5])
-                    {
-                        str = "企业价值";
-                    }
+                    
                     qiYeJiaZhi[0].transform.parent.Find("Label").GetComponent<Text>().text = str;
                     break;
                 }
@@ -315,48 +248,6 @@ public class TalentPanel : MonoSingleton<TalentPanel>
             }
         }
         usedPoint = 0;
-        for (int i = 0; i < dingWei.Count; i++)
-        {
-            if (PlayerData.My.dingWei[i])
-            {
-                usedPoint++;
-            }
-        }
-        for (int i = 0; i < yeWuXiTong.Count; i++)
-        {
-            if (PlayerData.My.yeWuXiTong[i])
-            {
-                usedPoint++;
-            }
-        }
-        for (int i = 0; i < guanJianZiYuanNengLi.Count; i++)
-        {
-            if (PlayerData.My.guanJianZiYuanNengLi[i])
-            {
-                usedPoint++;
-            }
-        }
-        for (int i = 0; i < yingLiMoShi.Count; i++)
-        {
-            if (PlayerData.My.yingLiMoShi[i])
-            {
-                usedPoint++;
-            }
-        }
-        for (int i = 0; i < xianJinLiu.Count; i++)
-        {
-            if (PlayerData.My.xianJinLiu[i])
-            {
-                usedPoint++;
-            }
-        }
-        for (int i = 0; i < qiYeJiaZhi.Count; i++)
-        {
-            if (PlayerData.My.qiYeJiaZhi[i])
-            {
-                usedPoint++;
-            }
-        }
     }
 
     /// <summary>
@@ -403,30 +294,6 @@ public class TalentPanel : MonoSingleton<TalentPanel>
     /// </summary>
     public void SaveAndQuit()
     {
-        for (int i = 0; i < dingWei.Count; i++)
-        {
-            PlayerData.My.dingWei[i] = dingWei[i].isSelect;
-        }
-        for (int i = 0; i < yeWuXiTong.Count; i++)
-        {
-            PlayerData.My.yeWuXiTong[i] = yeWuXiTong[i].isSelect;
-        }
-        for (int i = 0; i < guanJianZiYuanNengLi.Count; i++)
-        {
-            PlayerData.My.guanJianZiYuanNengLi[i] = guanJianZiYuanNengLi[i].isSelect;
-        }
-        for (int i = 0; i < yingLiMoShi.Count; i++)
-        {
-            PlayerData.My.yingLiMoShi[i] = yingLiMoShi[i].isSelect;
-        }
-        for (int i = 0; i < xianJinLiu.Count; i++)
-        {
-            PlayerData.My.xianJinLiu[i] = xianJinLiu[i].isSelect;
-        }
-        for (int i = 0; i < qiYeJiaZhi.Count; i++)
-        {
-            PlayerData.My.qiYeJiaZhi[i] = qiYeJiaZhi[i].isSelect;
-        }
         NetworkMgr.My.UpdateTalent(
             ()=> {
             Close();

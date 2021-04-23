@@ -45,10 +45,6 @@ public class StageNPCData
 
     public List<int> hideBuffList;
 
-    public List<int> goodBaseBuffList;
-
-    public List<int> badBaseBuffList;
-
     public StageNPCData(StageNPCItem item)
     {
         roleType = item.roleType;
@@ -72,8 +68,6 @@ public class StageNPCData
         skillDesc = item.skillDesc;
         initBuffList = new List<int>();
         hideBuffList = new List<int>();
-        goodBaseBuffList = new List<int>();
-        badBaseBuffList = new List<int>();
         foreach (var str in item.initBuffList.Split(','))
         {
             if (int.Parse(str) != -1)
@@ -83,16 +77,6 @@ public class StageNPCData
         {
             if (int.Parse(str) != -1)
                 hideBuffList.Add(int.Parse(str));
-        }
-        foreach (var str in item.goodBaseBuffList.Split(','))
-        {
-            if (int.Parse(str) != -1)
-                goodBaseBuffList.Add(int.Parse(str));
-        }
-        foreach (var str in item.badBaseBuffList.Split(','))
-        {
-            if (int.Parse(str) != -1)
-                badBaseBuffList.Add(int.Parse(str));
         }
     }
 

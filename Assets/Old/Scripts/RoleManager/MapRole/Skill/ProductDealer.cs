@@ -28,10 +28,6 @@ public class ProductDealer : BaseSkill
             {
                 data.AddBuff(role.GetEquipBuffList()[i]);
             }
-            for (int i = 0; i < badBaseBuffs.Count; i++)
-            {
-                badBaseBuffs[i].OnProduct(ref data);
-            }
             switch (data.bulletType)
             {
                 case BulletType.NormalPP:

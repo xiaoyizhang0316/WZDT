@@ -119,10 +119,6 @@ public abstract class BaseNpc : MonoBehaviour
     void Awake()
     {
         BaseInit();
-        if(PlayerData.My.yeWuXiTong[0])
-        {
-            lockNumber = lockNumber * 90 / 100;
-        }
     }
 
     public void BaseInit()

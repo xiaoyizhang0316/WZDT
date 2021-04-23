@@ -291,38 +291,14 @@ public class TradeSign : MonoBehaviour
         countNumber++;
         if (countNumber == 10 && (StageGoal.My.currentType != StageType.Normal || CommonParams.fteList.Contains(SceneManager.GetActiveScene().name)))
         {
-            if (PlayerData.My.yeWuXiTong[2])
+            int cost = CalculateTC();
+            countNumber = 0;
+            if (!PlayerData.My.isSOLO)
             {
-                int number = UnityEngine.Random.Range(0, 101);
-                if (number > 10)
+                string str = "OnGoldChange|" + (0 - cost).ToString();
+                if (PlayerData.My.isServer)
                 {
-                    int cost = CalculateTC();
-                    countNumber = 0;
-                    if (!PlayerData.My.isSOLO)
-                    {
-                        string str = "OnGoldChange|" + (0 - cost).ToString();
-                        if (PlayerData.My.isServer)
-                        {
-                            PlayerData.My.server.SendToClientMsg(str);
-                        }
-                    }
-                }
-                else
-                {
-                    countNumber = 0;
-                }
-            }
-            else
-            {
-                int cost = CalculateTC();
-                countNumber = 0;
-                if (!PlayerData.My.isSOLO)
-                {
-                    string str = "OnGoldChange|" + (0 - cost).ToString();
-                    if (PlayerData.My.isServer)
-                    {
-                        PlayerData.My.server.SendToClientMsg(str);
-                    }
+                    PlayerData.My.server.SendToClientMsg(str);
                 }
             }
         }

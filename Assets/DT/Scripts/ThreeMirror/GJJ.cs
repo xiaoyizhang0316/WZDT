@@ -139,12 +139,6 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     void Start()
     {
         costNumber.text = costTechNumber.ToString();
-        if (PlayerData.My.guanJianZiYuanNengLi[4])
-        {
-            transform.DORotateQuaternion(transform.rotation, 180f).OnComplete(() => {
-                AutoUseGJJ();
-            });
-        }
     }
 
     // Update is called once per frame

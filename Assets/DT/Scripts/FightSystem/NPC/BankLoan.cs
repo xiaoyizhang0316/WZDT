@@ -26,10 +26,6 @@ public class BankLoan : BaseExtraSkill
     {
         int actualLoan = loanNumber;
         count = 0;
-        if (PlayerData.My.yingLiMoShi[2])
-        {
-            actualLoan = actualLoan * 120 / 100;
-        }
         StageGoal.My.GetPlayerGold(actualLoan, true);
         StageGoal.My.Income(actualLoan, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
         eachReturn = (int)(actualLoan * (1 + CalculateInterest(PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole)))) / timeCount);
@@ -83,12 +79,5 @@ public class BankLoan : BaseExtraSkill
     private new void Start()
     {
         base.Start();
-        if (PlayerData.My.yingLiMoShi[2])
-        {
-            var buff = GameDataMgr.My.GetBuffDataByID(10053);
-            BaseBuff baseb = new BaseBuff();
-            baseb.Init(buff);
-            baseb.SetRoleBuff(null, GetComponentInParent<BaseMapRole>(), GetComponentInParent<BaseMapRole>());
-        }
     }
 }
