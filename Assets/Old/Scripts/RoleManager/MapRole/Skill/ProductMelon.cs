@@ -45,7 +45,7 @@ public class ProductMelon : BaseSkill
                 game.GetComponent<GoodsSign>().Move();
                 productDatas.Add(new ProductData(data));
               
-                Debug.Log("UnityEngine.Random.Range(0, 100)"+UnityEngine.Random.Range(0, 100));
+//                Debug.Log("UnityEngine.Random.Range(0, 100)"+UnityEngine.Random.Range(0, 100));
                 if (UnityEngine.Random.Range(0, 100) < role.baseRoleData.effect)
                 {
                       game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
