@@ -14,7 +14,7 @@ public class T0_5_4 : BaseGuideStep
     {
       NewCanvasUI.My.GameNormal();
       maprole.OnMoved += ChangeColor;
-     FTE_0_5Manager.My.UpRole( FTE_0_5Manager.My.seerJC1); 
+    
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
         {
             PlayerData.My.MapRole[i].tradeButton.transform.localScale = Vector3.zero;

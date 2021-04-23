@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class T0_5_11 : BaseGuideStep
@@ -22,7 +23,7 @@ public class T0_5_11 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        
+ 
        FTE_0_5Manager.My.consumerSpot.SetActive(true);
        FTE_0_5Manager.My.endPoint.SetActive(true);
         StageGoal.My.killNumber = 0;
@@ -61,8 +62,9 @@ public class T0_5_11 : BaseGuideStep
             PlayerData.My.DeleteRole(PlayerData.My.RoleData[0].ID);
             PlayerData.My.DeleteRole(PlayerData.My.RoleData[0].ID);
     
-        yield return new WaitForSeconds(2);  
-        
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Map");
+
     }
 
     public override bool ChenkEnd()

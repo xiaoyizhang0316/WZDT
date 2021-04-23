@@ -286,6 +286,11 @@ public class ConsumeSign : MonoBehaviour,ICloneable
         {
             T8Manager.My.CheckTasteKill(buildingIndex);
         }
+
+        if (SceneManager.GetActiveScene().name.Equals("FTE_0"))
+        {
+            T_N0_Manager.My.isTasteKill = true;
+        }
         DeathAward();
         Stop();
         GetComponent<Animator>().SetBool("IsDead", true);
@@ -357,6 +362,7 @@ public class ConsumeSign : MonoBehaviour,ICloneable
     {
         int baseScore = consumeData.killSatisfy;
         StageGoal.My.GetSatisfy(baseScore);
+        
         StageGoal.My.GetHealth(consumeData.liveSatisfy);
         StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy);
         if (scorePer > 1f)

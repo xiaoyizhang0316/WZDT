@@ -92,6 +92,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 
     public Text endDivideStatus;
 
+    public GameObject delete_btn;
+
     private string showNumberText;
 
     /// <summary>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DT.Fight.Bullet;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NpcSpecialInfo : MonoBehaviour
@@ -55,6 +56,10 @@ public class NpcSpecialInfo : MonoBehaviour
         clearBullets.onClick.AddListener(()=> {
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要清空仓库吗？";
+            if (PlayerData.My.guanJianZiYuanNengLi[5])
+            {
+                str = "确定要将仓库中的产品低价处理吗?";
+            }
             DeleteUIManager.My.Init(str, () => {
                 if (!PlayerData.My.isSOLO)
                 {
@@ -69,6 +74,14 @@ public class NpcSpecialInfo : MonoBehaviour
                         PlayerData.My.client.SendToServerMsg(str1);
                     }
                 }
+                if (SceneManager.GetActiveScene().name.Equals("FTE_0.7"))
+                {
+                    if (npc.baseRoleData.baseRoleData .roleType == GameEnum.RoleType.Peasant &&
+                        FTE_0_6Manager.My.clearWarehouse == 1)
+                    {
+                        FTE_0_6Manager.My.clearWarehouse = 2;
+                    }
+                }
                 //PlayerData.My.GetMapRoleById(npc.baseRoleData.ID).ClearWarehouse();
                 npc.ClearWarehouse();
                 SetInfo(npc, baseSkill, npcTF);
@@ -76,6 +89,11 @@ public class NpcSpecialInfo : MonoBehaviour
             });
         });
         icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.baseRoleData.baseRoleData.roleType.ToString() + (npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level == 0 ? 1 : npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level).ToString());
+        if (PlayerData.My.guanJianZiYuanNengLi[5])
+        {
+            clearBullets.GetComponentInChildren<Text>().text = "清仓(" + PlayerData.My.GetMapRoleById(npc.baseRoleData.ID).CountWarehouseIncome() + ")";
+            clearBullets.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Talent/Warehouse");
+        }
         //ClearBulletContent();
         switch (npc.baseRoleData.baseRoleData.roleType)
         {
@@ -121,6 +139,11 @@ public class NpcSpecialInfo : MonoBehaviour
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.buffList[i]);
                 sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.buffList[i]), npc);
             }
+            else if (i - baseSkill.buffList.Count < baseSkill.badSpecialBuffList.Count)
+            {
+                sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.badSpecialBuffList[i - baseSkill.buffList.Count]);
+                sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.badSpecialBuffList[i - baseSkill.buffList.Count]), npc);
+            }
             else
             {
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/999");
@@ -132,12 +155,17 @@ public class NpcSpecialInfo : MonoBehaviour
         if (npc.GetComponent<NPC>().isCanSeeEquip)
         {
             int a = 0;
-            for (int j = baseSkill.buffList.Count; j < buffs.Count; j++)
+            for (int j = baseSkill.buffList.Count + baseSkill.badSpecialBuffList.Count; j < buffs.Count; j++)
             {
                 if (a < npc.GetComponent<NPC>().NPCBuffList.Count)
                 {
                     buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + npc.GetComponent<NPC>().NPCBuffList[a]);
                     buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(npc.GetComponent<NPC>().NPCBuffList[a]), npc);
+                }
+                else if (a - npc.GetComponent<NPC>().NPCBuffList.Count < baseSkill.goodSpecialBuffList.Count)
+                {
+                    buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.goodSpecialBuffList[a - npc.GetComponent<NPC>().NPCBuffList.Count]);
+                    buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.goodSpecialBuffList[a - npc.GetComponent<NPC>().NPCBuffList.Count]), npc);
                 }
                 else
                 {

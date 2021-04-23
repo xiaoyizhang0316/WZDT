@@ -12,8 +12,12 @@ public class FTE_0_6Manager : MonoSingleton<FTE_0_6Manager>
     public GameObject dealerJC1; 
     public GameObject dealerJC2; 
     public GameObject dealerJC3; 
-    public GameObject dealerJC4; 
+    public GameObject dealerJC4;
 
+    public GameObject seed;
+    public GameObject peasant;
+    public GameObject dealer;
+    public GameObject dealer2;
     public Material sn;
     public Material sr;
     public Material sg;
@@ -46,6 +50,7 @@ public class FTE_0_6Manager : MonoSingleton<FTE_0_6Manager>
     {
         consumerSpot.SetActive(false);
         endPoint.SetActive(false);
+        
         SetRoleMageZero();
         InitRoleStartActive(false);
         PlayerData.My.playerGears.Clear();
@@ -55,14 +60,24 @@ public class FTE_0_6Manager : MonoSingleton<FTE_0_6Manager>
         SetRoleInfoAddEquip(false);
         RoleListManager.My.OutButton();
         SetUpdateButton(true);
-        SetClearWHButton(true);
+        SetClearWHButton(false);
         SetDeleteButton(true);
+        
+       
+        UpRole(dealerJC1);
+        StageGoal.My.maxRoleLevel = 3;
     }
 
     public void UpRole(GameObject role)
     {
         role.SetActive(true);
         role.transform.DOLocalMoveY(3,1).Play();
+        
+    }
+    public void UpRole(GameObject role,int value)
+    {
+        role.SetActive(true);
+        role.transform.DOLocalMoveY(value,1).Play();
         
     }
 

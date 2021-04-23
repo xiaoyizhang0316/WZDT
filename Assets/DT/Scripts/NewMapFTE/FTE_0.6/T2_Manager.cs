@@ -10,6 +10,7 @@ public class T2_Manager : MonoSingleton<T2_Manager>
     public GameObject bornPoint;
     public GameObject QualitySeed;
     public GameObject QualityMerchant;
+    public GameObject dealer_NPC;
     
     public GameObject seed_sign;
     public GameObject peasant_sign;
@@ -210,6 +211,24 @@ public class T2_Manager : MonoSingleton<T2_Manager>
             return;
         }
         mapRole.tradeButton.transform.DOScale(1, 0.5f).Play();
+    }
+
+    /// <summary>
+    /// 检查场上是否存在某角色
+    /// </summary>
+    /// <param name="roleType"></param>
+    /// <returns></returns>
+    public bool CheckHasRole(GameEnum.RoleType roleType)
+    {
+        for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+        {
+            if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == roleType)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     #region Time count down

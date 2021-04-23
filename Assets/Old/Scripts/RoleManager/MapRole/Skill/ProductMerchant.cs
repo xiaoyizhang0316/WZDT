@@ -7,9 +7,9 @@ public class ProductMerchant : BaseSkill
 {
     public List<ProductData> productDatas = new List<ProductData>();
 
-    private int currentCount = 0;
+    protected int currentCount = 0;
 
-    private int maxCount = 0;
+    protected int maxCount = 0;
 
     public new void Start()
     {

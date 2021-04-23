@@ -23,6 +23,7 @@ public class T3_3 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
+        FTE_0_6Manager.My.SetClearWHButton(true);
         yield return new WaitForSeconds(2);
     }
 

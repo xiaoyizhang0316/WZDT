@@ -6,6 +6,10 @@ public class T2_Dialog7 : FTE_Dialog
 {
     public override void BeforeDialog()
     {
+        // delete 20210419
+        /*T2_Manager.My.ShowTradeButton(GetSeed());*/
+        
+        // TODO 交易按钮显示
         T2_Manager.My.ShowTradeButton(GetSeed());
     }
     

@@ -4,7 +4,62 @@ using UnityEngine;
 
 public class T2_Task3 : BaseGuideStep
 {
-    public int needQuality = 0;
+    public GameObject redTipBullet;
+    public GameObject seedDetail_panel;
+    public override IEnumerator StepStart()
+    {
+        yield return null;
+        Check();
+    }
+    
+    void Check()
+    {
+        InvokeRepeating("CheckGoal", 0.5f, 0.5f);
+    }
+
+    void CheckGoal()
+    {
+        if (!missiondatas.data[0].isFinish)
+        {
+            if (NewCanvasUI.My.Panel_Update.activeInHierarchy 
+                && NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().currentRole.baseRoleData.roleType== GameEnum.RoleType.Seed)
+            {
+                missiondatas.data[0].isFinish = true;
+            }
+        }
+
+        if (!missiondatas.data[1].isFinish)
+        {
+            if (NewCanvasUI.My.Panel_Update.activeInHierarchy&& 
+                NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().currentRole.baseRoleData.roleType== GameEnum.RoleType.Seed)
+            {
+                redTipBullet.SetActive(true);
+                if (seedDetail_panel.activeInHierarchy)
+                {
+                    redTipBullet.SetActive(false);
+                    missiondatas.data[1].isFinish = true;
+                }
+            }
+            else
+            {
+                redTipBullet.SetActive(false);
+            }
+        }
+    }
+
+    public override bool ChenkEnd()
+    {
+        return missiondatas.CheckEnd();
+    }
+
+    public override IEnumerator StepEnd()
+    {
+        yield return new WaitForSeconds(2);
+    }
+    
+    #region remove 20210419
+
+    /*public int needQuality = 0;
     public override IEnumerator StepStart()
     {
         T2_Manager.My.QualitySeed.GetComponent<QualityRole>().QualityReset();
@@ -44,5 +99,9 @@ public class T2_Task3 : BaseGuideStep
         CancelInvoke();
         T2_Manager.My.QualitySeed.GetComponent<QualityRole>().CheckEnd();
         yield return new WaitForSeconds(3);
-    }
+    }*/
+
+    #endregion
+
+    
 }
