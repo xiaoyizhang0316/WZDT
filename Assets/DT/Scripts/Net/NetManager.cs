@@ -681,9 +681,7 @@ public class NetManager : MonoSingleton<NetManager>
         {
             return null;
         }
-
         string output = "";
-
         foreach (NetworkInterface item in NetworkInterface.GetAllNetworkInterfaces())
         {
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
@@ -716,7 +714,6 @@ public class NetManager : MonoSingleton<NetManager>
                 }
             }
         }
-
         return output;
     }
 

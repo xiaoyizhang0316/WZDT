@@ -83,11 +83,6 @@ public class BuffData
     /// </summary>
     public int buffValue;
 
-    /// <summary>
-    /// 时间点其他骚操作
-    /// </summary>
-    public Dictionary<int, List<string>> otherFunctions;
-
     public BuffData()
     {
         OnBuffAdd = new List<string>();
@@ -95,9 +90,31 @@ public class BuffData
         OnBeforeDead = new List<string>();
         OnTick = new List<string>();
         OnProduct = new List<string>();
-        otherFunctions = new Dictionary<int, List<string>>();
         buffParam = new List<int>();
         OnEndTurn = new List<string>();
+    }
+
+    public BuffData CopyNew()
+    {
+        BuffData temp = new BuffData();
+        temp.BuffID = BuffID;
+        temp.bulletBuffType = bulletBuffType;
+        temp.BuffName = BuffName;
+        temp.BuffDesc = BuffDesc;
+        temp.elementType = elementType;
+        temp.attackEffect = attackEffect;
+        temp.OnBuffAdd.AddRange(OnBuffAdd);
+        temp.OnBuffRemove.AddRange(OnBuffRemove);
+        temp.OnBeforeDead.AddRange(OnBeforeDead);
+        temp.OnTick.AddRange(OnTick);
+        temp.OnProduct.AddRange(OnProduct);
+        temp.buffParam.AddRange(buffParam);
+        temp.OnEndTurn.AddRange(OnEndTurn);
+        temp.duration = duration;
+        temp.turnDuration = turnDuration;
+        temp.interval = interval;
+        temp.buffValue = buffValue;
+        return temp;
     }
 
     public string GenerateBuffDesc(BaseMapRole role)

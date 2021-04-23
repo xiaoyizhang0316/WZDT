@@ -155,7 +155,6 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         GenerateMapStates(playerOperations);
         //line = playSlider.transform.GetChild(0).GetComponent<VectorObject2D>();
         InitMoneyLine(StageGoal.My.dataStats, StageGoal.My.timeCount);
-        InitTalentPanel(PlayerData.My.GeneratePlayerTalentReview());
     }
 
     public void ClearConsumableUse()

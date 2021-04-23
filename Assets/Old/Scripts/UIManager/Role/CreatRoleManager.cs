@@ -328,27 +328,15 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     /// </summary>
     public void CalculateAllAttribute()
     {
-        float costAdd = 1f;
-        float effectAdd = 1f;
-        if (PlayerData.My.guanJianZiYuanNengLi[0])
-        {
-            costAdd = 0.8f;
-        }
-
-        if (PlayerData.My.guanJianZiYuanNengLi[3])
-        {
-            effectAdd = 1.2f;
-        }
-
         InitRoleValue();
         foreach (var i in EquipList)
         {
             GearData tempData = GameDataMgr.My.GetGearData(i.Key);
-            finalEffect += (int) (tempData.effect * effectAdd);
-            finalEfficiency += (int) (tempData.efficiency * effectAdd);
-            finalRange += (int) (tempData.range * effectAdd);
+            finalEffect += (int) (tempData.effect);
+            finalEfficiency += (int) (tempData.efficiency );
+            finalRange += (int) (tempData.range );
             finalTradeCost += tempData.tradeCost;
-            finalCost += (int) (tempData.cost * costAdd);
+            finalCost += (int) (tempData.cost );
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             finalEncourageAdd += tempData.encourageAdd;
@@ -359,14 +347,14 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         foreach (var i in peoPleList)
         {
             WorkerData tempData = GameDataMgr.My.GetWorkerData(i.Key);
-            finalEffect += (int) (tempData.effect * effectAdd);
-            finalEfficiency += (int) (tempData.efficiency * effectAdd);
-            finalRange += (int) (tempData.range * effectAdd);
+            finalEffect += (int) (tempData.effect );
+            finalEfficiency += (int) (tempData.efficiency );
+            finalRange += (int) (tempData.range );
             finalTradeCost += tempData.tradeCost;
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             finalTechAdd += tempData.techAdd;
-            finalCost += (int) (tempData.cost * costAdd);
+            finalCost += (int) (tempData.cost);
             CurrentRole.workerCost += tempData.cost;
         }
 

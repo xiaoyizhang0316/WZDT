@@ -65,10 +65,6 @@ public class NpcProductInfo : MonoBehaviour
         clearBullets.onClick.AddListener(() => {
             NewCanvasUI.My.Panel_Delete.SetActive(true);
             string str = "确定要清空仓库吗？";
-            if (PlayerData.My.guanJianZiYuanNengLi[5])
-            {
-                str = "确定要将仓库中的产品低价处理吗?";
-            }
             DeleteUIManager.My.Init(str, () => {
                 if (!PlayerData.My.isSOLO)
                 {
@@ -89,11 +85,6 @@ public class NpcProductInfo : MonoBehaviour
                 ClearBulletContent();
             });
         });
-        if (PlayerData.My.guanJianZiYuanNengLi[5])
-        {
-            clearBullets.GetComponentInChildren<Text>().text = "清仓(" + PlayerData.My.GetMapRoleById(npc.GetComponent<BaseMapRole>().baseRoleData.ID).CountWarehouseIncome() + ")";
-            clearBullets.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Talent/Warehouse");
-        }
         ShowBullets(npc);
         encourageLevel.Init(npc.GetComponent<BaseMapRole>());
         bulletWarehourse.SetActive(true);
@@ -104,11 +95,6 @@ public class NpcProductInfo : MonoBehaviour
             {
                 sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.buffList[i]);
                 sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.buffList[i]), npc.GetComponent<BaseMapRole>());
-            }
-            else if (i - baseSkill.buffList.Count < baseSkill.badSpecialBuffList.Count)
-            {
-                sp.sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.badSpecialBuffList[i - baseSkill.buffList.Count]);
-                sp.GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.badSpecialBuffList[i - baseSkill.buffList.Count]), npc.GetComponent<BaseMapRole>());
             }
             else
             {
@@ -128,11 +114,6 @@ public class NpcProductInfo : MonoBehaviour
                     buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + npc.GetComponent<NPC>().NPCBuffList[a]);
                     buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(npc.GetComponent<NPC>().NPCBuffList[a]), npc.GetComponent<BaseMapRole>());
                 }
-                else if (a - npc.GetComponent<NPC>().NPCBuffList.Count < baseSkill.goodSpecialBuffList.Count)
-                {
-                    buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + baseSkill.goodSpecialBuffList[a - npc.GetComponent<NPC>().NPCBuffList.Count]);
-                    buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(baseSkill.goodSpecialBuffList[a - npc.GetComponent<NPC>().NPCBuffList.Count]), npc.GetComponent<BaseMapRole>());
-                }
                 else
                 {
                     buffs[j].sprite = NPCListInfo.My.buff;
@@ -147,16 +128,8 @@ public class NpcProductInfo : MonoBehaviour
                 a = 0;
                 for (int j = baseSkill.buffList.Count + npc.GetComponent<NPC>().NPCBuffList.Count; j < buffs.Count; j++)
                 {
-                    if (a< pm.goodSpecialBuffList.Count)
-                    {
-                        buffs[j].sprite = Resources.Load<Sprite>("Sprite/Buff/" + pm.goodSpecialBuffList[a]);
-                        buffs[j].GetComponent<BuffText>().InitBuff(GameDataMgr.My.GetBuffDataByID(pm.goodSpecialBuffList[a]), npc.GetComponent<BaseMapRole>());
-                    }
-                    else
-                    {
-                        buffs[j].sprite = NPCListInfo.My.buff;
-                        buffs[j].GetComponent<BuffText>().Reset();
-                    }
+                    buffs[j].sprite = NPCListInfo.My.buff;
+                    buffs[j].GetComponent<BuffText>().Reset();
                     a++;
                 }
             }

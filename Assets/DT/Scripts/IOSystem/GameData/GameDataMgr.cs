@@ -44,6 +44,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
 
     public List<TranslateData> translateDatas;
 
+    public List<EncourageSkillData> encourageSkillDatas;
+
     public Dictionary<ConsumerType, float> consumerWaitTime = new Dictionary<ConsumerType, float>();
 
     /// <summary>
@@ -170,25 +172,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         {
             if (b.BuffID == id)
             {
-                BuffData temp = new BuffData();
-                temp.BuffID = b.BuffID;
-                temp.bulletBuffType = b.bulletBuffType;
-                temp.BuffName = b.BuffName;
-                temp.BuffDesc = b.BuffDesc;
-                temp.elementType = b.elementType;
-                temp.attackEffect = b.attackEffect;
-                temp.OnBuffAdd.AddRange(b.OnBuffAdd);
-                temp.OnBuffRemove.AddRange(b.OnBuffRemove);
-                temp.OnBeforeDead.AddRange(b.OnBeforeDead);
-                temp.OnTick.AddRange(b.OnTick);
-                temp.OnProduct.AddRange(b.OnProduct);
-                temp.buffParam.AddRange(b.buffParam);
-                temp.OnEndTurn.AddRange(b.OnEndTurn);
-                temp.duration = b.duration;
-                temp.turnDuration = b.turnDuration;
-                temp.interval = b.interval;
-                temp.buffValue = b.buffValue;
-                return temp;
+                return b.CopyNew();
             }
         }
         print("------------查不到此BUFF!-----------" + id);
@@ -244,6 +228,24 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             }
         }
         print("----------------查不到此消费者类别----------------");
+        return null;
+    }
+
+    /// <summary>
+    /// 根据技能名称查找技能数据
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public EncourageSkillData GetEncourageSkillDataByName(string name)
+    {
+        foreach (EncourageSkillData item in encourageSkillDatas)
+        {
+            if (item.skillName.Equals(name))
+            {
+                return item;
+            }
+        }
+        print("----------------查不到此激励等级技能数据！----------------");
         return null;
     }
 
@@ -529,6 +531,21 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             {
                 consumerWaitTime.Add(temp.consumerType, float.Parse(c.waitTime));
             }
+        }
+    }
+
+    public void ParseEncourageSkillData(EncourageSkillsData rawData)
+    {
+        encourageSkillDatas = new List<EncourageSkillData>();
+        foreach (EncourageSkillItem item in rawData.encourageSkillSigns)
+        {
+            EncourageSkillData temp = new EncourageSkillData();
+            temp.skillName = item.skillName;
+            temp.skillType = (EncourageSkillType)Enum.Parse(typeof(EncourageSkillType),item.skillType);
+            temp.targetBuff = int.Parse(item.targetBuff);
+            temp.startValue = float.Parse(item.stratValue);
+            temp.add = float.Parse(item.add);
+            encourageSkillDatas.Add(temp);
         }
     }
 

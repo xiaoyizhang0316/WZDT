@@ -16,24 +16,6 @@ public abstract class BaseSkill : MonoBehaviour
     public bool isAnimPlaying = false;
 
     /// <summary>
-    /// 需要多棱镜发现的buff
-    /// </summary>
-    public List<int> goodSpecialBuffList;
-    /// <summary>
-    /// 需要多棱镜发现的buff实体
-    /// </summary>
-    public List<BaseBuff> goodBaseBuffs = new List<BaseBuff>();
-
-    /// <summary>
-    /// 不需要多棱镜发现的buff
-    /// </summary>
-    public List<int> badSpecialBuffList;
-    /// <summary>
-    /// 不需要多棱镜发现的buff实体
-    /// </summary>
-    public List<BaseBuff> badBaseBuffs = new List<BaseBuff>();
-
-    /// <summary>
     /// 技能描述
     /// </summary>
     public string skillDesc;
@@ -52,26 +34,6 @@ public abstract class BaseSkill : MonoBehaviour
         {
             UnleashSkills();
         }
-        for (int i = 0; i < goodSpecialBuffList.Count; i++)
-        {
-            BaseBuff buff = new BaseBuff();
-            BuffData data = GameDataMgr.My.GetBuffDataByID(goodSpecialBuffList[i]);
-            buff.Init(data);
-            buff.targetRole = role;
-            buff.castRole = role;
-            buff.buffRole = role;
-            goodBaseBuffs.Add(buff);
-        }
-        for (int i = 0; i < badSpecialBuffList.Count; i++)
-        {
-            BaseBuff buff = new BaseBuff();
-            BuffData data = GameDataMgr.My.GetBuffDataByID(badSpecialBuffList[i]);
-            buff.Init(data);
-            buff.targetRole = role;
-            buff.castRole = role;
-            buff.buffRole = role;
-            badBaseBuffs.Add(buff);
-        }
     }
 
     /// <summary>
@@ -82,30 +44,8 @@ public abstract class BaseSkill : MonoBehaviour
     public virtual void UnleashSkills()
     {
         isPlay = true;
-        float add = 1f;
-        if (role.encourageLevel > 0)
-        {
-            if(PlayerData.My.yingLiMoShi[3])
-            {
-                add -= role.encourageLevel * 0.08f;
-            }
-            else
-            {
-                add -= role.encourageLevel * 0.05f;
-            }
-        }
-        else
-        {
-            if (PlayerData.My.yingLiMoShi[3])
-            {
-                add += role.encourageLevel * -0.07f;
-            }
-            else
-            {
-                add += role.encourageLevel * -0.1f;
-            }
-        }
-        float d = Mathf.Min( 4f,1f / (role.baseRoleData.efficiency * 0.05f) * add);
+        
+        float d = Mathf.Min( 4f,1f / (role.baseRoleData.efficiency * 0.05f));
         if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
         {
             d /= 2f;

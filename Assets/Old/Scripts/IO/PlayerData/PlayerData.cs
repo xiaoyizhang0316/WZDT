@@ -39,20 +39,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// </summary>
     public List<PlayerConsumable> playerConsumables = new List<PlayerConsumable>();
 
-    public List<bool> dingWei = new List<bool>{ false, false, false, false, false, false };
-
-    public List<bool> yeWuXiTong = new List<bool> { false, false, false, false, false, false };
-
-    public List<bool> guanJianZiYuanNengLi = new List<bool> { false, false, false, false, false, false };
-
-    public List<bool> yingLiMoShi = new List<bool> { false, false, false, false, false, false };
-
-    public List<bool> xianJinLiu = new List<bool> { false, false, false, false, false, false };
-
-    public List<bool> qiYeJiaZhi = new List<bool> { false, false, false, false, false, false };
-
-    public List<bool> isOneFinish = new List<bool> { false, false, false, false, false, false };
-
     public bool cheatIndex1 = false;
 
     public bool cheatIndex2 = false;
@@ -228,21 +214,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         else if (StageGoal.My.timeCount - mapRole.putTime <= 5)
         {
             StageGoal.My.GetTechPoint(mapRole.costTechPoint);
-        }
-        // else if (sceneList.Contains(SceneManager.GetActiveScene().name))
-        // {
-        //     StageGoal.My.GetTechPoint(target.baseRoleData.costTech);
-        // }
-        if (guanJianZiYuanNengLi[2])
-        {
-            if (StageGoal.My.timeCount - mapRole.putTime > 5)
-            {
-                int returnTech = GameDataMgr.My.GetModelData(target.baseRoleData.roleType, 1).costTech * 50 / 100;
-                StageGoal.My.GetTechPoint(returnTech);
-            }
-            int returnGold = mapRole.totalUpgradeCost * 50 / 100;
-            StageGoal.My.GetPlayerGold(returnGold);
-            StageGoal.My.Income(returnGold,IncomeType.Other,null,"删除返现");
         }
         RoleData.Remove(target);
         MapRole.Remove(mapRole);
@@ -556,155 +527,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         MapRole.Clear();
     }
 
-    /// <summary>
-    /// 读取天赋配置字符串
-    /// </summary>
-    /// <param name="str"></param>
-    public void ParsePlayerTalent(string str)
-    {
-        string[] talentList = str.Split('_');
-        //if (talentList.Length != 7)
-        //{
-        //    Debug.Log(str);
-        //    Debug.LogWarning("天赋读取错误！");
-            for (int i = 0; i < 6; i++)
-            {
-                dingWei[i] = false;
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                guanJianZiYuanNengLi[i] = false;
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                yeWuXiTong[i] = false;
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                xianJinLiu[i] = false;
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                yingLiMoShi[i] = false;
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                qiYeJiaZhi[i] = false;
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                isOneFinish[i] = false;
-            }
-    }
-
-    /// <summary>
-    /// 生成天赋简化字符串
-    /// </summary>
-    /// <returns></returns>
-    public string GeneratePlayerTalentReview()
-    {
-        string result = "";
-        int count = 0;
-        for (int i = 0; i < 6; i++)
-        {
-            if (dingWei[i])
-            {
-                count++;
-            }
-        }
-        result += count.ToString();
-        count = 0;
-        for (int i = 0; i < 6; i++)
-        {
-            if (guanJianZiYuanNengLi[i])
-            {
-                count++;
-            }
-        }
-        result += count.ToString();
-        count = 0;
-        for (int i = 0; i < 6; i++)
-        {
-            if (yeWuXiTong[i])
-            {
-                count++;
-            }
-        }
-        result += count.ToString();
-        count = 0;
-        for (int i = 0; i < 6; i++)
-        {
-            if (xianJinLiu[i])
-            {
-                count++;
-            }
-        }
-        result += count.ToString();
-        count = 0;
-        for (int i = 0; i < 6; i++)
-        {
-            if(yingLiMoShi[i])
-            {
-                count++;
-            }
-        }
-        result += count.ToString();
-        count = 0;
-        for (int i = 0; i < 6; i++)
-        {
-            if(qiYeJiaZhi[i])
-            {
-                count++;
-            }
-        }
-        result += count.ToString();
-        return result;
-    }
-
-    /// <summary>
-    /// 生成玩家天赋字符串
-    /// </summary>
-    /// <returns></returns>
-    public string GeneratePlayerTalent()
-    {
-        string result = "";
-        for (int i = 0; i < dingWei.Count; i++)
-        {
-            result += dingWei[i] ? '1' : '0';
-        }
-        result += '_';
-        for (int i = 0; i < guanJianZiYuanNengLi.Count; i++)
-        {
-            result += guanJianZiYuanNengLi[i] ? '1' : '0';
-        }
-        result += '_';
-        for (int i = 0; i < yeWuXiTong.Count; i++)
-        {
-            result += yeWuXiTong[i] ? '1' : '0';
-        }
-        result += '_';
-        for (int i = 0; i < xianJinLiu.Count; i++)
-        {
-            result += xianJinLiu[i] ? '1' : '0';
-        }
-        result += '_';
-        for (int i = 0; i < yingLiMoShi.Count; i++)
-        {
-            result += yingLiMoShi[i] ? '1' : '0';
-        }
-        result += '_';
-        for (int i = 0; i < qiYeJiaZhi.Count; i++)
-        {
-            result += qiYeJiaZhi[i] ? '1' : '0';
-        }
-        result += '_';
-        for (int i = 0; i < isOneFinish.Count; i++)
-        {
-            result += isOneFinish[i] ? '1' : '0';
-        }
-        return result;
-    }
-
     private void Start()
     {
         NetManager.My.Init();
@@ -853,17 +675,6 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         return useCount + "_" + playerWorkers.Count;
     }
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                Screen.SetResolution(1920, 1080, true);
-            }
-        }
-    }
-
     public int seedCount;
     public int peasantCount;
     public int merchantCount;
@@ -896,9 +707,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
    
             List<string> param = new List<string>();
             param.Add(id .ToString());
-           
             StageGoal.My.RecordOperation(OperationType.UseConsumable, param);
-       
     }
 
     /*
