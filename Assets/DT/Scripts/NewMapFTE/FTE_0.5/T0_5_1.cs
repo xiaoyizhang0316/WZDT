@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class T0_5_1 : BaseGuideStep
 {
@@ -15,7 +16,12 @@ public class T0_5_1 : BaseGuideStep
     // Update is called once per frame
     public override IEnumerator StepStart()
     {
-        NewCanvasUI.My.GamePause();
+        if (SceneManager.GetActiveScene().name.Equals("FTE_-2"))
+        {
+            NewCanvasUI.My.GamePause();
+
+        }
+
         dailog.SetActive(true);
         yield break;
         
@@ -23,7 +29,10 @@ public class T0_5_1 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     {
-        NewCanvasUI.My.GameNormal();
+        if (SceneManager.GetActiveScene().name.Equals("FTE_-2"))
+        {
+            NewCanvasUI.My.GameNormal();
+        }
 
         dailog.SetActive(false);
         yield break;

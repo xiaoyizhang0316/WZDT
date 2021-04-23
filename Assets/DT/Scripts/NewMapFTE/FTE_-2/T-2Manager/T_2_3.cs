@@ -29,6 +29,6 @@ public class T_2_3 : BaseGuideStep
     public override bool ChenkEnd()
     {
 
-        return TradeManager.My.CheckTwoRoleHasTrade(wareHouse.baseRoleData ,PlayerData.My.MapRole[0].baseRoleData);
+        return TradeManager.My.CheckTwoRoleHasTrade(wareHouse.baseRoleData ,PlayerData.My.MapRole[1].baseRoleData);
     }
 }
