@@ -31,50 +31,6 @@ public class BoomTrigger : MonoBehaviour
             {
                 //Debug.Log("打到"+signs[i].name);
                 signs[i].OnHit(ref gameObject.GetComponent<GoodsSign>().productData);
-                if (PlayerData.My.dingWei[4] && isCanRestart)
-                {
-                    int num = UnityEngine.Random.Range(0,101);
-                    if (num <= 5)
-                    {
-                        ConsumeSign targetConsume = null;
-                        for (int j = 0; j < signs.Count; j++)
-                        {
-                            if (j != i && signs[j].isCanSelect && radius >= Vector3.Distance(signs[i].transform.position, signs[j].transform.position))
-                            {
-                                targetConsume = signs[j];
-                            }
-                        }
-                        if (targetConsume == null)
-                        {
-                            return;
-                        }
-
-                        List<Vector3> pointList = new List<Vector3>();
-                        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Bomb);
-                        gameObject.transform.SetParent(signs[i].transform);
-                        gameObject.transform.localPosition = new Vector3(0, 0.1f, 0);
-                        gameObject.GetComponent<GoodsSign>().productData = GetComponent<GoodsSign>().productData;
-                        pointList = DrawLine(gameObject.transform.position, targetConsume.transform.position);
-                        gameObject.transform.localPosition = new Vector3(0, 0.4f, 0);
-                        gameObject.GetComponent<GoodsSign>().lunch = GetComponent<GoodsSign>().lunch;
-                        gameObject.GetComponent<GoodsSign>().target = targetConsume;
-                        gameObject.transform.SetParent(signs[i].transform);
-                        gameObject.GetComponent<BulletEffect>().InitBufflist(gameObject.GetComponent<GoodsSign>().productData.buffList);
-
-
-                        gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
-                        //gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
-                        gameObject.transform.DOPath(pointList.ToArray(), 0.5f).SetEase(Ease.InCubic).OnComplete(() =>
-                        {
-                            gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
-                            //                  gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
-                            gameObject.GetComponent<BoomTrigger>().GetConsumerList(false);
-
-                            BulletObjectPool.My.RecoveryBullet(gameObject, 0.5f);
-                        });
-                        gameObject.GetComponent<GoodsSign>().twe = GetComponent<GoodsSign>().lunch.lanchNormalTWE;
-                    }
-                }
             }
         }
     }

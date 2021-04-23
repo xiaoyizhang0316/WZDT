@@ -64,6 +64,8 @@ public class BaseMapRole : MonoBehaviour
 
     public BaseExtraSkill extraSkill;
 
+    public BaseEncourageSkill encourageSkill;
+
     public List<GameObject> levelModels;
 
     public int putTime;
@@ -154,7 +156,6 @@ public class BaseMapRole : MonoBehaviour
             }
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
-        CheckTalentBuff();
     }
 
     /// <summary>
@@ -667,12 +668,6 @@ public class BaseMapRole : MonoBehaviour
     {
         DataUploadManager.My.AddData(DataEnum.角色_清仓);
         trash.AddRange(warehouse);
-        if (PlayerData.My.guanJianZiYuanNengLi[5])
-        {
-            int totalGold = CountWarehouseIncome();
-            StageGoal.My.GetPlayerGold(totalGold);
-            StageGoal.My.Income(totalGold,IncomeType.Other,null,"低价处理");
-        }
         warehouse.Clear();
     }
 
@@ -1092,47 +1087,6 @@ public class BaseMapRole : MonoBehaviour
         if (!(isNpc && GetComponent<NPC>().isLock))
         {
             tradeButton.transform.Find("TradeButton/BG").gameObject.SetActive(active);
-        }
-    }
-
-    public void CheckTalentBuff()
-    {
-        if (!isNpc)
-        {
-            if (PlayerData.My.guanJianZiYuanNengLi[1])
-            {
-                var buff = GameDataMgr.My.GetBuffDataByID(10022);
-                BaseBuff baseb = new BaseBuff();
-                baseb.Init(buff);
-                baseb.SetRoleBuff(null, this, this);
-            }
-            if (PlayerData.My.guanJianZiYuanNengLi[2])
-            {
-                var buff = GameDataMgr.My.GetBuffDataByID(10023);
-                BaseBuff baseb = new BaseBuff();
-                baseb.Init(buff);
-                baseb.SetRoleBuff(null, this, this);
-            }
-        }
-        if (baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
-        {
-            if (PlayerData.My.guanJianZiYuanNengLi[5])
-            {
-                var buff = GameDataMgr.My.GetBuffDataByID(10026);
-                BaseBuff baseb = new BaseBuff();
-                baseb.Init(buff);
-                baseb.SetRoleBuff(null, this, this);
-            }
-        }
-        if (baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
-        {
-            if (PlayerData.My.yeWuXiTong[1])
-            {
-                var buff = GameDataMgr.My.GetBuffDataByID(10032);
-                BaseBuff baseb = new BaseBuff();
-                baseb.Init(buff);
-                baseb.SetRoleBuff(null, this, this);
-            }
         }
     }
 

@@ -193,11 +193,8 @@ public class BossConsumer : ConsumeSign
     public override void DeathAward()
     {
         StageGoal.My.GetSatisfy(consumeData.killSatisfy);
-        if (!PlayerData.My.yingLiMoShi[5])
-        {
-            StageGoal.My.GetPlayerGold(consumeData.killMoney);
-            StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
-        }
+        StageGoal.My.GetPlayerGold(consumeData.killMoney);
+        StageGoal.My.Income(consumeData.killMoney, IncomeType.Consume);
     }
 
 
@@ -315,12 +312,6 @@ public class BossConsumer : ConsumeSign
         {
             currentHealth += num;
             StageGoal.My.GetSatisfy(num);
-            if (PlayerData.My.yingLiMoShi[5])
-            {
-                int gold = (int)(num * 0.45f);
-                StageGoal.My.GetPlayerGold(gold);
-                StageGoal.My.Income(gold, IncomeType.Consume);
-            }
             if (currentHealth <= 0)
                 currentHealth = 0;
             HealthCheck();

@@ -20,8 +20,6 @@ public class BaseBuff
 
     public int interval;
 
-    public bool canHeap;
-
     public string buffName;
 
     public int count;
@@ -36,6 +34,13 @@ public class BaseBuff
 
     public ConsumeSign targetConsume;
 
+    public BaseBuff CopyNew()
+    {
+        BaseBuff buff = new BaseBuff();
+        buff.Init(buffData.CopyNew());
+        return buff;
+    }
+    
     /// <summary>
     /// 当BUFF添加时
     /// </summary>
@@ -239,17 +244,6 @@ public class BaseBuff
                 {
                     CalculateNumber(str, ref buffConfig.playerGoldChange, StageGoal.My.playerGold);
                     int goldChange = buffConfig.playerGoldChange;
-                    if (PlayerData.My.yingLiMoShi[1])
-                    {
-                        if (targetConsume != null)
-                        {
-                            goldChange = goldChange * 120 / 100;
-                        }
-                        else if (castRole.isNpc)
-                        {
-                            goldChange = goldChange * 120 / 100;
-                        }
-                    }
                     StageGoal.My.GetPlayerGold(goldChange);
                     if (targetConsume != null)
                         StageGoal.My.Income(goldChange, IncomeType.Other, null, buffName);

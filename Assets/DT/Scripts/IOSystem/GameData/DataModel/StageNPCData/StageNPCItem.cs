@@ -46,10 +46,6 @@ public class StageNPCItem
 
     public string hideBuffList;
 
-    public string goodBaseBuffList;
-
-    public string badBaseBuffList;
-
     public string npcTag;
 }
 

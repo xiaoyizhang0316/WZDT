@@ -12,13 +12,6 @@ public class ProductMelon_Boom : BaseSkill
     public new void Start()
     {
         base.Start();
-        if (PlayerData.My.dingWei[5])
-        {
-            var buff = GameDataMgr.My.GetBuffDataByID(10016);
-            BaseBuff baseb = new BaseBuff();
-            baseb.Init(buff);
-            baseb.SetRoleBuff(null, role, role);
-        }
     }
 
 
@@ -34,10 +27,6 @@ public class ProductMelon_Boom : BaseSkill
         }
         
         int numberNeed = 2;
-        if (PlayerData.My.dingWei[5])
-        {
-            numberNeed--;
-        }
         if (role.warehouse.Count > numberNeed && role.warehouse[0].bulletType == BulletType.NormalPP)
         {
             ProductData data = role.warehouse[0];
@@ -48,10 +37,6 @@ public class ProductMelon_Boom : BaseSkill
             for (int i = 0; i < role.GetEquipBuffList().Count; i++)
             {
                 data.AddBuff(role.GetEquipBuffList()[i]);
-            }
-            for (int i = 0; i < badBaseBuffs.Count; i++)
-            {
-                badBaseBuffs[i].OnProduct(ref data);
             }
             data.bulletType = BulletType.Bomb;
             data.loadingSpeed *= 1f - role.baseRoleData.effect / 100f;

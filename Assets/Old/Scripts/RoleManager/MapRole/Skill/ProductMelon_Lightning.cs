@@ -14,13 +14,6 @@ public class ProductMelon_Lightning : BaseSkill
     public new void Start()
     {
         base.Start();
-        if (PlayerData.My.dingWei[5])
-        {
-            var buff = GameDataMgr.My.GetBuffDataByID(10016);
-            BaseBuff baseb = new BaseBuff();
-            baseb.Init(buff);
-            baseb.SetRoleBuff(null, role, role);
-        }
     }
 
     public void Update()
@@ -68,10 +61,6 @@ public class ProductMelon_Lightning : BaseSkill
             return;
         }
         int numberNeed = 3;
-        if (PlayerData.My.dingWei[5])
-        {
-            numberNeed--;
-        }
         if (role.warehouse.Count > numberNeed && role.warehouse[0].bulletType == BulletType.NormalPP)
         {
             //print("产闪电链");
@@ -84,10 +73,6 @@ public class ProductMelon_Lightning : BaseSkill
             {
                 data.AddBuff(role.GetEquipBuffList()[i]);
             }
-            for (int i = 0; i < badBaseBuffs.Count; i++)
-            {
-                badBaseBuffs[i].OnProduct(ref data);
-            }
             data.bulletType = BulletType.Lightning;
             data.loadingSpeed *= 1f - role.baseRoleData.effect / 100f;
             data.loadingSpeed += 1;
@@ -95,8 +80,6 @@ public class ProductMelon_Lightning : BaseSkill
             data.damage = (data.damage * 0.6f + role.baseRoleData.effect);
             try
             {
-
-
                 GameObject game = Instantiate(GoodsManager.My.GoodPrb, role.tradeList[currentCount].transform);
                 game.GetComponent<GoodsSign>().productData = data;
                 game.GetComponent<GoodsSign>().path = role.tradeList[currentCount].GetDeliverProductPath();

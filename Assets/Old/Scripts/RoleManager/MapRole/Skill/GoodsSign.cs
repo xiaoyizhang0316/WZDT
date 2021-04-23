@@ -125,69 +125,6 @@ public class GoodsSign : MonoBehaviour
                 target.OnHit(ref productData);
               
                 gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
-                if (PlayerData.My.dingWei[4])
-                {
-                    int number = UnityEngine.Random.Range(0, 101);
-                    if (number <= 10)
-                    {
-                        List<ConsumeSign> consumeSigns = FindObjectsOfType<ConsumeSign>().ToList();
-                        int targetIndex = -1;
-                        float minDis = 99999f;
-                        for (int i = 0; i < consumeSigns.Count; i++)
-                        {
-                            if (consumeSigns[i].GetInstanceID() != target.GetInstanceID() && consumeSigns[i].isCanSelect && minDis >= Vector3.Distance(target.transform.position, consumeSigns[i].transform.position) )
-                            {
-                                minDis = Vector3.Distance(target.transform.position, consumeSigns[i].transform.position);
-                                if (minDis <= 3)
-                                {
-                                    targetIndex = i;
-                                }
-                            }
-                        }
-                        if(targetIndex != -1)
-                        {
-                            GameObject go = BulletObjectPool.My.GetBullet(BulletType.NormalPP);
-                            //Debug.Log("初始化子弹" + go.name);
-                            go.GetComponent<GoodsSign>().productData = productData;
-                            go.GetComponent<GoodsSign>().lunch = lunch;
-                            go.GetComponent<GoodsSign>().isCopy = true;
-                            go.GetComponent<GoodsSign>().target = consumeSigns[targetIndex];
-                            go.transform.SetParent(target.transform);
-                            go.GetComponent<BulletEffect>().InitBufflist(go.GetComponent<GoodsSign>().productData.buffList);
-
-                            go.transform.localPosition = new Vector3(0, 0.5f, 0);
-                            go.transform.SetParent(target.transform);
-
-                            //Debug.Log("初始化拖尾" + go.name);
-                            if(!PlayerData.My.isPrediction)
-                                go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().tile);
-                            float flyTime2 = Vector3.Distance(consumeSigns[targetIndex].transform.position, go.transform.position) / 24f;
-                            //            gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
-                            if (consumeSigns[targetIndex] == null)
-                            {
-                                BulletObjectPool.My.RecoveryBullet(go, 0);
-                            }
-                            else
-                            {
-                                go.transform.DOMove(consumeSigns[targetIndex].transform.position, flyTime2).SetEase(Ease.Linear).OnComplete(() =>
-                                {
-                                    if (go.GetComponent<GoodsSign>().target != null)
-                                    {
-                                        //Debug.Log("初始化爆炸" + go.name);
-                                        if (!PlayerData.My.isPrediction)
-                                        {
-                                            go.GetComponent<BulletEffect>().InitBuff(go.GetComponent<BulletEffect>().explosions);
-                                        }
-                                        
-                                        //         gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
-                                        go.GetComponent<GoodsSign>().target.OnHit(ref productData);
-                                        BulletObjectPool.My.RecoveryBullet(go, 0.3f);
-                                    }
-                                });
-                            }
-                        }
-                    }
-                }
                 //    GetComponentInChildren<ETFXProjectileScript>().StartShoot();
                 BulletObjectPool.My.RecoveryBullet(gameObject, 0.3f);
             }

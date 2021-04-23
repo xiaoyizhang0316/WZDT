@@ -145,7 +145,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     groupID = playerDatas.groupID;
                     playerLimit = playerDatas.limit;
                     InitRoleFoundDic(playerDatas.roleFound);
-                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     //Debug.Log(playerID + " " + token);
                     //Debug.Log("token-----" + token);
                     doSuccess?.Invoke();
@@ -240,7 +239,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     public void UpdateTalent( Action doSuccess = null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
-        keyValues.Add("talent", PlayerData.My.GeneratePlayerTalent());
         keyValues.Add("playerID", playerID);
         keyValues.Add("token", token);
         StartCoroutine(HttpManager.My.HttpSend(Url.UpdatePlayerTalent, (www) => {
@@ -263,7 +261,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
                     InitRoleFoundDic(playerDatas.roleFound);
-                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -301,7 +298,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
                     InitRoleFoundDic(playerDatas.roleFound);
-                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -337,7 +333,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 token = playerDatas.token;
                 playerLimit = playerDatas.limit;
                 InitRoleFoundDic(playerDatas.roleFound);
-                PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                 if (SceneManager.GetActiveScene().name.StartsWith("FTE")&& SceneManager.GetActiveScene().name!="FTE_0")
                 {
                     StageGoal.My.CheckAfterReconnect();
@@ -376,7 +371,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 token = playerDatas.token;
                 playerLimit = playerDatas.limit;
                 InitRoleFoundDic(playerDatas.roleFound);
-                PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                 SceneManager.LoadScene("Map");
                 
                 doSuccess?.Invoke();
@@ -571,7 +565,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
                     InitRoleFoundDic(playerDatas.roleFound);
-                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -610,7 +603,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                 {
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
                     InitRoleFoundDic(playerDatas.roleFound);
-                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -657,7 +649,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
                     //Debug.Log(response.data);
                     playerDatas = JsonUtility.FromJson<PlayerDatas>(response.data);
                     InitRoleFoundDic(playerDatas.roleFound);
-                    PlayerData.My.ParsePlayerTalent(playerDatas.talent);
                     doSuccess?.Invoke();
                 }
                 catch (Exception ex)
@@ -1022,7 +1013,6 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             keyValues.Add("token", token);
             keyValues.Add("playerID", playerID);
             keyValues.Add("data", CompressUtils.Compress(JsonUtility.ToJson(playerReplay)));
-            keyValues.Add("talent", PlayerData.My.GeneratePlayerTalentReview());
             if (!PlayerData.My.isSOLO)
             {
                 if(PlayerData.My.isServer)// is server

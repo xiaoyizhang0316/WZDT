@@ -56,6 +56,12 @@ public class BuffConfig
 
     public bool consumerIgnoreResist;
 
+    public int consumerjuiceChange;
+
+    public int consuemrCutChange;
+
+    public int consumerSummonChange;
+
     public int bulletDamageChange;
 
     public int bulletLoadingChange;

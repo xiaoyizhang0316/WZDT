@@ -261,11 +261,6 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().MonthlyCost();
                     role.GetComponent<BaseMapRole>().AddTechPoint();
                     role.GetComponent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
-                    if (PlayerData.My.yingLiMoShi[4])
-                    {
-                        role.GetComponent<BaseMapRole>().startEncourageLevel += 2;
-                        role.GetComponent<BaseMapRole>().encourageLevel += 2;
-                    }
                     if (!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name)
                     )
                     {

@@ -173,6 +173,11 @@ public class EditorMapManager : MapManager
                         }
                         break;
                     }
+                case LandOptionType.AvaiableLand:
+                {
+                    
+                    break;
+                }
                 default:
                     break;
             }

@@ -60,6 +60,135 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     public bool tradeCostMoney;
 
     public List<StageSpecialType> stageSpecialTypes = new List<StageSpecialType>();
+    
+    public List<BaseBuff> consumerBuffList = new List<BaseBuff>();
+
+    public List<BaseBuff> playerStaticList = new List<BaseBuff>();
+
+    public void AddBuff(BaseMapRole role,EncourageSkillType type,int buffId,float number)
+    {
+        switch (type)
+        {
+            case EncourageSkillType.ConsumerBuff:
+            {
+                BaseBuff buff = new BaseBuff();
+                BuffData data = GameDataMgr.My.GetBuffDataByID(buffId);
+                buff.Init(data);
+                consumerBuffList.Add(buff);
+                ChangeBuffNumber(EncourageSkillType.ConsumerBuff,buffId,number);
+                AddBuffToAllConsumer(buff);
+                break;
+            }
+            case EncourageSkillType.PlayerStatic:
+            {
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    public void RemoveBuff(EncourageSkillType type,int _buffId)
+    {
+        switch (type)
+        {
+            case EncourageSkillType.ConsumerBuff:
+            {
+                for (int i = 0; i < consumerBuffList.Count; i++)
+                {
+                    if (consumerBuffList[i].buffId == _buffId)
+                    {
+                        RemoveBuffFromAddConsumer(consumerBuffList[i]);
+                        consumerBuffList.RemoveAt(i);
+                        break;
+                    }
+                }
+                break;
+            }
+            case EncourageSkillType.PlayerStatic:
+            {
+                for (int i = 0; i < playerStaticList.Count; i++)
+                {
+                    if (playerStaticList[i].buffId == _buffId)
+                    {
+                        playerStaticList.RemoveAt(i);
+                        break;
+                    }
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    public void ChangeBuffNumber(EncourageSkillType type, int _buffId,float number)
+    {
+        switch (type)
+        {
+            case EncourageSkillType.ConsumerBuff:
+            {
+                for (int i = 0; i < consumerBuffList.Count; i++)
+                {
+                    if (consumerBuffList[i].buffId == _buffId)
+                    {
+                        int prefix = int.Parse(consumerBuffList[i].buffData.OnBuffAdd[0].Split('_')[0]);
+                        if (prefix != -1)
+                        {
+                            consumerBuffList[i].buffData.OnBuffAdd[0] = prefix + "_" + number;
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+            case EncourageSkillType.PlayerStatic:
+            {
+                for (int i = 0; i < playerStaticList.Count; i++)
+                {
+                    if (playerStaticList[i].buffId == _buffId)
+                    {
+                        int prefix = int.Parse(playerStaticList[i].buffData.OnBuffAdd[0].Split('_')[0]);
+                        if (prefix != -1)
+                        {
+                            playerStaticList[i].buffData.OnEndTurn[0] = prefix + "_" + number;
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    public void AddBuffToAllConsumer(BaseBuff buff)
+    {
+        ConsumeSign[] sign = FindObjectsOfType<ConsumeSign>();
+        for (int i = 0; i < sign.Length; i++)
+        {
+            BaseBuff newBuff = buff.CopyNew();
+            newBuff.SetConsumerBuff(sign[i]);
+        }
+    }
+
+    public void RemoveBuffFromAddConsumer(BaseBuff buff)
+    {
+        ConsumeSign[] sign = FindObjectsOfType<ConsumeSign>();
+        for (int i = 0; i < sign.Length; i++)
+        {
+            sign[i].RemoveBuff(buff);
+        }
+    }
+
+    public void TurnStaticCheck()
+    {
+        for (int i = 0; i < playerStaticList.Count; i++)
+        {
+            playerStaticList[i].OnRoleTurn();
+        }
+    }
 
     /// <summary>
     /// 统计击杀数量

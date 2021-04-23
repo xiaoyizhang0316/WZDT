@@ -236,7 +236,11 @@ public class GameEnum
         /// <summary>
         /// 消费者终点
         /// </summary>
-        End
+        End,
+        /// <summary>
+        /// 能放置的地块
+        /// </summary>
+        AvaiableLand
     }
 
     public enum ConsumerType
@@ -420,6 +424,22 @@ public class GameEnum
         /// 甜
         /// </summary>
         Sweet
+    }
+
+    public enum EncourageSkillType
+    {
+        /// <summary>
+        /// 全局影响消费者
+        /// </summary>
+        ConsumerBuff,
+        /// <summary>
+        /// 全局玩家资源影响
+        /// </summary>
+        PlayerStatic,
+        /// <summary>
+        /// 影响消费者数量
+        /// </summary>
+        BuildingBuff
     }
 
     public enum ConsumableType
