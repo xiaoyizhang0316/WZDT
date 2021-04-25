@@ -19,6 +19,8 @@ public static class CommonParams
     public const float bargainBase = 2f;
     //交付基础系数
     public const float deliveryBase = 16f;
+
+    public const float bloodTotalWidth = 477f;
     
     #endregion
 

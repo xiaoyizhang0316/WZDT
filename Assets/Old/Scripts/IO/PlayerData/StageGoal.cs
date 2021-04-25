@@ -496,13 +496,15 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
-            currentDan++;
+            per = 1;
+            healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue);
+            /*currentDan++;
             per = (playerHealth - stageDan[2]) / (float)(stageDan[2]);
             healthBar1.DOFillAmount(1, 0.2f).Play().OnComplete(() =>
             {
                 healthBar2.sprite = danSprite[currentDan];
                 healthBar2.DOFillAmount(per, 0.3f).Play().OnComplete(ExeQueue);
-            });
+            });*/
         }
     }
 
@@ -1131,6 +1133,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         stageTarget = data.stageDan[0];
         stageDan =new List<int>(); 
         stageDan.AddRange( data.stageDan);
+        InitHealthBar();
         SetInfoImmidiate();
         foreach (int i in data.waveWaitTime)
         {
@@ -1911,6 +1914,18 @@ public class StageGoal : MonoSingleton<StageGoal>
         predictScore = playerSatisfy;
         predictKillNum = 0;
         predictHealth = playerHealth;
+    }
+
+    #endregion
+
+    #region init healthBar
+
+    public Transform bloodBar_transform;
+    public Transform bloodBar_back_transform;
+    void InitHealthBar()
+    {
+        bloodBar_back_transform.GetComponent<HealthBarSet>().SetBar(stageDan);
+        bloodBar_transform.GetComponent<HealthBarSet>().SetBar(stageDan);
     }
 
     #endregion
