@@ -38,6 +38,7 @@ public class NpcProductInfo : MonoBehaviour
     public Sprite lightning;
     public Sprite tow;
     public Text level;
+    public Transform r_buff_transform;
 
     public EncourageLevel encourageLevel;
 
@@ -54,7 +55,7 @@ public class NpcProductInfo : MonoBehaviour
         efficiency.text = npc.GetComponent<BaseMapRole>().baseRoleData.efficiency.ToString();
 
         SetBar(npc.GetComponent<BaseMapRole>().baseRoleData.effect, npc.GetComponent<BaseMapRole>().baseRoleData.efficiency);
-        prop1.text = (npc.GetComponent<BaseMapRole>().baseRoleData.efficiency / 20f).ToString("F2") + "/s";
+        prop1.text = (npc.GetComponent<BaseMapRole>().baseRoleData.efficiency / 20f).ToString("F2");
         prop2.text = (npc.GetComponent<BaseMapRole>().baseRoleData.effect).ToString() + "%";
 
         timeInv.text = (1.0f / npc.GetComponent<BaseMapRole>().baseRoleData.efficiency).ToString("F2");
@@ -87,6 +88,7 @@ public class NpcProductInfo : MonoBehaviour
         });
         ShowBullets(npc);
         encourageLevel.Init(npc.GetComponent<BaseMapRole>());
+        NPCListInfo.My.SetReceivedBuffs(npc.GetComponent<BaseMapRole>(), r_buff_transform);
         bulletWarehourse.SetActive(true);
         int i = 0;
         foreach (var sp in buffs)
