@@ -40,7 +40,7 @@ public class RoleListInfoDealer : BaseRoleListInfo
         float efficiencyNum = 1f / (role.efficiency * -0.01f + 1.5f);
         float add = 1f;
         float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel;
-        fireTime.color = Color.white;
+        fireTime.color = Color.black;
         if (encourage > 0)
         {
             add += encourage * 0.05f;
@@ -52,10 +52,10 @@ public class RoleListInfoDealer : BaseRoleListInfo
             fireTime.color = Color.red;
         }
         efficiencyNum *= add;
-        fireTime.text = (efficiencyNum).ToString("F2");
+        fireTime.text = (efficiencyNum).ToString("F1");
         efficiency.text = role.efficiency.ToString();
         roleRange.text = role.range.ToString();
-        Range.text = (role.range / 14.5f).ToString("F2");
+        Range.text = (role.range / 14.5f).ToString("F1");
         tradCost.text  =  role.tradeCost.ToString();
         risk .text =  role.riskResistance.ToString();
         if (StageGoal.My.currentType == GameEnum.StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))

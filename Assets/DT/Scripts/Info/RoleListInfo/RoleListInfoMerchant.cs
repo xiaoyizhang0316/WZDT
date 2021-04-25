@@ -37,7 +37,7 @@ public class RoleListInfoMerchant : BaseRoleListInfo
         float efficiencyNum = (role.efficiency);
         float add = 1f;
         float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel;
-        MoveSpeed.color = Color.white;
+        MoveSpeed.color = Color.black;
         if (encourage > 0)
         {
             add += encourage * 0.05f;

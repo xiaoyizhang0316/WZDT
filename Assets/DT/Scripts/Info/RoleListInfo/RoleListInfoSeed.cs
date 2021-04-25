@@ -36,8 +36,8 @@ public class RoleListInfoSeed : BaseRoleListInfo
     {
         float efficiencyNum = (role.efficiency / 20f);
         float add = 1f;
-        float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel;
-        productTime.color = Color.white;
+        float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel; 
+        productTime.color = Color.black;
         if (encourage > 0)
         {
             add += encourage * 0.05f;
@@ -52,7 +52,7 @@ public class RoleListInfoSeed : BaseRoleListInfo
         effect.text = role.effect.ToString();
         Damage.text = (role.effect * 10f).ToString();
         efficiency.text = role.efficiency.ToString();
-        productTime.text = (efficiencyNum).ToString("F2");
+        productTime.text = (efficiencyNum).ToString("F1");
         tradCost.text = role.tradeCost.ToString();
         risk.text = role.riskResistance.ToString();
         if (StageGoal.My.currentType == GameEnum.StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
