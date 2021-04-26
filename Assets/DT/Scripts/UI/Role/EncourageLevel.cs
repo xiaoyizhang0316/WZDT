@@ -20,7 +20,8 @@ public class EncourageLevel : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
         currentRole = role;
         showStr = "激励等级0，无任何影响";
         levelText.text = role.encourageLevel.ToString();
-        indexImg.transform.localPosition = new Vector2(-73.3f + role.encourageLevel * 36.7f, indexImg.transform.localPosition.y);
+        //indexImg.transform.localPosition = new Vector2(-73.3f + role.encourageLevel * 36.7f, indexImg.transform.localPosition.y);
+        indexImg.transform.localPosition = new Vector2(-24.5f + role.encourageLevel * 27.9f, indexImg.transform.localPosition.y);
         levelText.color = Color.black;
         if (role.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {

@@ -96,6 +96,10 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 
     private string showNumberText;
 
+    public Text searchAdd_text;
+    public Text bargainAdd_text;
+    public Text deliveryAdd_text;
+
     /// <summary>
     /// 打开并初始化
     /// </summary>
@@ -186,12 +190,22 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole));
         endRolePanel.Find("EndRoleTradeCost").GetComponent<Text>().text = endRoleTradeCost.ToString();
         endRolePanel.Find("EndRoleRisk").GetComponent<Text>().text = end.baseRoleData.riskResistance.ToString();
+        endRolePanel.Find("RoleIcon").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/" +
+            (end.baseRoleData.isNpc ? "RoleLogo/" : "hong/")
+            + end.baseRoleData.baseRoleData.roleType.ToString()
+            + end.baseRoleData.baseRoleData.level);
+        endRolePanel.Find("En_level/Level").GetComponent<Text>().text = end.encourageLevel.ToString();
         startRolePanel.Find("StartRoleTradeCost").GetComponent<Text>().text = startRoleTradeCost.ToString();
         startRolePanel.Find("StartRoleRisk").GetComponent<Text>().text = start.baseRoleData.riskResistance.ToString();
+        startRolePanel.Find("RoleIcon").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/" +
+            (start.baseRoleData.isNpc ? "RoleLogo/" : "hong/")
+            + start.baseRoleData.baseRoleData.roleType.ToString()
+            + start.baseRoleData.baseRoleData.level);
+        startRolePanel.Find("En_level/Level").GetComponent<Text>().text = start.encourageLevel.ToString();
         startName.text = start.baseRoleData.baseRoleData.roleName;
         endName.text = end.baseRoleData.baseRoleData.roleName;
-        startRolePanel.transform.DOLocalMoveX(-220f,0.5f).Play().timeScale = 1f / DOTween.timeScale;
-        endRolePanel.transform.DOLocalMoveX(220f, 0.5f).Play().timeScale = 1f / DOTween.timeScale;
+        startRolePanel.transform.DOLocalMoveX(-168f,0.5f).Play().timeScale = 1f / DOTween.timeScale;
+        endRolePanel.transform.DOLocalMoveX(168f, 0.5f).Play().timeScale = 1f / DOTween.timeScale;
     }
 
     /// <summary>
@@ -218,6 +232,14 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
             tradeCostText.text = result.ToString();
         }
         tradeCostText.text += showNumberText;
+        ShowAdditions();
+    }
+
+    void ShowAdditions()
+    {
+        searchAdd_text.text = currentTrade.searchAdd.ToString("F2");
+        bargainAdd_text.text = currentTrade.bargainAdd.ToString("F2");
+        deliveryAdd_text.text = currentTrade.deliveryAdd.ToString("F2");
     }
 
     /// <summary>
@@ -291,6 +313,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         }
     }
 
+    private int start_enLevel = 0;
+    private int end_enLevel = 0;
     public void OnDivideValueChange()
     {
         selectDividePercent = (int)divideSlider.value;
