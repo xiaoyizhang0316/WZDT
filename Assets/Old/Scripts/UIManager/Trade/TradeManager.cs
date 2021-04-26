@@ -36,6 +36,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             Destroy(temp.gameObject, 0f);
             if (NewCanvasUI.My.Panel_TradeSetting.activeSelf)
                 CreateTradeManager.My.Close();
+            StageGoal.My.RefreshAllCost();
         }
     }
 
