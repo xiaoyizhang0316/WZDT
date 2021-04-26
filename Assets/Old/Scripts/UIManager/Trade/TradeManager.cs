@@ -528,4 +528,14 @@ public class TradeManager : MonoSingleton<TradeManager>
             }
         }
     }
+
+    public int GetAllTradeCost()
+    {
+        int cost = 0;
+        foreach (var sign in tradeList.Values)
+        {
+            cost+= sign.CalculateTC(true);
+        }
+        return cost;
+    }
 }

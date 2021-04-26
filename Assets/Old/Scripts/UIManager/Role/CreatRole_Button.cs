@@ -265,6 +265,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                             PlayerData.My.client.SendToServerMsg(str);
                         }
                     }
+                    StageGoal.My.RefreshAllCost();
                 }
                 else
                 {

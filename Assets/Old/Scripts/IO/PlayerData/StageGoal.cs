@@ -1926,7 +1926,24 @@ public class StageGoal : MonoSingleton<StageGoal>
     {
         bloodBar_back_transform.GetComponent<HealthBarSet>().SetBar(stageDan);
         bloodBar_transform.GetComponent<HealthBarSet>().SetBar(stageDan);
+        RefreshAllCost();
     }
 
+    private Text fixedCost_text;
+    private Text tradeCost_text;
+
+    public void RefreshAllCost()
+    {
+        if (fixedCost_text == null)
+        {
+            fixedCost_text = transform.parent.Find("UserInfo/Fixed&Trade Cost/Fixed Cost/Cost Val")
+                .GetComponent<Text>();
+            tradeCost_text = transform.parent.Find("UserInfo/Fixed&Trade Cost/Trade Cost/Cost Val")
+                .GetComponent<Text>();
+        }
+
+        fixedCost_text.text = PlayerData.My.GetAllRoleCost().ToString();
+        tradeCost_text.text = TradeManager.My.GetAllTradeCost().ToString();
+    }
     #endregion
 }

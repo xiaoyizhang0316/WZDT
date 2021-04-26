@@ -410,6 +410,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         {
             RecordChangeTrade(currentTrade);
             DataUploadManager.My.AddData(DataEnum.交易_改交易);
+            StageGoal.My.RefreshAllCost();
         }
 
         lastDividePercent = (int) divideSlider.value;

@@ -501,6 +501,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         EquipListManager.My.QuitAndSave();
         ChangeRoleRecord(CurrentRole);
         DeleteTemplate();
+        StageGoal.My.RefreshAllCost();
     }
 
     /// <summary>

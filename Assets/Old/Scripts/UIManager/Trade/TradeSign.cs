@@ -220,6 +220,7 @@ public class TradeSign : MonoBehaviour
         {
             GenerateMoneyLine();
         }
+        StageGoal.My.RefreshAllCost();
     }
 
     // 交易初始 child count
