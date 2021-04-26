@@ -52,7 +52,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         }
 
     }
-
+    
     public void ReadCostTech(int cost = -1)
     {
         if (cost == -1)
