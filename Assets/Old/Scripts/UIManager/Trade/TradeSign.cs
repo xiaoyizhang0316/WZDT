@@ -51,6 +51,10 @@ public class TradeSign : MonoBehaviour
 
     public List<string> bothIDs=new List<string>();
 
+    public float searchAdd = 0;
+    public float bargainAdd = 0;
+    public float deliveryAdd = 0;
+
     public void Init(string start, string end)
     {
         tradeData = new TradeData();
@@ -348,14 +352,14 @@ public class TradeSign : MonoBehaviour
         int result = (int)(startRole.baseRoleData.tradeCost * startPer);
         result += (int)(endRole.baseRoleData.tradeCost * endPer );
         float distance = Vector3.Distance(startRole.transform.position, endRole.transform.position);
-        float searchAdd = CommonParams.searchBase * (distance - 0.2f * CommonParams.maxMapDistance) / CommonParams.maxMapDistance;
+         searchAdd = CommonParams.searchBase * (distance - 0.2f * CommonParams.maxMapDistance) / CommonParams.maxMapDistance;
         float maxRiskBase = Mathf.Sqrt(CommonParams.maxMapRisk * CommonParams.maxMapRisk * 2f);
         float riskBase = Mathf.Sqrt(Mathf.Pow(startRole.baseRoleData.riskResistance, 2) + Mathf.Pow(endRole.baseRoleData.riskResistance, 2));
-        float bargainAdd = CommonParams.bargainBase * (Mathf.Exp(riskBase / maxRiskBase - 1f) - Mathf.Exp(-1)) /
+         bargainAdd = CommonParams.bargainBase * (Mathf.Exp(riskBase / maxRiskBase - 1f) - Mathf.Exp(-1)) /
                            (1 - Mathf.Exp(-1));
         float encourageAdd = Mathf.Pow(startRole.encourageLevel >= 0 ? 0 : 0 - startRole.encourageLevel, 2) +
                              Mathf.Pow(endRole.encourageLevel >= 0 ? 0 : 0 - endRole.encourageLevel, 2);
-        float deliveryAdd = encourageAdd / CommonParams.bargainBase;
+         deliveryAdd = encourageAdd / CommonParams.bargainBase;
         result = (int)(result * (1f + searchAdd + bargainAdd + deliveryAdd));
         Debug.Log(("distance:"  + distance));
         Debug.Log(("搜寻:"  + searchAdd));
