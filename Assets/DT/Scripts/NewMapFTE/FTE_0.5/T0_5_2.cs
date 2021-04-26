@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class T0_5_2 : BaseGuideStep
 { 
-    public GameObject roleImage;
+   
 
     public GameObject red; 
     // Update is called once per frame
@@ -18,7 +18,7 @@ public class T0_5_2 : BaseGuideStep
 
         yield return new WaitForSeconds(1f);
 
-        roleImage.gameObject.SetActive(false);
+
         red.SetActive(true);
     }
 

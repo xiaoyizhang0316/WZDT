@@ -7,15 +7,13 @@ using UnityEngine.UI;
 
 public class T0_5_5 : BaseGuideStep
 {
-
-    public GameObject nongminLock;
+ 
 
     public GameObject red;
     // Update is called once per frame
     public override IEnumerator StepStart()
     { 
-        red.SetActive(true);
-        nongminLock.SetActive(false);
+        red.SetActive(true); 
         yield return null;
     }
 

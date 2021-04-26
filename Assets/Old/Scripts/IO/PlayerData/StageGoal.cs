@@ -1768,14 +1768,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 锁删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = false;
         // 禁止键角色
-        if (SceneManager.GetActiveScene().name.Equals("FTE_1") || SceneManager.GetActiveScene().name.Equals("FTE_2"))
-        {
+     // if (SceneManager.GetActiveScene().name.Equals("FTE_1") || SceneManager.GetActiveScene().name.Equals("FTE_2"))
+     // {
             RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(-300, 1f).Play();
-        }
-        else
-        {
-            RoleListManager.My.LockRoleCreate();
-        }
+     //  }
+     //  else
+     //  {
+     //      RoleListManager.My.LockRoleCreate();
+     //  }
     }
 
     /// <summary>
@@ -1800,14 +1800,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 解删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
         // 可以见角色
-        if (SceneManager.GetActiveScene().name.Equals("FTE_1") || SceneManager.GetActiveScene().name.Equals("FTE_2"))
-        {
+      // if (SceneManager.GetActiveScene().name.Equals("FTE_1") || SceneManager.GetActiveScene().name.Equals("FTE_2"))
+      // {
             RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(67, 1f).Play();
-        }
-        else
-        {
-            RoleListManager.My.UnlockRoleCreate();
-        }
+    //   }
+    //   else
+    //   {
+    //       RoleListManager.My.UnlockRoleCreate();
+    //   }
     }
 
     #endregion

@@ -35,14 +35,14 @@ public class RoleListManager : MonoSingleton<RoleListManager>
     // Start is called before the first frame update
     void Start()
     {
-        if (change != null)
-        {
-            change.onClick.AddListener(() => { Change(); });
-            if (!SceneManager.GetActiveScene().name.Equals("FTE_9"))
-            {
-                change.gameObject.SetActive(false);
-            }
-        }
+       // if (change != null)
+       // {
+       //     change.onClick.AddListener(() => { Change(); });
+       //     if (!SceneManager.GetActiveScene().name.Equals("FTE_9"))
+       //     {
+       //         change.gameObject.SetActive(false);
+       //     }
+       // }
         
 
         outButton.onClick.AddListener(() => { OutButton(); });
@@ -102,20 +102,20 @@ public class RoleListManager : MonoSingleton<RoleListManager>
 
     public void Change(Action playEnd=null)
     {
-        change.interactable = false;
-        changeObj[0].transform.DOLocalMoveY(changeObj[0].transform.localPosition.y + 100, 0.2f).OnComplete(() =>
-        {
-            changeObj[0].transform.SetSiblingIndex( changeObj[0].transform.GetSiblingIndex()-1);
-         
-            changeObj[0].transform.DOLocalMoveY(changeObj[0].transform.localPosition.y-100, 0.2f).OnComplete(() =>
-            { 
-                changeObj.Add(changeObj[0]);
-                changeObj.RemoveAt(0);
-                change.interactable = true;
-                playEnd?.Invoke();
-            }).Play();
-            
-        }).Play();
+    //   change.interactable = false;
+    //   changeObj[0].transform.DOLocalMoveY(changeObj[0].transform.localPosition.y + 100, 0.2f).OnComplete(() =>
+    //   {
+    //       changeObj[0].transform.SetSiblingIndex( changeObj[0].transform.GetSiblingIndex()-1);
+    //    
+    //       changeObj[0].transform.DOLocalMoveY(changeObj[0].transform.localPosition.y-100, 0.2f).OnComplete(() =>
+    //       { 
+    //           changeObj.Add(changeObj[0]);
+    //           changeObj.RemoveAt(0);
+    //           change.interactable = true;
+    //           playEnd?.Invoke();
+    //       }).Play();
+    //       
+    //   }).Play();
         
     }
 
