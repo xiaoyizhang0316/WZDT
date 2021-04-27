@@ -367,7 +367,7 @@ public class ConsumeSign : MonoBehaviour,ICloneable
         StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy);
         if (scorePer > 1f)
         {
-            StageGoal.My.ConsumerExtraPerTip();
+            //StageGoal.My.ConsumerExtraPerTip();
             DataUploadManager.My.AddData(消费者_口味击杀);
             StageGoal.My.ScoreGet(ScoreType.口味额外得分, (int)(baseScore * (scorePer - 1f)));
         }

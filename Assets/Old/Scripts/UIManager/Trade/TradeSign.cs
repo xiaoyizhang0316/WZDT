@@ -54,6 +54,7 @@ public class TradeSign : MonoBehaviour
     public float searchAdd = 0;
     public float bargainAdd = 0;
     public float deliveryAdd = 0;
+    public int lastDividePercent;
 
     public void Init(string start, string end)
     {

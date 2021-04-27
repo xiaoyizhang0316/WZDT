@@ -1057,9 +1057,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerHealthText = transform.parent.Find("Blood/Text").GetComponent<Text>();
         maxHealtherBarLength = playerHealthBar.GetComponent<RectTransform>().sizeDelta.x;
         //playerGoldText = transform.parent.Find("UserInfo/Image_money/PlayerMoney").GetComponent<Text>();
-        //playerSatisfyText = transform.parent.Find("UserInfo/PlayerScore/PlayerScoreText").GetComponent<Text>();
+        playerSatisfyText = transform.parent.Find("Blood/Score/Score val").GetComponent<Text>();
         //playerTechText = transform.parent.Find("UserInfo/Image_money/PlayerTech").GetComponent<Text>();
-        stageWaveText = transform.parent.Find("UserInfo/Image_level/StageLevel").GetComponent<Text>();
+        stageWaveText = transform.parent.Find("Blood/Wave/Wave").GetComponent<Text>();
         skipToFirstWave = transform.parent.Find("TimeScale/SkipFirst").GetComponent<Button>();
         lankuang = transform.parent.Find("Image_ReadyTime").gameObject;
         skipToFirstWave.onClick.AddListener(() =>

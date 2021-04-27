@@ -25,6 +25,7 @@ public class SingleWaveEnemyInfo : MonoBehaviour
 
     public Text consumerHealth;
 
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -35,6 +36,8 @@ public class SingleWaveEnemyInfo : MonoBehaviour
         consumeType = (ConsumerType)Enum.Parse(typeof(ConsumerType), list[0]);
         string path = "Sprite/ConsumerType/" + consumeType.ToString();
         typeSprite.sprite = Resources.Load<Sprite>(path);
+        typeSprite.SetNativeSize();
+        typeSprite.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         enemyNum.text = "x" + int.Parse(list[1]).ToString();
         //string[] buffList = list[2].Split('|');
         List<int> buffList = new List<int>();
@@ -42,6 +45,8 @@ public class SingleWaveEnemyInfo : MonoBehaviour
         buffList.AddRange(data.bornBuff);
         totalGold.text = "$" + (data.killMoney * int.Parse(list[1])).ToString();
         WaveCount.My.totalGold += data.killMoney * int.Parse(list[1]);
+        transform.Find("TypeSatisfy").GetComponent<Text>().text = data.killSatisfy.ToString();
+        transform.Find("TypeGold").GetComponent<Text>().text = data.killMoney.ToString();
         string[] strList = list[2].Split('|');
         for (int i = 0; i < strList.Length; i++)
         {

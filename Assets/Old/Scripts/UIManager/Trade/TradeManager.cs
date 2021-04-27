@@ -36,6 +36,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             Destroy(temp.gameObject, 0f);
             if (NewCanvasUI.My.Panel_TradeSetting.activeSelf)
                 CreateTradeManager.My.Close();
+            StageGoal.My.RefreshAllCost();
         }
     }
 
@@ -534,7 +535,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         int cost = 0;
         foreach (var sign in tradeList.Values)
         {
-            cost+= sign.CalculateTC(true);
+            cost+= sign.CalculateTC(true)*4;
         }
         return cost;
     }

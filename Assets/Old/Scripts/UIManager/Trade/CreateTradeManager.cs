@@ -324,7 +324,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 
     private int start_enLevel = 0;
     private int end_enLevel = 0;
-    private int lastDividePercent = 0;
+    //private int lastDividePercent = 0;
     public void OnDivideValueChange()
     {
         selectDividePercent = (int)divideSlider.value;
@@ -373,7 +373,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         endStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
         endStatus[0].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
         endStatus[1].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
-        PredictTradeCostChange( selectDividePercent-lastDividePercent);
+        PredictTradeCostChange( selectDividePercent-currentTrade.lastDividePercent);
         ShowAllEnLevel();
         if (selectCashFlow == currentTrade.tradeData.selectCashFlow)
         {
@@ -413,7 +413,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
             StageGoal.My.RefreshAllCost();
         }
 
-        lastDividePercent = (int) divideSlider.value;
+        currentTrade.lastDividePercent = (int) divideSlider.value;
+        
     }
 
     /// <summary>
