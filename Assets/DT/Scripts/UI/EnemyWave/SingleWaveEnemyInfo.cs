@@ -36,6 +36,8 @@ public class SingleWaveEnemyInfo : MonoBehaviour
         consumeType = (ConsumerType)Enum.Parse(typeof(ConsumerType), list[0]);
         string path = "Sprite/ConsumerType/" + consumeType.ToString();
         typeSprite.sprite = Resources.Load<Sprite>(path);
+        typeSprite.SetNativeSize();
+        typeSprite.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         enemyNum.text = "x" + int.Parse(list[1]).ToString();
         //string[] buffList = list[2].Split('|');
         List<int> buffList = new List<int>();
