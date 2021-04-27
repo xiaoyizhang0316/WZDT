@@ -535,7 +535,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         int cost = 0;
         foreach (var sign in tradeList.Values)
         {
-            cost+= sign.CalculateTC(true);
+            cost+= sign.CalculateTC(true)*4;
         }
         return cost;
     }
