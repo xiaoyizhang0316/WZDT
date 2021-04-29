@@ -276,7 +276,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
-            FloatInfoManager.My.TechChange(0 - num);
+            //FloatInfoManager.My.TechChange(0 - num);
+            playerTechText.GetComponent<PlayerAssetChange>().SetChange(0-num);
             playerTechPoint -= num;
         }
         SetInfo();
@@ -294,7 +295,8 @@ public class StageGoal : MonoSingleton<StageGoal>
             predictTPadd += num;
             return;
         }
-        FloatInfoManager.My.TechChange(num);
+        //FloatInfoManager.My.TechChange(num);
+        playerTechText.GetComponent<PlayerAssetChange>().SetChange(num);
         playerTechPoint += num;
         SetInfo();
     }
@@ -1262,7 +1264,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             }).Play();
             return;
         }
-        GetComponent<RectTransform>().DOAnchorPosX(180.4f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        GetComponent<RectTransform>().DOAnchorPosX(150f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
@@ -1274,7 +1276,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void MenuShow()
     {
-        GetComponent<RectTransform>().DOAnchorPosX(-210f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        GetComponent<RectTransform>().DOAnchorPosX(-220f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             menuCloseButton.gameObject.SetActive(true);
             menuOpenButton.gameObject.SetActive(false);
