@@ -88,6 +88,7 @@ public class TradeSign : MonoBehaviour
         GenerateTradeIcon();
         AddTradeToRole();
         InvokeRepeating("CheckEncourageSetting", 0f, 1f);
+        StageGoal.My.RefreshAllCost();
     }
 
     /// <summary>
@@ -200,8 +201,8 @@ public class TradeSign : MonoBehaviour
 
         if (tradeStartTime > StageGoal.My.turnStartTime)
         {
-            costNum = costNum * (StageGoal.My.timeCount - tradeStartTime) /
-                      (StageGoal.My.timeCount - StageGoal.My.turnStartTime);
+            costNum = (int) (costNum * (StageGoal.My.timeCount - tradeStartTime) /
+                      (float)(StageGoal.My.timeCount - StageGoal.My.turnStartTime));
         }
         StageGoal.My.CostPlayerGold(costNum);
         StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
@@ -221,7 +222,7 @@ public class TradeSign : MonoBehaviour
         {
             GenerateMoneyLine();
         }
-        StageGoal.My.RefreshAllCost();
+        
     }
 
     // 交易初始 child count
@@ -363,11 +364,11 @@ public class TradeSign : MonoBehaviour
                              Mathf.Pow(endRole.encourageLevel >= 0 ? 0 : 0 - endRole.encourageLevel, 2);
          deliveryAdd = encourageAdd / CommonParams.bargainBase;
         result = (int)(result * (1f + searchAdd + bargainAdd + deliveryAdd));
-        Debug.Log(("distance:"  + distance));
-        Debug.Log(("搜寻:"  + searchAdd));
-        Debug.Log(("议价:"  + bargainAdd));
-        Debug.Log(("交付:"  + deliveryAdd));
-        Debug.Log("总:" + result);
+        //Debug.Log(("distance:"  + distance));
+        //Debug.Log(("搜寻:"  + searchAdd));
+        //Debug.Log(("议价:"  + bargainAdd));
+        //Debug.Log(("交付:"  + deliveryAdd));
+        //Debug.Log("总:" + result);
         if (!IsTradeSettingBest())
         {
             if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))

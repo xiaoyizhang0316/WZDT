@@ -221,6 +221,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                 UpdateTurnCost(num);
         }
         FloatInfoManager.My.MoneyChange(0 - num);
+        playerGoldText.GetComponent<PlayerAssetChange>().SetChange(0-num);
         if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -275,7 +276,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
-            FloatInfoManager.My.TechChange(0 - num);
+            //FloatInfoManager.My.TechChange(0 - num);
+            playerTechText.GetComponent<PlayerAssetChange>().SetChange(0-num);
             playerTechPoint -= num;
         }
         SetInfo();
@@ -293,7 +295,8 @@ public class StageGoal : MonoSingleton<StageGoal>
             predictTPadd += num;
             return;
         }
-        FloatInfoManager.My.TechChange(num);
+        //FloatInfoManager.My.TechChange(num);
+        playerTechText.GetComponent<PlayerAssetChange>().SetChange(num);
         playerTechPoint += num;
         SetInfo();
     }
@@ -357,6 +360,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerGold += num;
         }
         FloatInfoManager.My.MoneyChange(num);
+        playerGoldText.GetComponent<PlayerAssetChange>().SetChange(num);
         if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -489,15 +493,16 @@ public class StageGoal : MonoSingleton<StageGoal>
         int afterAdd = beforeAdd + add;
         playerHealth = afterAdd;
         float per;
+        Tween te = null;
         if (playerHealth < stageDan[2])
         {
             per = playerHealth / (float)stageDan[2];
-            healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue);
+            te = healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue).OnPause(()=>te?.TogglePause());
         }
         else
         {
             per = 1;
-            healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue);
+            te = healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue).OnPause(()=>te?.TogglePause());
             /*currentDan++;
             per = (playerHealth - stageDan[2]) / (float)(stageDan[2]);
             healthBar1.DOFillAmount(1, 0.2f).Play().OnComplete(() =>
@@ -1260,7 +1265,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             }).Play();
             return;
         }
-        GetComponent<RectTransform>().DOAnchorPosX(180.4f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        GetComponent<RectTransform>().DOAnchorPosX(75f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
@@ -1272,7 +1277,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void MenuShow()
     {
-        GetComponent<RectTransform>().DOAnchorPosX(-210f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        GetComponent<RectTransform>().DOAnchorPosX(-100f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             menuCloseButton.gameObject.SetActive(true);
             menuOpenButton.gameObject.SetActive(false);

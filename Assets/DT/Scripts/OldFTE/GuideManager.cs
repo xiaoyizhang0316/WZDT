@@ -178,13 +178,13 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             {
                 currentGuideIndex = 0;
                 NewCanvasUI.My.GamePause(false);
-                guideClose.Init();
+                guideClose?.Init();
             }
             else
             {
                 currentGuideIndex = -1;
                 CloseFTE();
-                guideClose.Init();
+                guideClose?.Init();
             }
 
             //   while (true)

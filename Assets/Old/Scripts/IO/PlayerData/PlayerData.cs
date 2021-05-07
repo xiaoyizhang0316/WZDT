@@ -753,7 +753,7 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             {
                 continue;
             }
-            cost += MapRole[i].baseRoleData.cost;
+            cost += MapRole[i].baseRoleData.cost*2;
         }
 
         return cost;

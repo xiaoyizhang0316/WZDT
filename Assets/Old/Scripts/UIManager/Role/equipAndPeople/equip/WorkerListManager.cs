@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 
@@ -56,6 +57,8 @@ public class WorkerListManager : MonoSingleton<WorkerListManager>
         {
             _signs[i].transform.SetParent(transform.Find("Viewport/Content"));
         }
+
+        transform.Find("Viewport/Content").DOLocalMoveY(0, 0.5f).Play();
     }
     /// <summary>
     /// 将所有工人的占用情况更新到角色物品栏中
