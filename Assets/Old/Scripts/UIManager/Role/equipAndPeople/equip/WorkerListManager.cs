@@ -7,16 +7,24 @@ public class WorkerListManager : MonoSingleton<WorkerListManager>
 {
     public  List<WorkerSign> _signs= new List<WorkerSign>();
 
+    public Transform tempPos;
 
+    public Transform infoPos;
+    public Transform content;
     /// <summary>
     /// 初始化，从角色物品栏中赋值
     /// </summary>
     public void Init()
     {
+        
+        for (int i = 0; i <_signs.Count; i++)
+        {
+            Destroy(_signs[0].gameObject);
+        }
         foreach (PlayerWorker p in PlayerData.My.playerWorkers)
         {
             //CreatRoleManager.My.equipPrb
-            GameObject go = Instantiate(CreatRoleManager.My.workerPrb, transform.Find("Viewport/Content").position, transform.Find("Viewport/Content").rotation, transform.Find("Viewport/Content"));
+            GameObject go = Instantiate(workerPrb, transform.Find("Viewport/Content").position, transform.Find("Viewport/Content").rotation, transform.Find("Viewport/Content"));
             //go.transform.SetParent(transform.Find("Viewport/Content"));
             go.transform.GetComponent<WorkerSign>().Init(p.WorkerId,p.isEquiped);
         }
@@ -37,6 +45,18 @@ public class WorkerListManager : MonoSingleton<WorkerListManager>
     //    }
     }
 
+    public void ReInit()
+    {
+        for (int i = 0; i <_signs.Count; i++)
+        {
+            _signs[i].transform.SetParent(tempPos);
+        }
+
+        for (int i = 0; i <_signs.Count; i++)
+        {
+            _signs[i].transform.SetParent(transform.Find("Viewport/Content"));
+        }
+    }
     /// <summary>
     /// 将所有工人的占用情况更新到角色物品栏中
     /// </summary>
@@ -63,5 +83,5 @@ public class WorkerListManager : MonoSingleton<WorkerListManager>
 
     public Transform workerPos;
 
-    public Transform workerPrb;
+    public GameObject workerPrb;
 }

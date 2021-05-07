@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using DT.Fight.Bullet;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -64,6 +65,7 @@ public class RoleInfoMerchant : BaseRoleInfoAdd
             montyCost.text = (CreatRoleManager.My.finalCost).ToString();
         }
         technology.text = CreatRoleManager.My.finalTechAdd.ToString();
+        ShowLastpruduct(CreatRoleManager.My.CurrentRole);
 
     }
 
@@ -76,7 +78,93 @@ public class RoleInfoMerchant : BaseRoleInfoAdd
             new Vector2(CreatRoleManager.My.finalEffect / 120f * 150f,
                 effectyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
     }
+    
+    
+    private List<ProductData> _datas  = new List<ProductData>();
+ public void ShowLastpruduct(Role role)
+    {
+        BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(role.ID);
+        for (int i = 0; i <CreatRoleManager.My.goodsTF.childCount; i++)
+        {
+            Destroy(CreatRoleManager.My.goodsTF.GetChild(i).gameObject);
+        }
+        _datas.Clear();
+        for (int i = 0; i <baseMapRole.warehouse.Count; i++)
+        {
+            baseMapRole.warehouse[i].RepeatBulletCount = 0;
+        }
 
+        for (int i = 0; i <  baseMapRole.warehouse.Count; i++)
+        {
+            int  isSameCount = 0;
+            int count = 0;
+            for (int j = 0; j <_datas.Count; j++)
+            {
+            
+                if (_datas[j].CheckSame(baseMapRole.warehouse[i]))
+                {
+                    isSameCount++;
+                    _datas[j].RepeatBulletCount++;
+                    count++;
+                }
+            }
+
+            if (isSameCount>0)
+            {
+  
+                continue;
+            }
+            _datas.Add(baseMapRole.warehouse[i]);
+            
+        }
+
+        for (int i = 0; i < _datas.Count; i++)
+        {
+            
+
+         //   baseMapRole.warehouse[i].RepeatBulletCount = isSameCount;
+            GameObject Pruductgame =  Instantiate(CreatRoleManager.My.goodsPrb, CreatRoleManager.My.goodsTF);
+            Pruductgame.GetComponent<ProductSign>().currentProduct =
+                _datas[i];
+
+            Pruductgame.GetComponent<ProductSign>().conut.text =_datas[i].RepeatBulletCount.ToString();
+      
+       
+          
+        
+            switch (baseMapRole.warehouse[i].bulletType )
+            {
+                case BulletType.Bomb:
+                    Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.AOE;
+                    break;
+                case BulletType.NormalPP:
+                    Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.normallpp;
+                    break;
+
+                case BulletType.Lightning:
+                    Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.lightning;
+                    break;
+
+                case BulletType.summon:
+                    Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.tow;
+                    break;
+
+            }
+            if (Pruductgame.GetComponent<ProductSign>().currentProduct.wasteBuffList.Count > 0)
+            {
+                Pruductgame.GetComponent<Image>().color = new Color(1, 0.6f, 0.6f, 1);
+            }
+        
+         //  if (PlayerData.My.client != null)
+         //  {
+         //      Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.warehouse[i].RepeatBulletCount.ToString();
+         //  }
+         //  else
+         //  {
+         //      Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+         //  }
+        }
+    }
     public override void UpdateBuff()
     {
         List<int> equipId = CreatRoleManager.My.EquipList.Keys.ToList();
