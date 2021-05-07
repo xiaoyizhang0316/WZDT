@@ -74,24 +74,25 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
             montyCost.text = (CreatRoleManager.My.finalCost).ToString();
         }
         technology.text = CreatRoleManager.My.finalTechAdd.ToString();
-     //   if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) >3)
-     //   {
-     //       transform.Find("Image_TradCost").gameObject.SetActive(true);
-     //       transform.Find("Text_TradCost").gameObject.SetActive(true);
-     //       transform.Find("Text_Trad").gameObject.SetActive(true);
-     //       transform.Find("Image_risk").gameObject.SetActive(true);
-     //       transform.Find("Text_risk").gameObject.SetActive(true);
-     //       transform.Find("Text_riskchi").gameObject.SetActive(true);
-     //   }
-     //   else
-     //   {
-     //       transform.Find("Image_TradCost").gameObject.SetActive(false);
-     //       transform.Find("Text_TradCost").gameObject.SetActive(false);
-     //       transform.Find("Text_Trad").gameObject.SetActive(false);
-     //       transform.Find("Image_risk").gameObject.SetActive(false);
-     //       transform.Find("Text_risk").gameObject.SetActive(false);
-     //       transform.Find("Text_riskchi").gameObject.SetActive(false);
-     //   }
+        ShowLastpruduct(CreatRoleManager.My.CurrentRole);
+        //   if (int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) >3)
+        //   {
+        //       transform.Find("Image_TradCost").gameObject.SetActive(true);
+        //       transform.Find("Text_TradCost").gameObject.SetActive(true);
+        //       transform.Find("Text_Trad").gameObject.SetActive(true);
+        //       transform.Find("Image_risk").gameObject.SetActive(true);
+        //       transform.Find("Text_risk").gameObject.SetActive(true);
+        //       transform.Find("Text_riskchi").gameObject.SetActive(true);
+        //   }
+        //   else
+        //   {
+        //       transform.Find("Image_TradCost").gameObject.SetActive(false);
+        //       transform.Find("Text_TradCost").gameObject.SetActive(false);
+        //       transform.Find("Text_Trad").gameObject.SetActive(false);
+        //       transform.Find("Image_risk").gameObject.SetActive(false);
+        //       transform.Find("Text_risk").gameObject.SetActive(false);
+        //       transform.Find("Text_riskchi").gameObject.SetActive(false);
+        //   }
     }
 
     public override void UpdateBar()
@@ -104,6 +105,46 @@ public class RoleInfoSeedAdd : BaseRoleInfoAdd
                 effectyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
     }
 
+    public void ShowLastpruduct(Role role)
+    {
+        BaseMapRole baseMapRole = PlayerData.My.GetMapRoleById(role.ID);
+        for (int i = 0; i < CreatRoleManager.My.goodsTF.childCount; i++)
+        {
+            Destroy(CreatRoleManager.My.goodsTF.GetChild(i).gameObject);
+        }
+
+        int count = 9;
+        if (baseMapRole.GetComponent<ProductSeed>().productDatas.Count < 9)
+        {
+            count = baseMapRole.GetComponent<ProductSeed>().productDatas.Count;
+        }
+
+
+        for (int i = 1; i <= count; i++)
+        {
+            //Debug.Log(i + "||" + baseMapRole.GetComponent<ProductSeed>().productDatas.Count);
+            GameObject Pruductgame = Instantiate(CreatRoleManager.My.goodsPrb, CreatRoleManager.My.goodsTF);
+         
+            Pruductgame.GetComponent<ProductSign>().Image.gameObject.SetActive(false);
+            Pruductgame.GetComponent<ProductSign>().currentProduct =
+                baseMapRole.GetComponent<ProductSeed>().productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i];
+            Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.seedSpeed;
+            if (Pruductgame.GetComponent<ProductSign>().currentProduct.wasteBuffList.Count > 0)
+            {
+                Pruductgame.GetComponent<Image>().color = new Color(1,0.6f,0.6f,1);
+            }
+            //   if (PlayerData.My.client != null)
+            //   {
+            //       Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.GetComponent<ProductSeed>()
+            //           .productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+            //   }
+            //   else
+            //   {
+            //       Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            //   }
+
+        }
+    }
     public override void UpdateBuff()
     {
         List<int> equipId = CreatRoleManager.My.EquipList.Keys.ToList();

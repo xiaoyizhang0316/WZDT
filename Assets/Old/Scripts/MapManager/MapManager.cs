@@ -374,35 +374,35 @@ public class MapManager : MonoSingleton<MapManager>
                         }
                         break;
                     }
-                case LandOptionType.ConsumerSpot:
-                    {
-                        int index = int.Parse(options[i].Split('_')[1]);
-                        MapSign cell = GetMapSignByXY(x, y);
-                        string path = "Prefabs/Common/ConsumerSpot" + (index + 1).ToString();
-                        Vector3 pos = cell.transform.position + new Vector3(0f, 0.1f, 0f);
-                        GameObject go = Instantiate(Resources.Load<GameObject>(path),buildTF);
-                        go.transform.position = pos;
-                        go.GetComponent<Building>().ParsePathList(options[i].Split('_')[2]);
-                        go.GetComponent<Building>().buildingId = index;
-                        if (isItemMoveDown)
-                        {
-                            AddDive(moveTime, go);
-                        }
-                        break;
-                    }
-                case LandOptionType.End:
-                    {
-                        MapSign cell = GetMapSignByXY(x, y);
-                        string path = "Prefabs/Common/EndPoint";
-                        Vector3 pos = cell.transform.position + new Vector3(0f, -0.3f, 0f);
-                        GameObject go = Instantiate(Resources.Load<GameObject>(path), buildTF);
-                        go.transform.position = pos;
-                        if (isItemMoveDown)
-                        {
-                            AddDive( moveTime,go);
-                        }
-                        break;
-                    }
+          //   case LandOptionType.ConsumerSpot:
+          //       {
+          //           int index = int.Parse(options[i].Split('_')[1]);
+          //           MapSign cell = GetMapSignByXY(x, y);
+          //           string path = "Prefabs/Common/ConsumerSpot" + (index + 1).ToString();
+          //           Vector3 pos = cell.transform.position + new Vector3(0f, 0.1f, 0f);
+          //           GameObject go = Instantiate(Resources.Load<GameObject>(path),buildTF);
+          //           go.transform.position = pos;
+          //           go.GetComponent<Building>().ParsePathList(options[i].Split('_')[2]);
+          //           go.GetComponent<Building>().buildingId = index;
+          //           if (isItemMoveDown)
+          //           {
+          //               AddDive(moveTime, go);
+          //           }
+          //           break;
+          //       }
+          //   case LandOptionType.End:
+          //       {
+          //           MapSign cell = GetMapSignByXY(x, y);
+          //           string path = "Prefabs/Common/EndPoint";
+          //           Vector3 pos = cell.transform.position + new Vector3(0f, -0.3f, 0f);
+          //           GameObject go = Instantiate(Resources.Load<GameObject>(path), buildTF);
+          //           go.transform.position = pos;
+          //           if (isItemMoveDown)
+          //           {
+          //               AddDive( moveTime,go);
+          //           }
+          //           break;
+          //       }
                 default:
                     break;
             }

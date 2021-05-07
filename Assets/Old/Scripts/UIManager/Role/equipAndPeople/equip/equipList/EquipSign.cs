@@ -94,15 +94,7 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     /// <param name="id"></param>
     /// <param name="_isEquiped"></param>
     public void Init(int id, bool _isEquiped)
-    {
-        if ( SceneManager.GetActiveScene().name.Split('_')[1].Equals("1"))
-        {
-            LevelUI.SetActive(false);
-        }
-        else
-        {
-            LevelUI.SetActive(true); 
-        }
+    { 
 
         ID = id;
         SetOccupyStatus(_isEquiped);
@@ -123,18 +115,18 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
         //bulletCapacity.text = gearData.bulletCapacity.ToString(); 
         //print(gearData.SpritePath);
-        if (gearData.ProductOrder == 1)
-        {
-            shapeImageBG.sprite = hui;
-        }
-        if (gearData.ProductOrder == 2)
-        {
-            shapeImageBG.sprite = lv;
-        }
-        if (gearData.ProductOrder == 3)
-        {
-            shapeImageBG.sprite = lan ;
-        }
+    //  if (gearData.ProductOrder == 1)
+    //  {
+    //      shapeImageBG.sprite = hui;
+    //  }
+    //  if (gearData.ProductOrder == 2)
+    //  {
+    //      shapeImageBG.sprite = lv;
+    //  }
+    //  if (gearData.ProductOrder == 3)
+    //  {
+    //      shapeImageBG.sprite = lan ;
+    //  }
         Image_shape.sprite = Resources.Load<Sprite>(gearData.SpritePath);
         if (gearData.buffList[0] != -1)
         {
@@ -376,9 +368,26 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             //            cam.GetComponent<CameraMove>().enabled = false;
         //}
     }
+    private int index = 0;
+    public void MoveOut()
+    {
+        LevelUI.transform.DOLocalMoveX(125, 0.3f).Play();
+    }
+
+    public void MoveIn()
+    {
+        LevelUI.transform.DOLocalMoveX(5, 0.3f).Play();
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        
+        EquipListManager.My.content.GetComponent<GridLayoutGroup>().enabled = false;
+        EquipListManager.My.GetComponent<ScrollRect>().vertical = false;
+        index = transform.GetSiblingIndex();
+        transform.SetParent(EquipListManager.My.infoPos);
+        transform.DOScale(0.7f, 0.5f).Play();
+        MoveOut();
         if(isOccupation)
         {
             for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
@@ -395,6 +404,15 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        
+        transform.SetParent(         EquipListManager.My.content);
+        transform.SetSiblingIndex(index);
+        WorkerListManager.My.GetComponent<ScrollRect>().vertical = true;
+
+        WorkerListManager.My.content.GetComponent<GridLayoutGroup>().enabled = true; 
+     
+        transform.DOScale(0.5f, 0.5f) .Play();
+        MoveIn(); 
         FloatWindow.My.Hide();
     }
 }

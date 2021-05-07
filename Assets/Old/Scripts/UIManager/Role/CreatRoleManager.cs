@@ -102,6 +102,17 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
 
     public Button showGear;
 
+    public GameObject goodsPrb;
+
+    public Transform goodsTF;
+
+    public Transform buffTF;
+    public GameObject buffPrb;
+
+    public Button efficiencysort;
+    public Button effectsort;
+    public Button Range;
+
     /// <summary>
     /// 工人加起来的4项属性值（用于UI显示）
     /// </summary>
@@ -164,6 +175,182 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
 
     #endregion
 
+    void Start()
+    {
+        //gameObject.SetActive(false);
+        showWorker.onClick.AddListener(() =>
+        {
+            template_BottomPos.GetComponentInChildren<TemplateManager>().OpenTopTemplate(0.3f);
+        });
+        showGear.onClick.AddListener(() =>
+        {
+            template_BottomPos.GetComponentInChildren<TemplateManager>().OpenMidTemplate(0.3f);
+        });
+
+        efficiencysort.onClick.AddListener(() => { Initefficiencysort(); });
+
+        effectsort.onClick.AddListener(() => { Initeffectsort(); });
+
+        Range.onClick.AddListener(() =>
+        {
+            InitRange();
+        });
+}
+    public void InitRange()
+    {
+        List<EquipSign> temp = new List<EquipSign>();
+        for (int i = 0; i < EquipListManager.My._signs.Count; i++)
+        {
+            temp.Add(EquipListManager.My._signs[i]);
+        }
+
+        EquipSign tempsign;
+        for (int i = 0; i < temp.Count - 1; i++)
+        {
+            for (int j = 1; j < temp.Count - i - 1; j++)
+            {
+                if (temp[j - 1].gearData.range < temp[j].gearData.range)
+                {
+                    tempsign = temp[j - 1];
+                    temp[j - 1] = temp[j];
+                    temp[j] = tempsign;
+                }
+            }
+        }
+
+        EquipListManager.My._signs = temp;
+        EquipListManager.My.ReInit();
+        
+        
+        List<WorkerSign> worktemp = new List<WorkerSign>();
+        for (int i = 0; i < WorkerListManager.My._signs.Count; i++)
+        {
+            worktemp.Add(WorkerListManager.My._signs[i]);
+        }
+
+        WorkerSign worksign;
+        for (int i = 0; i < worktemp.Count - 1; i++)
+        {
+            for (int j = 1; j < worktemp.Count - i - 1; j++)
+            {
+                if (worktemp[j - 1].workerData.range < worktemp[j].workerData.range)
+                {
+                    worksign = worktemp[j - 1];
+                    worktemp[j - 1] = worktemp[j];
+                    worktemp[j] = worksign;
+                }
+            }
+        }
+
+        WorkerListManager.My._signs = worktemp;
+        WorkerListManager.My.ReInit();
+
+    }
+
+    public void Initeffectsort()
+    {
+        List<EquipSign> temp = new List<EquipSign>();
+        for (int i = 0; i < EquipListManager.My._signs.Count; i++)
+        {
+            temp.Add(EquipListManager.My._signs[i]);
+        }
+
+        EquipSign tempsign;
+        for (int i = 0; i < temp.Count - 1; i++)
+        {
+            for (int j = 1; j < temp.Count - i - 1; j++)
+            {
+                if (temp[j - 1].gearData.effect < temp[j].gearData.effect)
+                {
+                    tempsign = temp[j - 1];
+                    temp[j - 1] = temp[j];
+                    temp[j] = tempsign;
+                }
+            }
+        }
+
+        EquipListManager.My._signs = temp;
+        EquipListManager.My.ReInit();
+        
+        
+        List<WorkerSign> worktemp = new List<WorkerSign>();
+        for (int i = 0; i < WorkerListManager.My._signs.Count; i++)
+        {
+            worktemp.Add(WorkerListManager.My._signs[i]);
+        }
+
+        WorkerSign worksign;
+        for (int i = 0; i < worktemp.Count - 1; i++)
+        {
+            for (int j = 1; j < worktemp.Count - i - 1; j++)
+            {
+                if (worktemp[j - 1].workerData.effect < worktemp[j].workerData.effect)
+                {
+                    worksign = worktemp[j - 1];
+                    worktemp[j - 1] = worktemp[j];
+                    worktemp[j] = worksign;
+                }
+            }
+        }
+
+        WorkerListManager.My._signs = worktemp;
+        WorkerListManager.My.ReInit();
+
+
+    }
+
+    public void Initefficiencysort()
+    {
+        List<EquipSign> temp = new List<EquipSign>();
+        for (int i = 0; i < EquipListManager.My._signs.Count; i++)
+        {
+            temp.Add(EquipListManager.My._signs[i]);
+        }
+
+        EquipSign tempsign;
+        for (int i = 0; i < temp.Count - 1; i++)
+        {
+            for (int j = 1; j < temp.Count - i - 1; j++)
+            {
+                if (temp[j - 1].gearData.efficiency < temp[j].gearData.efficiency)
+                {
+                    tempsign = temp[j - 1];
+                    temp[j - 1] = temp[j];
+                    temp[j] = tempsign;
+                }
+            }
+        }
+
+        EquipListManager.My._signs = temp;
+        EquipListManager.My.ReInit();
+        
+        
+        List<WorkerSign> worktemp = new List<WorkerSign>();
+        for (int i = 0; i < WorkerListManager.My._signs.Count; i++)
+        {
+            worktemp.Add(WorkerListManager.My._signs[i]);
+        }
+
+        WorkerSign worksign;
+        for (int i = 0; i < worktemp.Count - 1; i++)
+        {
+            for (int j = 1; j < worktemp.Count - i - 1; j++)
+            {
+                if (worktemp[j - 1].workerData.efficiency < worktemp[j].workerData.efficiency)
+                {
+                    worksign = worktemp[j - 1];
+                    worktemp[j - 1] = worktemp[j];
+                    worktemp[j] = worksign;
+                }
+            }
+        }
+
+        WorkerListManager.My._signs = worktemp;
+        WorkerListManager.My.ReInit();
+
+        
+    }
+
 
     public void ShowEquipListPOPDatal(int ID)
     {
@@ -196,10 +383,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     {
         isPause = DOTween.defaultAutoPlay == AutoPlay.None;
         NewCanvasUI.My.GamePause(false);
-        for (int i = 0; i < effects.Count; i++)
-        {
-            effects[i].Move();
-        }
+  
 
         NewCanvasUI.My.Panel_ChoseRole.SetActive(false);
         CurrentRole = tempRole;
@@ -237,6 +421,27 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         EquipListManager.My.Init();
         WorkerListManager.My.Init();
         CheckAllConditions();
+        InitBuff();
+    }
+
+    public void InitBuff()
+    {
+        for (int i = 0; i < buffTF.childCount; i++)
+        {
+            Destroy(buffTF.GetChild(0).gameObject);
+        }
+
+        BaseMapRole baseMapRole = PlayerData.My.GetMapRoleById(CurrentRole.ID);
+
+        for (int i = 0; i < baseMapRole.buffList.Count; i++)
+        {
+            GameObject game = Instantiate(buffPrb, buffTF);
+            game.GetComponent<Image>().sprite =
+                Resources.Load<Sprite>("Sprite/Buff/" + baseMapRole.buffList[i].buffId.ToString());
+            game.GetComponent<ShowBuffText>().currentbuffData =
+                baseMapRole.buffList[i].buffData;
+            game.GetComponent<ShowBuffText>().role = baseMapRole.buffList[i].castRole;
+        }
     }
 
     /// <summary>
@@ -333,10 +538,10 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         {
             GearData tempData = GameDataMgr.My.GetGearData(i.Key);
             finalEffect += (int) (tempData.effect);
-            finalEfficiency += (int) (tempData.efficiency );
-            finalRange += (int) (tempData.range );
+            finalEfficiency += (int) (tempData.efficiency);
+            finalRange += (int) (tempData.range);
             finalTradeCost += tempData.tradeCost;
-            finalCost += (int) (tempData.cost );
+            finalCost += (int) (tempData.cost);
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
             finalEncourageAdd += tempData.encourageAdd;
@@ -347,9 +552,9 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         foreach (var i in peoPleList)
         {
             WorkerData tempData = GameDataMgr.My.GetWorkerData(i.Key);
-            finalEffect += (int) (tempData.effect );
-            finalEfficiency += (int) (tempData.efficiency );
-            finalRange += (int) (tempData.range );
+            finalEffect += (int) (tempData.effect);
+            finalEfficiency += (int) (tempData.efficiency);
+            finalRange += (int) (tempData.range);
             finalTradeCost += tempData.tradeCost;
             finalRiskResistance += tempData.riskResistance;
             finalBulletCapacity += tempData.bulletCapacity;
@@ -616,15 +821,9 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
     {
         for (int i = 0; i < effects.Count; i++)
         {
-            effects[i].Back();
+            //effects[i].Back();
         }
-   
-     
-           
-              
-          
-               
-         
+
 
         transform.DOScale(1, 0.5f).OnComplete(() =>
         {
@@ -638,7 +837,6 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                 {
                     NewCanvasUI.My.GameNormal();
                 }
-            
             }
             else
             {
@@ -646,21 +844,23 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
             }
 
             gameObject.SetActive(false);
-        })  .Play();
+        }).Play();
     }
 
     // Start is called before the first frame update
-    void Start()
+
+
+    public void ShowGoodsList()
     {
-        //gameObject.SetActive(false);
-        showWorker.onClick.AddListener(() =>
+        BaseMapRole baseMapRole = PlayerData.My.GetMapRoleById(CurrentRole.ID);
+        for (int i = 0; i < goodsTF.childCount; i++)
         {
-            template_BottomPos.GetComponentInChildren<TemplateManager>().OpenTopTemplate(0.3f);
-        });
-        showGear.onClick.AddListener(() =>
+            Destroy(goodsTF.GetChild(0));
+        }
+
+        for (int i = 0; i < baseMapRole.warehouse.Count; i++)
         {
-            template_BottomPos.GetComponentInChildren<TemplateManager>().OpenMidTemplate(0.3f);
-        });
+        }
     }
 
     /// <summary>

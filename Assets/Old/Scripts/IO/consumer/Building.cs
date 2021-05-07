@@ -533,7 +533,7 @@ public class Building : MonoBehaviour
                 pathItems.Add(item);
             }
         }
-        InitConsumerPath();
+          InitConsumerPath();
     }
 
     /// <summary>
@@ -541,12 +541,12 @@ public class Building : MonoBehaviour
     /// </summary>
     public void InitConsumerPath()
     {
-        consumerPathList.Clear();
-        for (int i = 0; i < pathItems.Count; i++)
-        {
-            MapSign sign = MapManager.My.GetMapSignByXY(pathItems[i].x, pathItems[i].y);
-            consumerPathList.Add(sign.transform);
-        }
+       // consumerPathList.Clear();
+       // for (int i = 0; i < pathItems.Count; i++)
+       // {
+       //     MapSign sign = MapManager.My.GetMapSignByXY(pathItems[i].x, pathItems[i].y);
+       //     consumerPathList.Add(sign.transform);
+       // }
         List<Vector3> list = new List<Vector3>();
         for (int i = 0; i < consumerPathList.Count; i++)
         {

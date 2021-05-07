@@ -64,6 +64,8 @@ public class RoleInfoPeasant : BaseRoleInfoAdd
             montyCost.text = (CreatRoleManager.My.finalCost).ToString();
         }
         technology.text = CreatRoleManager.My.finalTechAdd.ToString();
+        ShowLastpruduct(CreatRoleManager.My.CurrentRole);
+
     }
     public override void UpdateBar()
     {
@@ -74,7 +76,45 @@ public class RoleInfoPeasant : BaseRoleInfoAdd
             new Vector2(CreatRoleManager.My.finalEffect / 120f * 150f,
                 effectyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
     }
+    public void ShowLastpruduct(Role role)
+    {
+        BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(role.ID);
+        for (int i = 0; i <CreatRoleManager.My.goodsTF.childCount; i++)
+        {
+            Destroy(CreatRoleManager.My.goodsTF.GetChild(i).gameObject);
+        }
 
+        int count = 9;
+        if (baseMapRole.GetComponent<ProductMelon>().productDatas.Count <9)
+        {
+            count = baseMapRole.GetComponent<ProductMelon>().productDatas.Count ;
+        }
+     
+
+        for (int i = 1; i <=count; i++)
+        { 
+            //Debug.Log(i+"||"+ baseMapRole.GetComponent<ProductMelon>().productDatas.Count);
+            GameObject Pruductgame =  Instantiate(CreatRoleManager.My.goodsPrb, CreatRoleManager.My.goodsTF);
+            Pruductgame.GetComponent<ProductSign>().Image.gameObject.SetActive(false);
+
+            Pruductgame.GetComponent<ProductSign>().currentProduct =
+                baseMapRole.GetComponent<ProductMelon>().productDatas[    baseMapRole.GetComponent<ProductMelon>().productDatas.Count-i];
+            Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.normallpp;
+            if (Pruductgame.GetComponent<ProductSign>().currentProduct.wasteBuffList.Count > 0)
+            {
+                Pruductgame.GetComponent<Image>().color = new Color(1, 0.6f, 0.6f, 1);
+            }
+            //  if (PlayerData.My.client != null)
+            //  {
+            //      Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.GetComponent<ProductSeed>()
+            //          .productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+            //  }
+            //  else
+            //  {
+            //      Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+            //  }
+        }
+    }
     public override void UpdateBuff()
     {
         List<int> equipId = CreatRoleManager.My.EquipList.Keys.ToList();
