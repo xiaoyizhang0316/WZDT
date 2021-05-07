@@ -216,10 +216,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     void Update()
     {
         if (!PlayerData.My.isPrediction){
-            if (GuideManager.My.currentGuideIndex != -1)
+            /*if (GuideManager.My.currentGuideIndex != -1)
             {
                 return;
-            }
+            }*/
 
             if (Input.GetKeyDown(KeyCode.Space))
             {

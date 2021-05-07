@@ -15,6 +15,7 @@ public class PlayerAssetChange : MonoBehaviour
 
     private Sequence dt_sq;
     private bool isExe = false;
+    private static readonly object lockRoot = new object();
 
     //private Queue<int> cg_q;
 
@@ -33,8 +34,14 @@ public class PlayerAssetChange : MonoBehaviour
     {
         if (!isExe && q_data.Count>0)
         {
-            isExe = true;
-            QueueExe();
+            lock (lockRoot)
+            {
+                if (!isExe && q_data.Count > 0)
+                {
+                    isExe = true;
+                    QueueExe();
+                }
+            }
         }
     }
 

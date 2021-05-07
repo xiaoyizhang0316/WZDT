@@ -493,15 +493,16 @@ public class StageGoal : MonoSingleton<StageGoal>
         int afterAdd = beforeAdd + add;
         playerHealth = afterAdd;
         float per;
+        Tween te = null;
         if (playerHealth < stageDan[2])
         {
             per = playerHealth / (float)stageDan[2];
-            healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue);
+            te = healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue).OnPause(()=>te?.TogglePause());
         }
         else
         {
             per = 1;
-            healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue);
+            te = healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue).OnPause(()=>te?.TogglePause());
             /*currentDan++;
             per = (playerHealth - stageDan[2]) / (float)(stageDan[2]);
             healthBar1.DOFillAmount(1, 0.2f).Play().OnComplete(() =>
