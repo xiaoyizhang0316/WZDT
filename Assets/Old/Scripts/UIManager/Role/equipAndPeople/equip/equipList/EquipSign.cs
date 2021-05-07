@@ -407,9 +407,9 @@ public class EquipSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         
         transform.SetParent(         EquipListManager.My.content);
         transform.SetSiblingIndex(index);
-        WorkerListManager.My.GetComponent<ScrollRect>().vertical = true;
+        EquipListManager.My.GetComponent<ScrollRect>().vertical = true;
 
-        WorkerListManager.My.content.GetComponent<GridLayoutGroup>().enabled = true; 
+        EquipListManager.My.content.GetComponent<GridLayoutGroup>().enabled = true; 
      
         transform.DOScale(0.5f, 0.5f) .Play();
         MoveIn(); 
