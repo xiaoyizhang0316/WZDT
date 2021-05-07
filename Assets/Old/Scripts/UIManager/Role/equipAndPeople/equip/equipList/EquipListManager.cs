@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 
@@ -54,6 +55,7 @@ public class EquipListManager : MonoSingleton<EquipListManager>
         {
             _signs[i].transform.SetParent(transform.Find("Viewport/Content"));
         }
+        transform.Find("Viewport/Content").DOLocalMoveY(0, 0.5f).Play();
     }
 
     /// <summary>
