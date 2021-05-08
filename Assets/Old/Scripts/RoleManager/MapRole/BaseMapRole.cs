@@ -1279,4 +1279,18 @@ public class BaseMapRole : MonoBehaviour
         }
         //warehouse = CommonFunc.Clone<ProductData>(cloneWarehourse);
     }
+
+    public ProductData GetNormalProduct()
+    {
+        for (int i = 0; i < warehouse.Count; i++)
+        {
+            if (warehouse[i].bulletType == BulletType.NormalPP)
+            {
+                ProductData data = warehouse[i];
+                warehouse.RemoveAt(i);
+                return data;
+            }
+        }
+        return null;
+    }
 }
