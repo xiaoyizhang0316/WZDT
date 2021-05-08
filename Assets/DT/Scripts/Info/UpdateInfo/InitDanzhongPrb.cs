@@ -54,17 +54,18 @@ public class InitDanzhongPrb : MonoBehaviour
             }
         }
 
-      //  for (int i = 0; i < data.wasteBuffList.Count; i++)
-      //  {
-      //      if (i +  data.buffList.Count < 4)
-      //      {
-      //          buffList[i +  data.buffList.Count].gameObject.SetActive(true);
-      //          buffList[i+ data.buffList.Count].sprite =  Resources.Load<Sprite>("Sprite/Buff/" +data.wasteBuffList[i]); 
-      //          buffList[i +  data.buffList.Count].GetComponent<ShowBuffText>().currentbuffData =   GameDataMgr.My.GetBuffDataByID(data.wasteBuffList[i]);
-      //          buffList[i +  data.buffList.Count].transform.GetChild(0).gameObject.SetActive(true);
-      //      }
-//
-      //  }
+     
+    //  for (int i = 0; i < data.wasteBuffList.Count; i++)
+    //  {
+    //      if (i +  data.buffList.Count < 4)
+    //      {
+    //          buffList[i +  data.buffList.Count].gameObject.SetActive(true);
+    //          buffList[i+ data.buffList.Count].sprite =  Resources.Load<Sprite>("Sprite/Buff/" +data.wasteBuffList[i]); 
+    //          buffList[i +  data.buffList.Count].GetComponent<ShowBuffText>().currentbuffData =   GameDataMgr.My.GetBuffDataByID(data.wasteBuffList[i]);
+    //          buffList[i +  data.buffList.Count].transform.GetChild(0).gameObject.SetActive(true);
+    //      }
+    // 
+    //  }
     }
 
     // Update is called once per frame

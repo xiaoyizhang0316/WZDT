@@ -9,6 +9,7 @@ public class BossSummonConsumer : ConsumeSign
 {
     private float twePer;
 
+  
     /// <summary>
     /// 初始化
     /// </summary>
@@ -110,5 +111,11 @@ public class BossSummonConsumer : ConsumeSign
         }
         result += Vector3.Distance(pathList[pathList.Count - 1], pathList[0]) / consumeData.moveSpeed;
         return result;
+    }
+
+    public void gameobjtcjtdjd()
+    {
+        gameObject.SetActive(true);
+        
     }
 }
