@@ -59,6 +59,13 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public GameObject emptyEquip;
 
+    public GameObject danzhongprb;
+
+    public Transform danzhongTF;
+
+
+  
+
     // Start is called before the first frame update
     void Start()
     {
