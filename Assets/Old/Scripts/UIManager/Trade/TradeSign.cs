@@ -427,6 +427,10 @@ public class TradeSign : MonoBehaviour
     {
         BaseMapRole startRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.startRole));
         BaseMapRole endRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.endRole));
+        if (startRole.baseRoleData.riskResistance == endRole.baseRoleData.riskResistance)
+        {
+            return true;
+        }
         if (startRole.baseRoleData.riskResistance >= endRole.baseRoleData.riskResistance)
         {
             return tradeData.selectCashFlow == CashFlowType.后钱;
