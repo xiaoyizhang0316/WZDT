@@ -229,6 +229,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                     // RoleUpdateInfo.My.ReInit(tempBaseRoleData);
                 }
             }).Play();
+            StageGoal.My.RefreshAllCost();
         }
         else
         {

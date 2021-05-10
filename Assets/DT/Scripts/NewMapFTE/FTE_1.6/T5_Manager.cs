@@ -24,6 +24,8 @@ public class T5_Manager : MonoSingleton<T5_Manager>
 
     public int leftKillNum = 0;
     public int rightKillNum = 0;
+
+    public GameObject dlj;
     
     /// <summary>
     /// 角色信息界面上移

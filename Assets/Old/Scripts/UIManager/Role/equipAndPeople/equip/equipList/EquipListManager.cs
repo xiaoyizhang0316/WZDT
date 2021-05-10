@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 
@@ -7,11 +8,16 @@ public class EquipListManager : MonoSingleton<EquipListManager>
 {
     public  List<EquipSign> _signs= new List<EquipSign>();
 
+    public Transform tempPos;
+    
+    public Transform infoPos;
+    public Transform content;
     /// <summary>
     /// 初始化，从角色物品栏中赋值
     /// </summary>
     public void Init()
-    {
+    {_signs.Clear();
+        
         foreach (PlayerGear p in PlayerData.My.playerGears)
         {
             GameObject go = Instantiate(CreatRoleManager.My.equipPrb, transform.Find("Viewport/Content").position,
@@ -24,6 +30,8 @@ public class EquipListManager : MonoSingleton<EquipListManager>
                 e.CheckOccupyStatus();
         }
 
+        
+        
     //  if (GuideManager.My.ftegob.activeSelf)
     //  {
     //      for (int i = 0; i < transform.Find("Viewport/Content").childCount; i++)
@@ -34,6 +42,20 @@ public class EquipListManager : MonoSingleton<EquipListManager>
     //          }
     //      }
     //  }
+    }
+
+    public void ReInit()
+    {
+        for (int i = 0; i <_signs.Count; i++)
+        {
+            _signs[i].transform.SetParent(tempPos);
+        }
+
+        for (int i = 0; i <_signs.Count; i++)
+        {
+            _signs[i].transform.SetParent(transform.Find("Viewport/Content"));
+        }
+        transform.Find("Viewport/Content").DOLocalMoveY(0, 0.5f).Play();
     }
 
     /// <summary>

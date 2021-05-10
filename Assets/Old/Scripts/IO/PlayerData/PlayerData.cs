@@ -743,4 +743,19 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
             MapRole[i].RestoreWarehourse();
         }
     }
+
+    public int GetAllRoleCost()
+    {
+        int cost = 0;
+        for (int i = 0; i < MapRole.Count; i++)
+        {
+            if (MapRole[i].isNpc)
+            {
+                continue;
+            }
+            cost += MapRole[i].baseRoleData.cost*2;
+        }
+
+        return cost;
+    }
 }

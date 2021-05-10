@@ -37,7 +37,7 @@ public class RoleListInfoMerchant : BaseRoleListInfo
         float efficiencyNum = (role.efficiency);
         float add = 1f;
         float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel;
-        MoveSpeed.color = Color.white;
+        MoveSpeed.color = Color.black;
         if (encourage > 0)
         {
             add += encourage * 0.05f;
@@ -81,9 +81,57 @@ public class RoleListInfoMerchant : BaseRoleListInfo
     }
     
     private List<ProductData> _datas  = new List<ProductData>();
-
-  
     public void ShowLastpruduct(Role role)
+    {
+        for (int i = 0; i < productTF.childCount; i++)
+        {
+            Destroy(productTF.GetChild(0).gameObject);
+        }
+        BaseMapRole baseMapRole = PlayerData.My.GetMapRoleById(role.ID);
+      
+        for (int i = 0; i < baseMapRole.warehouse.Count; i++)
+        {
+            if (baseMapRole.warehouse[i].bulletType == BulletType.NormalPP)
+            {
+                GameObject Pruductgame = Instantiate(productPrb, productTF);
+                Pruductgame.GetComponent<InitDanzhongPrb>().Init( RoleUpdateInfo.My.normallpp,  baseMapRole.warehouse[i].damage.ToString(),  baseMapRole.warehouse[i].loadingSpeed.ToString(),  baseMapRole.warehouse[i]);
+             break;
+             
+            }
+        }
+        for (int i = 0; i < baseMapRole.warehouse.Count; i++)
+        {
+            if (baseMapRole.warehouse[i].bulletType == BulletType.Bomb)
+            {
+                GameObject Pruductgame = Instantiate(productPrb, productTF);
+                Pruductgame.GetComponent<InitDanzhongPrb>().Init( RoleUpdateInfo.My.AOE,  baseMapRole.warehouse[i].damage.ToString(),  baseMapRole.warehouse[i].loadingSpeed.ToString(),  baseMapRole.warehouse[i]);
+                break;
+             
+            }
+        }
+        for (int i = 0; i < baseMapRole.warehouse.Count; i++)
+        {
+            if (baseMapRole.warehouse[i].bulletType == BulletType.Lightning)
+            {
+                GameObject Pruductgame = Instantiate(productPrb, productTF);
+                Pruductgame.GetComponent<InitDanzhongPrb>().Init( RoleUpdateInfo.My.lightning,  baseMapRole.warehouse[i].damage.ToString(),  baseMapRole.warehouse[i].loadingSpeed.ToString(),  baseMapRole.warehouse[i]);
+                break;
+             
+            }
+        }
+        for (int i = 0; i < baseMapRole.warehouse.Count; i++)
+        {
+            if (baseMapRole.warehouse[i].bulletType == BulletType.summon)
+            {
+                GameObject Pruductgame = Instantiate(productPrb, productTF);
+                Pruductgame.GetComponent<InitDanzhongPrb>().Init( RoleUpdateInfo.My.tow,  baseMapRole.warehouse[i].damage.ToString(),  baseMapRole.warehouse[i].loadingSpeed.ToString(),  baseMapRole.warehouse[i]);
+                break;
+             
+            }
+        }
+          }
+  
+    public void ShowLastpruduct1(Role role)
     {
         BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(role.ID);
         for (int i = 0; i <productTF.childCount; i++)

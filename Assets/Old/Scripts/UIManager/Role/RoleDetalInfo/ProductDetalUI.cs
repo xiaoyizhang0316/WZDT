@@ -40,16 +40,16 @@ public class ProductDetalUI : MonoSingleton<ProductDetalUI>
     {
         
         DataUploadManager.My.AddData(DataEnum.看子弹属性);
-        for (int i = 0; i <buff.Count; i++)
-        {
-            buff[i].gameObject.SetActive(false);
-        }
+     
         this.data = data;
         Icon.sprite = IconSprite; 
           this.damage.text = damage.ToString();
           this.loadingSpeed.text = loadingSpeed.ToString();
 
-    
+          for (int i = 0; i <buff.Count; i++)
+          {
+              buff[i].gameObject.SetActive(false);
+          }
               for (int i = 0; i < 4; i++)
               {
                  

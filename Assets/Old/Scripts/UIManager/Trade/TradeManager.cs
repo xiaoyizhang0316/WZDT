@@ -36,6 +36,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             Destroy(temp.gameObject, 0f);
             if (NewCanvasUI.My.Panel_TradeSetting.activeSelf)
                 CreateTradeManager.My.Close();
+            StageGoal.My.RefreshAllCost();
         }
     }
 
@@ -362,7 +363,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
         foreach (var item in deleteTradeList)
         {
-            int costNum = item.Value * (StageGoal.My.timeCount - item.Key) / (StageGoal.My.timeCount - StageGoal.My.turnStartTime) * 4;
+            int costNum = (int)(item.Value * (StageGoal.My.timeCount - item.Key) / (float)(StageGoal.My.timeCount - StageGoal.My.turnStartTime) * 4);
             StageGoal.My.CostPlayerGold(costNum);
             StageGoal.My.Expend(costNum, ExpendType.TradeCosts);
         }
@@ -527,5 +528,22 @@ public class TradeManager : MonoSingleton<TradeManager>
                 }
             }
         }
+    }
+
+    public int GetAllTradeCost()
+    {
+        int cost = 0;
+        foreach (var sign in tradeList.Values)
+        {
+            BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.castRole));
+            int result = sign.CalculateTC(true)*4;
+            if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
+            {
+                result /= cast.tradeList.Count;
+            }
+            Debug.Log(sign.tradeData.ID+" trade cost: "+result);
+            cost += result;
+        }
+        return cost;
     }
 }

@@ -19,6 +19,8 @@ public class NpcLockedInfo : MonoBehaviour
 
     public List<Sprite> spriteList;
 
+    public Image icon;
+
     public void SetInfo(Transform npc, int unlockNumber)
     {
         BaseSkill baseSkill = npc.GetComponent<BaseSkill>();
@@ -27,6 +29,8 @@ public class NpcLockedInfo : MonoBehaviour
         
         tradeCost.text = npc.GetComponent<BaseMapRole>().baseRoleData.tradeCost.ToString();
         risk.text = npc.GetComponent<BaseMapRole>().baseRoleData.riskResistance.ToString();
+        icon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType.ToString() +
+                                             (npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level == 0?1: npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.level));
 
         unlockCost.text = unlockNumber.ToString();
 

@@ -37,6 +37,7 @@ public class NpcSpecialInfo : MonoBehaviour
     public Sprite lightning;
     public Sprite tow;
     public Sprite seedSpeed;
+    public Transform r_buff_transform;
 
     public EncourageLevel encourageLevel;
 
@@ -51,6 +52,7 @@ public class NpcSpecialInfo : MonoBehaviour
         level.text = npc.baseRoleData.baseRoleData.level.ToString();
         HideAll();
         encourageLevel.Init(npc);
+        NPCListInfo.My.SetReceivedBuffs(npc.GetComponent<BaseMapRole>(), r_buff_transform);
         ClearBulletContent();
         clearBullets.onClick.RemoveAllListeners();
         clearBullets.onClick.AddListener(()=> {

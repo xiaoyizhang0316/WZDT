@@ -48,7 +48,8 @@ public class HttpManager : MonoSingleton<HttpManager>
         timer = false;
         if (NetworkMgr.My.isShowFPS && SceneManager.GetActiveScene().name.StartsWith("FTE") && SceneManager.GetActiveScene().name != "FTE_0")
         {
-            InvokeRepeating("ShowFPS", 1, 1f);
+            //InvokeRepeating("ShowFPS", 1, 1f);
+            Invoke("ShowFPS",2);
         }
     }
     private float deltaTime;
@@ -61,11 +62,11 @@ public class HttpManager : MonoSingleton<HttpManager>
             time += Time.deltaTime;
         }
 
-        if(NetworkMgr.My.isShowFPS && SceneManager.GetActiveScene().name.StartsWith("FTE")&&SceneManager.GetActiveScene().name != "FTE_0")
+        /*if(NetworkMgr.My.isShowFPS && SceneManager.GetActiveScene().name.StartsWith("FTE")&&SceneManager.GetActiveScene().name != "FTE_0")
         {
             deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
             frameCount = 1f / deltaTime;
-        }
+        }*/
     }
 
     void ShowFPS()

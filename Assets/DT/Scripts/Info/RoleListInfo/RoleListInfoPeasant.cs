@@ -38,7 +38,7 @@ public class RoleListInfoPeasant : BaseRoleListInfo
         float efficiencyNum = (role.efficiency / 20f);
         float add = 1f;
         float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel;
-        productTime.color = Color.white;
+        productTime.color = Color.black;
         if (encourage > 0)
         {
             add += encourage * 0.05f;
@@ -53,7 +53,7 @@ public class RoleListInfoPeasant : BaseRoleListInfo
         effect.text =role.effect.ToString();
         reload.text = role.effect  .ToString()+"%";
         efficiency.text = role.efficiency.ToString();
-        productTime.text = (efficiencyNum).ToString("F2");
+        productTime.text = (efficiencyNum).ToString("F1");
         tradCost.text  =  role.tradeCost.ToString();
         risk .text = role.riskResistance.ToString();
         if (StageGoal.My.currentType == GameEnum.StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
@@ -80,44 +80,64 @@ public class RoleListInfoPeasant : BaseRoleListInfo
             new Vector2( role.effect / 120f * 150f,
                 effectyBar.GetComponent<RectTransform>().sizeDelta.y), 0.2f).Play();
     }
-    
     public void ShowLastpruduct(Role role)
     {
-        BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(role.ID);
-        for (int i = 0; i <productTF.childCount; i++)
+        for (int i = 0; i < productTF.childCount; i++)
         {
-            Destroy(productTF.GetChild(i).gameObject);
+            Destroy(productTF.GetChild(0).gameObject);
         }
-
-        int count = 9;
-        if (baseMapRole.GetComponent<ProductMelon>().productDatas.Count <9)
+        BaseMapRole baseMapRole = PlayerData.My.GetMapRoleById(role.ID);
+        ProductData data = null;
+        for (int i = 0; i < baseMapRole.GetComponent<ProductMelon>().productDatas.Count; i++)
         {
-            count = baseMapRole.GetComponent<ProductMelon>().productDatas.Count ;
+            data = baseMapRole.GetComponent<ProductMelon>().productDatas[i];
         }
-     
 
-        for (int i = 1; i <=count; i++)
-        { 
-            //Debug.Log(i+"||"+ baseMapRole.GetComponent<ProductMelon>().productDatas.Count);
-            GameObject Pruductgame =  Instantiate(productPrb, productTF);
-            Pruductgame.GetComponent<ProductSign>().Image.gameObject.SetActive(false);
-
-            Pruductgame.GetComponent<ProductSign>().currentProduct =
-                baseMapRole.GetComponent<ProductMelon>().productDatas[    baseMapRole.GetComponent<ProductMelon>().productDatas.Count-i];
-            Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.normallpp;
-            if (Pruductgame.GetComponent<ProductSign>().currentProduct.wasteBuffList.Count > 0)
-            {
-                Pruductgame.GetComponent<Image>().color = new Color(1, 0.6f, 0.6f, 1);
-            }
-         //  if (PlayerData.My.client != null)
-         //  {
-         //      Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.GetComponent<ProductSeed>()
-         //          .productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
-         //  }
-         //  else
-         //  {
-         //      Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
-         //  }
+        if (data == null)
+        {
+            return;
         }
+
+        GameObject Pruductgame = Instantiate(productPrb, productTF);
+        Pruductgame.GetComponent<InitDanzhongPrb>().Init( RoleUpdateInfo.My.normallpp, data.damage.ToString(), data.loadingSpeed.ToString(), data);
     }
+    //  public void ShowLastpruduct(Role role)
+    //  {
+    //      BaseMapRole baseMapRole =    PlayerData.My.GetMapRoleById(role.ID);
+    //      for (int i = 0; i <productTF.childCount; i++)
+    //      {
+    //          Destroy(productTF.GetChild(i).gameObject);
+    //      }
+    //
+    //      int count = 9;
+    //      if (baseMapRole.GetComponent<ProductMelon>().productDatas.Count <9)
+    //      {
+    //          count = baseMapRole.GetComponent<ProductMelon>().productDatas.Count ;
+    //      }
+    //   
+    //
+    //      for (int i = 1; i <=count; i++)
+    //      { 
+    //          //Debug.Log(i+"||"+ baseMapRole.GetComponent<ProductMelon>().productDatas.Count);
+    //          GameObject Pruductgame =  Instantiate(productPrb, productTF);
+    //          Pruductgame.GetComponent<ProductSign>().Image.gameObject.SetActive(false);
+    //
+    //          Pruductgame.GetComponent<ProductSign>().currentProduct =
+    //              baseMapRole.GetComponent<ProductMelon>().productDatas[    baseMapRole.GetComponent<ProductMelon>().productDatas.Count-i];
+    //          Pruductgame.GetComponent<Image>().sprite = RoleUpdateInfo.My.normallpp;
+    //          if (Pruductgame.GetComponent<ProductSign>().currentProduct.wasteBuffList.Count > 0)
+    //          {
+    //              Pruductgame.GetComponent<Image>().color = new Color(1, 0.6f, 0.6f, 1);
+    //          }
+    //       //  if (PlayerData.My.client != null)
+    //       //  {
+    //       //      Pruductgame.GetComponentInChildren<Text>().text = baseMapRole.GetComponent<ProductSeed>()
+    //       //          .productDatas[baseMapRole.GetComponent<ProductSeed>().productDatas.Count - i].RepeatBulletCount.ToString();
+    //       //  }
+    //       //  else
+    //       //  {
+    //       //      Pruductgame.GetComponentInChildren<Text>().gameObject.SetActive(false);
+    //       //  }
+    //      }
+    //  }
 }

@@ -30,9 +30,10 @@ public class ProductMerchant : BaseSkill
         {
             try
             {
-                if (PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).warehouse
-                    .Count + role.tradeList[currentCount].GetGoodsCountOnTradeLine()>= PlayerData.My
-                    .GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole)).baseRoleData
+                BaseMapRole target =
+                    PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[currentCount].tradeData.targetRole));
+                if (target.warehouse
+                    .Count + role.tradeList[currentCount].GetGoodsCountOnTradeLine()>= target.baseRoleData
                     .bulletCapacity && role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
                 {
                     currentCount++;
@@ -48,9 +49,37 @@ public class ProductMerchant : BaseSkill
                     Skill();
                     return;
                 }
-                ProductData data = role.warehouse[0];
+
+                ProductData data;
+                if (target.baseRoleData.baseRoleData.roleType != GameEnum.RoleType.Dealer && target.baseRoleData.baseRoleData.roleType
+                    != GameEnum.RoleType.Merchant)
+                {
+                    data = role.GetNormalProduct();
+                    if (data == null)
+                    {
+                        currentCount++;
+                        maxCount++;
+                        if (currentCount >= role.tradeList.Count)
+                        {
+                            currentCount = 0;
+                        }
+                        if (maxCount >= role.tradeList.Count)
+                        {
+                            return;
+                        }
+                        Skill();
+                        return;
+                    }
+                }
+                else
+                {
+                    data = role.warehouse[0];
+                    maxCount = 0;
+                    role.warehouse.RemoveAt(0);
+                }
+                /*ProductData data = role.warehouse[0];
                 maxCount = 0;
-                role.warehouse.RemoveAt(0);
+                role.warehouse.RemoveAt(0);*/
                 for (int i = 0; i < role.GetEquipBuffList().Count; i++)
                 {
                     data.AddBuff(role.GetEquipBuffList()[i]);

@@ -12,6 +12,8 @@ public class DeleteUIManager : MonoSingleton<DeleteUIManager>
     public Button cancle;
 
     public Button delete;
+
+    public Button close;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,12 @@ public class DeleteUIManager : MonoSingleton<DeleteUIManager>
         AudioManager.My.PlaySelectType(GameEnum.AudioClipType.MenuOpen);
         this.delete.onClick.RemoveAllListeners();
         this.cancle.onClick.RemoveAllListeners();
+        close.onClick.RemoveAllListeners();
         cancle.onClick.AddListener(() =>
+        {
+            gameObject.SetActive(false);
+        });
+        close.onClick.AddListener(() =>
         {
             gameObject.SetActive(false);
         });

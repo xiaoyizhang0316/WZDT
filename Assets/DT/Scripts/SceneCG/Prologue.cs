@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Prologue : MonoBehaviour
 {
@@ -9,7 +10,11 @@ public class Prologue : MonoBehaviour
     {
 
         NewCanvasUI.My.GamePause(false);
-        GuideManager.My.guideClose.gameObject.SetActive(false);
+        if (!SceneManager.GetActiveScene().name.Equals("FTE_6"))
+        {
+            GuideManager.My.guideClose.gameObject.SetActive(false);
+        }
+
         CameraPlay.WidescreenH_ON(Color.black, 1);
     }
 
@@ -20,8 +25,11 @@ public class Prologue : MonoBehaviour
         transform.DOScale(transform.localScale, 1).OnComplete(() =>
         {
             //NewCanvasUI.My.GameNormal();
-            GuideManager.My.guideClose.gameObject.SetActive(true);
-           StartCoroutine( GuideManager.My.Init());
+            if (!SceneManager.GetActiveScene().name.Equals("FTE_6"))
+            {
+                GuideManager.My.guideClose.gameObject.SetActive(true);
+                StartCoroutine(GuideManager.My.Init());
+            }
         }).Play();
     } 
 }

@@ -221,6 +221,7 @@ public class StageGoal : MonoSingleton<StageGoal>
                 UpdateTurnCost(num);
         }
         FloatInfoManager.My.MoneyChange(0 - num);
+        playerGoldText.GetComponent<PlayerAssetChange>().SetChange(0-num);
         if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -275,7 +276,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
-            FloatInfoManager.My.TechChange(0 - num);
+            //FloatInfoManager.My.TechChange(0 - num);
+            playerTechText.GetComponent<PlayerAssetChange>().SetChange(0-num);
             playerTechPoint -= num;
         }
         SetInfo();
@@ -293,7 +295,8 @@ public class StageGoal : MonoSingleton<StageGoal>
             predictTPadd += num;
             return;
         }
-        FloatInfoManager.My.TechChange(num);
+        //FloatInfoManager.My.TechChange(num);
+        playerTechText.GetComponent<PlayerAssetChange>().SetChange(num);
         playerTechPoint += num;
         SetInfo();
     }
@@ -357,6 +360,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerGold += num;
         }
         FloatInfoManager.My.MoneyChange(num);
+        playerGoldText.GetComponent<PlayerAssetChange>().SetChange(num);
         if (playerGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -489,20 +493,23 @@ public class StageGoal : MonoSingleton<StageGoal>
         int afterAdd = beforeAdd + add;
         playerHealth = afterAdd;
         float per;
+        Tween te = null;
         if (playerHealth < stageDan[2])
         {
             per = playerHealth / (float)stageDan[2];
-            healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue);
+            te = healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue).OnPause(()=>te?.TogglePause());
         }
         else
         {
-            currentDan++;
+            per = 1;
+            te = healthBar1.DOFillAmount(per, 0.5f).Play().OnComplete(ExeQueue).OnPause(()=>te?.TogglePause());
+            /*currentDan++;
             per = (playerHealth - stageDan[2]) / (float)(stageDan[2]);
             healthBar1.DOFillAmount(1, 0.2f).Play().OnComplete(() =>
             {
                 healthBar2.sprite = danSprite[currentDan];
                 healthBar2.DOFillAmount(per, 0.3f).Play().OnComplete(ExeQueue);
-            });
+            });*/
         }
     }
 
@@ -1055,10 +1062,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerHealthBar = transform.parent.Find("Blood/PlayerHealthBar").GetComponent<Image>();
         playerHealthText = transform.parent.Find("Blood/Text").GetComponent<Text>();
         maxHealtherBarLength = playerHealthBar.GetComponent<RectTransform>().sizeDelta.x;
-        playerGoldText = transform.parent.Find("UserInfo/Image_money/PlayerMoney").GetComponent<Text>();
-        playerSatisfyText = transform.parent.Find("UserInfo/PlayerScore/PlayerScoreText").GetComponent<Text>();
-        playerTechText = transform.parent.Find("UserInfo/Image_money/PlayerTech").GetComponent<Text>();
-        stageWaveText = transform.parent.Find("UserInfo/Image_level/StageLevel").GetComponent<Text>();
+        //playerGoldText = transform.parent.Find("UserInfo/Image_money/PlayerMoney").GetComponent<Text>();
+        playerSatisfyText = transform.parent.Find("Blood/Score/Score val").GetComponent<Text>();
+        //playerTechText = transform.parent.Find("UserInfo/Image_money/PlayerTech").GetComponent<Text>();
+        stageWaveText = transform.parent.Find("Blood/Wave/Wave").GetComponent<Text>();
         skipToFirstWave = transform.parent.Find("TimeScale/SkipFirst").GetComponent<Button>();
         lankuang = transform.parent.Find("Image_ReadyTime").gameObject;
         skipToFirstWave.onClick.AddListener(() =>
@@ -1132,6 +1139,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         stageTarget = data.stageDan[0];
         stageDan =new List<int>(); 
         stageDan.AddRange( data.stageDan);
+        InitHealthBar();
         SetInfoImmidiate();
         foreach (int i in data.waveWaitTime)
         {
@@ -1258,7 +1266,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             }).Play();
             return;
         }
-        GetComponent<RectTransform>().DOAnchorPosX(180.4f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        GetComponent<RectTransform>().DOAnchorPosX(75f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             menuCloseButton.gameObject.SetActive(false);
             menuOpenButton.gameObject.SetActive(true);
@@ -1270,7 +1278,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public void MenuShow()
     {
-        GetComponent<RectTransform>().DOAnchorPosX(-210f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
+        GetComponent<RectTransform>().DOAnchorPosX(-100f, 0.3f).SetEase(Ease.Linear).SetUpdate(true).OnComplete(() =>
         {
             menuCloseButton.gameObject.SetActive(true);
             menuOpenButton.gameObject.SetActive(false);
@@ -1766,14 +1774,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 锁删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = false;
         // 禁止键角色
-        if (SceneManager.GetActiveScene().name.Equals("FTE_1") || SceneManager.GetActiveScene().name.Equals("FTE_2"))
-        {
+     // if (SceneManager.GetActiveScene().name.Equals("FTE_1") || SceneManager.GetActiveScene().name.Equals("FTE_2"))
+     // {
             RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(-300, 1f).Play();
-        }
-        else
-        {
-            RoleListManager.My.LockRoleCreate();
-        }
+     //  }
+     //  else
+     //  {
+     //      RoleListManager.My.LockRoleCreate();
+     //  }
     }
 
     /// <summary>
@@ -1798,14 +1806,14 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 解删除
         NewCanvasUI.My.Panel_Update.GetComponent<RoleUpdateInfo>().delete.interactable = true;
         // 可以见角色
-        if (SceneManager.GetActiveScene().name.Equals("FTE_1") || SceneManager.GetActiveScene().name.Equals("FTE_2"))
-        {
+      // if (SceneManager.GetActiveScene().name.Equals("FTE_1") || SceneManager.GetActiveScene().name.Equals("FTE_2"))
+      // {
             RoleListManager.My.transform.GetComponent<RectTransform>().DOAnchorPosY(67, 1f).Play();
-        }
-        else
-        {
-            RoleListManager.My.UnlockRoleCreate();
-        }
+    //   }
+    //   else
+    //   {
+    //       RoleListManager.My.UnlockRoleCreate();
+    //   }
     }
 
     #endregion
@@ -1914,5 +1922,34 @@ public class StageGoal : MonoSingleton<StageGoal>
         predictHealth = playerHealth;
     }
 
+    #endregion
+
+    #region init healthBar
+
+    public Transform bloodBar_transform;
+    public Transform bloodBar_back_transform;
+    void InitHealthBar()
+    {
+        bloodBar_back_transform.GetComponent<HealthBarSet>().SetBar(stageDan);
+        bloodBar_transform.GetComponent<HealthBarSet>().SetBar(stageDan);
+        RefreshAllCost();
+    }
+
+    private Text fixedCost_text;
+    private Text tradeCost_text;
+
+    public void RefreshAllCost()
+    {
+        if (fixedCost_text == null)
+        {
+            fixedCost_text = transform.parent.Find("UserInfo/Fixed&Trade Cost/Fixed Cost/Cost Val")
+                .GetComponent<Text>();
+            tradeCost_text = transform.parent.Find("UserInfo/Fixed&Trade Cost/Trade Cost/Cost Val")
+                .GetComponent<Text>();
+        }
+
+        fixedCost_text.text = PlayerData.My.GetAllRoleCost().ToString();
+        tradeCost_text.text = TradeManager.My.GetAllTradeCost().ToString();
+    }
     #endregion
 }

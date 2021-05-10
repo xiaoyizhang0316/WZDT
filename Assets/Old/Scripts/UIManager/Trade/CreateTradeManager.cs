@@ -96,6 +96,10 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
 
     private string showNumberText;
 
+    public Text searchAdd_text;
+    public Text bargainAdd_text;
+    public Text deliveryAdd_text;
+
     /// <summary>
     /// 打开并初始化
     /// </summary>
@@ -186,12 +190,25 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole));
         endRolePanel.Find("EndRoleTradeCost").GetComponent<Text>().text = endRoleTradeCost.ToString();
         endRolePanel.Find("EndRoleRisk").GetComponent<Text>().text = end.baseRoleData.riskResistance.ToString();
+        endRolePanel.Find("RoleIcon").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/" +
+            (end.baseRoleData.isNpc ? "RoleLogo/" : "hong/")
+            + end.baseRoleData.baseRoleData.roleType.ToString()
+            + end.baseRoleData.baseRoleData.level);
+        //endRolePanel.Find("En_level/Level").GetComponent<Text>().text = end.encourageLevel.ToString();
+        end_enLevel = end.encourageLevel;
         startRolePanel.Find("StartRoleTradeCost").GetComponent<Text>().text = startRoleTradeCost.ToString();
         startRolePanel.Find("StartRoleRisk").GetComponent<Text>().text = start.baseRoleData.riskResistance.ToString();
+        startRolePanel.Find("RoleIcon").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/" +
+            (start.baseRoleData.isNpc ? "RoleLogo/" : "hong/")
+            + start.baseRoleData.baseRoleData.roleType.ToString()
+            + start.baseRoleData.baseRoleData.level);
+        //startRolePanel.Find("En_level/Level").GetComponent<Text>().text = start.encourageLevel.ToString();
+        start_enLevel = start.encourageLevel;
         startName.text = start.baseRoleData.baseRoleData.roleName;
         endName.text = end.baseRoleData.baseRoleData.roleName;
-        startRolePanel.transform.DOLocalMoveX(-220f,0.5f).Play().timeScale = 1f / DOTween.timeScale;
-        endRolePanel.transform.DOLocalMoveX(220f, 0.5f).Play().timeScale = 1f / DOTween.timeScale;
+        startRolePanel.transform.DOLocalMoveX(-168f,0.5f).Play().timeScale = 1f / DOTween.timeScale;
+        endRolePanel.transform.DOLocalMoveX(168f, 0.5f).Play().timeScale = 1f / DOTween.timeScale;
+        ShowAllEnLevel();
     }
 
     /// <summary>
@@ -218,6 +235,20 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
             tradeCostText.text = result.ToString();
         }
         tradeCostText.text += showNumberText;
+        ShowAdditions();
+    }
+
+    void ShowAdditions()
+    {
+        searchAdd_text.text = currentTrade.searchAdd.ToString("F2");
+        bargainAdd_text.text = currentTrade.bargainAdd.ToString("F2");
+        deliveryAdd_text.text = currentTrade.deliveryAdd.ToString("F2");
+    }
+
+    void ShowAllEnLevel()
+    {
+        startRolePanel.Find("En_level/Level").GetComponent<Text>().text = start_enLevel.ToString();
+        endRolePanel.Find("En_level/Level").GetComponent<Text>().text = end_enLevel.ToString();
     }
 
     /// <summary>
@@ -291,6 +322,9 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         }
     }
 
+    private int start_enLevel = 0;
+    private int end_enLevel = 0;
+    //private int lastDividePercent = 0;
     public void OnDivideValueChange()
     {
         selectDividePercent = (int)divideSlider.value;
@@ -339,7 +373,8 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         endStatus[1].gameObject.SetActive(Mathf.Abs(selectDividePercent) == 2);
         endStatus[0].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
         endStatus[1].sprite = encourageStatus[selectDividePercent < 0 ? 0 : 1];
-        PredictTradeCostChange();
+        PredictTradeCostChange( selectDividePercent-currentTrade.lastDividePercent);
+        ShowAllEnLevel();
         if (selectCashFlow == currentTrade.tradeData.selectCashFlow)
         {
             InitTradeCost();
@@ -350,7 +385,7 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         }
     }
 
-    public void PredictTradeCostChange()
+    private void PredictTradeCostChange(int change=0)
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(currentTrade.tradeData.endRole));
@@ -358,6 +393,9 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         startRolePanel.Find("StartRoleTradeCost").GetComponent<Text>().text = startRoleTradeCost.ToString();
         endRoleTradeCost = end.baseRoleData.tradeCost + (currentTrade.tradeData.dividePercent - selectDividePercent) * 5;
         endRolePanel.Find("EndRoleTradeCost").GetComponent<Text>().text = endRoleTradeCost.ToString();
+        start_enLevel = start.encourageLevel + change;
+        end_enLevel = end.encourageLevel - change;
+        ShowAllEnLevel();
     }
 
     /// <summary>
@@ -372,7 +410,11 @@ public class CreateTradeManager : MonoSingleton<CreateTradeManager>
         {
             RecordChangeTrade(currentTrade);
             DataUploadManager.My.AddData(DataEnum.交易_改交易);
+            StageGoal.My.RefreshAllCost();
         }
+
+        currentTrade.lastDividePercent = (int) divideSlider.value;
+        
     }
 
     /// <summary>

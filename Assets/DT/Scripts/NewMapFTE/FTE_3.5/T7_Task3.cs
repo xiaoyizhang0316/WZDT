@@ -11,6 +11,7 @@ public class T7_Task3 : BaseGuideStep
     public override IEnumerator StepStart()
     {
         Check();
+        tradeManager = NewCanvasUI.My.Panel_TradeSetting;
         yield return null;
     }
 

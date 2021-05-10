@@ -74,7 +74,15 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         WorkerListManager.My._signs.Add(this);
     }
 
+    public void MoveOut()
+    {
+        levelUI.transform.DOLocalMoveX(125, 0.3f).Play();
+    }
 
+    public void MoveIn()
+    {
+        levelUI.transform.DOLocalMoveX(5, 0.3f).Play();
+    }
 
     /// <summary>
     /// UI单个图标初始化
@@ -83,14 +91,14 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void Init(int id, bool Occupation)
     {
         ID = id;
-        if (SceneManager.GetActiveScene().name.Split('_')[1].Equals("1"))
-        {
-            levelUI.SetActive(false);
-        }
-        else
-        {
-            levelUI.SetActive(true);
-        }
+        //  if (SceneManager.GetActiveScene().name.Split('_')[1].Equals("1"))
+        //  {
+        //      levelUI.SetActive(false);
+        //  }
+        //  else
+        //  {
+        //      levelUI.SetActive(true);
+        //  }
         SetOccupyStatus(Occupation);
         workerData = GameDataMgr.My.GetWorkerData(id);
         effect.text = workerData.effect.ToString();
@@ -98,7 +106,8 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         range.text = workerData.range.ToString();
         riskResistance.text = workerData.riskResistance.ToString();
         tradeCost.text = workerData.tradeCost.ToString();
-        if (StageGoal.My.currentType == GameEnum.StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
+        if (StageGoal.My.currentType == GameEnum.StageType.Normal &&
+            !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             cost.text = (workerData.cost * 2).ToString();
         }
@@ -106,25 +115,26 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         {
             cost.text = workerData.cost.ToString();
         }
+
         bulletCapacity.text = workerData.bulletCapacity.ToString();
         //S name.text = workerData.name;
         //print(workerData.SpritePath);
-        if (workerData.ProductOrder == 1)
-        {
-            shapeImageBG.sprite = hui;
-        }
+        //  if (workerData.ProductOrder == 1)
+        //  {
+        //      shapeImageBG.sprite = hui;
+        //  }
 
-        if (workerData.ProductOrder == 2)
-        {
-            shapeImageBG.sprite = lv;
-        }
+        //  if (workerData.ProductOrder == 2)
+        //  {
+        //      shapeImageBG.sprite = lv;
+        //  }
 
-        if (workerData.ProductOrder == 3)
-        {
-            shapeImageBG.sprite = lan;
-        }
+        //  if (workerData.ProductOrder == 3)
+        //  {
+        //      shapeImageBG.sprite = lan;
+        //  }
 
-        Image_shape.sprite = Resources.Load<Sprite>(workerData.SpritePath);
+        // Image_shape.sprite = Resources.Load<Sprite>(workerData.SpritePath);
 
         techAdd.text = workerData.techAdd.ToString();
     }
@@ -276,13 +286,13 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
                                     PlayerData.My.MapRole[i].baseRoleData.peoPleList.Remove(ID);
                                 }
                             }
-                            PlayerData.My.SetWorkerStatus(ID,false);
 
-                            discharge.gameObject.SetActive(false);
+                            PlayerData.My.SetWorkerStatus(ID, false);
+
+                            //discharge.gameObject.SetActive(false);
                             SetOccupyStatus(iso);
                         }, () =>
                         {
-                            
                             CreatRoleManager.My.peoPleList.Remove(ID);
                             worker.GetComponent<DragUI>().Remove();
                             Destroy(worker);
@@ -324,8 +334,16 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         //   }
     }
 
+    private GameObject game;
+    private int index = 0;
     public void OnPointerEnter(PointerEventData eventData)
     {
+      WorkerListManager.My.content.GetComponent<GridLayoutGroup>().enabled = false;
+      WorkerListManager.My.GetComponent<ScrollRect>().vertical = false;
+      index = transform.GetSiblingIndex();
+        transform.SetParent(WorkerListManager.My.infoPos);
+        transform.DOScale(0.7f, 0.5f).Play();
+        MoveOut();
         if (isOccupation)
         {
             for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
@@ -346,7 +364,7 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         if (isOccupation && !CreatRoleManager.My.peoPleList.ContainsKey(ID))
         {
-            discharge.gameObject.SetActive(true);
+            //discharge.gameObject.SetActive(true);
             discharge.onClick.AddListener(() =>
             {
                 NewCanvasUI.My.Panel_Delete.SetActive(true);
@@ -391,6 +409,13 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        FloatWindow.My.Hide();
-    }
+        transform.SetParent(         WorkerListManager.My.content);
+        transform.SetSiblingIndex(index);
+        WorkerListManager.My.GetComponent<ScrollRect>().vertical = true;
+
+        WorkerListManager.My.content.GetComponent<GridLayoutGroup>().enabled = true;
+     
+        transform.DOScale(0.5f, 0.5f) .Play();
+        MoveIn(); 
+        FloatWindow.My.Hide();}
 }

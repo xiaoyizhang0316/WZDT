@@ -59,6 +59,14 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public GameObject emptyEquip;
 
+    public GameObject danzhongprb;
+
+    public Transform danzhongTF;
+
+
+    public Text jiliLevel;
+  
+
     // Start is called before the first frame update
     void Start()
     {
@@ -199,11 +207,12 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public void Init(Role role)
     {
+        jiliLevel.text = PlayerData.My.GetMapRoleById(role.ID).encourageLevel.ToString();
         name.text = role.baseRoleData.roleName;
         roleName = role.baseRoleData.roleName;
         roleImg.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/" + role.baseRoleData.roleType.ToString() +
                                                 role.baseRoleData.level.ToString());
-        roleImg.SetNativeSize();
+        //roleImg.SetNativeSize();
         skillDesc.text = PlayerData.My.GetMapRoleById(role.ID).transform.GetComponent<BaseSkill>().skillDesc;
         encourageLevel.Init(PlayerData.My.GetMapRoleById(role.ID));
         currentRole = role;

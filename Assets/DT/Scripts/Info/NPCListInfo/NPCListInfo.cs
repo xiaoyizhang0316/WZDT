@@ -283,4 +283,23 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         productTrade.interactable = isUnlock;
         serviceTrade.interactable = isUnlock;
     }
+
+    public Sprite buff_bull_sprite;
+    public void SetReceivedBuffs(BaseMapRole mapRole, Transform buff)
+    {
+        for (int i = 0; i < buff.childCount; i++)
+        {
+            buff.GetChild(i).GetComponent<Image>().sprite =buff_bull_sprite;
+            buff.GetChild(i).GetComponent<BuffText>().Reset();
+        }
+        for (int i = 0; i < mapRole.buffList.Count; i++)
+        {
+            if (i >= buff.childCount)
+            {
+                continue;
+            }
+            buff.GetChild(i).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Buff/" + mapRole.buffList[i].buffId);
+            buff.GetChild(i).GetComponent<BuffText>().InitBuff(mapRole.buffList[i].buffData, mapRole);
+        }
+    }
 }

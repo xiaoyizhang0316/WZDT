@@ -9,9 +9,7 @@ using UnityEngine.UI;
 public class T0_5_11 : BaseGuideStep
 {
 
-
-    public GameObject roleImage;
-
+ 
    
     public int count;
     public int time;
@@ -53,14 +51,9 @@ public class T0_5_11 : BaseGuideStep
 
     public override IEnumerator StepEnd()
     { 
-        t.Kill(); 
-        roleImage.SetActive(true);
-        roleImage.SetActive(false);
+        t.Kill();  
       
-            PlayerData.My.DeleteRole(PlayerData.My.RoleData[0].ID);
-            PlayerData.My.DeleteRole(PlayerData.My.RoleData[0].ID);
-            PlayerData.My.DeleteRole(PlayerData.My.RoleData[0].ID);
-            PlayerData.My.DeleteRole(PlayerData.My.RoleData[0].ID);
+            PlayerData.My.DeleteRole(FTE_0_5Manager.My.dealerJC1.GetComponent<BaseMapRole>().baseRoleData.ID); 
     
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene("Map");

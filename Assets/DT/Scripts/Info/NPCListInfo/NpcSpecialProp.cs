@@ -21,7 +21,7 @@ public class NpcSpecialProp : MonoBehaviour
         effeciency.text = npc.baseRoleData.efficiency.ToString();
         float add = 1f;
         float encourage = npc.encourageLevel;
-        prop1.color = Color.white;
+        prop1.color = Color.black;
         if (encourage > 0)
         {
             add += encourage * 0.05f;
