@@ -14,6 +14,16 @@ public class BuffConfig
 
     public int playerTechPointChange;
 
+    public int stageRiskLevelChange;
+
+    public int stageTradeCostLevelChange;
+
+    public int stageDistanceLevelChange;
+
+    public int stageMonthCostChange;
+
+    public int stageEncourageLevelChange;
+
     public int roleEffectChange;
 
     public int roleEfficiencyChange;

@@ -6,7 +6,9 @@ using UnityEngine;
 [Serializable]
 public class EncourageSkillItem
 {
-    public string skillName;
+    public string skillId;
+
+    public string skillDesc;
 
     public string skillType;
 

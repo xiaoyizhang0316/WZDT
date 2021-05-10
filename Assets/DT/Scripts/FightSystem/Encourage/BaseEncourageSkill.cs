@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BaseEncourageSkill
 {
-
     public EncourageSkillData skillData;
 
     public bool isSkillOpen;
@@ -25,18 +24,8 @@ public class BaseEncourageSkill
     }
 
 
-    public float OnEncourageValueChange()
+    public void OnEncourageValueChange()
     {
-        float result = 0f;
-        if (role.encourageLevel <= -3)
-        {
-            
-        }
-        if (role.encourageLevel < 0)
-        {
-            
-        }
-
         if (role.encourageLevel >= 3)
         {
             if (!isSkillOpen)
@@ -55,7 +44,6 @@ public class BaseEncourageSkill
                 SkillOff();
             }
         }
-        return result;
     }
 
     public float CalculateNumber()
@@ -65,9 +53,9 @@ public class BaseEncourageSkill
         return result;
     }
 
-    private BaseEncourageSkill(string name,BaseMapRole _role)
+    private BaseEncourageSkill(int id,BaseMapRole _role)
     {
-        skillData = GameDataMgr.My.GetEncourageSkillDataByName(name);
+        skillData = GameDataMgr.My.GetEncourageSkillDataById(id);
         role = _role;
     }
     

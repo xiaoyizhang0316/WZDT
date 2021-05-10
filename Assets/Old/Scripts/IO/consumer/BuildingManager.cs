@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class BuildingManager : MonoSingleton<BuildingManager>
 
     public List<Building> buildings = new List<Building>();
 
+    public List<WaveConfig> extraConsumer = new List<WaveConfig>();
+    
     /// <summary>
     /// 初始化所有建筑
     /// </summary>
@@ -83,5 +86,15 @@ public class BuildingManager : MonoSingleton<BuildingManager>
         {
             item.StopShowPathLine();
         }
+    }
+    
+    [Serializable]
+    public class WaveConfig
+    {
+        public GameEnum.ConsumerType consumerType;
+
+        public int num;
+
+        public List<int> buffList;
     }
 }

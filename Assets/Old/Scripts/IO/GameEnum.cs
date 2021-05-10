@@ -439,7 +439,15 @@ public class GameEnum
         /// <summary>
         /// 影响消费者数量
         /// </summary>
-        BuildingBuff
+        BuildingBuff,
+        /// <summary>
+        /// 全局环境因素影响
+        /// </summary>
+        StageStatic,
+        /// <summary>
+        /// 特殊因素影响
+        /// </summary>
+        Special
     }
 
     public enum ConsumableType
@@ -592,7 +600,11 @@ public class GameEnum
         /// <summary>
         /// 删除角色永远返还Mega值
         /// </summary>
-        DeleteAlwaysReturnMega
+        DeleteAlwaysReturnMega,
+        /// <summary>
+        /// 忽视先后钱的影响
+        /// </summary>
+        IgnoreMoneyFirst
     }
 
     public enum CursorType

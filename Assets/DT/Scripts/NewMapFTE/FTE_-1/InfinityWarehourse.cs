@@ -74,8 +74,6 @@ public class InfinityWarehourse : ProductMerchant
                     Skill();
                     return;
                 }
-
-                
                 ProductData data = role.warehouse[0];
                 maxCount = 0;
                 //role.warehouse.RemoveAt(0);

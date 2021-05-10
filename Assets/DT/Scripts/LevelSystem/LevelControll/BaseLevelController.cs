@@ -48,7 +48,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     public Vector3 newCameraRot;
 
     public float orthoSize;
-
+    
     public GameObject emojiPrb;
 
     public string winkey1;
@@ -57,13 +57,24 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     public string winkey3;
 
-    public bool tradeCostMoney;
-
     public List<StageSpecialType> stageSpecialTypes = new List<StageSpecialType>();
     
     public List<BaseBuff> consumerBuffList = new List<BaseBuff>();
 
     public List<BaseBuff> playerStaticList = new List<BaseBuff>();
+
+    public List<BaseBuff> stageStaticList = new List<BaseBuff>();
+    
+    //风险防控等级
+    public int riskControlLevel;
+    //交易成本等级
+    public int tradeCostLevel;
+    //距离等级
+    public int distanceLevel;
+    //固定成本等级
+    public int monthCostLevel;
+    //交付因素等级（激励等级）
+    public int encourageLevel;
 
     public void AddBuff(BaseMapRole role,EncourageSkillType type,int buffId,float number)
     {
@@ -81,6 +92,30 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
             }
             case EncourageSkillType.PlayerStatic:
             {
+                BaseBuff buff = new BaseBuff();
+                BuffData data = GameDataMgr.My.GetBuffDataByID(buffId);
+                buff.Init(data);
+                playerStaticList.Add(buff);
+                ChangeBuffNumber(EncourageSkillType.PlayerStatic,buffId,number);
+                break;
+            }
+            case EncourageSkillType.BuildingBuff:
+            {
+                BuildingManager.WaveConfig config = new BuildingManager.WaveConfig();
+                config.consumerType = (ConsumerType) buffId;
+                config.num = (int) number;
+                config.buffList = new List<int>(){-1};
+                BuildingManager.My.extraConsumer.Add(config);
+                break;
+            }
+            case EncourageSkillType.StageStatic:
+            {
+                BaseBuff buff = new BaseBuff();
+                BuffData data = GameDataMgr.My.GetBuffDataByID(buffId);
+                buff.Init(data);
+                stageStaticList.Add(buff);
+                ChangeBuffNumber(EncourageSkillType.StageStatic,buffId,number);
+                buff.RoleBuffAdd();
                 break;
             }
             default:
@@ -111,6 +146,31 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
                 {
                     if (playerStaticList[i].buffId == _buffId)
                     {
+                        playerStaticList.RemoveAt(i);
+                        break;
+                    }
+                }
+                break;
+            }
+            case EncourageSkillType.BuildingBuff:
+            {
+                for (int i = 0; i < BuildingManager.My.extraConsumer.Count; i++)
+                {
+                    if (BuildingManager.My.extraConsumer[i].consumerType == (ConsumerType) _buffId)
+                    {
+                        BuildingManager.My.extraConsumer.RemoveAt(i);
+                        break;
+                    }
+                }
+                break;
+            }
+            case EncourageSkillType.StageStatic:
+            {
+                for (int i = 0; i < stageStaticList.Count; i++)
+                {
+                    if (stageStaticList[i].buffId == _buffId)
+                    {
+                        stageStaticList[i].RoleBuffRemove();
                         playerStaticList.RemoveAt(i);
                         break;
                     }
@@ -148,11 +208,41 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
                 {
                     if (playerStaticList[i].buffId == _buffId)
                     {
-                        int prefix = int.Parse(playerStaticList[i].buffData.OnBuffAdd[0].Split('_')[0]);
+                        int prefix = int.Parse(playerStaticList[i].buffData.OnEndTurn[0].Split('_')[0]);
                         if (prefix != -1)
                         {
                             playerStaticList[i].buffData.OnEndTurn[0] = prefix + "_" + number;
                         }
+                        break;
+                    }
+                }
+                break;
+            }
+            case EncourageSkillType.StageStatic:
+            {
+                for (int i = 0; i < stageStaticList.Count; i++)
+                {
+                    if (stageStaticList[i].buffId == _buffId)
+                    {
+                        int prefix = int.Parse(stageStaticList[i].buffData.OnBuffAdd[0].Split('_')[0]);
+                        if (prefix != -1)
+                        {
+                            playerStaticList[i].buffData.OnBuffAdd[0] = prefix + "_" + number;
+                        }
+                        stageStaticList[i].RoleBuffRemove();
+                        stageStaticList[i].RoleBuffAdd();
+                        break;
+                    }
+                }
+                break;
+            }
+            case EncourageSkillType.BuildingBuff:
+            {
+                for (int i = 0; i < BuildingManager.My.extraConsumer.Count; i++)
+                {
+                    if (BuildingManager.My.extraConsumer[i].consumerType == (ConsumerType) _buffId)
+                    {
+                        BuildingManager.My.extraConsumer[i].num = (int)number;
                         break;
                     }
                 }
@@ -170,6 +260,17 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         {
             BaseBuff newBuff = buff.CopyNew();
             newBuff.SetConsumerBuff(sign[i]);
+        }
+    }
+
+    public void CheckStageStaticNumber(int type,int number, bool isRemove = false)
+    {
+        switch (type)
+        {
+            case 1:
+            {
+                break;
+            }
         }
     }
 

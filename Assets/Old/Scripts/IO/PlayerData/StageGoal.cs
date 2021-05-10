@@ -898,7 +898,6 @@ public class StageGoal : MonoSingleton<StageGoal>
         waveCountItem.Move();
         isTurnStart = true;
         BuildingManager.My.RestartAllBuilding();
-        PlayerData.My.RoleTurnCheckBuff();
         // 重置回合收支
         ResetTurnIncomeAndCost();
         LockOperation();
@@ -929,6 +928,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         waveCountItem.Clear();
         PlayerData.My.RoleTurnEnd();
         TradeManager.My.TurnTradeCost();
+        BaseLevelController.My.TurnStaticCheck();
+        PlayerData.My.RoleTurnCheckBuff();
         //TODO 解锁准备阶段的操作
         // 显示收支
         isEndTurn = true;
