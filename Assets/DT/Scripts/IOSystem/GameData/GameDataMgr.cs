@@ -544,8 +544,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.skillDesc = item.skillDesc;
             temp.skillType = (EncourageSkillType)Enum.Parse(typeof(EncourageSkillType),item.skillType);
             temp.targetBuff = int.Parse(item.targetBuff);
-            temp.startValue = float.Parse(item.stratValue);
-            temp.add = float.Parse(item.add);
+            temp.startValue = float.Parse(item.startValue);
+            temp.add = float.Parse(item.encourageAdd);
             temp.specialAddType = item.specialAddType;
             temp.specialAdd = float.Parse(item.specialAdd);
             encourageSkillDatas.Add(temp);

@@ -81,6 +81,8 @@ public class ConsumeSign : MonoBehaviour,ICloneable
 
     private float scorePer = 1f;
 
+    public int tasteKillAdd = 0;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -103,6 +105,11 @@ public class ConsumeSign : MonoBehaviour,ICloneable
             baseBuff.Init(buff);
             baseBuff.SetConsumerBuff(this);
             bornBuffList.Add(i);
+        }
+        for (int i = 0; i < BaseLevelController.My.consumerBuffList.Count; i++)
+        {
+            BaseBuff buff = BaseLevelController.My.consumerBuffList[i].CopyNew();
+            buff.SetConsumerBuff(this);
         }
         if (PlayerData.My.cheatIndex2)
             consumeData.maxHealth = (int)(consumeData.maxHealth * 0.5f);

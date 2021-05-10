@@ -14,9 +14,9 @@ public class EncourageSkillItem
 
     public string targetBuff;
 
-    public string stratValue;
+    public string startValue;
 
-    public string add;
+    public string encourageAdd;
 
     public string specialAddType;
 
