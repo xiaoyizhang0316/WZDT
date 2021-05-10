@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Mime;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
@@ -330,6 +331,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         }
     }
 
+ 
     public void ShowBuffText(string text)
     {
         buffcontent.SetActive(true);

@@ -125,7 +125,12 @@ public class GameEnum
         /// <summary>
         /// 任意
         /// </summary>
-        All
+        All,
+
+        /// <summary>
+        /// 金融公司
+        /// </summary>
+            financialCompany
     }
 
     public enum PDPType

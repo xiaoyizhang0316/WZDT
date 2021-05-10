@@ -41,6 +41,9 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
     public GameObject buffPrb;
 
     public NpcBulletDetail npcBulletDetail;
+
+    public GameObject financialCompany;
+     
     // Start is called before the first frame update
     void Start()
     {
@@ -141,6 +144,8 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         commonServiceInfo.SetActive(false);
         bulletWareHouse.SetActive(false);
         lockedInfo.SetActive(false);
+        financialCompany.SetActive(false);
+
     }
 
     void ShowSpecialNpc(Transform npc)
@@ -175,15 +180,29 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         }
         else if(currentNpc.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Service)
         {
-            commonServiceInfo.GetComponent<NpcServiceInfo>().SetInfo(npc,currentSkill);
-            commonServiceInfo.SetActive(true);
-            serviceTrade.onClick.RemoveAllListeners();
-            serviceTrade.onClick.AddListener(() =>
+
+            if (currentNpc.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.financialCompany)
             {
-                NewCanvasUI.My.CreateTrade(PlayerData.My.GetMapRoleById(currentNpc.baseRoleData.ID));
-                npcInfo.SetActive(false);
-                closeBtn.gameObject.SetActive(false);
-            });
+            // GameObject specialInfo =  Instantiate(currentNpc.specialInfo, npcInfo.transform);
+            financialCompany.SetActive(true);
+                //todo
+                financialCompany.GetComponent<NpcFinancialCompany>().Init(npc.GetComponent<FinancialCompanySkill>()  );
+                  
+            }
+            else
+            {
+                commonServiceInfo.GetComponent<NpcServiceInfo>().SetInfo(npc,currentSkill);
+                commonServiceInfo.SetActive(true);
+                serviceTrade.onClick.RemoveAllListeners();
+                serviceTrade.onClick.AddListener(() =>
+                {
+                    NewCanvasUI.My.CreateTrade(PlayerData.My.GetMapRoleById(currentNpc.baseRoleData.ID));
+                    npcInfo.SetActive(false);
+                    closeBtn.gameObject.SetActive(false);
+                });
+            }
+
+            
         }
     }
     bool isPopShow = false;
@@ -220,10 +239,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         closeBtn.gameObject.SetActive(true);
         lockedInfo.SetActive(true);
         lockedInfo.GetComponent<NpcLockedInfo>().SetInfo(npc, npc.GetComponent<NPC>().lockNumber);
-
-
-
-
+ 
         unlockBtn.onClick.RemoveAllListeners();
         unlockBtn.onClick.AddListener(()=> {
             Unlock(npc);
