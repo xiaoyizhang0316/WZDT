@@ -5,23 +5,20 @@ using UnityEngine;
 public class KillCheck : SkillCheckBase
 {
     public int startKillNum;
-    public int startTurn;
     public int totalConsumerNum;
     public int checkedTurn;
 
     protected override void InitCheck()
     {
-        startTurn = StageGoal.My.currentWave;
         if (StageGoal.My.isTurnStart)
         {
-            startTurn = StageGoal.My.currentWave + 1;
             currentText.text = "本回合不计入检测！";
             InvokeRepeating("CheckStartInNextTurn", 1, 1);
             return;
         }
         
         currentText.text = isPercent ? "当前：0%" : "当前：0";
-
+        isTurnEnd = true;
         checkedTurn = 0;
         startKillNum = SkillCheckManager.My.killNum;
         totalConsumerNum = BuildingManager.My.GetExtraConsumerNumber("100")+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave);
@@ -30,8 +27,10 @@ public class KillCheck : SkillCheckBase
 
     void CheckStartInNextTurn()
     {
-        if (StageGoal.My.currentWave == startTurn && StageGoal.My.isTurnStart)
+        if (!StageGoal.My.isTurnStart)
         {
+            CancelInvoke();
+            isTurnEnd = true;
             startKillNum = SkillCheckManager.My.killNum;
             currentText.text = isPercent ? "当前：0%" : "当前：0";
 
@@ -44,8 +43,9 @@ public class KillCheck : SkillCheckBase
     private float currentPercent;
     protected override void Check()
     {
-        if (!StageGoal.My.isTurnStart)
+        if (!StageGoal.My.isTurnStart && !isTurnEnd)
         {
+            isTurnEnd = true;
             checkedTurn += 1;
             if (checkedTurn < checkTurn)
             {
@@ -53,7 +53,20 @@ public class KillCheck : SkillCheckBase
             }
             else
             {
+                CancelInvoke();
+                if (detail.isMainTarget)
+                {
+                    SkillCheckManager.My.NotifyEnd(dependRole);
+                }
                 return;
+            }
+        }
+
+        if (StageGoal.My.isTurnStart)
+        {
+            if (isTurnEnd)
+            {
+                isTurnEnd = false;
             }
         }
 
