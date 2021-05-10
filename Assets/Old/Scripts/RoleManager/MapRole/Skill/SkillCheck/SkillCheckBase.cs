@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SkillCheckBase : MonoBehaviour
 {
     public string target;
-    public string current;
+    //public string current;
 
     public bool isPercent;
 
@@ -19,6 +19,8 @@ public class SkillCheckBase : MonoBehaviour
     public Text contentText;
     public Text currentText;
     public int checkTurn;
+    public bool isTurnEnd;
+    public CheckDetail detail;
 
     protected virtual void InitCheck()
     {
@@ -40,6 +42,7 @@ public class SkillCheckBase : MonoBehaviour
         currentText = transform.Find("currentText").GetComponent<Text>();
         contentText.text = checkContent;
         this.checkTurn = checkTurn;
+        this.detail = detail;
 
         InitCheck();
     }

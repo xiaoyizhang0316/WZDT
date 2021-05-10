@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using DG.Tweening;
 using UnityEngine;
 
 public class SkillCheckManager : MonoSingleton<SkillCheckManager>
@@ -11,26 +13,82 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     public int tasteKillNum;
     public int getMega;
     public int nonConsumerIncome;
-    public List<RoleSkillCheckDetail> AllCheckDetail=new List<RoleSkillCheckDetail>();
-    private List<RoleSkillCheckDetail> onCheckRoles=new List<RoleSkillCheckDetail>();
+    [SerializeField]
+    public List<RoleSkillSelect> allCheckRoles=new List<RoleSkillSelect>();
+    private List<RoleSkillSelect> onCheckRoles=new List<RoleSkillSelect>();
 
     public GameObject checkPrefab;
     public Transform checkContent;
 
-    public void TradeOnAndCheck(BaseMapRole role, int select)
+    public void ActiveRoleCheck(BaseMapRole role, int select)
     {
-        RoleSkillCheckDetail rscd = GetCheckDetail(role.baseRoleData.baseRoleData.roleType);
+        RoleSkillSelect rscd = GetCheckDetail(role.baseRoleData.baseRoleData.roleType);
         if (rscd == null || select >= rscd.checkDetailsList.Count)
         {
             return;
         }
+
+        rscd.checkedCount = 0;
         onCheckRoles.Add(rscd);
         for(int i = 0; i < rscd.checkDetailsList[select].checkDetails.Count; i++)
         {
             GameObject go= Instantiate(checkPrefab, checkContent);
-            AttachComponent(go, rscd.checkDetailsList[select].checkDetails[i].checkBase.name);
-            go.GetComponent<SkillCheckBase>().ActiveCheck(role, rscd.turnRange, rscd.checkDetailsList[select].checkDetails[i]);
+            AttachComponent(go, rscd.checkDetailsList[select].checkDetails[i].checkBaseScript.ToString());
+            go.GetComponent<SkillCheckBase>().ActiveCheck(role, rscd.checkTurn, rscd.checkDetailsList[select].checkDetails[i]);
             //go.AddComponent<rscd.checkDetailsList[select].checkDetails[i].checkBase>().ActiveCheck(role, rscd.checkDetailsList[select].checkDetails[i]);
+        }
+
+        transform.DOScale(Vector3.one, 0.5f).Play();
+    }
+
+    //private static readonly object _lock = new object();
+    public void NotifyEnd(BaseMapRole role)
+    {
+        for (int i = 0; i < onCheckRoles.Count; i++)
+        {
+            if (onCheckRoles[i].RoleType == role.baseRoleData.baseRoleData.roleType)
+            {
+                CheckRoleSkillEnd(onCheckRoles[i]);
+            }
+        }
+    }
+
+    void CheckRoleSkillEnd(RoleSkillSelect rscd)
+    {
+        bool isSuccess = true;
+        foreach (Transform child in checkContent)
+        {
+            if (child.GetComponent<SkillCheckBase>().dependRole.baseRoleData.baseRoleData.roleType == rscd.RoleType)
+            {
+                if (!child.GetComponent<SkillCheckBase>().isSuccess)
+                {
+                    isSuccess = false;
+                    break;
+                }
+            }
+        }
+
+        if (isSuccess)
+        {
+            // TODO reach target
+        }
+        else
+        {
+            rscd.checkedCount += 1;
+            if (rscd.checkedCount >= rscd.checkCount)
+            {
+                // TODO fail
+            }
+            else
+            {
+                foreach (Transform child in checkContent)
+                {
+                    if (child.GetComponent<SkillCheckBase>().dependRole.baseRoleData.baseRoleData.roleType == rscd.RoleType)
+                    {
+                        child.GetComponent<SkillCheckBase>().ResetCheck();
+                    }
+                }
+            }
         }
     }
 
@@ -59,13 +117,13 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
         go.AddComponent(com);
     }
 
-    RoleSkillCheckDetail GetCheckDetail(GameEnum.RoleType roleType)
+    RoleSkillSelect GetCheckDetail(GameEnum.RoleType roleType)
     {
-        for (int i = 0; i < AllCheckDetail.Count; i++)
+        for (int i = 0; i < allCheckRoles.Count; i++)
         {
-            if (AllCheckDetail[i].RoleType == roleType)
+            if (allCheckRoles[i].RoleType == roleType)
             {
-                return AllCheckDetail[i];
+                return allCheckRoles[i];
             }
         }
 
@@ -73,24 +131,33 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     }
 }
 
-public class RoleSkillCheckDetail
+[Serializable]
+public class RoleSkillSelect
 {
     public GameEnum.RoleType RoleType;
-    public int turnRange;
+    public int checkTurn;
     public int checkCount;
-    public List<CheckDetails> checkDetailsList;
+    public int checkedCount;
+    public List<CheckDetails> checkDetailsList=new List<CheckDetails>();
 }
 
+[Serializable]
 public class CheckDetails
 {
-    public int select;
-    public List<CheckDetail> checkDetails;
+    public List<CheckDetail> checkDetails=new List<CheckDetail>();
 }
 
+[Serializable]
 public class CheckDetail
 {
     public string checkContent;
     public string target;
     public bool isPersent;
-    public SkillCheckBase checkBase;
+    public bool isMainTarget;// 用于通知技能结束
+    public SkillCheckType checkBaseScript;
+}
+
+public enum SkillCheckType
+{
+    KillCheck
 }
