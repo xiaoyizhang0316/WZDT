@@ -16,6 +16,7 @@ public class JsonDatas
 	public string TradeSkillData;
 	public string WorkerData;
 	public string TranslateData;
+    public string EncourageSkillData;
     public string FTE_0;
     public string FTE_1;
     public string FTE_2;

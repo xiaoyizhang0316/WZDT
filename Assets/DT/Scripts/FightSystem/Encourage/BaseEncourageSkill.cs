@@ -60,6 +60,8 @@ public class BaseEncourageSkill
             int choice = int.Parse(skillData.specialAddType);
             switch (choice)
             {
+                case 0:
+                    break;
                 case 5:
                     specialNumber = BaseLevelController.My.riskControlLevel;
                     break;
@@ -89,7 +91,17 @@ public class BaseEncourageSkill
         return result;
     }
 
-    private BaseEncourageSkill(int id,BaseMapRole _role)
+    /// <summary>
+    /// 生成激励等级描述字符串
+    /// </summary>
+    /// <returns></returns>
+    public string GenerateDesc()
+    {
+        string result = "";
+        return result;
+    }
+
+    public BaseEncourageSkill(int id,BaseMapRole _role)
     {
         skillData = GameDataMgr.My.GetEncourageSkillDataById(id);
         role = _role;

@@ -96,6 +96,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
                 BuffData data = GameDataMgr.My.GetBuffDataByID(buffId);
                 buff.Init(data);
                 playerStaticList.Add(buff);
+                buff.castRole = role;
                 ChangeBuffNumber(EncourageSkillType.PlayerStatic,buffId,number);
                 break;
             }
