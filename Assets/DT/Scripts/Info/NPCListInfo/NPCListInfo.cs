@@ -200,9 +200,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
                     npcInfo.SetActive(false);
                     closeBtn.gameObject.SetActive(false);
                 });
-            }
-
-            
+            } 
         }
     }
     bool isPopShow = false;
