@@ -35,5 +35,6 @@ public class FinancialCompanySkill : BaseExtraSkill
         {
             StageGoal.My.GetPlayerGold(200000,false,true);
         }
+        SkillCheckManager.My.ActiveRoleCheck(GetComponent<BaseMapRole>(),index);
     }
 }

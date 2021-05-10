@@ -21,8 +21,9 @@ public class KillCheck : SkillCheckBase
         isTurnEnd = true;
         checkedTurn = 0;
         startKillNum = SkillCheckManager.My.killNum;
-        totalConsumerNum = BuildingManager.My.GetExtraConsumerNumber("100")+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave);
-        InvokeRepeating("Check", 0.5f, 0.5f);
+        totalConsumerNum = BuildingManager.My.GetExtraConsumerNumber("100")+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave+1);
+        Debug.Log("total consumer "+totalConsumerNum);
+        InvokeRepeating("Check", 1f, 1f);
     }
 
     void CheckStartInNextTurn()
@@ -35,7 +36,7 @@ public class KillCheck : SkillCheckBase
             currentText.text = isPercent ? "当前：0%" : "当前：0";
 
             checkedTurn = 0;
-            totalConsumerNum = BuildingManager.My.GetExtraConsumerNumber("100")+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave);
+            totalConsumerNum = BuildingManager.My.GetExtraConsumerNumber("100")+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave+1);
             InvokeRepeating("Check", 0.5f, 0.5f);
         }
     }
@@ -45,11 +46,12 @@ public class KillCheck : SkillCheckBase
     {
         if (!StageGoal.My.isTurnStart && !isTurnEnd)
         {
+            Debug.Log("check Turn end");
             isTurnEnd = true;
             checkedTurn += 1;
             if (checkedTurn < checkTurn)
             {
-                totalConsumerNum += BuildingManager.My.GetExtraConsumerNumber("100")+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave);
+                totalConsumerNum += BuildingManager.My.GetExtraConsumerNumber("100")+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave+1);
             }
             else
             {
@@ -69,8 +71,10 @@ public class KillCheck : SkillCheckBase
                 isTurnEnd = false;
             }
         }
+        
+        Debug.Log(" check total consumer "+totalConsumerNum);
 
-        currentPercent = (SkillCheckManager.My.killNum - startKillNum) / (float)totalConsumerNum;
+        currentPercent = (SkillCheckManager.My.killNum - startKillNum) / (float)(totalConsumerNum==0?1: totalConsumerNum);
         currentText.text = "当前：" + currentPercent.ToString("F2") + "%";
         isSuccess = currentPercent >= float.Parse(target);
     }
