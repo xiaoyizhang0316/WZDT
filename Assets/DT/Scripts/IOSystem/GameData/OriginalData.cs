@@ -23,6 +23,8 @@ public class OriginalData : MonoSingleton<OriginalData>
 
     public TranslatesData translateRawData;
 
+    public EncourageSkillsData encourageSkillRawData;
+
     public AnswerStage[] answerStages;
 
     public QuestionList questionList;
@@ -60,6 +62,7 @@ public class OriginalData : MonoSingleton<OriginalData>
             ReadRoleTemplateJson();
             ReadEquipJson();
             ReadWorkerJson();
+            ReadEncourageSkillJson();
 
         }
         else
@@ -97,6 +100,12 @@ public class OriginalData : MonoSingleton<OriginalData>
         GameDataMgr.My.ParseBuffData(buffRawData);
         //    }
         //}
+    }
+
+    void ReadEncourageSkillJson()
+    {
+        encourageSkillRawData = JsonUtility.FromJson<EncourageSkillsData>(jsonDatas.EncourageSkillData);
+        GameDataMgr.My.ParseEncourageSkillData(encourageSkillRawData);
     }
 
 

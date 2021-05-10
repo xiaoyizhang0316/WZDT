@@ -89,7 +89,7 @@ public class BaseEncourageSkill
         return result;
     }
 
-    private BaseEncourageSkill(int id,BaseMapRole _role)
+    public BaseEncourageSkill(int id,BaseMapRole _role)
     {
         skillData = GameDataMgr.My.GetEncourageSkillDataById(id);
         role = _role;
