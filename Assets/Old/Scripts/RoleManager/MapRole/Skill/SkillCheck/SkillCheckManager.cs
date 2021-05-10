@@ -23,18 +23,18 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     public void ActiveRoleCheck(BaseMapRole role, int select)
     {
         RoleSkillSelect rscd = GetCheckDetail(role.baseRoleData.baseRoleData.roleType);
-        if (rscd == null || select >= rscd.checkDetailsList.Count)
+        if (rscd == null || select >= rscd.roleSkillSelect.Count)
         {
             return;
         }
 
         rscd.checkedCount = 0;
         onCheckRoles.Add(rscd);
-        for(int i = 0; i < rscd.checkDetailsList[select].checkDetails.Count; i++)
+        for(int i = 0; i < rscd.roleSkillSelect[select].checkDetails.Count; i++)
         {
             GameObject go= Instantiate(checkPrefab, checkContent);
-            AttachComponent(go, rscd.checkDetailsList[select].checkDetails[i].checkBaseScript.ToString());
-            go.GetComponent<SkillCheckBase>().ActiveCheck(role, rscd.checkTurn, rscd.checkDetailsList[select].checkDetails[i]);
+            AttachComponent(go, rscd.roleSkillSelect[select].checkDetails[i].checkBaseScript.ToString());
+            go.GetComponent<SkillCheckBase>().ActiveCheck(role, rscd.checkTurn, rscd.roleSkillSelect[select].checkDetails[i]);
             //go.AddComponent<rscd.checkDetailsList[select].checkDetails[i].checkBase>().ActiveCheck(role, rscd.checkDetailsList[select].checkDetails[i]);
         }
 
@@ -138,7 +138,7 @@ public class RoleSkillSelect
     public int checkTurn;
     public int checkCount;
     public int checkedCount;
-    public List<CheckDetails> checkDetailsList=new List<CheckDetails>();
+    public List<CheckDetails> roleSkillSelect=new List<CheckDetails>();
 }
 
 [Serializable]
