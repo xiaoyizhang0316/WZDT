@@ -64,7 +64,9 @@ public class BaseMapRole : MonoBehaviour
 
     public BaseExtraSkill extraSkill;
 
-    public BaseEncourageSkill encourageSkill;
+    public int encourageSkillId = 0;
+
+    public BaseEncourageSkill encourageSkill = null;
 
     public List<GameObject> levelModels;
 
@@ -156,6 +158,15 @@ public class BaseMapRole : MonoBehaviour
             }
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
+        InitEncourageSkill();
+    }
+
+    public void InitEncourageSkill()
+    {
+        if (encourageSkillId != 0 && encourageSkill == null)
+        {
+            encourageSkill = new BaseEncourageSkill(encourageSkillId,this);
+        }
     }
 
     /// <summary>
