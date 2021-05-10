@@ -18,6 +18,10 @@ public class EncourageSkillItem
 
     public string add;
 
+    public string specialAddType;
+
+    public string specialAdd;
+
 }
 
 public class EncourageSkillsData

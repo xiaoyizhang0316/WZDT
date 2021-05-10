@@ -67,6 +67,37 @@ public class BuildingManager : MonoSingleton<BuildingManager>
     }
 
     /// <summary>
+    /// 获取指定类型的额外消费者的总数（100 = 所有类型的额外消费者）
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    public int GetExtraConsumerNumber(string type)
+    {
+        int result = 0;
+        if (type.Equals("100"))
+        {
+            for (int i = 0; i < extraConsumer.Count; i++)
+            {
+                result += extraConsumer[i].num;
+            }
+        }
+        else
+        {
+            GameEnum.ConsumerType consumerType =
+                (GameEnum.ConsumerType) Enum.Parse(typeof(GameEnum.ConsumerType), type);
+            for (int i = 0; i < extraConsumer.Count; i++)
+            {
+                if (extraConsumer[i].consumerType.Equals(consumerType))
+                {
+                    result += extraConsumer[i].num;
+                }
+            }
+        }
+        return result;
+    }
+    
+
+    /// <summary>
     /// 重置所有建筑的spawn状态
     /// </summary>
     public void RestartAllBuilding()

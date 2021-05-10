@@ -546,6 +546,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.targetBuff = int.Parse(item.targetBuff);
             temp.startValue = float.Parse(item.stratValue);
             temp.add = float.Parse(item.add);
+            temp.specialAddType = item.specialAddType;
+            temp.specialAdd = float.Parse(item.specialAdd);
             encourageSkillDatas.Add(temp);
         }
     }

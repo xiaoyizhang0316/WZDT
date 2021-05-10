@@ -15,5 +15,9 @@ public class EncourageSkillData
     public float startValue;
 
     public float add;
+
+    public string specialAddType;
+
+    public float specialAdd;
 }
 
