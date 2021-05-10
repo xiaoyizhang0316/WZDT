@@ -236,11 +236,11 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public EncourageSkillData GetEncourageSkillDataByName(string name)
+    public EncourageSkillData GetEncourageSkillDataById(int id)
     {
         foreach (EncourageSkillData item in encourageSkillDatas)
         {
-            if (item.skillName.Equals(name))
+            if (item.skillId == id)
             {
                 return item;
             }
@@ -540,11 +540,14 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
         foreach (EncourageSkillItem item in rawData.encourageSkillSigns)
         {
             EncourageSkillData temp = new EncourageSkillData();
-            temp.skillName = item.skillName;
+            temp.skillId = int.Parse(item.skillId);
+            temp.skillDesc = item.skillDesc;
             temp.skillType = (EncourageSkillType)Enum.Parse(typeof(EncourageSkillType),item.skillType);
             temp.targetBuff = int.Parse(item.targetBuff);
             temp.startValue = float.Parse(item.stratValue);
             temp.add = float.Parse(item.add);
+            temp.specialAddType = item.specialAddType;
+            temp.specialAdd = float.Parse(item.specialAdd);
             encourageSkillDatas.Add(temp);
         }
     }

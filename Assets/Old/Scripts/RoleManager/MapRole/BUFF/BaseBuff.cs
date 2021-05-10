@@ -266,14 +266,24 @@ public class BaseBuff
                 StageGoal.My.IncomeTp(buffConfig.playerTechPointChange, IncomeTpType.Buff);
                 break;
             case 5:
-                List<string> consumableList = attri[1].Split('|').ToList();
-                int number = int.Parse(attri[2]);
-                for (int i = 0; i < number; i++)
-                {
-                    int index = UnityEngine.Random.Range(0, consumableList.Count);
-                    PlayerData.My.GetNewConsumalbe(int.Parse(consumableList[index]));
-                }
-                //Debug.Log("numdasdsa" + number);
+                CalculateNumber(str, ref buffConfig.stageRiskLevelChange, BaseLevelController.My.riskControlLevel);
+                BaseLevelController.My.riskControlLevel += buffConfig.stageRiskLevelChange;
+                break;
+            case 6:
+                CalculateNumber(str, ref buffConfig.stageTradeCostLevelChange, BaseLevelController.My.tradeCostLevel);
+                BaseLevelController.My.tradeCostLevel += buffConfig.stageTradeCostLevelChange;
+                break;
+            case 7:
+                CalculateNumber(str, ref buffConfig.stageDistanceLevelChange, BaseLevelController.My.distanceLevel);
+                BaseLevelController.My.distanceLevel += buffConfig.stageDistanceLevelChange;
+                break;
+            case 8:
+                CalculateNumber(str, ref buffConfig.stageMonthCostChange, BaseLevelController.My.monthCostLevel);
+                BaseLevelController.My.monthCostLevel += buffConfig.stageMonthCostChange;
+                break;
+            case 9:
+                CalculateNumber(str, ref buffConfig.stageEncourageLevelChange, BaseLevelController.My.encourageLevel);
+                BaseLevelController.My.encourageLevel += buffConfig.stageEncourageLevelChange;
                 break;
             default:
                 break;

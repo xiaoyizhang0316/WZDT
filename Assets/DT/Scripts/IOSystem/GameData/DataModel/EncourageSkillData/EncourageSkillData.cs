@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EncourageSkillData
 {
-    public string skillName;
+    public int skillId;
+
+    public string skillDesc;
 
     public GameEnum.EncourageSkillType skillType;
 
@@ -13,4 +15,9 @@ public class EncourageSkillData
     public float startValue;
 
     public float add;
+
+    public string specialAddType;
+
+    public float specialAdd;
 }
+

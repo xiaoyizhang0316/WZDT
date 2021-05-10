@@ -14,7 +14,7 @@ public class Building : MonoBehaviour
 
     public int buildingId;
 
-    public Dictionary<int, List<WaveConfig>> waveConfigs = new Dictionary<int, List<WaveConfig>>();
+    public Dictionary<int, List<BuildingManager.WaveConfig>> waveConfigs = new Dictionary<int, List<BuildingManager.WaveConfig>>();
 
     public List<Transform> consumerPathList = new List<Transform>();
 
@@ -27,8 +27,6 @@ public class Building : MonoBehaviour
     public GameObject protalGameObject;
 
     public bool isUseTSJ = false;
-
-    public List<WaveConfig> extraConsumer = new List<WaveConfig>();
 
     public Image countDownSprite;
 
@@ -96,11 +94,11 @@ public class Building : MonoBehaviour
     /// <param name="waveConfig"></param>
     public void InitSingleWave(int waveNum, List<string> waveConfig)
     {
-        List<WaveConfig> tempList = new List<WaveConfig>();
+        List<BuildingManager.WaveConfig> tempList = new List<BuildingManager.WaveConfig>();
         foreach (string str in waveConfig)
         {
             string[] strList = str.Split('_');
-            WaveConfig config = new WaveConfig();
+            BuildingManager.WaveConfig config = new BuildingManager.WaveConfig();
             if (strList.Length == 1)
                 continue;
             config.consumerType = (ConsumerType)Enum.Parse(typeof(ConsumerType), strList[0]);
@@ -160,12 +158,12 @@ public class Building : MonoBehaviour
                 protalGameObject.transform.DOScale(new Vector3(1,1,0.52f), 1);
             }
         }
-        List<WaveConfig> result = new List<WaveConfig>();
+        List<BuildingManager.WaveConfig> result = new List<BuildingManager.WaveConfig>();
         consumeSigns.Clear();
         result.AddRange(waveConfigs[waveNumber]);
-        result.AddRange(extraConsumer);
+        result.AddRange(BuildingManager.My.extraConsumer);
         int index = 0;
-        foreach (WaveConfig w in result)
+        foreach (BuildingManager.WaveConfig w in result)
         {
             for (int i = 0; i < w.num; i++)
             {
@@ -533,7 +531,7 @@ public class Building : MonoBehaviour
                 pathItems.Add(item);
             }
         }
-          InitConsumerPath();
+        InitConsumerPath();
     }
 
     /// <summary>
@@ -541,12 +539,12 @@ public class Building : MonoBehaviour
     /// </summary>
     public void InitConsumerPath()
     {
-       // consumerPathList.Clear();
-       // for (int i = 0; i < pathItems.Count; i++)
-       // {
-       //     MapSign sign = MapManager.My.GetMapSignByXY(pathItems[i].x, pathItems[i].y);
-       //     consumerPathList.Add(sign.transform);
-       // }
+        // consumerPathList.Clear();
+        // for (int i = 0; i < pathItems.Count; i++)
+        // {
+        //     MapSign sign = MapManager.My.GetMapSignByXY(pathItems[i].x, pathItems[i].y);
+        //     consumerPathList.Add(sign.transform);
+        // }
         List<Vector3> list = new List<Vector3>();
         for (int i = 0; i < consumerPathList.Count; i++)
         {
@@ -655,15 +653,5 @@ public class Building : MonoBehaviour
             
         }
         //}
-    }
-
-    [Serializable]
-    public class WaveConfig
-    {
-        public ConsumerType consumerType;
-
-        public int num;
-
-        public List<int> buffList;
     }
 }
