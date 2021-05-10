@@ -11856,7 +11856,7 @@ PrefabInstance:
     - target: {fileID: 745394881712787409, guid: 5280d1d7889004cec8e9a5869ee70aa9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 745394881712787411, guid: 5280d1d7889004cec8e9a5869ee70aa9,
         type: 3}
@@ -11961,7 +11961,7 @@ PrefabInstance:
     - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
         type: 3}
       propertyPath: baseRoleData.ID
-      value: 90000
+      value: 80000
       objectReference: {fileID: 0}
     - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
         type: 3}
@@ -12012,6 +12012,11 @@ PrefabInstance:
         type: 3}
       propertyPath: baseRoleData.cost
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835603690850080641, guid: 5280d1d7889004cec8e9a5869ee70aa9,
+        type: 3}
+      propertyPath: encourageSkillId
+      value: 10001
       objectReference: {fileID: 0}
     - target: {fileID: 6118018039966739326, guid: 5280d1d7889004cec8e9a5869ee70aa9,
         type: 3}
@@ -17252,10 +17257,15 @@ MonoBehaviour:
   winkey1: "-\u5207\u597D\u7684\u74DC\u5E94\u5BF9\u5C11\u91CF\u7CBE\u82F1\u6D88\u8D39\u8005\u6709\u5947\u6548"
   winkey2: "-\u5916\u90E8\u89D2\u8272\u62E5\u6709\u81EA\u8EAB\u6CA1\u6709\u7684\u67D0\u4E9B\u7279\u6B8A\u6548\u679C"
   winkey3: "-\u4F18\u5316\u4EA4\u6613\u7ED3\u6784\u53EF\u4EE5\u8282\u7EA6\u5927\u91CF\u6210\u672C"
-  tradeCostMoney: 0
   stageSpecialTypes: 
   consumerBuffList: []
   playerStaticList: []
+  stageStaticList: []
+  riskControlLevel: 0
+  tradeCostLevel: 0
+  distanceLevel: 0
+  monthCostLevel: 0
+  encourageLevel: 0
 --- !u!4 &1747396752
 Transform:
   m_ObjectHideFlags: 0
@@ -20154,7 +20164,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -51.000122
       objectReference: {fileID: 0}
+    - target: {fileID: 1894308360087322116, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -119.23999
+      objectReference: {fileID: 0}
     - target: {fileID: 3474157426287768486, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3803630548147942509, guid: 0d504daa51ecf5245804106862ffeb76,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3803630548147942509, guid: 0d504daa51ecf5245804106862ffeb76,
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0

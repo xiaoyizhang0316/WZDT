@@ -60,6 +60,8 @@ public class BaseEncourageSkill
             int choice = int.Parse(skillData.specialAddType);
             switch (choice)
             {
+                case 0:
+                    break;
                 case 5:
                     specialNumber = BaseLevelController.My.riskControlLevel;
                     break;
@@ -86,6 +88,16 @@ public class BaseEncourageSkill
             specialNumber = BuildingManager.My.GetExtraConsumerNumber(type.ToString());
         }
         result += specialNumber * skillData.specialAdd;
+        return result;
+    }
+
+    /// <summary>
+    /// 生成激励等级描述字符串
+    /// </summary>
+    /// <returns></returns>
+    public string GenerateDesc()
+    {
+        string result = "";
         return result;
     }
 
