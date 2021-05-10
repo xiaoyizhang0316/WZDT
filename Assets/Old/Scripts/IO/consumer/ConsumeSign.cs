@@ -370,6 +370,11 @@ public class ConsumeSign : MonoBehaviour,ICloneable
             //StageGoal.My.ConsumerExtraPerTip();
             DataUploadManager.My.AddData(消费者_口味击杀);
             StageGoal.My.ScoreGet(ScoreType.口味额外得分, (int)(baseScore * (scorePer - 1f)));
+            SkillCheckManager.My.AddKillNum(lastHitType != BulletType.NormalPP, true);
+        }
+        else
+        {
+            SkillCheckManager.My.AddKillNum(lastHitType != BulletType.NormalPP, false);
         }
         int baseGold = consumeData.killMoney;
         StageGoal.My.GetPlayerGold(baseGold); 

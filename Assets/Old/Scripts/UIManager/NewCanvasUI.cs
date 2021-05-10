@@ -62,6 +62,8 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 
     public GameObject Panel_NPC;
 
+    public GameObject skillCheckManager;
+
     public Button Button_Pause;
 
     public Button Button_Normal;

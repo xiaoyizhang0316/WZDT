@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using DG.Tweening;
 using UnityEngine;
 
 public class SkillCheckManager : MonoSingleton<SkillCheckManager>
@@ -36,6 +37,8 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
             go.GetComponent<SkillCheckBase>().ActiveCheck(role, rscd.checkTurn, rscd.checkDetailsList[select].checkDetails[i]);
             //go.AddComponent<rscd.checkDetailsList[select].checkDetails[i].checkBase>().ActiveCheck(role, rscd.checkDetailsList[select].checkDetails[i]);
         }
+
+        transform.DOScale(Vector3.one, 0.5f).Play();
     }
 
     //private static readonly object _lock = new object();
