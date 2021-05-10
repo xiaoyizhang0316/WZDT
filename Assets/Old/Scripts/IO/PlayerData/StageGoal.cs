@@ -16,6 +16,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// </summary>
     public int playerGold;
 
+    public int financialGold;
     /// <summary>
     /// 玩家满意度
     /// </summary>
@@ -195,7 +196,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 玩家消耗金币
     /// </summary>
     /// <param name="num"></param>
-    public void CostPlayerGold(int num, bool isNotTurn =false)
+    public void CostPlayerGold(int num, bool isNotTurn =false )
     {
         if (PlayerData.My.isPrediction)
         {
@@ -216,13 +217,29 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
-            playerGold -= num;
+
+            if (financialGold > num)
+            {
+                financialGold -= num;
+            }
+           else if (financialGold < num && financialGold > 0)
+            {
+                num=num - financialGold;
+                financialGold = 0;
+                playerGold -= num;
+            }
+            else
+            {
+                playerGold -= num;
+                
+            }
+
             if(!isNotTurn)
                 UpdateTurnCost(num);
         }
         FloatInfoManager.My.MoneyChange(0 - num);
         playerGoldText.GetComponent<PlayerAssetChange>().SetChange(0-num);
-        if (playerGold < maxMinusGold)
+        if (playerGold+financialGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
             {
@@ -331,8 +348,9 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 玩家获得金币
     /// </summary>
     /// <param name="num"></param>
-    public void GetPlayerGold(int num , bool isNotTurn=false)
+    public void GetPlayerGold(int num , bool isNotTurn=false,bool isFinancial =false)
     {
+    
         if (PlayerData.My.isPrediction)
         {
             predictIncome += num;
@@ -357,11 +375,20 @@ public class StageGoal : MonoSingleton<StageGoal>
             {
                 UpdateTurnIncome(num);
             }
-            playerGold += num;
+
+            if (!isFinancial)
+            {
+                playerGold += num;
+
+            }
+            else
+            {
+                financialGold += num;
+            }
         }
         FloatInfoManager.My.MoneyChange(num);
         playerGoldText.GetComponent<PlayerAssetChange>().SetChange(num);
-        if (playerGold < maxMinusGold)
+        if (playerGold+financialGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
             {
@@ -526,7 +553,16 @@ public class StageGoal : MonoSingleton<StageGoal>
             playerHealth = playerMaxHealth;
         }
         //playerHealthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealtherBarLength * per, playerHealthBar.GetComponent<RectTransform>().sizeDelta.y);
-        playerGoldText.DOText(playerGold.ToString(), time, true, ScrambleMode.None).Play();
+        if (financialGold > 0)
+        {
+            playerGoldText.DOText(playerGold.ToString()+"\n("+financialGold.ToString()+")", time, true, ScrambleMode.None).Play();
+
+        }
+        else
+        {
+            playerGoldText.DOText(playerGold.ToString() , time, true, ScrambleMode.None).Play();
+            
+        }
 
         if (playerGold > 0)
             playerGoldText.DOColor(Color.white, time).Play();

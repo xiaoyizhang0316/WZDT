@@ -12,7 +12,7 @@ public class FinancialCompanySkill : BaseExtraSkill
     // Start is called before the first frame update
     void Start()
     {
-       GetComponent<BaseMapRole>().HideTradeButton(false);
+//       GetComponent<BaseMapRole>().HideTradeButton(false);
     }
 
     // Update is called once per frame
@@ -23,6 +23,17 @@ public class FinancialCompanySkill : BaseExtraSkill
 
     public override void SkillOn(TradeSign sign)
     {
-        
+        if (index == 0)
+        {
+            StageGoal.My.GetPlayerGold(50000,false,true);
+        }
+        if (index == 1)
+        {
+            StageGoal.My.GetPlayerGold(100000,false,true);
+        }
+        if (index == 2)
+        {
+            StageGoal.My.GetPlayerGold(200000,false,true);
+        }
     }
 }

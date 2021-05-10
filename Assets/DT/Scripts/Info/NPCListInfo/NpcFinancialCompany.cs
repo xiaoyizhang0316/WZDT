@@ -29,6 +29,7 @@ public class NpcFinancialCompany : MonoBehaviour
 
     public void Init( FinancialCompanySkill skill)
     {
+        
         this.skill =  skill ;
         this.condition_1.text = skill.condition_1;
         this.condition_2.text = skill.condition_2;
@@ -48,14 +49,27 @@ public class NpcFinancialCompany : MonoBehaviour
                 conditionButtons[i].interactable = false;
             }
         }
+        skill.GetComponent<BaseMapRole>().HideTradeButton(false);
     }
 
     public void  ConditionButtonClick()
     {
-        for (int i = 0; i <conditionButtons.Count; i++)
-        {
-            conditionButtons[i].onClick.AddListener(() => { InitButton(i); });
-        }
+       
+            conditionButtons[0].onClick.AddListener(() =>
+            {
+                InitButton(0); 
+                
+            });
+            conditionButtons[1].onClick.AddListener(() =>
+            {
+                InitButton(1); 
+                
+            });
+            conditionButtons[2].onClick.AddListener(() =>
+            {
+                InitButton(2); 
+                
+            });
     }
 
     public void  InitButton(int index)
