@@ -599,6 +599,7 @@ public class Building : MonoBehaviour
         }
     }
 
+    
     public bool bornFTE = false;
     public IEnumerator BornEnemyForFTE(int type, int count)
     {
