@@ -40,6 +40,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
         }
 
         rscd.checkedCount = 0;
+        rscd.roleID = role.baseRoleData.ID;
         onCheckRoles.Add(rscd);
         for(int i = 0; i < rscd.roleSkillSelect[select].checkDetails.Count; i++)
         {
@@ -69,7 +70,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
         bool isSuccess = true;
         foreach (Transform child in checkContent)
         {
-            if (child.GetComponent<SkillCheckBase>().dependRole.baseRoleData.baseRoleData.roleType == rscd.RoleType)
+            if (child.GetComponent<SkillCheckBase>().roleID == rscd.roleID)
             {
                 if (!child.GetComponent<SkillCheckBase>().isSuccess)
                 {
@@ -182,6 +183,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
 public class RoleSkillSelect
 {
     public GameEnum.RoleType RoleType;
+    public double roleID;
     public int checkTurn;
     public int checkCount;
     public int checkedCount;

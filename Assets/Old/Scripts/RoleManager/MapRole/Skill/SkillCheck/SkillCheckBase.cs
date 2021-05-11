@@ -14,6 +14,8 @@ public class SkillCheckBase : MonoBehaviour
 
     public BaseMapRole dependRole;
 
+    public double roleID;
+
     public bool isSuccess;
 
     public Text contentText;
@@ -42,6 +44,7 @@ public class SkillCheckBase : MonoBehaviour
         target = detail.target;
         isPercent = detail.isPercent;
         checkContent = detail.checkContent;
+        roleID = role.baseRoleData.ID;
         InitTransforms(checkContent);
         contentText.text = checkContent;
         this.checkTurn = checkTurn;
