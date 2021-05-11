@@ -55,6 +55,10 @@ public class NpcFinancialCompany : MonoBehaviour
     public void  ConditionButtonClick()
     {
        
+        conditionButtons[0].onClick.RemoveAllListeners();
+        conditionButtons[1].onClick.RemoveAllListeners();
+        conditionButtons[2].onClick.RemoveAllListeners();
+        
             conditionButtons[0].onClick.AddListener(() =>
             {
                 InitButton(0); 
