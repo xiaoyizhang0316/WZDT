@@ -315,6 +315,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         //FloatInfoManager.My.TechChange(num);
         playerTechText.GetComponent<PlayerAssetChange>().SetChange(num);
         playerTechPoint += num;
+        SkillCheckManager.My.AddMega(num);
         SetInfo();
     }
 
@@ -348,7 +349,7 @@ public class StageGoal : MonoSingleton<StageGoal>
     /// 玩家获得金币
     /// </summary>
     /// <param name="num"></param>
-    public void GetPlayerGold(int num , bool isNotTurn=false,bool isFinancial =false)
+    public void GetPlayerGold(int num , bool isNotTurn=false,bool isFinancial =false, bool isConsumer=false)
     {
     
         if (PlayerData.My.isPrediction)
@@ -371,6 +372,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         else
         {
+            
             if (currentType == StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name) && !isNotTurn)
             {
                 UpdateTurnIncome(num);
@@ -378,12 +380,22 @@ public class StageGoal : MonoSingleton<StageGoal>
 
             if (!isFinancial)
             {
+                if (SkillCheckManager.My.checkDivide)
+                {
+                    int divided = (int)(num * SkillCheckManager.My.proportion);
+                    num -= divided;
+                    SkillCheckManager.My.AddDividedProfit(divided);
+                }
                 playerGold += num;
-
             }
             else
             {
                 financialGold += num;
+            }
+
+            if (!isConsumer)
+            {
+                SkillCheckManager.My.AddNonConsumerIncome(num);
             }
         }
         FloatInfoManager.My.MoneyChange(num);
@@ -441,6 +453,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             playerSatisfy += num;
         }
+        SkillCheckManager.My.AddScore(num);
         SetInfo();
     }
 
