@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 531.16235}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5057872553002777318
@@ -50,12 +50,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 2
+    m_Left: 10
     m_Right: 0
-    m_Top: 0
+    m_Top: 10
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 5
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -115,7 +115,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 5.75, y: -15.05}
-  m_SizeDelta: {x: 211.5, y: 307.56}
+  m_SizeDelta: {x: 393.8, y: 572.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5057872553191165037
 CanvasRenderer:
@@ -336,8 +336,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5057872554103860360}
   m_HandleRect: {fileID: 5057872554103860361}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.511789
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -639,7 +639,7 @@ RectTransform:
   m_GameObject: {fileID: 5057872554757930761}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children:
   - {fileID: 5057872553191165040}
   m_Father: {fileID: 0}
@@ -648,7 +648,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 223, y: 361}
+  m_SizeDelta: {x: 431.3, y: 698.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5057872554757930757
 CanvasRenderer:
@@ -702,6 +702,7 @@ MonoBehaviour:
   specialBulletKillNum: 0
   tasteKillNum: 0
   getMega: 0
+  playerScore: 0
   nonConsumerIncome: 0
   allCheckRoles:
   - RoleType: 30
@@ -712,37 +713,37 @@ MonoBehaviour:
     - checkDetails:
       - checkContent: "\u65F6\u95F4\u6BB5\u5185\u51FB\u6740\u8D85\u8FC740%\u7684\u6D88\u8D39\u8005"
         target: 40
-        isPersent: 1
+        isPercent: 0
         isMainTarget: 1
         checkBaseScript: 0
-      - checkContent: "\u65F6\u95F4\u6BB5\u5185\u51FB\u6740\u8D85\u8FC760%\u7684\u6D88\u8D39\u8005"
-        target: 60
-        isPersent: 1
-        isMainTarget: 1
-        checkBaseScript: 0
+      - checkContent: "\u53E3\u5473\u51FB\u674020\u4E2A\u6D88\u8D39\u8005"
+        target: 20
+        isPercent: 0
+        isMainTarget: 0
+        checkBaseScript: 2
     - checkDetails:
-      - checkContent: "\u65F6\u95F4\u6BB5\u5185\u51FB\u6740\u8D85\u8FC740%\u7684\u6D88\u8D39\u8005"
-        target: 40
-        isPersent: 1
+      - checkContent: "\u4F7F\u7528\u7279\u6B8A\u5F39\u79CD\u51FB\u674020\u4E2A\u6D88\u8D39\u8005"
+        target: 20
+        isPercent: 0
         isMainTarget: 1
-        checkBaseScript: 0
-      - checkContent: "\u65F6\u95F4\u6BB5\u5185\u51FB\u6740\u8D85\u8FC760%\u7684\u6D88\u8D39\u8005"
-        target: 60
-        isPersent: 1
-        isMainTarget: 1
-        checkBaseScript: 0
+        checkBaseScript: 1
+      - checkContent: "\u975E\u6D88\u8D39\u8005\u6536\u5165\u9700\u8FBE\u52306000"
+        target: 6000
+        isPercent: 0
+        isMainTarget: 0
+        checkBaseScript: 3
     - checkDetails:
-      - checkContent: "\u65F6\u95F4\u6BB5\u5185\u51FB\u6740\u8D85\u8FC740%\u7684\u6D88\u8D39\u8005"
-        target: 40
-        isPersent: 1
+      - checkContent: "\u83B7\u53D6100\u70B9Mega\u503C"
+        target: 100
+        isPercent: 0
         isMainTarget: 1
-        checkBaseScript: 0
-      - checkContent: "\u65F6\u95F4\u6BB5\u5185\u51FB\u6740\u8D85\u8FC760%\u7684\u6D88\u8D39\u8005"
-        target: 60
-        isPersent: 1
-        isMainTarget: 1
-        checkBaseScript: 0
-  checkPrefab: {fileID: 6598428917876673120, guid: 8adf4361de6f5f544ad554892a6bb5a2,
+        checkBaseScript: 4
+      - checkContent: "\u83B7\u53D610000\u70B9\u5F97\u5206"
+        target: 10000
+        isPercent: 0
+        isMainTarget: 0
+        checkBaseScript: 5
+  checkPrefab: {fileID: 8253020689668256350, guid: 8adf4361de6f5f544ad554892a6bb5a2,
     type: 3}
   checkContent: {fileID: 5057872553002777316}
 --- !u!1 &5057872554782904497

@@ -12,13 +12,19 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     public int specialBulletKillNum;
     public int tasteKillNum;
     public int getMega;
+    public int playerScore;
     public int nonConsumerIncome;
+    public int dividedProfit;
     [SerializeField]
     public List<RoleSkillSelect> allCheckRoles=new List<RoleSkillSelect>();
     private List<RoleSkillSelect> onCheckRoles=new List<RoleSkillSelect>();
 
     public GameObject checkPrefab;
     public Transform checkContent;
+
+    private bool isCheckActive;
+    public bool checkDivide;
+    public float proportion;//分成比例
 
     public void ActiveRoleCheck(BaseMapRole role, int select)
     {
@@ -28,13 +34,18 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
             return;
         }
 
+        if (!isCheckActive)
+        {
+            isCheckActive = true;
+        }
+
         rscd.checkedCount = 0;
         onCheckRoles.Add(rscd);
         for(int i = 0; i < rscd.roleSkillSelect[select].checkDetails.Count; i++)
         {
             GameObject go= Instantiate(checkPrefab, checkContent);
             AttachComponent(go, rscd.roleSkillSelect[select].checkDetails[i].checkBaseScript.ToString());
-            go.GetComponent<SkillCheckBase>().ActiveCheck(role, rscd.checkTurn, rscd.roleSkillSelect[select].checkDetails[i]);
+            go.GetComponent<SkillCheckBase>().ActiveCheck(role, rscd.checkTurn, rscd.roleSkillSelect[select].checkDetails[i], rscd.checkCount);
             //go.AddComponent<rscd.checkDetailsList[select].checkDetails[i].checkBase>().ActiveCheck(role, rscd.checkDetailsList[select].checkDetails[i]);
         }
 
@@ -94,6 +105,10 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
 
     public void AddKillNum(bool isSpecialBullet, bool isTaste)
     {
+        if (!isCheckActive)
+        {
+            return;
+        }
         killNum++;
         if (isTaste)
         {
@@ -108,7 +123,39 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
 
     public void AddNonConsumerIncome(int income)
     {
+        if (!isCheckActive)
+        {
+            return;
+        }
         nonConsumerIncome += income;
+    }
+
+    public void AddMega(int addMega)
+    {
+        if (!isCheckActive)
+        {
+            return;
+        }
+        getMega += addMega;
+    }
+
+    public void AddScore(int num)
+    {
+        if (!isCheckActive)
+        {
+            return;
+        }
+        playerScore += num;
+    }
+
+    public void AddDividedProfit(int num)
+    {
+        if (!isCheckActive)
+        {
+            return;
+        }
+
+        dividedProfit += num;
     }
 
     void AttachComponent(GameObject go, string componentName)
@@ -152,12 +199,19 @@ public class CheckDetail
 {
     public string checkContent;
     public string target;
-    public bool isPersent;
+    public float proportion;
+    public bool isPercent;
     public bool isMainTarget;// 用于通知技能结束
     public SkillCheckType checkBaseScript;
 }
 
 public enum SkillCheckType
 {
-    KillCheck
+    KillCheck,
+    SpecialBulletKillCheck,
+    TasteKillCheck,
+    NonConsumerCheck,
+    GetMegaCheck,
+    GetScoreCheck,
+    DividedProfitCheck
 }

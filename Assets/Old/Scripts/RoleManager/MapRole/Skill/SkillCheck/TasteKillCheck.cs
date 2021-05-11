@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillCheck : SkillCheckBase
+public class TasteKillCheck : SkillCheckBase
 {
     public int startKillNum;
-    public int totalConsumerNum;
 
     protected override void InitCheck()
     {
@@ -19,9 +18,7 @@ public class KillCheck : SkillCheckBase
         currentText.text = isPercent ? "当前：0%" : "当前：0";
         isTurnEnd = true;
         checkedTurn = 0;
-        startKillNum = SkillCheckManager.My.killNum;
-        totalConsumerNum = BuildingManager.My.GetExtraConsumerNumber("100")+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave+1);
-        Debug.Log("total consumer "+totalConsumerNum);
+        startKillNum = SkillCheckManager.My.tasteKillNum;
         InvokeRepeating("Check", 1f, 1f);
     }
 
@@ -31,18 +28,19 @@ public class KillCheck : SkillCheckBase
         {
             CancelInvoke();
             isTurnEnd = true;
-            startKillNum = SkillCheckManager.My.killNum;
+            startKillNum = SkillCheckManager.My.tasteKillNum;
             currentText.text = isPercent ? "当前：0%" : "当前：0";
 
             checkedTurn = 0;
-            totalConsumerNum = BuildingManager.My.GetExtraConsumerNumber("100")+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave+1);
             InvokeRepeating("Check", 0.5f, 0.5f);
         }
     }
 
-    private float currentPercent;
+    private int currentKillNum;
     protected override void Check()
     {
+        
+
         if (StageGoal.My.isTurnStart)
         {
             if (isTurnEnd)
@@ -50,21 +48,17 @@ public class KillCheck : SkillCheckBase
                 isTurnEnd = false;
             }
         }
-
-        currentPercent = (SkillCheckManager.My.killNum - startKillNum) / (float)(totalConsumerNum==0?1: totalConsumerNum);
-        currentText.text = "当前：" + currentPercent.ToString("F2") + "%";
-        isSuccess = currentPercent >= float.Parse(target);
+        
+        currentKillNum = SkillCheckManager.My.tasteKillNum - startKillNum;
+        currentText.text = "当前：" +currentKillNum;
+        isSuccess = currentKillNum >= int.Parse(target);
         
         if (!StageGoal.My.isTurnStart && !isTurnEnd)
         {
             Debug.Log("check Turn end");
             isTurnEnd = true;
             checkedTurn += 1;
-            if (checkedTurn < checkTurn)
-            {
-                totalConsumerNum += BuildingManager.My.GetExtraConsumerNumber("100")+BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave+1);
-            }
-            else
+            if (checkedTurn >= checkTurn)
             {
                 NotifyRoleEnd();
             }

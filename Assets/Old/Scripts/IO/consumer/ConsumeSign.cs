@@ -384,7 +384,7 @@ public class ConsumeSign : MonoBehaviour,ICloneable
             SkillCheckManager.My.AddKillNum(lastHitType != BulletType.NormalPP, false);
         }
         int baseGold = consumeData.killMoney;
-        StageGoal.My.GetPlayerGold(baseGold); 
+        StageGoal.My.GetPlayerGold(baseGold,false,false,true); 
         StageGoal.My.Income(baseGold, IncomeType.Consume);
         if (PlayerData.My.isPrediction)
         {
