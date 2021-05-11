@@ -28,7 +28,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
 
     public void ActiveRoleCheck(BaseMapRole role, int select)
     {
-        RoleSkillSelect rscd = GetCheckDetail(role.baseRoleData.baseRoleData.roleType);
+        RoleSkillSelect rscd = GetCheckDetail(role.baseRoleData);
         if (rscd == null || select >= rscd.roleSkillSelect.Count)
         {
             return;
@@ -83,6 +83,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
         if (isSuccess)
         {
             // TODO reach target
+            Debug.Log("check success");
         }
         else
         {
@@ -90,6 +91,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
             if (rscd.checkedCount >= rscd.checkCount)
             {
                 // TODO fail
+                Debug.Log("check fail");
             }
             else
             {
@@ -97,6 +99,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
                 {
                     if (child.GetComponent<SkillCheckBase>().dependRole.baseRoleData.baseRoleData.roleType == rscd.RoleType)
                     {
+                        Debug.Log("check reset");
                         child.GetComponent<SkillCheckBase>().ResetCheck();
                     }
                 }
@@ -165,11 +168,11 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
         go.AddComponent(com);
     }
 
-    RoleSkillSelect GetCheckDetail(GameEnum.RoleType roleType)
+    RoleSkillSelect GetCheckDetail(Role role)
     {
         for (int i = 0; i < allCheckRoles.Count; i++)
         {
-            if (allCheckRoles[i].RoleType == roleType)
+            if (allCheckRoles[i].roleID == role.ID && allCheckRoles[i].RoleType == role.baseRoleData.roleType)
             {
                 return allCheckRoles[i];
             }
@@ -183,10 +186,15 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
 public class RoleSkillSelect
 {
     public GameEnum.RoleType RoleType;
+    [Tooltip("填上对应的角色的ID")]
     public double roleID;
+    [Tooltip("要检测的回合数")]
     public int checkTurn;
+    [Tooltip("最多检测次数")]
     public int checkCount;
+    [Tooltip("不用填")]
     public int checkedCount;
+    [Tooltip("选择选项对应的检测")]
     public List<CheckDetails> roleSkillSelect=new List<CheckDetails>();
 }
 
@@ -199,11 +207,18 @@ public class CheckDetails
 [Serializable]
 public class CheckDetail
 {
+    [Tooltip("检测的内容")]
     public string checkContent;
+    [Tooltip("检测的目标")]
     public string target;
+    [Header("Optional")]
+    [Tooltip("分成比例，依赖于分成相关的检测")]
     public float proportion;
+    [Tooltip("是否用百分比展示当前的数据")]
     public bool isPercent;
+    [Tooltip("用于通知Mananger是否完成检测，一个选项中有且只能√上一个")]
     public bool isMainTarget;// 用于通知技能结束
+    [Tooltip("检测的类型")]
     public SkillCheckType checkBaseScript;
 }
 

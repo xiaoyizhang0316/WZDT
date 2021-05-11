@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 531.16235}
+  m_AnchoredPosition: {x: -191.15, y: 3411.7888}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5057872553002777318
@@ -704,8 +704,10 @@ MonoBehaviour:
   getMega: 0
   playerScore: 0
   nonConsumerIncome: 0
+  dividedProfit: 0
   allCheckRoles:
   - RoleType: 30
+    roleID: 0
     checkTurn: 3
     checkCount: 2
     checkedCount: 0
@@ -713,39 +715,47 @@ MonoBehaviour:
     - checkDetails:
       - checkContent: "\u65F6\u95F4\u6BB5\u5185\u51FB\u6740\u8D85\u8FC740%\u7684\u6D88\u8D39\u8005"
         target: 40
+        proportion: 0
         isPercent: 0
         isMainTarget: 1
         checkBaseScript: 0
       - checkContent: "\u53E3\u5473\u51FB\u674020\u4E2A\u6D88\u8D39\u8005"
         target: 20
+        proportion: 0
         isPercent: 0
         isMainTarget: 0
         checkBaseScript: 2
     - checkDetails:
       - checkContent: "\u4F7F\u7528\u7279\u6B8A\u5F39\u79CD\u51FB\u674020\u4E2A\u6D88\u8D39\u8005"
         target: 20
+        proportion: 0
         isPercent: 0
         isMainTarget: 1
         checkBaseScript: 1
       - checkContent: "\u975E\u6D88\u8D39\u8005\u6536\u5165\u9700\u8FBE\u52306000"
         target: 6000
+        proportion: 0
         isPercent: 0
         isMainTarget: 0
         checkBaseScript: 3
     - checkDetails:
       - checkContent: "\u83B7\u53D6100\u70B9Mega\u503C"
         target: 100
+        proportion: 0
         isPercent: 0
         isMainTarget: 1
         checkBaseScript: 4
       - checkContent: "\u83B7\u53D610000\u70B9\u5F97\u5206"
         target: 10000
+        proportion: 0
         isPercent: 0
         isMainTarget: 0
         checkBaseScript: 5
   checkPrefab: {fileID: 8253020689668256350, guid: 8adf4361de6f5f544ad554892a6bb5a2,
     type: 3}
   checkContent: {fileID: 5057872553002777316}
+  checkDivide: 0
+  proportion: 0
 --- !u!1 &5057872554782904497
 GameObject:
   m_ObjectHideFlags: 0
