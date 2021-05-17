@@ -28,4 +28,9 @@ public class AddMaga : BaseFinancialCompanyThreshold
             return false;
         }
     }
+
+    public override string FailedTip()
+    {
+        return "累计消耗Maga值为达标";
+    }
 }
