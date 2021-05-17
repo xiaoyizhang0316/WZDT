@@ -117,7 +117,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
         {
             if (threshold)
             {
-                //HttpManager.My.ShowTip("");
+                HttpManager.My.ShowTip(role.GetComponent<BaseFinancialCompanyThreshold>().FailedTip());
             }
             rscd.checkedCount += 1;
             if (rscd.checkedCount >= rscd.checkCount)
