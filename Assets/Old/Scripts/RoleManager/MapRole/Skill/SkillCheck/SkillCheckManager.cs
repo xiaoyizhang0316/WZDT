@@ -104,13 +104,21 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
             }
         }
 
-        if (isSuccess)
+        BaseMapRole role = PlayerData.My.GetMapRoleById(rscd.roleID);
+        bool threshold = role.GetComponent<BaseFinancialCompanyThreshold>()
+            .Threshold();
+
+        if (isSuccess && threshold)
         {
             // TODO reach target
             Debug.Log("check success");
         }
         else
         {
+            if (threshold)
+            {
+                //HttpManager.My.ShowTip("");
+            }
             rscd.checkedCount += 1;
             if (rscd.checkedCount >= rscd.checkCount)
             {
