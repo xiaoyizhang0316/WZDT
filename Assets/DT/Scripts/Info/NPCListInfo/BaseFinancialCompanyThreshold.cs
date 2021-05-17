@@ -5,4 +5,6 @@ using UnityEngine;
 public abstract class BaseFinancialCompanyThreshold : MonoBehaviour
 {
    public abstract bool Threshold();
+
+   public abstract string FailedTip();
 }
