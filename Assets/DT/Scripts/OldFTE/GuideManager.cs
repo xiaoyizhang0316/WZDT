@@ -76,6 +76,9 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         return "";
     }
 
+    /// <summary>
+    /// 开启当前索引的引导
+    /// </summary>
     public void PlayCurrentIndexGuide()
     {
         if (!ftegob.activeInHierarchy)
@@ -146,6 +149,10 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
         StartCoroutine(baseGuideSteps[currentGuideIndex].Play());
     }
 
+    /// <summary>
+    /// 初始化引导
+    /// </summary>
+    /// <returns></returns>
     public virtual IEnumerator Init()
     {
         if (nextButton != null)
@@ -215,6 +222,9 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
     }
 
 
+    /// <summary>
+    /// 关闭教学
+    /// </summary>
     public virtual void CloseFTE()
     {
         Debug.Log("关闭教学");
@@ -261,41 +271,59 @@ public class GuideManager : IOIntensiveFramework.MonoSingleton.MonoSingleton<Gui
             guideClose.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 播放下一个引导
+    /// </summary>
     public void PlayNextIndexGuide()
     {
         currentGuideIndex++;
         PlayCurrentIndexGuide();
     }
 
+    /// <summary>
+    /// 播放上一个引导
+    /// </summary>
     public void PlayLastIndexGuide()
     {
         currentGuideIndex--;
         PlayCurrentIndexGuide();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+ 
 
+    /// <summary>
+    /// 生成消费者
+    /// </summary>
+    /// <param name="type"></param>
     public void BornEnemy1(int type = -1)
     {
         //Debug.Log("born");
         StartCoroutine(GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().BornEnemy1(type));
     }
 
+    /// <summary>
+    /// 生成教学消费者
+    /// </summary>
     public void BornEnemy()
     {
         //Debug.Log("born");
         StartCoroutine(GameObject.Find("Build/ConsumerSpot").GetComponent<Building>().BornEnemy());
     }
-
+    
+    /// <summary>
+    /// 添加当前引导时间
+    /// </summary>
+    /// <param name="taskName"></param>
     public void AddTaskTime(string taskName)
     {
         int useTime= currentTaskEndTime - currentTaskStartTime;
         taskTimeList.Add(taskName+"&"+useTime);
     }
 
+    /// <summary>
+    /// 获取当前引导时间
+    /// </summary>
+    /// <returns></returns>
     public string GetTaskTimes()
     {
         //任务1：消费者口味&8_任务2：新角色-口味工厂&8_任务3：口味加工厂&54_任务4：查看角色口味能力&8_任务5：角色口味能力&39_任务6：满足消费者口味&80

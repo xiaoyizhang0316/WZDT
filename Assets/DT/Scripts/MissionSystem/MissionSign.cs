@@ -7,22 +7,54 @@ using UnityEngine.UI;
 public class MissionSign : MonoBehaviour
 {
 
+    /// <summary>
+    /// 内容文本
+    /// </summary>
     public Text contentText;
 
+    /// <summary>
+    /// 当前完成数量
+    /// </summary>
     public Text currentNum;
 
+    /// <summary>
+    ///  目标完成数量
+    /// </summary>
     public Text maxNum;
 
+    /// <summary>
+    ///  当前引导数据
+    /// </summary>
     public MissionData data;
 
+    /// <summary>
+    /// 背景
+    /// </summary>
     public Image sign;
 
+    /// <summary>
+    /// 成功标记
+    /// </summary>
     public GameObject success;
+    
+    /// <summary>
+    /// 数字背景
+    /// </summary>
     public GameObject numberBg;
+    
+    /// <summary>
+    /// 标记的颜色
+    /// </summary>
     private Color signColor;
 
+    /// <summary>
+    /// 当前是否完成
+    /// </summary>
     private bool isover;
 
+    /// <summary>
+    /// 当文字被改变的时候
+    /// </summary>
     private TextOnChange TextOnChange;
     // Start is called before the first frame update
     void Start()
@@ -47,7 +79,7 @@ public class MissionSign : MonoBehaviour
             {
                 sign.color = Color.green;
 
-                effectOver();
+                EffectOver();
             }else
             {
                 isover = false; 
@@ -57,7 +89,10 @@ public class MissionSign : MonoBehaviour
         }
     }
 
-    public void effectOver()
+    /// <summary>
+    /// 当此任务完成时，播放特效
+    /// </summary>
+    public void EffectOver()
     {
         if (!isover)
         {
@@ -73,6 +108,11 @@ public class MissionSign : MonoBehaviour
         } 
     }
 
+    /// <summary>
+    /// 初始化任务
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="title"></param>
     public void Init(MissionData data, string title)
     {
         this.data = data;
@@ -100,12 +140,18 @@ public class MissionSign : MonoBehaviour
     }
 
     private string signTitle= "";
+    /// <summary>
+    /// 
+    /// </summary>
     public void OnDestroy()
     {
         MissionManager.My.signs.Remove(this);
         MissionManager.My.ChangeTital("", signTitle);
     }
 
+    /// <summary>
+    /// 重置成功标记
+    /// </summary>
     public void ResetSuccess()
     {
         success.transform.DOScale(0, 0.02f).Play();
