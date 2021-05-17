@@ -7,8 +7,14 @@ using UnityEngine;
 public class BuildingManager : MonoSingleton<BuildingManager>
 {
 
+    /// <summary>
+    /// 建筑集合
+    /// </summary>
     public List<Building> buildings = new List<Building>();
 
+    /// <summary>
+    /// 波数集合
+    /// </summary>
     public List<WaveConfig> extraConsumer = new List<WaveConfig>();
     
     /// <summary>

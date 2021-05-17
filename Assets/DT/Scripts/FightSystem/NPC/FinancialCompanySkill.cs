@@ -8,7 +8,9 @@ public class FinancialCompanySkill : BaseExtraSkill
     public string condition_2;
     public string condition_3;
 
+    public int totalMaga = 0;
     public int index =-1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,7 @@ public class FinancialCompanySkill : BaseExtraSkill
     // Update is called once per frame
     void Update()
     {
-        
+    
     }
 
     public override void SkillOn(TradeSign sign)
@@ -37,4 +39,5 @@ public class FinancialCompanySkill : BaseExtraSkill
         }
         SkillCheckManager.My.ActiveRoleCheck(GetComponent<BaseMapRole>(),index);
     }
+    
 }

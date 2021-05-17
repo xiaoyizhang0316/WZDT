@@ -10,18 +10,35 @@ using UnityEngine.SceneManagement;
 
 public class Building : MonoBehaviour
 {
+    /// <summary>
+    /// 消费者物体列表
+    /// </summary>
     public List<GameObject> consumerGoList = new List<GameObject>();
 
+    /// <summary>
+    /// 建筑ID
+    /// </summary>
     public int buildingId;
 
+    /// <summary>
+    /// 波数配置
+    /// </summary>
     public Dictionary<int, List<BuildingManager.WaveConfig>> waveConfigs = new Dictionary<int, List<BuildingManager.WaveConfig>>();
 
+    /// <summary>
+    /// 消费者路径
+    /// </summary>
     public List<Transform> consumerPathList = new List<Transform>();
 
+    /// <summary>
+    /// 路径集合
+    /// </summary>
     public List<PathItem> pathItems = new List<PathItem>();
 
+  
     public GameObject pathIndicator;
 
+    
     public bool isFinishSpawn;
 
     public GameObject protalGameObject;
@@ -198,6 +215,10 @@ public class Building : MonoBehaviour
         protalGameObject.transform.DOScale(0, 1);
     }
 
+    /// <summary>
+    /// 生成消费者
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator BornEnemy()
     {
         ConsumerType ct;
@@ -440,6 +461,9 @@ public class Building : MonoBehaviour
 
     private bool isPathLineShow = false;
 
+    /// <summary>
+    /// 显示消费者路径
+    /// </summary>
     public void ShowPathLine()
     {
         GetComponent<LineRenderer>().textureMode = LineTextureMode.Tile;
@@ -448,6 +472,9 @@ public class Building : MonoBehaviour
         isPathLineShow = true;
     }
 
+    /// <summary>
+    /// 关闭消费者线路
+    /// </summary>
     public void StopShowPathLine()
     {
         if (isPathLineShow)
@@ -599,6 +626,7 @@ public class Building : MonoBehaviour
         }
     }
 
+    
     public bool bornFTE = false;
     public IEnumerator BornEnemyForFTE(int type, int count)
     {

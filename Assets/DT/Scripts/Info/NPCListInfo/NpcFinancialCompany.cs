@@ -12,19 +12,32 @@ public class NpcFinancialCompany : MonoBehaviour
     public Text condition_3;
 
     public FinancialCompanySkill skill;
+    public BaseFinancialCompanyThreshold b;
 
     public List<Button> conditionButtons;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        b = skill.GetComponent<BaseFinancialCompanyThreshold>();
     }
 
     // Update is called once per frame
     void Update()
     {
-    
+        if (!b.Threshold())
+        {
+            conditionButtons[0].interactable = false;
+            conditionButtons[1].interactable = false;
+            conditionButtons[2].interactable = false;
+        }
+
+        else
+        {
+            conditionButtons[0].interactable = true;
+            conditionButtons[1].interactable = true;
+            conditionButtons[2].interactable = true;
+        }
     }
 
     public void Init( FinancialCompanySkill skill)

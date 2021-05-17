@@ -11,20 +11,43 @@ using System.Linq;
 
 public class MapManager : MonoSingleton<MapManager>
 {
+    /// <summary>
+    /// 所有地块集合
+    /// </summary>
     public List<MapSign>_mapSigns = new List<MapSign>();
 
+    
     public List<GameObject> mapTypeList;
 
+    /// <summary>
+    /// 地块之间的间距
+    /// </summary>
     private float interval;
 
+    /// <summary>
+    /// 创造地块类
+    /// </summary>
     public SaveLoadMenu SaveLoadMenu;
+    
+    /// <summary>
+    /// 在地块上释放技能1
+    /// </summary>
     public GameObject skillOneEffect;
+    
+    /// <summary>
+    /// 在地块释放技能2
+    /// </summary>
     public GameObject skillTwoEffect;
-    public GameObject skillThreeEffect;
-    public Transform buildTF;
+ 
 
+    /// <summary>
+    /// 下沉地块列表
+    /// </summary>
     public Dictionary<int, List<GameObject>> diveList = new Dictionary<int, List<GameObject>>();
 
+    /// <summary>
+    /// 下沉地块集合
+    /// </summary>
     public Dictionary<int, List<HexCell>> diveLandList = new Dictionary<int, List<HexCell>>();
 
 
@@ -53,8 +76,8 @@ public class MapManager : MonoSingleton<MapManager>
     /// <summary>
     /// 检测地块是否能放置建筑
     /// </summary>
-    /// <param name="xList"></param>
-    /// <param name="yList"></param>
+    /// <param name="xList">x坐标</param>
+    /// <param name="yList">Y坐标</param>
     /// <returns></returns>
     public bool CheckLandAvailable(int x,int y)
     {
@@ -430,6 +453,11 @@ public class MapManager : MonoSingleton<MapManager>
         go.SetActive(false);
     }
 
+    /// <summary>
+    /// 添加地块
+    /// </summary>
+    /// <param name="time"></param>
+    /// <param name="cell"></param>
     public void ADDLandDive(int time, HexCell cell)
     {
         if (diveLandList.ContainsKey(time))
@@ -446,6 +474,10 @@ public class MapManager : MonoSingleton<MapManager>
     }
 
 
+    /// <summary>
+    /// 上浮地块
+    /// </summary>
+    /// <param name="time">时间</param>
     public void CheckDive(int time)
     {
         if (diveList.ContainsKey(time))

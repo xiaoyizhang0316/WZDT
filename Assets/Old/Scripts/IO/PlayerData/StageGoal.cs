@@ -274,6 +274,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         SetInfo();
     }
 
+    public int techCost = 0 ;
     /// <summary>
     /// 消耗人脉值
     /// </summary>
@@ -290,9 +291,11 @@ public class StageGoal : MonoSingleton<StageGoal>
         if (PlayerData.My.isPrediction )
         {
             predictTPcost -= num;
+            
         }
         else
         {
+            techCost += num;
             //FloatInfoManager.My.TechChange(0 - num);
             playerTechText.GetComponent<PlayerAssetChange>().SetChange(0-num);
             playerTechPoint -= num;
@@ -315,6 +318,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         //FloatInfoManager.My.TechChange(num);
         playerTechText.GetComponent<PlayerAssetChange>().SetChange(num);
         playerTechPoint += num;
+        
         SkillCheckManager.My.AddMega(num);
         SetInfo();
     }

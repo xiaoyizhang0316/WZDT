@@ -8,27 +8,59 @@ using static GameEnum;
 
 public class MapSign : MonoBehaviour, IDragHandler
 {
+    /// <summary>
+    /// 地块类型
+    /// </summary>
     public MapType mapType;
 
+    /// <summary>
+    /// 横坐标
+    /// </summary>
     public int x;
 
+    /// <summary>
+    /// 纵坐标
+    /// </summary>
     public int y;
 
+    /// <summary>
+    /// 高度
+    /// </summary>
     public int height = 0;
 
+    /// <summary>
+    /// 是否可以释放
+    /// </summary>
     public bool isCanPlace = true;
 
+    /// <summary>
+    /// 停止工作变量（boss技能专用）
+    /// </summary>
     public bool lostEffect = false;
 
+    /// <summary>
+    /// 增加成本变量（Boss技能专用）
+    /// </summary>
     public bool addCost = false;
+    
+    /// <summary>
+    /// 增加成本BuffID
+    /// </summary>
     private int addCostBuffId = 998;
+  
+    /// <summary>
+    /// 停止工作BuffID
+    /// </summary>
     private int addRangeBuffId = 996;
+    
+    /// <summary>
+    /// 在这个地块上的角色
+    /// </summary>
     public BaseMapRole baseMapRole;
 
 
     public int weighting;
-
-    public bool isNearWater;
+ 
     // Start is called before the first frame update
     private void Awake()
     {
