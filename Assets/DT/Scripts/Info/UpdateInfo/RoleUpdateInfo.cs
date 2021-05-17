@@ -9,64 +9,177 @@ using UnityEngine.UI;
 
 public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 {
+    /// <summary>
+    /// 种子商模板
+    /// </summary>
     public GameObject seed;
+
+    /// <summary>
+    /// 农民模板
+    /// </summary>
     public GameObject peasant;
+
+    /// <summary>
+    /// 贸易商模板
+    /// </summary>
     public GameObject merchant;
+
+    /// <summary>
+    /// 零售商
+    /// </summary>
     public GameObject dealer;
+
+
+    /// <summary>
+    /// 服务
+    /// </summary>
+    public GameObject service;
+
+    /// <summary>
+    /// 改弹种
+    /// </summary>
+    public GameObject changeBulletType;
+    /// <summary>
+    /// 当前传入的角色
+    /// </summary>
     public Role currentRole;
 
+    /// <summary>
+    /// 详细信息名字
+    /// </summary>
     public Text name;
-    public int nextLevel;
+
+    /// <summary>
+    /// 当前等级
+    /// </summary>
     public int currentLevel;
+
+
+    /// <summary>
+    /// 关闭按钮
+    /// </summary>
     public Button close;
+
+    /// <summary>
+    /// 删除角色按钮
+    /// </summary>
     public Button delete;
+
+    /// <summary>
+    /// 等级
+    /// </summary>
     public Text level;
 
+    /// <summary>
+    /// 技能描述
+    /// </summary>
     public Text skillDesc;
 
-    public Button hammer;
+    /// <summary>
+    /// 下一个等级
+    /// </summary>
+    public int nextLevel;
+
+    /// <summary>
+    /// 升级按钮
+    /// </summary>
     public Button update;
+
+    /// <summary>
+    /// 角色名称
+    /// </summary>
     public string roleName;
 
+    /// <summary>
+    /// 弹药UI
+    /// </summary>
     public Sprite AOE;
+
     public Sprite normallpp;
     public Sprite lightning;
     public Sprite tow;
-    public Sprite seedSpeed;
-    public Sprite melonSpeed;
 
+    /// <summary>
+    /// 种子商速度UI
+    /// </summary>
+    public Sprite seedSpeed;
+
+
+    /// <summary>
+    /// 角色信息
+    /// </summary>
     public Image roleImg;
 
+    /// <summary>
+    /// 角色BuffUI列表
+    /// </summary>
     public List<Image> roleBuff;
 
+    /// <summary>
+    /// Buff生成位置
+    /// </summary>
     public Transform buffTF;
 
+    /// <summary>
+    /// buff预制体
+    /// </summary>
     public GameObject buffPrb;
 
+    /// <summary>
+    /// 空buffUI
+    /// </summary>
     public Sprite buffNull;
 
+    /// <summary>
+    /// Buff内容;
+    /// </summary>
     public GameObject buffcontent;
+
+    /// <summary>
+    /// Buff文本
+    /// </summary>
     public Text buffcontentText;
 
+    /// <summary>
+    /// 更改角色装备按钮
+    /// </summary>
     public Button changeRoleButton;
 
+    /// <summary>
+    /// 创建交易按钮
+    /// </summary>
     public Button createTradeButton;
 
+    /// <summary>
+    /// 清空仓库
+    /// </summary>
     public Button clearWarehouse;
 
+    /// <summary>
+    /// 售卖角色
+    /// </summary>
     public Button sellRole;
 
+    /// <summary>
+    /// 激励等级UI
+    /// </summary>
     public EncourageLevel encourageLevel;
 
+    /// <summary>
+    /// 没有使用装备
+    /// </summary>
     public GameObject emptyEquip;
 
-    public GameObject danzhongprb;
 
-    public Transform danzhongTF;
-
-
+    /// <summary>
+    /// 激励等级文本
+    /// </summary>
     public Text jiliLevel;
-  
+
+
+    public GameObject self;
+
+    public GameObject npc;
 
     // Start is called before the first frame update
     void Start()
@@ -208,6 +321,23 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public void Init(Role role)
     {
+        if (role.isNpc)
+        {
+            npc.SetActive(true);
+            self.SetActive(false);
+            update.gameObject.SetActive(false);
+            changeRoleButton.gameObject.SetActive(false);
+            delete.gameObject.SetActive(false);
+        }
+        else
+        {
+            npc.SetActive(false);
+            self.SetActive(true);
+            update.gameObject.SetActive(true);
+            changeRoleButton.gameObject.SetActive(true);
+            delete.gameObject.SetActive(true);
+        }
+
         jiliLevel.text = PlayerData.My.GetMapRoleById(role.ID).encourageLevel.ToString();
         name.text = role.baseRoleData.roleName;
         roleName = role.baseRoleData.roleName;
@@ -221,23 +351,24 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         peasant.SetActive(false);
         merchant.SetActive(false);
         dealer.SetActive(false);
+        service.SetActive(false);
+        changeBulletType.SetActive(false);
         nextLevel = role.baseRoleData.level + 1;
         currentLevel = role.baseRoleData.level;
         if (GetComponentInChildren<UpdateRole>())
         {
             GetComponentInChildren<UpdateRole>().Init();
         }
+
         sellRole.gameObject.SetActive(false);
         ReInit(role);
         if (currentLevel >= StageGoal.My.maxRoleLevel)
         {
             update.interactable = false;
-            hammer.interactable = false;
         }
         else
         {
             update.interactable = true;
-            hammer.interactable = true;
         }
 
         InitBuff();
@@ -306,32 +437,48 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             level.color = Color.white;
         }
 
-        if (role.baseRoleData.roleType == GameEnum.RoleType.Seed)
+        if (role.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Product)
         {
-            seed.SetActive(true);
-            seed.GetComponent<BaseRoleListInfo>().Init(role);
+            if (role.baseRoleData.roleType == GameEnum.RoleType.Seed)
+            {
+                seed.SetActive(true);
+                seed.GetComponent<BaseRoleListInfo>().Init(role);
+            }
+
+           else if (role.baseRoleData.roleType == GameEnum.RoleType.Peasant)
+            {
+                peasant.SetActive(true);
+                peasant.GetComponent<BaseRoleListInfo>().Init(role);
+            }
+
+            else  if (role.baseRoleData.roleType == GameEnum.RoleType.Merchant)
+            {
+                merchant.SetActive(true);
+                merchant.GetComponent<BaseRoleListInfo>().Init(role);
+            }
+
+            else   if (role.baseRoleData.roleType == GameEnum.RoleType.Dealer)
+            {
+                dealer.SetActive(true);
+                dealer.GetComponent<BaseRoleListInfo>().Init(role);
+            }
+            else
+            {
+                changeBulletType.SetActive(true);
+
+                changeBulletType.GetComponent<BaseRoleListInfo>().Init(role);
+            }
         }
 
-        if (role.baseRoleData.roleType == GameEnum.RoleType.Peasant)
+        if (role.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Service)
         {
-            peasant.SetActive(true);
-            peasant.GetComponent<BaseRoleListInfo>().Init(role);
-        }
+            service.SetActive(true);
 
-        if (role.baseRoleData.roleType == GameEnum.RoleType.Merchant)
-        {
-            merchant.SetActive(true);
-            merchant.GetComponent<BaseRoleListInfo>().Init(role);
-        }
-
-        if (role.baseRoleData.roleType == GameEnum.RoleType.Dealer)
-        {
-            dealer.SetActive(true);
-            dealer.GetComponent<BaseRoleListInfo>().Init(role);
+            service.GetComponent<BaseRoleListInfo>().Init(role);
         }
     }
 
- 
+
     public void ShowBuffText(string text)
     {
         buffcontent.SetActive(true);
