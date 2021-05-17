@@ -10,43 +10,65 @@ using static GameEnum;
 public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
 {
     #region Player datas
+    // 是否使用网络
     public bool isUsingHttp = false;
     public bool isShowFPS = false;
+    // 是否使用本地Json
     public bool useLocalJson = false;
-
+    // 登录记录ID，用于登录登出记录
     public string loginRecordID;
+    // 连接服务器令牌
     private string token;
+    // 所在组ID
     private int groupID = 0;
+    // 设备ID
     private string deviceID;
+    // 玩家ID
     public string playerID;
+    // 限制
     public int playerLimit = 1;
+    // 玩家数据
     public PlayerDatas playerDatas;
+    // 当前所在关卡
     public int currentLevel = 0;
+    // 开始时间（进入关卡）
     public int startTime = 0;
-
+    // 三个问题答案
     public Answers answers;
+    // 当前进度的回答
     public string currentAnswer = "";
-
+    // 解析用
     private LevelProgress levelProgress;
+    // 序列化Json的数据
     public LevelProgresses levelProgresses;
+    // 关卡数据
     public List<LevelProgress> levelProgressList;
-
+    // 个人关卡记录
     public List<ReplayList> replayLists;
-
+    // 全球排名列表
     public GlobalRankList globalList;
+    // 小组排名列表
     public GroupRankList groupList;
+    // 个人小组排名
     public GroupRankList groupRank;
+    // 个人全球排名
     public GlobalRankList globalRank;
+    // 排名当前页（小组）
     public int currentGroupPage = 0;
+    // 排名当前页（全球）
     public int currentGlobalPage = 0;
     
-
+    // 解析用
     private PlayerEquip playerEquip;
+    // 序列化Json后的数据
     public PlayerEquips playerEquips;
+    // 装备列表
     public List<PlayerEquip> playerEquipsList;
+    // 触发教学角色字典
     public Dictionary<RoleType, int> roleFoundDic = new Dictionary<RoleType, int>();
     #endregion
 
+    // 当前点击的关卡ID
     public int currentClickLevelID=0;
     private void Start()
     {
@@ -58,6 +80,7 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     }
 
 
+    // ping server
     public void PingTest(string ip , Action doSuccess, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -184,6 +207,13 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }
     }
 
+    /// <summary>
+    /// 设置玩家所在状态
+    /// </summary>
+    /// <param name="sceneName">场景名</param>
+    /// <param name="teamID">小队ID</param>
+    /// <param name="doSuccess">成功回调</param>
+    /// <param name="doFail">失败回调</param>
     public void SetPlayerStatus(string sceneName, string teamID, Action doSuccess=null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -236,6 +266,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         UpdatePlayerDatas(0, 0, roleFound);
     }
 
+    /// <summary>
+    /// 更新天赋
+    /// </summary>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void UpdateTalent( Action doSuccess = null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -272,6 +307,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post, HttpId.UpdatePlayerTalent));
     }
 
+    /// <summary>
+    /// 更新解锁状态
+    /// </summary>
+    /// <param name="unlockStatus"></param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void UpdateUnlockStatus(string unlockStatus, Action doSuccess = null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -309,7 +350,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post, HttpId.UpdatePlayerUnlockStatus));
     }
 
+    // 是否需要重新登陆
     public bool needReLogin = false;
+    /// <summary>
+    /// 重连
+    /// </summary>
+    /// <param name="doSuccess"></param>
     public void ReConnect(Action doSuccess=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -348,6 +394,10 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
 
+    /// <summary>
+    /// 重连到主界面
+    /// </summary>
+    /// <param name="doSuccess"></param>
     public void ConnectToMap(Action doSuccess = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -379,6 +429,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
 
+    /// <summary>
+    ///  获取所有JSON数据
+    /// </summary>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void GetJsonDatas(Action<string> doSuccess, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -576,6 +631,12 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post, HttpId.updatePlayerDatasID));
     }
 
+    /// <summary>
+    /// 更新玩家教学进度
+    /// </summary>
+    /// <param name="fte"></param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void UpdatePlayerFTE(string fte, Action doSuccess = null, Action doFail = null)
     {
         Debug.Log("更新fte" + fte);
@@ -705,6 +766,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post, HttpId.getAnswerID));
     }
 
+    /// <summary>
+    /// 获取追赶等级
+    /// </summary>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void GetCatchLevel(Action<int> doSuccess, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -733,6 +799,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Get, HttpId.getCatchLevelID));
     }
     public PlayerGroupInfo playerGroupInfo;
+    /// <summary>
+    ///  获取玩家所在小组信息
+    /// </summary>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void GetPlayerGroupInfo(Action doSuccess, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -764,6 +835,9 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     }
     #endregion
 
+    /// <summary>
+    /// 未用
+    /// </summary>
     #region team
     public List<TeamAcount> teamAcounts = new List<TeamAcount>();
     public TeamAcount currentBattleTeamAcount;
@@ -1263,6 +1337,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Get, HttpId.getGlobalRankingID));
     }
 
+    /// <summary>
+    /// 获取个人全球排名
+    /// </summary>
+    /// <param name="sceneName"></param>
+    /// <param name="doSuccess"></param>
     public void GetGlobalRank(string sceneName, Action doSuccess)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -1301,6 +1380,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Get, HttpId.getplayerGlobalRankingID));
     }
 
+    /// <summary>
+    /// 获取个人小组排名
+    /// </summary>
+    /// <param name="sceneName"></param>
+    /// <param name="doSuccess"></param>
     public void GetGroupRank(string sceneName, Action doSuccess)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -1355,6 +1439,14 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         return null;
     }
 
+    /// <summary>
+    /// 添加教学记录
+    /// </summary>
+    /// <param name="useTime">用时</param>
+    /// <param name="levelName">关卡名</param>
+    /// <param name="isPass">是否通过</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void AddTeachLevel(int useTime, string levelName, int isPass, Action doSuccess=null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -1391,6 +1483,14 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     #endregion
 
     #region match
+    /// <summary>
+    /// 上传分数
+    /// </summary>
+    /// <param name="score">分数</param>
+    /// <param name="bossLevel">boss等级</param>
+    /// <param name="isEnd">是否结束</param>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void AddScore(int score, int bossLevel, bool isEnd, Action doSuccess=null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -1439,6 +1539,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     }
     public List<PlayerRTScore> playerRTScores = new List<PlayerRTScore>();
     public bool stopMatch = false;
+    /// <summary>
+    /// 获取小组所有人的分数等信息
+    /// </summary>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void GetGroupRTScore( Action doSuccess=null, Action doFail=null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -1509,6 +1614,11 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Get, HttpId.GetGroupPlayerScore));
     }
 
+    /// <summary>
+    /// 获取小组比赛是否结束
+    /// </summary>
+    /// <param name="doSuccess"></param>
+    /// <param name="doFail"></param>
     public void GetGroupScoreStatus( Action doSuccess = null, Action doFail = null)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -1713,11 +1823,18 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     #endregion
 
     #region other
+    /// <summary>
+    /// 关卡开始时间
+    /// </summary>
     public void LevelStartTime()
     {
         startTime = TimeStamp.GetCurrentTimeStamp();
     }
 
+    /// <summary>
+    ///  去登陆
+    /// </summary>
+    /// <param name="tip"></param>
     private void GoToLogin(string tip)
     {
        
@@ -1727,16 +1844,27 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
             SceneManager.LoadScene("Login"); });
     }
 
+    /// <summary>
+    /// 重连
+    /// </summary>
+    /// <param name="str">显示信息</param>
     private void ShowReconn(string str=null)
     {
         HttpManager.My.ShowReConn(str);
     }
 
+    /// <summary>
+    /// 设置遮罩（关闭）
+    /// </summary>
     private void SetMask()
     {
         HttpManager.My.mask.SetActive(false);
     }
 
+    /// <summary>
+    /// 测试
+    /// </summary>
+    /// <param name="json"></param>
     public void TestPost(string json)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -1749,6 +1877,10 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         }, keyValues, HttpType.Post));
     }
 
+    /// <summary>
+    /// 测试
+    /// </summary>
+    /// <param name="action"></param>
     public void TestGet(Action<string> action)
     {
         SortedDictionary<string, string> keyValues = new SortedDictionary<string, string>();
@@ -1762,6 +1894,9 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
     }
     #endregion
 
+    /// <summary>
+    /// 程序退出时，向服务器发送退出信息
+    /// </summary>
     private void OnApplicationQuit()
     {
         if(isUsingHttp&&playerID!=null)

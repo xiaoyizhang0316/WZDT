@@ -6,10 +6,15 @@ using UnityEngine.UI;
 
 public class RTPanel : MonoBehaviour
 {
+    // 生成list的content
     public Transform content;
+    // 要生成在列表里的预制体，显示详细信息
     public GameObject rtPrefab;
+    // 开启竞赛排名按钮
     public Button rank_btn;
+    // 关闭界面按钮
     public Button close_btn;
+    // 正在更新
     bool isOnUpdate = false;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +28,10 @@ public class RTPanel : MonoBehaviour
         });
         close_btn.onClick.AddListener(Close);
     }
-
+    
+    /// <summary>
+    /// 初始化界面
+    /// </summary>
     public void InitRTPanel()
     {
         NetworkMgr.My.GetGroupScoreStatus();
@@ -49,6 +57,9 @@ public class RTPanel : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// 更新小组排名
+    /// </summary>
     private void UpdateGroupPlayerScore()
     {
         NetworkMgr.My.GetGroupRTScore(()=> {
@@ -66,6 +77,9 @@ public class RTPanel : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// 显示列表
+    /// </summary>
     void ShowRtList()
     {
         for(int i=0; i< NetworkMgr.My.playerRTScores.Count; i++)
@@ -74,6 +88,11 @@ public class RTPanel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 初始化每个玩家的详细信息
+    /// </summary>
+    /// <param name="prt"></param>
+    /// <param name="rank"></param>
     void InitRtItem(PlayerRTScore prt, int rank)
     {
         GameObject go = Instantiate(rtPrefab, content);
@@ -81,6 +100,9 @@ public class RTPanel : MonoBehaviour
         rts.Setup(prt, rank);
     }
 
+    /// <summary>
+    /// 清除列表界面
+    /// </summary>
     void ClearContent()
     {
         foreach(Transform child in content)
@@ -89,6 +111,9 @@ public class RTPanel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 关闭
+    /// </summary>
     public void Close()
     {
         if (isOnUpdate)

@@ -6,32 +6,49 @@ using UnityEngine.UI;
 
 public class RankPanel : MonoSingleton<RankPanel>
 {
+    // 标题
     public Text title;
+    // 排名图片（1，2，3）
     public List<Sprite> rankSprites;
+    // 个人记录开关
     public Toggle record_toggle;
+    // 小组排名开关
     public Toggle group_toggle;
+    // 全球排名开关
     public Toggle global_toggle;
+    // 加载列表的content
     public Transform listContent;
+    // 预制体
     public GameObject rankPrefab;
-
+    // 玩家排名
     public GameObject playerRankObj;
+    // 上一页/下一页 按钮的父物体
     public GameObject pageButtons;
+    // 上一页按钮
     public Button prePage;
+    // 下一页按钮
     public Button nextPage;
+    // 刷新按钮
     public Button refresh_btn;
-
+    // 当前场景名
     public string currentSceneName = "";
+    // 上次场景名
     public string lastSceneName = "";
-
+    // 当前展示页数
     private int currentShowIndex = -1;
+    // 刷新时间
     private static int timeInterval = 10;
 
     //private List<ReplayList> replayLists = new List<ReplayList>();
+    // 小组排名列表
     public List<RankList> groupList = new List<RankList>();
+    // 全球排名列表
     public List<RankList> globalList = new List<RankList>();
-
+    // 获取个人记录
     bool getRecord = false;
+    // 获取小组记录
     bool getGroup = false;
+    // 获取全球记录
     bool getGlobal = false;
 
     // Start is called before the first frame update
@@ -50,6 +67,10 @@ public class RankPanel : MonoSingleton<RankPanel>
         //ShowRankPanel("FTE_1");
     }
 
+    /// <summary>
+    /// 显示排名界面
+    /// </summary>
+    /// <param name="sceneName">场景名</param>
     public void ShowRankPanel(string sceneName)
     {
         currentSceneName = sceneName;
@@ -75,6 +96,10 @@ public class RankPanel : MonoSingleton<RankPanel>
         }
     }
 
+    /// <summary>
+    /// 选择Record toggle
+    /// </summary>
+    /// <param name="isOn"></param>
     void Record(bool isOn)
     {
         if (currentShowIndex == 0)
@@ -124,6 +149,10 @@ public class RankPanel : MonoSingleton<RankPanel>
         }
     }
 
+    /// <summary>
+    /// 选择小组toggle
+    /// </summary>
+    /// <param name="isOn"></param>
     void Group(bool isOn)
     {
         if (currentShowIndex == 1)
@@ -172,6 +201,10 @@ public class RankPanel : MonoSingleton<RankPanel>
         //SetButton(true);
     }
 
+    /// <summary>
+    ///  选择全球toggle
+    /// </summary>
+    /// <param name="isOn"></param>
     void Global(bool isOn)
     {
         if (currentShowIndex == 2)
@@ -232,6 +265,9 @@ public class RankPanel : MonoSingleton<RankPanel>
 
     }
 
+    /// <summary>
+    /// 刷新
+    /// </summary>
     public void Refresh()
     {
         PlayerPrefs.SetInt("rankFreshTime", TimeStamp.GetCurrentTimeStamp());
@@ -337,6 +373,9 @@ public class RankPanel : MonoSingleton<RankPanel>
         }
     }
 
+    /// <summary>
+    /// 上一页
+    /// </summary>
     void PrePage()
     {
         if (currentShowIndex == 1)
@@ -353,6 +392,9 @@ public class RankPanel : MonoSingleton<RankPanel>
         }
     }
 
+    /// <summary>
+    /// 下一页
+    /// </summary>
     void NextPage()
     {
         //Debug.Log("next");
@@ -409,6 +451,10 @@ public class RankPanel : MonoSingleton<RankPanel>
         }
     }
 
+    /// <summary>
+    /// 显示自己的排名
+    /// </summary>
+    /// <param name="isGroup"></param>
     void ShowMyRank(bool isGroup)
     {
         if (isGroup)
@@ -435,6 +481,10 @@ public class RankPanel : MonoSingleton<RankPanel>
         }
     }
 
+    /// <summary>
+    /// 设置toggle层级
+    /// </summary>
+    /// <param name="toggle"></param>
     void SetToggleStatus(Transform toggle)
     {
         record_toggle.transform.SetAsFirstSibling();
@@ -444,6 +494,10 @@ public class RankPanel : MonoSingleton<RankPanel>
         toggle.SetAsLastSibling();
     }
 
+    /// <summary>
+    /// 是否显示按钮
+    /// </summary>
+    /// <param name="show"></param>
     void SetButton(bool show)
     {
         playerRankObj.SetActive(show);
@@ -462,6 +516,9 @@ public class RankPanel : MonoSingleton<RankPanel>
         //}
     }
 
+    /// <summary>
+    /// 显示个人记录
+    /// </summary>
     void ShowRecordList()
     {
         int childCount = listContent.childCount;
@@ -493,6 +550,10 @@ public class RankPanel : MonoSingleton<RankPanel>
         }
     }
 
+    /// <summary>
+    /// 显示排名界面
+    /// </summary>
+    /// <param name="isGroup"></param>
     void ShowRankList(bool isGroup)
     {
         int childCount = listContent.childCount;
@@ -581,6 +642,9 @@ public class RankPanel : MonoSingleton<RankPanel>
         }
     }
 
+    /// <summary>
+    /// 隐藏列表所有的game object
+    /// </summary>
     void HideAllList()
     {
         for (int i = 0; i < listContent.childCount; i++)
@@ -589,6 +653,10 @@ public class RankPanel : MonoSingleton<RankPanel>
         }
     }
 
+    /// <summary>
+    /// 刷新翻页按钮
+    /// </summary>
+    /// <param name="isGroup"></param>
     void RefreshPageButtons(bool isGroup)
     {
         if (isGroup)
@@ -659,6 +727,9 @@ public class RankPanel : MonoSingleton<RankPanel>
         }
     }
 
+    /// <summary>
+    /// 刷新倒计时
+    /// </summary>
     void RefreshTimeCount()
     {
         int currentTime = TimeStamp.GetCurrentTimeStamp();
@@ -675,6 +746,10 @@ public class RankPanel : MonoSingleton<RankPanel>
         }
     }
     int timeCountDown = 0;
+    /// <summary>
+    /// 倒计时
+    /// </summary>
+    /// <param name="interval"></param>
     void TimeCountDown(int interval)
     {
         CancelInvoke("RankCountDown");
@@ -683,6 +758,9 @@ public class RankPanel : MonoSingleton<RankPanel>
         InvokeRepeating("RankCountDown", 0, 1);
     }
 
+    /// <summary>
+    /// 刷新排名倒计时
+    /// </summary>
     void RankCountDown()
     {
         timeCountDown -= 1;
