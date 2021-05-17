@@ -240,7 +240,7 @@ public class BaseMapRole : MonoBehaviour
     {
         int result = startEncourageLevel;
         result += baseRoleData.gearEncourageAdd;
-        if (CheckAllTradeBest())
+        if (CheckAllTradeBest()&& !BaseLevelController.My.stageSpecialTypes.Contains(StageSpecialType.IgnoreMoneyFirst))
         {
             result++;
         }

@@ -9,6 +9,7 @@ public class DividedProfitCheck : SkillCheckBase
     protected override void InitCheck()
     {
         startDividedProfit = SkillCheckManager.My.dividedProfit;
+        SkillCheckManager.My.checkDivide=true;
     }
 
     private int currentDividedProfit;
@@ -18,5 +19,10 @@ public class DividedProfitCheck : SkillCheckBase
         currentText.text = "当前：" +currentDividedProfit;
         isSuccess = currentDividedProfit >= int.Parse(target);
         base.Check();
+    }
+
+    protected override void EndCheck()
+    {
+        SkillCheckManager.My.checkDivide=false;
     }
 }

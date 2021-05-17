@@ -5,28 +5,35 @@ using UnityEngine.UI;
 
 public class SkillCheckBase : MonoBehaviour
 {
+    // 检测目标
     public string target;
     //public string current;
-
+    // 是否显示百分比
     public bool isPercent;
-
+    // 检测条件内容
     public string checkContent;
-
+    // 相关角色
     public BaseMapRole dependRole;
-
+    // 角色 ID
     public double roleID;
-
+    // 是否成功
     public bool isSuccess;
-
+    // 内容组件
     public Text contentText;
     public Text currentText;
     public Image roleIcon;
     public List<GameObject> leftCountStatus=new List<GameObject>(); 
+    // 要检测的回合数
     public int checkTurn;
+    // 已检测的回合
     public int checkedTurn;
+    // 回合是否结束
     public bool isTurnEnd;
+    // 检测的详情
     public CheckDetail detail;
+    // 要检测的次数
     public int checkCount;
+    // 已检测的次数
     public int checkedCount;
 
     /// <summary>
@@ -93,6 +100,7 @@ public class SkillCheckBase : MonoBehaviour
             if (checkedTurn >= checkTurn)
             {
                 CancelInvoke();
+                EndCheck();
                 NotifyRoleEnd();
             }
         }
@@ -154,8 +162,17 @@ public class SkillCheckBase : MonoBehaviour
         }
         if (detail.isMainTarget)
         {
+            bool isDestroy;
             SkillCheckManager.My.NotifyEnd(dependRole);
         }
+    }
+
+    /// <summary>
+    /// 结束一次检测的时候，针对不同的检测，还原设置
+    /// </summary>
+    protected virtual void EndCheck()
+    {
+        
     }
 
     /// <summary>
