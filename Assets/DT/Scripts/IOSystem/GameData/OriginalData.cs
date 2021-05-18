@@ -25,6 +25,8 @@ public class OriginalData : MonoSingleton<OriginalData>
 
     public EncourageSkillsData encourageSkillRawData;
 
+    public RequirementsData requirementRawData;
+
     public AnswerStage[] answerStages;
 
     public QuestionList questionList;
@@ -106,6 +108,12 @@ public class OriginalData : MonoSingleton<OriginalData>
     {
         encourageSkillRawData = JsonUtility.FromJson<EncourageSkillsData>(jsonDatas.EncourageSkillData);
         GameDataMgr.My.ParseEncourageSkillData(encourageSkillRawData);
+    }
+
+    void ReadRequirementJson()
+    {
+        requirementRawData = JsonUtility.FromJson<RequirementsData>(jsonDatas.RequirementData);
+        GameDataMgr.My.ParseRequirementData(requirementRawData);
     }
 
 

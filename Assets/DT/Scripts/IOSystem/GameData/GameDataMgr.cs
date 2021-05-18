@@ -46,6 +46,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
 
     public List<EncourageSkillData> encourageSkillDatas;
 
+    public List<RequirementData> requirementDatas;
+
     public Dictionary<ConsumerType, float> consumerWaitTime = new Dictionary<ConsumerType, float>();
 
     /// <summary>
@@ -246,6 +248,24 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             }
         }
         print("----------------查不到此激励等级技能数据！----------------");
+        return null;
+    }
+
+    /// <summary>
+    /// 根据需求ID查找需求数据
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public RequirementData GetRequirementDataById(int id)
+    {
+        foreach (RequirementData item in requirementDatas)
+        {
+            if (item.requirementId == id)
+            {
+                return item;
+            }
+        }
+        print("----------------查不到此需求数据！----------------");
         return null;
     }
 
@@ -549,6 +569,22 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.specialAddType = item.specialAddType;
             temp.specialAdd = float.Parse(item.specialAdd);
             encourageSkillDatas.Add(temp);
+        }
+    }
+
+    public void ParseRequirementData(RequirementsData rawData)
+    {
+        requirementDatas = new List<RequirementData>();
+        foreach (RequirementItem item in rawData.requirementDataSigns)
+        {
+            RequirementData temp = new RequirementData();
+            temp.requirementId = int.Parse(item.requirementId);
+            temp.targetBuffId = int.Parse(item.targetBuffId);
+            temp.requirementDesc = item.requirementDesc;
+            temp.requireList = new List<string>();
+            List<string> strList = item.requireList.Split(',').ToList();
+            temp.requireList.AddRange(strList);
+            requirementDatas.Add(temp);
         }
     }
 

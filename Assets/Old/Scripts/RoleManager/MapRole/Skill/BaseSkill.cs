@@ -24,10 +24,13 @@ public abstract class BaseSkill : MonoBehaviour
     /// </summary>
     public List<int> buffList;
 
+    /// <summary>
+    /// 当角色激活时有动画效果的物体
+    /// </summary>
     public List<GameObject> animationPart = new List<GameObject>();
 
     // Start is called before the first frame update
-    public void Start()
+    public virtual void Start()
     {
         role = GetComponent<BaseMapRole>();
         if (IsOpen)
