@@ -1314,4 +1314,22 @@ public class BaseMapRole : MonoBehaviour
         }
         return null;
     }
+
+    /// <summary>
+    /// 判断角色上是否连接某个交易
+    /// </summary>
+    /// <param name="tradeID">交易的ID</param>
+    /// <returns></returns>
+    public bool ContainsTrade(int tradeID)
+    {
+        foreach (TradeSign sign in tradeList) 
+        {
+            if (sign.tradeData.ID == tradeID)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

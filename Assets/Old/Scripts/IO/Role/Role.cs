@@ -223,4 +223,24 @@ public class Role
 
         return false;
     }
+
+    public void RemoveEquip(int id, bool isEquip)
+    {
+        if (isEquip)
+        {
+            if (EquipList.ContainsKey(id))
+            {
+                EquipList.Remove(id);
+                EquipListManager.My.UninstallEquip(id);
+            }
+        }
+        else
+        {
+            if (peoPleList.ContainsKey(id))
+            {
+                peoPleList.Remove(id);
+                WorkerListManager.My.UninstallWorker(id);
+            }
+        }
+    }
 }
