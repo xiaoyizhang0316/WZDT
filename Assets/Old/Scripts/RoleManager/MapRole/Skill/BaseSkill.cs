@@ -5,14 +5,27 @@ using UnityEngine;
 
 public abstract class BaseSkill : MonoBehaviour
 {
+    /// <summary>
+    /// 角色
+    /// </summary>
     public BaseMapRole role;
 
+    /// <summary>
+    /// 是否打开
+    /// </summary>
     public bool IsOpen;
 
+    /// <summary>
+    /// 是否开始
+    /// </summary>
     public bool isPlay;
 
+    
     public bool isAvaliable = true;
 
+    /// <summary>
+    /// 是否播放动画
+    /// </summary>
     public bool isAnimPlaying = false;
 
     /// <summary>
@@ -44,6 +57,9 @@ public abstract class BaseSkill : MonoBehaviour
     /// </summary>
     public abstract void Skill();
 
+    /// <summary>
+    /// 释放技能
+    /// </summary>
     public virtual void UnleashSkills()
     {
         isPlay = true;

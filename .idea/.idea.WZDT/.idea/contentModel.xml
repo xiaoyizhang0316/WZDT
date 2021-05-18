@@ -10,6 +10,7 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="a" t="Include">
+          <e p="Button_Test.cs" t="Include" />
           <e p="ClickPos.cs" t="Include" />
           <e p="LookA.cs" t="Include" />
           <e p="Map.cs" t="Include" />
@@ -395,6 +396,7 @@
                 <e p="BaseExtraSkill.cs" t="Include" />
                 <e p="ConsumerBuffReward.cs" t="Include" />
                 <e p="ExtraConsumer.cs" t="Include" />
+                <e p="FinancialCompanySkill.cs" t="Include" />
                 <e p="ItemFactory.cs" t="Include" />
                 <e p="RubishProcess.cs" t="Include" />
                 <e p="RubishProcessItem.cs" t="Include" />
@@ -470,6 +472,9 @@
               <e p="FTE_3" t="Include">
                 <e p="FTE_3_Step_1.cs" t="Include" />
                 <e p="FTE_3_Step_2.cs" t="Include" />
+                <e p="New" t="Include">
+                  <e p="Step_FTE3_2.cs" t="Include" />
+                </e>
               </e>
               <e p="FTE_4" t="Include">
                 <e p="FTE_4_Step_1.cs" t="Include" />
@@ -508,6 +513,7 @@
                   <e p="BaseTween.cs" t="Include" />
                   <e p="ChangeColor.cs" t="Include" />
                   <e p="ChangeScale.cs" t="Include" />
+                  <e p="IsPointOn.cs" t="Include" />
                   <e p="MoveBetweenTwoPoint.cs" t="Include" />
                   <e p="SequenceFrame.cs" t="Include" />
                 </e>
@@ -534,9 +540,12 @@
               </e>
               <e p="ComboManager.cs" t="Include" />
               <e p="NPCListInfo" t="Include">
+                <e p="AddMaga.cs" t="Include" />
+                <e p="BaseFinancialCompanyThreshold.cs" t="Include" />
                 <e p="BuffText.cs" t="Include" />
                 <e p="NpcBulletDetail.cs" t="Include" />
                 <e p="NpcBulletSign.cs" t="Include" />
+                <e p="NpcFinancialCompany.cs" t="Include" />
                 <e p="NPCListInfo.cs" t="Include" />
                 <e p="NpcLockedInfo.cs" t="Include" />
                 <e p="NpcPop.cs" t="Include" />
@@ -560,6 +569,7 @@
                 <e p="RoleListInfoMerchant.cs" t="Include" />
                 <e p="RoleListInfoPeasant.cs" t="Include" />
                 <e p="RoleListInfoSeed.cs" t="Include" />
+                <e p="RoleListInfoService.cs" t="Include" />
               </e>
               <e p="RoleTemplateInfo.cs" t="Include" />
               <e p="TurnInOut" t="Include">
@@ -888,6 +898,15 @@
                 <e p="T7_Task3.cs" t="Include" />
                 <e p="T7_Task4.cs" t="Include" />
                 <e p="T7_Task5.cs" t="Include" />
+              </e>
+              <e p="FTE_4" t="Include">
+                <e p="T4_1.cs" t="Include" />
+                <e p="T4_2.cs" t="Include" />
+                <e p="T4_3.cs" t="Include" />
+                <e p="T4_4.cs" t="Include" />
+                <e p="T4_5.cs" t="Include" />
+                <e p="T4_6.cs" t="Include" />
+                <e p="T4_7.cs" t="Include" />
               </e>
             </e>
             <e p="OldFTE" t="Include">
@@ -2667,6 +2686,17 @@
                   <e p="ProductMerchant.cs" t="Include" />
                   <e p="ProductSeed.cs" t="Include" />
                   <e p="SeedChangeManager.cs" t="Include" />
+                  <e p="SkillCheck" t="Include">
+                    <e p="DividedProfitCheck.cs" t="Include" />
+                    <e p="GetMegaCheck.cs" t="Include" />
+                    <e p="GetScoreCheck.cs" t="Include" />
+                    <e p="KillCheck.cs" t="Include" />
+                    <e p="NonConsumerCheck.cs" t="Include" />
+                    <e p="SkillCheckBase.cs" t="Include" />
+                    <e p="SkillCheckManager.cs" t="Include" />
+                    <e p="SpecialBulletKillCheck.cs" t="Include" />
+                    <e p="TasteKillCheck.cs" t="Include" />
+                  </e>
                 </e>
               </e>
               <e p="MelonRoleManager.cs" t="Include" />
@@ -2776,6 +2806,18 @@
                 <e p="TradeSign.cs" t="Include" />
               </e>
               <e p="UIManager.cs" t="Include" />
+            </e>
+          </e>
+          <e p="StreamingAssets" t="Include">
+            <e p="Data" t="Include">
+              <e p="ConsumableData.json" t="Include" />
+              <e p="ConsumerTypeData.json" t="Include" />
+              <e p="EquipData.json" t="Include" />
+              <e p="RoleTemplateData.json" t="Include" />
+              <e p="SkillData.json" t="Include" />
+              <e p="StageData.json" t="Include" />
+              <e p="TradeSkillData.json" t="Include" />
+              <e p="WorkerData.json" t="Include" />
             </e>
           </e>
           <e p="Test" t="Include">
@@ -2893,6 +2935,87 @@
         </e>
         <e p="StreamingAssets" t="Include">
           <e p="build_info.txt" t="Include" />
+          <e p="Data" t="Include">
+            <e p="BuffData.json" t="Include" />
+            <e p="ConsumableData.json" t="Include" />
+            <e p="ConsumerTypeData.json" t="Include" />
+            <e p="EquipData.json" t="Include" />
+            <e p="FTEText_0-1.json" t="Include" />
+            <e p="FTEText_0-2.json" t="Include" />
+            <e p="FTEText_1.json" t="Include" />
+            <e p="FTEText_2.json" t="Include" />
+            <e p="FTEText_3.json" t="Include" />
+            <e p="FTEText_4.json" t="Include" />
+            <e p="FTEText_5.json" t="Include" />
+            <e p="FTEText_6.json" t="Include" />
+            <e p="FTEText_7.json" t="Include" />
+            <e p="FTEText_8.json" t="Include" />
+            <e p="FTEText_9.json" t="Include" />
+            <e p="FTEText_Map.json" t="Include" />
+            <e p="QuestionData.json" t="Include" />
+            <e p="Questions---.json" t="Include" />
+            <e p="Questions.json" t="Include" />
+            <e p="Questions1.json" t="Include" />
+            <e p="RoleTemplateData.json" t="Include" />
+            <e p="SkillData.json" t="Include" />
+            <e p="StageData.json" t="Include" />
+            <e p="StageEnemy" t="Include">
+              <e p="FTE_0.json" t="Include" />
+              <e p="FTE_1.json" t="Include" />
+              <e p="FTE_10.json" t="Include" />
+              <e p="FTE_2.json" t="Include" />
+              <e p="FTE_20.json" t="Include" />
+              <e p="FTE_3.json" t="Include" />
+              <e p="FTE_4.json" t="Include" />
+              <e p="FTE_5.json" t="Include" />
+              <e p="FTE_6.json" t="Include" />
+              <e p="FTE_7.json" t="Include" />
+              <e p="FTE_8.json" t="Include" />
+              <e p="FTE_9.json" t="Include" />
+            </e>
+            <e p="StageNPC" t="Include">
+              <e p="FTE_1.json" t="Include" />
+              <e p="FTE_2.json" t="Include" />
+              <e p="FTE_3.json" t="Include" />
+              <e p="FTE_4.json" t="Include" />
+              <e p="FTE_5.json" t="Include" />
+              <e p="FTE_6.json" t="Include" />
+              <e p="FTE_7.json" t="Include" />
+              <e p="FTE_8.json" t="Include" />
+              <e p="FTE_9.json" t="Include" />
+            </e>
+            <e p="TradeSkillData.json" t="Include" />
+            <e p="TranslateData.json" t="Include" />
+            <e p="WorkerData.json" t="Include" />
+          </e>
+          <e p="FTEConfig" t="Include">
+            <e p="dsadasd.json" t="Include" />
+            <e p="FTE_-1.json" t="Include" />
+            <e p="FTE_-2.json" t="Include" />
+            <e p="FTE_0.5.json" t="Include" />
+            <e p="FTE_0.6.json" t="Include" />
+            <e p="FTE_0.6_old.json" t="Include" />
+            <e p="FTE_0.7.json" t="Include" />
+            <e p="FTE_0.json" t="Include" />
+            <e p="FTE_1.1.json" t="Include" />
+            <e p="FTE_1.2.json" t="Include" />
+            <e p="FTE_1.3.json" t="Include" />
+            <e p="FTE_1.5.json" t="Include" />
+            <e p="FTE_1.6.json" t="Include" />
+            <e p="FTE_1.json" t="Include" />
+            <e p="FTE_2.5.json" t="Include" />
+            <e p="FTE_2.json" t="Include" />
+            <e p="FTE_3.5.json" t="Include" />
+            <e p="FTE_3.json" t="Include" />
+            <e p="FTE_4.5.json" t="Include" />
+            <e p="FTE_4.json" t="Include" />
+            <e p="FTE_5.json" t="Include" />
+            <e p="FTE_6.json" t="Include" />
+            <e p="FTE_7.json" t="Include" />
+            <e p="FTE_8.json" t="Include" />
+            <e p="FTE_9.json" t="Include" />
+          </e>
+          <e p="Questions.json" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
@@ -2920,6 +3043,7 @@
           </e>
           <e p="Sprites" t="Include">
             <e p="EmojiOne Attribution.txt" t="Include" />
+            <e p="EmojiOne.json" t="Include" />
           </e>
         </e>
         <e p="Unity.IO.Compression" t="Include">

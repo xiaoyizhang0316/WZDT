@@ -69,6 +69,15 @@ public class RoleListInfoMerchant : BaseRoleListInfo
         {
             ShowLastpruduct(role);
         }
+        if (role.isNpc)
+        {
+            montyCost.gameObject.SetActive(false);
+        }
+        else
+        {
+            montyCost.gameObject.SetActive(true);
+
+        }
     }
     public void UpdateBar(Role role)
     {

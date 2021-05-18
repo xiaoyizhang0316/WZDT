@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public static class CommonParams
@@ -12,6 +13,9 @@ public static class CommonParams
 
     // 血条最大长度
     public const float bloodTotalWidth = 471f;
+    
+    // 匹配括号内容
+    public static Regex BracketsRegex = new Regex(@"\((.*\))");
 
     #region 交易费用计算
     //地图最大距离

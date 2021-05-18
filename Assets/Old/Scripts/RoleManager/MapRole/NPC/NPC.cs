@@ -94,7 +94,8 @@ public class NPC : BaseNpc
                 }
                 else
                 {
-                    NPCListInfo.My.ShowNpcInfo(transform);
+                    //NPCListInfo.My.ShowNpcInfo(transform);
+                    RoleUpdateInfo.My.Init(currentRole);
                 }
             }
             else if (float.Parse(SceneManager.GetActiveScene().name.Split('_')[1]) > 2f)

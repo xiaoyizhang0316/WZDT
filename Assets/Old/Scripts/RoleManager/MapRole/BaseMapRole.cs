@@ -106,6 +106,7 @@ public class BaseMapRole : MonoBehaviour
 
     public GameObject ringEffect;
 
+    public GameObject specialInfo;
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
@@ -239,7 +240,7 @@ public class BaseMapRole : MonoBehaviour
     {
         int result = startEncourageLevel;
         result += baseRoleData.gearEncourageAdd;
-        if (CheckAllTradeBest())
+        if (CheckAllTradeBest()&& !BaseLevelController.My.stageSpecialTypes.Contains(StageSpecialType.IgnoreMoneyFirst))
         {
             result++;
         }

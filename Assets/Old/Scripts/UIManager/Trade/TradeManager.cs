@@ -40,7 +40,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
     }
 
-    public void CheckDeleteNpcRole(TradeSign sign)
+    private void CheckDeleteNpcRole(TradeSign sign)
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole));
@@ -66,7 +66,7 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
     }
 
-    public int CheckTradeCount(string roleId)
+    private int CheckTradeCount(string roleId)
     {
         int result = 0;
         foreach (TradeSign sign in tradeList.Values)
@@ -81,7 +81,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// 删除交易记录操作
     /// </summary>
     /// <param name="ID"></param>
-    public void DeleteTradeRecord(int ID,TradeSign sign)
+    private void DeleteTradeRecord(int ID,TradeSign sign)
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.castRole));
         if (start.baseRoleData.baseRoleData.roleType == RoleType.Bank)
@@ -113,7 +113,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// 检测发起者承受者之间是否已经存在交易
     /// </summary>
     /// <returns></returns>
-    public bool CheckDuplicateTrade()
+    private bool CheckDuplicateTrade()
     {
         foreach (TradeSign sign in tradeList.Values)
         {
@@ -137,7 +137,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// 检测npc是否激活
     /// </summary>
     /// <returns></returns>
-    public bool CheckNpcActive()
+    private bool CheckNpcActive()
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(NewCanvasUI.My.startRole.baseRoleData.ID);
         BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
@@ -164,7 +164,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// 检测发起者和承受者技能类型
     /// </summary>
     /// <returns></returns>
-    public bool CheckStartAndEnd()
+    private bool CheckStartAndEnd()
     {
         if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service &&
             NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
@@ -181,7 +181,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// 检测发起方和承受方是否可以交易
     /// </summary>
     /// <returns></returns>
-    public bool CheckTradeConstraint()
+    private bool CheckTradeConstraint()
     {
         if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product && NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Product)
             return TradeConstraint.My.CheckTradeConstraint(NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleType, NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleType,true);
@@ -193,7 +193,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// 检测技能可施放数量
     /// </summary>
     /// <returns></returns>
-    public bool CheckSkillCountLimit()
+    private bool CheckSkillCountLimit()
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(NewCanvasUI.My.startRole.baseRoleData.ID);
         BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
@@ -220,7 +220,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// 检测玩家金钱是否满足条件
     /// </summary>
     /// <returns></returns>
-    public bool CheckMoneyCondition()
+    private bool CheckMoneyCondition()
     {
         return true;
     }
@@ -265,7 +265,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// 生成交易时检测NPC角色是否添加
     /// </summary>
     /// <param name="sign"></param>
-    public void CheckNpcRole(TradeSign sign)
+    private void CheckNpcRole(TradeSign sign)
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole));
         BaseMapRole end = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.endRole));
@@ -419,6 +419,11 @@ public class TradeManager : MonoSingleton<TradeManager>
         tradeList = new Dictionary<int, TradeSign>();
     }
 
+    /// <summary>
+    /// 检测npc是否存在交易
+    /// </summary>
+    /// <param name="npcID"></param>
+    /// <returns></returns>
     public bool CheckNpcInTrade(string npcID)
     {
         if (tradeList.Count <= 0)
@@ -501,6 +506,9 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
     }
 
+    /// <summary>
+    /// 清除所有交易上的商品
+    /// </summary>
     public void ClearAllGoods()
     {
         foreach (var item in tradeList)
@@ -515,6 +523,9 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
     }
 
+    /// <summary>
+    ///  回收所有交易上的商品
+    /// </summary>
     public void RecycleAllGoods()
     {
         foreach (var item in tradeList)

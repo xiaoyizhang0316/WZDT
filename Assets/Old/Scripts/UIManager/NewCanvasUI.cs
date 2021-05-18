@@ -14,12 +14,36 @@ using static UnityEngine.UIElements.VisualElement;
 public class NewCanvasUI : MonoSingleton<NewCanvasUI>
 {
 
+    
+    /// <summary>
+    /// 选择角色UI
+    /// </summary>
     public GameObject Panel_ChoseRole;
     public Role CurrentClickRole;
+    
+    /// <summary>
+    /// 当前选择的MapRole
+    /// </summary>
     public BaseMapRole currentMapRole;
+    
+    /// <summary>
+    /// 配置装备界面
+    /// </summary>
     public GameObject Panel_AssemblyRole;
+    
+    /// <summary>
+    /// 交易界面
+    /// </summary>
     public GameObject Panel_TradeSetting;
+    
+    /// <summary>
+    /// 角色位置
+    /// </summary>
     public Transform RoleTF;
+    
+    /// <summary>
+    /// 失败界面
+    /// </summary>
     public GameObject lose;
     
     
@@ -44,40 +68,102 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     /// </summary>
     public BaseMapRole endRole;
 
+    /// <summary>
+    /// 交易线OBJ
+    /// </summary>
     public GameObject CreateTradeLineGo;
 
+    /// <summary>
+    /// 删除界面
+    /// </summary>
     public GameObject Panel_Delete;
 
+    /// <summary>
+    /// 升级界面
+    /// </summary>
     public GameObject Panel_Update;
 
+    /// <summary>
+    /// 角色信息界面
+    /// </summary>
     public GameObject Panel_RoleInfo;
 
+    
+    /// <summary>
+    /// 复盘界面
+    /// </summary>
     public GameObject Panel_Review;
 
+    
+    /// <summary>
+    /// 消费者信息界面
+    /// </summary>
     public GameObject consumerInfoFloatWindow;
 
+    
+    /// <summary>
+    /// 设置界面
+    /// </summary>
     public GameObject Panel_Option;
 
+    /// <summary>
+    /// 关卡星级界面
+    /// </summary>
     public GameObject Panel_Stat;
 
+    
+    /// <summary>
+    /// NPC界面
+    /// </summary>
     public GameObject Panel_NPC;
 
+    public GameObject skillCheckManager;
+
+    /// <summary>
+    /// 暂停按钮
+    /// </summary>
     public Button Button_Pause;
 
+    
+    /// <summary>
+    /// 一倍速
+    /// </summary>
     public Button Button_Normal;
 
+    
+    /// <summary>
+    /// 二倍速
+    /// </summary>
     public Button Button_Accelerate;
 
+    
+    /// <summary>
+    /// 开始按钮
+    /// </summary>
     public Button statBtn;
+    
+    /// <summary>
+    /// 设置按钮
+    /// </summary>
     public Button OptionsBtn;
+    
+    /// <summary>
+    /// 显示隐藏交易线按钮
+    /// </summary>
     public Button showHideTradeButton;
 
     #endregion
 
     public Transform hidePanel;
 
+    /// <summary>
+    /// 高光特效
+    /// </summary>
     public List<GameObject> highLight = new List<GameObject>();
 
+    /// <summary>
+    /// 关闭界面
+    /// </summary>
     public List<GameObject> panelList = new List<GameObject>();
 
     public GameObject watchGuidePanel;
@@ -366,6 +452,10 @@ public class NewCanvasUI : MonoSingleton<NewCanvasUI>
     }
 
 
+    /// <summary>
+    /// 速录按钮
+    /// </summary>
+    /// <param name="isShow"></param>
     public void ToggleSpeedButton(bool isShow)
     {
         Button_Pause.gameObject.SetActive(isShow);

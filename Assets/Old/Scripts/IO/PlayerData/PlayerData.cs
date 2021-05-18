@@ -209,10 +209,13 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
         List<string> sceneList = new List<string>() { "FTE_3.5" ,"FTE_2.5", "FTE_4.5" };
         if (BaseLevelController.My.stageSpecialTypes.Contains(StageSpecialType.DeleteAlwaysReturnMega))
         {
+            StageGoal.My.techCost -= mapRole.costTechPoint;
             StageGoal.My.GetTechPoint(mapRole.costTechPoint);
         }
         else if (StageGoal.My.timeCount - mapRole.putTime <= 5)
         {
+            StageGoal.My.techCost -= mapRole.costTechPoint;
+
             StageGoal.My.GetTechPoint(mapRole.costTechPoint);
         }
         RoleData.Remove(target);

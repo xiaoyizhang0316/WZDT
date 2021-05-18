@@ -13,31 +13,41 @@ public class LoginPanel : MonoBehaviour
 {
     public Transform playerInfoPanel;
     public Transform threeWordsPanel;
+    // 设置服务器界面
     public GameObject setServerPanel;
-
+    // 用户名输入框
     public InputField username_Input;
+    // 密码输入框
     public InputField password_Input;
+    // 服务器地址输入框
     public InputField server_Input;
+    // 显示输入的服务器地址
     public Text server_InputText;
-
+    // 保存密码选择框
     public Toggle savePassword_Toggle;
+    // 使用自定义服务器选择框
     public Toggle userServer_Toggle;
-
+    // 登陆按钮
     public Button login_Btn;
+    // 服务器确认按钮
     public Button serverConfirm;
+    // 服务器取消按钮
     public Button serverCancel;
-
+    // 提示
     public GameObject notice;
-
+    // 用户名
     string username = "";
+    // 密码
     string password = "";
+    // 服务器地址
     string serverIP = "";
+    // 服务器地址正则表达式
     string regx = "^(\\d{1,3}\\.){3}\\d{1,3}$";
-
+    // 正在登陆 
     bool isLogin = false;
-
+    // 左侧小人图片
     public List<Transform> left = new List<Transform>();
-
+    // 右侧小人图片
     public List<Transform> right = new List<Transform>();
 
     // Start is called before the first frame update
@@ -75,6 +85,9 @@ public class LoginPanel : MonoBehaviour
         //Debug.Log(Directory.GetParent(Application.dataPath) + "\\Account.json");
     }
 
+    /// <summary>
+    /// 初始化
+    /// </summary>
     void NewInit()
     {
         PlayerPrefs.SetInt("BackGroundVolume",-80);
@@ -95,6 +108,12 @@ public class LoginPanel : MonoBehaviour
         //HideGame();
     }
     
+    /// <summary>
+    /// 加载账户
+    /// </summary>
+    /// <param name="canLogin">登陆回调</param>
+    /// <param name="cantLogin">登陆失败回调</param>
+    /// <returns></returns>
     public IEnumerator LoadAccount(Action canLogin,Action cantLogin)
     {
         StreamReader streamReader = null;
@@ -139,6 +158,10 @@ public class LoginPanel : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// 初始化用户名和密码
+    /// </summary>
+    /// <param name="json"></param>
     public void InitInput(AccountJosn json)
     {
         if (json != null)
@@ -152,6 +175,11 @@ public class LoginPanel : MonoBehaviour
             password_Input.text = "";
         }
     }
+    /// <summary>
+    /// 保存账号密码
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="password"></param>
     public void SaveAccount(string name, string password)
     {
         AccountJosn account = new AccountJosn()
@@ -229,6 +257,9 @@ public class LoginPanel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 使用自定义服务器
+    /// </summary>
     private void UserServerOrNot()
     {
         server_Input.onValueChanged.AddListener((ip) => InputServerIP(ip));
@@ -248,6 +279,9 @@ public class LoginPanel : MonoBehaviour
         userServer_Toggle.onValueChanged.AddListener((isOn) => ServerToggleChange(isOn));
     }
 
+    /// <summary>
+    /// 登陆
+    /// </summary>
     private void Login()
     {
         isLogin = true;
@@ -268,11 +302,17 @@ public class LoginPanel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 登录
+    /// </summary>
     private void ForLogin()
     {
         NetworkMgr.My.Login(username, password, LoginSuccess, LoginFail);
     }
 
+    /// <summary>
+    /// 登录成功回调
+    /// </summary>
     private void LoginSuccess()
     {
         // for new version login
@@ -347,6 +387,11 @@ public class LoginPanel : MonoBehaviour
         isLogin = false;
     }
 
+    /// <summary>
+    /// 登录失败回调
+    /// </summary>
+    /// <param name="deletePwd"></param>
+    /// <param name="errMsg"></param>
     private void LoginFail(bool deletePwd, string errMsg)
     {
         HttpManager.My.ShowTip(errMsg);
@@ -361,6 +406,9 @@ public class LoginPanel : MonoBehaviour
         isLogin = false;
     }
 
+    /// <summary>
+    /// 保存密码
+    /// </summary>
     private void SavePasswordOrNot()
     {
         PlayerPrefs.SetString("username", username);
@@ -420,6 +468,10 @@ public class LoginPanel : MonoBehaviour
         //}
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="isOn"></param>
     private void ServerToggleChange(bool isOn)
     {
         if (isOn)
@@ -573,6 +625,10 @@ public class LoginPanel : MonoBehaviour
 
 
 
+    /// <summary>
+    /// 人物动效
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator PeopleEffect()
     {
         for (int i = 0; i < left.Count; i++)
