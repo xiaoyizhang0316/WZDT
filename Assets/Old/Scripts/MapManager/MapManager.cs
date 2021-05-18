@@ -269,7 +269,7 @@ public class MapManager : MonoSingleton<MapManager>
         //Debug.Log("+++++++++" + json);
         StageNPCsData stageNPCsData = JsonUtility.FromJson< StageNPCsData >(json );
         //Debug.Log("============" + stageNPCsData.stageNPCItems.Count);
-        ParseStageNPCData(stageNPCsData);
+        //ParseStageNPCData(stageNPCsData);
     }
 
     /// <summary>

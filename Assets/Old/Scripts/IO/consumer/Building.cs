@@ -533,6 +533,7 @@ public class Building : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitConsumerPath();
         if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
             FTEInit();
@@ -561,6 +562,7 @@ public class Building : MonoBehaviour
         InitConsumerPath();
     }
 
+    public LineRenderer lr;
     /// <summary>
     /// 将坐标路径点转化为实际地块
     /// </summary>
@@ -584,9 +586,9 @@ public class Building : MonoBehaviour
             Destroy(go);
         }).SetEase(Ease.Linear).SetLookAt(0.01f);
         twe.ForceInit();
-        GetComponent<LineRenderer>().textureMode = LineTextureMode.Stretch;
-        GetComponent<LineRenderer>().positionCount = twe.PathGetDrawPoints().Length;
-        GetComponent<LineRenderer>().SetPositions(twe.PathGetDrawPoints());
+        lr.textureMode = LineTextureMode.Stretch;
+        lr.positionCount = twe.PathGetDrawPoints().Length;
+        lr.SetPositions(twe.PathGetDrawPoints());
     }
 
     // Update is called once per frame
