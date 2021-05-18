@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class BankLoan : BaseExtraSkill
+public class BankLoan : BaseServiceSkill
 {
     public int loanNumber;
 
@@ -13,13 +13,14 @@ public class BankLoan : BaseExtraSkill
 
     public TradeSign sign;
 
-    public override void SkillOn(TradeSign _sign)
+    public override void Skill(TradeData data)
     {
-        base.SkillOn(_sign);
-        _sign.icon.gameObject.SetActive(false);
+        base.Skill(data);
+        TradeManager.My.tradeList[data.ID].icon.gameObject.SetActive(false);
         //Debug.Log("开始借钱" + _sign.tradeData.ID);
-        StartLoan(_sign);
-        sign = _sign;
+        sign = TradeManager.My.tradeList[data.ID];
+        StartLoan(sign);
+
     }
 
     public void StartLoan(TradeSign sign)

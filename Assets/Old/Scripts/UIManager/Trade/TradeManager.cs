@@ -166,15 +166,13 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// <returns></returns>
     private bool CheckStartAndEnd()
     {
-        if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service &&
-            NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
-        {
-            HttpManager.My.ShowTip("双方不能都为增益型角色！");
-            return false;
-        }
-
-        else
-            return true;
+        // if (NewCanvasUI.My.startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service &&
+        //     NewCanvasUI.My.endRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
+        // {
+        //     HttpManager.My.ShowTip("双方不能都为增益型角色！");
+        //     return false;
+        // }
+        return true;
     }
 
     /// <summary>
@@ -197,17 +195,25 @@ public class TradeManager : MonoSingleton<TradeManager>
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(NewCanvasUI.My.startRole.baseRoleData.ID);
         BaseMapRole end = PlayerData.My.GetMapRoleById(NewCanvasUI.My.endRole.baseRoleData.ID);
-        if (start.extraSkill != null)
+        if (start.baseRoleData.baseRoleData.roleSkillType.Equals(end.baseRoleData.baseRoleData.roleSkillType))
         {
-            if (start.tradeList.Count == start.extraSkill.maxTradeLimit && start.extraSkill.maxTradeLimit != 0)
+            if (start.baseSkill.CheckIsOverLimit())
             {
                 HttpManager.My.ShowTip("发起方无法进行更多交易！");
                 return false;
             }
         }
-        if (end.extraSkill != null)
+        else if (start.baseRoleData.baseRoleData.roleSkillType.Equals(RoleSkillType.Service))
         {
-            if (end.tradeList.Count == end.extraSkill.maxTradeLimit && end.extraSkill.maxTradeLimit != 0)
+            if (start.baseSkill.CheckIsOverLimit())
+            {
+                HttpManager.My.ShowTip("发起方无法进行更多交易！");
+                return false;
+            }
+        }
+        else
+        {
+            if (end.baseSkill.CheckIsOverLimit())
             {
                 HttpManager.My.ShowTip("承受方无法进行更多交易！");
                 return false;

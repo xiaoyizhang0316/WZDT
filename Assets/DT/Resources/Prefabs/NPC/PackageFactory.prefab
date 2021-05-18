@@ -58,11 +58,11 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b107cd102029e624c88e23012aa01bc5, type: 2}
-  - {fileID: 2100000, guid: e5a4a3f92554a1a49bd02f5ef1539cbf, type: 2}
-  - {fileID: 2100000, guid: b00ae5ef62d5ab846aef7dbed7cc4121, type: 2}
-  - {fileID: 2100000, guid: b31f41583f2e9ab4eaafc7c25059a979, type: 2}
-  - {fileID: 2100000, guid: 6456cac035c3ccf46b1ba751b35c2370, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4967,6 +4967,7 @@ MonoBehaviour:
       PrePath: 
       RoleSpacePath: 
     effect: 20
+    freeUpdate: 0
     efficiency: 20
     range: 20
     tradeCost: 20
@@ -4993,32 +4994,27 @@ MonoBehaviour:
   tradePoint: {fileID: 4120281494302893411}
   AI: 0
   npcScript: {fileID: 0}
-  extraSkill: {fileID: 0}
+  encourageSkillId: 0
+  baseSkill: {fileID: 0}
   levelModels:
   - {fileID: 2813869648818183600}
   putTime: 0
-  totalProfit: 0
-  monthlyProfit: 0
-  totalSatisfy: 0
-  monthlySatisfy: 0
-  totalCost: 0
-  rentCost: 0
-  operationCost: 0
-  activityCost: 0
-  tradeCost: 0
-  shop: []
+  costTechPoint: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  skillPower: 0
   startTradeList: []
   endTradeList: []
   tasteBuffList: 
+  consumableList: 
   totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
   stopWorkSprite: {fileID: 0}
   isSell: 0
   ringEffect: {fileID: 0}
+  specialInfo: {fileID: 0}
   cloneWarehourse: []
 --- !u!114 &1876834373110284189
 MonoBehaviour:
@@ -5039,6 +5035,7 @@ MonoBehaviour:
   NPCBuffList: 
   hideModel: {fileID: 4362902875407242174}
   trueModel: {fileID: 8825165898939728382}
+  npcTag: 
   autoTradeList: []
   animator: {fileID: 0}
 --- !u!114 &6276455492902670409
@@ -5058,13 +5055,10 @@ MonoBehaviour:
   isPlay: 0
   isAvaliable: 1
   isAnimPlaying: 0
-  goodSpecialBuffList: 
-  goodBaseBuffs: []
-  badSpecialBuffList: 
-  badBaseBuffs: []
   skillDesc: "\u5BF9\u74DC\u6216\u8005\u74DC\u7684\u53D8\u79CD\u4EA7\u54C1\u8FDB\u884C\u52A0\u5DE5\uFF0C\u4F7F\u5176\u5E26\u6709\u7CBE\u7F8E\u5305\u88C5\u5C5E\u6027"
   buffList: 2e010000
   animationPart: []
+  maxTradeLimit: 0
   productDatas: []
 --- !u!114 &1923684923635664215
 MonoBehaviour:
@@ -5078,9 +5072,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1a4513a69c24adaa8f64bd86b03d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 0
-  extraSkillDesc: 
-  maxTradeLimit: -1
+  role: {fileID: 0}
+  IsOpen: 0
+  isPlay: 0
+  isAvaliable: 1
+  isAnimPlaying: 0
+  skillDesc: "\u5BF9\u74DC\u6216\u8005\u74DC\u7684\u53D8\u79CD\u4EA7\u54C1\u8FDB\u884C\u52A0\u5DE5\uFF0C\u4F7F\u5176\u5E26\u6709\u7CBE\u7F8E\u5305\u88C5\u5C5E\u6027"
+  buffList: 2e010000
+  animationPart: []
+  maxTradeLimit: 0
+  addAttributeType: 0
+  addStartValue: 0
+  addPerSP: 0
+  buffId: 0
   tasteBuffId: 302
 --- !u!1 &4720203674094380097
 GameObject:
@@ -5140,7 +5144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 87c27596f4cc387428aea73d0fec90e9, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5219,7 +5223,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 87c27596f4cc387428aea73d0fec90e9, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5298,7 +5302,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2b72ae969776449448d990e4347d256c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5377,7 +5381,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e5a4a3f92554a1a49bd02f5ef1539cbf, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

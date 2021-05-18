@@ -9593,7 +9593,6 @@ GameObject:
   - component: {fileID: 8899486489098488673}
   - component: {fileID: 5840160722976328818}
   - component: {fileID: 6545259540281883998}
-  - component: {fileID: 2261022846323357431}
   - component: {fileID: 179940833888517489}
   m_Layer: 0
   m_Name: OrderCompany
@@ -9650,6 +9649,7 @@ MonoBehaviour:
       PrePath: 
       RoleSpacePath: 
     effect: 20
+    freeUpdate: 0
     efficiency: 20
     range: 20
     tradeCost: 20
@@ -9676,32 +9676,28 @@ MonoBehaviour:
   tradePoint: {fileID: 6390241512700188720}
   AI: 0
   npcScript: {fileID: 0}
-  extraSkill: {fileID: 0}
+  encourageSkillId: 0
+  baseSkill: {fileID: 0}
   levelModels:
   - {fileID: 9211116637711524963}
   putTime: 0
-  totalProfit: 0
-  monthlyProfit: 0
-  totalSatisfy: 0
-  monthlySatisfy: 0
-  totalCost: 0
-  rentCost: 0
-  operationCost: 0
-  activityCost: 0
-  tradeCost: 0
-  shop: []
+  costTechPoint: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  skillPower: 0
   startTradeList: []
   endTradeList: []
   tasteBuffList: 
+  consumableList: 
   totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
   stopWorkSprite: {fileID: 0}
   isSell: 0
   ringEffect: {fileID: 0}
+  specialInfo: {fileID: 0}
+  cloneWarehourse: []
 --- !u!114 &8899486489098488673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9721,6 +9717,7 @@ MonoBehaviour:
   NPCBuffList: 
   hideModel: {fileID: 7010573542175292831}
   trueModel: {fileID: 8145369834327937887}
+  npcTag: 
   autoTradeList: []
   animator: {fileID: 0}
 --- !u!65 &5840160722976328818
@@ -9752,31 +9749,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2261022846323357431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692879230315230448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15132e808915d41afb014f5d6cd33929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  role: {fileID: 0}
-  IsOpen: 1
-  isPlay: 0
-  isAvaliable: 1
-  isAnimPlaying: 0
-  goodSpecialBuffList: 
-  goodBaseBuffs: []
-  badSpecialBuffList: 
-  badBaseBuffs: []
-  skillDesc: "\u63D0\u4F9B\u9884\u552E\u529F\u80FD\uFF0C\u5B9A\u671F\u7ED9\u73A9\u5BB6\u8D44\u91D1\uFF0C\u4F46\u540E\u7EED\u6BCF\u6CE2\u4F1A\u989D\u5916\u751F\u6210\u6D88\u8D39\u8005"
-  buffList: 00020000
-  animationPart: []
-  productDatas: []
 --- !u!114 &179940833888517489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9789,10 +9761,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2105cf8c470b4864856b4f56b32f6a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 0
-  extraSkillDesc: 
+  role: {fileID: 0}
+  IsOpen: 0
+  isPlay: 0
+  isAvaliable: 1
+  isAnimPlaying: 0
+  skillDesc: "\u63D0\u4F9B\u9884\u552E\u529F\u80FD\uFF0C\u5B9A\u671F\u7ED9\u73A9\u5BB6\u8D44\u91D1\uFF0C\u4F46\u540E\u7EED\u6BCF\u6CE2\u4F1A\u989D\u5916\u751F\u6210\u6D88\u8D39\u8005"
+  buffList: 00020000
+  animationPart: []
   maxTradeLimit: 1
-  targetBuildingId: 0
+  addAttributeType: 0
+  addStartValue: 0
+  addPerSP: 0
+  buffId: 0
   waveConfigs:
   - consumerType: 13
     num: 3

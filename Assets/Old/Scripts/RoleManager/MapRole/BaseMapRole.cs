@@ -62,11 +62,11 @@ public class BaseMapRole : MonoBehaviour
 
     public BaseNpc npcScript;
 
-    public BaseExtraSkill extraSkill;
-
     public int encourageSkillId = 0;
 
     public BaseEncourageSkill encourageSkill = null;
+
+    public BaseSkill baseSkill;
 
     public List<GameObject> levelModels;
 
@@ -475,9 +475,9 @@ public class BaseMapRole : MonoBehaviour
                 }
             }
         }
-        if(extraSkill != null && tradeList.Count > 0)
+        if(GetComponent<BaseServiceSkill>() != null && tradeList.Count > 0)
         {
-            extraSkill.OnEndTurn();
+            GetComponent<BaseServiceSkill>().OnEndTurn();
         }
     }
 
@@ -1313,5 +1313,23 @@ public class BaseMapRole : MonoBehaviour
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// 判断角色上是否连接某个交易
+    /// </summary>
+    /// <param name="tradeID">交易的ID</param>
+    /// <returns></returns>
+    public bool ContainsTrade(int tradeID)
+    {
+        foreach (TradeSign sign in tradeList) 
+        {
+            if (sign.tradeData.ID == tradeID)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

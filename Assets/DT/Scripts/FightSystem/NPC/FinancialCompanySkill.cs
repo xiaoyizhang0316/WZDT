@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinancialCompanySkill : BaseExtraSkill
+public class FinancialCompanySkill : BaseServiceSkill
 {
     public string condition_1;
     public string condition_2;
@@ -23,7 +23,7 @@ public class FinancialCompanySkill : BaseExtraSkill
     
     }
 
-    public override void SkillOn(TradeSign sign)
+    public override void Skill(TradeData data)
     {
         if (index == 0)
         {

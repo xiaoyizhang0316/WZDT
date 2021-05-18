@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7925462026539193959}
   - component: {fileID: 7210796264468271515}
   - component: {fileID: 5110266323495140453}
-  - component: {fileID: 6047026649453153880}
   - component: {fileID: 6124456438500703285}
   m_Layer: 0
   m_Name: Youtuber
@@ -70,6 +69,7 @@ MonoBehaviour:
       PrePath: 
       RoleSpacePath: 
     effect: 0
+    freeUpdate: 0
     efficiency: 0
     range: 0
     tradeCost: 0
@@ -81,6 +81,7 @@ MonoBehaviour:
     equipCost: 0
     workerCost: 0
     landCost: 0
+    gearEncourageAdd: 0
     inMap: 0
     isNpc: 0
   warehouse: []
@@ -95,26 +96,29 @@ MonoBehaviour:
   tradePoint: {fileID: 7851201757852236932}
   AI: 0
   npcScript: {fileID: 0}
-  extraSkill: {fileID: 0}
+  encourageSkillId: 0
+  baseSkill: {fileID: 0}
   levelModels:
   - {fileID: 6584360560985651322}
   - {fileID: 5245805482150863178}
   putTime: 0
-  totalProfit: 0
-  monthlyProfit: 0
-  totalSatisfy: 0
-  monthlySatisfy: 0
-  totalCost: 0
-  rentCost: 0
-  operationCost: 0
-  activityCost: 0
-  tradeCost: 0
-  shop: []
+  costTechPoint: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  skillPower: 0
+  startTradeList: []
+  endTradeList: []
+  tasteBuffList: 
+  consumableList: 
+  totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
+  stopWorkSprite: {fileID: 0}
+  isSell: 0
+  ringEffect: {fileID: 0}
+  specialInfo: {fileID: 0}
+  cloneWarehourse: []
 --- !u!114 &7925462026539193959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +138,7 @@ MonoBehaviour:
   NPCBuffList: 
   hideModel: {fileID: 3815718885771491734}
   trueModel: {fileID: 9036407238198923515}
+  npcTag: 
   autoTradeList: []
   animator: {fileID: 0}
 --- !u!54 &7210796264468271515
@@ -165,31 +170,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6642528, y: 6.487493, z: 1.4084256}
   m_Center: {x: -0.009532958, y: -0.8457191, z: -0.11082542}
---- !u!114 &6047026649453153880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3003597555336255898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15132e808915d41afb014f5d6cd33929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  role: {fileID: 0}
-  IsOpen: 1
-  isPlay: 0
-  isAvaliable: 1
-  isAnimPlaying: 0
-  goodSpecialBuffList: 
-  goodBaseBuffs: []
-  badSpecialBuffList: 
-  badBaseBuffs: []
-  skillDesc: "\u7F51\u7EA2\u5E26\u8D27\uFF0C\u4F7F\u89D2\u8272\u5468\u56F4\u7684\u6D88\u8D39\u8005\u7684\u559C\u597D\u6682\u65F6\u8F6C\u5316\u4E3A\u7F51\u7EA2\u5E26\u8D27\u7684\u559C\u597D"
-  buffList: 
-  animationPart: []
-  productDatas: []
 --- !u!114 &6124456438500703285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,9 +182,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb74256ea63549ca963d3b462e58860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 0
-  extraSkillDesc: 
-  maxTradeLimit: -1
+  role: {fileID: 0}
+  IsOpen: 0
+  isPlay: 0
+  isAvaliable: 1
+  isAnimPlaying: 0
+  skillDesc: "\u7F51\u7EA2\u5E26\u8D27\uFF0C\u4F7F\u89D2\u8272\u5468\u56F4\u7684\u6D88\u8D39\u8005\u7684\u559C\u597D\u6682\u65F6\u8F6C\u5316\u4E3A\u7F51\u7EA2\u5E26\u8D27\u7684\u559C\u597D"
+  buffList: 
+  animationPart: []
+  maxTradeLimit: 0
+  addAttributeType: 0
+  addStartValue: 0
+  addPerSP: 0
+  buffId: 0
   buffId: 0
   youtuberItemPrb: {fileID: 1947705653320290112, guid: f07f226569819b04e88ab9fdf2f32fe3,
     type: 3}
@@ -4914,7 +4904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateOBJ: {fileID: 5245805482150863178}
-  skill: {fileID: 6047026649453153880}
+  skill: {fileID: 0}
 --- !u!1 &6381409787556087662
 GameObject:
   m_ObjectHideFlags: 0
@@ -14702,15 +14692,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f0351e57994a4cf58878b3d1d06aada, type: 3}
---- !u!1 &6584360560985651322 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 0f0351e57994a4cf58878b3d1d06aada,
-    type: 3}
-  m_PrefabInstance: {fileID: 2900797672064246131}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7870885682568415849 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 0f0351e57994a4cf58878b3d1d06aada,
+    type: 3}
+  m_PrefabInstance: {fileID: 2900797672064246131}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6584360560985651322 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 0f0351e57994a4cf58878b3d1d06aada,
     type: 3}
   m_PrefabInstance: {fileID: 2900797672064246131}
   m_PrefabAsset: {fileID: 0}
@@ -14798,15 +14788,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7d4a569f838c4aabac004dbe5cb894e, type: 3}
---- !u!1 &5245805482150863178 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: a7d4a569f838c4aabac004dbe5cb894e,
-    type: 3}
-  m_PrefabInstance: {fileID: 4318166289293604931}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9121902034527769433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: a7d4a569f838c4aabac004dbe5cb894e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4318166289293604931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5245805482150863178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: a7d4a569f838c4aabac004dbe5cb894e,
     type: 3}
   m_PrefabInstance: {fileID: 4318166289293604931}
   m_PrefabAsset: {fileID: 0}

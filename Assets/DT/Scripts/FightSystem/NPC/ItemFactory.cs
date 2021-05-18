@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemFactory : BaseExtraSkill
+public class ItemFactory : BaseServiceSkill
 {
     /// <summary>
     /// 消耗品列表
@@ -17,7 +17,7 @@ public class ItemFactory : BaseExtraSkill
 
     public override void OnEndTurn()
     {
-        if (!isOpen)
+        if (!IsOpen)
         {
             return;
         }

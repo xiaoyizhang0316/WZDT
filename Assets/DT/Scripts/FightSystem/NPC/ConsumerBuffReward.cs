@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConsumerBuffReward : BaseExtraSkill
+public class ConsumerBuffReward : BaseServiceSkill
 {
     public List<int> targetBuffRewardList = new List<int>();
 
@@ -12,7 +12,7 @@ public class ConsumerBuffReward : BaseExtraSkill
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Consumer") && isOpen)
+        if (other.CompareTag("Consumer") && IsOpen)
         {
             int count = targetBuffRewardList.Count;
             //print("广告成功");
@@ -42,7 +42,7 @@ public class ConsumerBuffReward : BaseExtraSkill
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Consumer") && isOpen)
+        if (other.CompareTag("Consumer") && IsOpen)
         {
             if (other.transform.GetComponent<ConsumeSign>().enterMarketingTime > 0)
             {
@@ -64,12 +64,12 @@ public class ConsumerBuffReward : BaseExtraSkill
         }
     }
 
-    public override void SkillOff(TradeSign sign)
+    public override void SkillOff(TradeData data)
     {
-        base.SkillOff(sign);
+        base.SkillOff(data);
         if (GetComponentInParent<BaseMapRole>().tradeList.Count == 0)
         {
-            isOpen = false;
+            IsOpen = false;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BaseServiceSkill : BaseSkill
@@ -12,12 +13,15 @@ public class BaseServiceSkill : BaseSkill
 
     public int buffId;
 
+    protected Dictionary<int, TradeData> _unChangeData=new Dictionary<int, TradeData>();
+
     /// <summary>
     /// 释放技能时调用函数
     /// </summary>
     /// <param name="data"></param>
     public virtual void Skill(TradeData data)
     {
+        IsOpen = true;
         AddRoleBuff(data);
     }
 
@@ -86,6 +90,14 @@ public class BaseServiceSkill : BaseSkill
     }
 
     /// <summary>
+    /// 增益型技能回合结束调用
+    /// </summary>
+    public virtual void OnEndTurn()
+    {
+        
+    }
+
+    /// <summary>
     /// 计算buff加成的具体数值
     /// </summary>
     /// <returns></returns>
@@ -117,6 +129,27 @@ public class BaseServiceSkill : BaseSkill
         for (int i = 0; i < role.tradeList.Count; i++)
         {
             SkillOff(role.tradeList[i].tradeData); 
+        }
+    }
+
+    /// <summary>
+    /// 重启未变形的交易技能
+    /// </summary>
+    public void RestartSkill()
+    {
+        List<int> keys = _unChangeData.Keys.ToList();
+        if (keys.Count == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < keys.Count; i++)
+        {
+            if (_unChangeData.ContainsKey(keys[i]))
+            {
+                SkillOff(_unChangeData[keys[i]]);
+                Skill(_unChangeData[keys[i]]);
+            }
         }
     }
 }
