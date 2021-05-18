@@ -708,6 +708,8 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         DeleteTemplate();
         StageGoal.My.RefreshAllCost();
     }
+    
+    
 
     /// <summary>
     /// 记录修改角色操作

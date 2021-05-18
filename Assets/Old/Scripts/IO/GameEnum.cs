@@ -130,7 +130,15 @@ public class GameEnum
         /// <summary>
         /// 金融公司
         /// </summary>
-            financialCompany
+        financialCompany,
+        /// <summary>
+        /// 饮料公司
+        /// </summary>
+        BeverageCompany,
+        /// <summary>
+        /// 设备厂
+        /// </summary>
+        InstrumentFactory
     }
 
     public enum PDPType

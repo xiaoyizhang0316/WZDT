@@ -8,6 +8,7 @@ public class RoleTransition : MonoBehaviour
     public RoleType currentRoleType;
     private BaseMapRole _role;
     private Transform[] _objects;
+    private bool isNpc = false;
 
     private void Start()
     {
@@ -17,6 +18,7 @@ public class RoleTransition : MonoBehaviour
         
         _objects = new Transform[1];
         _objects[0] = null;
+        isNpc = _role.isNpc;
     }
 
     /// <summary>
@@ -38,7 +40,6 @@ public class RoleTransition : MonoBehaviour
         currentRoleType = roleType;
         _role.baseRoleData.baseRoleData.roleType = currentRoleType;
         Transition();
-        InvokeRepeating("CheckTransitionEnd", 1, 1 );
     }
 
     /// <summary>
@@ -56,7 +57,7 @@ public class RoleTransition : MonoBehaviour
     /// </summary>
     private void CheckTransitionEnd()
     {
-        if (_objects[0].GetComponent<TradeSign>())
+        if (isNpc || _objects[0].GetComponent<TradeSign>())
         {
             if (!_role.tradeList.Contains(_objects[0].GetComponent<TradeSign>()))
             {
@@ -92,7 +93,24 @@ public class RoleTransition : MonoBehaviour
     {
         var skillName =
             CommonFunc.GetContentInBracketsWithoutBrackets(transform.GetComponent<BaseSkill>().ToString());
-        RemoveCurrentSkill(skillName);
+        if (skillName.Equals("")|| !transform.GetComponent(skillName))
+        {
+            Debug.Log("未找到 skill 脚本");
+            return;
+        }
+
+        try
+        {
+            RemoveCurrentSkill(skillName);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            CancelInvoke();
+            TransitionFailed(false);
+            return;
+        }
+        
         var newSkillName = GetNewSkillNameByRoleType(currentRoleType);
         
         try
@@ -103,7 +121,7 @@ public class RoleTransition : MonoBehaviour
         {
             Console.WriteLine(e);
             CancelInvoke();
-            TransitionFailed();
+            TransitionFailed(true, skillName);
             return;
         }
         // 重置role sprite
@@ -111,12 +129,44 @@ public class RoleTransition : MonoBehaviour
         // TODO transform model 
         // TODO init role data 
         // TODO check trade 
+        // 检查还原初始状态
+        InvokeRepeating("CheckTransitionEnd", 1, 1 );
     }
 
-    private void TransitionFailed() 
+    /// <summary>
+    /// 变形失败，重置
+    /// </summary>
+    /// <param name="isAddFailed"></param>
+    /// <param name="skillName"></param>
+    private void TransitionFailed(bool isAddFailed, string skillName="") 
     {
-        // TODO 还原到初始状态
-        // TODO 移除装备或者交易
+        currentRoleType = startRoleType;
+        _role.baseRoleData.baseRoleData.roleType = currentRoleType;
+        if (_objects[0].GetComponent<TradeSign>())
+        {
+            // 删除相关交易
+            TradeManager.My.DeleteTrade(_objects[0].GetComponent<TradeSign>().tradeData.ID);
+        }
+        else
+        {
+            // 删除相关工人或设备
+            if (_objects[0].GetComponent<EquipSign>())
+            {
+                _role.baseRoleData.RemoveEquip(_objects[0].GetComponent<EquipSign>().ID, true);
+                PlayerData.My.SetGearStatus(_objects[0].GetComponent<EquipSign>().ID, false);
+            }
+            else
+            {
+                _role.baseRoleData.RemoveEquip(_objects[0].GetComponent<WorkerSign>().ID, false);
+                PlayerData.My.SetGearStatus(_objects[0].GetComponent<WorkerSign>().ID, false);
+            }
+        }
+
+        _objects[0] = null;
+        if (isAddFailed)
+        {
+            CommonFunc.AddComponent(gameObject,skillName);
+        }
     }
 
     /// <summary>
@@ -132,9 +182,7 @@ public class RoleTransition : MonoBehaviour
         catch (Exception e)
         {
             Console.WriteLine(e);
-            CancelInvoke();
-            Restore();
-            throw;
+            throw new Exception(e.Message);
         }
     }
 
@@ -148,68 +196,17 @@ public class RoleTransition : MonoBehaviour
         string skillName = "";
         switch (type)
         {
-            case RoleType.Seed:
-                skillName = "";
-                break;
-            case RoleType.Peasant:
-                break;
             case RoleType.Merchant:
-                break;
-            case RoleType.Dealer:
-                break;
-            case RoleType.School:
-                break;
-            case RoleType.Bank:
-                break;
-            case RoleType.Investor:
-                break;
-            case RoleType.CutFactory:
+                skillName = "ProductMerchant";
                 break;
             case RoleType.JuiceFactory:
-                break;
-            case RoleType.CanFactory:
-                break;
-            case RoleType.WholesaleFactory:
+                skillName = "ProductMelon_Boom";
                 break;
             case RoleType.PackageFactory:
                 break;
-            case RoleType.SoftFactory:
+            case RoleType.BeverageCompany:
                 break;
-            case RoleType.CrispFactory:
-                break;
-            case RoleType.SweetFactory:
-                break;
-            case RoleType.Insurance:
-                break;
-            case RoleType.Consulting:
-                break;
-            case RoleType.PublicRelation:
-                break;
-            case RoleType.GasStation:
-                break;
-            case RoleType.Advertisment:
-                break;
-            case RoleType.Fertilizer:
-                break;
-            case RoleType.ResearchInstitute:
-                break;
-            case RoleType.Youtuber:
-                break;
-            case RoleType.OrderCompany:
-                break;
-            case RoleType.Marketing:
-                break;
-            case RoleType.RubishProcess:
-                break;
-            case RoleType.DataCenter:
-                break;
-            case RoleType.ConsumerItemFactory:
-                break;
-            case RoleType.RoleItemFactory:
-                break;
-            case RoleType.All:
-                break;
-            case RoleType.financialCompany:
+            case RoleType.InstrumentFactory:
                 break;
         }
 
