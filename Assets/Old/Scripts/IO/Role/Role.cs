@@ -187,4 +187,40 @@ public class Role
             peoPleList.Add(ID, pos);
         }
     }
+
+    /// <summary>
+    /// 该角色是否存在某装备
+    /// </summary>
+    /// <param name="equipID"></param>
+    /// <returns></returns>
+    public bool HasEquip(int equipID)
+    {
+        foreach (int key in EquipList.Keys)
+        {
+            if (key == equipID)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    /// <summary>
+    /// 该角色是否存在某工人
+    /// </summary>
+    /// <param name="workerID"></param>
+    /// <returns></returns>
+    public bool HasWorker(int workerID)
+    {
+        foreach (int key in peoPleList.Keys)
+        {
+            if (key == workerID)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -162,4 +162,20 @@ public class RoleSprite : MonoBehaviour
             lockSprite.gameObject.SetActive(false);
         }
     }
+
+    /// <summary>
+    /// 角色转型或还原之后重新初始化
+    /// </summary>
+    public void RestoreOrTransition()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+        mapRole = GetComponentInParent<BaseMapRole>();
+        lockSprite = GetComponentsInChildren<SpriteRenderer>()[1];
+        mapRole.roleSprite = this;
+        gameObject.SetActive(false);
+        if (!mapRole.isNpc)
+        {
+            mapRole.CheckRoleDuty();
+        }
+    }
 }
