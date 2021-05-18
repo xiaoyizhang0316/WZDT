@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
-public class ProductMerchant : BaseSkill
+public class ProductMerchant : BaseProductSkill
 {
     public List<ProductData> productDatas = new List<ProductData>();
 
@@ -107,5 +108,24 @@ public class ProductMerchant : BaseSkill
                 currentCount = 0;
             }
         }
+    }
+
+    public override void UnleashSkills()
+    {
+        isPlay = true;
+        
+        float d = Mathf.Min( 4f,1f / (role.baseRoleData.efficiency * 0.05f));
+        if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
+        {
+            d /= 2f;
+        }
+        transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
+        {
+            Skill();
+            if (IsOpen)
+            {
+                UnleashSkills();
+            }
+        });
     }
 }

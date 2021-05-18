@@ -86,6 +86,11 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public int startEncourageLevel;
 
+    /// <summary>
+    /// 技能强度
+    /// </summary>
+    public int skillPower;
+
     public List<TradeSign> startTradeList = new List<TradeSign>();
 
     public List<TradeSign> endTradeList = new List<TradeSign>();
@@ -513,7 +518,7 @@ public class BaseMapRole : MonoBehaviour
     {
         for (int i = 0; i < tradeList.Count; i++)
         {
-            GetComponent<BaseSkill>().AddRoleBuff(tradeList[i].tradeData);
+            GetComponent<BaseServiceSkill>().AddRoleBuff(tradeList[i].tradeData);
         }
     }
 

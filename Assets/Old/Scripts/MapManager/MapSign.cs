@@ -89,7 +89,6 @@ public class MapSign : MonoBehaviour, IDragHandler
             }
             lostEffect = false;
         }).Play();
-
     }
 
     /// <summary>

@@ -5,7 +5,7 @@ using DT.Fight.Bullet;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ProductDealer : BaseSkill
+public class ProductDealer : BaseProductSkill
 {
     // Start is called before the first frame update
 

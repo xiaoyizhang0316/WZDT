@@ -4,11 +4,30 @@ using UnityEngine;
 
 public class BaseServiceSkill : BaseSkill
 {
-    
-    
-    public override void Skill()
+    public int addAttributeType;
+
+    public int addStartValue;
+
+    public int addPerSP;
+
+    public int buffId;
+
+    /// <summary>
+    /// 释放技能时调用函数
+    /// </summary>
+    /// <param name="data"></param>
+    public virtual void Skill(TradeData data)
     {
-        throw new System.NotImplementedException();
+        AddRoleBuff(data);
+    }
+
+    /// <summary>
+    /// 取消技能时调用函数
+    /// </summary>
+    /// <param name="data"></param>
+    public virtual void SkillOff(TradeData data)
+    {
+        DeteleRoleBuff(data);
     }
 
     /// <summary>
@@ -65,6 +84,39 @@ public class BaseServiceSkill : BaseSkill
             }
         }
     }
-    
-    
+
+    /// <summary>
+    /// 计算buff加成的具体数值
+    /// </summary>
+    /// <returns></returns>
+    public int CalculateNumber()
+    {
+        int result = addStartValue;
+        result = addStartValue + role.skillPower * addPerSP;
+        return result;
+    }
+
+    /// <summary>
+    /// 增益型角色重启技能（对所有承受者重新施放一次技能，但不重新发起交易）
+    /// </summary>
+    public override void ReUnleashSkills()
+    {
+        IsOpen = true;
+        for (int i = 0; i < role.tradeList.Count; i++)
+        {
+            Skill(role.tradeList[i].tradeData); 
+        }
+    }
+
+    /// <summary>
+    /// 增益型角色关闭技能（对所有承受者取消技能，但不删除交易）
+    /// </summary>
+    public override void CancelSkill()
+    {
+        base.CancelSkill();
+        for (int i = 0; i < role.tradeList.Count; i++)
+        {
+            SkillOff(role.tradeList[i].tradeData); 
+        }
+    }
 }

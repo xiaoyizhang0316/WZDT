@@ -46,114 +46,17 @@ public abstract class BaseSkill : MonoBehaviour
     public virtual void Start()
     {
         role = GetComponent<BaseMapRole>();
-        if (IsOpen)
-        {
-            UnleashSkills();
-        }
-    }
-
-    /// <summary>
-    /// 释放技能
-    /// </summary>
-    public abstract void Skill();
-
-    /// <summary>
-    /// 释放技能
-    /// </summary>
-    public virtual void UnleashSkills()
-    {
-        isPlay = true;
-        
-        float d = Mathf.Min( 4f,1f / (role.baseRoleData.efficiency * 0.05f));
-        if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant)
-        {
-            d /= 2f;
-        }
-        transform.DORotate(transform.eulerAngles, d).OnComplete(() =>
-        {
-            Skill();
-            if (IsOpen)
-            {
-                UnleashSkills();
-            }
-        });
-    }
-
-    /// <summary>
-    /// 添加增益Buff
-    /// </summary>
-    public void AddRoleBuff(TradeData tradeData)
-    {
-        if (!IsOpen)
-        {
-            return;
-        }
-
-        for (int i = 0; i < buffList.Count; i++)
-        {
-            var buff = GameDataMgr.My.GetBuffDataByID(buffList[i]);
-            BaseBuff baseb = new BaseBuff();
-            baseb.Init(buff);
-            baseb.SetRoleBuff(PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole)), PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole)), PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole)));
-        }
-        if (role.isNpc)
-        {
-            if (role.npcScript.isCanSeeEquip)
-            {
-                for (int i = 0; i < role.npcScript.NPCBuffList.Count; i++)
-                {
-                    var buff = GameDataMgr.My.GetBuffDataByID(role.npcScript.NPCBuffList[i]);
-                    BaseBuff baseb = new BaseBuff();
-                    baseb.Init(buff);
-                    baseb.SetRoleBuff(PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole)), PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole)), PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole)));
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// 移除增益buff
-    /// </summary>
-    /// <param name="tradeData"></param>
-    public void DeteleRoleBuff(TradeData tradeData)
-    {
-        BaseMapRole targetRole = PlayerData.My.GetMapRoleById(double.Parse(tradeData.targetRole));
-        foreach (int i in buffList)
-        {
-            targetRole.RemoveBuffById(i);
-        }
-        if (role.isNpc)
-        {
-            if (role.npcScript.isCanSeeEquip)
-            {
-                foreach (int i in role.npcScript.NPCBuffList)
-                {
-                    targetRole.RemoveBuffById(i);
-                }
-            }
-        }
     }
 
     /// <summary>
     /// 重启释放技能
     /// </summary>
-    public void ReUnleashSkills()
-    {
-        IsOpen = true;
-        //Debug.Log("重启技能" + role.baseRoleData.ID);
-        if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
-        {
-            if (!isPlay)
-                UnleashSkills();
-        }
-        else
-            UnleashSkills();
-    }
+    public abstract void ReUnleashSkills();
 
     /// <summary>
     ///  取消技能
     /// </summary>
-    public void CancelSkill()
+    public virtual void CancelSkill()
     {
         IsOpen = false;
     }
