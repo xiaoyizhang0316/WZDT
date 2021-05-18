@@ -6,7 +6,7 @@ using DT.Fight.Bullet;
 using UnityEngine;
 using Random = System.Random;
 
-public class ProductMelon : BaseSkill
+public class ProductMelon : BaseProductSkill
 {
     public List<ProductData> productDatas = new List<ProductData>();
 

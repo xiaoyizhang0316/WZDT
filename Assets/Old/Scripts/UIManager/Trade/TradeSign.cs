@@ -149,7 +149,7 @@ public class TradeSign : MonoBehaviour
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
             CheckBuffLineTradeCost();
-            cast.GetComponent<BaseSkill>().AddRoleBuff(tradeData);
+            cast.GetComponent<BaseServiceSkill>().Skill(tradeData);
             if (cast.extraSkill != null)
             {
                 cast.extraSkill.SkillOn(this);
@@ -169,7 +169,7 @@ public class TradeSign : MonoBehaviour
         tweener = transform.DOScale(1f, 10f).OnComplete(() =>
         {
             BaseMapRole cast = PlayerData.My.GetMapRoleById(double.Parse(tradeData.castRole));
-            cast.GetComponent<BaseSkill>().AddRoleBuff(tradeData);
+            cast.GetComponent<BaseServiceSkill>().Skill(tradeData);
             CalculateTC();
             CheckBuffLineTradeCost();
         });
@@ -327,7 +327,7 @@ public class TradeSign : MonoBehaviour
         end.RecalculateEncourageLevel(true);
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
-            cast.GetComponent<BaseSkill>().DeteleRoleBuff(tradeData);
+            cast.GetComponent<BaseServiceSkill>().SkillOff(tradeData);
             if (cast.extraSkill != null)
             {
                 cast.extraSkill.SkillOff(this);

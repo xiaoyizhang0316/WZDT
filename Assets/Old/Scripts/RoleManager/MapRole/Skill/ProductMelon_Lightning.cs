@@ -5,7 +5,7 @@ using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
 
-public class ProductMelon_Lightning : BaseSkill
+public class ProductMelon_Lightning : BaseProductSkill
 {
     private int currentCount = 0;
 

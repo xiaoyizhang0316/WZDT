@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class ProductSeed : BaseSkill
+public class ProductSeed : BaseProductSkill
 {
     public List<ProductData> productDatas = new List<ProductData>();
     // Start is called before the first frame update

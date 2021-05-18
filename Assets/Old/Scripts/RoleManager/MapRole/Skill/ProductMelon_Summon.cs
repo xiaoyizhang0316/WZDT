@@ -5,7 +5,7 @@ using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
 
-public class ProductMelon_Summon : BaseSkill
+public class ProductMelon_Summon : BaseProductSkill
 {
     private int currentCount = 0;
 
