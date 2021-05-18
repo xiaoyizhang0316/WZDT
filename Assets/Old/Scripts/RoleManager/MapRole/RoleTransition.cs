@@ -10,6 +10,9 @@ public class RoleTransition : MonoBehaviour
     private BaseMapRole _role;
     private TransitionCause[] _objects;
     private bool isNpc = false;
+    private bool isTransition = false;
+
+    public bool IsTransition => isTransition;
 
     private void Start()
     {
@@ -37,6 +40,7 @@ public class RoleTransition : MonoBehaviour
         }
 
         active = true;
+        isTransition = true;
         _objects[0] = cause;
         currentRoleType = roleType;
         _role.baseRoleData.baseRoleData.roleType = currentRoleType;
@@ -51,6 +55,7 @@ public class RoleTransition : MonoBehaviour
         _objects[0] = null;
         currentRoleType = startRoleType;
         Transition();
+        isTransition = false;
     }
 
     /// <summary>
@@ -168,6 +173,8 @@ public class RoleTransition : MonoBehaviour
         {
             CommonFunc.AddComponent(gameObject,skillName);
         }
+
+        isTransition = false;
     }
 
     /// <summary>
