@@ -1,13 +1,14 @@
 ﻿using System;
 using UnityEngine;
 using static GameEnum;
+using Object = System.Object;
 
 public class RoleTransition : MonoBehaviour
 {
     public RoleType startRoleType;
     public RoleType currentRoleType;
     private BaseMapRole _role;
-    private Transform[] _objects;
+    private TransitionCause[] _objects;
     private bool isNpc = false;
 
     private void Start()
@@ -16,7 +17,7 @@ public class RoleTransition : MonoBehaviour
         currentRoleType = startRoleType;
         _role = GetComponent<BaseMapRole>();
         
-        _objects = new Transform[1];
+        _objects = new TransitionCause[1];
         _objects[0] = null;
         isNpc = _role.isNpc;
     }
@@ -27,7 +28,7 @@ public class RoleTransition : MonoBehaviour
     /// <param name="roleType">要转换的类型</param>
     /// <param name="cause">转换的原因（EquipSign,WorkerSign,TradeSign）</param>
     /// <param name="active">激活成功(可用来判断能否达成交易)</param>
-    public void ActiveTransition(RoleType roleType, Transform cause, out bool active)
+    public void ActiveTransition(RoleType roleType, TransitionCause cause, out bool active)
     {
         if (_objects[0] != null)
         {
@@ -57,9 +58,9 @@ public class RoleTransition : MonoBehaviour
     /// </summary>
     private void CheckTransitionEnd()
     {
-        if (isNpc || _objects[0].GetComponent<TradeSign>())
+        if (isNpc || _objects[0].causeType == CauseType.Trade)
         {
-            if (!_role.tradeList.Contains(_objects[0].GetComponent<TradeSign>()))
+            if (!_role.ContainsTrade( _objects[0].id))
             {
                 CancelInvoke();
                 Restore();
@@ -67,9 +68,9 @@ public class RoleTransition : MonoBehaviour
         }
         else
         {
-            if (_objects[0].GetComponent<EquipSign>())
+            if (_objects[0].causeType == CauseType.Equip)
             {
-                if (!_role.baseRoleData.HasEquip(_objects[0].GetComponent<EquipSign>().ID))
+                if (!_role.baseRoleData.HasEquip(_objects[0].id))
                 {
                     CancelInvoke();
                     Restore();
@@ -77,7 +78,7 @@ public class RoleTransition : MonoBehaviour
             }
             else
             {
-                if (!_role.baseRoleData.HasWorker(_objects[0].GetComponent<WorkerSign>().ID))
+                if (!_role.baseRoleData.HasWorker(_objects[0].id))
                 {
                     CancelInvoke();
                     Restore();
@@ -142,23 +143,23 @@ public class RoleTransition : MonoBehaviour
     {
         currentRoleType = startRoleType;
         _role.baseRoleData.baseRoleData.roleType = currentRoleType;
-        if (_objects[0].GetComponent<TradeSign>())
+        if (_objects[0].causeType == CauseType.Trade)
         {
             // 删除相关交易
-            TradeManager.My.DeleteTrade(_objects[0].GetComponent<TradeSign>().tradeData.ID);
+            TradeManager.My.DeleteTrade(_objects[0].id);
         }
         else
         {
             // 删除相关工人或设备
-            if (_objects[0].GetComponent<EquipSign>())
+            if (_objects[0].causeType == CauseType.Equip)
             {
-                _role.baseRoleData.RemoveEquip(_objects[0].GetComponent<EquipSign>().ID, true);
-                PlayerData.My.SetGearStatus(_objects[0].GetComponent<EquipSign>().ID, false);
+                _role.baseRoleData.RemoveEquip(_objects[0].id, true);
+                PlayerData.My.SetGearStatus(_objects[0].id, false);
             }
             else
             {
-                _role.baseRoleData.RemoveEquip(_objects[0].GetComponent<WorkerSign>().ID, false);
-                PlayerData.My.SetGearStatus(_objects[0].GetComponent<WorkerSign>().ID, false);
+                _role.baseRoleData.RemoveEquip(_objects[0].id, false);
+                PlayerData.My.SetGearStatus(_objects[0].id, false);
             }
         }
 
@@ -212,4 +213,23 @@ public class RoleTransition : MonoBehaviour
 
         return skillName;
     }
+}
+
+public class TransitionCause
+{
+    public CauseType causeType;
+    public int id;
+
+    public TransitionCause(CauseType causeType, int id)
+    {
+        this.causeType = causeType;
+        this.id = id;
+    }
+}
+
+public enum CauseType
+{
+    Trade,
+    Equip,
+    Worker
 }
