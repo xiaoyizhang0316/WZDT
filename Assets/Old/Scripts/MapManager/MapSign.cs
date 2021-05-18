@@ -66,6 +66,8 @@ public class MapSign : MonoBehaviour, IDragHandler
     {
         MapManager.My._mapSigns.Add(this);
       //  isCanPlace = GetComponent<MeshRenderer>().enabled && isCanPlace;
+      x =(int) transform.localPosition.x ;
+      y =(int) transform.localPosition.y ;
     }
 
     /// <summary>

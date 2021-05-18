@@ -94,7 +94,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         }
     }
 
-    private HexCell currentCell;
+   // private HexCell currentCell;
     public void OnDrag(PointerEventData eventData)
     {
         if (role == null)
@@ -112,24 +112,28 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         if (Physics.Raycast(inputRay, out hit))
         {
 
-            if (currentCell != null)
-            {
-                currentCell.DisableHighlight();
-            }
+       //  if (currentCell != null)
+       //  {
+       //      currentCell.DisableHighlight();
+       //  }
 
-              currentCell = HexGrid.My.GetCell(hit.point);
-            if (currentCell.TerrainTypeIndex == 1)
-            {
-                currentCell.EnableHighlight(Color.green);
+             /// currentCell = HexGrid.My.GetCell(hit.point);
+       //    if (currentCell.TerrainTypeIndex == 1)
+       //    {
+       //        currentCell.EnableHighlight(Color.green);
 
-             }
-            else
-            {
-                currentCell.EnableHighlight(Color.red);
-                
-            }
+       //     }
+       //    else
+       //    {
+       //        currentCell.EnableHighlight(Color.red);
+       //        
+       //    }
+       if (hit.transform.tag.Equals("Map"))
+       {
+           role.transform.position =hit.point+ new Vector3(0, 0.3f, 0);
 
-            role.transform.position =currentCell.Position+ new Vector3(0, 0.3f, 0);
+       }
+
         }
     }
 
@@ -198,26 +202,26 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
         RaycastHit hit;
         if (Physics.Raycast(inputRay, out hit))
         {
-            HexCell currentCell = HexGrid.My.GetCell(hit.point);
+         //   HexCell currentCell = HexGrid.My.GetCell(hit.point);
            
-            if (currentCell!=null)
+            if (hit.transform.tag.Equals("Map"))
             {
-                currentCell.DisableHighlight();
-                for (int i = 0; i < currentCell.neighbors.Length; i++)
-                {
-                    currentCell.neighbors[i].DisableHighlight();
-                }
-                int x =currentCell.GetComponent<MapSign>().x;
-                int y = currentCell.GetComponent<MapSign>().y;
-                if (MapManager.My.CheckLandAvailable(x, y) &&
+               // currentCell.DisableHighlight();
+              // for (int i = 0; i < currentCell.neighbors.Length; i++)
+              // {
+              //     currentCell.neighbors[i].DisableHighlight();
+              // }
+             //   int x =currentCell.GetComponent<MapSign>().x;
+             //   int y = currentCell.GetComponent<MapSign>().y;
+                if (hit.transform.GetComponent<MapSign>()!=null &&MapManager.My.CheckLandAvailable(hit.transform.GetComponent<MapSign>().x, hit.transform.GetComponent<MapSign>().y) &&
                     StageGoal.My.CostTechPoint(costTech))
                 {
                     print("true ");
                     role.GetComponent<BaseMapRole>().putTime = StageGoal.My.timeCount;
                     StageGoal.My.CostTp(costTech,
                         CostTpType.Build);
-                    role.transform.position =currentCell.Position + new Vector3(0f, 2f, 0f);
-                    role.transform.DOMove(currentCell.Position + new Vector3(0f, 0f, 0f), 0.2f).OnComplete(() =>
+                    role.transform.position =hit.transform.position + new Vector3(0f, 2f, 0f);
+                    role.transform.DOMove(hit.transform.position + new Vector3(0f, 0f, 0f), 0.2f).OnComplete(() =>
                         {
                             GameObject go = Instantiate(dustPrb, role.transform);
                             Destroy(go, 1f);
@@ -236,9 +240,9 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     PlayerData.My.RoleData.Add(role.GetComponent<BaseMapRole>().baseRoleData);
                     PlayerData.My.MapRole.Add(role.GetComponent<BaseMapRole>());
                     isSuccess = true;
-                    MapManager.My.SetLand(x, y, role.GetComponent<BaseMapRole>());
-                    role.GetComponent<BaseMapRole>().posX = x;
-                    role.GetComponent<BaseMapRole>().posY = y;
+                    MapManager.My.SetLand(hit.transform.GetComponent<MapSign>().x, hit.transform.GetComponent<MapSign>().y, role.GetComponent<BaseMapRole>());
+                    role.GetComponent<BaseMapRole>().posX = hit.transform.GetComponent<MapSign>().x;
+                    role.GetComponent<BaseMapRole>().posY = hit.transform.GetComponent<MapSign>().y;
                     role.GetComponent<BaseMapRole>().MonthlyCost();
                     role.GetComponent<BaseMapRole>().AddTechPoint();
                     role.GetComponent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
@@ -255,7 +259,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                         str += role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleType.ToString() + ",";
                         str += role.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleName + ",";
                         str += role.GetComponent<BaseMapRole>().baseRoleData.ID.ToString() + ",";
-                        str += x.ToString() + "," + y.ToString();
+                        str += hit.transform.GetComponent<MapSign>().x.ToString() + "," +hit.transform.GetComponent<MapSign>().y.ToString();
                         if (PlayerData.My.isServer)
                         {
                             PlayerData.My.server.SendToClientMsg(str);
