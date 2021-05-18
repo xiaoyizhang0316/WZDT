@@ -18,6 +18,7 @@ public class BaseServiceSkill : BaseSkill
     /// <param name="data"></param>
     public virtual void Skill(TradeData data)
     {
+        IsOpen = true;
         AddRoleBuff(data);
     }
 
@@ -83,6 +84,14 @@ public class BaseServiceSkill : BaseSkill
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// 增益型技能回合结束调用
+    /// </summary>
+    public virtual void OnEndTurn()
+    {
+        
     }
 
     /// <summary>

@@ -62,11 +62,11 @@ public class BaseMapRole : MonoBehaviour
 
     public BaseNpc npcScript;
 
-    public BaseExtraSkill extraSkill;
-
     public int encourageSkillId = 0;
 
     public BaseEncourageSkill encourageSkill = null;
+
+    public BaseSkill baseSkill;
 
     public List<GameObject> levelModels;
 
@@ -475,9 +475,9 @@ public class BaseMapRole : MonoBehaviour
                 }
             }
         }
-        if(extraSkill != null && tradeList.Count > 0)
+        if(GetComponent<BaseServiceSkill>() != null && tradeList.Count > 0)
         {
-            extraSkill.OnEndTurn();
+            GetComponent<BaseServiceSkill>().OnEndTurn();
         }
     }
 

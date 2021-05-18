@@ -9473,7 +9473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateOBJ: {fileID: 7037255807943775730}
-  skill: {fileID: 2261022846323357431}
+  skill: {fileID: 0}
 --- !u!1 &7267091913716725118
 GameObject:
   m_ObjectHideFlags: 0
@@ -14214,7 +14214,6 @@ GameObject:
   - component: {fileID: 8899486489098488673}
   - component: {fileID: 5840160722976328818}
   - component: {fileID: 6545259540281883998}
-  - component: {fileID: 2261022846323357431}
   - component: {fileID: 2120803140364257434}
   m_Layer: 0
   m_Name: Bank
@@ -14271,6 +14270,7 @@ MonoBehaviour:
       PrePath: 
       RoleSpacePath: 
     effect: 20
+    freeUpdate: 0
     efficiency: 20
     range: 20
     tradeCost: 20
@@ -14297,33 +14297,28 @@ MonoBehaviour:
   tradePoint: {fileID: 6390241512700188720}
   AI: 0
   npcScript: {fileID: 0}
-  extraSkill: {fileID: 0}
+  encourageSkillId: 0
+  baseSkill: {fileID: 0}
   levelModels:
   - {fileID: 6259165991455398444}
   - {fileID: 7037255807943775730}
   putTime: 0
-  totalProfit: 0
-  monthlyProfit: 0
-  totalSatisfy: 0
-  monthlySatisfy: 0
-  totalCost: 0
-  rentCost: 0
-  operationCost: 0
-  activityCost: 0
-  tradeCost: 0
-  shop: []
+  costTechPoint: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  skillPower: 0
   startTradeList: []
   endTradeList: []
   tasteBuffList: 
+  consumableList: 
   totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
   stopWorkSprite: {fileID: 0}
   isSell: 0
   ringEffect: {fileID: 0}
+  specialInfo: {fileID: 0}
   cloneWarehourse: []
 --- !u!114 &8899486489098488673
 MonoBehaviour:
@@ -14344,6 +14339,7 @@ MonoBehaviour:
   NPCBuffList: 
   hideModel: {fileID: 7010573542175292831}
   trueModel: {fileID: 8145369834327937887}
+  npcTag: 
   autoTradeList: []
   animator: {fileID: 0}
 --- !u!65 &5840160722976328818
@@ -14375,31 +14371,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2261022846323357431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692879230315230448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15132e808915d41afb014f5d6cd33929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  role: {fileID: 0}
-  IsOpen: 1
-  isPlay: 0
-  isAvaliable: 1
-  isAnimPlaying: 0
-  goodSpecialBuffList: 
-  goodBaseBuffs: []
-  badSpecialBuffList: 
-  badBaseBuffs: []
-  skillDesc: "\u63D0\u4F9B\u8D37\u6B3E\u529F\u80FD\uFF0C\u5229\u7387\u53D6\u51B3\u4E8E\u53E6\u4E00\u65B9\u7684\u98CE\u9669\u503C"
-  buffList: 
-  animationPart: []
-  productDatas: []
 --- !u!114 &2120803140364257434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14412,9 +14383,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f829d4b2280d4f838d601bb528e84d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 0
-  extraSkillDesc: 
+  role: {fileID: 0}
+  IsOpen: 1
+  isPlay: 0
+  isAvaliable: 1
+  isAnimPlaying: 0
+  skillDesc: "\u63D0\u4F9B\u8D37\u6B3E\u529F\u80FD\uFF0C\u5229\u7387\u53D6\u51B3\u4E8E\u53E6\u4E00\u65B9\u7684\u98CE\u9669\u503C"
+  buffList: 
+  animationPart: []
   maxTradeLimit: 1
+  addAttributeType: 0
+  addStartValue: 0
+  addPerSP: 0
+  buffId: 0
   loanNumber: 20000
   timeCount: 4
   eachReturn: 3800

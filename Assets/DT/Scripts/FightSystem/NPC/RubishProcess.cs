@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class RubishProcess : BaseExtraSkill
+public class RubishProcess : BaseServiceSkill
 {
     public List<BaseMapRole> clearRoleList= new List<BaseMapRole>();
 
@@ -11,17 +11,17 @@ public class RubishProcess : BaseExtraSkill
 
     public RubishProcessItem item;
 
-    public override void SkillOn(TradeSign sign)
+    public override void Skill(TradeData data)
     {
-        base.SkillOn(sign);
-        BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole));
+        base.Skill(data);
+        BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(data.targetRole));
         clearRoleList.Add(target);
     }
 
-    public override void SkillOff(TradeSign sign)
+    public override void SkillOff(TradeData data)
     {
-        base.SkillOff(sign);
-        BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.targetRole));
+        base.SkillOff(data);
+        BaseMapRole target = PlayerData.My.GetMapRoleById(double.Parse(data.targetRole));
         clearRoleList.Remove(target);
     }
 

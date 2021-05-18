@@ -150,10 +150,6 @@ public class TradeSign : MonoBehaviour
         {
             CheckBuffLineTradeCost();
             cast.GetComponent<BaseServiceSkill>().Skill(tradeData);
-            if (cast.extraSkill != null)
-            {
-                cast.extraSkill.SkillOn(this);
-            }
         }
     }
 
@@ -328,10 +324,6 @@ public class TradeSign : MonoBehaviour
         if (cast.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
             cast.GetComponent<BaseServiceSkill>().SkillOff(tradeData);
-            if (cast.extraSkill != null)
-            {
-                cast.extraSkill.SkillOff(this);
-            }
         }
     }
 

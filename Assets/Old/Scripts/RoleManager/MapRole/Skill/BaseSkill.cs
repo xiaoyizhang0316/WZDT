@@ -42,6 +42,11 @@ public abstract class BaseSkill : MonoBehaviour
     /// </summary>
     public List<GameObject> animationPart = new List<GameObject>();
 
+    /// <summary>
+    /// 最大交易数量限制（0-默认为无限制）
+    /// </summary>
+    public int maxTradeLimit;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -59,5 +64,22 @@ public abstract class BaseSkill : MonoBehaviour
     public virtual void CancelSkill()
     {
         IsOpen = false;
+    }
+
+    public virtual bool CheckIsOverLimit()
+    {
+        if (maxTradeLimit == 0)
+            return false;
+        else
+        {
+            if (role.tradeList.Count >= maxTradeLimit)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

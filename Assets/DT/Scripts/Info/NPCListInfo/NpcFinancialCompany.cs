@@ -92,7 +92,7 @@ public class NpcFinancialCompany : MonoBehaviour
     public void  InitButton(int index)
     {
         skill.index = index;
-        skill.SkillOn(null);
+        skill.Skill(null);
         for (int i = 0; i <conditionButtons.Count; i++)
         {
             conditionButtons[i].interactable = false;
