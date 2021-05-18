@@ -255,7 +255,9 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         if (npc.GetComponent<NPC>().UnlockNPCRole())
         {
             lockedInfo.SetActive(false);
-            ShowNpcInfo(npc);
+            //ShowNpcInfo(npc);
+            RoleUpdateInfo.My.Init(npc.GetComponent<BaseMapRole>().baseRoleData);
+            
             DataUploadManager.My.UnlockNpc(npc.GetComponent<BaseMapRole>());
             if (!PlayerData.My.isSOLO)
             {
