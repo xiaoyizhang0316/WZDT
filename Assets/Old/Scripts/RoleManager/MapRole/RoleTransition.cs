@@ -113,7 +113,7 @@ public class RoleTransition : MonoBehaviour
         // TODO check trade 
     }
 
-    private void TransitionFailed()
+    private void TransitionFailed() 
     {
         // TODO 还原到初始状态
         // TODO 移除装备或者交易
