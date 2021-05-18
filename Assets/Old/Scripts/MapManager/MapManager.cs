@@ -61,7 +61,7 @@ public class MapManager : MonoSingleton<MapManager>
         //Invoke("TestMethod", 1f); 
         Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
         Debug.Log(Application.streamingAssetsPath+"/"+SceneManager.GetActiveScene().name  + ".map");
-        SaveLoadMenu.LoadActualScene(Application.streamingAssetsPath+"/"+SceneManager.GetActiveScene().name  + ".map");
+//        SaveLoadMenu.LoadActualScene(Application.streamingAssetsPath+"/"+SceneManager.GetActiveScene().name  + ".map");
         //buildTF = transform.root
         Debug.Log(transform.root);
         Invoke("InitStageNPCData",0.6f);
@@ -269,7 +269,7 @@ public class MapManager : MonoSingleton<MapManager>
         //Debug.Log("+++++++++" + json);
         StageNPCsData stageNPCsData = JsonUtility.FromJson< StageNPCsData >(json );
         //Debug.Log("============" + stageNPCsData.stageNPCItems.Count);
-        ParseStageNPCData(stageNPCsData);
+        //ParseStageNPCData(stageNPCsData);
     }
 
     /// <summary>
