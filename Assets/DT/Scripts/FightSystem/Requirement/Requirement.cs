@@ -12,12 +12,18 @@ public class Requirement
 
     public bool isOpen;
 
+    /// <summary>
+    /// 需求从不满足到满足时获得增益效果
+    /// </summary>
     public void OnMeetRequire()
     {
         //TODO 生成buff并附加在角色上
         isOpen = true;
     }
 
+    /// <summary>
+    /// 需求从满足到不满足时取消增益效果
+    /// </summary>
     public void CancelRequire()
     {
         //TODO 取消对应ID的角色buff
@@ -25,6 +31,9 @@ public class Requirement
     }
     
 
+    /// <summary>
+    /// 检测需求是否被满足
+    /// </summary>
     public void CheckCondition()
     {
         for (int i = 0; i < requirementData.requireList.Count; i++)
@@ -44,6 +53,11 @@ public class Requirement
         }
     }
 
+    /// <summary>
+    /// 检测单个需求是否被满足
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
     public bool CheckSingleCondition(string str)
     {
         string[] strList = str.Split('_');
@@ -127,6 +141,11 @@ public class Requirement
         return true;
     }
 
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    /// <param name="requireId"></param>
+    /// <param name="_role"></param>
     public Requirement(int requireId,BaseMapRole _role)
     {
         requirementData = GameDataMgr.My.GetRequirementDataById(requireId);
