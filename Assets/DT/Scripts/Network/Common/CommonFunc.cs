@@ -79,7 +79,7 @@ public static class CommonFunc
         catch (Exception e)
         {
             //Console.WriteLine(e);
-            throw e;
+            throw new Exception(e.Message);
         }
     }
 }

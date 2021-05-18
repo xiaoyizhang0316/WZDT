@@ -17,6 +17,7 @@ public class JsonDatas
 	public string WorkerData;
 	public string TranslateData;
     public string EncourageSkillData;
+    public string RequirementData;
     public string FTE_0;
     public string FTE_1;
     public string FTE_2;
@@ -40,6 +41,8 @@ public class JsonDatas
     public string FTE_4_5;
     public string FTE_F2;
     public string FTE_F1;
+    public string FTE_11;
+    public string NPC_11;
 
     public string questions;
     //public List<Level> level;
@@ -114,6 +117,10 @@ public class JsonDatas
                 if (isNPC)
                     return NPC_9;
                 return FTE_9;
+            case "FTE_11":
+                if (isNPC)
+                    return NPC_11;
+                return FTE_11;
         }
         return null;
     }
