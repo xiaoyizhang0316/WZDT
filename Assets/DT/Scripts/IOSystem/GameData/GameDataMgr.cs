@@ -581,6 +581,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.requirementId = int.Parse(item.requirementId);
             temp.targetBuffId = int.Parse(item.targetBuffId);
             temp.requirementDesc = item.requirementDesc;
+            temp.effectDesc = item.effectDesc;
             temp.requireList = new List<string>();
             List<string> strList = item.requireList.Split(',').ToList();
             temp.requireList.AddRange(strList);

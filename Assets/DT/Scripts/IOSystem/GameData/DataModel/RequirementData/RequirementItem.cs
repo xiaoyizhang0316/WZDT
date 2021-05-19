@@ -8,6 +8,8 @@ public class RequirementItem
 
     public string requirementDesc;
 
+    public string effectDesc;
+
     public string targetBuffId;
     
     public string requireList;

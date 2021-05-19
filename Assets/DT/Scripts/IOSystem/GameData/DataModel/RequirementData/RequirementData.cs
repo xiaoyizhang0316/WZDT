@@ -8,6 +8,8 @@ public class RequirementData
 
     public string requirementDesc;
 
+    public string effectDesc;
+
     public int targetBuffId;
 
     public List<string> requireList = new List<string>();
