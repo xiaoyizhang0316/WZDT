@@ -74,7 +74,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     //固定成本等级
     public int monthCostLevel;
     //交付因素等级（激励等级）
-    public int encourageLevel;
+    public int encourageLevel; 
     //世界环境因素1
     public int environmentLevel1;
     //世界环境因素1名称
@@ -86,7 +86,13 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     //世界环境因素3
     public int environmentLevel3;
     //世界环境因素3名称
-    public string environmentLevel3Name;
+    public string environmentLevel3Name; 
+    // 满意度倍率
+    public float satisfyRate;
+    // 口味伤害倍率
+    public float tasteDamageRate;
+
+    public Dictionary<Role, int> onTradeRole = new Dictionary<Role, int>(); 
 
     /// <summary>
     /// 当添加了新激励等级效果时
@@ -473,6 +479,74 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
                     }
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// 交易达成时，添加交易双方到激活的角色列表里
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    public void AddOntradeRole(string start, string end)
+    {
+        var startRole = PlayerData.My.GetRoleById(double.Parse(start));
+        var endRole = PlayerData.My.GetRoleById(double.Parse(end));
+        if (onTradeRole.ContainsKey(startRole))
+        {
+            var val = onTradeRole[startRole];
+            onTradeRole[startRole] = val + 1;
+        }
+        else
+        {
+            onTradeRole[startRole] = 1;
+        }
+        
+        if (onTradeRole.ContainsKey(endRole))
+        {
+            var val = onTradeRole[endRole];
+            onTradeRole[endRole] = val + 1;
+        }
+        else
+        {
+            onTradeRole[endRole] = 1;
+        }
+    }
+
+    /// <summary>
+    /// 交易删除时，从激活的角色里删除
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    public void DeleteTradeRole(string start , string end)
+    {
+        var startRole = PlayerData.My.GetRoleById(double.Parse(start));
+        var endRole = PlayerData.My.GetRoleById(double.Parse(end));
+        if (onTradeRole.ContainsKey(startRole))
+        {
+            var val = onTradeRole[startRole];
+            if (val - 1 == 0)
+            {
+                onTradeRole.Remove(startRole);
+            }
+            else
+            {
+                onTradeRole[startRole] = val - 1;
+            }
+            
+        }
+        
+        if (onTradeRole.ContainsKey(endRole))
+        {
+            var val = onTradeRole[endRole];
+            if (val - 1 == 0)
+            {
+                onTradeRole.Remove(endRole);
+            }
+            else
+            {
+                onTradeRole[endRole] = val - 1;
+            }
+            
         }
     }
 }

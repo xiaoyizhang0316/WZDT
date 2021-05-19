@@ -89,6 +89,7 @@ public class TradeSign : MonoBehaviour
         AddTradeToRole();
         InvokeRepeating("CheckEncourageSetting", 0f, 1f);
         StageGoal.My.RefreshAllCost();
+        BaseLevelController.My.AddOntradeRole(start,end);
     }
 
     /// <summary>
