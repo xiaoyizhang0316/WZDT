@@ -14,6 +14,7 @@ namespace DT.Fight.Bullet
         Lightning = 3,
         summon = 4,
         Leaser = 5,
+        Juice = 6,
     }
      
 }

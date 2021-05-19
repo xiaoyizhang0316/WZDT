@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using DT.Fight.Bullet;
+using MoonSharp.Interpreter.Tree.Statements;
 using static GameEnum;
 
   [Serializable]
@@ -23,6 +24,12 @@ public class ProductData
         buffList.AddRange(data.buffList);
         wasteBuffList.AddRange(data.wasteBuffList);
         buffMaxCount = data.buffMaxCount;
+     AddDamage = data.AddDamage;
+
+     AddScore=data.AddScore;
+
+     AddSatisfaction = data.AddSatisfaction;
+        
     }
 
     public ProductData( SendProductData data)
@@ -35,6 +42,11 @@ public class ProductData
         buffList.AddRange(data.buffList);
         buffMaxCount = data.buffMaxCount;
         RepeatBulletCount = data.count;
+        AddDamage = 1;
+
+        AddScore= 1;
+
+        AddSatisfaction = 1;
     }
 
     public BulletType bulletType;
@@ -64,6 +76,12 @@ public class ProductData
     /// </summary>
     public int buffMaxCount;
 
+
+    public float AddDamage = 1;
+
+    public float AddScore= 1;
+
+    public float AddSatisfaction = 1;
     public int RepeatBulletCount;
 
     public void AddBuff(int buffId)

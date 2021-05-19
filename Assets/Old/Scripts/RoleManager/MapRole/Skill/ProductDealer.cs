@@ -34,6 +34,10 @@ public class ProductDealer : BaseProductSkill
                     GetComponent<BulletLaunch>().LanchNormal(data, role.shootTarget);
                     break;
                 case BulletType.Bomb:
+                    GetComponent<BulletLaunch>().LanchJuice(data); 
+                    break;
+
+                case BulletType.Juice:
                     GetComponent<BulletLaunch>().LanchBoom(data);
                     break;
                 case BulletType.Lightning:
