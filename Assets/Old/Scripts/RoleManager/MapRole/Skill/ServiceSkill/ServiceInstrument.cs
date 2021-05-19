@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ServiceInstrument : BaseServiceSkill
 {
+    private bool isActive;
     public override void Skill(TradeData data)
     {
         var target = role.baseRoleData.ID.ToString().Equals(data.startRole)?PlayerData.My.GetMapRoleById(double.Parse(data.endRole)):
@@ -14,13 +15,32 @@ public class ServiceInstrument : BaseServiceSkill
             target.GetComponent<RoleTransition>().ActiveTransition(transitionType, new TransitionCause(CauseType.Trade, data.ID), out var active);
             if (!active)
             {
+                if (!_unChangeData.ContainsKey(data.ID))
+                {
+                    _unChangeData.Add(data.ID,data);
+                }
                 base.Skill(data);
             }
+            else
+            {
+                if (_unChangeData.ContainsKey(data.ID))
+                {
+                    _unChangeData.Remove(data.ID);
+                }
+            }
+
+            isActive = active;
         }
         else
         {
             base.Skill(data);
         }
+    }
+
+    public override void SkillOff(TradeData data)
+    {
+        if(!isActive)
+            base.SkillOff(data);
     }
 
     bool CheckTransition(BaseMapRole role, out GameEnum.RoleType transitionType)

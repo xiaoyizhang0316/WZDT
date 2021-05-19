@@ -60,6 +60,41 @@ public class BulletLaunch : MonoBehaviour
           });
         gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
     }
+    public void LanchJuice(ProductData data)
+    {
+        List<Vector3> pointList = new List<Vector3>();
+
+        GameObject gameObject = BulletObjectPool.My.GetBullet(BulletType.Juice);
+        gameObject.transform.SetParent(launchShooter);
+        gameObject.transform.localPosition = new Vector3(0, 0.1f, 0);
+        gameObject.GetComponent<GoodsSign>().productData = data;
+        pointList = DrawLine(gameObject.transform.position, GetComponent<BaseMapRole>().shootTarget.transform.position);
+        gameObject.transform.localPosition = new Vector3(0, 0.4f, 0);
+        gameObject.GetComponent<GoodsSign>().lunch = this;
+        gameObject.GetComponent<GoodsSign>().target = GetComponent<BaseMapRole>().shootTarget;
+        gameObject.transform.SetParent(this.transform);
+        gameObject.GetComponent<BulletEffect>().InitBufflist(gameObject.GetComponent<GoodsSign>().productData.buffList);
+
+        // gameObject.transform.localPosition = new Vector3(0, 1, 0);
+
+        launchShooter.DOLookAt(PlayerData.My.isPrediction? launchShooter.position:pointList[pointList.Count / 2], 0.1f).OnComplete(() =>
+          {
+              if(!PlayerData.My.isPrediction)
+                    gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().tile);
+              //gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().Init();
+              gameObject.transform.DOPath(pointList.ToArray(), 0.5f).SetEase(sase).OnComplete(() =>
+              {
+                  if(!PlayerData.My.isPrediction)
+                        gameObject.GetComponent<BulletEffect>().InitBuff(gameObject.GetComponent<BulletEffect>().explosions);
+                  //                  gameObject.GetComponent<GoodsSign>().GetComponentInChildren<ETFXProjectileScript>().StartShoot();
+                  gameObject.GetComponent<BoomTrigger>().GetConsumerList();
+
+
+                  BulletObjectPool.My.RecoveryBullet(gameObject, 0.5f);
+              });
+          });
+        gameObject.GetComponent<GoodsSign>().twe = lanchNormalTWE;
+    }
 
     public bool isplay;
 

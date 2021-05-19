@@ -26,6 +26,8 @@ public class GoodsSign : MonoBehaviour
     private float speedAdd = 1f;
     public float speed = 0.7f;
 
+    
+
     public Dictionary<double, int> speedBuffList = new Dictionary<double, int>();
     // Start is called before the first frame update
     void Start()
