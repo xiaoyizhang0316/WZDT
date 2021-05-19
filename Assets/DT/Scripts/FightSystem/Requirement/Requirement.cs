@@ -45,7 +45,7 @@ public class Requirement
         {
             if (!CheckSingleCondition(requirementData.requireList[i]))
             {
-                if (isOpen)
+                if (isOpen && requirementData.isRealTime == 0)
                 {
                     CancelRequire();
                 }
@@ -141,18 +141,116 @@ public class Requirement
                 BulletType targetType = (BulletType)Enum.Parse(typeof(BulletType), targetNumber);
                 for (int i = 0; i < role.warehouse.Count; i++)
                 {
-                    
+                    if (role.warehouse[i].bulletType.Equals(targetType))
+                    {
+                        return true;
+                    }
                 }
-                break;
+                return false;
             case 15:
+                target = BaseLevelController.My.totalKillNumber;
                 break;
             case 16:
+                //TODO baselevelcontrooler消费者击杀数据
                 break;
-            
+            case 17:
+            {
+                List<int> tasteBufflist = new List<int>(){303,304,305};
+                for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                {
+                    if (PlayerData.My.MapRole[i].CheckContainAddon())
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            case 18:
+            {
+                int tempMaxRisk = 0;
+                for (int i = 0; i < role.startTradeList.Count; i++)
+                {
+                    BaseMapRole mapRole =
+                        PlayerData.My.GetMapRoleById(double.Parse(role.startTradeList[i].tradeData.endRole));
+                    if (mapRole.baseRoleData.riskResistance > tempMaxRisk)
+                    {
+                        tempMaxRisk = mapRole.baseRoleData.riskResistance;
+                    }
+                }
+                for (int i = 0; i < role.endTradeList.Count; i++)
+                {
+                    BaseMapRole mapRole =
+                        PlayerData.My.GetMapRoleById(double.Parse(role.endTradeList[i].tradeData.startRole));
+                    if (mapRole.baseRoleData.riskResistance > tempMaxRisk)
+                    {
+                        tempMaxRisk = mapRole.baseRoleData.riskResistance;
+                    }
+                }
+                target = tempMaxRisk;
+                break;
+            }
+            case 19:
+            {
+                int count = 0;
+                for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                {
+                    if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Advertisment)
+                    {
+                        count++;
+                    }
+                }
+                target = count;
+                break;
+            }
+            case 20:
+            {
+                int targetBuff = int.Parse(targetNumber);
+                for (int i = 0; i < role.buffList.Count; i++)
+                {
+                    if (role.buffList[i].buffId == targetBuff)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            case 21:
+            {
+                GameEnum.RoleType targetRoleType = (GameEnum.RoleType)Enum.Parse(typeof(GameEnum.RoleType), targetNumber);
+                for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                {
+                    if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType.Equals(targetRoleType))
+                    {
+                        if (PlayerData.My.MapRole[i].startTradeList.Count > 0 ||
+                            PlayerData.My.MapRole[i].endTradeList.Count > 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
             default:
                 break;
         }
-        return true;
+
+        if (condition == 0)
+        {
+            return target > int.Parse(targetNumber);
+        }
+        else if (condition == 1)
+        {
+            return target == int.Parse(targetNumber);
+        }
+        else if (condition == 2)
+        {
+            return target < int.Parse(targetNumber);
+        }
+        else if (condition == 3)
+        {
+            return target != int.Parse(targetNumber);
+        }
+        return false;
     }
 
     /// <summary>

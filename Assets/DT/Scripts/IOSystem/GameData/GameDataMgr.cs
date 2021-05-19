@@ -585,6 +585,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.requireList = new List<string>();
             List<string> strList = item.requireList.Split(',').ToList();
             temp.requireList.AddRange(strList);
+            temp.isRealTime = int.Parse(item.isRealTime);
             requirementDatas.Add(temp);
         }
     }

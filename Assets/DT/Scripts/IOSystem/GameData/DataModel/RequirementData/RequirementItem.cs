@@ -13,6 +13,8 @@ public class RequirementItem
     public string targetBuffId;
     
     public string requireList;
+
+    public string isRealTime;
 }
 
 public class RequirementsData

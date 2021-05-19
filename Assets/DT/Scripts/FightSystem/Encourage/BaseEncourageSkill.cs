@@ -11,19 +11,27 @@ public class BaseEncourageSkill
 
     public BaseMapRole role;
     
+    /// <summary>
+    /// 激励等级技能激活时
+    /// </summary>
     public virtual void SkillOn()
     {
         isSkillOpen = true;
         BaseLevelController.My.AddBuff(role,skillData.skillType,skillData.targetBuff,CalculateNumber());
     }
 
+    /// <summary>
+    /// 激励等级技能关闭时
+    /// </summary>
     public virtual void SkillOff()
     {
         BaseLevelController.My.RemoveBuff(skillData.skillType,skillData.targetBuff);
         isSkillOpen = false;
     }
-
-
+    
+    /// <summary>
+    /// 激励等级发生变化时更改加成数值
+    /// </summary>
     public void OnEncourageValueChange()
     {
         if (role.encourageLevel >= 3)
