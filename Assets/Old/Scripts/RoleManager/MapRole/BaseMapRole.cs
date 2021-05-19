@@ -67,12 +67,20 @@ public class BaseMapRole : MonoBehaviour
     public BaseEncourageSkill encourageSkill = null;
 
     public BaseSkill baseSkill;
+    
+    public List<int> requirementId = new List<int>();
+
+    public List<Requirement> roleRequirement = new List<Requirement>();
 
     public List<GameObject> levelModels;
 
+    //放置时间
     public int putTime;
-
+    //放置消耗的Mega值
     public int costTechPoint;
+
+    //加工过的产品数量
+    public int producedNumber;
 
     public GameObject tradeButton;
 
@@ -167,11 +175,48 @@ public class BaseMapRole : MonoBehaviour
         InitEncourageSkill();
     }
 
+    /// <summary>
+    /// 初始化激励等级技能
+    /// </summary>
     public void InitEncourageSkill()
     {
         if (encourageSkillId != 0 && encourageSkill == null)
         {
             encourageSkill = new BaseEncourageSkill(encourageSkillId,this);
+        }
+    }
+
+    /// <summary>
+    /// 初始化需求
+    /// </summary>
+    public void InitRequirement()
+    {
+        if (requirementId.Count != 0 && roleRequirement.Count == 0)
+        {
+            for (int i = 0; i < requirementId.Count; i++)
+            {
+                roleRequirement.Add(new Requirement(requirementId[i],this));
+            }
+            InvokeRepeating("CheckRoleRequirement",0f,1f);
+        }
+
+    }
+
+    /// <summary>
+    /// 检测角色的需求是否被满足
+    /// </summary>
+    public void CheckRoleRequirement()
+    {
+        if (roleRequirement.Count != 0)
+        {
+            for (int i = 0; i < roleRequirement.Count; i++)
+            {
+                roleRequirement[i].CheckCondition();
+            }
+        }
+        else
+        {
+            CancelInvoke("CheckRoleRequirement");
         }
     }
 

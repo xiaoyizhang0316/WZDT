@@ -134,6 +134,22 @@ public class TradeManager : MonoSingleton<TradeManager>
     }
 
     /// <summary>
+    /// 检测所有交易是否正确(交易数量为0视为正确)
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckAllTradeRight()
+    {
+        if (tradeList.Count == 0)
+            return true;
+        foreach (TradeSign sign in tradeList.Values)
+        {
+            if (!sign.IsTradeSettingBest())
+                return false;
+        }
+        return true;
+    }
+
+    /// <summary>
     /// 检测npc是否激活
     /// </summary>
     /// <returns></returns>

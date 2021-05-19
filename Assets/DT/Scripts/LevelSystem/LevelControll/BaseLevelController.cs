@@ -75,7 +75,26 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     public int monthCostLevel;
     //交付因素等级（激励等级）
     public int encourageLevel;
+    //世界环境因素1
+    public int environmentLevel1;
+    //世界环境因素1名称
+    public string environmentLevel1Name;
+    //世界环境因素2
+    public int environmentLevel2;
+    //世界环境因素2名称
+    public string environmentLevel2Name;
+    //世界环境因素3
+    public int environmentLevel3;
+    //世界环境因素3名称
+    public string environmentLevel3Name;
 
+    /// <summary>
+    /// 当添加了新激励等级效果时
+    /// </summary>
+    /// <param name="role"></param>
+    /// <param name="type"></param>
+    /// <param name="buffId"></param>
+    /// <param name="number"></param>
     public void AddBuff(BaseMapRole role,EncourageSkillType type,int buffId,float number)
     {
         switch (type)
@@ -124,6 +143,11 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         }
     }
 
+    /// <summary>
+    /// 激励等级效果消失时
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="_buffId"></param>
     public void RemoveBuff(EncourageSkillType type,int _buffId)
     {
         switch (type)
@@ -183,6 +207,12 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         }
     }
 
+    /// <summary>
+    /// 激励等级效果发生变化时
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="_buffId"></param>
+    /// <param name="number"></param>
     public void ChangeBuffNumber(EncourageSkillType type, int _buffId,float number)
     {
         switch (type)
@@ -254,6 +284,10 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         }
     }
 
+    /// <summary>
+    /// 将所有消费者相关的激励等级效果施加到场上现有的消费者上
+    /// </summary>
+    /// <param name="buff"></param>
     public void AddBuffToAllConsumer(BaseBuff buff)
     {
         ConsumeSign[] sign = FindObjectsOfType<ConsumeSign>();
@@ -275,6 +309,10 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         }
     }
 
+    /// <summary>
+    /// 激励等级效果消失时场上现有的消费者都移除掉该效果
+    /// </summary>
+    /// <param name="buff"></param>
     public void RemoveBuffFromAddConsumer(BaseBuff buff)
     {
         ConsumeSign[] sign = FindObjectsOfType<ConsumeSign>();
@@ -284,6 +322,9 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         }
     }
 
+    /// <summary>
+    /// 回合+钱/得分类激励等级效果回合结算
+    /// </summary>
     public void TurnStaticCheck()
     {
         for (int i = 0; i < playerStaticList.Count; i++)
