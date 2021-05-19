@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinancialCompanySkill : BaseServiceSkill
+public class FinancialCompanySkill : BaseFinancialSkill
 {
     public string condition_1;
     public string condition_2;
     public string condition_3;
 
     public int totalMaga = 0;
-    public int index =-1;
+    //public int index =-1;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class FinancialCompanySkill : BaseServiceSkill
     
     }
 
-    public override void Skill(TradeData data)
+    public override void Skill()
     {
         if (index == 0)
         {
@@ -37,7 +37,8 @@ public class FinancialCompanySkill : BaseServiceSkill
         {
             StageGoal.My.GetPlayerGold(200000,false,true);
         }
-        SkillCheckManager.My.ActiveRoleCheck(GetComponent<BaseMapRole>(),index);
+        //SkillCheckManager.My.ActiveRoleCheck(GetComponent<BaseMapRole>(),index);
+        base.Skill();
     }
     
 }

@@ -9473,7 +9473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateOBJ: {fileID: 7037255807943775730}
-  skill: {fileID: 2261022846323357431}
+  skill: {fileID: 0}
 --- !u!1 &7267091913716725118
 GameObject:
   m_ObjectHideFlags: 0
@@ -14214,7 +14214,6 @@ GameObject:
   - component: {fileID: 8899486489098488673}
   - component: {fileID: 5840160722976328818}
   - component: {fileID: 6545259540281883998}
-  - component: {fileID: 2261022846323357431}
   - component: {fileID: -6703912262440890650}
   m_Layer: 0
   m_Name: financialCompany
@@ -14298,7 +14297,8 @@ MonoBehaviour:
   tradePoint: {fileID: 6390241512700188720}
   AI: 0
   npcScript: {fileID: 0}
-  extraSkill: {fileID: 0}
+  encourageSkillId: 0
+  baseSkill: {fileID: 0}
   levelModels:
   - {fileID: 6259165991455398444}
   - {fileID: 7037255807943775730}
@@ -14307,6 +14307,7 @@ MonoBehaviour:
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  skillPower: 0
   startTradeList: []
   endTradeList: []
   tasteBuffList: 
@@ -14371,27 +14372,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2261022846323357431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692879230315230448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15132e808915d41afb014f5d6cd33929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  role: {fileID: 0}
-  IsOpen: 1
-  isPlay: 0
-  isAvaliable: 1
-  isAnimPlaying: 0
-  skillDesc: 
-  buffList: 
-  animationPart: []
-  productDatas: []
 --- !u!114 &-6703912262440890650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14404,12 +14384,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2e0c5d38929e440a82ad9bc79e8578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 0
-  extraSkillDesc: 
+  role: {fileID: 0}
+  IsOpen: 0
+  isPlay: 0
+  isAvaliable: 1
+  isAnimPlaying: 0
+  skillDesc: 
+  buffList: 
+  animationPart: []
   maxTradeLimit: 0
+  addAttributeType: 0
+  addStartValue: 0
+  addPerSP: 0
+  buffId: 0
   condition_1: "\u7B2C\u4E00\u4E2A\u6761\u4EF6"
   condition_2: "\u7B2C\u4E8C\u4E2A\u6761\u4EF6"
   condition_3: "\u7B2C\u4E09\u4E2A\u6761\u4EF6"
+  totalMaga: 0
   index: -1
 --- !u!1001 &1072662421135550785
 PrefabInstance:

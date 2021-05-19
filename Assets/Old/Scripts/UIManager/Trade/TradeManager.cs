@@ -37,6 +37,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             if (NewCanvasUI.My.Panel_TradeSetting.activeSelf)
                 CreateTradeManager.My.Close();
             StageGoal.My.RefreshAllCost();
+            BaseLevelController.My.DeleteTradeRole(temp.tradeData.startRole, temp.tradeData.endRole);
         }
     }
 
