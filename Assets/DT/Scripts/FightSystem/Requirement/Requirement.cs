@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using DT.Fight.Bullet;
 using Fungus;
 using Debug = UnityEngine.Debug;
 
@@ -17,7 +19,10 @@ public class Requirement
     /// </summary>
     public void OnMeetRequire()
     {
-        //TODO 生成buff并附加在角色上
+        BaseBuff buff = new BaseBuff();
+        BuffData data = GameDataMgr.My.GetBuffDataByID(requirementData.targetBuffId);
+        buff.Init(data);
+        buff.SetRoleBuff(role,role,role);
         isOpen = true;
     }
 
@@ -26,7 +31,7 @@ public class Requirement
     /// </summary>
     public void CancelRequire()
     {
-        //TODO 取消对应ID的角色buff
+        role.RemoveBuffById(requirementData.targetBuffId);
         isOpen = false;
     }
     
@@ -68,7 +73,7 @@ public class Requirement
         }
         int prefix = int.Parse(strList[0]);
         int condition = int.Parse(strList[1]);
-        int targetNumber = int.Parse(strList[2]);
+        string targetNumber = strList[2];
         int target = 0;
         switch (prefix)
         {
@@ -110,7 +115,7 @@ public class Requirement
                 break;
             }
             case 6:
-                target = role.baseRoleData.peoPleList.Count;
+                target = role.baseRoleData.EquipList.Count;
                 break;
             case 7:
                 target = role.baseRoleData.baseRoleData.level;
@@ -119,16 +124,25 @@ public class Requirement
                 //TODO 高地条件检测
                 break;
             case 9:
+                target = StageGoal.My.timeCount - role.putTime;
                 break;
             case 10:
+                target = role.producedNumber;
                 break;
             case 11:
-                break;
+                return TradeManager.My.CheckAllTradeRight();
             case 12:
+                target = role.baseRoleData.riskResistance;
                 break;
             case 13:
+                target = role.baseRoleData.tradeCost;
                 break;
             case 14:
+                BulletType targetType = (BulletType)Enum.Parse(typeof(BulletType), targetNumber);
+                for (int i = 0; i < role.warehouse.Count; i++)
+                {
+                    
+                }
                 break;
             case 15:
                 break;
