@@ -48,7 +48,7 @@ public class ServiceInstrument : BaseServiceSkill
         if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Merchant|| 
             role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.JuiceFactory)
         {
-            transitionType = GameEnum.RoleType.BeverageCompany;
+            transitionType = GameEnum.RoleType.DrinksCompany;
             return true;
         }
 
