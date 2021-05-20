@@ -181,10 +181,12 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         else if(currentNpc.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Service)
         {
 
-            if (currentNpc.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.financialCompany)
+            if (currentNpc.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.financialCompany ||
+                currentNpc.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Government ||
+                currentNpc.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.DrinksGroup)
             {
-            // GameObject specialInfo =  Instantiate(currentNpc.specialInfo, npcInfo.transform);
-            financialCompany.SetActive(true);
+                // GameObject specialInfo =  Instantiate(currentNpc.specialInfo, npcInfo.transform);
+                financialCompany.SetActive(true);
                 //todo
                 financialCompany.GetComponent<NpcFinancialCompany>().Init(npc.GetComponent<FinancialCompanySkill>()  );
                   
@@ -256,6 +258,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         {
             lockedInfo.SetActive(false);
             //ShowNpcInfo(npc);
+            NewCanvasUI.My.Panel_Update.SetActive(true);
             RoleUpdateInfo.My.Init(npc.GetComponent<BaseMapRole>().baseRoleData);
             
             DataUploadManager.My.UnlockNpc(npc.GetComponent<BaseMapRole>());

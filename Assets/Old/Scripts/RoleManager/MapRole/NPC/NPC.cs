@@ -95,6 +95,7 @@ public class NPC : BaseNpc
                 else
                 {
                     //NPCListInfo.My.ShowNpcInfo(transform);
+                    NewCanvasUI.My.Panel_Update.SetActive(true);
                     RoleUpdateInfo.My.Init(currentRole);
                 }
             }

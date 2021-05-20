@@ -167,12 +167,14 @@ public class BaseMapRole : MonoBehaviour
                 }*/
                 if (isNpc)
                 {
-                    DataUploadManager.My.AddNpcRoleType(this);
+               //     DataUploadManager.My.AddNpcRoleType(this);
                 }
             }
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
+        baseSkill = GetComponent<BaseSkill>();
         InitEncourageSkill();
+        InitRequirement();
     }
 
     /// <summary>
@@ -193,6 +195,7 @@ public class BaseMapRole : MonoBehaviour
     {
         if (requirementId.Count != 0 && roleRequirement.Count == 0)
         {
+            Debug.Log("add requirement");
             for (int i = 0; i < requirementId.Count; i++)
             {
                 roleRequirement.Add(new Requirement(requirementId[i],this));
@@ -562,6 +565,10 @@ public class BaseMapRole : MonoBehaviour
         if(GetComponent<BaseServiceSkill>() != null && tradeList.Count > 0)
         {
             GetComponent<BaseServiceSkill>().OnEndTurn();
+        }
+        if(GetComponent<BaseProductSkill>() != null && tradeList.Count > 0)
+        {
+            GetComponent<BaseProductSkill>().OnEndTurn();
         }
     }
 
@@ -1406,7 +1413,15 @@ public class BaseMapRole : MonoBehaviour
     /// <returns></returns>
     public bool ContainsTrade(int tradeID)
     {
-        foreach (TradeSign sign in tradeList) 
+        foreach (TradeSign sign in startTradeList) 
+        {
+            if (sign.tradeData.ID == tradeID)
+            {
+                return true;
+            }
+        }
+        
+        foreach (TradeSign sign in endTradeList) 
         {
             if (sign.tradeData.ID == tradeID)
             {

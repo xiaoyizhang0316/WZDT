@@ -6,6 +6,7 @@ using DT.Fight.Bullet;
 using Fungus;
 using Debug = UnityEngine.Debug;
 
+[Serializable]
 public class Requirement
 {
     public RequirementData requirementData;

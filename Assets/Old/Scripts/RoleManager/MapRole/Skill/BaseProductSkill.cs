@@ -35,7 +35,12 @@ public abstract class BaseProductSkill : BaseSkill
             }
         });
     }
-    
+
+    public virtual void OnEndTurn()
+    {
+        
+    }
+
     /// <summary>
     /// 重启释放技能
     /// </summary>

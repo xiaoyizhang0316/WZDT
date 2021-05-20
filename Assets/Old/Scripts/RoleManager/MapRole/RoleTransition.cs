@@ -52,9 +52,12 @@ public class RoleTransition : MonoBehaviour
     /// </summary>
     private void Restore()
     {
+        CancelInvoke();
+        Debug.Log("变形重置");
         _objects[0] = null;
         currentRoleType = startRoleType;
-        Transition();
+        _role.baseRoleData.baseRoleData.roleType = currentRoleType;
+        Transition(true);
         isTransition = false;
     }
 
@@ -63,21 +66,28 @@ public class RoleTransition : MonoBehaviour
     /// </summary>
     private void CheckTransitionEnd()
     {
+        if (_objects[0] == null)
+        {
+            CancelInvoke();
+            return;
+        }
         if (isNpc || _objects[0].causeType == CauseType.Trade)
         {
+            Debug.Log("check end transition");
             if (!_role.ContainsTrade( _objects[0].id))
             {
-                CancelInvoke();
+                //CancelInvoke();
                 Restore();
             }
         }
         else
         {
+            Debug.Log("check equip");
             if (_objects[0].causeType == CauseType.Equip)
             {
                 if (!_role.baseRoleData.HasEquip(_objects[0].id))
                 {
-                    CancelInvoke();
+                    //CancelInvoke();
                     Restore();
                 }
             }
@@ -85,7 +95,7 @@ public class RoleTransition : MonoBehaviour
             {
                 if (!_role.baseRoleData.HasWorker(_objects[0].id))
                 {
-                    CancelInvoke();
+                    //CancelInvoke();
                     Restore();
                 }
             }
@@ -95,7 +105,7 @@ public class RoleTransition : MonoBehaviour
     /// <summary>
     /// 变形
     /// </summary>
-    private void Transition()
+    private void Transition(bool isRestore=false)
     {
         var skillName =
             CommonFunc.GetContentInBracketsWithoutBrackets(transform.GetComponent<BaseSkill>().ToString());
@@ -136,7 +146,8 @@ public class RoleTransition : MonoBehaviour
         // TODO init role data 
         // TODO check trade 
         // 检查还原初始状态
-        InvokeRepeating("CheckTransitionEnd", 1, 1 );
+        if (!isRestore)
+            InvokeRepeating("CheckTransitionEnd", 1, 1 );
     }
 
     /// <summary>
@@ -146,6 +157,7 @@ public class RoleTransition : MonoBehaviour
     /// <param name="skillName"></param>
     private void TransitionFailed(bool isAddFailed, string skillName="") 
     {
+        Debug.Log("变形失败");
         currentRoleType = startRoleType;
         _role.baseRoleData.baseRoleData.roleType = currentRoleType;
         if (_objects[0].causeType == CauseType.Trade)
@@ -173,6 +185,8 @@ public class RoleTransition : MonoBehaviour
         {
             CommonFunc.AddComponent(gameObject,skillName);
         }
+
+        //isAddFailed = false;
 
         isTransition = false;
     }
@@ -212,9 +226,11 @@ public class RoleTransition : MonoBehaviour
                 break;
             case RoleType.PackageFactory:
                 break;
-            case RoleType.BeverageCompany:
+            case RoleType.DrinksCompany:
+                skillName = "ProductMelon_Juice";
                 break;
             case RoleType.InstrumentFactory:
+                skillName = "ServiceInstrument";
                 break;
         }
 

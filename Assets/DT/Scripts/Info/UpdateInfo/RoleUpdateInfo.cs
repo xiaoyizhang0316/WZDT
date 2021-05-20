@@ -168,7 +168,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     /// <summary>
     /// 没有使用装备
     /// </summary>
-    public GameObject emptyEquip;
+   // public GameObject emptyEquip;
 
 
     /// <summary>
@@ -181,10 +181,15 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public GameObject npc;
 
+    public Transform RequiContent;
+    public GameObject requiresign;
+    public GameObject requireOBJ;
+
     // Start is called before the first frame update
     void Start()
     {
         SetDependency();
+        InitRequire();
         close.onClick.AddListener(() => { gameObject.SetActive(false); });
         delete.onClick.AddListener(() =>
         {
@@ -288,31 +293,31 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     private float interval = 1f;
 
     // Update is called once per frame
-    void Update()
-    {
-        interval += Time.deltaTime;
-        if (interval >= 1f)
-        {
-            if (!sceneName.Contains(SceneManager.GetActiveScene().name))
-            {
-                if (currentRole != null && currentRole.EquipList.Count == 0 && currentRole.peoPleList.Count == 0
-                    && (PlayerData.My.GetAvailableWorkerNumber() > 0 || PlayerData.My.GetAvailableEquipNumber() > 0))
-                {
-                    emptyEquip.SetActive(true);
-                }
-                else
-                {
-                    emptyEquip.SetActive(false);
-                }
-            }
-            else
-            {
-                emptyEquip.SetActive(false);
-            }
-
-            interval = 0f;
-        }
-    }
+ //   void Update()
+ //   {
+ //       interval += Time.deltaTime;
+ //       if (interval >= 1f)
+ //       {
+ //           if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+ //           {
+ //               if (currentRole != null && currentRole.EquipList.Count == 0 && currentRole.peoPleList.Count == 0
+ //                   && (PlayerData.My.GetAvailableWorkerNumber() > 0 || PlayerData.My.GetAvailableEquipNumber() > 0))
+ //               {
+ //                   //emptyEquip.SetActive(true);
+ //               }
+ //               else
+ //               {
+ //                  // emptyEquip.SetActive(false);
+ //               }
+ //           }
+ //           else
+ //           {
+ //              // emptyEquip.SetActive(false);
+ //           }
+//
+ //           interval = 0f;
+ //       }
+ //   }
 
     public void SetDependency()
     {
@@ -328,6 +333,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             update.gameObject.SetActive(false);
             changeRoleButton.gameObject.SetActive(false);
             delete.gameObject.SetActive(false);
+            
         }
         else
         {
@@ -478,6 +484,20 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         }
     }
 
+    public void InitRequire()
+    {
+        BaseMapRole role = PlayerData.My.GetMapRoleById(currentRole.ID);
+        if (role.roleRequirement.Count == 0)
+        {
+            requireOBJ.SetActive(false);
+        }
+
+        for (int i = 0; i <role.roleRequirement.Count; i++)
+        {
+           GameObject game =  Instantiate(requiresign, RequiContent);
+           game.GetComponent<ReqireMentSign>().Init(false,role.roleRequirement[i]);
+        }
+    }
 
     public void ShowBuffText(string text)
     {

@@ -65,6 +65,7 @@ public class OriginalData : MonoSingleton<OriginalData>
             ReadEquipJson();
             ReadWorkerJson();
             ReadEncourageSkillJson();
+            ReadRequirementJson();
 
         }
         else

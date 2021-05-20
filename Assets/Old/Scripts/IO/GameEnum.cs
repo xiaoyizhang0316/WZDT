@@ -134,11 +134,79 @@ public class GameEnum
         /// <summary>
         /// 饮料公司
         /// </summary>
-        BeverageCompany,
+        DrinksCompany,
         /// <summary>
         /// 设备厂
         /// </summary>
-        InstrumentFactory
+        InstrumentFactory,
+        /// <summary>
+        /// 政府
+        /// </summary>
+        Government,
+        /// <summary>
+        /// 饮料集团
+        /// </summary>
+        DrinksGroup,
+        /// <summary>
+        /// 饭馆
+        /// </summary>
+        Restaurant,
+        /// <summary>
+        /// 采摘园
+        /// </summary>
+        PickingGarden,
+        /// <summary>
+        /// 酒店
+        /// </summary>
+        Hotel,
+        /// <summary>
+        /// 景点
+        /// </summary>
+        ScenicSpot,
+        /// <summary>
+        /// MCN公司
+        /// </summary>
+        MCN,
+        /// <summary>
+        /// 旅行社
+        /// </summary>
+        TravelAgency,
+        /// <summary>
+        /// 工商局
+        /// </summary>
+        TradeOffice,
+        /// <summary>
+        /// 健康机构
+        /// </summary>
+        Healthcare,
+        /// <summary>
+        /// 赠品公司
+        /// </summary>
+        GiftCompany,
+        /// <summary>
+        /// 租车公司
+        /// </summary>
+        CarRental,
+        /// <summary>
+        /// IP孵化公司
+        /// </summary>
+        IPIncubator,
+        /// <summary>
+        /// 旅游局
+        /// </summary>
+        TouristOffice,
+        /// <summary>
+        /// 设计公司
+        /// </summary>
+        DesignCompany,
+        /// <summary>
+        /// 航空公司
+        /// </summary>
+        AirlineCompany,
+        /// <summary>
+        /// 地摊
+        /// </summary>
+        Stall
     }
 
     public enum PDPType
