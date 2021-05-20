@@ -30,10 +30,7 @@ public class ProductRestaurant : BaseProductSkill
 
     public override void Skill()
     {
-        if (role.tradeList.Count == 0)
-        {
-            return;
-        }
+        
 
         if (role.warehouse.Count == 0)
         {
@@ -64,11 +61,7 @@ public class ProductRestaurant : BaseProductSkill
 
     public void AddEnergy()
     {
-        if (role.tradeList.Count == 0)
-        {
-            return;
-        }
-
+     
         if (role.warehouse.Count == 0)
         {
             return;

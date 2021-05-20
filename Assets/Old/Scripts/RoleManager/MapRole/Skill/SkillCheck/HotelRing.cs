@@ -58,7 +58,8 @@ public class HotelRing : MonoBehaviour
                 {
                     isopen = true;
                 }
-           
+
+                consumeEnergy();
         });
     }
 
