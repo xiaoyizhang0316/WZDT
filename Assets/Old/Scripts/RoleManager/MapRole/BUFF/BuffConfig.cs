@@ -30,6 +30,10 @@ public class BuffConfig
     
     public int stageEnvironmentLevel3Change;
 
+    public int stageSatisfyRateChange;
+
+    public int stageTasteDamageRateChange;
+
     public int roleEffectChange;
 
     public int roleEfficiencyChange;

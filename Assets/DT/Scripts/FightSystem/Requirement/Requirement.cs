@@ -230,6 +230,26 @@ public class Requirement
                 }
                 return false;
             }
+            case 22:
+            {
+                int count = 0;
+                for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
+                {
+                    if (PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
+                    {
+                        if (PlayerData.My.MapRole[i].startTradeList.Count > 0 ||
+                            PlayerData.My.MapRole[i].endTradeList.Count > 0)
+                        {
+                            count++;
+                        }
+                    }
+                }
+                target = count;
+                break;
+            }
+            case 23:
+                target = BaseLevelController.My.riskControlLevel;
+                break;
             default:
                 break;
         }
