@@ -258,6 +258,7 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         {
             lockedInfo.SetActive(false);
             //ShowNpcInfo(npc);
+            NewCanvasUI.My.Panel_Update.SetActive(true);
             RoleUpdateInfo.My.Init(npc.GetComponent<BaseMapRole>().baseRoleData);
             
             DataUploadManager.My.UnlockNpc(npc.GetComponent<BaseMapRole>());

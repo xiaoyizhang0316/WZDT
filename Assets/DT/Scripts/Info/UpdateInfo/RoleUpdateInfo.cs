@@ -333,6 +333,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             update.gameObject.SetActive(false);
             changeRoleButton.gameObject.SetActive(false);
             delete.gameObject.SetActive(false);
+            
         }
         else
         {

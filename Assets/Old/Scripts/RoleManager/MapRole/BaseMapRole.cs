@@ -172,6 +172,7 @@ public class BaseMapRole : MonoBehaviour
             }
         }
         tradePoint.GetComponent<MeshRenderer>().enabled = false;
+        baseSkill = GetComponent<BaseSkill>();
         InitEncourageSkill();
     }
 
