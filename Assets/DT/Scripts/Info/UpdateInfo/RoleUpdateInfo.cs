@@ -181,10 +181,15 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public GameObject npc;
 
+    public Transform RequiContent;
+    public GameObject requiresign;
+    public GameObject requireOBJ;
+
     // Start is called before the first frame update
     void Start()
     {
         SetDependency();
+        InitRequire();
         close.onClick.AddListener(() => { gameObject.SetActive(false); });
         delete.onClick.AddListener(() =>
         {
@@ -478,6 +483,20 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         }
     }
 
+    public void InitRequire()
+    {
+        BaseMapRole role = PlayerData.My.GetMapRoleById(currentRole.ID);
+        if (role.roleRequirement.Count == 0)
+        {
+            requireOBJ.SetActive(false);
+        }
+
+        for (int i = 0; i <role.roleRequirement.Count; i++)
+        {
+           GameObject game =  Instantiate(requiresign, RequiContent);
+           game.GetComponent<ReqireMentSign>().Init(false,role.roleRequirement[i]);
+        }
+    }
 
     public void ShowBuffText(string text)
     {
