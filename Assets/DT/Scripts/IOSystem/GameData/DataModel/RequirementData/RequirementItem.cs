@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class RequirementItem
 {
     public string requirementId;
@@ -12,7 +14,7 @@ public class RequirementItem
 
     public string targetBuffId;
     
-    public string requireList;
+    public string requirementList;
 
     public string isRealTime;
 }

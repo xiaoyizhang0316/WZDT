@@ -10,7 +10,7 @@ public class EncourageSkillData
 
     public GameEnum.EncourageSkillType skillType;
 
-    public int targetBuff;
+    public string targetBuff;
 
     public float startValue;
 

@@ -17,7 +17,7 @@ public class BaseEncourageSkill
     public virtual void SkillOn()
     {
         isSkillOpen = true;
-        BaseLevelController.My.AddBuff(role,skillData.skillType,skillData.targetBuff,CalculateNumber());
+        //BaseLevelController.My.AddBuff(role,skillData.skillType,skillData.targetBuff,CalculateNumber());
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ public class BaseEncourageSkill
     /// </summary>
     public virtual void SkillOff()
     {
-        BaseLevelController.My.RemoveBuff(skillData.skillType,skillData.targetBuff);
+        //BaseLevelController.My.RemoveBuff(skillData.skillType,skillData.targetBuff);
         isSkillOpen = false;
     }
     
@@ -42,7 +42,7 @@ public class BaseEncourageSkill
             }
             else
             {
-                BaseLevelController.My.ChangeBuffNumber(skillData.skillType,skillData.targetBuff,CalculateNumber());
+                //BaseLevelController.My.ChangeBuffNumber(skillData.skillType,skillData.targetBuff,CalculateNumber());
             }
         }
         else

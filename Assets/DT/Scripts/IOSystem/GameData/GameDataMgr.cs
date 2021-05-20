@@ -260,6 +260,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     {
         foreach (RequirementData item in requirementDatas)
         {
+            Debug.Log(item.requirementId+"  "+id);
             if (item.requirementId == id)
             {
                 return item;
@@ -563,7 +564,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.skillId = int.Parse(item.skillId);
             temp.skillDesc = item.skillDesc;
             temp.skillType = (EncourageSkillType)Enum.Parse(typeof(EncourageSkillType),item.skillType);
-            temp.targetBuff = int.Parse(item.targetBuff);
+            temp.targetBuff = item.targetBuff;
             temp.startValue = float.Parse(item.startValue);
             temp.add = float.Parse(item.encourageAdd);
             temp.specialAddType = item.specialAddType;
@@ -583,7 +584,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             temp.requirementDesc = item.requirementDesc;
             temp.effectDesc = item.effectDesc;
             temp.requireList = new List<string>();
-            List<string> strList = item.requireList.Split(',').ToList();
+            List<string> strList = item.requirementList.Split(',').ToList();
             temp.requireList.AddRange(strList);
             temp.isRealTime = int.Parse(item.isRealTime);
             requirementDatas.Add(temp);
