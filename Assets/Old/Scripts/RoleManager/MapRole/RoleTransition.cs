@@ -213,8 +213,10 @@ public class RoleTransition : MonoBehaviour
             case RoleType.PackageFactory:
                 break;
             case RoleType.DrinksCompany:
+                skillName = "ProductMelon_Juice";
                 break;
             case RoleType.InstrumentFactory:
+                skillName = "ServiceInstrument";
                 break;
         }
 

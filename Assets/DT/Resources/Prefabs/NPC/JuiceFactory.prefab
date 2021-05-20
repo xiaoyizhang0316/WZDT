@@ -9613,6 +9613,7 @@ GameObject:
   - component: {fileID: 8042900951992241372}
   - component: {fileID: 1978081586137602260}
   - component: {fileID: 672556125583589396}
+  - component: {fileID: -4486418076867990583}
   m_Layer: 0
   m_Name: JuiceFactory
   m_TagString: MapRole
@@ -9669,6 +9670,7 @@ MonoBehaviour:
       PrePath: 
       RoleSpacePath: 
     effect: 0
+    freeUpdate: 0
     efficiency: 0
     range: 0
     tradeCost: 0
@@ -9695,32 +9697,30 @@ MonoBehaviour:
   tradePoint: {fileID: 7200740041478458412}
   AI: 0
   npcScript: {fileID: 0}
-  extraSkill: {fileID: 0}
+  encourageSkillId: 0
+  baseSkill: {fileID: 0}
+  requirementId: 
   levelModels:
   - {fileID: 8572933110316213530}
   putTime: 0
-  totalProfit: 0
-  monthlyProfit: 0
-  totalSatisfy: 0
-  monthlySatisfy: 0
-  totalCost: 0
-  rentCost: 0
-  operationCost: 0
-  activityCost: 0
-  tradeCost: 0
-  shop: []
+  costTechPoint: 0
+  producedNumber: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  skillPower: 0
   startTradeList: []
   endTradeList: []
   tasteBuffList: 
+  consumableList: 
   totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
   stopWorkSprite: {fileID: 559848217536056864}
   isSell: 0
   ringEffect: {fileID: 0}
+  specialInfo: {fileID: 0}
+  cloneWarehourse: []
 --- !u!114 &8899486489098488673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9740,6 +9740,8 @@ MonoBehaviour:
   NPCBuffList: 
   hideModel: {fileID: 4810849347866377249}
   trueModel: {fileID: 8145369834327937887}
+  npcTag: 
+  isUseTSJ: 0
   autoTradeList: []
   animator: {fileID: 0}
 --- !u!65 &8042900951992241372
@@ -9788,13 +9790,24 @@ MonoBehaviour:
   isPlay: 0
   isAvaliable: 1
   isAnimPlaying: 0
-  goodSpecialBuffList: 
-  goodBaseBuffs: []
-  badSpecialBuffList: 
-  badBaseBuffs: []
   skillDesc: "\u5C06\u74DC\u52A0\u5DE5\u6210\u679C\u6C41\uFF0C\u679C\u6C41\u662F\u4E00\u79CD\u65B0\u4EA7\u54C1\uFF0C\u62E5\u6709\u4E0D\u540C\u4E8E\u666E\u901A\u74DC\u7684\u552E\u5356\u65B9\u5F0F"
   buffList: 
   animationPart: []
+  maxTradeLimit: 0
+--- !u!114 &-4486418076867990583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692879230315230448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc19f57e05b95304da6f6d95f5776363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startRoleType: 8
+  currentRoleType: 8
 --- !u!1 &8918512674671390897
 GameObject:
   m_ObjectHideFlags: 0
