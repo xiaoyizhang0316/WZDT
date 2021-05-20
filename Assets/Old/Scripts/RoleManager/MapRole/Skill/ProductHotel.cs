@@ -20,11 +20,7 @@ public class ProductHotel : BaseProductSkill
     /// </summary>
     public float chiguaSpeed;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
 
     public override void Skill()
     {
@@ -100,10 +96,5 @@ public class ProductHotel : BaseProductSkill
         }
         role.warehouse.RemoveAt(0);
     }
-
-// Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 }
