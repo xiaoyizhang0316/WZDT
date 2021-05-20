@@ -24,6 +24,12 @@ public class BuffConfig
 
     public int stageEncourageLevelChange;
 
+    public int stageEnvironmentLevel1Change;
+    
+    public int stageEnvironmentLevel2Change;
+    
+    public int stageEnvironmentLevel3Change;
+
     public int roleEffectChange;
 
     public int roleEfficiencyChange;

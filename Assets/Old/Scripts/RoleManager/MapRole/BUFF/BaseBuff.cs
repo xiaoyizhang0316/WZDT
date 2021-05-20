@@ -285,6 +285,18 @@ public class BaseBuff
                 CalculateNumber(str, ref buffConfig.stageEncourageLevelChange, BaseLevelController.My.encourageLevel);
                 BaseLevelController.My.encourageLevel += buffConfig.stageEncourageLevelChange;
                 break;
+            case 101:
+                CalculateNumber(str, ref buffConfig.stageEnvironmentLevel1Change, BaseLevelController.My.environmentLevel1);
+                BaseLevelController.My.environmentLevel1 += buffConfig.stageEnvironmentLevel1Change;
+                break;
+            case 102:
+                CalculateNumber(str, ref buffConfig.stageEnvironmentLevel2Change, BaseLevelController.My.environmentLevel2);
+                BaseLevelController.My.environmentLevel2 += buffConfig.stageEnvironmentLevel2Change;
+                break;
+            case 103:
+                CalculateNumber(str, ref buffConfig.stageEnvironmentLevel3Change, BaseLevelController.My.environmentLevel3);
+                BaseLevelController.My.environmentLevel3 += buffConfig.stageEnvironmentLevel3Change;
+                break;
             default:
                 break;
         }

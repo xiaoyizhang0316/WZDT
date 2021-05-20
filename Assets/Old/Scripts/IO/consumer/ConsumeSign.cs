@@ -273,6 +273,8 @@ public class ConsumeSign : MonoBehaviour,ICloneable
         }
         if (!CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
+            BaseLevelController.My.totalKillNumber++;
+            BaseLevelController.My.CountKillType(consumerType);
             BaseLevelController.My.CountKillNumber(this);
         }
         /*if(SceneManager.GetActiveScene().name == "FTE_0-1")
