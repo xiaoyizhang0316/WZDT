@@ -167,7 +167,7 @@ public class BaseMapRole : MonoBehaviour
                 }*/
                 if (isNpc)
                 {
-                    DataUploadManager.My.AddNpcRoleType(this);
+               //     DataUploadManager.My.AddNpcRoleType(this);
                 }
             }
         }
