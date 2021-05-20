@@ -212,7 +212,7 @@ public class RoleTransition : MonoBehaviour
                 break;
             case RoleType.PackageFactory:
                 break;
-            case RoleType.BeverageCompany:
+            case RoleType.DrinksCompany:
                 break;
             case RoleType.InstrumentFactory:
                 break;

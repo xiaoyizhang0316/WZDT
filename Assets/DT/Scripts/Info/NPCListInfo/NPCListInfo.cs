@@ -181,10 +181,12 @@ public class NPCListInfo : MonoSingleton<NPCListInfo>
         else if(currentNpc.baseRoleData.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Service)
         {
 
-            if (currentNpc.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.financialCompany)
+            if (currentNpc.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.financialCompany ||
+                currentNpc.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Government ||
+                currentNpc.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.DrinksGroup)
             {
-            // GameObject specialInfo =  Instantiate(currentNpc.specialInfo, npcInfo.transform);
-            financialCompany.SetActive(true);
+                // GameObject specialInfo =  Instantiate(currentNpc.specialInfo, npcInfo.transform);
+                financialCompany.SetActive(true);
                 //todo
                 financialCompany.GetComponent<NpcFinancialCompany>().Init(npc.GetComponent<FinancialCompanySkill>()  );
                   
