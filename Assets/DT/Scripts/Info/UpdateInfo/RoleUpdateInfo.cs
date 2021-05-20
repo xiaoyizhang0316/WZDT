@@ -168,7 +168,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     /// <summary>
     /// 没有使用装备
     /// </summary>
-    public GameObject emptyEquip;
+   // public GameObject emptyEquip;
 
 
     /// <summary>
@@ -293,31 +293,31 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     private float interval = 1f;
 
     // Update is called once per frame
-    void Update()
-    {
-        interval += Time.deltaTime;
-        if (interval >= 1f)
-        {
-            if (!sceneName.Contains(SceneManager.GetActiveScene().name))
-            {
-                if (currentRole != null && currentRole.EquipList.Count == 0 && currentRole.peoPleList.Count == 0
-                    && (PlayerData.My.GetAvailableWorkerNumber() > 0 || PlayerData.My.GetAvailableEquipNumber() > 0))
-                {
-                    emptyEquip.SetActive(true);
-                }
-                else
-                {
-                    emptyEquip.SetActive(false);
-                }
-            }
-            else
-            {
-                emptyEquip.SetActive(false);
-            }
-
-            interval = 0f;
-        }
-    }
+ //   void Update()
+ //   {
+ //       interval += Time.deltaTime;
+ //       if (interval >= 1f)
+ //       {
+ //           if (!sceneName.Contains(SceneManager.GetActiveScene().name))
+ //           {
+ //               if (currentRole != null && currentRole.EquipList.Count == 0 && currentRole.peoPleList.Count == 0
+ //                   && (PlayerData.My.GetAvailableWorkerNumber() > 0 || PlayerData.My.GetAvailableEquipNumber() > 0))
+ //               {
+ //                   //emptyEquip.SetActive(true);
+ //               }
+ //               else
+ //               {
+ //                  // emptyEquip.SetActive(false);
+ //               }
+ //           }
+ //           else
+ //           {
+ //              // emptyEquip.SetActive(false);
+ //           }
+//
+ //           interval = 0f;
+ //       }
+ //   }
 
     public void SetDependency()
     {
