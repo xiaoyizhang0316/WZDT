@@ -13,4 +13,6 @@ public class RequirementData
     public int targetBuffId;
 
     public List<string> requireList = new List<string>();
+
+    public int isRealTime;
 }

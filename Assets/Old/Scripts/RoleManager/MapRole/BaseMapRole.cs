@@ -221,6 +221,45 @@ public class BaseMapRole : MonoBehaviour
     }
 
     /// <summary>
+    /// 检测有没有添加剂
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckContainAddon()
+    {
+        if (tasteBuffList.Count > 0)
+        {
+            return true;
+        }
+        else
+        {
+            List<int> tempList = new List<int>();
+            List<int> tasteList = new List<int>(){303,304,035};
+            if (startTradeList.Count == 0 && endTradeList.Count == 0)
+            {
+                return false;
+            }
+            if (!isNpc)
+            {
+                tempList.AddRange(GetEquipBuffList());
+            }
+            else
+            {
+                tempList.AddRange(baseSkill.buffList);
+                tempList.AddRange(npcScript.NPCBuffList);
+            }
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                if (tasteList.Contains(tempList[i]))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
     /// 根据职责隐藏某些物体
     /// </summary>
     public void CheckRoleDuty()

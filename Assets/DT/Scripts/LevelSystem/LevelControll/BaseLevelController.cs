@@ -64,6 +64,11 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     public List<BaseBuff> playerStaticList = new List<BaseBuff>();
 
     public List<BaseBuff> stageStaticList = new List<BaseBuff>();
+
+    //总杀敌数
+    public int totalKillNumber;
+    //消费者类别杀敌数
+    public Dictionary<ConsumerType,int> killTypeNumber = new Dictionary<ConsumerType, int>();
     
     //风险防控等级
     public int riskControlLevel;
@@ -92,8 +97,25 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     // 口味伤害倍率
     public float tasteDamageRate;
 
-    public Dictionary<Role, int> onTradeRole = new Dictionary<Role, int>(); 
+    public Dictionary<Role, int> onTradeRole = new Dictionary<Role, int>();
 
+    /// <summary>
+    /// 统计击杀消费者类别/数量
+    /// </summary>
+    /// <param name="type"></param>
+    public void CountKillType(ConsumerType type)
+    {
+        if (killTypeNumber.ContainsKey(type))
+        {
+            killTypeNumber[type]++;
+        }
+        else
+        {
+            killTypeNumber.Add(type,1);
+        }
+    }
+    
+    
     /// <summary>
     /// 当添加了新激励等级效果时
     /// </summary>
