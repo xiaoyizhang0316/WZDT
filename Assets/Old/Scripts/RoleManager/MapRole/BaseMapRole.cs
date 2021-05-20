@@ -524,6 +524,10 @@ public class BaseMapRole : MonoBehaviour
         {
             GetComponent<BaseServiceSkill>().OnEndTurn();
         }
+        if(GetComponent<BaseProductSkill>() != null && tradeList.Count > 0)
+        {
+            GetComponent<BaseProductSkill>().OnEndTurn();
+        }
     }
 
     /// <summary>

@@ -11299,6 +11299,7 @@ GameObject:
   - component: {fileID: 2001842654562297475}
   - component: {fileID: 2804377106294627056}
   - component: {fileID: 2406658930683523430}
+  - component: {fileID: 8261281016873897321}
   m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
@@ -11371,6 +11372,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8261281016873897321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5282312067654657307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9132d78010cbb4c9fbbcca8424ca2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addMoney: 10
+  addScore: 10
 --- !u!1 &5738286364912365578
 GameObject:
   m_ObjectHideFlags: 0
@@ -16687,12 +16702,14 @@ MonoBehaviour:
   npcScript: {fileID: 0}
   encourageSkillId: 0
   baseSkill: {fileID: 0}
+  requirementId: 
   levelModels:
   - {fileID: 7898410003919226555}
   - {fileID: 6304371361495179729}
   - {fileID: 6685599693067977771}
   putTime: 0
   costTechPoint: 0
+  producedNumber: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
@@ -16781,8 +16798,14 @@ MonoBehaviour:
   buffList: 
   animationPart: []
   maxTradeLimit: 0
-  addMoney: 1
-  addScore: 1
+  currentenergy: 0
+  seedEnergy: 0
+  molonEnergy: 0
+  qiaguaEnergy: 0
+  guozhiEnergy: 0
+  guantouEnergy: 0
+  yinliaoEnergy: 0
+  chiguaSpeed: 0
 --- !u!1 &9023546651489883559
 GameObject:
   m_ObjectHideFlags: 0
@@ -17009,15 +17032,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20b7d387e20cd4374829c0be0fd83a4f, type: 3}
---- !u!4 &7885241203540009634 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9170921686820856154, guid: 20b7d387e20cd4374829c0be0fd83a4f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1309326724229792760}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1378310973834796060 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 75179317026791396, guid: 20b7d387e20cd4374829c0be0fd83a4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1309326724229792760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7885241203540009634 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9170921686820856154, guid: 20b7d387e20cd4374829c0be0fd83a4f,
     type: 3}
   m_PrefabInstance: {fileID: 1309326724229792760}
   m_PrefabAsset: {fileID: 0}
@@ -17765,15 +17788,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d14a3c5ab36d4c4182cbce42cb783c8, type: 3}
---- !u!1 &4713311738903967039 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1434527626329367494, guid: 2d14a3c5ab36d4c4182cbce42cb783c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 5945168547219248889}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8589021812776126252 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2716566258459759061, guid: 2d14a3c5ab36d4c4182cbce42cb783c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5945168547219248889}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4713311738903967039 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1434527626329367494, guid: 2d14a3c5ab36d4c4182cbce42cb783c8,
     type: 3}
   m_PrefabInstance: {fileID: 5945168547219248889}
   m_PrefabAsset: {fileID: 0}

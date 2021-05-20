@@ -100,7 +100,7 @@ public class ProductRestaurant : BaseProductSkill
         {
             currentenergy += GameDataMgr.My.GetBuffDataByID(role.warehouse[0].buffList[i]).buffValue;
         }
-        
+        role.warehouse.RemoveAt(0);
     }
 
 // Update is called once per frame
