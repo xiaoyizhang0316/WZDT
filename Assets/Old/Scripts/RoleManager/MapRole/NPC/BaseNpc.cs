@@ -38,6 +38,8 @@ public abstract class BaseNpc : MonoBehaviour
 
     public string npcTag = "";
 
+    public bool isUseTSJ;
+
     /// <summary>
     /// 激活npc
     /// </summary>
@@ -80,6 +82,16 @@ public abstract class BaseNpc : MonoBehaviour
             GetComponent<BaseMapRole>().baseRoleData.tradeCost += (int)(tempData.buffValue * add);
         }
         GetComponent<BaseMapRole>().RecheckDLJBuff();
+    }
+
+    /// <summary>
+    /// 看角色的隐藏需求
+    /// </summary>
+    public void UseTSJ()
+    {
+
+
+        isUseTSJ = true;
     }
 
     //public float h;

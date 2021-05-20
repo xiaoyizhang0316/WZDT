@@ -202,7 +202,11 @@ public class GameEnum
         /// <summary>
         /// 航空公司
         /// </summary>
-        AirlineCompany
+        AirlineCompany,
+        /// <summary>
+        /// 地摊
+        /// </summary>
+        Stall
     }
 
     public enum PDPType
