@@ -297,6 +297,14 @@ public class BaseBuff
                 CalculateNumber(str, ref buffConfig.stageEnvironmentLevel3Change, BaseLevelController.My.environmentLevel3);
                 BaseLevelController.My.environmentLevel3 += buffConfig.stageEnvironmentLevel3Change;
                 break;
+            case 104:
+                CalculateNumber(str, ref buffConfig.stageSatisfyRateChange, (int)BaseLevelController.My.satisfyRate);
+                BaseLevelController.My.satisfyRate += buffConfig.stageSatisfyRateChange / 100f;
+                break;
+            case 105:
+                CalculateNumber(str, ref buffConfig.stageTasteDamageRateChange, (int)BaseLevelController.My.tasteDamageRate);
+                BaseLevelController.My.tasteDamageRate += buffConfig.stageTasteDamageRateChange / 100f;
+                break;
             default:
                 break;
         }

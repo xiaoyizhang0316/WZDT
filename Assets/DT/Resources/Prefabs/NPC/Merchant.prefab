@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7580769199408575989}
   - component: {fileID: 3350102371471842545}
   - component: {fileID: 5569870448007674632}
+  - component: {fileID: -647784988723721456}
   m_Layer: 0
   m_Name: Merchant
   m_TagString: MapRole
@@ -70,6 +71,7 @@ MonoBehaviour:
       PrePath: 
       RoleSpacePath: 
     effect: 0
+    freeUpdate: 0
     efficiency: 0
     range: 0
     tradeCost: 0
@@ -96,34 +98,32 @@ MonoBehaviour:
   tradePoint: {fileID: 1386838502588418603}
   AI: 0
   npcScript: {fileID: 0}
-  extraSkill: {fileID: 0}
+  encourageSkillId: 0
+  baseSkill: {fileID: 0}
+  requirementId: 
   levelModels:
   - {fileID: 7730164169955404100}
   - {fileID: 1294433476390200009}
   - {fileID: 1437120597049821888}
   putTime: 0
-  totalProfit: 0
-  monthlyProfit: 0
-  totalSatisfy: 0
-  monthlySatisfy: 0
-  totalCost: 0
-  rentCost: 0
-  operationCost: 0
-  activityCost: 0
-  tradeCost: 0
-  shop: []
+  costTechPoint: 0
+  producedNumber: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  skillPower: 0
   startTradeList: []
   endTradeList: []
   tasteBuffList: 
+  consumableList: 
   totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 0}
   stopWorkSprite: {fileID: 1917410291809854943}
   isSell: 0
   ringEffect: {fileID: 0}
+  specialInfo: {fileID: 0}
+  cloneWarehourse: []
 --- !u!65 &3989839872042212707
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -172,6 +172,8 @@ MonoBehaviour:
   NPCBuffList: 
   hideModel: {fileID: 6185902882869737220}
   trueModel: {fileID: 7307834171875257483}
+  npcTag: 
+  isUseTSJ: 0
   autoTradeList: []
   animator: {fileID: 0}
 --- !u!114 &5569870448007674632
@@ -191,14 +193,25 @@ MonoBehaviour:
   isPlay: 0
   isAvaliable: 1
   isAnimPlaying: 0
-  goodSpecialBuffList: 
-  goodBaseBuffs: []
-  badSpecialBuffList: 
-  badBaseBuffs: []
   skillDesc: "\u63D0\u4F9B\u4ED3\u50A8\u7269\u6D41\u529F\u80FD\uFF0C\u4E0D\u4F1A\u7ED9\u4ED3\u5E93\u6EE1\u7684\u89D2\u8272\u8FD0\u8F93\u4EA7\u54C1\uFF0C\u540C\u65F6\u53EF\u4EE5\u964D\u4F4E\u8303\u56F4\u5185\u89D2\u8272\u7684\u4EA4\u6613\u6210\u672C\u503C"
   buffList: 
   animationPart: []
+  maxTradeLimit: 0
   productDatas: []
+--- !u!114 &-647784988723721456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745394881712787409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc19f57e05b95304da6f6d95f5776363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startRoleType: 2
+  currentRoleType: 2
 --- !u!1 &2012059022961659406
 GameObject:
   m_ObjectHideFlags: 0
@@ -15134,15 +15147,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d14a3c5ab36d4c4182cbce42cb783c8, type: 3}
---- !u!4 &7170825982936679703 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2716566258459759061, guid: 2d14a3c5ab36d4c4182cbce42cb783c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 5057765184565368002}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6185902882869737220 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1434527626329367494, guid: 2d14a3c5ab36d4c4182cbce42cb783c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5057765184565368002}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7170825982936679703 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2716566258459759061, guid: 2d14a3c5ab36d4c4182cbce42cb783c8,
     type: 3}
   m_PrefabInstance: {fileID: 5057765184565368002}
   m_PrefabAsset: {fileID: 0}

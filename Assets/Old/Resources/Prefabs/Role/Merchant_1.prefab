@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 745394881712787411}
   - component: {fileID: 6762698527656334721}
   - component: {fileID: 7490401797702312954}
+  - component: {fileID: -419199613140676970}
   m_Layer: 0
   m_Name: Merchant_1
   m_TagString: MapRole
@@ -87,6 +88,7 @@ MonoBehaviour:
       PrePath: 
       RoleSpacePath: 
     effect: 0
+    freeUpdate: 0
     efficiency: 0
     range: 0
     tradeCost: 0
@@ -113,34 +115,32 @@ MonoBehaviour:
   tradePoint: {fileID: 1386838502588418603}
   AI: 0
   npcScript: {fileID: 0}
-  extraSkill: {fileID: 0}
+  encourageSkillId: 0
+  baseSkill: {fileID: 0}
+  requirementId: 
   levelModels:
   - {fileID: 3791712011024375346}
   - {fileID: 8279648061454086906}
   - {fileID: 6820375390067776961}
   putTime: 0
-  totalProfit: 0
-  monthlyProfit: 0
-  totalSatisfy: 0
-  monthlySatisfy: 0
-  totalCost: 0
-  rentCost: 0
-  operationCost: 0
-  activityCost: 0
-  tradeCost: 0
-  shop: []
+  costTechPoint: 0
+  producedNumber: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  skillPower: 0
   startTradeList: []
   endTradeList: []
   tasteBuffList: 
+  consumableList: 
   totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 3504843815520519041}
   stopWorkSprite: {fileID: 2674054422102297618}
   isSell: 0
   ringEffect: {fileID: 3890387005949681747}
+  specialInfo: {fileID: 0}
+  cloneWarehourse: []
 --- !u!114 &7490401797702312954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,14 +158,25 @@ MonoBehaviour:
   isPlay: 0
   isAvaliable: 1
   isAnimPlaying: 0
-  goodSpecialBuffList: 
-  goodBaseBuffs: []
-  badSpecialBuffList: 
-  badBaseBuffs: []
   skillDesc: "\u63D0\u4F9B\u4ED3\u50A8\u7269\u6D41\u529F\u80FD\uFF0C\u4E0D\u4F1A\u7ED9\u4ED3\u5E93\u6EE1\u7684\u89D2\u8272\u8FD0\u8F93\u4EA7\u54C1\uFF0C\u540C\u65F6\u53EF\u4EE5\u964D\u4F4E\u8303\u56F4\u5185\u89D2\u8272\u7684\u4EA4\u6613\u6210\u672C\u503C"
   buffList: 
   animationPart: []
+  maxTradeLimit: 0
   productDatas: []
+--- !u!114 &-419199613140676970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745394881712787409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc19f57e05b95304da6f6d95f5776363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startRoleType: 2
+  currentRoleType: 2
 --- !u!1 &2012059022961659406
 GameObject:
   m_ObjectHideFlags: 0
