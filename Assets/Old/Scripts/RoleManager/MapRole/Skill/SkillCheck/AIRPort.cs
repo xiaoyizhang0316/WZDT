@@ -29,6 +29,10 @@ public class AIRPort : BaseProductSkill
         StageGoal.My.GetPlayerGold(addMoney);
         StageGoal.My.ScoreGet(ScoreType.其他得分, addScore);
 
+        if (luxingshe == null || zuche == null)
+        {
+            return;
+        }
 
         if ((TradeManager.My.CheckTwoRoleHasTrade(zuche.baseRoleData, role.baseRoleData) ||
              TradeManager.My.CheckTwoRoleHasTrade(role.baseRoleData, zuche.baseRoleData)) &&
