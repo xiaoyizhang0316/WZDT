@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using static GameEnum;
 using UnityEngine;
 
 public static class CommonParams
@@ -10,6 +11,8 @@ public static class CommonParams
     //public static string[] fteList =  {"FTE_0.5", "FTE_0.6", "FTE_0.7", "FTE_1.5", "FTE_1.6", "FTE_2.5", "FTE_3.5", "FTE_4.5" };
     // 教学关卡列表
     public static List<string> fteList;
+
+    public static List<RoleType> financialList;
 
     // 血条最大长度
     public const float bloodTotalWidth = 471f;
@@ -49,5 +52,6 @@ public static class CommonParams
     {
         fteList = new List<string>
             {"FTE_0.5", "FTE_0.6", "FTE_0.7", "FTE_1.5", "FTE_1.6", "FTE_2.5", "FTE_3.5", "FTE_4.5"};
+        financialList = new List<RoleType>() {RoleType.Government,RoleType.DrinksGroup,RoleType.financialCompany};
     }
 }

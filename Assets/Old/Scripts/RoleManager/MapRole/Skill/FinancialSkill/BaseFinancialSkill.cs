@@ -14,4 +14,9 @@ public class BaseFinancialSkill : BaseSkill
     {
         
     }
+
+    public override void Start()
+    {
+        base.Start();
+    }
 }
