@@ -152,4 +152,14 @@ public class BaseServiceSkill : BaseSkill
             }
         }
     }
+
+    /// <summary>
+    /// 重启技能
+    /// </summary>
+    /// <param name="data"></param>
+    public void RestartTradeData(TradeData data)
+    {
+        SkillOff(data);
+        Skill(data);
+    }
 }
