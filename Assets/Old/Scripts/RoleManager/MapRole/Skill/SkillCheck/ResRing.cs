@@ -15,7 +15,7 @@ public class ResRing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        consumeEnergy();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -54,7 +54,8 @@ public class ResRing : MonoBehaviour
                 {
                     isopen = true;
                 }
-           
+
+                consumeEnergy();
             }); 
     }
 

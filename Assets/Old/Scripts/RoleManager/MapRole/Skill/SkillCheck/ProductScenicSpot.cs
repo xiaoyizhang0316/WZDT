@@ -16,10 +16,7 @@ public class ProductScenicSpot : BaseProductSkill
 
     public override void Skill()
     {
-        if (role.tradeList.Count == 0)
-        {
-            return;
-        }
+         
 
         if (role.warehouse.Count == 0)
         {

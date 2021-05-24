@@ -120,6 +120,7 @@ public class BaseMapRole : MonoBehaviour
     public GameObject ringEffect;
 
     public GameObject specialInfo;
+    public bool isUseTSJ;
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
@@ -153,6 +154,7 @@ public class BaseMapRole : MonoBehaviour
         if (!isNpc)
         {
             InitAttribute();
+            isUseTSJ = true;
         }
         if (baseRoleData.inMap)
         {

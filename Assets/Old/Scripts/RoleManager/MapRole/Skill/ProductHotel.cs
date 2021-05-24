@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using DG.Tweening;
 using DT.Fight.Bullet;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class ProductHotel : BaseProductSkill
 {
@@ -24,15 +26,15 @@ public class ProductHotel : BaseProductSkill
 
     public override void Skill()
     {
-        if (role.tradeList.Count == 0)
-        {
-            return;
-        }
+     
 
         if (role.warehouse.Count == 0)
         {
+            Debug.Log("进入(role.tradeList.Count"+role.warehouse.Count);
+
             return;
         }
+        Debug.Log("进入skill");
         AddEnergy(); 
        
         
@@ -42,6 +44,8 @@ public class ProductHotel : BaseProductSkill
 
     public override void UnleashSkills()
     {
+        Debug.Log("进入");
+        
         transform.DORotate(transform.eulerAngles, chiguaSpeed).OnComplete(() =>
         {
           
@@ -58,11 +62,8 @@ public class ProductHotel : BaseProductSkill
 
     public void AddEnergy()
     {
-        if (role.tradeList.Count == 0)
-        {
-            return;
-        }
-
+        
+    
         if (role.warehouse.Count == 0)
         {
             return;
@@ -75,6 +76,7 @@ public class ProductHotel : BaseProductSkill
                 break;
             case  BulletType.NormalPP :
                 currentenergy += molonEnergy + role.warehouse[0].damage * 1;
+                Debug.Log(currentenergy);
                 break;
             case  BulletType.Bomb :
                 currentenergy += guozhiEnergy + role.warehouse[0].damage * 1;

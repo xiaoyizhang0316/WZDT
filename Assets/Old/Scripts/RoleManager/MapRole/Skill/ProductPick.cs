@@ -7,17 +7,10 @@ public class ProductPick : BaseProductSkill
 {
     public int buffId;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+ 
     public override void Skill()
     {
-        if (role.tradeList.Count == 0)
-        {
-            return;
-        }
+       
 
         if (role.warehouse.Count == 0)
         {
@@ -48,10 +41,5 @@ public class ProductPick : BaseProductSkill
             }
         });
     }
-
-// Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 }

@@ -89,8 +89,7 @@ public abstract class BaseNpc : MonoBehaviour
     /// </summary>
     public void UseTSJ()
     {
-
-
+        GetComponent<BaseMapRole>().isUseTSJ = true;
         isUseTSJ = true;
     }
 
@@ -131,6 +130,7 @@ public abstract class BaseNpc : MonoBehaviour
     void Awake()
     {
         BaseInit();
+        isUseTSJ = false;
     }
 
     public void BaseInit()
