@@ -25,6 +25,7 @@ public class NpcLockedInfo : MonoBehaviour
     {
         BaseSkill baseSkill = npc.GetComponent<BaseSkill>();
         npcName.text = npc.GetComponent<BaseMapRole>().baseRoleData.baseRoleData.roleName;
+        
         skillDes.text = npc.GetComponent<BaseSkill>().skillDesc;
         
         tradeCost.text = npc.GetComponent<BaseMapRole>().baseRoleData.tradeCost.ToString();
