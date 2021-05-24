@@ -286,7 +286,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
                         int prefix = int.Parse(stageStaticList[i].buffData.OnBuffAdd[0].Split('_')[0]);
                         if (prefix != -1)
                         {
-                            playerStaticList[i].buffData.OnBuffAdd[0] = prefix + "_" + number;
+                            stageStaticList[i].buffData.OnBuffAdd[0] = prefix + "_" + number;
                         }
                         stageStaticList[i].RoleBuffRemove();
                         stageStaticList[i].RoleBuffAdd();
