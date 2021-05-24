@@ -256,7 +256,12 @@ public class GameEnum
         /// <summary>
         /// 解决方案
         /// </summary>
-        Solution
+        Solution,
+        
+        /// <summary>
+        /// 金融类
+        /// </summary>
+        Financial
     }
 
     public enum CashFlowType
