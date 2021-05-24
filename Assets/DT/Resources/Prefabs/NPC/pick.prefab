@@ -16642,8 +16642,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseRoleData:
     baseRoleData:
-      roleName: "\u96F6\u552E\u5546"
-      roleType: 3
+      roleName: "\u91C7\u6458\u56ED"
+      roleType: 36
       roleSkillType: 0
       level: 1
       effect: 0
@@ -16686,14 +16686,17 @@ MonoBehaviour:
   tradePoint: {fileID: 4965318302032042359}
   AI: 0
   npcScript: {fileID: 0}
-  encourageSkillId: 0
+  encourageSkillId: 10002
   baseSkill: {fileID: 0}
+  requirementId: 
+  roleRequirement: []
   levelModels:
   - {fileID: 6929713195939769975}
   - {fileID: 6542080146574936349}
   - {fileID: 5872559898451766503}
   putTime: 0
   costTechPoint: 0
+  producedNumber: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
@@ -16709,6 +16712,7 @@ MonoBehaviour:
   isSell: 0
   ringEffect: {fileID: 0}
   specialInfo: {fileID: 0}
+  isUseTSJ: 0
   cloneWarehourse: []
 --- !u!65 &3805595754798905755
 BoxCollider:
@@ -16759,6 +16763,7 @@ MonoBehaviour:
   hideModel: {fileID: 5539022300153667059}
   trueModel: {fileID: 572419796151533199}
   npcTag: 
+  isUseTSJ: 0
   autoTradeList: []
   animator: {fileID: 0}
 --- !u!114 &4795250987525630434
@@ -17008,15 +17013,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20b7d387e20cd4374829c0be0fd83a4f, type: 3}
---- !u!4 &6978752560163867246 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9170921686820856154, guid: 20b7d387e20cd4374829c0be0fd83a4f,
-    type: 3}
-  m_PrefabInstance: {fileID: 2277742607033985844}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2204298598590379216 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 75179317026791396, guid: 20b7d387e20cd4374829c0be0fd83a4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2277742607033985844}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6978752560163867246 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9170921686820856154, guid: 20b7d387e20cd4374829c0be0fd83a4f,
     type: 3}
   m_PrefabInstance: {fileID: 2277742607033985844}
   m_PrefabAsset: {fileID: 0}

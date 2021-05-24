@@ -11386,6 +11386,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addMoney: 10
   addScore: 10
+  isopen: 0
+  energyconsumeValue: 0
 --- !u!1 &5738286364912365578
 GameObject:
   m_ObjectHideFlags: 0
@@ -16656,8 +16658,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseRoleData:
     baseRoleData:
-      roleName: "NPC\u96F6\u552E\u5546"
-      roleType: 3
+      roleName: "\u996D\u9986"
+      roleType: 35
       roleSkillType: 0
       level: 1
       effect: 20
@@ -16700,9 +16702,10 @@ MonoBehaviour:
   tradePoint: {fileID: 5287183985803358651}
   AI: 0
   npcScript: {fileID: 0}
-  encourageSkillId: 0
+  encourageSkillId: 10001
   baseSkill: {fileID: 0}
   requirementId: 
+  roleRequirement: []
   levelModels:
   - {fileID: 7898410003919226555}
   - {fileID: 6304371361495179729}
@@ -16725,6 +16728,7 @@ MonoBehaviour:
   isSell: 0
   ringEffect: {fileID: 0}
   specialInfo: {fileID: 0}
+  isUseTSJ: 0
   cloneWarehourse: []
 --- !u!65 &4136470837839073623
 BoxCollider:
@@ -16775,6 +16779,7 @@ MonoBehaviour:
   hideModel: {fileID: 4713311738903967039}
   trueModel: {fileID: 740322787611088451}
   npcTag: 
+  isUseTSJ: 0
   autoTradeList: []
   animator: {fileID: 0}
 --- !u!114 &7849786405243313338
