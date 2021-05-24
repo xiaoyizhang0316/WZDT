@@ -14239,8 +14239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseRoleData:
     baseRoleData:
-      roleName: "\u519C\u6C11"
-      roleType: 1
+      roleName: "MCN\u516C\u53F8"
+      roleType: 39
       roleSkillType: 0
       level: 2
       effect: 0
@@ -14283,9 +14283,10 @@ MonoBehaviour:
   tradePoint: {fileID: 2416795728960362755}
   AI: 0
   npcScript: {fileID: 0}
-  encourageSkillId: 0
+  encourageSkillId: 10006
   baseSkill: {fileID: 0}
   requirementId: 
+  roleRequirement: []
   levelModels:
   - {fileID: 277659398218064406}
   - {fileID: 3920274109134721554}
@@ -14308,6 +14309,7 @@ MonoBehaviour:
   isSell: 0
   ringEffect: {fileID: 0}
   specialInfo: {fileID: 0}
+  isUseTSJ: 0
   cloneWarehourse: []
 --- !u!65 &4112379801950664828
 BoxCollider:
@@ -14358,6 +14360,7 @@ MonoBehaviour:
   hideModel: {fileID: 691249208849960670}
   trueModel: {fileID: 4622446598827779372}
   npcTag: 
+  isUseTSJ: 0
   autoTradeList: []
   animator: {fileID: 0}
 --- !u!1001 &1211808575871892339
@@ -14576,15 +14579,15 @@ PrefabInstance:
     - {fileID: 5931166922487716019, guid: b0645bce8462ef34cac5c192172e8da9, type: 3}
     - {fileID: 6294485039741197169, guid: b0645bce8462ef34cac5c192172e8da9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b0645bce8462ef34cac5c192172e8da9, type: 3}
---- !u!4 &6817876331233852300 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5203463125745278338, guid: b0645bce8462ef34cac5c192172e8da9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1633571098313926158}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4023086026362637710 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2413721793236200320, guid: b0645bce8462ef34cac5c192172e8da9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1633571098313926158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6817876331233852300 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5203463125745278338, guid: b0645bce8462ef34cac5c192172e8da9,
     type: 3}
   m_PrefabInstance: {fileID: 1633571098313926158}
   m_PrefabAsset: {fileID: 0}
