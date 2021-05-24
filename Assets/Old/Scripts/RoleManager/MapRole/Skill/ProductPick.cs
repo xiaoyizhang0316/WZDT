@@ -7,10 +7,7 @@ public class ProductPick : BaseProductSkill
 {
     public int buffId;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
 
     public override void Skill()
     {
@@ -49,9 +46,4 @@ public class ProductPick : BaseProductSkill
         });
     }
 
-// Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

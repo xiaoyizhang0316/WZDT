@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using static GameEnum;
 using Object = System.Object;
@@ -12,6 +13,8 @@ public class RoleTransition : MonoBehaviour
     private bool isNpc = false;
     private bool isTransition = false;
 
+    private Queue<TransitionCause> failedTransitionCauses;
+
     public bool IsTransition => isTransition;
 
     private void Start()
@@ -23,6 +26,7 @@ public class RoleTransition : MonoBehaviour
         _objects = new TransitionCause[1];
         _objects[0] = null;
         isNpc = _role.isNpc;
+        failedTransitionCauses = new Queue<TransitionCause>();
     }
 
     /// <summary>
@@ -36,11 +40,13 @@ public class RoleTransition : MonoBehaviour
         if (_objects[0] != null)
         {
             active = false;
+            failedTransitionCauses.Enqueue(cause);
             return;
         }
 
         active = true;
         isTransition = true;
+        restartSkill = false;
         _objects[0] = cause;
         currentRoleType = roleType;
         _role.baseRoleData.baseRoleData.roleType = currentRoleType;
@@ -50,7 +56,7 @@ public class RoleTransition : MonoBehaviour
     /// <summary>
     /// 还原到初始状态
     /// </summary>
-    private void Restore()
+    public void Restore()
     {
         CancelInvoke();
         Debug.Log("变形重置");
@@ -59,6 +65,28 @@ public class RoleTransition : MonoBehaviour
         _role.baseRoleData.baseRoleData.roleType = currentRoleType;
         Transition(true);
         isTransition = false;
+        CheckNext();
+    }
+
+    public bool restartSkill = false;
+
+    void CheckNext()
+    {
+        if (failedTransitionCauses.Count > 0)
+        {
+            var cause = failedTransitionCauses.Peek();
+            if (cause.causeType == CauseType.Trade)
+            {
+                restartSkill = true;
+                cause.role.GetComponent<BaseServiceSkill>().RestartTradeData(cause.t_data);
+            }
+            else
+            {
+                // TODO 装备变形
+            }
+
+            failedTransitionCauses.Dequeue();
+        }
     }
 
     /// <summary>
@@ -146,8 +174,8 @@ public class RoleTransition : MonoBehaviour
         // TODO init role data 
         // TODO check trade 
         // 检查还原初始状态
-        if (!isRestore)
-            InvokeRepeating("CheckTransitionEnd", 1, 1 );
+        /*if (!isRestore)
+            InvokeRepeating("CheckTransitionEnd", 1, 1 );*/
     }
 
     /// <summary>
@@ -232,6 +260,12 @@ public class RoleTransition : MonoBehaviour
             case RoleType.InstrumentFactory:
                 skillName = "ServiceInstrument";
                 break;
+            case RoleType.PickingGarden:
+                skillName = "ProductPick";
+                break;
+            case RoleType.Peasant:
+                skillName = "ProductMelon";
+                break;
         }
 
         return skillName;
@@ -242,8 +276,13 @@ public class TransitionCause
 {
     public CauseType causeType;
     public int id;
+    public BaseMapRole role;
+    public TradeData t_data;
+    public EquipData e_data;
+    public WorkerData w_data;
 
-    public TransitionCause(CauseType causeType, int id)
+
+    public TransitionCause(CauseType causeType, int id,BaseMapRole role=null, TradeData data=null, EquipData eData=null, WorkerData wData=null)
     {
         this.causeType = causeType;
         this.id = id;
