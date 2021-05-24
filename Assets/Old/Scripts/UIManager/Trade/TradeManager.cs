@@ -262,12 +262,13 @@ public class TradeManager : MonoSingleton<TradeManager>
     /// </summary>
     /// <param name="start"></param>
     /// <param name="end"></param>
-    public void AutoCreateTrade(string start,string end)
+    public int AutoCreateTrade(string start,string end)
     {
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Trade/TradeSign"));
         go.transform.SetParent(transform);
         go.GetComponent<TradeSign>().Init(start,end);
         CreateTradeRecord(go.GetComponent<TradeSign>());
+        return go.GetComponent<TradeSign>().tradeData.ID;
     }
 
     /// <summary>
