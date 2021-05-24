@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class ServiceInstrument : BaseServiceSkill
 {
-    private bool isActive;
+    
     public override void Skill(TradeData data)
     {
-        var target = role.baseRoleData.ID.ToString().Equals(data.startRole)?PlayerData.My.GetMapRoleById(double.Parse(data.endRole)):
-            PlayerData.My.GetMapRoleById(double.Parse(data.startRole));
+        var target = PlayerData.My.GetMapRoleById(double.Parse(data.targetRole));
         var isTransition = CheckTransition(target, out var transitionType);
         if (isTransition)
         {
-            target.GetComponent<RoleTransition>().ActiveTransition(transitionType, new TransitionCause(CauseType.Trade, data.ID), out var active);
+            target.GetComponent<RoleTransition>().ActiveTransition(transitionType, new TransitionCause(CauseType.Trade, data.ID, role, data), out var active);
             if (!active)
             {
                 if (!_unChangeData.ContainsKey(data.ID))
@@ -28,8 +27,6 @@ public class ServiceInstrument : BaseServiceSkill
                     _unChangeData.Remove(data.ID);
                 }
             }
-
-            isActive = active;
         }
         else
         {
@@ -39,8 +36,18 @@ public class ServiceInstrument : BaseServiceSkill
 
     public override void SkillOff(TradeData data)
     {
-        if(!isActive)
-            base.SkillOff(data);
+        var target = PlayerData.My.GetMapRoleById(double.Parse(data.targetRole));
+        if (!target.GetComponent<RoleTransition>().restartSkill)
+        {
+            if (target.GetComponent<RoleTransition>().IsTransition)
+            {
+                target.GetComponent<RoleTransition>().Restore();
+            }
+            else
+            {
+                base.SkillOff(data);
+            }
+        }
     }
 
     bool CheckTransition(BaseMapRole role, out GameEnum.RoleType transitionType)

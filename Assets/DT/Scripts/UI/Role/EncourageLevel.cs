@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static GameEnum;
 
-public class EncourageLevel : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class EncourageLevel : MonoBehaviour
 {
     public BaseMapRole currentRole;
 
@@ -15,6 +15,9 @@ public class EncourageLevel : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
 
     public Image indexImg;
 
+    public Image skillImage;
+    public EncourageSkillData skillData;
+
     public void Init(BaseMapRole role)
     {
         currentRole = role;
@@ -23,6 +26,13 @@ public class EncourageLevel : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
         //indexImg.transform.localPosition = new Vector2(-73.3f + role.encourageLevel * 36.7f, indexImg.transform.localPosition.y);
         indexImg.transform.localPosition = new Vector2(-24.5f + role.encourageLevel * 27.9f, indexImg.transform.localPosition.y);
         levelText.color = Color.black;
+        skillData = GameDataMgr.My.GetEncourageSkillDataById(role.encourageSkillId);
+        if (skillData != null)
+        {
+            if (role.encourageSkillId != 0)
+                skillImage.sprite = Resources.Load<Sprite>("Sprite/EncourageSkill/" + role.encourageSkillId);
+            skillImage.GetComponent<EncourageSkillInfo>().showStr = skillData.skillDesc;
+        }
         if (role.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
         {
             if (role.encourageLevel > 0)
@@ -51,15 +61,9 @@ public class EncourageLevel : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
                 }
             }
         }
+
+        indexImg.GetComponent<EncourageLevelInfo>().showStr = showStr;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        FloatWindow.My.Init(showStr);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        FloatWindow.My.Hide();
-    }
+    
 }

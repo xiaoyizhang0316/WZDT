@@ -69,7 +69,8 @@ public class RoleListInfoService : BaseRoleListInfo
         }
         efficiencyNum *= add;
         mainBuff.GetComponent<ShowBuffText>().role =  PlayerData.My.GetMapRoleById(role.ID);
-        mainBuff.sprite = Resources.Load<Sprite>("Sprite/Buff/" + PlayerData.My.GetMapRoleById(role.ID).buffList[0]);
+        if (mainBuff.GetComponent<ShowBuffText>().role.buffList.Count>0)
+            mainBuff.sprite = Resources.Load<Sprite>("Sprite/Buff/" + PlayerData.My.GetMapRoleById(role.ID).buffList[0]);
         effect.text =role.effect.ToString();
         reload.text = role.effect  .ToString()+"%";
         efficiency.text = role.efficiency.ToString();

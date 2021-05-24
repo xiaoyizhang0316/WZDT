@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6529673540645862003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5558218082238661449}
+  - component: {fileID: 986874550995358667}
+  - component: {fileID: 3604369512195809467}
+  - component: {fileID: 6929774664804940626}
+  m_Layer: 5
+  m_Name: En_buff
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5558218082238661449
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529673540645862003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &986874550995358667
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529673540645862003}
+  m_CullTransparentMesh: 0
+--- !u!114 &3604369512195809467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529673540645862003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: c58f3fe0dc09f454a92b8a84bab45bf6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6929774664804940626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529673540645862003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be576d981bb46249ba8750eff00aa6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buff_image: {fileID: 3604369512195809467}
+  buff:
+    buffConfig:
+      playerGoldChange: 0
+      playerSatisfyChange: 0
+      playerHealthChange: 0
+      playerTechPointChange: 0
+      stageRiskLevelChange: 0
+      stageTradeCostLevelChange: 0
+      stageDistanceLevelChange: 0
+      stageMonthCostChange: 0
+      stageEncourageLevelChange: 0
+      stageEnvironmentLevel1Change: 0
+      stageEnvironmentLevel2Change: 0
+      stageEnvironmentLevel3Change: 0
+      stageSatisfyRateChange: 0
+      stageTasteDamageRateChange: 0
+      roleEffectChange: 0
+      roleEfficiencyChange: 0
+      roleRangeChange: 0
+      roleTradeCostChange: 0
+      roleRiskResistanceChange: 0
+      roleCostChange: 0
+      roleBulletCapacityChange: 0
+      roleEncourageLevelChange: 0
+      consumerHealthChange: 0
+      consumerMaxHealthChange: 0
+      consumerSpeedChange: 0
+      consumerKillMoneyChange: 0
+      consumerKillSatisfyChange: 0
+      consumerLiveSatisfyChange: 0
+      consumerNormalChange: 0
+      consumerDiscountChange: 0
+      consumerGoodPackChange: 0
+      consumerSoftChange: 0
+      consumerCrispChange: 0
+      consumerSweetChange: 0
+      consumerIgnoreResist: 0
+      consumerjuiceChange: 0
+      consuemrCutChange: 0
+      consumerSummonChange: 0
+      bulletDamageChange: 0
+      bulletLoadingChange: 0
+    buffData:
+      BuffID: 0
+      bulletBuffType: 0
+      BuffName: 
+      BuffDesc: 
+      buffParam: 
+      elementType: 0
+      attackEffect: 0
+      OnBuffAdd: []
+      OnBuffRemove: []
+      OnBeforeDead: []
+      OnTick: []
+      OnProduct: []
+      OnEndTurn: []
+      duration: 0
+      turnDuration: 0
+      interval: 0
+      buffValue: 0
+    buffId: 0
+    duration: 0
+    turnDuration: 0
+    interval: 0
+    buffName: 
+    count: 0
+    buffDesc: 
+    castRole: {fileID: 0}
+    targetRole: {fileID: 0}
+    buffRole: {fileID: 0}
+    targetConsume: {fileID: 0}
