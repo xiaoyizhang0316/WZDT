@@ -29,7 +29,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     /// </summary>
     public GameObject dealer;
 
-
+    public GameObject NpcFinancialCompany;
     /// <summary>
     /// 服务
     /// </summary>
@@ -478,9 +478,23 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
         if (role.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Service)
         {
-            service.SetActive(true);
+            if (role.baseRoleData.roleType == GameEnum.RoleType.financialCompany ||
+                role.baseRoleData.roleType == GameEnum.RoleType.Government ||
+                role.baseRoleData.roleType == GameEnum.RoleType.DrinksGroup)
+            {
+                // GameObject specialInfo =  Instantiate(currentNpc.specialInfo, npcInfo.transform);
+                NpcFinancialCompany.SetActive(true);
+                //todo
+                NpcFinancialCompany.GetComponent<NpcFinancialCompany>().Init(npc.GetComponent<FinancialCompanySkill>()  );
+                  
+            }
+            else
+            {
+                service.SetActive(true);
 
-            service.GetComponent<BaseRoleListInfo>().Init(role);
+                service.GetComponent<BaseRoleListInfo>().Init(role);
+            } 
+           
         }
     }
 
