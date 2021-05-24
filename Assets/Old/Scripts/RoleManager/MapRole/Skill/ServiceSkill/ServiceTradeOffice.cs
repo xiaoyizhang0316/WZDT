@@ -30,16 +30,29 @@ public class ServiceTradeOffice : BaseServiceSkill
     public override void SkillOff(TradeData data)
     {
         var target = PlayerData.My.GetMapRoleById(double.Parse(data.targetRole));
-        if (!target.GetComponent<RoleTransition>().restartSkill)
+        if (target.GetComponent<RoleTransition>())
         {
             if (target.GetComponent<RoleTransition>().IsTransition)
             {
-                target.GetComponent<RoleTransition>().Restore();
+                if (target.GetComponent<RoleTransition>().CheckIsThisTradeCause(role))
+                {
+                    target.GetComponent<RoleTransition>().Restore();
+                }
+                else
+                {
+                    target.GetComponent<RoleTransition>().RemoveFailedCauseData(data);
+                    base.SkillOff(data);
+                }
             }
             else
             {
+                target.GetComponent<RoleTransition>().RemoveFailedCauseData(data);
                 base.SkillOff(data);
             }
+        }
+        else
+        {
+            base.SkillOff(data);
         }
     }
 }

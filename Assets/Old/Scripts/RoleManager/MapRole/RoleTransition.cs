@@ -9,11 +9,16 @@ public class RoleTransition : MonoBehaviour
     public RoleType startRoleType;
     public RoleType currentRoleType;
     private BaseMapRole _role;
+    [SerializeField]
     private TransitionCause[] _objects;
+
+    public TransitionCause[] Objects => _objects;
+
     private bool isNpc = false;
     private bool isTransition = false;
 
-    private Queue<TransitionCause> failedTransitionCauses;
+    //private Queue<TransitionCause> failedTransitionCauses;
+    private Dictionary<TransitionCause, int> failedCausesDic;
 
     public bool IsTransition => isTransition;
 
@@ -26,7 +31,8 @@ public class RoleTransition : MonoBehaviour
         _objects = new TransitionCause[1];
         _objects[0] = null;
         isNpc = _role.isNpc;
-        failedTransitionCauses = new Queue<TransitionCause>();
+        //failedTransitionCauses = new Queue<TransitionCause>();
+        failedCausesDic = new Dictionary<TransitionCause, int>();
     }
 
     /// <summary>
@@ -40,7 +46,8 @@ public class RoleTransition : MonoBehaviour
         if (_objects[0] != null)
         {
             active = false;
-            failedTransitionCauses.Enqueue(cause);
+            //failedTransitionCauses.Enqueue(cause);
+            failedCausesDic.Add(cause, 1);
             return;
         }
 
@@ -72,7 +79,7 @@ public class RoleTransition : MonoBehaviour
 
     void CheckNext()
     {
-        if (failedTransitionCauses.Count > 0)
+        /*if (failedTransitionCauses.Count > 0)
         {
             var cause = failedTransitionCauses.Peek();
             if (cause.causeType == CauseType.Trade)
@@ -86,7 +93,71 @@ public class RoleTransition : MonoBehaviour
             }
 
             failedTransitionCauses.Dequeue();
+        }*/
+
+        if (failedCausesDic.Count > 0)
+        {
+            var cause = GetDicItem();
+            if (cause.causeType == CauseType.Trade)
+            {
+                restartSkill = true;
+                cause.role.GetComponent<BaseServiceSkill>().RestartTradeData(cause.t_data);
+            }
+            else
+            {
+                // TODO 装备变形
+            }
+            failedCausesDic.Remove(cause);
         }
+    }
+
+    public bool CheckIsThisTradeCause(BaseMapRole role)
+    {
+        if (_objects[0] == null)
+        {
+            return false;
+        }
+
+        if (_objects[0].causeType == CauseType.Trade)
+        {
+            if (role.baseRoleData.ID == _objects[0].role.baseRoleData.ID)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 删除未造成变形的cause
+    /// </summary>
+    /// <param name="data"></param>
+    public void RemoveFailedCauseData(TradeData data)
+    {
+        failedCausesDic.Remove(GetCauseByTradeData(data));
+    }
+
+    TransitionCause GetCauseByTradeData(TradeData data)
+    {
+        foreach (var td in failedCausesDic.Keys)
+        {
+            if (data == td.t_data)
+            {
+                return td;
+            }
+        }
+        return null;
+    }
+
+    TransitionCause GetDicItem()
+    {
+        foreach (var key in failedCausesDic.Keys)
+        {
+            return key;
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -272,6 +343,7 @@ public class RoleTransition : MonoBehaviour
     }
 }
 
+[Serializable]
 public class TransitionCause
 {
     public CauseType causeType;
@@ -286,9 +358,14 @@ public class TransitionCause
     {
         this.causeType = causeType;
         this.id = id;
+        this.role = role;
+        this.t_data = data;
+        this.e_data = eData;
+        this.w_data = wData;
     }
 }
 
+[Serializable]
 public enum CauseType
 {
     Trade,
