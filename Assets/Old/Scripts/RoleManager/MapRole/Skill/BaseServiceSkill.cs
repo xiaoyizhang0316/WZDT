@@ -153,6 +153,7 @@ public class BaseServiceSkill : BaseSkill
         }
     }
 
+    protected int causeID = -1;
     /// <summary>
     /// 重启技能
     /// </summary>

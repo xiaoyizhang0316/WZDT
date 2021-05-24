@@ -130,10 +130,11 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             //        
             //    }
 
-            if (hit[i].transform.tag.Equals("Map"))
+            if (!hit[i].transform.tag.Equals("MapRole"))
             {
                 Debug.Log("Yes");
-                role.transform.position = hit[i].point + new Vector3(0, 0.3f, 0);
+                role.transform.position =new Vector3(hit[i].transform.position.x,0.3f,hit[i].transform.position.z);  
+
             }
         }
     }
