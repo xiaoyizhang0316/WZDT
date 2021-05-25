@@ -246,6 +246,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     
     public RoleSkillSelect GetRoleCheckDetailByType(Role role)
     {
+        Debug.Log(role.baseRoleData.roleType);
         for (int i = 0; i < allCheckRoles.Count; i++)
         {
             if ( allCheckRoles[i].RoleType == role.baseRoleData.roleType)
@@ -253,6 +254,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
                 return allCheckRoles[i];
             }
         }
+        Debug.Log("null");
 
         return null;
     }
