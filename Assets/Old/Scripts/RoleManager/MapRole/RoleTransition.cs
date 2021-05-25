@@ -239,6 +239,8 @@ public class RoleTransition : MonoBehaviour
             TransitionFailed(true, skillName);
             return;
         }
+
+        transform.GetComponent<BaseSkill>().IsOpen = true;
         // 重置role sprite
         transform.Find("RoleSprite").GetComponent<RoleSprite>().RestoreOrTransition();
         // TODO transform model 

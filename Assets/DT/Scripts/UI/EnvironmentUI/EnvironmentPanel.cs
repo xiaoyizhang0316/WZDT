@@ -54,6 +54,7 @@ public class EnvironmentPanel : MonoBehaviour
         transform.GetComponent<RectTransform>().DOAnchorPosY(140, 0.5f).Play().OnComplete(() =>
         {
             CancelInvoke();
+            Clear();
             stopShow = false;
             StartCoroutine(ShowEnvOnClose());
             in_btn.gameObject.SetActive(false);

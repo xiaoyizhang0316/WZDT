@@ -5,28 +5,10 @@ using UnityEngine;
 public class AddMaga : BaseFinancialCompanyThreshold
 {
     public int mageAdd = 0 ;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public override bool Threshold()
     {
-        if (StageGoal.My.techCost > mageAdd)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return StageGoal.My.techCost > mageAdd;
     }
 
     public override string FailedTip()
