@@ -52,7 +52,7 @@ public class RoleListInfoService : BaseRoleListInfo
             montyCost.gameObject.SetActive(true);
 
         }
-
+      
         float efficiencyNum = (role.efficiency / 20f);
         float add = 1f;
         float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel;
