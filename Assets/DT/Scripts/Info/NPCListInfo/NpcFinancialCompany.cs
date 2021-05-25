@@ -45,8 +45,8 @@ public class NpcFinancialCompany : MonoBehaviour
         RoleSkillSelect rs = SkillCheckManager.My.GetRoleCheckDetailByType(skill.GetComponent<BaseMapRole>().baseRoleData);
         this.skill =  skill ;
         this.condition_1.text = skill.condition_1+"\n"+rs.roleSkillSelect[0].checkDetails[0].checkContent;
-        this.condition_2.text = skill.condition_2+"\n"+rs.roleSkillSelect[0].checkDetails[0].checkContent;
-        this.condition_3.text =skill.condition_3+"\n"+rs.roleSkillSelect[0].checkDetails[0].checkContent;
+        this.condition_2.text = skill.condition_2+"\n"+rs.roleSkillSelect[1].checkDetails[0].checkContent;
+        this.condition_3.text =skill.condition_3+"\n"+rs.roleSkillSelect[2].checkDetails[0].checkContent;
         if (skill.index == -1)
         {
             for (int i = 0; i <conditionButtons.Count; i++)
