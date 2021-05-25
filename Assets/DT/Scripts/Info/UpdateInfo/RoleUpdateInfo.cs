@@ -190,7 +190,11 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     {
         SetDependency();
         InitRequire();
-        close.onClick.AddListener(() => { gameObject.SetActive(false); });
+        close.onClick.AddListener(() =>
+        {
+            
+            gameObject.SetActive(false);
+        });
         delete.onClick.AddListener(() =>
         {
             gameObject.SetActive(false);
@@ -359,6 +363,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         dealer.SetActive(false);
         service.SetActive(false);
         changeBulletType.SetActive(false);
+        NpcFinancialCompany.SetActive(false);
         nextLevel = role.baseRoleData.level + 1;
         currentLevel = role.baseRoleData.level;
         if (GetComponentInChildren<UpdateRole>())
