@@ -9,7 +9,8 @@ public class RoleListInfoChangeBullet : BaseRoleListInfo
     public Text productTime;
 
     public Text tradCost;
-   
+
+    public GameObject levelUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,15 @@ public class RoleListInfoChangeBullet : BaseRoleListInfo
 
     public override void Init(Role role)
     {
+        if (role.isNpc)
+        {
+            levelUI.SetActive(false);
+        }
+        else
+        {
+            levelUI.SetActive(true);
+        }
+
         float efficiencyNum = (role.efficiency / 20f);
         float add = 1f;
         float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel;
