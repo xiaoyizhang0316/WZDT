@@ -235,7 +235,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     {
         for (int i = 0; i < allCheckRoles.Count; i++)
         {
-            if (allCheckRoles[i].roleID == role.ID && allCheckRoles[i].RoleType == role.baseRoleData.roleType)
+            if (/*allCheckRoles[i].roleID == role.ID &&*/ allCheckRoles[i].RoleType == role.baseRoleData.roleType)
             {
                 return allCheckRoles[i];
             }
@@ -306,5 +306,6 @@ public enum SkillCheckType
     NonConsumerCheck,
     GetMegaCheck,
     GetScoreCheck,
-    DividedProfitCheck
+    DividedProfitCheck,
+    GetSatisfyCheck
 }
