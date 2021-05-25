@@ -485,7 +485,8 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                 // GameObject specialInfo =  Instantiate(currentNpc.specialInfo, npcInfo.transform);
                 NpcFinancialCompany.SetActive(true);
                 //todo
-                NpcFinancialCompany.GetComponent<NpcFinancialCompany>().Init(npc.GetComponent<FinancialCompanySkill>()  );
+                BaseMapRole mapRole = PlayerData.My.GetMapRoleById(role.ID);
+                NpcFinancialCompany.GetComponent<NpcFinancialCompany>().Init(mapRole  );
                   
             }
             else

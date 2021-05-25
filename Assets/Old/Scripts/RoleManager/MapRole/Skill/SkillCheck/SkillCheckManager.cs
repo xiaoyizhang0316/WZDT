@@ -231,15 +231,30 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     /// </summary>
     /// <param name="role"></param>
     /// <returns></returns>
-    RoleSkillSelect GetCheckDetail(Role role)
+    private RoleSkillSelect GetCheckDetail(Role role)
     {
         for (int i = 0; i < allCheckRoles.Count; i++)
         {
-            if (allCheckRoles[i].roleID == role.ID && allCheckRoles[i].RoleType == role.baseRoleData.roleType)
+            if (/*allCheckRoles[i].roleID == role.ID &&*/ allCheckRoles[i].RoleType == role.baseRoleData.roleType)
             {
                 return allCheckRoles[i];
             }
         }
+
+        return null;
+    }
+    
+    public RoleSkillSelect GetRoleCheckDetailByType(Role role)
+    {
+        Debug.Log(role.baseRoleData.roleType);
+        for (int i = 0; i < allCheckRoles.Count; i++)
+        {
+            if ( allCheckRoles[i].RoleType == role.baseRoleData.roleType)
+            {
+                return allCheckRoles[i];
+            }
+        }
+        Debug.Log("null");
 
         return null;
     }
@@ -293,5 +308,6 @@ public enum SkillCheckType
     NonConsumerCheck,
     GetMegaCheck,
     GetScoreCheck,
-    DividedProfitCheck
+    DividedProfitCheck,
+    GetSatisfyCheck
 }

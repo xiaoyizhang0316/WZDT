@@ -11,7 +11,7 @@ public class NpcFinancialCompany : MonoBehaviour
     public Text condition_2;
     public Text condition_3;
 
-    public FinancialCompanySkill skill;
+    public BaseFinancialSkill skill;
     public BaseFinancialCompanyThreshold b;
 
     public List<Button> conditionButtons;
@@ -19,35 +19,18 @@ public class NpcFinancialCompany : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        b = skill.GetComponent<BaseFinancialCompanyThreshold>();
+        //b = skill.GetComponent<BaseFinancialCompanyThreshold>();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public void Init( BaseMapRole role)
     {
-        if (!b.Threshold())
-        {
-            conditionButtons[0].interactable = false;
-            conditionButtons[1].interactable = false;
-            conditionButtons[2].interactable = false;
-        }
-
-        else
-        {
-            conditionButtons[0].interactable = true;
-            conditionButtons[1].interactable = true;
-            conditionButtons[2].interactable = true;
-        }
-    }
-
-    public void Init( FinancialCompanySkill skill)
-    {
-        
-        this.skill =  skill ;
-        this.condition_1.text = skill.condition_1;
-        this.condition_2.text = skill.condition_2;
-        this.condition_3.text =skill. condition_3;
-        if (skill.index == -1)
+        RoleSkillSelect rs = SkillCheckManager.My.GetRoleCheckDetailByType(role.baseRoleData);
+        this.skill =  role.GetComponent<BaseFinancialSkill>() ;
+        b = role.GetComponent<BaseFinancialCompanyThreshold>();
+        this.condition_1.text = skill.condition_1+"\n"+rs.roleSkillSelect[0].checkDetails[0].checkContent;
+        this.condition_2.text = skill.condition_2+"\n"+rs.roleSkillSelect[1].checkDetails[0].checkContent;
+        this.condition_3.text =skill.condition_3+"\n"+rs.roleSkillSelect[2].checkDetails[0].checkContent;
+        if (skill.index == -1 && b.Threshold() )
         {
             for (int i = 0; i <conditionButtons.Count; i++)
             {
@@ -92,6 +75,7 @@ public class NpcFinancialCompany : MonoBehaviour
     public void  InitButton(int index)
     {
         skill.index = index;
+        //skill.isActive = true;
         skill.Skill();
         for (int i = 0; i <conditionButtons.Count; i++)
         {

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class BaseFinancialSkill : BaseSkill
 {
+    public string condition_1;
+    public string condition_2;
+    public string condition_3;
+
+    //public bool isActive;
+    
     public int index = -1;
     public virtual void Skill()
     {
