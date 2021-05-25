@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class FinancialCompanySkill : BaseFinancialSkill
 {
-    /*public string condition_1;
-    public string condition_2;
-    public string condition_3;*/
-
     public int totalMaga = 0;
     //public int index =-1;
 

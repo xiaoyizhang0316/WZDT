@@ -35,7 +35,7 @@ public abstract class BaseSkill : MonoBehaviour
     /// <summary>
     /// 附带buff列表
     /// </summary>
-    public List<int> buffList;
+    public List<int> buffList=new List<int>();
 
     /// <summary>
     /// 当角色激活时有动画效果的物体
