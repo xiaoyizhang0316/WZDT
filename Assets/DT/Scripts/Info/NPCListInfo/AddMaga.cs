@@ -31,6 +31,11 @@ public class AddMaga : BaseFinancialCompanyThreshold
 
     public override string FailedTip()
     {
-        return "累计消耗Maga值为达标";
+        return "累计消耗Mega值未达标";
+    }
+
+    public override string ThresholdTip()
+    {
+        return "累计消耗Mega值需达到"+mageAdd+"点";
     }
 }

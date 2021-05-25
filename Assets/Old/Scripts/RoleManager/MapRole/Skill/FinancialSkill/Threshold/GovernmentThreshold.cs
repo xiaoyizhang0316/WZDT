@@ -15,6 +15,11 @@ public class GovernmentThreshold : BaseFinancialCompanyThreshold
         return "场上农民数量未达到" + targetPeasantNum;
     }
 
+    public override string ThresholdTip()
+    {
+        return "场上至少存在" + targetPeasantNum + "个农民";
+    }
+
     int GetPeasantCount()
     {
         int count = 0;
