@@ -231,11 +231,24 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     /// </summary>
     /// <param name="role"></param>
     /// <returns></returns>
-    RoleSkillSelect GetCheckDetail(Role role)
+    private RoleSkillSelect GetCheckDetail(Role role)
     {
         for (int i = 0; i < allCheckRoles.Count; i++)
         {
             if (allCheckRoles[i].roleID == role.ID && allCheckRoles[i].RoleType == role.baseRoleData.roleType)
+            {
+                return allCheckRoles[i];
+            }
+        }
+
+        return null;
+    }
+    
+    public RoleSkillSelect GetRoleCheckDetailByType(Role role)
+    {
+        for (int i = 0; i < allCheckRoles.Count; i++)
+        {
+            if ( allCheckRoles[i].RoleType == role.baseRoleData.roleType)
             {
                 return allCheckRoles[i];
             }

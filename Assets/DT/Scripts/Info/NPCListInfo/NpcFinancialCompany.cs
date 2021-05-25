@@ -11,7 +11,7 @@ public class NpcFinancialCompany : MonoBehaviour
     public Text condition_2;
     public Text condition_3;
 
-    public FinancialCompanySkill skill;
+    public BaseFinancialSkill skill;
     public BaseFinancialCompanyThreshold b;
 
     public List<Button> conditionButtons;
@@ -40,13 +40,13 @@ public class NpcFinancialCompany : MonoBehaviour
         }
     }
 
-    public void Init( FinancialCompanySkill skill)
+    public void Init( BaseFinancialSkill skill)
     {
-        
+        RoleSkillSelect rs = SkillCheckManager.My.GetRoleCheckDetailByType(skill.GetComponent<BaseMapRole>().baseRoleData);
         this.skill =  skill ;
-        this.condition_1.text = skill.condition_1;
-        this.condition_2.text = skill.condition_2;
-        this.condition_3.text =skill. condition_3;
+        this.condition_1.text = skill.condition_1+"\n"+rs.roleSkillSelect[0].checkDetails[0].checkContent;
+        this.condition_2.text = skill.condition_2+"\n"+rs.roleSkillSelect[0].checkDetails[0].checkContent;
+        this.condition_3.text =skill.condition_3+"\n"+rs.roleSkillSelect[0].checkDetails[0].checkContent;
         if (skill.index == -1)
         {
             for (int i = 0; i <conditionButtons.Count; i++)
