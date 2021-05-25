@@ -9,11 +9,6 @@ public class ProductMelon_Juice : BaseProductSkill
 {
     private int currentCount = 0;
 
-    public new void Start()
-    {
-        base.Start();
-    }
-
 
     public override void Skill()
     {

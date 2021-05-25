@@ -15,6 +15,11 @@ public class DrinksGroupThreshold : BaseFinancialCompanyThreshold
         return "场上未有种子商的效果值达到" + targetSeedEffect;
     }
 
+    public override string ThresholdTip()
+    {
+        return "至少存在一个种子商的效果值达到" + targetSeedEffect;
+    }
+
     bool CheckSeed()
     {
         for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
