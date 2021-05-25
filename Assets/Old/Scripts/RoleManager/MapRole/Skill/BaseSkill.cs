@@ -82,4 +82,9 @@ public abstract class BaseSkill : MonoBehaviour
             }
         }
     }
+
+    public virtual void Init()
+    {
+        
+    }
 }

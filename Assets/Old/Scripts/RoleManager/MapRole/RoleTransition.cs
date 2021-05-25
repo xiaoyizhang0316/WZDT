@@ -46,6 +46,7 @@ public class RoleTransition : MonoBehaviour
         if (_objects[0] != null)
         {
             active = false;
+            Debug.Log("已变形");
             //failedTransitionCauses.Enqueue(cause);
             failedCausesDic.Add(cause, 1);
             return;
@@ -240,7 +241,7 @@ public class RoleTransition : MonoBehaviour
             return;
         }
 
-        transform.GetComponent<BaseSkill>().ReUnleashSkills();
+        transform.GetComponent<BaseSkill>().Init();
         // 重置role sprite
         transform.Find("RoleSprite").GetComponent<RoleSprite>().RestoreOrTransition();
         // TODO transform model 
@@ -300,7 +301,8 @@ public class RoleTransition : MonoBehaviour
     {
         try
         {
-            Destroy(transform.GetComponent(skillName));
+            
+            DestroyImmediate(transform.GetComponent(skillName));
         }
         catch (Exception e)
         {

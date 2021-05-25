@@ -47,7 +47,7 @@ public abstract class BaseProductSkill : BaseSkill
     public override void ReUnleashSkills()
     {
         IsOpen = true;
-        //Debug.Log("重启技能" + role.baseRoleData.ID);
+        Debug.Log("重启技能" + role.baseRoleData.ID);
         if (role.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
         {
             if (!isPlay)
@@ -55,5 +55,11 @@ public abstract class BaseProductSkill : BaseSkill
         }
         else
             UnleashSkills();
+    }
+
+    public override void Init()
+    {
+        IsOpen = true;
+        Start();
     }
 }
