@@ -30,6 +30,8 @@ public class RoleListInfoService : BaseRoleListInfo
     public GameObject tradText;
 
     public Image mainBuff;
+    public GameObject levelUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,12 +47,11 @@ public class RoleListInfoService : BaseRoleListInfo
     {
         if (role.isNpc)
         {
-            montyCost.gameObject.SetActive(false);
+            levelUI.SetActive(false);
         }
         else
         {
-            montyCost.gameObject.SetActive(true);
-
+            levelUI.SetActive(true);
         }
       
         float efficiencyNum = (role.efficiency / 20f);
