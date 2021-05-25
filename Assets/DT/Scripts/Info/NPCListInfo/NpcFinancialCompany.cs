@@ -10,6 +10,8 @@ public class NpcFinancialCompany : MonoBehaviour
     public Text condition_1;
     public Text condition_2;
     public Text condition_3;
+    public Text f_name_text;
+    public Text threshold_text;
 
     public BaseFinancialSkill skill;
     public BaseFinancialCompanyThreshold b;
@@ -27,10 +29,13 @@ public class NpcFinancialCompany : MonoBehaviour
         RoleSkillSelect rs = SkillCheckManager.My.GetRoleCheckDetailByType(role.baseRoleData);
         this.skill =  role.GetComponent<BaseFinancialSkill>() ;
         b = role.GetComponent<BaseFinancialCompanyThreshold>();
+        threshold_text.text = b.ThresholdTip();
+        threshold_text.color = b.Threshold() ? Color.green : Color.red;
+        f_name_text.text = role.baseRoleData.baseRoleData.roleName;
         this.condition_1.text = skill.condition_1+"\n"+rs.roleSkillSelect[0].checkDetails[0].checkContent;
         this.condition_2.text = skill.condition_2+"\n"+rs.roleSkillSelect[1].checkDetails[0].checkContent;
         this.condition_3.text =skill.condition_3+"\n"+rs.roleSkillSelect[2].checkDetails[0].checkContent;
-        if (skill.index == -1 && b.Threshold() )
+        if (skill.index == -1 && b.Threshold())
         {
             for (int i = 0; i <conditionButtons.Count; i++)
             {
