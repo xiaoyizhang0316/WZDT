@@ -260,7 +260,6 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     {
         foreach (RequirementData item in requirementDatas)
         {
-            Debug.Log(item.requirementId+"  "+id);
             if (item.requirementId == id)
             {
                 return item;

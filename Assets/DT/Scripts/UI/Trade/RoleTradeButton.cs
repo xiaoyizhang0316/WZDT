@@ -150,6 +150,11 @@ public class RoleTradeButton : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         currentRole = transform.GetComponentInParent<BaseMapRole>();
     }
 
+    public void ReInit()
+    {
+        currentRole = transform.GetComponentInParent<BaseMapRole>();
+    }
+
     // Update is called once per frame
     void Update()
     {

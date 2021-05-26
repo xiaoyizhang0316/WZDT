@@ -101,17 +101,21 @@ MonoBehaviour:
   tradePoint: {fileID: 5268046155399773150}
   AI: 0
   npcScript: {fileID: 0}
-  extraSkill: {fileID: 0}
   encourageSkillId: 10001
+  baseSkill: {fileID: 0}
+  requirementId: 1c2700001d270000
+  roleRequirement: []
   levelModels:
   - {fileID: 1356297579487580124}
   - {fileID: 8430294214797169161}
   - {fileID: 5460184844133458030}
   putTime: 0
   costTechPoint: 0
+  producedNumber: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  skillPower: 0
   startTradeList: []
   endTradeList: []
   tasteBuffList: 
@@ -122,6 +126,8 @@ MonoBehaviour:
   stopWorkSprite: {fileID: 8303916417233821260}
   isSell: 0
   ringEffect: {fileID: 221564960369029756}
+  specialInfo: {fileID: 0}
+  isUseTSJ: 0
   cloneWarehourse: []
 --- !u!114 &7942513109256546735
 MonoBehaviour:
@@ -146,6 +152,7 @@ MonoBehaviour:
   - {fileID: 4650249910260599319}
   - {fileID: 3327167653881769197}
   - {fileID: 7219219629744561437}
+  maxTradeLimit: 0
   productDatas: []
 --- !u!1 &1592532863279912224
 GameObject:

@@ -386,6 +386,7 @@ MonoBehaviour:
       PrePath: 
       RoleSpacePath: 
     effect: 0
+    freeUpdate: 0
     efficiency: 0
     range: 0
     tradeCost: 0
@@ -397,6 +398,7 @@ MonoBehaviour:
     equipCost: 0
     workerCost: 0
     landCost: 0
+    gearEncourageAdd: 0
     inMap: 0
     isNpc: 0
   warehouse: []
@@ -411,34 +413,34 @@ MonoBehaviour:
   tradePoint: {fileID: 2951205324157791759}
   AI: 0
   npcScript: {fileID: 0}
-  extraSkill: {fileID: 0}
+  encourageSkillId: 0
+  baseSkill: {fileID: 0}
+  requirementId: 1c2700001d270000
+  roleRequirement: []
   levelModels:
   - {fileID: 3095725251720570581}
   - {fileID: 3132902041614391449}
   - {fileID: 8789623484722917863}
   putTime: 0
-  totalProfit: 0
-  monthlyProfit: 0
-  totalSatisfy: 0
-  monthlySatisfy: 0
-  totalCost: 0
-  rentCost: 0
-  operationCost: 0
-  activityCost: 0
-  tradeCost: 0
-  shop: []
+  costTechPoint: 0
+  producedNumber: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
+  skillPower: 0
   startTradeList: []
   endTradeList: []
   tasteBuffList: 
+  consumableList: 
   totalUpgradeCost: 0
   roleSprite: {fileID: 0}
   emptyGearSprite: {fileID: 927899722831342201}
   stopWorkSprite: {fileID: 3288098775641481497}
   isSell: 0
   ringEffect: {fileID: 4412191841985257966}
+  specialInfo: {fileID: 0}
+  isUseTSJ: 0
+  cloneWarehourse: []
 --- !u!114 &1439850988682758017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,13 +479,10 @@ MonoBehaviour:
   isPlay: 0
   isAvaliable: 1
   isAnimPlaying: 0
-  goodSpecialBuffList: 
-  goodBaseBuffs: []
-  badSpecialBuffList: 
-  badBaseBuffs: []
   skillDesc: "\u5C06\u74DC\u9001\u7ED9\u6D88\u8D39\u8005\uFF0C\u6548\u7387\u8D8A\u9AD8\uFF0C\u5356\u5F97\u8D8A\u5FEB\uFF0C\u8303\u56F4\u503C\u8D8A\u5927\uFF0C\u5356\u5F97\u8D8A\u5E7F"
   buffList: 
   animationPart: []
+  maxTradeLimit: 0
 --- !u!1 &2058430452873792019
 GameObject:
   m_ObjectHideFlags: 0
