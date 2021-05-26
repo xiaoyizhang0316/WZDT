@@ -79,8 +79,7 @@ public class AIRPort : BaseProductSkill
                 game.GetComponent<GoodsSign>().role =
                     PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[tradID].tradeData.targetRole));
                 game.transform.position = transform.position;
-                game.GetComponent<GoodsSign>().Move();
-                //productDatas.Add(new ProductData(data));
+                game.GetComponent<GoodsSign>().Move(); 
                 count++;
             }
             catch (Exception e)
