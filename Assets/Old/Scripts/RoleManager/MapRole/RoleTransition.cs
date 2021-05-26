@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using static GameEnum;
 using Object = System.Object;
@@ -16,6 +17,9 @@ public class RoleTransition : MonoBehaviour
 
     private bool isNpc = false;
     private bool isTransition = false;
+
+    public List<GameObject> startModels = new List<GameObject>();
+    public GameObject trans_model;
 
     //private Queue<TransitionCause> failedTransitionCauses;
     private Dictionary<TransitionCause, int> failedCausesDic;
@@ -241,10 +245,37 @@ public class RoleTransition : MonoBehaviour
             return;
         }
 
+        if (isRestore)
+        {
+            for (int i = 0; i < startModels.Count; i++)
+            {
+                if (startModels[i].name.Equals("RoleCreateTradeButton"))
+                {
+                    startModels[i].transform.DOScale(1, 0.05f).Play();
+                }
+                startModels[i].SetActive(true);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < startModels.Count; i++)
+            {
+                if (startModels[i].name.Equals("RoleCreateTradeButton"))
+                {
+                    startModels[i].transform.DOScale(0, 0.05f).Play();
+                }
+                startModels[i].SetActive(false);
+            }
+            
+        }
+
+        _role.baseSkill = transform.GetComponent<BaseSkill>();
+
         transform.GetComponent<BaseSkill>().Init();
         // 重置role sprite
         transform.Find("RoleSprite").GetComponent<RoleSprite>().RestoreOrTransition();
-        // TODO transform model 
+        // 更换角色模型
+        RoleTransitionMgr.My.ChangeModel(_role, currentRoleType, isRestore);
         // TODO init role data 
         // TODO check trade 
         // 检查还原初始状态

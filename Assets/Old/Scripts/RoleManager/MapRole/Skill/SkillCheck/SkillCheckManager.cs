@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillCheckManager : MonoSingleton<SkillCheckManager>
 {
@@ -22,6 +23,8 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     public int nonConsumerIncome;
     // 分成
     public int dividedProfit;
+
+    public int drinkIncome;
     // 角色检测相关的设置
     [SerializeField]
     public List<RoleSkillSelect> allCheckRoles=new List<RoleSkillSelect>();
@@ -37,6 +40,33 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     public bool checkDivide;
     // 分成的比例
     public float proportion;//分成比例
+
+    public Button open_btn;
+    public Button close_btn;
+
+    private void Start()
+    {
+        open_btn.onClick.AddListener(Open);
+        close_btn.onClick.AddListener(Close);
+    }
+
+    void Open()
+    {
+        transform.GetComponent<RectTransform>().DOAnchorPosY(350, 0.5f).Play().OnComplete(() =>
+        {
+            open_btn.gameObject.SetActive(false);
+            close_btn.gameObject.SetActive(true);
+        });
+    }
+
+    void Close()
+    {
+        transform.GetComponent<RectTransform>().DOAnchorPosY(-270, 0.5f).Play().OnComplete(() =>
+        {
+            open_btn.gameObject.SetActive(true);
+            close_btn.gameObject.SetActive(false);
+        });
+    }
 
     /// <summary>
     /// 激活角色功能，开启检测
@@ -215,6 +245,11 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
         dividedProfit += num;
     }
 
+    public void AddDrinkIncome(int income)
+    {
+        drinkIncome += income;
+    }
+
     /// <summary>
     /// 给gameobject添加脚本
     /// </summary>
@@ -309,5 +344,6 @@ public enum SkillCheckType
     GetMegaCheck,
     GetScoreCheck,
     DividedProfitCheck,
-    GetSatisfyCheck
+    GetSatisfyCheck,
+    DrinkIncomeCheck
 }

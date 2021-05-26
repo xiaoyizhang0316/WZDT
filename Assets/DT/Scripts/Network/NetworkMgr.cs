@@ -955,7 +955,8 @@ public class NetworkMgr : MonoSingletonDontDestroy<NetworkMgr>
         keyValues.Add("groupID", groupID.ToString());
         if (levelID != 1)
         {
-            keyValues.Add("useStatus", CompressUtils.Compress( DataUploadManager.My.GetNpcUseStatus()));
+            //keyValues.Add("useStatus", CompressUtils.Compress( DataUploadManager.My.GetNpcUseStatus()));
+            keyValues.Add("useStatus", "");
         }
         else
         {
