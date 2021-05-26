@@ -215,6 +215,34 @@ public class Building : MonoBehaviour
         protalGameObject.transform.DOScale(0, 1);
     }
 
+
+    public void  SpawnWaveSingleConsumer(BuildingManager.WaveConfig w, int index)
+    {
+     
+           
+                string path = "Prefabs/Consumer/" + w.consumerType.ToString();
+                GameObject go = Instantiate(Resources.Load<GameObject>(path), transform);
+                go.GetComponent<ConsumeSign>().Init(consumerPathList);
+                go.GetComponent<ConsumeSign>().buildingIndex = buildingId;
+                go.GetComponent<ConsumeSign>().consumerIndex = index;
+                consumeSigns.Add(go.GetComponent<ConsumeSign>());
+                index++;
+                go.transform.position = transform.position;
+                go.transform.localPosition = Vector3.zero + new Vector3(0f, 0f, 0f);
+                foreach (int num in w.buffList)
+                {
+                    if (num != -1)
+                    {
+                        BuffData buff = GameDataMgr.My.GetBuffDataByID(num);
+                        BaseBuff baseBuff = new BaseBuff();
+                        baseBuff.Init(buff);
+                        baseBuff.SetConsumerBuff(go.GetComponent<ConsumeSign>());
+                        go.GetComponent<ConsumeSign>().bornBuffList.Add(num);
+                    }
+                }
+                //go.GetComponent<ConsumeSign>().InitRangeBuff(); 
+    }
+
     /// <summary>
     /// 生成消费者
     /// </summary>
@@ -461,7 +489,7 @@ public class Building : MonoBehaviour
 
     private bool isPathLineShow = false;
 
-    /// <summary>
+    /// <summary>F
     /// 显示消费者路径
     /// </summary>
     public void ShowPathLine()

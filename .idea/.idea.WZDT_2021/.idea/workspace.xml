@@ -25,7 +25,7 @@
     <list default="true" id="34d0e92c-24ac-4736-834e-e498cb4e8bf6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WZDT_2021/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WZDT_2021/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DT/Art/UI/UIPrb/Canvas_NEW.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DT/Art/UI/UIPrb/Canvas_NEW.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DT/Art/UI/UIPrb/Panel_RoleUpdate.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DT/Art/UI/UIPrb/Panel_RoleUpdate.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Trade/TradeSign.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Trade/TradeSign.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/build_info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/build_info.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +68,6 @@
         <option value="$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/NPC/BankLoan.cs" />
         <option value="$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/NPC/ConsumerBuffReward.cs" />
         <option value="$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/Skill/BaseServiceSkill.cs" />
-        <option value="$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Trade/TradeSign.cs" />
         <option value="$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/Skill/BaseSkill.cs" />
         <option value="$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/NPC/BaseExtraSkill.cs" />
         <option value="$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/NPC/ExtraConsumer.cs" />
@@ -87,7 +86,6 @@
         <option value="$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/BUFF/BaseBuff.cs" />
         <option value="$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Requirement/Requirement.cs" />
         <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/DataModel/EncourageSkillData/EncourageSkillData.cs" />
-        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/GameDataMgr.cs" />
         <option value="$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/BaseMapRole.cs" />
         <option value="$PROJECT_DIR$/Assets/DT/Scripts/FightSystem/Encourage/BaseEncourageSkill.cs" />
         <option value="$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/Skill/ProductMCN.cs" />
@@ -100,6 +98,8 @@
         <option value="$PROJECT_DIR$/Assets/DT/Scripts/Network/Common/CommonParams.cs" />
         <option value="$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/Skill/FinancialSkill/ServiceDrinksGroup.cs" />
         <option value="$PROJECT_DIR$/Assets/Old/Scripts/RoleManager/MapRole/Skill/FinancialSkill/ServiceGovernment.cs" />
+        <option value="$PROJECT_DIR$/Assets/DT/Scripts/IOSystem/GameData/GameDataMgr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Trade/TradeSign.cs" />
       </list>
     </option>
   </component>
@@ -181,7 +181,8 @@
       <workItem from="1621414693335" duration="5419000" />
       <workItem from="1621481613594" duration="8172000" />
       <workItem from="1621832936114" duration="8595000" />
-      <workItem from="1621910560913" duration="5124000" />
+      <workItem from="1621910560913" duration="5731000" />
+      <workItem from="1622013423460" duration="2051000" />
     </task>
     <servers />
   </component>
@@ -222,10 +223,11 @@
     <state x="2945" y="270" key="SettingsEditor/2560.23.1920.1057/68.23.2492.1417@2560.23.1920.1057" timestamp="1617873547843" />
     <state x="2826" y="157" width="982" height="801" key="SettingsEditor/2560.23.1920.1057/70.23.2490.1417@2560.23.1920.1057" timestamp="1617874485333" />
     <state x="2909" y="228" key="SettingsEditor/2560.23.1920.1057/72.23.2488.1417@2560.23.1920.1057" timestamp="1618556076522" />
-    <state x="2742" y="149" width="1491" height="736" key="VCS.FileHistoryDialog" timestamp="1618994453791">
+    <state x="2742" y="149" width="1491" height="736" key="VCS.FileHistoryDialog" timestamp="1622024237231">
       <screen x="2560" y="23" width="1920" height="1057" />
     </state>
     <state x="2742" y="149" width="1491" height="736" key="VCS.FileHistoryDialog/2560.23.1920.1057/66.23.2494.1417@2560.23.1920.1057" timestamp="1618919128144" />
+    <state x="2742" y="149" width="1491" height="736" key="VCS.FileHistoryDialog/2560.23.1920.1057/67.23.2493.1417@2560.23.1920.1057" timestamp="1622024237231" />
     <state x="2742" y="149" width="1491" height="736" key="VCS.FileHistoryDialog/2560.23.1920.1057/68.23.2492.1417@2560.23.1920.1057" timestamp="1618994453791" />
     <state x="2742" y="149" width="1491" height="736" key="VCS.FileHistoryDialog/2560.23.1920.1057/72.23.2488.1417@2560.23.1920.1057" timestamp="1617876861136" />
     <state x="3038" y="233" key="Vcs.Push.Dialog.v2" timestamp="1620722446580">
@@ -236,15 +238,34 @@
       <screen x="2560" y="23" width="1920" height="1057" />
     </state>
     <state x="3118" y="228" key="run.anything.popup/2560.23.1920.1057/68.23.2492.1417@2560.23.1920.1057" timestamp="1620634239285" />
-    <state x="3122" y="289" width="672" height="160" key="search.everywhere.popup" timestamp="1621935197180">
+    <state x="3122" y="289" width="672" height="160" key="search.everywhere.popup" timestamp="1622023456485">
       <screen x="2560" y="23" width="1920" height="1057" />
     </state>
     <state x="3122" y="289" width="672" height="678" key="search.everywhere.popup/2560.23.1920.1057/60.23.2500.1417@2560.23.1920.1057" timestamp="1619688739850" />
     <state x="3122" y="289" width="672" height="678" key="search.everywhere.popup/2560.23.1920.1057/64.23.2496.1417@2560.23.1920.1057" timestamp="1621328868371" />
     <state x="3122" y="289" width="672" height="678" key="search.everywhere.popup/2560.23.1920.1057/66.23.2494.1417@2560.23.1920.1057" timestamp="1621854037693" />
-    <state x="3122" y="289" width="672" height="160" key="search.everywhere.popup/2560.23.1920.1057/67.23.2493.1417@2560.23.1920.1057" timestamp="1621935197180" />
+    <state x="3122" y="289" width="672" height="160" key="search.everywhere.popup/2560.23.1920.1057/67.23.2493.1417@2560.23.1920.1057" timestamp="1622023456485" />
     <state x="3122" y="289" width="672" height="678" key="search.everywhere.popup/2560.23.1920.1057/68.23.2492.1417@2560.23.1920.1057" timestamp="1620634528818" />
     <state x="3122" y="289" width="672" height="678" key="search.everywhere.popup/2560.23.1920.1057/70.23.2490.1417@2560.23.1920.1057" timestamp="1620625835101" />
     <state x="3122" y="289" width="672" height="678" key="search.everywhere.popup/2560.23.1920.1057/72.23.2488.1417@2560.23.1920.1057" timestamp="1620616978059" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Trade/CreateTradeManager.cs</url>
+          <line>336</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Old/Scripts/UIManager/Trade/CreateTradeManager.cs" initialLine="336">
+            <startOffsets>
+              <option value="11253" />
+            </startOffsets>
+            <endOffsets>
+              <option value="11283" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
