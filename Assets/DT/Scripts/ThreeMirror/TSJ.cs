@@ -45,15 +45,15 @@ public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         RaycastHit[] hit = Physics.RaycastAll(ray);
         for (int i = 0; i < hit.Length; i++)
         {
-            if (hit[i].transform.CompareTag("Building"))
+            if (hit[i].transform.CompareTag("MapRole")&&!hit[i].transform.GetComponent<NPC>()!=null)
             {
-                if (!hit[i].transform.GetComponent<Building>().isUseTSJ)
+                if (!hit[i].transform.GetComponent<NPC>().isUseTSJ)
                 {
                     if (StageGoal.My.CostTechPoint(costTechNumber))
                     {
                         StageGoal.My.CostTp(costTechNumber, CostTpType.Mirror);
                         AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
-                        hit[i].transform.GetComponent<Building>().UseTSJ();
+                        hit[i].transform.GetComponent<NPC>().UseTSJ();
                         GameObject effect = Instantiate(effectPrb, hit[i].transform);
                         effect.transform.localPosition = Vector3.zero;
                         //Debug.Log("使用透视镜成功");
@@ -62,7 +62,7 @@ public class TSJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         {
                             string str1 = "UseThreeMirror|";
                             str1 += "2";
-                            str1 += "," + hit[i].transform.GetComponent<Building>().buildingId;
+                            str1 += "," + hit[i].transform.GetComponent<BaseMapRole>().baseRoleData.ID;
                             str1 += "," + costTechNumber.ToString();
                             if (PlayerData.My.isServer)
                             {

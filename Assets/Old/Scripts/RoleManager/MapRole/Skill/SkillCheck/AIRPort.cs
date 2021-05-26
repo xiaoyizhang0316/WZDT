@@ -16,10 +16,11 @@ public class AIRPort : BaseProductSkill
 
     public int tradID;
 
+    public int count = 0 ;
 
     public override void Skill()
     {
-        if (role.warehouse.Count == 0)
+        if (role.warehouse.Count == 0|| count> BuildingManager.My.GetExtraConsumerNumber("100"))
         {
             return;
         }
@@ -57,6 +58,7 @@ public class AIRPort : BaseProductSkill
         if (TradeManager.My.CheckTwoRoleHasTrade(luxingshe.baseRoleData, role.baseRoleData) ||
             TradeManager.My.CheckTwoRoleHasTrade(role.baseRoleData, luxingshe.baseRoleData))
         {
+            
             ProductData data = new ProductData();
             data.buffList = new List<int>();
             data.bulletType = BulletType.Seed;
@@ -78,7 +80,8 @@ public class AIRPort : BaseProductSkill
                     PlayerData.My.GetMapRoleById(Double.Parse(role.tradeList[tradID].tradeData.targetRole));
                 game.transform.position = transform.position;
                 game.GetComponent<GoodsSign>().Move();
-                //productDatas.Add(new ProductData(data)); 
+                //productDatas.Add(new ProductData(data));
+                count++;
             }
             catch (Exception e)
             {
@@ -86,5 +89,9 @@ public class AIRPort : BaseProductSkill
             }
         }
     }
- 
+
+    public override void OnEndTurn()
+    {
+        count = 0;
+    }
 }

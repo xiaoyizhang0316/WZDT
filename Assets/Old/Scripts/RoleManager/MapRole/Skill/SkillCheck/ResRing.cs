@@ -28,6 +28,11 @@ public class ResRing : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
+        if (!other.tag.Equals("Consumer"))
+        {
+            return;
+        }
+
         int time =(StageGoal.My.timeCount- consumeData[other.transform.GetComponent<ConsumeSign>()]) * addMoney;
        StageGoal.My.GetPlayerGold(time);
        StageGoal.My.Income(time, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
