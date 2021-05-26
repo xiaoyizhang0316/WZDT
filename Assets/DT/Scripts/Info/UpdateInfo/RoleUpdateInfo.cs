@@ -515,7 +515,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         for (int i = 0; i <role.roleRequirement.Count; i++)
         {
            GameObject game =  Instantiate(requiresign, RequiContent);
-           game.GetComponent<ReqireMentSign>().Init(false,role.roleRequirement[i]);
+           game.GetComponent<ReqireMentSign>().Init(role.isUseTSJ,role.roleRequirement[i]);
         }
     }
 
