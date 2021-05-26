@@ -110,9 +110,6 @@ public class TradeSign : MonoBehaviour
             {
                 tradeData.castRole = tradeData.endRole;
                 tradeData.targetRole = tradeData.startRole;
-                tradeData.dividePercent = 4;
-                startPer = 0.6f;
-                endPer = 1.4f;
             }
         }
         else if (startRole.baseRoleData.baseRoleData.roleSkillType == RoleSkillType.Service)
