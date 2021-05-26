@@ -341,6 +341,12 @@ public class ConsumeSign : MonoBehaviour,ICloneable
             {
                 consumeData.killMoney = (int) (consumeData.killMoney* 1.2f);
             }
+
+            // 饮料收入检测
+            if (lastHitType == BulletType.Juice)
+            {
+                SkillCheckManager.My.AddDrinkIncome(consumeData.killMoney);
+            }
             OnDeath();
         }
     }

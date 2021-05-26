@@ -99,7 +99,7 @@ public class EnvironmentPanel : MonoBehaviour
 
         ReSwitch:
         switchCount++;
-        if (switchCount > 10)
+        if (switchCount > 11)
         {
             envItem.GetChild(0).GetComponent<Text>().text = "";
             envItem.GetChild(1).GetComponent<Text>().text = "";
@@ -207,10 +207,22 @@ public class EnvironmentPanel : MonoBehaviour
                 }
                 break;
             case 9:
-                showIndex=0;
+                showIndex++;
                 if (BaseLevelController.My.environmentLevel3 > 0)
                 {
                     ShowEnvClosed(BaseLevelController.My.environmentLevel3Name,BaseLevelController.My.environmentLevel3.ToString() );
+                }
+                else
+                {
+                    goto ReSwitch;
+                }
+                break;
+            case 10:
+                showIndex = 0;
+                int extNum = BuildingManager.My.GetExtraConsumerNumber("100");
+                if (extNum > 0)
+                {
+                    ShowEnvClosed("额外的消费者",extNum.ToString() );
                 }
                 else
                 {
@@ -233,9 +245,11 @@ public class EnvironmentPanel : MonoBehaviour
         Tween te=null;
         te=envItem.DOLocalMoveY(35, 0.5f).OnComplete(() =>
             {
+                envItem.GetChild(0).GetComponent<Text>().text = "";
+                envItem.GetChild(1).GetComponent<Text>().text = "";
+                envItem.transform.localPosition = Vector3.zero;
                 envItem.GetChild(0).GetComponent<Text>().text = envName;
                 envItem.GetChild(1).GetComponent<Text>().text = envVal;
-                envItem.transform.localPosition = Vector3.zero;
             }).Play().OnPause(()=>te?.TogglePause());
         //te = envItem.DOLocalMoveY(35, 2.5f).SetEase(Ease.InOutBounce).SetEase(Ease.InExpo).Play().OnPause(()=>te?.TogglePause());
     }
@@ -291,6 +305,13 @@ public class EnvironmentPanel : MonoBehaviour
         {
             GameObject go = Instantiate(val_prefab, val_content);
             go.GetComponent<EnvValItem>().Setup("口味满足倍率", BaseLevelController.My.tasteDamageRate.ToString("F2"));
+        }
+
+        int extNum = BuildingManager.My.GetExtraConsumerNumber("100");
+        if (extNum > 0)
+        {
+            GameObject go = Instantiate(val_prefab, val_content);
+            go.GetComponent<EnvValItem>().Setup("额外的消费者", extNum.ToString());
         }
     }
 
