@@ -514,6 +514,10 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             requireOBJ.SetActive(false);
         }
 
+        for (int i = 0; i <RequiContent.childCount; i++)
+        {
+            Destroy(RequiContent.GetChild(0));
+        }
         for (int i = 0; i <role.roleRequirement.Count; i++)
         {
            GameObject game =  Instantiate(requiresign, RequiContent);
