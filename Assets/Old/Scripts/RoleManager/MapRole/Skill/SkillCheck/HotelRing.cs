@@ -33,7 +33,7 @@ public class HotelRing : MonoBehaviour
     {
         if (isopen)
         {
-            int time = consumeData[other.transform.GetComponent<ConsumeSign>()] * addMoney;
+            int time = (StageGoal.My.timeCount-consumeData[other.transform.GetComponent<ConsumeSign>()] )* addMoney;
             StageGoal.My.GetPlayerGold(time);
             StageGoal.My.Income(time, IncomeType.Npc, GetComponentInParent<BaseMapRole>());
 
