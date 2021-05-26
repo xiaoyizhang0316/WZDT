@@ -382,6 +382,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             update.interactable = true;
         }
 
+        InitRequire();
         InitBuff();
         DataUploadManager.My.AddData(DataEnum.角色_查看自己属性);
         switch (role.baseRoleData.roleType)
@@ -438,6 +439,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
     public void ReInit(Role role)
     {
+        InitRequire();
         level.text = role.baseRoleData.level.ToString();
         if (role.baseRoleData.level >= 5)
         {

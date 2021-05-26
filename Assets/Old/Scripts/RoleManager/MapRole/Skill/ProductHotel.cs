@@ -27,14 +27,7 @@ public class ProductHotel : BaseProductSkill
     public override void Skill()
     {
      
-
-        if (role.warehouse.Count == 0)
-        {
-            Debug.Log("进入(role.tradeList.Count"+role.warehouse.Count);
-
-            return;
-        }
-        Debug.Log("进入skill");
+ 
         AddEnergy(); 
        
         
@@ -44,7 +37,7 @@ public class ProductHotel : BaseProductSkill
 
     public override void UnleashSkills()
     {
-        Debug.Log("进入");
+      
         
         transform.DORotate(transform.eulerAngles, chiguaSpeed).OnComplete(() =>
         {
