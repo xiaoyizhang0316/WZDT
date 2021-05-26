@@ -8,14 +8,15 @@ using UnityEngine;
 public class ServiceTradeOffice : BaseServiceSkill
 {
     public int lastTurnIncome;
-    
+
     public override void Skill(TradeData data)
     {
         var target = PlayerData.My.GetMapRoleById(double.Parse(data.targetRole));
         if (target.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant)
         {
             Debug.Log("工商 - 农民");
-            target.GetComponent<RoleTransition>().ActiveTransition(GameEnum.RoleType.PickingGarden, new TransitionCause(CauseType.Trade, data.ID,role, data), out var active);
+            target.GetComponent<RoleTransition>().ActiveTransition(GameEnum.RoleType.PickingGarden,
+                new TransitionCause(CauseType.Trade, data.ID, role, data), out var active);
             if (!active)
             {
                 base.Skill(data);
@@ -30,13 +31,21 @@ public class ServiceTradeOffice : BaseServiceSkill
     public override void SkillOff(TradeData data)
     {
         var target = PlayerData.My.GetMapRoleById(double.Parse(data.targetRole));
-        if (target.GetComponent<RoleTransition>())
+        if (target.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant)
         {
-            if (target.GetComponent<RoleTransition>().IsTransition)
+            if (target.GetComponent<RoleTransition>())
             {
-                if (target.GetComponent<RoleTransition>().CheckIsThisTradeCause(role))
+                if (target.GetComponent<RoleTransition>().IsTransition)
                 {
-                    target.GetComponent<RoleTransition>().Restore();
+                    if (target.GetComponent<RoleTransition>().CheckIsThisTradeCause(role))
+                    {
+                        target.GetComponent<RoleTransition>().Restore();
+                    }
+                    else
+                    {
+                        target.GetComponent<RoleTransition>().RemoveFailedCauseData(data);
+                        base.SkillOff(data);
+                    }
                 }
                 else
                 {
@@ -46,7 +55,6 @@ public class ServiceTradeOffice : BaseServiceSkill
             }
             else
             {
-                target.GetComponent<RoleTransition>().RemoveFailedCauseData(data);
                 base.SkillOff(data);
             }
         }

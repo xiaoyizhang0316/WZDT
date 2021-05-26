@@ -37,13 +37,22 @@ public class ServiceInstrument : BaseServiceSkill
     public override void SkillOff(TradeData data)
     {
         var target = PlayerData.My.GetMapRoleById(double.Parse(data.targetRole));
-        if (target.GetComponent<RoleTransition>())
+        var isTransition = CheckTransition(target, out var transitionType);
+        if (isTransition)
         {
-            if (target.GetComponent<RoleTransition>().IsTransition)
+            if (target.GetComponent<RoleTransition>())
             {
-                if (target.GetComponent<RoleTransition>().CheckIsThisTradeCause(role))
+                if (target.GetComponent<RoleTransition>().IsTransition)
                 {
-                    target.GetComponent<RoleTransition>().Restore();
+                    if (target.GetComponent<RoleTransition>().CheckIsThisTradeCause(role))
+                    {
+                        target.GetComponent<RoleTransition>().Restore();
+                    }
+                    else
+                    {
+                        target.GetComponent<RoleTransition>().RemoveFailedCauseData(data);
+                        base.SkillOff(data);
+                    }
                 }
                 else
                 {
@@ -53,7 +62,6 @@ public class ServiceInstrument : BaseServiceSkill
             }
             else
             {
-                target.GetComponent<RoleTransition>().RemoveFailedCauseData(data);
                 base.SkillOff(data);
             }
         }
