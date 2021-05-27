@@ -69,7 +69,6 @@ public class ProductHotel : BaseProductSkill
                 break;
             case  BulletType.NormalPP :
                 currentenergy += molonEnergy + role.warehouse[0].damage * 1;
-                Debug.Log(currentenergy);
                 break;
             case  BulletType.Bomb :
                 currentenergy += guozhiEnergy + role.warehouse[0].damage * 1;
