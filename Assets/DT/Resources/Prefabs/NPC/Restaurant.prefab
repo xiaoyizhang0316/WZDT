@@ -11297,7 +11297,6 @@ GameObject:
   - component: {fileID: 8780297429412994313}
   - component: {fileID: 8574185990872130860}
   - component: {fileID: 2001842654562297475}
-  - component: {fileID: 2804377106294627056}
   - component: {fileID: 2406658930683523430}
   - component: {fileID: 8261281016873897321}
   m_Layer: 2
@@ -11343,19 +11342,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: -1
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2804377106294627056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5282312067654657307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6807691c035244ba973b7ff3b582686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapRole: {fileID: 0}
 --- !u!54 &2406658930683523430
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11384,8 +11370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9132d78010cbb4c9fbbcca8424ca2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addMoney: 10
-  addScore: 10
+  addMoney: 100
+  addScore: 1
   isopen: 0
   energyconsumeValue: 0
 --- !u!1 &5738286364912365578
@@ -16690,6 +16676,7 @@ MonoBehaviour:
     gearEncourageAdd: 0
     inMap: 0
     isNpc: 0
+    startType: 0
   warehouse: []
   trash: []
   isNpc: 0
@@ -16729,6 +16716,7 @@ MonoBehaviour:
   ringEffect: {fileID: 0}
   specialInfo: {fileID: 0}
   isUseTSJ: 0
+  startType: 0
   cloneWarehourse: []
 --- !u!65 &4136470837839073623
 BoxCollider:
@@ -16800,7 +16788,7 @@ MonoBehaviour:
   isAvaliable: 1
   isAnimPlaying: 0
   skillDesc: 
-  buffList: 
+  buffList: 34750000
   animationPart: []
   maxTradeLimit: 0
   currentenergy: 0
@@ -16836,7 +16824,7 @@ Transform:
   m_GameObject: {fileID: 9023546651489883559}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.25, y: -1.881, z: 0.13000107}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children:
   - {fileID: 8780297429412994313}
   - {fileID: 5774127148741216713}

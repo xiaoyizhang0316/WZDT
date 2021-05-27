@@ -14200,6 +14200,7 @@ GameObject:
   - component: {fileID: 4112379801950664828}
   - component: {fileID: 9009953016726619282}
   - component: {fileID: 2701979172005432229}
+  - component: {fileID: 2107146538}
   m_Layer: 0
   m_Name: MCN
   m_TagString: MapRole
@@ -14271,6 +14272,7 @@ MonoBehaviour:
     gearEncourageAdd: 0
     inMap: 0
     isNpc: 0
+    startType: 0
   warehouse: []
   trash: []
   isNpc: 0
@@ -14285,7 +14287,7 @@ MonoBehaviour:
   npcScript: {fileID: 0}
   encourageSkillId: 10006
   baseSkill: {fileID: 0}
-  requirementId: 
+  requirementId: 1f270000
   roleRequirement: []
   levelModels:
   - {fileID: 277659398218064406}
@@ -14310,6 +14312,7 @@ MonoBehaviour:
   ringEffect: {fileID: 0}
   specialInfo: {fileID: 0}
   isUseTSJ: 0
+  startType: 0
   cloneWarehourse: []
 --- !u!65 &4112379801950664828
 BoxCollider:
@@ -14363,6 +14366,31 @@ MonoBehaviour:
   isUseTSJ: 0
   autoTradeList: []
   animator: {fileID: 0}
+--- !u!114 &2107146538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6415752449164942172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3e6b55f21d1504faf85e5e28192874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  role: {fileID: 0}
+  IsOpen: 0
+  isPlay: 0
+  isAvaliable: 1
+  isAnimPlaying: 0
+  skillDesc: 
+  buffList: 39750000
+  animationPart: []
+  maxTradeLimit: 0
+  addMoney: 0
+  addScore: 0
+  normalEncourageId: 0
+  specialEncourageId: 0
 --- !u!1001 &1211808575871892339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14848,15 +14876,15 @@ PrefabInstance:
     - {fileID: 5753050262067411517, guid: 14ee27cfc30e4f9439b17154fc36d559, type: 3}
     - {fileID: 4876667174991743178, guid: 14ee27cfc30e4f9439b17154fc36d559, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 14ee27cfc30e4f9439b17154fc36d559, type: 3}
---- !u!4 &2099619960432421299 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6109254903091845886, guid: 14ee27cfc30e4f9439b17154fc36d559,
-    type: 3}
-  m_PrefabInstance: {fileID: 5326412340151628621}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &277659398218064406 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5346131258116706651, guid: 14ee27cfc30e4f9439b17154fc36d559,
+    type: 3}
+  m_PrefabInstance: {fileID: 5326412340151628621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2099619960432421299 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6109254903091845886, guid: 14ee27cfc30e4f9439b17154fc36d559,
     type: 3}
   m_PrefabInstance: {fileID: 5326412340151628621}
   m_PrefabAsset: {fileID: 0}

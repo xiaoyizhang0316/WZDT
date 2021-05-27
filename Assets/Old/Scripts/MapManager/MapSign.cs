@@ -125,6 +125,9 @@ public class MapSign : MonoBehaviour, IDragHandler
     }
     void Start()
     {
+        if (lockImage != null)
+        {
+
         if (!isCanPlace)
         {
             lockImage.SetActive(true);
@@ -134,7 +137,9 @@ public class MapSign : MonoBehaviour, IDragHandler
             lockImage.SetActive(false);
             
         }
-    }
+        }
+
+        }
 
     public void Unlock()
     {
