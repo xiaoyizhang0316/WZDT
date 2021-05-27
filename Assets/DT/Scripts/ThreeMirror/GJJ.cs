@@ -91,27 +91,18 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         Destroy(goCopy);
     }
 
-    public void AutoUseGJJ()
+    public void AutoUseGJJ(BaseMapRole basemapRole)
     {
         transform.DORotateQuaternion(transform.rotation, 30f).OnComplete(() =>
         {
-            List<BaseMapRole> roleList = new List<BaseMapRole>();
-            for (int i = 0; i < PlayerData.My.MapRole.Count; i++)
-            {
-                if (PlayerData.My.MapRole[i].isNpc && !PlayerData.My.MapRole[i].npcScript.isCanSee)
-                {
-                    roleList.Add(PlayerData.My.MapRole[i]);
-                }
-            }
-            if (roleList.Count > 0)
-            {
-                int index = UnityEngine.Random.Range(0, roleList.Count);
+        
+            
                 AudioManager.My.PlaySelectType(GameEnum.AudioClipType.ThreeMirror);
-                roleList[index].npcScript.DetectNPCRole();
-                GameObject effect = Instantiate(effectPrb, roleList[index].transform);
+                basemapRole.npcScript.DetectNPCRole();
+                GameObject effect = Instantiate(effectPrb, basemapRole.transform);
                 effect.transform.localPosition = Vector3.zero;
-                roleList[index].transform.GetComponentInParent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
-                SoftFTE.My.CheckUnlockNewRole(roleList[index].transform.GetComponentInParent<BaseMapRole>().baseRoleData.baseRoleData.roleType);
+                basemapRole.transform.GetComponentInParent<BaseMapRole>().HideTradeButton(NewCanvasUI.My.isTradeButtonActive);
+                SoftFTE.My.CheckUnlockNewRole(basemapRole.transform.GetComponentInParent<BaseMapRole>().baseRoleData.baseRoleData.roleType);
                 Destroy(effect, 1f);
                 //Debug.Log("使用广角镜成功");
                 DataUploadManager.My.AddData(DataEnum.使用广角镜);
@@ -119,7 +110,7 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                 {
                     string str1 = "UseThreeMirror|";
                     str1 += "0";
-                    str1 += "," + roleList[index].baseRoleData.ID.ToString();
+                    str1 += "," + basemapRole.baseRoleData.ID.ToString();
                     str1 += ",0";
                     if (PlayerData.My.isServer)
                     {
@@ -130,8 +121,8 @@ public class GJJ : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                         PlayerData.My.client.SendToServerMsg(str1);
                     }
                 }
-                AutoUseGJJ();
-            }
+            
+         
         }).Play();
     }
 
