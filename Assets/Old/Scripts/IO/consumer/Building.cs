@@ -178,7 +178,16 @@ public class Building : MonoBehaviour
         List<BuildingManager.WaveConfig> result = new List<BuildingManager.WaveConfig>();
         consumeSigns.Clear();
         result.AddRange(waveConfigs[waveNumber]);
-        result.AddRange(BuildingManager.My.extraConsumer);
+        if (GetComponent<AIRPort>() != null && GetComponent<AIRPort>().hastrad)
+        {
+            //result.AddRange(BuildingManager.My.extraConsumer);
+            
+        }
+        else
+        {
+            result.AddRange(BuildingManager.My.extraConsumer);
+        }
+
         int index = 0;
         foreach (BuildingManager.WaveConfig w in result)
         {

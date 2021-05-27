@@ -483,7 +483,15 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
             }
         }
 
+        
         if (role.baseRoleData.roleSkillType == GameEnum.RoleSkillType.Service)
+        { 
+                service.SetActive(true);
+
+                service.GetComponent<BaseRoleListInfo>().Init(role);
+        
+        }
+        else
         {
             if (role.baseRoleData.roleType == GameEnum.RoleType.financialCompany ||
                 role.baseRoleData.roleType == GameEnum.RoleType.Government ||
@@ -496,13 +504,6 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
                 NpcFinancialCompany.GetComponent<NpcFinancialCompany>().Init(mapRole  );
                   
             }
-            else
-            {
-                service.SetActive(true);
-
-                service.GetComponent<BaseRoleListInfo>().Init(role);
-            } 
-           
         }
     }
 
@@ -512,6 +513,12 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         if (role.roleRequirement.Count == 0)
         {
             requireOBJ.SetActive(false);
+        }
+
+        else
+        {
+            requireOBJ.SetActive(true);
+
         }
 
         for (int i = 0; i <RequiContent.childCount; i++)
