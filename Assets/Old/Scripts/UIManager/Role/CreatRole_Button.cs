@@ -132,7 +132,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
 
             if (!hit[i].transform.tag.Equals("MapRole"))
             {
-                Debug.Log("Yes");
+                //Debug.Log("Yes");
                 role.transform.position =new Vector3(hit[i].transform.position.x,0.3f,hit[i].transform.position.z);  
 
             }

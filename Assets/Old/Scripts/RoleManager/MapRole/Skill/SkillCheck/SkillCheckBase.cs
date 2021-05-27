@@ -154,15 +154,15 @@ public class SkillCheckBase : MonoBehaviour
     /// </summary>
     private void NotifyRoleEnd()
     {
-        checkedCount += 1;
         Debug.Log("checkCount "+checkedCount);
         if (!isSuccess)
         {
+            checkedCount += 1;
             leftCountStatus[checkedCount-1].GetComponent<Image>().color = Color.red;
         }
         if (detail.isMainTarget)
         {
-            bool isDestroy;
+            //bool isDestroy;
             SkillCheckManager.My.NotifyEnd(dependRole);
         }
     }
@@ -182,7 +182,7 @@ public class SkillCheckBase : MonoBehaviour
     {
         CancelInvoke("Check");
         isSuccess = false;
-        checkedCount = 0;
+        //checkedCount = 0;
         InitCheck();
     }
 }

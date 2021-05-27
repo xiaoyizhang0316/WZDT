@@ -414,7 +414,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
                                                tempRole.baseRoleData.level.ToString());
         templateOBJ =
             Instantiate(
-                Resources.Load<GameObject>(GameDataMgr.My.GetModelData(CurrentRole.baseRoleData.roleType, 1)
+                Resources.Load<GameObject>(GameDataMgr.My.GetModelData(CurrentRole.startType, 1)
                     .RoleSpacePath), template_BottomPos);
         CurrentTemplateManager = templateOBJ.GetComponent<TemplateManager>();
         SetCreateRoleTitle();
@@ -453,7 +453,7 @@ public class CreatRoleManager : MonoSingleton<CreatRoleManager>
         peasantInfo.SetActive(false);
         merchantInfo.SetActive(false);
         dealerInfo.SetActive(false);
-        switch (CurrentRole.baseRoleData.roleType)
+        switch (CurrentRole.startType)
         {
             case RoleType.Seed:
                 roleTitleText.text = "种子商";
