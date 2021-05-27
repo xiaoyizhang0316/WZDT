@@ -59,6 +59,8 @@ public class MapSign : MonoBehaviour, IDragHandler
     public BaseMapRole baseMapRole;
 
 
+    public GameObject lockImage;
+    
     public int weighting;
  
     // Start is called before the first frame update
@@ -123,7 +125,21 @@ public class MapSign : MonoBehaviour, IDragHandler
     }
     void Start()
     {
-        
+        if (!isCanPlace)
+        {
+            lockImage.SetActive(true);
+        }
+        else
+        {
+            lockImage.SetActive(false);
+            
+        }
+    }
+
+    public void Unlock()
+    {
+        lockImage.SetActive(false);
+        isCanPlace = true;
     }
 
     /// <summary>
