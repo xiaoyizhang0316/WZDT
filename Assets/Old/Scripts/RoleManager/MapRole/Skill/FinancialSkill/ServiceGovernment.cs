@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ServiceGovernment : BaseFinancialSkill
 {
+    public List<MapSign> mapSigns=new List<MapSign>();
     public override void Skill()
     {
         switch (index)
@@ -19,5 +20,14 @@ public class ServiceGovernment : BaseFinancialSkill
                 break;
         }
         base.Skill();
+        UnlockMapSigns();
+    }
+
+    void UnlockMapSigns()
+    {
+        for (int i = 0; i < mapSigns.Count; i++)
+        {
+            mapSigns[i].isCanPlace = true;
+        }
     }
 }

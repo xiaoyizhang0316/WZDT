@@ -53,8 +53,9 @@ public class RoleTransitionMgr : MonoSingleton<RoleTransitionMgr>
             {
                 role.CheckLevel();
                 role.HideTradeButton(true);
-                role.TradeLightOff();
+                
             }
+            role.TradeLightOff();
             ///role.tradeButton = GetComponentInChildren<RoleTradeButton>().transform.parent.gameObject;
         }
         //role.transform.GetComponentInChildren<RoleTradeButton>().ReInit();
