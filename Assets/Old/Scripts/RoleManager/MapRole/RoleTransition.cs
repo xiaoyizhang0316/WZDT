@@ -75,8 +75,8 @@ public class RoleTransition : MonoBehaviour
         _objects[0] = null;
         currentRoleType = startRoleType;
         _role.baseRoleData.baseRoleData.roleType = currentRoleType;
-        Transition(true);
         isTransition = false;
+        Transition(true);
         CheckNext();
     }
 
@@ -255,6 +255,8 @@ public class RoleTransition : MonoBehaviour
                 }
                 startModels[i].SetActive(true);
             }
+
+            isTransition = false;
         }
         else
         {

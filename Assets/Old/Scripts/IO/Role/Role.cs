@@ -89,6 +89,8 @@ public class Role
     public Dictionary<int, Vector3> EquipList =new Dictionary<int, Vector3>();
     public Dictionary<int, Vector3> peoPleList =new Dictionary<int, Vector3>();
 
+    public GameEnum.RoleType startType;
+
     // Start is called before the first frame update
     
     public Role(BaseRoleData baseRoleData, Dictionary<int, Vector3> _EquipList, Dictionary<int, Vector3> _peoPleList,double ID)

@@ -31,9 +31,10 @@ public class ServiceTradeOffice : BaseServiceSkill
     public override void SkillOff(TradeData data)
     {
         var target = PlayerData.My.GetMapRoleById(double.Parse(data.targetRole));
-        if (target.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Peasant)
+
+        if (target.GetComponent<RoleTransition>())
         {
-            if (target.GetComponent<RoleTransition>())
+            if (target.GetComponent<RoleTransition>().startRoleType == GameEnum.RoleType.Peasant)
             {
                 if (target.GetComponent<RoleTransition>().IsTransition)
                 {
