@@ -27,7 +27,7 @@ public class ServiceGovernment : BaseFinancialSkill
     {
         for (int i = 0; i < mapSigns.Count; i++)
         {
-            mapSigns[i].isCanPlace = true;
+            mapSigns[i].Unlock();
         }
     }
 }
