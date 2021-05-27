@@ -516,7 +516,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
 
         for (int i = 0; i <RequiContent.childCount; i++)
         {
-            Destroy(RequiContent.GetChild(0));
+            Destroy(RequiContent.GetChild(i).gameObject);
         }
         for (int i = 0; i <role.roleRequirement.Count; i++)
         {
