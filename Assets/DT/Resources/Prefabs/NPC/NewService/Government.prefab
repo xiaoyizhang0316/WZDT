@@ -28597,7 +28597,7 @@ MonoBehaviour:
     baseRoleData:
       roleName: "\u653F\u5E9C"
       roleType: 33
-      roleSkillType: 1
+      roleSkillType: 3
       level: 1
       effect: 20
       efficiency: 20
@@ -28620,13 +28620,14 @@ MonoBehaviour:
     riskResistance: 14
     bulletCapacity: 20
     techAdd: 0
-    ID: 90013
+    ID: 10001
     equipCost: 0
     workerCost: 0
     landCost: 0
     gearEncourageAdd: 0
     inMap: 1
     isNpc: 1
+    startType: 0
   warehouse: []
   trash: []
   isNpc: 1
@@ -28664,6 +28665,7 @@ MonoBehaviour:
   ringEffect: {fileID: 0}
   specialInfo: {fileID: 0}
   isUseTSJ: 0
+  startType: 0
   cloneWarehourse: []
 --- !u!114 &1788553750556573511
 MonoBehaviour:
@@ -28741,6 +28743,9 @@ MonoBehaviour:
   condition_1: "\u83B7\u5F9750000\u91D1\u94B1"
   condition_2: "\u83B7\u5F9770000\u91D1\u94B1"
   condition_3: "\u83B7\u5F97100000\u91D1\u94B1"
+  MapRoles:
+  - {fileID: 0}
+  gjj: {fileID: 0}
   index: -1
 --- !u!114 &3111027376146014471
 MonoBehaviour:
@@ -28754,7 +28759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c73dee8edc16f4b8b5fec9f94810e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPeasantNum: 0
+  targetPeasantNum: 2
 --- !u!1 &2758350122803463482
 GameObject:
   m_ObjectHideFlags: 0
@@ -43207,7 +43212,7 @@ RectTransform:
   m_GameObject: {fileID: 3960158083789441194}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 735565786820071950}
   - {fileID: 5264421297868593555}

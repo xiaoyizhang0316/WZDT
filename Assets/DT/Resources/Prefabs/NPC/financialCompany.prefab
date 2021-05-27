@@ -9460,20 +9460,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &3903344562719278417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7037255807943775730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33638745cf4213344b4eb501f52a00f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateOBJ: {fileID: 7037255807943775730}
-  skill: {fileID: 0}
 --- !u!1 &7267091913716725118
 GameObject:
   m_ObjectHideFlags: 0
@@ -14215,6 +14201,7 @@ GameObject:
   - component: {fileID: 5840160722976328818}
   - component: {fileID: 6545259540281883998}
   - component: {fileID: -6703912262440890650}
+  - component: {fileID: 329612122}
   m_Layer: 0
   m_Name: financialCompany
   m_TagString: MapRole
@@ -14255,7 +14242,7 @@ MonoBehaviour:
     baseRoleData:
       roleName: "\u91D1\u878D\u516C\u53F8"
       roleType: 30
-      roleSkillType: 1
+      roleSkillType: 3
       level: 1
       effect: 20
       efficiency: 20
@@ -14285,6 +14272,7 @@ MonoBehaviour:
     gearEncourageAdd: 0
     inMap: 0
     isNpc: 0
+    startType: 0
   warehouse: []
   trash: []
   isNpc: 0
@@ -14324,6 +14312,7 @@ MonoBehaviour:
   specialInfo: {fileID: 8704733597141071812, guid: 0e46ea0e712e3d745b691c40a6c41299,
     type: 3}
   isUseTSJ: 0
+  startType: 0
   cloneWarehourse: []
 --- !u!114 &8899486489098488673
 MonoBehaviour:
@@ -14337,7 +14326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad11e3828a282a48bfda32d4aeda778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLock: 0
+  isLock: 1
   isCanSee: 0
   isCanSeeEquip: 0
   lockNumber: 10
@@ -14401,8 +14390,23 @@ MonoBehaviour:
   condition_1: "\u83B7\u5F9750000\u91D1\u94B1\uFF0C20\u77E5\u540D\u5EA6"
   condition_2: "\u83B7\u5F9760000\u91D1\u94B1\uFF0C20\u77E5\u540D\u5EA6"
   condition_3: "\u83B7\u5F9770000\u91D1\u94B1\uFF0C20\u77E5\u540D\u5EA6"
+  MapRoles: []
+  gjj: {fileID: 0}
   index: -1
   totalMaga: 0
+--- !u!114 &329612122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692879230315230448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a1ef4fbcbc8f54884e3bfc3fdeb5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSeedEffect: 0
 --- !u!1001 &1072662421135550785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14807,6 +14811,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7062710201189638545, guid: 9b3a05174be6f4dcd9f0ef324b229625,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8256080403480066048, guid: 9b3a05174be6f4dcd9f0ef324b229625,
         type: 3}

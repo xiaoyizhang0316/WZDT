@@ -21,6 +21,7 @@ public class AIRPort : BaseProductSkill
 
     public int count = 0 ;
 
+  
     public override void Skill()
     {
         Debug.Log("jinru ");
@@ -50,7 +51,7 @@ public class AIRPort : BaseProductSkill
              TradeManager.My.CheckTwoRoleHasTrade(role.baseRoleData, zuche.baseRoleData) )
             )
         {
-         
+            hastrad = true;
             ProductData data = new ProductData();
             data.buffList = new List<int>();
             data.bulletType = BulletType.Seed;
@@ -76,7 +77,13 @@ public class AIRPort : BaseProductSkill
                 
           
         }
+        else
+        {
+            hastrad = false;
+        }
+        
     }
+    
 
     public override void UnleashSkills()
     {
