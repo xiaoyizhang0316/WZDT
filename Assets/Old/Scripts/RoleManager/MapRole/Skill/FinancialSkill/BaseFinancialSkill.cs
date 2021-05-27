@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class BaseFinancialSkill : BaseSkill
 {
@@ -17,9 +19,15 @@ public class BaseFinancialSkill : BaseSkill
     public virtual void Skill()
     {
         SkillCheckManager.My.ActiveRoleCheck(GetComponent<BaseMapRole>(),index);
+        AutoStartGJJ();
+    }
+
+    public void AutoStartGJJ()
+    {
         for (int i = 0; i <MapRoles.Count; i++)
         {
             gjj.AutoUseGJJ(MapRoles[i]);
+            Debug.Log("打开广角镜"+MapRoles[i].baseRoleData.baseRoleData.roleName);
         }
     }
 
