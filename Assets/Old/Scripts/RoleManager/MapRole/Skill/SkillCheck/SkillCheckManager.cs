@@ -29,7 +29,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     [SerializeField]
     public List<RoleSkillSelect> allCheckRoles=new List<RoleSkillSelect>();
     // 当前开启检测的角色
-    private List<RoleSkillSelect> onCheckRoles=new List<RoleSkillSelect>();
+    public List<RoleSkillSelect> onCheckRoles=new List<RoleSkillSelect>();
     // 检测详情
     public GameObject checkPrefab;
     // 检测详情父物体
@@ -154,6 +154,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
             {
                 // TODO fail
                 Debug.Log("check fail");
+                StageGoal.My.Lose();
             }
             else
             {
@@ -167,6 +168,40 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// 当游戏结束时，判断是否成功
+    /// </summary>
+    /// <param name="rscd"></param>
+    /// <param name="isWin"></param>
+    public void CheckWhenWin(RoleSkillSelect rscd, out bool isWin)
+    {
+        bool isSuccess = false;
+        foreach (Transform child in checkContent)
+        {
+            if (child.GetComponent<SkillCheckBase>().roleID == rscd.roleID)
+            {
+                if (!child.GetComponent<SkillCheckBase>().isSuccess)
+                {
+                    isSuccess = false;
+                    break;
+                }
+            }
+        }
+
+        BaseMapRole role = PlayerData.My.GetMapRoleById(rscd.roleID);
+        bool threshold = role.GetComponent<BaseFinancialCompanyThreshold>()
+            .Threshold();
+        if (!isSuccess || !threshold)
+        {
+            rscd.checkedCount += 1;
+            if (rscd.checkedCount >= rscd.checkCount)
+            {
+                isWin = false;
+            }
+        }
+        isWin = true;
     }
 
     /// <summary>

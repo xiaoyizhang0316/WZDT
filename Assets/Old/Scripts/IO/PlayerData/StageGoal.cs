@@ -702,7 +702,27 @@ public class StageGoal : MonoSingleton<StageGoal>
             if (playerHealth >= stageTarget)
             {
                 //print("胜利");
-                Win();
+                bool isWin = true;
+                if (SkillCheckManager.My.onCheckRoles.Count > 0)
+                {
+                    for (int i = 0; i < SkillCheckManager.My.onCheckRoles.Count; i++)
+                    {
+                        SkillCheckManager.My.CheckWhenWin(SkillCheckManager.My.onCheckRoles[i], out isWin);
+                        if (isWin == false)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (isWin)
+                {
+                    Win();
+                }
+                else
+                {
+                    Lose();
+                }
             }
             else
             {
