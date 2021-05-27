@@ -140,7 +140,9 @@ public class RoleTransition : MonoBehaviour
     /// <param name="data"></param>
     public void RemoveFailedCauseData(TradeData data)
     {
-        failedCausesDic.Remove(GetCauseByTradeData(data));
+        TransitionCause tc = GetCauseByTradeData(data);
+        if(failedCausesDic.ContainsKey(tc))
+            failedCausesDic.Remove(tc);
     }
 
     TransitionCause GetCauseByTradeData(TradeData data)
