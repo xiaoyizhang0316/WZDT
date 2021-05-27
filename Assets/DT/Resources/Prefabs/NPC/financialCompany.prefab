@@ -14299,11 +14299,14 @@ MonoBehaviour:
   npcScript: {fileID: 0}
   encourageSkillId: 0
   baseSkill: {fileID: 0}
+  requirementId: 
+  roleRequirement: []
   levelModels:
   - {fileID: 6259165991455398444}
   - {fileID: 7037255807943775730}
   putTime: 0
   costTechPoint: 0
+  producedNumber: 0
   tradeButton: {fileID: 0}
   encourageLevel: 0
   startEncourageLevel: 0
@@ -14320,6 +14323,7 @@ MonoBehaviour:
   ringEffect: {fileID: 0}
   specialInfo: {fileID: 8704733597141071812, guid: 0e46ea0e712e3d745b691c40a6c41299,
     type: 3}
+  isUseTSJ: 0
   cloneWarehourse: []
 --- !u!114 &8899486489098488673
 MonoBehaviour:
@@ -14341,6 +14345,7 @@ MonoBehaviour:
   hideModel: {fileID: 7010573542175292831}
   trueModel: {fileID: 8145369834327937887}
   npcTag: 
+  isUseTSJ: 0
   autoTradeList: []
   animator: {fileID: 0}
 --- !u!65 &5840160722976328818
@@ -14393,15 +14398,11 @@ MonoBehaviour:
   buffList: 
   animationPart: []
   maxTradeLimit: 0
-  addAttributeType: 0
-  addStartValue: 0
-  addPerSP: 0
-  buffId: 0
-  condition_1: "\u7B2C\u4E00\u4E2A\u6761\u4EF6"
-  condition_2: "\u7B2C\u4E8C\u4E2A\u6761\u4EF6"
-  condition_3: "\u7B2C\u4E09\u4E2A\u6761\u4EF6"
-  totalMaga: 0
+  condition_1: "\u83B7\u5F9750000\u91D1\u94B1\uFF0C20\u77E5\u540D\u5EA6"
+  condition_2: "\u83B7\u5F9760000\u91D1\u94B1\uFF0C20\u77E5\u540D\u5EA6"
+  condition_3: "\u83B7\u5F9770000\u91D1\u94B1\uFF0C20\u77E5\u540D\u5EA6"
   index: -1
+  totalMaga: 0
 --- !u!1001 &1072662421135550785
 PrefabInstance:
   m_ObjectHideFlags: 0

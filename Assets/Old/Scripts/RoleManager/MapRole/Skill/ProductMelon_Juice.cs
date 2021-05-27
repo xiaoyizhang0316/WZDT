@@ -38,9 +38,9 @@ public class ProductMelon_Juice : BaseProductSkill
             data.loadingSpeed += 2;
             data.buffMaxCount = 3;
             data.damage = (float)(data.damage + role.baseRoleData.effect);
-            data.AddDamage *=BaseLevelController.My.environmentLevel1;
-            data.AddSatisfaction *= BaseLevelController.My.environmentLevel1;
-            data.AddScore *= BaseLevelController.My.environmentLevel1;
+            data.AddDamage +=BaseLevelController.My.environmentLevel1;
+            data.AddSatisfaction += BaseLevelController.My.environmentLevel1;
+            data.AddScore += BaseLevelController.My.environmentLevel1;
             try
             {
 

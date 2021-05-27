@@ -229,6 +229,12 @@ public class ConsumeSign : MonoBehaviour,ICloneable
         
     }
 
+    private int damageAdd;
+
+    private int socreAdd;
+
+    private int satisfyAdd;
+
     /// <summary>
     /// 消费者被击中时调用
     /// </summary>
@@ -238,9 +244,12 @@ public class ConsumeSign : MonoBehaviour,ICloneable
         if (isCanSelect)
         {
             lastHitType = data.bulletType;
+            damageAdd = (int)data.AddDamage;
+            socreAdd = (int)data.AddScore;
+            satisfyAdd = (int) data.AddSatisfaction * 2;
             CheckAttackEffect(ref data);
             CheckProduct(ref data);
-            int realDamage = (int)data.damage;
+            int realDamage = (int)data.damage + (int)(10 * damageAdd);
             CheckBulletElement(ref realDamage, data);
             CheckDebuff(data);
             ChangeHealth(realDamage);
@@ -378,7 +387,7 @@ public class ConsumeSign : MonoBehaviour,ICloneable
         int baseScore = consumeData.killSatisfy;
         StageGoal.My.GetSatisfy(baseScore);
         
-        StageGoal.My.GetHealth(consumeData.liveSatisfy);
+        StageGoal.My.GetHealth(consumeData.liveSatisfy + satisfyAdd);
         StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy);
         if (scorePer > 1f)
         {

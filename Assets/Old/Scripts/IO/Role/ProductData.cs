@@ -77,11 +77,11 @@ public class ProductData
     public int buffMaxCount;
 
 
-    public float AddDamage = 1;
+    public float AddDamage = 0;
 
-    public float AddScore= 1;
+    public float AddScore= 0;
 
-    public float AddSatisfaction = 1;
+    public float AddSatisfaction = 0;
     public int RepeatBulletCount;
 
     public void AddBuff(int buffId)

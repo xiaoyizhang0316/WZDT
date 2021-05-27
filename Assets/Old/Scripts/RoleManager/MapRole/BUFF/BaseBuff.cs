@@ -255,6 +255,7 @@ public class BaseBuff
             case 2:
                 CalculateNumber(str, ref buffConfig.playerSatisfyChange, StageGoal.My.playerSatisfy);
                 StageGoal.My.GetSatisfy(buffConfig.playerSatisfyChange);
+                StageGoal.My.playerHealth += buffConfig.playerSatisfyChange;
                 break;
             case 3:
                 CalculateNumber(str, ref buffConfig.playerHealthChange, StageGoal.My.playerHealth);
