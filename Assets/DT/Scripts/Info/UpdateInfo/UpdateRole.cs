@@ -80,7 +80,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         tempBaseRoleData.ID = RoleUpdateInfo.My.currentRole.ID;
         tempBaseRoleData.EquipList = RoleUpdateInfo.My.currentRole.EquipList;
         tempBaseRoleData.peoPleList = RoleUpdateInfo.My.currentRole.peoPleList;
-        tempBaseRoleData.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.baseRoleData.roleType,
+        tempBaseRoleData.baseRoleData = GameDataMgr.My.GetModelData(RoleUpdateInfo.My.currentRole.startType,
             RoleUpdateInfo.My.currentRole.baseRoleData.level + 1);
         tempBaseRoleData.baseRoleData.roleName = RoleUpdateInfo.My.currentRole.baseRoleData.roleName;
 
@@ -159,7 +159,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 }
             }
             DataUploadManager.My.AddData(DataEnum.角色_升级);
-            switch (RoleUpdateInfo.My.currentRole.baseRoleData.roleType)
+            switch (RoleUpdateInfo.My.currentRole.startType)
             {
                 case GameEnum.RoleType.Seed:
                     DataUploadManager.My.AddData(DataEnum.角色_升级种子商);
@@ -183,7 +183,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 null, "升级");
             UpgradeRoleRecord(RoleUpdateInfo.My.currentRole);
             RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(
-                RoleUpdateInfo.My.currentRole.baseRoleData.roleType,
+                RoleUpdateInfo.My.currentRole.startType,
                 RoleUpdateInfo.My.currentRole.baseRoleData.level + 1);
             RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
             RoleUpdateInfo.My.currentRole.baseRoleData.roleName = RoleUpdateInfo.My.roleName;

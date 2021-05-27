@@ -138,6 +138,8 @@ public class BaseMapRole : MonoBehaviour
         baseRoleData.range = baseRoleData.baseRoleData.range;
         baseRoleData.cost = baseRoleData.baseRoleData.cost;
         baseRoleData.bulletCapacity = baseRoleData.baseRoleData.bulletCapacity;
+        startType = baseRoleData.baseRoleData.roleType;
+        baseRoleData.startType = baseRoleData.baseRoleData.roleType;
 
         if (CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
         {
@@ -145,6 +147,7 @@ public class BaseMapRole : MonoBehaviour
         }
     }
 
+    public RoleType startType;
     // Start is called before the first frame update
     void Start()
     {
@@ -285,6 +288,13 @@ public class BaseMapRole : MonoBehaviour
     /// </summary>
     public void CheckLevel()
     {
+        if (GetComponent<RoleTransition>())
+        {
+            if (GetComponent<RoleTransition>().IsTransition)
+            {
+                return;
+            }
+        }
         if (PlayerData.My.creatRole == PlayerData.My.playerDutyID)
         {
             if (levelModels.Count == 0)

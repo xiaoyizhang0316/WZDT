@@ -37,10 +37,11 @@ public class ServiceInstrument : BaseServiceSkill
     public override void SkillOff(TradeData data)
     {
         var target = PlayerData.My.GetMapRoleById(double.Parse(data.targetRole));
-        var isTransition = CheckTransition(target, out var transitionType);
-        if (isTransition)
+        
+        if (target.GetComponent<RoleTransition>())
         {
-            if (target.GetComponent<RoleTransition>())
+            bool isCause = CheckTransitions(target.GetComponent<RoleTransition>().startRoleType);
+            if (isCause)
             {
                 if (target.GetComponent<RoleTransition>().IsTransition)
                 {
@@ -70,6 +71,7 @@ public class ServiceInstrument : BaseServiceSkill
             base.SkillOff(data);
         }
     }
+    
 
     bool CheckTransition(BaseMapRole role, out GameEnum.RoleType transitionType)
     {
@@ -81,6 +83,16 @@ public class ServiceInstrument : BaseServiceSkill
         }
 
         transitionType = GameEnum.RoleType.Seed;
+        return false;
+    }
+    
+    bool CheckTransitions(GameEnum.RoleType type)
+    {
+        if (type == GameEnum.RoleType.Merchant|| 
+            type == GameEnum.RoleType.JuiceFactory)
+        {
+            return true;
+        }
         return false;
     }
 }
