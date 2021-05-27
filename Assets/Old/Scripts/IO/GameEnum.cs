@@ -533,7 +533,11 @@ public class GameEnum
         /// <summary>
         /// 特殊因素影响
         /// </summary>
-        Special
+        Special,
+        /// <summary>
+        /// 影响自身类
+        /// </summary>
+        Self
     }
 
     public enum ConsumableType
