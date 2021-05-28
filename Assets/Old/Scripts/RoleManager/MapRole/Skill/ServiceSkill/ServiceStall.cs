@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ServiceStall : BaseServiceSkill
 {
-    public int buffId;
-
     public GameObject stallItem;
 
     public override void Skill(TradeData data)
