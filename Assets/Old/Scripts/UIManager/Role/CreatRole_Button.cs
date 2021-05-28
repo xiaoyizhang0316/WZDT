@@ -133,7 +133,7 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             if (!hit[i].transform.tag.Equals("MapRole"))
             {
                 //Debug.Log("Yes");
-                role.transform.position =new Vector3(hit[i].transform.position.x,0.3f,hit[i].transform.position.z);  
+                role.transform.position =new Vector3(hit[i].transform.position.x,  hit[i].transform.position.y+0.3f,hit[i].transform.position.z);  
 
             }
         }
@@ -220,8 +220,8 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
                     role.GetComponent<BaseMapRole>().putTime = StageGoal.My.timeCount;
                     StageGoal.My.CostTp(costTech,
                         CostTpType.Build);
-                    role.transform.position = hit[i].transform.position + new Vector3(0f, 2f, 0f);
-                    role.transform.DOMove(hit[i].transform.position + new Vector3(0f, 0f, 0f), 0.2f).OnComplete(() =>
+                    role.transform.position = hit[i].transform.position + new Vector3(0f, 2, 0f);
+                    role.transform.DOMove(hit[i].transform.position + new Vector3(0f, 0.3f, 0f), 0.2f).OnComplete(() =>
                         {
                             GameObject go = Instantiate(dustPrb, role.transform);
                             Destroy(go, 1f);

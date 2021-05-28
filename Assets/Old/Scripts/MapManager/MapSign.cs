@@ -130,11 +130,12 @@ public class MapSign : MonoBehaviour, IDragHandler
 
         if (!isCanPlace)
         {
-            lockImage.SetActive(true);
+            GetComponent<MeshRenderer>().material.color = Color.gray;
         }
         else
         {
-            lockImage.SetActive(false);
+            GetComponent<MeshRenderer>().material.color = Color.white;
+
             
         }
         }
