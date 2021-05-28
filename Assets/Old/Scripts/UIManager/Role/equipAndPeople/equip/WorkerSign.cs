@@ -106,15 +106,9 @@ public class WorkerSign : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         range.text = workerData.range.ToString();
         riskResistance.text = workerData.riskResistance.ToString();
         tradeCost.text = workerData.tradeCost.ToString();
-        if (StageGoal.My.currentType == GameEnum.StageType.Normal &&
-            !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name))
-        {
-            cost.text = (workerData.cost * 2).ToString();
-        }
-        else
-        {
+      
             cost.text = workerData.cost.ToString();
-        }
+     
 
         bulletCapacity.text = workerData.bulletCapacity.ToString();
         //S name.text = workerData.name;
