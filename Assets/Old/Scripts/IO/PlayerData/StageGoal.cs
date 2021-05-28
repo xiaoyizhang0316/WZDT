@@ -88,10 +88,12 @@ public class StageGoal : MonoSingleton<StageGoal>
     #region UI
     
     public Text playerGoldText;
+    public Text playerTurnGoldText;
 
     public Text playerSatisfyText;
 
     public Text playerTechText;
+    public Text playerTurnTechText;
 
     public Image playerHealthBar;
 
@@ -235,10 +237,10 @@ public class StageGoal : MonoSingleton<StageGoal>
             }
 
             if(!isNotTurn)
-                UpdateTurnCost(num);
+                UpdateTurnGold(-num);
         }
         FloatInfoManager.My.MoneyChange(0 - num);
-        playerGoldText.GetComponent<PlayerAssetChange>().SetChange(0-num);
+        //playerGoldText.GetComponent<PlayerAssetChange>().SetChange(0-num);
         if (playerGold+financialGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -296,9 +298,13 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
         {
             techCost += num;
-            //FloatInfoManager.My.TechChange(0 - num);
-            playerTechText.GetComponent<PlayerAssetChange>().SetChange(0-num);
+            FloatInfoManager.My.TechChange(0 - num);
+            //playerTechText.GetComponent<PlayerAssetChange>().SetChange(0-num);
             playerTechPoint -= num;
+            if (isTurnStart)
+            {
+                UpdateTurnMega(-num);
+            }
         }
         SetInfo();
         return true;
@@ -316,9 +322,12 @@ public class StageGoal : MonoSingleton<StageGoal>
             return;
         }
         //FloatInfoManager.My.TechChange(num);
-        playerTechText.GetComponent<PlayerAssetChange>().SetChange(num);
+        //playerTechText.GetComponent<PlayerAssetChange>().SetChange(num);
         playerTechPoint += num;
-        
+        if (isTurnStart)
+        {
+            UpdateTurnMega(num);
+        }
         SkillCheckManager.My.AddMega(num);
         SetInfo();
     }
@@ -377,9 +386,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
         {
             
-            if (currentType == StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name) && !isNotTurn)
+            if (currentType == StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name) && !isFinancial && !isNotTurn)
             {
-                UpdateTurnIncome(num);
+                UpdateTurnGold(num);
             }
 
             if (!isFinancial)
@@ -403,7 +412,7 @@ public class StageGoal : MonoSingleton<StageGoal>
             }
         }
         FloatInfoManager.My.MoneyChange(num);
-        playerGoldText.GetComponent<PlayerAssetChange>().SetChange(num);
+        //playerGoldText.GetComponent<PlayerAssetChange>().SetChange(num);
         if (playerGold+financialGold < maxMinusGold)
         {
             if (!isOverMaxMinus)
@@ -981,6 +990,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 重置回合收支
         ResetTurnIncomeAndCost();
         LockOperation();
+        turnGoldIncome = 0;
+        turnGoldCost = 0;
+        turnMegaIncome = 0;
+        turnMegaCost = 0;
         //TODO 更新金币消耗UI信息
         //TODO 检查错误操作（果汁厂没输入）
         transform.DOScale(1f, produceTime).SetEase(Ease.Linear).OnComplete(() =>
@@ -1014,6 +1027,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 显示收支
         isEndTurn = true;
         ShowTurnIncomeAndCost();
+        playerTurnGoldText.GetComponent<LastTurnBalance>().SetAsset(turnGoldIncome+turnGoldCost);
+        playerTurnTechText.GetComponent<LastTurnBalance>().SetAsset(turnMegaCost+turnMegaIncome);
         UnlockOperation();
         //TODO 结算buff/角色周期性效果
     }
@@ -1136,8 +1151,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         playerHealthText = transform.parent.Find("Blood/Text").GetComponent<Text>();
         maxHealtherBarLength = playerHealthBar.GetComponent<RectTransform>().sizeDelta.x;
         //playerGoldText = transform.parent.Find("UserInfo/Image_money/PlayerMoney").GetComponent<Text>();
+        playerTurnGoldText = transform.parent.Find("UserInfo/Gold&Mega/Gold/Add Mask/Gold_Add").GetComponent<Text>();
         playerSatisfyText = transform.parent.Find("Blood/Score/Score val").GetComponent<Text>();
         //playerTechText = transform.parent.Find("UserInfo/Image_money/PlayerTech").GetComponent<Text>();
+        playerTurnTechText = transform.parent.Find("UserInfo/Gold&Mega/Mega/Add Mask/Mega_Add").GetComponent<Text>();
         stageWaveText = transform.parent.Find("Blood/Wave/Wave").GetComponent<Text>();
         skipToFirstWave = transform.parent.Find("TimeScale/SkipFirst").GetComponent<Button>();
         lankuang = transform.parent.Find("Image_ReadyTime").gameObject;
@@ -1823,6 +1840,38 @@ public class StageGoal : MonoSingleton<StageGoal>
         }
         turnTotalCost -= cost;
         turnTotalCost_txt.text = (-turnTotalCost).ToString();
+    }
+
+    [SerializeField]
+    private int turnMegaCost = 0;
+    [SerializeField]
+    private int turnMegaIncome = 0;
+    void UpdateTurnMega(int num)
+    {
+        if (num >= 0)
+        {
+            turnMegaIncome += num;
+        }
+        else
+        {
+            turnMegaCost += num;
+        }
+    }
+    
+    [SerializeField]
+    private int turnGoldCost = 0;
+    [SerializeField]
+    private int turnGoldIncome = 0;
+    void UpdateTurnGold(int num)
+    {
+        if (num >= 0)
+        {
+            turnGoldIncome += num;
+        }
+        else
+        {
+            turnGoldCost += num;
+        }
     }
 
     /// <summary>

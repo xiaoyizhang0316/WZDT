@@ -103,7 +103,16 @@ public class SkillCheckBase : MonoBehaviour
                 EndCheck();
                 NotifyRoleEnd();
             }
+            else
+            {
+                TurnEnd();
+            }
         }
+    }
+
+    protected virtual void TurnEnd()
+    {
+        
     }
 
     /// <summary>

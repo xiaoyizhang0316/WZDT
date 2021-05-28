@@ -56,6 +56,7 @@ public class EnvironmentPanel : MonoBehaviour
             CancelInvoke();
             Clear();
             stopShow = false;
+            allShow_text.gameObject.SetActive(false);
             StartCoroutine(ShowEnvOnClose());
             in_btn.gameObject.SetActive(false);
             out_btn.gameObject.SetActive(true);
@@ -89,15 +90,28 @@ public class EnvironmentPanel : MonoBehaviour
     {
         if (stopShow)
         {
-            mask.SetActive(false);
-            envItem.GetChild(0).GetComponent<Text>().text = "";
-            envItem.GetChild(1).GetComponent<Text>().text = "";
+            //mask.SetActive(false);
+            /*envItem.GetChild(0).GetComponent<Text>().text = "";
+            envItem.GetChild(1).GetComponent<Text>().text = "";*/
+            allShow_text.gameObject.SetActive(false);
             yield break;
         }
         int switchCount = 0;
-        mask.SetActive(true);
+        //mask.SetActive(true);
+        allShow_text.gameObject.SetActive(true);
+        string zwf = "  ";
+        string envString = "";
 
-        ReSwitch:
+        envString += "风：" + BaseLevelController.My.riskControlLevel + zwf;
+        envString += "交：" + BaseLevelController.My.tradeCostLevel + zwf;
+        envString += "距：" + BaseLevelController.My.distanceLevel + zwf;
+        envString += "固：" + BaseLevelController.My.monthCostLevel + zwf;
+        envString += "激：" + BaseLevelController.My.encourageLevel + zwf;
+        envString += "额：" + BuildingManager.My.GetExtraConsumerNumber("100") + zwf;
+        envString += "满：" + BaseLevelController.My.satisfyRate.ToString("F2") + zwf;
+        envString += "满：" + BaseLevelController.My.tasteDamageRate.ToString("F2");
+
+        /*ReSwitch:
         switchCount++;
         if (switchCount > 11)
         {
@@ -230,14 +244,21 @@ public class EnvironmentPanel : MonoBehaviour
                 }
                 break;
         }
-        SwitchEnd:
+        SwitchEnd:*/
+        ShowEnvClosed(envString);
         yield return new WaitForSeconds(3);
         StartCoroutine(ShowEnvOnClose());
     }
 
+    public Text allShow_text;
+    void ShowEnvClosed(string envName)
+    {
+        allShow_text.text = envName;
+    }
+
     void ShowEnvClosed(string envName, string envVal)
     {
-        string oldName = envItem.GetChild(0).GetComponent<Text>().text;
+        /*string oldName = envItem.GetChild(0).GetComponent<Text>().text;
         if (oldName.Equals(envName))
         {
             return;
@@ -250,8 +271,8 @@ public class EnvironmentPanel : MonoBehaviour
                 envItem.transform.localPosition = Vector3.zero;
                 envItem.GetChild(0).GetComponent<Text>().text = envName;
                 envItem.GetChild(1).GetComponent<Text>().text = envVal;
-            }).Play().OnPause(()=>te?.TogglePause());
-        //te = envItem.DOLocalMoveY(35, 2.5f).SetEase(Ease.InOutBounce).SetEase(Ease.InExpo).Play().OnPause(()=>te?.TogglePause());
+            }).Play().OnPause(()=>te?.TogglePause());*/
+        
     }
 
     void ShowEnvValues()
