@@ -107,6 +107,7 @@ public class EnvironmentPanel : MonoBehaviour
         envString += "距：" + BaseLevelController.My.distanceLevel + zwf;
         envString += "固：" + BaseLevelController.My.monthCostLevel + zwf;
         envString += "激：" + BaseLevelController.My.encourageLevel + zwf;
+        envString += "额：" + BuildingManager.My.GetExtraConsumerNumber("100") + zwf;
         envString += "满：" + BaseLevelController.My.satisfyRate.ToString("F2") + zwf;
         envString += "满：" + BaseLevelController.My.tasteDamageRate.ToString("F2");
 

@@ -236,8 +236,8 @@ public class StageGoal : MonoSingleton<StageGoal>
                 
             }
 
-            if(isTurnStart)
-                UpdateTurnCost(num);
+            if(!isNotTurn)
+                UpdateTurnGold(-num);
         }
         FloatInfoManager.My.MoneyChange(0 - num);
         //playerGoldText.GetComponent<PlayerAssetChange>().SetChange(0-num);
@@ -386,9 +386,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
         {
             
-            if (currentType == StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name) && !isFinancial && isTurnStart)
+            if (currentType == StageType.Normal && !CommonParams.fteList.Contains(SceneManager.GetActiveScene().name) && !isFinancial && !isNotTurn)
             {
-                UpdateTurnIncome(num);
+                UpdateTurnGold(num);
             }
 
             if (!isFinancial)
@@ -990,6 +990,10 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 重置回合收支
         ResetTurnIncomeAndCost();
         LockOperation();
+        turnGoldIncome = 0;
+        turnGoldCost = 0;
+        turnMegaIncome = 0;
+        turnMegaCost = 0;
         //TODO 更新金币消耗UI信息
         //TODO 检查错误操作（果汁厂没输入）
         transform.DOScale(1f, produceTime).SetEase(Ease.Linear).OnComplete(() =>
@@ -1023,7 +1027,7 @@ public class StageGoal : MonoSingleton<StageGoal>
         // 显示收支
         isEndTurn = true;
         ShowTurnIncomeAndCost();
-        playerTurnGoldText.GetComponent<LastTurnBalance>().SetAsset(lastTurnTotalIncome+lastTurnTotalCost);
+        playerTurnGoldText.GetComponent<LastTurnBalance>().SetAsset(turnGoldIncome+turnGoldCost);
         playerTurnTechText.GetComponent<LastTurnBalance>().SetAsset(turnMegaCost+turnMegaIncome);
         UnlockOperation();
         //TODO 结算buff/角色周期性效果
@@ -1838,7 +1842,9 @@ public class StageGoal : MonoSingleton<StageGoal>
         turnTotalCost_txt.text = (-turnTotalCost).ToString();
     }
 
+    [SerializeField]
     private int turnMegaCost = 0;
+    [SerializeField]
     private int turnMegaIncome = 0;
     void UpdateTurnMega(int num)
     {
@@ -1849,6 +1855,22 @@ public class StageGoal : MonoSingleton<StageGoal>
         else
         {
             turnMegaCost += num;
+        }
+    }
+    
+    [SerializeField]
+    private int turnGoldCost = 0;
+    [SerializeField]
+    private int turnGoldIncome = 0;
+    void UpdateTurnGold(int num)
+    {
+        if (num >= 0)
+        {
+            turnGoldIncome += num;
+        }
+        else
+        {
+            turnGoldCost += num;
         }
     }
 
