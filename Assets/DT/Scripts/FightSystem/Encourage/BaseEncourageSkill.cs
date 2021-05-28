@@ -17,7 +17,11 @@ public class BaseEncourageSkill
     public virtual void SkillOn()
     {
         isSkillOpen = true;
-        BaseLevelController.My.AddBuff(role,skillData.skillType,skillData.targetBuff,CalculateNumber());
+        if (skillData.skillType != GameEnum.EncourageSkillType.Self)
+        {
+            BaseLevelController.My.AddBuff(role,skillData.skillType,skillData.targetBuff,CalculateNumber());
+        }
+
     }
 
     /// <summary>
