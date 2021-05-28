@@ -18,6 +18,9 @@ public class NpcFinancialCompany : MonoBehaviour
 
     public List<Button> conditionButtons;
 
+    public List<Text> selectText;
+    public List<GameObject> selectFlags;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,14 +35,16 @@ public class NpcFinancialCompany : MonoBehaviour
         threshold_text.text = b.ThresholdTip();
         threshold_text.color = b.Threshold() ? Color.green : Color.red;
         f_name_text.text = role.baseRoleData.baseRoleData.roleName;
-        this.condition_1.text = skill.condition_1+"\n"+rs.roleSkillSelect[0].checkDetails[0].checkContent;
-        this.condition_2.text = skill.condition_2+"\n"+rs.roleSkillSelect[1].checkDetails[0].checkContent;
-        this.condition_3.text =skill.condition_3+"\n"+rs.roleSkillSelect[2].checkDetails[0].checkContent;
+        this.condition_1.text = skill.condition_1;
+        this.condition_2.text = skill.condition_2;
+        this.condition_3.text =skill.condition_3;
         if (skill.index == -1 && b.Threshold())
         {
             for (int i = 0; i <conditionButtons.Count; i++)
             {
                 conditionButtons[i].interactable = true;
+                selectText[i].text = rs.roleSkillSelect[i].checkDetails[0].checkContent;
+                selectFlags[i].SetActive(false);
             }
             ConditionButtonClick();
         }
@@ -48,6 +53,15 @@ public class NpcFinancialCompany : MonoBehaviour
             for (int i = 0; i <conditionButtons.Count; i++)
             {
                 conditionButtons[i].interactable = false;
+                selectText[i].text = rs.roleSkillSelect[i].checkDetails[0].checkContent;
+                if (skill.index == i)
+                {
+                    selectFlags[i].SetActive(true);
+                }
+                else
+                {
+                    selectFlags[i].SetActive(false);
+                }
             }
         }
         skill.GetComponent<BaseMapRole>().HideTradeButton(false);
@@ -86,5 +100,6 @@ public class NpcFinancialCompany : MonoBehaviour
         {
             conditionButtons[i].interactable = false;
         }
+        selectFlags[index].SetActive(true);
     }
 }
