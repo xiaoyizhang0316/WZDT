@@ -24,13 +24,18 @@ public class KillCheck : SkillCheckBase
         base.Check();
     }
 
+    protected override void TurnEnd()
+    {
+        totalConsumerNum += GetTotalConsumer();
+    }
+
     int GetTotalConsumer()
     {
         return BuildingManager.My.GetExtraConsumerNumber("100") +
-               BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave) +
+               BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave) /*+
                BuildingManager.My.GetExtraConsumerNumber("100") +
                BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave + 1) +
                BuildingManager.My.GetExtraConsumerNumber("100") +
-               BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave + 2);
+               BuildingManager.My.CalculateConsumerNumber(StageGoal.My.currentWave + 2)*/;
     }
 }
