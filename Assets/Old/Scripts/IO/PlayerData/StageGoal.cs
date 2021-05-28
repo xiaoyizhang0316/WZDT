@@ -1411,12 +1411,12 @@ public class StageGoal : MonoSingleton<StageGoal>
                         Win(true);
                 }
             }
-            //if (Input.GetKeyDown(KeyCode.M))
-            //{
-            //    GetPlayerGold(10000);
-            //    GetTechPoint(1000);
-            //    playerHealth = playerMaxHealth;
-            //}
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                GetPlayerGold(10000);
+                GetTechPoint(1000);
+                //playerHealth = playerMaxHealth;
+            }
             if (Input.GetKeyDown(KeyCode.L))
             {
                 Lose();
