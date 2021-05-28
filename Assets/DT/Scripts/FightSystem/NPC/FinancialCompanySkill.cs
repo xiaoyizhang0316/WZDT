@@ -24,14 +24,17 @@ public class FinancialCompanySkill : BaseFinancialSkill
         if (index == 0)
         {
             StageGoal.My.GetPlayerGold(50000,false,true);
+            BaseLevelController.My.environmentLevel1 += 20;
         }
         if (index == 1)
         {
             StageGoal.My.GetPlayerGold(100000,false,true);
+            BaseLevelController.My.environmentLevel1 += 20;
         }
         if (index == 2)
         {
             StageGoal.My.GetPlayerGold(200000,false,true);
+            BaseLevelController.My.environmentLevel1 += 20;
         }
         //SkillCheckManager.My.ActiveRoleCheck(GetComponent<BaseMapRole>(),index);
         base.Skill();
