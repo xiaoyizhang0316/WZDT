@@ -70,6 +70,16 @@ public class MapSign : MonoBehaviour, IDragHandler
       //  isCanPlace = GetComponent<MeshRenderer>().enabled && isCanPlace;
       x =(int) transform.localPosition.x ;
       y =(int) transform.localPosition.y ;
+      if (!isCanPlace)
+      {
+          GetComponent<MeshRenderer>().material.color = new Color(0.2f,0.2f,0.2f,1);
+      }
+      else
+      {
+          GetComponent<MeshRenderer>().material.color = Color.white;
+
+            
+      }
     }
 
     /// <summary>
@@ -125,27 +135,16 @@ public class MapSign : MonoBehaviour, IDragHandler
     }
     void Start()
     {
-        if (lockImage != null)
-        {
-
-        if (!isCanPlace)
-        {
-            GetComponent<MeshRenderer>().material.color = Color.gray;
+   
+       
         }
-        else
-        {
-            GetComponent<MeshRenderer>().material.color = Color.white;
-
-            
-        }
-        }
-
-        }
+ 
 
     public void Unlock()
     {
-       // lockImage?.SetActive(false);
+ 
         isCanPlace = true;
+        GetComponent<MeshRenderer>().material.color = Color.white;
     }
 
     /// <summary>
@@ -170,6 +169,7 @@ public class MapSign : MonoBehaviour, IDragHandler
     // Update is called once per frame
     void Update()
     {
+        
      //   GetRoleByLand();
         if (lostEffect)
         {
