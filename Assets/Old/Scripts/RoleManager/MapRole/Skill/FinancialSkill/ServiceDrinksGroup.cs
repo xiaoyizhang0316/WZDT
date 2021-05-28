@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class ServiceDrinksGroup : BaseFinancialSkill
 {
-    public string condition_1;
-    public string condition_2;
-    public string condition_3;
-    
     public override void Skill()
     {
         switch (index)

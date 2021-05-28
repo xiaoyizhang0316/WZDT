@@ -386,8 +386,8 @@ public class ConsumeSign : MonoBehaviour,ICloneable
     {
         int baseScore = consumeData.killSatisfy;
         StageGoal.My.GetSatisfy(baseScore);
-        
-        StageGoal.My.GetHealth(consumeData.liveSatisfy + satisfyAdd);
+        int healthAdd = (int) ((consumeData.liveSatisfy + satisfyAdd) * (1 + BaseLevelController.My.satisfyRate));
+        StageGoal.My.GetHealth(healthAdd);
         StageGoal.My.ScoreGet(ScoreType.消费者得分, consumeData.killSatisfy);
         if (scorePer > 1f)
         {
@@ -445,6 +445,13 @@ public class ConsumeSign : MonoBehaviour,ICloneable
         if (isNormal)
         {
             per += elementResistance[ProductElementType.Normal] / 100f - 1f;
+        }
+        else
+        {
+            if (per > 1f)
+            {
+                damage = (int)(damage * (1 + BaseLevelController.My.tasteDamageRate));
+            }
         }
         scorePer = Mathf.Max(1f,per);
         damage = (int)(damage * per);

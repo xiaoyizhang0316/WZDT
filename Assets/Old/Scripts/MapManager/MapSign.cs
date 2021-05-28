@@ -144,7 +144,7 @@ public class MapSign : MonoBehaviour, IDragHandler
 
     public void Unlock()
     {
-        lockImage.SetActive(false);
+        lockImage?.SetActive(false);
         isCanPlace = true;
     }
 
