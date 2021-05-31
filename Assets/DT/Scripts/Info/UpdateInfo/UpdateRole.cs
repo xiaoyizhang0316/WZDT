@@ -49,6 +49,16 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        // 变形时无升级预览
+        BaseMapRole _role = PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID);
+        
+        if (_role.GetComponent<RoleTransition>())
+        {
+            if (_role.GetComponent<RoleTransition>().IsTransition)
+            {
+                return;
+            }
+        }
         if (isUpdate || !GetComponent<Button>().interactable || RoleUpdateInfo.My.currentRole.baseRoleData.level ==StageGoal.My.maxRoleLevel)
         {
             return;
@@ -120,6 +130,7 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void UpdateRole1(PointerEventData eventData = null)
     {
+        BaseMapRole _role = PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID);
         if (RoleUpdateInfo.My.currentRole.baseRoleData.level == StageGoal.My.maxRoleLevel || (tew != null && tew.IsPlaying()) ||
             !GetComponent<Button>().interactable)
         {
@@ -185,6 +196,12 @@ public class UpdateRole : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             RoleUpdateInfo.My.currentRole.baseRoleData = GameDataMgr.My.GetModelData(
                 RoleUpdateInfo.My.currentRole.startType,
                 RoleUpdateInfo.My.currentRole.baseRoleData.level + 1);
+            // 角色变形时，不改变其变形后的类型
+            if (_role.GetComponent<RoleTransition>())
+            {
+                RoleUpdateInfo.My.currentRole.baseRoleData.roleType =
+                    _role.GetComponent<RoleTransition>().currentRoleType;
+            }
             RoleUpdateInfo.My.currentRole.CalculateAllAttribute();
             RoleUpdateInfo.My.currentRole.baseRoleData.roleName = RoleUpdateInfo.My.roleName;
             PlayerData.My.GetMapRoleById(RoleUpdateInfo.My.currentRole.ID).ReaddAllBuff();
