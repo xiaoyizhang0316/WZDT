@@ -71,7 +71,7 @@ public class CreateBaseMap : MonoBehaviour
                     Vector3  v3= hit.transform.position;
                     Destroy(hit.transform.gameObject);
                     GameObject tf = Instantiate(grass, transform);
-                    tf.transform.position =new Vector3(v3.x,0,v3.z);
+                    tf.transform.position =new Vector3(v3.x,0,v3.z); 
 
 
                 }
@@ -81,9 +81,8 @@ public class CreateBaseMap : MonoBehaviour
                     
                     Vector3  v3= hit.transform.position;
                     Destroy(hit.transform.gameObject);
-                    GameObject tf = Instantiate(highGrass, transform);
-                    
-                    tf.transform.position =new Vector3(v3.x,0,v3.z);
+                    GameObject tf = Instantiate(highGrass, transform); 
+                    tf.transform.position =new Vector3(v3.x,0,v3.z); 
 
                 }
                 if (rt.isOn)
@@ -91,8 +90,8 @@ public class CreateBaseMap : MonoBehaviour
                
                     Vector3  v3= hit.transform.position;
                     Destroy(hit.transform.gameObject);
-                    GameObject tf = Instantiate(road, transform);
-                    tf.transform.position =new Vector3(v3.x,0,v3.z);
+                    GameObject tf = Instantiate(road, transform); 
+                    tf.transform.position =new Vector3(v3.x,0,v3.z); 
 
                 }
                 if (nt.isOn)
@@ -101,7 +100,7 @@ public class CreateBaseMap : MonoBehaviour
                     Vector3  v3= hit.transform.position;
                     Destroy(hit.transform.gameObject);
                     GameObject tf = Instantiate(land, transform);
-                    tf.transform.position =new Vector3(v3.x,0,v3.z);
+                    tf.transform.position =new Vector3(v3.x,0,v3.z); 
 
 
                 }
