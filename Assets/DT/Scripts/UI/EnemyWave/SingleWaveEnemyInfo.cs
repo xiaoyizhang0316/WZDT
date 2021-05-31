@@ -43,8 +43,9 @@ public class SingleWaveEnemyInfo : MonoBehaviour
         List<int> buffList = new List<int>();
         ConsumerTypeData data = GameDataMgr.My.GetConsumerTypeDataByType(consumeType);
         buffList.AddRange(data.bornBuff);
-        totalGold.text = "$" + (data.killMoney * int.Parse(list[1])).ToString();
+        totalGold.text = "$" + (data.killMoney * int.Parse(list[1]));
         WaveCount.My.totalGold += data.killMoney * int.Parse(list[1]);
+        WaveCount.My.totalHealth += data.liveSatisfy * int.Parse(list[1]);
         transform.Find("TypeSatisfy").GetComponent<Text>().text = data.killSatisfy.ToString();
         transform.Find("TypeGold").GetComponent<Text>().text = data.killMoney.ToString();
         string[] strList = list[2].Split('|');
