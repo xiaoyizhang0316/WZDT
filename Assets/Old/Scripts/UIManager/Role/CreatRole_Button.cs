@@ -129,11 +129,11 @@ public class CreatRole_Button : MonoBehaviour, IDragHandler, IPointerClickHandle
             //        currentCell.EnableHighlight(Color.red);
             //        
             //    }
-            role.transform.position =new Vector3(hit[i].transform.position.x,  hit[i].transform.position.y+0.3f,hit[i].transform.position.z);  
 
-            if (!hit[i].transform.tag.Equals("MapRole"))
+            if ( hit[i].transform.tag.Equals("MapLand")|| hit[i].transform.tag.Equals("Map"))
             {
                 //Debug.Log("Yes");
+                role.transform.position =new Vector3(hit[i].transform.position.x,  hit[i].transform.position.y+0.3f,hit[i].transform.position.z);  
 
             }
         }
