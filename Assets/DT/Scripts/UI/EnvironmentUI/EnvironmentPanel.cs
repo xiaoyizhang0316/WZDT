@@ -107,6 +107,18 @@ public class EnvironmentPanel : MonoBehaviour
         envString += "距：" + BaseLevelController.My.distanceLevel + zwf;
         envString += "固：" + BaseLevelController.My.monthCostLevel + zwf;
         envString += "激：" + BaseLevelController.My.encourageLevel + zwf;
+        if (!string.IsNullOrEmpty(BaseLevelController.My.environmentLevel1Name))
+        {
+            envString += BaseLevelController.My.environmentLevel1Name.Substring(0,1)+"：" + BaseLevelController.My.environmentLevel1 + zwf;
+        }
+        if (!string.IsNullOrEmpty(BaseLevelController.My.environmentLevel2Name))
+        {
+            envString += BaseLevelController.My.environmentLevel2Name.Substring(0,1)+"：" + BaseLevelController.My.environmentLevel2 + zwf;
+        }
+        if (!string.IsNullOrEmpty(BaseLevelController.My.environmentLevel3Name))
+        {
+            envString += BaseLevelController.My.environmentLevel3Name.Substring(0,1)+"：" + BaseLevelController.My.environmentLevel3 + zwf;
+        }
         envString += "额：" + BuildingManager.My.GetExtraConsumerNumber("100") + zwf;
         envString += "满：" + BaseLevelController.My.satisfyRate.ToString("F2") + zwf;
         envString += "满：" + BaseLevelController.My.tasteDamageRate.ToString("F2");
