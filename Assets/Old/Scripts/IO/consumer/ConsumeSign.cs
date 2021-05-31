@@ -106,11 +106,7 @@ public class ConsumeSign : MonoBehaviour,ICloneable
             baseBuff.SetConsumerBuff(this);
             bornBuffList.Add(i);
         }
-        for (int i = 0; i < BaseLevelController.My.consumerBuffList.Count; i++)
-        {
-            BaseBuff buff = BaseLevelController.My.consumerBuffList[i].CopyNew();
-            buff.SetConsumerBuff(this);
-        }
+
         if (PlayerData.My.cheatIndex2)
             consumeData.maxHealth = (int)(consumeData.maxHealth * 0.5f);
         GameObject go = Instantiate(hudPrb, transform);
@@ -126,6 +122,11 @@ public class ConsumeSign : MonoBehaviour,ICloneable
         go.transform.localPosition = Vector3.zero + new Vector3(0, 3.5f, 0);
         InitPath(paths);
         InitAndMove();
+        for (int i = 0; i < BaseLevelController.My.consumerBuffList.Count; i++)
+        {
+            BaseBuff buff = BaseLevelController.My.consumerBuffList[i].CopyNew();
+            buff.SetConsumerBuff(this);
+        }
     }
 
     /// <summary>
@@ -149,7 +150,7 @@ public class ConsumeSign : MonoBehaviour,ICloneable
     /// <param name="buffID"></param>
     public virtual void AddEffect(int buffID)
     {
-        if (buffID <= 1000)
+        if (buffID <= 1000 || buffID > 10000)
         {
             for (int i = 0; i < debuffEffectList.Count; i++)
             {

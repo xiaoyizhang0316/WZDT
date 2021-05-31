@@ -9,6 +9,7 @@ public class DividedProfitCheck : SkillCheckBase
     protected override void InitCheck()
     {
         startDividedProfit = SkillCheckManager.My.dividedProfit;
+        SkillCheckManager.My.proportion = detail.proportion;
         SkillCheckManager.My.checkDivide=true;
     }
 
