@@ -23,19 +23,13 @@ public class ProductRestaurant : BaseProductSkill
     public float chiguaSpeed;
     
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+ 
 
     public override void Skill()
     {
         
 
-        if (role.warehouse.Count == 0)
-        {
-            return;
-        }
+     
         AddEnergy(); 
        
         
@@ -95,10 +89,5 @@ public class ProductRestaurant : BaseProductSkill
         }
         role.warehouse.RemoveAt(0);
     }
-
-// Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 }
