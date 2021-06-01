@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class RoleUISign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
@@ -22,8 +24,13 @@ public class RoleUISign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 
     public GameObject effectSprite;
     public GameObject rangeSprite;
-    
-    
+
+    public Image roleicon;
+
+    public GameObject xiaolv_Di;
+    public GameObject xiaoguo_Di;
+
+    public GameObject cost_di;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +59,7 @@ public class RoleUISign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         else
         {
             UpdateNamePosition();
+            
             if (mapRole.baseRoleData.baseRoleData.roleType == GameEnum.RoleType.Dealer)
             {
                 effect.text = mapRole.baseRoleData.range.ToString();
@@ -95,6 +103,10 @@ public class RoleUISign : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
             {
                 icon.gameObject.SetActive(false);
                 cost.gameObject.SetActive(false);
+                cost_di.gameObject.SetActive(false);
+                xiaoguo_Di.gameObject.SetActive(false);
+                xiaolv_Di.gameObject.SetActive(false); 
+               
                 if (mapRole.GetComponent<NPC>().isCanSeeEquip)
                 {
                     for (int i = 0; i < mapRole.GetEquipBuffList().Count; i++)
