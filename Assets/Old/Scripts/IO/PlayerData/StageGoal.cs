@@ -498,6 +498,8 @@ public class StageGoal : MonoSingleton<StageGoal>
         {
             return;
         }
+        
+        Debug.Log("加血" + healthAdd);
 
         //SetHealthBar(playerHealth, healthAdd);
         //playerHealth += healthAdd;

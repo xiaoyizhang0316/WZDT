@@ -583,7 +583,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             {
                 result /= cast.tradeList.Count;
             }
-            Debug.Log(sign.tradeData.ID+" trade cost: "+result);
+            //Debug.Log(sign.tradeData.ID+" trade cost: "+result);
             cost += result;
         }
         return cost;
