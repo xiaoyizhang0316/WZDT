@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class ProductPick : BaseProductSkill
 {
-    public int buffId;
+    public int buffId = 101;
     // Start is called before the first frame update
  
     public override void Skill()
     {
-       
+        if (buffList.Count == 0)
+        {
+            buffList.Add(30006);
+        }
 
         if (role.warehouse.Count == 0)
         {

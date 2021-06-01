@@ -251,6 +251,9 @@ public class Requirement
             case 23:
                 target = BaseLevelController.My.riskControlLevel;
                 break;
+            case 24:
+                target = BaseLevelController.My.environmentLevel1;
+                break;
             default:
                 break;
         }

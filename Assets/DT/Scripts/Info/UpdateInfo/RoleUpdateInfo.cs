@@ -168,8 +168,9 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
     /// <summary>
     /// 没有使用装备
     /// </summary>
-   // public GameObject emptyEquip;
+    // public GameObject emptyEquip;
 
+    public GameObject bulletTF;
 
     /// <summary>
     /// 激励等级文本
@@ -192,7 +193,7 @@ public class RoleUpdateInfo : MonoSingleton<RoleUpdateInfo>
         InitRequire();
         close.onClick.AddListener(() =>
         {
-            
+            bulletTF.SetActive(false);
             gameObject.SetActive(false);
         });
         delete.onClick.AddListener(() =>
