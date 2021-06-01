@@ -574,11 +574,11 @@ public class BaseMapRole : MonoBehaviour
                 }
             }
         }
-        if(GetComponent<BaseServiceSkill>() != null && tradeList.Count > 0)
+        if(GetComponent<BaseServiceSkill>() != null &&(  startTradeList.Count > 0|| endTradeList.Count>0))
         {
             GetComponent<BaseServiceSkill>().OnEndTurn();
         }
-        if(GetComponent<BaseProductSkill>() != null && tradeList.Count > 0)
+        if(GetComponent<BaseProductSkill>() != null &&(  startTradeList.Count > 0|| endTradeList.Count>0))
         {
             GetComponent<BaseProductSkill>().OnEndTurn();
         }
