@@ -240,6 +240,10 @@ public class LevelInfoManager : MonoSingleton<LevelInfoManager>
 
     void InitBoxs(string star)
     {
+        if (string.IsNullOrEmpty(star))
+        {
+            return;
+        }
         SetBoxsStatus(star[0], mission_1.transform, box1OpenedImage, box1CloseImage);
         SetBoxsStatus(star[1], mission_2.transform, box2OpenedImage, box2CloseImage);
         SetBoxsStatus(star[2], mission_3.transform, box3OpenedImage, box3CloseImage);
