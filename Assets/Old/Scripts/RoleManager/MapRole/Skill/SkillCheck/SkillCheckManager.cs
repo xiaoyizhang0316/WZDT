@@ -110,7 +110,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
         {
             if (onCheckRoles[i].RoleType == role.baseRoleData.baseRoleData.roleType)
             {
-                CheckRoleSkillEnd(onCheckRoles[i]);
+                CheckRoleSkillEnd(onCheckRoles[i], role);
             }
         }
     }
@@ -119,12 +119,12 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
     /// 检测角色的每个检测是否成功
     /// </summary>
     /// <param name="rscd"></param>
-    void CheckRoleSkillEnd(RoleSkillSelect rscd)
+    void CheckRoleSkillEnd(RoleSkillSelect rscd, BaseMapRole mapRole)
     {
         bool isSuccess = true;
         foreach (Transform child in checkContent)
         {
-            if (child.GetComponent<SkillCheckBase>().roleID == rscd.roleID)
+            if (child.GetComponent<SkillCheckBase>().dependRole.baseRoleData.ID == mapRole.baseRoleData.ID)
             {
                 if (!child.GetComponent<SkillCheckBase>().isSuccess)
                 {
@@ -134,8 +134,8 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
             }
         }
 
-        BaseMapRole role = PlayerData.My.GetMapRoleById(rscd.roleID);
-        bool threshold = role.GetComponent<BaseFinancialCompanyThreshold>()
+        //BaseMapRole role = PlayerData.My.GetMapRoleById(rscd.roleID);
+        bool threshold = mapRole.GetComponent<BaseFinancialCompanyThreshold>()
             .Threshold();
 
         if (isSuccess && threshold)
@@ -147,7 +147,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
         {
             if (threshold)
             {
-                HttpManager.My.ShowTip(role.GetComponent<BaseFinancialCompanyThreshold>().FailedTip());
+                HttpManager.My.ShowTip(mapRole.GetComponent<BaseFinancialCompanyThreshold>().FailedTip());
             }
             rscd.checkedCount += 1;
             if (rscd.checkedCount >= rscd.checkCount)
@@ -160,7 +160,7 @@ public class SkillCheckManager : MonoSingleton<SkillCheckManager>
             {
                 foreach (Transform child in checkContent)
                 {
-                    if (child.GetComponent<SkillCheckBase>().roleID == rscd.roleID)
+                    if (child.GetComponent<SkillCheckBase>().dependRole.baseRoleData.ID == mapRole.baseRoleData.ID)
                     {
                         Debug.Log("check reset");
                         child.GetComponent<SkillCheckBase>().ResetCheck();
