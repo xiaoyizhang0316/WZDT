@@ -53,7 +53,7 @@ public class RoleListInfoService : BaseRoleListInfo
         {
             levelUI.SetActive(true);
         }
-      
+      productTF.gameObject.SetActive(false);
         float efficiencyNum = (role.efficiency / 20f);
         float add = 1f;
         float encourage = PlayerData.My.GetMapRoleById(role.ID).encourageLevel;

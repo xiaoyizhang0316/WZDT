@@ -92,6 +92,8 @@ public class RoleListInfoMerchant : BaseRoleListInfo
     private List<ProductData> _datas  = new List<ProductData>();
     public void ShowLastpruduct(Role role)
     {
+        productTF.gameObject.SetActive(true);
+
         for (int i = 0; i < productTF.childCount; i++)
         {
             Destroy(productTF.GetChild(0).gameObject);

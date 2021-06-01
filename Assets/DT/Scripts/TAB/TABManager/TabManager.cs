@@ -32,8 +32,8 @@ public class TabManager : MonoSingleton<TabManager>
         {
             fade.SetActive(true);
 
-            fade.GetComponent<Image>().DOColor(new Color(1, 1, 1, 0.5f), 0.2f).Play();
-            fade.GetComponent<Image>().material.SetInt("_Size",5);
+         //   fade.GetComponent<Image>().DOColor(new Color(1, 1, 1, 0.5f), 0.2f).Play();
+         //   fade.GetComponent<Image>().material.SetInt("_Size",5);
             CreatRoleUI();
             CreatRoleLine();
         }
@@ -42,9 +42,9 @@ public class TabManager : MonoSingleton<TabManager>
             fade.SetActive(false);
             DeleteRole();
             
-            fade.GetComponent<Image>().DOColor(new Color(1f, 1f, 1f, 1), 0.2f).Play();
-
-            fade.GetComponent<Image>().material.SetInt("_Size",0);
+       //     fade.GetComponent<Image>().DOColor(new Color(1f, 1f, 1f, 1), 0.2f).Play();
+//
+       //     fade.GetComponent<Image>().material.SetInt("_Size",0);
         }
     }
 
@@ -56,16 +56,16 @@ public class TabManager : MonoSingleton<TabManager>
             if (PlayerData.My.MapRole[i].isNpc && !PlayerData.My.MapRole[i].npcScript.isCanSee)
             {
 
-                roleUI.transform.GetChild(4).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/lan/unKnown");
+                roleUI.GetComponent<RoleUISign>().roleicon.sprite = Resources.Load<Sprite>("Sprite/lan/unKnown");
             }
             else  if(PlayerData.My.MapRole[i].isNpc)
             {
-                roleUI.transform.GetChild(4).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/RoleLogo/"+PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType+PlayerData.My.MapRole[i].baseRoleData.baseRoleData.level);
+                roleUI.GetComponent<RoleUISign>().roleicon.sprite = Resources.Load<Sprite>("Sprite/RoleLogo/"+PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType+PlayerData.My.MapRole[i].baseRoleData.baseRoleData.level);
 
             }
             else if (!PlayerData.My.MapRole[i].isNpc)
             {
-                roleUI.transform.GetChild(4).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/hong/"+PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType+PlayerData.My.MapRole[i].baseRoleData.baseRoleData.level);
+                roleUI.GetComponent<RoleUISign>().roleicon.sprite = Resources.Load<Sprite>("Sprite/hong/"+PlayerData.My.MapRole[i].baseRoleData.baseRoleData.roleType+PlayerData.My.MapRole[i].baseRoleData.baseRoleData.level);
  
             }
 
