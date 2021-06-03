@@ -455,6 +455,8 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
             //temp.PDP = (PDPType)Enum.Parse(typeof(PDPType), w.PDP);
             temp.Init();
             workerDatas.Add(temp);
+            
+             
         }
     }
 
