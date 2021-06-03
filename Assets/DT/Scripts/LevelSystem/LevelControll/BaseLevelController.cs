@@ -7,6 +7,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static GameEnum;
 
+/// <summary>
+/// 每个关卡中控制关卡全局信息的类
+/// 负责检测关卡星级条件是否达成
+/// 负责存储，结算所有因激励等级带来的影响
+/// 对于不同的关卡，可以新建指定的脚本来继承该脚本，随后override不同的星级检测条件
+/// </summary>
 public class BaseLevelController : MonoSingleton<BaseLevelController>
 {
     /// <summary>
@@ -57,12 +63,22 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
 
     public string winkey3;
 
+    /// <summary>
+    /// 关卡的特殊属性（先后钱不影响交易成本，先后钱默认正确，放角色不耗Mega值之类的）
+    /// </summary>
     public List<StageSpecialType> stageSpecialTypes = new List<StageSpecialType>();
     
+    /// <summary>
+    /// 影响消费者属性的激励等级效果合集
+    /// </summary>
     public List<BaseBuff> consumerBuffList = new List<BaseBuff>();
-
+    /// <summary>
+    /// 回合类影响玩家资源的激励等级效果合集
+    /// </summary>
     public List<BaseBuff> playerStaticList = new List<BaseBuff>();
-
+    /// <summary>
+    /// 即时类影响世界环境因素的激励等级效果合集
+    /// </summary>
     public List<BaseBuff> stageStaticList = new List<BaseBuff>();
 
     //总杀敌数
@@ -117,7 +133,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     
     
     /// <summary>
-    /// 当添加了新激励等级效果时
+    /// 当添加了新激励等级效果时，根据激励等级效果类型进行不同的结算
     /// </summary>
     /// <param name="role"></param>
     /// <param name="type"></param>
@@ -172,7 +188,7 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
     }
 
     /// <summary>
-    /// 激励等级效果消失时
+    /// 激励等级效果消失时，根据激励等级效果类别进行不同的移除处理
     /// </summary>
     /// <param name="type"></param>
     /// <param name="_buffId"></param>
@@ -326,17 +342,6 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         }
     }
 
-    public void CheckStageStaticNumber(int type,int number, bool isRemove = false)
-    {
-        switch (type)
-        {
-            case 1:
-            {
-                break;
-            }
-        }
-    }
-
     /// <summary>
     /// 激励等级效果消失时场上现有的消费者都移除掉该效果
     /// </summary>
@@ -476,6 +481,9 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
         }
     }
 
+    /// <summary>
+    /// 发送表情（多人联机用）
+    /// </summary>
     private void Update()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -554,7 +562,6 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
             {
                 onTradeRole[startRole] = val - 1;
             }
-            
         }
         
         if (onTradeRole.ContainsKey(endRole))
@@ -568,7 +575,6 @@ public class BaseLevelController : MonoSingleton<BaseLevelController>
             {
                 onTradeRole[endRole] = val - 1;
             }
-            
         }
     }
 }

@@ -5,6 +5,7 @@ using DT.Fight.Bullet;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
 public class ProductDealer : BaseProductSkill
 {
     // Start is called before the first frame update
@@ -50,8 +51,6 @@ public class ProductDealer : BaseProductSkill
             }
         }
     }
-
-
 
     public override void UnleashSkills()
     {

@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static GameEnum;
 
+/// <summary>
+/// 单个交易的实体类
+/// 用来处理单个交易的状态，包括添加/删除以及检查交易的属性
+/// </summary>
 public class TradeSign : MonoBehaviour
 {
     /// <summary>

@@ -9,6 +9,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static GameEnum;
 
+/// <summary>
+/// 在地图中的角色实体类
+/// 负责角色在地图中相关属性的变化（由buff或者激励等级变化引起）
+/// 负责控制角色buff相关触发条件
+/// 
+/// </summary>
 [Serializable]
 public class BaseMapRole : MonoBehaviour
 {
@@ -95,18 +101,18 @@ public class BaseMapRole : MonoBehaviour
     public int startEncourageLevel;
 
     /// <summary>
-    /// 技能强度
+    /// 技能强度（暂时没用，将来角色技能属性成长可能会用到）
     /// </summary>
     public int skillPower;
-
+    //身为发起方所参与的所有交易
     public List<TradeSign> startTradeList = new List<TradeSign>();
-
+    //身为承受方所参与的所有交易
     public List<TradeSign> endTradeList = new List<TradeSign>();
-
+    //从口味加工成获得的口味列表
     public List<int> tasteBuffList = new List<int>();
-
+    
     public List<int> consumableList = new List<int>();
-
+    
     public int totalUpgradeCost;
 
     public RoleSprite roleSprite;
@@ -114,13 +120,15 @@ public class BaseMapRole : MonoBehaviour
     public GameObject emptyGearSprite;
 
     public GameObject stopWorkSprite;
-
+    //是否出售（已弃用）
     public bool isSell = false;
 
     public GameObject ringEffect;
 
     public GameObject specialInfo;
+    //是否使用了透视镜
     public bool isUseTSJ;
+    
     public void InitBaseRoleData()
     {
         baseRoleData = PlayerData.My.GetRoleById(double.Parse(name));
@@ -148,7 +156,9 @@ public class BaseMapRole : MonoBehaviour
     }
 
     public RoleType startType;
+    
     // Start is called before the first frame update
+    // 角色开始时进行的一些组建注册和属性初始化操作
     void Start()
     {
         buffList = new List<BaseBuff>();
@@ -268,7 +278,7 @@ public class BaseMapRole : MonoBehaviour
     }
 
     /// <summary>
-    /// 根据职责隐藏某些物体
+    /// 根据职责隐藏某些物体（联机用）
     /// </summary>
     public void CheckRoleDuty()
     {
@@ -284,7 +294,7 @@ public class BaseMapRole : MonoBehaviour
     }
 
     /// <summary>
-    /// 根据角色等级改变模型
+    /// 根据角色等级改变模型（内部角色升级用）
     /// </summary>
     public void CheckLevel()
     {

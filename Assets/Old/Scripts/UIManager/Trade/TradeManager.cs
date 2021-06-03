@@ -5,6 +5,9 @@ using UnityEngine;
 using IOIntensiveFramework.MonoSingleton;
 using static GameEnum;
 
+/// <summary>
+/// 负责管理所有交易，创建/删除交易，执行所有与交易相关方法的管理类
+/// </summary>
 public class TradeManager : MonoSingleton<TradeManager>
 {
     public int index;
@@ -41,6 +44,10 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
     }
 
+    /// <summary>
+    /// 删除交易检测是否有npc角色需要从复盘记录中删除（没参与的交易的npc不显示在复盘界面中）
+    /// </summary>
+    /// <param name="sign"></param>
     private void CheckDeleteNpcRole(TradeSign sign)
     {
         BaseMapRole start = PlayerData.My.GetMapRoleById(double.Parse(sign.tradeData.startRole));
@@ -67,6 +74,11 @@ public class TradeManager : MonoSingleton<TradeManager>
         }
     }
 
+    /// <summary>
+    /// 检测一个角色相关的交易数量
+    /// </summary>
+    /// <param name="roleId"></param>
+    /// <returns></returns>
     private int CheckTradeCount(string roleId)
     {
         int result = 0;
@@ -178,7 +190,7 @@ public class TradeManager : MonoSingleton<TradeManager>
     }
 
     /// <summary>
-    /// 检测发起者和承受者技能类型
+    /// 检测发起者和承受者技能类型（已作废，任何类型的角色都可以交易）
     /// </summary>
     /// <returns></returns>
     private bool CheckStartAndEnd()
@@ -583,7 +595,7 @@ public class TradeManager : MonoSingleton<TradeManager>
             {
                 result /= cast.tradeList.Count;
             }
-            Debug.Log(sign.tradeData.ID+" trade cost: "+result);
+            //Debug.Log(sign.tradeData.ID+" trade cost: "+result);
             cost += result;
         }
         return cost;

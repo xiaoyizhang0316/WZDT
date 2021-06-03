@@ -157,6 +157,9 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         InitMoneyLine(StageGoal.My.dataStats, StageGoal.My.timeCount);
     }
 
+    /// <summary>
+    /// 清除所有消耗品使用记录（初始化用）
+    /// </summary>
     public void ClearConsumableUse()
     {
         Transform tf = playSlider.transform.Find("ConsumableList");
@@ -166,6 +169,10 @@ public class ReviewPanel : MonoSingleton<ReviewPanel>
         }
     }
 
+    /// <summary>
+    /// 初始化天赋面板（已作废）
+    /// </summary>
+    /// <param name="talentStr"></param>
     public void InitTalentPanel(string talentStr)
     {
         //if (talentStr == null || talentStr.Length != 6)

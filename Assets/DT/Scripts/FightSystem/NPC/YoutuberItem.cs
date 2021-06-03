@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 网红生效的实际光圈范围脚本
+/// 消费者在圈内会暂时被洗脑，喜好被抹掉换成指定的喜好
+/// buffId：指定喜好的buffId
+/// </summary>
 public class YoutuberItem : MonoBehaviour
 {
-
+    //对应的buffId
     public int buffId;
-
+    //该光圈对应的交易Id
     public int tradeId;
 
     public void OnTriggerEnter(Collider other)

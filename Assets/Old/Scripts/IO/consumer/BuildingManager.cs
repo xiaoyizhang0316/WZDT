@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using IOIntensiveFramework.MonoSingleton;
 using UnityEngine;
 
+/// <summary>
+/// 所有Building（消费者出生点）的管理类
+/// 负责控制所有出生点刷出指定波数的消费者（由StageGoal调用）
+/// 一些关于消费者的辅助统计功能
+/// </summary>
 public class BuildingManager : MonoSingleton<BuildingManager>
 {
 

@@ -7,6 +7,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static GameEnum;
 
+/// <summary>
+/// 玩家数据存储中心，负责存储所有玩家自身相关的数据（所有关卡通用，因为是dontdestroyOnLoad）
+/// 负责查找，注册所有关卡中地图上的角色，玩家拥有的装备，工人，消耗品等
+/// </summary>
 public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 {
     /// <summary>
@@ -39,14 +43,16 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
     /// </summary>
     public List<PlayerConsumable> playerConsumables = new List<PlayerConsumable>();
 
+    //是否开启第一项作弊
     public bool cheatIndex1 = false;
-
+    //是否开启第二项作弊
     public bool cheatIndex2 = false;
-
+    //是否开启第三项作弊
     public bool cheatIndex3 = false;
 
+    //副端（多人用）
     public Client client;
-
+    //主机端（多人用）
     public Server server;
 
     //是否是主机
@@ -623,6 +629,9 @@ public class PlayerData : MonoSingletonDontDestroy<PlayerData>
 
     public bool isLocalReady = false;
 
+    /// <summary>
+    /// 多人联机时检测游戏是否具备开始条件（所有人是否都准备完毕）
+    /// </summary>
     public void CheckGameStart()
     {
         //Debug.Log("检测ready");

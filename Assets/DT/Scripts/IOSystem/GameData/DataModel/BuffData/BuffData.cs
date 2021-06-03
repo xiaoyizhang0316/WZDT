@@ -32,8 +32,14 @@ public class BuffData
     /// </summary>
     public List<int> buffParam;
 
+    /// <summary>
+    /// 子弹口味属性（没有的话写normal）
+    /// </summary>
     public ProductElementType elementType;
 
+    /// <summary>
+    /// 攻击特效发生概率
+    /// </summary>
     public int attackEffect;
 
     /// <summary>
@@ -83,6 +89,9 @@ public class BuffData
     /// </summary>
     public int buffValue;
 
+    /// <summary>
+    /// 构造函数
+    /// </summary>
     public BuffData()
     {
         OnBuffAdd = new List<string>();
@@ -94,6 +103,10 @@ public class BuffData
         OnEndTurn = new List<string>();
     }
 
+    /// <summary>
+    /// 复制成新的buffData实体
+    /// </summary>
+    /// <returns></returns>
     public BuffData CopyNew()
     {
         BuffData temp = new BuffData();
