@@ -10,6 +10,10 @@ using DT.Fight.Bullet;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 消费者类的实体脚本
+/// 负责控制消费者的状态变化，移动，击杀奖励/终点惩罚以及消费者相关的buff结算
+/// </summary>
 public class ConsumeSign : MonoBehaviour,ICloneable
 {
     /// <summary>
@@ -44,6 +48,9 @@ public class ConsumeSign : MonoBehaviour,ICloneable
     /// </summary>
     public bool isIgnoreResistance = false;
 
+    /// <summary>
+    /// 血条相关的UI显示
+    /// </summary>
     public GameObject hudPrb;
 
     public Hud hud;
@@ -53,38 +60,51 @@ public class ConsumeSign : MonoBehaviour,ICloneable
     /// </summary>
     public List<BaseBuff> buffList = new List<BaseBuff>();
 
+    /// <summary>
+    /// 出生自带的buff列表
+    /// </summary>
     public List<int> bornBuffList = new List<int>();
 
+    /// <summary>
+    /// 是否出发（有可能生成了但在原地不动还没出发，此时不可被零售商攻击）
+    /// </summary>
     public bool isStart = false;
-
+    
+    /// <summary>
+    /// 是否可以被零售商攻击
+    /// </summary>
     public bool isCanSelect = false;
-
+    
+    //路径点列表
     public List<Vector3> pathList;
 
+    //消费者技能实体
     public BaseConsumer baseConsumer;
 
+    //debuff特效列表（部分debuff可能存在特殊特效）
     public List<GameObject> debuffEffectList = new List<GameObject>();
 
+    //自身模型（用于变羊效果还原）
     public GameObject self;
-
+    //羊模型，用于变羊模型更换
     public GameObject sheep;
-
+    //2D图标（多人联机副端用）
     public GameObject spriteLogo;
-
+    //上一次被击中的子弹类型
     public BulletType lastHitType;
-
+    //从哪个出生点出生的
     public int buildingIndex;
-
+    //消费者特殊编号
     public int consumerIndex;
-
+    //进入广告公司的时间（用于结算广告收益）
     public int enterMarketingTime = 0;
-
+    //得分倍率（可能被口味所影响）
     private float scorePer = 1f;
-
+    //口味击杀倍率影响
     public int tasteKillAdd = 0;
 
     /// <summary>
-    /// 初始化
+    /// 初始化（Building生成消费者时从Building调用）
     /// </summary>
     public virtual void Init(List<Transform> paths)
     {
@@ -194,7 +214,7 @@ public class ConsumeSign : MonoBehaviour,ICloneable
     }
 
     /// <summary>
-    /// 每次刷新消费者调用
+    /// 开始向终点移动
     /// </summary>
     /// <param name="targetRole"></param>
     public virtual void InitAndMove()

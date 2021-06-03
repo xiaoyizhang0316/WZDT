@@ -6,13 +6,20 @@ using DT.Fight.Bullet;
 using Fungus;
 using Debug = UnityEngine.Debug;
 
+
+/// <summary>
+/// 角色的需求类
+/// 负责控制角色的需求开关，一个角色有多个需求，这些需求以List<Requirement>的形式存储在basemaprole里
+/// 负责周期性检测角色需求是否被满足，如果被满足，激活角色的需求奖励效果（以buff的形式）
+/// </summary>
 [Serializable]
 public class Requirement
 {
+    //详细需求数据类存储实体
     public RequirementData requirementData;
-
+    //需求的拥有者
     public BaseMapRole role;
-
+    //需求是否被满足的状态显示
     public bool isOpen;
 
     /// <summary>
@@ -60,7 +67,7 @@ public class Requirement
     }
 
     /// <summary>
-    /// 检测单个需求是否被满足
+    /// 检测单个需求是否被满足，prefix对应的编号详情查看excel，如果添加新的需求项在switch中单写
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>

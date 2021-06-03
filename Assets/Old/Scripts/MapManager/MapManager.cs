@@ -9,6 +9,10 @@ using System.IO;
 using System;
 using System.Linq;
 
+/// <summary>
+/// 地图管理类
+/// 用来根据配置表创建关卡内的npc，管理地块的可放置状态以及其他针对于地块的操作
+/// </summary>
 public class MapManager : MonoSingleton<MapManager>
 {
     /// <summary>
@@ -229,6 +233,9 @@ public class MapManager : MonoSingleton<MapManager>
         go.GetComponent<NPC>().NPCBuffList.AddRange(npc.hideBuffList);
     }
 
+    /// <summary>
+    /// 根据JSON表生成npc
+    /// </summary>
     public void InitStageNPCData()
     {
         string sceneName = SceneManager.GetActiveScene().name;

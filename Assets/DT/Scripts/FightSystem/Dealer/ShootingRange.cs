@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 零售商的范围脚本，会将范围内的消费者注册进零售商basemaprole中的shootTargetList中
+/// </summary>
 public class ShootingRange : MonoBehaviour
 {
 

@@ -7,7 +7,20 @@ using System.Linq;
 using System;
 using UnityEngine.SceneManagement;
 
-
+/// <summary>
+/// 游戏数据存储中心，负责所有数据的读取，查找以及JSON转化
+/// 目前存储的数据有：
+/// 角色模板数据 RoleTemplateModelData
+/// 装备数据 GearData
+/// 工人数据 WorkerData
+/// BUff数据 BuffData
+/// 消耗品数据 ConsumableData
+/// 关卡信息数据 StageData
+/// 消费者类别数据 ConsumerTypeData
+/// 中英文转化数据 TranslateData
+/// 激励等级技能数据 EncourageSkillData
+/// 需求信息数据 RequirementData
+/// </summary>
 public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
 {
     /// <summary>
@@ -31,7 +44,7 @@ public class GameDataMgr : MonoSingletonDontDestroy<GameDataMgr>
     public List<BuffData> buffDatas;
 
     /// <summary>
-    /// Buff数据库
+    /// 消耗品数据库
     /// </summary>
     public List<ConsumableData> consumableDatas;
 

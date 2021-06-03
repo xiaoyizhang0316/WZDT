@@ -9,6 +9,12 @@ using System.Linq;
 using System;
 using static GameEnum;
 
+/// <summary>
+/// 负责记录玩家的得分，血量，金币，Mega值的情况（包括数值变化）
+/// 负责判断关卡的胜利/失败条件 （包括三星条件）
+/// 控制游戏内回合开始和结束的状态转移
+/// 通知Building Manager根据回合波数刷出对应的消费者
+/// </summary>
 public class StageGoal : MonoSingleton<StageGoal>
 {
     /// <summary>
@@ -743,7 +749,8 @@ public class StageGoal : MonoSingleton<StageGoal>
     }
 
     /// <summary>
-    /// 检测本波是否结束
+    /// 检测本波是否结束（只有回合制有结束回合的概念，
+    /// 所有Building都生成完所有消费者并且场上没有任何消费者时视为回合结束）
     /// </summary>
     public void CheckEndTurn()
     {

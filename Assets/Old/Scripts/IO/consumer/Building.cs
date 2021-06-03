@@ -8,6 +8,10 @@ using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 单个消费者出生点类
+/// 负责控制单个出生点的消费者生成
+/// </summary>
 public class Building : MonoBehaviour
 {
     /// <summary>
@@ -38,13 +42,13 @@ public class Building : MonoBehaviour
   
     public GameObject pathIndicator;
 
-    
+    //是否该波所有消费者都已生成（用于判断回合结束已经胜率失败条件）
     public bool isFinishSpawn;
 
     public GameObject protalGameObject;
-
+    //是否使用了透视镜
     public bool isUseTSJ = false;
-
+    
     public Image countDownSprite;
 
     public List<Material> materials;
@@ -55,7 +59,7 @@ public class Building : MonoBehaviour
 
 
     /// <summary>
-    /// 使用透视镜
+    /// 使用透视镜，20秒持续时间
     /// </summary>
     public void UseTSJ()
     {
@@ -71,7 +75,7 @@ public class Building : MonoBehaviour
     }
 
     /// <summary>
-    /// 初始化
+    /// 将波数消费者信息初始化并存储
     /// </summary>
     public void Init(List<StageEnemyData> datas)
     {
@@ -105,7 +109,7 @@ public class Building : MonoBehaviour
     }
 
     /// <summary>
-    /// 初始化每一波
+    /// 初始化每一波消费者信息并存储
     /// </summary>
     /// <param name="waveNum"></param>
     /// <param name="waveConfig"></param>
@@ -135,7 +139,7 @@ public class Building : MonoBehaviour
     }
 
     /// <summary>
-    /// 每一波召唤消费者
+    /// 每一波召唤消费者，从BuildingManager处调用
     /// </summary>
     /// <param name="waveNumber"></param>
     public void SpawnConsumer(int waveNumber)
@@ -440,7 +444,7 @@ public class Building : MonoBehaviour
     }
 
     /// <summary>
-    /// 生成一波消费者
+    /// 生成一波指定数量，类别的消费者
     /// </summary>
     /// <param name="type"></param>
     /// <param name="number"></param>

@@ -5,35 +5,48 @@ using System;
 using System.Linq;
 using static GameEnum;
 
+/// <summary>
+/// Buff实体类，角色和消费者的buff都是basebuff
+/// 使用规则：
+/// 1. Basebuff buff = new Basebuff();
+/// 2. Buffdata data = 根据buffId获取对应的buffData实体
+/// 3. buff.Init(data)
+/// 4. 如果目标是角色，就调用setRoleBuff,如果目标是消费者，就调用SetConsumerBuff
+/// </summary>
 [Serializable]
 public class BaseBuff
 {
+    //buff实际生效的数值记录（用于添加和buff消除时扣除属性）
     public BuffConfig buffConfig;
-
+    //buffData实体
     public BuffData buffData;
-
+    //ID
     public int buffId;
-
+    //buff持续时间（-1 = 无限持续时间）
     public int duration;
-
+    //buff回合持续时间（=1 = 无限持续时间）
     public int turnDuration;
-
+    //buff生效周期性间隔（-1 为没有周期性效果）
     public int interval;
-
+    //buff名称
     public string buffName;
-
+    //周期时间计数器
     public int count;
-
+    //buff描述
     public string buffDesc = "";
-
+    //buff施法方
     public BaseMapRole castRole;
-
+    //buff目标方
     public BaseMapRole targetRole;
-
+    //buff实际生效方
     public BaseMapRole buffRole;
-
+    //buff目标方（目标是消费者）
     public ConsumeSign targetConsume;
 
+    /// <summary>
+    /// 复制当前的buff实体
+    /// </summary>
+    /// <returns></returns>
     public BaseBuff CopyNew()
     {
         BaseBuff buff = new BaseBuff();
@@ -42,7 +55,7 @@ public class BaseBuff
     }
     
     /// <summary>
-    /// 当BUFF添加时
+    /// 当buff添加到角色时调用
     /// </summary>
     public void RoleBuffAdd()
     {
@@ -54,7 +67,7 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 当BUFF移除时
+    /// 当buff从角色上移除时调用
     /// </summary>
     public void RoleBuffRemove()
     {
@@ -66,7 +79,7 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 当BUFF添加时
+    /// 当buff添加到消费者身上时调用
     /// </summary>
     public void ConsumerBuffAdd()
     {
@@ -78,7 +91,7 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 当BUFF移除时
+    /// 当buff从消费者身上移除时调用
     /// </summary>
     public void ConsumerBuffRemove()
     {
@@ -90,7 +103,7 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 消费者濒临死亡时
+    /// 消费者濒临死亡时调用
     /// </summary>
     public void OnConsumerBeforeDead()
     {
@@ -102,7 +115,7 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 当濒临破产时
+    /// 当玩家濒临失败时调用
     /// </summary>
     public void OnPlayerBeforeDead()
     {
@@ -113,7 +126,7 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 周期性活动(角色)时
+    /// 角色计算周期性效果时调用
     /// </summary>
     public void OnRoleTick()
     {
@@ -133,7 +146,7 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 回合结束调用
+    /// 回合结束时角色身上buff调用
     /// </summary>
     public void OnRoleTurn()
     {
@@ -145,7 +158,7 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 周期性活动（消费者）时
+    /// 消费者周期性效果结算时调用
     /// </summary>
     public void OnConsumerTick()
     {
@@ -163,7 +176,7 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 产品相关
+    /// 计算关于弹药属性变更时调用
     /// </summary>
     /// <param name="data"></param>
     public virtual void OnProduct(ref ProductData data)
@@ -192,7 +205,7 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 设置buff的发起者，承受者，目标
+    /// 设置buff的发起者，承受者，目标（当buff对角色生效时调用此方法）
     /// </summary>
     /// <param name="start"></param>
     /// <param name="end"></param>
@@ -206,7 +219,7 @@ public class BaseBuff
     }
 
     /// <summary>
-    /// 设置buff的目标
+    /// 当buff对消费者生效时调用此方法
     /// </summary>
     /// <param name="consume"></param>
     public void SetConsumerBuff(ConsumeSign consume)
@@ -554,6 +567,9 @@ public class BaseBuff
         }
     }
 
+    /// <summary>
+    /// 重新计算角色身上的buff效果（当buff的数值发生变化时）
+    /// </summary>
     public void ResetRoleBuff()
     {
         foreach (string str in buffData.OnBuffRemove)
@@ -566,6 +582,9 @@ public class BaseBuff
         }
     }
 
+    /// <summary>
+    /// 重新添加角色身上的buff效果
+    /// </summary>
     public void ReaddRoleBuff()
     {
         foreach (string str in buffData.OnBuffAdd)

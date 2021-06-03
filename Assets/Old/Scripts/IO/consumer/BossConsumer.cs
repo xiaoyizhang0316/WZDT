@@ -6,6 +6,9 @@ using UnityEngine;
 using static GameEnum;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// 首领类消费者的脚本（继承自ConsumeSign）
+/// </summary>
 public class BossConsumer : ConsumeSign
 {
     private int skillOneTime = 60; 

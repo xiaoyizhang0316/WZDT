@@ -3,16 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 角色的激励等级技能类
+/// 负责控制角色的激励等级技能效果
+/// 包括激励等级技能效果的开关，数值计算
+/// 激励等级技能目前有4类
+/// 1 PlayerStatic类 回合类资源影响，通过baselevelcontroller里的buff正常结算
+/// 2 ConsumerBUff类 影响消费者的属性，通过baselevelcontroller里的buff正常结算
+/// 3 BuildingBuff类 影响每波生成消费者的数量，通过BuildingManager里的extraConsumer进行状态更新
+/// 4 StageStatic类 即时类世界环境因素影戏那个，通过baselevelcontroller里的buff正常结算
+/// </summary>
 public class BaseEncourageSkill
 {
+    //激励等级技能数据存储实体
     public EncourageSkillData skillData;
 
+    //激励等级技能开关状态
     public bool isSkillOpen;
 
+    //激励等级技能的拥有者
     public BaseMapRole role;
     
     /// <summary>
-    /// 激励等级技能激活时
+    /// 激励等级技能激活时，将该激励等级效果注册到baselevelcontroller里
     /// </summary>
     public virtual void SkillOn()
     {
@@ -25,7 +38,7 @@ public class BaseEncourageSkill
     }
 
     /// <summary>
-    /// 激励等级技能关闭时
+    /// 激励等级技能关闭时，通知baselevelcontroller移除该激励等级效果
     /// </summary>
     public virtual void SkillOff()
     {
@@ -34,7 +47,7 @@ public class BaseEncourageSkill
     }
     
     /// <summary>
-    /// 激励等级发生变化时更改加成数值
+    /// 激励等级发生变化时通知baselevelcontroller更改对应的加成数值
     /// </summary>
     public void OnEncourageValueChange()
     {
@@ -104,7 +117,7 @@ public class BaseEncourageSkill
     }
 
     /// <summary>
-    /// 生成激励等级描述字符串
+    /// 生成激励等级描述字符串（暂时没用）
     /// </summary>
     /// <returns></returns>
     public string GenerateDesc()
@@ -113,6 +126,11 @@ public class BaseEncourageSkill
         return result;
     }
 
+    /// <summary>
+    /// 构造函数，根据ID查找对应的激励等级技能数据并注册拥有者
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="_role"></param>
     public BaseEncourageSkill(int id,BaseMapRole _role)
     {
         skillData = GameDataMgr.My.GetEncourageSkillDataById(id);
