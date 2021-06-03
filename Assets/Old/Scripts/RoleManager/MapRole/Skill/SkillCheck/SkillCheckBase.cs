@@ -164,7 +164,7 @@ public class SkillCheckBase : MonoBehaviour
     private void NotifyRoleEnd()
     {
         Debug.Log("checkCount "+checkedCount);
-        if (!isSuccess)
+        if (!isSuccess || !dependRole.GetComponent<BaseFinancialCompanyThreshold>().Threshold())
         {
             checkedCount += 1;
             leftCountStatus[checkedCount-1].GetComponent<Image>().color = Color.red;
@@ -192,6 +192,6 @@ public class SkillCheckBase : MonoBehaviour
         CancelInvoke("Check");
         isSuccess = false;
         //checkedCount = 0;
-        InitCheck();
+        CheckInit();
     }
 }

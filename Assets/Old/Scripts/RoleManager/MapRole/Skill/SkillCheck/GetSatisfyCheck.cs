@@ -9,14 +9,15 @@ public class GetSatisfyCheck : SkillCheckBase
     protected override void InitCheck()
     {
         startSatisfy = StageGoal.My.playerHealth;
+        currentSatisfy = 0;
     }
 
-    private int currentSatisy;
+    private int currentSatisfy;
     protected override void Check()
     {
-        currentSatisy = StageGoal.My.playerHealth - startSatisfy;
-        currentText.text = "当前：" +currentSatisy;
-        isSuccess = currentSatisy >= int.Parse(target);
+        currentSatisfy = StageGoal.My.playerHealth - startSatisfy;
+        currentText.text = "当前：" +currentSatisfy;
+        isSuccess = currentSatisfy >= int.Parse(target);
         base.Check();
     }
 }
